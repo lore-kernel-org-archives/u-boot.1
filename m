@@ -1,28 +1,28 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 559C7606A331
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 00:12:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 604E9606A88C
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 00:15:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QhdYSw/5
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IAMnhty7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2A4AC81547;
-	Sat, 14 Nov 2026 00:12:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2856540EB0;
+	Sat, 14 Nov 2026 00:15:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZA8sNxnZ30Y3; Sat, 14 Nov 2026 00:12:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 79144812FA
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794615141;
-	b=MQFJ3PrDGLPqKU6F6eYV4bkhIpo5lkHu30pQ1SVoOdLHMe+vkijeDuRSbGEwBm4H2+Y3
-	 y8ZqlsBp1jtHynJKnQuwipwkxD/AYZg2gYvjA692vr+vtIMIRCSarczOJuY7mJB1vQOF9
-	 Ce5/EOSW0UGZhqFtSDykySmjUoAgkGvlFnYd0k4xjwRIkwTjTxCSIfULL0slfCzX1PECi
-	 Sh08zWbIIu6LXyyutYROxdgAiMPO4jp9OsP+VPTUHbfI+OsDIkRgngfdCcWMQJjFrp8Bd
-	 oPmpMU0s7MW/8lrQc3cO9OoL3nEBgMTVWKHp2E8bCXsvj6hxZUZHlBxCTi6AZcA167g==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JPOdMVH0uo3G; Sat, 14 Nov 2026 00:15:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 57D2A40EB2
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794615354;
+	b=kQrVwMMJ9XKxOiGLJp2jC0yrzxOtpt+EHxtqv6JTgQryV8fbgA4kPrhpoqN41qp0HOFD
+	 bhKwYwkecHYGzE08fISYeRadQmzaK0zDXKthDJOKUSUESQmQUrhsjJAe4e0Z/GBVijP1t
+	 dtYAFt1GwAxY2onxTlfJHIvuf1ct/6AexRb3V261m6fJyT5onQnHxbSzt1K7IIFFD2VlM
+	 sKxwtlxv2Gu/zf60VsaQoTq9YXzplxz8DxBmO10lQFMIMYl7lUklwp75mhuWcwItk55yt
+	 02wkN+3RvoEg5H4leatWO/hu8aK5r8KXQa/3qiSfWv+x9Cmxm4xk3HavDkWn3eahvoQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794615141;
+	c=relaxed/relaxed; t=1794615354;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:Date:
@@ -30,58 +30,58 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=8O+DgGzv+2xQypEZiKNRRRPsRsN3qAsvBPt3wG1tijk=;
-	b=IWYkrKiGL2QH/dumrtCfX9z/pjsFqYL4dK4yhXKfBNEsvIoQ9aTtSAAqMaffos4oFmrK
-	 7qPyjm8veiIHjjQBrJkZ1lbAEMEx7Ntrekn0Iz+uzkGapnRFMYhiLiu3JzGjCkjUP+4Up
-	 pKAsIUfzh6h3fSCL8KMl2GdG+iw7OOzqs/lR4Fajssx7xJUEIsffh7rZUhoBjD0rDC691
-	 CtT5eFL4omGxD6IuJR6triVgCmC4JDaqkgVTTZiSywY447y6pYRT3A0TWErpSNtvYlEvk
-	 MHJU2nzX2A9vJPPcoJF8b1ZOgL8VrgoZFWwFwcZ/4uB/pCMvuRFcJIkbseeSQJUOZBQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=BlrAg0Ymh4laPoDIg+Pr2/5AQQ3hIoRIn7aeQqJqrLo=;
+	b=czpdCweBdC0E1IIbrnDPBTUOb7iVjPcWBfdOXwPd6gkTTj4+vWOdc/TBBdaBYZEiJ/kf
+	 6uqDT8SltdXLy5cVBJwTIBSSo7EbM2Y74rKGiwG6LN0z+WCgg54HzDdlH6e4Q04jt1yYX
+	 1gb0w8dtuiWb7L3DKAb/Nt/+uFF4OCMv3jMqZ/bOhhn/361toMVpV8KLgkeJ7ERfzdYqb
+	 VTV8KvaU9GoAsFs5WIBTWCX0W8py5vFqNvmZPTN5ESRLEe7hivd00BYHmRFhLdmsP1En8
+	 fiAs66CESj6oAW0Ph3wrYOPr340kg3vr+RVGIY9DFRAbcpmN/iV85jE5oFtDZxhTgYw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794615141;
-	bh=8O+DgGzv+2xQypEZiKNRRRPsRsN3qAsvBPt3wG1tijk=;
+	d=lists.u-boot-project.org; s=default; t=1794615354;
+	bh=BlrAg0Ymh4laPoDIg+Pr2/5AQQ3hIoRIn7aeQqJqrLo=;
 	h=Date:From:To:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QhdYSw/5seboXls20RIB/fU18hLytkqD5vfcW0p/rvWRkZGJMLLHE6Lmxbk3nNvmQ
-	 LaGhEUvFcUeTElDm4lmWeGt1eS5a5n3Fh8HCNL3o17YjiJDM0PUAWdiVbb6AIO7LPB
-	 x1EfAEWM9hpS/JauY1Lxk32UbN9H4C3wUmZkd4XLN3CCusuY3zt5NGLTUA6gC0gGCC
-	 XwdS0R0cPPFgyiH2gl+CwgiNP8XPNeKGvXn3sVQUPiuyi5RJisLXkueSZyjsOkyAFe
-	 iGQLd4wmwn8pbXRV8rhrnJoJSqIBK5u7D9+7sNKA1DTti7N6j1ohFq8ri6JyFrvYyc
-	 0xqB3+bQ55XTw==
+	b=IAMnhty7dpCCUs2JFJoJ9sZ2fENJvzDw9fTcQzadQKnNm/18acEuAuG+NG2NrQtRk
+	 TNi4EMw/BNjMb7q9sCfQ3pDFtZ7ZmvMh+OgYKt/PUa/6cFwB4W4nhbchUWYTgNbJ/i
+	 es/b0qwcOWhmAuvVCAi6QIDY5G2GUNKHYaIWj6xMWYlNLSn4qwgfIegwcwJ+Fnra5v
+	 f/DzdCSKDrx/0JmG05PQsa99/Jmr1z8lLnFqCCTXD8saxt1x3pStM542gLAkuT/MmB
+	 VvJayYjeP4xLDdVaJF9JzRw8L9xHFnAtL0FdKqSt3bRpc5xmS19PdZoEd0n4+iXpXN
+	 TToMGrXta30Pw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 79144812FA;
-	Sat, 14 Nov 2026 00:12:21 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2A0B9260
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 57D2A40EB2;
+	Sat, 14 Nov 2026 00:15:54 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id DBD6F260
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:15:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1BC904061D
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C24B140269
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:15:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pi7en2yvbmsE for <u-boot@lists.u-boot-project.org>;
- Sat, 14 Nov 2026 00:12:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3C9AE40611
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qQBRJk-LzSaC for <u-boot@lists.u-boot-project.org>;
+ Sat, 14 Nov 2026 00:15:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 128BB4025F
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip="2a07:2ec0:3002::65"
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3C9AE40611
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:18 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 128BB4025F
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:15:51 +0000 (UTC)
 Received: from local by pidgin.makrotopia.org with esmtpsa
  (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768) (Exim 4.100.1)
- (envelope-from <daniel@makrotopia.org>) id 1xS1NJ-0000000007z-4B1u;
- Sat, 14 Nov 2026 00:12:10 +0000
-Date: Sat, 14 Nov 2026 00:12:07 +0000
+ (envelope-from <daniel@makrotopia.org>) id 1xS1Ql-0000000009O-0apK;
+ Sat, 14 Nov 2026 00:15:43 +0000
+Date: Sat, 14 Nov 2026 00:15:40 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
@@ -96,8 +96,8 @@ To: Alexey Brodkin <alexey.brodkin@synopsys.com>,
  =?iso-8859-1?Q?Jo=E3o?= Loureiro <joaofl@gmail.com>,
  uboot-snps-arc@synopsys.com, u-boot@lists.u-boot-project.org,
  openwrt-devel@lists.openwrt.org
-Subject: [PATCH 8/9] test: dm: sf: Check the block count after re-probing
-Message-ID: <038d7127b0665d1b76a69922d91b7625f9f82ede.1794614777.git.daniel@makrotopia.org>
+Subject: [PATCH 9/9] boot: imagemap: Copy cached data when moving a region
+Message-ID: <d359e598a8be0fd0900b347e0dd65a34d7f1a801.1794614777.git.daniel@makrotopia.org>
 References: <cover.1794614777.git.daniel@makrotopia.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
@@ -120,61 +120,89 @@ X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a test which removes and probes the SPI flash again, checking that
-the number of child block devices stays the same. Compare with the
-initial count so the test also works with CONFIG_MTD_BLOCK disabled.
+Moving a region while extending it reads the cached data from storage
+again. Copy the existing data into the new allocation and read only the
+added range, and include a sandbox unit test covering all of that.
 
+Fixes: 9b41c7dbee96 ("boot: add imagemap on-demand loading from storage")
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- test/dm/sf.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ boot/imagemap.c      |  4 +++-
+ test/boot/imagemap.c | 40 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 43 insertions(+), 1 deletion(-)
 
-diff --git a/test/dm/sf.c b/test/dm/sf.c
-index 0ec02ac694b..5c3a02d6f79 100644
---- a/test/dm/sf.c
-+++ b/test/dm/sf.c
-@@ -12,6 +12,7 @@
- #include <spi_flash.h>
- #include <asm/state.h>
- #include <asm/test.h>
-+#include <dm/device-internal.h>
- #include <dm/test.h>
- #include <dm/util.h>
- #include <test/test.h>
-@@ -106,3 +107,34 @@ static int dm_test_spi_flash_func(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_spi_flash_func, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
-+static int sf_count_blk(struct udevice *dev)
+diff --git a/boot/imagemap.c b/boot/imagemap.c
+index 8455763815e..32ea2682895 100644
+--- a/boot/imagemap.c
++++ b/boot/imagemap.c
+@@ -265,7 +265,9 @@ static void *imagemap_extend(struct imagemap_priv *priv,
+ 	}
+ 	base = map_sysmem(addr, alloc_size);
+ 
+-	ret = spl_load_region(&priv->info, img_offset, size, base);
++	memcpy(base, r->ram, r->size);
++	ret = spl_load_region(&priv->info, r->img_offset + r->size,
++			      read_size - r->size, (char *)base + r->size);
+ 	if (ret < 0) {
+ 		lmb_free(addr, alloc_size, LMB_NONE);
+ 		goto err_read;
+diff --git a/test/boot/imagemap.c b/test/boot/imagemap.c
+index 05bba8776d7..682f6d5542b 100644
+--- a/test/boot/imagemap.c
++++ b/test/boot/imagemap.c
+@@ -250,6 +250,8 @@ static int imagemap_test_map_extend(struct unit_test_state *uts)
+ 	p2 = imagemap_map(dev, 0, 256);
+ 	ut_assert(!IS_ERR(p2));
+ 	ut_asserteq(2, mock->read_count);
++	ut_asserteq(64, mock->last_off);
++	ut_asserteq(192, mock->last_size);
+ 	ut_asserteq_mem(image, p2, 256);
+ 
+ 	/* Region count should still be 1 (updated, not added) */
+@@ -282,6 +284,44 @@ static int imagemap_test_map_extend(struct unit_test_state *uts)
+ 
+ IMAGEMAP_TEST(imagemap_test_map_extend, UTF_DM);
+ 
++static int imagemap_test_map_extend_move(struct unit_test_state *uts)
 +{
-+	struct udevice *child;
-+	int count = 0;
-+
-+	list_for_each_entry(child, &dev->child_head, sibling_node)
-+		if (device_get_uclass_id(child) == UCLASS_BLK)
-+			count++;
-+
-+	return count;
-+}
-+
-+/* Test that probing the flash again does not add a block device */
-+static int dm_test_spi_flash_reprobe_blk(struct unit_test_state *uts)
-+{
++	struct imagemap_priv *priv;
++	struct mock_priv *mock;
++	u8 image[IMAGE_SIZE];
 +	struct udevice *dev;
-+	int count;
++	void *p1, *p2;
++	int i;
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_SPI_FLASH, &dev));
-+	count = sf_count_blk(dev);
++	for (i = 0; i < IMAGE_SIZE; i++)
++		image[i] = (u8)(i & 0xff);
 +
-+	ut_assertok(device_remove(dev, DM_REMOVE_NORMAL));
-+	ut_assertok(device_probe(dev));
-+	ut_asserteq(count, sf_count_blk(dev));
++	ut_assertok(create_mock_loader_bl(image, IMAGE_SIZE, 512, &dev));
++	mock = get_mock_priv(dev);
++	priv = dev_get_uclass_priv(dev);
 +
-+	sandbox_sf_unbind_emul(state_get_current(), 0, 0);
++	p1 = imagemap_map(dev, 612, 200);
++	ut_assert(!IS_ERR(p1));
++	ut_asserteq_mem(image + 612, p1, 200);
++	ut_asserteq(512, mock->last_off);
++	ut_asserteq(512, mock->last_size);
++
++	p2 = imagemap_map(dev, 612, 900);
++	ut_assert(!IS_ERR(p2));
++	ut_assert(p1 != p2);
++	ut_asserteq(2, mock->read_count);
++	ut_asserteq(1024, mock->last_off);
++	ut_asserteq(512, mock->last_size);
++	ut_asserteq_mem(image + 612, p2, 900);
++	ut_asserteq(1, priv->regions.count);
++
++	imagemap_cleanup(dev);
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_spi_flash_reprobe_blk, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++IMAGEMAP_TEST(imagemap_test_map_extend_move, UTF_DM);
++
+ /* Test: a failed extend leaves the original mapping intact */
+ static int imagemap_test_map_extend_fail(struct unit_test_state *uts)
+ {
 -- 
 2.56.0
