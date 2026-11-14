@@ -1,137 +1,137 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68C79606A329
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 15:00:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03380606A331
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 15:00:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HeAH+Jq6;
-	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=CxcWMEvR
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lhiFzO50;
+	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=n7jmNL9G
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 32C066061C;
-	Sat, 14 Nov 2026 15:00:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C921B81684;
+	Sat, 14 Nov 2026 15:00:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1_NlQ8gkR7lu; Sat, 14 Nov 2026 15:00:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7F2096064C
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794668407;
-	b=QHSksqg9YwhUtNqP/HaEQlrPP8WrcZ2y51GYCYg3Zuua+cI63TIme9bLGzbwMw+6LGn1
-	 /ZyRt2kLNhKeeCfnXMoGHy4ODIotJD0KU5kkWik200oOWgDXAnJ7XKTg5ppQdCaHsl/Ir
-	 nocXN0tQQEaaNW/A5IxonPfo4bK7HUFYjuQ0RIJuPmPJoTbqWindKCkTzElfVaEMmyUHD
-	 Bn+6z+cxaAEH9MU8wlQZtx9Nx8p4pWMYhPykGxNnCOpgxlYYhNu9mH8IylK5DKCvFybBT
-	 ZJyHpVnBW5/RZO5L++7sqRiKnz1WY/1k9tdZOl/xJNu6qFpfnQNUZEqcBKfV1DBSJOQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9dvpfFVe4QuA; Sat, 14 Nov 2026 15:00:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2CB9E809AD
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794668409;
+	b=JCHGkI6yaWCWr/OZZAHKS+7khB5WHC2xo2Dp7TqKvHNB34rmsK1NZ1+HgLXSUU96zUFn
+	 ugW1D/ot1WKaG/k9+cJtquRDVgUoibkXSEDOw+6xZslRH//SHTiyiD+R6DBX60PvGfpPB
+	 PqLm5y+PKju2OPJ+dTeaykv/q/zCs8lBXzcHTKV+4agt4kNveVuFgMH+OvJNSc9FWrDk9
+	 HVy6XwErGgu0Ji9/6PyoonOVWdJDFfzYd/yyFDg9aDKzYj8jsZFfA643u/iTe0mTPuhxS
+	 JFVRL10RCi0tX1pElFY5MBtD0+WwCmE42wNHRsqTDVsLkIdfDsWoBIBjNCcvLvh5pcg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794668407;
+	c=relaxed/relaxed; t=1794668409;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=4pNcqYceAC3B670dc6BK85ka0T1TFq0Yz1xafJy8/TY=;
-	b=GzHk+jBJFlmsKRyxQ+QYjt4WEaT61icHx5lLXX8w1aOb9/yRxTOajBgiT4mCcipEZRRQ
-	 wltclaGocOqXitwIrFlX3rGpC75Fin/IC3IxJ+jOM1Cw2Uwx6kPQvVUmuln68hAccoxCz
-	 yzMgiFRrarzdiKndZ8GGNCGWvnfJAhS6k34YUzGtY7W9Lh/+qXQwy4bDcoBolsty5/8o8
-	 cmKr7B59GqL1GT07qi/whq6N6H3PeB38Y7/RPEMXSltn7HMG4UqiWvjsdreMP4aqt/RW8
-	 1hFlN70kpqFwmkvsgvmfELPDQhbmvygO2LTFvumKpBgiwQILWeImnWGpbtnfYCuOUFg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=amarulasolutions.com;
-	dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=CxcWMEvR;
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=BcpvFUqJqYCosC2bdwcdYHD7BmqhvPsK9otsk0zp1l4=;
+	b=SZyi6RaoUuUL5d++mIiUBrzJeOZX6JJj5bxE+2GM7+qPyfavoenC+uVV2cxjLaOoGh2k
+	 EqF5N+mSENMszBBlSVa50atpIoQ43zRWV9pmtkh2VjM82JDYIPK4is3YsGSwPjSmNrmgU
+	 flCtA9iUFgL+RoL1awW6efQuTHXcdUN+gw8mbge09VA3BE6uY/F/PIaH7x1ikg/wr5eqY
+	 r/gj5CANwM43ovl1DtyUoP+YiE5+/MB/9QQneLhAhx3u5qfhqVMhMxrOnHgve1aShi7rv
+	 lUrilKOqddZ0ZUEePjCDpsf4v+zTDy+rsu4JV/qzQZBM6JbKRJDtLqTBxAeYH1YWLeg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794668407;
-	bh=4pNcqYceAC3B670dc6BK85ka0T1TFq0Yz1xafJy8/TY=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=HeAH+Jq68VEksE1uYzuUnKZ3ZHhCFZdi6HbVGNH5Qo/ap7kvuKKMHKkVMwuHYk5Ul
-	 pYXOKHj24cAH4fu5685kQFsmL8hhLsLNFh0Su9tteG3QtQXdv1y6EE3lu7M1bIOz2d
-	 mg75nKNHpjk2Si15G2VJHbsra1xv9IK4dkkHiy4pJyUFmKhJw6XKEw9s4iJdAwbnAX
-	 MavqGaRjzpd/6eZIX9oJfc8nG9R/TwY6ybkcQrrJeIABxaHyFT+IkrybXWVDmoTt5W
-	 2C75h+0NZhXxevF+cUkAGLjsKujFa8P/MG+b+oEwbmoPNOCzdi96Jai39srGdLGlLV
-	 Htybdy+8Iv1tg==
+	d=lists.u-boot-project.org; s=default; t=1794668409;
+	bh=BcpvFUqJqYCosC2bdwcdYHD7BmqhvPsK9otsk0zp1l4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lhiFzO50UXP6LLLblG3UOi6C/IW02rbcjcMvoZfsURLyzLa7EWNpzAvUZUP0iHDyZ
+	 gTqnIKiDsJPmbWX177FmAIiUer7B48twtyd88mYC6yCRWUoWQEM0/j+tAqe07OEKPD
+	 ibCxuDjATcVPhqlO83q35Ia9FP2rNzB/G5pCB9v9dk/m0WtOBtyRKAWcjXlK0zhtba
+	 xwdX7JTCx8dwcB8GEc+1Vq9Z2zkBz6n4eQ+9FMBGI/K+jfLbF9tqH8Dm5UkPMqrAja
+	 uPeVWs1dkO6NntwrwLJQeU5U45D5Xj65qw4vhM8CwUKZLY1GztwD0WrKNdiM3GIgbc
+	 lGDV7gpMJjFow==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7F2096064C;
-	Sat, 14 Nov 2026 15:00:07 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8327772D
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 15:00:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2CB9E809AD;
+	Sat, 14 Nov 2026 15:00:09 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 44CF272D
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 15:00:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 69A316064C
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 15:00:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 369FD406E7
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 15:00:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6V79NO_XOHhl for <u-boot@lists.u-boot-project.org>;
- Sat, 14 Nov 2026 15:00:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6C2FD6061C
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::436"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yM4iYG6t4Z8k for <u-boot@lists.u-boot-project.org>;
+ Sat, 14 Nov 2026 15:00:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3BED9406C0
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::334"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::436; helo=mail-wr1-x436.google.com;
+ client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
  envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com
- header.a=rsa-sha256 header.s=google header.b=CxcWMEvR
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6C2FD6061C
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 15:00:02 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-491d1f66968so453663f8f.0
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 07:00:02 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=n7jmNL9G
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3BED9406C0
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 15:00:04 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so10694085e9.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 07:00:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1794668400; x=1795273200;
+ d=amarulasolutions.com; s=google; t=1794668402; x=1795273202;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=4pNcqYceAC3B670dc6BK85ka0T1TFq0Yz1xafJy8/TY=;
- b=CxcWMEvRNlRqJDywxCXz2Jeg4yU3buHlKEg04qc8OQs+GoWoKUnCv+pTSEWCV/ihgu
- y6dy5foQXhv11p1eEgFRTC/49tZr2mrhZd5C93iyObdnpN5hxqD8gAp3CpSCtBtxkslz
- 1/AHtSSzZ1+og/EIdiNfArpg7ID4WSj6dVr2Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794668400; x=1795273200;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4pNcqYceAC3B670dc6BK85ka0T1TFq0Yz1xafJy8/TY=;
- b=LiYzQN0/WQqdiJi+xl81HVayYrWs4hNE/fwig090542JFFD0Jgt8U9Qe1rkip6sRsd
- tqBNHoFzdcM9lJ3qUmYl017rBz7+xcPcDFrp5UPzVo/ie5cgilCRYdUrQQXjC/4PaegN
- o9IvO2xhSyVSymr4cCD4/4fShvIonnJ85NUFdjuUiZPwf5MPXKrqIyahnxSd+6+W2jtT
- o2FxUjpOJ+jZpoLk+aKPaIBmru06KOLD+f8OXsNKX+cNxtiPrXanqNUHC2wNqYaCArIc
- VAdUNyW6NLX5h1vTYIWug4W2ZI+E1QFsfZn7W/NGMShHde3d2BzUdz4yZt519itp/z2z
- mFoA==
+ bh=BcpvFUqJqYCosC2bdwcdYHD7BmqhvPsK9otsk0zp1l4=;
+ b=n7jmNL9G4DQ8cwLJgC74yFLSaBBzRcH0DXtCMZ89h2QAjdo4VMDq+9eBpnn8SHKzj2
+ ocfoLKS0Y9Y9YUPwfjx93F/BT24GgAo+xTgp34iPU9xh6uO4b4+Su3n6YA311n/JA2ji
+ 2Y9ihc7hDSYpAgTVxVNRuX0C+ebaZzPIk2it0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794668402; x=1795273202;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=BcpvFUqJqYCosC2bdwcdYHD7BmqhvPsK9otsk0zp1l4=;
+ b=b+n6y+bLZo2sYiA/jQfATjoMJKO0qdcm9cTaxznKwdx3dRs9tIz3n57sDa1Ws8RqLo
+ ljjQTDTDJ6ztBABC1yYE2z0fM4wuAZZVhdRHVs3VeafDCpFpcIMvcGEeT7iPwTTrf0vy
+ q8ifGLxZOd2D3PoxR8FMLIZLfFTFzWZeEl26j+0cqoFCvR3cbVCq+3u9GTN3v/9t7JzA
+ WGRd5yzj3J3Kam2YIxO0vukKVYF8wfnBMpNSjuxWTBIvbtYPEWhqgsmTLA7dOVP8lqRc
+ pwPR3FzQc9Iyk0elIkh0Z5gKXSkPjfTET5QPQdkYtXqmAfvupS+Qhmg73qaTkhTGKiDp
+ +o5g==
 X-Forwarded-Encrypted: i=1;
- AL+hErGU9nTffh5p4YgrrkGBE90FxKR+c1d7cAZxBMqYfKZQOJyN+JGx8X8jURH57wJh41ytVLW4piU=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+1bFOEq1xVlDGqmOFp/rCrRFH6sC9Yqdew3a4m4YnfwR1VnOXe
- hkxFT31xnBANmKg473cUohPlZEJ5R03hi9iC+h1gxPCIoAPCJoWqLW2DcWUOaf0XNbyCkyerjVq
- hReLy
-X-Gm-Gg: AYBFou2sTgpUUMLk58p6g1o6t5sp7ipH9C9LSHkfq+scJAbg3BBHjB+Zlf1F/0rNBZy
- qGFCL//HhLRwlSsLs56pCnsancValF8Go0ibgbebgH9BQz6axP51XqoQqWJGpds80q4RYTEo7gs
- PzgfJ02ITGgykM40xbH5o2G5xvvDH6L2QG3Jh7QNgYlncQMd6Z2W5uYNDFXHF8dNeya822mNfl7
- v5rXqae4mvRKrDCjbLSaL9x9+mrOVnzMzwU0Sipi95kNy8FVMBa/IXdzJcwExS3wzNcDEfxlwM4
- uI07MbSE1pgG6Le07jif605DaWcGE8GLKUqIrvVCAgGvpFGDckKz+d4MHIG9jg0ThWK8vbhprJ6
- ybvygmb9USgkqoAjTmV/gsztK78E21jfyTmCZwi9Fz0kTEot7uL0u/bxEIsWkpFI6hyHmnvXeTG
- VYj30mrvZuWzzvOsgcatV1QkGOefbFlEk7akUo6nvbKaenqpfIjcijFbYe7hAfvgTpTAiskeROr
- UG7BWB51ey4LOBiy7lCKxnXQ9NO7XTM0ig6jmS+0LHiC5TdtBNS06bQK4M4QNy+edsE1Y0HkPFj
- WHpWeVkMu4kpBhCCZgg/wB2aVN6VXM+vGVBPLmBWYxo1yG+Idj7i53K0IkWMbl+aLWE1mwn0g41
- JONT6VAYSuM55RXfUa1M9RwNMTWs3CTOuRKJxrl44nE6ZmjGjdaNsy2YEN5BrfJ+DfIaSx+BtAq
- G1R8re8gUfTvpH+DIqvaBE1CXMfg==
-X-Received: by 2002:adf:e013:0:20b0:49b:b93d:9631 with SMTP id
- ffacd0b85a97d-49c71970581mr8655354f8f.48.1794668400276; 
- Sat, 14 Nov 2026 07:00:00 -0800 (PST)
+ AL+hErGosYcZMqGfXp6qCLEkrbuX6dXGsrG4hAbUmf22RenmJrUuNv3sQU0EgB2LXwHelnbIqPQZpQo=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9ej044Sm19ZtPmnsKoI2dEUeaXPE3bXbVKxgVYf4n+Wp2d52Ch
+ 7Um0aPhOXnNT0Ld7GdBb124K6+B8uuUB69ttPkbcoFsK85fiJZ/uxBNtQPF1uM7gSNk=
+X-Gm-Gg: AYBFou3Ubmd1VJ3HSay+Qo47uUciVLmRsUll4GNTauezvwUXnEfhIZub8NgQIHIYNZ2
+ jSQvJLkzHH3Zxdt9GnLl7rwhrQ8Abgc/3Bpycl5FFli9Hr2OR9lLVRKeH0aDFtSEyE29YYrbsgW
+ 1ZU9BELcXmWGCUZ3YWptPSdySVkfVNSq/dUe0dlFx89swqEJjv99EzTshrf1NwEmjU6GhZt2LfW
+ uNzJ/BxXzisHZ6B2qGyAp5gin8PXGH3o3/6nNAPyY5qJma1jiXtCs2Br/MLj2BOadEdRZ9uLWiA
+ R1qdSQW0aXyXqvepxs6S6H0gkdAJhh04NMxm7uKa848Qw/JUN8cqBk6nK+BPpg6ydIfYgxld4Pn
+ G9jURff3LDGfRupo6QsQoUJioFsCEqahgDOHNSkkLXRjtCce60eoqedAeQu6gF5k+GRVyGxSyQW
+ ar1lPx9aGjfrJQ5FKRDsCUHqN+LLhRDYy3iYEoeBM2kIt8p8fZ5vNC9gzlZ3RCnosj+CxccZVGO
+ 1smSWq9kY8NbDu7HkruDnn1gu/cpc+CTye0+gTC2yqhXDywa4/iOxPPHLmyHqaq8AgRyLiKIME3
+ M2dnw7bCA9N3OsncdNlA4nFRCVahd6wAaZ7RIPAf8NtYhm9/ZSdGfQusf3JeReN2oKuy+RYtkt/
+ HuMAkWo7D8EXC2+K1wIqCPYos/+9H4WIwgVvq/WikLKqXboVM3KfBHa61BqIGjrh2RZXobDUU5M
+ USVJ30wu5CCV731bV0V6a3VQNbmQ==
+X-Received: by 2002:a05:600c:83c5:b0:4a2:fe11:9a8a with SMTP id
+ 5b1f17b1804b1-4bb5599af0fmr124028495e9.0.1794668402055; 
+ Sat, 14 Nov 2026 07:00:02 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-79-14-29-58.business.telecomitalia.it. [79.14.29.58])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5f782396sm11728413f8f.24.2026.11.14.06.59.59
+ ffacd0b85a97d-49c5f782396sm11728413f8f.24.2026.11.14.07.00.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Nov 2026 06:59:59 -0800 (PST)
+ Sat, 14 Nov 2026 07:00:01 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -139,10 +139,13 @@ Cc: linux-amarula@amarulasolutions.com, michael@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 0/2] Enable the display of the STM32MP257F-EV1
-Date: Sat, 14 Nov 2026 15:59:42 +0100
-Message-ID: <20261114145957.2197295-1-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH v2 1/2] configs: stm32mp25: enable the LVDS panel of the
+ STM32MP257F-EV1
+Date: Sat, 14 Nov 2026 15:59:43 +0100
+Message-ID: <20261114145957.2197295-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261114145957.2197295-1-dario.binacchi@amarulasolutions.com>
+References: <20261114145957.2197295-1-dario.binacchi@amarulasolutions.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -155,36 +158,45 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series enables the LVDS panel of the STM32MP257F-EV1 and shows
-the STMicroelectronics logo as splash screen on the STM32MP25 boards,
-as already done on the STM32MP15 ones.
+The LVDS panel of the STM32MP257F-EV1 has a GPIO backlight. Without its
+driver the panel fails to probe, and so does the LVDS bridge:
 
-Tested on the STM32MP257F-EV1.
+  stm32-display-lvds lvds@48060000: panel device error -19
 
-Changes in v2:
-- Drop the redundant MAINTAINERS entry
+Enable it, and raise the maximum framebuffer resolution to 1024x600,
+the resolution of the panel, from the default 640x480.
 
-Dario Binacchi (2):
-  configs: stm32mp25: enable the LVDS panel of the STM32MP257F-EV1
-  board: stm32mp25: add splash screen with stmicroelectronics logo
-
- configs/stm32mp25_defconfig           |  10 ++++++++++
- include/configs/stm32mp25_st_common.h |   4 +++-
- tools/logos/stm32mp2.bmp              | Bin 0 -> 7802 bytes
- 3 files changed, 13 insertions(+), 1 deletion(-)
- create mode 100644 tools/logos/stm32mp2.bmp
-
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
-base-commit: ff8a9bc41e4e5bdd3406932af5abb4c18064e539
-branch: stm32mp2-splash-screen
 
+(no changes since v1)
+
+ configs/stm32mp25_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+index e55ca2e3f0f5..02e5efd1f48a 100644
+--- a/configs/stm32mp25_defconfig
++++ b/configs/stm32mp25_defconfig
+@@ -95,8 +95,11 @@ CONFIG_DM_SPI=y
+ CONFIG_STM32_OSPI=y
+ # CONFIG_OPTEE_TA_AVB is not set
+ CONFIG_VIDEO=y
++CONFIG_BACKLIGHT_GPIO=y
+ CONFIG_VIDEO_STM32=y
+ CONFIG_VIDEO_STM32_LVDS=y
++CONFIG_VIDEO_STM32_MAX_XRES=1024
++CONFIG_VIDEO_STM32_MAX_YRES=600
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ CONFIG_WDT_ARM_SMC=y
 -- 
 2.43.0
 
