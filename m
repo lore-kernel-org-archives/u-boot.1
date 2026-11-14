@@ -1,124 +1,124 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C6B9606A329
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 16:21:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1386D606A327
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 16:21:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m9h+GjiD;
-	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=kPLunoxG;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=aroj+cbL
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZoDbGtMh;
+	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=dswNCs4c;
+	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=YA4K+ErT
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 91ECD606CA;
-	Sat, 14 Nov 2026 16:21:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B4AA440807;
+	Sat, 14 Nov 2026 16:21:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xavVK7UBUjka; Sat, 14 Nov 2026 16:21:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5BC6C606A0
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794673307;
-	b=O604t9fAmjXLWTEneMy6vtCgTcBsMd+NKIiHy/RKl/G64d9MHJ7kYQKs8nPFXtnxRAnP
-	 fQl957mmgUil5b6BuGrtSmync41Uz2IfyfcwHJXSXhRO7o+0ktWc/zxwKMZFjgNB+YG2C
-	 zu5Vyj87bTL8rsHbyKBbJlP0n68xx8zPRgrBSjlMo4dVSMTqwh+P5bA3BmT4WEIXpH4aT
-	 wtcIwmxV62t18sd8jVF1pdNyrLIIgICnHWwYsiJvLu06tRZyr4/Wv9F+gRbkdapswOD49
-	 taZSD+SyGCl1kPGy2yKXKlJ6OXasnaDBROIjqbjFzi8oqTKLdu+dV/9SvGSEfojltjw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OcuKXFoGnbtK; Sat, 14 Nov 2026 16:21:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E164440822
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794673309;
+	b=RUi9j81d49YvKHupuSKJsUtxfyxYthyw6F/S556k4YuRk9BvXZEmdaUtPgjdkshgZ0me
+	 vs0/IgOc5pZznxhvTEOtsQw7zcNorziv6pQAs3VKx9sJtEMOr6b6d2pI4pJvl4YX8oCCz
+	 tBG7zqRErZyiJx9Bg/IAAh0jO1We+33QIgRuZktqsQduTEPpHY7RDAxu1ed0QOJPbEm6Y
+	 EwFdyJ4eyBLTLvYoL97KW+VtLLa6VsTBvk70IHlwbpVQvleW+hQ0Flkndi5Go5QQgHKvN
+	 VGTn+4dbasOPEafqRZsCLzU5F6npA6AtLi0IOWiED0mXlwa/7dl6SqYu24G3WGXqmKg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794673307;
+	c=relaxed/relaxed; t=1794673309;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:DKIM-Signature:From:Subject:Date:Message-ID:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 DKIM-Signature:DKIM-Signature:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-ID:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 Feedback-ID:X-SES-Outgoing:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=PDqIcZvAr0HDm5XL8+3VGhxQ/94UC/eB/X9WC6MMJLA=;
-	b=Yfro3+3D7oDsxJAJJK3t2jTONZF75455Mx4JnoBoIBB+utR/kGWsYvXmG2MDATPFgqDd
-	 KJY9a6jeScXMHKr+OFDkQwQPH7h0+dI29qM5d8+WkX3tHcJ5Y23UcRbkmf6jowHzRe9+t
-	 b7r/ojxV3HfrNBva4i3J7rM5o5Ddb52qZ4XOnPXp3rCvBfTftuwRVJSjKgJ6RfyPgDCj5
-	 O2zzU6cTN1zIBGcOwW6EZSCwYYUxm9+CrqbSPfZmq2GPeL5nOBCcTOvP0yq4f+JIzeruQ
-	 dZBGmj1sz4Siq0YN01u4hKpoGReqslZV3qcxwlE93/HaJqUqfaaFRLr/DCKnzG/Oqng==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=7B1ochTYh68aHen/InxLUXfUhw4HZjVJ0QQvOcoUVCE=;
+	b=mi52/CHBq/d3N2qCvpJw1AQrnsieXb5Mz/HkMwc/LP6erXpHJypTWL4Dv+3EoidvwkfL
+	 hhdfFrUB1f1sYgCvuJV3Z/nTqkGkeifZ/7XQpS/RyvdDPSR2eQAg4UR1wU5b/b3a6ITLM
+	 XJuwJWlHkJYN1i554kXH8pVpKDR6wvETeRloh9CirjXFwO2bA0QDGdMeU3bc7vgRKfZWG
+	 WqrfHupT4qdLqirSKxT95MXgytW5PtxisotfRdPHxHWB4BOIOhhf03YmeUJZ7GBXNrMXp
+	 Tz96B0a4NbU28weYe+AUnmVXzx+Azda5w2UBmwIcFIAu/U6mCSugL4DKp8lzWZqep+w==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=freemyipod.org;
+	dkim=pass header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=dswNCs4c;
+	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=YA4K+ErT;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794673307;
-	bh=PDqIcZvAr0HDm5XL8+3VGhxQ/94UC/eB/X9WC6MMJLA=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=m9h+GjiDAznCYLguwBP/AjfXuWA/cxxTxALYZnC0bUjuXkP6rDjgtI0mu6CcSuv6h
-	 j/1N3BmmdLzi4h4Jr9RiL4La0q/ckt+GVaF0zPQJ9DlB4XVLhFvLDkeRVxFJEQmWPN
-	 NlASFcp/b5NFoU5vMQWheXbS5v3q0ONKO6jshX9pzmWwEkjzisGXLkfcBwuGI+gBkC
-	 zFcpnQNiDbQ4dN3ir3bOwH6rXRfLvn7OMlHM7FPA1P6vDfaSlrZoxsSmp0JxJyTu2X
-	 fmhFWIpr9VlzVlgfrvn/Yyu/ZIgRV5TKCNIuzStXIr8ilMBocGsBwpKORCnSvgQmmh
-	 l6vf/4nRzHj6g==
+	d=lists.u-boot-project.org; s=default; t=1794673309;
+	bh=7B1ochTYh68aHen/InxLUXfUhw4HZjVJ0QQvOcoUVCE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ZoDbGtMhyEHWkLPFmycPb9ke2a9nCrsFykypKqNBuf68AcVwRx7iGRVAeYa9EoSvO
+	 gADk9c/n4yzFZdjF59gIU68EJViUo8yppk/UKk5CDZwYrsppBhEdxn4yEnVQZq9mo1
+	 SYh/PWEGDjMDVz67/nsZ/rDuZ74Dy+UPpyWNLhcH2N4Buj8nQEg/iQcwuPm8ZoKrLf
+	 OhJCblZnv1rudLiaA6uxOF2BMFRuJ3rz4Sk6YrLdNbmnsCBgk3kLD1Ys+RmjDcEbMO
+	 SfzH6Mu99XLLBFBcf0UL//q9vDFoSu1ppnEBTI5JG9raCyoisZbuHMqAo3YPTBNLSp
+	 R9fneIuIocq7A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5BC6C606A0;
-	Sat, 14 Nov 2026 16:21:47 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8C8102E5
+	by smtp4.osuosl.org (Postfix) with ESMTP id E164440822;
+	Sat, 14 Nov 2026 16:21:48 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CB71F28C
  for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 690CA81501
+ by smtp4.osuosl.org (Postfix) with ESMTP id BD3A840807
  for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1fTpXQUJaW10 for <u-boot@lists.u-boot-project.org>;
- Sat, 14 Nov 2026 16:21:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6029E814A0
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=69.169.224.8
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=69.169.224.8;
- helo=b224-8.smtp-out.eu-central-1.amazonses.com;
- envelope-from=010701a1dadd57e4-74066822-1ee0-4079-ab88-5cac92416224-000000@ses.freemyipod.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uycwIhmO8Z8E for <u-boot@lists.u-boot-project.org>;
+ Sat, 14 Nov 2026 16:21:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5C11D407E4
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=69.169.224.10
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=69.169.224.10;
+ helo=b224-10.smtp-out.eu-central-1.amazonses.com;
+ envelope-from=010701a1dadd5d13-31750064-7f22-4c99-9303-9c19b5da0ac4-000000@ses.freemyipod.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=freemyipod.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org
  header.i=@freemyipod.org header.a=rsa-sha256
- header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=kPLunoxG; 
+ header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=dswNCs4c; 
  dkim=pass (1024-bit key,
  unprotected) header.d=amazonses.com header.i=@amazonses.com
  header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh
- header.b=aroj+cbL
-Received: from b224-8.smtp-out.eu-central-1.amazonses.com
- (b224-8.smtp-out.eu-central-1.amazonses.com [69.169.224.8])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6029E814A0
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:43 +0000 (UTC)
+ header.b=YA4K+ErT
+Received: from b224-10.smtp-out.eu-central-1.amazonses.com
+ (b224-10.smtp-out.eu-central-1.amazonses.com [69.169.224.10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5C11D407E4
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1794673301;
- h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=E/gkau/TT9OiLZB1W+DM0DnbCAt0jlHzVLqYv32BK9g=;
- b=kPLunoxGVpAc0ENFOQ/t382WW5KRFGC6UymoDj1YDbLHXmkw/XDrkCYuxfIkWJcI
- GxsAuv2BGy+IptWiGTc/L882aEAxSX60J+9BOXf5mLosbQ+Kt/OfFVrtTStpv4udAiS
- yJ7PJu1U5G5zG0Zxpl8wAzH3Tp2h+4sPmnKajXdykFSy30BqdXsmP8HE3dd9b/pMEHs
- 6Uz0uz/lkVWnNOUJkKlEGpjL8UGu4s/rZHnohQ08HaN/alT5kjHwh7PtuP248bjAeAw
- EDwLNHldQdUOxQFcJWXm/zoKdpEHyyLD0lRkjCNhH+EBIb13EuQvRp6Q7HsNNb4Hw7I
- 7X6fXmFP0Q==
+ s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1794673303;
+ h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc;
+ bh=tU0Md0jCDTTUuuQhnRN0jgUhXax1y79zt8e0RA9t5Cc=;
+ b=dswNCs4ciQNtH8kn0vmGNEJMnaBSGW3lhiYP2ibaxajrt6/hw+uvV3xL4y8CLmwL
+ n2ZvgZVcRByRoqJSOvt5JGVftqmeI+n38j/u6A3QzgpRlP51+4hKv189ETJg86rF71G
+ ROg6889NrLeFZtuVut3ypqkdf81xfREeFECZbf2m3JqensDtXct5xMZhPjSNU9AUGFL
+ PoILEBt+Jg22SD3goCuITwvubix/ghrgiH4b5TxsFxKXwKa4cUjOSR7uhDOHwQfNHnZ
+ yd+UReKZ6E1DDpBQwirrWumANvLWkusqmLacN1Pq3tu8fDkWu5EDvJ76DdadpM7++hs
+ B7peCPBiNg==
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1794673301;
- h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:Cc:Feedback-ID;
- bh=E/gkau/TT9OiLZB1W+DM0DnbCAt0jlHzVLqYv32BK9g=;
- b=aroj+cbLulhxhDTlBatRxxiN5AAo2NPiTJdtdR0FE3axObM5jyKT8/6ushl2fW0v
- iNsWA0q6+f3QvMQ1X7EIQK6Obe5PMx0xddCV/0nnrgr6aeuW3ksvtTmAddPJKkLZ06p
- EDKAQlZ0IoDJ1hXxPozr7hRgeB9vvuL4q8m5wJy8=
+ s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1794673303;
+ h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:Feedback-ID;
+ bh=tU0Md0jCDTTUuuQhnRN0jgUhXax1y79zt8e0RA9t5Cc=;
+ b=YA4K+ErTT7mz281yMsrc2W9njXHBq14Pdn7XCKiIVosDyLIebRdMrUoVeRFreRm7
+ zbNLBpmK4dMbM4gj08Kwe4kIKbBl4FlKHNRm8MLhRLrmSVPk0rfIfjLHrn7UbapgZGQ
+ 14LF/5/Surhek7S+euEeLgTKoZSvThw97tO+ggaY=
 From: Vencislav Atanasov <user890104@freemyipod.org>
-Subject: [PATCH v3 00/13] New platform: Samsung S5L87xx
-Date: Sat, 14 Nov 2026 16:21:41 +0000
-Message-ID: <010701a1dadd57e4-74066822-1ee0-4079-ab88-5cac92416224-000000@eu-central-1.amazonses.com>
+Date: Sat, 14 Nov 2026 16:21:42 +0000
+Subject: [PATCH v3 01/13] ARM920T: Add support for CONFIG_POSITION_INDEPENDENT
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/02Oza7CIBCFX8Wwdhp+SgFXvodxQWGqGFsM1KZq+
- u7Sehd3MrP4kjPnnA/JmAJmcth9SMIp5BCHAmK/I+5qhwtC8IUJp7xh5SDLu1bzDBMH56RXxnQ
- eRU3KwyNhF+bN7HT+cX62N3Tj6rAqriGPMb22tImtOkIZVZRZRluBtdQcjDJt47QHxp2BWjMD1
- qsOlEPDpceiqYFuc8QnOBzGZO/AKtvbdxwy5srFnqwFJr5F/HVX/7uXpcA8NkJTIUv6sUuI/Ss
- 8oq9iupDzsixfK7+MKR4BAAA=
-X-Change-ID: 20261026-s5l87xx-v2-cc5d799fde34
+Content-Transfer-Encoding: 7bit
+Message-ID: <010701a1dadd5d13-31750064-7f22-4c99-9303-9c19b5da0ac4-000000@eu-central-1.amazonses.com>
+References: <20261114-s5l87xx-v2-v3-0-083bd20d8ded@freemyipod.org>
+In-Reply-To: <20261114-s5l87xx-v2-v3-0-083bd20d8ded@freemyipod.org>
 To: u-boot@lists.u-boot-project.org, Janne Grunau <j@jannau.net>
 Cc: Vencislav Atanasov <user890104@freemyipod.org>, 
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
@@ -137,15 +137,15 @@ Cc: Vencislav Atanasov <user890104@freemyipod.org>,
  Mark Kettenis <kettenis@openbsd.org>, 
  Stefan Roese <stefan.roese@mailbox.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794673300; l=10565;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794673300; l=2328;
  i=user890104@freemyipod.org; s=20261004; h=from:subject:message-id;
- bh=E/gkau/TT9OiLZB1W+DM0DnbCAt0jlHzVLqYv32BK9g=;
- b=VIGRpu0bKrTF7kQ7f0oHRcTIxAuJ2aot39X79/Gy97K4UjmlPyGHBYOXHwhF2gai+ZQ6LN8l3
- WIICMswy6tECph8RAcTCTkdsBBWqc0lfeA7cTbEzz1JAqlNX6BU6fMu
+ bh=tU0Md0jCDTTUuuQhnRN0jgUhXax1y79zt8e0RA9t5Cc=;
+ b=O10O4hjsmyP8AVvz0/qASsvLdvyRLsCxTeP22Q7p2SeK0579HtpzAjUlbO5azAhv1kQcm/UaM
+ kAw03RgKSx3CqPgnqFS1fXmhzEItmaQeele/3nIpCTDXyLEg9p8BMT+
 X-Developer-Key: i=user890104@freemyipod.org; a=ed25519;
  pk=klj5EgxMkX+YF0tPboUEB9kwBfthBgHWLhDOkwnmUus=
 Feedback-ID: ::1.eu-central-1.GZFSN+SpSZlcZgoCjFtpLsnhzRcxifcxl4uaxXIRIUo=:AmazonSES
-X-SES-Outgoing: 2026.11.14-69.169.224.8
+X-SES-Outgoing: 2026.11.14-69.169.224.10
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,218 +155,93 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Port U-Boot to the Samsung S5L87xx SoC family, which is used by the
-Apple iPod nano (2nd to 7th generation), iPod classic (6th generation)
-and iPod touch (2nd generation) digital audio players.
-
-As there is no official documentation or datasheets available from the
-manufacturer, all peripherals have been reverse-engineered in the span
-of more than 18 years, initially by the Linux4Nano project, which was
-later renamed to freemyipod.
-
-The current code can be built and booted on the iPod nano series,
-from 2nd to 7th generation inclusive, and on the iPod classic (6th
-generation). While the iPod touch (2nd generation) uses the same SoC
-as the iPod nano (4th generation), support for the former is not
-currently included.
-
-On those supported devices, U-Boot's console works over UART, using
-either the 30-pin connector's UART pins, or the UART pins on the
-Lightning connector for iPod nano (7th generation). USB 2.0 works
-in device mode, and U-Boot can successfully enumerate as a DFU device
-and launch a firmware image - either another copy of U-Boot, or a
-Linux FDT image.
-
-U-Boot can be chain loaded from Apple's bootloader or from Rockbox.
-Since Apple's bootloader verifies and decrypts all DFU images, an
-additional tool is needed to generate a suitable image from u-boot.bin.
-
-There are a couple issues, still being worked on:
-- The timer on iPod nano (2nd generation) is not exact, there's a
-  drift of about 5 seconds every 5 minutes.
-- The S5L8702 devices (iPod nano 3rd generation and iPod classic
-  6th generation) use a different UART baud rate - 57600. In addition,
-  the latter's UART interface is not stable when receiving data from
-  the computer.
-- The iPod classic (6th generation) is currently using a wrong clock
-  for keeping time in U-Boot, so the sleep command is slower.
-- The iPod nano (5th generation) build does not boot because of wrong
-  DTB alignment. The tool which launches U-Boot does not use a 8-byte
-  aligned address, which became a requirement since 0535e46d55d7.
-
-This patch is the combined work of several developers:
-iPod nano (2nd generation): Franz-Josef Haider <f_haider at gmx.at>
-iPod nano (3rd generation): Tucker Osman <osmiumusa at gmail.com>
-iPod nano (4th generation): Vencislav Atanasov
-				<user890104 at freemyipod.org>
-iPod nano (5th generation): Serge Bazanski <q3k at q3k.org>
-iPod nano (6th generation): Vencislav Atanasov
-				<user890104 at freemyipod.org>
-iPod nano (7th generation): Martí Guasch <m-gsch at guas.ch>
-iPod classic (6th generation): Vencislav Atanasov
-				<user890104 at freemyipod.org>
-
-Links/resources:
-- https://freemyipod.org/ - main project wiki
-- https://github.com/freemyipod/u-boot - development repository
-- https://freemyipod.org/wiki/U-Boot - building/running instructions
-- https://freemyipod.org/wiki/Hardware - device and spec list
+Copied from armv7/start.S. Tested on an ARM940T SoC.
 
 Signed-off-by: Vencislav Atanasov <user890104@freemyipod.org>
 ---
-Changes in v3:
-- Changed spaces to tabs in arm1176/start.S
-- Merged the POSITION_INDEPENDENT Kconfig deps to the respective commits
-- Link to v2: https://patch.msgid.link/20261027-s5l87xx-v2-v2-0-1de63803510b@freemyipod.org
+ arch/arm/Kconfig             |  2 +-
+ arch/arm/cpu/arm920t/start.S | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 44 insertions(+), 1 deletion(-)
 
-Changes in v2:
-- Split to separate commits per SoC/board
-- Enabled skipping of low level init on ARM1176
-- Using separate USB PHY driver for S5L8740
-- Cleaned up serial and clk includes
-- Regenerated defconfig using savedefconfig
-- Removed unused code (BUSCON)
-- Fixed tabs/spaces/newlines
-- Link to v1: https://patch.msgid.link/010701a10b3e4582-979b6c8d-12c9-4819-ad7f-7ce925de5824-000000@eu-central-1.amazonses.com
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 3e9f3b51031..dde41e59d15 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -42,7 +42,7 @@ config COUNTER_FREQUENCY
+ 
+ config POSITION_INDEPENDENT
+ 	bool "Generate position-independent pre-relocation code"
+-	depends on ARM64 || CPU_V7A
++	depends on ARM64 || CPU_V7A || CPU_ARM920T
+ 	help
+ 	  U-Boot expects to be linked to a specific hard-coded address, and to
+ 	  be loaded to and run from that address. This option lifts that
+diff --git a/arch/arm/cpu/arm920t/start.S b/arch/arm/cpu/arm920t/start.S
+index e792e8e795e..3d1f210af05 100644
+--- a/arch/arm/cpu/arm920t/start.S
++++ b/arch/arm/cpu/arm920t/start.S
+@@ -26,6 +26,42 @@
+ 	.globl	reset
+ 
+ reset:
++#ifdef CONFIG_POSITION_INDEPENDENT
++	/*
++	 * Fix .rela.dyn relocations. This allows U-Boot to loaded to and
++	 * executed at a different address than it was linked at.
++	 */
++pie_fixup:
++	adr	r0, reset	/* r0 <- Runtime value of reset label */
++	ldr	r1, =reset	/* r1 <- Linked value of reset label */
++	subs	r4, r0, r1	/* r4 <- Runtime-vs-link offset */
++	beq	pie_fixup_done
++
++	adr	r0, pie_fixup
++	ldr	r1, _rel_dyn_start_ofs
++	add	r2, r0, r1	/* r2 <- Runtime &__rel_dyn_start */
++	ldr	r1, _rel_dyn_end_ofs
++	add	r3, r0, r1	/* r3 <- Runtime &__rel_dyn_end */
++
++pie_fix_loop:
++	ldr	r0, [r2]	/* r0 <- Link location */
++	ldr	r1, [r2, #4]	/* r1 <- fixup */
++	cmp	r1, #23		/* relative fixup? */
++	bne	pie_skip_reloc
++
++	/* relative fix: increase location by offset */
++	add	r0, r4
++	ldr	r1, [r0]
++	add	r1, r4
++	str	r1, [r0]
++	str	r0, [r2]
++	add	r2, #8
++pie_skip_reloc:
++	cmp	r2, r3
++	blo	pie_fix_loop
++pie_fixup_done:
++#endif
++
+ 	/*
+ 	 * set the cpu to SVC32 mode
+ 	 */
+@@ -95,3 +131,10 @@ cpu_init_crit:
+ #endif
+ 	mov	pc, lr
+ #endif /* CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT) */
++
++#if CONFIG_POSITION_INDEPENDENT
++_rel_dyn_start_ofs:
++	.word   __rel_dyn_start - pie_fixup
++_rel_dyn_end_ofs:
++	.word   __rel_dyn_end - pie_fixup
++#endif
 
-To: u-boot@lists.u-boot-project.org
-To: Janne Grunau <j@jannau.net>
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Vencislav Atanasov <user890104@freemyipod.org>
-Cc: Michael Srba <Michael.Srba@seznam.cz>
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Lukasz Majewski <lukma@nabladev.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Marek Vasut <marex@nabladev.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Honbo He <hehongbo918@gmail.com>
-Cc: Samuel Holland <samuel@sholland.org>
-Cc: Mark Kettenis <kettenis@openbsd.org>
-Cc: Stefan Roese <stefan.roese@mailbox.org>
-
----
-Vencislav Atanasov (13):
-      ARM920T: Add support for CONFIG_POSITION_INDEPENDENT
-      ARM1176: Add support for CONFIG_POSITION_INDEPENDENT
-      ARM1176: Add support for SKIP_LOWLEVEL_INIT/SKIP_LOWLEVEL_INIT_ONLY
-      New SoC platform: S5L87xx
-      usb: Add DWC2 HS OTG params for S5L87xx
-      serial: Add support for S5L87xx to serial_s5p
-      Common files for the whole S5L87xx SoC family and the Nxx board series
-      New SoC/board: S5L8701/N36
-      New SoC/boards: S5L8702/N46 and N25
-      New SoC/board: S5L8720/N58s
-      New SoC/board: S5L8723/N20
-      New SoC/board: S5L8730/N33
-      New SoC/board: S5L8740/N31
-
- MAINTAINERS                                 |  10 ++
- arch/arm/Kconfig                            |  14 ++-
- arch/arm/Makefile                           |   1 +
- arch/arm/cpu/arm1176/start.S                |  46 +++++++++
- arch/arm/cpu/arm920t/start.S                |  43 +++++++++
- arch/arm/dts/s5l8701-n36.dts                |  26 ++++++
- arch/arm/dts/s5l8701.dtsi                   |  62 +++++++++++++
- arch/arm/dts/s5l8702-common.dtsi            |  34 +++++++
- arch/arm/dts/s5l8702-n25.dts                |  26 ++++++
- arch/arm/dts/s5l8702-n46.dts                |  26 ++++++
- arch/arm/dts/s5l8702.dtsi                   |  44 +++++++++
- arch/arm/dts/s5l8720-n58s.dts               |  26 ++++++
- arch/arm/dts/s5l8720.dtsi                   |  42 +++++++++
- arch/arm/dts/s5l8723-n20.dts                |  26 ++++++
- arch/arm/dts/s5l8723.dtsi                   |  40 ++++++++
- arch/arm/dts/s5l8730-n33.dts                |  26 ++++++
- arch/arm/dts/s5l8730.dtsi                   |  42 +++++++++
- arch/arm/dts/s5l8740-n31.dts                |  26 ++++++
- arch/arm/dts/s5l8740.dtsi                   |  43 +++++++++
- arch/arm/dts/s5l87xx-nxx.dtsi               |  22 +++++
- arch/arm/dts/s5l87xx.dtsi                   |  78 ++++++++++++++++
- arch/arm/include/asm/arch-s5l87xx/clk.h     |  19 ++++
- arch/arm/include/asm/arch-s5l87xx/s5l87xx.h |  79 ++++++++++++++++
- arch/arm/include/asm/arch-s5l87xx/uart.h    |  29 ++++++
- arch/arm/mach-s5l87xx/Kconfig               |  67 ++++++++++++++
- arch/arm/mach-s5l87xx/Makefile              |  35 +++++++
- arch/arm/mach-s5l87xx/relocate.S            |  27 ++++++
- arch/arm/mach-s5l87xx/s5l8701-otg-phy.c     |  56 +++++++++++
- arch/arm/mach-s5l87xx/s5l8701-timer.c       | 109 ++++++++++++++++++++++
- arch/arm/mach-s5l87xx/s5l8701.c             |  26 ++++++
- arch/arm/mach-s5l87xx/s5l8701/Kconfig       |  12 +++
- arch/arm/mach-s5l87xx/s5l8702-otg-phy.c     |  72 ++++++++++++++
- arch/arm/mach-s5l87xx/s5l8702.c             |  18 ++++
- arch/arm/mach-s5l87xx/s5l8702/Kconfig       |  26 ++++++
- arch/arm/mach-s5l87xx/s5l8720.c             |  18 ++++
- arch/arm/mach-s5l87xx/s5l8720/Kconfig       |  12 +++
- arch/arm/mach-s5l87xx/s5l8723.c             |  18 ++++
- arch/arm/mach-s5l87xx/s5l8723/Kconfig       |  12 +++
- arch/arm/mach-s5l87xx/s5l8730.c             |  18 ++++
- arch/arm/mach-s5l87xx/s5l8730/Kconfig       |  12 +++
- arch/arm/mach-s5l87xx/s5l8740-otg-phy.c     |  75 +++++++++++++++
- arch/arm/mach-s5l87xx/s5l8740.c             |  25 +++++
- arch/arm/mach-s5l87xx/s5l8740/Kconfig       |  12 +++
- arch/arm/mach-s5l87xx/s5l87xx-clk.c         |  66 +++++++++++++
- arch/arm/mach-s5l87xx/s5l87xx-otg-phy.c     |  55 +++++++++++
- arch/arm/mach-s5l87xx/s5l87xx-timer.c       | 139 ++++++++++++++++++++++++++++
- arch/arm/mach-s5l87xx/s5l87xx.c             |  22 +++++
- board/apple/n20/Kconfig                     |  15 +++
- board/apple/n20/Makefile                    |   7 ++
- board/apple/n20/n20.c                       |  57 ++++++++++++
- board/apple/n25/Kconfig                     |  15 +++
- board/apple/n25/Makefile                    |   7 ++
- board/apple/n25/n25.c                       |  50 ++++++++++
- board/apple/n31/Kconfig                     |  15 +++
- board/apple/n31/Makefile                    |   7 ++
- board/apple/n31/n31.c                       |  96 +++++++++++++++++++
- board/apple/n33/Kconfig                     |  15 +++
- board/apple/n33/Makefile                    |   7 ++
- board/apple/n33/n33.c                       |  57 ++++++++++++
- board/apple/n36/Kconfig                     |  15 +++
- board/apple/n36/Makefile                    |   7 ++
- board/apple/n36/n36.c                       |  19 ++++
- board/apple/n46/Kconfig                     |  15 +++
- board/apple/n46/Makefile                    |   7 ++
- board/apple/n46/n46.c                       |  51 ++++++++++
- board/apple/n58s/Kconfig                    |  15 +++
- board/apple/n58s/Makefile                   |   7 ++
- board/apple/n58s/n58s.c                     |  57 ++++++++++++
- board/apple/nxx-common/nxx.c                |  47 ++++++++++
- configs/apple_n20_defconfig                 |  33 +++++++
- configs/apple_n25_defconfig                 |  37 ++++++++
- configs/apple_n31_defconfig                 |  31 +++++++
- configs/apple_n33_defconfig                 |  33 +++++++
- configs/apple_n36_defconfig                 |  31 +++++++
- configs/apple_n46_defconfig                 |  36 +++++++
- configs/apple_n58s_defconfig                |  33 +++++++
- drivers/serial/Kconfig                      |   4 +-
- drivers/serial/serial_s5p.c                 |  49 ++++++----
- drivers/usb/gadget/dwc2_udc_otg.c           |  29 ++++++
- include/configs/apple_n20.h                 |  15 +++
- include/configs/apple_n25.h                 |  15 +++
- include/configs/apple_n31.h                 |  15 +++
- include/configs/apple_n33.h                 |  16 ++++
- include/configs/apple_n36.h                 |  15 +++
- include/configs/apple_n46.h                 |  15 +++
- include/configs/apple_n58s.h                |  15 +++
- 86 files changed, 2753 insertions(+), 19 deletions(-)
----
-base-commit: b0da72e3e8e77e36c29a5f3fecc04c47764031bf
-change-id: 20261026-s5l87xx-v2-cc5d799fde34
-
-Best regards,
---  
-Vencislav Atanasov <user890104@freemyipod.org>
+-- 
+Git-157)
 
