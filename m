@@ -1,28 +1,28 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2CF1606A327
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 00:12:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 559C7606A331
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 00:12:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=h4p3/Ap3
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QhdYSw/5
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AFE3360DA5;
-	Sat, 14 Nov 2026 00:12:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2A4AC81547;
+	Sat, 14 Nov 2026 00:12:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HKP1pH8Y09Me; Sat, 14 Nov 2026 00:12:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E720F6071D
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794615132;
-	b=rvMK2Vy8hvYYUr5Tv6fK5Hkz2MXdJ7FHfDp9ToN+uz6h+cyXnxvANk1Q7cLNNUyhir5+
-	 sGe+tfzu27Mlvp9Ns3l8HZmCLsdvRZ5t/GCU5KpT5Ykuwcj61H8wqzcEZOzaN0JrMg5Yl
-	 lzGbfu/zAy4qLfGlQIu+G5dHNUgaa+hJqwx98b5Zntco0OvELZdHHFaG4RTbBasAO3fUK
-	 NBHHBGO3uK3h2hKenc9OXmyKAVKIlgtmpHJ3NdbKMEHAuiiGnptbekyg+m0MFfVs+Xa3S
-	 9+xuiHQIQhpy+XAwkjq9uhqd0LrhgSKudo2OBkuv8NQg4/8nBxfCm6vnlttT5KUbaNQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZA8sNxnZ30Y3; Sat, 14 Nov 2026 00:12:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 79144812FA
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794615141;
+	b=MQFJ3PrDGLPqKU6F6eYV4bkhIpo5lkHu30pQ1SVoOdLHMe+vkijeDuRSbGEwBm4H2+Y3
+	 y8ZqlsBp1jtHynJKnQuwipwkxD/AYZg2gYvjA692vr+vtIMIRCSarczOJuY7mJB1vQOF9
+	 Ce5/EOSW0UGZhqFtSDykySmjUoAgkGvlFnYd0k4xjwRIkwTjTxCSIfULL0slfCzX1PECi
+	 Sh08zWbIIu6LXyyutYROxdgAiMPO4jp9OsP+VPTUHbfI+OsDIkRgngfdCcWMQJjFrp8Bd
+	 oPmpMU0s7MW/8lrQc3cO9OoL3nEBgMTVWKHp2E8bCXsvj6hxZUZHlBxCTi6AZcA167g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794615132;
+	c=relaxed/relaxed; t=1794615141;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:Date:
@@ -30,59 +30,58 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Jm+9WeTAg2MURi84gwxgLxP55qVwsdno237Qkmj9VuM=;
-	b=JEn5VLdL8rgPAJQRbH4hS0dsEMcIbcOgXa4Cwl/dlkqOgzbBUpLut2WWQRwoe6WmqvFR
-	 Dc++c3B8aTsmP1Em16f63pgnT7Pjt5L5Of9Se8QXvYNzB9O6361szFW2+5ThpLOFsHPTd
-	 RpaQXx3qZcVIwqD3usINyPO9xEj82H3E9fkzNUuAY7KO7yl66cB3mkfgslvwVEw6PVX0o
-	 5H8fE1AOjF58Xo+jMzBpY7YAOYVtY24kqj30zzDL0ETRJeFoH/AP7p/5DTnJUBhJnaR/G
-	 yP87hMZ0OEVj7HIhRU4zxuFmlX/W4HqKpJ29EPf5LPifgZOCCZ2zzGjpbofFr9XMfPg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=none header.from=makrotopia.org;
+	bh=8O+DgGzv+2xQypEZiKNRRRPsRsN3qAsvBPt3wG1tijk=;
+	b=IWYkrKiGL2QH/dumrtCfX9z/pjsFqYL4dK4yhXKfBNEsvIoQ9aTtSAAqMaffos4oFmrK
+	 7qPyjm8veiIHjjQBrJkZ1lbAEMEx7Ntrekn0Iz+uzkGapnRFMYhiLiu3JzGjCkjUP+4Up
+	 pKAsIUfzh6h3fSCL8KMl2GdG+iw7OOzqs/lR4Fajssx7xJUEIsffh7rZUhoBjD0rDC691
+	 CtT5eFL4omGxD6IuJR6triVgCmC4JDaqkgVTTZiSywY447y6pYRT3A0TWErpSNtvYlEvk
+	 MHJU2nzX2A9vJPPcoJF8b1ZOgL8VrgoZFWwFwcZ/4uB/pCMvuRFcJIkbseeSQJUOZBQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794615132;
-	bh=Jm+9WeTAg2MURi84gwxgLxP55qVwsdno237Qkmj9VuM=;
+	d=lists.u-boot-project.org; s=default; t=1794615141;
+	bh=8O+DgGzv+2xQypEZiKNRRRPsRsN3qAsvBPt3wG1tijk=;
 	h=Date:From:To:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=h4p3/Ap3i7qd4ViTv8yxZHFi0OE4c5p5jWbSIh7q/DuLZnrJhgtc1zTb8yqVmCHxA
-	 sbPj+JEgFAmIK6Xs2WakBH9BAjtuJyn3eeeWK3jRY8xmvr0hk8Op9xdusP6in0ElF/
-	 Ut6Dmwd7AfXoMdDvCDz5b1ks14QprAVwlflUaCCDWBbrK92tkfpDhpfFTelf787+t/
-	 5Yc9jqr9IT+M68ONPhe++X35yhx0ztcmFJczymY3D06zR4gHNqlzwX3zkNb5nPyNtz
-	 vTcfTkAleqAEE9eK1bs+d41Kd/WsMk/Qk9hR+bP5EV4gSK5HAlCR5mAbEJv/JsSogm
-	 DhIfCqgykQBNQ==
+	b=QhdYSw/5seboXls20RIB/fU18hLytkqD5vfcW0p/rvWRkZGJMLLHE6Lmxbk3nNvmQ
+	 LaGhEUvFcUeTElDm4lmWeGt1eS5a5n3Fh8HCNL3o17YjiJDM0PUAWdiVbb6AIO7LPB
+	 x1EfAEWM9hpS/JauY1Lxk32UbN9H4C3wUmZkd4XLN3CCusuY3zt5NGLTUA6gC0gGCC
+	 XwdS0R0cPPFgyiH2gl+CwgiNP8XPNeKGvXn3sVQUPiuyi5RJisLXkueSZyjsOkyAFe
+	 iGQLd4wmwn8pbXRV8rhrnJoJSqIBK5u7D9+7sNKA1DTti7N6j1ohFq8ri6JyFrvYyc
+	 0xqB3+bQ55XTw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E720F6071D;
-	Sat, 14 Nov 2026 00:12:11 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id C7F462FB
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 79144812FA;
+	Sat, 14 Nov 2026 00:12:21 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2A0B9260
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id AE312606F1
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:10 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1BC904061D
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wjjjaXsSVSkU for <u-boot@lists.u-boot-project.org>;
- Sat, 14 Nov 2026 00:12:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0B19B6065A
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pi7en2yvbmsE for <u-boot@lists.u-boot-project.org>;
+ Sat, 14 Nov 2026 00:12:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3C9AE40611
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip="2a07:2ec0:3002::65"
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0B19B6065A
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:08 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3C9AE40611
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:12:18 +0000 (UTC)
 Received: from local by pidgin.makrotopia.org with esmtpsa
  (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768) (Exim 4.100.1)
- (envelope-from <daniel@makrotopia.org>) id 1xS1N9-0000000007D-3AtC;
- Sat, 14 Nov 2026 00:11:59 +0000
-Date: Sat, 14 Nov 2026 00:11:56 +0000
+ (envelope-from <daniel@makrotopia.org>) id 1xS1NJ-0000000007z-4B1u;
+ Sat, 14 Nov 2026 00:12:10 +0000
+Date: Sat, 14 Nov 2026 00:12:07 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
@@ -97,8 +96,8 @@ To: Alexey Brodkin <alexey.brodkin@synopsys.com>,
  =?iso-8859-1?Q?Jo=E3o?= Loureiro <joaofl@gmail.com>,
  uboot-snps-arc@synopsys.com, u-boot@lists.u-boot-project.org,
  openwrt-devel@lists.openwrt.org
-Subject: [PATCH 7/9] mtd: Unbind the block device when removing a master
-Message-ID: <3bb8a258bbf331627e61d5a0cfc6ce4f4b234f80.1794614777.git.daniel@makrotopia.org>
+Subject: [PATCH 8/9] test: dm: sf: Check the block count after re-probing
+Message-ID: <038d7127b0665d1b76a69922d91b7625f9f82ede.1794614777.git.daniel@makrotopia.org>
 References: <cover.1794614777.git.daniel@makrotopia.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
@@ -121,103 +120,61 @@ X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Removing an MTD master leaves its block device bound, so each SPI
-flash re-probe adds another block device and leaks its pointer storage.
-Unbind the block device and free the storage when deleting the master.
-Share the condition used to identify masters which have block devices.
+Add a test which removes and probes the SPI flash again, checking that
+the number of child block devices stays the same. Compare with the
+initial count so the test also works with CONFIG_MTD_BLOCK disabled.
 
-Fixes: e8a7453824b7 ("mtd: bind an mtd_blk device for non-NAND MTD masters")
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- drivers/mtd/mtdcore.c | 48 ++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 45 insertions(+), 3 deletions(-)
+ test/dm/sf.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/drivers/mtd/mtdcore.c b/drivers/mtd/mtdcore.c
-index 3d3a84df0a6..34009f997f8 100644
---- a/drivers/mtd/mtdcore.c
-+++ b/drivers/mtd/mtdcore.c
-@@ -30,6 +30,7 @@
- #include <linux/bug.h>
- #include <linux/err.h>
- #include <ubi_uboot.h>
+diff --git a/test/dm/sf.c b/test/dm/sf.c
+index 0ec02ac694b..5c3a02d6f79 100644
+--- a/test/dm/sf.c
++++ b/test/dm/sf.c
+@@ -12,6 +12,7 @@
+ #include <spi_flash.h>
+ #include <asm/state.h>
+ #include <asm/test.h>
 +#include <dm/device-internal.h>
- #endif
- 
- #include <linux/log2.h>
-@@ -396,6 +397,44 @@ static struct device_type mtd_devtype = {
- };
- #endif
- 
-+static bool mtd_is_blk_master(struct mtd_info *mtd)
+ #include <dm/test.h>
+ #include <dm/util.h>
+ #include <test/test.h>
+@@ -106,3 +107,34 @@ static int dm_test_spi_flash_func(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_spi_flash_func, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++static int sf_count_blk(struct udevice *dev)
 +{
-+	return IS_ENABLED(CONFIG_MTD_BLOCK) && mtd->dev &&
-+	       !mtd_is_partition(mtd) && !mtd_type_is_nand(mtd);
++	struct udevice *child;
++	int count = 0;
++
++	list_for_each_entry(child, &dev->child_head, sibling_node)
++		if (device_get_uclass_id(child) == UCLASS_BLK)
++			count++;
++
++	return count;
 +}
 +
-+static void mtd_blk_unbind(struct mtd_info *mtd, struct udevice *blk)
++/* Test that probing the flash again does not add a block device */
++static int dm_test_spi_flash_reprobe_blk(struct unit_test_state *uts)
 +{
-+	struct mtd_info **mtdp;
-+	int ret;
++	struct udevice *dev;
++	int count;
 +
-+	if (strcmp(blk->driver->name, "mtd_blk"))
-+		return;
++	ut_assertok(uclass_first_device_err(UCLASS_SPI_FLASH, &dev));
++	count = sf_count_blk(dev);
 +
-+	mtdp = dev_get_priv(blk);
-+	if (!mtdp || *mtdp != mtd)
-+		return;
++	ut_assertok(device_remove(dev, DM_REMOVE_NORMAL));
++	ut_assertok(device_probe(dev));
++	ut_asserteq(count, sf_count_blk(dev));
 +
-+	ret = device_remove(blk, DM_REMOVE_NORMAL);
-+	if (!ret)
-+		ret = device_unbind(blk);
-+	if (ret) {
-+		pr_warn("mtd: %s: cannot unbind the block device: %d\n",
-+			mtd->name, ret);
-+		return;
-+	}
++	sandbox_sf_unbind_emul(state_get_current(), 0, 0);
 +
-+	kfree(mtdp);
++	return 0;
 +}
-+
-+static void mtd_blk_unbind_master(struct mtd_info *mtd)
-+{
-+	struct udevice *blk, *next;
-+
-+	list_for_each_entry_safe(blk, next, &mtd->dev->child_head, sibling_node)
-+		mtd_blk_unbind(mtd, blk);
-+}
-+
- static void mtd_blk_bind_master(struct mtd_info *mtd)
- {
- 	struct mtd_info **mtdp;
-@@ -403,7 +442,7 @@ static void mtd_blk_bind_master(struct mtd_info *mtd)
- 
- 	/*
- 	 * mtd_bind() keeps the passed pointer, so it needs storage that lives
--	 * as long as the block device; an MTD master is never removed.
-+	 * as long as the block device.
- 	 */
- 	mtdp = kmalloc(sizeof(*mtdp), GFP_KERNEL);
- 	if (!mtdp) {
-@@ -520,8 +559,7 @@ int add_mtd_device(struct mtd_info *mtd)
- 
- 	mutex_unlock(&mtd_table_mutex);
- 
--	if (IS_ENABLED(CONFIG_MTD_BLOCK) && mtd->dev &&
--	    !mtd_is_partition(mtd) && !mtd_type_is_nand(mtd)) {
-+	if (mtd_is_blk_master(mtd)) {
- 		/*
- 		 * Expose a non-NAND MTD master (parallel NOR, SPI-NOR, ...) as
- 		 * a mtd_blk block device, so its partitions are reachable
-@@ -596,6 +634,10 @@ int del_mtd_device(struct mtd_info *mtd)
- 		device_unregister(&mtd->dev);
- #endif
- 
-+		if (CONFIG_IS_ENABLED(DM_DEVICE_REMOVE) &&
-+		    mtd_is_blk_master(mtd))
-+			mtd_blk_unbind_master(mtd);
-+
- 		idr_remove(&mtd_idr, mtd->index);
- 
- 		module_put(THIS_MODULE);
++DM_TEST(dm_test_spi_flash_reprobe_blk, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 -- 
 2.56.0
