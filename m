@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31A1A606A32D
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 16:22:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E573606A323
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 16:22:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UZKw4/Bs;
-	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=o+YKNxPm;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=VhPNGrRz
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=T5O4V4nD;
+	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=s0hmTPIc;
+	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=TDSRs1vM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C035D6075B;
-	Sat, 14 Nov 2026 16:22:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7BDF4409B2;
+	Sat, 14 Nov 2026 16:22:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mbaa3_-LfiIC; Sat, 14 Nov 2026 16:22:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3219660770
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794673319;
-	b=PiIrmGPcxmlaM4OTckufNZ3Bbact+dNovrJxL7eZbHrJ1I9zxSX72C+LUnSwi/lN4gj0
-	 9tMwbptHx/KC7lypSjJvp4MN7O+ftk9B6kUVP3H2CUr0cheElqhIZwYwlPh0kWPjJQfJ8
-	 IaF9YXO7FJEJjHPSgo94xixgwrEbNSIF8f5OkKjB/f79lqva2RdfhEFbWiFDXg3iv/D2x
-	 pJjPu7lNsoTqwtyGq1gHMp6cuRjm2YQo7P7BPfCwpVxoFcNwcAQdxhdDZ8e1eqqdF1MnM
-	 XQM8hkFmGl6waL3mpsEfvMcMiyNudcz0mEwHlc46XjhGLPaDXWaMQ/JqOb7+pFn6N1w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id N_CXc-brUsuO; Sat, 14 Nov 2026 16:22:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 133BB40913
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794673322;
+	b=MxKKqoFYsj5PlJiB6D16DaXczo4j0agRaFvR+o5XH8ZFQbej2YPx/JiEEj39i/NrmtPt
+	 ZD6MnqHjtdE1EdQU480Ek+HA27lHDHgsewwxHFqDBsORwk0DEl8C5GRWh5ju3naJ4oyxw
+	 FJvCK276MT8md+cf6meWEmQwZxWfKEoNx8dWkxks9v2j71G9g03/App+eS/Anoicp1Ncr
+	 hpVtpawFazPXJpOVPmq31FtiFT9tr5XSXbTHbHucPoC3Np4KPqZYD3snW6ADZtZUJdnmi
+	 +03bneHpJ4Qf1TCsLVUymVzuGAYDze+6Gf4/5a9piookBFD4Qlp9REO0yxxPTMiPpTQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794673319;
+	c=relaxed/relaxed; t=1794673322;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -34,86 +34,86 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Feedback-ID:X-SES-Outgoing:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=OUlZN9kcyhVyQlJ37gsfdeYx72w8qm6LZL/hvAbnbew=;
-	b=nObwl/JkMLrCqw4hOyZMdssMGs11FpyII7ukT6l1XUj7hAwjR2yatjhZXcB1kJ+Vj+Ap
-	 ezKESC8ZKrMj9a8lWTaALKVcnxwtdQSOUuDGyF+cnM29B4DBVl97uMUCcvgcVa1aQeNr8
-	 Sx20rvkZNMEAlI8AS20c+KuAqnRrWEZN7dU/RuK5SGQkuJLe/OoUNN9AR3qSpjcY27COu
-	 iaCZouq7iJ48KgOs2STBMCDjwwuQZ7/9FXV4FGUhjB074VQTPdrq+CpRrSKS9cV1FL1Xf
-	 tTRYM3LbeYwmj5X0qzcVfWhB8snMm3K2QSxhOawLpzqWcKJiCDF+dQ2Y8OcdykMh/vA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=Zf6S8v7bIbxZT2svhBX1xvItGONN/CqNsYwFZ45KVBw=;
+	b=gKKh+/faX/CNgnH0kKA7RgNHuuMj7aAQqeXFYfiYrV7ViP81jnVxUpOEfksxkSWF/wH7
+	 cWsoHedpLUsGa4P22PjyzUHKON88um3z/rcr0MFgC52uednGDxpi3lCmWrRWSRdZhR2sv
+	 tRY1Qp0yLiu4HzLFgGDhvobWw5tcYUsUIe5e02SFLwF32fjF7JmBIqr7gv4jipjAx35CB
+	 gpduBcBAz/fVQ4rs5S3V5QKOz+fq46J4Q9MFec52uxhnHfcWAYwM5+xiKUwPHvfjl8xOU
+	 1e8ecwdwiJ/iYDcu0ldrtGVmC4O6tdjN8PCuhiNAGdGuUGserGN/lTJLl4SGMtjTGHw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794673319;
-	bh=OUlZN9kcyhVyQlJ37gsfdeYx72w8qm6LZL/hvAbnbew=;
+	d=lists.u-boot-project.org; s=default; t=1794673322;
+	bh=Zf6S8v7bIbxZT2svhBX1xvItGONN/CqNsYwFZ45KVBw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UZKw4/BsVEzTecPJWavHsVHwXqlCznPm4q/ujQJJHeKG7mipIH1MiVlQrErFjChRQ
-	 wKTR+OITA/8r8+kAu1Sb4d6dFCcrog+NOMrlSpDLo0L2T06HPJk6cmye/ySLgloP9U
-	 ACYnKdQ23g5SMAdxGNJDox0k9pfkc9qfZuz//p+wNOyBub5EVsKbmmnHjJYUrfPTPD
-	 Ve/kIsM6etReA2J4sRrtpQZt0MfGWUhYy4gmKhUQuRdUzIjeH7Rdwc0bnN/G2hq5g9
-	 3f3/N+nmgA7HD22ISghL06GLOMaQVECk+VEaD7W2fy7mZu/WMoay6Dz8ygKgq78e9e
-	 gCQVpHoRFk4dQ==
+	b=T5O4V4nD1js6rVzVPtrEmSOvt5oRE0oWDsDCPEbBCDo+RV0DB23t6EQddqLql8W70
+	 nVx9xxhHPa+h5hDffRhytqt6vGoTFEqnsQNgQ/tbaB+uVly9qo3tXDuG/MIAzShmIQ
+	 Rl2p/exDAFu4kdNwVKJEZnOB2I7h1+iYLKJXMfnm6jQwwhl/9inRn0bBxPtG8nnjNA
+	 H/Tiv1nE21afdu00gPrYIVkmnnVAbvdRLni72jfkXEBh2m0WRsbS19TB0m8IPGkaoW
+	 9PbT3kIH4BzE0M5dgrN2WcEx7F5hxmJROmlm2JnAKe/0NYDOIZGarr4myO2otuAfGc
+	 f7rDdPLLjxgEQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3219660770;
-	Sat, 14 Nov 2026 16:21:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 889A92E5
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 133BB40913;
+	Sat, 14 Nov 2026 16:22:02 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 652C728C
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6EF77400BE
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 571C281501
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nTcYNIaPWRnW for <u-boot@lists.u-boot-project.org>;
- Sat, 14 Nov 2026 16:21:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1CA2540063
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=69.169.224.8
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=69.169.224.8;
- helo=b224-8.smtp-out.eu-central-1.amazonses.com;
- envelope-from=010701a1dadd705d-fe87a8a4-8874-4292-ba82-58fb7c9458ae-000000@ses.freemyipod.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PWr2HK2nB_ta for <u-boot@lists.u-boot-project.org>;
+ Sat, 14 Nov 2026 16:21:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AE2FB814A0
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=69.169.224.12
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=69.169.224.12;
+ helo=b224-12.smtp-out.eu-central-1.amazonses.com;
+ envelope-from=010701a1dadd7890-e99508cf-cf4f-4a49-93cf-9b899353d12d-000000@ses.freemyipod.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=freemyipod.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org
  header.i=@freemyipod.org header.a=rsa-sha256
- header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=o+YKNxPm; 
+ header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=s0hmTPIc; 
  dkim=pass (1024-bit key,
  unprotected) header.d=amazonses.com header.i=@amazonses.com
  header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh
- header.b=VhPNGrRz
-Received: from b224-8.smtp-out.eu-central-1.amazonses.com
- (b224-8.smtp-out.eu-central-1.amazonses.com [69.169.224.8])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1CA2540063
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:49 +0000 (UTC)
+ header.b=TDSRs1vM
+Received: from b224-12.smtp-out.eu-central-1.amazonses.com
+ (b224-12.smtp-out.eu-central-1.amazonses.com [69.169.224.12])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id AE2FB814A0
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1794673307;
+ s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1794673310;
  h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc;
- bh=Gf3Fv4f5PlownI2+2zfoWuGLR27GJ7Sn42rYKCNhaxg=;
- b=o+YKNxPmvkiiSDSSx4ajemkWUFe7XBolDPGMjLQoJW8QXfiJSxitVBaTL2bxqjz1
- rvhQoROaTC6nKtVWhHclUjInuXbRJkvuWJlm03dK+AL3i9G2O7jCrcvfx4EBTTLD9eL
- axJ4ece+My2VQpsbIAZ9bz8NTnPjyIvCS8VDvTrYa5ZozuMQBAdkZE69axaCN5mkiga
- hL4M146qb2siYr6r44L7J6QYXuKRcoeHgvp8gNRinNftkcv1WfWIOFdiFVFbYWIg7cE
- tGPvzx4hzsjfZrYN83PjveQQpTsvpBt00QgYJHQWY/Lzs+wjoOfpcdF3X1lhT7nEP8f
- q+vsU5ztIA==
+ bh=2HNyuoBMZiCcmo6l+cxe00V6mFX92HioHqmNJQqW40A=;
+ b=s0hmTPIcad/8miFH7F21roSYnZoVw233U9Ygod3R8r8IIJnL50C2vrlmypHsh4nN
+ dqC6AKvWxfXiSOsiYT5MydyVBP0nFSqD/wo39iSoAVk5vfJfuT3QUUyIBbwFiOyaHTw
+ USOw0hEdNcGnp9rQOPWqDjb3zDvE2a1zrkO1hszgP4YYDRaI3FpQVmA5pCVNhw6G9bu
+ FALI47kp0oM4da5UVzNWm0NQt9Biwr5BRoexSsaKAl5SfLT8cam7rCMJxdR8mmE4fjT
+ OjwmBHjPg7G3gS+OOnQloEXECb7VFH/3apyMKWKdEc8ye2868vxaKXHF80k/eisiscD
+ nKt+Y2qY5A==
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1794673307;
+ s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1794673310;
  h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:Feedback-ID;
- bh=Gf3Fv4f5PlownI2+2zfoWuGLR27GJ7Sn42rYKCNhaxg=;
- b=VhPNGrRzPDiqiX9MMi8I5yO+CRDeXo9qpJJSL7gzH2Ml3vthhFKcSnpli+pxTxuT
- AztfsZoXeVqpkcYnJ+xAoN3C+mwig0gPZVwtbolTqJiqXonXYZNTeU9IG88xO0gthOH
- JwVwtjQRlDPZjpePKD6cYXHj551pySyUjCZ4EzK8=
+ bh=2HNyuoBMZiCcmo6l+cxe00V6mFX92HioHqmNJQqW40A=;
+ b=TDSRs1vMwZzTMmzyT27Av8PLhGleBwUiD7RFnNbdV/b9+BeoSD2AwGo+Yzy2Me2C
+ HDzMzWYYICAN/HnKyuXvt1HjkTCPAEVcJoQn7/7u9ptX4GfquCl381AEvJgZdN1F3p/
+ hhTybLcOrRRvaaP7Sm9QMbYOQ5fcG6bj2wLwtQBM=
 From: Vencislav Atanasov <user890104@freemyipod.org>
-Date: Sat, 14 Nov 2026 16:21:47 +0000
-Subject: [PATCH v3 06/13] serial: Add support for S5L87xx to serial_s5p
+Date: Sat, 14 Nov 2026 16:21:49 +0000
+Subject: [PATCH v3 08/13] New SoC/board: S5L8701/N36
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <010701a1dadd705d-fe87a8a4-8874-4292-ba82-58fb7c9458ae-000000@eu-central-1.amazonses.com>
+Message-ID: <010701a1dadd7890-e99508cf-cf4f-4a49-93cf-9b899353d12d-000000@eu-central-1.amazonses.com>
 References: <20261114-s5l87xx-v2-v3-0-083bd20d8ded@freemyipod.org>
 In-Reply-To: <20261114-s5l87xx-v2-v3-0-083bd20d8ded@freemyipod.org>
 To: u-boot@lists.u-boot-project.org, Janne Grunau <j@jannau.net>
@@ -134,15 +134,15 @@ Cc: Vencislav Atanasov <user890104@freemyipod.org>,
  Mark Kettenis <kettenis@openbsd.org>, 
  Stefan Roese <stefan.roese@mailbox.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794673300; l=6507;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794673300; l=14226;
  i=user890104@freemyipod.org; s=20261004; h=from:subject:message-id;
- bh=Gf3Fv4f5PlownI2+2zfoWuGLR27GJ7Sn42rYKCNhaxg=;
- b=5cJV7NCho0OvNUG37+IBIdvP9sjy00QVQEsK9ZH3mGtf1x5hVcaK3PYYaPWSi9AUzOd3qCNu8
- ObYnwrIcLvvDWuREmMVkTXytDif1me7iball0aoBvnbUh0Qx8O6tpHm
+ bh=2HNyuoBMZiCcmo6l+cxe00V6mFX92HioHqmNJQqW40A=;
+ b=/Tpig2WxKWrakT1xCCpCOXpP0h8WWVBm+lsSQCRHCqKUllQ8Ku7bVOUHhw0u2ZgEBpfJb3UeI
+ d1HzpyllwOEC3FH8AByfu+qcRx3t8GRWtHk6H6rowazEnY36S1trc1S
 X-Developer-Key: i=user890104@freemyipod.org; a=ed25519;
  pk=klj5EgxMkX+YF0tPboUEB9kwBfthBgHWLhDOkwnmUus=
 Feedback-ID: ::1.eu-central-1.GZFSN+SpSZlcZgoCjFtpLsnhzRcxifcxl4uaxXIRIUo=:AmazonSES
-X-SES-Outgoing: 2026.11.14-69.169.224.8
+X-SES-Outgoing: 2026.11.14-69.169.224.12
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -159,214 +159,541 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The S5L87xx UART peripheral does not support UDIVSLOT, also it needs
-the NCLK bit to be set (clock source selection).
+Marketing name: Apple iPod nano (2nd generation)
 
 Signed-off-by: Vencislav Atanasov <user890104@freemyipod.org>
 ---
- MAINTAINERS                              |  5 ++++
- arch/arm/include/asm/arch-s5l87xx/uart.h | 29 +++++++++++++++++++
- drivers/serial/Kconfig                   |  4 +--
- drivers/serial/serial_s5p.c              | 49 +++++++++++++++++++++-----------
- 4 files changed, 69 insertions(+), 18 deletions(-)
+ MAINTAINERS                             |   2 +
+ arch/arm/dts/s5l8701-n36.dts            |  26 ++++++++
+ arch/arm/dts/s5l8701.dtsi               |  62 ++++++++++++++++++
+ arch/arm/mach-s5l87xx/Kconfig           |   2 +
+ arch/arm/mach-s5l87xx/Makefile          |   4 ++
+ arch/arm/mach-s5l87xx/s5l8701-otg-phy.c |  56 ++++++++++++++++
+ arch/arm/mach-s5l87xx/s5l8701-timer.c   | 109 ++++++++++++++++++++++++++++++++
+ arch/arm/mach-s5l87xx/s5l8701.c         |  26 ++++++++
+ arch/arm/mach-s5l87xx/s5l8701/Kconfig   |  12 ++++
+ board/apple/n36/Kconfig                 |  15 +++++
+ board/apple/n36/Makefile                |   7 ++
+ board/apple/n36/n36.c                   |  19 ++++++
+ configs/apple_n36_defconfig             |  31 +++++++++
+ drivers/usb/gadget/dwc2_udc_otg.c       |  16 +++++
+ include/configs/apple_n36.h             |  15 +++++
+ 15 files changed, 402 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 95b1f3b5ab3..da8e413dd35 100644
+index fccc5b2e886..a54987e8546 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -600,6 +600,11 @@ F:	drivers/clk/exynos/clk-exynos850.c
- F:	drivers/phy/phy-exynos-usbdrd.c
- F:	drivers/pinctrl/exynos/pinctrl-exynos850.c
+@@ -607,6 +607,8 @@ F:	arch/arm/dts/s5l87*
+ F:	arch/arm/include/asm/arch-s5l87*
+ F:	arch/arm/mach-s5l87*
+ F:	board/apple/n*
++F:	configs/apple_n*
++F:	include/configs/apple_n*
  
-+ARM SAMSUNG S5L87XX SOC
-+M:	Vencislav Atanasov <user890104@freemyipod.org>
-+S:	Maintained
-+F:	arch/arm/include/asm/arch-s5l87*
-+
  ARM SAMSUNG SOC DRIVERS
  M:	Sam Protsenko <semen.protsenko@linaro.org>
- S:	Maintained
-diff --git a/arch/arm/include/asm/arch-s5l87xx/uart.h b/arch/arm/include/asm/arch-s5l87xx/uart.h
+diff --git a/arch/arm/dts/s5l8701-n36.dts b/arch/arm/dts/s5l8701-n36.dts
 new file mode 100644
-index 00000000000..61b7cf43890
+index 00000000000..f8d6cdc8dba
 --- /dev/null
-+++ b/arch/arm/include/asm/arch-s5l87xx/uart.h
-@@ -0,0 +1,29 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/arm/dts/s5l8701-n36.dts
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
 +/*
-+ * (C) Copyright 2009 Samsung Electronics
-+ * Minkyu Kang <mk7.kang@samsung.com>
-+ * Heungjun Kim <riverful.kim@samsung.com>
++ * Apple iPod nano (2nd generation)
++ *
++ * target-type: N36
++ *
++ * Copyright (C) 2026 The freemyipod team (freemyipod.org)
 + */
 +
-+#ifndef __ASM_ARCH_S5L87XX_UART_H_
-+#define __ASM_ARCH_S5L87XX_UART_H_
++/dts-v1/;
 +
-+#ifndef __ASSEMBLY__
++#include "s5l8701.dtsi"
++#include "s5l87xx-nxx.dtsi"
 +
-+struct s5p_uart {
-+	unsigned int	ulcon;
-+	unsigned int	ucon;
-+	unsigned int	ufcon;
-+	unsigned int	umcon;
-+	unsigned int	utrstat;
-+	unsigned int	uerstat;
-+	unsigned int	ufstat;
-+	unsigned int	umstat;
-+	unsigned int	utxh;
-+	unsigned int	urxh;
-+	unsigned int	ubrdiv;
++/ {
++	compatible = "apple,n36", "samsung,s5l8701", "apple,arm-platform";
++	model = "Apple iPod nano (2nd generation)";
 +};
 +
-+#endif	/* __ASSEMBLY__ */
++&memory {
++	reg = <0x08000000 0x02000000>; /* 32 MiB SDRAM */
++};
 +
-+#endif	/* __ASM_ARCH_S5L87XX_UART_H_ */
-diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-index bcb0c865437..fa1959b2c30 100644
---- a/drivers/serial/Kconfig
-+++ b/drivers/serial/Kconfig
-@@ -321,7 +321,7 @@ config DEBUG_SBI_CONSOLE
- 
- config DEBUG_UART_S5P
- 	bool "Samsung S5P"
--	depends on ARCH_APPLE || ARCH_EXYNOS || ARCH_S5PC1XX
-+	depends on ARCH_APPLE || ARCH_EXYNOS || ARCH_S5PC1XX || ARCH_S5L87XX
- 	help
- 	  Select this to enable a debug UART using the serial_s5p driver. You
- 	  will need to provide parameters to make this work. The driver will
-@@ -905,7 +905,7 @@ config ROCKCHIP_SERIAL
- 
- config S5P_SERIAL
- 	bool "Support for Samsung S5P UART"
--	depends on ARCH_APPLE || ARCH_EXYNOS || ARCH_S5PC1XX
-+	depends on ARCH_APPLE || ARCH_EXYNOS || ARCH_S5PC1XX || ARCH_S5L87XX
- 	default y
- 	help
- 	  Select this to enable Samsung S5P UART support.
-diff --git a/drivers/serial/serial_s5p.c b/drivers/serial/serial_s5p.c
-index d46a88610ab..eec0fa0a10f 100644
---- a/drivers/serial/serial_s5p.c
-+++ b/drivers/serial/serial_s5p.c
-@@ -13,10 +13,14 @@
- #include <asm/global_data.h>
- #include <linux/compiler.h>
- #include <asm/io.h>
--#if !IS_ENABLED(CONFIG_ARCH_APPLE)
-+#if !IS_ENABLED(CONFIG_ARCH_APPLE) && !IS_ENABLED(CONFIG_ARCH_S5L87XX)
- #include <asm/arch/clk.h>
- #endif
-+#if IS_ENABLED(CONFIG_ARCH_S5L87XX)
-+#include <asm/arch-s5l87xx/uart.h>
-+#else
- #include <asm/arch/uart.h>
-+#endif
- #include <serial.h>
- #include <clk.h>
- 
-@@ -40,6 +44,7 @@ enum {
- #define S5L_TX_FIFO_COUNT_SHIFT	4
- #define S5L_TX_FIFO_COUNT_MASK	(0xf << S5L_TX_FIFO_COUNT_SHIFT)
- #define S5L_TX_FIFO_FULL	BIT(9)
-+#define S5L_CLK_NCLK		BIT(10)
- 
- #define S5P_RX_FIFO_COUNT_SHIFT	0
- #define S5P_RX_FIFO_COUNT_MASK	(0xff << S5P_RX_FIFO_COUNT_SHIFT)
-@@ -61,6 +66,7 @@ struct s5p_serial_plat {
- 	u32 tx_fifo_full;
- };
- 
-+#if !IS_ENABLED(CONFIG_ARCH_S5L87XX)
- /*
-  * The coefficient, used to calculate the baudrate on S5P UARTs is
-  * calculated as
-@@ -86,6 +92,7 @@ static const int udivslot[] = {
- 	0xdfdf,
- 	0xffdf,
- };
-+#endif
- 
- static void __maybe_unused s5p_serial_init(struct s5p_uart *uart)
- {
-@@ -98,6 +105,14 @@ static void __maybe_unused s5p_serial_init(struct s5p_uart *uart)
- 	/* No interrupts, no DMA, pure polling */
- 	writel(UCON_RX_IRQ_OR_POLLING | UCON_TX_IRQ_OR_POLLING |
- 	       UCON_RX_ERR_IRQ_EN | UCON_TX_IRQ_LEVEL, &uart->ucon);
++&clkref {
++	clock-frequency = <24000000>;
++};
+diff --git a/arch/arm/dts/s5l8701.dtsi b/arch/arm/dts/s5l8701.dtsi
+new file mode 100644
+index 00000000000..df14e80f083
+--- /dev/null
++++ b/arch/arm/dts/s5l8701.dtsi
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Samsung S5L8701 SoC
++ *
++ * Other names: M1
++ *
++ * Copyright (C) 2026 The freemyipod team (freemyipod.org)
++ */
 +
-+	if (IS_ENABLED(CONFIG_ARCH_S5L87XX)) {
-+		u32 val;
++#include "s5l87xx.dtsi"
 +
-+		val = readl(&uart->ucon);
-+		val |= S5L_CLK_NCLK;
-+		writel(val, &uart->ucon);
++/ {
++	compatible = "samsung,s5l8701", "apple,arm-platform";
++
++	chosen {
++		stdout-path = &uart0;
++	};
++
++	soc {
++		icu: interrupt-controller@39c00000 {
++			compatible = "samsung,s5l8701-icu";
++			interrupt-controller;
++			reg = <0x39c00000 0x1000>;
++			#interrupt-cells = <1>;
++		};
++
++		usbotg_hs: usb@38800000 {
++			compatible = "apple,s5l87xx-usb";
++			reg = <0x38800000 0x40000>;
++			interrupt-parent = <&icu>;
++			interrupts = <16>;
++			phys = <&usbphy>;
++			phy-names = "usb2-phy";
++			clocks = <&clkref>;
++			clock-names = "otg";
++			g-rx-fifo-size = <256>;
++			g-np-tx-fifo-size = <128>;
++			g-tx-fifo-size = <0>;
++			dr_mode = "peripheral";
++		};
++	};
++};
++
++&cpu0 {
++	compatible = "arm,arm940t";
++};
++
++&clkgates {
++	/*
++	 * Clock-gate name -> {gate, bit} table consumed by s5l87xx_enable_clkgate().
++	 * Each entry is two cells: gate * 32 + bit, with 0xffffffff for an unused
++	 * second gate. The Nano2G (S5L8701) uses single gates (PWRCON registers).
++	 * See https://freemyipod.org/wiki/Nano2G_clock_gates
++	 */
++	clock-gate-names = "timer", "uart", "usb2-phy", "usb-otg";
++	samsung,clock-gates = <4 0xffffffff>, <8 0xffffffff>,
++						  <14 0xffffffff>, <43 0xffffffff>;
++};
++
++&uart0 {
++	status = "okay";
++};
+diff --git a/arch/arm/mach-s5l87xx/Kconfig b/arch/arm/mach-s5l87xx/Kconfig
+index 39de1039495..ec35a293998 100644
+--- a/arch/arm/mach-s5l87xx/Kconfig
++++ b/arch/arm/mach-s5l87xx/Kconfig
+@@ -57,4 +57,6 @@ config S5L8740
+ 
+ endchoice
+ 
++source "arch/arm/mach-s5l87xx/s5l8701/Kconfig"
++
+ endif
+diff --git a/arch/arm/mach-s5l87xx/Makefile b/arch/arm/mach-s5l87xx/Makefile
+index c8d200479c3..68da781df74 100644
+--- a/arch/arm/mach-s5l87xx/Makefile
++++ b/arch/arm/mach-s5l87xx/Makefile
+@@ -5,3 +5,7 @@
+ 
+ obj-y += s5l87xx.o
+ obj-y += s5l87xx-clk.o
++
++obj-$(CONFIG_S5L8701) += s5l8701.o
++obj-$(CONFIG_S5L8701) += s5l8701-otg-phy.o
++obj-$(CONFIG_S5L8701) += s5l8701-timer.o
+diff --git a/arch/arm/mach-s5l87xx/s5l8701-otg-phy.c b/arch/arm/mach-s5l87xx/s5l8701-otg-phy.c
+new file mode 100644
+index 00000000000..9584d662de5
+--- /dev/null
++++ b/arch/arm/mach-s5l87xx/s5l8701-otg-phy.c
+@@ -0,0 +1,56 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 The freemyipod team (freemyipod.org)
++ */
++
++#include <init.h>
++#include <asm/io.h>
++#include <asm/arch-s5l87xx/s5l87xx.h>
++#include <asm/arch-s5l87xx/clk.h>
++#include <linux/delay.h>
++
++struct s5l87xx_otgphy {
++	u32 pwr;	 // 0x00
++	u32 con;	 // 0x04
++	u32 rstcon;  // 0x08
++	u32 unk[4];  // 0x0c, 0x10, 0x14, 0x18
++	u32 unkcon;  // 0x1c
++	u32 pad[36]; // 0x20 - 0x44
++	u32 unk44;   // 0x44
++};
++
++void otg_phy_init(void *unused)
++{
++	struct s5l87xx_otgphy *otgphy = (struct s5l87xx_otgphy *)S5L87XX_PHY_BASE;
++
++	log_debug("s5l8701_otgphy: turning on\n");
++	s5l87xx_enable_clkgate("usb-otg");
++	s5l87xx_enable_clkgate("usb2-phy");
++	mdelay(10);
++
++	// Disable USB suspend.
++	writel(0, S5L87XX_OTG_BASE + 0xe00);
++
++	writel(0, &otgphy->pwr); /* PHY: Power up */
++	udelay(10);
++	writel(1, &otgphy->unkcon);
++	writel(0xe3f, &otgphy->unk44);
++	writel(1, &otgphy->rstcon); /* PHY: Assert Software Reset */
++	udelay(10);
++	writel(0, &otgphy->rstcon); /* PHY: Deassert Software Reset */
++	udelay(10);
++	writel(0x600, &otgphy->unk[3]);
++	writel(0, &otgphy->con);
++	udelay(400);
++}
++
++void otg_phy_off(void *unused)
++{
++	struct s5l87xx_otgphy *otgphy = (struct s5l87xx_otgphy *)S5L87XX_PHY_BASE;
++
++	log_debug("s5l8701_otgphy: turning off\n");
++	writel(0x0F, &otgphy->pwr); /* PHY: Power down */
++	udelay(10);
++	writel(0x07, &otgphy->rstcon); /* PHY: Assert Software Reset */
++	udelay(10);
++}
+diff --git a/arch/arm/mach-s5l87xx/s5l8701-timer.c b/arch/arm/mach-s5l87xx/s5l8701-timer.c
+new file mode 100644
+index 00000000000..ca0854c6acf
+--- /dev/null
++++ b/arch/arm/mach-s5l87xx/s5l8701-timer.c
+@@ -0,0 +1,109 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 The freemyipod team (freemyipod.org)
++ */
++
++#include <init.h>
++#include <asm/io.h>
++#include <asm/arch-s5l87xx/s5l87xx.h>
++#include <asm/arch-s5l87xx/clk.h>
++
++struct s5l87xx_timer {
++	u32 con;	// 0x00
++	u32 cmd;	// 0x04
++	u32 data0;	// 0x08
++	u32 data1;	// 0x0c
++	u32 pre;	// 0x10
++	u32 cnt;	// 0x14
++};
++
++enum s5l87xx_timer_id {
++	//  Timers A, B, C, D: 16-bit
++	S5L87XX_TIMER_A = 0,
++	S5L87XX_TIMER_B = 1,
++	S5L87XX_TIMER_C = 2,
++	S5L87XX_TIMER_D = 3,
++};
++
++#define SYSTEM_TIMER S5L87XX_TIMER_C
++
++enum s5l87xx_timer_cmd {
++	S5L87XX_TIMER_CMD_STOP = 0,
++	S5L87XX_TIMER_CMD_START = 1,
++	S5L87XX_TIMER_CMD_CLR = 2,
++};
++
++static struct s5l87xx_timer *s5l87xx_timer_registers(enum s5l87xx_timer_id id)
++{
++	switch (id) {
++	case S5L87XX_TIMER_A:
++		return (struct s5l87xx_timer *)S5L87XX_TIMER_BASE;
++	case S5L87XX_TIMER_B:
++		return (struct s5l87xx_timer *)(S5L87XX_TIMER_BASE + 0x20);
++	case S5L87XX_TIMER_C:
++		return (struct s5l87xx_timer *)(S5L87XX_TIMER_BASE + 0x40);
++	case S5L87XX_TIMER_D:
++		return (struct s5l87xx_timer *)(S5L87XX_TIMER_BASE + 0x60);
++	default:
++		panic("requested invalid timer id %d", id);
 +	}
- }
++}
++
++static const char *s5l87xx_timer_clockgate(enum s5l87xx_timer_id id)
++{
++	/* S5L8701 and S5L8702 gate all timers behind a single clock gate. */
++	return "timer";
++}
++
++static void s5l87xx_timer_configure_interval(enum s5l87xx_timer_id id)
++{
++	struct s5l87xx_timer *timer = s5l87xx_timer_registers(id);
++
++	log_debug("s5l87xx_timer: configuring %d in interval mode\n", id);
++	s5l87xx_enable_clkgate(s5l87xx_timer_clockgate(id));
++
++	writel(S5L87XX_TIMER_CMD_STOP, &timer->cmd);
++	/* configure timer for 1000 Hz??? */
++	writel((3 << 8) | (1 << 4), &timer->con);
++	writel(511, &timer->pre);
++	writel(0xffff, &timer->data0);
++	writel(0xffff, &timer->data1);
++	writel(S5L87XX_TIMER_CMD_CLR, &timer->cmd);
++}
++
++static void s5l87xx_timer_start(enum s5l87xx_timer_id id)
++{
++	struct s5l87xx_timer *timer = s5l87xx_timer_registers(id);
++
++	log_debug("s5l87xx_timer: starting %d\n", id);
++	writel(S5L87XX_TIMER_CMD_START, &timer->cmd);
++}
++
++static u32 s5l87xx_timer_read(enum s5l87xx_timer_id id)
++{
++	struct s5l87xx_timer *timer = s5l87xx_timer_registers(id);
++
++	return readl(&timer->cnt);
++}
++
++int timer_init(void)
++{
++	s5l87xx_timer_configure_interval(SYSTEM_TIMER);
++	s5l87xx_timer_start(SYSTEM_TIMER);
++
++	return 0;
++}
++
++unsigned long timer_read_counter(void)
++{
++	static u16 last, high;
++
++	u16 now = s5l87xx_timer_read(SYSTEM_TIMER);
++
++	if (now < last)
++		high++;
++
++	last = now;
++
++	return ((u32)high << 16) | (u32)now;
++}
+diff --git a/arch/arm/mach-s5l87xx/s5l8701.c b/arch/arm/mach-s5l87xx/s5l8701.c
+new file mode 100644
+index 00000000000..9cacbf3eafb
+--- /dev/null
++++ b/arch/arm/mach-s5l87xx/s5l8701.c
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 The freemyipod team (freemyipod.org)
++ */
++
++#include <init.h>
++
++int print_cpuinfo(void)
++{
++	printf("CPU:   Samsung S5L8701 (ARM940T)\n");
++	return 0;
++}
++
++void enable_caches(void)
++{
++	// Caches already enabled by the bootloader
++	// This is here so that we don't see
++	// WARNING: Caches not enabled
++}
++
++ulong get_tbclk(void)
++{
++	// Corresponds to timer setup from s5l8701-timer.c.
++	// Is this correct?
++	return 1416;
++}
+diff --git a/arch/arm/mach-s5l87xx/s5l8701/Kconfig b/arch/arm/mach-s5l87xx/s5l8701/Kconfig
+new file mode 100644
+index 00000000000..7a12d3c4d20
+--- /dev/null
++++ b/arch/arm/mach-s5l87xx/s5l8701/Kconfig
+@@ -0,0 +1,12 @@
++if S5L8701
++
++config TARGET_N36
++	bool "Apple N36 - iPod nano (2nd generation)"
++	default y
++	help
++	  Apple iPod nano (2nd generation) is a digital audio player, introduced in
++	  September 2006. It has a NAND flash of either 2, 4 or 8 GiB.
++
++source "board/apple/n36/Kconfig"
++
++endif
+diff --git a/board/apple/n36/Kconfig b/board/apple/n36/Kconfig
+new file mode 100644
+index 00000000000..19190eddbc1
+--- /dev/null
++++ b/board/apple/n36/Kconfig
+@@ -0,0 +1,15 @@
++if TARGET_N36
++
++config SYS_BOARD
++	default "n36"
++
++config SYS_VENDOR
++	default "apple"
++
++config SYS_SOC
++	default "s5l8701"
++
++config SYS_CONFIG_NAME
++	default "apple_n36"
++
++endif
+diff --git a/board/apple/n36/Makefile b/board/apple/n36/Makefile
+new file mode 100644
+index 00000000000..a8fde44f930
+--- /dev/null
++++ b/board/apple/n36/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2026 The freemyipod team (freemyipod.org)
++#
++
++obj-y += ../nxx-common/nxx.o
++obj-y += n36.o
+diff --git a/board/apple/n36/n36.c b/board/apple/n36/n36.c
+new file mode 100644
+index 00000000000..663b213247c
+--- /dev/null
++++ b/board/apple/n36/n36.c
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 The freemyipod team (freemyipod.org)
++ */
++
++#include <asm/arch-s5l87xx/clk.h>
++
++static void board_clock_init(void)
++{
++	s5l87xx_enable_clkgate("uart");
++}
++
++int board_early_init_f(void)
++{
++	/* enabling UART clocking */
++	board_clock_init();
++
++	return 0;
++}
+diff --git a/configs/apple_n36_defconfig b/configs/apple_n36_defconfig
+new file mode 100644
+index 00000000000..e2c9ff308f7
+--- /dev/null
++++ b/configs/apple_n36_defconfig
+@@ -0,0 +1,31 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT_ONLY=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_ARCH_S5L87XX=y
++CONFIG_TEXT_BASE=0x08000000
++CONFIG_SYS_MALLOC_LEN=0x00200000
++CONFIG_DEFAULT_DEVICE_TREE="s5l8701-n36"
++CONFIG_SYS_LOAD_ADDR=0x08000000
++CONFIG_DEBUG_UART_BASE=0x3CC00000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_DEBUG_UART=y
++CONFIG_STACK_SIZE=0x00100000
++CONFIG_FIT=y
++CONFIG_BOOTDELAY=3
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="dfu 0 ram 0; bootm"
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_CMD_DFU=y
++CONFIG_OF_CONTROL=y
++CONFIG_CLK=y
++CONFIG_DFU_RAM=y
++CONFIG_SET_DFU_ALT_INFO=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x00100000
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_VENDOR_NUM=0x05ac
++CONFIG_USB_GADGET_PRODUCT_NUM=0xff00
++CONFIG_USB_GADGET_DWC2_OTG=y
++CONFIG_USB_GADGET_DOWNLOAD=y
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index ac36e5e2d87..09f18c64408 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -287,6 +287,14 @@ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
  
- static void __maybe_unused s5p_serial_baud(struct s5p_uart *uart, u8 reg_width,
-@@ -109,12 +124,14 @@ static void __maybe_unused s5p_serial_baud(struct s5p_uart *uart, u8 reg_width,
+ 	enable_irq(IRQ_OTG);
  
- 	writel(val / 16 - 1, &uart->ubrdiv);
- 
-+#if !IS_ENABLED(CONFIG_ARCH_S5L87XX)
- 	if (s5p_uart_divslot())
- 		writew(udivslot[val % 16], &uart->rest.slot);
- 	else if (reg_width == 4)
- 		writel(val % 16, &uart->rest.value);
- 	else
- 		writeb(val % 16, &uart->rest.value);
-+#endif
- }
- 
- #ifndef CONFIG_XPL_BUILD
-@@ -124,7 +141,8 @@ int s5p_serial_setbrg(struct udevice *dev, int baudrate)
- 	struct s5p_uart *const uart = plat->reg;
- 	u32 uclk;
- 
--#if IS_ENABLED(CONFIG_CLK_EXYNOS) || IS_ENABLED(CONFIG_ARCH_APPLE)
-+#if IS_ENABLED(CONFIG_CLK_EXYNOS) || IS_ENABLED(CONFIG_ARCH_APPLE) || \
-+	IS_ENABLED(CONFIG_ARCH_S5L87XX)
- 	struct clk clk;
- 	int ret;
- 
-@@ -286,26 +304,25 @@ static inline void _debug_uart_init(void)
- 	struct s5p_uart *uart = (struct s5p_uart *)CONFIG_VAL(DEBUG_UART_BASE);
- 
- 	s5p_serial_init(uart);
--#if IS_ENABLED(CONFIG_ARCH_APPLE)
--	s5p_serial_baud(uart, 4, CONFIG_DEBUG_UART_CLOCK, CONFIG_BAUDRATE);
--#else
--	s5p_serial_baud(uart, 1, CONFIG_DEBUG_UART_CLOCK, CONFIG_BAUDRATE);
--#endif
-+	if (IS_ENABLED(CONFIG_ARCH_APPLE) || IS_ENABLED(CONFIG_ARCH_S5L87XX))
-+		s5p_serial_baud(uart, 4, CONFIG_DEBUG_UART_CLOCK, CONFIG_BAUDRATE);
-+	else
-+		s5p_serial_baud(uart, 1, CONFIG_DEBUG_UART_CLOCK, CONFIG_BAUDRATE);
- }
- 
- static inline void _debug_uart_putc(int ch)
- {
- 	struct s5p_uart *uart = (struct s5p_uart *)CONFIG_VAL(DEBUG_UART_BASE);
- 
--#if IS_ENABLED(CONFIG_ARCH_APPLE)
--	while (readl(&uart->ufstat) & S5L_TX_FIFO_FULL)
--		;
--	writel(ch, &uart->utxh);
--#else
--	while (readl(&uart->ufstat) & S5P_TX_FIFO_FULL)
--		;
--	writeb(ch, &uart->utxh);
--#endif
-+	if (IS_ENABLED(CONFIG_ARCH_APPLE) || IS_ENABLED(CONFIG_ARCH_S5L87XX)) {
-+		while (readl(&uart->ufstat) & S5L_TX_FIFO_FULL)
-+			;
-+		writel(ch, &uart->utxh);
-+	} else {
-+		while (readl(&uart->ufstat) & S5P_TX_FIFO_FULL)
-+			;
-+		writeb(ch, &uart->utxh);
++	if (IS_ENABLED(CONFIG_S5L8701)) {
++		u32 value;
++
++		value = readl(S5L87XX_INTMSK);
++		value |= 1 << IRQ_USB_FUNC;
++		writel(value, S5L87XX_INTMSK);
 +	}
- }
++
+ 	debug_cond(DEBUG_SETUP != 0,
+ 		   "Registered gadget driver %s\n", dev->gadget.name);
+ 	udc_enable(dev);
+@@ -316,6 +324,14 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
  
- DEBUG_UART_FUNCS
+ 	disable_irq(IRQ_OTG);
+ 
++	if (IS_ENABLED(CONFIG_S5L8701)) {
++		u32 value;
++
++		value = readl(S5L87XX_INTMSK);
++		value &= ~(1 << IRQ_USB_FUNC);
++		writel(value, S5L87XX_INTMSK);
++	}
++
+ 	udc_disable(dev);
+ 	return 0;
+ }
+diff --git a/include/configs/apple_n36.h b/include/configs/apple_n36.h
+new file mode 100644
+index 00000000000..cad28a3cc8e
+--- /dev/null
++++ b/include/configs/apple_n36.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2026 The freemyipod team (freemyipod.org)
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++#define CFG_SYS_UBOOT_BASE		CONFIG_TEXT_BASE
++
++// 176K SRAM total
++#define CFG_SYS_INIT_RAM_ADDR	0x22000000
++#define CFG_SYS_INIT_RAM_SIZE	0x0002C000
++
++#endif	/* __CONFIG_H */
 
 -- 
 Git-157)
