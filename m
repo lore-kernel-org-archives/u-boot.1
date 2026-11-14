@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13552606A327
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 04:05:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F44B606A32D
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 04:05:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bpY91YgN;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YMgrZiq4
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vRUHvZa/;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dONFq1Sh
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AEAA940E66;
-	Sat, 14 Nov 2026 04:05:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5151781AF4;
+	Sat, 14 Nov 2026 04:05:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jfb4WCYyjGoW; Sat, 14 Nov 2026 04:05:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8119640DE9
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794629108;
-	b=RAAkrqDqRxvkbCuKtr/aTQIRsnLBk9p3CKn5jr1sbV1WgTiKmPBBptKZQLFnlG+b0MSm
-	 9T9oJLNy4POnQzB5XoDbWqkhpu4biUlJCNjtNxfFntG5Q2Axvw17yVkMem5So/Bu/uyAp
-	 a+hbNCxQVNWar5hS94TrGu4BANqggOH8KUAlnwQND6zBVlbaHp2JH4FGlqoI70c9qTlMT
-	 MEM8M3I2rpvINhn5JkGtkdU2Rk9c2FTygZfmrPoglSGIa54M1vpxLS4alOU8GriMMM1je
-	 Rbta/6zStCRbDhoevw66BWkQJrQXPCmQPrr+dHYaQvm85hD49lTwDu1tjtHcv9f2bdw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id x7ToSDA9aSfb; Sat, 14 Nov 2026 04:05:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 38538817E4
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794629110;
+	b=B/wJ3yQFAjI+Gpvyg+PRSqI8LsQkv+ksDGZfJvqzYfINEbli/nsGb5GqbxyqNWAyj5H6
+	 kY9y/L9OlA7XsMG+VGzEZV7jHpZ9Px3mm+uyXHlHiT0Ca6lOf7pL9/oWEMhRuGluJuCd+
+	 yIfVq9T50M/MdyGE+MCs57J4tLZqE2Sl1MKIIMaSeKhlbR1X42+9MJohR68uHgxPG4I2i
+	 Dsw1YDxTl6+LHUtY2UCvLlgBwfBNjh+SDnIl1Iv4izXPzINxMzBDgDnjvLfjnj+nGeI32
+	 HsA9p3xjV16irIuTC1tFbrQFrL6hB0CQ98O9JcsnEzhyGPESW/QQoObIXNFhByZ1nDw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794629108;
+	c=relaxed/relaxed; t=1794629110;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,86 +33,86 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Original-From:Content-Transfer-Encoding:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=8kq25ta6GPtV9B9v8TOEV+GVApYM9uiLNgODuEeKcx4=;
-	b=c3bVk3ikIJaR06qKt7oT9UscLtOqnBfIFjk/Uz2mn1HY29KOq5fJ/m15UmAp7gdyDB66
-	 24sSlRFGIUSUQmgMl67OffSed8Zcj7VgY9Np6xC1rbASoMfSI+Qv45C+47BiY/DtBXQmW
-	 Uz0o3Zt/EIWMeSBiBrXgXaXhuoUjjQZUbU1dHNJIjxhWUQxBOa+0udX7mF13fiooB30IJ
-	 2UsI10cedqhdeRl1I7jR1J0+OuMHZ40nZ7gCx3tO3HEpq2g6mAUgyxLKjj8VAXnhWgu/O
-	 QlSA1SXP6H3fm0C900DahygGETZVg6cG/yCSxdlAaS+DRSbjwXpaHB2+77rSdbcyysg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=mWi7QLDt3KZQPtOTJEoXPgokWr1iUNtZHQnpy2fycUI=;
+	b=XkL6Fv8Swa3EtGyb0JjhNAEDgat3VhhWuJIDTTq8BZUTcvnjyaPzI7KglbFsTmhcpYi2
+	 GOiEwY6hO+m7EfAWen7xA7raGEsw3QuKwClCQnebDx7EMAMch4Ze71krJJ8dFvg6kHbYZ
+	 LtZcZMG07OzBBo6+wEmuqTX8jxP/JdEtqZCbcmfYQKq9qpWIgZk9Eda8ru+2+z/LSYpSy
+	 G+G3ID8qZsvK8d8156lIvGYGDKfWNKrQhsHOtJIchQfpFE5hReEECZ3hSq9Ts2UTtMVVh
+	 kH0ZSFHzlm0nFhdQIxh5M6hqM7YWMjAOaReXBhBbhoLK8Lywm20fUj3BtOO4Ee8JHoA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794629108;
-	bh=8kq25ta6GPtV9B9v8TOEV+GVApYM9uiLNgODuEeKcx4=;
+	d=lists.u-boot-project.org; s=default; t=1794629110;
+	bh=mWi7QLDt3KZQPtOTJEoXPgokWr1iUNtZHQnpy2fycUI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=bpY91YgNkP3rGhTIl3sm5F0bfhJGajB2A8kzxP/n+CPber4iALvk1C0eQkkqcnEJv
-	 OVJYLDLVi3oEPitGAZVvbQ7K1wYOC0n01P1RkhwLHtrRwBKf6jXBWeucQ0lqU2hNjO
-	 0dxMxoslu2rKlFpp5UiweDs3XFGrBO7lF0PnbW9HPSLgom7yglwiyoiiOdeoKKyEll
-	 IcCKZy1pLsH6y/kqDstpyYSkvxJQiKTTuW1TIttzHxxunFKrl1QHmH0x5i4s4ZaA/b
-	 H9sncUVP3AG7SJcpVX0MW5jscxcz+3WqB2riBkTQmHJyb1C6ivUzs81GN8n0V4hKyi
-	 DbXwTUVfYcRvg==
+	b=vRUHvZa/i9Vo7UwkvFH/vvKC47E5IiZaE8+Rwu+fh1oDoRiAirDqHgv7QiDb3OF6o
+	 P3rJ37L1pRNaUpkgsm2isUvWxzttlt3cPgTf9rTzrdW7Z68SsV/E/aBY216KHUbk1h
+	 tjNo/ChZveVDA7ImL+ynmf32HlgaEMkQL6SvWBQnnZeAEFoc8BHknHYc7ETzHAvaUY
+	 RRzBEUo0bPGH+gCy1A802rytxXll/XC/I9IdDibDsNZNxkRg1oswn9nKvCq2JVNrkb
+	 MAtmZlKqUHB7Ud3EaM8k92o02H2+gnEGdAcDEKWQvJCmXPx2LFSJJSK3NS2ajWyk2W
+	 26rJSO4KW/HqQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8119640DE9;
-	Sat, 14 Nov 2026 04:05:08 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id C4E6A150
+	by smtp1.osuosl.org (Postfix) with ESMTP id 38538817E4;
+	Sat, 14 Nov 2026 04:05:10 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C66D92FE
  for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 02:22:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AA9DA81779
+ by smtp2.osuosl.org (Postfix) with ESMTP id C21D040506
  for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 02:22:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3_TSTD66SBlw for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id duS-nvYCGI6o for <u-boot@lists.u-boot-project.org>;
  Sat, 14 Nov 2026 02:22:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A370C81774
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 73B14400B1
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
  envelope-from=devnull+me.fromdisposition.org@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=YMgrZiq4
+ header.s=k20260515 header.b=dONFq1Sh
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A370C81774
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 02:22:17 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 73B14400B1
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 02:22:16 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id AE0A546391;
+ by sea.source.kernel.org (Postfix) with ESMTP id 4B9DC4633B;
  Sat, 14 Nov 2026 02:22:16 +0000 (UTC)
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 0C84F1F000C7;
- Sat, 14 Nov 2026 02:22:15 +0000 (UTC)
+ by smtp.kernel.org (Postfix) with ESMTPS id E276B1F000C5;
+ Sat, 14 Nov 2026 02:22:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
  s=k20260515; t=1794622936;
- bh=8kq25ta6GPtV9B9v8TOEV+GVApYM9uiLNgODuEeKcx4=;
+ bh=mWi7QLDt3KZQPtOTJEoXPgokWr1iUNtZHQnpy2fycUI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=YMgrZiq4xlapftxtIX5qZsYccCb0Q4LjjQIhTUui7H3PRd7q7u+FgW9px+QTSO/b9
- wIXq29tHh4mDIRDc8nF/5xWd6BL/jhmTJrSU+jJHltjyMFQgPV8J8d0TB5Cl1TxFwN
- l2+hatd0yZOzONGqqFtUW6sGoYq2iKiZdt6CNdOpd/WF0x1K6GigDdS+sP6CKDmdQ8
- 9Yu2wrt/YSCibX5FbAO6yDV2Tisx2FxwVRQ8UrW7kXdDzPb3VkXCICweokrqdEu/Vp
- NgSdSU+NMvcxrB6s4V1y+cwA8P9/i12sNpO4clOl8Flfo3lu+Q+WQqodE270j4xI4b
- z9ebyftAvXWjQ==
+ b=dONFq1ShPMCZsX9RsytbvPAJ7Pc9Lc6vxOpYCIS/BHc0glQJoIsPigJngq9101v+w
+ 3Xff5X4402o/WD47v3LY6amTMohczw4GuVXVGXsTHONjslft1tVwt6gRVB7Dzfhz24
+ ANOYTKGA/f3OzH3n5oADlOUR8VA1RjcJIY2EgvTy0tpyL0T1/D+EcpHogv2SgMlYfT
+ /t1TcWQOg4AGu+zGm0wD5BMQurB5bl4zyGUYm89ujQBOAtUVHBQ37tJM0iaotNZPkA
+ 2/Sb+v41zOBteTQLVOofL74h1pYxwzT6yaiVuvYUIMd0Oga2ZzKlAKJJJ4wH1+UzlD
+ Pmg7FZCnUaR2A==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id 8C08449C2B;
+ by lkml.kernel.org (Postfix) with ESMTP id 5C8AA49C04;
  Sat, 14 Nov 2026 02:22:14 +0000 (UTC)
 From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
-Date: Sat, 14 Nov 2026 02:21:57 +0000
-Subject: [PATCH 3/9] interconnect: qcom: Add SM8350 interconnect driver
+Date: Sat, 14 Nov 2026 02:21:55 +0000
+Subject: [PATCH 1/9] clk: qcom: Add SM8350 GCC driver
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261114-sm8350-support-v1-3-414271f59474@fromdisposition.org>
+Message-Id: <20261114-sm8350-support-v1-1-414271f59474@fromdisposition.org>
 References: <20261114-sm8350-support-v1-0-414271f59474@fromdisposition.org>
 In-Reply-To: <20261114-sm8350-support-v1-0-414271f59474@fromdisposition.org>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org, 
@@ -132,11 +132,11 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@nabladev.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Demeter Barna <me@fromdisposition.org>, David Heidelberg <david@ixit.cz>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794622936; l=9700;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794622936; l=12501;
  i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
- bh=Y/9S1F4K86ewGZ32pcgQfy1f16WZQerIRRZt0CQBHNA=;
- b=oxhew4EGDD8fFXGSEYSCuGVgVXphoc5fegJ+e3RAg9pnSWJdqJ9wak/0Ji01D0Cpi7brpE2nP
- HgPMusYYxqLDJmV0RDfe+L3d89yxyactrmVpi4pfJ9mA5PPxCAXfuUU
+ bh=+KXBqJyjMpDrSsLUr+U/TTWndFA+DGFbRxRxmVgZoH8=;
+ b=Z3elKw3rbzda03ZzewVutVwAd1v9Hs9M4/1po2rXvx+MbBUAdYkbX6QpAj5FUI9OzabNYV60J
+ OdgSsmVoJW6DOpYhDuEQeKWoXFkLgmB4PH0HuwdSd6K7Zbn4oGdeuKA
 X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
  pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
 X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
@@ -164,356 +164,336 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Demeter Barna <me@fromdisposition.org>
 
-Add the interconnect (NoC) driver for SM8350 with the nodes of the two
-UFS paths, the only ones U-Boot requests, as the QCS8300 driver has
-them.
+Add a clock driver for the SM8350 SoC, with the clocks, resets and GDSCs
+of the QUP wrappers, UFS, the primary USB controller and SDCC2.
 
-Taken from Linux's drivers/interconnect/qcom/sm8350.c (tag v7.4-rc1).
+The data are those of Linux's gcc-sm8350 driver (tag v7.4-rc1).
 
 Signed-off-by: Demeter Barna <me@fromdisposition.org>
 ---
- drivers/interconnect/qcom/Kconfig  |   7 +
- drivers/interconnect/qcom/Makefile |   1 +
- drivers/interconnect/qcom/sm8350.c | 271 +++++++++++++++++++++++++++++++++++++
- drivers/interconnect/qcom/sm8350.h |  25 ++++
- 4 files changed, 304 insertions(+)
+ drivers/clk/qcom/Kconfig        |   8 ++
+ drivers/clk/qcom/Makefile       |   1 +
+ drivers/clk/qcom/clock-sm8350.c | 281 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 290 insertions(+)
 
-diff --git a/drivers/interconnect/qcom/Kconfig b/drivers/interconnect/qcom/Kconfig
-index 4123a1d224..6a030a7891 100644
---- a/drivers/interconnect/qcom/Kconfig
-+++ b/drivers/interconnect/qcom/Kconfig
-@@ -17,6 +17,13 @@ config INTERCONNECT_QCOM_QCS8300
- 	help
- 	  Enable support for the interconnect driver for the QCS8300 SoC.
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 0d8f5028a4..e18d7c1c58 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -160,6 +160,14 @@ config CLK_QCOM_SM8250
+ 	  on the Snapdragon SM8250 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
  
-+config INTERCONNECT_QCOM_SM8350
-+	bool "Enable interconnect support for SM8350 SoC"
-+	depends on INTERCONNECT_QCOM_RPMH
++config CLK_QCOM_SM8350
++	bool "Qualcomm SM8350 GCC"
++	select CLK_QCOM
 +	help
-+	  Enable support for the interconnect driver for the SM8350 SoC.
-+	  It has the nodes of the UFS paths.
++	  Say Y here to enable support for the Global Clock Controller
++	  on the Snapdragon SM8350 SoC. This driver supports the clocks
++	  and resets exposed by the GCC hardware block.
 +
- config INTERCONNECT_QCOM_SM8650
- 	bool "Enable interconnect support for SM8650 SoC"
- 	depends on INTERCONNECT_QCOM_RPMH
-diff --git a/drivers/interconnect/qcom/Makefile b/drivers/interconnect/qcom/Makefile
-index ac6b8cee19..c4b38d13a0 100644
---- a/drivers/interconnect/qcom/Makefile
-+++ b/drivers/interconnect/qcom/Makefile
-@@ -6,4 +6,5 @@
- obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_RPMH) += icc-rpmh.o bcm-voter.o
- obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_QCS8300) += qcs8300.o
- obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_SC7280) += sc7280.o
-+obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_SM8350) += sm8350.o
- obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_SM8650) += sm8650.o
-diff --git a/drivers/interconnect/qcom/sm8350.c b/drivers/interconnect/qcom/sm8350.c
+ config CLK_QCOM_SM8550
+ 	bool "Qualcomm SM8550 GCC"
+ 	select CLK_QCOM
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index 73cafc3f93..53788f1370 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -24,6 +24,7 @@ obj-$(CONFIG_CLK_QCOM_SM6350) += clock-sm6350.o
+ obj-$(CONFIG_CLK_QCOM_SM7150) += clock-sm7150.o
+ obj-$(CONFIG_CLK_QCOM_SM8150) += clock-sm8150.o
+ obj-$(CONFIG_CLK_QCOM_SM8250) += clock-sm8250.o
++obj-$(CONFIG_CLK_QCOM_SM8350) += clock-sm8350.o
+ obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
+ obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
+ obj-$(CONFIG_CLK_QCOM_X1E80100) += clock-x1e80100.o
+diff --git a/drivers/clk/qcom/clock-sm8350.c b/drivers/clk/qcom/clock-sm8350.c
 new file mode 100644
-index 0000000000..71423c9b22
+index 0000000000..b643d3347e
 --- /dev/null
-+++ b/drivers/interconnect/qcom/sm8350.c
-@@ -0,0 +1,271 @@
-+// SPDX-License-Identifier: GPL-2.0-only
++++ b/drivers/clk/qcom/clock-sm8350.c
+@@ -0,0 +1,281 @@
++// SPDX-License-Identifier: BSD-3-Clause
 +/*
-+ * Copyright (c) 2019-2020, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2021, Linaro Limited
++ * Clock drivers for Qualcomm sm8350
++ *
++ * (C) Copyright 2024 Linaro Ltd.
++ * (C) Copyright 2026 Demeter Barna <me@fromdisposition.org>
++ *
++ * Based on Linux Kernel driver
 + */
 +
++#include <clk-uclass.h>
 +#include <dm.h>
-+#include <interconnect-uclass.h>
-+#include <dt-bindings/interconnect/qcom,sm8350.h>
++#include <linux/bitops.h>
++#include <dt-bindings/clock/qcom,gcc-sm8350.h>
 +
-+#include "icc-rpmh.h"
-+#include "sm8350.h"
++#include "clock-qcom.h"
 +
-+static struct qcom_icc_node xm_ufs_mem = {
-+	.name = "xm_ufs_mem",
-+	.id = SM8350_MASTER_UFS_MEM,
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.links = { SM8350_SLAVE_A1NOC_SNOC },
-+};
++/* bi_tcxo */
++#define TCXO_RATE	19200000
 +
-+static struct qcom_icc_node qnm_gemnoc_cnoc = {
-+	.name = "qnm_gemnoc_cnoc",
-+	.id = SM8350_MASTER_GEM_NOC_CNOC,
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.links = { SM8350_SLAVE_UFS_MEM_CFG },
-+};
-+
-+static struct qcom_icc_node chm_apps = {
-+	.name = "chm_apps",
-+	.id = SM8350_MASTER_APPSS_PROC,
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.links = { SM8350_SLAVE_GEM_NOC_CNOC },
-+};
-+
-+static struct qcom_icc_node qnm_snoc_sf = {
-+	.name = "qnm_snoc_sf",
-+	.id = SM8350_MASTER_SNOC_SF_MEM_NOC,
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.links = { SM8350_SLAVE_LLCC },
-+};
-+
-+static struct qcom_icc_node llcc_mc = {
-+	.name = "llcc_mc",
-+	.id = SM8350_MASTER_LLCC,
-+	.channels = 4,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.links = { SM8350_SLAVE_EBI1 },
-+};
-+
-+static struct qcom_icc_node qnm_aggre1_noc = {
-+	.name = "qnm_aggre1_noc",
-+	.id = SM8350_MASTER_A1NOC_SNOC,
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.links = { SM8350_SLAVE_SNOC_GEM_NOC_SF },
-+};
-+
-+static struct qcom_icc_node qns_a1noc_snoc = {
-+	.name = "qns_a1noc_snoc",
-+	.id = SM8350_SLAVE_A1NOC_SNOC,
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.links = { SM8350_MASTER_A1NOC_SNOC },
-+};
-+
-+static struct qcom_icc_node qhs_ufs_mem_cfg = {
-+	.name = "qhs_ufs_mem_cfg",
-+	.id = SM8350_SLAVE_UFS_MEM_CFG,
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_gem_noc_cnoc = {
-+	.name = "qns_gem_noc_cnoc",
-+	.id = SM8350_SLAVE_GEM_NOC_CNOC,
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.links = { SM8350_MASTER_GEM_NOC_CNOC },
-+};
-+
-+static struct qcom_icc_node qns_llcc = {
-+	.name = "qns_llcc",
-+	.id = SM8350_SLAVE_LLCC,
-+	.channels = 4,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.links = { SM8350_MASTER_LLCC },
-+};
-+
-+static struct qcom_icc_node ebi = {
-+	.name = "ebi",
-+	.id = SM8350_SLAVE_EBI1,
-+	.channels = 4,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_gemnoc_sf = {
-+	.name = "qns_gemnoc_sf",
-+	.id = SM8350_SLAVE_SNOC_GEM_NOC_SF,
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.links = { SM8350_MASTER_SNOC_SF_MEM_NOC },
-+};
-+
-+static struct qcom_icc_bcm bcm_acv = {
-+	.name = "ACV",
-+	.enable_mask = BIT(3),
-+	.num_nodes = 1,
-+	.nodes = { &ebi },
-+};
-+
-+static struct qcom_icc_bcm bcm_cn0 = {
-+	.name = "CN0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &qnm_gemnoc_cnoc },
-+};
-+
-+static struct qcom_icc_bcm bcm_cn1 = {
-+	.name = "CN1",
-+	.num_nodes = 1,
-+	.nodes = { &qhs_ufs_mem_cfg },
-+};
-+
-+static struct qcom_icc_bcm bcm_mc0 = {
-+	.name = "MC0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &ebi },
-+};
-+
-+static struct qcom_icc_bcm bcm_sh0 = {
-+	.name = "SH0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &qns_llcc },
-+};
-+
-+static struct qcom_icc_bcm bcm_sh4 = {
-+	.name = "SH4",
-+	.num_nodes = 1,
-+	.nodes = { &chm_apps },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn0 = {
-+	.name = "SN0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &qns_gemnoc_sf },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn7 = {
-+	.name = "SN7",
-+	.num_nodes = 1,
-+	.nodes = { &qnm_aggre1_noc },
-+};
-+
-+static struct qcom_icc_node * const aggre1_noc_nodes[] = {
-+	[MASTER_UFS_MEM] = &xm_ufs_mem,
-+	[SLAVE_A1NOC_SNOC] = &qns_a1noc_snoc,
-+};
-+
-+static const struct qcom_icc_desc sm8350_aggre1_noc = {
-+	.nodes = aggre1_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(aggre1_noc_nodes),
-+};
-+
-+static struct qcom_icc_bcm * const config_noc_bcms[] = {
-+	&bcm_cn0,
-+	&bcm_cn1,
-+};
-+
-+static struct qcom_icc_node * const config_noc_nodes[] = {
-+	[MASTER_GEM_NOC_CNOC] = &qnm_gemnoc_cnoc,
-+	[SLAVE_UFS_MEM_CFG] = &qhs_ufs_mem_cfg,
-+};
-+
-+static const struct qcom_icc_desc sm8350_config_noc = {
-+	.nodes = config_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(config_noc_nodes),
-+	.bcms = config_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(config_noc_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const gem_noc_bcms[] = {
-+	&bcm_sh0,
-+	&bcm_sh4,
-+};
-+
-+static struct qcom_icc_node * const gem_noc_nodes[] = {
-+	[MASTER_APPSS_PROC] = &chm_apps,
-+	[MASTER_SNOC_SF_MEM_NOC] = &qnm_snoc_sf,
-+	[SLAVE_GEM_NOC_CNOC] = &qns_gem_noc_cnoc,
-+	[SLAVE_LLCC] = &qns_llcc,
-+};
-+
-+static const struct qcom_icc_desc sm8350_gem_noc = {
-+	.nodes = gem_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(gem_noc_nodes),
-+	.bcms = gem_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(gem_noc_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const mc_virt_bcms[] = {
-+	&bcm_acv,
-+	&bcm_mc0,
-+};
-+
-+static struct qcom_icc_node * const mc_virt_nodes[] = {
-+	[MASTER_LLCC] = &llcc_mc,
-+	[SLAVE_EBI1] = &ebi,
-+};
-+
-+static const struct qcom_icc_desc sm8350_mc_virt = {
-+	.nodes = mc_virt_nodes,
-+	.num_nodes = ARRAY_SIZE(mc_virt_nodes),
-+	.bcms = mc_virt_bcms,
-+	.num_bcms = ARRAY_SIZE(mc_virt_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const system_noc_bcms[] = {
-+	&bcm_sn0,
-+	&bcm_sn7,
-+};
-+
-+static struct qcom_icc_node * const system_noc_nodes[] = {
-+	[MASTER_A1NOC_SNOC] = &qnm_aggre1_noc,
-+	[SLAVE_SNOC_GEM_NOC_SF] = &qns_gemnoc_sf,
-+};
-+
-+static const struct qcom_icc_desc sm8350_system_noc = {
-+	.nodes = system_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(system_noc_nodes),
-+	.bcms = system_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(system_noc_bcms),
-+};
-+
-+static const struct udevice_id qnoc_of_match[] = {
-+	{ .compatible = "qcom,sm8350-aggre1-noc", .data = (ulong)&sm8350_aggre1_noc },
-+	{ .compatible = "qcom,sm8350-config-noc", .data = (ulong)&sm8350_config_noc },
-+	{ .compatible = "qcom,sm8350-gem-noc", .data = (ulong)&sm8350_gem_noc },
-+	{ .compatible = "qcom,sm8350-mc-virt", .data = (ulong)&sm8350_mc_virt },
-+	{ .compatible = "qcom,sm8350-system-noc", .data = (ulong)&sm8350_system_noc },
++static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
++	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
++	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
++	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
++	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
++	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
++	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
++	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
++	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
++	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
++	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
++	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(qnoc_sm8350) = {
-+	.name = "qnoc-sm8350",
-+	.id = UCLASS_INTERCONNECT,
-+	.of_match = qnoc_of_match,
-+	.probe = qcom_icc_rpmh_probe,
-+	.bind = qcom_icc_rpmh_bind,
-+	.unbind = qcom_icc_rpmh_unbind,
-+	.ops = &qcom_icc_rpmh_ops,
-+	.plat_auto = sizeof(struct qcom_icc_provider),
++static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
++	F(66666667, CFG_CLK_SRC_GPLL0_EVEN, 4.5, 0, 0),
++	F(133333333, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
++	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
++	F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
++	{ }
 +};
-diff --git a/drivers/interconnect/qcom/sm8350.h b/drivers/interconnect/qcom/sm8350.h
-new file mode 100644
-index 0000000000..580b139185
---- /dev/null
-+++ b/drivers/interconnect/qcom/sm8350.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * SM8350 interconnect IDs
-+ *
-+ * Copyright (c) 2019-2020, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2021, Linaro Limited
-+ */
 +
-+#ifndef __DRIVERS_INTERCONNECT_QCOM_SM8350_H
-+#define __DRIVERS_INTERCONNECT_QCOM_SM8350_H
++static const struct freq_tbl ftbl_gcc_ufs_card_ice_core_clk_src[] = {
++	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
++	F(150000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
++	F(300000000, CFG_CLK_SRC_GPLL0, 2, 0, 0),
++	{ }
++};
 +
-+#define SM8350_MASTER_UFS_MEM		0
-+#define SM8350_MASTER_GEM_NOC_CNOC	1
-+#define SM8350_MASTER_APPSS_PROC	2
-+#define SM8350_MASTER_SNOC_SF_MEM_NOC	3
-+#define SM8350_MASTER_LLCC		4
-+#define SM8350_MASTER_A1NOC_SNOC	5
-+#define SM8350_SLAVE_A1NOC_SNOC		6
-+#define SM8350_SLAVE_UFS_MEM_CFG	7
-+#define SM8350_SLAVE_GEM_NOC_CNOC	8
-+#define SM8350_SLAVE_LLCC		9
-+#define SM8350_SLAVE_EBI1		10
-+#define SM8350_SLAVE_SNOC_GEM_NOC_SF	11
++static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
++	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
++	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
++	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
++	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
++	F(202000000, CFG_CLK_SRC_GPLL9, 4, 0, 0),
++	{ }
++};
 +
-+#endif
++static struct pll_vote_clk gpll9_vote_clk = {
++	.status = 0x1c000,
++	.status_bit = BIT(31),
++	.ena_vote = 0x52018,
++	.vote_bit = BIT(9),
++};
++
++static ulong sm8350_set_rate(struct clk *clk, ulong rate)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++	const struct freq_tbl *freq;
++
++	switch (clk->id) {
++	case GCC_QUPV3_WRAP0_S3_CLK: /* debug UART */
++		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, 0x173a0,
++				     freq->pre_div, freq->m, freq->n, freq->src, 16);
++		return freq->freq;
++	case GCC_USB30_PRIM_MASTER_CLK:
++		freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, 0xf020,
++				     freq->pre_div, freq->m, freq->n, freq->src, 8);
++		return freq->freq;
++	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
++		clk_rcg_set_rate(priv->base, 0xf038, 0, CFG_CLK_SRC_CXO);
++		return TCXO_RATE;
++	case GCC_UFS_PHY_UNIPRO_CORE_CLK:
++		freq = qcom_find_freq(ftbl_gcc_ufs_card_ice_core_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, 0x77084,
++				     freq->pre_div, freq->m, freq->n, freq->src, 0);
++		return freq->freq;
++	case GCC_SDCC2_APPS_CLK:
++		/* GPLL9 feeds the highest SDCC2 rate */
++		clk_enable_gpll0(priv->base, &gpll9_vote_clk);
++		freq = qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, 0x1400c,
++				     freq->pre_div, freq->m, freq->n, freq->src, 8);
++		return freq->freq;
++	default:
++		return 0;
++	}
++}
++
++static const struct gate_clk sm8350_clks[] = {
++	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,          0x770cc, 0x00000001),
++	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_HW_CTL_CLK,   0x770cc, 0x00000002),
++	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,        0x0f080, 0x00000001),
++	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,      0x0f07c, 0x00000001),
++	GATE_CLK(GCC_QUPV3_WRAP0_CORE_2X_CLK,        0x52008, 0x00000200),
++	GATE_CLK(GCC_QUPV3_WRAP0_CORE_CLK,           0x52008, 0x00000100),
++	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,             0x52008, 0x00000400),
++	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,             0x52008, 0x00000800),
++	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK,             0x52008, 0x00001000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK,             0x52008, 0x00002000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK,             0x52008, 0x00004000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK,             0x52008, 0x00008000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S6_CLK,             0x52008, 0x00010000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S7_CLK,             0x52008, 0x00020000),
++	GATE_CLK(GCC_QUPV3_WRAP1_CORE_2X_CLK,        0x52008, 0x00040000),
++	GATE_CLK(GCC_QUPV3_WRAP1_CORE_CLK,           0x52008, 0x00080000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK,             0x52008, 0x00400000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK,             0x52008, 0x00800000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S2_CLK,             0x52008, 0x01000000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK,             0x52008, 0x02000000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK,             0x52008, 0x04000000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK,             0x52008, 0x08000000),
++	GATE_CLK(GCC_QUPV3_WRAP2_CORE_2X_CLK,        0x52010, 0x00000008),
++	GATE_CLK(GCC_QUPV3_WRAP2_CORE_CLK,           0x52010, 0x00000001),
++	GATE_CLK(GCC_QUPV3_WRAP2_S0_CLK,             0x52010, 0x00000010),
++	GATE_CLK(GCC_QUPV3_WRAP2_S1_CLK,             0x52010, 0x00000020),
++	GATE_CLK(GCC_QUPV3_WRAP2_S2_CLK,             0x52010, 0x00000040),
++	GATE_CLK(GCC_QUPV3_WRAP2_S3_CLK,             0x52010, 0x00000080),
++	GATE_CLK(GCC_QUPV3_WRAP2_S4_CLK,             0x52010, 0x00000100),
++	GATE_CLK(GCC_QUPV3_WRAP2_S5_CLK,             0x52010, 0x00000200),
++	GATE_CLK(GCC_QUPV3_WRAP_0_M_AHB_CLK,         0x52008, 0x00000040),
++	GATE_CLK(GCC_QUPV3_WRAP_0_S_AHB_CLK,         0x52008, 0x00000080),
++	GATE_CLK(GCC_QUPV3_WRAP_1_M_AHB_CLK,         0x52008, 0x00100000),
++	GATE_CLK(GCC_QUPV3_WRAP_1_S_AHB_CLK,         0x52008, 0x00200000),
++	GATE_CLK(GCC_QUPV3_WRAP_2_M_AHB_CLK,         0x52010, 0x00000004),
++	GATE_CLK(GCC_QUPV3_WRAP_2_S_AHB_CLK,         0x52010, 0x00000002),
++	GATE_CLK(GCC_SDCC2_AHB_CLK,                  0x14008, 0x00000001),
++	GATE_CLK(GCC_SDCC2_APPS_CLK,                 0x14004, 0x00000001),
++	GATE_CLK(GCC_UFS_1_CLKREF_EN,                0x8c000, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_AHB_CLK,                0x77018, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_AXI_CLK,                0x77010, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_AXI_HW_CTL_CLK,         0x77010, 0x00000002),
++	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,           0x77064, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_ICE_CORE_HW_CTL_CLK,    0x77064, 0x00000002),
++	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,            0x7709c, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_PHY_AUX_HW_CTL_CLK,     0x7709c, 0x00000002),
++	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,        0x77020, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,        0x770b8, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,        0x7701c, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,        0x7705c, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_HW_CTL_CLK, 0x7705c, 0x00000002),
++	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,          0x0f010, 0x00000001),
++	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,       0x0f01c, 0x00000001),
++	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,           0x0f018, 0x00000001),
++	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,          0x0f054, 0x00000001),
++	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,      0x0f058, 0x00000001),
++	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,         0x0f05c, 0x00000001),
++};
++
++static int sm8350_enable(struct clk *clk)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++
++	return qcom_gate_clk_en(priv, clk->id);
++}
++
++static const struct qcom_reset_map sm8350_gcc_resets[] = {
++	[GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
++	[GCC_SDCC2_BCR] = { 0x14000 },
++	[GCC_UFS_PHY_BCR] = { 0x77000 },
++	[GCC_USB30_PRIM_BCR] = { 0xf000 },
++};
++
++static const struct qcom_power_map sm8350_gdscs[] = {
++	[UFS_PHY_GDSC] = { 0x77004 },
++	[USB30_PRIM_GDSC] = { 0xf004 },
++};
++
++/* GPLL4 and GPLL9 are left out: clk dump names the PLLs by their index here */
++static const phys_addr_t sm8350_gpll_addrs[] = {
++	0x00100000,
++};
++
++static const phys_addr_t sm8350_rcg_addrs[] = {
++	0x00117010,
++	0x00117140,
++	0x00117270,
++	0x001173a0,
++	0x001174d0,
++	0x00117600,
++	0x00117730,
++	0x00117860,
++	0x00118010,
++	0x00118140,
++	0x00118270,
++	0x001183a0,
++	0x001184d0,
++	0x00118600,
++	0x0011e010,
++	0x0011e140,
++	0x0011e270,
++	0x0011e3a0,
++	0x0011e4d0,
++	0x0011e600,
++	0x0011400c,
++	0x00177024,
++	0x0017706c,
++	0x001770a0,
++	0x00177084,
++	0x0010f020,
++	0x0010f038,
++	0x0010f064,
++};
++
++static const char *const sm8350_rcg_names[] = {
++	"GCC_QUPV3_WRAP0_S0_CMD_RCGR",
++	"GCC_QUPV3_WRAP0_S1_CMD_RCGR",
++	"GCC_QUPV3_WRAP0_S2_CMD_RCGR",
++	"GCC_QUPV3_WRAP0_S3_CMD_RCGR",
++	"GCC_QUPV3_WRAP0_S4_CMD_RCGR",
++	"GCC_QUPV3_WRAP0_S5_CMD_RCGR",
++	"GCC_QUPV3_WRAP0_S6_CMD_RCGR",
++	"GCC_QUPV3_WRAP0_S7_CMD_RCGR",
++	"GCC_QUPV3_WRAP1_S0_CMD_RCGR",
++	"GCC_QUPV3_WRAP1_S1_CMD_RCGR",
++	"GCC_QUPV3_WRAP1_S2_CMD_RCGR",
++	"GCC_QUPV3_WRAP1_S3_CMD_RCGR",
++	"GCC_QUPV3_WRAP1_S4_CMD_RCGR",
++	"GCC_QUPV3_WRAP1_S5_CMD_RCGR",
++	"GCC_QUPV3_WRAP2_S0_CMD_RCGR",
++	"GCC_QUPV3_WRAP2_S1_CMD_RCGR",
++	"GCC_QUPV3_WRAP2_S2_CMD_RCGR",
++	"GCC_QUPV3_WRAP2_S3_CMD_RCGR",
++	"GCC_QUPV3_WRAP2_S4_CMD_RCGR",
++	"GCC_QUPV3_WRAP2_S5_CMD_RCGR",
++	"GCC_SDCC2_APPS_CMD_RCGR",
++	"GCC_UFS_PHY_AXI_CMD_RCGR",
++	"GCC_UFS_PHY_ICE_CORE_CMD_RCGR",
++	"GCC_UFS_PHY_PHY_AUX_CMD_RCGR",
++	"GCC_UFS_PHY_UNIPRO_CORE_CMD_RCGR",
++	"GCC_USB30_PRIM_MASTER_CMD_RCGR",
++	"GCC_USB30_PRIM_MOCK_UTMI_CMD_RCGR",
++	"GCC_USB3_PRIM_PHY_AUX_CMD_RCGR",
++};
++
++static struct msm_clk_data sm8350_gcc_data = {
++	.resets = sm8350_gcc_resets,
++	.num_resets = ARRAY_SIZE(sm8350_gcc_resets),
++	.clks = sm8350_clks,
++	.num_clks = ARRAY_SIZE(sm8350_clks),
++	.power_domains = sm8350_gdscs,
++	.num_power_domains = ARRAY_SIZE(sm8350_gdscs),
++
++	.dbg_pll_addrs = sm8350_gpll_addrs,
++	.num_plls = ARRAY_SIZE(sm8350_gpll_addrs),
++	.dbg_rcg_addrs = sm8350_rcg_addrs,
++	.num_rcgs = ARRAY_SIZE(sm8350_rcg_addrs),
++	.dbg_rcg_names = sm8350_rcg_names,
++
++	.enable = sm8350_enable,
++	.set_rate = sm8350_set_rate,
++};
++
++static const struct udevice_id gcc_sm8350_of_match[] = {
++	{
++		.compatible = "qcom,gcc-sm8350",
++		.data = (ulong)&sm8350_gcc_data,
++	},
++	{ }
++};
++
++U_BOOT_DRIVER(gcc_sm8350) = {
++	.name		= "gcc_sm8350",
++	.id		= UCLASS_NOP,
++	.of_match	= gcc_sm8350_of_match,
++	.bind		= qcom_cc_bind,
++	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++};
 
 -- 
 2.53.0
