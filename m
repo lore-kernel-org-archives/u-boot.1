@@ -1,30 +1,30 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB732606A330
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 16:22:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A12FC606A323
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 16:22:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sCTe1BvL;
-	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=jtoMO+fI;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=CUwMOqEl
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UIlVa43u;
+	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=I4/ZJAuD;
+	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=mAowWX85
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C386E4087F;
-	Sat, 14 Nov 2026 16:22:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7DB676074D;
+	Sat, 14 Nov 2026 16:22:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id C2tckZX_BfVr; Sat, 14 Nov 2026 16:22:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BEE3540ACD
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794673331;
-	b=m4nED31TzHjAg6lVPOgh+cCfBq45rChUphlbHw+AOWFV9IKBP7cKjTWe7ZIa2G1wcC9e
-	 jrtet3KRgghyDuo3cannQ1RMSIdCXY2ZFyDCkiKsEtj5eB6o8z+Cygiuyb1P6DDM6EP7V
-	 2q1cAPMTkpDhJZWHFIEk8lFAGPMKBckICkGNisJWIOUjC7e2Z1bpZSIK9zZvLcYFmm2dL
-	 kAc/8KGJ+Eslr2UxEMU1LXAw1rrBfarAZ7cKvFQtNzU1oCnSoC9zTjJbtHg4B3Cw8Ji0G
-	 hDhgNRl3AcAisoqsyD7mx1tHbHB7rw53iOtPFQI0yjJlO7nX5i2zI/U85TamvGyMc4A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kIVswEkKTzE6; Sat, 14 Nov 2026 16:22:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 95C686078C
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794673328;
+	b=ag4+AyGnwyKB3PJ257/wpfGOwxtvkYW2jzwkTZ0gxASCUdCfIWkx9PQN+EW+TUJCVG3x
+	 lrcSxXo9SVknpxz8QyKZrAq9dLtccpXbxKw+8rtrp/mPjQZ4n4ATfkW5naLWJxTo1K7AL
+	 f0lQvNaiY4xSuDDZyEqhfsfaOGP2015OiudB+yG1XUH242Py2yXbQM+z9edjT04Kpw9NM
+	 2dAslweL6K+68GdlyxIp+25HK58lpzmseg0RlEeehwZsGiNDIfZPM4yWAtqeTjC8M7IpP
+	 7KbUB0K+/do1fb4nXSFj+IlX5XGsfbWoO0JlkpwOdru5dDHWOqHp6VXdMtHGnQFbveg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794673331;
+	c=relaxed/relaxed; t=1794673328;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -34,86 +34,86 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Feedback-ID:X-SES-Outgoing:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=d2kosJnBK1q/Af76lI3zY78vmtG+d7zRCHa+rlVyAKo=;
-	b=mG+XaojIxrYwXWsXkPxwvBvdxktBLgGen3EUVQo9orbR5OnvtPpMsWYOh89CPCizwOaO
-	 sK5twI0HFqc6pn+BEmSGQiBKWKnO/hSoi0mB22n3HhvF25wUPuRef3hNLvwY9vdcgYDWK
-	 hE+z/Ax7euroUl47T8JHFc1VLx4HRsFdu0Dro+19+zSPu3MZY3uNXapYp6ZWOubiU+pm8
-	 UR1TKVEAXvG+M/h/bAL8g9VmMuRwcY4rsO68TvKM2iE05TpiYlIEpDUrTk37QvCQDluTs
-	 2tkvjPPmroORLi5AF4lQ10/yqGGHpAsrelQq3AmfYn5p/oFCvOlcaB6drxZeKoQI9Yg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=L/GXM9t9xfhFxvalMA3tVw1ORhsGO843UiKzbG5PgHQ=;
+	b=D/RzKAyq9QjFkupaTvVjog68zKIvqTmwmUIA/tfeyUqm/1Od4CMvV5F7DvSlth0gkU97
+	 PWE/k6hIKTAzJrK92X6avkv+o2B307XGp1zRcOZzKpOc5vlj8LfxeqLP0WpPRDuPrgwUb
+	 lujs0q4zIa7CKgr8pWK41PzsdhcN/FYYTn1g7snwivcfENkd4lA9PXPzPCafgZ4pGoPgv
+	 XBzBn4Zv+fUw1ca52UR/r7Z0F/9y41LrRCd+Z1echbmJUJDQot4CljLNSKxx1LVdK/zBE
+	 Sk8NWKcDF60/Lz7/EOx67dqzlT3RNGr5QPml/sdnPJhB3K/iV5geW0ZgWyxNCMshngQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794673331;
-	bh=d2kosJnBK1q/Af76lI3zY78vmtG+d7zRCHa+rlVyAKo=;
+	d=lists.u-boot-project.org; s=default; t=1794673328;
+	bh=L/GXM9t9xfhFxvalMA3tVw1ORhsGO843UiKzbG5PgHQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sCTe1BvL44OmQFwASxIKRA5ywXlKuAXJ0ejBVEEqVLHctIgcQQmhRrRMqiCp8HOiz
-	 E2+8UcN/4FdE2LpHD9krBa5jCEmczW9RhuRkTWWP1lNM/9jUHRe2OiDdqFWFxCP6GD
-	 WVyaVG0wJzdvz5kJJBWSNEdd7oqY/dxhQKttPu6I8T+4xV4txrU55cKF/1sT79vVZs
-	 /nL6EjCk9DLmPkGkzLfGpoPJQfsDAmk6K+Xdn3X/ROI8KIVpf72tHOzsAnjIHYdjOm
-	 8TPTl2jWRtjzX0h/2aqGoUJ8BCJbNT0j2wWhjWhsuOHC6FEmU4ThfGP0iYLfawQ+lO
-	 tT2yfnwvlVK2Q==
+	b=UIlVa43ud8ZajkHX4wjmYSDAajGFxsR/ROStJkWZ1MtUx5BJ98VA7gnUm8+YKuXZL
+	 dvt6TXpRELwjX85mASughmkqGG+Ldte4LwuPSnkw+5WS/JMT0k0IbGX+ekPFmMcbeG
+	 dXiFSKM9EkA9e3bb11U68SwHDBdxtnRX58fdlHw96r0/08AUasmHBOJhecPtTh0BLI
+	 L8+LyrUKRKcSgIMCWJFdGt/fJYjkxXg402wJjPRZLHrlC9SB/RtFZ/xTdEe6nl4V4A
+	 PBK9q8hJQSoyOkL4nygoFd26CuxIGQsNPWw9ckn1LQrKaA2SEX5fzPRZ5m4yqSXV1+
+	 naHWOr2ctM6eQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BEE3540ACD;
-	Sat, 14 Nov 2026 16:22:11 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8DC0572D
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 95C686078C;
+	Sat, 14 Nov 2026 16:22:08 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A6BDA9B6
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7EE69814A1
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:57 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A4C9A40111
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wB1OP5ZOuqXo for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iaBixbZRKskk for <u-boot@lists.u-boot-project.org>;
  Sat, 14 Nov 2026 16:21:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5840C814A0
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=69.169.224.11
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6E44A40063
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=69.169.224.11
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=69.169.224.11;
  helo=b224-11.smtp-out.eu-central-1.amazonses.com;
- envelope-from=010701a1dadd88be-37739a02-7ea0-4758-988b-362bfdea3fb6-000000@ses.freemyipod.org;
+ envelope-from=010701a1dadd853d-b7698d8e-7cdb-46a2-b60d-74cbf5bd4a12-000000@ses.freemyipod.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=freemyipod.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org
  header.i=@freemyipod.org header.a=rsa-sha256
- header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=jtoMO+fI; 
+ header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=I4/ZJAuD; 
  dkim=pass (1024-bit key,
  unprotected) header.d=amazonses.com header.i=@amazonses.com
  header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh
- header.b=CUwMOqEl
+ header.b=mAowWX85
 Received: from b224-11.smtp-out.eu-central-1.amazonses.com
  (b224-11.smtp-out.eu-central-1.amazonses.com [69.169.224.11])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5840C814A0
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:55 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6E44A40063
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 16:21:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1794673314;
+ s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1794673313;
  h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc;
- bh=5RJ7VGLp3nyFdBbScGZNLoTXng1pDfTsukx3fnmEQ2I=;
- b=jtoMO+fIms1doC3ZYZOWY6tce1fVQrLoQ0tU6tF1GjpPzsqC/f9eKhdzK9pwffHw
- WObEXohHJewpgwQf5noms9Bfu2kd1j6qsV6+sZZSSflPP9OE87jK78j8YTY3Au4ziT+
- 55V4jAtiPb793MXLr9ohxigggbvHAZMUsJXXG/u+AJopIuVo80W0M1cGqxDo3CDTCDN
- 3Xx2QNxFYZa+9EESkNKanlDQO9PKH/qhJDwWK5J3GSAv6sbRHRhLXUOguNQRdANhuZV
- JcT2rHmh5XG/KaH0wWDyJ2BlNjJ0TzOXSFPD9+TIQr5PqH0BM5qkYIUiwybQKQgZg0I
- BfkWw847TA==
+ bh=a/6y516RXEydBUU11w4FXNN2fxcPdTMGFI1jd3B6DLw=;
+ b=I4/ZJAuD/eYioJTh/bblDIMcqSd8rZTzD5DKE+Zm6tgutPmnNIA3xDB8lhZ4dZoh
+ WdIQNS8TeGEDGkf9GKV7dZ6FX8pG3ibJy2znptNETbPkrPJA8e9kEpRBXZuSAd7mt5R
+ jFhIQ7YutFz/dZRCMLtWS3nbzpWBjDQtrU3yWSq2e+AIRv4zL9XyIKCaS/vDzaUP/TF
+ lu8dR0YhqOYuTPu+eYsWXV3d4VocLOMfPAxVBsHsAVzhiopoTa0GmLFCZYWAukPxAP7
+ MbwzN92xQKzJ0Et+B9SVFlqhy48PX9eLta4J8fEwIQhY4yx6CwPt3TcL0kl6H9yDPr7
+ oS/Q638xhg==
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1794673314;
+ s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1794673313;
  h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:Feedback-ID;
- bh=5RJ7VGLp3nyFdBbScGZNLoTXng1pDfTsukx3fnmEQ2I=;
- b=CUwMOqElIK/bUZk3iQcHUdE5zL27gqB5/O0+1SgSLz2YabWiVr1h90+r0okD4C3v
- G90ZGoH1Z1FmRRG6Klenp8SMrVgwRjdfFgT7o+pRHbkpy2moehEmkCAXoB6aqOwJ14F
- MRUeHmGgQB49ucKatbO/T2ovmc/wZDS9TKY7C+Io=
+ bh=a/6y516RXEydBUU11w4FXNN2fxcPdTMGFI1jd3B6DLw=;
+ b=mAowWX85J+Pi9UvYBJ9DrPgN+YEPBAYb3eRviYln09aH2XMsNdpR08A8nzeTCnmW
+ Ab8bI4igg0iishqSdfhGPc1DbwBswmkX/TDVcflJ6BB5Eu5s3nukZBuDlnCYFKoFnRL
+ 1Ll+mxNgVFa4EAxZfjqCw2cakIuo8cPOPWiXuffA=
 From: Vencislav Atanasov <user890104@freemyipod.org>
-Date: Sat, 14 Nov 2026 16:21:54 +0000
-Subject: [PATCH v3 12/13] New SoC/board: S5L8730/N33
+Date: Sat, 14 Nov 2026 16:21:53 +0000
+Subject: [PATCH v3 11/13] New SoC/board: S5L8723/N20
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <010701a1dadd88be-37739a02-7ea0-4758-988b-362bfdea3fb6-000000@eu-central-1.amazonses.com>
+Message-ID: <010701a1dadd853d-b7698d8e-7cdb-46a2-b60d-74cbf5bd4a12-000000@eu-central-1.amazonses.com>
 References: <20261114-s5l87xx-v2-v3-0-083bd20d8ded@freemyipod.org>
 In-Reply-To: <20261114-s5l87xx-v2-v3-0-083bd20d8ded@freemyipod.org>
 To: u-boot@lists.u-boot-project.org, Janne Grunau <j@jannau.net>
@@ -134,11 +134,11 @@ Cc: Vencislav Atanasov <user890104@freemyipod.org>,
  Mark Kettenis <kettenis@openbsd.org>, 
  Stefan Roese <stefan.roese@mailbox.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794673300; l=8793;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794673300; l=8660;
  i=user890104@freemyipod.org; s=20261004; h=from:subject:message-id;
- bh=5RJ7VGLp3nyFdBbScGZNLoTXng1pDfTsukx3fnmEQ2I=;
- b=bBbO7YELnYTSMsZwfszu2tXQS6AyCyn03ZwM6/KMap30kn9bAvctH3UXMbFq9qN1WDa+SnxeS
- aXwlrn3M2RxCYFtBdKXd7WHXw45GLaKSpWfV5lT7osWxT1kDDIuRlih
+ bh=a/6y516RXEydBUU11w4FXNN2fxcPdTMGFI1jd3B6DLw=;
+ b=h2FklgqVAXIL8yhP4P5c8xvOF5b8upDss8YqCaSooURohMaCA61vfWlh/t95+orLzTX8rn6pb
+ 5OWQWs9gO6VDXljhZ9sg1uMT+hsZJibe22niT2YhTkdAwCwFNWJpTpH
 X-Developer-Key: i=user890104@freemyipod.org; a=ed25519;
  pk=klj5EgxMkX+YF0tPboUEB9kwBfthBgHWLhDOkwnmUus=
 Feedback-ID: ::1.eu-central-1.GZFSN+SpSZlcZgoCjFtpLsnhzRcxifcxl4uaxXIRIUo=:AmazonSES
@@ -159,46 +159,46 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Marketing name: Apple iPod nano (5th generation)
+Marketing name: Apple iPod nano (6th generation)
 
 Signed-off-by: Vencislav Atanasov <user890104@freemyipod.org>
 ---
- arch/arm/dts/s5l8730-n33.dts          | 26 ++++++++++++++++
- arch/arm/dts/s5l8730.dtsi             | 42 ++++++++++++++++++++++++++
+ arch/arm/dts/s5l8723-n20.dts          | 26 ++++++++++++++++
+ arch/arm/dts/s5l8723.dtsi             | 40 ++++++++++++++++++++++++
  arch/arm/mach-s5l87xx/Kconfig         |  1 +
  arch/arm/mach-s5l87xx/Makefile        |  5 +++
- arch/arm/mach-s5l87xx/s5l8730.c       | 18 +++++++++++
- arch/arm/mach-s5l87xx/s5l8730/Kconfig | 12 ++++++++
- board/apple/n33/Kconfig               | 15 +++++++++
- board/apple/n33/Makefile              |  7 +++++
- board/apple/n33/n33.c                 | 57 +++++++++++++++++++++++++++++++++++
- configs/apple_n33_defconfig           | 33 ++++++++++++++++++++
- include/configs/apple_n33.h           | 16 ++++++++++
- 11 files changed, 232 insertions(+)
+ arch/arm/mach-s5l87xx/s5l8723.c       | 18 +++++++++++
+ arch/arm/mach-s5l87xx/s5l8723/Kconfig | 12 ++++++++
+ board/apple/n20/Kconfig               | 15 +++++++++
+ board/apple/n20/Makefile              |  7 +++++
+ board/apple/n20/n20.c                 | 57 +++++++++++++++++++++++++++++++++++
+ configs/apple_n20_defconfig           | 33 ++++++++++++++++++++
+ include/configs/apple_n20.h           | 15 +++++++++
+ 11 files changed, 229 insertions(+)
 
-diff --git a/arch/arm/dts/s5l8730-n33.dts b/arch/arm/dts/s5l8730-n33.dts
+diff --git a/arch/arm/dts/s5l8723-n20.dts b/arch/arm/dts/s5l8723-n20.dts
 new file mode 100644
-index 00000000000..fb2fecedf09
+index 00000000000..f2996f495b2
 --- /dev/null
-+++ b/arch/arm/dts/s5l8730-n33.dts
++++ b/arch/arm/dts/s5l8723-n20.dts
 @@ -0,0 +1,26 @@
 +// SPDX-License-Identifier: GPL-2.0+ OR MIT
 +/*
-+ * Apple iPod nano (5th generation)
++ * Apple iPod nano (6th generation)
 + *
-+ * target-type: N33
++ * target-type: N20
 + *
 + * Copyright (C) 2026 The freemyipod team (freemyipod.org)
 + */
 +
 +/dts-v1/;
 +
-+#include "s5l8730.dtsi"
++#include "s5l8723.dtsi"
 +#include "s5l87xx-nxx.dtsi"
 +
 +/ {
-+	compatible = "apple,n33", "samsung,s5l8730", "apple,arm-platform";
-+	model = "Apple iPod nano (5th generation)";
++	compatible = "apple,n20", "samsung,s5l8723", "apple,arm-platform";
++	model = "Apple iPod nano (6th generation)";
 +};
 +
 +&memory {
@@ -208,17 +208,15 @@ index 00000000000..fb2fecedf09
 +&clkref {
 +	clock-frequency = <24000000>;
 +};
-diff --git a/arch/arm/dts/s5l8730.dtsi b/arch/arm/dts/s5l8730.dtsi
+diff --git a/arch/arm/dts/s5l8723.dtsi b/arch/arm/dts/s5l8723.dtsi
 new file mode 100644
-index 00000000000..902a8ac5dc1
+index 00000000000..be83c0f4ebc
 --- /dev/null
-+++ b/arch/arm/dts/s5l8730.dtsi
-@@ -0,0 +1,42 @@
++++ b/arch/arm/dts/s5l8723.dtsi
+@@ -0,0 +1,40 @@
 +// SPDX-License-Identifier: GPL-2.0+ OR MIT
 +/*
-+ * Samsung S5L8730 SoC
-+ *
-+ * Other names: M2
++ * Samsung S5L8723 SoC
 + *
 + * Copyright (C) 2026 The freemyipod team (freemyipod.org)
 + */
@@ -227,7 +225,7 @@ index 00000000000..902a8ac5dc1
 +#include "s5l8702-common.dtsi"
 +
 +/ {
-+	compatible = "samsung,s5l8730", "apple,arm-platform";
++	compatible = "samsung,s5l8723", "apple,arm-platform";
 +
 +	chosen {
 +		stdout-path = &uart0;
@@ -248,7 +246,7 @@ index 00000000000..902a8ac5dc1
 +					   "timer5", "timer6", "timer7", "timer8",
 +					   "uart0", "usb-otg", "usb2-phy", "bootrom";
 +	samsung,clock-gates = <37 128>, <55 129>, <56 130>, <57 131>, <58 132>,
-+						  <59 133>, <60 134>, <69 150>, <70 151>,
++						  <56 130>, <57 131>, <69 150>, <70 151>,
 +						  <41 135>, <2 0xffffffff>, <35 0xffffffff>,
 +						  <13 0xffffffff>;
 +};
@@ -257,34 +255,34 @@ index 00000000000..902a8ac5dc1
 +	status = "okay";
 +};
 diff --git a/arch/arm/mach-s5l87xx/Kconfig b/arch/arm/mach-s5l87xx/Kconfig
-index f40a340312a..3ec2326de42 100644
+index 6a873f10675..f40a340312a 100644
 --- a/arch/arm/mach-s5l87xx/Kconfig
 +++ b/arch/arm/mach-s5l87xx/Kconfig
-@@ -61,5 +61,6 @@ source "arch/arm/mach-s5l87xx/s5l8701/Kconfig"
+@@ -60,5 +60,6 @@ endchoice
+ source "arch/arm/mach-s5l87xx/s5l8701/Kconfig"
  source "arch/arm/mach-s5l87xx/s5l8702/Kconfig"
  source "arch/arm/mach-s5l87xx/s5l8720/Kconfig"
- source "arch/arm/mach-s5l87xx/s5l8723/Kconfig"
-+source "arch/arm/mach-s5l87xx/s5l8730/Kconfig"
++source "arch/arm/mach-s5l87xx/s5l8723/Kconfig"
  
  endif
 diff --git a/arch/arm/mach-s5l87xx/Makefile b/arch/arm/mach-s5l87xx/Makefile
-index ff84eff8448..78ea7bc58d0 100644
+index 62564a34645..ff84eff8448 100644
 --- a/arch/arm/mach-s5l87xx/Makefile
 +++ b/arch/arm/mach-s5l87xx/Makefile
-@@ -24,3 +24,8 @@ obj-$(CONFIG_S5L8723) += relocate.o
- obj-$(CONFIG_S5L8723) += s5l8723.o
- obj-$(CONFIG_S5L8723) += s5l87xx-otg-phy.o
- obj-$(CONFIG_S5L8723) += s5l87xx-timer.o
+@@ -19,3 +19,8 @@ obj-$(CONFIG_S5L8720) += relocate.o
+ obj-$(CONFIG_S5L8720) += s5l8720.o
+ obj-$(CONFIG_S5L8720) += s5l87xx-otg-phy.o
+ obj-$(CONFIG_S5L8720) += s5l87xx-timer.o
 +
-+obj-$(CONFIG_S5L8730) += relocate.o
-+obj-$(CONFIG_S5L8730) += s5l8730.o
-+obj-$(CONFIG_S5L8730) += s5l87xx-otg-phy.o
-+obj-$(CONFIG_S5L8730) += s5l87xx-timer.o
-diff --git a/arch/arm/mach-s5l87xx/s5l8730.c b/arch/arm/mach-s5l87xx/s5l8730.c
++obj-$(CONFIG_S5L8723) += relocate.o
++obj-$(CONFIG_S5L8723) += s5l8723.o
++obj-$(CONFIG_S5L8723) += s5l87xx-otg-phy.o
++obj-$(CONFIG_S5L8723) += s5l87xx-timer.o
+diff --git a/arch/arm/mach-s5l87xx/s5l8723.c b/arch/arm/mach-s5l87xx/s5l8723.c
 new file mode 100644
-index 00000000000..f0970e21cec
+index 00000000000..5c82dfd2851
 --- /dev/null
-+++ b/arch/arm/mach-s5l87xx/s5l8730.c
++++ b/arch/arm/mach-s5l87xx/s5l8723.c
 @@ -0,0 +1,18 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
@@ -295,7 +293,7 @@ index 00000000000..f0970e21cec
 +
 +int print_cpuinfo(void)
 +{
-+	printf("CPU:   Samsung S5L8730 (ARM1176JZF-S)\n");
++	printf("CPU:   Samsung S5L8723 (ARM1176JZF-S)\n");
 +	return 0;
 +}
 +
@@ -304,50 +302,50 @@ index 00000000000..f0970e21cec
 +	// Corresponds to TIMER_F setup from s5l87xx.c.
 +	return 1000000;
 +}
-diff --git a/arch/arm/mach-s5l87xx/s5l8730/Kconfig b/arch/arm/mach-s5l87xx/s5l8730/Kconfig
+diff --git a/arch/arm/mach-s5l87xx/s5l8723/Kconfig b/arch/arm/mach-s5l87xx/s5l8723/Kconfig
 new file mode 100644
-index 00000000000..4ca87a2f52b
+index 00000000000..9564f620518
 --- /dev/null
-+++ b/arch/arm/mach-s5l87xx/s5l8730/Kconfig
++++ b/arch/arm/mach-s5l87xx/s5l8723/Kconfig
 @@ -0,0 +1,12 @@
-+if S5L8730
++if S5L8723
 +
-+config TARGET_N33
-+	bool "Apple N33 - iPod nano (5th generation)"
++config TARGET_N20
++	bool "Apple N20 - iPod nano (6th generation)"
 +	default y
 +	help
-+	  Apple iPod nano (5th generation) is a digital audio player, introduced in
-+	  September 2009. It has a NAND flash of either 8 or 16 GiB.
++	  Apple iPod nano (6th generation) is a digital audio player, introduced in
++	  September 2010. It has a NAND flash of either 8 or 16 GiB.
 +
-+source "board/apple/n33/Kconfig"
++source "board/apple/n20/Kconfig"
 +
 +endif
-diff --git a/board/apple/n33/Kconfig b/board/apple/n33/Kconfig
+diff --git a/board/apple/n20/Kconfig b/board/apple/n20/Kconfig
 new file mode 100644
-index 00000000000..5c9dea9fbb9
+index 00000000000..252baff3c33
 --- /dev/null
-+++ b/board/apple/n33/Kconfig
++++ b/board/apple/n20/Kconfig
 @@ -0,0 +1,15 @@
-+if TARGET_N33
++if TARGET_N20
 +
 +config SYS_BOARD
-+	default "n33"
++	default "n20"
 +
 +config SYS_VENDOR
 +	default "apple"
 +
 +config SYS_SOC
-+	default "s5l8730"
++	default "s5l8723"
 +
 +config SYS_CONFIG_NAME
-+	default "apple_n33"
++	default "apple_n20"
 +
 +endif
-diff --git a/board/apple/n33/Makefile b/board/apple/n33/Makefile
+diff --git a/board/apple/n20/Makefile b/board/apple/n20/Makefile
 new file mode 100644
-index 00000000000..721718361e1
+index 00000000000..e3353451653
 --- /dev/null
-+++ b/board/apple/n33/Makefile
++++ b/board/apple/n20/Makefile
 @@ -0,0 +1,7 @@
 +# SPDX-License-Identifier: GPL-2.0-or-later
 +#
@@ -355,12 +353,12 @@ index 00000000000..721718361e1
 +#
 +
 +obj-y += ../nxx-common/nxx.o
-+obj-y += n33.o
-diff --git a/board/apple/n33/n33.c b/board/apple/n33/n33.c
++obj-y += n20.o
+diff --git a/board/apple/n20/n20.c b/board/apple/n20/n20.c
 new file mode 100644
 index 00000000000..ec6dbf01714
 --- /dev/null
-+++ b/board/apple/n33/n33.c
++++ b/board/apple/n20/n20.c
 @@ -0,0 +1,57 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
@@ -419,11 +417,11 @@ index 00000000000..ec6dbf01714
 +	s5l87xx_enable_clkgate_bit(1, 9);
 +	s5l87xx_enable_clkgate_bit(4, 7);
 +}
-diff --git a/configs/apple_n33_defconfig b/configs/apple_n33_defconfig
+diff --git a/configs/apple_n20_defconfig b/configs/apple_n20_defconfig
 new file mode 100644
-index 00000000000..3a9cb4fe817
+index 00000000000..62a401f2087
 --- /dev/null
-+++ b/configs/apple_n33_defconfig
++++ b/configs/apple_n20_defconfig
 @@ -0,0 +1,33 @@
 +CONFIG_ARM=y
 +CONFIG_SKIP_LOWLEVEL_INIT_ONLY=y
@@ -431,8 +429,8 @@ index 00000000000..3a9cb4fe817
 +CONFIG_ARCH_S5L87XX=y
 +CONFIG_TEXT_BASE=0x08000000
 +CONFIG_SYS_MALLOC_LEN=0x00200000
-+CONFIG_DEFAULT_DEVICE_TREE="s5l8730-n33"
-+CONFIG_S5L8730=y
++CONFIG_DEFAULT_DEVICE_TREE="s5l8723-n20"
++CONFIG_S5L8723=y
 +CONFIG_SYS_LOAD_ADDR=0x08000000
 +CONFIG_DEBUG_UART_BASE=0x3CC00000
 +CONFIG_DEBUG_UART_CLOCK=24000000
@@ -458,12 +456,12 @@ index 00000000000..3a9cb4fe817
 +CONFIG_USB_GADGET_PRODUCT_NUM=0xff00
 +CONFIG_USB_GADGET_DWC2_OTG=y
 +CONFIG_USB_GADGET_DOWNLOAD=y
-diff --git a/include/configs/apple_n33.h b/include/configs/apple_n33.h
+diff --git a/include/configs/apple_n20.h b/include/configs/apple_n20.h
 new file mode 100644
-index 00000000000..a00e773746f
+index 00000000000..7cb68073fcd
 --- /dev/null
-+++ b/include/configs/apple_n33.h
-@@ -0,0 +1,16 @@
++++ b/include/configs/apple_n20.h
+@@ -0,0 +1,15 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
 + * Copyright (C) 2026 The freemyipod team (freemyipod.org)
@@ -474,10 +472,9 @@ index 00000000000..a00e773746f
 +
 +#define CFG_SYS_UBOOT_BASE		CONFIG_TEXT_BASE
 +
-+// 448K SRAM total, first 64K and the 256K at 0x30000 are the fastest
-+// 128K at 0x10000 are slower than DRAM
++// 192K SRAM total, first 64K is the fastest
 +#define CFG_SYS_INIT_RAM_ADDR	0x22000000
-+#define CFG_SYS_INIT_RAM_SIZE	0x00070000
++#define CFG_SYS_INIT_RAM_SIZE	0x00030000
 +
 +#endif	/* __CONFIG_H */
 
