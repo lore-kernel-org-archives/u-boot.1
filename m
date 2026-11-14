@@ -1,28 +1,28 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F299606A335
-	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 00:10:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4204D606A330
+	for <u-boot@archiver.kernel.org>; Sat, 14 Nov 2026 00:11:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EVGNvIGK
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=d/16Reak
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2580640EA6;
-	Sat, 14 Nov 2026 00:10:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 17BD76077C;
+	Sat, 14 Nov 2026 00:11:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vbDos5ETwIoO; Sat, 14 Nov 2026 00:10:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 62C1C40E9C
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794615022;
-	b=q+0Zi7DzKiwiPkqtY/Sn4u5Ir1mO0rUhBZrokxB1+BkpZcx83vRihcvrv4Zug0c4tTqh
-	 qKq/ch8dhWDmiEFRHyRlex2TMqkHnqND6WPp6FTw3oOAOUnau/e0L9+3dfQOZp+68dJP+
-	 gWqlKBEPT6IpABYBt9OtOrTpOF7a321ku6QnByqFEtfbj27HKMiMbbInge/Moebsq/iXR
-	 zDbR1x/b/lwYKwwZFiqGt+5EG/dfB340kJ6muIyOynErXUQKjsbcUHCj2GetAEgafiwpe
-	 5Kv+gO2BtTKf7L5NASuUTLCrdaeaaZcpTzzcbcrnV1STYOm8CUvnJgki9RXROgR3t0w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NuiyH6iZhUlE; Sat, 14 Nov 2026 00:11:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 20AEC606EA
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794615093;
+	b=fpBWiYZUwgkxuKuvbH0iJCXPtNax7geFkqKfkc4IbkofNhChIZCEj3ilKjgutIQWsv7Z
+	 Mbc0Iw/aNmjB/iZCrdnEufdoIQepwnySGPEr7agWllVuGz3JgGotu/DGfr1GZUi687+L7
+	 v74pjC7wzsXffk146q7mTBcSEsZohIyDerQJ6fNTgq5zaXuIExhk82khq/WZuvl34SsWf
+	 cHFDmChleHRw1OtQkdV8rV9MgfTPfoT25r41+E3GqYVA5kJmjyXSJEbqKvhCVVbbf1zcR
+	 57O3YpJFe40Dytm4pNP7JIpbWtflABb2rsqetMe0w19S4XZTFy5FwqKWDmU0RXn4c+A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794615022;
+	c=relaxed/relaxed; t=1794615093;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:Date:
@@ -30,58 +30,58 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=dRtMqJUhpD9Ouq0ya+MPshaH6m+MzVsuej7CSC8IYVU=;
-	b=mTigMB2rIplaof/6mmTgbwFLhhRP39rzeacydRAVaJtCh5brMy9vRea6QZKtF3IobSeC
-	 MawLNVAQI/+Gyv0h8B9jWzsklpOH2jWeIKDes9eNAKkP0XkFRFoPaQQOe76d6nHXorQnh
-	 fcvX/OokmwFxdM+kqHP8+Xi0zjS4NKABZv022IR5uYjjwnQgJB/bs3lSHqxGnp3rKQuTH
-	 b9BIYe90ActlOp1uQsXMF8gv2zADja9V45ZmsAbzyCm+lg0SYwquSHEi8G0qG+SS9VNRX
-	 gX8zAD0SxhpZbf4Sy6BemDJw//jZj7s7BPGXC31m1oYzV136x5DU7ocaNqMkEqoD9rg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=XyY41mdS6lYN3K3r4071h1u24qmjuG2RddANyMPikuw=;
+	b=luxOUk0l62sQ0PmEO9pPxwxGYr32K7GlxLDHusf5+oD4hNlWoAb8Nps1jb9khQGyAM05
+	 vbB/O6Z07WL+hrRuoY2cDh8gFYw+El5nLhhjVxg28UECS6gWVbzHmqnJGEf14M+W6KPML
+	 bZhKmqM5pE4Of1rYVVmfi58FMpfec6JgojTZjUrrHtanYxzlSjUpdP1//KVziLI3RZDp1
+	 Oa3PdOAbWtKEghtf91wa63rGvxr5HTB1FaiYylrMBb+vXxAcYpM7cXmZ2AM6rKu2DLeLA
+	 TtJPezvZ1OqF++4u4H8Q5Wn209BTcOC3aA2hpDbHy0aldvxuTlrW9yhLmzlL497ttdw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794615022;
-	bh=dRtMqJUhpD9Ouq0ya+MPshaH6m+MzVsuej7CSC8IYVU=;
+	d=lists.u-boot-project.org; s=default; t=1794615093;
+	bh=XyY41mdS6lYN3K3r4071h1u24qmjuG2RddANyMPikuw=;
 	h=Date:From:To:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EVGNvIGKFZz70aefaD2mbjFE+ierNNTxaziZinOKdpGm46NNBFmduv97YXj5w2HGw
-	 a0Oz1Y9Qmahruj+Yx//m0+y/aU0d0qAg0AkWf95uNmzBCrrsaZcoHIRiQgcKvIbqdL
-	 HbTB3lWcLJC6LY5+k5tCxxj+tGbn7l/bX7vmVQzKoENB3oQ8DBs2Cy+QHeiTPBRggF
-	 +71x/MlAr46bIUtkJ4kD40rzwDP8QtGd9Er8sa1eVbxEU70wVL4wdviPGDpV2tuSV+
-	 3G+qWXEAkuN3YZt3irYLnTTQ/6BSBPw1T8ahl5+fUUE2xpspyke2MRY2NHmI27Yvue
-	 EGBS8+yFzXwaQ==
+	b=d/16ReakjfzNE/0LUjZNs/OJqLfm3QsrPWrYz65pbYh8w/uE51cak1qngvibm2vYW
+	 pBk4g+WTa67WCaliggSKXDQa59nl0JQ/7nxfXoFS6klYEGP9IoJTpevsGVJToBZU5d
+	 4CILimYIr2Y+zMdQnctMmdQlxoWXLjAL5/uV6OaYXehNtET+SS2faL5qpJ93xE26yn
+	 3+Bmj3lIFnCplU2L+t7bqoBfhhVZqgZCr41MqHxYmTi1tBXxPuMxYaU4GJ1YM1CgDS
+	 I8fAVSk3KpXcXcFvUyzxALJrdN2NlIcMSCpbd60Kl/wmVoUpgC/h59RGsFmvNfVcgv
+	 jP6eD+EG7P4sQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 62C1C40E9C;
-	Sat, 14 Nov 2026 00:10:22 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D8A192FB
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:10:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 20AEC606EA;
+	Sat, 14 Nov 2026 00:11:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9B6D428C
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:11:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id BE98E812F6
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:10:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 89C5540269
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:11:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dFtMe1ROMKrc for <u-boot@lists.u-boot-project.org>;
- Sat, 14 Nov 2026 00:10:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 01C9781AF4
-Authentication-Results: smtp1.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LSq9NhUqxjKC for <u-boot@lists.u-boot-project.org>;
+ Sat, 14 Nov 2026 00:11:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org AFA934025F
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip="2a07:2ec0:3002::65"
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
  helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=none (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 01C9781AF4
- for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:10:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id AFA934025F
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 00:11:30 +0000 (UTC)
 Received: from local by pidgin.makrotopia.org with esmtpsa
  (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768) (Exim 4.100.1)
- (envelope-from <daniel@makrotopia.org>) id 1xS1LQ-000000008Vr-20cq;
- Sat, 14 Nov 2026 00:10:12 +0000
-Date: Sat, 14 Nov 2026 00:10:09 +0000
+ (envelope-from <daniel@makrotopia.org>) id 1xS1MW-00000000053-0eHn;
+ Sat, 14 Nov 2026 00:11:20 +0000
+Date: Sat, 14 Nov 2026 00:11:17 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
@@ -96,8 +96,8 @@ To: Alexey Brodkin <alexey.brodkin@synopsys.com>,
  =?iso-8859-1?Q?Jo=E3o?= Loureiro <joaofl@gmail.com>,
  uboot-snps-arc@synopsys.com, u-boot@lists.u-boot-project.org,
  openwrt-devel@lists.openwrt.org
-Subject: [PATCH 3/9] test: boot: bootm: Check ordinary failures
-Message-ID: <9ba9ab9a205a56b508fca98c738a4389be0f22a9.1794614777.git.daniel@makrotopia.org>
+Subject: [PATCH 4/9] boot: imagemap: Preserve mappings when an extend fails
+Message-ID: <ba37599719c79518fedceb1c696327f6a5eab7af.1794614777.git.daniel@makrotopia.org>
 References: <cover.1794614777.git.daniel@makrotopia.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
@@ -120,82 +120,191 @@ X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Check that a failing bootm subcommand returns -ENOSYS with the expected
-console message. Force a ramdisk allocation failure and check that it
-returns -ENOMEM.
+Extending a region releases its reservation before allocating and
+reading the larger range. A failure leaves the old mapping pointing at
+unreserved memory, which cleanup may free again after another user
+has allocated it.
 
+Keep the original reservation until the read succeeds, reserving the
+added space or a new block first. Update the mapping after success.
+
+Fixes: 9b41c7dbee96 ("boot: add imagemap on-demand loading from storage")
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- test/boot/bootm.c | 53 +++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 53 insertions(+)
+ boot/imagemap.c | 143 +++++++++++++++++++++++++++++-------------------
+ 1 file changed, 87 insertions(+), 56 deletions(-)
 
-diff --git a/test/boot/bootm.c b/test/boot/bootm.c
-index ed60094f3c1..5f013298f8c 100644
---- a/test/boot/bootm.c
-+++ b/test/boot/bootm.c
-@@ -7,6 +7,8 @@
- 
- #include <bootm.h>
- #include <env.h>
-+#include <errno.h>
-+#include <malloc.h>
- #include <asm/global_data.h>
- #include <test/test.h>
- #include <test/ut.h>
-@@ -249,3 +251,54 @@ static int bootm_test_subst_both(struct unit_test_state *uts)
+diff --git a/boot/imagemap.c b/boot/imagemap.c
+index d46c1430fb7..0e3fbd0934a 100644
+--- a/boot/imagemap.c
++++ b/boot/imagemap.c
+@@ -208,6 +208,82 @@ static int imagemap_read_exact(struct spl_load_info *info, loff_t off,
  	return 0;
  }
- BOOTM_TEST(bootm_test_subst_both, 0);
-+
-+/* Test that a failing subcommand returns its error to the caller */
-+static int bootm_test_subcmd_fail(struct unit_test_state *uts)
+ 
++/**
++ * imagemap_extend() - Grow a region this device allocated
++ *
++ * The region keeps its reservation and its record until the larger one
++ * is reserved and read, so a failure leaves the existing mapping valid.
++ *
++ * @priv:	The imagemap uclass data
++ * @r:		Region to grow, with lmb_reserved set
++ * @img_offset:	Byte offset within the source image
++ * @size:	Number of bytes wanted from @img_offset
++ * Return: pointer to the data at @img_offset, or ERR_PTR on failure
++ */
++static void *imagemap_extend(struct imagemap_priv *priv,
++			     struct imagemap_region *r, loff_t img_offset,
++			     ulong size)
 +{
-+	struct bootm_info bmi;
-+	int old_state;
-+	u8 old_os;
++	phys_size_t old_alloc = ALIGN(r->size, ARCH_DMA_MINALIGN);
++	ulong bl_len = spl_get_bl_len(&priv->info);
++	ulong overhead = img_offset & (bl_len - 1);
++	ulong read_size = ALIGN(size + overhead, bl_len);
++	phys_addr_t old_addr = map_to_sysmem(r->ram);
++	phys_size_t alloc_size, tail_size;
++	phys_addr_t addr, tail;
++	void *base;
 +	int ret;
 +
-+	bootm_init(&bmi);
-+	old_state = bmi.images->state;
-+	old_os = bmi.images->os.os;
-+	bmi.images->os.os = IH_OS_LINUX;
++	alloc_size = ALIGN(read_size, ARCH_DMA_MINALIGN);
++	tail_size = alloc_size - old_alloc;
++	tail = old_addr + old_alloc;
 +
-+	ret = bootm_run_states(&bmi, BOOTM_STATE_OS_BD_T);
++	ret = 0;
++	if (tail_size)
++		ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &tail, tail_size,
++				    LMB_NONE);
++	if (!ret) {
++		base = map_sysmem(old_addr, alloc_size);
++		ret = spl_load_region(&priv->info, r->img_offset + r->size,
++				      read_size - r->size,
++				      (char *)base + r->size);
++		if (ret < 0) {
++			if (tail_size)
++				lmb_free(tail, tail_size, LMB_NONE);
++			goto err_read;
++		}
++		r->size = read_size;
 +
-+	bmi.images->os.os = old_os;
-+	bmi.images->state = old_state;
++		return base + overhead;
++	}
 +
-+	ut_asserteq(-ENOSYS, ret);
-+	ut_assert_nextline("subcommand failed (err=%d)", -ENOSYS);
-+	ut_assert_console_end();
++	if (lmb_alloc_mem(LMB_MEM_ALLOC_ANY, ARCH_DMA_MINALIGN, &addr,
++			  alloc_size, LMB_NONE)) {
++		log_err("imagemap: LMB alloc failed (0x%lx bytes)\n",
++			(ulong)alloc_size);
++		return ERR_PTR(-ENOMEM);
++	}
++	base = map_sysmem(addr, alloc_size);
 +
-+	return 0;
++	ret = spl_load_region(&priv->info, img_offset, size, base);
++	if (ret < 0) {
++		lmb_free(addr, alloc_size, LMB_NONE);
++		goto err_read;
++	}
++
++	lmb_free(old_addr, old_alloc, LMB_NONE);
++	r->size = read_size;
++	r->ram = base;
++
++	return base + overhead;
++
++err_read:
++	log_err("imagemap: read failed at offset 0x%llx (size 0x%lx): %d\n",
++		(unsigned long long)img_offset, size, ret);
++
++	return ERR_PTR(ret);
 +}
-+BOOTM_TEST(bootm_test_subcmd_fail, UTF_CONSOLE);
 +
-+static int bootm_test_ramdisk_nomem(struct unit_test_state *uts)
-+{
-+	ulong initrd_start, initrd_end;
-+	char *old_high, *high;
-+	int ret;
+ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
+ {
+ 	struct imagemap_priv *priv = dev_get_uclass_priv(dev);
+@@ -215,10 +291,8 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
+ 	ulong overhead = img_offset & (bl_len - 1);
+ 	loff_t base_off = img_offset - overhead;
+ 	ulong read_size = ALIGN(size + overhead, bl_len);
+-	phys_addr_t old_addr;
+ 	phys_addr_t addr;
+ 	phys_size_t alloc_size;
+-	ulong old_size;
+ 	void *base;
+ 	int ret;
+ 	struct imagemap_region *r;
+@@ -231,62 +305,19 @@ void *imagemap_map(struct udevice *dev, loff_t img_offset, ulong size)
+ 
+ 	alloc_size = ALIGN(read_size, ARCH_DMA_MINALIGN);
+ 
+-	/*
+-	 * Extend a block-aligned region at the same base offset to the
+-	 * larger size, re-reading the full range from storage.
+-	 */
+ 	alist_for_each(r, &priv->regions) {
+-		if (r->img_offset == base_off && r->size < read_size) {
+-			/*
+-			 * Only a region this device allocated may be resized;
+-			 * one recorded by imagemap_map_to() lives at an address
+-			 * the caller chose and owns.
+-			 */
+-			if (!r->lmb_reserved)
+-				break;
+-
+-			old_size = r->size;
+-			old_addr = map_to_sysmem(r->ram);
+-			addr = old_addr;
+-
+-			lmb_free(addr, ALIGN(old_size, ARCH_DMA_MINALIGN),
+-				 LMB_NONE);
++		if (r->img_offset != base_off || r->size >= read_size)
++			continue;
+ 
+-			/* Try to re-reserve at the same address with new size */
+-			if (lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
+-					  alloc_size, LMB_NONE)) {
+-				/* In-place extend failed, allocate elsewhere */
+-				if (lmb_alloc_mem(LMB_MEM_ALLOC_ANY,
+-						  ARCH_DMA_MINALIGN,
+-						  &addr, alloc_size,
+-						  LMB_NONE)) {
+-					log_err("imagemap: LMB alloc failed (0x%lx bytes)\n",
+-						(ulong)alloc_size);
+-					return ERR_PTR(-ENOMEM);
+-				}
+-			}
+-			base = map_sysmem(addr, alloc_size);
+-
+-			if (addr == old_addr)
+-				ret = spl_load_region(&priv->info,
+-						      base_off + old_size,
+-						      read_size - old_size,
+-						      (char *)base + old_size);
+-			else
+-				ret = spl_load_region(&priv->info, img_offset,
+-						      size, base);
+-			if (ret < 0) {
+-				log_err("imagemap: read failed at offset 0x%llx (size 0x%lx): %d\n",
+-					(unsigned long long)img_offset, size, ret);
+-				lmb_free(addr, alloc_size, LMB_NONE);
+-				return ERR_PTR(ret);
+-			}
+-			r->size = read_size;
+-			r->ram = base;
+-			r->lmb_reserved = true;
+-
+-			return base + overhead;
+-		}
++		/*
++		 * Only a region this device allocated may be resized;
++		 * one recorded by imagemap_map_to() lives at an address
++		 * the caller chose and owns.
++		 */
++		if (!r->lmb_reserved)
++			break;
 +
-+	high = env_get("initrd_high");
-+	old_high = high ? strdup(high) : NULL;
-+	ut_assert(!high || old_high);
-+	ut_assertok(env_set_hex("initrd_high", 0));
-+
-+	ret = boot_ramdisk_high(1, ~0UL, &initrd_start, &initrd_end);
-+
-+	ut_assertok(env_set("initrd_high", old_high));
-+	free(old_high);
-+
-+	ut_asserteq(-ENOMEM, ret);
-+	ut_assert_nextline("ramdisk - allocation error");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+
-+BOOTM_TEST(bootm_test_ramdisk_nomem, UTF_CONSOLE);
++		return imagemap_extend(priv, r, img_offset, size);
+ 	}
+ 
+ 	/* New region - allocate from LMB */
 -- 
 2.56.0
