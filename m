@@ -2,156 +2,162 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 184C2606A31A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 16:02:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60776606A327
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 16:02:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=J2mXZsvq;
-	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=taEFpJad
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pQ3F/qG7;
+	dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=KWNaCZxE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CC18B60762;
-	Sun, 15 Nov 2026 16:02:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 35D6A6079F;
+	Sun, 15 Nov 2026 16:02:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W88ZS0hfgxd6; Sun, 15 Nov 2026 16:02:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F183A606C6
+ id 1L7zZVUKvGmu; Sun, 15 Nov 2026 16:02:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 87A9360748
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794758567;
-	b=M+CwAjOkDZGMq7CC6NCEiyEhev8BpB1xviIFi/gw6yX/nciMkM0cxRpJ8LnIyI34yS0d
-	 /kHePajDdIsSywYpo7eDQJdi1l9t0CXjJie4kJ7EvZWGPa5kFXxr3ZWghewE94nFfq8oU
-	 R4mR63Ov/QoCM21rVY/CEopERO9jpxpW/PEG/bKcl/4fQLBePKlu9zid/kuBf/+SsK/bx
-	 dKiJkhFlhAlvCU04v7f49zKVWpRFRH+CVIormHynSb0cWBxcXdH7FCPed0Hj6U7EOHDir
-	 8BhndbQLe4Idv0JSM+faHIaL0z2Di+MaXal5wqkgFq8ch1FqVHt5omaxoozftUNSKEA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794758568;
+	b=EylX6KsegVvaz1PWJ0RhzPIcJAs2M1eVPSTzix7gaZAMq1Yn+ezBQl0FhGCMayT2Bis7
+	 rX8CMQhKf2923+Zh9GYyK4/fcC6cHxlj76qVeBpr90HXV4GvVBgXT+fnQjweleu32HHBZ
+	 OZNa26IK11vORUZ0D+c2fXgsB3ORlUX2dLtkmirBmRpUDSX35hrbXtZzF5n0MbJBn5IIL
+	 h5G8OeeO9QMGC+BggHaopjKxLUNJgMRn9QkVRzagM24yZMRioGrvh7jDdGdMDHz0kVYIu
+	 2yBO3qaPIcD4Q6ickH33eyTrkTbP2j4Uxql5J2WOXN6V9tLryUqYswljZJ9tShvhe4w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794758567;
+	c=relaxed/relaxed; t=1794758568;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=O4XkGcf9gEV3KOt6f31Ayo+1HYjdH+fiEox0RhkyO60=;
-	b=ZkgyxhVfAWGaK8AnK+Q+aidy+SHRzZ8req4JTiTkVGPDKFz/uy4i8xl+tbtH3OUYHUSK
-	 Z+zFNfg4gURW4oj7s+HcB5aHbTtfPNcru4bIyOtvn5o+US46hF/c6bCUQ/X/H2SA9O0A2
-	 kwElscfbvHabBKm6EKQ5VLM7nRjtYL5bQBmA87QwNS5rVVWEzKJ6hVFk569/R3Ksr6Ic3
-	 5ksPwGrlnWZqFP4lnE+Fa1iLrzVKMGY7RaTuF3DKYIR2JBAyvpI/D51nnkmuAk9/PQDSG
-	 rlSLAKPFMKYWrP4e3Dj7uoY/b0jeYJ8ngtBvesDVBmL7pXWjOGj/sdYabHA1hnyT77w==
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=9YAflZdv2sN+MsnodwPi+rOemCv8xpLsSu1bVrTIofA=;
+	b=An19oOzWOZ4TsHiQ9GzA22j7iQxVgpmv3CCHxBYSIM8nea8KPP7E57bC5Sl3BIxQv6Ot
+	 AGvvCLuM7e4jimx5XGo+chMthBnUIjhwuNeu8VfcSwacrx1pk6DCxr8tnUik3Xd2lb56T
+	 aCgzea7M2kJxN2mMCgkdECMMUej6S/H7yfWGunmG/M5TL1goZyRzID6X7PogspsBejB1S
+	 /FcYE86MpakumageSsyn/WeKLA9wPyblWLWCKjdERh885+oHiU/T2EdDGPO2YjbQv/aov
+	 5/rlPi8FrpceQqd1lo+Z0byVZHq+89npLs5zmF6AonkImOjIQYXS04PcKYMy1TxMt3Q==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794758567;
-	bh=O4XkGcf9gEV3KOt6f31Ayo+1HYjdH+fiEox0RhkyO60=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=J2mXZsvqjBzj9ag8UF6mFXklCAU9bMUzwmOR78zjHhX1vKw3Sbsnqt/CjUtlyR4rP
-	 rMSdUShQHAH0IyFXdN6qQa3Xg8sGw2zJ/D/FXqYYNP7rt/hrng+f2/KURF5RdT5N5a
-	 gRrza5XKEkHkES557eif8Iy4hB9L0MaUL5ubheXKrGsTmx+842OgfMvOuVy3Oh5wI/
-	 Jzr1V+QzOi7ZTdZ66wfQoS2GHVb64Fvf/29LjEuCFX8EPvCKIt/Ioca1Jn77dKTW3i
-	 2HFiE49F3Kt6eiXri3oVu6iaTZ4tFbYrZ2SkE74sRgFi8mRsLdyow+fuJQonpNnKpK
-	 6M2p1Rea2qpOQ==
+	d=lists.u-boot-project.org; s=default; t=1794758568;
+	bh=9YAflZdv2sN+MsnodwPi+rOemCv8xpLsSu1bVrTIofA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=pQ3F/qG74bzOhoks7cWH+4PTN3uRvR0Rl2LvcGjJOLoLbTdYaXxlCnsm/IcnmZx2J
+	 tFwuV2QW046gsvoxuDIHJ3OF0585aTTDRSsJfVxrkvZPsu7QF9mZB0VsWr7ViQpEQ6
+	 TF+gXgYzdEl6fb71n7P1JHjAgByX203D3pUZqfmg1EY5LtvS2KezozQecwi8FyPTXR
+	 poTDEJ2UTThZHimDEgYJIaaJLG82stZNRETxzidznksM5i1uoYb3GqE3UX3y7Onj8l
+	 EEXCkwcO/XaadAwgadYcMiNt5B3PXnC9iRagA0t7QS/WOMAVK591Of86X2jA7ayWgZ
+	 ok/8PXbxRWRBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F183A606C6;
-	Sun, 15 Nov 2026 16:02:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 96A86109
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:31:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 87A9360748;
+	Sun, 15 Nov 2026 16:02:48 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3A5B31E7
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:32:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 74B9A40061
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:31:59 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2094C40061
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:32:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yPD7pqzw5wNZ for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 14:31:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B293340050
+ id z7hD3EfgwnCA for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 14:32:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E318F40050
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.122
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=taEFpJad
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B293340050
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:31:56 +0000 (UTC)
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
- [209.85.215.199])
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=KWNaCZxE
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E318F40050
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:31:59 +0000 (UTC)
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 096E63F185
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:31:54 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 844203F846
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:31:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1794753114;
- bh=O4XkGcf9gEV3KOt6f31Ayo+1HYjdH+fiEox0RhkyO60=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=taEFpJadaHkMw04MVTZdi//9R7ZKVNSO9Fn3gZrlmucPNsWaerb+seR93PJTsrrTT
- cPXBOsWDtWRGzZZgS8G5V1oq63Q7iWt9xsuNjrq/FdI+eTME5cpsDnQTLy23xl3YVR
- Vc1khoSEdGTc+QGAWk+JxI+9J4nJM1HZwjNVe4hJLnoaLaUXlzNexjvYHzVyCFMxrn
- EioxE+0LyLQaAqJQFzPuvTp1H1tjr82btA0IQb7/U8BUjo3MxwbgJ7lEowfAAfWjCl
- J96bhSNwk9c2NF3Xu+nHVzzZhKu66/Vuz2tVqhJMdU7fSkxuyya/Mz4FSmDOX1Opel
- ZcMdzaVP9519xkOyl0GkV63dJl2uyBkxLTnfG7M3uKait+dG51+bXlFoN7p+Xor1ur
- JGpyoNhGlMXItt1B9t/dtfBisJ/q/tCEdOrNVZqFgZOmeTrEE3rIV86iji7SZO3V6B
- BSlFlsclrSuYSDVG8LoNLdh2cxyCXnHClK6W0+963G2IGJXGXpgCoP7uWruCnTVhJ0
- 9p4SadSjRh1+Nz7/6AFqNWwCGjjIKKfq7HFQT2gSzRnt3gdyEfLR7lffUUvDhP4QzH
- wbArS3wIKz116IbJWVWZoNOHKzt1m9me7ehLa4zUFJqN3UPNnHJO2sm+Q2JU7BnJIq
- 73JAOTK3HsTvOIRT4gyvZyMc=
-Received: by mail-pg1-f199.google.com with SMTP id
- 41be03b00d2f7-cd66551e02cso2993288a12.2
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 06:31:53 -0800 (PST)
+ s=20251003; t=1794753117;
+ bh=9YAflZdv2sN+MsnodwPi+rOemCv8xpLsSu1bVrTIofA=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=KWNaCZxE331STDxa/DvtlbRmG3uN3Yp7JYmqfI8aXBMP32EInsxnybYCCfHGqFzJF
+ JHFVM9twd47ifQSo2qv5bFvFug/CbC6pfOKh20KywzrLNDeONUoDoMEruC2qvopAxY
+ rt39A6z/LX8UaJvl6WdVJRAdV+1SgLisqBw4rI6syNK/hOsGdxoyd6KIVA+vASWCHv
+ DCICofgKusLXeR5SE1qkqsDfMudab7BdVa0BKGsCsYID1BPZoRYmpQUzGLsMhPzI3s
+ pZTXtsQAqmbOy+21SvKR4WjjbWGYEGNqKBLyYm2rs/SDJfveaLSEkk58XTecayMNM1
+ b8aZ5NembECk1u9csHlfOfS3wVhYY0uoOv6ltS6750euhzZVZKzKIRzAiF1vnxdzbK
+ 2wKUg2zNBntx+bwiALYEKPs3KbAK0sPR0yY4GmUwehAy1qteLLxTXPOLdPG1Xx+J53
+ iisGo6kGi5W+ECiwIu9RHaMH6ANsEr7xh8nfuAxXYwwhbhGmtWOT6XglDIy+oImrM7
+ k+ftCgQsgs1n2q3OcVZuAAAz8E0BMgEku2VNs1abEp11GaRHObylD8d5LpNOIKrgb9
+ zYuUuhTcc3Hx7aaBakW1h+zu7ULsOYGfqXXVIhbw3EY59vYBz6Uy1SuPi0d3Wx5BOy
+ 4BjrYEcAeTgEta1UsO07flOw=
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-3ae6fda7a00so2370105a91.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 06:31:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794753112; x=1795357912;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=O4XkGcf9gEV3KOt6f31Ayo+1HYjdH+fiEox0RhkyO60=;
- b=sdhapRPG1ZShtfpU3qQorchJMO1vPfacOGg/8k3gsbjuxGKvQfk58fk/MLP0fEA2UB
- H2vGZYmXRSHGGdR9K4jUORMhYFjHhx3hoCM12bFNvECHeChCrLQFgVOFWXipLUt9W++t
- F9mTyN6lukTM7zK2SltUFfWdl30W1PEHclw/Oen21ROCeSfhAd+D1j1Nw4lENoE/w8G/
- qIWkUBqeGLCpW8nVqXO7/3v6luurCUAjZH2hTK/DI21mFgbqYQrDJWp176I6Xwi4aag4
- XFNdx0qtidWP1kmYoXTZItuenDJtY+2bmolJa744R5hzvsWzGEksHlQiBLXx9YdT8gZe
- h1EQ==
-X-Gm-Message-State: APuU4Z9AEa5/ASzWOjABeQ4RKcPXVn+XISQiJ8sVyeXoQ9oQQsKRzijc
- 9dWIx/FWAUnKzgbLpAKANpUuKVHsU04xQdTIjOJZ2k9AODNO8f5uFjwgk279bCN7bh51XaaVTdL
- yQJzxD3LYX4bjuE3BGyejPXsNb8/Lx8uVaZAnsUA9lmPJnso+ZtxsaJy/NomrenRazsL4jqtwhG
- OCYfj4XDMujz2dD2br5Q==
-X-Gm-Gg: AYBFou0oo9SRyIeN7hZazjWquVlGUWh2cgGI8eRV0ZCKXO3KoUmX2QjFbE7p3pk1x6n
- 6n197ED4STsA4XdzRNvaoHSM1V8WnBmq6LhmtYuDrc/EPlXsphsonjYOOx4fbQjelgfZ3ixsrDC
- ImICqYJaUocn0/05c8plxgYfK3nrbQWxlcivPvzTAMu5r9bhEZ6OTqlXKN8GsKHfSbUCUinXHRa
- IH1bDFVvmD56vY41UG+wAhX0LQtIa6lsPEnUjscPV8fZjQCWylA9kgYAizunlBVOETStsxlLLvN
- VbqeDrVJH+o5v2lEES+Lgwi6WcUDVThJayXKoQR0OJ3nehXMyKUSOPlQ7O368L4UP8A0gDImFk7
- wFvDBa1RH5USM3AO2BYua/0lby/Er58TID/2FoAuBqMgaS7gVAgCVRAHniQZecF/qes1ZY3CB2j
- L7R8aq0diPI9LQRthnjgv8ObnuMV50ejgvMKidhNc61/E=
-X-Received: by 2002:a17:90b:390f:b0:3ac:8446:c1b5 with SMTP id
- 98e67ed59e1d1-3b1b0a0fdaemr7824129a91.31.1794753111993; 
- Sun, 15 Nov 2026 06:31:51 -0800 (PST)
-X-Received: by 2002:a17:90b:390f:b0:3ac:8446:c1b5 with SMTP id
- 98e67ed59e1d1-3b1b0a0fdaemr7824104a91.31.1794753111446; 
- Sun, 15 Nov 2026 06:31:51 -0800 (PST)
+ d=1e100.net; s=20260707; t=1794753116; x=1795357916;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=9YAflZdv2sN+MsnodwPi+rOemCv8xpLsSu1bVrTIofA=;
+ b=1ECqL9EOz8nBFLXBgNsGfcKn0wJhTcWW6wGXNNamse3VoOeMiIpZtlo5TChSVZt3AB
+ qTFnPC5biKD5SBZBJ+dtrbYRlxgLcmtIWqdy421sFOxPxV3MFVHbg7wdqZZMFX76Djue
+ YJZTMQ3ULKhDX9weDM0JWNhTCfXBnNJyqPR1wNF0fJLroC04EnLF7NRyFTYJBX999eag
+ UD6UCTPnRdyHTzLj//yrgGi5cW2NRatNApfgT2kt244H97JGjICTpATVKI+nZFSiQ/OL
+ +xJ2BxRSKwRCwR0BvCVu/snT/0jT1VTTwQ5AhdSIs6h3XfJRjh03udbDlI1eMQoIIFsl
+ uBLw==
+X-Gm-Message-State: APuU4Z9aREZuqHEIn/UrVqDo9ccGORa3AaVHy/vj6I4ZjZJrki9DKC6A
+ 4QjCIuWwvnbYXt5TQYa79LglSU1dfTp8DGtO+KOkTU1wAJ3YrD/D+Pl+T5/FeC6OthnrEN/UYvg
+ zgAYoBaS8emLVEhpqQIm4Lmm1nfn53iaA6Y/GGO03QbOsTbtehLHdIjzdZSTBEt9UPW1RCEVgN7
+ ysS25lwKFNPklBHPkW+Q==
+X-Gm-Gg: AYBFou1/O61RzrjWlcA2ew9SSFD3/LJiKz+/v66oOBqVm/nv3Y+C68HuK6FDin+zILZ
+ e//fCY8Z6yhy9r/hC41s+Wc9gZQmEBMAP2+K2P3VJCTnV5In9LAPOp/d0keRMCDs4j3LYJH2b6i
+ htDrOky7Kk8tb1KK1wDhuBGyvey2085hysVQCaHcWsCiej9s1qHvLshbwDhVoBbmOU9RsJgdr/9
+ sog2MhgvRws2yKskOfbUUIq5RrHmR1LsIFy53Y/lFZrNWvqfHEjQXCzYyqWXRR7Q3/GqGpCdbUK
+ 2OnJhaMZRb9dF1q2EhCuZnSNzoK1a5RvaFoKjQ/p/W9rc7cdcUQaIEY/pp0oCu5+f/uRpI18N9h
+ yVWt+WhRdFT5Tt68vuZtRQx/GKQ+/35CBp4NIRUQyLUZSp06SKBUj0ry4d5E/dJRm5w+dRXwCeb
+ lvCSwxLa/7uS7XxcbYmePesso0wfaj007IZLk0fGcgXhY=
+X-Received: by 2002:a17:90b:2712:b0:3ab:b39f:41da with SMTP id
+ 98e67ed59e1d1-3b1b09f9c3dmr7188410a91.11.1794753115801; 
+ Sun, 15 Nov 2026 06:31:55 -0800 (PST)
+X-Received: by 2002:a17:90b:2712:b0:3ab:b39f:41da with SMTP id
+ 98e67ed59e1d1-3b1b09f9c3dmr7188390a91.11.1794753115365; 
+ Sun, 15 Nov 2026 06:31:55 -0800 (PST)
 Received: from noble-uboot.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b1bfb607e7sm4297670a91.3.2026.11.15.06.31.48
+ 98e67ed59e1d1-3b1bfb607e7sm4297670a91.3.2026.11.15.06.31.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Nov 2026 06:31:50 -0800 (PST)
+ Sun, 15 Nov 2026 06:31:53 -0800 (PST)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Daniel Golle <daniel@makrotopia.org>,
- Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 0/2] boot: fit: bound the external data size on the
+ Aristo Chen <aristo.chen@canonical.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Alexey Charkov <alchark@flipper.net>, Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v1 1/2] boot: fit: bound the external data size on the
  imagemap storage path
-Date: Sun, 15 Nov 2026 14:31:12 +0000
-Message-ID: <20261115143134.25791-1-aristo.chen@canonical.com>
+Date: Sun, 15 Nov 2026 14:31:13 +0000
+Message-ID: <20261115143134.25791-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261115143134.25791-1-aristo.chen@canonical.com>
+References: <20261115143134.25791-1-aristo.chen@canonical.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -165,96 +171,113 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series bounds a read that the FIT loader sizes from unsigned
-metadata on the imagemap storage path. It addresses Coverity CID 661899
-from the scan report in [1]. It is partial hardening rather than a
-complete fix; what it leaves open is described under patch 1.
+fit_image_load_storage() loads an external-data sub-image by reading it
+from the storage device with a transfer sized from the FIT data-size
+property. That property is listed in exc_prop[] in boot/image-fit-sig.c,
+so it is excluded from the configuration signature and stays under the
+control of anyone able to modify the boot medium even when FIT_SIGNATURE
+is enabled. The read happens before fit_image_select() checks the image
+hash, and for an uncompressed image it goes straight to the load address,
+so an inflated data-size overruns the destination before the corruption
+can be detected.
 
-fit_image_load_storage() in boot/image-fit.c reads an external-data
-sub-image from the storage device with a transfer sized from the FIT
-data-size property, and fit_image_load() only checks the image hash
-after that, in fit_image_select(). data-size is in the exc_prop[]
-exclusion list in boot/image-fit-sig.c, so it is not covered by the
-configuration signature and stays under the control of anyone able to
-modify the boot medium even when FIT_SIGNATURE is enabled. For an
-uncompressed image with a load address that the caller asks to have
-loaded (a ramdisk or a loadable, for example, but not the kernel, which
-bootm moves later) the read goes straight to that address, so an
-inflated value writes past the end of the image before the hash can
-reject it. This is the same problem that
-commit 8f71d7170f5c ("spl: fit: bound the external data size before
-reading it") dealt with in load_simple_fit() for SPL.
+Reject an image whose data-size exceeds CONFIG_SYS_BOOTM_LEN before the
+read is issued, the same bound load_simple_fit() applies on the SPL path
+in commit 8f71d7170f5c ("spl: fit: bound the external data size before
+reading it"), and print a message that names the option so that a real
+image which trips the limit can be diagnosed.
 
-Patch 1 rejects a data-size larger than CONFIG_SYS_BOOTM_LEN with
--EFBIG before the read is issued, the ceiling the SPL commit uses for
-loads to a memory region, and prints a message that names the option.
-Two consequences of that choice are spelled out in the commit message.
+This is partial hardening, not a complete fix. CONFIG_SYS_BOOTM_LEN is a
+conservative ceiling rather than a tight bound on the destination: an
+inflated size at or below it is still written to the load address, and
+the image hash only rejects the image after that. What the ceiling
+removes is the much larger overrun that was possible until now, when the
+only limits were the 32-bit data-size itself and the end of the
+partition.
 
-The ceiling is not a tight bound on the destination. On such a direct
-read, a size inflated to anything at or below it is still written to
-the load address, and the hash only rejects the image after that. What
-goes away is the much larger overrun, limited until now only by the
-32-bit data-size and the end of the partition. Removing the write
-before verification altogether would mean not reading to the load
-address at all (read to scratch memory, verify, then copy); this series
-keeps the direct read and matches the SPL path instead.
+The ceiling is also a new limit. In full U-Boot CONFIG_SYS_BOOTM_LEN has
+so far only been the default limit bootm applies when it decompresses or
+moves the OS image. On the imagemap storage path it now applies to every
+external-data sub-image that is read into RAM, ramdisks and loadables
+included, so one larger than that can no longer be loaded this way. A
+filesystem image that is left on storage for dm-verity is not read and
+is not affected. Mention the new use in the help text of the option.
 
-The ceiling is also a new limit. On this path CONFIG_SYS_BOOTM_LEN now
-applies to every external-data sub-image that is read into RAM, ramdisks
-and loadables included, where so far it has only been the default limit
-bootm applies when it decompresses or moves the OS image. A filesystem
-image that is left on storage for dm-verity is not read and is not
-affected.
+CONFIG_SYS_BOOTM_LEN is only offered when a boot command or a legacy
+image format is enabled, none of which IMAGEMAP selects, so make it
+depend on IMAGEMAP as well. Without that an IMAGEMAP build that enables
+none of them would reference an undefined macro here.
 
-Patch 1 also makes CONFIG_SYS_BOOTM_LEN available when IMAGEMAP is
-enabled, since an IMAGEMAP build with no boot command and no legacy
-image format enabled would otherwise not define it, and mentions the
-new use in the help text of the option.
+Fixes: 46d32e38ee4e ("boot: fit: support on-demand loading in fit_image_load()")
+Addresses-Coverity-ID: CID 661899: Insecure data handling (TAINTED_SCALAR)
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ boot/Kconfig     |  5 ++++-
+ boot/image-fit.c | 20 ++++++++++++++++++++
+ 2 files changed, 24 insertions(+), 1 deletion(-)
 
-Patch 2 adds a sandbox unit test to test/boot/imagemap.c. It builds a
-FIT with one external-data ramdisk whose data-size is far beyond the
-ceiling, loads it through a mock imagemap device with verification on,
-and checks that fit_image_load() returns -EFBIG and that the mock
-reader was never entered. Without patch 1 the read is attempted and the
-test fails with -EIO. The test is skipped when FIT is disabled, since
-IMAGEMAP does not depend on it.
-
-No in-tree boot flow hands an imagemap device to bootm yet:
-imagemap_create() is only called from the unit tests and
-bootm_info_set_imagemap() has no caller, so the new limit does not
-change any in-tree boot flow.
-
-Verified on sandbox: each commit builds, and the imagemap and bootm unit
-test suites pass with the series applied (15 and 7 tests). The series
-also builds with FIT disabled, where the new test is reported as
-skipped. With the boot commands and the legacy image formats disabled,
-boot/image-fit.c compiles with the Kconfig change of patch 1 and fails
-on the undefined CONFIG_SYS_BOOTM_LEN without it.
-
-The series is based on current main and does not conflict with the
-imagemap series in [2]; that series applies on top of this one, and the
-two test suites pass with both applied.
-
-Link: https://lore.kernel.org/u-boot/20261109221650.GA3741582@bill-the-cat/ [1]
-Link: https://lore.kernel.org/u-boot/cover.1794614777.git.daniel@makrotopia.org/ [2]
-
-Aristo Chen (2):
-  boot: fit: bound the external data size on the imagemap storage path
-  test: boot: imagemap: reject an oversized data-size
-
- boot/Kconfig         |   5 +-
- boot/image-fit.c     |  20 +++++++
- test/boot/imagemap.c | 133 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 157 insertions(+), 1 deletion(-)
-
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 8c9ddc2ef1d..e2fe399a51b 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1178,7 +1178,7 @@ endif # MEASURED_BOOT
+ config SYS_BOOTM_LEN
+ 	hex "Maximum size of a decompressed OS image"
+ 	depends on CMD_BOOTM || CMD_BOOTI || CMD_BOOTZ || \
+-		LEGACY_IMAGE_FORMAT || SPL_LEGACY_IMAGE_FORMAT
++		LEGACY_IMAGE_FORMAT || SPL_LEGACY_IMAGE_FORMAT || IMAGEMAP
+ 	default 0x8000000 if PPC || ARM64 || RISCV
+ 	default 0x1000000 if X86 || ARCH_MX6 || ARCH_MX7
+ 	default 0x800000
+@@ -1186,6 +1186,9 @@ config SYS_BOOTM_LEN
+ 	  This is the maximum size of the buffer that is used to decompress the OS
+ 	  image in to if attempting to boot a compressed image.
+ 
++	  With IMAGEMAP it is also the maximum size of an external-data FIT
++	  sub-image that can be read from storage.
++
+ config SUPPORT_RAW_INITRD
+ 	bool "Enable raw initrd images"
+ 	help
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 75d0f3f72d8..228d5be49c2 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2305,6 +2305,26 @@ static int fit_image_load_storage(struct bootm_headers *images, const void *fit,
+ 	if (fit_image_get_data_size(fit, noffset, &data_sz))
+ 		return 0;
+ 
++	/*
++	 * data-size is excluded from the configuration signature (it is in
++	 * exc_prop[] in boot/image-fit-sig.c), so it stays attacker controlled
++	 * even after fit_config_verify() succeeds.  The payload is read below,
++	 * for an uncompressed image straight to its load address, before
++	 * fit_image_select() checks the hash, so an inflated data-size overruns
++	 * the destination before the corruption can be detected.  Reject an
++	 * implausibly large size here, as load_simple_fit() does on the SPL
++	 * path.
++	 *
++	 * CONFIG_SYS_BOOTM_LEN is a conservative ceiling, not a tight bound on
++	 * the destination: an inflated size at or below it is still written
++	 * before the hash check rejects the image.
++	 */
++	if (data_sz > CONFIG_SYS_BOOTM_LEN) {
++		printf("FIT external data too large (%u bytes): increase CONFIG_SYS_BOOTM_LEN\n",
++		       data_sz);
++		return -EFBIG;
++	}
++
+ 	fit_image_get_comp(fit, noffset, &img_comp);
+ 
+ 	if (img_comp == IH_COMP_NONE && load_op != FIT_LOAD_IGNORED &&
 -- 
 2.43.0
 
