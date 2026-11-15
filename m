@@ -1,217 +1,231 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EC2E606A323
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 10:49:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED841606A31D
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 11:05:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WFG9wa0n;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E509SZ50;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kkBymrGm
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AjzCdJqj;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=R/yFQ6Ai;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xdfw10Vs
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 42A87405AA;
-	Sun, 15 Nov 2026 10:49:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B721260650;
+	Sun, 15 Nov 2026 11:05:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qIDAtN-wAfrQ; Sun, 15 Nov 2026 10:49:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 95DB74062C
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794739787;
-	b=kIYlTKgrpVkLJmLBwybe18q1VNAAe4HHyIe/lA/eDMx+sRwDhVWfvPREPUhbx1it0WxT
-	 Lq9/t6Z83/DqItGa5Cug99xr6B5rk0a4aN90PwHBl3GAdyRWdZqwwr/X0RCyI+V8D39yE
-	 BmW90Ny5Q7L4X2UtMy4WgfqL4+Lpr6XGZwQT/njpOH0vlYu95Ras//0m4mDY5KGgIY4bp
-	 uJ75fhv9Vpopm7EDf9APb/LKlQVtC38LDnCF6SCRUeyJ0gvhyg5UIJDS94J7PthS8qAdr
-	 B/pRHCSCieGjoIznu2thqia6quqcAFDQpDefSks1lHytm6uF4ohwfWgrCr/oFysClcA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5KqF5NgXeBQL; Sun, 15 Nov 2026 11:05:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C838A60634
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794740722;
+	b=gyaVxFUcg7s1a96oc+7xcyMhXHiC5cR7Qz0M2dL0rxz1le4zo3M1xBamvRTobNkpiinV
+	 xfLsR6GqEeX35Sy9GEVaxooUXXI7eEm0X9IYGdohwbZJG7yXuTe1aPvyKKM7+5BpP9Vak
+	 YqFMmKfGLDqYWPpNPKisu2V9BFWkrw4jjKSL/A+k0lAsOE+9Fewf1FPwJjvo1WoW3DBsy
+	 w9T934cVzBlHnEP4sTWOcSBFW24qjVUVAja4tcj8svPKR9oxemZvv3MDYY384qDBzkiZH
+	 R324MrK5515COLTLSw8GUcWSHq9tGMnvAHM+GR9dF+JevuhR+7L+hhH907qjXX4N0bw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794739787;
+	c=relaxed/relaxed; t=1794740722;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:Received:DKIM-Signature:
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
-	b=FXKAHLkBypbjKtE3ebfcrBOJxM34fzTzKiDd+oRnQWPOQLbwE5pfNkeAQi2M4CET5ASQ
-	 GYvA1JM4ej1gHgRaK2Z/SPa9mc42DnGyiHNEY1unGPp4j01cGzBYU+VLpR/kqGAiOT1+O
-	 ks/iL31D089bAgvgpwbIFcaZloELZecxbrG/6TvYxzv9yCvQldhen65PUcgkhToOuqmw1
-	 pwE1sts6aeGwj7Hhp614QT4AUfN5DJIL711444pt+Lx6aEZFgppmBufBnAu409lMjtsVw
-	 ozwL+1vyMu4uJcUZjWgtpha8iX2n/60R9yXmby3LqLGyjq5avrbJ41efaF1sWwdP3SA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 X-Gm-Gg:X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=Gm6SDgcYkuIp75mpyjCllZ20+/nkKwLJLO4SsDMhWHc=;
+	b=V6L6nm5/9DFE4Czyi6LYlcIOmZcqoXXxQi6s9E3ZgpivGSzeWKWd3O8dHWtHTnjnHPNV
+	 /zwPbAx86WIctkViogWK98DCes6Re9ghiTPByUfXjWwIr2lOYe0J+3I456Q0ktKhcEd5Q
+	 ZqjpBxcuwPTQXi071Gji2SyvUWL8g60vz+S5NUmMN/yksWPSeH2a5puq+BvaSbKETLKsd
+	 M7MoNfLR94ldct4scdDOQ/ZK3Shfx29Q9hQHsCCD4VGaZNTZbr+1siJMTBoDgf3+/ZGg1
+	 6oTSLNHoPMtZx9EzcS1Xaqx5PdjxwohhJfX9d/H2X5SmYdaSCxdEegvntWwPcWv8miA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E509SZ50;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kkBymrGm;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="R/yFQ6Ai";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xdfw10Vs;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794739787;
-	bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WFG9wa0nkPp+T9rgrXQJUErscCTCsBLEuKGT3Z4sjr4IMDatisRd5jaMzxjzXJ7BU
-	 6TLFxKi5wJeCdiPZ8L04/SqC568bbA+DdAf30hD+CVxR7oo2tKVTHL8gj3SM+E3N1G
-	 hMjYYJ7//v4xLTfZUxo4z9bpl5eyQtItyedM5MInnNC6XiOFTqCNDpJTMbujHt42aI
-	 edJ3KVqlTC8m6YT5smcdOYOxoqXVq2RmftRCWFK9J+Ba9ROoRlVUyLBMVBs16whupd
-	 gTT1PbbW+p/v3iLTh5SW1zanUfomsiHwaApynaxhYCOqSPArzeGkLV7A9v28ywAzsP
-	 Y1CyaU+QdzvTA==
+	d=lists.u-boot-project.org; s=default; t=1794740721;
+	bh=Gm6SDgcYkuIp75mpyjCllZ20+/nkKwLJLO4SsDMhWHc=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=AjzCdJqj5nkUs9Oou9+xDggAdVE76CNyppFbApQUzVvxyf2DcGIcPsPez2B6nVNqu
+	 /tF5PxibwP/6mKnTYgte5ry48SIcDpj8gC1IP8f0FfaVq35RREM+ZhHgXizrnI7s0g
+	 /G21+W9uvqzSnSFFIl8TAZiUP1q+wlaqM7tPO08fqQhcsBfuirK7DuzUQuqH+Yfxxv
+	 jLry6Gk2aHH9x9i+Ph69Ct5RfPDLJPonK7PO1Bl6+/83P5xoabK7+5ckoXrz3JwWaY
+	 mnLVfmET6nNQKbJdfHMu4JrVY09df4Kzbejg+FKxoI1hZxCzIvlQpq6HeViZl8u8bM
+	 y7+szcDsQR+zQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 95DB74062C;
-	Sun, 15 Nov 2026 10:49:47 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B60312E5
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C838A60634;
+	Sun, 15 Nov 2026 11:05:21 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id BB0A370B
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:05:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A7B90405AA
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:44 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A0CAF60634
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:05:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XT41K7GOja-k for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 10:49:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A903D4062C
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6i8n80klS0fF for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 11:05:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8FAF960628
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+ helo=mx0a-0031df01.pphosted.com;
+ envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=E509SZ50; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=kkBymrGm
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=R/yFQ6Ai; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=Xdfw10Vs
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A903D4062C
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:43 +0000 (UTC)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8FAF960628
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:05:18 +0000 (UTC)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AF7whp41196882
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:42 GMT
+ 6AF7xFpe2338478
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:05:17 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=; b=E509SZ50/RHkFSYX
- sTbItdmbkQCwyLlC/JnsTRpw6M3VOV99jS64d7V46tsW6snyj8sS3LMUNf0SXz0M
- 9uNXAfzBU6eEjz/3cZ3e+woHPfgb/MJUkGQ6fp3TBVQZdHk8oDKeT/YZFu83qxUC
- n2bevdasnjosWkAurGYSMq0jJqVbE2AZ18ZsblEvBH8xT8UcFlxqdyOjp4Bv+7kz
- IPuyFbKvTf57OMbZULc6tFUuaBohxsj7sLhUddA4MCIbdbRpxQZNdXmNLfroXD4e
- SrtiU+ZOEp6uVuJuoSt3rLu/DdDzyiRdWr1N//tcHl9fIftoEjBxFGt5fRigzqms
- 9GgWlg==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhmhjscs-1
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=Gm6SDgcYkuIp75mpyjCllZ
+ 20+/nkKwLJLO4SsDMhWHc=; b=R/yFQ6AicyYJNVdkwfMKL2ImSFo9iYn56ldR21
+ +9OBZ4hOtK+emvqvxMLx9Bld60/G7LV+yKT2sd5e9s69HKOtlkXNXmrtmkJMU6Hz
+ Vted4kRZ4fYp6dei6I8ihzGHwV4a1uEfB2WuRaVwLKRFnIKY+yG4S+ZnGEC7P233
+ UQ9yNyHccncDbEpRRibOr1AJX/4HcNcVojy9X6kz8Ca4W0o4i2Dl4nYRZ2/+DxAx
+ hBCjRWN4K1nQM38zfgr950Nf6J3OtzIOQusme/9f7G7xMPgDkF8k8NWA54qjDVkY
+ iH4pynxieYk/r78Tz+cf+KQ9qR64kGnoiSxM0RXUVqVjmTDA==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhjqjutm-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:42 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-93f20addba1so495278085a.1
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:49:42 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:05:17 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-375f0fd31f4so802390eec.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:05:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794739782; x=1795344582;
+ d=oss.qualcomm.com; s=google; t=1794740717; x=1795345517;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
- b=kkBymrGmfjWVZatKZmOwZEMj0CSX3imhwmABZ8cIS1SJQex24B/RiqVD7iK+2/ILMS
- Y3DTWGIpvPLW+IYXdAOn0v8Nsih6nftEWu5NrXzDZ2hqG3h60UrEe2qDfJiGjdeRtlNG
- BpQ4TY6WubR2/oRR/uHAR/+sBXWSMaXFkXEPKt4LedYUtwIVRJB2YXwQX8sauzChZeqJ
- 6aLXtTiImK/FsySj9aai32R80dtRMZ+xvH+dxgQnkmbvYsjKfHNprrAGZGaHKvZ0Yy/T
- iac8EfNlrohNt7PkykaykAZrZnDnFRs2xsy/BimwUM7Zj1jANX5M05PvObTEboU5t2rV
- BDvw==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=Gm6SDgcYkuIp75mpyjCllZ20+/nkKwLJLO4SsDMhWHc=;
+ b=Xdfw10Vs+tDHjM4wnyBYHv/EZ/T3UTdEr4CtSPWonoI1kg6uNjDss/BVTstFYI9IvL
+ 7xWlbs3aXA2tPLC2KFtNGI38RYoM/HyObT0GPzMbHFeA2izb5zrWttcaE5iJFRyiAC4B
+ fXuVacywbiJUfPw1sSooCQCphSryfGFe9Wps5UuzE1x5KrNBAjVwxJoiApYyIFfyDmBm
+ Pj97JuKBtKzEnc6jeZy0vxY4lcEEgMXzw47WRLdedzXYbyLuucA/lh+MyjVwqrtyXjnX
+ h29kyslkVtN7H+YSX1jgGgcX0hK7TzoMRGk2u9aPBWTuDYtsrc16FxVvTAxBGpphzuRA
+ 5mvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794739782; x=1795344582;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
- b=fatcSYQ+sNKdw0iEg6rV/nZuEq4V9in4UUDr189Hij37oxZNiR6/xeHplNM+K3Ai+m
- n5ajJemqO2dFh/nA88RXTnfO6a+ALBstK5EewzDWW1hwD8KuYt1b8nk0eHTvmaHkK4kA
- pffAMIDbPH1acA+cf6AIGEvrIa1G5ks/SVD8qqNd2I1t2FdEfftPqY8OC2ThPnGIy6E5
- EgsNgVKzWe3Ii7KQ4KTwLc20v8d+6D/fLDf81DsDH4k8MMlxJBhK9YXr+jp8PZ1OLUUS
- dsnxbo5pN2sOFIKMzx+TkXgn/1IGTZ+6dygfmM0foMkQjyBY9QFi2xDTIFjOmZjU4RFI
- lbGg==
+ d=1e100.net; s=20260707; t=1794740717; x=1795345517;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Gm6SDgcYkuIp75mpyjCllZ20+/nkKwLJLO4SsDMhWHc=;
+ b=kwVzBOeHyWqFjXwtmvQOWuHhnSTkdFAlYoIePMZDM8Q1xGhGrZiNuWWr5vWm6Rn3m/
+ r6Cl5DSAxl+v28qElEStsT5v0ZYpTDFchKf8nJaEYiPoER1dgHzoYu7HkbxI47NJwoe5
+ Kyn6q6+Ce+ClJuSV0g45uAu4z6SkI84SJchdTyw6uBlHEvdwtozNzCi6RzxY+NdF88sA
+ 10xGV2/qx8DWNohHhptsmfN/8mhW/jILsv1DIHZSl4q3zSdJqmEkuwIkjrw9tZ3sIuNa
+ 7eZmFLRI0hnHzcIgppybUK//zX6Z9iWmEC/xo7CUjmI8GtGyTCm3RNAmpK+wm19ynnce
+ JseQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErGzEO1/bz44Mu3RoBG9ajHKt4EnF5O3PaYZN7Rc+Z62wENs9TvwPjbII4TlFtbkdAb3MemKu9Y=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9TaIQBv6rXhV6bqbKQ3DXTue3RYfqculpZXTds58g1AAAge3Ae
- dUGuI472LutFElQKy8hT28bTrdCew4zc4iOhfcH3Ewg2YYfPTWqJqbhc2Vq5fZYcjPgFu1HjHAd
- Mwzng5yUK8LiExjFUQ4PWpztKmlYoVJWC4vuaJ3P7T9kO2Y7V21tLBWZke2dmy+kuaWbbD0w=
-X-Gm-Gg: AYBFou2XYtgvGw7CC8q7eyq6l86PyZ3XoXuh2nc1l82vn1dWhn0Z7x/XHZIexyQr2x6
- ktXUWhvKjB1utP3BFwce7CKitDK9J3SNmdpH8+Ae1H0lSCcbxSBEZUb6b5JI+uLVUkIf/fcX2+l
- yGz9N8oNa2uFSRrj+f2u9pceYI9U0XBi7YNqm+/XxuDcXUhKit9aJChReX+TJ7qq8A2tiPoApa1
- 1WjPQJP8EiSrSmGDCjvHG99XLJc52HmRHDocTh4Cvv70hA1lKuPhm0xDbeIlpdGLY4+mu478PXL
- JFHQKOtBTETwv6jetuaum3JCuMkobFxFT/hLKSYsoWv/wvD/f4jN8p7dsQkbtyhyDgWv1UPXmrV
- EQ7onGCG7FDGm8r0T3jcz8tikzxVC5ryky0+ls5yVfCthREK1EG+6jTiNubBDU1lUlCAcjtMQhR
- 7XsZQUQ9TQFiQV
-X-Received: by 2002:a05:620a:6e99:10b0:949:6d95:f62c with SMTP id
- af79cd13be357-9496d960033mr298290485a.72.1794739781658; 
- Sun, 15 Nov 2026 02:49:41 -0800 (PST)
-X-Received: by 2002:a05:620a:6e99:10b0:949:6d95:f62c with SMTP id
- af79cd13be357-9496d960033mr298289485a.72.1794739781245; 
- Sun, 15 Nov 2026 02:49:41 -0800 (PST)
-Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
+ AL+hErELtGnIuw3eW5vwooUSUhFfsP7WDoeAcKL9uqtq0PtmRU2rQs/G5psuR2P3zG2MpMR9WOudso8=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+hQfdREN7Xi3sgRPmVu4OuzfQK2off6EiHRKp4B+iZ/lvuzJFu
+ 3+9XqKKlFvxDaB6ZmFDvwsKgMKisaXAVPuCBu2znmmMgz6e1sWjjuGaxdf88Y73khEPpkNQsguv
+ s/8YRvql+R5XDCbKCJ13UQanQp5K6m6fyUAeDp+xESwhnQCHzrwrvVgNpG7zP7UwXKy46L1o=
+X-Gm-Gg: AYBFou1dlGAYKHFJEVEwfq/CJAzBaYLFpTRq45ol5ioV1gKN0U4Zn/1P8X2M4fjsTmm
+ jkzxo3j7+b/MbeUFxfacH8FMzJ4JX0PymEn1/VDIstyIvyiO4WUbH6rMEP6kwxVoJdmj3ecAU8w
+ 8t9YNyCs9GGDaNe14Mg6p4Jmbk/oNvk8fD54IpNPP1hV+Amo2vl1kr8ulWIwqaAmUakOa8b0cIN
+ aEtLjcY7JNaPHYfJ1xQKU/bTWhi8rhvNQceA5sjRKxHfGW1HC+CWseO1yVGqiVtq/kOu3SkBrib
+ 8FkmbGNmrMCGHjhYeKnX5A8oJDyMgERKkbsdvRmOozn117G71+ifexJvYEnRIL4uDLHgCW87NsD
+ vnpVGOv1T9hcFQBBlgHmDIC5jZKoeR7hjEyGCFfXEyWUkDY3S+6Rf+jWTrNdmKxVgdfqyTISK3V
+ +V4SR9bcyHHtT79HC8FxWx/PS44DiRXaWcfYjwMuXfHCHWVLTPRi6wcvZ4xaRUJ2hScWeguV4y8
+ NGD
+X-Received: by 2002:a05:7300:2a9a:b0:35b:cb8a:8d0e with SMTP id
+ 5a478bee46e88-37966e3b092mr7587384eec.16.1794740716659; 
+ Sun, 15 Nov 2026 03:05:16 -0800 (PST)
+X-Received: by 2002:a05:7300:2a9a:b0:35b:cb8a:8d0e with SMTP id
+ 5a478bee46e88-37966e3b092mr7587348eec.16.1794740716063; 
+ Sun, 15 Nov 2026 03:05:16 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b7c24e7714sm3099358a12.28.2026.11.15.02.49.38
+ 5a478bee46e88-379563e6b6dsm43456454eec.21.2026.11.15.03.05.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Nov 2026 02:49:39 -0800 (PST)
-From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Sun, 15 Nov 2026 11:49:26 +0100
-Subject: [PATCH 2/2] i2c: geni: do not report a missing clock disable operation
+ Sun, 15 Nov 2026 03:05:15 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH v3 0/6] fastboot: block: Add GPT/MBR and device selection
+Date: Sun, 15 Nov 2026 16:35:07 +0530
+Message-Id: <20261115-fb_gpt-v3-0-7ddd7ef832f6@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261115-qcom-geni-mixed-minicore-v1-2-bce20aa8f4cf@oss.qualcomm.com>
-References: <20261115-qcom-geni-mixed-minicore-v1-0-bce20aa8f4cf@oss.qualcomm.com>
-In-Reply-To: <20261115-qcom-geni-mixed-minicore-v1-0-bce20aa8f4cf@oss.qualcomm.com>
-To: Sumit Garg <sumit.garg@kernel.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+X-B4-Tracking: v=1; b=H4sIAOOR+WoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEyNz3bSk+PSCEl0LsxTzFDNTS9OUxBQloOKCotS0zAqwQdGxtbUAuoF
+ +a1gAAAA=
+X-Change-ID: 20260427-fb_gpt-86d7d6595dad
+To: Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ u-boot@lists.u-boot-project.org,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Cc: Tom Rini <trini@konsulko.com>, Carlo Caione <ccaione@baylibre.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+ Simon Glass <sjg@chromium.org>, Sam Day <me@samcday.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Francois Berder <fberder@outlook.fr>,
+ Vitor Sato Eschholz <vsatoes@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-GUID: i7nLtvuArkFeXOED2eZJmTn6zNZYgXOM
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA0MiBTYWx0ZWRfX5mty0evEVlbw
- 4dlhzDEyG6waVI49Sf+Y8wH61N38rD0RIyC0BLI5yAvRNIhS3Gi9JMEob42sAXZYRrh3UrujovQ
- GeWkQDY8BVpfLMz0RF5W95rIAvMVli0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA0MiBTYWx0ZWRfX4EStDimJP3bN
- wwWu6/9A/An/7rgWNjAF1u6KNvOWNdLnrysuAIXOM/sc1b0NShqoMEZDPOIPim26A4S8Els45Eq
- HJT5PFmpmzUVJSf8v307eE4NIfsFf9FYUhAzp8v8Ly+TmjcRX54kjWNOl481/aL6OpKi5CxXO3J
- MkNUfL597OhNt6HGMRKCcEsCYKoHIkVaHf8/rIz2oIVGFASru9g7fnM+70a1L/xRy87NErjHvdQ
- ozJFMxIbUX/VRGMMDz5i5x/p9ea1fLxc79T+gnq1A4gCIz1cTH7h4kYImrk7wmcbEYCkYH9mLho
- XIQeiaN5UEeK4o1/Thi7hVmlJ41eagvoFMuPTY5O83kTrvLXmwzC5DoYSNVZDuGsljjyF0+CMjz
- REzoD0QSiufMfv1bslBvtcWqy2nHjAFmfRQqE9Hz0zOWIDEPKpCbPugs+glThyxexI1KhDzWlFm
- W1V08+bRxC+6RgoNx3A==
-X-Authority-Analysis: v=2.4 cv=e/2T2qp/ c=1 sm=1 tr=0 ts=6af98e46 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794740710; l=3060;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=frWIcjqDnOezHxrm2ziTcX7CfDBV/2XRkca4Y+VJ5/A=;
+ b=PV3PmxBQjTOTrOWxgMG/uBQCMeQi2e31iEZVAjeXUcAsoZzZm/W92bjebHpGSaAlfeOH2sqPn
+ 5wpG1eJ5aftDjrvS9EfPA6mcMkIz/eUycdgrx1e8wgEOwrHJe81erq7
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-ORIG-GUID: U8ZRu8gsSkqPxImBFPMxah18U3i-YVxj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA0MyBTYWx0ZWRfX4KjfpPo/oaKT
+ yIj8YSYlUrakbaNMSfWqENlhfQGTVaMxSGFQe3y3Wo4SMghO6ge8qW5uEyCTrqcNP6UmTfHTBHP
+ lY79FdRv2HrL+a+zbb9QkZS89u8+Xo2iKbsdZMLuqUDVBrCFEee7Qt4BkhP6VvyXz1g78ntM2nv
+ yqPKt+7RnjC0Th2pbPPCQBjOaS5VFG+aQqRuNiNAuqSHJjv+BU/fev2tMpeYHkRT8ur2CuLowkA
+ l0zHttKTL8Tpps6IXkVdO0NsIhTUsys0ALWot8DpdXHBK9HU0SoHvhHQH8EvFzP7Im9FwbLMFws
+ N8ZHX3v9uV++XLFKAmum8iGSAPvfHrqK3Ub110qEMO9KlK0GrRKc5scya7BAATQVDxtwYz5AbDL
+ MTdmacxkHw0vB/Bqll+p2UaJPIY2LbKZJrcWiXf/vTfaswIF5zg6GUp5cLLA3UPxYHoyCK7uY0z
+ qE6N8LJlM1ymwrN0GjQ==
+X-Authority-Analysis: v=2.4 cv=TqJzFzXh c=1 sm=1 tr=0 ts=6af991ed cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=NXVH2vJESF5G1wsgjtQA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: i7nLtvuArkFeXOED2eZJmTn6zNZYgXOM
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=_aTGsJdUfmxtiA1JYQUA:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-GUID: U8ZRu8gsSkqPxImBFPMxah18U3i-YVxj
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA0MyBTYWx0ZWRfX/lE9TH1XtnvA
+ svmTAKg9YAuolPlkxknoLGBFuscqM4CnES493/Xik5T9po1q0/aWDtp6K/1ZSMGp31p+yixXM9i
+ YM23ZdR709vj6W505zMNOOZ9gJgSHUM=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-15_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 adultscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
- malwarescore=0 spamscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015
+ malwarescore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0 suspectscore=0
+ spamscore=0 priorityscore=1501 phishscore=0 impostorscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611150042
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611150043
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -228,42 +242,68 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-clk_disable() returns -ENOSYS when the clock driver has no disable
-operation, as with the Qualcomm clock drivers, so the probe error path
-prints "clk_disable se failed -38" although nothing failed. Ignore
--ENOSYS, as clk_disable_bulk() does.
+This series adds GPT and MBR partition table flashing to the fastboot
+block backend and lets the host select which device on the configured
+interface to use. For example, with FASTBOOT_FLASH_BLOCK:
 
-Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+  fastboot flash gpt gpt.img        # GPT on the default device
+  fastboot flash 1#gpt gpt.img      # GPT on device 1
+  fastboot flash 1#mbr mbr.img      # MBR on device 1
+  fastboot flash 1#boot boot.img    # partition "boot" on device 1
+  fastboot erase 1:3                # partition 3 on device 1
+
+A name without a device prefix, such as "fastboot flash boot boot.img",
+works as before with CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID.
+
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
 ---
- drivers/i2c/geni_i2c.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+Changes in v3:
+- Rebase on master, which now has SPL fastboot support
+- Split the blk_get_dev() NULL check fix into its own patch
+- Use '#' to select a partition by name, as the rest of the disk layer
+  does, and reuse part_get_info_by_dev_and_name_or_num() instead of a
+  local parser. This also fixes "foo:boot" being taken as device 0
+- Pass a block descriptor to the GPT/MBR helpers, so fb_mmc.c keeps
+  its DEV_TYPE_UNKNOWN check, and share the validate/write code between
+  them. Move them to fb_block.c
+- Check the interface name and the device prefix in the block caller,
+  and report an invalid prefix instead of ignoring it
+- Add a sandbox test for the partition table target lookup
+- Doc: use sentence case headings, cut the duplicated GPT/MBR text down
+  to one example and mention erase and partition-size
+- Link to v2: https://lore.kernel.org/u-boot/20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com/
 
-diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-index 7498cbcb41a..b4a351b124c 100644
---- a/drivers/i2c/geni_i2c.c
-+++ b/drivers/i2c/geni_i2c.c
-@@ -329,17 +329,16 @@ static int geni_i2c_disable_clocks(struct udevice *dev, struct geni_i2c_priv *ge
- {
- 	int ret;
- 
-+	/* -ENOSYS: the clock driver has no disable operation */
- 	if (geni->is_master_hub) {
- 		ret = clk_disable(&geni->core);
--		if (ret) {
-+		if (ret && ret != -ENOSYS)
- 			dev_err(dev, "clk_disable core failed %d\n", ret);
--		}
- 	}
- 
- 	ret = clk_disable(&geni->se);
--	if (ret) {
-+	if (ret && ret != -ENOSYS)
- 		dev_err(dev, "clk_disable se failed %d\n", ret);
--	}
- 
- 	return 0;
- }
+Changes in v2:
+- Separate adding device selection syntax and GPT/MBR flashing support
+  into separate patches.
+- Introduce common helper functions such as
+  fastboot_flash_gpt_partition_table and
+  fastboot_flash_mbr_partition_table functions that can be used both
+  in fb_mmc.c and fb_block.c for GPT and MBR flashing.
+- Link to v1: https://lore.kernel.org/u-boot/20260410-fb_block-v1-0-68f0c976fe0e@oss.qualcomm.com/
 
+---
+Balaji Selvanathan (6):
+      fastboot: block: Fix NULL check on blk_get_dev() result
+      fastboot: block: Add device selection syntax
+      fastboot: Add GPT/MBR partition table flashing helper functions
+      fastboot: block: Add GPT/MBR partition table flashing support
+      test: fastboot: Add test for block partition table targets
+      doc: fastboot: Document block device selection syntax
+
+ doc/android/fastboot.rst    |  32 +++++++++
+ drivers/fastboot/Kconfig    |   4 +-
+ drivers/fastboot/fb_block.c | 158 +++++++++++++++++++++++++++++++++++++++++---
+ drivers/fastboot/fb_mmc.c   |  45 ++-----------
+ include/fb_block.h          |  52 +++++++++++++++
+ test/dm/fastboot.c          |  61 +++++++++++++++++
+ 6 files changed, 301 insertions(+), 51 deletions(-)
+---
+base-commit: 6487c50b8a40f2668ab98a892b9300ad5c181f38
+change-id: 20260427-fb_gpt-86d7d6595dad
+
+Best regards,
 -- 
-2.53.0
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
