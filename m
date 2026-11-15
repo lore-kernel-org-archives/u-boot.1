@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24539606A31D
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 11:13:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C3A9606A31D
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 11:15:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Yu8Tnf6e;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KrVTlr5z;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UNY9uPkz
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=qNUbEKIC;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IY6Z8AF9;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DGoJC6Wi
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 71C57606F3;
-	Sun, 15 Nov 2026 11:13:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2E22B40674;
+	Sun, 15 Nov 2026 11:15:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gykIYT-K87xw; Sun, 15 Nov 2026 11:13:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2D3EB6063E
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794741229;
-	b=Ju9CMJVoGNerMxRBt7JF19lbhwJaXmCk6d9EV7oFuIsFfhcfEb9DtZTuKubr+OSFiKgO
-	 cLUnzkirwL1C/Fkk7p+pR12lITvsgFBmakZkVSWkFVgYnPH97qArsImHeXnsGg0wrtPHE
-	 xxNruyGiwouEEEr22RDni9/pkE+cDp8D+M/wm0Zv9vA9rY/1o5htKkSZxCKTyfAx9P62y
-	 OVbCeERA0eAKoL7Q075+WofqrXTZOqADRKKHH1/81jVPglcLVym0Th2VLy8dK3uASCOkr
-	 oQYLTxgEPziZE2YduAcdFopBrqPS6YMJpnbHP5MSJNR855luh0AhaBAxEPBVFT1oTKA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AsPgZnaDL-Vh; Sun, 15 Nov 2026 11:15:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B9BD840620
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794741304;
+	b=qAIvw7+B/K3rbeRXVdUyK4IQd3LglnRIdEg3Mw4cA9oJk+WmGBnSgbP+ObZi31r9XRCE
+	 T/dexQisuSTKvZEqUBSoSCryFxO56Ftkn0u7p32QXs+hXW/M6MxWs/N1uvatwgeXnZWJD
+	 20a4xak7dFdJ1MSmn9mPQN5WtU4JALT79PytgbGYAnXIUk/2izNPMGxDAQuj9LaFtPtqR
+	 PJi0nHJzkL68X8PVbAXaXJIcl/OK4eRvY7xDlKlks30HiL8wNyxvPtUdR+jTIDHdNali6
+	 833/GIRYv1Um+Nl0UhUtr9cb3exlsIC7a/qE6YtNaOCFA6CCDJ6dIbiYs7GriZSeeUQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794741229;
+	c=relaxed/relaxed; t=1794741304;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,178 +32,178 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
 	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=yJZzyxkNb4LcFIAVhsnfKm/aiO/PB8iis4hCRh1E4R0=;
-	b=GFjrbopPkb1bKzXO+f0em38aRuH/m4OcBQRUKEiiQI47xj2GtOT/6SJ9sPNV+OgUqGWo
-	 iSQk29KPCwKyu2QpFCoy7LWGPLshntqYZMeF7F/2iN8JpB6NMh13aJ/S6kWm8wsNw0T6B
-	 MAp73OUh4dsgG/VTSP9HMtr0QH9nPpvMA1UWNQU7rZ1z7swJa6hhrB+9UrHR4xkdKaGX5
-	 cuINGRP11VDmW3FwazZaUaj9CVM0dizJCo1QuH4MYbSY8rOfO4o8gT3g+kOwJlicol7pl
-	 aE2ttSnxj+w8NOVYrQq5Iiy31bAtaVUdBygK+JJtXwlFmgRbAXsHygcWqSrgc6h/eSg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=fn33tiLbRhRkWG1srQiA84F6KYYgUngMBxkukN7KDpg=;
+	b=UV4PMKXOmcXD3IvfXH8RHXpvgzxhpx5O9mfk8R4Ob08sAp44BMuJi2gofwfMkXJg9mej
+	 oAfw4pD9v9Tn+KFCHvaAWIg8b3eX7CF3+dLwHmu48315az2e8G8ykiaD3+xa8D//+4NEo
+	 jt6N65ZZaMgw+DapIB1Gz5lqmhL0tlYrUu6ZwtAIQ68DMHK0wRwkgbx9UgJCVPBhMq9Tv
+	 8LJXFaOfdVwZNfJMF3zUBoSrD7HTsmKM2eIQKyNd00RLePsFcWagD1Webkk9jIGTRB9Yf
+	 SMICU8U8Jwhiz6d/Kko1ZdgpvcE9DaUbvz8rqtC3rtPaSrH8GJTNTX6bgoTIQQ8vHrA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794741229;
-	bh=yJZzyxkNb4LcFIAVhsnfKm/aiO/PB8iis4hCRh1E4R0=;
+	d=lists.u-boot-project.org; s=default; t=1794741304;
+	bh=fn33tiLbRhRkWG1srQiA84F6KYYgUngMBxkukN7KDpg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Yu8Tnf6e5SpuVbvGLPn6X0nsfij15bO4LNp0T28IwSb/huaJvzuJuJsVNE74drSrG
-	 cjEYokXeIv8zrlS511AD3BleIGHdtk9QWW6mT8FeDfaoxj+fstsXyjNgSoJ3TuC2D2
-	 xU/8WNhXESJKQ0Crtd2LVApcQZ6vQEk9R9PK7zjOiAS3SgzEKQS7+4+ZBWDvfqZEwp
-	 5av0bqpYrR6FSiV/GkEC3JffVWkL7TsdU51Jg+jYc56sb0B4I2w97pzJpllT2mNrLC
-	 2nYVggxYq33YgPq9au93ilJwQNjX0rr5MvLJdUgylNubhE2cQ3TG8RGO7P0N+3Tb/g
-	 G5inrCl4l7qEA==
+	b=qNUbEKICfWQ2fMvqSZPkgT40Y0sXGyG5p7KICAUUwZnajanMEgMuA3h1G5W8Ez/XU
+	 T+dn/Tn6ltgm0y7YLKhyAKgzShNOX1alG+1wCP30WPjmzfzl2LnuUxkyn5gv0Kw8lT
+	 PfTPJg8m1EeZUvalcivWj7j36T0xxZNIXC+LvfhPlXju3GuqPzQMcY+Rq3DXod6341
+	 qPrB8G5cHzlKr1IJTo8F5bUBrU6h7bHJ821GHGU6AqfvtuhnCt88t/rAL5ekqy8NuM
+	 houdsx9aBTb7u2c7U4bcanMCYrED8QmwiE0w1FXDqlrgLS8tQTguWvwYkM1pPaGEC3
+	 szZf16CntxiLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2D3EB6063E;
-	Sun, 15 Nov 2026 11:13:49 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 424B470B
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:13:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B9BD840620;
+	Sun, 15 Nov 2026 11:15:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 17C6A2FB
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:15:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2BD3B4073B
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:13:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id F26BE40068
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:15:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pqNQ-c_CmvDV for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 11:13:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E95F8406D9
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gIeI20ST1z_g for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 11:15:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 98FC540061
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
  envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=KrVTlr5z; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=IY6Z8AF9; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=UNY9uPkz
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E95F8406D9
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:13:44 +0000 (UTC)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ header.a=rsa-sha256 header.s=google header.b=DGoJC6Wi
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 98FC540061
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:15:00 +0000 (UTC)
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AF7x2Hk1764892
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:13:43 GMT
+ 6AF7w3sh535855
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:15:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- yJZzyxkNb4LcFIAVhsnfKm/aiO/PB8iis4hCRh1E4R0=; b=KrVTlr5zvhk55ySr
- cyR941f0twk4z7d0gDOaHLrR4Ji7BOhNX+L47uk/6p0pVmfXsnRDMucri9F82BLP
- JpaLCe81SeBWdQanWR06oIdJSeVUYhD0YC6A36jAOikHzLwFSHAKwQR/t5G8UR/T
- 2EZ6F2/kQVtizZ2fae7lDHC7wFGbOTrWZTlpXIZOujuqWruGtx63bTvwszy2THVu
- vz3fk2jUNHTF/ghAoOg6wVslZYk5eWN3r3kXPIODXvjEwWgGzs6/8CHS+0CadTx4
- Oqvg1hPLWSh9HEimnD6PMN8qFaj4YX+qow0YA+vvCxJYxsRkl0cp6M6nK60VTbD1
- zI0WwA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
- [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhjqjx68-1
+ fn33tiLbRhRkWG1srQiA84F6KYYgUngMBxkukN7KDpg=; b=IY6Z8AF9dwTsrZRz
+ 9teXYXMOycWvcKofQ+Yuq6XDPIHUrSfX4bs4+EPUKxYyx6PDcipBIRQbta2vBCci
+ dc8R1rEIMpKPCMKoCRs+VsE3Pef/PD1NqVGI2zE1xtTnsgUsL+f3LhWe/vtwd+cT
+ 4HT8VV9bwu/vbrxNSMiFsOs4W5wKOYuFEPX70DPSnW8ADzQIwQMGq9HJB3dCACgQ
+ fqMgsJMAc3YtQbpU2o2imdB0Rje8n6xlc0na1tGZGFImZUBwpioA/7sb47Srfjsa
+ hXh4OwNimqsxRjsPt5mli7uXDN4gH0I6XoeXrKs60enPq0qtJeg7Mb7S3Q4lQq7M
+ aMRumA==
+Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhmcase9-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:13:43 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-36f26e6abe9so3057774eec.0
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:13:43 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 11:15:00 +0000 (GMT)
+Received: by mail-dl1-f70.google.com with SMTP id
+ a92af1059eb24-1b3b45597c7so5621094c88.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:15:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794741222; x=1795346022;
+ d=oss.qualcomm.com; s=google; t=1794741300; x=1795346100;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=yJZzyxkNb4LcFIAVhsnfKm/aiO/PB8iis4hCRh1E4R0=;
- b=UNY9uPkzcz77tLViz9Cdco4fGd5Cj4ySJiy4stzRHMmMCmmj1+HqBEdnmVM0ZvfEzd
- 8nsU4XatibQtxi0H+g5jMy7sO5vMfw9JmlgpBW1/TeSC66NnMKmyHoNn7C61SQmoXwii
- O6eyPhqc4Xgm8/cO4EMZadbG5vUkTphnHDNcxZ5xGjUNNCRTFvgMWzqCNrXDLNCaJd7F
- dmp3MbYLn0n2VBlxuZYqCeCg07op1WyawQSwZp3D5/Yc+7W+PWPFa/6uKhb4dP7ZBCyI
- CiAEimWO/tiLl48uqPHgFzfZLnRQ7xTUFhEpcfFpLdY29rfqu+iYTdhKoLMCQGMpVr9P
- FCqw==
+ :content-type; bh=fn33tiLbRhRkWG1srQiA84F6KYYgUngMBxkukN7KDpg=;
+ b=DGoJC6Wis59n9AuLdnoomqW/N8PBQDi+j2k2tAbh7JVmStLBPdCvy+gj1TNL8SveiB
+ QUr/cN1l2igMY1T0nvCU0ZEmVQEX66OfOjYQPohiVTeWXbjZuHEUrsY6TMtTMGoi4Mkg
+ UPEO2qZX7rZlEKkaMeR0h7I37UwDeAvQbmE3XGh6nWYLspc6cXZR2+wfwKArdBVQjEAz
+ y2aanl3uGVTj9SDDN8Rdjj60VaSNLw4zUv03Ww1E0ou7Nh0+PwnWfmhD/dAYqcr+VgbX
+ beKWPuXWC4bkDYpy/kEGez3RyofWOdZYhidL6NfSLCVRjVnRmAqO90Md2aMNwtUlhYeK
+ yeNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794741222; x=1795346022;
+ d=1e100.net; s=20260707; t=1794741300; x=1795346100;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=yJZzyxkNb4LcFIAVhsnfKm/aiO/PB8iis4hCRh1E4R0=;
- b=XvWHL+mPwnlWOVRemnJhuBgDy2wJvi5nIbLcYTGIAOv/zBylhwm+J1vPDuwQIILI72
- C1bXGv+HhR6Z8ms+yEE8y0gnD/BEIUmqRESJSJVtwXlpQJtlwXe/XL3OJAOtgWMdt0BG
- GcJ2UIU6HXgMfKAtac44YJxGkXVtMKsO192Twc7ks6BgaJpTrCvNFatcMY8CipkaNCGV
- mvFQITrWCuNDMKeP68B5xkDFG0Uz4AxqfnlbMkKc2jvy2ru6MYNfFP1dBB2OOtZT/jyp
- V8ORNwepX+zdn1xyqZUeor/PYmq1gwCjrkpb5HZs38Kxj9pZC8p6V5185hRiVBfXa6GK
- Xt8g==
+ bh=fn33tiLbRhRkWG1srQiA84F6KYYgUngMBxkukN7KDpg=;
+ b=FfCz76ppXaQ31FkNG/PmJVNhfAXzrEdip97v1jOC/XX41scJgApGxc7KCXzqSDIAuv
+ pXylOywdp5+IeGY7/9Kh/Scnr5cRrTJTH5a71Y5ZLU0um3390vzEY9tWab/SfdH/b3tg
+ g18CpXFB+MEKyPxy4er4AKUpzygndHhp4H0Neo6m/TpDd9soptg773sV8TNonLZLf31F
+ T51UMlTzQ751vyoOviQTQd7fgQvJi/bNJy4PXD7zcFL2n0vQIQGYafqxqfiT/N7cMODF
+ 8GjEk3ASA7rAGbmUCKJR0nkK7mU3Gz9uFS6IuriCEAYUpNCsnfXylgYm2DGD5tp+qJuu
+ lb9Q==
 X-Forwarded-Encrypted: i=1;
- AL+hErGDNFsyXqatcpCTLt1pCFnSj39YTuLYi38lsYDriS2fwTq1msTeJzIw+BtzIet2gIUBlgj6tUU=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/Iv5hGXOVgvujVkBY1tiToA+dGbJgFs9XT6xtO49Q6+xX44lMS
- QcGnHy9SOMqorEGpdnI/gpEzAZxC/OX4tTJxmTdDt+x+PDXpPYm/IAOLqgiUwehocMATYxt6KbT
- uXjvQ+68M5zqIaObXQbGqkyYYlIrCLog4kmi6OTCLc4i+CJgrHScmk3XgsE4vtABIPZIz8Fo=
-X-Gm-Gg: AYBFou1DPqyEJgGcX8DFY3O5GRPsdc/RtztRebTC4UilRnB0pCC63CNbLp9U4SpdtqR
- zEVFjxA/PFiLbSh9iH5bfBW+gDLHPGEGQnDb4yPUei5Ni4uOzj/J3HPZTjEdLKVrWI3jNciY/iE
- fY95gMIpkYXyo8/7g5MEHk3RJtz3z+uR4EbbjAXNk3je4E6BFNxg5e7XPqtLwtjKwIEZZsQ75E9
- nU9wr7NNuuaaGuOXGjq+bU/OeVWNfNDXTiov9/+SCRJI2HddKWYiw5kWysmY16y71E1D/zxwUER
- c7X83BAaHt0koEqDKokIAEa9weES49KL9p6WswRArgwxXZxd8iXfJi4I+Nl6n1RwAfguEnGIHNF
- 9ra4l241GVWEt419jXYbtYk7/4fXAsljCBXt2MwcxvaVZ12eisa5jVmqYA6mr0SBsSGz0mLz6YC
- kAyiGwKME=
-X-Received: by 2002:a05:7300:168a:b0:36c:9fa4:dc5b with SMTP id
- 5a478bee46e88-37966e3ad35mr7605771eec.23.1794741222086; 
- Sun, 15 Nov 2026 03:13:42 -0800 (PST)
-X-Received: by 2002:a05:7300:168a:b0:36c:9fa4:dc5b with SMTP id
- 5a478bee46e88-37966e3ad35mr7605750eec.23.1794741221480; 
- Sun, 15 Nov 2026 03:13:41 -0800 (PST)
+ AL+hErETlcNoa/AzGdSy6164Db6PQ7yCR2lXwQWRMi+WqmbL3zME5cdCh6u/w91UkoJ4zyD2lj3GTGo=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+MPlKm5rFSTmCXqxDONmOacv3JIGTQMQ5/Jb4cuM5Tg5U3/nWe
+ TexWpYqPBp0oS4FkdQwTwwcQJw0xozu8dMBI350lR3xsWcRbGqVJALKt9P7A9Jbn033Y3gqbEGz
+ 2gG3q6lpyt9Mz5MnRv9LgZupvbhMsjT6SPYxfFRdgojbfcNgAucQCQOFtJ0hueD2HjAK1sKIhbY
+ s5pmA=
+X-Gm-Gg: AYBFou3TW1AlcQ1k3CTZuYffDaOVmBUYkUv22jCCeqj9o3e0yZkLHz80j/eWLbULaZp
+ xo55kmZcpDdzFyUIbcKsI3J6TA2uZP0jUJrasxeNOfpLh0vRXcV/8jYl5q1VACBigJt1Ppphw5w
+ mE8iY/j2f/eMxJcdxubqXbFsBwBiT1ELC4457o0F1k+PCjnpb+EJxYiN2tmZ5iuMxAd+W+d6Sii
+ 3ENZKcc94J4VzB73A+Fmg8etI/BVRB6Duj+svPEmCyVO5bkok/MQjxgV2+s8kWAcVmK9UrTiv1v
+ RKYkt9phnqQaS/giSAc6nbCuJoBb7QL8IFqAlmunBdPZcUEpJ0bvROZvAc/5nStFmqzWTqCvFFE
+ IZqy2iE+enQRB5hHYJNDdzsaGfvWwWex6WhYCjqJ4V4RCzEYPf1kb5yeri18h/SheF5BOQqC0Ho
+ YOmSvauxM=
+X-Received: by 2002:a05:7022:3a83:b0:149:50cb:2175 with SMTP id
+ a92af1059eb24-1b503124835mr8026961c88.33.1794741299576; 
+ Sun, 15 Nov 2026 03:14:59 -0800 (PST)
+X-Received: by 2002:a05:7022:3a83:b0:149:50cb:2175 with SMTP id
+ a92af1059eb24-1b503124835mr8026928c88.33.1794741298838; 
+ Sun, 15 Nov 2026 03:14:58 -0800 (PST)
 Received: from [192.168.0.2] ([49.206.98.25]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-379553316fdsm24743882eec.5.2026.11.15.03.13.38
+ a92af1059eb24-1b5031b2519sm20471391c88.13.2026.11.15.03.14.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Nov 2026 03:13:40 -0800 (PST)
-Message-ID: <9d87943c-8226-4c1e-bb20-1308a2d4b62b@oss.qualcomm.com>
-Date: Sun, 15 Nov 2026 16:43:36 +0530
+ Sun, 15 Nov 2026 03:14:58 -0800 (PST)
+Message-ID: <0abd716f-5378-47b2-8e67-59fb7dc33fc6@oss.qualcomm.com>
+Date: Sun, 15 Nov 2026 16:44:54 +0530
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] efi_loader: firmware: track last attempt status for
- ESRT reporting
+Subject: Re: [PATCH 4/4] efidebug: capsule: add a command to list updatable
+ firmware images
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.u-boot-project.org
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
  <vincent.stehle@arm.com>, Aristo Chen <aristo.chen@canonical.com>
 References: <20260813-efi-esrt-last-attempt-v1-0-3be172f47d9d@oss.qualcomm.com>
- <20260813-efi-esrt-last-attempt-v1-1-3be172f47d9d@oss.qualcomm.com>
- <7644192B-CE1B-437D-8D87-0F0D22D75EEA@gmx.de>
+ <20260813-efi-esrt-last-attempt-v1-4-3be172f47d9d@oss.qualcomm.com>
+ <9A49653C-9CF5-40D3-96E0-DC8273640213@gmx.de>
 Content-Language: en-US
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <7644192B-CE1B-437D-8D87-0F0D22D75EEA@gmx.de>
+In-Reply-To: <9A49653C-9CF5-40D3-96E0-DC8273640213@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=KelHIgYD c=1 sm=1 tr=0 ts=6af993e7 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=B+jc5o7RI9DO8wW/BDIZNw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA0NCBTYWx0ZWRfX9pxWsDw1pXG8
+ ZG+j479bw6fRrxiJY5VfPqL11iPFGmYUS5iRdgtdaoSvu9TvINRyj2aRmr6DU0EjayL0ggK2mQ0
+ s6CeKKzU30f1iX2OdGS/izRrjMMpKmA=
+X-Proofpoint-ORIG-GUID: T1yuRxIdxWXHFDUruf_WA7PG9tAmDSxy
+X-Proofpoint-GUID: T1yuRxIdxWXHFDUruf_WA7PG9tAmDSxy
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA0NCBTYWx0ZWRfXyQVRDD5/lm6Y
+ x1N2isbqnRi93LYGhY3CcfJd4mrEMsTlMwG1mPRPCmap9teiFfYYM+nTvtcdKH/xljowu2972gW
+ sf4qu5rLMELkzFb8hOMwDVbqHEt2e4I8rSUTNSHS9px3uE9XGTS1/Z/FO0qXcZCycIA2hGds9oJ
+ f+AWtsNdLyh7CaY9LPvdzhjeo3h2uJWZA1uBWYGWzzfCvDk7Yi5opoTcsHgmeYKgWRvilwQpgP8
+ 9zwSALqDV4DAIKVuKyqtgmacBmk1e01bgtDB+89tyPRVAxxnQA9Yd6omkU81o3NKIIuWvb8abxa
+ d++FKpnYXqtCeL9AvwcMgHqAJLwn1K9BpwEKKc5ZH8wi3Zpruk6RZ6AxaJDEbNbX5cwOBlEqv/h
+ /ZikL65uXIomj7oAkWdx+4U3UoaY7wSbgkOvsl6/JweC3Hk+iY97AUgQiYUW01ty7BZbS94Sht8
+ Myo473bPszW+DS/dB4A==
+X-Authority-Analysis: v=2.4 cv=Vpy2kO2n c=1 sm=1 tr=0 ts=6af99434 cx=c_pps
+ a=SvEPeNj+VMjHSW//kvnxuw==:117 a=B+jc5o7RI9DO8wW/BDIZNw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=R-zapx3Xcfi-8ACqDycA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA0NCBTYWx0ZWRfX+tekdQZZd7pm
- vdESrEZwssKUlFcMJU1B9xKLL52I4Jlsq3YJ18d9Hu6Kwc3byHCw01S2xp/U6jBccdptjdl1ASO
- lOUHHUqIsKnjtFB8e4zediL4lm4SdWU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA0NCBTYWx0ZWRfXyxPmOIIexEFc
- HCI+Yprhxed19V4a7H70EFMIfI8IwLXztuR50Bs6S6UaDzLAVIiwd+5biyuUHTt3+qEdygNz+av
- YJGOwgyNERXg34VZH9a+f6ZEtHn7xAft7yztNe2Utn+gfWsY7bwtm4Lm2G/BSFn2d5OSlJ5BxDO
- X8ze36CSuqROe+lTBL+9Vn0XqexeFhuMU4WupWXksgVnP/2KBtlWcwwEffJVGccdM1+52ov6JJF
- FSyGdEEnIgfgQ4w1GWotO6M6L5bFcydux/JaZq8Ia/TSmz9xELqOi/29yvteeCQz+kNzLhHFWPv
- e+j6/U6ylnZPSNyF6m82/Q1CIG7eRTO6msWyzVJ+WuUWSD/cDQBIKrWuIVYUk1uLD0zdPqPYSJA
- RqcRKe7xT3QGkYdbjdd+fMCCiBUbwyD7YUUE3YKkQGDoKpCMCGXlLwEhczY1SbBSQE3fZTyDFD5
- cy444ib1cAP3i3wGiKQ==
-X-Proofpoint-GUID: y1rISkE7AtTMAqoT7BIIDfoYhByBKPgZ
-X-Proofpoint-ORIG-GUID: y1rISkE7AtTMAqoT7BIIDfoYhByBKPgZ
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=JVMcHblXzJD57q7Xr18A:9 a=QEXdDO2ut3YA:10
+ a=Kq8ClHjjuc5pcCNDwlU0:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-15_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
- clxscore=1015 spamscore=0 adultscore=0 priorityscore=1501 malwarescore=0
+ impostorscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ phishscore=0 priorityscore=1501 bulkscore=0 spamscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611150044
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -224,169 +224,194 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Hi Heinrich,
 
-On 8/13/2026 11:58 AM, Heinrich Schuchardt wrote:
-> Am 13. August 2026 07:50:17 MESZ schrieb Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>:
->> The last_attempt_version and last_attempt_status fields in struct
->> fmp_state were carried but never populated, so the ESRT last-attempt
->> information exposed to the OS stayed at its boot-time defaults
->> regardless of what happened during an update.
+On 8/13/2026 12:04 PM, Heinrich Schuchardt wrote:
+> Am 13. August 2026 07:50:20 MESZ schrieb Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>:
+>> There is no easy way to see which firmware images a capsule can actually
+>> target on a given board. On platforms that build their fw_images[] table
+>> at runtime this is worse, since the set of images vary per board.
 >>
->> Add the plumbing to maintain them: a helper to record the attempted
->> version and status, a mapping from internal efi_status_t codes to the
->> UEFI LAST_ATTEMPT_STATUS_* values, and reads/writes of the two fields
->> in efi_firmware_fill_version_info() and efi_firmware_set_fmp_state_var().
->> fw_version is now only advanced on a successful update so a failed
->> attempt no longer overwrites the recorded good version.
+>> Add "efidebug capsule images", which walks the installed Firmware
+>> Management Protocol handles and prints the image descriptors each one
+>> reports, along with the image index, name and type GUID. This is the
+>> same information capsule matching looks at, so it doubles as a quick way
+>> to check the GUIDs in a capsule line up with what the board expects
+>> before attempting an update.
 >>
 >> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 >> ---
->> lib/efi_loader/efi_firmware.c | 74 +++++++++++++++++++++++++++++++++++++++----
->> 1 file changed, 68 insertions(+), 6 deletions(-)
->>
->> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
->> index b41969c70fd..cbe8bcd7c64 100644
->> --- a/lib/efi_loader/efi_firmware.c
->> +++ b/lib/efi_loader/efi_firmware.c
->> @@ -52,9 +52,9 @@ struct fmp_payload_header {
->>   */
->> struct fmp_state {
->> 	u32 fw_version;
->> -	u32 lowest_supported_version; /* not used */
->> -	u32 last_attempt_version; /* not used */
->> -	u32 last_attempt_status; /* not used */
->> +	u32 lowest_supported_version; /* not used - read from DTB for security */
->> +	u32 last_attempt_version;     /* used for esrt tracking */
-> Thank you for improving the ESRT reporting.
->
-> Please, provide a description explaining which information is contained in the field.
->
->> +	u32 last_attempt_status;      /* used for esrt tracking */
-> ditto
->
->
->> };
->>
->> /**
->> @@ -190,6 +190,49 @@ static void efi_firmware_get_lsv_from_dtb(u8 image_index,
->> 	}
->> }
->>
->> +/**
->> + * efi_firmware_set_last_attempt - set last attempt information
->> + * @state:		Pointer to fmp state
->> + * @attempt_version:	Version that was attempted
-> version of what?
->
-> How about:
->
-> Firmware version of the last attempted capsule update.
->
->> + * @attempt_status:	Status of the attempt
-> With type u32 and "Status" I would have no clue which values to expect and what they might mean.
->
-> In the description you could refer to the enum containing LAST_ATTEMPT_STATUS_SUCCESS et al.
+>> cmd/efidebug.c                                     | 102 +++++++++++++++++++++
+>> .../test_efi_capsule/test_capsule_firmware_raw.py  |  22 +++++
+> The documentation update is missing.
 >
 > Best regards
 >
 > Heinrich
 
-Thanks for the feedback, have addressed these in v2: 
-https://lore.kernel.org/u-boot/20261114-efi-esrt-last-attempt-v2-1-f47a430a6917@oss.qualcomm.com/
+Documentation is added in v2: 
+https://lore.kernel.org/u-boot/20261114-efidebug-capsule-images-v2-1-f66f0513d3d2@oss.qualcomm.com/
 
 Regards,
 
 Balaji
 
 >
->> + *
->> + * Set the last attempt version and status in the fmp_state structure.
->> + */
->> +static void efi_firmware_set_last_attempt(struct fmp_state *state,
->> +					  u32 attempt_version,
->> +					  u32 attempt_status)
->> +{
->> +	state->last_attempt_version = attempt_version;
->> +	state->last_attempt_status = attempt_status;
->> +}
->> +
->> +/**
->> + * efi_firmware_map_error_to_status - map internal errors to UEFI status codes
->> + * @error:	Internal error code
->> + *
->> + * Map U-Boot internal error codes to UEFI-compliant last attempt status codes.
->> + *
->> + * Return: UEFI last attempt status code
->> + */
->> +static u32 efi_firmware_map_error_to_status(efi_status_t error)
->> +{
->> +	switch (error) {
->> +	case EFI_SUCCESS:
->> +		return LAST_ATTEMPT_STATUS_SUCCESS;
->> +	case EFI_OUT_OF_RESOURCES:
->> +		return LAST_ATTEMPT_STATUS_ERROR_INSUFFICIENT_RESOURCES;
->> +	case EFI_INVALID_PARAMETER:
->> +		return LAST_ATTEMPT_STATUS_ERROR_INCORRECT_VERSION;
->> +	case EFI_SECURITY_VIOLATION:
->> +		return LAST_ATTEMPT_STATUS_ERROR_AUTH_ERROR;
->> +	case EFI_UNSUPPORTED:
->> +		return LAST_ATTEMPT_STATUS_ERROR_INVALID_FORMAT;
->> +	case EFI_DEVICE_ERROR:
->> +	default:
->> +		return LAST_ATTEMPT_STATUS_ERROR_UNSUCCESSFUL;
->> +	}
->> +}
->> +
->> /**
->>   * efi_firmware_fill_version_info - fill the version information
->>   * @image_info:		Image information
->> @@ -237,8 +280,15 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
+>> 2 files changed, 124 insertions(+)
 >>
->> 	ret = efi_get_variable_int(varname, &fw_array->image_type_id,
->> 				   NULL, &size, var_state, NULL);
->> -	if (ret == EFI_SUCCESS && expected_size == size)
->> +	if (ret == EFI_SUCCESS && expected_size == size) {
->> 		image_info->version = var_state[active_index].fw_version;
->> +		image_info->last_attempt_version = var_state[active_index].last_attempt_version;
->> +		image_info->last_attempt_status = var_state[active_index].last_attempt_status;
->> +	} else {
->> +		/* Default values if no previous state exists */
->> +		image_info->last_attempt_version = 0;
->> +		image_info->last_attempt_status = LAST_ATTEMPT_STATUS_SUCCESS;
->> +	}
->>
->> 	free(var_state);
+>> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+>> index e55de04c699..a9e445d03fa 100644
+>> --- a/cmd/efidebug.c
+>> +++ b/cmd/efidebug.c
+>> @@ -294,6 +294,104 @@ static int do_efi_capsule_res(struct cmd_tbl *cmdtp, int flag,
+>> 	return CMD_RET_SUCCESS;
 >> }
->> @@ -427,6 +477,10 @@ efi_status_t efi_firmware_capsule_authenticate(const void **p_image,
->>   * @image_index:	image index
->>   *
->>   * Update the FmpStateXXXX variable with the firmware update state.
->> + * On successful update (last_attempt_status == LAST_ATTEMPT_STATUS_SUCCESS),
->> + * updates fw_version to the new version.
->> + * On failed update, preserves the old fw_version.
->> + * Always updates last_attempt_version and last_attempt_status.
->>   *
->>   * Return:		status code
->>   */
->> @@ -471,11 +525,19 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
->> 		memset(var_state, 0, num_banks * sizeof(*var_state));
 >>
->> 	/*
->> -	 * Only the fw_version is set here.
->> +	 * Set fw_version and last attempt information.
->> 	 * lowest_supported_version in FmpState variable is ignored since
->> 	 * it can be tampered if the file based EFI variable storage is used.
->> +	 *
->> +	 * Only update fw_version if the update succeeded.
->> +	 * On failure, preserve the old fw_version to maintain accurate ESRT state.
->> 	 */
->> -	var_state[update_bank].fw_version = state->fw_version;
->> +	if (state->last_attempt_status == LAST_ATTEMPT_STATUS_SUCCESS)
->> +		var_state[update_bank].fw_version = state->fw_version;
->> +	/* else: keep existing fw_version (don't update on failure) */
+>> +/**
+>> + * do_efi_capsule_images() - list firmware images updatable by capsule
+>> + *
+>> + * @cmdtp:	Command table
+>> + * @flag:	Command flag
+>> + * @argc:	Number of arguments
+>> + * @argv:	Argument array
+>> + * Return:	CMD_RET_SUCCESS on success, CMD_RET_FAILURE on failure
+>> + *
+>> + * Implement efidebug "capsule images" sub-command.
+>> + * Walk every Firmware Management Protocol instance and print the image
+>> + * descriptors it reports, i.e. the firmware images a capsule can target
+>> + * on this board along with their name, index and type GUID.
+>> + *
+>> + *     efidebug capsule images
+>> + */
+>> +static int do_efi_capsule_images(struct cmd_tbl *cmdtp, int flag,
+>> +				 int argc, char * const argv[])
+>> +{
+>> +	struct efi_firmware_management_protocol *fmp;
+>> +	struct efi_firmware_image_descriptor *image_info, *desc;
+>> +	efi_uintn_t info_size, descriptor_size, no_handles;
+>> +	u32 descriptor_version, package_version;
+>> +	u16 *package_version_name;
+>> +	u8 descriptor_count;
+>> +	efi_handle_t *handles;
+>> +	efi_status_t ret;
+>> +	int i, j;
 >> +
->> +	var_state[update_bank].last_attempt_version = state->last_attempt_version;
->> +	var_state[update_bank].last_attempt_status = state->last_attempt_status;
+>> +	if (argc != 1)
+>> +		return CMD_RET_USAGE;
+>> +
+>> +	ret = EFI_CALL(efi_locate_handle_buffer(BY_PROTOCOL,
+>> +						&efi_guid_firmware_management_protocol,
+>> +						NULL, &no_handles, &handles));
+>> +	if (ret != EFI_SUCCESS || no_handles == 0) {
+>> +		printf("No firmware images found\n");
+>> +		return CMD_RET_SUCCESS;
+>> +	}
+>> +
+>> +	printf("Image Index    Firmware Name         Image Type GUID\n");
+>> +	printf("===========    ===================== ====================================\n");
+>> +
+>> +	for (i = 0; i < no_handles; i++) {
+>> +		struct efi_handler *handler;
+>> +
+>> +		ret = efi_search_protocol(handles[i],
+>> +					  &efi_guid_firmware_management_protocol,
+>> +					  &handler);
+>> +		if (ret != EFI_SUCCESS)
+>> +			continue;
+>> +		fmp = handler->protocol_interface;
+>> +
+>> +		info_size = 0;
+>> +		image_info = NULL;
+>> +		descriptor_version = 0;
+>> +		descriptor_count = 0;
+>> +		descriptor_size = 0;
+>> +		package_version = 0;
+>> +		package_version_name = NULL;
+>> +		ret = EFI_CALL(fmp->get_image_info(fmp, &info_size, image_info,
+>> +						   &descriptor_version,
+>> +						   &descriptor_count,
+>> +						   &descriptor_size,
+>> +						   &package_version,
+>> +						   &package_version_name));
+>> +		if (ret != EFI_BUFFER_TOO_SMALL)
+>> +			continue;
+>> +
+>> +		image_info = malloc(info_size);
+>> +		if (!image_info)
+>> +			continue;
+>> +
+>> +		ret = EFI_CALL(fmp->get_image_info(fmp, &info_size, image_info,
+>> +						   &descriptor_version,
+>> +						   &descriptor_count,
+>> +						   &descriptor_size,
+>> +						   &package_version,
+>> +						   &package_version_name));
+>> +		if (ret == EFI_SUCCESS &&
+>> +		    descriptor_version == EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION) {
+>> +			for (j = 0, desc = image_info; j < descriptor_count;
+>> +			     j++, desc = (void *)desc + descriptor_size)
+>> +				printf("%11d    %-21ls %pUl\n",
+>> +				       desc->image_index,
+>> +				       desc->image_id_name ? desc->image_id_name : u"",
+>> +				       &desc->image_type_id);
+>> +		}
+>> +
+>> +		efi_free_pool(package_version_name);
+>> +		free(image_info);
+>> +	}
+>> +
+>> +	efi_free_pool(handles);
+>> +
+>> +	return CMD_RET_SUCCESS;
+>> +}
+>> +
+>> static struct cmd_tbl cmd_efidebug_capsule_sub[] = {
+>> 	U_BOOT_CMD_MKENT(update, CONFIG_SYS_MAXARGS, 1, do_efi_capsule_update,
+>> 			 "", ""),
+>> @@ -309,6 +407,8 @@ static struct cmd_tbl cmd_efidebug_capsule_sub[] = {
+>> #endif
+>> 	U_BOOT_CMD_MKENT(result, CONFIG_SYS_MAXARGS, 1, do_efi_capsule_res,
+>> 			 "", ""),
+>> +	U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_capsule_images,
+>> +			 "", ""),
+>> };
 >>
->> 	size = num_banks * sizeof(*var_state);
->> 	ret = efi_set_variable_int(varname, image_type_id,
+>> /**
+>> @@ -1618,6 +1718,8 @@ U_BOOT_LONGHELP(efidebug,
+>> 	"  - show capsule information\n"
+>> 	"efidebug capsule result [<capsule result var>]\n"
+>> 	"  - show a capsule update result\n"
+>> +	"efidebug capsule images\n"
+>> +	"  - list firmware images updatable by capsule\n"
+>> #ifdef CONFIG_EFI_ESRT
+>> 	"efidebug capsule esrt\n"
+>> 	"  - print the ESRT\n"
+>> diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+>> index b8cb483b380..e6246a83ff0 100644
+>> --- a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+>> +++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
+>> @@ -238,3 +238,25 @@ class TestEfiCapsuleFirmwareRaw:
+>>              check_file_removed(ubman, disk_img, capsule_files)
+>>
+>>              verify_content(ubman, '100000', 'u-boot:Old')
+>> +
+>> +    def test_efi_capsule_fw6(
+>> +            self, u_boot_config, ubman, efi_capsule_data):
+>> +        """ Test Case 6
+>> +        List the firmware images updatable by capsule with
+>> +        'efidebug capsule images' and check the images sandbox exposes
+>> +        for raw capsule updates
+>> +        """
+>> +        ubman.restart_uboot()
+>> +
+>> +        output = ubman.run_command('efidebug capsule images')
+>> +
+>> +        # ensure that SANDBOX-UBOOT and SANDBOX-UBOOT-ENV are both listed,
+>> +        # along with the image index each one is exposed at.
+>> +        assert '1' in output and 'SANDBOX-UBOOT' in output
+>> +        assert '2' in output and 'SANDBOX-UBOOT-ENV' in output
+>> +
+>> +        # ensure that SANDBOX_UBOOT_IMAGE_GUID is reported.
+>> +        assert '985F2937-7C2E-5E9A-8A5E-8E063312964B' in output
+>> +
+>> +        # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is reported.
+>> +        assert '9E339473-C2EB-530A-A69B-0CD6BBBED40E' in output
 >>
