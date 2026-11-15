@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1078606A31F
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 10:30:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E2F6606A31D
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 10:32:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=L07tCFSF;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=QqBcWtwC
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Mdlvqi/4;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=U2lMixcZ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 39AE160650;
-	Sun, 15 Nov 2026 10:30:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5B07660698;
+	Sun, 15 Nov 2026 10:32:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w94oWGDJT04B; Sun, 15 Nov 2026 10:30:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 16C2D60629
+ id krJ2rgYB3Ira; Sun, 15 Nov 2026 10:32:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 293F76061C
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794738641;
-	b=lbTVDTFFzrMrwWn1P7pUYKmb2ktsbRZoPyYhgdhfYlFWRe+hl84uClgmLLYdlhPNKevT
-	 /IF/mKLF3IlFCbw5QMO55qOUGNBwbm/hASk9m+KG3mRoBoYKrJl3QsKlj+DxxPG1tjZ9d
-	 7CBHFEseoXWLdmxea6PpHebEckhdrKypCuRMj7VGQ1x36V4bz74r6u1ZDT0cKT1Bnw8Ob
-	 QSfb87f0LNLTuhYo2hbTz3G59fvPWDDDmmGKkA9k37vDoLgAIZ4ezFAfJCchoJY22l0F8
-	 ImqL45dG2dtXG8N6qsy94Pqk3pD+x2sWYYtIjTR1Jp9wR4hEyq5Ll9ZgSS4iqd5qZaQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794738750;
+	b=pOg0CcO7/3z6IT7HgIg1nZuVrsi2I3i8qGkmXNWbo99HwI3ZIvSHSGscR0L5+zVk6hQC
+	 gaEKaUfZPcjXAMoxrrTKIK7PKZYtDbjfpfbZqwY2b1+a6Y5EZDtWv4NZtT+y/paCVonO2
+	 Krg1/xhbtq3nD9m7K3NtHvmIG+UCU+ad7XhJlXMjuZJDih6a6TfVLgZsUUvjyB78Cml4K
+	 bGg/cvyAce/ze8M7l4wMdGs4laNYQBaJ6js/4h3uTEljdQywo81kjYOqubAwzvrtEOyXq
+	 ohPYD+P6VzF5almOZFupGKcqXO6Wvnj3p2TupAirlgvAWAtEBDVjrzFRjkJQ/iQ8IBg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794738641;
+	c=relaxed/relaxed; t=1794738750;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,111 +32,112 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=CUUuvtl6UguSC8VYrlgnnLS+F54/0jjFJBGaw8kRMO4=;
-	b=HZMorsX4iG2/Q7uGsFoWxaJFbxzKupRds/Fa0W17RDluXModLCGyPAM7rAjc2L/oct+q
-	 pHLCytLRWW/2nfet3rPUqq0bFyab8RyZMOT4TJwRerOGOJdaYSnZ/NPJoht3UWwVL9TtI
-	 MiuV73qmodHIASoauVJC3l6xoB6U1YI51Tk5He6AYWb8KZK5v2M4ee3r8AT6G2eiJUSF1
-	 nkzF0Oj+g3fyGl0KarDajHfgZcQNL8oxVn7GfvseqxpTvDT7asJDXyHjKjHngVLmPVisU
-	 kpzqUu8Ah1pTPllFwRvl3jm8g/NGdYBJ2QWBZ4/jYz0+IDdSJwzJZ2+eOoS4lqre8YA==
+	bh=HI9T+pbtCzZhkzubMSmbuiA9GiDX3KDnrGwDspM6d34=;
+	b=ANg8g2AE1nsPGzvbl+DmL8YR+VXCTZtlbGcaOQIM+L22WlGFPAIGzIU5E7TyvfMvtMk3
+	 HrvX8FdFPtY0YeedTIsTNWd2amv5U8jaL/SoSWVhsDHpPwE6nRQp1+1fHpdsFJ/PYalgU
+	 5asLpoLDcVXab0mQRHX/vhmwnL6Vwt9Au8Wd6XzGgadJModdcR9RyqeFrOjX0HrBqsmRX
+	 HSGIbs+H9wDlc8ElEdMaZGZV9fJ4mxRAthFDeoXCR+sSAgN1707vkCGVhjONJTukC7wHq
+	 DDc82bZCXkf1avWvNzY8+LOPsFRKXO/6W9ykEdSq+Nu++5zB7aWxL/Og1Ml+hmZjZNQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=QqBcWtwC;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794738641;
-	bh=CUUuvtl6UguSC8VYrlgnnLS+F54/0jjFJBGaw8kRMO4=;
+	d=lists.u-boot-project.org; s=default; t=1794738750;
+	bh=HI9T+pbtCzZhkzubMSmbuiA9GiDX3KDnrGwDspM6d34=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=L07tCFSFMdM/I4JoPvodIsN9kWKhIsgWMYb1NlUwhu85JFrXI6y8DBfYs0HvmyOSp
-	 rAs+f8KlmNd5mL0bU+BMO2B8H6TeSYkQzjnVM/p/BTgPh8A0jo5A0CV1pKNb5KlH93
-	 p2fmUqUf5C94OXwkW64pX3bbo8Yn3wYsabSbNz1hgLObsZqd7suZe8zY1vlP8XNug3
-	 4Q8PLq8uQ3WZ2xyYMUZviVFH27Xn4Ud6ZueGoW6XcKjhzwF8cV7XRCeciWavfsQuHL
-	 MRw3eMAKBFVbryhCkxSZ9eqbDor+49Jm5c8kJRHWWLhysTeE4DX06HXPaF1b7Myq6v
-	 KfTwzkAIOk1qw==
+	b=Mdlvqi/4TMKz6sAZk21xqwyJYEQ/aqfkChZ87Xy0tIcOOnOcJeojAU/RYsv2tBq/t
+	 lCYPfxulTwrN271W0GkeDbVDAr3wzwQpFr0dQW+pn9lJitqmcHophbT2REMT/BYfm+
+	 rWj9+Qvfq+Yf2grcU461NpIzwktIWbiN+ScS/wtXsJHhyr8YZ/GLCyBgPI+w8ZXUZK
+	 3JXCBrpXoR0wazy+XGwPyVk2yjPfti+NDLgq8o5IATuwewiNztKJMf+dlo6Zp8XWob
+	 fdIcQvmC/1WWxIDA7PUHdFM5KUX+ozBxmEwX8j3f1anKJUwZuy+s59YonOmYClD8wm
+	 QZzRQzXMX6aEg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 16C2D60629;
-	Sun, 15 Nov 2026 10:30:41 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5C7FC2FB
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:30:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 293F76061C;
+	Sun, 15 Nov 2026 10:32:30 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1B58A2FE
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:32:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 4DA7F60629
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:30:39 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id F2B1840079
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:32:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id btwKrTL-7T9j for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 10:30:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DC86B6061B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::535"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id w0ZDJHc8rCuZ for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 10:32:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7089C40061
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::62e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
+ client-ip=2a00:1450:4864:20::62e; helo=mail-ej1-x62e.google.com;
  envelope-from=massimo.pegorer@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=QqBcWtwC
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DC86B6061B
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:30:37 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6b81214ab40so347442a12.0
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:30:37 -0800 (PST)
+ header.s=20260707 header.b=U2lMixcZ
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7089C40061
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:32:26 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c50604721c8so434405966b.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:32:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794738635; x=1795343435;
+ d=gmail.com; s=20260707; t=1794738745; x=1795343545;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=CUUuvtl6UguSC8VYrlgnnLS+F54/0jjFJBGaw8kRMO4=;
- b=QqBcWtwCUwc7HPurORyKNP9GEjM8P1gPlTi6j0c5Us4O8wS5PNqq9zSTnQY45lKIB5
- /ukPwnAYVrxyIEFf9baCjAOd/MWexDWUv+D9Wi04isjxM59wdVIjRV/8r+R5d7PiD4AH
- 8IDL4l0GaXiQsqE4Sc/1gUvEVv1Wm4pTXR6WCjyYORvgTYqxy0ImjxrqCQB2sVoQoQDM
- modAI9l+plk+Ys3jhrL+scbAPexOtt5MIsv9rRa3PItWJwMN2aLUDC144w0DoSVtQJg+
- GTNuch7kEJOM4Hg0fJFZKiXXBicnvzOwlOlmmDXE5xOtQKJ4SgWLqxam6aeul5kAW3UW
- Sr1w==
+ :content-type; bh=HI9T+pbtCzZhkzubMSmbuiA9GiDX3KDnrGwDspM6d34=;
+ b=U2lMixcZS+hyeV4IF4z3dlRzTkScqNOS8d+ciYC5C0qf2Les3Un1x9u6jp57G/Y+E1
+ IwCajstgfPqpwmrdPVPtbMAosga1QjASnbe0Bva2ucf8anCmhrMutN8aaZhIgcLTlHVx
+ oH+tCqDZNpjl2nAEGP08htxZCjlhZNuuWZSBglKvjYNzR+H/mNgb8c/ARHlD4dH1EZBX
+ rZwpzsyoHystiPgGnrEMRZgxHkafDBB8dbMW9eq1V3U9EDkZjupssFO6OYb0eU8JcA5U
+ J0jCgqg/eaWshKF+KxojS3oGyoLjA/DQaojG4FAiG5JGOPui4WfyExvp+ChBzEFRV9FD
+ RioQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794738635; x=1795343435;
+ d=1e100.net; s=20260707; t=1794738745; x=1795343545;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=CUUuvtl6UguSC8VYrlgnnLS+F54/0jjFJBGaw8kRMO4=;
- b=iKU9A4FL81bAwsNWWVkL//qjBGuAiMgjKsMRkRfcOq8zh0WCkO0viocqDHDDYvR+pM
- lCSQQyHrsoCe8oOar/twIvGQK0U2KqOt06djxPGyiPR6Zz9sPt6affwLwc2gx1HV/7am
- pKBttZTb0yhFo7w6TZl+QIuBqX3fpweJFCPk2WKWv1H6/33hSDgFBa/iAKJs0a46BaQt
- C56oe1xE4lTayw9qd5HyfNSFiXGiMbQ5/8Tttj14ZJTD+Xh9xLvYY5qUSQlcTRaDSMDQ
- rJzeEXGxv9RwOA2qcb6pYBSPzFho9d9CVb5VGOwbdO4CMw/tq8wqxwkWchTTe/FIE81w
- gcjA==
-X-Gm-Message-State: APuU4Z/EBKqa+42TKgx/6GWKYuxMMEXR/NuE+qO7dtc/y73iH6dnPSPs
- RYvznBgE32A3FdVsnlyKh9O4pTvKGrNj5bka9yjWSfYFoGUzU+jf4ohh7vX8/+sff8V+wjlAybH
- IYydh/g1stVORGQP8+vqps8XpBU0xuMSpZQ==
-X-Gm-Gg: AYBFou3jPYjY20nIb5m/uKKSSXRzQd1A0RoqEkjiVurLEyiQPY2fPEHKBhLavoPq8jK
- gm80DRezUqlBMztsFtmmuJ4CBZNEZdwdQe720hUKIX1cB+hdRDdHHgwcuxH6LSDIL1JWXoTDzNx
- 7bqG8C0c8uL18gjmgUhv8SeqDbMZF470DWVBo8fJ5pLLQFaEbnY2lmiQor3ec2VKG+H7gf21KYp
- ZW+Y6E+xNMTtZgECFZTvDXm2w2Hkjf+qhSUz56jkVhc2E4F09pz7rhcVehS8N7YBRdBoy4/o8S4
- WS/TRyKVft72wSdLR06/l8f3KXCxBdxreD4SkhWZry6FdOBBXHFDPGaJPf4sZRv1ycdCJcmZF0L
- +rUVG+N7ZBC6Gsu3ioGq3PNA+EJIwLlgPGCRS3g==
-X-Received: by 2002:a17:906:3791:b0:c49:c3f5:8bc with SMTP id
- a640c23a62f3a-c507bc6cacamr702236266b.10.1794738635147; Sun, 15 Nov 2026
- 02:30:35 -0800 (PST)
+ bh=HI9T+pbtCzZhkzubMSmbuiA9GiDX3KDnrGwDspM6d34=;
+ b=XUTJliA1EqMPAsAPrJvMb83/XnIQjuks5+RcwQfGNELUTyMHf6j+BfKrq0QuwNbBJ3
+ pmnkrhPDqqGHDg72fDNSLaJeUNStBu123ie3yKi8LrsK3f5zwX7wRtCnl59ngWefazqY
+ 8GJG6qRjkqc8xThYFu74IB2e47uRD8TNpC6DRr1/zsGmWNy9M1bwLUGIHlaxchlbyNQO
+ t2owQyE9huTN+zdoyGnqA1K0bKL/bNiWDcYXiFy3cwg9W7mc1lroj9EwwFlGQKbv9Z6Y
+ FPTcsf6X57J6SUNtjyN/ohZLJmLhxLQrIBeMBWFnwt5vyBx2qsdq0pMqwmLCcD57JZ4R
+ 7OBg==
+X-Gm-Message-State: APuU4Z+hcvnKbcqWOyQOQxoPDWXQpYntG2gX55lSyGrlneawyVCRSMp3
+ ZhAIWHF9EPHHonW2xKnRsUQSiuU1wOCUdrhFj8J8cwJg2LQU591/s2/hyE+k7Lakon0Y48v0AcL
+ iAEOxHvk9AXhMPcDlu5Qy8zSxdDmiqJy1DA==
+X-Gm-Gg: AYBFou0oFKTv+44rMxuTcEtaPtLhpkxVrBrcmwOt06sERdHxxEe+ZTUy7RPEFtxpDJc
+ a64GvHNe1psyiX8UP+BiuDgiUuhtEeyEsj3sCiBue/vxzoHaLubK5q0NXfrX6LNOavlE4R7rGzN
+ K1ZqY8X9IlIq5evwE1GUsfodT1fEBJOJAQPzXpzv8RJCMj14Ma320RsAlOVOjL6BPyQZpSpMPrd
+ TT4vVTq4X7nOhRLqJczJL2NPIVVrYnLji2i+mz8GTLtKe5cx49/gmR2vfgRkqUoWXO7kwLt/9in
+ 9NmEi4PsXIT45+HeGjTVhSBYftalR+wTqEENmgBBJITgu+LbPb0+bzFt7BbPXARWlYNfYNJr1Tl
+ 27wvcvb23uT+JQdg1oJNJRGP8Rw0qr/AQXXm+Jw==
+X-Received: by 2002:a17:907:3e8b:b0:c29:f5d8:9c78 with SMTP id
+ a640c23a62f3a-c50964101demr588347266b.39.1794738744726; Sun, 15 Nov 2026
+ 02:32:24 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20261025-ddr-multi-v2-0-b82ff9c860ba@gmail.com>
- <20261025-ddr-multi-v2-1-b82ff9c860ba@gmail.com>
- <1fba6d0c-acac-4495-bdf4-58765efedce0@0leil.net>
- <9d263ab1-5880-42d0-afc8-2f2ebdae4a95@0leil.net>
-In-Reply-To: <9d263ab1-5880-42d0-afc8-2f2ebdae4a95@0leil.net>
+ <20261025-ddr-multi-v2-2-b82ff9c860ba@gmail.com>
+ <a10d5dd9-ecdd-44e2-acce-8cb33501adec@0leil.net>
+ <CAC928Hanm2_mSEo3vuLnDQnHZ9uXTbV9pMmHfhXne7H3ONor=A@mail.gmail.com>
+ <cfb5d923-8148-4087-a090-a20077a4a627@0leil.net>
+In-Reply-To: <cfb5d923-8148-4087-a090-a20077a4a627@0leil.net>
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Sun, 15 Nov 2026 11:30:24 +0100
-X-Gm-Features: AclHuK_EN9fCRdYSodlzVoQqB0VetMbTkBC7_BX67LzdJbg_vZrNMnt4V3gu_xQ
-Message-ID: <CAC928HaChzVVKU1LzcO13pMiQuCiq66z3v47zcLxyuodD3pL3g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] ram: rockchip: improve sdram type configs selection
+Date: Sun, 15 Nov 2026 11:32:13 +0100
+X-Gm-Features: AclHuK9bzyarC-h_b99K3ipcMJIzsWV_kRkA4bAphgdwcz3n7NZo0Wp7azfIKZk
+Message-ID: <CAC928HZvN5daTputdUxkZOkGPz-d4icga9sj+CzxtE0W6w4bsA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] ram: rockchip: px30: allow multiple SDRAM types
+ selection
 To: Quentin Schulz <u-boot@0leil.net>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, Joseph Chen <chenjh@rock-chips.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -147,214 +148,196 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Quentin
+Hi Quentin,
 
-Il giorno mer 11 nov 2026 alle ore 17:08 Quentin Schulz ha scritto:
-> On 11/11/26 4:31 PM, Quentin Schulz wrote:
-> > Hi Massimo,
+Il giorno mer 11 nov 2026 alle ore 19:08 Quentin Schulz ha scritto:
+> On 11/11/26 6:55 PM, Massimo Pegorer wrote:
+> > Hi Quentin,
 > >
-> > On 10/25/26 8:30 PM, Massimo Pegorer wrote:
-> >> Not all the SDRAM types config options named in the Kconfig are
-> >> supported by each of the Rockchip SoCs: improve clarity adding SoC
-> >> dependencies to the options.
+> > Il giorno mer 11 nov 2026 alle ore 16:41 Quentin Schulz ha scritto:
 > >>
-> >> Add a new RAM_ROCKCHIP_DDR3 option and remove PX30 and RV1126 sdram
-> >> drivers fallback behaviour when no SDRAM type option is selected,
-> >> raising a compile time error in this case, instead. The new option
-> >> has a default true value if no other SDRAM option is true to avoid
-> >> impacts on defconfigs.
+> >> Hi Massimo, Joseph,
 > >>
-> >> Moreover, these drivers support only one SDRAM type at a time: when
-> >> more options are selected, avoid debatable preemption of one over the
-> >> others, and raise a compile time error instead.
+> >> On 10/25/26 8:30 PM, Massimo Pegorer wrote:
+> >>> Allow the inclusion of more than one SDRAM parameters set in the PX30
+> >>> sdram driver. The driver applies included sets in alphabetical order
+> >>> (DDR3, DDR4, LPDDR2, LPDDR3), stopping at the first one that makes
+> >>> SDRAM initialization function to complete with success. This order is
+> >>> debatable and not based on any specific reason.
+> >>>
+> >>> Due to limited PX30 TPL maximum size, including support for more than
+> >>> one SDRAM type can require disabling some configuration options such
+> >>> as CONFIG_RAM_ROCKCHIP_DEBUG.
+> >>>
 > >>
-> >> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> >> ---
-> >>   drivers/ram/rockchip/Kconfig        | 24 +++++++++++------
-> >>   drivers/ram/rockchip/sdram_px30.c   | 17 +++++++++---
-> >>   drivers/ram/rockchip/sdram_rv1126.c | 54 ++++++++++++++++++++
-> >> +----------------
-> >>   3 files changed, 60 insertions(+), 35 deletions(-)
+> >> @Joseph, can you help us out here?
 > >>
-> >> diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
-> >> index d707d09c1c8..f51ae6a4542 100644
-> >> --- a/drivers/ram/rockchip/Kconfig
-> >> +++ b/drivers/ram/rockchip/Kconfig
-> >> @@ -24,28 +24,36 @@ config RAM_ROCKCHIP_DEBUG
-> >>         This is an option for developers to understand the ram drivers
-> >>         initialization, configurations and etc.
-> >> +config RAM_ROCKCHIP_DDR3
-> >> +    bool "DDR3 support for Rockchip SoCs"
-> >> +    depends on ROCKCHIP_PX30 || ROCKCHIP_RV1126
-> >> +    default y if !RAM_ROCKCHIP_DDR4 && !RAM_ROCKCHIP_LPDDR2 && \
-> >> +        !RAM_ROCKCHIP_LPDDR3 && !RAM_ROCKCHIP_LPDDR4
-> >> +    help
-> >> +      Enable DDR3 sdram support on Rockchip SoCs.
-> >> +
+> >> We are trying to do the same thing that px30_ddr_333MHz_v*.bin from
+> >> Rockchip's rkbin is doing: do DDR initialization without knowing which
+> >> kind of DDR is soldered on the PX30-based device. Is there something
+> >> special we need to do or know? For now, we are trying to initialize with
+> >> DDR3 first, then DDR4 if it fails, then LPDDR2 if that fails too, then
+> >> LPDDR3 if all fails. The first DDR init that doesn't fail is deemed
+> >> successful. I do not know if this is correct, can you please provide
+> >> some guidance?
+> >>
+> >>> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+> >>> ---
+> >>>    drivers/ram/rockchip/sdram_px30.c | 40 +++++++++++++++++----------------------
+> >>>    1 file changed, 17 insertions(+), 23 deletions(-)
+> >>>
+> >>> diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
+> >>> index c7ff924b2c5..7f51b9c4f8f 100644
+> >>> --- a/drivers/ram/rockchip/sdram_px30.c
+> >>> +++ b/drivers/ram/rockchip/sdram_px30.c
+> >>> @@ -123,27 +123,24 @@ u32 addrmap[][8] = {
+> >>>
+> >>>    struct dram_info dram_info;
+> >>>
+> >>> -#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3) + \
+> >>> -     IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4) + \
+> >>> -     IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2) + \
+> >>> -     IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3) > 1
+> >>> -#error "This driver only supports one DRAM configuration at a time"
+> >>> -#endif
+> >>> -
+> >>>    struct px30_sdram_params sdram_configs[] = {
+> >>>    #if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3)
+> >>>    #include    "sdram-px30-ddr3-detect-333.inc"
+> >>> -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
+> >>> +#endif
+> >>> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
+> >>>    #include    "sdram-px30-ddr4-detect-333.inc"
+> >>> -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
+> >>> +#endif
+> >>> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
+> >>>    #include    "sdram-px30-lpddr2-detect-333.inc"
+> >>> -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
+> >>> +#endif
+> >>> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
+> >>>    #include    "sdram-px30-lpddr3-detect-333.inc"
+> >>> -#else
+> >>> -#error "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP option"
+> >>>    #endif
+> >>>    };
+> >>>
+> >>> +static_assert(ARRAY_SIZE(sdram_configs) > 0,
+> >>> +           "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP options");
+> >>> +
+> >>>    struct ddr_phy_skew skew = {
+> >>>    #include    "sdram-px30-ddr_skew.inc"
+> >>>    };
+> >>> @@ -691,19 +688,11 @@ out:
+> >>>        return ret;
+> >>>    }
+> >>>
+> >>> -struct px30_sdram_params
+> >>> -             *get_default_sdram_config(void)
+> >>> -{
+> >>> -     sdram_configs[0].skew = &skew;
+> >>> -
+> >>> -     return &sdram_configs[0];
+> >>> -}
+> >>> -
+> >>>    /* return: 0 = success, other = fail */
+> >>>    int sdram_init(void)
+> >>>    {
+> >>>        struct px30_sdram_params *sdram_params;
+> >>> -     int ret = 0;
+> >>> +     int ret = 1;
+> >>
+> >> @Massimo: question: why the need to change ret to 1?
+> >>
+> >> Because the driver enforces sdram_configs array to be non-empty, we're
+> >> guaranteed to do at least one loop and thus ret is guaranteed to be set
+> >> properly.
 > >
-> > issue: too much done in one commit
+> > You are right, the static assert guarantees ret to be set at least once.
 > >
-> > Please split this into multiple commits. I could identify:
-> > - add SoC dependency for existing DRAM Kconfig symbols (with the change
-> > to the helptext to make it generic)
-
-I will do it in v3.
-
-> > - add new DDR3 symbol and gate existing code with it. That is, rv1126
-> > and px30 should have their #else for their DDR3 timings gated by this
-> > symbol. A new #else can call #error so the build fails in case of
-> > incorrect configuration, like you did here,
-
-I will do it in v3. Do you agree on keeping in this commit the default y for
-the new DDR3 symbol if none of the other RAM_ROCKCHIP symbols are selected?
-This should avoid affecting defconfigs.
-
-I will also drop defined/IS_ENABLED substitutions, see below about this topic.
-
-> > - enforce only one selectable DRAM init for PX30 and RV1126,
-
-I will do it in v3.
-
-> >
-> >>   config RAM_ROCKCHIP_DDR4
-> >>       bool "DDR4 support for Rockchip SoCs"
-> >> +    depends on ROCKCHIP_PX30 || ROCKCHIP_RV1126
-> >>       help
-> >> -      This enables DDR4 sdram support instead of the default DDR3
-> >> support
-> >> -      on Rockchip SoCs.
-> >> +      Enable DDR4 sdram support on Rockchip SoCs.
-> >>   config RAM_ROCKCHIP_LPDDR2
-> >>       bool "LPDDR2 support for Rockchip SoCs"
-> >> +    depends on ROCKCHIP_PX30
-> >>       help
-> >> -      This enables LPDDR2 sdram support instead of the default DDR3
-> >> support
-> >> -      on Rockchip SoCs.
-> >> +      Enable LPDDR2 sdram support on Rockchip SoCs.
-> >>   config RAM_ROCKCHIP_LPDDR3
-> >>       bool "LPDDR3 support for Rockchip SoCs"
-> >> +    depends on ROCKCHIP_PX30
-> >>       help
-> >> -      This enables LPDDR3 sdram support instead of the default DDR3
-> >> support
-> >> -      on Rockchip SoCs.
-> >> +      Enable LPDDR3 sdram support on Rockchip SoCs.
-> >>   config RAM_ROCKCHIP_LPDDR4
-> >> +    depends on ROCKCHIP_RK3399 || ROCKCHIP_RV1126
-> >>       bool "LPDDR4 support for Rockchip SoCs"
-> >>       help
-> >> -      This enables LPDDR4 sdram code support for the platforms based
-> >> -      on Rockchip SoCs.
-> >> +      Enable LPDDR4 sdram support on Rockchip SoCs.
-> >
-> > Because I checked, and for future reference:
-> >
-> > PX30 supports LPDDR2/LPDDR3/DDR3/DDR4. Only one selectable at a time
-> > currently.
-> > RK3368 only supports DDR3.
-> > RK3066 supports DDR3/LPDDR3 but only DDR3 is used (MK808 device,
-> > configuration via Device Tree and OF_PLATDATA)
-> > RK3188 supports DDR3/LPDDR3 but only DDR3 is used (Radxa Rock,
-> > configuration via Device Tree and OF_PLATDATA)
-> > RK322x supports DDR3/LPDDR2/LPDDR3 but only DDR3 is used (RK3229 EVB,
-> > configuration via Device Tree and OF_PLATDATA)
-> > RK3288 supports DDR3/LPDDR3, both used via e.g. Rock Pi N8 (LDDR3) and
-> > Rock2 Square (DDR3), configuration via device tree and OF_PLATDATA)
-> > RK3328 supports DDR3/LPDDR3/DDR4, all used, via e.g. Rock Pi E (DDR3),
-> > Rock64 (LPDDR3) and Orange Pi R1S Plus (DDR4).
-> > RK3399 supports DDR3/LPDDR3/LDDR4, all used, via e.g. Puma (DDR3), Gru
-> > Bob (LPDDR3), PinePhone Pro (LPDDR4). Either DDR3/LPDDR3 or LPDDR4, not
-> > both. We should check for this in the driver.
-> > RV1126 supports DDR3/DDR4/LPDDR3/LPDDR4, but no timings for LPDDR3. Only
-> > one selectable at a time currently.
+> > For variables - and logic in general - which are in the local scope, I'm used
+> > to rely as little as possible on conditions and assumptions out of that local
+> > scope. But I respect different opinions and approaches, so if you prefer I can
+> > drop the initialization at all, or restore the zero init.
 > >
 >
-> And RK3036 only has DDR3 boards supported.
+> Up to you, but if you keep a change to ret, have it at least -1 so it
+> obviously shows when reading that an error is expected to be returned by
+> default.
 
-I think this information, even if available in the public domain, could be
-useful also in U-Boot Rockchip documentation: would you like me to try to add
-it to the documentation within another series? It could be useful to know if
-these drivers have ever been tested/used in the past with RAM types currently
-not used by any of the boards maintained in U-Boot.
+Right. BTW, the line just above sdram_init() definition says:
+/* return: 0 = success, other = fail */
+...so 1 should be considered a valid error return value too... ;)
 
 >
-> > The common theme though is that they are all configured via Device Tree
-> > (via OF_PLATDATA) where the dramtype is hardcoded, and this here would
-> > be the first to try to do autodetection of the DRAM and init properly.
+> You can also check if not setting ret doesn't actually save you some
+> bytes in the final binary.
+>
+> suggestion: Maybe:
+>
+>         for (int i = 0; i < ARRAY_SIZE(sdram_configs); i++) {
+>                 sdram_configs[i].skew = &skew;
+>                 sdram_params = &sdram_configs[i];
+>                 if(sdram_init_detect(&dram_info, sdram_params))
+>                         continue;
+>
+>                 sdram_print_ddr_info(&sdram_params->ch.cap_info, &sdram_params->base, 0);
+>                 return 0;
+>         }
+>
+>         return -1;
+> }
+
+I will try some alternatives to find the best in size, thanks for the
+suggestion.
+
+BTW, do you mean that I can also drop the printascii("out\n")? Really?! More
+than six years ago Miquel Rynal provided a patch that Kever accepted [1][2]
+but it has never landed into main (master at that time) branch really.
+That "out" on console really annoys me!
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20200317153217.1493-1-miquel.raynal@bootlin.com/
+[2] https://lore.kernel.org/u-boot/32e592dd-4a7e-ddaa-a4e0-e61686006a3f@rock-chips.com/
+
+>
+> can make the binary even smaller without the need for the ret variable
+> at all and removes a bunch of if conditions/jumps and is also valid
+> without the static_assert on the sdram_configs array.
+>
+> thought: I'm also not sure why we have a global dram_info? If it's not
+> needed, then we can have it as a function-local variable in sdram_init
+> and initialized in one go:
+>
+> struct dram_info dram_info = {
+>         .phy = (void *)DDR_PHY_BASE_ADDR,
+>         .pctl = [...]
+> };
+>
+> if it needs to be global, we can still initialize it in one go and avoid
+> the multiple assignments in sdram_init.
+
+I have a few other optimizations, as mentioned. I will send a dedicated series
+for them, after this one.
+
+>
+> > By the way, in the original code, which is the need to init ret to zero? In that
+> > case, there is a local scope evidence and guarantee that it will be set before
+> > using.
 > >
-> >>   endif # RAM_ROCKCHIP
-> >> diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/
-> >> sdram_px30.c
-> >> index 37e62120504..c7ff924b2c5 100644
-> >> --- a/drivers/ram/rockchip/sdram_px30.c
-> >> +++ b/drivers/ram/rockchip/sdram_px30.c
-> >> @@ -123,15 +123,24 @@ u32 addrmap[][8] = {
-> >>   struct dram_info dram_info;
-> >> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3) + \
-> >> +    IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4) + \
-> >> +    IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2) + \
-> >> +    IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3) > 1
-> >> +#error "This driver only supports one DRAM configuration at a time"
-> >> +#endif
-> >> +
-> >>   struct px30_sdram_params sdram_configs[] = {
-> >> -#if defined(CONFIG_RAM_ROCKCHIP_DDR4)
-> >> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3)
-> >> +#include    "sdram-px30-ddr3-detect-333.inc"
-> >> +#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
-> >>   #include    "sdram-px30-ddr4-detect-333.inc"
-> >> -#elif defined(CONFIG_RAM_ROCKCHIP_LPDDR2)
-> >> +#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
-> >>   #include    "sdram-px30-lpddr2-detect-333.inc"
-> >> -#elif defined(CONFIG_RAM_ROCKCHIP_LPDDR3)
-> >> +#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
-> >
-> > question: what's the benefit to switch defined() to IS_ENABLED?
+>
+> Yeah, let's agree we've got a lot of unused and non-optimal code in
+> U-Boot for Rockchip boards :) We can always improve :)
 
-None. Having checkpatch complain with - WARNING: Use 'if
-(IS_ENABLED(CONFIG...))'
-instead of '#if or #ifdef' where possible - I misinterpreted and
-supposed to make
-it quiet in this way. I was wrong and I did not notice checkpatch was
-not quieter
-at all, obviously. Sorry. I will avoid in v3.
-
-> >
-> > It almost made me miss the fact this reorders the DRAM timings array.
-
-I wrote about the reordering based on alphabetical criteria in the cover letter
-description, and cited it in the v2 changes list, too. Can I help if I put the
-version changes list per patch instead of grouped in the cover letter?
-
-> >
-> > I think the reordering should be made in a separate commit, possibly the
-> > one where it's possible to select more than one
-
-In v3, the reordering will be within the "more than one" commit. Right now,
-that commit affects PX30 only, but reordering will impact RV116 code, too:
-I would prefer to keep the ordering criteria (alphabetical) shared between
-all Rockchip SoCs.
-
-If you prefer reordering in a dedicated commit instead, let me know and I will
-split reordering from "more than one".
-
-I will send the v3 rebased on next after Monday merging.
-
-Thanks for your time and your support. I really appreciate.
-
-Regards,
+Yes! Thanks. Regards,
 Massimo
 
-> >
-> > Cheers,
-> > Quentin
 >
+> Cheers,
+> Quentin
