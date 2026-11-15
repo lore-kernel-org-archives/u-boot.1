@@ -2,137 +2,153 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CC1D606A323
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 03:50:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5699D606A323
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 04:24:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=B4j3qYB0;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KGvDXLkf
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WgUkaI2A;
+	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=R9Qk1PDm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3E632606E3;
-	Sun, 15 Nov 2026 03:50:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 22BE4606C4;
+	Sun, 15 Nov 2026 04:24:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zNBnOOzXuBZ1; Sun, 15 Nov 2026 03:50:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4FDD46073F
+ id i7gUAOm9aP8A; Sun, 15 Nov 2026 04:24:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E4DA160623
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794714645;
-	b=D0gvgFBBv5tx8Fe5XOW2lcoyN5KegdtiD9AcIzEsdFuQkpTVXQDUCVrynoy8nGml9O5Q
-	 fw2rrAp24PB4ij/U7vwmaBUhuCOgN/flpWwNY6BEQ1grXgmcM+QxrSdjlISV19cnKtHpx
-	 kdRj0jUtQcedx3feFVPM8URNuGg9OJnCQx5G5eZe3QH1rFL+IeQBd52ke32l7ctcLAhuz
-	 RM90VTKgIREqcp04G8r8TO4ttmRuU/JNdLLF9hETX00WQq9FrStA0+AG/w3ZALHXEAD6l
-	 b2nMxynvlbauWDe921OS9uPEVRT57SQKf24x0MTovKuMZTkzG6NGWnb5sd4Yzoo1JEg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794716645;
+	b=RfSkuTogUchx63LexRq2k+8N8yDfuoK4FoIedVdPDajrh3eK2DTWGCBUcJcq8rTKi7lv
+	 Uf4qTVHb0u549lTtxSv4iOIwL2HudyB2P4M8OHMTF6pvyehwwfNRqZxdjM2zDyZagv9pN
+	 S+35vyk/A0SFfTzXFadbV5q7a8Tii4+I9lPcd72ahvUegHDoj7tCRpRUxT9N7VHAkHSzs
+	 nJtEWgiLTEV/zwDA8jfSuCbpBMf/NEoUXRkgklJyECUFtmZkuIEoBUg936qwJReoZnrgn
+	 fYkMKN4P54rEJSRe5FwTvi9CP4UFc28vXl5KpuUf2iH7vI3hIidG1oUFM8wRsaZph5w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794714645;
+	c=relaxed/relaxed; t=1794716645;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Content-Transfer-Encoding:X-BeenThere:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=jzBHawrSi2BsPVL+Ic5A72BcVVlzspUs+xjYOYJxrdk=;
-	b=devEpsZig6c+KdhXwpmkcd7pgvuYowKINdfMMoqF+3XDEJAJH+ZXZvltZus57cBaf/xq
-	 xFzI51QD10aIX+pAiSN9UoGnT0KzZwK9tbiUZX0+v5BLw9j63BnSZv/1ofTurDvZVe3Cp
-	 DiAfi6ADqQf9FUBLeJ0FIOvvUsePPuzfhRcFjxLMkeLXXJDajiLUI8mXYWp4IsVAcMFbY
-	 c0U4Oyasznfl6SddgQ7ONAGp0NMY1Z1DOFrlkvFTIU+mdmypnGofqo7tGw7cdVP6lOZgg
-	 sHjyOPoXFzoRgHIA3taqyOAUjSierjrVoD2uMFCdPeyvw+ZLjoJ3V5jTI/pSJ9Zb5sA==
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=hroz81vLEvTa3p5ywtlUHFWuyEQIHNEmPM4j9pMLXZ4=;
+	b=l8yPCrI2VvKrRsR1YeSBQHVCzpOWn0DsMaXh4viVQ4cQqxA4+eNe5tNuYEt243+LXKxp
+	 y1ZZO+/Ke0JTfTFsCZS06ZrjaPY0rVmGLg61P3nUuNjN/qV8k7DTTOchYou30Z7S2f4f2
+	 OvuKmjphVOkJ+PFYAlyeXJF2eV0TRkkNycBbe+RDEap6hORxoN1pYFqS5cyMdaO9wRjXH
+	 9UQ3IowT6Ikg/g+LuehTYCp8G+aSksK28bUfDckkKSehvzmukiKDSQIMwW8cnQR7nCtPr
+	 8qo3RNLh9QryU3cNKKl4oY2MDkRIJTl4bDz9Z3VO/Yl478fiVwkmFvzISwMF/dZRvmQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KGvDXLkf;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794714645;
-	bh=jzBHawrSi2BsPVL+Ic5A72BcVVlzspUs+xjYOYJxrdk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794716645;
+	bh=hroz81vLEvTa3p5ywtlUHFWuyEQIHNEmPM4j9pMLXZ4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=B4j3qYB0iQ24hpJbaCmjQpfK/AaHQPlkHQtvHANpIqs3oKBw0J1t/RmQtKHbjJUSc
-	 G17Bf2a6Gur8cUUUi5VU2iQihQ0Y/glaTmooMIUG2SAsVHkWevWnHksamtmSXltrET
-	 CAsM/Nd8O0lTD0/Ouwi7S2SvNs8StOv3Zu5ldQsL1U32w+ZCnoe/neRah9c2OQTpaw
-	 IYRVxPd44cdpw9SxhkrWk/cRcyR21/zI957hCmEhGJzUZ2uOfEt1NvFFPH/cVgrvKA
-	 DY83MrGm1Xk0aCVoNMkY37cwOFG4yfhucBexULCnc+eQdgNdc31b3ykhQUm25KSxsR
-	 rbVFyyYJRdpPg==
+	 From;
+	b=WgUkaI2Ak3EK2nmIrFjb9lkwxyz4i2yIdL0N1SWS7Ac0EFlWkNgv0dTNL2Ppsi6xP
+	 155WLkhT+q0X/wtHiEPmcJ6hEQZm6Hg1vGQzc5oHUhoYHEql+wxRDsdQaLkUrFbSe9
+	 55csNQP29QNDLJGzzqbjqtaRGIdU0hCyc0L67UuDdIqbJFQlMW7PA60hRKknTUMwIf
+	 6sxbAJGyrKfBDdqLzZ6E0OCTBCYUzX1riebqVha+2aho5jl/G7/0/tnxelADggLnyO
+	 c8ton9VZa1MhSa6ZqYStmC1Pg8257y81WO7Yuu0jGe+k4Lc5ijXHLV2QUmUACSMANS
+	 AIlU3di0jyOQA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4FDD46073F;
-	Sun, 15 Nov 2026 03:50:45 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6620A2FE
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:50:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E4DA160623;
+	Sun, 15 Nov 2026 04:24:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 489871A6
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:18:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 57F13606C6
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:50:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2632E40079
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:18:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Om-UrszIFQGr for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 03:50:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 83137605EF
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org; envelope-from=devnull+iav.iav.lv@kernel.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=KGvDXLkf
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 83137605EF
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:50:36 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 010AA6184A;
- Sun, 15 Nov 2026 03:50:35 +0000 (UTC)
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OxKk3oWwMvxu for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 02:18:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5612140068
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=185.125.188.122
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
+ helo=smtp-relay-internal-0.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=R9Qk1PDm
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5612140068
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:18:04 +0000 (UTC)
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 081CE1F000C7;
- Sun, 15 Nov 2026 03:50:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794714634;
- bh=jzBHawrSi2BsPVL+Ic5A72BcVVlzspUs+xjYOYJxrdk=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=KGvDXLkfwAc88yLsf5YoeA1yBxVlaQNmztpMwyWO3Al8V3AJE1acj5C2M+eua031i
- br+xyb5BMpjCsiVe5NwFj3RsWJJYZ5XZr9pQ0aQj2wDnqU9tmiYXMxX8ynJo4zew7L
- AKjE8cK/Yr01LbppUpc8+JIX44q8meupfLrrz9b86VDl5kOqTgsTgL5pyGhR4UO7PE
- WdwCXbJdIYvVOd01BSgl338mOhq0R4Ux5SAw+Vhw9JTdAvW+brRsJDw/P39XlQUVQg
- JX99sMSHEDPdPM1b6np+pydSrFDWZSrQh9+usDgL16wGimxSuwfODfgK/o8uMIapUO
- rSgeET0EBUFqw==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id 8AB3449F61;
- Sun, 15 Nov 2026 03:50:33 +0000 (UTC)
-From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
-Date: Sun, 15 Nov 2026 03:50:32 +0000
-Subject: [PATCH 3/3] configs: odroid-c4, odroid-hc4: enable Wake-on-LAN
- from suspend
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 016F13F030
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:18:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1794709082;
+ bh=hroz81vLEvTa3p5ywtlUHFWuyEQIHNEmPM4j9pMLXZ4=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=R9Qk1PDmD83wbqaCYMu/xoBJmL87kOU21AdwUdrg6ruT2LCagwZikMfct9Q8XsLeE
+ Nw/ZsgctufZkBPi3UH1/uJQUtmDvRk89FeBAzOjLEcRb8865AYN8NjTheJlwDDugcc
+ +Orkh69oTD6gltOvoV7oTZsyS3qwAMHA4hcX9rGqhlGhlkasdc9pKjqSALf+TnYPMm
+ Cj2VxDyYWrkExVjNCQlxfFWNrnWmOZ2Pq/KqugegfWbCOoMbdJ+aAAl1maum8+9ou2
+ 5MIV8yiT7hZ2Ccj+tDfzqSw3VI41i5ePDGnAk1Onll2qT//RT4JYP/yeOAvhdykXkG
+ MdKSFN8DyqmpRVD1Y7QRWYPuvh+o1OTtz1lCVBblE2/h6kV2F7cXzmx+0Sfw73REXX
+ HniBzbIpcwpxnb/VvrMSQUHj/RgKRbGnJbVH8VsF0CA80OfvUClrzoMOgAJWrcLNhl
+ N1nF8nI2IOAnney3WhiWGp9Lyt12ay5bZo9u911KTc9KjC23bdN30CVw+Bvv6YtOTM
+ QL6V7nAdZoQW5HZtu4Uqdh1rwycs6iYL+vgxxFNscuRwhIHFDKjV8myyqMRP2L6u1G
+ Kv8v0AWsW/Tm4yshA+vDEvWiSkY06FTwQ+XKlSkhR4Xyc7KxZBHsUkQHzOTcns/WaM
+ N6oZMCfWy5QqAEfLLpH8+Ie4=
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-6b763d2c2cdso1960232a12.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 14 Nov 2026 18:18:01 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794709081; x=1795313881;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=hroz81vLEvTa3p5ywtlUHFWuyEQIHNEmPM4j9pMLXZ4=;
+ b=FgQWHOPlTTU1qG6KqQHgEAkxFAxvj+4+kXYU15SMMKs9hAE2/Hedi85t/TjYyw1ppj
+ ZH4iyqX1yw/boJQfAcD9jw6zQy3DyOxUcfpJLDBp0h7KWNw5rmxj0qCWsPaN/17n0738
+ YnofE/ovJDbf9zl6Kd1aR4R3knbiLE/YT9cxeJ2SaLZ+2tdElaP6bExJSfKmHMAq0eNl
+ UUP2fqGnObtKH5FYMxSXV+thZP7hzI4qE50Z9T8XPirZZczEXtPhAmuWGBAktN0ioXT/
+ GFynd0j+eo/NeIZ6S0AM8D0MJ7cUJyIt/4/bYLo85EW3u6oAHAvAvufEl+v9GKdm8Q36
+ N3sw==
+X-Gm-Message-State: APuU4Z819IUYuZONxlH8zw9erZFqbIMdSZQ7dPMRLxK3MY5n7OpviPim
+ rcsp0lTUJ20l3czsXXBW8QFVhdyOuNbDqFVL9S05CJp0nsSJND7+CG7zBFvxtdvR0FWT//KGiyG
+ 0XnaDsQuyFf8YvnsvhXCqsZo+ogsI4HLMM0c9/y/350CY5EGKZBk7iBHzieuNrolS4p07RkoojA
+ YO8F/e2fGlqzcP2LQVFYI0kZUXie7pzHyyYSK76FBZG3cmVVU2LGt16rDc8HtF
+X-Gm-Gg: AYBFou1/pug1mV1/Mnx7CXQMEhPxkoeiH92aJH0qYrZZqidVP/nAf0vRJBkic0PZ7aJ
+ 1NGbSMrINuuBx4bjkIZ6i56Bo3YKJbiEcUy3qQF100NP0w6v3WT7Unh8kYStvIrOqGBVSvRSrJl
+ q2Yh09XGtskJ2ueCr/85P/cfrSdqZkopCU4z+7kX/LSnQB2+PiefM/qbZL
+X-Received: by 2002:a05:6402:2804:b0:6b7:245a:a509 with SMTP id
+ 4fb4d7f45d1cf-6b7c0d166cfmr4295973a12.40.1794709081624; 
+ Sat, 14 Nov 2026 18:18:01 -0800 (PST)
+X-Received: by 2002:a05:6402:2804:b0:6b7:245a:a509 with SMTP id
+ 4fb4d7f45d1cf-6b7c0d166cfmr4295967a12.40.1794709081300; Sat, 14 Nov 2026
+ 18:18:01 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261115-b4-meson-scp-wol-v1-3-80c3e9f4deda@iav.lv>
-References: <20261115-b4-meson-scp-wol-v1-0-80c3e9f4deda@iav.lv>
-In-Reply-To: <20261115-b4-meson-scp-wol-v1-0-80c3e9f4deda@iav.lv>
-To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, 
- Igor Velkov <iav@iav.lv>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3105; i=iav@iav.lv;
- h=from:subject:message-id;
- bh=TR7+WSUw912x4EZh77Z+Wcm/UCk/rDcRO5KtEgwiol8=;
- b=owGbwMvMwCVmNH1q96v4SmbG02pJDFk/dTgiX8SIPuY++9jozibj8weXz5lx9O2Bp++28Tcoa
- YYFe92Y01HKwiDGxSArpsgy4ZDGrYwlV//6e5g/gJnDygQyhIGLUwAmUj2X4Z/u4qVr2R973hUN
- +una0cPo8ftPZuU1sTnL03pm/he5vzyJ4a9Q59b8bzkfdqterz1qoyyiniC4NMzo76brqxguVF1
- u+cEOAA==
-X-Developer-Key: i=iav@iav.lv; a=openpgp;
- fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
-X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
-X-Original-From: Igor Velkov <iav@iav.lv>
-Content-Transfer-Encoding: 7bit
+References: <20261109221650.GA3741582@bill-the-cat>
+In-Reply-To: <20261109221650.GA3741582@bill-the-cat>
+From: Aristo Chen <aristo.chen@canonical.com>
+Date: Sun, 15 Nov 2026 10:17:49 +0800
+X-Gm-Features: AclHuK8z5o0yOn8u_5oeVOgb4xnDgNqscm9-qJn9WP4diVeql0jwETc_5dXMBaU
+Message-ID: <CAA=k7=kgnH8EPpHpdKhqF98ykJG6QdaeYD53sBEdap5OudZwLw@mail.gmail.com>
+Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, Linus Walleij <linusw@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 15 Nov 2026 04:24:04 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,89 +158,163 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: iav@iav.lv
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Igor Velkov <iav@iav.lv>
+Hi Tom,
 
-Enable CONFIG_MESON_G12A_SCPI so that U-Boot tells BL301 whether to
-wake the board on the Ethernet PHY in suspend, and describe it in the
-board docs.
+On Tue, Nov 10, 2026 at 6:16=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> Here's the latest report.
+>
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Mon, Nov 9, 2026 at 4:13=E2=80=AFPM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+>
+>
+> Hi,
+>
+> Please find the latest report on new defect(s) introduced to *Das U-Boot*
+> found with Coverity Scan.
+>
+>    - *New Defects Found:* 2
+>    - 2 defect(s), reported by Coverity Scan earlier, were marked fixed in
+>    the recent build analyzed by Coverity Scan.
+>    - *Defects Shown:* Showing 2 of 2 defect(s)
+>
+> Defect Details
+>
+> ** CID 661899:       Insecure data handling  (TAINTED_SCALAR)
+>
+>
+> _________________________________________________________________________=
+____________________
+> *** CID 661899:         Insecure data handling  (TAINTED_SCALAR)
+> /boot/image-fit.c: 2244             in fit_image_load_storage()
+> 2238            fit_image_get_comp(fit, noffset, &img_comp);
+> 2239
+> 2240            if (img_comp =3D=3D IH_COMP_NONE && load_op !=3D FIT_LOAD=
+_IGNORED &&
+> 2241                !fit_image_get_load(fit, noffset, &img_load)) {
+> 2242                    dst =3D map_sysmem(img_load, data_sz);
+> 2243
+> >>>     CID 661899:         Insecure data handling  (TAINTED_SCALAR)
+> >>>     Passing tainted expression "data_sz" to "imagemap_map_to", which =
+uses it as an offset.
+> 2244                    mapped =3D imagemap_map_to(images->imagemap, data=
+_off, data_sz,
+> 2245                                             dst);
+> 2246                    unmap_sysmem(dst);
+> 2247            } else {
+> 2248                    mapped =3D imagemap_map(images->imagemap, data_of=
+f, data_sz);
+> 2249            }
+>
+> ** CID 661898:       Insecure data handling  (TAINTED_SCALAR)
+> /drivers/pinctrl/pinctrl-nomadik.c: 171           in nmk_pinctrl_set_stat=
+e()
+>
+>
+> _________________________________________________________________________=
+____________________
+> *** CID 661898:         Insecure data handling  (TAINTED_SCALAR)
+> /drivers/pinctrl/pinctrl-nomadik.c: 171             in nmk_pinctrl_set_st=
+ate()
+> 165                             continue;
+> 166
+> 167                     cfg =3D ofnode_parse_phandle(node, "ste,config", =
+0);
+> 168                     if (!ofnode_valid(cfg))
+> 169                             cfg =3D node;
+> 170
+> >>>     CID 661898:         Insecure data handling  (TAINTED_SCALAR)
+> >>>     Using tainted variable "count" as a loop boundary.
+> 171                     for (i =3D 0; i < count; i++) {
+> 172                             const char *name;
+> 173                             unsigned int pin;
+> 174
+> 175                             ret =3D ofnode_read_string_index(node, "p=
+ins", i, &name);
+> 176                             if (ret)
+>
+>
 
-Signed-off-by: Igor Velkov <iav@iav.lv>
----
- configs/odroid-c4_defconfig      | 1 +
- configs/odroid-hc4_defconfig     | 1 +
- doc/board/amlogic/odroid-c4.rst  | 9 +++++++++
- doc/board/amlogic/odroid-hc4.rst | 9 +++++++++
- 4 files changed, 20 insertions(+)
+I had a look at both.
 
-diff --git a/configs/odroid-c4_defconfig b/configs/odroid-c4_defconfig
-index f42fa0789d6..55e62f7f1cf 100644
---- a/configs/odroid-c4_defconfig
-+++ b/configs/odroid-c4_defconfig
-@@ -11,6 +11,7 @@ CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-sm1-odroid-c4"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_MESON_G12A=y
-+CONFIG_MESON_G12A_SCPI=y
- CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_DEBUG_UART_BASE=0xff803000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/odroid-hc4_defconfig b/configs/odroid-hc4_defconfig
-index 694db0684e7..1d18070d265 100644
---- a/configs/odroid-hc4_defconfig
-+++ b/configs/odroid-hc4_defconfig
-@@ -11,6 +11,7 @@ CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-sm1-odroid-hc4"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_MESON_G12A=y
-+CONFIG_MESON_G12A_SCPI=y
- CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_DEBUG_UART_BASE=0xff803000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/doc/board/amlogic/odroid-c4.rst b/doc/board/amlogic/odroid-c4.rst
-index 6994b958cf8..2df7afd71bc 100644
---- a/doc/board/amlogic/odroid-c4.rst
-+++ b/doc/board/amlogic/odroid-c4.rst
-@@ -141,3 +141,12 @@ Then write the image to SD or eMMC with:
-     $ DEV=/dev/boot_device
-     $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
-     $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
-+
-+Wake-on-LAN from suspend
-+------------------------
-+
-+The BL301 firmware built from the Hardkernel sources wakes the board on the
-+Ethernet PHY interrupt, and keeps the VCCK_B and 3.3 V rails on in suspend
-+for it, only when told to. With ``CONFIG_MESON_G12A_SCPI``, U-Boot tells it
-+to when the PHY node of the device tree passed to the OS has the
-+``wakeup-source`` property, and tells it not to otherwise.
-diff --git a/doc/board/amlogic/odroid-hc4.rst b/doc/board/amlogic/odroid-hc4.rst
-index 1d37be2d80e..ccf30de5350 100644
---- a/doc/board/amlogic/odroid-hc4.rst
-+++ b/doc/board/amlogic/odroid-hc4.rst
-@@ -140,3 +140,12 @@ Then write U-Boot to SD or SPI-NOR with:
-     $ DEV=/dev/boot_device
-     $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
-     $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
-+
-+Wake-on-LAN from suspend
-+------------------------
-+
-+The BL301 firmware built from the Hardkernel sources wakes the board on the
-+Ethernet PHY interrupt, and keeps the VCCK_B and 3.3 V rails on in suspend
-+for it, only when told to. With ``CONFIG_MESON_G12A_SCPI``, U-Boot tells it
-+to when the PHY node of the device tree passed to the OS has the
-+``wakeup-source`` property, and tells it not to otherwise.
+CID 661899 (image-fit.c) is real, and it is a write rather than just a
+read. In fit_image_load_storage() data_sz comes from the sub-image's
+data-size property. For an uncompressed image with a load address that
+the caller asks to have loaded (a ramdisk or a loadable, for example,
+but not the kernel, which bootm moves later) it is used as the length of
+a read straight into that address:
 
--- 
-2.43.0
+dst =3D map_sysmem(img_load, data_sz);
+mapped =3D imagemap_map_to(imagemap, data_off, data_sz, dst);
 
+Two things make that exploitable on a signed FIT:
 
+ - data-size is in exc_prop[] in boot/image-fit-sig.c, so it is not
+   covered by the configuration signature. The value can be enlarged
+   without invalidating the signature.
+
+ - On the imagemap storage path the sub-image is streamed to its load
+   address here, and fit_image_load() only runs fit_image_select() (the
+   data hash) afterwards. So the copy sized by the untrusted data-size
+   lands in RAM before the hash is checked.
+
+Reproduced on sandbox with a signed FIT (sha256,rsa2048) read through an
+imagemap over a disk partition. With the ramdisk data-size bumped from
+0x1000 to 0x3000, the configuration signature still verifies OK, 0x3000
+bytes are written to the ramdisk load address, and only then does the
+data hash fail and bootm abort. The 0x2000 bytes past the signed image
+are already overwritten with whatever follows the FIT on storage; the
+honest image leaves that memory untouched. load and entry are signed, so
+the base address cannot be moved on a signed FIT, but the overflow past
+the intended image (bounded only by the 32-bit data-size and the end of
+the partition) is controlled.
+
+No in-tree production caller supplies a non-NULL imagemap yet: bootm
+propagates one from struct bootm_info, but imagemap_create() is only
+reached from the unit tests, and the bootmeth_openwrt consumer that
+would populate it, posted as an RFC in February, has not been merged.
+The code is in the tree, though.
+
+The imagemap follow-up series that just landed ("imagemap: structural and
+cosmetic review follow-ups") refactors this function and adds the
+data-offset range check, which is good, but it does not bound data-size,
+so CID 661899 survives it. Daniel's series that is on the list now
+("imagemap: Fix boot errors and resource lifetimes") does not touch this
+function either.
+
+I will send a fix as a separate series,
+
+CID 661898 (pinctrl-nomadik.c) is a false positive. count is
+ofnode_read_string_count() on the "pins" property of each child of the
+selected pinctrl config node, used as the loop bound, but each iteration
+reads pins[i] with ofnode_read_string_index() and returns on the first
+failure, so an out-of-range index is never dereferenced whatever count
+is. The device tree here is the platform's own description, not external
+input.
+
+Best regards,
+Aristo Chen
+
+>
+> View Defects in Coverity Scan
+> <https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+>
+> Best regards,
+>
+> The Coverity Scan Admin Team
+>
+> ----- End forwarded message -----
+>
+> --
+> Tom
