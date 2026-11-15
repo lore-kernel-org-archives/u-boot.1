@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CD38606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EC2E606A323
 	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 10:49:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zVcSe5N8;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nit7k25A;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jJ+XMG/v
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WFG9wa0n;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E509SZ50;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kkBymrGm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 327F760740;
-	Sun, 15 Nov 2026 10:49:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 42A87405AA;
+	Sun, 15 Nov 2026 10:49:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Tv7e34GpERrp; Sun, 15 Nov 2026 10:49:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5B1BA6063E
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794739785;
-	b=mt8rMMMgYisSHEb9Qjd+5+wpy53MOE5Q0Nrqb8gcaxvJTed5A7JXqDoNlDnJ5+sAvAUt
-	 556Qzk3PVuTH6lmRXd72H9g73d4zP/uwR9LG3BN0E4Ecb+QTvrWnV0IXLGKgTXnl1I5Q5
-	 Biy6EM7OXpBTo9zqQ/OQBQA7y2ZGUn4RYTbJ3y91CwnaTN7pL7Q0GJRuEDVJ4JX4FfA/w
-	 CvRKhCpvGUy4vbPNeyO38Y5UdP9LRBGw1u+s8CRkSZNtuvmr933ve/LAnRvkk3sOI2YOU
-	 LS3+3fiOHMuODcy8UvlfH1XY2St0tHDxosdhIIUuG/UDOJbef1E+D3o9pTE0CMKg+nA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qIDAtN-wAfrQ; Sun, 15 Nov 2026 10:49:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 95DB74062C
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794739787;
+	b=kIYlTKgrpVkLJmLBwybe18q1VNAAe4HHyIe/lA/eDMx+sRwDhVWfvPREPUhbx1it0WxT
+	 Lq9/t6Z83/DqItGa5Cug99xr6B5rk0a4aN90PwHBl3GAdyRWdZqwwr/X0RCyI+V8D39yE
+	 BmW90Ny5Q7L4X2UtMy4WgfqL4+Lpr6XGZwQT/njpOH0vlYu95Ras//0m4mDY5KGgIY4bp
+	 uJ75fhv9Vpopm7EDf9APb/LKlQVtC38LDnCF6SCRUeyJ0gvhyg5UIJDS94J7PthS8qAdr
+	 B/pRHCSCieGjoIznu2thqia6quqcAFDQpDefSks1lHytm6uF4ohwfWgrCr/oFysClcA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794739785;
+	c=relaxed/relaxed; t=1794739787;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,145 +32,146 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=2wGC8AP5A6wC8ZFVm93nms1Ww3e8j8mDTEipxaB/wPs=;
-	b=NCMLMXx8jfWi9bVVw3sa8ybk+xj86J9RrXsy3yqEA4Y/ba2WwPIoAnCDxLUfqir5Q8oQ
-	 Jf1Bal9j7Nk9YHkhxk/vyCS91WkVvx23CMozU8Ry07ldsYktnZds7NCUI7/IeCzaYrv8e
-	 fh9pSVFebH+HqdMbccluRDHBvARRkWp2HbOQ4rYGiZreZx7PnASYguxHj+viwcBxn0mIO
-	 RUQigmjixXofroIlxv4NdUzARPvJbHwr+j0PCWBpf0S97DkRj8u8zZ5+umYd3Iy0CTup+
-	 CSiuLqp9IVys9V0PxTXJIACkg1hA06TZV48WVNlIrvZMAPCXqC8hHi7fLY8x8Xw/eAA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
+	b=FXKAHLkBypbjKtE3ebfcrBOJxM34fzTzKiDd+oRnQWPOQLbwE5pfNkeAQi2M4CET5ASQ
+	 GYvA1JM4ej1gHgRaK2Z/SPa9mc42DnGyiHNEY1unGPp4j01cGzBYU+VLpR/kqGAiOT1+O
+	 ks/iL31D089bAgvgpwbIFcaZloELZecxbrG/6TvYxzv9yCvQldhen65PUcgkhToOuqmw1
+	 pwE1sts6aeGwj7Hhp614QT4AUfN5DJIL711444pt+Lx6aEZFgppmBufBnAu409lMjtsVw
+	 ozwL+1vyMu4uJcUZjWgtpha8iX2n/60R9yXmby3LqLGyjq5avrbJ41efaF1sWwdP3SA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E509SZ50;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kkBymrGm;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794739785;
-	bh=2wGC8AP5A6wC8ZFVm93nms1Ww3e8j8mDTEipxaB/wPs=;
+	d=lists.u-boot-project.org; s=default; t=1794739787;
+	bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zVcSe5N8V0nolvG9urq/DJNMUHGL+St1oCp2ptiq33MJgzHYOg2jxJ45Ja22/WUvz
-	 K6cO7qVA02dJIBc3LL9weu+j0/eKEo+c4JGewC0TOGyRKJK4wuGGMigfMIPjYjqD7Y
-	 OJE6uk/DFksbrwN/M+08Hyhl/QDLBL28uK4VBMfOraOcbAJURhchjZfTkqpP4RlKIa
-	 +vMOeonLteper3tTt15zd3YMOn/IErfszbvzLa2g9PccHjTuwH9ZtiR6LvKDMWL7sI
-	 NExWoSRI3itmjo4N0gXx3xTLpvhZ6AXlnJ2aUnHAREc45WWgyeZc5M+B1uummKjISA
-	 laIS70y6NRE2Q==
+	b=WFG9wa0nkPp+T9rgrXQJUErscCTCsBLEuKGT3Z4sjr4IMDatisRd5jaMzxjzXJ7BU
+	 6TLFxKi5wJeCdiPZ8L04/SqC568bbA+DdAf30hD+CVxR7oo2tKVTHL8gj3SM+E3N1G
+	 hMjYYJ7//v4xLTfZUxo4z9bpl5eyQtItyedM5MInnNC6XiOFTqCNDpJTMbujHt42aI
+	 edJ3KVqlTC8m6YT5smcdOYOxoqXVq2RmftRCWFK9J+Ba9ROoRlVUyLBMVBs16whupd
+	 gTT1PbbW+p/v3iLTh5SW1zanUfomsiHwaApynaxhYCOqSPArzeGkLV7A9v28ywAzsP
+	 Y1CyaU+QdzvTA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5B1BA6063E;
-	Sun, 15 Nov 2026 10:49:45 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3B02870B
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 95DB74062C;
+	Sun, 15 Nov 2026 10:49:47 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B60312E5
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 38A9F40079
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:42 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A7B90405AA
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CZS7H0ItG979 for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 10:49:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 095BE40061
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XT41K7GOja-k for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 10:49:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A903D4062C
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=nit7k25A; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=jJ+XMG/v
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=E509SZ50; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=kkBymrGm
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 095BE40061
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:40 +0000 (UTC)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A903D4062C
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:43 +0000 (UTC)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AF7w6WK2139781
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:40 GMT
+ 6AF7whp41196882
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 2wGC8AP5A6wC8ZFVm93nms1Ww3e8j8mDTEipxaB/wPs=; b=nit7k25AIHxtR9+U
- TXgZvX5peYzVZilaOmtbkL8kS1LohosfyvnPwAQevJDdxt0u/GmFvY9hy+HsriQ+
- 6Nw5aJX4KRKRsSYHi97lN9kA5DmXPceUIp4LCWBlG0Yf2OkGoBnYcEVNjSWprGQC
- hE/8jAoZyeIYXJTQjOsF6T5vUrLZ+bcrEWZZEYOSt6sEFex6IiyLglueaYRZO54n
- o1WN7TFbw1W1RGbwNnN7mfQUzAmeonpkPlQHTVliwajniPOMgNZcivNG2siLhoYv
- aUMfp/QW+SW5RqdwLBN1TLzYguyu2gpCHXh/sBImbaxrKMmrdl1DbL2+EoBeHS7i
- jw9RBw==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhhjtw63-1
+ XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=; b=E509SZ50/RHkFSYX
+ sTbItdmbkQCwyLlC/JnsTRpw6M3VOV99jS64d7V46tsW6snyj8sS3LMUNf0SXz0M
+ 9uNXAfzBU6eEjz/3cZ3e+woHPfgb/MJUkGQ6fp3TBVQZdHk8oDKeT/YZFu83qxUC
+ n2bevdasnjosWkAurGYSMq0jJqVbE2AZ18ZsblEvBH8xT8UcFlxqdyOjp4Bv+7kz
+ IPuyFbKvTf57OMbZULc6tFUuaBohxsj7sLhUddA4MCIbdbRpxQZNdXmNLfroXD4e
+ SrtiU+ZOEp6uVuJuoSt3rLu/DdDzyiRdWr1N//tcHl9fIftoEjBxFGt5fRigzqms
+ 9GgWlg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhmhjscs-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:39 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-944138ed63fso401196385a.3
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:49:39 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:49:42 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-93f20addba1so495278085a.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:49:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794739779; x=1795344579;
+ d=oss.qualcomm.com; s=google; t=1794739782; x=1795344582;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=2wGC8AP5A6wC8ZFVm93nms1Ww3e8j8mDTEipxaB/wPs=;
- b=jJ+XMG/vJQYo/CGxioWQ6EMnk3Uqgtwzctu2HzEEC85Hi6dMpYqqkCBpEPgJFxi5DT
- uK+gYdnnTwfUZ6iZFlD6IyzNWLQQe8TlfgxGGEXq54ify5L0d8JTSwXOYGp4s7LBtL3r
- l0ufh690ANADVGSCbXIgbb2ajUYMkRftQ5Drf6B6RROJ7TpFxZgo0aqBwELrCwE8DECl
- U4FQZ0sK/fV68qoNFQ+GZXA6rvRIC3gbV4nseXhGdw7/FsWrqshDAwjXc0Ng1ZFUrAjk
- J+dd4keYmRtp0tV0wrXu/zKGdgE7xgdLbgoRs/Qh4huKZMsWMZu3JljzAxMk4qHPokku
- qMlQ==
+ bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
+ b=kkBymrGmfjWVZatKZmOwZEMj0CSX3imhwmABZ8cIS1SJQex24B/RiqVD7iK+2/ILMS
+ Y3DTWGIpvPLW+IYXdAOn0v8Nsih6nftEWu5NrXzDZ2hqG3h60UrEe2qDfJiGjdeRtlNG
+ BpQ4TY6WubR2/oRR/uHAR/+sBXWSMaXFkXEPKt4LedYUtwIVRJB2YXwQX8sauzChZeqJ
+ 6aLXtTiImK/FsySj9aai32R80dtRMZ+xvH+dxgQnkmbvYsjKfHNprrAGZGaHKvZ0Yy/T
+ iac8EfNlrohNt7PkykaykAZrZnDnFRs2xsy/BimwUM7Zj1jANX5M05PvObTEboU5t2rV
+ BDvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794739779; x=1795344579;
+ d=1e100.net; s=20260707; t=1794739782; x=1795344582;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=2wGC8AP5A6wC8ZFVm93nms1Ww3e8j8mDTEipxaB/wPs=;
- b=E4jOlwYHtz/5RJxg/Rr7x3adG1yqgYMSpu8sQhoENkrRMxkJhSmj3hvgyNI6AV5TlQ
- UpFbp2hy4ENIR1FZuJVsQ2SpeSzWKdm7HXReh6Bm7lpRetoBd4D7i5TE31aE2BPYyBWF
- c0MCUjUVEu0j/Bv/43eggerp0v8s5YDCXEqNw8ALVnQR8Md1l4PK/M1B1FEUyyeB6+tr
- i5FzmyuXTr+1c6tg99Sa+pl1JMOYhNgRuSohUfL5pxSsWbRD2s260Jj6k/X6S4y+8tIt
- riJxerVt6+Mr06584W0tk8zR0tQLCuy+0uoNlMibGkcuWa3EA75uOQHy426Jzvj04ysk
- zO+g==
+ bh=XkblUlrKDowtuuvvxsLxIV712/VK7MEYIfL5no6ElUg=;
+ b=fatcSYQ+sNKdw0iEg6rV/nZuEq4V9in4UUDr189Hij37oxZNiR6/xeHplNM+K3Ai+m
+ n5ajJemqO2dFh/nA88RXTnfO6a+ALBstK5EewzDWW1hwD8KuYt1b8nk0eHTvmaHkK4kA
+ pffAMIDbPH1acA+cf6AIGEvrIa1G5ks/SVD8qqNd2I1t2FdEfftPqY8OC2ThPnGIy6E5
+ EgsNgVKzWe3Ii7KQ4KTwLc20v8d+6D/fLDf81DsDH4k8MMlxJBhK9YXr+jp8PZ1OLUUS
+ dsnxbo5pN2sOFIKMzx+TkXgn/1IGTZ+6dygfmM0foMkQjyBY9QFi2xDTIFjOmZjU4RFI
+ lbGg==
 X-Forwarded-Encrypted: i=1;
- AL+hErEoOmDIC6hGHYs39avdrc5o48sDkUfr6zU8xUxzktclclO+ByHaR74XZ2I0yJSBICCJinZqQyA=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/+GP2VrNq4PJ6+4pUtJcX1UrK5w8nI16A7VI0/+uWSPKmS/P0d
- jdpi/4c3hVP+58QORkR5HIKXB04Qz7UpMKFYV24N8FdpfF7g9yQQifIvcQGhu/m0DJVPrxCSlGm
- VnJtup97rFScXWGvEIlk0c9ntgOYS5ZdZWLizZn6t4AaRvJW+5fZbd4yuu9uULdwsFyi+NMs=
-X-Gm-Gg: AYBFou052yhlii+425gw/Px7sLbsYuTdqbTcaCWumEAHzK3sg26t2lRX9VX0DBzQ8BK
- eLi5ityZxR5Vm9WRjpw9pSgAx+64gdAwkHFWA5xeQ2HrsgU6y8bGEmvMeBM/Kusq1tskx+I+YDM
- l7P2TiN7g34/QCkEhyDOXP+1m5JQrR1oQnnMWL60QF84D/kkeGSEPKGPYIFYHs+yqInKo3i3FIK
- efY+MkN1/853ybaJovbif95YyPZ6ptCrkMmXAAd7wM6vKs6CxoEA3U3A5akbjVJfSHl0VsspCKq
- gjZ+9Ml8ZeiunRO/qucbHN6Pfh36kdhoRiWeSvuYIvtgRWy1sYij8WXnAyhiHyr6oEMIAAc9Kjj
- wUhEXxHom+UUVtOz+WoOIPBdXuL0DjnGXdsU9KbBhMIo1XBMYgbG2ykRBmR5TnTA1Y3p5rvQ3lt
- Ak8cB6ExetA+rI
-X-Received: by 2002:a05:620a:7082:b0:93f:3219:835f with SMTP id
- af79cd13be357-9494bd2cae9mr1193456085a.81.1794739778722; 
- Sun, 15 Nov 2026 02:49:38 -0800 (PST)
-X-Received: by 2002:a05:620a:7082:b0:93f:3219:835f with SMTP id
- af79cd13be357-9494bd2cae9mr1193453185a.81.1794739778276; 
- Sun, 15 Nov 2026 02:49:38 -0800 (PST)
+ AL+hErGzEO1/bz44Mu3RoBG9ajHKt4EnF5O3PaYZN7Rc+Z62wENs9TvwPjbII4TlFtbkdAb3MemKu9Y=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9TaIQBv6rXhV6bqbKQ3DXTue3RYfqculpZXTds58g1AAAge3Ae
+ dUGuI472LutFElQKy8hT28bTrdCew4zc4iOhfcH3Ewg2YYfPTWqJqbhc2Vq5fZYcjPgFu1HjHAd
+ Mwzng5yUK8LiExjFUQ4PWpztKmlYoVJWC4vuaJ3P7T9kO2Y7V21tLBWZke2dmy+kuaWbbD0w=
+X-Gm-Gg: AYBFou2XYtgvGw7CC8q7eyq6l86PyZ3XoXuh2nc1l82vn1dWhn0Z7x/XHZIexyQr2x6
+ ktXUWhvKjB1utP3BFwce7CKitDK9J3SNmdpH8+Ae1H0lSCcbxSBEZUb6b5JI+uLVUkIf/fcX2+l
+ yGz9N8oNa2uFSRrj+f2u9pceYI9U0XBi7YNqm+/XxuDcXUhKit9aJChReX+TJ7qq8A2tiPoApa1
+ 1WjPQJP8EiSrSmGDCjvHG99XLJc52HmRHDocTh4Cvv70hA1lKuPhm0xDbeIlpdGLY4+mu478PXL
+ JFHQKOtBTETwv6jetuaum3JCuMkobFxFT/hLKSYsoWv/wvD/f4jN8p7dsQkbtyhyDgWv1UPXmrV
+ EQ7onGCG7FDGm8r0T3jcz8tikzxVC5ryky0+ls5yVfCthREK1EG+6jTiNubBDU1lUlCAcjtMQhR
+ 7XsZQUQ9TQFiQV
+X-Received: by 2002:a05:620a:6e99:10b0:949:6d95:f62c with SMTP id
+ af79cd13be357-9496d960033mr298290485a.72.1794739781658; 
+ Sun, 15 Nov 2026 02:49:41 -0800 (PST)
+X-Received: by 2002:a05:620a:6e99:10b0:949:6d95:f62c with SMTP id
+ af79cd13be357-9496d960033mr298289485a.72.1794739781245; 
+ Sun, 15 Nov 2026 02:49:41 -0800 (PST)
 Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b7c24e7714sm3099358a12.28.2026.11.15.02.49.36
+ 4fb4d7f45d1cf-6b7c24e7714sm3099358a12.28.2026.11.15.02.49.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Nov 2026 02:49:37 -0800 (PST)
+ Sun, 15 Nov 2026 02:49:39 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Sun, 15 Nov 2026 11:49:25 +0100
-Subject: [PATCH 1/2] misc: qcom_geni: use the minicore settings only on
- all-minicore wrappers
+Date: Sun, 15 Nov 2026 11:49:26 +0100
+Subject: [PATCH 2/2] i2c: geni: do not report a missing clock disable operation
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261115-qcom-geni-mixed-minicore-v1-1-bce20aa8f4cf@oss.qualcomm.com>
+Message-Id: <20261115-qcom-geni-mixed-minicore-v1-2-bce20aa8f4cf@oss.qualcomm.com>
 References: <20261115-qcom-geni-mixed-minicore-v1-0-bce20aa8f4cf@oss.qualcomm.com>
 In-Reply-To: <20261115-qcom-geni-mixed-minicore-v1-0-bce20aa8f4cf@oss.qualcomm.com>
 To: Sumit Garg <sumit.garg@kernel.org>,
@@ -184,31 +185,31 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heiko Schocher <hs@nabladev.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA0MiBTYWx0ZWRfX8/YMJ3L+Ld4/
- RFau8HalUaS4UIMvGCmiCmKNEn/m88MSHTUa6ppm+k8fqvY0HEKpYL+is/swetdM+huXN0ptgt6
- MylBj9M/ZxBOtm/RjR39/k99qXRXFQwe990z3FRX4jdP0nPCLa08xJcm7I0NgzBxY38UjIo/NEu
- 3eQCfT+Fl6onbZdBD4DbzEcNceRsW0GFPid3ggpoiSlINu6s+Pdi2RbTB4VKKz0Tir34wofJg4H
- hhlccK2gR+Aq9WO0im+jMqXeY7bMdC7fgd7duXSJ7O7dlOpv5mTKp/uXBFb47ioJeIPevj5Qeg0
- lkYU8Na1kSNH/qoAzMrFlnL07EhEWOy3vuUJ6NL7ifu01jVoXJ5jxxSqa/UKedcqAK9FRBmcYwl
- ZTjpe8PU7lIma4OvatLumhgTljul21RByoIVTORJ2K2oAt2A4R2jRQrUWrKEosbwheK6mLh+hFJ
- IMXNqHCTb+KzUUNxgUw==
-X-Proofpoint-ORIG-GUID: LtHT2O450iKkwtuGk-7pmSyAuVElrvRj
-X-Proofpoint-GUID: LtHT2O450iKkwtuGk-7pmSyAuVElrvRj
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA0MiBTYWx0ZWRfX4kvGviY3C3tG
- S1HT1YRfQ1zgvw8ZCkWuSgQ6v+qeOJUevlpAmApWlRxRVEmdUXNsR3x7On1/uzndBh6Zr7ZsbDG
- CiDd/wx9ZY7BEzUZcc/SdsFwTvYX1Kg=
-X-Authority-Analysis: v=2.4 cv=X9rHu2Te c=1 sm=1 tr=0 ts=6af98e43 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
+X-Proofpoint-GUID: i7nLtvuArkFeXOED2eZJmTn6zNZYgXOM
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA0MiBTYWx0ZWRfX5mty0evEVlbw
+ 4dlhzDEyG6waVI49Sf+Y8wH61N38rD0RIyC0BLI5yAvRNIhS3Gi9JMEob42sAXZYRrh3UrujovQ
+ GeWkQDY8BVpfLMz0RF5W95rIAvMVli0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA0MiBTYWx0ZWRfX4EStDimJP3bN
+ wwWu6/9A/An/7rgWNjAF1u6KNvOWNdLnrysuAIXOM/sc1b0NShqoMEZDPOIPim26A4S8Els45Eq
+ HJT5PFmpmzUVJSf8v307eE4NIfsFf9FYUhAzp8v8Ly+TmjcRX54kjWNOl481/aL6OpKi5CxXO3J
+ MkNUfL597OhNt6HGMRKCcEsCYKoHIkVaHf8/rIz2oIVGFASru9g7fnM+70a1L/xRy87NErjHvdQ
+ ozJFMxIbUX/VRGMMDz5i5x/p9ea1fLxc79T+gnq1A4gCIz1cTH7h4kYImrk7wmcbEYCkYH9mLho
+ XIQeiaN5UEeK4o1/Thi7hVmlJ41eagvoFMuPTY5O83kTrvLXmwzC5DoYSNVZDuGsljjyF0+CMjz
+ REzoD0QSiufMfv1bslBvtcWqy2nHjAFmfRQqE9Hz0zOWIDEPKpCbPugs+glThyxexI1KhDzWlFm
+ W1V08+bRxC+6RgoNx3A==
+X-Authority-Analysis: v=2.4 cv=e/2T2qp/ c=1 sm=1 tr=0 ts=6af98e46 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=AX5I_u7HpfGqXeuhjPkA:9 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=NXVH2vJESF5G1wsgjtQA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-ORIG-GUID: i7nLtvuArkFeXOED2eZJmTn6zNZYgXOM
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-15_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015 priorityscore=1501
- adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
+ suspectscore=0 adultscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
+ malwarescore=0 spamscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611150042
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -222,98 +223,46 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-A QUP wrapper is treated as minicore as soon as one of its serial
-engines reports GENI_USE_MINICORES, and then no engine is loaded from
-the firmware partition. On QCM2290, SE0 and SE1 have program RAM while
-SE2-SE5 are minicores; with CONFIG_QCOM_GENI_MINICORE=n no engine gets
-firmware:
+clk_disable() returns -ENOSYS when the clock driver has no disable
+operation, as with the Qualcomm clock drivers, so the probe error path
+prints "clk_disable se failed -38" although nothing failed. Ignore
+-ENOSYS, as clk_disable_bulk() does.
 
-  i2c_geni i2c@4a80000: Invalid proto 255
-
-Use the built-in settings only if every engine is a minicore and the
-table is built in. Otherwise load the firmware image and skip the
-program RAM copy for minicore engines, as Linux does.
-
-Tested on the Arduino UNO Q (QRB2210): all engines are loaded, i2c probe
-finds the devices, Linux uses the engines. Not tested: an all-minicore
-wrapper (IPQ5210).
-
-Fixes: 91a70d8bcf5e ("misc: qcom_geni: Add minicore support")
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
- drivers/misc/qcom_geni.c | 28 ++++++++++++++++++++++------
- 1 file changed, 22 insertions(+), 6 deletions(-)
+ drivers/i2c/geni_i2c.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-index 90aac714988..2b44bb492de 100644
---- a/drivers/misc/qcom_geni.c
-+++ b/drivers/misc/qcom_geni.c
-@@ -280,9 +280,15 @@ static int load_se_firmware(struct qup_se_rsc *rsc, bool elf, void *info)
- 		return -EINVAL;
+diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
+index 7498cbcb41a..b4a351b124c 100644
+--- a/drivers/i2c/geni_i2c.c
++++ b/drivers/i2c/geni_i2c.c
+@@ -329,17 +329,16 @@ static int geni_i2c_disable_clocks(struct udevice *dev, struct geni_i2c_priv *ge
+ {
+ 	int ret;
+ 
++	/* -ENOSYS: the clock driver has no disable operation */
+ 	if (geni->is_master_hub) {
+ 		ret = clk_disable(&geni->core);
+-		if (ret) {
++		if (ret && ret != -ENOSYS)
+ 			dev_err(dev, "clk_disable core failed %d\n", ret);
+-		}
  	}
  
--	/* Program RAM address space. */
--	for (i = 0; i < hdr->fw_size_in_items; i++)
--		writel_relaxed(fw_val_arr[i], rsc->base + SE_GENI_CFG_RAMN + i * sizeof(u32));
-+	/*
-+	 * Program RAM address space. A minicore engine runs the protocol on
-+	 * a hardware state machine and has no program RAM, so only the
-+	 * register configuration of the ELF image applies to it.
-+	 */
-+	if (!elf || !(readl(rsc->base + SE_HW_PARAM_2) & GENI_USE_MINICORES))
-+		for (i = 0; i < hdr->fw_size_in_items; i++)
-+			writel_relaxed(fw_val_arr[i],
-+				       rsc->base + SE_GENI_CFG_RAMN + i * sizeof(u32));
+ 	ret = clk_disable(&geni->se);
+-	if (ret) {
++	if (ret && ret != -ENOSYS)
+ 		dev_err(dev, "clk_disable se failed %d\n", ret);
+-	}
  
- 	/* Put default values on GENI's output pads. */
- 	writel_relaxed(0x1, rsc->base + GENI_FORCE_DEFAULT_REG);
-@@ -457,9 +463,16 @@ static int geni_se_of_to_plat(struct udevice *dev)
- 	struct resource res;
- 	u32 proto;
- 	struct geni_se_plat *plat = dev_get_plat(dev);
-+	bool all_mini_cores = true, any_se = false;
- 
- 	plat->need_firmware_load = false;
- 
-+	/*
-+	 * The built-in minicore settings replace the firmware image only if
-+	 * every engine of the wrapper is a minicore. A wrapper can mix both
-+	 * kinds (QCM2290: SE0/SE1 have program RAM, SE2-SE5 are minicores),
-+	 * and then the engines are loaded from the firmware partition.
-+	 */
- 	dev_for_each_subnode(child, dev) {
- 		if (!ofnode_is_enabled(child))
- 			continue;
-@@ -474,10 +487,13 @@ static int geni_se_of_to_plat(struct udevice *dev)
- 		if (proto == GENI_SE_INVALID_PROTO)
- 			plat->need_firmware_load = true;
- 
--		if (readl(res.start + SE_HW_PARAM_2) & GENI_USE_MINICORES)
--			plat->is_mini_core = true;
-+		any_se = true;
-+		if (!(readl(res.start + SE_HW_PARAM_2) & GENI_USE_MINICORES))
-+			all_mini_cores = false;
- 	}
- 
-+	plat->is_mini_core = any_se && all_mini_cores;
-+
  	return 0;
  }
- 
-@@ -580,7 +596,7 @@ static int qcom_geni_fw_initialise(void)
- 		return 0;
- 	}
- 
--	if (plat->is_mini_core) {
-+	if (IS_ENABLED(CONFIG_QCOM_GENI_MINICORE) && plat->is_mini_core) {
- 		fw_buf = qup_mini_cores;
- 		goto mini_core;
- 	}
 
 -- 
 2.53.0
