@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4A77606A31E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 10:33:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63FB1606A31D
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 10:34:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DJadeHFE;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uYYqwxvS
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mxoyF6lo;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=of9SrrWT
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8D5B440711;
-	Sun, 15 Nov 2026 10:33:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3E34360698;
+	Sun, 15 Nov 2026 10:34:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q2Fqc4SHIDWr; Sun, 15 Nov 2026 10:33:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BD8B240712
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794738793;
-	b=bHoL3kjplziDAJL5sXfdlaagXQf3gkIzy7F0AVEgy/6FCrFE8pr1tFTk1+5mJ/KK/+uM
-	 93bIUQRZAdhp8JANz4jIF0fcqvM0eCW3UEj2S8AUosoVwC0corGaiKhgupQbaH3wiWZnJ
-	 ur6+GVAB9wvV23CH40LTfe9A1PAEiTLl3adZGJGGkn+KGbDmAFJdbrZDz8SH+u4AvzUGH
-	 Gz5b5iXZplD9CtZD0aZHHwcqMQEMHdSqNAXazuF2Jrye0AoEx+/fePD3NIqB1rdimSAwT
-	 aq2V0StfiMW+UfD9h+2cGZkX/Qh7HQ33TB9k0EBEj4z8suSpj78r1TAfzbC1/9fKwzQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8vzUYjBnleyt; Sun, 15 Nov 2026 10:34:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6597B60611
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794738875;
+	b=ZwBfVj7hqCiybwBt4w3RUYFmN6ovRR1IUcTpH+qSKkIJud+M6RPntqvd2GGqCUjVqcP/
+	 NEvAvN9l0o3jXUrJMs1zj6zOVR4YYDdCs8GSwHrj5piMYu80bjG23EMHWR9e8rlk9tJq6
+	 UdlLMxfhVcbxP3xF7NxlCsVcsX4bGtC5cPFkBG44EqViyJjbDO32BakR8uxt0et3BbyFH
+	 mlGELKCkqwIImboBaxA7z2+JLvndsMXulP+KhdqxD6EfasvMxgbTfzlUmZ82nXX+rljlf
+	 WCdEPMsedlParfUSHF6anTlBXYrHLnluLbzQa93w3h7HNkFzG8flKPwB+pgPIJ2VXeQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794738793;
+	c=relaxed/relaxed; t=1794738875;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,106 +32,108 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=WO5G9Hzfg60NWi8i801fQ6DRORlXAJNajtGvZgplaO4=;
-	b=DfRNyQm56d7EUIK1RpHEpTcUq13XkRfjLW8jJwD5xiuF3AE3VEWdkczq7jnslzMIdzUA
-	 oMuqRyJVMXZ8M9ZMnSFR0u7Vkjagrj9f0tYI38eLka0BoP/1MtAbqiNjaJ8iyruNDC+eh
-	 m64pMZlLTqaurC9GTSt2YSCk7iqijARs/j3hPtOz/RJZqGk+6nocvp8GMZSjM2SxUfS5a
-	 jOl6qNc6jW4tZo94GXR64scbruAtKE9b1kbF0VoUYCvsGk7Ms92x2W+WNk0ghyzRoeqpO
-	 HqT4uMYx+K4h4+iqu9ElCnZ7BXYt0wIajaq7YNXCdPJ43/5dghGLSjG/z6r+7MDPTVQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=uKaYwml6R0U9qb4gnyp4cKQOXqtdATsuWDIsuKrQseE=;
+	b=L2tA/DhtP0YRmZaRl0RDJipD8LEcKCti1+6WRYSN+kt0aseD/IB/w492lX5IMT/dCx9F
+	 r8kX+4bb3YHld5G3UVTnLIjYt42ckuOB33yK/Z4rhgOT3DIKEMGjTysaxclOl+KnFlfua
+	 7VMCUaol5SV8O4HePYY9zdQLdtNliN3GiG1cbYfOhcwx/BlHOEuwwPBdJhSMM3v9n9ECk
+	 yVoD+KgzfyFRSgIhgeC5SwaXFNz6LHrozT860hbbH4p4jOMYkPzSxZTbAgIMA3M9tLz6I
+	 Zs+1mSC4Xp/olzOsNc/HUgsMxxYrHtphoCOdU8zQMLh0OUA2l1rvhFgSLss6z53tCtQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=of9SrrWT;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794738793;
-	bh=WO5G9Hzfg60NWi8i801fQ6DRORlXAJNajtGvZgplaO4=;
+	d=lists.u-boot-project.org; s=default; t=1794738875;
+	bh=uKaYwml6R0U9qb4gnyp4cKQOXqtdATsuWDIsuKrQseE=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DJadeHFEVxyEn967oVCMZ/QVXyOESRP5lKRP/ybExPSJhTNr+oL9OfAm847P/3bxA
-	 11sypfUWDMn3iq5i98I4ZlVDjaJJKB4J08IuDuikumXnWK0cfeGeyU/G2QjXJRWFrZ
-	 elqR/MsIMfrlyJ35QWWLylHnwGVRq6m+dA/zih6mUzVUOhzRgbKeG+T2mw5TAaAc0c
-	 3sFCVPsSWz6VNbG6B15SGYf+cXeVOHy9ocM9ydb2NsXF53b+zDYLDHkgKx5X2Vm8yP
-	 HeE+olwGg0q3m6HH1uj3ihSwgPaJ7wPIfFZGBdHe29ldI3CMgtAP5+Gl2sWjQbhtAC
-	 bwxKBon13cdaQ==
+	b=mxoyF6loJ0wvGDSy9XTLZMOYKwq4PbulW96s/QlVKnIId5OjCubq2a0JbqF2LCcPt
+	 OvulY5R4zYtjuYqLStl0faCRWNiw57gJHt3Sbom2S+8NxrC2DSDAlxfDEEMkXa5oI2
+	 oqrO/MlqqhszrkI6ci3nAeEdeyYHuJY4EkYvCbTrAQRaowF8i936vIvDXztRzRga66
+	 kUyqNU6lw++1cHvMAEpZ2YY2KBcKLcLAA2z4hSeiJ6raqIDn5iDGPoUWjMHlGFeOF1
+	 LKwPV+NVAcDzf2BToobV/K/aWOrwSpYfHGNDviGfgPQy6Cko9BnWld+jNvoPqOBbfT
+	 5BeYydub2sKrA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BD8B240712;
-	Sun, 15 Nov 2026 10:33:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6597B60611;
+	Sun, 15 Nov 2026 10:34:35 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5BD8F2FB
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:33:12 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 45F2870B
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:34:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 41CFB60634
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:33:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 37CC860611
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:34:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uj8KVMiJ0uPU for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 10:33:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0A44360611
+ id sknN2f-a-OUk for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 10:34:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2971960604
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::52d"
+ smtp.remote-ip="2a00:1450:4864:20::635"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
+ client-ip=2a00:1450:4864:20::635; helo=mail-ej1-x635.google.com;
  envelope-from=massimo.pegorer@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=uYYqwxvS
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0A44360611
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:33:10 +0000 (UTC)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6b56221d361so3940473a12.3
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:33:10 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=of9SrrWT
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2971960604
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:34:32 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-c5075fa7ed0so439866166b.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 02:34:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794738789; x=1795343589;
+ d=gmail.com; s=20260707; t=1794738871; x=1795343671;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=WO5G9Hzfg60NWi8i801fQ6DRORlXAJNajtGvZgplaO4=;
- b=uYYqwxvSbbV+AMHEA930eBUUi4w7KskoOKxVGpsMbdXn02aRn5C9+ts1P/GF2vLY9b
- ZqHbmfwcUsdT5Z68tXq5t1Ke6naFh1PmaqC8emUT+enXu6UgIGeGKb1TysQv5LXndChZ
- XlBChfhHUkrFH36rgQiR6aDJ0hKhM2dLWnnfx7lf/fnhcM0SfdnZ1DpnOVoQOD0Bby2w
- 9LBXMlnlsWr4YAC4dm38vyenCBkFxCHAcQG5YPI4QeysmLGzndVeeIfgVc5492mddL3/
- pXjvBjDRpyfrMkKJbUBC6ySux2EtAEbKL5vnZabUuCxKs1xD0NPfDeYyvKRoRr+UuDgX
- bUdQ==
+ :content-type; bh=uKaYwml6R0U9qb4gnyp4cKQOXqtdATsuWDIsuKrQseE=;
+ b=of9SrrWT0D6+BceOCXVtVHDFHAqHaOSXyHGjXiW/6CKF1OYRELhq+xMW2McwYKlaXC
+ Eji+hw8TPmJKKA5dXSW2JLrZYX+EKD8kAQzYO9xOPgDMNiCQCvTZ2/6Moe6qHZ3Ya8KC
+ TIkHOGxTCl5WfHBIbnSdksxjzHhH0OnkCYwsXeBuDiFN4v+As6X/r7UvhbL85JsGoQJ0
+ f+AAzoR2EqH9wOg84YWiEu0q5vkqKExO47kDOzwlknmrF2kRVj5+O+cWTUc0UtPZFBCa
+ dX5LuejgfveSNyX8TzDblgyAbCLMtPxWH+Ei51P4vPtY6s+60Lwi6MmjFjcHKtRhsRh5
+ gWGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794738789; x=1795343589;
+ d=1e100.net; s=20260707; t=1794738871; x=1795343671;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=WO5G9Hzfg60NWi8i801fQ6DRORlXAJNajtGvZgplaO4=;
- b=Kiy7j9EPbYsDyyXRheA4c1Thj7ttgCpAtrEkVuZJ6M7Jj4bQqPS5wNDx3L128ZAecr
- H62qH8cSaLAF8Lwc7U2zYuz4LDotKjvVus8M2R1eBGo2Seo9wmW7VE167Ru6ANAIcHDX
- sRol+nSt2AEO9KqUFhXXfuJsDzbX62CnwhxWpXjYz1QI/oM04Ks2pNROc6rms1cY++Uk
- 7n5cT8JKessunF/ugHDJWtC8raV6a65FriZMuC8zqbMQy0OG9I1qPgBUFApiEloEYyEo
- pWSiOT7EmpwwVc22AMHBX8Zb5lEMpG6J9pxFQ0deBk5whevz+Fj1SZYFdfgYtaRVU8Jp
- /xPw==
-X-Gm-Message-State: APuU4Z9TUSNvZG/RVstgui7GoGzaJmIk0bnzhZQaKR+q8n5Z8H7zPtk3
- IBSBPrfCmmyMupJHvqURRHlUTjU2yXB5w7VjwiyQVlJ0b/TImLswNLvQQepGe18f6rpP2OBwuuN
- 8D3avFOCq5nGz6QdtxYk/AHsPPoPAtqY=
-X-Gm-Gg: AYBFou3WDu/cfPEwSd+4uN4EG7Vx8ZGi7Y5ty2WNWrjCKc8MEw/W4bWwc0//4+xIfGD
- Hxhkcj0J2Dpw+7Mgwznen83byXiRsvaoc1U6YnvslEN6YaCj8Evvj/mzWbxTUJfl0q3A7/4NAA/
- edgH2N+6cKDfPvkWRzaC38PUixfqXmRZzPsN+Vibob4JBwATG/VUHH0f1ZcM/dfseQ4vhoY9fIB
- /gzn0WpzHbdYuCJHAsUTomc0aIYBrhC97dn6ae5n2iwv/AI4MOLQ6LKfZximiflyoLdImG+PiNi
- VcyixOsENrEuNL7Oz5cZkXD3IFq5X/tp/eL78VCNwbvHCPLS5UsO5Rk5UEsmMPgDCM/nNoJQLqX
- xV9wP5wEzpHP64wqqu4/PYQZME8+JvceTysDGoA==
-X-Received: by 2002:a17:907:ea94:b0:c50:5e10:71b3 with SMTP id
- a640c23a62f3a-c50962edfb7mr592549366b.10.1794738788691; Sun, 15 Nov 2026
- 02:33:08 -0800 (PST)
+ bh=uKaYwml6R0U9qb4gnyp4cKQOXqtdATsuWDIsuKrQseE=;
+ b=lodMZt2ed4x/tUKbuABz3buUTA7YnoOQKeBMSkTUcbYrAwMQ3y7BnmRquH37IEzRSC
+ 2zKbgLToph+mw8S9AdI75r6H9ABMB7KsbskUBBXpvB4K1Hx98YJXJ2dpFysuiT3i8y/C
+ oWw0GQso5gtMPy3kQUwMIoJ6nQIH22JaMc8qIokaTnhWt0Ng3aRxYiu8666X2Mg4r/X8
+ StHHFBa3kTKURkGlgFEKG8GD9yv7a96WFwJbUPQelOUl1+n5iXcOoTHlBY5CsvSdSvd9
+ O+QsNPL49SlvpXynnT6BXpVHvF5jI44ZauYyiayBV9OyLh1tBN87/wwYCMJRjj96+Tge
+ fzmA==
+X-Gm-Message-State: APuU4Z8yPyY7LlHCWSqqFSOdAlM0M0Uo4Xh186CS+dsb1hDUjHPzPbcs
+ a2gsl5OsN4H1sMriknlnkk40fmnVZbT/nZ2eFytsei0q7blKU1Wf9edpg9MqhsqPSYSbNEw9WEp
+ PhWWPyVSHrzF/6tHQN0wOPRz7OevCeJY=
+X-Gm-Gg: AYBFou3IbdwWaV05gWJC6ms6lN/S0LejcarhDT4/zrbr8ht8JdZtkUxGHPS6Inzu/Ex
+ RSpwEJzo/rHgWmAihYuZgcyesZRp1RKccy58pJ1V0x1mwxU58K8qVpMt5Jpb7CzAxvlgSa3Y5n3
+ HWKx09WNTCDzZGShPVmW97D7FYi8jXex4WKoQm/8CbnKoKK75yuknSyc0JtdecbvJ/vgQt1SwNN
+ 8nd0iZB1QsXhymNv6IrykV/bwwUgI+loG8PXMVlsq8fJJndBGiZItLZKS+VPs9HudSuWs0BYEEB
+ RvNRezSOineVurjJSfLC1mmUptA1tYgDQEEKkUBEA4doqCpiT81UY9qdciyAgAEVFAXF5W0ctY1
+ dpz2UH7NE45vxQzybOZLwMUMfw57fUeYGrzFOmw==
+X-Received: by 2002:a17:907:3f9f:b0:c2a:34fe:ea4d with SMTP id
+ a640c23a62f3a-c509631c9c0mr668056866b.25.1794738870529; Sun, 15 Nov 2026
+ 02:34:30 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20261025-ddr-multi-v2-0-b82ff9c860ba@gmail.com>
- <20261025-ddr-multi-v2-3-b82ff9c860ba@gmail.com>
- <3e4b8eeb-ac8a-447d-98ea-74ec0e2ad14e@0leil.net>
-In-Reply-To: <3e4b8eeb-ac8a-447d-98ea-74ec0e2ad14e@0leil.net>
+ <20261025-ddr-multi-v2-4-b82ff9c860ba@gmail.com>
+ <29c060b0-17c1-43a8-90f0-f517ac874268@0leil.net>
+In-Reply-To: <29c060b0-17c1-43a8-90f0-f517ac874268@0leil.net>
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Sun, 15 Nov 2026 11:32:57 +0100
-X-Gm-Features: AclHuK8QIJeuZkJEmgRO5-Tb-BCq87f_JH5vjidnRlumiVRCHcLGhloZfPgKZXA
-Message-ID: <CAC928HZd33v=R6C24eZ4ST1mnLC_=OKest4f9U4XEbC=5d-zRQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] ram: rockchip: reduce debugging code size
+Date: Sun, 15 Nov 2026 11:34:19 +0100
+X-Gm-Features: AclHuK-hFX6yeEOoGhlEDr8T0pnd0pFZHfy0lHlcFovDcoFyBxPjH7IGvDhvCNo
+Message-ID: <CAC928HY5SW0akmHG-tJ-wA6F0a_2ZokChr5K7N+HqBLvch3pTQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] ram: rockchip: add config option for tinier debug
 To: Quentin Schulz <u-boot@0leil.net>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -154,145 +156,151 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Hi Quentin,
 
-Il giorno mer 11 nov 2026 alle ore 16:54 Quentin Schulz ha scritto:
+Il giorno mer 11 nov 2026 alle ore 17:23 Quentin Schulz ha scritto:
 > Hi Massimo,
 >
 > On 10/25/26 8:30 PM, Massimo Pegorer wrote:
-> > Slightly optimize SDRAM driver debugging code to reduce required space
-> > in the case of PX30 SoC TPL, allowing further code to be included such
-> > as multiple SDRAM types support.
+> > Selecting the RAM_ROCKCHIP_DEBUG_TINY new configuration option, the
+> > debugging code prints only the SDRAM type, frequency and size, limiting
+> > the required space. In this way, the debugging code can coexist with
+> > support for multiple SDRAM types without exceeding the output size
+> > limit, such as in the case of the PX30 SoC TPL.
 > >
 > > Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
 > > ---
-> >   drivers/ram/rockchip/sdram_common.c | 49 ++++++++++++++-----------------------
-> >   1 file changed, 19 insertions(+), 30 deletions(-)
+> >   drivers/ram/rockchip/Kconfig        | 11 ++++++++
+> >   drivers/ram/rockchip/sdram_common.c | 54 ++++++++++++++++++-------------------
+> >   drivers/ram/rockchip/sdram_px30.c   |  4 ++-
+> >   3 files changed, 41 insertions(+), 28 deletions(-)
 > >
+> > diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
+> > index f51ae6a4542..98770659cd2 100644
+> > --- a/drivers/ram/rockchip/Kconfig
+> > +++ b/drivers/ram/rockchip/Kconfig
+> > @@ -24,6 +24,17 @@ config RAM_ROCKCHIP_DEBUG
+> >         This is an option for developers to understand the ram drivers
+> >         initialization, configurations and etc.
+> >
+> > +config RAM_ROCKCHIP_DEBUG_TINY
+> > +     bool "Rockchip ram drivers tiny debugging"
+> > +     depends on RAM_ROCKCHIP_DEBUG
+>
+> question: do we really need a new symbol for that?
+>
+> Maybe we can simply have a constant (e.g. DEBUG) defined at the top of
+> the file and check on that. I am trying to think if anyone would want to
+> have this configurable in a defconfig? If it's only useful for quick
+> debugging, I don't think it makes sense to have a symbol for it.
+
+Quite true, indeed. But RAM_ROCKCHIP_DEBUG defaults to 'y', and 143 of the
+152 configurations that have RAM_ROCKCHIP defined also have RAM_ROCKCHIP_DEBUG
+defined. Therefore I have thought about a Kconfig option, but we can consider
+a different solution: will do in a next series.
+
+>
+> > +     help
+> > +       Limit ram driver debugging info to sdram type, frequency and size.
+> > +
+> > +       Help to keep basic debugging information while minimizing consequences
+> > +       to ram driver footprint. This can be useful when configuring the ram
+> > +       driver to support multiple sdram types in a very constrained context,
+> > +       such as TPL for PX30 SoC.
+> > +
+> >   config RAM_ROCKCHIP_DDR3
+> >       bool "DDR3 support for Rockchip SoCs"
+> >       depends on ROCKCHIP_PX30 || ROCKCHIP_RV1126
 > > diff --git a/drivers/ram/rockchip/sdram_common.c b/drivers/ram/rockchip/sdram_common.c
-> > index b7a8fce607c..b46de5d9044 100644
+> > index b46de5d9044..519bbdb4e60 100644
 > > --- a/drivers/ram/rockchip/sdram_common.c
 > > +++ b/drivers/ram/rockchip/sdram_common.c
-> > @@ -11,39 +11,34 @@
-> >   #include <asm/arch-rockchip/sdram_common.h>
+> > @@ -44,36 +44,36 @@ void sdram_print_ddr_info(struct sdram_cap_info *cap_info,
+> >       printdec(base->ddr_freq);
+> >       printascii("MHz\n");
 > >
-> >   #ifdef CONFIG_RAM_ROCKCHIP_DEBUG
-> > -void sdram_print_dram_type(unsigned char dramtype)
-> > +static const char *sdram_get_dram_type_string(unsigned char dramtype)
-> >   {
-> >       switch (dramtype) {
-> > -     case DDR3:
-> > -             printascii("DDR3");
-> > -             break;
-> > -     case DDR4:
-> > -             printascii("DDR4");
-> > -             break;
-> > -     case LPDDR2:
-> > -             printascii("LPDDR2");
-> > -             break;
-> > -     case LPDDR3:
-> > -             printascii("LPDDR3");
-> > -             break;
-> > -     case LPDDR4:
-> > -             printascii("LPDDR4");
-> > -             break;
-> > -     default:
-> > -             printascii("Unknown Device");
-> > -             break;
-> > +     case DDR3:      return "DDR3";
-> > +     case DDR4:      return "DDR4";
-> > +     case LPDDR2:    return "LPDDR2";
-> > +     case LPDDR3:    return "LPDDR3";
-> > +     case LPDDR4:    return "LPDDR4";
-> > +     default:        return "Unknown Device";
+> > -     printascii("BW=");
+> > -     printdec(8 << cap_info->bw);
+> > -     printascii(" Col=");
+> > -     printdec(cap_info->col);
+> > -     printascii(" Bk=");
+> > -     printdec(0x1 << cap_info->bk);
+> > -     if (base->dramtype == DDR4) {
+> > -             printascii(" BG=");
+> > -             printdec(1 << ((cap_info->dbw == 0) ? 2 : 1));
+> > -     }
+> > -     printascii(" CS0 Row=");
+> > -     printdec(cap_info->cs0_row);
+> > -     if (cap_info->cs0_high16bit_row !=
+> > -             cap_info->cs0_row) {
+> > -             printascii("/");
+> > -             printdec(cap_info->cs0_high16bit_row);
+> > -     }
+> > -     if (cap_info->rank > 1) {
+> > -             printascii(" CS1 Row=");
+> > -             printdec(cap_info->cs1_row);
+> > -             if (cap_info->cs1_high16bit_row !=
+> > -                     cap_info->cs1_row) {
+> > +     if (!IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG_TINY)) {
+> > +             printascii("BW=");
+> > +             printdec(8 << cap_info->bw);
+> > +             printascii(" Col=");
+> > +             printdec(cap_info->col);
+> > +             printascii(" Bk=");
+> > +             printdec(0x1 << cap_info->bk);
+> > +             if (base->dramtype == DDR4) {
+> > +                     printascii(" BG=");
+> > +                     printdec(1 << ((cap_info->dbw == 0) ? 2 : 1));
+> > +             }
+> > +             printascii(" CS0 Row=");
+> > +             printdec(cap_info->cs0_row);
+> > +             if (cap_info->cs0_high16bit_row != cap_info->cs0_row) {
+> >                       printascii("/");
+> > -                     printdec(cap_info->cs1_high16bit_row);
+> > +                     printdec(cap_info->cs0_high16bit_row);
+> > +             }
+> > +             if (cap_info->rank > 1) {
+> > +                     printascii(" CS1 Row=");
+> > +                     printdec(cap_info->cs1_row);
+> > +                     if (cap_info->cs1_high16bit_row != cap_info->cs1_row) {
+> > +                             printascii("/");
+> > +                             printdec(cap_info->cs1_high16bit_row);
+> > +                     }
+> >               }
+> > +             printascii(" CS=");
+> > +             printdec(cap_info->rank);
+> > +             printascii(" Die BW=");
+> > +             printdec(8 << cap_info->dbw);
 > >       }
-> >   }
+> > -     printascii(" CS=");
+> > -     printdec(cap_info->rank);
+> > -     printascii(" Die BW=");
+> > -     printdec(8 << cap_info->dbw);
 > >
-> > +void sdram_print_dram_type(unsigned char dramtype)
-> > +{
-> > +     printascii(sdram_get_dram_type_string(dramtype));
-> > +}
+> >       printascii(" Size=");
+> >       printdec(cap >> 20);
+> > diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
+> > index 7f51b9c4f8f..2b25a0124ed 100644
+> > --- a/drivers/ram/rockchip/sdram_px30.c
+> > +++ b/drivers/ram/rockchip/sdram_px30.c
+> > @@ -715,7 +715,9 @@ int sdram_init(void)
+> >
+> >       sdram_print_ddr_info(&sdram_params->ch.cap_info, &sdram_params->base, 0);
+> >
+> > -     printascii("out\n");
+> > +     if (!IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG_TINY))
+> > +             printascii("out\n");
 > > +
 >
-> issue: make the above a separate patch
+> suggestion: just get rid of it
 >
-> It makes it easier to see individual changes and the impact each change
-> has on the final size.
+> In a separate patch. Considering sdram_print_ddr_info() always print
+> something, there's no need to say when we've exited that function I think?
 
-I agree. I will drop this and the next one from v3 of this series, and will
-evaluate rewriting them after running some tests on TPL size, taking care of
-your suggestions. Thanks.
+I will be really happy to get rid of it! See my comments about this in the
+reply related to patch [2/4].
 
 Regards,
 Massimo
 
-
-
->
-> >   void sdram_print_ddr_info(struct sdram_cap_info *cap_info,
-> >                         struct sdram_base_params *base, u32 split)
-> >   {
-> > -     u64 cap;
-> > -     u32 bg;
-> > +     u64 cap = sdram_get_cs_cap(cap_info, 3, base->dramtype);
-> >
-> > -     bg = (cap_info->dbw == 0) ? 2 : 1;
->
-> issue: make the removal of the bg variable its own patch
->
-> Same reasons as above.
->
-> > +     if (cap_info->row_3_4)
-> > +             cap = cap * 3 / 4;
-> > +     else if (split)
-> > +             cap = cap / 2 + (split << 24) / 2;
-> >
-> > -     sdram_print_dram_type(base->dramtype);
-> > +     printascii(sdram_get_dram_type_string(base->dramtype));
->
-> question: why this oneline change here?
->
-> Isn't that exactly what sdram_print_dram_type() is doing? You can always
-> forcefully inline it, even though I'm not sure it's necessary
->
-> >
-> >       printascii(", ");
-> >       printdec(base->ddr_freq);
-> > @@ -57,7 +52,7 @@ void sdram_print_ddr_info(struct sdram_cap_info *cap_info,
-> >       printdec(0x1 << cap_info->bk);
-> >       if (base->dramtype == DDR4) {
-> >               printascii(" BG=");
-> > -             printdec(1 << bg);
-> > +             printdec(1 << ((cap_info->dbw == 0) ? 2 : 1));
-> >       }
-> >       printascii(" CS0 Row=");
-> >       printdec(cap_info->cs0_row);
-> > @@ -80,12 +75,6 @@ void sdram_print_ddr_info(struct sdram_cap_info *cap_info,
-> >       printascii(" Die BW=");
-> >       printdec(8 << cap_info->dbw);
-> >
-> > -     cap = sdram_get_cs_cap(cap_info, 3, base->dramtype);
-> > -     if (cap_info->row_3_4)
-> > -             cap = cap * 3 / 4;
-> > -     else if (split)
-> > -             cap = cap / 2 + (split << 24) / 2;
-> > -
->
-> question: does the move of those 5 lines at the beginning of the
-> function actually help with anything?
->
-> thought: I'm thinking there are additional ways to make functions in
-> this file smaller
->
-> There's a bunch of checks scattered all over the file on dram_type.
-> Considering we know what we want to support via the
-> CONFIG_RAM_ROCKCHIP_* symbols, I'm thinking we could have a bunch of
-> #ifdef/IS_ENABLED in there and make the functions smaller. It needs to
-> be done carefully though. Maybe in a future commit, not necessarily for
-> you to do.
->
-> todo: split this into its own series, we don't need to have it depend on
-> the PX30 DDR auto-detect thing. We can merge improvements and bug fixes
-> separately from new features. The next patch could be part of that
-> series, but I'll only start reviewing it now :)
 >
 > Cheers,
 > Quentin
