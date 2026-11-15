@@ -2,135 +2,134 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16F96606A329
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 03:50:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CD2F606A323
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 03:50:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=M3VhlzMJ;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NFJi9MAD
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Y4Q4J8us;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mTJm1XRc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D1A0B60629;
-	Sun, 15 Nov 2026 03:50:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6F32D606F5;
+	Sun, 15 Nov 2026 03:50:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id r9lsNSquz2tU; Sun, 15 Nov 2026 03:50:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0BC4960698
+ id cjQEBzHcVjHj; Sun, 15 Nov 2026 03:50:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A5377606D5
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794714638;
-	b=RNO97AX6gSkCH3aAfWP6JMCQQxZq16EwOLwfH6Ko8t35t7TMkibO0fuNteErycHG4sWg
-	 5QzbiKQqxKFW9R2CGd9PbXZq6/lh2nIFvZmHgFvGJ5s7SG+alB/MScslCsvUV6d6KBrQB
-	 lDWqa+1wlX38h5AaRVdYct4n/+PhUBNe0ojMGLZas2blGgTsAkq8PKGIWhm2je1y+iG08
-	 jqcJl/ZXlkpHtJK/0hTBlUDCwDrTS/Rx9gnnBzyd3k9gvFP0WTogFKlpPax/oo69vD15K
-	 xz90FClYyEdOOWfkl4Pbiurox/C0B0iJAiLXeO43yRmAkd7RLF/82+1ppMLu0leZJuw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794714640;
+	b=LxPjCuc1Pt6p9aVjYGdiW13QHLn8VfM+6CSQKC7BpI4KahSd2/Gp3GfxD4KR44tKF+ME
+	 5XZgXfHi++mw6u2RixRTK2UWV4psW4x/9j0Cn27nuV+b4SmOx4+c0XO2jAtQasCb3w+Wt
+	 XQnLPPulaN15USAvRO/kvwG3gx/Y/+IAL8qnLWdgK6x0FGwxWacIlvAawDEC1iwaWOyUf
+	 R7J7QxnnRYjufpwKXUkRr5b9Y4POZ2JXhp0tHCDJy0dzP3Hf+l3UMwFvstjVHHzIl4s8l
+	 XLruBqB/itzH4H0tIMM4Qp/5bs9o1kNsssTuHxRLS9CfdLxYck3T17GvRPzrAnIHaGQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794714638;
+	c=relaxed/relaxed; t=1794714640;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=/os7nt/UzbSihdCul5QdcXZqGl8vTtLAgCfB3B5yknY=;
-	b=VAOeHW7y2oXefcrdRO3GL/M3vYKS300gBbd/CShdNv0dgcfI95Kr/CyLjmD6SZ96pg3r
-	 /puoKox8xH2cWpbCCbgU5I5FTphKu3cCbz/1CFAn6Tyj2yXf0taJUa/nyjbSoC8jl6Lh6
-	 0Rg1N0H+4j5/LQC2chEPGEt7yQvTYAzcGMi7poGxI31DbcQgLtEr6NQtEzotZb/U0UfQw
-	 CmBh8knvvk7HNsaNDxQL5fQDO5OXr3YFXmLnrUUzIltfm20leEbPhyPwqp33egqSrZgT0
-	 ZH3rVZ5ikiu64Vd/pnKCVGcOY/vOg1awOO8zrDXrbP7+7tyAVBkNuxCoT0W0PbgeySg==
+	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:Errors-To;
+	bh=tG0BbysG7C8Nd5wCC17HBgXM//q7ZYVBbLOWnuDg/aQ=;
+	b=GqoonkyMlGImlZcHEoNrbVWyYBg//BF3iYzhKx+YzNj6XrZ2kY77CSxvzx/xQghj8COf
+	 /LKPZ9sNhy7wA4DHk64n6fL6Sgy38r2YORRdjDgHP7eWJy7c95sXxQ4s0Qk0Aq2earX4/
+	 Hasb/KBHI4AOQpcvle6t6oV+/gck2guQtR12dyF67sGetsZXcjvwTGAfNNeE41UK2y0Xq
+	 lh/J5qJIYe6uVyZZEfJ5wvGR8LskEMzq0etY1U5J3CASnnoZxtKelv49TRVN96YSdBRdW
+	 5WmGynxhh7p0BENJ/hEN7IafSrMy0vm02nU3o5UkZiHdfFbrjzvpXXnfjLA3NIDbliw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794714638;
-	bh=/os7nt/UzbSihdCul5QdcXZqGl8vTtLAgCfB3B5yknY=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=M3VhlzMJjodZwRkYF1X4Yd/h5LIH8UpukhPXci8oT5dkO2wiFTDwJDp08MG8F5OiF
-	 8O35zXBmfzeYMPsZxNLTNOkvtuLuJhF5p9u5zhurkxEFvhTrTKrHxacnZG001Yxutt
-	 6ZtztGXw+Y5Nekp+DE2URqeV+yyZwweEtM6K5KAU5pL/ytJLjNG/9kROrDzXd/Cmuj
-	 EBs5UvoPNkKfuEq/zy3yP466oMJ9APY4fklwuMseEzSaQb7Kw5cWBJPm3IPsJ3i9um
-	 cULGfyj7SXOQOknUjLaWP2WHoRNDyX301AJae44UfH1GZll8szgKi6cIB4UCslxxpA
-	 kvfA0iZ+OKgcA==
+	d=lists.u-boot-project.org; s=default; t=1794714640;
+	bh=tG0BbysG7C8Nd5wCC17HBgXM//q7ZYVBbLOWnuDg/aQ=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=Y4Q4J8usv5Gr7DPoouFUxu/lC0Idl6AcwbC0/OzXPZ5W6jS3oO0jNMTzyS4kBb+jw
+	 Y/DErkjCyMnSA0P3oNjOI8cDg8ZqUGC/CvQuMcwNZxO36Q8haJ9H1N6cuFyxnGpeTc
+	 wRK6qER/kk9WVV+v+ny2qwK7cu+DMH/F5+L6N4Y5VLOJHcIJ+sKZxJtWfjU+A9W3pU
+	 NVKO1sUvy8NJFZOqDd5SjvFo/VgJdBaPT30jnKWqALXcKQN8HPo0NNR+i2nEzoIgeI
+	 smMDEHV5hz7lNR+NQGVgUZqpnDcUFIzxHDmZDGBpmlNOnC4sbidIUlvNd8ZWhOg1Dr
+	 jAm4MF7v1etvg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0BC4960698;
-	Sun, 15 Nov 2026 03:50:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A5377606D5;
+	Sun, 15 Nov 2026 03:50:39 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A54FB2E5
+ by lists1.osuosl.org (Postfix) with ESMTP id D6BD7109
  for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:50:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9A69C40080
+ by smtp2.osuosl.org (Postfix) with ESMTP id BCD1040079
  for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:50:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f-BA1ISOSrS2 for <u-boot@lists.u-boot-project.org>;
+ id jIqPKPvQHCp2 for <u-boot@lists.u-boot-project.org>;
  Sun, 15 Nov 2026 03:50:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C3EFB40079
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C051140068
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=devnull+iav.iav.lv@kernel.org; receiver=<UNKNOWN> 
+ smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=devnull+iav.iav.lv@kernel.org;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=NFJi9MAD
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C3EFB40079
+ header.a=rsa-sha256 header.s=k20260515 header.b=mTJm1XRc
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C051140068
  for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 03:50:35 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 3528D43E50;
- Sun, 15 Nov 2026 03:50:35 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 564A443DDD;
+ Sun, 15 Nov 2026 03:50:34 +0000 (UTC)
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id D1FBA1F000C5;
+ by smtp.kernel.org (Postfix) with ESMTPS id C34171F000C4;
  Sun, 15 Nov 2026 03:50:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794714635;
- bh=/os7nt/UzbSihdCul5QdcXZqGl8vTtLAgCfB3B5yknY=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=NFJi9MADD4vuqctFNWr1t4LxYKe6b8/P1bZqDp0ufZgouZF8J12DY+zLAiVsSxHgF
- CTeVet8SMrTGmPQYXhBw50oxFjvSZYKcwTkDx/pGKcNTO4Jh/zydlsCAqzaU4aWp8T
- a2PC0KP/5PiBnEnGUtj3lcpb0DCrMVCWZBI7sLKKgGkz+LNefW3WjrI51H9usckII/
- QzLdzMKq7xiWHu7DbL7mWZRRS+a+lo/ykC107XmIRelSs6Gz2lOfpUS0BPw9cFzm8U
- tcwKxAKyLN3Fbq44SbOITJn/UDFsc+3hBQShLS9fFLgv+94yhrA/+5UVIdalKp3czU
- 1kkP8SVgih6zA==
+ s=k20260515; t=1794714634;
+ bh=tG0BbysG7C8Nd5wCC17HBgXM//q7ZYVBbLOWnuDg/aQ=;
+ h=From:Subject:Date:To:Cc:Reply-To;
+ b=mTJm1XRcSK2oWc/F5DyWndKbYPR8ZJrBx+32dptKzyhCURIWiGwGJOeGcWbgmJGOB
+ +BI9KEmzdG64kn9Em+uizbuPoa9CsIDdfmzAsoAN+wEV/cHHA3HOCWo1UrgLKL1QGy
+ FAu8NSdj8I3wCGgTfl9urTuYposjemt2bI7C8PH6Cp6cwMKH37z9HmU+ceyjUVFRzS
+ TjnAgmVV3Y9Co2JNrx67S3CNXQEQpSKZomnImLatSxtfmi8EFTVPIMQblGjdD10bG/
+ hhdKAACC8/U91Iv72jLKJGqSfo0CMQBn0Bi8a7DIBg2v878KB46MRmDiiEAFlncjB7
+ TJy0a/ka7JAJg==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id 5E56349F30;
+ by lkml.kernel.org (Postfix) with ESMTP id 4385649F59;
  Sun, 15 Nov 2026 03:50:33 +0000 (UTC)
 From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
-Date: Sun, 15 Nov 2026 03:50:30 +0000
-Subject: [PATCH 1/3] arm: meson: g12a: send SCPI user data to the SCP firmware
+Subject: [PATCH 0/3] arm: meson: odroid-c4/hc4: Wake-on-LAN from suspend
+Date: Sun, 15 Nov 2026 03:50:29 +0000
+Message-Id: <20261115-b4-meson-scp-wol-v1-0-80c3e9f4deda@iav.lv>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261115-b4-meson-scp-wol-v1-1-80c3e9f4deda@iav.lv>
-References: <20261115-b4-meson-scp-wol-v1-0-80c3e9f4deda@iav.lv>
-In-Reply-To: <20261115-b4-meson-scp-wol-v1-0-80c3e9f4deda@iav.lv>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAUs+WoC/x3MwQpAQBCA4VfRnE0ZLOVV5LAYTLGrnUJt3t3m+
+ B3+P4JyEFbosgiBL1HxLoHyDKbNupVR5mQoi7IhIoNjjQerd6jTibff0dY0c2NbLkwFKTsDL/L
+ 8y3543w99hJQ7YgAAAA==
 To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, 
  Igor Velkov <iav@iav.lv>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4345; i=iav@iav.lv;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2136; i=iav@iav.lv;
  h=from:subject:message-id;
- bh=2Gdr08FRW63F0qHBRAEK5BDd5GdXqVBzC6URzhNj9gE=;
- b=owGbwMvMwCVmNH1q96v4SmbG02pJDFk/ddhf8qVUxUz+8v1sh5CgHffPsxnzMzN4VbRZy5luL
- 86QO3qvo5SFQYyLQVZMkWXCIY1bGUuu/vX3MH8AM4eVCWQIAxenAExE/QbDP4PIiWp9125OZehk
- fHUx/W/sDreykphZf/zcb5715k5cHsTIcGl1PrPm8Y78NWsz/m20LL9x79z/K5svLuiTq7rvsO1
- wNQcA
+ bh=1f4rcOl0WM800WyLDxnBIBr8IxSjl/eCc4sHv9kkPzM=;
+ b=owGbwMvMwCVmNH1q96v4SmbG02pJDFk/ddiuS96ttw9rPKzyclf40SWzXmvxdnk55F86nLng1
+ oFbp6ubOkpZGMS4GGTFFFkmHNK4lbHk6l9/D/MHMHNYmUCGMHBxCsBEAhcy/FNbrSm6/fGTqy9V
+ p29wPagU+Zi3vYM30XTCpbdxB+9Nby5gZPj13uGZi4RO2p+/4iVhGko7lFU8Zx085/h/yaMjZyq
+ 3f+MCAA==
 X-Developer-Key: i=iav@iav.lv; a=openpgp;
  fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
 X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
 X-Original-From: Igor Velkov <iav@iav.lv>
-Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,140 +148,51 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Igor Velkov <iav@iav.lv>
+The BL301 that Hardkernel builds for ODROID-C4/HC4 wakes the board on
+the Ethernet PHY only after the AP has sent SCPI SET_USR_DATA for client
+7 with a non-zero value. Neither mainline U-Boot nor Linux sends it, so
+a magic packet does not wake these boards from deep suspend.
 
-The BL30 firmware on G12A boards takes settings from the AP through
-the SCPI SET_USR_DATA command on the MHU mailbox. Mainline Linux does
-not send this command, so U-Boot has to, before it starts the OS.
+This series sends 0 or 1 from the DTB fixup, following wakeup-source on
+the PHY node of the DTB the OS boots with [1].
 
-Add meson_scpi_set_usr_data(), which sends the command on the
-low-priority channel and waits for the reply with a timeout.
+Tested on ODROID-HC4 (U-Boot chainloaded from SPI, BL301 built from
+Hardkernel's odroidg12-v2015.01 with unrelated RTC alarm changes, Linux
+7.4-rc2): with wakeup-source a magic packet wakes the board from deep
+suspend 3/3; without it the packet does not and the RTC alarm does.
+fdt boardsetup sends the expected value with the property present,
+absent, and with the MAC disabled.
+
+Client 7 is an extension of this BL301, so the option is enabled per
+board, for C4 and HC4. The N2 BL301 has the same client, but I could
+not test it, nor C4. The G12 device trees have no MHU node, hence a bare
+helper rather than a DM mailbox driver; I can rework it if preferred.
+
+[1] https://lore.kernel.org/r/20261109-hc4-phy-wakeup-v1-1-d98784ecac88@iav.lv
 
 Signed-off-by: Igor Velkov <iav@iav.lv>
 ---
+Igor Velkov (3):
+      arm: meson: g12a: send SCPI user data to the SCP firmware
+      board: amlogic: odroid-n2: tell BL301 whether to wake on LAN
+      configs: odroid-c4, odroid-hc4: enable Wake-on-LAN from suspend
+
  arch/arm/include/asm/arch-meson/scpi.h | 17 +++++++++++
  arch/arm/mach-meson/Kconfig            |  9 ++++++
  arch/arm/mach-meson/Makefile           |  1 +
  arch/arm/mach-meson/scpi-g12a.c        | 55 ++++++++++++++++++++++++++++++++++
- 4 files changed, 82 insertions(+)
+ board/amlogic/odroid-n2/odroid-n2.c    | 31 +++++++++++++++++++
+ configs/odroid-c4_defconfig            |  1 +
+ configs/odroid-hc4_defconfig           |  1 +
+ doc/board/amlogic/odroid-c4.rst        |  9 ++++++
+ doc/board/amlogic/odroid-hc4.rst       |  9 ++++++
+ 9 files changed, 133 insertions(+)
+---
+base-commit: 6487c50b8a40f2668ab98a892b9300ad5c181f38
+change-id: 20261115-b4-meson-scp-wol-a41de6a7e053
 
-diff --git a/arch/arm/include/asm/arch-meson/scpi.h b/arch/arm/include/asm/arch-meson/scpi.h
-new file mode 100644
-index 00000000000..5e9eef1974e
---- /dev/null
-+++ b/arch/arm/include/asm/arch-meson/scpi.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#ifndef __MESON_SCPI_H__
-+#define __MESON_SCPI_H__
-+
-+#include <linux/types.h>
-+
-+/**
-+ * meson_scpi_set_usr_data - send SCPI_CMD_SET_USR_DATA to the SCP firmware
-+ *
-+ * @client: SCPI client id; its meaning is defined by the BL30 firmware
-+ * @val: value for the client
-+ * Return: 0 once the SCP has replied, -ETIMEDOUT otherwise
-+ */
-+int meson_scpi_set_usr_data(u8 client, u32 val);
-+
-+#endif /* __MESON_SCPI_H__ */
-diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
-index 91d1e8342e0..cf98f4941d9 100644
---- a/arch/arm/mach-meson/Kconfig
-+++ b/arch/arm/mach-meson/Kconfig
-@@ -76,6 +76,15 @@ config MESON_S4
- 
- endchoice
- 
-+config MESON_G12A_SCPI
-+	bool "Send SCPI messages to the SCP firmware"
-+	depends on MESON_G12A
-+	help
-+	  Send SCPI messages to the BL30 firmware running on the SCP over
-+	  the MHU mailbox. Boards use them to pass settings to their BL30
-+	  build before starting the OS. If the firmware does not reply, each
-+	  message adds up to 200 ms to the boot.
-+
- config SYS_SOC
- 	default "meson"
- 
-diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
-index 2157c35c2d5..ff9effbbc9e 100644
---- a/arch/arm/mach-meson/Makefile
-+++ b/arch/arm/mach-meson/Makefile
-@@ -16,5 +16,6 @@ endif
- 
- obj-$(CONFIG_MESON_AXG) += board-axg.o
- obj-$(CONFIG_MESON_G12A) += board-g12a.o
-+obj-$(CONFIG_MESON_G12A_SCPI) += scpi-g12a.o
- obj-$(CONFIG_MESON_A1) += board-a1.o
- obj-$(CONFIG_MESON_S4) += board-s4.o
-diff --git a/arch/arm/mach-meson/scpi-g12a.c b/arch/arm/mach-meson/scpi-g12a.c
-new file mode 100644
-index 00000000000..ba66167fec0
---- /dev/null
-+++ b/arch/arm/mach-meson/scpi-g12a.c
-@@ -0,0 +1,55 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * SCPI messages to the G12A SCP firmware (BL30) over the MHU mailbox
-+ */
-+
-+#include <errno.h>
-+#include <asm/io.h>
-+#include <asm/arch/g12a.h>
-+#include <asm/arch/scpi.h>
-+#include <linux/bitfield.h>
-+#include <linux/iopoll.h>
-+
-+/* Low-priority MHU channel: AP to SCP on SET/STAT/CLR_4, replies on _1 */
-+#define G12A_MHU_SCP_STAT	(G12A_HIU_BASE + 0x414)
-+#define G12A_MHU_SCP_CLR	(G12A_HIU_BASE + 0x418)
-+#define G12A_MHU_AP_SET		(G12A_HIU_BASE + 0x434)
-+#define G12A_MHU_AP_STAT	(G12A_HIU_BASE + 0x438)
-+#define G12A_MHU_AP_CLR		(G12A_HIU_BASE + 0x43c)
-+
-+/* AP to SCP low-priority payload in the shared SRAM */
-+#define G12A_MHU_AP_PAYLOAD	0xfffe7200
-+
-+#define SCPI_CMD_ID		GENMASK(7, 0)
-+#define SCPI_CMD_CLIENT		GENMASK(15, 8)
-+#define SCPI_CMD_SIZE		GENMASK(28, 20)
-+
-+#define SCPI_CMD_SET_USR_DATA	0x20
-+
-+#define SCPI_TIMEOUT_US		100000
-+
-+int meson_scpi_set_usr_data(u8 client, u32 val)
-+{
-+	u32 reg;
-+	int ret;
-+
-+	/* Drop a reply that came late for a request that timed out */
-+	writel(~0, G12A_MHU_SCP_CLR);
-+	writel(~0, G12A_MHU_AP_CLR);
-+	writel(val, G12A_MHU_AP_PAYLOAD);
-+	writel(FIELD_PREP(SCPI_CMD_ID, SCPI_CMD_SET_USR_DATA) |
-+	       FIELD_PREP(SCPI_CMD_CLIENT, client) |
-+	       FIELD_PREP(SCPI_CMD_SIZE, sizeof(val)), G12A_MHU_AP_SET);
-+
-+	ret = readl_poll_timeout(G12A_MHU_AP_STAT, reg, !reg, SCPI_TIMEOUT_US);
-+	if (ret) {
-+		/* Do not leave a stale request for the SCP to pick up later */
-+		writel(~0, G12A_MHU_AP_CLR);
-+		return ret;
-+	}
-+
-+	ret = readl_poll_timeout(G12A_MHU_SCP_STAT, reg, reg, SCPI_TIMEOUT_US);
-+	writel(~0, G12A_MHU_SCP_CLR);
-+
-+	return ret;
-+}
-
+Best regards,
 -- 
-2.43.0
+Igor Velkov <iav@iav.lv>
 
 
