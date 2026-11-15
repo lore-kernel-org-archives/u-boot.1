@@ -2,145 +2,154 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60C5C606A31F
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 20:52:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29A5D606A329
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 20:53:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KQd0w0ey;
-	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=eB6aZ4Ws
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RZZOGQP2;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=oC/1mfvZ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 29A2360672;
-	Sun, 15 Nov 2026 20:52:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E906360650;
+	Sun, 15 Nov 2026 20:53:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QQAOwrpv3diL; Sun, 15 Nov 2026 20:52:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2602360632
+ id zjsugxPJ55-Y; Sun, 15 Nov 2026 20:53:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 008AF6061A
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794775927;
-	b=Zl6idCzaoQMscUNbG6fPUdA2hkVe9hdYB1vS6Dyt9u2wAtpfIRUUpXCmXN5mcaMCaFM7
-	 xH5slR4UiB80RqxeJrT48r0Zv7KqggPyN9e3Q+ABvQBd786GCqBPCn+MUkod3JIbOlU2W
-	 F+Ml8CrSGTmBWfk1vl4dcvhDNT9BfGVsCMN9iB/gZwODgOAFIKfNMxK1Af80zvQXtRaGW
-	 O1yAfw7Z3r0aqA8RIEjsxflE6uhz2EvJkL76vFiEt4e0x26x6059CKpFbXQSZcdshF/gN
-	 iYtZgG/S5cnJmq1gg2uSa6kSiT+WTL/yPWsym8ANTBmgw2JoV5oN94EppIfii34Zp0g==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794775997;
+	b=Wu6tazj7gIYq++NmNJx2X/EoJi2ru93gbhzis1qINKtZg/sRyj3BTWM9j/J0NNhp+M0v
+	 cXXDMZEpS1DMnfCg1DY0g9GO4gSgdFbBpmLOUgHyMmDt3sMIFBUWoyxBcZeKc9BeZmFJY
+	 4loXSIRDIkEi47fMWxyFW5NoKuQiwS5GmUoQu4WBvlEJLX/czwn157CVj7wtQq5dQnBlw
+	 +cLLLKIVldUpOaT1BMcK9pHLAO68TvWowFuzscxT4uH8IwQ+kXy5eW9k2pO9/9Z1ZMc2S
+	 WcSMzRTF9IEMVkFfkti1cmgBDhjfUjYgZLYfT9OUFXhr4kNLqrvTmI8cclI+8aA5EMw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794775927;
+	c=relaxed/relaxed; t=1794775997;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=wAyDshsu6SAFAybc6wnt94GtNmhqoMKWj93uS9n8Uwc=;
-	b=s0s2/pAqgMmjldJE5kbQyrD3S6nxV47rc2ezEXV8ucRvpZF2GVl2UUJKvcqr3lO5+XkJ
-	 v408FSUaYsvHuWqKcQ7mQXVoGoY50mv6+HF3Z/FH0PrD8FKzh/txI1UZlyA4GSH2ckdL6
-	 iZPNY2REZh52a7lEWov2aEnBdWnOeZVLQ7dgeGrqvgjsrBE+GXXi1OmvsqRzgyLqYzRXE
-	 rA0HTYtVH8noPnGa1GLDVimSr3oE9NMsXA3RcMI9riG/2MG9Dd9E7FXXF6UlVikOTyRIT
-	 SRgDjZLX5P56VlDjbDVDcHWL6ee3PXmAcWdYBQ88FqFRT1VLvOtcmqNJajYAGs0+CAg==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=sSugjLiyUA5/coVv8WTK3Ay/XJHdaYfI+OvVzCoLq0o=;
+	b=qrkFYZEOvRIGf8t6C41Rsf0NqMZHgCuCvofRxD0FueqsMI+TPkc2J5nUogC7YHU29FOe
+	 Gr1rtZ5tuhMujNIYZvSfq7CvPN1oaES9I8KBc/hUDT+q5f/lCOpOXDiwUaCUqDs7AjBVL
+	 mDn3D18eLWWW9clkdCMYk9e6JkPuvUYEgv9hgFSB40i3M7PY1Lw53ErTSFTbq+LG/EG9Y
+	 qfyVDAfk8gdAnYD82M06MVztEPtplR32hc3kvKkP1EuDTA3ds60WBGuLPiA9Dm9qq/2z+
+	 zlPCtTwwfef61BG5WAGVPjMD0UGgjdP/4mddlLcdERxrv1NlpNkXMU3e4DUrPNMYwRA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=eB6aZ4Ws;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794775927;
-	bh=wAyDshsu6SAFAybc6wnt94GtNmhqoMKWj93uS9n8Uwc=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794775997;
+	bh=sSugjLiyUA5/coVv8WTK3Ay/XJHdaYfI+OvVzCoLq0o=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KQd0w0eyQbGrKe51o+K8md3RmPNddXA/3Csja6cmYYB8uw5vvqJLqX9PJoTrDwfzL
-	 mtrqiTqXas8JBSgIkvzyKFwfI+G1qifcRBJ2pYdYGzS8RDs/wsJV8slkzypAUI+ue/
-	 Nf6E9UFGfTyVc9kV0hgOwpDEQ9lIWk4kctZZUmM66iRo5dvcfUWAcIN8kwuhdTz5X9
-	 7ej9ntUJdNWg+66eDmoMLeyrM+nlHXh7TXJsnYKVkeeJgR23Lt2CMiB/2518fC2ded
-	 Wx9JIg5z7lq3PuQ7O5X3RXtNQWWJ9fa2teqEM7t0sBVF/JwbK0RcpDtqdvmRggwQMm
-	 /V3McmxSkRnfw==
+	b=RZZOGQP2jY0vfw5Oppq5jcxqmnJoO/JmqeeWyLnTjehir35Ezj3OEV2phAtiiFL12
+	 fc+TWmoY/yz5UjAj1EhYhe3zVA8md2SPy0gbawYmXvs0QETQf0iKpxuPOUOgvJMVsX
+	 T4niJnVW8K/05DotBckbbsEHSQoIhXrkjjA3AnTn8f/Zg4PTFsIgbdgnt69gB2f0df
+	 NA9b6QbvZUV26OLogIh/NmzJ98HFSHi4X0/9Atl26q4E/XLAScCl8Jsx5C12B9I5rV
+	 AaS304X6lI/LRP4OE0Hv6567Ra5N5hYNpidzrwL35JDlAsTsDXgoQnlKLiVi6pzFOx
+	 BCndE359fc7DQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2602360632;
-	Sun, 15 Nov 2026 20:52:07 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 896B928C
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 20:39:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 008AF6061A;
+	Sun, 15 Nov 2026 20:53:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C21962FE
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 20:53:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 67C05605EB
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 20:39:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A896340080
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 20:53:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1CstvzltZ-wL for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 20:39:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 39D8F60607
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::92b"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 37CtUTM6hJ-Q for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 20:53:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A9B2140048
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c2c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::92b; helo=mail-ua1-x92b.google.com;
- envelope-from=georgekola@google.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256
- header.s=20260707 header.b=eB6aZ4Ws
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 39D8F60607
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 20:39:25 +0000 (UTC)
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-99071945aa7so2420990241.3
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 12:39:25 -0800 (PST)
+ client-ip=2607:f8b0:4864:20::c2c; helo=mail-oo1-xc2c.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=oC/1mfvZ
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A9B2140048
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 20:53:14 +0000 (UTC)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-706113e92f9so2305692eaf.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 12:53:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20260707; t=1794775164; x=1795379964;
+ d=konsulko.com; s=google; t=1794775993; x=1795380793;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=wAyDshsu6SAFAybc6wnt94GtNmhqoMKWj93uS9n8Uwc=;
- b=eB6aZ4WsvIH6s5qOoks8LVNgWFyI8VRu5dqBWKFEjqip9AmGFun3zpYM3UYe84ub9I
- tPfweQRwwVDps4002fZ917nBukmE3PXRADPBuaszECgVRB5DXstwnZeJCIzCAOxkzbIE
- P/3v8J1mmJ2Q01Wc1nUn5tQ0h5fu6NVZIKk1yJWANN8uKlQsiZO1d0WKrdi4apKHjEWr
- 8YnsbfQN5bpyOFwqgUQ9j1/to8GIGPRiPbERKzEuKV5+QYf2MRsYz0UteAkeLeoDNVUD
- 5PRTj05p11NE4rS0nwqa/CEezCjI1yvZwpd4YnXFc8YtOyUv28WVgT/pZyqvuYEfU8r3
- Y7SA==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=sSugjLiyUA5/coVv8WTK3Ay/XJHdaYfI+OvVzCoLq0o=;
+ b=oC/1mfvZXQ/G9mp71UQ/yo3eHIFYFGnvCHTos28z+OiVwDz78mSYy0LtRMocJDUfCX
+ hS1zuQ15pHH3Z8yGwfl45NzlwbIsmwZP8pJvL5JJ04cptCAG5IKIX2Q9eLfFHgWowvzk
+ VwQO1DbqYZ7SjnP4ancQylc4jGBh+3ulyfzyE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794775164; x=1795379964;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=wAyDshsu6SAFAybc6wnt94GtNmhqoMKWj93uS9n8Uwc=;
- b=2WPSTfHAiDFin1+fXYXcbmbQ7kCQFIs6amYWZVJSLzcp+AbqgwrCuXWUzrYyXtQ5j7
- cT58fKPA8U7OBvGXpU1BUgt5BSYKPrvU+QqhDIBasqt9HQGkh2rq4lIhDVXjXscj/4YF
- qZ2gl65eygtNoYtYvZ22MOsJrC9P0g8P4p8f1Bef5EQRo8QChOSyGJz/9TMeIJxzSQfB
- qhO63xpuGXJyEnOSPsdTmAaj4rdcc54gy3YmlmXir14DF3MCa+jzJ51m4gbE1gMatIje
- lDAJML764bPXKwvzRbmy31iO1mgReSD91SjRhK20ZonRequ0ANSo6jtOr/0I8wPa6cNV
- Rt2w==
+ d=1e100.net; s=20260707; t=1794775993; x=1795380793;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=sSugjLiyUA5/coVv8WTK3Ay/XJHdaYfI+OvVzCoLq0o=;
+ b=Xx8eYFNq+blLdrmPagfVMtRteZN+k2YVHAcdVLHEfWDGeP//I49falLh/2hWqBgs67
+ xJeVuR2es9RYS743o//36tDwve4lNfpE2MK64CAQwAUui3YF0ov0kl5lXZiGYRvF3kLP
+ B13IWqKkxKQiIsZO90AnLw+hfXiLxLU9hS4SOYOcr0sELbu8RzybOF4bCjchAbLI6Pfa
+ pgc8LllcF9mr7sRMHpdKFnQrXkPi6S2vc+MdemLPT8yOdiJ0VNPI+pN6wttFlyDgp3+4
+ dba7sOGy/3iARw/ZQ9QYBLVwWCT+CdvFqOLOMCE9vydlKQ25xcYIih5hQvQ+ZdZ3afBJ
+ 2aEw==
 X-Forwarded-Encrypted: i=1;
- AL+hErGiNkHxmrrteoOxmvGCN7+ew3SHrkby4RJ4rkxH0fIr7Id0ogNPA3xcJ8nm0E4mkuw7zSH1j2M=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9D9vwSvMvmVX5e99Oif3dx8vgx1M4vPQlDX1fzrTjbSx7XlmRI
- UF00xdSNqNC/vaIw5ND+40kEKQ8MvzJzV8fZR42GET90Q3MXgX5UgutD4reYun1TvtIayMjT5jl
- 9XZ5d6x+wA5NVlTbaxrHEX9HwEAWv/LPsI3h0sDcb
-X-Gm-Gg: AYBFou0woARG+HF/9sqZcjlWOFuzVABXOFIw0+8s/vGwmgaW3qAVdp38wZ56oxZBMit
- TgMn4ZWPgAh28OyRu61zkgYKl9F26WLU5oUBTK7aR2stx4C54U1c8MyWihSC2Ub5kBg35MZdvHz
- jXFcgUHcWaxWHzKPpdkDKelIhKVRbo2MtOWp7A+rwLLBOejOp267J3f53LhljM+PTRhamtC0GFA
- PCXAnZri3BPfwgBznXEMHF8tkyy2xhGIv7vP8f5QNR0v8zyDS5rRIw66bCmXGqcbI7d13R/2wYh
- lklpQIW9p2BUx3iI2V0GheQBYFQTnARvUtIfMVDJ/z383heyjvKF7IGntu96l+vKD4z5mqGjjPK
- n9PKb78BWAprX0jksd2KoSt8Cdm7TTzrXT1rLrcnHn0ENnuBBIlDT694a/jjb439lB/Va5g==
-X-Received: by 2002:a05:6102:510f:b0:7cc:3246:3095 with SMTP id
- ada2fe7eead31-7d64d8b73cbmr3292415137.34.1794775163803; Sun, 15 Nov 2026
- 12:39:23 -0800 (PST)
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
+ AL+hErF5qMcHFk2IFv/jl9oShtOxtuAeWa8V3M1ZL66gFQfgjda+1NfiX8nRshD9fdpZExbEDZN3Xlg=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9xa06yLGCc/2m8GK3m44Hj6fBVyp4sroAX52FROIWPMzyyCzZ1
+ DBFIhR+9zHyAbCBmP32lJfqyk+o7wU3x6AdOgR3W6QCT9P69L2n4MNmlmWSVxI3FkstMxkC98uf
+ L72mheA3keA==
+X-Gm-Gg: AYBFou2taUUHHpQRp8zlhReGguQflI5zSlCuIrx61tF8ltKbr6vCFY3rHrRqXsn19st
+ yohyeeIVZqO9HZrnjLbBQYv3dPIKV2zViNbJ+uRNeBzMCXAANXdk9hwJF8H4MlYVVHqp4kquBre
+ +g1vvjdqDu4wIvpapjFX7+dNla8y4K9pNlqb2WkO2YQ+HTwFHH6F9KX9S+BARH3GkjxZMdihDK1
+ /BhLY4WPfIWkoiy/b/sh4REPbZS264CBdAt3Q2KxJkcck184muZTstZd6bTDEybpCjmq1+x74hL
+ /7U6H80p/eqLaLdg7v/KBI1shxYszwfCaROz0hfshB72ZBtMuIz9PqMZh0+r3AYp4qQWaeFB0x/
+ 4jPzkdmqUVCrPfyiHR6nD0JqT8+yEulm5rm2YQgw41M+WSeXcAjPbkq8LQ/u46gIITWEjEFzdHg
+ Cf+w94Xc/YReHNT4VrByQJwyP7IuwOoYR58Ej+8XUz2HG71Fw9GrEA+Joet0A2kskS+0y4F8VD1
+ LUyG61yShhcYi0PGSlcYhyutKrU1DahnRQkj/TY0DP+De+nDY375uKyrrwfLspY1lkgpdYggCj6
+ ipvsxT91lJRp11Lzu+V0KfPxGSl8JNMuCczHjkn3Kv2X8Dub51282CN5ccCeupiFiP3F20Y/1qb
+ QgWETFrtYsy3FZCZGRH+s6bHxp6J7syfzIYCbDaSlXnNmPiaUO3S+QzAXEfLmIEQlgPQCU4qkN9
+ IzdGdmU1iEl/J87v3Dpol2L+SWytSWV+4=
+X-Received: by 2002:a05:6820:a74d:10b0:716:d70f:1c09 with SMTP id
+ 006d021491bc7-71ab510c5aemr3653059eaf.79.1794775993274; 
+ Sun, 15 Nov 2026 12:53:13 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-71ab430598csm7144392eaf.10.2026.11.15.12.53.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Nov 2026 12:53:12 -0800 (PST)
+Date: Sun, 15 Nov 2026 14:53:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: George Kola <georgekola@google.com>
+Cc: Simon Guinot <simon.guinot@sequanux.org>, u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH] configs: netspace_mini_v2: disable default netconsole
+Message-ID: <20261115205310.GX554944@bill-the-cat>
 References: <CAOTQ16+AbF9iURWBrU6_NOM14KCq5-s1YFbbP9ULe0Ch0hhAZQ@mail.gmail.com>
  <20261115180628.GV554944@bill-the-cat> <avn83NoJA8ZKi1q7@localhost>
  <20261115190204.GW554944@bill-the-cat>
-In-Reply-To: <20261115190204.GW554944@bill-the-cat>
-From: George Kola <georgekola@google.com>
-Date: Sun, 15 Nov 2026 12:39:12 -0800
-X-Gm-Features: AclHuK8JQd4fiWmlMEQkAiUdDJtKC7CYQK6FomOcOpy_YdcC9Par3cvOpeRT97U
-Message-ID: <CAOTQ16JK6uKASoNGK1XFXuw-W+dc9ofZRJEV_ZqHMVbAjXhPPA@mail.gmail.com>
-Subject: Re: [PATCH] configs: netspace_mini_v2: disable default netconsole
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Guinot <simon.guinot@sequanux.org>, u-boot@lists.u-boot-project.org
-Content-Type: multipart/alternative; boundary="00000000000018541b066056a8ec"
-X-Mailman-Approved-At: Sun, 15 Nov 2026 20:52:05 +0000
+ <CAOTQ16JK6uKASoNGK1XFXuw-W+dc9ofZRJEV_ZqHMVbAjXhPPA@mail.gmail.com>
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="COrNanbz38SOrsak"
+Content-Disposition: inline
+In-Reply-To: <CAOTQ16JK6uKASoNGK1XFXuw-W+dc9ofZRJEV_ZqHMVbAjXhPPA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,136 +159,94 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.4 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_IN_DEF_DKIM_WL autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---00000000000018541b066056a8ec
-Content-Type: text/plain; charset="UTF-8"
+
+--COrNanbz38SOrsak
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Thanks for confirming. I was trying to secure our setup where we do not
-need this and  I will move this into our repo.
+On Sun, Nov 15, 2026 at 12:39:12PM -0800, George Kola wrote:
 
-On Sun, Nov 15, 2026 at 11:02=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
+> Thanks for confirming. I was trying to secure our setup where we do not
+> need this and  I will move this into our repo.
 
-> On Sun, Nov 15, 2026 at 07:41:32PM +0100, Simon Guinot wrote:
-> > On Sun, Nov 15, 2026 at 12:06:28PM -0600, Tom Rini wrote:
-> > > On Sun, Nov 15, 2026 at 09:12:23AM -0800, George Kola wrote:
-> > >
-> > > > netspace_mini_v2_defconfig runs dhcp and activates netconsole in
-> > > > CONFIG_BOOTCOMMAND without setting ncip, exposing an unauthenticate=
-d
-> > > > UDP port 6666 console that accepts broadcast packets and drops to a=
-n
-> > > > interactive U-Boot shell over the local network.
+Interesting. What setup is this, given we're talking about a very
+specific board configuration, and not a new one either. Thanks!
+
+>=20
+> On Sun, Nov 15, 2026 at 11:02=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
+ote:
+>=20
+> > On Sun, Nov 15, 2026 at 07:41:32PM +0100, Simon Guinot wrote:
+> > > On Sun, Nov 15, 2026 at 12:06:28PM -0600, Tom Rini wrote:
+> > > > On Sun, Nov 15, 2026 at 09:12:23AM -0800, George Kola wrote:
 > > > >
-> > > > Remove dhcp and netconsole activation from CONFIG_BOOTCOMMAND and
-> drop
-> > > > CONFIG_NETCONSOLE=3Dy so the board boots directly from local USB or
-> SATA
-> > > > storage by default.
+> > > > > netspace_mini_v2_defconfig runs dhcp and activates netconsole in
+> > > > > CONFIG_BOOTCOMMAND without setting ncip, exposing an unauthentica=
+ted
+> > > > > UDP port 6666 console that accepts broadcast packets and drops to=
+ an
+> > > > > interactive U-Boot shell over the local network.
+> > > > >
+> > > > > Remove dhcp and netconsole activation from CONFIG_BOOTCOMMAND and
+> > drop
+> > > > > CONFIG_NETCONSOLE=3Dy so the board boots directly from local USB =
+or
+> > SATA
+> > > > > storage by default.
+> > > > >
+> > > > > Fixes: 970bf8603b87 ("Convert CONFIG_USE_BOOTCOMMAND et al to
+> > Kconfig")
+> > > > > Signed-off-by: George Kola <georgekola@google.com>
 > > > >
-> > > > Fixes: 970bf8603b87 ("Convert CONFIG_USE_BOOTCOMMAND et al to
-> Kconfig")
-> > > > Signed-off-by: George Kola <georgekola@google.com>
+> > > > This is feature working as intended, presumably.
 > > >
-> > > This is feature working as intended, presumably.
+> > > Yes, netconsole is enabled by default on purpose on the LaCie
+> > > Kirkwood-based devices.
+> > >
+> > > When installing mainline U-Boot, you need a way to access the U-Boot
+> > > console in order to configure the environment for booting the OS you
+> > > are installing. The serial port is not always an option, since it
+> > > requires opening the case and using a serial adapter (that you may not
+> > > have).
+> > >
+> > > Here is a guide describing how to install and configure mainline U-Bo=
+ot
+> > > on these devices: https://lacie-nas.org/doku.php?id=3Duboot. Much of =
+the
+> > > procedure relies on netconsole being available.
+> > >
+> > > Note that you can disable netconsole support either at build time or =
+at
+> > > run time if/when you don't need it. But I think it is better to keep =
+it
+> > > enabled by default.
 > >
-> > Yes, netconsole is enabled by default on purpose on the LaCie
-> > Kirkwood-based devices.
+> > Thanks for confirming.
 > >
-> > When installing mainline U-Boot, you need a way to access the U-Boot
-> > console in order to configure the environment for booting the OS you
-> > are installing. The serial port is not always an option, since it
-> > requires opening the case and using a serial adapter (that you may not
-> > have).
+> > --
+> > Tom
 > >
-> > Here is a guide describing how to install and configure mainline U-Boot
-> > on these devices: https://lacie-nas.org/doku.php?id=3Duboot. Much of th=
-e
-> > procedure relies on netconsole being available.
-> >
-> > Note that you can disable netconsole support either at build time or at
-> > run time if/when you don't need it. But I think it is better to keep it
-> > enabled by default.
->
-> Thanks for confirming.
->
-> --
-> Tom
->
 
---00000000000018541b066056a8ec
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--=20
+Tom
 
-<div dir=3D"auto">Thanks for confirming. I was trying to secure our setup w=
-here we do not need this and =C2=A0I will move this into our repo.</div><di=
-v><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cla=
-ss=3D"gmail_attr">On Sun, Nov 15, 2026 at 11:02=E2=80=AFAM Tom Rini &lt;<a =
-href=3D"mailto:trini@konsulko.com">trini@konsulko.com</a>&gt; wrote:<br></d=
-iv><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left=
-:1px #ccc solid;padding-left:1ex">On Sun, Nov 15, 2026 at 07:41:32PM +0100,=
- Simon Guinot wrote:<br>
-&gt; On Sun, Nov 15, 2026 at 12:06:28PM -0600, Tom Rini wrote:<br>
-&gt; &gt; On Sun, Nov 15, 2026 at 09:12:23AM -0800, George Kola wrote:<br>
-&gt; &gt; <br>
-&gt; &gt; &gt; netspace_mini_v2_defconfig runs dhcp and activates netconsol=
-e in<br>
-&gt; &gt; &gt; CONFIG_BOOTCOMMAND without setting ncip, exposing an unauthe=
-nticated<br>
-&gt; &gt; &gt; UDP port 6666 console that accepts broadcast packets and dro=
-ps to an<br>
-&gt; &gt; &gt; interactive U-Boot shell over the local network.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Remove dhcp and netconsole activation from CONFIG_BOOTCOMMAN=
-D and drop<br>
-&gt; &gt; &gt; CONFIG_NETCONSOLE=3Dy so the board boots directly from local=
- USB or SATA<br>
-&gt; &gt; &gt; storage by default.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Fixes: 970bf8603b87 (&quot;Convert CONFIG_USE_BOOTCOMMAND et=
- al to Kconfig&quot;)<br>
-&gt; &gt; &gt; Signed-off-by: George Kola &lt;<a href=3D"mailto:georgekola@=
-google.com" target=3D"_blank">georgekola@google.com</a>&gt;<br>
-&gt; &gt; <br>
-&gt; &gt; This is feature working as intended, presumably.<br>
-&gt; <br>
-&gt; Yes, netconsole is enabled by default on purpose on the LaCie<br>
-&gt; Kirkwood-based devices.<br>
-&gt; <br>
-&gt; When installing mainline U-Boot, you need a way to access the U-Boot<b=
-r>
-&gt; console in order to configure the environment for booting the OS you<b=
-r>
-&gt; are installing. The serial port is not always an option, since it<br>
-&gt; requires opening the case and using a serial adapter (that you may not=
-<br>
-&gt; have).<br>
-&gt; <br>
-&gt; Here is a guide describing how to install and configure mainline U-Boo=
-t<br>
-&gt; on these devices: <a href=3D"https://lacie-nas.org/doku.php?id=3Duboot=
-" rel=3D"noreferrer" target=3D"_blank">https://lacie-nas.org/doku.php?id=3D=
-uboot</a>. Much of the<br>
-&gt; procedure relies on netconsole being available.<br>
-&gt; <br>
-&gt; Note that you can disable netconsole support either at build time or a=
-t<br>
-&gt; run time if/when you don&#39;t need it. But I think it is better to ke=
-ep it<br>
-&gt; enabled by default.<br>
-<br>
-Thanks for confirming.<br>
-<br>
--- <br>
-Tom<br>
-</blockquote></div></div>
+--COrNanbz38SOrsak
+Content-Type: application/pgp-signature; name="signature.asc"
 
---00000000000018541b066056a8ec--
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCavobsgAKCRAr4qD1Cr/k
+CipJAQC3O1hdRiERJpb/soZcWAHjaYVX42mOmj8bjnUW2ZbyUQD/b1d/GkyQXkpt
+bkz/FuQTtBwkTz4O326bg6MVwe+01Qo=
+=ILAm
+-----END PGP SIGNATURE-----
+
+--COrNanbz38SOrsak--
