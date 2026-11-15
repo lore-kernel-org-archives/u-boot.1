@@ -1,30 +1,30 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8917606A31F
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 19:00:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA8D4606A32C
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 19:00:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xxtUH/+7;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oLK/0C7r;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VqnHMT80
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XerMc9Z/;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=h8J44vlD;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=X2JKpq2p
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 77F3480F45;
-	Sun, 15 Nov 2026 19:00:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 929A340670;
+	Sun, 15 Nov 2026 19:00:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h5q1nBIW9G5S; Sun, 15 Nov 2026 19:00:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 44AB680F27
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794769247;
-	b=H2RH7XRgs8R3/sRxpfX3L8vY+vaTg3xsq5AJ6cTWdfO5wZNy27t0+qWHe6Ihxc2IKbGQ
-	 6Tm+c7lO32rz7wlRdfVxqVZLA2RQu2+/3vHuFyI6IvNZzHjJInCE8qG95qO0mGDVpmZYA
-	 L3A7Uc+K4HE24OTK2zRGVWA/y8RfsnqpeCBjSMePkJT7fgS9LmCLWasddgTE/9htjKam5
-	 R7CZuI33gFno6P2L7KgYlZoUiMDo20h09gBF+bNsjykjNeRNPkFCBiGt8Izn1Sv45SCvt
-	 EWB2SJrIOjJgqWAWB4Ix7wIiwSwibBLG13iVWTe97U1WnVSlQuuczHqOB2aB3rWN9Rg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YbzsxeGdCCtJ; Sun, 15 Nov 2026 19:00:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DCD10406C2
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794769249;
+	b=az8ZQ2b4JKnqIF5edhC2+fPczyhcgnIMxVD5U6hmvvL9bv4uPszHKqf6VyuWYrtTximi
+	 oxxLdYxgwXfKEerGOxsCLojtuSbEimnRKGh410K+8PfMN4B124rNvhUvLzCIhYtFIHSUL
+	 pVKKuAojZw9YOKPR+gQtgl8Cg1qDlBzLlXdM7w2B8J4s2PMc/dWUVCCGXeMZzUM4T7a0b
+	 I4hELk9RenX1/FNbf4uovPydWM6z94m1PKFNdeAw+JrsxHt34PciZ0xFpSysmx7UxrewX
+	 TYDb87sRT3/+kSKt24jM0LXD7RawtYFRUcCCFW9CY5T0H82yHujHa9QtccT1CaxoEcA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794769247;
+	c=relaxed/relaxed; t=1794769249;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,49 +32,52 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:X-Google-Original-From:To:
 	 Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 MIME-Version:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=JbSg/ZRacsnc45pteIBSK/m25QGz7JKp0fcSHEeSHxs=;
-	b=A1Q6kLgtfKr6eGNhlxiSlh9iQJDDYs8vp7EBfu4gIODgO8U3y3OyW2seGtgdt2uMP13O
-	 mqxWGkoq5tAn+swmIhsoNPwDsIilFfqqCSU3hL340RQTvcCkyXZuhn/Jt4ca4aAMxVP2t
-	 Gxa+egihILBAv+awy0G5ZqY6NR8Nwg0Lrkq5bMFDnREQ1sOgLAs6Z0v2FIep7t5JElkZH
-	 xBkDe7aF7KE1c+BqEIvSBJde+lYXpDALRXF4E1l8Ot2lpGUo8Ohoj8/4cuMwWsoHADI9A
-	 8IARBaYXjfetu1wBl4ppblkw3VOCOEtmhi9lPFDTlMSSl2mxPQaeL+g6RJcR5tvsGDg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=fpdj5RKcrNzdH4NSk5BJEsvaDsadM/3Qhnp+uKf40Jg=;
+	b=cXhEOplNm09+zmZKMBuyukEADnWjoFmNxmy+nO4Nv3UKE46PTZ0KnzdZAfFDyTmVQG4t
+	 LlBkkjM8H8VyDFBw3YQUiIXkOUoFOAcNGIgFuyF9VRBcj3aD/mZjcujMnXS6pWPk/sgXC
+	 BBP7huKLoYMADr7K3fHeb9ty3qw4MRi89fnZr0BQqSGAvRHVS3bFlniV4X81d3BQNXIqT
+	 3fngU+PhowcBgiNMmLvnkhnLO+/bV1BV8LaZugcnRnKziz5rarfnaOAr3Yx/QUjcxt/JH
+	 rGk9lApaxirCJqhfdYYRMtpGRiK0RW12E2REIrYRcAMSDtrM1jS9dZbh1LZewkeN1CA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=h8J44vlD;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=X2JKpq2p;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794769247;
-	bh=JbSg/ZRacsnc45pteIBSK/m25QGz7JKp0fcSHEeSHxs=;
+	d=lists.u-boot-project.org; s=default; t=1794769249;
+	bh=fpdj5RKcrNzdH4NSk5BJEsvaDsadM/3Qhnp+uKf40Jg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xxtUH/+7aDbZlaU4EH2+q2fam5yvCS0X2/HRxXvJbG+jgpl/FnzwCqZLLBcTnXfts
-	 s+esS1SE/8hSZ9klApVHsLgmII7KBFtTGzul6pqjDRr198gfocFquIS+xI+cfIBkj3
-	 o3O2JJrIAUVISsw7Oqgmmxjdey5MgMNti1yaqq/ok8Xwoxtfi5O2rlVG/9lixl86H2
-	 h/1Goex8I8HqVkDBxRs5/J7q16SrompXxqOU3mGR46704MkEzmbS66ddR6kA/WaLJO
-	 uSDXp2mDYnvj8b+iv0MjpnZyLE7LS66qjI2GlkBmYRoDruoVBBauHE7VRX5tn38Dt5
-	 CbGop/2npKcNg==
+	b=XerMc9Z/+IUKBEAC9NcGOrgh3+5aiYYBEg20l4oZ3kf1Ll5emXdsynIJLk4OtwZJ3
+	 WDYGPorgicEyL9TNo9pG3DW9rAWPFp3BhXspmA9hxcu1YtY4JeQlOlI7RmJ+sZZ1Tj
+	 ohZ1wzEHtkxKOIzhOxIIAkEDxLQBTje9v45OdflISHUlwGMumU0eNaYN/DhV0vtaVq
+	 swZ+XpGKsZVgvZhjbomOYi+K/9pC8//jIybWl2N0FbnmO2s6R+J2AbX5sBgiH/694I
+	 hs/w6i2uv/Rn5CmsroBBz340kP50N3bwVdWYI/A6rHRTBrCO/KQVwIT5F6LYVcNAEH
+	 qH0AUDdpCYoSg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 44AB680F27;
-	Sun, 15 Nov 2026 19:00:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DCD10406C2;
+	Sun, 15 Nov 2026 19:00:48 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E0BFB28C
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:20:00 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 14BDA109
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:20:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9D18040555
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:20:00 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E9E59405AE
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:20:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6z93WmGjk6xo for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 18:19:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3FD75405AE
+ id HqKPJWdpCxYy for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 18:20:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1D51F40555
 Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
@@ -84,83 +87,82 @@ Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=oLK/0C7r; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=h8J44vlD; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=VqnHMT80
+ header.a=rsa-sha256 header.s=google header.b=X2JKpq2p
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3FD75405AE
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:19:58 +0000 (UTC)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1D51F40555
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:20:06 +0000 (UTC)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AFFB3PY3219015
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:19:58 GMT
+ 6AFFBCM72075598
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:20:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- JbSg/ZRacsnc45pteIBSK/m25QGz7JKp0fcSHEeSHxs=; b=oLK/0C7rQmGobDz2
- aEe9fb1zvENVTlsCTVR/NfgxAdS/KwkXe9ROMoU66TYcTwYiljJZtDu+Ba6djB3m
- Vp3Yvq2YhAkR981M5WZQMLY6ui6uNpRYJHeSjA5UGQJa34mxnVhQULfBMeP1+HQy
- +OAsfnlb8nyuVKGnZEE4mJbagUBNh9MYE+vx13Cb1Mkq1Y0zcFE5hu9QmcMaFux5
- YCrniQTYVYE/jQ43yY1vkjJdPWwMe6fcMte/oIi9F/Dazy39kWe+QRO4UtdTp/ra
- EVfnt45s3UquL41q8rzbEJ3FHXnbvmYI47YVrt5M9N2jkPA76f8F8045MJ5OhFaw
- PRqZlg==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhjqkjf1-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=fpdj5RKcrNz
+ dH4NSk5BJEsvaDsadM/3Qhnp+uKf40Jg=; b=h8J44vlD2qfTrO72zsW4xcHnZBC
+ dkui6cjTjFitEK8zKVrGI5HVfGF4fbI4oG4vzdUBuFf/fGRUFQKGfFK4HsiB4Qjb
+ lQx0WrSHgEzSP/1IER8b1u29EtIGJeybWStTcXKRik+ApW7Sh8r6CfajDvYNsMgY
+ wtrZ0a61MCnPj/AyPE+ghTxG7yinoPr8BcQAHJs5feQx1EZIq6T2rgw3DvuHzEfH
+ hUve+TngznCWeiUgFaMl7lySD7ROEbrMyyqzJ3wAS8zhMnBeAsD7Vo04QP0y9+OG
+ hHkSn/e7cnNNogVRB7SklpfmV6yRxlg/NeQEDao7fiOxMIphCW85kLQ6Q9w==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
+ [74.125.82.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhmhkg9s-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:19:57 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id
- a92af1059eb24-1b238436265so1345470c88.1
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:19:57 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 18:20:05 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-3724667bc16so1791430eec.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 10:20:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794766797; x=1795371597;
+ d=oss.qualcomm.com; s=google; t=1794766805; x=1795371605;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=JbSg/ZRacsnc45pteIBSK/m25QGz7JKp0fcSHEeSHxs=;
- b=VqnHMT80vS6UJpxt0pbtWrh/P0rEDoICLD88aAnry2owaMk8MoBG1d8n7SEkbUWD2P
- p5zLwT6r8yR9/eQbV//uwWSsXuOo6yVObIlZNqrX9MS5lx1iEYKPk+2Uo0fm+k7QrR9e
- a9TZB03Gcg9DfV1+oPkO0DFB5p8WbrKmwLWOtHwHJj1jFfSVAEGIrklaaJgwqbmlRisd
- zHK0Qv3keZpmuWaY2Gpc9Xo5dOJIn9PnY/NdSzmQ2ROU4rHWnsl56X4uJo6k2uPX/sPu
- z1uly2dH/INd4PTFEGcpQYPCShQRzGkTJOU3LgeBOJzVPh0Q4WBQ2sngO+hpmrZxZMiu
- 5fOg==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=fpdj5RKcrNzdH4NSk5BJEsvaDsadM/3Qhnp+uKf40Jg=;
+ b=X2JKpq2poZlwbMojcQ7GWiHH72dBnajf8GbSfSFXAIl8rHpi6yL4xJHaE4W1atFVVT
+ bED6fNbKyIKMjhSv8q0zCNtaMZgApMI9lP4N6T5WEVU217HWnikGvrsnpCdL9Fr144Xt
+ 2OztgZsGmlrXFNbyvVHmQj1/uoyKhQIeMJAosmKYnphaWAYXs4rIFc0wGfY0FHpliict
+ e2NQUq98CLsGGzv8fn9Y7ZMzDHr9hm+6zNV9a23GdJ54iYuFmJE+0sBfB/GMSQ58D9EZ
+ sMSRKCL8kT/e611dl+lFTlqfiscU1zNPVZ3roEJhxPJhewSrk2FMY+xDbZLVmeH7NxsD
+ BiXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794766797; x=1795371597;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=JbSg/ZRacsnc45pteIBSK/m25QGz7JKp0fcSHEeSHxs=;
- b=f8YQqJSJbTdMgyL/i+m3/5LI6YttY7pI4lGkpgfTUUoaK2Ui0wDO9b2Wtq5SCwTvuL
- JrJ9LQb17bxnPzSY+bPXT1dtpjkki5307uc5ZggUxaUQclZrkd5ANRb2dKYgGiDJd/EC
- HA/koPdfJe4cna2sfR1Thzh1nh/WSHl/HIlQrGDQcgXnjc+vt4jGImJ8qHDZyLmvaE8Q
- a0ERPY7Vkbgsvp1ooKVPPzzomx26tlnEPLA3Nt3G9x3ZAwL4n92sEmU4h9W1YUgzTv0O
- KT8hvmmlmJoPsPCVIh7ogOap6RuL6THxxzykjcAm7KZCZ3jCNsqeU7iPIStY3O0frFcM
- l/bQ==
+ d=1e100.net; s=20260707; t=1794766805; x=1795371605;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=fpdj5RKcrNzdH4NSk5BJEsvaDsadM/3Qhnp+uKf40Jg=;
+ b=kA3dNfABSEALVjZklWyG9Mac0ZSNs1YcJqApjAciOfjG+kDQfO4PrbPlU13VWBosVJ
+ 09eswrliLCMK8un4IExqRw4XVdzupoSoPp046gUcx+t5NfsFTLVeMiwfFInKC/Ap2jZy
+ 3DyqR7LiFeu+BnzNVca0i7GPyW3nE2QWoaYG0YY27/7UVzM/GEALKDDuKZ6ORz7ijsv/
+ zB2Z/XFlefLmJ68xzVTJlsRLF92p8NcnpXzvRey4ed+rveKUlh93LNq8xcVcpN+7uO6Z
+ 1zxlM0oV8nLNavKijnJ0FlX3qc/wKe3VVNa3Lw7K35/y1dWRuaQRaRivMCvzSGAzl7dx
+ 91Gw==
 X-Forwarded-Encrypted: i=1;
- AL+hErHAR+zYxJMKHQ+OUnfvDJZr8YoU70ROuce1+QgJF8dUW2UQtD1T02wEBjc5DowoXBIM9ArbtBk=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/VOAyBabPuqHzBk0H7I4F+K9dBRP2DpR35ubUoWjhd5VwvC6Aw
- FeJN5ZUE4o15zLyJiwOA09v1iZucZOCW9fagzF+1nMojAut+llogHq3QeY0gWYZ0hL8VeX3e0rp
- wOZY4bCyZ1huQb/4uOgCc6AbmVcbJFfWhmjMf1U7sJ+cDZZRpeJNXwEeA0pX7skC2SCXCAd8=
-X-Gm-Gg: AYBFou2CmtOAR8nfJgYPf3siBZr1mGoO7lg9RXF4rNl8t++r0OpVNXCMfwbrTRY0ZXu
- KWqbniOeyNNks7POEFlWLwVedLCeSEAI2VODybLCO73bG606xCZpRKjc5n6tThr1oR+gS2rYRwY
- /CtrC/LWo+wFurSVfsK3wssYT6BY1D3mjJSuu+mTX3p+stitA2A9UwGxHIbyezXioTCyousGfRl
- 73+94t2PVtj1af4xqVdtz/lci0XLChyjQ/JYKbHXUs5qG0LF++McTp9gPGW6SZLOVgzbTtftisu
- KUMwUU8cnVKqZ1FatrDJ7e8QVN5ecuojlcu/wQ65F9WHc2l9nN3zG+Q9YeSiEE8BSkt2Fr63eOg
- 0h3DqDJTWY7ExoSaaL866gh8nGWV1bRTNC97jNsLrkNqHfwo7bvgADJOrWvuc7Z1FjYte8R0fl/
- ++
-X-Received: by 2002:a05:7022:c44:b0:1b2:558a:d777 with SMTP id
- a92af1059eb24-1b50302b6e4mr7509903c88.2.1794766796716; 
- Sun, 15 Nov 2026 10:19:56 -0800 (PST)
-X-Received: by 2002:a05:7022:c44:b0:1b2:558a:d777 with SMTP id
- a92af1059eb24-1b50302b6e4mr7509881c88.2.1794766796088; 
- Sun, 15 Nov 2026 10:19:56 -0800 (PST)
+ AL+hErH2fhNMjH7xAlN3lHfwP0SbU8n1YgeI9pR3gOcJt9QutA7gx7uouNCs/8Q6X5Fmz+ZTm07lTEU=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+n1qtgMFJFqOcXWumXD7gVEXrra3I7QRvK4PXsf99BF1x0l9Qa
+ I8A0kYBpcHy+3DSPlJVPN2bJYxgVkhGz4C/HK/Tegc082yrrwYDMZbh854Zmu8pNEcLRnC5bDil
+ XxZEmvpbqrI+m4JiyVZX4ALAFmI8lhczqwKlGvKyEDWLDAOErYpeet3spR2Wx3RC7n41peX4=
+X-Gm-Gg: AYBFou2jCX1Zr8A88N19muhfvegmhc6U5OTcKAgUXPoDnDFAPxAiv69BLZFJd4nHKiq
+ t8XWee9alcxoz4Ao961Qppyzmfd4AivHe0KhCnVVgDDHdkk2ycnMIpU2IrZjysXch3v0DI7vBsN
+ xKiggeSr2KkwWjJVNfp53WfhEN2Iv3soVuk3dJ4RAzgOKveg/EkOQ6HcrFLLs2SkBw7lVdUySg7
+ msVIRwZeYmYyzj3coFZpWs9WE/DZ9UQxtmN7ckU3UsVKNVSgtFjZUwYWEWJQtChaYzdLdsd/UsP
+ cHMMU9Y5UoHSypNjJhqxroiInzUa5qfYn+JSRJg7xQGWmsQBfoaxDw/s4Z1sT03a8Msq6BTsRHH
+ T5UXhwtyIELhN3Q003+GoyyRJtGTl3oPcHO1PLYag7Pak0KEVkuJx2xRWnHZcu65enjwnFE9gen
+ FL
+X-Received: by 2002:a05:7300:c00b:10b0:36a:647b:2d7a with SMTP id
+ 5a478bee46e88-377db7c8ac3mr12419838eec.0.1794766805290; 
+ Sun, 15 Nov 2026 10:20:05 -0800 (PST)
+X-Received: by 2002:a05:7300:c00b:10b0:36a:647b:2d7a with SMTP id
+ 5a478bee46e88-377db7c8ac3mr12419807eec.0.1794766804799; 
+ Sun, 15 Nov 2026 10:20:04 -0800 (PST)
 Received: from hu-mmanikan-hyd.qualcomm.com ([202.46.22.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-37955f02ff0sm26598663eec.16.2026.11.15.10.19.50
+ 5a478bee46e88-37955f02ff0sm26598663eec.16.2026.11.15.10.19.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Nov 2026 10:19:55 -0800 (PST)
+ Sun, 15 Nov 2026 10:20:04 -0800 (PST)
 From: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
 X-Google-Original-From: Manikanta Mylavarapu <mmanikan@qti.qualcomm.com>
 To: trini@konsulko.com, lukma@nabladev.com, jerome.forissier@arm.com,
@@ -173,42 +175,39 @@ To: trini@konsulko.com, lukma@nabladev.com, jerome.forissier@arm.com,
  quentin.schulz@cherry.de, jbx6244@gmail.com,
  u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
 Cc: kelam@qti.qualcomm.com, gpotnuru@qti.qualcomm.com
-Subject: [PATCH 1/6] net: dwc_eth_qos: allow platform-specific DMA channel and
- MTL offsets
-Date: Sun, 15 Nov 2026 23:49:31 +0530
-Message-Id: <20261115181936.1750625-2-mmanikan@qti.qualcomm.com>
+Subject: [PATCH 2/6] net: dwc_eth_qos: support 2.5Gbps link speed
+Date: Sun, 15 Nov 2026 23:49:32 +0530
+Message-Id: <20261115181936.1750625-3-mmanikan@qti.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261115181936.1750625-1-mmanikan@qti.qualcomm.com>
 References: <20261115181936.1750625-1-mmanikan@qti.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: KAgHLzpivT8A9DrXoeyniSM16KzSgWFi
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA3MiBTYWx0ZWRfX7YLxkC7bpeaS
- 1sF1+Q5Kw0TpQRuKOXX2S9sxNuOejP0PkOBYWXC/LZ8ZaSdqp0mNz2VXNjBJRQ1fciw8DGikD+U
- 1LXTYpFdT+wJAvDDfqLJXVL19ejZwyHEKvN3iiAKJ0Xxp+KqIwshuK+qvFdFPbtl3YGyNBNwk4M
- 1brt72f3fLt/X96aDnY+YqS9ZeVz7K//Gw+rBG5GaDUXuH8uf7+IVfikB8Bj9ak975JR8UeEYTf
- YyRBQk8fKtP1w+cme9ghj90A3I0HPrEAhUd24j6u8hFVIkMCZh5i92KwvT1MKaRXWrnP7T40Tob
- NEYAlJ4J5iOArdHn4FbCesilrruLTOFqbaH/BRZXa5QfhWRxQBxCQ03v7NSSHSt6tiZCz3aB76M
- /efINQPCTy9tBW5qGubszjqG9wTc87a7hG0kofZuAyzS71XjU7k7Wq+9vStKyp8Mtn3uMHi+yVo
- 0qW69I2vGSpKK9Rj+2Q==
-X-Authority-Analysis: v=2.4 cv=TqJzFzXh c=1 sm=1 tr=0 ts=6af9f7cd cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=2-k0SVyLfpYsC9YwG1AA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=Fk4IpSoW4aLDllm1B1p-:22
-X-Proofpoint-GUID: KAgHLzpivT8A9DrXoeyniSM16KzSgWFi
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA3MiBTYWx0ZWRfXzeQZPolAW0g5
- tM2gWfIhpBvtmcCUBUrMqc3qb7xvhiSmqchPbEyK22CidKiz35nrQ48IkrcsO3qv3iO/tnd2eEm
- H9eWKJ9HQ+Bef7Eldi+QoCofmG9xD9U=
+X-Proofpoint-GUID: EGHJlE2Jyv6aYD1P7mYBU2NW2BUZqKJ4
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA3MiBTYWx0ZWRfXy5AredfoL5qr
+ h52knviS67u9pL6+fpfDaGhH6jJMuexpR7AOL1ybvkJ7aAMme3fwZHruBFO9y23/yrn568ZilLG
+ ME0AIXgxNwc1vKUdRjror9XBNEvUcfQ=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA3MiBTYWx0ZWRfXyAyCemTP9zL0
+ Xotv5M6cuu8dpOJ28b2EAyNRDej57ONZ5/WjtE4Qyx6OuWfyLOIlmZnN00EamAyEIz17PgAbWtG
+ kB9tOORsaqTQZQm1opBz7+Vutz9packd4vgrqsDspTpsaKlD70/SiAa6uCz0tC8tghxsVDqQrAW
+ SC8WaU00Jp855DHBHm7FL7FjqlPQP7uqQ1f0oXkvtrrtsV0pBIAZhYMcxxZJAUmzl4cNmU59nFv
+ lTz05G3kr9kq6hB9biwn6ky5iE+wdXRWBAlRikRyMyHgxn7OVkJ1Ofg2CNEEc15Gwpn5xRmbl5J
+ GgAK40H22uPJNGxIAec5EDL5XgkiY+u4ZZeGJyzOKIHUtnKo0ky3wpQdN54xttCnpPXveBY4imQ
+ iUl0s+E47+h1s/Db7b2hYhQsxK9VqK8tx3Loy5aS6pqxovX+WpdYs08nTdJ+MKnB15MCGAd6XTk
+ a4s0yJr/KtEUU8wD10g==
+X-Authority-Analysis: v=2.4 cv=e/2T2qp/ c=1 sm=1 tr=0 ts=6af9f7d6 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=QFJn9Ik-wN-IVgwQvG8A:9 a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-ORIG-GUID: EGHJlE2Jyv6aYD1P7mYBU2NW2BUZqKJ4
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-15_05,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0 suspectscore=0
- spamscore=0 priorityscore=1501 phishscore=0 impostorscore=0 adultscore=0
+ suspectscore=0 adultscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
+ malwarescore=0 spamscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611150072
 X-Mailman-Approved-At: Sun, 15 Nov 2026 19:00:41 +0000
@@ -230,246 +229,33 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
 
-The EQOS driver currently assumes that the global DMA registers start at
-offset 0x1000, the channel-0 DMA registers start at 0x1100 and the MTL
-queue registers start at 0x0d00.
+The MAC port-select and fast-Ethernet speed bits use the GMII encoding
+for both 1Gbps and 2.5Gbps operation.
 
-This layout is not shared by all EQOS revisions. On SA8775P, the global
-DMA registers remain at 0x1000, while the MTL queue and channel-0 DMA
-register blocks are located at 0x8000 and 0x8100 respectively.
-
-Split the global DMA and channel DMA register structures and add optional
-platform-data offsets for the channel DMA and MTL register blocks.
-
-Keep 0x1100 and 0x0d00 as the defaults when a platform does not provide
-the new offsets. Existing platforms, including QCS404, therefore retain
-their current register layout.
+Handle SPEED_2500 in the generic link-adjustment path and leave the
+platform callback responsible for configuring its clocks, wrapper and
+SerDes.
 
 Signed-off-by: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
 ---
- drivers/net/dwc_eth_qos.c | 43 +++++++++++++++++---------------
- drivers/net/dwc_eth_qos.h | 52 ++++++++++++++++++++++++++++-----------
- 2 files changed, 61 insertions(+), 34 deletions(-)
+ drivers/net/dwc_eth_qos.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 565bda088b0..6f158202124 100644
+index 6f158202124..de06bb46151 100644
 --- a/drivers/net/dwc_eth_qos.c
 +++ b/drivers/net/dwc_eth_qos.c
-@@ -936,11 +936,11 @@ static int eqos_start(struct udevice *dev)
- 	/* Configure DMA */
- 
- 	/* Enable OSP mode */
--	setbits_le32(&eqos->dma_regs->ch0_tx_control,
-+	setbits_le32(&eqos->dma_ch_regs->ch0_tx_control,
- 		     EQOS_DMA_CH0_TX_CONTROL_OSP);
- 
- 	/* RX buffer size. Must be a multiple of bus width */
--	clrsetbits_le32(&eqos->dma_regs->ch0_rx_control,
-+	clrsetbits_le32(&eqos->dma_ch_regs->ch0_rx_control,
- 			EQOS_DMA_CH0_RX_CONTROL_RBSZ_MASK <<
- 			EQOS_DMA_CH0_RX_CONTROL_RBSZ_SHIFT,
- 			EQOS_MAX_PACKET_SIZE <<
-@@ -949,7 +949,7 @@ static int eqos_start(struct udevice *dev)
- 	desc_pad = (eqos->desc_size - sizeof(struct eqos_desc)) /
- 		   eqos->config->axi_bus_width;
- 
--	setbits_le32(&eqos->dma_regs->ch0_control,
-+	setbits_le32(&eqos->dma_ch_regs->ch0_control,
- 		     EQOS_DMA_CH0_CONTROL_PBLX8 |
- 		     (desc_pad << EQOS_DMA_CH0_CONTROL_DSL_SHIFT));
- 
-@@ -962,12 +962,12 @@ static int eqos_start(struct udevice *dev)
- 	pbl = tqs + 1;
- 	if (pbl > 32)
- 		pbl = 32;
--	clrsetbits_le32(&eqos->dma_regs->ch0_tx_control,
-+	clrsetbits_le32(&eqos->dma_ch_regs->ch0_tx_control,
- 			EQOS_DMA_CH0_TX_CONTROL_TXPBL_MASK <<
- 			EQOS_DMA_CH0_TX_CONTROL_TXPBL_SHIFT,
- 			pbl << EQOS_DMA_CH0_TX_CONTROL_TXPBL_SHIFT);
- 
--	clrsetbits_le32(&eqos->dma_regs->ch0_rx_control,
-+	clrsetbits_le32(&eqos->dma_ch_regs->ch0_rx_control,
- 			EQOS_DMA_CH0_RX_CONTROL_RXPBL_MASK <<
- 			EQOS_DMA_CH0_RX_CONTROL_RXPBL_SHIFT,
- 			8 << EQOS_DMA_CH0_RX_CONTROL_RXPBL_SHIFT);
-@@ -1001,16 +1001,16 @@ static int eqos_start(struct udevice *dev)
+@@ -557,6 +557,10 @@ static int eqos_adjust_link(struct udevice *dev)
  	}
  
- 	addr64 = (ulong)eqos_get_desc(eqos, 0, false);
--	writel(upper_32_bits(addr64), &eqos->dma_regs->ch0_txdesc_list_haddress);
--	writel(lower_32_bits(addr64), &eqos->dma_regs->ch0_txdesc_list_address);
-+	writel(upper_32_bits(addr64), &eqos->dma_ch_regs->ch0_txdesc_list_haddress);
-+	writel(lower_32_bits(addr64), &eqos->dma_ch_regs->ch0_txdesc_list_address);
- 	writel(EQOS_DESCRIPTORS_TX - 1,
--	       &eqos->dma_regs->ch0_txdesc_ring_length);
-+	       &eqos->dma_ch_regs->ch0_txdesc_ring_length);
- 
- 	addr64 = (ulong)eqos_get_desc(eqos, 0, true);
--	writel(upper_32_bits(addr64), &eqos->dma_regs->ch0_rxdesc_list_haddress);
--	writel(lower_32_bits(addr64), &eqos->dma_regs->ch0_rxdesc_list_address);
-+	writel(upper_32_bits(addr64), &eqos->dma_ch_regs->ch0_rxdesc_list_haddress);
-+	writel(lower_32_bits(addr64), &eqos->dma_ch_regs->ch0_rxdesc_list_address);
- 	writel(EQOS_DESCRIPTORS_RX - 1,
--	       &eqos->dma_regs->ch0_rxdesc_ring_length);
-+	       &eqos->dma_ch_regs->ch0_rxdesc_ring_length);
- 
- 	/*
- 	 * Point TX tail pointer at the first descriptor, implying no descriptor
-@@ -1018,19 +1018,19 @@ static int eqos_start(struct udevice *dev)
- 	 * a packet in eqos_send().
- 	 */
- 	addr64 = (ulong)eqos_get_desc(eqos, 0, false);
--	writel(lower_32_bits(addr64), &eqos->dma_regs->ch0_txdesc_tail_pointer);
-+	writel(lower_32_bits(addr64), &eqos->dma_ch_regs->ch0_txdesc_tail_pointer);
- 
- 	/*
- 	 * Point RX tail pointer at the last descriptor, implying all
- 	 * descriptors are owned by the DMA.
- 	 */
- 	addr64 = (ulong)eqos_get_desc(eqos, EQOS_DESCRIPTORS_RX - 1, true);
--	writel(lower_32_bits(addr64), &eqos->dma_regs->ch0_rxdesc_tail_pointer);
-+	writel(lower_32_bits(addr64), &eqos->dma_ch_regs->ch0_rxdesc_tail_pointer);
- 
- 	/* Enable everything */
--	setbits_le32(&eqos->dma_regs->ch0_tx_control,
-+	setbits_le32(&eqos->dma_ch_regs->ch0_tx_control,
- 		     EQOS_DMA_CH0_TX_CONTROL_ST);
--	setbits_le32(&eqos->dma_regs->ch0_rx_control,
-+	setbits_le32(&eqos->dma_ch_regs->ch0_rx_control,
- 		     EQOS_DMA_CH0_RX_CONTROL_SR);
- 	setbits_le32(&eqos->mac_regs->configuration,
- 		     EQOS_MAC_CONFIGURATION_TE | EQOS_MAC_CONFIGURATION_RE);
-@@ -1062,7 +1062,7 @@ static void eqos_stop(struct udevice *dev)
- 	eqos->reg_access_ok = false;
- 
- 	/* Disable TX DMA */
--	clrbits_le32(&eqos->dma_regs->ch0_tx_control,
-+	clrbits_le32(&eqos->dma_ch_regs->ch0_tx_control,
- 		     EQOS_DMA_CH0_TX_CONTROL_ST);
- 
- 	/* Wait for TX all packets to drain out of MTL */
-@@ -1091,7 +1091,7 @@ static void eqos_stop(struct udevice *dev)
- 	}
- 
- 	/* Turn off RX DMA */
--	clrbits_le32(&eqos->dma_regs->ch0_rx_control,
-+	clrbits_le32(&eqos->dma_ch_regs->ch0_rx_control,
- 		     EQOS_DMA_CH0_RX_CONTROL_SR);
- 
- 	if (eqos->phy) {
-@@ -1130,7 +1130,7 @@ static int eqos_send(struct udevice *dev, void *packet, int length)
- 	eqos->config->ops->eqos_flush_desc(tx_desc);
- 
- 	writel(lower_32_bits((ulong)eqos_get_desc(eqos, eqos->tx_desc_idx, false)),
--	       &eqos->dma_regs->ch0_txdesc_tail_pointer);
-+	       &eqos->dma_ch_regs->ch0_txdesc_tail_pointer);
- 
- 	for (i = 0; i < 1000000; i++) {
- 		eqos->config->ops->eqos_inval_desc(tx_desc);
-@@ -1212,7 +1212,7 @@ static int eqos_free_pkt(struct udevice *dev, uchar *packet, int length)
- 			eqos->config->ops->eqos_flush_desc(rx_desc);
- 		}
- 		writel(lower_32_bits((ulong)rx_desc),
--		       &eqos->dma_regs->ch0_rxdesc_tail_pointer);
-+		       &eqos->dma_ch_regs->ch0_rxdesc_tail_pointer);
- 	}
- 
- 	eqos->rx_desc_idx++;
-@@ -1435,8 +1435,11 @@ static fdt_addr_t eqos_get_base_addr_common(struct udevice *dev, fdt_addr_t addr
- 
- 	eqos->regs = addr;
- 	eqos->mac_regs = (void *)(addr + EQOS_MAC_REGS_BASE);
--	eqos->mtl_regs = (void *)(addr + EQOS_MTL_REGS_BASE);
-+	eqos->mtl_regs = (void *)(addr + (eqos->config->mtl_regs_base ?:
-+					   EQOS_MTL_REGS_BASE));
- 	eqos->dma_regs = (void *)(addr + EQOS_DMA_REGS_BASE);
-+	eqos->dma_ch_regs = (void *)(addr + (eqos->config->dma_ch_regs_base ?:
-+					      EQOS_DMA_CH_REGS_BASE));
- 
- 	return 0;
- }
-diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
-index ef07660a765..51ab5469c28 100644
---- a/drivers/net/dwc_eth_qos.h
-+++ b/drivers/net/dwc_eth_qos.h
-@@ -151,24 +151,34 @@ struct eqos_mtl_regs {
- #define EQOS_MTL_RXQ0_DEBUG_RXQSTS_SHIFT		4
- #define EQOS_MTL_RXQ0_DEBUG_RXQSTS_MASK			3
- 
-+/*
-+ * mode/sysbus_mode are global DMA registers that stay at this fixed offset
-+ * on every EQOS revision. The per-channel block below (ch0_*) is relocated
-+ * on newer EQOS revisions (Linux: has_emac_ge_3, e.g. SA8775P) — its base is
-+ * configurable via eqos_config::dma_ch_regs_base and lives in a separate
-+ * struct/pointer so it can move independently of mode/sysbus_mode.
-+ */
- #define EQOS_DMA_REGS_BASE 0x1000
- struct eqos_dma_regs {
- 	u32 mode;					/* 0x1000 */
- 	u32 sysbus_mode;				/* 0x1004 */
--	u32 unused_1008[(0x1100 - 0x1008) / 4];	/* 0x1008 */
--	u32 ch0_control;				/* 0x1100 */
--	u32 ch0_tx_control;			/* 0x1104 */
--	u32 ch0_rx_control;			/* 0x1108 */
--	u32 unused_110c;				/* 0x110c */
--	u32 ch0_txdesc_list_haddress;		/* 0x1110 */
--	u32 ch0_txdesc_list_address;		/* 0x1114 */
--	u32 ch0_rxdesc_list_haddress;		/* 0x1118 */
--	u32 ch0_rxdesc_list_address;		/* 0x111c */
--	u32 ch0_txdesc_tail_pointer;		/* 0x1120 */
--	u32 unused_1124;				/* 0x1124 */
--	u32 ch0_rxdesc_tail_pointer;		/* 0x1128 */
--	u32 ch0_txdesc_ring_length;		/* 0x112c */
--	u32 ch0_rxdesc_ring_length;		/* 0x1130 */
-+};
-+
-+#define EQOS_DMA_CH_REGS_BASE 0x1100
-+struct eqos_dma_ch_regs {
-+	u32 ch0_control;				/* +0x00 */
-+	u32 ch0_tx_control;			/* +0x04 */
-+	u32 ch0_rx_control;			/* +0x08 */
-+	u32 unused_0c;				/* +0x0c */
-+	u32 ch0_txdesc_list_haddress;		/* +0x10 */
-+	u32 ch0_txdesc_list_address;		/* +0x14 */
-+	u32 ch0_rxdesc_list_haddress;		/* +0x18 */
-+	u32 ch0_rxdesc_list_address;		/* +0x1c */
-+	u32 ch0_txdesc_tail_pointer;		/* +0x20 */
-+	u32 unused_24;				/* +0x24 */
-+	u32 ch0_rxdesc_tail_pointer;		/* +0x28 */
-+	u32 ch0_txdesc_ring_length;		/* +0x2c */
-+	u32 ch0_rxdesc_ring_length;		/* +0x30 */
- };
- 
- #define EQOS_DMA_MODE_SWR				BIT(0)
-@@ -242,6 +252,19 @@ struct eqos_config {
- 	int config_mac;
- 	int config_mac_mdio;
- 	unsigned int axi_bus_width;
-+	/*
-+	 * Base offset of the per-channel DMA register block (ch0_*).
-+	 * 0 means "use the default EQOS_DMA_CH_REGS_BASE". Newer EQOS
-+	 * revisions (Linux: has_emac_ge_3) relocate this block, e.g. to
-+	 * 0x8100 on SA8775P, while mode/sysbus_mode stay at EQOS_DMA_REGS_BASE.
-+	 */
-+	fdt_addr_t dma_ch_regs_base;
-+	/*
-+	 * Base offset of the per-queue MTL register block (txq0_x/rxq0_x).
-+	 * 0 means "use the default EQOS_MTL_REGS_BASE". Relocated to 0x8000
-+	 * on SA8775P, same has_emac_ge_3 relocation as dma_ch_regs_base.
-+	 */
-+	fdt_addr_t mtl_regs_base;
- 	phy_interface_t (*interface)(const struct udevice *dev);
- 	struct eqos_ops *ops;
- };
-@@ -272,6 +295,7 @@ struct eqos_priv {
- 	struct eqos_mac_regs *mac_regs;
- 	struct eqos_mtl_regs *mtl_regs;
- 	struct eqos_dma_regs *dma_regs;
-+	struct eqos_dma_ch_regs *dma_ch_regs;
- 	struct eqos_tegra186_regs *tegra186_regs;
- 	void *eqos_qcom_rgmii_regs;
- 	struct reset_ctl reset_ctl;
+ 	switch (eqos->phy->speed) {
++	case SPEED_2500:
++		en_calibration = true;
++		ret = eqos_set_gmii_speed(dev);
++		break;
+ 	case SPEED_1000:
+ 		en_calibration = true;
+ 		ret = eqos_set_gmii_speed(dev);
 -- 
 2.34.1
 
