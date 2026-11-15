@@ -1,117 +1,150 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E555E606A327
-	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 14:55:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE4BC606A33A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Nov 2026 16:01:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PrDdmLTG;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech header.a=rsa-sha256 header.s=zmail header.b=qvMHM9uC
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DwI/nsCa;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=kdYaPLdM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B1C0480F84;
-	Sun, 15 Nov 2026 14:55:04 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UbulbcYGn_Ni; Sun, 15 Nov 2026 14:55:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DF13B80F7E
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794754503;
-	b=iVlK8Tt0wSkck2nQXzgYbhz4WgnLIa4Lf7uOf5Fna2zCn2i9Vh5kWLC32kZRuiGwwVY4
-	 hsZi0Lx2F7dGIOYtV9bYJr5HJ9tPcOsJ0oswVComP1Oj9UQ00vEPA8ISHOiI6DnZ22zQT
-	 5Joln6pm/60XIc1pOXt0pKvEuwnP3l6a3xDpiFuneotAIWb8POi6lLNsc4aR62HLWP+Ra
-	 QSVd0sctfRnQS4Qsr21bkHW8nn+xreVBC/b5HUu1hZof1zIUXRZobeGUsQVfH3tgrT79L
-	 SdLttWRE9+yGb4pd6DMZOCcfJieNtIgm6XF7QrmpKpyZPwOX3JGzyAG/4bUBkG0nWpQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794754503;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Mime-Version:Content-Transfer-Encoding:
-	 Content-Type:Date:Message-Id:From:To:Cc:Subject:X-Mailer:References:
-	 In-Reply-To:X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=1Zv4AKHFXPZNlTuSL2b2naQv/2OZ1Pt2CJ1B1ba59/Y=;
-	b=RhlfGNp2XfIX5GXKqPF3lW9zyaAzrX9MnPWb0os6rAi+BJEj5xaW+COeyasuGsey3b51
-	 5xLfIUD/28qt7t+5gHy6y/b6LpqOHeTXz4DYSLEE3zq1w2mSJ/SYasw1gn6kmmRcosmlW
-	 dLMScBFPLRFvC2g6GgXCsu7f19gt7huf2onPn3O5NAybGn+9qnn4O8xrKwb3FPeCu8hRr
-	 oBiBThzCSorGL+GXf+j/sGG9EllxBhIl31rh8VXrGOfYyUL7zuKTHQLDZFfegPH0lhdtL
-	 vNEQN2dwiw0n1iiIvTco8w5s6FYJ7h1rfZOXUSpnT89aDoX/8YXTOsw0ybzxZmxgWNA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794754503;
-	bh=1Zv4AKHFXPZNlTuSL2b2naQv/2OZ1Pt2CJ1B1ba59/Y=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PrDdmLTGTHkCyo06A6owkt7hI0anqJV32sbVkosR8Wx7FOB7qV0EWGz8/zn8GbpHw
-	 lM4bBX0n+3vy0pixZI7BsvLeFOwWrXtbCGYGzFUrFC9aHYvZ6ZDG7xjL7SvqQWdO1I
-	 Pxoatu+yz5QZiCFvcChCC4+PfZV+wqt4eDqfA6TFNlofawS546W4JyRJBA/cTFMRUd
-	 8N0kEi2e/0Xh0uSVhDqakB2x6/BtdNfl2LlhCJ+tUjgAvCruqY6a1ECFifrjXLvpDk
-	 DtLU7NbVNrwp0ULvr0nFT06NV5ZYohmB638WuVaU/RCD2StFgPb9ITc8WXhgiA1kIQ
-	 PfzujZRFJQaag==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DF13B80F7E;
-	Sun, 15 Nov 2026 14:55:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E52C3109
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:55:00 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CA62660621
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:55:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 952526060A;
+	Sun, 15 Nov 2026 16:01:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aCg2hsRGgR2T for <u-boot@lists.u-boot-project.org>;
- Sun, 15 Nov 2026 14:54:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AED316060D
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=qvMHM9uC
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id AED316060D
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 14:54:56 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=qvMHM9uCG8IZCXvBMlVXPlSH9vwbzE2i9sr+jetFBSJWKw5Km/9EMAWwylrpvlOvpqtCBAP4aM7PSnOZQzEn2ounzEYW7VujJ/fzqkcwHi8eXeBIrOkFsGn9P4UIeocSuoYCFuZd9JK0thpDe9i34e5SY8Ew334bCrSEMnl+dik=;
- c=relaxed/relaxed; s=zmail; d=pigmoral.tech; v=1;
- bh=1Zv4AKHFXPZNlTuSL2b2naQv/2OZ1Pt2CJ1B1ba59/Y=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794754442165963.8176458709165;
- Sun, 15 Nov 2026 06:54:02 -0800 (PST)
+ id HsiGUN817YOP; Sun, 15 Nov 2026 16:01:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F013A6061F
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794758479;
+	b=ahPkGmUDT/bjjHbD51lgDxxWqO0MP4QbepCfMZZfNRM7dCap0nIUC5dEA15lSOcFty4A
+	 RaWlPPV7C3+KBUfV6AP+CNY1ZXz22P9d8Ya9yQ16SKVgv3g7OSIYsyLChxJwENRLGyCdH
+	 zJ+ziaWZ8vKLeSpG848OvF0L8aapXPNQC6HF4ZbMNWR2jEfGG2Qubfa3llT/WOWNGHrQ1
+	 rMIGq9xYWVqFEOZxpVia1OD5ya4A7XN1N4rc2X4ql5+1r0JBMswX3ZVwjcn9hqb7MQoOf
+	 G3DI0Y3gyc8B9FHNBYLKvOQde6nGI1bh2F2QUdTeuGJNlmAskNRrKbN3eo1q8ZJyn6w==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794758479;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=hNFaJpie9tsv0G5mkjlO7d5GS/DaqRz2n989hgwbNJ8=;
+	b=KSZ0rmei9/bCWM2Onx9qih2XA/uaD48M1AK7BIjD+9Dwk2h8zygJAYF/lOks8SQEeL9D
+	 S52kDIEGa1JIT2/HIXU0v6Qsm9DfYZW9OjsgoizWHlf8MY6jRa9kAVNAjiyIzhT3EqMhp
+	 Uny5gs+W2tjXJpGoPihNsZQUd8B0tkklUXpsdRAjdoPexOHrXyJmSFDgL1RAx6zW9oaH0
+	 0VP/bJs9DfLdBGQvN/j+wq37vCHyDZAZUBSpHCaipIIe2meMw6KwMu1HqOWAywz9mTF6A
+	 24FGu7cplEeQ0R8geVGPJUQmSr1l3TwzCdoeYbdd9Ys9YSWfEq/IHoqatJ5x7esOghA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1794758479;
+	bh=hNFaJpie9tsv0G5mkjlO7d5GS/DaqRz2n989hgwbNJ8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DwI/nsCatXfEnHMdCl+EqYmnasag+VZk2Bn5as2NBRvf/Lk7TDF8jl88cEeWDi/02
+	 t6thW89hZLsCwhb9BEMMWcDlpx2HFaUeR1Yi/vTJHHoHB0B9LZRVgFPCiGPiW71PXt
+	 7w4t6m9wC/3wNp7mIOcio2pmNG+6O+AlIHCncz85RD+BV2fKSvtQKisMBdDzlvUFkk
+	 tqp+jIxCc9xtSb7EqY2OYDwyo2BaL7VUKH+xy68tKQPqS3TR+CHqh2dueBcTi4WVds
+	 Iq6We7bumEA/k/zZEB5B79GTFpjTp68juWP8wSAbOoBmLHMS/Ili4wc7oMz/2TbY8j
+	 mTateiwcHYV4Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id F013A6061F;
+	Sun, 15 Nov 2026 16:01:18 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id BC63928C
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 16:01:16 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id A319A80F61
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 16:01:16 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X2fI3btHAFQ2 for <u-boot@lists.u-boot-project.org>;
+ Sun, 15 Nov 2026 16:01:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D96DA80F55
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32c"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::32c; helo=mail-ot1-x32c.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=kdYaPLdM
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D96DA80F55
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 16:01:15 +0000 (UTC)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-862b3a39d0dso369238a34.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 08:01:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1794758474; x=1795363274;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=hNFaJpie9tsv0G5mkjlO7d5GS/DaqRz2n989hgwbNJ8=;
+ b=kdYaPLdM+6KahlaTr1Yfee8fBE6YjuEQizrV+l6P4e5e3zH3DeE6o/8T2bcFGX2yHp
+ dXbeDkfsWVaK8wmlb8hxhBVTiElEKj1mcsR/r34MueiJ076GBmxepHWxSwGXGM6gDg6x
+ mQfeI6LlYuLQ/49Z3Nkw+N5Am8/G3ntcA1c6Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794758474; x=1795363274;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=hNFaJpie9tsv0G5mkjlO7d5GS/DaqRz2n989hgwbNJ8=;
+ b=QCdlNi0dH7Yl1DaqVqCnMTXWzQ2ZlKcY2DOKrA+vn8NElwgDsV7otSj+4w72G3RzGu
+ Kes2DaVjcSMinwK7kLH5RKT99k5kgB9F0jSTBSLr/Ok0xoF/GNGkiwaOfSSkqP8dn4ms
+ QGT8nqthQmCPHRLiwHj1gFNIJXXxGVhBPR4GIJwoaqBn4gAgqvfuocX2r7A9rBcX6LO6
+ uOfVNX1AxJfRiWOMVn0jzSL7Bq0YXEXbIuXSxsGSgcZGleAYRyQgxFO0Ce3IBosXaWRN
+ 4CdqZgUBbZ8izOEhcsx2TEXhkQj/4/qDHFY4QQR+VMETqbmop2CTmiQzvdKcqMg7lwz2
+ /Ckg==
+X-Gm-Message-State: APuU4Z+A1R+h8YMEJDoQx2HvXCugjM2rReLTbv5Zcyqd+uzbPuNOBR6z
+ YsSh2EK1tAjnPp+f5FMeAqtZhbsNS7tu1aN368gUrrzJhcFEYYbwZCoOEovWOnV28eI=
+X-Gm-Gg: AYBFou3S5jJyznsU0WHbBX69H8f1XH/HEqcV0NmurFJK6+dF6Y78fzP8If637Eja2Q2
+ xd0z82vb6B+tZuJbeT+/hh+EWE328zstyx/8m+pFp2elQvAQmSy2ciJYm4CfXYnIncS0YA7Xr0g
+ OfamCKa0o2cZzGKvZ0vUwjBU2if9PXxcOjHvu9mORxNP24p7C3Gl/it4cVd8jYvVW466emR2MKD
+ 3nll6Id0LRNwrpwyS4XHAZytLGIOXOpoKP2Zp+xeN0K54xYLKwFXkWrTa8whxoEJOMAVhFhrHOD
+ JeptntnGUwhp9cb3SQC6I/TdeRkL0jRe8UAlu4mlzAIM7dUgIY0WuQb2ax1K3iAS0m+DUrtcP3z
+ FnqZT+zbQ9WFCizlmeXCNlRyesjrhC/LoWs+EsdvC4KUev3hn0rKooD3/RMSntDM6Zeh2I6cyGf
+ wuqy5dJIjeN1lyHmnCI+tS2J/FxRS+mslH715NLq6dBDzlXKesOn9rwQKvxA8tZHtFazRB4qFM9
+ KCrF743BV0Dpy8s7T4IfmQSh3FBMfcHPKpQCP2jVUYP0cPBIOOBurk+gUEypJGKVPAnKRuAOJS/
+ j7hqHCJ8ryhufKEPj7wUatZlALlXltOc3i5Ln0PECRTlXyjSEOZRVsl/1CxnPsHKde6IL5Zok0q
+ ZRVQ5icg8PhXwV/7IYy1JT2cMjk2mmczAu+nDl+oi5u9zza35wEBUnGhi+ofmSd51b+26S0IQWo
+ UOKS4YwKQpd+ySdNAZprWbq8cRzo1m6bXN
+X-Received: by 2002:a05:6820:c44a:10b0:71a:eb23:a7d1 with SMTP id
+ 006d021491bc7-71aeb23b6f3mr638200eaf.53.1794758474315; 
+ Sun, 15 Nov 2026 08:01:14 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-862880a52basm8786059a34.4.2026.11.15.08.01.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Nov 2026 08:01:13 -0800 (PST)
+Date: Sun, 15 Nov 2026 10:01:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>, Dale Wilcox <wilcox101@gmail.com>
+Cc: u-boot@lists.u-boot-project.org
+Subject: Re: binman: SPDX tag "Intel" on lib/binman.c and include/binman.h?
+Message-ID: <20261115160107.GS554944@bill-the-cat>
+References: <CAKtUr1WwwZfggtY3xA5cComHhJcbjNVm_fSrwxDPHWh60E1i8w@mail.gmail.com>
+ <CAFLszThWu0iXjhznvWXWiM08cmWV_HS8sOtA2pnyhcny4BOBLA@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sun, 15 Nov 2026 22:53:52 +0800
-Message-Id: <DMVVCK6FNA7K.3UJ8SKV87RZOE@pigmoral.tech>
-From: "Junhui Liu" <junhui.liu@pigmoral.tech>
-To: "Indrek Kruusa" <indrek.kruusa@gmail.com>, "Junhui Liu"
- <junhui.liu@pigmoral.tech>, <u-boot@lists.u-boot-project.org>
-Cc: "Andre Przywara" <andre.przywara@arm.com>, "Tim Ouyang"
- <tim609@andestech.com>, "Leo Liang" <leo.liang@sifive.com>, "Yao Zi"
- <me@ziyao.cc>, "Peng Fan" <peng.fan@nxp.com>, "Jaehoon Chung"
- <jh80.chung@samsung.com>, "Lukasz Majewski" <lukma@nabladev.com>, "Stefan
- Roese" <stefan.roese@mailbox.org>, "Samuel Holland" <samuel@sholland.org>,
- "Tom Rini" <trini@konsulko.com>, "Hiago De Franco" <hfranco@baylibre.com>
-Subject: Re: [PATCH 01/10] riscv: cpu: add Allwinner D1/D1s(F133) CPU support
-X-Mailer: aerc 0.22.0
-References: <20261101210449.1235102-1-indrek.kruusa@gmail.com>
- <20261101210449.1235102-2-indrek.kruusa@gmail.com>
- <DMOV1SBS6QJO.MFJO4I90QL0P@pigmoral.tech>
- <20261110220009.50776-1-indrek.kruusa@gmail.com>
-In-Reply-To: <20261110220009.50776-1-indrek.kruusa@gmail.com>
-X-ZohoMailClient: External
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bNhZgIyrm4vFfMDP"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThWu0iXjhznvWXWiM08cmWV_HS8sOtA2pnyhcny4BOBLA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -121,271 +154,70 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Indrek,
 
-On Wed Nov 11, 2026 at 6:00 AM CST, Indrek Kruusa wrote:
-> Hi Junhui,
->
-> thanks for the review!
->
-> On Sat, 07 Nov 2026 17:11:09 +0800
-> Junhui Liu <junhui.liu@pigmoral.tech> wrote:
->
->> Hi Indrek,
->>
->> Thanks for your work. I'm very happy to finally see someone proposing
->> this work.
->
-> Thanks, I appreciate that!
->
->> But for most of the T-Head/XuanTie CPU support, I think it is
->> better to make it common code instead of keeping it private to sun20i.
->>
->
-> Agreed.
->
-> [...]
->
->> > diff --git a/arch/riscv/cpu/sun20i/cache.c b/arch/riscv/cpu/sun20i/cac=
-he.c
->> > new file mode 100644
->> > index 00000000000..c961eded109
->> > --- /dev/null
->> > +++ b/arch/riscv/cpu/sun20i/cache.c
->> > @@ -0,0 +1,88 @@
->> > +// SPDX-License-Identifier: GPL-2.0+
->> > +/*
->> > + * Copyright (C) 2026, Indrek Kruusa <indrek.kruusa@gmail.com>
->> > + *
->> > + * T-Head C906 cache operations for the Allwinner D1 (sun20i).
->> > + */
->> > +
->> > +#include <asm/arch/thead_csr.h>
->> > +#include <asm/cache.h>
->> > +#include <asm/csr.h>
->> > +#include <cpu_func.h>
->> > +#include <linux/bitops.h>
->> > +
->> > +/*
->> > + * T-Head cache maintenance instructions, emitted as raw encodings be=
-cause the
->> > + * assembler does not know them: dcache.ciall (write back and invalid=
-ate all),
->> > + * dcache.iall (invalidate all), icache.ipa (invalidate the line hold=
-ing the
->> > + * physical address in a0) and sync.i (wait for the operation to comp=
-lete).
->> > + * They only decode while MXSTATUS.THEADISAEE is set, which harts_ear=
-ly_init()
->> > + * does before any of them is used.
->> > + */
->> > +#define THEAD_SYNC_I            ".long 0x01a0000b"
->> > +#define THEAD_DCACHE_CIALL      ".long 0x0030000b"
->> > +#define THEAD_DCACHE_IALL       ".long 0x0020000b"
->> > +#define THEAD_ICACHE_IPA_A0     ".long 0x0385000b"
->> > +
->> > +static inline void sync_i(void)
->> > +{
->> > +	asm volatile (THEAD_SYNC_I ::: "memory");
->> > +}
->> > +
->> > +void flush_dcache_all(void)
->> > +{
->> > +	asm volatile (THEAD_DCACHE_CIALL ::: "memory");
->> > +	sync_i();
->> > +}
->> > +
->> > +void invalidate_dcache_all(void)
->> > +{
->> > +	asm volatile (THEAD_DCACHE_IALL ::: "memory");
->> > +	sync_i();
->> > +}
->> > +
->> > +void invalidate_icache_range(unsigned long start, unsigned long end)
->> > +{
->> > +	register ulong addr asm ("a0") =3D start & -CONFIG_SYS_CACHELINE_SIZ=
-E;
->> > +
->> > +	for (; addr < end; addr +=3D CONFIG_SYS_CACHELINE_SIZE)
->> > +		asm volatile (THEAD_ICACHE_IPA_A0 :: "r" (addr) : "memory");
->> > +	sync_i();
->> > +}
->>
->> For these cache operations, arch/riscv/lib/thead_cmo.c already contains
->> the D-cache range operations. The D-cache all operations and I-cache
->> operations added here are common T-Head/XuanTie CMO operations, so I
->> think it's better to add them to that common file instead of being
->> implemented under sun20i.
->>
->
-> Actually, that's what I initially had in mind, but I didn't feel comforta=
-ble
-> doing it. Sure, and as Yao also suggested, I'll move flush_dcache_all() a=
-nd
-> invalidate_dcache_all() to arch/riscv/lib/thead_cmo.c in the next version=
-.
->
-> I still need to investigate invalidate_icache_range() and whether I can
-> simply rely on the default implementation in arch/riscv/lib/cache.c. If s=
-o,
-> the local cache.c can go away entirely.
+--bNhZgIyrm4vFfMDP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I checked the C906 user manual, and it explicitly states that fence.i
-invalidates the I-cache. Both CV1800B and TH1520 already use the default
-invalidate_icache_range() in arch/riscv/lib/cache.c, so I think D1 can
-use the default implementation as well.
+On Sun, Nov 15, 2026 at 05:48:29AM -0700, Simon Glass wrote:
+> Hi Dale,
+>=20
+> On Sat, 14 Nov 2026 at 23:43, Dale Wilcox <wilcox101@gmail.com> wrote:
+> >
+> > Hi Simon,
+> >
+> > lib/binman.c and include/binman.h carry
+> >
+> > SPDX-License-Identifier: Intel
+> >
+> > but their headers say "Copyright 2019 Google LLC, Written by Simon Glas=
+s", and the
+> > rest of binman (tools/binman/*.py) is GPL-2.0+. The tag has been there =
+since the
+> > files were added (present in v2020.04, not in v2020.01) and is unchange=
+d in
+> > v2026.10.
+> >
+> > "Intel" is not an identifier on the SPDX licence list and has no text in
+> > Licenses/; in-tree it otherwise marks Intel-released x86 code (arch/x86=
+/cpu/quark,
+> > the FSP configs). So it looks like a copy-paste slip rather than an int=
+ended
+> > licence.
+> >
+> > We noticed it while generating licence notices for a board that enables
+> > CONFIG_BINMAN_FDT, which compiles lib/binman.c into u-boot proper. Was =
+GPL-2.0+
+> > intended? If so, would you send (or ack) a patch changing both tags? On=
+ly the
+> > copyright holder can confirm the licence, so we haven't sent a patch ou=
+rselves.
+>=20
+> That looks like a mistake. Yes I am happy to ack such a patch.
 
->
->> > +
->> > +#if CONFIG_IS_ENABLED(RISCV_MMODE)
->> > +
->> > +void icache_enable(void)
->> > +{
->> > +	invalidate_icache_all();
->> > +	csr_set(CSR_MHCR, MHCR_IE);
->> > +}
->> > +
->> > +void icache_disable(void)
->> > +{
->> > +	csr_clear(CSR_MHCR, MHCR_IE);
->> > +}
->> > +
->> > +int icache_status(void)
->> > +{
->> > +	return csr_read(CSR_MHCR) & MHCR_IE;
->> > +}
->> > +
->> > +void dcache_enable(void)
->> > +{
->> > +	invalidate_dcache_all();
->> > +	csr_set(CSR_MHCR, MHCR_DE);
->> > +}
->> > +
->> > +void dcache_disable(void)
->> > +{
->> > +	flush_dcache_all();
->> > +	csr_clear(CSR_MHCR, MHCR_DE);
->> > +}
->> > +
->> > +int dcache_status(void)
->> > +{
->> > +	return csr_read(CSR_MHCR) & MHCR_DE;
->> > +}
->> > +
->> > +#endif
->>
->> For this part, arch/riscv/cpu/th1520/cache.c already has related
->> functions. Can we extract them into a common file, for example
->> arch/riscv/lib/thead_cache.c, and provide a THEAD_CACHE config for the
->> platforms that need it to select?
->>
->
-> I had a look: th1520/cache.c has only the _enable() and _status() half, a=
-nd
-> cv1800b has no cache.c at all (it relies on the defaults in
-> arch/riscv/lib/cache.c).
-> Yes, having a common thead_cache.c with all six functions and a THEAD_CAC=
-HE
-> symbol would give all three SoCs the same implementation.
->
-> I can add the THEAD_CACHE symbol and arch/riscv/lib/thead_cache.c, but I'=
-m
-> not sure about touching the other SoCs in this series. What do you think?=
- I
-> can prepare a separate series if that would be a better way to handle thi=
-s
-> consistently across all three SoCs.
+And please make sure it gets sent to the current mailing list address
+Dale, thanks.
 
-I would prefer a separate series for the common T-Head/XuanTie support,
-so it can be reviewed and applied independently and benefit other SoCs
-as well. The D1 support series can then depend on it.
+--=20
+Tom
 
-Best regards,
-Junhui Liu
+--bNhZgIyrm4vFfMDP
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
->> [...]
->>
->> > diff --git a/arch/riscv/include/asm/arch-sun20i/thead_csr.h b/arch/ris=
-cv/include/asm/arch-sun20i/thead_csr.h
->> > new file mode 100644
->> > index 00000000000..4d6e15aab1c
->> > --- /dev/null
->> > +++ b/arch/riscv/include/asm/arch-sun20i/thead_csr.h
->> > @@ -0,0 +1,29 @@
->> > +/* SPDX-License-Identifier: GPL-2.0+ */
->> > +/*
->> > + * Copyright (C) 2026, Indrek Kruusa <indrek.kruusa@gmail.com>
->> > + *
->> > + * T-Head C906 CSR definitions for the Allwinner D1 (sun20i).
->> > + */
->> > +
->> > +#ifndef _ASM_RISCV_ARCH_THEAD_CSR_H
->> > +#define _ASM_RISCV_ARCH_THEAD_CSR_H
->> > +
->> > +#define CSR_MXSTATUS            0x7c0
->> > +#define CSR_MHCR                0x7c1
->> > +#define CSR_MHINT               0x7c5
->> > +
->> > +#define MXSTATUS_THEADISAEE     BIT(22) /* T-HEAD ISA extensions enab=
-le */
->> > +#define MXSTATUS_MAEE           BIT(21) /* MMU honours the PTE memory=
- type */
->> > +#define MXSTATUS_MM             BIT(15) /* misaligned access enable *=
-/
->> > +
->> > +#define MHCR_IE                 BIT(0)  /* icache enable */
->> > +#define MHCR_DE                 BIT(1)  /* dcache enable */
->> > +#define MHCR_WA                 BIT(2)  /* dcache write allocate */
->> > +#define MHCR_RS                 BIT(4)  /* return stack enable */
->> > +#define MHCR_BPE                BIT(5)  /* branch prediction enable *=
-/
->> > +#define MHCR_BTB_C906           BIT(6)  /* branch target prediction e=
-nable */
->> > +
->> > +#define MHINT_IPLD              BIT(8)  /* icache prefetch enable */
->> > +#define MHINT_IWPE              BIT(9)  /* icache way prediction enab=
-le */
->> > +
->> > +#endif /* _ASM_RISCV_ARCH_THEAD_CSR_H */
->>
->> A number of these CSR definitions already exist in
->> arch/riscv/cpu/th1520/spl.c and arch/riscv/cpu/th1520/cache.c. Can the
->> common register numbers and bitfields be moved into a common header,
->> such as arch/riscv/include/asm/thead_csr.h, instead of placing them
->> under arch-sun20i?
->
-> Agreed. I'll create arch/riscv/include/asm/thead_csr.h in the next versio=
-n,
-> identify the common register definitions and bitfields, and move them the=
-re.
->
-> Again, I'm not sure I'd want to convert the other SoCs in the same series=
-.
-> Would a separate series be better?
->
-> One thing I should flag while we're on this: my patch 1 defines
-> `MHINT_IWPE` as `BIT(9)`.
-> I did some AI-assisted investigation into these fields, and the finding w=
-as:
-> "In the OpenC906 RTL, bit 9 is LPE (its write decode is commented out and
-> the field is tied to zero), while bit 10 is IWPE."
-> So, according to this finding, the series as posted never actually enable=
-s
-> I-cache way prediction. That's a bug in my patch, will fix it.
->
->>
->> --=20
->> Best regards,
->> Junhui Liu
->>
->
-> Thanks,
-> Indrek
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCavnXPwAKCRAr4qD1Cr/k
+CkPpAP4nVR7kImAsTrZh+VVWoTLKz07dbizD3NLxG/NOsjSVnQEAjIEFf4lDt5Zo
+FUrvpaeRudSthxARdABNe8e21pewkgw=
+=FIz9
+-----END PGP SIGNATURE-----
+
+--bNhZgIyrm4vFfMDP--
