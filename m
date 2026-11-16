@@ -1,144 +1,142 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 470CE606A333
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B724606A330
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QcdKr6sW;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=03kmQieL
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XwX54CAp;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b5Cuh2gp
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 23539605DA;
-	Tue, 17 Nov 2026 04:34:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D94E081061;
+	Tue, 17 Nov 2026 04:34:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R_WjTz3a6FYU; Tue, 17 Nov 2026 04:34:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5735A605FF
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890090;
-	b=H/GnlE18Cseapq7XyuZE3j+RKamEmWSElC3FB6MfAbaYMF/kHxQaPGLktC0ahsILHFJM
-	 jGE1xaElJO14JMKfZt6jxI9623g2qfkbAiXtnOrb+KZHIhW7K7jtos0dBEgl5Zn41APbb
-	 EFrleW6lYPSA1Knhyxi3KaQ+bwt8OKJBbG1RTLdYD/leoCAkzGdyeYnmisEleokDJJhz8
-	 fmL33S9jjUOA69SUDXRXXbzsu9cKiVgf+lMs7zQ5fOXE3Y/LWO7KQ5uqgX0PG95fiF1Jg
-	 Mi1kP6lA+2mn1oeVDsyG89iawGHUYgshibjPD3Lo2d1vr40/F9gej2hO3zHurk/yiLA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8V1fjcFIPe8z; Tue, 17 Nov 2026 04:34:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0F17D81046
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890092;
+	b=HjXu05/g1R0g9xF1qO1esAJIxeFOa1K1KLcedJqI8TCcDKTpRo1XqfGLV8IDemqSWFj2
+	 +D/gfPt7v6GT40yNPQEP1NrkNQh0aEbfyUlAghkjmNc4xC23NBKU8Utyw1Gh02AopxL2X
+	 z3PUjbPf69D5ncK39vfYAlkWF1gig8yY6b+8BuY0SEeWKBmhwnROT+RYNTrAeXt/RR5Gb
+	 Jjpn2I5FfO8ZiKXIvZXQ3y8Yf0o6+l/zqOKGjt5bkgeFJ9ZUAoE/bKphZB/BRStCxFLwK
+	 vjn0J2Td7AZD66PAOiPlpfW0DZk+NP8k8G1nFnamVTbrKH4G1HikXogOjCIVXoIz5xg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794890090;
+	c=relaxed/relaxed; t=1794890092;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=BJVfrYo/8kzPEiwrZkol/knSKexaW6h95r3S1lOu9AA=;
-	b=EZYLgg/rF8suVXzmOQHVJeq477nNLWB1tW4jdvp+P1y6W/Y6ohmBhdkA6HLFD+x+11fE
-	 Vp0XfgdFdm0B5ws+7CM7zfhXNjxABtKPytGfR+G63LYO4+oeuzPfhctRFb6VbfXgy97gq
-	 TtS6O194hzU8XIF3IN6ne+ZI4gXFoefG4Jc5QuORw7dFoPzRQKYvIp28UNzDvbLK4ussc
-	 OmzmVfK/WHhyX43A/LXDXh2wxLizs+xPOJ/6Mij1Q12kPWWI8ZrkY6HkasHc7P1eNCJM3
-	 JzrT2/Z+1DRElXqUVmnyNKQPv94Kd0VK8qg2BV4cQrqYHoG4RbsyECiK23uUlh1amRQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
+	b=DLycfLJDegY8/0WyYB6wfzmhJmlAjdKeoK+JTH/qNatNCIEsDCtM4lc8X1Rfl8eOaqlL
+	 C1joqm5w4k1i/jW/yJtCMflqlwfURRn/i8Q6NjQmrOc70qSZSKfuBW6luqcF8Clt0CPm+
+	 Bpg5AkTPOb0Xv2sq+2gJB3LdqK1ed5n0heedWWVeitjRLDsdAI8NSkCTZYmuV794TtvgY
+	 VqP0QLP2//2THWmWXmu7sWhxexMXAJmJEqFMUTw8SrEjyMhLURtG7EJ5RKTgfQqd94tOt
+	 GU6jAGPWyxaMC5tqySRAwDXAXR+LWpsGU/o4CW2pePWHHLuDTyLFmfBB0efWy80iC6A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b5Cuh2gp;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794890090;
-	bh=BJVfrYo/8kzPEiwrZkol/knSKexaW6h95r3S1lOu9AA=;
+	d=lists.u-boot-project.org; s=default; t=1794890092;
+	bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=QcdKr6sW47pHSU3SToezNMejpaH8pTDmeryWoFnmJwSHzgRiXzK5GdtfO8OH+sJmy
-	 W4Hc+dEyxzWB9QQgxsuNmwi26TftqRum9uqUduwDA5/A03Aka2aOQv47dQcMCBKJPJ
-	 aVYd3yB1rKecAzeQpmi9DtVGZW6ucPNzmy/b7lasiuwLXfiZpjDLkos0PdwKMg0DIT
-	 Vfx1osjq4W9AgwhQMTI+PgsnBnQwmXM9M72i0oLoMXSjRspORnZg3l6QMoELt3uw0A
-	 GCdyMER5ezh5/sIJnOCy3gX3YLM8pcSBUW9xbB52SPRoyIraJpedvR/MlvRXhrvNUO
-	 /1Q7ruLyPHotg==
+	b=XwX54CAp/VSVKInfGKAgSpCyZTnUPrU9XBENJqy9V5yE2YXGKIrh2rYP3fITCFZbm
+	 hzWHx97mGHUoxRiQcnSby92aROZnYH1XEGYmJpIs8DRt3mlAqVbX1JelXZYowQHiBO
+	 0HeaZR6Fpza678Z3UhDUACKvTO6HAHGY7h86VHUl+8YCYY25hvQFkwo2aqQxt43XJL
+	 uUKcfMfRlre3uqSWpE6idowFIux0tI8VEQgyVGmUnLyo5qPxWKSHP6BY/yzqpA609z
+	 MW8yCTaXQCls9eo1CmS3NSi1UNEl/fbJE3b/kAB9GZ9HmZ0qT0vCTgkwyNh+MwYEPu
+	 nJTpf35SNyKNg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5735A605FF;
-	Tue, 17 Nov 2026 04:34:50 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 09C1F1E7
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:02:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0F17D81046;
+	Tue, 17 Nov 2026 04:34:52 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3E0994DD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:02:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BD561402CD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:01:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2F31B81046
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:02:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k1hmIOWAyq0K for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 21:01:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E98CC402CA
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::112d"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Hx1oCeUNmvGP for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 21:02:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 763C580B5F
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::112e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112d; helo=mail-yw1-x112d.google.com;
+ client-ip=2607:f8b0:4864:20::112e; helo=mail-yw1-x112e.google.com;
  envelope-from=dilipchowdary21@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=03kmQieL
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E98CC402CA
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:01:58 +0000 (UTC)
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-8b360828905so37312567b3.2
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:01:58 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=b5Cuh2gp
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 763C580B5F
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:02:28 +0000 (UTC)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-8b4bc216e9dso15367447b3.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:02:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794862917; x=1795467717;
+ d=gmail.com; s=20260707; t=1794862947; x=1795467747;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=BJVfrYo/8kzPEiwrZkol/knSKexaW6h95r3S1lOu9AA=;
- b=03kmQieLAcK+y/dDOVGtqZIqCaTUwj1beqfE6jMjazNjH/2nWLFyfrFPkct6IDv2LQ
- yGw9xC/g5hCC1FuMDHcvX80nbl9zFpTV2DcfCCZD+4wi1l5C7N12ftqj4OVe2JeAdICC
- WrJchSEF1a19A8fCIz2kSYkxrqvTlJz+5x0vSscBPgGYjAbvlntrdflPz4VPJOVV5w88
- J/JJCj24g7tZQg2J61JILb6XYhj9jPEsBlj8WFCB4vfU/jH+Nw5ykyiRS/phoBRytLe8
- 0lOE3Oy1qQH0REF8HUwZZ0EumDNBQw2plsR/Ky7SACj+rkNxIeYjdpJNJQHoOuvhXuwb
- iDFQ==
+ bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
+ b=b5Cuh2gp7HW1DCjD5LsxaAwAUW8r/GGAkbUjQgps0fiF5TxGAGsNkg6v86wOkaNbvp
+ U7Hs6hy9JEOUF7Zc+P3tREEwUOriri8FPucEcGl9QNmeRru+PzgYGy3iaAcOyAIibvLT
+ 3D2OFesVIG8qhAViqwYO2T6Vxmr3uG+5VcUqJdHEZM+5UUyLRHGKyad3g/ngK5WtqrT9
+ cFQaIbCYtBsfPIx0qSWGPWRowkfy85dwWm3aFvfy3IbndJIbG6nL+C1+m/9fh1YhUUm0
+ /62URDA+4vyKWKqDj5XvXcOi2RXDOtY5apJuY9BHkJytwilA0MHDQNeUPF6Nvt1WcyfN
+ zVow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794862917; x=1795467717;
+ d=1e100.net; s=20260707; t=1794862947; x=1795467747;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=BJVfrYo/8kzPEiwrZkol/knSKexaW6h95r3S1lOu9AA=;
- b=YZGWOVT6+xJy2146aldTnAbuJkwyKmBHV6RnuC3mCJZkb/6+GSmHSJ86913KV/2lbB
- WB9NjHqr0hl1MnLUJtfhz7IhyAzANj7zrVy6Z4iIottWf6NpNx6780ChVan/MLqyVdl3
- U8aYjUlF7NDRp98J1HdclRGuCLHySuA2eeA7DIQ6a8YcfxD32PeBBZassS23/nmiYMRo
- WVzBKioESQBmWkd4ID0iO/nzRJ2mfdkK0kgqNYNRC2u3iAZHUz/SbZsyzDDUNMxYtcXQ
- 12mX+KsY6KuUoWvfnTh6X/NIXlU6zTbOmZ+DDpnuP0cNKkNnqCG5X3y2yk0FfVlz5gkD
- ddsw==
-X-Forwarded-Encrypted: i=1;
- AL+hErGUae+nCBXGmveSL2Jb/Xd/F+aVk9C1rI+fHAN/kzZCXW0zoh1tVdvJG3toZzSPGESnrlAnut8=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+rHH7EEzrgc1RagMwhRxLQA90Jz6+zr/NQgDuSaZadRCpwtLAi
- w743t48yLJUFvnlTiLYd46MlR9jCPXhKzjvE7gH4WyUXs3uR8qBx9ixF
-X-Gm-Gg: AZFdTZf/B3bVn4t8E1n7jHIh/yNuuoetygBQy7LS3dQ+UnKuQyNvDe7ZSgRarQ6efzj
- ASaV2zb/anmZg5vVTMUGwKe8GPtgVBzRetJUUI7+oLaQRPIQQzAZbTihEQv/aDYCtngJscD4ZY2
- KVA9P26vXjCLz9vJ11VV9BPiWl4auxxsT6YEuCvgM8RM/y5/OSv3a19cYfRj2qgEmZRTLwmaZBe
- N9SB3mWUg0JO5YPqBlvn+SuAWywqtAoCuFzTJ4SOBmhPbgzNIxDt4sOreTwh1jl+d1SJy9UIdC6
- kmG22vbG5Xde/HMQat8oJJpG92m/xk3awPCnzkPriuONNUl5VuvAiXFoQ2AfR9wRmCntmoUGxQM
- fxjOhiocfKNDOEZqIzdpQqm/5sWsY9Odrl/oOCiWozNLbNjedewtykUFJaNRpNuipvH4nxmxD7V
- gSn7br7UCKEeKL7ZEv4+9bo+EjdR+V4zkactvXn3SVWd828aC+cyr16/GkdUD5tLo2qIM7yLH9x
- R7PkOoCtnnTsSuLhQYzng5z8W4/UdPFm20tpd+7hbEGWZqjrg1F400v1pHf9svN5HLk2+Fdq0fH
- SlHFXjasXgo+Q8X7Bk1BUZ7SkFKSOnXLzUzuAb5nLYPxAt982NJtvXyyL4W2tcF5gdOuukcoqFZ
- 4GaD7dzzMUREYrpMISAek0y31Xh7U
-X-Received: by 2002:a05:690c:c4e5:b0:8b4:d8c6:4da7 with SMTP id
- 00721157ae682-8b4d8c65098mr19016147b3.103.1794862917058; 
- Mon, 16 Nov 2026 13:01:57 -0800 (PST)
+ bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
+ b=hRZ1yOlSstyO42EONMC2bSk3Zz1cNICgaL348RmZm3oRr9fURaQ7ilbHXuubu0NdbL
+ s1GDXl/GVpkJ9evJapSNDCtNN2VY3ncwI1NeudNZ8QshMayXlraGrj8wYMSEJhbCMGQe
+ VTgvwx+UiRLr55X5Zj06xN4zaqpjphxc2wCIvoPXSaEznZuwWfJ2lKAXX4BCDMjEuCWR
+ 6/M/lxmqnm7beK7IpYjlulEQkgnR+oFcOgRdC3by05ACou/ZOvsDZUwhbMkBcigE/h2E
+ pxEH4P6CCBLpIjQZw4bNQTM6jcM8KoCJXJ0GNXR4dUYqDiSVjynF1kOFRsmr8Iht8qJj
+ VJ7g==
+X-Gm-Message-State: APuU4Z+fSKRCpj9M66DHnlLdP836ezgC6ELnqqEsDKnvh3f/8s8x1R2i
+ X1ZE3vrYA8PtTpwgoNNa+7nuWBPDJjamuKY1rT9uqn9xwhXIX9A6rPbu6fY5pvcr
+X-Gm-Gg: AZFdTZdeSyzFxuTNi3XGeCHONJN5GB7+3Ft4AtbW/+FPqRvXpE3NItzP3u7uG8A7Aq9
+ AdT2VgRuk7XOL4cIlAANvQwMUDqF1oCCB7rcXEuV8yDtNyz8Hnfz93g7n0j+aj75577cfpRzAIF
+ O8VSaABda4oa7DloA5fJhRGchC5wbDP0/AhTBlq5IfDNnX1NqpQLzwl/eDsBIhLCaD3mmT+23K7
+ 9emUX3gp1SYMRJJ75zXLBbpfyxaBIVU9tL1ZPGD4OWZRByUiowb7tj9Od0eNb6pyuUY0G2Sdo+E
+ G0xTJPbZJ26czIYRkDMSkj9AzkXWfXWmFHxWk1YFKl3LLibnovBuTzthnXD4bFXdi28BFioobQ+
+ Zr2yWmMFZNQmubtY/zHJSGjYBXNryqnKoPrqPK23AZ+xhA6pRsp5ifuIqrLZBFQ7HoK0dFoD86h
+ vKysfiAEL8QS40xU0rM0zROShA7eBbsb91ffHuSlWIt6e2X772leN7at8I6quje8lou0uI8N2uy
+ GdVgDaKV/V3zi3HGhKfEWhnwk+t8AeF5oYmzhRXO7DnQaAbUBreDJ9bUJRR1zyXPqWMxCwx8h7q
+ Tc5j8IZ8Ep+ZbgE6RmajgZOvS7d78jc7RU/zQFL+rSbBj3cVYUnxHBZG1fbh3CIFUarz47CKiBa
+ 3sQM4oydQ5SsC7nmeThjw9BavAY7o
+X-Received: by 2002:a05:690c:9413:b0:8b3:b06d:68de with SMTP id
+ 00721157ae682-8b4aa3b2d79mr47189637b3.106.1794862946907; 
+ Mon, 16 Nov 2026 13:02:26 -0800 (PST)
 Received: from d3sec.localdomain ([216.170.66.174])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b4eb7f2057sm8795767b3.5.2026.11.16.13.01.55
+ 00721157ae682-8b4eb7f0408sm8765837b3.2.2026.11.16.13.02.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 13:01:56 -0800 (PST)
+ Mon, 16 Nov 2026 13:02:25 -0800 (PST)
 From: Dilip Mallavarapu <dilipchowdary21@gmail.com>
-To: Alexey Charkov <alchark@flipper.net>,
-	Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org,
  Dilip Mallavarapu <dilipchowdary21@gmail.com>
-Subject: [PATCH] disk: part_efi: fix two out-of-bounds reads on crafted GPT
-Date: Mon, 16 Nov 2026 15:01:48 -0600
-Message-ID: <20261116210148.15202-1-dilipchowdary21@gmail.com>
+Subject: [PATCH] fs/cramfs: bound decompression output to the destination size
+Date: Mon, 16 Nov 2026 15:02:09 -0600
+Message-ID: <20261116210209.15246-1-dilipchowdary21@gmail.com>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
@@ -161,76 +159,86 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Two attacker-controlled header fields are used without bounds when
-parsing a GPT, which is done automatically while probing a block device:
+cramfs_uncompress_block() set stream.avail_out to a fixed 8192 bytes,
+unrelated to the destination buffer. cramfs_uncompress_link() sizes its
+buffer as malloc(size + 1) from the inode's declared size, so a crafted
+block that inflates beyond that size overflows the heap buffer with
+attacker-controlled content (CWE-787). The length check runs only after
+the data has been written.
 
-1) alloc_read_gpt_entries(): count = num_partition_entries *
-   sizeof_partition_entry is evaluated in 32-bit and wraps (even on
-   64-bit), under-sizing the entry buffer while part_print_efi() /
-   part_get_info_efi() iterate the full num_partition_entries with a
-   sizeof(gpt_entry) stride -> heap OOB read and partition-name info
-   leak (CWE-190/125). Compute in size_t so an oversized array fails
-   allocation, and require sizeof_partition_entry == sizeof(gpt_entry)
-   so the buffer and the iteration stride agree.
+Pass the remaining destination size down and use it as avail_out, so an
+over-long block fails decompression (Z_BUF_ERROR) instead of overflowing.
 
-2) validate_gpt_header(): efi_crc32(gpt_h, header_size) runs over an
-   attacker-controlled header_size on a single-block buffer -> OOB read
-   of up to ~4 GiB before the CRC is even compared (CWE-125). Bound
-   header_size to [sizeof(gpt_header), block_size] in is_gpt_valid().
+Reachable e.g. via cramfsls over a directory containing a symlink.
 
 Signed-off-by: Dilip Mallavarapu <dilipchowdary21@gmail.com>
 ---
- disk/part_efi.c | 30 +++++++++++++++++++++++++++++-
- 1 file changed, 29 insertions(+), 1 deletion(-)
+ fs/cramfs/cramfs.c         | 9 ++++++++-
+ fs/cramfs/uncompress.c     | 4 ++--
+ include/cramfs/cramfs_fs.h | 2 +-
+ 3 files changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index d8751297fbe..9f1d2953556 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -1095,6 +1095,17 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
- 		return 2;
- 	}
+diff --git a/fs/cramfs/cramfs.c b/fs/cramfs/cramfs.c
+index 22148ff8fe2..411e707528b 100644
+--- a/fs/cramfs/cramfs.c
++++ b/fs/cramfs/cramfs.c
+@@ -211,13 +211,20 @@ static int cramfs_uncompress (unsigned long begin, unsigned long offset,
+ 	unsigned long curr_block = (CRAMFS_GET_OFFSET (inode) +
+ 				    (((CRAMFS_24 (inode->size)) +
+ 				      4095) >> 12)) << 2;
++	int inode_size = CRAMFS_24 (inode->size);
+ 	int size, total_size = 0;
+ 	int i;
  
-+	/*
-+	 * header_size is used as the length for the header CRC. Bound it to the
-+	 * block that was read so efi_crc32() cannot run off the buffer.
-+	 */
-+	if (le32_to_cpu(pgpt_head->header_size) < sizeof(gpt_header) ||
-+	    le32_to_cpu(pgpt_head->header_size) > desc->blksz) {
-+		log_debug("GPT: invalid header_size %u\n",
-+			  le32_to_cpu(pgpt_head->header_size));
-+		return 0;
-+	}
-+
- 	if (validate_gpt_header(pgpt_head, (lbaint_t)lba, desc->lba))
- 		return 0;
+ 	cramfs_uncompress_init ();
  
-@@ -1177,7 +1188,24 @@ static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
- 		return NULL;
- 	}
+-	for (i = 0; i < ((CRAMFS_24 (inode->size) + 4095) >> 12); i++) {
++	for (i = 0; i < ((inode_size + 4095) >> 12); i++) {
++		/*
++		 * Bound each block's decompressed output to the remaining
++		 * declared size. Otherwise a crafted block can inflate past
++		 * the destination buffer (which is sized from inode->size).
++		 */
+ 		size = cramfs_uncompress_block ((void *) loadoffset,
++						inode_size - total_size,
+ 						(void *) (begin + curr_block),
+ 						(CRAMFS_32 (block_ptrs[i]) -
+ 						 curr_block));
+diff --git a/fs/cramfs/uncompress.c b/fs/cramfs/uncompress.c
+index 97af8cb2b4f..43ee5f7609c 100644
+--- a/fs/cramfs/uncompress.c
++++ b/fs/cramfs/uncompress.c
+@@ -29,7 +29,7 @@
+ static z_stream stream;
  
--	count = le32_to_cpu(pgpt_head->num_partition_entries) *
-+	/*
-+	 * Both fields are u32, so the product is evaluated in 32-bit and can
-+	 * wrap (even on 64-bit builds), under-sizing the allocation while the
-+	 * callers still iterate the full num_partition_entries. Compute in
-+	 * 64-bit so an oversized array fails allocation rather than overflowing.
-+	 */
-+	/*
-+	 * The entry array is indexed as gpt_entry[i] (sizeof(gpt_entry) stride),
-+	 * so the on-disk entry size must match or the buffer and the iteration
-+	 * disagree. Reject anything else.
-+	 */
-+	if (le32_to_cpu(pgpt_head->sizeof_partition_entry) != sizeof(gpt_entry)) {
-+		log_debug("GPT: unexpected sizeof_partition_entry %u\n",
-+			  le32_to_cpu(pgpt_head->sizeof_partition_entry));
-+		return NULL;
-+	}
-+
-+	count = (size_t)le32_to_cpu(pgpt_head->num_partition_entries) *
- 		le32_to_cpu(pgpt_head->sizeof_partition_entry);
+ /* Returns length of decompressed data. */
+-int cramfs_uncompress_block (void *dst, void *src, int srclen)
++int cramfs_uncompress_block (void *dst, int dstlen, void *src, int srclen)
+ {
+ 	int err;
  
- 	log_debug("count = %u * %u = %lu\n",
+@@ -39,7 +39,7 @@ int cramfs_uncompress_block (void *dst, void *src, int srclen)
+ 	stream.avail_in = srclen;
+ 
+ 	stream.next_out = dst;
+-	stream.avail_out = 4096 * 2;
++	stream.avail_out = dstlen;
+ 
+ 	err = inflate (&stream, Z_FINISH);
+ 
+diff --git a/include/cramfs/cramfs_fs.h b/include/cramfs/cramfs_fs.h
+index e0c14f04af5..02c4867386b 100644
+--- a/include/cramfs/cramfs_fs.h
++++ b/include/cramfs/cramfs_fs.h
+@@ -93,7 +93,7 @@ struct cramfs_super {
+ #define CRAMFS_SET_NAMELEN(x,y) ((x)->namelen = (y))
+ 
+ /* Uncompression interfaces to the underlying zlib */
+-int cramfs_uncompress_block(void *dst, void *src, int srclen);
++int cramfs_uncompress_block(void *dst, int dstlen, void *src, int srclen);
+ int cramfs_uncompress_init(void);
+ int cramfs_uncompress_exit(void);
+ 
 -- 
 2.53.0
 
