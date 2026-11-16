@@ -2,165 +2,230 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDAF6606A329
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 07:59:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5751606A329
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 08:18:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XAHWgCyY;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ofk9Z68T
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vS3ASel/;
+	dkim=pass (2048-bit key, unprotected) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=R1P8Plgd
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B492580E49;
-	Mon, 16 Nov 2026 07:59:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A4B6780D6F;
+	Mon, 16 Nov 2026 08:18:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3yfsdAYN_SHx; Mon, 16 Nov 2026 07:59:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 375A480E3F
+ id mIiaiZvr8LXa; Mon, 16 Nov 2026 08:18:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C80B180D48
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794815959;
-	b=hgugK4vDDTKjORyOoEMI0evOw6cAvBujIyq4+2wSQRTHm5tATlehg6ouqLoiGuytDCu6
-	 d0+N8K0oCkB1ZBQAgWYk16O4FBhR1mEUCYpXjrkPbtTUpQZ6gm/52d9t9lFV9ORGkfWvH
-	 Y98AeoQZ5Q7PlsUTUH51thy3dhVZXDlR5gGkArn4rSjaZZPCsHhOYro+0YW4p8GDzuVFf
-	 HrEEBnVCvr2OUAUT0lfLtO6TccjA95ZPzv8SQt3hjxn8xGhotBoGY43CX/V47k6lVOlLr
-	 82GvwA7S7IMGn6xLPGJLYifYp6RJZOu1bOM0r1kRuvYpYMgy/E2f76s+zkArAcbSkbw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794817098;
+	b=psZ5j2z4925mrd0LyeDdzrrmBO6WiLWR4QihNkf6MllYgxJby5ka8CEDGURsB0J4FFHk
+	 gPAkGdj5tksGY8ui5j2SjMWTeFldIxYG7Gn0WXBPygEl6TBG8p/mfB23ocXOMrLAEM4dH
+	 Bfj4vZqyCe2IvUThH9mEs6wYhGaYs/dGeRRoQTtoR7Mg5ZvBQq1YXUy2yBkgxXCUeeC5H
+	 xvL5HDvaBSdV8LcztGY4p7QNSNj41rd/I465cPewIuE1Vzw1nOJxFr9sJtGyr7wxkoavZ
+	 YKny/+RrHyozJoa82uAK+2j/4NBFkMEHGJJLQ3v6I/XJQFEWK8hvswFbqQlxBmH9/jA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794815959;
+	c=relaxed/relaxed; t=1794817098;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Mime-Version:Content-Transfer-Encoding:
-	 Content-Type:Date:Message-Id:From:To:Cc:Subject:X-Mailer:References:
-	 In-Reply-To:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=T+4Ni75zSnRnvrKAnH3Qjpx87n7PCEQw46Se8d1z1r8=;
-	b=d3KFbsQ5RdKEFFO8PIpY84FufkVvd8wdlTO7v7aIcmWum8UR6Xr9LDH+pShL0RAzTr2F
-	 yEWLPHgGaRl0PHq16sPcKPIinGnIeHDH5fJW31dAJOdUIQZWadl5woXWlB0Hcln0XbnRX
-	 elc4uiLUtdvVoZcOKBQEEna6EQN5WRNZ73jlvi3FDNEbJqi/h6bLd6IpVyku11YAkwKrL
-	 2g0HWfJZImB8RE2f1IgnlAwYySjLtBoTXSiSZuds0cyw8oiUHkwlI2yDYOwfpIwjleP8E
-	 ir8SaadKtUXssSTS6+27QUfqt4515BryXDcepl6XJdd4VWbALgseFym+YOuSMdgKHxw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM2-Signature:Message-Instance:DKIM-Signature:X-UI-Sender-Class:
+	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Provags-ID:UI-OutboundReport:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=h0yz9gotEfy/q3sknhUBjgOe/5YJ01863frNCoPXD2g=;
+	b=Mk6wpRqknYbwn7XPnAM64PPA7Ebyfaz0HRyPjR/xujRzg97XrmLCL3a6S6j0qCmYc0cg
+	 8J2CYjU57e+oTTCDBC7kRs/rr9CBb2TJCC39E2li6wvNS0WfRIaDcKhHcopacR3mU4NA7
+	 NHHav5+KMbJMTwTgcsGbizxIgn5+OSwht78I4EZd+xlWVOc/XTbUNie4w2RysLSRicafn
+	 dNyuKNbUJDAFU/Wl2WHRA7cQQILNC0NIOVCmDbfmT9gwy1BkoXxVbPGYHKhTJ3W+Epvt6
+	 Fnxd06kg4Key+Nk71ElmDWRUUTZCFb4sG6aOCjSyDlhIaDb5Nb+ksMScQtXUmQyst7A==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ofk9Z68T;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794815959;
-	bh=T+4Ni75zSnRnvrKAnH3Qjpx87n7PCEQw46Se8d1z1r8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794817098;
+	bh=h0yz9gotEfy/q3sknhUBjgOe/5YJ01863frNCoPXD2g=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XAHWgCyYmWFdlzOIFMEFmnEAJAZt+zwl2QN28/5PhP27brw/5C3rcdcfDIKjvJpKP
-	 qhyrIYgne/MDnBzh2XwiADDiKHMf/uW/Bo56YqPpTWmaaewgEUSrFxgDxEOhEMf9UJ
-	 23+f170c+09dC41GhFN0tKUrkam6v0Qd3p05HbwmnnKpTB49rDvnRorERO3dJ8Sw9C
-	 lAplTKTwAqFg9o768oYk6pBzkH5lvIiqKUQpngodQBh5vyHAFDlKbSsDV9dtTe2Zsv
-	 5wNFKNzyltOJwjKYnAFNBHtF/rLfQHsn4gFfsGhkEu+gtFsPru+hilx0woliecVcx5
-	 YZtJU0MnKhFZw==
+	b=vS3ASel/JEkCuFx0F7FKufgLe4oXjj+qWkHr7DKinEKLZRqWwwmnlicOS2IO5CLdJ
+	 AbB3TURVCnS6j2PcJUVSj0HXiQIdwVYzcFDvWu/Wda6bVE8QI3Pr7f+dy2/qZFv0/H
+	 V0liW6N4H1zCE1MDlONRFaTlFWntdHT6RPsWyRYKEUNs8biKffdyiShZ1RavDaP2Y2
+	 YBFfiYA3LnfxlznRp5jHGHgj3zte+hWiLb3PmD4fYbOZKM7G4k0N1Dkv8ST81WyLLg
+	 IfUek8mi3M7K5VhL4Zmtl+BRCNyzCtNHvX3oaSTC/qfU6VhWeCP0fR+JVvlrGBuegc
+	 aDp4pu7SO208Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 375A480E3F;
-	Mon, 16 Nov 2026 07:59:19 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id A30841A6
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 07:59:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C80B180D48;
+	Mon, 16 Nov 2026 08:18:18 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 602B31A6
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 08:18:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8CC0780E3F
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 07:59:17 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 54E20400F5
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 08:18:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MG8qwoShBDkY for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 07:59:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A66EC80E3E
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32c"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32c; helo=mail-wm1-x32c.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=ofk9Z68T
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A66EC80E3E
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 07:59:15 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4a207b02a2cso16841515e9.1
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 23:59:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794815953; x=1795420753;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:references:subject:cc:to:from:message-id:date
- :content-type:content-transfer-encoding:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=T+4Ni75zSnRnvrKAnH3Qjpx87n7PCEQw46Se8d1z1r8=;
- b=ofk9Z68T5lbQE2SGn4fo0YQF5u1RlonvBDWA+3cOdtMyHXC4L0bLhu1IIdBjUlVZ1I
- I6rfS2cZbBs833kD1mBam8Ki0IzwSJPgGTZ4tT30AZgt8HeJ43E78L/h8L5pxZXpA0Kq
- PGoudtD6Kr6cLNT+wbRfwP5SJdBl7H5HC5SV0M9NgaO8bvVoTQw1+HiEA5XJHRwzkRPX
- UzNa+Ky+lpp1lbDpt7KbSeHiLfAV1g2QIyJNuE7nf5VaMIPXT0gWuDXzOnjjbLwiVLA+
- wBZUF+dgkqYwHvxni+6dTppqWDOVsFkl78SKt8fOHRe18IOMsJGxnSebs35dhKkLE92W
- XxtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794815953; x=1795420753;
- h=in-reply-to:references:subject:cc:to:from:message-id:date
- :content-type:content-transfer-encoding:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=T+4Ni75zSnRnvrKAnH3Qjpx87n7PCEQw46Se8d1z1r8=;
- b=xXcUoT0Fg9BnA/LAyjmuXvHYWMdsc/AK46bLnOTCoNjLSSHDQGgWJjmDhGunlarEIz
- WwamLXOJBP2S0VfbVTUGVbp6FdUYKn4RftYiSJ/6p0ZJQ5xR6Yqm5NMPxbj2klg43p0U
- wpvIq31FJMY+UA4+U++7NExm5f1HW+7K+HpgGvkxx2rrnHWS1jqsetGZIld7HwixZuuO
- rewa8S7YutELaVW4yHO4vCgG6mLNGteAI3352NuaspRclJOW0ZNbqajn6IsbH7O1twiB
- jk4KihQs2x2eQq4cGLW5XbHCYi+p6tgafb7Kn5g8Yv7qW6Cro/TAmsDNfigVOldZ1S7P
- OzDg==
-X-Gm-Message-State: APuU4Z8YHaHRVvo3YdG4uz9/qZx8XRuPCj7ib9LaIjMZ+5NtH6StFweq
- +DnPxRMdpgVRoWdA6yc4kWU8bWVZUkbztcgxVuDdHJxqTi+iLtnCPSQcdfrHI20yqUg=
-X-Gm-Gg: AYBFou1DEYdPbg7hLYXtBJXHF33c16BuXVyxbVq/6JN0gKhiUQ+QTONQMCoFV9iMrFT
- Q/641abRD00YHB9LqURN+rGDXk+lhmYRLnDpRpYjku4HXBffl6xEf2Tu5XyQp3lkVaHaHoxecjN
- ZQUV7zGXBM12tptx+44Hg7JbVuLwSpDjxu5eFGudeulBeNrlb4PQQw6FQmAJtjPvhUgp3wMLMD4
- jfJPCrWFLOru8LwF7tePtOmpBRmoUaor0z9xDX0MxKYwnwYkkPkze/LP9gOR6dYDBicP+cxcyAZ
- 6wSvLYgFfVZP+eXgww3L1yYD5wnMcb5FhH47wBE52gO9IDx+919RvURqHBi01EINKnaQ0XzMZv5
- T240RzkA3Jdbb52wVf24XBl4M5mlfAU32cQhiwQ+eGGVS/Au8ogJ/KcH8ngK2LwSpt9VvB5TXBy
- Y+7zkXSHmCZq0i5l+F8nU0v40T6cWsv1rd0tSB4ZiI64gHqENuHiET6Usa9rIaTA2mVyOBIHNGQ
- RpIpjpstAiAyLSiN3ZX8xdah83QsU8QFc2AlH4Yiafrpdh6upK0uda7kdHqYlZHwFMSYVIr3u2k
- +qEduAKCCAeu5jjj84znS27cZsQDG9dUxA08ymPElXg4A37i6CLQpGXcaTfLrMGFyRUen6mRHS6
- FHfoC5GyCNqQs5hx23Pwtus9VqkQlJrhmGW2P/1ObE55j/fNQUzgEtua4qTdZi2K8ADSwh0TrSF
- TiY3OTJxxObJQ5yqxRC15+ndO7uHZUcaIeLUQcd77U/EnzIausXBPzMe+HYzMXyAAHAlPUCn6NQ
- WH+BT/qp4A6A5qA3hmZYvgqRFXCbG1B4Y0Ti3Zf8xD/MhSLXRiF4ZtySGzgal6o9SPB60lceNzQ
- Woqkk9Err7PF+P6d6lun6eItBPIi89BftZSc1orzN+G1JN+7y/H6m4R3oLpDkFM+Rw8y0qcSN1l
- E4i0V1xvhWfOz42TC7Fcg5UUMDgegXFrSTA==
-X-Received: by 2002:a05:6000:2dc9:b0:491:8462:20b6 with SMTP id
- ffacd0b85a97d-49c73ed0fbemr24280366f8f.38.1794815953185; 
- Sun, 15 Nov 2026 23:59:13 -0800 (PST)
-Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5d22394esm21424708f8f.3.2026.11.15.23.59.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Nov 2026 23:59:12 -0800 (PST)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vp7Z0Y7ZUJ-b for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 08:18:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org ECC8F400D6
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=212.227.15.18
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.18;
+ helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de
+ header.a=rsa-sha256 header.s=s31663417 header.b=R1P8Plgd
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id ECC8F400D6
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 08:18:15 +0000 (UTC)
+DKIM2-Signature: i=1; m=1; t=1794817093; mf=PHh5cHJvbi5nbHBrQGdteC5kZT4=;
+ rt=PHUtYm9vdEBsaXN0cy51LWJvb3QtcHJvamVjdC5vcmc+; d=gmx.de;
+ s=s31663417:rsa-sha256:LMW5boEI9ZsHgZk5bLG+RZLMBSnS
+ /QGOzIuI5fIXzsaJZNSZIJePPl3t4Rsj1up1JKC4ru9h09k+GIHQqLkLXGcpY+k7wSD0zlUMT9e
+ qvt0sUnYYP1FQIbeqkNss6h0ZTT7YY3CJAF541LYARHJf2vcOUPivSpOO9YBoqUz2lNU4lhx79n
+ ORxLaMn8/D0CAX9qwzL0m51SIFTSjfWtiCVM0SSAttoZEe2Fd/PRyC0Ili5Yqmh0DnC/KGi+qVm
+ 36MlMYxa4b7hxOQUNJdgQ45Wa16r5FdKi7gHBVCMLJ5cgY/b59nXL5XepN3JAD4TsdXw4vi0hcr
+ JGE/6WGh22jdNg==;
+Message-Instance: m=1; h=sha256: uqrXtI37KvAv630uskuoch3GsdnETfX1H2BFUhox7Pw=:
+ cFWQQKiK9afDr4rhfML2xM36k+r2fNDEHs70SNjSKz0=, sha512:
+ CuicVNfiS1tLbkAfIq5sU0YAd6AzWPXwjJnWVtQaS3AzIllNTTGih2S3n6kF1jD+RxoHtiQDL2h6WVAmaVYS+Q==:
+ 15ZCN9fgRgJ90chMxNail6zjTDQ5NOEBngoygaJveQ+CUdZjssRewMQ3KLMYplId8zimcIYZIMgChmqPSwZEag==;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1794817092; x=1795421892; i=xypron.glpk@gmx.de;
+ bh=h0yz9gotEfy/q3sknhUBjgOe/5YJ01863frNCoPXD2g=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=R1P8Plgdi228rkP7W3+FkXg6mxHrBCUxmei/0jlA2yp9NBkNidgfmC8uB9YfFQvC
+ yO9shfgRkXHeLQt0eX83MZyK/uPIpZXtjpks8vuCeHNSNCiSi7jSsJiExtrZHJkxN
+ TdM1yfP1oU3auFhe7P4mbPtASjzkU4dRoz/6r9zuxM9YCLuBMEO8qzinZ5CytD1+s
+ EMXjd3WSd+RzOCTP1Mowe/dq9qaGQvWIHw25FrRoQdXgOSHwkDgKH57pWnIKDZQd+
+ pQBxxYTs53Ouhr6cVlN7wR0G2C9xDj0cQ6cC3i/XL6mMRX5d8NoyPLn0D675+FSM/
+ ULS1UnNRLBnieiacUQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N6KYl-1wMowP0qsL-010KVf; Mon, 16
+ Nov 2026 09:18:12 +0100
+Message-ID: <b832921f-a366-4a35-b8f1-e43dd2d4f448@gmx.de>
+Date: Mon, 16 Nov 2026 09:18:11 +0100
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] scripts: checkpatch: prevent shell injection in SPDX check
+To: George Kola <georgekola@google.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+References: <CAOTQ16Lwp8m_tDTbiuT_CAVj-YByNJ2o5g_XBHwBNke+tuGQZA@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAOTQ16Lwp8m_tDTbiuT_CAVj-YByNJ2o5g_XBHwBNke+tuGQZA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 16 Nov 2026 09:59:10 +0200
-Message-Id: <DMWH5L5PBF9S.2Z428I5YBXQVU@linaro.org>
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "David Lechner" <dlechner@baylibre.com>, "Tom Rini"
- <trini@konsulko.com>, "Alper Nebi Yasak" <alpernebiyasak@gmail.com>, "Ryder
- Lee" <ryder.lee@mediatek.com>, "Weijie Gao" <weijie.gao@mediatek.com>,
- "Chunfeng Yun" <chunfeng.yun@mediatek.com>, "Igor Belwon"
- <igor.belwon@mentallysanemainliners.org>, "Julien Stephan"
- <jstephan@baylibre.com>, "GSS_MTK_Uboot_upstream"
- <GSS_MTK_Uboot_upstream@mediatek.com>, "Macpaul Lin"
- <Macpaul.Lin@mediatek.com>, "Ilias Apalodimas"
- <ilias.apalodimas@linaro.org>
-Cc: <u-boot@lists.u-boot-project.org>, "Michal Simek"
- <michal.simek@amd.com>, "Casey Connolly" <casey.connolly@linaro.org>,
- "Carlo Caione" <ccaione@baylibre.com>
-Subject: Re: [PATCH 00/10] binman: support separate binman devicetree from
- control devicetree
-X-Mailer: aerc 0.22.0
-References: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
-In-Reply-To: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
+X-Provags-ID: V03:K1:Lm3ot90htO7a/B88HZbg/hwkqlWMtRE1LJy5jzwUiucDzCiUDWt
+ TpFUcEJetkQMX2aE+9k0+YHfrr5OrdwJSXsBF1xulmi4C0wOHM52Rs2eDtOCsbNAmMJQNhn
+ do0WyVhcJq/nPYKNBdVZmNAqvVQWFXEAu3j24ZrTWyXeKddqlm4tWcerXx/snzmVZa0L+mA
+ Fo623MT40M3xUorfHjAVg==
+UI-OutboundReport: notjunk:1;M01:P0:VCVHAbtr2is=;4B5L4DUXR7iW1rcYcf+5ygi+0pt
+ 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
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -170,273 +235,111 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi David,
-
-Unfortunately, I don't have the bandwidth to go throuigh this in detail, bu=
-t +1 for
-the overall approach.
-
-Thanks
-/Ilias
-On Thu Nov 12, 2026 at 11:14 PM EET, David Lechner wrote:
-> Anyone who has worked on hardware that uses a devicetree for the
-> hardware description should know the mantra "the devicetree describes
-> the hardware, not the configuration".
->
-> Binman is describing configuration and not the hardware itself,
-> therefore it doesn't belong in the control devicetree that describes
-> the hardware. So we propose encouraging the separation of these two
-> descriptions into separate devicetree files. In most cases, binman
-> info is not needed at runtime anyway, so combining it with the control
-> devicetree is unnecessary, takes up space, and causes DTS validation
-> to fail because binman is not part of any standard devicetree schema.
->
-> Currently, only Xilinx is doing this kind of separation. This series
-> makes it possible for more platforms to adopt this separation. The first
-> patches fix binman so that the image gets the U-Boot control devicetree
-> rather than the binman one when the two are separate binaries. And they
-> make BINMAN_DTB work with OF_UPSTREAM, and document the recommendation.
-> The remaining patches update the MediaTek Genio targets to make use of
-> all of this.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
+On 11/15/26 18:12, George Kola wrote:
+> is_SPDX_License_valid() interpolates the untrusted SPDX license line
+> extracted from a patch directly into shell backticks, allowing crafted
+> SPDX-License-Identifier lines containing shell metacharacters to run
+> arbitrary commands when checkpatch.pl inspects a patch.
+>=20
+> Reject SPDX lines containing control characters or shell metacharacters
+> up front (even when python3 or spdxcheck.py is unavailable), and
+> replace the backtick shell pipeline with a direct fork/exec of python3
+> scripts/spdxcheck.py over an anonymous pipe with SIGPIPE ignored so no
+> shell is spawned and early child exits cannot terminate checkpatch.pl.
+>=20
+> Fixes: c261fef51ca0 ("checkpatch.pl: update from Linux kernel v5.4-rc3")
+> Signed-off-by: George Kola <georgekola@google.com>
 > ---
-> Casey Connolly (1):
->       binman: support building binman dtb when OF_UPSTREAM is enabled
->
-> David Lechner (9):
->       binman: allow a control devicetree separate from the image descript=
-ion
->       Makefile: give binman the control devicetree with BINMAN_DTB
->       dts: always build the binman devicetree from BINMAN_DTB
->       lib: Kconfig: do not enable BINMAN_FDT by default with BINMAN_DTB
->       binman: recommend a separate devicetree for the image description
->       arm: dts: mediatek: drop the -u-boot suffix from the Genio binman f=
-iles
->       arm: mediatek: describe the Genio images in a separate binman devic=
-etree
->       board: mediatek: add a Genio boot images config fragment
->       doc: board: mediatek: use the Genio boot images config fragment
->
->  .gitignore                                         |  1 +
->  Makefile                                           | 16 +++---
->  arch/arm/dts/mt8188-genio-binman.dts               | 15 ++++++
->  arch/arm/dts/mt8189-genio-binman.dts               | 13 +++++
->  arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi      | 10 ----
->  arch/arm/dts/mt8370-genio-da-u-boot.dtsi           |  6 ---
->  arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi      |  9 ----
->  arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi      | 10 ----
->  arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi      |  9 ----
->  arch/arm/dts/mtk-genio-binman-u-boot.dtsi          | 12 -----
->  arch/arm/dts/mtk-genio-binman.dtsi                 | 26 ++++++++++
->  ...boot.dtsi =3D> mtk-genio-bootloaders-binman.dtsi} |  2 +
->  ...binman-u-boot.dtsi =3D> mtk-genio-da-binman.dtsi} |  2 +-
->  ...an-u-boot.dtsi =3D> mtk-genio-da-fit-binman.dtsi} |  2 +
->  ...-boot.dtsi =3D> mtk-genio-loader-spl-binman.dtsi} |  2 +
->  ...-u-boot.dtsi =3D> mtk-genio-mtk-boot-binman.dtsi} |  3 +-
->  arch/arm/mach-mediatek/Kconfig                     |  5 ++
->  board/mediatek/MAINTAINERS                         |  7 ++-
->  board/mediatek/genio-boot-images.config            |  5 ++
->  doc/board/mediatek/mt8188-genio-evk.rst            |  9 ++--
->  doc/board/mediatek/mt8189-genio-evk.rst            | 14 ++----
->  dts/Makefile                                       | 20 +++++++-
->  lib/Kconfig                                        |  9 +++-
->  tools/binman/binman.rst                            | 22 ++++++++-
->  tools/binman/cmdline.py                            |  3 ++
->  tools/binman/control.py                            | 14 ++++--
->  tools/binman/etype/fdtmap.py                       |  3 +-
->  tools/binman/ftest.py                              | 57 ++++++++++++++++=
-++++--
->  tools/binman/state.py                              | 38 ++++++++++++---
->  tools/binman/test/fdt/u_boot_dtb_separate.dts      | 13 +++++
->  .../test/fdt/u_boot_dtb_separate_expanded.dts      | 13 +++++
->  .../binman/test/fdt/u_boot_dtb_separate_fdtmap.dts | 15 ++++++
->  32 files changed, 285 insertions(+), 100 deletions(-)
-> ---
-> base-commit: d1d45c926a571fb6c1e6d7105c280833646915ea
-> base-tree: https://git.u-boot-project.org/u-boot/custodians/u-boot-mediat=
-ek.git mediatek-staging
-> change-id: 20261106-mtk-genio-binman-dtb-c0be6919e9cd
-> prerequisite-message-id: <20261104-ccaione-upstream-spl-fastboot-boot-v2-=
-0-cf9781441ed5@baylibre.com>
-> prerequisite-patch-id: 15e30b35b9a32d98cea92287c95973bb55655b8d
-> prerequisite-patch-id: 74b01d9723a9eebb7a438ae6f3aa84fecbd86a2f
-> prerequisite-patch-id: 84ffa226fd432b97e30508988d556056f19488d8
-> prerequisite-patch-id: b6ef8f19bc0e45642fadc98a2a70a8a77e16cc31
-> prerequisite-patch-id: 6d301cbbd2d389bb156e2f9565f02c7d1eb9fed1
-> prerequisite-patch-id: 21aae4cff1307c55e73d737cd68552b6ea1b73f2
-> prerequisite-patch-id: 110fc69a696fa4dd74fb7e14a50c97e3b7238a9a
-> prerequisite-message-id: <20261022-ccaione-upstream-mt8390-da-v5-0-58982f=
-e11312@baylibre.com>
-> prerequisite-patch-id: 47bd1028b5d35a3cc00be6cfd2efa94a8fcbf521
-> prerequisite-patch-id: aceec0866b3329401896512d235b7e01dc1746b1
-> prerequisite-patch-id: 9f0be27b51978f99dd1d301f4e346e323f057407
-> prerequisite-patch-id: 94bec74d37c3b2d2b22ffc303d8f2ac567db22c4
-> prerequisite-change-id: 20261104-bloblist-tl-fixes-4e2617a399c6:v1
-> prerequisite-patch-id: 316b1610fc2e3953677ec152eee8cd5035723f82
-> prerequisite-patch-id: 55680c05d9c25c1a5fbd05e2b9f91a5bb1e4c350
-> prerequisite-change-id: 20261103-spl-bloblist-pass-regs-3130cf768211:v2
-> prerequisite-patch-id: 2aa06c6d07b125147e3a6bcdc620e19f9c5885df
-> prerequisite-patch-id: eb93f71f16b3641ae6a369b1b3113656656f65e3
-> prerequisite-patch-id: 575d26f405980ef8a1be726c9ca0df679eb77d84
-> prerequisite-patch-id: 6b9e9c6e1f9cbc0ef3b716cd8615430680354877
-> prerequisite-change-id: 20261013-mtk-genio-720-spl-1620416c6224:v2
-> prerequisite-patch-id: f109e3e09ffe96d42ba64923f72a2081764a0837
-> prerequisite-patch-id: 1b7d8c90462884a830b2c4e43bbc7b7d698d7410
-> prerequisite-patch-id: 8f4cb6976f7c28cf7c2acf3e81ce240e47dcb113
-> prerequisite-patch-id: 789a3616e548a97eb48ffd62cd59f114bda6d94b
-> prerequisite-patch-id: 521533b5bb8d1e145d036ea7f9f9e8a7f0856e78
-> prerequisite-patch-id: 7debdd01277d15f23a983475c7b7bbf05af82175
-> prerequisite-change-id: 20261013-mtk-mt8189-tfa-fdt-94283317c6c0:v2
-> prerequisite-patch-id: 316b1610fc2e3953677ec152eee8cd5035723f82
-> prerequisite-patch-id: 55680c05d9c25c1a5fbd05e2b9f91a5bb1e4c350
-> prerequisite-patch-id: 2aa06c6d07b125147e3a6bcdc620e19f9c5885df
-> prerequisite-patch-id: eb93f71f16b3641ae6a369b1b3113656656f65e3
-> prerequisite-patch-id: 575d26f405980ef8a1be726c9ca0df679eb77d84
-> prerequisite-patch-id: 6b9e9c6e1f9cbc0ef3b716cd8615430680354877
-> prerequisite-patch-id: f109e3e09ffe96d42ba64923f72a2081764a0837
-> prerequisite-patch-id: 1b7d8c90462884a830b2c4e43bbc7b7d698d7410
-> prerequisite-patch-id: 8f4cb6976f7c28cf7c2acf3e81ce240e47dcb113
-> prerequisite-patch-id: 789a3616e548a97eb48ffd62cd59f114bda6d94b
-> prerequisite-patch-id: 521533b5bb8d1e145d036ea7f9f9e8a7f0856e78
-> prerequisite-patch-id: 7debdd01277d15f23a983475c7b7bbf05af82175
-> prerequisite-patch-id: ef70f6dcf4e6aea68256028734614efc067c954d
-> prerequisite-patch-id: 75640c82cbccc2f173feb4bc6c912c9a321a68c9
-> prerequisite-patch-id: 569f315372b1b8f55a5a94f1385175252dc33b9f
-> prerequisite-patch-id: b43d50f060dc034ad413c28153ea641e697e5655
-> prerequisite-patch-id: f5f6fabf8e9a55c44413a76791d3713fe6415a33
-> prerequisite-patch-id: f031399df28961dad8315ffa6ad1ee0ff77116ec
-> prerequisite-patch-id: 316728f8f3107d7e9e0b45669d947498b77469a3
-> prerequisite-patch-id: 6c889af47fd9df264bf4dc2758c18418c175dd3b
-> prerequisite-message-id: <20261019-spl_ufs-v4-0-61432d0b258c@oss.qualcomm=
-.com>
-> prerequisite-patch-id: 8adf07351c5a4eb61976ceeced2d0ab0eadf235d
-> prerequisite-patch-id: 55ead548e0a7c82c4296cc9b9fa047f110c1e306
-> prerequisite-patch-id: 34bbdb130ae694420b954f41a536b8eb8df77791
-> prerequisite-patch-id: 5a62f8304a1790b31accf47af84815bffaa92b89
-> prerequisite-patch-id: d2e87bf5a992d19bde372fb230f4589242f12d40
-> prerequisite-patch-id: 0429aaac18b3a3d564662f2b93aa3af755c880db
-> prerequisite-patch-id: a577a9e2266f5b16dd0bf1b8b4312952f736380d
-> prerequisite-patch-id: 3223b00fa7e9c330054e19f256b4e601008160f2
-> prerequisite-patch-id: f1cf16250799f803bde22d6dae704cc5338ec76c
-> prerequisite-change-id: 20261013-mtk-genio-720-spl-ufs-4ac6af78de70:v1
-> prerequisite-patch-id: 79df99b8a797eed3bedbfcbafb7cda7e019f0445
-> prerequisite-patch-id: bc8ebcd6928771bcb436408a6c10ac4f00b2c265
-> prerequisite-patch-id: 0f5ccd0db365686315ced7255063d0404cdf5250
-> prerequisite-patch-id: a435fbd4cca84219d404138e2d8ee1a96d669366
-> prerequisite-patch-id: 4407c23f51001d4996a8e790270825fd8281d7f5
-> prerequisite-patch-id: 14bb13c537f635ee2589d626e0031e9a80c348d5
-> prerequisite-patch-id: 0b59a9f24e103a77700ca1cc99052ba318017b9d
-> prerequisite-patch-id: fc1dc7d141126db709479fb8477fe11536e6811c
-> prerequisite-patch-id: 2b22eb0b87c0c9e5c35e0b2719eedb3228503dbf
-> prerequisite-patch-id: 90108657775725ee881493b1af8e2ae51c8debc9
-> prerequisite-patch-id: ba3b4599b6ce497f7bf5bcafd2c93c89a0c7f5d4
-> prerequisite-patch-id: b47cebc4433bc3a0e5c3932a8cd64afea88d32a9
-> prerequisite-patch-id: a8a6f8e478b4888ff1c6affbcf14f1bb801f6cb9
-> prerequisite-patch-id: 537ec57f093f5cc68529116aabb6fec1296e9ed5
-> prerequisite-patch-id: bcd4644665e032714d68c49ad9afb36b25b9f418
-> prerequisite-patch-id: 1eda3254e8ba4f67886c788467d5cb3e706e51f7
-> prerequisite-patch-id: 0396e7309b235e7a577aa54549f260d6561d6cc5
-> prerequisite-patch-id: 3ff8b871bc763b373ac93eb095a0ac362f4fb4f9
-> prerequisite-patch-id: f3288ee3e395bff11655165a34c9617be55cc52a
-> prerequisite-patch-id: 893c19a121729050c2095888af67d5cee32c67d1
-> prerequisite-patch-id: 8c900b341eac7dd1b2f69a434b2fa808ac79e914
-> prerequisite-patch-id: 180113519aa422aef5b1d6384c8e65a943482cf5
-> prerequisite-patch-id: a5493d2e60617de14414c25c63d9f77f3fbc7ca9
-> prerequisite-patch-id: 3b798f71b18533fa36c3864daaf3b60099201097
-> prerequisite-patch-id: 731b2a85b293eb24b8a9ad5cbd4b2052591ec9d7
-> prerequisite-patch-id: f44798150ea9c5cf44a43ba0ee5561ed6d522063
-> prerequisite-patch-id: 01bd0fde93d212bbce964da6cc85f5aace84bddf
-> prerequisite-patch-id: c5662096f7f5cc7abfd5b178e145fe006737152d
-> prerequisite-patch-id: 74e53343d8fb0f2e7baee9848b7d81320910ed4a
-> prerequisite-patch-id: f018d9e03bd324a7853ab106eaaeb770f20bfb1a
-> prerequisite-patch-id: 95e0ae837a7ba3ca39b2a4b8421ac105234d677a
-> prerequisite-patch-id: 88e610436d6e9630fac7212c08251727fbe27fc3
-> prerequisite-patch-id: 0949dcf268f48d1fb7ee912fc57188b73fd4ae58
-> prerequisite-patch-id: 1474c68c12a790dc0abe513ffa5f71c5d72934eb
-> prerequisite-patch-id: fdc92399e83ba67d6f157e7e9fec546624226db6
-> prerequisite-patch-id: bb0f680620dd60fe1f55507198c1daba04d51ca0
-> prerequisite-patch-id: b60ed43a099f02bf9743f90a7cf474ca844d71d2
-> prerequisite-patch-id: f18d63e4e8c0ca8f08573f2395dd58b698e1da27
-> prerequisite-patch-id: ce11ab44a0332ef9682d3f6cb34a5f8648a1c619
-> prerequisite-patch-id: 3c5e447deebe943a6b8a98c2d017d1c0eab5da25
-> prerequisite-patch-id: dc6c98cdbffe9b3f19b8a0fc303f9b2902defa07
-> prerequisite-patch-id: 558d3536869699311008e4d6cce6a2a18a727eca
-> prerequisite-patch-id: 805a0898b88d8e1291e8262044d1d6bed1d45be2
-> prerequisite-patch-id: 8d7155ea7c0941b756129b6a490f9413b51b05ef
-> prerequisite-patch-id: 974eaa9cb6adf9749f6225fe1e67dd9433318625
-> prerequisite-patch-id: cdb2934ed5393e539f856e6f4de36140cd8ad697
-> prerequisite-patch-id: ab91736213909c77894d8e47594f548592f96bb4
-> prerequisite-patch-id: 15e30b35b9a32d98cea92287c95973bb55655b8d
-> prerequisite-patch-id: 74b01d9723a9eebb7a438ae6f3aa84fecbd86a2f
-> prerequisite-patch-id: 84ffa226fd432b97e30508988d556056f19488d8
-> prerequisite-patch-id: b6ef8f19bc0e45642fadc98a2a70a8a77e16cc31
-> prerequisite-patch-id: 6d301cbbd2d389bb156e2f9565f02c7d1eb9fed1
-> prerequisite-patch-id: 21aae4cff1307c55e73d737cd68552b6ea1b73f2
-> prerequisite-patch-id: 110fc69a696fa4dd74fb7e14a50c97e3b7238a9a
-> prerequisite-patch-id: 2ec906b416c75e44362332459fcd498872a22124
-> prerequisite-patch-id: aceec0866b3329401896512d235b7e01dc1746b1
-> prerequisite-patch-id: 41d8b9c212ca0950fb1ccbea92d8f62a3c42676a
-> prerequisite-patch-id: 94bec74d37c3b2d2b22ffc303d8f2ac567db22c4
-> prerequisite-patch-id: 4391fbbb5b04123f46d3eb3ec7b183be7152d338
-> prerequisite-patch-id: 08e009e1d4f6ef7fffaddeb82f9e35692bd593e4
-> prerequisite-patch-id: 14b40c9224527e76382332cf547d070f1d3a40ed
-> prerequisite-patch-id: eca0139a7cedf72a4e8a99324a846dea15392e4b
-> prerequisite-patch-id: cde323ef8d773b7dad5a278faaca89bb71405ab1
-> prerequisite-patch-id: 6abe9e3824531990933ada4bd58ff483637f3794
-> prerequisite-patch-id: 4344564d375dc6002077d382335ce759523ffa29
-> prerequisite-patch-id: 316b1610fc2e3953677ec152eee8cd5035723f82
-> prerequisite-patch-id: 55680c05d9c25c1a5fbd05e2b9f91a5bb1e4c350
-> prerequisite-patch-id: 2aa06c6d07b125147e3a6bcdc620e19f9c5885df
-> prerequisite-patch-id: eb93f71f16b3641ae6a369b1b3113656656f65e3
-> prerequisite-patch-id: 575d26f405980ef8a1be726c9ca0df679eb77d84
-> prerequisite-patch-id: 6b9e9c6e1f9cbc0ef3b716cd8615430680354877
-> prerequisite-patch-id: f109e3e09ffe96d42ba64923f72a2081764a0837
-> prerequisite-patch-id: 1b7d8c90462884a830b2c4e43bbc7b7d698d7410
-> prerequisite-patch-id: 8f4cb6976f7c28cf7c2acf3e81ce240e47dcb113
-> prerequisite-patch-id: 789a3616e548a97eb48ffd62cd59f114bda6d94b
-> prerequisite-patch-id: 521533b5bb8d1e145d036ea7f9f9e8a7f0856e78
-> prerequisite-patch-id: 7debdd01277d15f23a983475c7b7bbf05af82175
-> prerequisite-patch-id: ef70f6dcf4e6aea68256028734614efc067c954d
-> prerequisite-patch-id: 75640c82cbccc2f173feb4bc6c912c9a321a68c9
-> prerequisite-patch-id: 569f315372b1b8f55a5a94f1385175252dc33b9f
-> prerequisite-patch-id: b43d50f060dc034ad413c28153ea641e697e5655
-> prerequisite-patch-id: f5f6fabf8e9a55c44413a76791d3713fe6415a33
-> prerequisite-patch-id: f031399df28961dad8315ffa6ad1ee0ff77116ec
-> prerequisite-patch-id: 8064ba5bd7cf2db6d127f981b3731001c71d58f2
-> prerequisite-patch-id: 6c889af47fd9df264bf4dc2758c18418c175dd3b
-> prerequisite-patch-id: 6c44e76abdeb8319ce17dab256fb99ea6a5e77ea
-> prerequisite-patch-id: 4680066fad4dcbccf016541a4847c7ace62e2e06
-> prerequisite-patch-id: d7159d0635ba309d374f519b37fc39dfdd15d0eb
-> prerequisite-patch-id: 070be0db29756ccd90ee239cb9ae5c3b6748cf93
-> prerequisite-patch-id: 93318a4ddebf24432063549989b91d9ff998bdec
-> prerequisite-patch-id: 55ead548e0a7c82c4296cc9b9fa047f110c1e306
-> prerequisite-patch-id: 34bbdb130ae694420b954f41a536b8eb8df77791
-> prerequisite-patch-id: 5a62f8304a1790b31accf47af84815bffaa92b89
-> prerequisite-patch-id: d2e87bf5a992d19bde372fb230f4589242f12d40
-> prerequisite-patch-id: 0429aaac18b3a3d564662f2b93aa3af755c880db
-> prerequisite-patch-id: a577a9e2266f5b16dd0bf1b8b4312952f736380d
-> prerequisite-patch-id: 3223b00fa7e9c330054e19f256b4e601008160f2
-> prerequisite-patch-id: f1cf16250799f803bde22d6dae704cc5338ec76c
-> prerequisite-patch-id: 781986f407c7f833f3a157bcaa9b6384f964fe11
-> prerequisite-patch-id: bb9dcec311319f2dbac1c3795ec19fc44dc5bd20
-> prerequisite-patch-id: d56476ab6a3a7b32a29eea6c811e110a127dfc65
-> prerequisite-patch-id: 0d9bf4d3f321845f908bc96dcf0b844c14701218
-> prerequisite-patch-id: 24910c0e34355ac74ac3e0701e24d09e18450b90
-> prerequisite-patch-id: 640fa47c52c8d79ae409b7077e030cfe8d336287
-> prerequisite-patch-id: de19c1094bc466beef1d7d648974f925f7cbfb91
-> prerequisite-patch-id: d98337a0fb6f5db044fc303476f609e4d0a5bc0f
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
+>   scripts/checkpatch.pl | 26 ++++++++++++++++++++++++--
+>   1 file changed, 24 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+> index 7e4d6cd227..d377c19a06 100755
+> --- a/scripts/checkpatch.pl
+> +++ b/scripts/checkpatch.pl
+> @@ -1168,11 +1168,33 @@ sub is_maintained_obsolete {
+>   sub is_SPDX_License_valid {
+>   	my ($license) =3D @_;
+>=20
+> +	return 0 if ($license =3D~ /[\x00-\x1f;$|&\x60\\]/);
 
+This allows
+
+foo" <(touch /tmp/hacked) "
+
+The correct way to avoid code execution is to pass the parameter in perl=
+=20
+with
+
+system('/path/to/program/scripts/spdxcheck.py', '-', $license);
+
+
+We have
+
+.checkpatch.conf:2:--no-tree
+
+Our checkpatch does not proceed beyond this point because of the !$tree=20
+check.
+
+top_of_kernel_tree() stops reaching this point if $tree is set.
+
+If the code would proceed, spdxcheck.py would throw
+
+FAIL: "Blob or Tree named 'LICENSES' not found"
+
+and once we correct this
+
+KeyError: "Blob or Tree named 'preferred' not found"
+
+Your patch is valid for the Linux kernel and should submitted there.
+
+For U-Boot the patch is correct but applies to currently dead code.
+
+What we really need to do is think about what we want the SPDX check to=20
+do once we enable it.
+
+Best regards
+
+Heinrich
+
+
+>=20
+>   	my $root_path =3D abs_path($root);
+> -	my $status =3D `cd "$root_path"; echo "$license" | scripts/spdxcheck.p=
+y -`;
+> -	return 0 if ($status ne "");
+> +	pipe(my $in_r, my $in_w) or return 1;
+> +	my $pid =3D open(my $spdx_out, "-|");
+> +	if (!defined($pid)) {
+> +		close($in_r);
+> +		close($in_w);
+> +		return 1;
+> +	}
+> +	if ($pid =3D=3D 0) {
+> +		close($in_w);
+> +		open(STDIN, "<&", $in_r) or POSIX::_exit(1);
+> +		close($in_r);
+> +		chdir($root_path) or POSIX::_exit(1);
+> +		exec("python3", "scripts/spdxcheck.py", "-") or POSIX::_exit(1);
+> +	}
+> +	close($in_r);
+> +	{
+> +		local $SIG{PIPE} =3D 'IGNORE';
+> +		print $in_w "$license\n";
+> +		close($in_w);
+> +	}
+> +	my $status =3D do { local $/; <$spdx_out> };
+> +	close($spdx_out);
+> +	return 0 if (defined($status) && $status ne "");
+>   	return 1;
+>   }
+>=20
 
