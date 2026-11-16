@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 080E660A380A
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 11:06:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 051ED606E4AD
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 11:06:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tL/Uap+U;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=edFVNLKg
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m2EDWkGf;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=q9gQ3MXg
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D7837607B5;
-	Mon, 16 Nov 2026 11:06:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BE6DA60841;
+	Mon, 16 Nov 2026 11:06:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tDO6z9eF0-4G; Mon, 16 Nov 2026 11:06:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E238A60728
+ id P6F8smiS8GyU; Mon, 16 Nov 2026 11:06:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A72FC60834
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794827209;
-	b=lOHFkRI6iNxVAFFghnqht/US+Qt6hAz5ckfbkIpkc0PLfHReZbp9zyOymmwn9dw6xH8D
-	 z77mkuj6JTes04VOP7Wr7yjg4NBQ/yJSKvMo6bopoaJizzUa6b0YAKpnpyzwE1yXwyOiQ
-	 pwJ3Mab4AsZjq1UOgrUvTq+plgkioPtjV4TgFe/zgDYHa2LfpLjeM7o/cmvxXt3krSxqR
-	 5jC0ze99shGOcoZz/WRqMVnERyalq6wCheyDWTft/wetTWTmZr9WJrZ80sekZlSeYpHRS
-	 Nz0AE2xnL+Grycj8Bs059U1hFI+yLoF4W9VcXY45EdFpbuX9AHsANwBR284FUAl4qKw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794827211;
+	b=Zd6PNkU+q9XUU0AI9RHygFmimMLhGILtXDcl20p5uTSA340Ua8AKlPKgVt06Zo2wt0DM
+	 H0QxIKDrcDyC1p5q9rGAHfUr0qIr7GALuiO7uSbDih2a/nYFOt4CX9ThQ+XoSzrF19Iy1
+	 gEdwdtQBbhFr1I2+8eWDYjA4/S7fKOV/59Y91Vr6fXPjTl0c0S4GXRIuhbPZyxGYcZO1y
+	 aKJvNNDhvg8MjJ+Dqq7MLt9Xid5Mn9SiJG4sDB21KNXR3uesdVkYZXlflqAlcdCvdYyA1
+	 FeCQIjexaZ1H1BpzyWQ4pDkDn3mP8vFYAQNPctJYwDdwXVc45JiuNz7xNUesoK9LT3Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794827209;
+	c=relaxed/relaxed; t=1794827211;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,77 +32,75 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Kv6mO+GYey3AxW0+880Pw2WMsTwAPDF6LQDUxQbz7BA=;
-	b=IU6CXMKlFe6ws4oIZz5sdsW10+YfD5DI2C1hotnxTCRpKLF46y7xN9aEOfG9W6D8OZom
-	 NqwRJuea5U5LjdiLedFb1sK4qm6LA7J5w+OuaekoPnLuiJSCTUBDvhxRKjvxf/Komw1tL
-	 A1OOdMZEODZ4tXjjf0bmMXoviZxOABbE4pZDi1CPqu+oPRb5atMV4FH13plU7bllSSjSm
-	 abviabLKZQ5p8NvCktcrUB3DbwzAJ7NUQ8IxfztEjXNY+KEtn82qNBbTX7es3bZpjRqzk
-	 TjS+UaR+1p2rLbfvNfHJBiipMW0NQ1TU3qWYu5VUytn3oL3l8E4mteGFcYeyoP10f3w==
+	bh=489zIbhVP4zpSBkF+W2XT/uBhOnM1osayY4pHBxkFys=;
+	b=Wy7qY309SIsqsFZb7NlT8952e3mPS3SsOSBkAAIABtaIpVHdP6ZuJA/Li9umz6fYGUCQ
+	 tKabhSvtVrX9dtdOb+NBo0mmzGAJFT1tSX6rOUmGuJfqhK0+qnS9ZBbQsHCqx6l6m8R/7
+	 aHDOIBwTMafrJNsx7F9c8zR4trafuiAZkpryqw+O4dMQf7aignXyaTHYuz5yfHg9WZqah
+	 C3RdHwGpjxvMi7s5Q6hmQdsWYpHmNeFMeqADyy2P3/YG9beI89vEK1x6mkTq8v4WuFMEj
+	 ImRIsqXvMI9TvqDbMJd1SRb1AmFy7eSeYuSxXATBWRyDn87gJdDs5VST5TAl+FVFBnw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=edFVNLKg;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794827209;
-	bh=Kv6mO+GYey3AxW0+880Pw2WMsTwAPDF6LQDUxQbz7BA=;
+	d=lists.u-boot-project.org; s=default; t=1794827211;
+	bh=489zIbhVP4zpSBkF+W2XT/uBhOnM1osayY4pHBxkFys=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tL/Uap+UbkuU2t6604EPN5FXo88HB466F3vl/0jpV7yfkpIqy0diD8qNPuY+c6DfV
-	 G7lOH6zZ+yraU8uR7EnCimpbOZYxo1yXu9j7MWIS9UixeDXv/0U96UsSZxo18g9EQT
-	 0X3NS9opTMj9N1+/eUMRTD5mc1uN4iQQOmOvfkWWGlrgDZszIsI1j8uCtyy+RGX+E6
-	 voI7RG+6lRrkdPrEJREu73/RKth2dLTmlTjInjp/DapH0OI4ddXROMqFRYRyZSSNk6
-	 LmNpwPO85RVcswnjZrkPhTiqOISjHH2EVLzUTPWdZf67JHXnxnHT1gUdROTiCMD+AG
-	 ouPh9GqJuHRmA==
+	b=m2EDWkGflAzhF0tZnlhskWuwUE/o405sZ+9N1uVMm8bZcAQ4jDJXtV6fMxpYkfuhl
+	 zcLWuBHJQPb3PZ4Iu0IUvCoCicBVe1XHW4eJEtjYhTxo0/AQTJIp0G3b7bFsV14qL+
+	 /V00BzdxcJ8GTIC/rc996ZdaBxYHiHSqozGU++QCna427nJPHjcPBHghIS2VJAGjEQ
+	 1r3nUnDBFhVcU+MYbGNzWO1YohE7CPYnRfNLVU6LNwpDJwtfIj4SghnEs4pKpIBzjC
+	 rxoUFbfMd2BVxL/6QzGkYydag0pxbVf6ALtA69PaIUS63j7aZXVWQFeRrBVgVJo5rR
+	 NiEp6LqpxmdMA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E238A60728;
-	Mon, 16 Nov 2026 11:06:48 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 05FF01A6
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A72FC60834;
+	Mon, 16 Nov 2026 11:06:50 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 556302FE
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EB9D1607C7
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:42 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 415A9406A3
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dyNZUxvSIxmz for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 11:06:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DD97D60769
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::103"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aBib4eB4dWBI for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 11:06:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 37D7B405DD
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::201"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::103; helo=mout-p-103.mailbox.org;
+ client-ip=2001:67c:2050:0:465::201; helo=mout-p-201.mailbox.org;
  envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=edFVNLKg
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DD97D60769
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:41 +0000 (UTC)
+ header.a=rsa-sha256 header.s=mail20150812 header.b=q9gQ3MXg
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 37D7B405DD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:43 +0000 (UTC)
 Received: from smtp1.mailbox.org (smtp1.mailbox.org
  [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4jSlRf5QBczKm7b;
- Mon, 16 Nov 2026 12:06:38 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jSlRh3wFWzMkxq;
+ Mon, 16 Nov 2026 12:06:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794827198;
+ s=mail20150812; t=1794827200;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Kv6mO+GYey3AxW0+880Pw2WMsTwAPDF6LQDUxQbz7BA=;
- b=edFVNLKglQOdQaLQYz8sGGQGEuwfFIwIk3/27GqV7SXJYRmHS1xhNcS/3cDSWnAJQyBRbE
- J/a3FMEsKJRa8Ijvxdoww3hm73EYErRMVr1HzEMGWxC6ZnM1kChJ8z6ZKLuYxzYYIJG5i4
- Aw3B9QdkQ4DSXp1im3/us+hzEfrB2T5RFYhnVQy+RXJ9cng1sGaqTQK620gBIvUWWFq89Z
- 7U0OvsrpU30lo9DCMv7/854bs0VhxnwNbyTgJ9wwSIPNGKcJLAA4TN7meSRvpsQS3BBqAK
- +Kt3IwKXAT/OSRcdLCKJycOOfnY3g/zjSqsSG7IHkCDUjuhNuUV+/epjUgq30Q==
+ bh=489zIbhVP4zpSBkF+W2XT/uBhOnM1osayY4pHBxkFys=;
+ b=q9gQ3MXgzueBrF6VvHYjagREyrBHBKHqxjJBlhvxGyL8OXxesOABIfi3TuVCF9ZbKanuGe
+ 4X/vnW1hfWcY5TFHzIMTD82qWaC9RwEOEMIIxnG3eHpqdOQql8+MJ47t2yfGkM6JJXhGHW
+ 4fbUWSUjrxx9MZWRZuupWNJCAEN+93slycK8lTAD2wsZD0eUlrvjFnZKAvpSiR+VxyexRs
+ gs55b56ob35BL23XrWRoSe81SJ97MaDAC9goR7PyRflPq79J9nzo0AMBBb7NoDAGqz/5wT
+ d2pz2Fu8KdjX5Og4OXehW9LndoRES85Zc5VfR6mB6UPswTgSLXdhxs53Bz32MA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -115,17 +113,17 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH 6/9] clk: scmi: Export discovery functions
-Date: Mon, 16 Nov 2026 12:05:42 +0100
-Message-ID: <20261116110615.3394324-6-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 7/9] reset: scmi: Export discovery functions
+Date: Mon, 16 Nov 2026 12:05:43 +0100
+Message-ID: <20261116110615.3394324-7-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261116110615.3394324-1-marek.vasut+renesas@mailbox.org>
 References: <20261116110615.3394324-1-marek.vasut+renesas@mailbox.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: odi7x8aazb7r4g576iinhpjfp5jk8nkc
-X-MBO-RS-ID: c81b4e037e071cae66b
+X-MBO-RS-META: jp7t6wececifjazjdm6s6ed9odf4pwhd
+X-MBO-RS-ID: 8f253bebe2da1eb5eab
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,10 +140,10 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Make functions to determine SCMI clock protocol clock name, rate,
-attributes and permissions available outside of SCMI clock protocol
-implementation. Those functions can be invoked from the 'scmi info'
-command to print detailed information about the SCMI clock protocol.
+Make functions to determine SCMI reset protocol reset name, attributes
+and latency available outside of SCMI reset protocol implementation.
+Those functions can be invoked from the 'scmi info' command to print
+detailed information about the SCMI reset protocol.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -162,130 +160,147 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Udit Kumar <u-kumar1@ti.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/clk/clk_scmi.c   | 18 +++++++++------
- include/scmi_protocols.h | 47 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 58 insertions(+), 7 deletions(-)
+ drivers/reset/reset-scmi.c | 62 ++++++++++++++++++++++++++++++++------
+ include/scmi_protocols.h   | 39 ++++++++++++++++++++++++
+ 2 files changed, 92 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index 12c7b1e8254..90e34c2128d 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -26,7 +26,7 @@ struct scmi_clock_priv {
- 	u32 version;
- };
- 
--static int scmi_clk_get_permissions(struct udevice *dev, int clkid, u32 *perm)
-+int scmi_clk_get_permissions(struct udevice *dev, int clkid, u32 *perm)
- {
- 	struct scmi_clock_priv *priv = dev_get_priv(dev);
- 	int ret;
-@@ -67,7 +67,7 @@ static int scmi_clk_get_permissions(struct udevice *dev, int clkid, u32 *perm)
- 	return 0;
+diff --git a/drivers/reset/reset-scmi.c b/drivers/reset/reset-scmi.c
+index f92a9e35579..2fdb147cb21 100644
+--- a/drivers/reset/reset-scmi.c
++++ b/drivers/reset/reset-scmi.c
+@@ -43,26 +43,70 @@ static int scmi_reset_deassert(struct reset_ctl *rst)
+ 	return scmi_reset_set_level(rst, false);
  }
  
--static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
-+int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
+-static int scmi_reset_request(struct reset_ctl *rst)
++int scmi_reset_protocol_attrs(struct udevice *dev, int *num_rddoms)
  {
- 	struct scmi_clk_protocol_attr_out out;
- 	struct scmi_msg msg = {
-@@ -87,8 +87,7 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
- 	return 0;
- }
- 
--static int scmi_clk_get_attribute(struct udevice *dev, int clkid, char *name,
--				  u32 *attr)
-+int scmi_clk_get_attribute(struct udevice *dev, int clkid, char *name, u32 *attr)
- {
- 	struct scmi_clock_priv *priv = dev_get_priv(dev);
- 	struct scmi_clk_attribute_in in = {
-@@ -262,10 +261,10 @@ static int scmi_clk_disable(struct clk *clk)
- 	return 0;
- }
- 
--static ulong scmi_clk_get_rate(struct clk *clk)
-+ulong scmi_clk_get_rate_id(struct udevice *dev, int id)
- {
- 	struct scmi_clk_rate_get_in in = {
--		.clock_id = clk_get_id(clk),
-+		.clock_id = id,
+-	struct scmi_rd_attr_in in = {
+-		.domain_id = rst->id,
++	struct scmi_rd_protocol_attr_out out;
++	struct scmi_msg msg = {
++		.protocol_id = SCMI_PROTOCOL_ID_RESET_DOMAIN,
++		.message_id = SCMI_PROTOCOL_ATTRIBUTES,
++		.out_msg = (u8 *)&out,
++		.out_msg_sz = sizeof(out),
  	};
- 	struct scmi_clk_rate_get_out out;
- 	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-@@ -273,7 +272,7 @@ static ulong scmi_clk_get_rate(struct clk *clk)
++	int ret;
++
++	if (!dev || !num_rddoms)
++		return -EINVAL;
++
++	ret = devm_scmi_process_msg(dev, &msg);
++	if (ret)
++		return ret;
++
++	if (out.status)
++		return scmi_to_linux_errno(out.status);
++
++	*num_rddoms = SCMI_RD_PROTO_ATTRS_NUM_RD(out.attributes);
++
++	return 0;
++}
++
++int scmi_reset_attrs(struct udevice *dev, u32 domain_id, u32 *attributes,
++		     u32 *latency, u8 **name)
++{
++	struct scmi_rd_attr_in in = { .domain_id = domain_id, };
+ 	struct scmi_rd_attr_out out;
+ 	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_RESET_DOMAIN,
+ 					  SCMI_RESET_DOMAIN_ATTRIBUTES,
  					  in, out);
  	int ret;
  
--	ret = devm_scmi_process_msg(clk->dev, &msg);
+-	/*
+-	 * We don't really care about the attribute, just check
+-	 * the reset domain exists.
+-	 */
+-	ret = devm_scmi_process_msg(rst->dev, &msg);
++	if (!dev)
++		return -EINVAL;
++
 +	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret < 0)
+ 	if (ret)
  		return ret;
  
-@@ -284,6 +283,11 @@ static ulong scmi_clk_get_rate(struct clk *clk)
- 	return (ulong)(((u64)out.rate_msb << 32) | out.rate_lsb);
- }
- 
-+static ulong scmi_clk_get_rate(struct clk *clk)
-+{
-+	return scmi_clk_get_rate_id(clk->dev, clk_get_id(clk));
+-	return scmi_to_linux_errno(out.status);
++	if (out.status)
++		return scmi_to_linux_errno(out.status);
++
++	if (attributes)
++		*attributes = out.attributes;
++
++	if (latency)
++		*latency = out.latency;
++
++	if (name) {
++		*name = strdup(out.name);
++		if (!*name)
++			return -ENOMEM;
++	}
++
++	return 0;
 +}
 +
- static ulong __scmi_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	struct scmi_clk_rate_set_in in = {
++static int scmi_reset_request(struct reset_ctl *rst)
++{
++	return scmi_reset_attrs(rst->dev, rst->id, NULL, NULL, NULL);
+ }
+ 
+ static const struct reset_ops scmi_reset_domain_ops = {
 diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index 1a58549555d..a50794aceac 100644
+index a50794aceac..e90234efab1 100644
 --- a/include/scmi_protocols.h
 +++ b/include/scmi_protocols.h
-@@ -1368,6 +1368,53 @@ enum scmi_config_type {
- 	SCMI_PIN_SLEW_RATE = 20,
- };
+@@ -937,6 +937,18 @@ enum scmi_reset_domain_message_id {
+ #define SCMI_RD_RESET_FLAG_ASSERT	BIT(1)
+ #define SCMI_RD_RESET_FLAG_CYCLE	BIT(0)
+ 
++#define SCMI_RD_PROTO_ATTRS_NUM_RD(attributes) ((attributes) & GENMASK(15, 0))
++
++/**
++ * struct scmi_rd_protocol_attr_out
++ * @status:		SCMI command status
++ * @attributes:		Protocol attributes
++ */
++struct scmi_rd_protocol_attr_out {
++	s32 status;
++	u32 attributes;
++};
++
+ /**
+  * struct scmi_rd_attr_in - Payload for RESET_DOMAIN_ATTRIBUTES message
+  * @domain_id:	SCMI reset domain ID
+@@ -1415,6 +1427,33 @@ int scmi_clk_get_permissions(struct udevice *dev, int id, u32 *perm);
+  */
+ ulong scmi_clk_get_rate_id(struct udevice *dev, int id);
  
 +/**
-+ * scmi_clk_get_num_clock - get clock count
-+ * @dev: SCMI protocol device
-+ * @num_clocks: Number of clocks
++ * scmi_reset_protocol_attrs - get protocol attributes
++ * @dev:	SCMI protocol device
++ * @num_rddoms:	Number of reset domains
 + *
-+ * Obtain the number of clocks.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks);
-+
-+/**
-+ * scmi_clk_get_attribute - get clock attributes
-+ * @dev: SCMI protocol device
-+ * @id: SCMI clock ID
-+ * @name: SCMI clock name
-+ * @attr: SCMI clock attributes
-+ *
-+ * Obtain the clock name and attributes from SCMI clock ID.
++ * Obtain the protocol attributes, the number of reset domains.
 + *
 + * Return: 0 on success, error code on failure
 + */
-+int scmi_clk_get_attribute(struct udevice *dev, int id, char *name, u32 *attr);
++int scmi_reset_protocol_attrs(struct udevice *dev, int *num_rddoms);
 +
 +/**
-+ * scmi_clk_get_permissions - get clock permissions
-+ * @dev: SCMI protocol device
-+ * @id: SCMI clock ID
-+ * @perm: SCMI clock permissions
++ * scmi_reset_attrs - get reset domain attributes
++ * @dev:	SCMI protocol device
++ * @domain_id:	Identifier of reset domain
++ * @attributes:	Power domain attributes
++ * @latency:	Power domain latency
++ * @name:	Name of reset domain
 + *
-+ * Obtain the clock permissions from SCMI clock ID.
++ * Obtain the attributes of the given reset domain, @domain_id, in @attributes
++ * as well as its name in @name.
 + *
 + * Return: 0 on success, error code on failure
 + */
-+int scmi_clk_get_permissions(struct udevice *dev, int id, u32 *perm);
-+
-+/**
-+ * scmi_clk_get_rate_id - get clock rate
-+ * @dev: SCMI protocol device
-+ * @id: SCMI clock ID
-+ *
-+ * Obtain the clock rate in Hz from SCMI clock ID.
-+ *
-+ * Return: clock rate in Hz
-+ */
-+ulong scmi_clk_get_rate_id(struct udevice *dev, int id);
++int scmi_reset_attrs(struct udevice *dev, u32 domain_id, u32 *attributes,
++		     u32 *latency, u8 **name);
 +
  /**
   * scmi_pinctrl_protocol_attrs - get pinctrl information
