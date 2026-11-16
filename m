@@ -2,29 +2,29 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38FD5606A31C
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 13:02:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59D43606A323
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 13:02:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=yJAJzqr4;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IJao8Kqy;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Cbv+nZC8
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SHOhXeJO;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HAyMCCj5;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bXpGOKB+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0373880DDC;
-	Mon, 16 Nov 2026 13:02:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3116D80E81;
+	Mon, 16 Nov 2026 13:02:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9b3Ohp7hu0sb; Mon, 16 Nov 2026 13:02:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 28EFD80E35
+ id nno3bgMLaw0s; Mon, 16 Nov 2026 13:02:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 886FC80EB3
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794834139;
-	b=YcE3FwHamGcuc0ze66fVCWFnGxAfOhZG5/kBwcNby8gR9QJONz2ULqH1JQlDfbWe6tHZ
-	 umvcGhu5FDcvQFZ/3yuV+p+Fu2hDxzmTnJf+OLrr5labXHYh3nZK5qdwxtVzE7/v0prJ8
-	 E+t1ryJ4Zapfidj4MGkhfU1MkRgLZf25v99r+0lYJDHRmNyXYhsCoUPhlLkdsUz6SScUl
-	 fY+31rS2hRJeuNtGWJRwcpRH1jYp083cWw1wzq4djY472iwTbt9pS+B26J6fwk0QgixGv
-	 3ouvGTye8754+lwCeASIBeOaNgGzmE/ofRXWqP4PAN5pjGgOVwr60rf6Ob898USCupg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794834140;
+	b=M635HRupzAwtb8Pu100l2p8lXmEi+c8kLct/R4TFqa4PInumYfiSSfPmqOCt5Du4tCVk
+	 Gt0HKfcnE3JzkEngdzTf8QcUNuz2cdv2/KQe6Rrijs6TQ5hhWReSsrXDNNV+ClhMUmkX+
+	 iq+D0D8hmaHtqv44l7p0ySfKVeXx2G/OrWo2RGWaN57bx4lzRHhd6S/xdV/49hmHpxFeW
+	 zAx2lwY+0v/YYaZcCVJxd6sfH6hRD9hLfCp951Tt59tClO3wqx3YG5PKjDXzkwxmNB6Bw
+	 ZPmTOdVzZ8bzD6EdjCTl0KVYw2ipBZJw0n+0aUiISxhyNA3sFtuiDq7ugpyUwb3ysRQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794834139;
+	c=relaxed/relaxed; t=1794834140;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,49 +32,48 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
 	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=d3qqgETqBSDy81c6l9RGN4UNu8jF2SiZ8xQCUBKwBuY=;
-	b=RUr3aUfUPCgsgrLDR7vFJPEsLS+FmU81r5Q0acnVz2ZYq1BiqOVjpI/yh97rQwnd/G3S
-	 LSidcd3vuI1GEiMbS6mKe7HYF/p0jUyYWd+b8ogt2khwDPQQTActY+zGTex0F+Ah9xpzB
-	 SmlYeDpGVY/6PSM9rvpBi4/ixCx8S/y32ovBc+U7bb5aR6vlplBSZ9GLN49wgAhH4fBbW
-	 ytClmEzMdKC7X8RWlNYt85rTEi34mvN2OpYl/T1/mKWC5HU5RGxAGd2EEvv5S6p4gaF1f
-	 vKjnJgwhm2uXmPpczb7tbPKMQ9VQ85Rj+mTcPNuzu57wtRrBqOZVIzR9g/UbANT6zzQ==
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=a688rtCkyZC92PHmySHGyYxHWYgCd5rQVHlS4RArVmQ=;
+	b=aNQQZ8vn+HIP6yRW2BM3zwB1v35MnjmI20r3LvHYD1NievqDew6vCufwyII2kjfCi922
+	 edujxFfOe4sFBDlD8/JDRTSVbmxYOaR6aiWWyA5wd8JEzmJF0ONFqKBYwx1xin8bZtDqQ
+	 CAZaVhscARir5Pmh4yLxfZ8k7HncD+H/ctro3UKcZvL5PAUUeHun5d57khg17YNsBlrC6
+	 0OS6rHuQB3wHgyh2il2IWz5r751s5pf7a6GwEW9C4Q8ZyL4HwqkTU95cehJqhfD8C+CLh
+	 y1kQS3gfdB/4airufoServdJ9S04ZfEtqCBzd/wy8D6JPpMr61Tbz/s9B7GdHTA9FbA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794834139;
-	bh=d3qqgETqBSDy81c6l9RGN4UNu8jF2SiZ8xQCUBKwBuY=;
+	d=lists.u-boot-project.org; s=default; t=1794834140;
+	bh=a688rtCkyZC92PHmySHGyYxHWYgCd5rQVHlS4RArVmQ=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yJAJzqr4jFKLqcKTNJl5/2YnnCwjN1ucnJWDSMJi2yneYPR85wtF/ScMAtOcoYEGR
-	 jVwS+ik88ijmGkZbMnVya9sm84SHUYg85eXyk6ImIZapoy8PFH8CW6QbxwfmcmrX6L
-	 EZGcwWJtoa4JO9nIgWrJIIE8b7/X2Jo5dHI+cLPIgbG1SplIn749k3RBMTbIzlLGMU
-	 GHcQj0qEl9FnF1Cgwc1hXs45tncjLdJRHwfl/MAVnandBBWSNl+n+e6C6+lfHOmFN9
-	 G6tHsGITGrKcvXf91MVNBB5LaP9OFpRidCWVWWwk6MF9nxPHiMK2QExnhj84c+Uy4i
-	 ZTyh+p2ceejQg==
+	b=SHOhXeJOCKuPNQOErTALdM4AYQ9f7CDPcuQfET776pBDsYvmB3FbYklg55JHuxD65
+	 7b43lJyH5khY7iX2o6c4l9u/l/cbNke1E6R4ge3SQm2MUmQku/1a5Nm7rfvY5MpKu7
+	 qMuVpCec6xO76WyaVm6jf1vFMOmrYzR3rXwFx4KndUD+NIs0IlBFLaBBioe1ZtqxP6
+	 bBnQoDh86QeqLIA20kopCQGu+YMI3OLC25h/IEIQ9NBypmaYeV3JWsIO3jE1jU3TpE
+	 sLX54r9+oiIQZYAHtFx0XhPma0waJGxQUPyswsXfKyqmQFBFab8rSM/5cOFBcKYYeQ
+	 DoeBmbt3sUm0w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 28EFD80E35;
-	Mon, 16 Nov 2026 13:02:19 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id EE1F02FE
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 886FC80EB3;
+	Mon, 16 Nov 2026 13:02:20 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6A16A28C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:08:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E06124008C
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:49 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 506554008C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:08:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fN1PIrRLwktX for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 05:07:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B4EA240012
+ id jFycKZ4fl5QN for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 05:07:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 62B0B40012
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
@@ -83,86 +82,85 @@ Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=IJao8Kqy; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Cbv+nZC8
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=HAyMCCj5; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=bXpGOKB+
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B4EA240012
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:46 +0000 (UTC)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 62B0B40012
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:57 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AG4R0YG3056795
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:46 GMT
+ 6AG4R3kn472458
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- d3qqgETqBSDy81c6l9RGN4UNu8jF2SiZ8xQCUBKwBuY=; b=IJao8KqyP1R4rIvk
- nBRe/sQO1BsrbDYpZyL3MWxmsysF7X9ZfZZLNmf48surpvELY6zTGXshvhr3yecn
- 8DffEl48pweJtSOtrcDty4XnPIWk6u9vuOnZRVq2Vpl2ie3Nn8vwF/0EPDMW1aQf
- PRqg7GtparARSzBqOVEP1XSHgGyUB4DBeqesQBdIhDEVpANbNLJPyXA9TbrlfcZc
- INy1XIwKmz5vAcykNyOxl6M2OxFCIYn9UIoFxEb7gmxiI5Id2k9GlndJteHog/ZQ
- LETEwsGc0wnZDExaeUoDfJPS2bgzw2vkIDdzy2G/Jf88p+VAHnSpZ52nosFrOMwg
- D0X4vw==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
- [209.85.217.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhmccsd8-1
+ a688rtCkyZC92PHmySHGyYxHWYgCd5rQVHlS4RArVmQ=; b=HAyMCCj5TIPNsEV7
+ 3SEFaobo0wbEmwPTDW33p9pa80ZyirHs3vQ1Cw/cz8cjCcFyeUiuRVerVfBVEurT
+ AX0h6eJpZvDBlDiD6E94GZAAAFG2P4OQz8w4Vw+3AL8gJn38EGAtI00cDdORnVOj
+ u/+l5P83PlpurD2/UqYA8v5pzk3+7f1/IwYneCc5QmLKfbSwN18QVSw0AG5eZrqN
+ tDSCIIjirk7O8ctrRnFPOggL4cZYrAEUgjFNyAH+/m1cP0QJS12H6Dg3TWKZz9+5
+ A8w4ZMn9xfnzLEq53D6s7ED1f/w+/6cGPprBeCNV8p6X/y91vyN437gejqJNIyl1
+ Ut18XA==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com
+ [209.85.217.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhhjvwc6-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:46 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id
- ada2fe7eead31-7d2c5352d1eso156087137.3
- for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 21:07:45 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:07:56 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id
+ ada2fe7eead31-77f133855b9so82309137.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 15 Nov 2026 21:07:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794805665; x=1795410465;
+ d=oss.qualcomm.com; s=google; t=1794805676; x=1795410476;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=d3qqgETqBSDy81c6l9RGN4UNu8jF2SiZ8xQCUBKwBuY=;
- b=Cbv+nZC80FJTd4CMJjrU3zIf3tKB6VI/oJTjWoawUdVEH4/TwRSGGcNiwMtPb09r96
- kcZd0Y/Z4zhArZ08cHwNsfQT3ptMclDdNmkwZ5SXt4K21HxXap0RgJtv6qe6Vg4O+aq3
- CCBSMtMBBPzOkj76sK64dpnCqazBTXMRKTLO8L6SQNRO5VbO6GyfZKWXW4AsmRHjVU1W
- jhBeoH/EDH7y7Qx5eTd4Zym73HOoO5DtQItlG+/dajzKU7CW7zflNmqanN1+h27haDiR
- SImT5QJTw3qaloui7JOuBHazRxmGa9/xQjmjx0yHT8gXs5SgOTl9vonY21mbPl0K8A77
- aMTg==
+ bh=a688rtCkyZC92PHmySHGyYxHWYgCd5rQVHlS4RArVmQ=;
+ b=bXpGOKB+Hu9fOOK60wGXEGxE8xXk/CsioaX8WdXAxHbDdyHAqeYHS/LCJ1cZLzod8V
+ 9zEfiPNnIWJDJyT2ZdUWdbkx4xz4fo0Z6pV4NQWQQ99sALtmdNTHRPZbsfvYqAnrEq9Y
+ gVHQ77jI8GLoG7C4iilYCiux9wWo1IPam0XhK/y/zCcjG8AtqXRT1/IW/XA/gbwPUl2U
+ wzaJsaEhV3Gt/kN5T9fMTFu3xzPvX+wXUqRsyMVNnKIMhdGhgHONtfPAULRc97MWRa7E
+ pkQXzxZJSZ9U6lTxzow9EZR/oYeOgjGFJbNS6kdzqqn332ydGn63novKpmmCZPl4paZL
+ +T3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794805665; x=1795410465;
+ d=1e100.net; s=20260707; t=1794805676; x=1795410476;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=d3qqgETqBSDy81c6l9RGN4UNu8jF2SiZ8xQCUBKwBuY=;
- b=fez3qrmNkvnmsHnpcgxwB9h47B+FFy20mRNvrPxkcRI4HmF6JNp38M7xbcFgRp6Efc
- cv057W3tUqroZ3Zv+5tngmuSfjV8l/MaCdIrOBDNltlwe+mmNiZiv6eMA/xAa7Nb+k6p
- 3Jc6sCCxcTiH2TrmHWQ5+1PsrTQ2BcBHh8UgYF1Ecqrqza9UuT+Ps4/YrMrFLA2YAokF
- UGNXMTk2wq82wvgl2Kgi/UnG4PzbNzscqxz8dVgq1fSpfNaZjIJgjrCrF+P3dgSXIskB
- pYEv+s9MZMT3bHny+Thh85CBB8xVMPEc3wn5V0V2uBJuEZ2mReOJFeVWmx6lVs4EMuy0
- hWTQ==
-X-Gm-Message-State: APuU4Z/qDkJiO1km2YJ0fYjCcBhGGDPW+yoY7rZFKJ/P+Y6zFwDHqn3h
- ES45+M8RfW0XaeHU23bi4eDT2mKNQ0g4X5shTKHwRyQH5OfdkSh+mtGV5oHoGvRGWQuBX94KhiH
- wANsmo9G0FIq0QeMcBEqBzbvR0SgD2eevhWCcYzVW84e/d0nF7/wz2X50VpHSZcYeMOcb0xPuX1
- a4mr9ARg4omQevzaETm1g0HWmhYMEl+x0hNtctLvOmoWpPKA==
-X-Gm-Gg: AYBFou2gy+nISxw6eyLMXwQLZQySiDNkp0H4vRoALjy/yAVaiPiBL2JQ65NLDFBi5MX
- MHBJxsY+cSu7BMyjlzYLvduU23LW7HVDhCRwNJP1WT9iIrh6WfPMoLMkW6bKmEsw5EvajuP9WVl
- ZPX19chC6AMp9te1jzXwQnwh/HBMm9P6BdI2mA69K1cxxtuPmxd8gOd8YISak=
-X-Received: by 2002:a05:6102:a1d4:10b0:7c3:83a9:edb2 with SMTP id
- ada2fe7eead31-7d64d454788mr2907493137.1.1794805664700; 
- Sun, 15 Nov 2026 21:07:44 -0800 (PST)
-X-Received: by 2002:a05:6102:a1d4:10b0:7c3:83a9:edb2 with SMTP id
- ada2fe7eead31-7d64d454788mr2907476137.1.1794805664078; Sun, 15 Nov 2026
- 21:07:44 -0800 (PST)
+ bh=a688rtCkyZC92PHmySHGyYxHWYgCd5rQVHlS4RArVmQ=;
+ b=HgaUVqKaZQnZnbTljPv9obXifsLBAHbcha4o1KS9VEa2BFSooxVdAjrVBj1Dw47woh
+ RQo8/mrdU+i8EPVgJK1+quiuPNEROyvQGHJpjwEqQPXiI+3W0DPOTUlFRaa8RP1mqxXf
+ UyDHMeg7cJ+WbQ0G9e4dCBJB3FXmsfcRqhkj9enxIn+rgXrldLuxuuGxyflNzXDfd3Vt
+ YnDp+pf4CVilTUxF9u/khAtUVGum/2kWDRZPYC45UOLthLnU2TExhLSUAN3i2m/0p5yO
+ 6/E2/E9zdbCgp38hpvgIRfYWcpVNVm4kq5D9pXbHl/3iUMLb8MulL1Wsq0HKZHDlkCOK
+ u4rw==
+X-Gm-Message-State: APuU4Z9f9k+7i8d54J+2/5Ffyc2I60rWgxmWfycEZJdxIkrzOC1jba9v
+ Fcqs2eJZM7pJMaohjw4xPZhqciCJDtFPiFVEj1olAfBh8KL3X1GbWRlYCwsLBBifsx3tPur6Pr0
+ KqYmOJE8JAjRpL/45JmXKGKkiS2f+OdsMXQ2nSPYBngOteh/Vlpp3jzG90cCSc9IH9UevAG3a4D
+ 0/Gfxmq4FciWLAxlWXbPAXx2aS8hF8MbGe2Cjood0369txXA==
+X-Gm-Gg: AYBFou3zG5cfV+bxfqZX99Az0671ONYTmqjRTCpnbdhDJijtG2URT1OVcZYOmuFnIzt
+ TZaarYhD6KSIAxYFl6Y2Hvz73sb5drfQWZN+mfF5crquVLdrhUQlUVVOhSjc5/mZImcOFQIgc/8
+ eNkBOKMKzqt8EM83xBrqP0xvjWgNUF+eO/S7ctTomoQGZHZPtAouGelIQIr+M=
+X-Received: by 2002:a05:6102:8547:20b0:7b4:f1cd:80dd with SMTP id
+ ada2fe7eead31-7d64d4104b4mr2604173137.1.1794805675747; 
+ Sun, 15 Nov 2026 21:07:55 -0800 (PST)
+X-Received: by 2002:a05:6102:8547:20b0:7b4:f1cd:80dd with SMTP id
+ ada2fe7eead31-7d64d4104b4mr2604163137.1.1794805675171; Sun, 15 Nov 2026
+ 21:07:55 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20261113-rpmi_v4-v5-0-6787318ad186@microchip.com>
- <20261113-rpmi_v4-v5-2-6787318ad186@microchip.com>
-In-Reply-To: <20261113-rpmi_v4-v5-2-6787318ad186@microchip.com>
+ <20261113-rpmi_v4-v5-3-6787318ad186@microchip.com>
+In-Reply-To: <20261113-rpmi_v4-v5-3-6787318ad186@microchip.com>
 From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Date: Mon, 16 Nov 2026 10:37:31 +0530
-X-Gm-Features: Aa3M54qIO1vTtLg6SH99jTeSOWPkLj7-L34w3nGL6DCE74WNKjxsBYpKsikofNw
-Message-ID: <CAPxK-6fkN2HN+oU0c-o01ZtEWAFoH92GPyuHqoDAYjgnM8xoSA@mail.gmail.com>
-Subject: Re: [PATCH v5 2/8] firmware: rpmi: add support for the SBI MPXY
+Date: Mon, 16 Nov 2026 10:37:44 +0530
+X-Gm-Features: Aa3M54r0kJ7uwZdVUocgL_BSa5eDTFFsr-PuLEduLbaVCv0R2bkvD6UmNeQxDJw
+Message-ID: <CAPxK-6eV6hhcrBUmRfRpc6Qf0Gx_7pAygfe1miG4n6MFMDbrNQ@mail.gmail.com>
+Subject: Re: [PATCH v5 3/8] firmware: rpmi: add support for shared memory
  transport
 To: Charles Perry <charles.perry@microchip.com>
 Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
@@ -177,31 +175,31 @@ Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
  Peng Fan <peng.fan@oss.nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDAyMCBTYWx0ZWRfX6znYdHutgwQt
- x5sQvQ/DiJFXENsc7lxLq3WH3J/pwVNTvk5M+rLKtyKYfYEWqYi+a16yWbbv9o4vxeLpOnGitSS
- jz0PM/Lq4AD30JKhjhYQGVR/gqyRpVE=
-X-Proofpoint-ORIG-GUID: ncwcg_kfOMFo5NPhJQcCslITMNVUV6zZ
-X-Proofpoint-GUID: ncwcg_kfOMFo5NPhJQcCslITMNVUV6zZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDAyMCBTYWx0ZWRfX7nC3yUQFA435
- Db42ErYuMHuhKHdij67+pmSonRcAaJsbDJjiyuvsZJrhu/oALBInc84idJpLjo6inMbatVOXEbC
- NY+NWkrIjklPPipcav87CZr+HoC5HC1LzJXHR68167MOYkopRcCjQQLfNzsu4vuM3/gUPHLITT9
- rRLMRuoM8WfFNa819i06ku5IZJnJHGcoRxYrHpXcT6UBuFdtH5P20ImVx65Gp/wR8XDwyC1rm/n
- u83k+KLObvNU7Q1q5w296b/Y3feOhqJkAkVuA92Wc/+QyK9LuXbgD9RXFlyGkm49YgGjiuz0/+2
- yJS1dCYLMK4Ep+3Puj6v5jL0NxMRupg/D9MOh5Vw3cbD4HXd/rUibCHIcpPDMGCtnyt4S2JEdsu
- CGedLPkQ7T+JbvVa4MdR3ceukE+BXroQSAF5NzIkWAd/cGz4kitu5NhaxdbJyJB7EwiF5djYNGB
- qAHbfnpKgZ3QCthVccA==
-X-Authority-Analysis: v=2.4 cv=Vpy2kO2n c=1 sm=1 tr=0 ts=6afa8fa2 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDAyMCBTYWx0ZWRfX7AUtKv2EAJCX
+ hy4wSq/eirZsZMk3pqUArT9V8QTzCZBr1zKGQwqI93pYt60ASHxASYsk8vfBQSISd22lMCAIk0J
+ ZFsaBxlTu64YoiaoKzqa7ZdxMYoIbfGo6nWHFzuVHb1oeW2TsO31vR8ywwKFJMTmXyp1jvuXOVe
+ hXaI7EqgeDWP++WTD00NYMZHJjwhkAUQq5h9Bh+Zxilp2sdWwXdYuI6x/Jc37pulWr8edzdtcJM
+ C+CTDkoitpxvYj/q+hT9yZ6Rl9bwjoQRTWgCaqRz92L/oiDUXv9LuFeN5vwCR+r5fUjIKmf6Vom
+ nLz4eT3kZG8jwY6/fYipY4m8fMUQs51tJmhu/7bujYF7lrXx1Ei9DrHNmdBT1Zkegf7ByimhmEB
+ Z+ANArksudeMWefXP4GeuNIMWEFyFJuSSVFrDkbqzbQYs6uacK6wGnY4bPkXXPl0GGiyaBZENcW
+ O7Ng6lW7wklVWA6cr8A==
+X-Proofpoint-ORIG-GUID: jNKe4YW-KyZW5YDOQf4uQRKJx40-M1Bk
+X-Proofpoint-GUID: jNKe4YW-KyZW5YDOQf4uQRKJx40-M1Bk
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDAyMCBTYWx0ZWRfX0BRC5GAcxDCO
+ D2rlWOgGmefhMkhz7gCen6jiKn7/aPvf2ycFzP34LTjOxhQb4jq3Gq3uHnVQzHduirEHtjwrVcl
+ ZUDYE6OsYr//IXZ13gAEB17CIxU8oFM=
+X-Authority-Analysis: v=2.4 cv=X9rHu2Te c=1 sm=1 tr=0 ts=6afa8fac cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=XYAwZIGsAAAA:8
- a=Wqw0UAraFnB7B5Dxd3sA:9 a=QEXdDO2ut3YA:10 a=ODZdjJIeia2B_SHc_B0f:22
+ a=yOCtJkima9RkubShWh1s:22 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=XYAwZIGsAAAA:8
+ a=0CjJnxMWMwjMeDG4vOEA:9 a=QEXdDO2ut3YA:10 a=-aSRE8QhW-JAV6biHavz:22
  a=E8ToXWR_bxluHZ7gmE-Z:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-16_02,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
- phishscore=0 priorityscore=1501 bulkscore=0 spamscore=0 suspectscore=0
+ phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015 priorityscore=1501
+ adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160020
 X-Mailman-Approved-At: Mon, 16 Nov 2026 13:02:15 +0000
@@ -217,8 +215,8 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -227,168 +225,82 @@ Reviewed-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 On Sat, Nov 14, 2026 at 1:13=E2=80=AFAM Charles Perry
 <charles.perry@microchip.com> wrote:
 >
-> This adds an RPMI transport driver for the Supervisor Binary Interface
-> (SBI) message proxy (MPXY) extension [1].
+> Add support for transport of RPMI messages over shared memory as
+> described in the RPMI spec [1]. This uses two or four ring buffers
+> composed of a fixed number of "slots" to pass messages between the AP
+> and the PuC. U-Boot is the Application processor (AP) and sends messages
+> through the a2p-req queue and receives response though the p2a-ack
+> queue. There is no support for platform microcontroller (PuC) initiated
+> requests nor notifications.
 >
-> This is for S-Mode U-Boot where some supervisor software (such as
-> OpenSBI) runs in M-Mode and handles the low level communication with the
-> PuC.
+> This transport can be used in M or S mode U-Boot, but in the S-mode
+> case, one must make sure that the supervisor software isn't already
+> using the AP side of the shared memory.
 >
-> [1]: https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
+> [1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 2)
 >
 > Signed-off-by: Charles Perry <charles.perry@microchip.com>
 > ---
-> Changes in v5:
->  - bound check the returned message length against max_xfer_len
->    (from Subrahmanya review)
->  - Makefile: compile MPXY only if CONFIG_RISCV_SMODE is true (from Leo
->    review)
->  - fix the case where sbi_get_spec_version() returns an error code (from
->    LLM review)
+> Changes in v5: (from Subrahmanya review)
+>  - Access the head and tail via readl/writel and data slots with
+>    memcpy_[to/from]io. The memory region used for the shared queues might
+>    not be normal memory and should be read/write to using IO accessor.
+>  - Match the service_id and servicegroup_id in addition to the token in
+>    rpmi_smq_rx()
+>  - Reject responses with -EIO if the size exceeds the slot_size length
+>  - Make sure the slot-size is a power of two
 >
-> Changes in v4: None
+> Changes in v4:
+>  - Fix the default value of the doorbell from 0 to 1
+>
 > Changes in v3: None
 >
 > Changes in v2: (from Yao Zi review)
 >  - Reorder headers
->  - Remove struct sbi_mpxy_rpmi_channel_attrs and struct
->    sbi_mpxy_channel_attrs for simpler u32 arrays
 >  - Don't null check pointers before free()
 > ---
->  arch/riscv/include/asm/sbi.h          |  57 +++++
->  drivers/firmware/rpmi/Kconfig         |   9 +
->  drivers/firmware/rpmi/Makefile        |   3 +
->  drivers/firmware/rpmi/rpmi-sbi-mpxy.c | 415 ++++++++++++++++++++++++++++=
+>  drivers/firmware/rpmi/Kconfig      |   8 +
+>  drivers/firmware/rpmi/Makefile     |   1 +
+>  drivers/firmware/rpmi/rpmi-shmem.c | 496 +++++++++++++++++++++++++++++++=
 ++++++
->  4 files changed, 484 insertions(+)
+>  include/rpmi_proto.h               |  23 ++
+>  4 files changed, 528 insertions(+)
 >
-> diff --git a/arch/riscv/include/asm/sbi.h b/arch/riscv/include/asm/sbi.h
-> index 47124dbaac84..10e03257d8e6 100644
-> --- a/arch/riscv/include/asm/sbi.h
-> +++ b/arch/riscv/include/asm/sbi.h
-> @@ -10,6 +10,7 @@
->  #define _ASM_RISCV_SBI_H
->
->  #include <linux/types.h>
-> +#include <linux/errno.h>
->
->  enum sbi_ext_id {
->         SBI_EXT_0_1_SET_TIMER =3D 0x0,
-> @@ -104,6 +105,17 @@ enum sbi_ext_dbcn_fid {
->         SBI_EXT_DBCN_CONSOLE_WRITE_BYTE,
->  };
->
-> +enum sbi_ext_mpxy_fid {
-> +       SBI_EXT_MPXY_GET_SHMEM_SIZE =3D 0,
-> +       SBI_EXT_MPXY_SET_SHMEM,
-> +       SBI_EXT_MPXY_GET_CHANNEL_IDS,
-> +       SBI_EXT_MPXY_READ_ATTRS,
-> +       SBI_EXT_MPXY_WRITE_ATTRS,
-> +       SBI_EXT_MPXY_SEND_MSG_WITH_RESP,
-> +       SBI_EXT_MPXY_SEND_MSG_WITHOUT_RESP,
-> +       SBI_EXT_MPXY_GET_NOTIFICATION_EVENTS,
-> +};
-> +
->  #ifdef CONFIG_SBI_V01
->  #define SBI_EXT_SET_TIMER              SBI_EXT_0_1_SET_TIMER
->  #define SBI_FID_SET_TIMER              0
-> @@ -132,6 +144,14 @@ enum sbi_ext_dbcn_fid {
->  #define SBI_SPEC_VERSION_MAJOR_MASK    0x7f
->  #define SBI_SPEC_VERSION_MINOR_MASK    0xffffff
->
-> +static inline unsigned long sbi_mk_version(unsigned long major,
-> +                                          unsigned long minor)
-> +{
-> +       return ((major & SBI_SPEC_VERSION_MAJOR_MASK)
-> +               << SBI_SPEC_VERSION_MAJOR_SHIFT) |
-> +              (minor & SBI_SPEC_VERSION_MINOR_MASK);
-> +}
-> +
->  /* SBI return error codes */
->  #define SBI_SUCCESS                    0
->  #define SBI_ERR_FAILURE                        -1
-> @@ -139,6 +159,43 @@ enum sbi_ext_dbcn_fid {
->  #define SBI_ERR_INVALID_PARAM          -3
->  #define SBI_ERR_DENIED                 -4
->  #define SBI_ERR_INVALID_ADDRESS                -5
-> +#define SBI_ERR_ALREADY_AVAILABLE      -6
-> +#define SBI_ERR_ALREADY_STARTED                -7
-> +#define SBI_ERR_ALREADY_STOPPED                -8
-> +#define SBI_ERR_NO_SHMEM               -9
-> +#define SBI_ERR_INVALID_STATE          -10
-> +#define SBI_ERR_BAD_RANGE              -11
-> +#define SBI_ERR_TIMEOUT                        -12
-> +#define SBI_ERR_IO                     -13
-> +#define SBI_ERR_DENIED_LOCKED          -14
-> +
-> +static inline int sbi_to_linux_error(int err)
-> +{
-> +       switch (err) {
-> +       case SBI_SUCCESS:
-> +               return 0;
-> +       case SBI_ERR_DENIED:
-> +       case SBI_ERR_DENIED_LOCKED:
-> +               return -EPERM;
-> +       case SBI_ERR_INVALID_PARAM:
-> +       case SBI_ERR_INVALID_STATE:
-> +               return -EINVAL;
-> +       case SBI_ERR_BAD_RANGE:
-> +               return -ERANGE;
-> +       case SBI_ERR_INVALID_ADDRESS:
-> +               return -EFAULT;
-> +       case SBI_ERR_NO_SHMEM:
-> +               return -ENOMEM;
-> +       case SBI_ERR_TIMEOUT:
-> +               return -ETIMEDOUT;
-> +       case SBI_ERR_IO:
-> +               return -EIO;
-> +       case SBI_ERR_NOT_SUPPORTED:
-> +       case SBI_ERR_FAILURE:
-> +       default:
-> +               return -EOPNOTSUPP;
-> +       };
-> +}
->
->  struct sbiret {
->         long error;
 > diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfi=
 g
-> index 54fd77ad8f48..708d931263ff 100644
+> index 708d931263ff..421a1fa9deba 100644
 > --- a/drivers/firmware/rpmi/Kconfig
 > +++ b/drivers/firmware/rpmi/Kconfig
-> @@ -7,3 +7,12 @@ config RPMI_FIRMWARE
->           protocol for communication between an Application Processor (AP=
-) and a
->           platform microcontroller (PuC). The RPMI specification is avail=
-able
->           at: https://github.com/riscv-non-isa/riscv-rpmi
+> @@ -16,3 +16,11 @@ config RPMI_SBI_MPXY
+>           (MPXY) extension of the supervisor binary interface (SBI). The
+>           specification for the MPXY extension is available at:
+>           https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
 > +
-> +config RPMI_SBI_MPXY
-> +       bool "RPMI over SBI MPXY transport"
-> +       depends on RPMI_FIRMWARE && SBI
+> +config RPMI_SHMEM
+> +       bool "RPMI over shared memory transport"
+> +       depends on RPMI_FIRMWARE
 > +       help
-> +         Enable support for transport of RPMI messages over the message =
-proxy
-> +         (MPXY) extension of the supervisor binary interface (SBI). The
-> +         specification for the MPXY extension is available at:
-> +         https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
+> +         Enable support for transport of RPMI messages over shared memor=
+y as
+> +         described in chapter 2 of the RPMI specification, available at:
+> +         https://github.com/riscv-non-isa/riscv-rpmi
 > diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makef=
 ile
-> index d69c718d150e..4976176f07df 100644
+> index 4976176f07df..87ef3623a93a 100644
 > --- a/drivers/firmware/rpmi/Makefile
 > +++ b/drivers/firmware/rpmi/Makefile
-> @@ -1 +1,4 @@
->  obj-y  +=3D rpmi-uclass.o
-> +ifeq ($(CONFIG_$(PHASE_)RISCV_SMODE),y)
-> +obj-$(CONFIG_RPMI_SBI_MPXY) +=3D rpmi-sbi-mpxy.o
-> +endif
-> diff --git a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c b/drivers/firmware/rpm=
-i/rpmi-sbi-mpxy.c
+> @@ -2,3 +2,4 @@ obj-y   +=3D rpmi-uclass.o
+>  ifeq ($(CONFIG_$(PHASE_)RISCV_SMODE),y)
+>  obj-$(CONFIG_RPMI_SBI_MPXY) +=3D rpmi-sbi-mpxy.o
+>  endif
+> +obj-$(CONFIG_RPMI_SHMEM) +=3D rpmi-shmem.o
+> diff --git a/drivers/firmware/rpmi/rpmi-shmem.c b/drivers/firmware/rpmi/r=
+pmi-shmem.c
 > new file mode 100644
-> index 000000000000..3398271f8567
+> index 000000000000..f07912a56846
 > --- /dev/null
-> +++ b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-> @@ -0,0 +1,415 @@
+> +++ b/drivers/firmware/rpmi/rpmi-shmem.c
+> @@ -0,0 +1,496 @@
 > +// SPDX-License-Identifier: GPL-2.0
 > +/*
 > + * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
@@ -397,170 +309,303 @@ i/rpmi-sbi-mpxy.c
 > +#define LOG_CATEGORY UCLASS_RPMI
 > +
 > +#include <asm/io.h>
-> +#include <asm/sbi.h>
 > +#include <asm/types.h>
 > +#include <dm.h>
 > +#include <dm/device_compat.h>
-> +#include <linux/bitops.h>
-> +#include <linux/kernel.h>
+> +#include <linux/delay.h>
+> +#include <linux/log2.h>
 > +#include <log.h>
 > +#include <malloc.h>
 > +#include <rpmi-uclass.h>
-> +#include <string.h>
 > +
-> +/* SBI MPXY channel IDs data in shared memory */
-> +struct sbi_mpxy_channel_ids_data {
-> +       /* Remaining number of channel ids */
-> +       __le32 remaining;
-> +       /* Returned channel ids in current function call */
-> +       __le32 returned;
-> +       /* Returned channel id array */
-> +       __le32 channel_array[];
+> +#define RPMI_SLOT_SIZE_MIN 64
+> +
+> +enum rpmi_queue_idx {
+> +       RPMI_QUEUE_IDX_A2P_REQ =3D 0,
+> +       RPMI_QUEUE_IDX_P2A_ACK =3D 1,
+> +       RPMI_QUEUE_IDX_P2A_REQ =3D 2,
+> +       RPMI_QUEUE_IDX_A2P_ACK =3D 3,
+> +       RPMI_QUEUE_IDX_MAX_COUNT =3D 4,
+> +       RPMI_A2P_DOORBELL =3D 5,
 > +};
 > +
-> +enum sbi_mpxy_attribute_id {
-> +       /* Standard channel attributes managed by MPXY framework */
-> +       SBI_MPXY_ATTR_MSG_PROT_ID =3D 0x00000000,
-> +       SBI_MPXY_ATTR_MSG_PROT_VER =3D 0x00000001,
-> +       SBI_MPXY_ATTR_MSG_MAX_LEN =3D 0x00000002,
-> +       SBI_MPXY_ATTR_MSG_SEND_TIMEOUT =3D 0x00000003,
-> +       SBI_MPXY_ATTR_MSG_COMPLETION_TIMEOUT =3D 0x00000004,
-> +       SBI_MPXY_ATTR_CHANNEL_CAPABILITY =3D 0x00000005,
-> +       SBI_MPXY_ATTR_SSE_EVENT_ID =3D 0x00000006,
-> +       SBI_MPXY_ATTR_MSI_CONTROL =3D 0x00000007,
-> +       SBI_MPXY_ATTR_MSI_ADDR_LO =3D 0x00000008,
-> +       SBI_MPXY_ATTR_MSI_ADDR_HI =3D 0x00000009,
-> +       SBI_MPXY_ATTR_MSI_DATA =3D 0x0000000A,
-> +       SBI_MPXY_ATTR_EVENTS_STATE_CONTROL =3D 0x0000000B,
-> +       SBI_MPXY_ATTR_STD_ATTR_MAX_IDX,
-> +       /*
-> +        * Message protocol specific attributes, managed by
-> +        * the message protocol specification.
-> +        */
-> +       SBI_MPXY_ATTR_MSGPROTO_ATTR_START =3D 0x80000000,
-> +       SBI_MPXY_ATTR_MSGPROTO_ATTR_END =3D 0xffffffff
+> +struct shmem_queue {
+> +       u32 num_slot;
+> +       __le32 *headptr;
+> +       __le32 *tailptr;
+> +       void *buffer;
 > +};
 > +
-> +/* SBI_MPXY_ATTR_CHANNEL_CAPABILITY bits */
-> +#define SBI_MPXY_CHAN_CAP_MSI BIT(0)
-> +#define SBI_MPXY_CHAN_CAP_SSE BIT(1)
-> +#define SBI_MPXY_CHAN_CAP_EVENTS_STATE BIT(2)
-> +#define SBI_MPXY_CHAN_CAP_SEND_WITH_RESP BIT(3)
-> +#define SBI_MPXY_CHAN_CAP_SEND_WITHOUT_RESP BIT(4)
-> +#define SBI_MPXY_CHAN_CAP_GET_NOTIFICATIONS BIT(5)
-> +
-> +/* RPMI message protocol specific MPXY attributes */
-> +enum sbi_mpxy_rpmi_attribute_id {
-> +       SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID,
-> +       SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION,
-> +       SBI_MPXY_RPMI_ATTR_IMPL_ID,
-> +       SBI_MPXY_RPMI_ATTR_IMPL_VERSION,
-> +       SBI_MPXY_RPMI_ATTR_MAX_ID
-> +};
-> +
-> +/* Possible values of MSG_PROT_ID attribute as-per SBI v3.0 (or higher) =
-*/
-> +enum sbi_mpxy_msgproto_id {
-> +       SBI_MPXY_MSGPROTO_RPMI_ID =3D 0x0,
-> +};
-> +
-> +struct sbi_mpxy_chan_desc {
-> +       u32 id;
-> +       u32 max_xfer_len;
-> +       u32 attrs[SBI_MPXY_ATTR_STD_ATTR_MAX_IDX];
-> +       u32 rpmi_attrs[SBI_MPXY_RPMI_ATTR_MAX_ID];
-> +};
-> +
-> +struct rpmi_sbi_mpxy {
+> +struct rpmi_shmem {
 > +       struct udevice *dev;
-> +       void *shmem;
-> +       unsigned long shmem_size;
-> +       u32 channel_count;
-> +       struct sbi_mpxy_chan_desc *channel_descs;
+> +       struct shmem_queue a2p_req;
+> +       struct shmem_queue p2a_ack;
+> +       int slot_size;
+> +       int rx_timeout_ms;
+> +       u32 token;
+> +       void *doorbell;
+> +       u32 doorbell_value;
+> +       u32 spec_version;
+> +       u32 impl_version;
+> +       u32 impl_id;
 > +};
 > +
-> +static int rpmi_sbi_mpxy_read_attrs(struct rpmi_sbi_mpxy *mpxy, u32 chan=
-nel_id,
-> +                                   u32 base_attrid, u32 attr_count,
-> +                                   u32 *attrs_buf)
+> +struct rpmi_shmem_chan_priv {
+> +       struct rpmi_shmem *priv;
+> +       u32 servicegroup_id;
+> +       u32 servicegroup_version;
+> +};
+> +
+> +static int rpmi_shmem_queue_idx(const char *name)
 > +{
-> +       struct sbiret sret;
-> +       int i;
+> +       static const struct {
+> +               int id;
+> +               const char *name;
+> +       } id_names[] =3D {
+> +               { RPMI_QUEUE_IDX_A2P_REQ, "a2p-req" },
+> +               { RPMI_QUEUE_IDX_P2A_ACK, "p2a-ack" },
+> +               { RPMI_QUEUE_IDX_P2A_REQ, "p2a-req" },
+> +               { RPMI_QUEUE_IDX_A2P_ACK, "a2p-ack" },
+> +               { RPMI_A2P_DOORBELL, "a2p-doorbell" },
+> +       };
 > +
-> +       sret =3D sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_READ_ATTRS, channel=
-_id,
-> +                        base_attrid, attr_count, 0, 0, 0);
-> +       if (sret.error)
-> +               return sbi_to_linux_error(sret.error);
+> +       for (int i =3D 0; i < ARRAY_SIZE(id_names); i++) {
+> +               if (strcmp(name, id_names[i].name) =3D=3D 0)
+> +                       return id_names[i].id;
+> +       }
 > +
-> +       for (i =3D 0; i < attr_count; i++)
-> +               attrs_buf[i] =3D le32_to_cpu(((__le32 *)mpxy->shmem)[i]);
+> +       return -ENODEV;
+> +}
+> +
+> +static u32 rpmi_read_head(struct shmem_queue *qctx)
+> +{
+> +       return le32_to_cpu(readl(qctx->headptr));
+> +}
+> +
+> +static u32 rpmi_read_tail(struct shmem_queue *qctx)
+> +{
+> +       return le32_to_cpu(readl(qctx->tailptr));
+> +}
+> +
+> +static void rpmi_write_head(struct shmem_queue *qctx, u32 val)
+> +{
+> +       writel(cpu_to_le32(val), qctx->headptr);
+> +}
+> +
+> +static void rpmi_write_tail(struct shmem_queue *qctx, u32 val)
+> +{
+> +       writel(cpu_to_le32(val), qctx->tailptr);
+> +}
+> +
+> +static bool rpmi_smq_queue_full(struct shmem_queue *qctx)
+> +{
+> +       return ((rpmi_read_tail(qctx) + 1) % qctx->num_slot =3D=3D
+> +               rpmi_read_head(qctx));
+> +}
+> +
+> +/* 31                                            0
+> + * +---------------------+-----------------------+
+> + * | FLAGS | SERVICE_ID  |   SERVICEGROUP_ID     |
+> + * +---------------------+-----------------------+
+> + * |        TOKEN        |     DATA LENGTH       |
+> + * +---------------------+-----------------------+
+> + * |                 DATA/PAYLOAD                |
+> + * +---------------------------------------------+
+> + */
+> +struct rpmi_message_header {
+> +       __le16 servicegroup_id;
+> +       u8 service_id;
+> +       u8 flags;
+> +       __le16 datalen;
+> +       __le16 token;
+> +} __packed;
+> +
+> +static int rpmi_smq_rx(struct rpmi_shmem *priv, struct shmem_queue *qctx=
+,
+> +                      u32 service_group_id, u32 service_id, u16 token,
+> +                      void *response, unsigned long max_response_len,
+> +                      unsigned long *out_response_len)
+> +{
+> +       struct rpmi_message_header *msg;
+> +       u32 dlen, headidx, tailidx;
+> +       int rxretry =3D 0;
+> +       void *src;
+> +
+> +       headidx =3D rpmi_read_head(qctx);
+> +
+> +       /* Wait for the Rx message with matching token, discard any other
+> +        * messages received in the mean time
+> +        */
+> +       while (true) {
+> +               tailidx =3D rpmi_read_tail(qctx);
+> +
+> +               if (headidx !=3D tailidx) {
+> +                       msg =3D (void *)qctx->buffer +
+> +                             (headidx * priv->slot_size);
+> +                       if ((le16_to_cpu(msg->token) =3D=3D token) &&
+> +                           (le16_to_cpu(msg->servicegroup_id) =3D=3D
+> +                            service_group_id) &&
+> +                           (msg->service_id =3D=3D service_id))
+> +                               break;
+> +
+> +                       headidx =3D (headidx + 1) % qctx->num_slot;
+> +               }
+> +
+> +               mdelay(1);
+> +               rxretry +=3D 1;
+> +               if (rxretry > priv->rx_timeout_ms)
+> +                       return -ETIMEDOUT;
+> +       }
+> +
+> +       /* Extract data from the message */
+> +       if (response) {
+> +               dlen =3D le16_to_cpu(msg->datalen);
+> +               if (dlen > priv->slot_size - sizeof(struct rpmi_message_h=
+eader))
+> +                       return -EIO;
+> +               if (dlen > max_response_len)
+> +                       dlen =3D max_response_len;
+> +               if (out_response_len)
+> +                       *out_response_len =3D dlen;
+> +               src =3D (void *)msg + sizeof(struct rpmi_message_header);
+> +               memcpy_fromio(response, src, dlen);
+> +       }
+> +
+> +       /* Update the head index */
+> +       headidx =3D (headidx + 1) % qctx->num_slot;
+> +       rpmi_write_head(qctx, headidx);
 > +
 > +       return 0;
 > +}
 > +
-> +static int rpmi_sbi_mpxy_send_message(struct rpmi_sbi_mpxy *mpxy,
-> +                                     struct sbi_mpxy_chan_desc *desc,
-> +                                     u32 mpxy_fid, u32 msg_id, const voi=
-d *tx,
-> +                                     unsigned long tx_len, void *rx,
-> +                                     unsigned long max_rx_len,
-> +                                     unsigned long *rx_len)
+> +static int rpmi_smq_tx(struct rpmi_shmem *priv, struct shmem_queue *qctx=
+,
+> +                      u32 service_group_id, u32 service_id,
+> +                      enum rpmi_message_type type, u16 token,
+> +                      const void *request, unsigned long request_len)
 > +{
-> +       void *shmem =3D mpxy->shmem;
-> +       unsigned long rx_bytes;
-> +       struct sbiret sret;
+> +       struct rpmi_message_header header =3D { 0 };
+> +       u32 tailidx;
+> +       void *dst;
 > +
-> +       if (tx)
-> +               memcpy(shmem, tx, tx_len);
+> +       /* Tx sanity checks */
+> +       if (request_len >
+> +           (priv->slot_size - sizeof(struct rpmi_message_header)))
+> +               return -EINVAL;
 > +
-> +       sret =3D sbi_ecall(SBI_EXT_MPXY, mpxy_fid, desc->id, msg_id, tx_l=
-en, 0, 0,
-> +                        0);
+> +       if (rpmi_smq_queue_full(qctx))
+> +               return -ENOMEM;
 > +
-> +       if (rx && !sret.error) {
-> +               rx_bytes =3D sret.value;
-> +               if (rx_bytes > max_rx_len)
-> +                       return -ENOSPC;
-> +               if (rx_bytes > desc->max_xfer_len)
-> +                       return -EIO;
+> +       tailidx =3D rpmi_read_tail(qctx);
 > +
-> +               memcpy(rx, shmem, rx_bytes);
-> +               if (rx_len)
-> +                       *rx_len =3D rx_bytes;
-> +       }
+> +       /* Prepare the header to be written into the slot */
+> +       header.servicegroup_id =3D cpu_to_le16(service_group_id);
+> +       header.service_id =3D service_id;
+> +       header.flags =3D type;
+> +       header.datalen =3D cpu_to_le16(request_len);
+> +       header.token =3D cpu_to_le16(token);
 > +
-> +       return sbi_to_linux_error(sret.error);
+> +       /* Write header into the slot */
+> +       dst =3D (char *)qctx->buffer + (tailidx * priv->slot_size);
+> +       memcpy_toio(dst, &header, sizeof(header));
+> +       dst +=3D sizeof(header);
+> +
+> +       /* Write data into the slot */
+> +       if (request)
+> +               memcpy_toio(dst, request, request_len);
+> +
+> +       /* Update the tail/write index */
+> +       tailidx =3D (tailidx + 1) % qctx->num_slot;
+> +       rpmi_write_tail(qctx, tailidx);
+> +
+> +       /* Ring the RPMI doorbell if present */
+> +       if (priv->doorbell)
+> +               writel(priv->doorbell_value, priv->doorbell);
+> +
+> +       return 0;
 > +}
 > +
-> +static int rpmi_sbi_mpxy_get_attr(struct rpmi_chan *chan,
-> +                                 enum rpmi_attribute_id id, u32 *data)
+> +static int rpmi_shmem_request_priv(struct rpmi_shmem *priv, u32 serviceg=
+roup_id,
+> +                                  u32 service_id, const void *request,
+> +                                  unsigned long request_len, void *respo=
+nse,
+> +                                  unsigned long max_response_len,
+> +                                  unsigned long *out_response_len)
 > +{
-> +       struct rpmi_sbi_mpxy *mpxy =3D dev_get_priv(chan->dev);
-> +       struct sbi_mpxy_chan_desc *desc =3D &mpxy->channel_descs[chan->id=
-];
+> +       enum rpmi_message_type type =3D response ? RPMI_MSG_NORMAL_REQUES=
+T :
+> +                                                RPMI_MSG_POSTED_REQUEST;
+> +       int err;
+> +
+> +       if (!request && request_len)
+> +               return -EINVAL;
+> +
+> +       err =3D rpmi_smq_tx(priv, &priv->a2p_req, servicegroup_id, servic=
+e_id,
+> +                         type, priv->token, request, request_len);
+> +       if (err) {
+> +               dev_err(priv->dev, "tx failed %i\n", err);
+> +               goto out;
+> +       }
+> +
+> +       if (response) {
+> +               err =3D rpmi_smq_rx(priv, &priv->p2a_ack, servicegroup_id=
+,
+> +                                 service_id, priv->token, response,
+> +                                 max_response_len, out_response_len);
+> +               if (err) {
+> +                       dev_err(priv->dev, "rx failed %i\n", err);
+> +                       goto out;
+> +               }
+> +       }
+> +
+> +out:
+> +       priv->token++;
+> +       return err;
+> +}
+> +
+> +static int rpmi_shmem_request(struct rpmi_chan *chan, u32 service_id,
+> +                             const void *request, unsigned long request_=
+len,
+> +                             void *response, unsigned long max_response_=
+len,
+> +                             unsigned long *out_response_len)
+> +{
+> +       struct rpmi_shmem *priv =3D dev_get_priv(chan->dev);
+> +       struct rpmi_shmem_chan_priv *chan_priv =3D chan->con_priv;
+> +
+> +       return rpmi_shmem_request_priv(priv, chan_priv->servicegroup_id,
+> +                                      service_id, request, request_len,
+> +                                      response, max_response_len,
+> +                                      out_response_len);
+> +}
+> +
+> +static int rpmi_shmem_get_attr(struct rpmi_chan *chan,
+> +                              enum rpmi_attribute_id id, u32 *data)
+> +{
+> +       struct rpmi_shmem *priv =3D dev_get_priv(chan->dev);
+> +       struct rpmi_shmem_chan_priv *chan_priv =3D chan->con_priv;
 > +
 > +       switch (id) {
 > +       case RPMI_ATTR_SPEC_VERSION:
-> +               *data =3D desc->attrs[SBI_MPXY_ATTR_MSG_PROT_VER];
+> +               *data =3D priv->spec_version;
 > +               break;
 > +       case RPMI_ATTR_MAX_MSG_DATA_SIZE:
-> +               *data =3D desc->max_xfer_len;
+> +               *data =3D priv->slot_size - sizeof(struct rpmi_message_he=
+ader);
 > +               break;
 > +       case RPMI_ATTR_SERVICEGROUP_ID:
-> +               *data =3D desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_SERVICEGROU=
-P_ID];
+> +               *data =3D chan_priv->servicegroup_id;
 > +               break;
 > +       case RPMI_ATTR_SERVICEGROUP_VERSION:
-> +               *data =3D desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_SERVICEGROU=
-P_VERSION];
+> +               *data =3D chan_priv->servicegroup_version;
 > +               break;
 > +       case RPMI_ATTR_IMPL_ID:
-> +               *data =3D desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_IMPL_ID];
+> +               *data =3D priv->impl_id;
 > +               break;
 > +       case RPMI_ATTR_IMPL_VERSION:
-> +               *data =3D desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_IMPL_VERSIO=
-N];
+> +               *data =3D priv->impl_version;
 > +               break;
 > +       default:
 > +               return -EOPNOTSUPP;
@@ -569,262 +614,242 @@ N];
 > +       return 0;
 > +}
 > +
-> +static int rpmi_sbi_mpxy_request(struct rpmi_chan *chan, u32 service_id,
-> +                                const void *request, unsigned long reque=
-st_len,
-> +                                void *response, unsigned long max_respon=
-se_len,
-> +                                unsigned long *out_response_len)
+> +static int rpmi_shmem_base_service_req(struct rpmi_shmem *priv, u32 serv=
+ice_id,
+> +                                      const u32 *arg_in, u32 *arg_out)
 > +{
-> +       struct rpmi_sbi_mpxy *mpxy =3D dev_get_priv(chan->dev);
-> +       struct sbi_mpxy_chan_desc *desc =3D &mpxy->channel_descs[chan->id=
-];
-> +       u32 caps =3D desc->attrs[SBI_MPXY_ATTR_CHANNEL_CAPABILITY];
-> +       u32 mpxy_fid;
+> +       int len =3D 0;
+> +       u32 rx[2];
+> +       u32 tx[1];
+> +       int ret;
 > +
-> +       if (!request && request_len)
-> +               return -EINVAL;
-> +
-> +       if (request_len > desc->max_xfer_len)
-> +               return -EINVAL;
-> +
-> +       if (!response && max_response_len)
-> +               return -EINVAL;
-> +
-> +       if (response) {
-> +               if (!(caps & SBI_MPXY_CHAN_CAP_SEND_WITH_RESP))
-> +                       return -EIO;
-> +
-> +               mpxy_fid =3D SBI_EXT_MPXY_SEND_MSG_WITH_RESP;
-> +       } else {
-> +               if (!(caps & SBI_MPXY_CHAN_CAP_SEND_WITHOUT_RESP))
-> +                       return -EIO;
-> +
-> +               mpxy_fid =3D SBI_EXT_MPXY_SEND_MSG_WITHOUT_RESP;
+> +       if (arg_in) {
+> +               tx[0] =3D cpu_to_le32(*arg_in);
+> +               len =3D sizeof(*arg_in);
 > +       }
 > +
-> +       return rpmi_sbi_mpxy_send_message(mpxy, desc, mpxy_fid, service_i=
-d,
-> +                                         request, request_len, response,
-> +                                         max_response_len, out_response_=
-len);
-> +}
-> +
-> +static int rpmi_sbi_mpxy_of_xlate(struct rpmi_chan *chan,
-> +                                 struct ofnode_phandle_args *args)
-> +{
-> +       struct rpmi_sbi_mpxy *mpxy =3D dev_get_priv(chan->dev);
-> +       u32 channel_id, proto;
-> +       int i;
-> +
-> +       if (args->args_count !=3D 2)
-> +               return -EINVAL;
-> +
-> +       channel_id =3D args->args[0];
-> +       proto =3D args->args[1];
-> +
-> +       for (i =3D 0; i < mpxy->channel_count; i++) {
-> +               if (mpxy->channel_descs[i].id =3D=3D channel_id &&
-> +                   mpxy->channel_descs[i].attrs[SBI_MPXY_ATTR_MSG_PROT_I=
-D] =3D=3D
-> +                           proto) {
-> +                       chan->id =3D i;
-> +                       return 0;
-> +               }
-> +       }
-> +
-> +       return -EINVAL;
-> +}
-> +
-> +static int rpmi_sbi_mpxy_get_shmem_size(unsigned long *shmem_size)
-> +{
-> +       struct sbiret sret;
-> +
-> +       sret =3D sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_GET_SHMEM_SIZE, 0, =
-0, 0, 0,
-> +                        0, 0);
-> +       if (sret.error)
-> +               return sbi_to_linux_error(sret.error);
-> +
-> +       /* The shared memory size MUST be at least 4096 bytes */
-> +       if (sret.value < PAGE_SIZE)
-> +               return -ENODEV;
-> +
-> +       /* The shared memory size MUST be multiple of 4096 bytes */
-> +       if (sret.value & (PAGE_SIZE - 1))
-> +               return -ENODEV;
-> +
-> +       if (shmem_size)
-> +               *shmem_size =3D sret.value;
-> +
-> +       return 0;
-> +}
-> +
-> +static int rpmi_sbi_mpxy_get_channel_ids(struct rpmi_sbi_mpxy *mpxy)
-> +{
-> +       struct sbi_mpxy_channel_ids_data *sdata =3D mpxy->shmem;
-> +       u32 remaining, returned, channel_id, start_index =3D 0;
-> +       struct sbiret sret;
-> +       int i, ret;
-> +
-> +       do {
-> +               sret =3D sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_GET_CHANNEL=
-_IDS,
-> +                                start_index, 0, 0, 0, 0, 0);
-> +               if (sret.error)
-> +                       return sbi_to_linux_error(sret.error);
-> +
-> +               remaining =3D le32_to_cpu(sdata->remaining);
-> +               returned =3D le32_to_cpu(sdata->returned);
-> +
-> +               // Allocate memory on the first call.
-> +               if (!mpxy->channel_descs) {
-> +                       mpxy->channel_count =3D returned + remaining;
-> +                       if (mpxy->channel_count =3D=3D 0)
-> +                               return -ENODEV;
-> +
-> +                       mpxy->channel_descs =3D
-> +                               calloc(mpxy->channel_count,
-> +                                      sizeof(struct sbi_mpxy_chan_desc))=
-;
-> +                       if (!mpxy->channel_descs)
-> +                               return -ENOMEM;
-> +
-> +                       dev_dbg(mpxy->dev, "channel count =3D %i\n",
-> +                               mpxy->channel_count);
-> +               }
-> +
-> +               if (remaining && !returned)
-> +                       return -EPROTO;
-> +
-> +               if (start_index + returned > mpxy->channel_count)
-> +                       return -EPROTO;
-> +
-> +               for (i =3D 0; i < returned; i++) {
-> +                       mpxy->channel_descs[start_index + i].id =3D
-> +                               le32_to_cpu(sdata->channel_array[i]);
-> +               }
-> +               start_index +=3D returned;
-> +       } while (remaining);
-> +
-> +       for (i =3D 0; i < mpxy->channel_count; i++) {
-> +               channel_id =3D mpxy->channel_descs[i].id;
-> +
-> +               ret =3D rpmi_sbi_mpxy_read_attrs(mpxy, channel_id,
-> +                                              SBI_MPXY_ATTR_MSG_PROT_ID,
-> +                                              SBI_MPXY_ATTR_STD_ATTR_MAX=
-_IDX,
-> +                                              mpxy->channel_descs[i].att=
-rs);
-> +               if (ret)
-> +                       return ret;
-> +
-> +               if (mpxy->channel_descs[i].attrs[SBI_MPXY_ATTR_MSG_PROT_I=
-D] =3D=3D
-> +                   SBI_MPXY_MSGPROTO_RPMI_ID) {
-> +                       ret =3D rpmi_sbi_mpxy_read_attrs(
-> +                               mpxy, channel_id,
-> +                               SBI_MPXY_ATTR_MSGPROTO_ATTR_START,
-> +                               SBI_MPXY_RPMI_ATTR_MAX_ID,
-> +                               mpxy->channel_descs[i].rpmi_attrs);
-> +                       if (ret)
-> +                               return ret;
-> +               }
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int rpmi_sbi_mpxy_probe(struct udevice *dev)
-> +{
-> +       struct rpmi_sbi_mpxy *mpxy =3D dev_get_priv(dev);
-> +       struct sbi_mpxy_chan_desc *desc;
-> +       unsigned long flags;
-> +       struct sbiret sret;
-> +       long sbi_version;
-> +       int i, ret;
-> +
-> +       mpxy->dev =3D dev;
-> +
-> +       /* Probe for SBI MPXY extension */
-> +       sbi_version =3D sbi_get_spec_version();
-> +       if (sbi_version < 0 || sbi_version < sbi_mk_version(1, 0) ||
-> +           sbi_probe_extension(SBI_EXT_MPXY) <=3D 0) {
-> +               dev_info(dev, "SBI MPXY extension not available\n");
-> +               return -ENODEV;
-> +       }
-> +
-> +       /* Find-out shared memory size */
-> +       ret =3D rpmi_sbi_mpxy_get_shmem_size(&mpxy->shmem_size);
+> +       ret =3D rpmi_shmem_request_priv(priv, RPMI_SRVGRP_BASE, service_i=
+d, tx,
+> +                                     len, rx, sizeof(rx), NULL);
 > +       if (ret) {
-> +               dev_err(dev, "failed to get MPXY shared memory size\n");
-> +               return -ENODEV;
+> +               dev_err(priv->dev, "BASE service %i failed (%i)\n", servi=
+ce_id,
+> +                       ret);
+> +               return ret;
 > +       }
 > +
-> +       mpxy->shmem =3D memalign(PAGE_SIZE, mpxy->shmem_size);
-> +       if (!mpxy->shmem)
+> +       if (rx[0]) {
+> +               ret =3D rpmi_to_linux_error(le32_to_cpu(rx[0]));
+> +               dev_err(priv->dev, "BASE service %i returned code %i\n",
+> +                       service_id, ret);
+> +               return ret;
+> +       }
+> +
+> +       if (arg_out)
+> +               *arg_out =3D le32_to_cpu(rx[1]);
+> +
+> +       return 0;
+> +}
+> +
+> +static int rpmi_shmem_of_xlate(struct rpmi_chan *chan,
+> +                              struct ofnode_phandle_args *args)
+> +{
+> +       if (args->args_count !=3D 1)
+> +               return -EINVAL;
+> +
+> +       // args[0] is the servicegroup id.
+> +       chan->id =3D args->args[0];
+> +
+> +       return 0;
+> +}
+> +
+> +static int rpmi_shmem_open(struct rpmi_chan *chan)
+> +{
+> +       struct rpmi_shmem *priv =3D dev_get_priv(chan->dev);
+> +       u32 servicegroup_id, servicegroup_version;
+> +       struct rpmi_shmem_chan_priv *chan_priv;
+> +       int ret;
+> +
+> +       servicegroup_id =3D chan->id;
+> +
+> +       ret =3D rpmi_shmem_base_service_req(priv,
+> +                                         RPMI_BASE_SRV_PROBE_SERVICE_GRO=
+UP,
+> +                                         &servicegroup_id,
+> +                                         &servicegroup_version);
+> +       if (ret)
+> +               return ret;
+> +
+> +       chan_priv =3D malloc(sizeof(*chan_priv));
+> +       if (!chan_priv)
 > +               return -ENOMEM;
 > +
-> +       /* Setup shmem in OVERWRITE mode. (flags[1:0] =3D 00b) */
-> +       flags =3D 0;
-> +       sret =3D sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_SET_SHMEM,
-> +                        virt_to_phys(mpxy->shmem), 0, flags, 0, 0, 0);
-> +       if (sret.error) {
-> +               ret =3D sbi_to_linux_error(sret.error);
-> +               goto err;
-> +       }
+> +       chan->con_priv =3D chan_priv;
 > +
-> +       ret =3D rpmi_sbi_mpxy_get_channel_ids(mpxy);
-> +       if (ret)
-> +               goto err;
-> +
-> +       for (i =3D 0; i < mpxy->channel_count; i++) {
-> +               desc =3D &mpxy->channel_descs[i];
-> +               desc->max_xfer_len =3D
-> +                       min((u32)mpxy->shmem_size,
-> +                           desc->attrs[SBI_MPXY_ATTR_MSG_MAX_LEN]);
-> +       }
+> +       chan_priv->priv =3D priv;
+> +       chan_priv->servicegroup_id =3D servicegroup_id;
+> +       chan_priv->servicegroup_version =3D servicegroup_version;
 > +
 > +       return 0;
-> +
-> +err:
-> +       free(mpxy->channel_descs);
-> +       free(mpxy->shmem);
-> +
-> +       return ret;
 > +}
 > +
-> +static int rpmi_sbi_mpxy_remove(struct udevice *dev)
+> +static void rpmi_shmem_close(struct rpmi_chan *chan)
 > +{
-> +       struct rpmi_sbi_mpxy *mpxy =3D dev_get_priv(dev);
+> +       free(chan->con_priv);
+> +}
 > +
-> +       free(mpxy->channel_descs);
-> +       free(mpxy->shmem);
+> +static int rpmi_shmem_probe(struct udevice *dev)
+> +{
+> +       struct rpmi_shmem *priv =3D dev_get_priv(dev);
+> +       int i, ret, qidx, qcount, qslotcnt;
+> +       struct shmem_queue *queue;
+> +       u32 arg_in, arg_out;
+> +       const char *qname;
+> +       fdt_size_t qsize;
+> +       void *start;
+> +
+> +       priv->dev =3D dev;
+> +       priv->rx_timeout_ms =3D 20;
+> +
+> +       priv->slot_size =3D dev_read_u32_default(dev, "riscv,slot-size", =
+0);
+> +       if (priv->slot_size < RPMI_SLOT_SIZE_MIN ||
+> +           !is_power_of_2(priv->slot_size))
+> +               return -EINVAL;
+> +
+> +       priv->doorbell_value =3D
+> +               dev_read_u32_default(dev, "riscv,a2p-doorbell-value", 1);
+> +
+> +       qcount =3D dev_read_string_count(dev, "reg-names");
+> +       if (qcount < 0 || qcount > 5)
+> +               return -EINVAL;
+> +
+> +       for (i =3D 0; i < qcount; i++) {
+> +               ret =3D dev_read_string_index(dev, "reg-names", i, &qname=
+);
+> +               if (ret)
+> +                       continue;
+> +
+> +               qidx =3D rpmi_shmem_queue_idx(qname);
+> +               if (qidx < 0)
+> +                       continue;
+> +
+> +               start =3D dev_read_addr_size_index_ptr(dev, i, &qsize);
+> +               if (!start)
+> +                       continue;
+> +
+> +               if (qidx =3D=3D RPMI_A2P_DOORBELL) {
+> +                       priv->doorbell =3D start;
+> +               } else {
+> +                       qslotcnt =3D qsize / priv->slot_size;
+> +                       if (qslotcnt < 4)
+> +                               continue;
+> +
+> +                       if (qidx =3D=3D RPMI_QUEUE_IDX_A2P_REQ)
+> +                               queue =3D &priv->a2p_req;
+> +                       else if (qidx =3D=3D RPMI_QUEUE_IDX_P2A_ACK)
+> +                               queue =3D &priv->p2a_ack;
+> +                       else
+> +                               continue;
+> +
+> +                       queue->headptr =3D start;
+> +                       queue->tailptr =3D start + priv->slot_size;
+> +                       queue->buffer =3D start + (2 * priv->slot_size);
+> +                       queue->num_slot =3D qslotcnt - 2;
+> +               }
+> +       }
+> +
+> +       if (!priv->a2p_req.num_slot || !priv->p2a_ack.num_slot)
+> +               return -EINVAL;
+> +
+> +       arg_in =3D RPMI_SRVGRP_BASE;
+> +       ret =3D rpmi_shmem_base_service_req(
+> +               priv, RPMI_BASE_SRV_PROBE_SERVICE_GROUP, &arg_in, &arg_ou=
+t);
+> +       if (ret)
+> +               return ret;
+> +
+> +       if (arg_out < RPMI_MKVER(1, 0))
+> +               return -EINVAL;
+> +
+> +       ret =3D rpmi_shmem_base_service_req(
+> +               priv, RPMI_BASE_SRV_GET_IMPLEMENTATION_VERSION, NULL, &ar=
+g_out);
+> +       if (ret)
+> +               return ret;
+> +       priv->impl_version =3D arg_out;
+> +
+> +       ret =3D rpmi_shmem_base_service_req(
+> +               priv, RPMI_BASE_SRV_GET_IMPLEMENTATION_IDN, NULL, &arg_ou=
+t);
+> +       if (ret)
+> +               return ret;
+> +       priv->impl_id =3D arg_out;
+> +
+> +       ret =3D rpmi_shmem_base_service_req(priv, RPMI_BASE_SRV_GET_SPEC_=
+VERSION,
+> +                                         NULL, &arg_out);
+> +       if (ret)
+> +               return ret;
+> +       priv->spec_version =3D arg_out;
 > +
 > +       return 0;
 > +}
 > +
-> +static const struct udevice_id rpmi_sbi_mpxy_ids[] =3D {
-> +       { .compatible =3D "riscv,sbi-mpxy-mbox" },
+> +static const struct udevice_id rpmi_shmem_ids[] =3D {
+> +       { .compatible =3D "riscv,rpmi-shmem-mbox" },
 > +       {}
 > +};
 > +
-> +static const struct rpmi_transport_ops rpmi_sbi_mpxy_ops =3D {
-> +       .of_xlate =3D rpmi_sbi_mpxy_of_xlate,
-> +       .get_attr =3D rpmi_sbi_mpxy_get_attr,
-> +       .request =3D rpmi_sbi_mpxy_request,
+> +static const struct rpmi_transport_ops rpmi_shmem_ops =3D {
+> +       .of_xlate =3D rpmi_shmem_of_xlate,
+> +       .get_attr =3D rpmi_shmem_get_attr,
+> +       .request =3D rpmi_shmem_request,
+> +       .open =3D rpmi_shmem_open,
+> +       .close =3D rpmi_shmem_close,
 > +};
 > +
-> +U_BOOT_DRIVER(rpmi_sbi_mpxy) =3D {
-> +       .name =3D "rpmi-sbi-mpxy",
+> +U_BOOT_DRIVER(rpmi_shmem) =3D {
+> +       .name =3D "rpmi-shmem",
 > +       .id =3D UCLASS_RPMI,
-> +       .of_match =3D rpmi_sbi_mpxy_ids,
-> +       .probe =3D rpmi_sbi_mpxy_probe,
-> +       .remove =3D rpmi_sbi_mpxy_remove,
-> +       .priv_auto =3D sizeof(struct rpmi_sbi_mpxy),
-> +       .ops =3D &rpmi_sbi_mpxy_ops,
+> +       .of_match =3D rpmi_shmem_ids,
+> +       .probe =3D rpmi_shmem_probe,
+> +       .priv_auto =3D sizeof(struct rpmi_shmem),
+> +       .ops =3D &rpmi_shmem_ops,
 > +       .flags =3D DM_FLAG_PRE_RELOC,
 > +};
+> diff --git a/include/rpmi_proto.h b/include/rpmi_proto.h
+> index 012ae93d7317..4b557bfeedf5 100644
+> --- a/include/rpmi_proto.h
+> +++ b/include/rpmi_proto.h
+> @@ -60,4 +60,27 @@ enum rpmi_servicegroup_id {
+>         RPMI_SRVGRP_VENDOR_END          =3D 0xFFFF,
+>  };
+>
+> +/** RPMI Base ServiceGroup Service IDs */
+> +enum rpmi_base_service_id {
+> +       RPMI_BASE_SRV_ENABLE_NOTIFICATION =3D 0x01,
+> +       RPMI_BASE_SRV_GET_IMPLEMENTATION_VERSION =3D 0x02,
+> +       RPMI_BASE_SRV_GET_IMPLEMENTATION_IDN =3D 0x03,
+> +       RPMI_BASE_SRV_GET_SPEC_VERSION =3D 0x04,
+> +       RPMI_BASE_SRV_GET_PLATFORM_INFO =3D 0x05,
+> +       RPMI_BASE_SRV_PROBE_SERVICE_GROUP =3D 0x06,
+> +       RPMI_BASE_SRV_GET_ATTRIBUTES =3D 0x07,
+> +};
+> +
+> +/** RPMI Messages Types */
+> +enum rpmi_message_type {
+> +       /* Normal request backed with ack */
+> +       RPMI_MSG_NORMAL_REQUEST =3D 0x0,
+> +       /* Request without any ack */
+> +       RPMI_MSG_POSTED_REQUEST =3D 0x1,
+> +       /* Acknowledgment for normal request message */
+> +       RPMI_MSG_ACKNOWLDGEMENT =3D 0x2,
+> +       /* Notification message */
+> +       RPMI_MSG_NOTIFICATION =3D 0x3,
+> +};
+> +
+>  #endif
 >
 > --
 > 2.53.0
