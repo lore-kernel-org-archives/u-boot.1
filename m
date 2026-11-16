@@ -1,157 +1,169 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96F74606A338
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 18:22:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D282A606A330
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 18:32:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wiLakJrp;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=x9eAYcb5
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DUnpTr9C;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=be+ncvpa
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 134A0607EB;
-	Mon, 16 Nov 2026 18:22:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8E5764078E;
+	Mon, 16 Nov 2026 18:32:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id c8MoTxYoZcNE; Mon, 16 Nov 2026 18:22:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 263EC607B2
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794853337;
-	b=hqVYl+U0AmDy+E1JsBd+1ypTPXrd07yYYQQkc5+D9jIL838ESmNbtwdkZqJI6Wao8kU3
-	 9JRiIcfp9rgmgPSF9vk0d0NyCEt6xbJKx+coTbseIESthkgsFJFlCUtbMWYkrTyIEOPqv
-	 EQF5dnPgib5jpKduo1IACHdhmMhBYyLd46u5FG60sC7BG7B4RWPHEws3YQiEbKRD7fKgS
-	 KBAEhtS+wcQp7+YkyxGoJzBYdo9sj1uUBtztS3xV0ZqfTJahxvsC01uRwUeRD3hzEFtjh
-	 vxUnHXyFz52GRZtfK0KiInxRDAGa/FkTIWExBchNcus2UUdPTXrWXUOd9HlEpgh2hNg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2WIut5OJqEBU; Mon, 16 Nov 2026 18:32:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CB1B140766
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794853920;
+	b=ECR+4q5D5k+KwCU//z9sgH3IGck9XDPl95qcQ6WIHsW+8LIbA7fvrlDUj7TsEa7AatsF
+	 Hdqh3yFuuj5Sb0LccSXRyOaDxHpWQzq/UQK3lvZFv4tOA8c7c/DQIVrB11V0/fs9RJbQk
+	 gadxA3aHG3CNjkMV93Pt6fB4zNMs4+CnJbN4Ycb/q/b9UVKXTSJJzdNvIFz6Honw/RHcG
+	 +FYMWe8W8Cj+NRaeyUKxlDjMUqAZL9E2c+ClNE8b9YHsHTS/+KAUwDZ50yG0TtImq/j2U
+	 4OSoqbKyxD59gGUnRNZ+sWSBPM0PMSq17HRUrQWqxGhYVxsS6aBkkdzsEbB6biKwi4A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794853337;
+	c=relaxed/relaxed; t=1794853920;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=v8u+MLHZhhlywtjNA2/fYblyo66n1VxHtWIkjfTUbDk=;
-	b=N3C24c0rvcsn4FzU/DVrIXODRxN9GkT615Y3L5X3yCzUd0piI6+K4HjB0ZGSOn6LE/X6
-	 LMh+mum7bHJ2dPPRsWyoKlbx0CPDruPe/jhqiml9B6UTJ/LAdNRNvpHTsxQIBgzp/I2/a
-	 w8agflZTMigiXVllYzR87+dzpl7d6TkbpHrX92bZhlLPm96Ycljy8Ml732wn9+vcdFPfR
-	 FyDv6bfR3qumZdAQM8DKe2yuc1Eb/waiAdX4+wp/7ApIczwvgPYNMiasXAr5coN4JNTeh
-	 iNQuGcBZrY4eakwrx3OPOiWk6IMm8qNv4aRIxNsi2ZatoXgsmX3nLXwIpW6nxIIpNKg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
+	b=Rrflqh4370IOsp0jAjx5W9z4hefdJ6lj3nkzHO2Wf7hbIHOSLVvCdJ4FhwXTm4/DQd0r
+	 ac4RqAxpz3EUxOSUebsr1EN8L0vlPItrUO8t/UxyLCXnHgze3S4m/UPYa6izr7acMN07b
+	 maXkykTX3vhXFrrJPUAa/VHx8fgAmFk8Bukm/UupTCNGAs8iAdRlUBpCiVDg0fJ9UX/Bp
+	 KRDDMN7vk+7BwMaoqdvLB+qQC9Z1ytikGEXAHYdCOjr6tL5jgqlWAkC0ZsS8M+r+hCIDH
+	 HmYV13xEkQotIBT+KXRMsmf4e1nYt3EP0RhcxzsN7O++UhvjLJIFzWIUUOtbL3pbIag==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794853337;
-	bh=v8u+MLHZhhlywtjNA2/fYblyo66n1VxHtWIkjfTUbDk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794853919;
+	bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wiLakJrpnpJkHkTY9RJTYosyA6lvf1m4R22VXj6uFoueRG0cnlob3vi0kQ1V9mfS8
-	 Ler6Il4EaOHbeQIsWeXiwwiIFUHKIRw2o6hKhsINqYTg4JxBSl2n6uB2/ZjU3o8Jpn
-	 l4sHayIF9EODWomCsPAKhhJ2M53dqT15OtoPUFd90msNBV12OHQH6eNjVVRH7nFrE8
-	 83GZhlYi3zGoOuwU1Nk8Kh759IHKZQebpjIPgGkHmsBhfQNkef1HJJbQZe4YCPlPmV
-	 06dxwmBAims9nSFK/UEAI/97y/F0HlmwgnS67k5x5BSkWMiEL0cofuQ0Rs1B4MT2j2
-	 HQjvTVs2iheDw==
+	b=DUnpTr9C2gwLWLaqEMCk+bnuaMv86RwSBeMmdjrbULMpqwZnn32F5308zw4bQHM9s
+	 ZrnEyPjiSP4U2QM4QH52PuMGkTnbe2zH3c6HD1QCVfyS1cEBjYtOVZ9ZK2/TR5OeRi
+	 aVPkcGaboXqtttmBdqnJTI6B/UsCNBHMsut2hPtEywLEViqn7Q0gfWwGbrTlt9vP5x
+	 gklJAPt4T81UQxgztoGWF0O0p58OzAYHaheEr03j8QhF3b/JsJdCqPTsXW7RPuHxLS
+	 YiWu94R3TiG031XZeOzJMKrNmVzRo7G3uoK3qN4WlVUBYDqbE2thdxkKGMFU3AnEo6
+	 ACgOdLUquuycg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 263EC607B2;
-	Mon, 16 Nov 2026 18:22:17 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id D702D176
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:22:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CB1B140766;
+	Mon, 16 Nov 2026 18:31:59 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6AFA728C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:31:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id BDD9180F23
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:22:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4DA70607CD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:31:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UeU5AykMDnWt for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 18:22:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C905D80F19
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::132b"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MVKIqc96mRnK for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 18:31:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8431960763
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c2d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::132b; helo=mail-dy1-x132b.google.com;
- envelope-from=clamor95@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=x9eAYcb5
-Received: from mail-dy1-x132b.google.com (mail-dy1-x132b.google.com
- [IPv6:2607:f8b0:4864:20::132b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C905D80F19
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:22:14 +0000 (UTC)
-Received: by mail-dy1-x132b.google.com with SMTP id
- 5a478bee46e88-37071c0f42aso5579201eec.0
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:22:14 -0800 (PST)
+ client-ip=2607:f8b0:4864:20::c2d; helo=mail-oo1-xc2d.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=be+ncvpa
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8431960763
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:31:56 +0000 (UTC)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-716b58a4365so2502010eaf.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:31:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794853333; x=1795458133;
+ d=konsulko.com; s=google; t=1794853916; x=1795458716;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=v8u+MLHZhhlywtjNA2/fYblyo66n1VxHtWIkjfTUbDk=;
- b=x9eAYcb5fg1hQWW0ji0m3NX8n/s2i8qw/xpcjgQJHxZKs5QQlfTYfXoEMSKDj80H2J
- 8V080Be/JsIbrVgzNMbiaolIWo5RzeMA43Kid507cxiDQjShr0BR4IlG0CHfYkkVwcDH
- or3J+t/ve2cwE86KVa3gQWR4iHc2hBg2i7ain4i11/jFaL4dFjovgy2CJvzywvNTHgp2
- jGgL5R98o/5gVUfApiqAC5khCZQqQ5EGcgp6uE98JW6/A2NJpTgfSiswboh9VoV5tHX0
- XlFN18IVg2TsFqJOkiZLzztYaYNKnOTzKPwMw9uwuh3EIu1A4T0Nl2EgLufW0ygvBnG1
- uV6w==
+ bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
+ b=be+ncvpaGGXLGjCapjWhYVIheAgdJxJD52xWtEPcW35GnkzLEa3wwvToQTDOJ7B2/d
+ OqSDMGNcWAKm87zqOnGVNpp3l3BGDc48NaXvOSSv5DVRfisWJW3Fs7MsOrGpoJLolVOe
+ PVX88YKJsvoE2kg3iMLBNCdyrt6JU96ZqFgBE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794853333; x=1795458133;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20260707; t=1794853916; x=1795458716;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=v8u+MLHZhhlywtjNA2/fYblyo66n1VxHtWIkjfTUbDk=;
- b=haUoVpBQLtMMY+ofrSNnjNvkEx+baHeI2g3Y0Uz948CS/u00uq+cP+lcag0V3DznBA
- b8Ml3WS1PWSiYVRwU060qaPqIIiBRudqD6IgHWYZO5Lvq9HBjD07yKxwwaEcPXgh92uH
- Kj/wLGZAzwZR+FqoR+ekyXSp55LQFM3kuK3JqugorwbMXLIeWS9ZqmoQpIlAjHkqzu70
- Eco3eSgLkdfQ20sHVbvloGT+mZjtgyLS/yaCnUC1xnZfYzYL9HCFvnqdJCN3QKs9TNE0
- G/f4KzLG42Ov9fQmSsXG5Klp3GEWJCyUrpUD8gfln22vWjEXZvxaqzg6vTdItdjwHMHf
- rDjA==
-X-Gm-Message-State: APuU4Z8o/5jjMljK1JtBSBpeqXdzmixiYt9zBsAwc1wi/bUFVClKFvCb
- wI5u9oypDbIe+LXwoehdOp3olt0+shFsOczemQ1MD7Q6KakSBhOv34g5xOQPIzVXZ9OBHfrJOBT
- 6YYCG2B2OtmRRHSiJzzN1xztnVtmr5Fg=
-X-Gm-Gg: AZFdTZeRYVa5jfX1eYuYfnxDfGme44MuhjXeC+y1n3v4deMacBavDEQGwCtmK4oryQa
- k0YxQlSTYQMguvh/97gGf7uFS5PkVKG+ud29w4MhlRCisL4Gvu1uSra52Kp50q6xsT6+8qVJ0lD
- 03rf0LlQSM7bh/BBxeEyhCZOL96pJzrFhlKrTHqB796cZ5Kpkmme4v3u0GYee4UZp4ZlM6Kbvm3
- qXfvbJAosB6poKhRPSoEg3L7jj4rbg0V7hJgS1s7rw6oMHQ7NSTWkbWNL1Yp76kHGf2aEqSBrf+
- +3/wvOs+BfMEMYG8IytWzuIfJI0yKDmAOWSss3EnLy6N1XsJvuxFIAq4eNfApr9uSOGrYPZ0GuQ
- 8pVgc5kJvlqifM0yriFMvshlHaAxR1e2w8xhwTjKq/tmAKKiQaX8Cgi+LXP9moy0E0LPg8d3XUE
- isVlk16lXOU+uDRAMPsyqnhIICABABnTJGJKFRqW4T0iKJR82OrTI=
-X-Received: by 2002:a05:7300:f694:b0:376:203e:7d7b with SMTP id
- 5a478bee46e88-3796337436amr17022137eec.2.1794853333570; Mon, 16 Nov 2026
- 10:22:13 -0800 (PST)
+ bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
+ b=NOTOsilGxFayghXeBOJdsFY0JqTASNAxEqspmrNCIpaBAs2rXjdS+LVFOKQ4R8i3KJ
+ st9JBuWQwb9WnZ78k6eLL8XCVyWyOL09ChP7zENu+olRfalrcWjRQlCyK1u/elnOLpd0
+ GkegbDcVbQiVRtrvx8SLJscGKUlzu4FUMglb213XNQOA27W8Qv6Qm+A6ulCzEuOkQ14X
+ UJmiFJYLnNM09dZInkj20cpsCAjfyZqmaaI6lXKen5biRWfnmRb6x/P/QJRodTM7GdYS
+ nbYPdZxFqXejTPNQ4e7y0PRg38O/jrm4bmAxEO/M5wJMb8UPLzQwYAhsPZY8kca5HlW0
+ RamA==
+X-Gm-Message-State: APuU4Z8wRx0eHRV/NhmvFwp2FRCkhiz/2DVCleWt/3XswsP83W2bl6+O
+ sZXgSn2qOHiwkfUBaknV4HXugrlZXOfu92P0T24CgeHd8XqFpydQChvx7RlEDuJt9aw=
+X-Gm-Gg: AYBFou1CsqnJ1wD8SkSUStYaLlXLFi053C7pjehwAtzAszXAChgQU0LTBfchLmGRaxM
+ 6MLXMOweZ8LldLuGZIYoZ078PxvUYCxXhoasX695NnfsLI7GDBs4kP1namtOrkPVe9JKL5DgLTY
+ P96WkcfZIC+G1JVe8t7Rj8OueCA1zy1myeQoYuho3GFpm+Cu+L+UUTRhnZPED8PQlN601DL44fl
+ CGpKk8thR+QwUAxMBSg0G6KESANf/yUW5/AAR0zO9N6sNL3xl0Jw4GOTbp0sx/kq2F0sWqaKy35
+ HeDkEmZrp7hM3fFIyyc28DrwNEUbgB4nHK+6kRHDxfjd0U3z0JX49jxRn853B13wGoZfmrmXApx
+ +q6RlDQ/C0bZzc07uhAkSzm5ETsm9R2ZJiTjNKeO/mY/RiM/tUK70mgu/a5ChL6o7EgVbDm68Wr
+ XLAlSswJovGS/UWFT3bZFUFtl2Brgaqnn2H2aCEQ5xLdPLn6qz4CtzCfVjvciaj/KQCeRz9R/37
+ zuPr3E+hLnz3iIdcmmiirLDjjNnOjAHS8A7pLbLO3y+aBGW0HSqSOhSQrfp7RtvSSMZRYkr5YJ5
+ 7XyioDNAzLcF5csMm2siLMLU1VJaoPTwkp0KR07dBHnLyiho46Ci4QOjyqxf+MMsqP9a73Tu6LE
+ sy3+zNwul5YOgsj1+7omKfP6xTy/bZC9MHcaW3+feE9NHKnYA+5uuCOffYyVJ614dW0a2qAYt6m
+ bwFBqdIdz2P0ayzHmS8L3TNqfZEPLSn1c=
+X-Received: by 2002:a05:6820:c5c1:20b0:71a:ef4a:8684 with SMTP id
+ 006d021491bc7-71aef4a8e17mr1978546eaf.59.1794853915721; 
+ Mon, 16 Nov 2026 10:31:55 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-71ab42cc12dsm9132452eaf.7.2026.11.16.10.31.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Nov 2026 10:31:54 -0800 (PST)
+Date: Mon, 16 Nov 2026 12:31:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Javier Tia <floss@jetm.me>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, David Lechner <dlechner@baylibre.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michael Walle <mwalle@kernel.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH v4 1/8] disk: Add partition lookup by type GUID
+ functionality
+Message-ID: <20261116183151.GB554944@bill-the-cat>
+References: <20260428-type-v4-0-b7051dc45a88@oss.qualcomm.com>
+ <20260428-type-v4-1-b7051dc45a88@oss.qualcomm.com>
+ <a5c42652-7346-4775-a13e-e9d74c393ee6@cherry.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261116174340.3488324-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20261116174340.3488324-1-marek.vasut+renesas@mailbox.org>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 16 Nov 2026 20:22:02 +0200
-X-Gm-Features: Aa3M54rwfd358pt5YBDu-HaVm03mnhb8JPMrElY6WA7dBoJKA1gm_YZoeV3jh84
-Message-ID: <CAPVz0n2ftpVfRNmudF7A_DbOF7W=Ay=ZOTuKVBLnbr4MSALW0w@mail.gmail.com>
-Subject: Re: [PATCH] sysreset: Constify driver ops
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.u-boot-project.org, Bradley Morgan <bradley.morgan@linux.dev>,
- Daniel Palmer <daniel@thingy.jp>, David Lechner <dlechner@baylibre.com>, 
- Eugen Hristev <ehristev@kernel.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Hiago De Franco <hfranco@baylibre.com>, Julien Stephan <jstephan@baylibre.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Leo Liang <leo.liang@sifive.com>, 
- Mario Six <mario.six@gdsys.cc>, Max Filippov <jcmvbkbc@gmail.com>, 
- Michal Simek <michal.simek@amd.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Thierry Reding <treding@nvidia.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Tim Ouyang <tim609@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Yao Zi <me@ziyao.cc>, Zhuxu Ran <zhuxu_ran@zohomail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vZCQxaLfc0dh9iNB"
+Content-Disposition: inline
+In-Reply-To: <a5c42652-7346-4775-a13e-e9d74c393ee6@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -161,170 +173,94 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-=D0=BF=D0=BD, 16 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 19:4=
-3 Marek Vasut <marek.vasut+renesas@mailbox.org> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Bradley Morgan <bradley.morgan@linux.dev>
-> Cc: Daniel Palmer <daniel@thingy.jp>
-> Cc: David Lechner <dlechner@baylibre.com>
-> Cc: Eugen Hristev <ehristev@kernel.org>
-> Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-> Cc: Hiago De Franco <hfranco@baylibre.com>
-> Cc: Julien Stephan <jstephan@baylibre.com>
-> Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-> Cc: Leo Liang <leo.liang@sifive.com>
-> Cc: Mario Six <mario.six@gdsys.cc>
-> Cc: Max Filippov <jcmvbkbc@gmail.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Sam Protsenko <semen.protsenko@linaro.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Thierry Reding <treding@nvidia.com>
-> Cc: Tien Fong Chee <tien.fong.chee@altera.com>
-> Cc: Tim Ouyang <tim609@andestech.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Weijie Gao <weijie.gao@mediatek.com>
-> Cc: Yao Zi <me@ziyao.cc>
-> Cc: Zhuxu Ran <zhuxu_ran@zohomail.com>
-> Cc: u-boot@lists.u-boot-project.org
-> ---
->  drivers/sysreset/poweroff_gpio.c           | 2 +-
->  drivers/sysreset/sysreset-ti-sci.c         | 2 +-
->  drivers/sysreset/sysreset_ast.c            | 2 +-
->  drivers/sysreset/sysreset_at91.c           | 2 +-
->  drivers/sysreset/sysreset_cv1800b.c        | 2 +-
->  drivers/sysreset/sysreset_gpio.c           | 2 +-
->  drivers/sysreset/sysreset_max77663.c       | 2 +-
->  drivers/sysreset/sysreset_max8907.c        | 2 +-
->  drivers/sysreset/sysreset_microblaze.c     | 2 +-
->  drivers/sysreset/sysreset_mpc83xx.c        | 2 +-
->  drivers/sysreset/sysreset_octeon.c         | 2 +-
->  drivers/sysreset/sysreset_palmas.c         | 2 +-
->  drivers/sysreset/sysreset_psci.c           | 2 +-
->  drivers/sysreset/sysreset_qemu_virt_ctrl.c | 2 +-
->  drivers/sysreset/sysreset_raa215300.c      | 2 +-
->  drivers/sysreset/sysreset_resetctl.c       | 2 +-
->  drivers/sysreset/sysreset_sandbox.c        | 4 ++--
->  drivers/sysreset/sysreset_sbi.c            | 2 +-
->  drivers/sysreset/sysreset_socfpga.c        | 2 +-
->  drivers/sysreset/sysreset_socfpga_soc64.c  | 2 +-
->  drivers/sysreset/sysreset_sti.c            | 2 +-
->  drivers/sysreset/sysreset_syscon.c         | 2 +-
->  drivers/sysreset/sysreset_tegra.c          | 2 +-
->  drivers/sysreset/sysreset_tps65910.c       | 2 +-
->  drivers/sysreset/sysreset_tps80031.c       | 2 +-
->  drivers/sysreset/sysreset_x86.c            | 2 +-
->  drivers/sysreset/sysreset_xtfpga.c         | 2 +-
->  27 files changed, 28 insertions(+), 28 deletions(-)
->
-...
->
-> diff --git a/drivers/sysreset/sysreset_max77663.c b/drivers/sysreset/sysr=
-eset_max77663.c
-> index 8febcf8de6c..a4ed763f743 100644
-> --- a/drivers/sysreset/sysreset_max77663.c
-> +++ b/drivers/sysreset/sysreset_max77663.c
-> @@ -41,7 +41,7 @@ static int max77663_sysreset_request(struct udevice *de=
-v,
->         return -EINPROGRESS;
->  }
->
-> -static struct sysreset_ops max77663_sysreset =3D {
-> +static const struct sysreset_ops max77663_sysreset =3D {
->         .request =3D max77663_sysreset_request,
->  };
->
-> diff --git a/drivers/sysreset/sysreset_max8907.c b/drivers/sysreset/sysre=
-set_max8907.c
-> index 6f62af9bffe..ac268dc5e61 100644
-> --- a/drivers/sysreset/sysreset_max8907.c
-> +++ b/drivers/sysreset/sysreset_max8907.c
-> @@ -26,7 +26,7 @@ static int max8907_sysreset_request(struct udevice *dev=
-, enum sysreset_t type)
->         return -EINPROGRESS;
->  }
->
-> -static struct sysreset_ops max8907_sysreset =3D {
-> +static const struct sysreset_ops max8907_sysreset =3D {
->         .request =3D max8907_sysreset_request,
->  };
->
-...
->
-> diff --git a/drivers/sysreset/sysreset_palmas.c b/drivers/sysreset/sysres=
-et_palmas.c
-> index 9e3aa403488..e80c78ca482 100644
-> --- a/drivers/sysreset/sysreset_palmas.c
-> +++ b/drivers/sysreset/sysreset_palmas.c
-> @@ -41,7 +41,7 @@ static int palmas_sysreset_request(struct udevice *dev,
->         return -EINPROGRESS;
->  }
->
-> -static struct sysreset_ops palmas_sysreset =3D {
-> +static const struct sysreset_ops palmas_sysreset =3D {
->         .request =3D palmas_sysreset_request,
->  };
->
-...
->
-> diff --git a/drivers/sysreset/sysreset_tegra.c b/drivers/sysreset/sysrese=
-t_tegra.c
-> index 10bcd3a1873..d498aaea73a 100644
-> --- a/drivers/sysreset/sysreset_tegra.c
-> +++ b/drivers/sysreset/sysreset_tegra.c
-> @@ -29,7 +29,7 @@ static int tegra_sysreset_request(struct udevice *dev,
->         return -EINPROGRESS;
->  }
->
-> -static struct sysreset_ops tegra_sysreset =3D {
-> +static const struct sysreset_ops tegra_sysreset =3D {
->         .request =3D tegra_sysreset_request,
->  };
->
-> diff --git a/drivers/sysreset/sysreset_tps65910.c b/drivers/sysreset/sysr=
-eset_tps65910.c
-> index 98da56661c0..957c73f04f2 100644
-> --- a/drivers/sysreset/sysreset_tps65910.c
-> +++ b/drivers/sysreset/sysreset_tps65910.c
-> @@ -43,7 +43,7 @@ static int tps65910_sysreset_request(struct udevice *de=
-v,
->         return -EINPROGRESS;
->  }
->
-> -static struct sysreset_ops tps65910_sysreset =3D {
-> +static const struct sysreset_ops tps65910_sysreset =3D {
->         .request =3D tps65910_sysreset_request,
->  };
->
-> diff --git a/drivers/sysreset/sysreset_tps80031.c b/drivers/sysreset/sysr=
-eset_tps80031.c
-> index 50024fe4e79..1a0dc2adb16 100644
-> --- a/drivers/sysreset/sysreset_tps80031.c
-> +++ b/drivers/sysreset/sysreset_tps80031.c
-> @@ -29,7 +29,7 @@ static int tps80031_sysreset_request(struct udevice *de=
-v,
->         return -EINPROGRESS;
->  }
->
-> -static struct sysreset_ops tps80031_sysreset =3D {
-> +static const struct sysreset_ops tps80031_sysreset =3D {
->         .request =3D tps80031_sysreset_request,
->  };
->
 
-Acked-by: Svyatoslav Ryhel <clamor95@gmail.com> # Tegra, Maxim and TI PMICs
+--vZCQxaLfc0dh9iNB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, May 07, 2026 at 03:42:14PM +0200, Quentin Schulz wrote:
+> Hi Balaji,
+>=20
+> On 4/28/26 9:31 AM, Balaji Selvanathan wrote:
+> > Introduce part_get_info_by_type_guid() function to enable partition
+> > lookup using partition type GUID. This complements the existing UUID
+> > lookup functionality and provides more flexible partition discovery
+> > mechanisms.
+> >=20
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> > ---
+> > Changes in v4:
+> > - No changes
+> >=20
+> > Changes in v3:
+> > - Addressed minor corrections in part_get_info_by_type_guid function
+> >=20
+> > Changes in v2:
+> > - No changes
+> > ---
+> > ---
+> >   disk/part.c    | 37 +++++++++++++++++++++++++++++++++++++
+> >   include/part.h | 21 +++++++++++++++++++++
+> >   2 files changed, 58 insertions(+)
+> >=20
+> > diff --git a/disk/part.c b/disk/part.c
+> > index 4923dc44593..4cb3204ac6e 100644
+> > --- a/disk/part.c
+> > +++ b/disk/part.c
+> > @@ -731,6 +731,43 @@ int part_get_info_by_uuid(struct blk_desc *desc, c=
+onst char *uuid,
+> >   	return -ENOENT;
+> >   }
+> > +int part_get_info_by_type_guid(struct blk_desc *desc, const char *type=
+_guid,
+> > +			       struct disk_partition *info)
+> > +{
+> > +	struct part_driver *part_drv;
+> > +	int ret;
+> > +	int i;
+> > +
+> > +	if (!CONFIG_IS_ENABLED(PARTITION_TYPE_GUID))
+>=20
+> We don't have an xPL symbols for PARTITION_TYPE_GUID so you need to use
+> IS_ENABLED(CONFIG_...) here otherwise it won't work in xPL stages.
+>=20
+> Or you need to add an xPL symbol for that (see PARTITION_UUIDS and
+> SPL_PARTITION_UUIDS).
+
+Jumping back here as I see in v5 it was switched to IS_ENABLED(...). I
+believe the correct approach is CONFIG_IS_ENABLED(...) and introducing
+if needed, or just waiting for the need otherwise, the xPL variant. This
+is because I can see for size reasons xPL and full U-Boot not having the
+same environment notion (perhaps NOWHERE being set) and so we instead
+run in to the other type of compile problem here. Generally speaking
+using CONFIG_IS_ENABLED(FOO) and later adding the xPL symbols, for shared c=
+ode,
+is better than IS_ENABLED(CONFIG_FOO) because we want/need that
+flexibility (there are counter examples, but they are the exception, ie
+we *must* be consistent from phase to phase or know what a previous
+phase has done/next will do).
+
+--=20
+Tom
+
+--vZCQxaLfc0dh9iNB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCavtMEwAKCRAr4qD1Cr/k
+CnDhAP9nOjRScUyhWE0Elr8eDuanb39ppsNjIYhWvQ/7va1lIQD6A29Xpbrdrcb7
+Q+2N8g/S+5PkBBASlmNLZkYdiVZMlgE=
+=DL6r
+-----END PGP SIGNATURE-----
+
+--vZCQxaLfc0dh9iNB--
