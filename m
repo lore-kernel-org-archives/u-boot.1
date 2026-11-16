@@ -1,146 +1,145 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B724606A330
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7FD6606A888
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XwX54CAp;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b5Cuh2gp
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jqjnb0hz;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=dR/40db7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D94E081061;
-	Tue, 17 Nov 2026 04:34:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 94B3D403FF;
+	Tue, 17 Nov 2026 04:34:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8V1fjcFIPe8z; Tue, 17 Nov 2026 04:34:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0F17D81046
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890092;
-	b=HjXu05/g1R0g9xF1qO1esAJIxeFOa1K1KLcedJqI8TCcDKTpRo1XqfGLV8IDemqSWFj2
-	 +D/gfPt7v6GT40yNPQEP1NrkNQh0aEbfyUlAghkjmNc4xC23NBKU8Utyw1Gh02AopxL2X
-	 z3PUjbPf69D5ncK39vfYAlkWF1gig8yY6b+8BuY0SEeWKBmhwnROT+RYNTrAeXt/RR5Gb
-	 Jjpn2I5FfO8ZiKXIvZXQ3y8Yf0o6+l/zqOKGjt5bkgeFJ9ZUAoE/bKphZB/BRStCxFLwK
-	 vjn0J2Td7AZD66PAOiPlpfW0DZk+NP8k8G1nFnamVTbrKH4G1HikXogOjCIVXoIz5xg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lbAK6SQIsGEg; Tue, 17 Nov 2026 04:34:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B40554043B
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890093;
+	b=j7cFaZ1IsdEu6ZYYgX6ssXwdq4CchPYrLbaXAKoQ0clPzj6ScQ+wbnzLAuSNdpW4kuMi
+	 CJhpL1zexnjLBUtU/fSEYlcJWB2AsRM8AchCnGS/oGLYFhB6+CvpLfzwQC3fdu0qfgQSV
+	 ZOpc+rfFWXWV/Cbt7idiFG6gpZasMvh1PfJ/HZVixMmcATULNsxausLYxQokR6D3lXlPq
+	 3qdqOgSi9gkNqS7wXvq+j3Icu+vvzgCnlCfXQZVdc1JsspxU7lbwwwASPY8MtNOnxDX65
+	 U28abo1bpTyYIw7NpXze5yqPTGma1p0GADTNzXyha7x1LDlVm6trHHhb+XepiRrFhcg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794890092;
+	c=relaxed/relaxed; t=1794890093;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
-	b=DLycfLJDegY8/0WyYB6wfzmhJmlAjdKeoK+JTH/qNatNCIEsDCtM4lc8X1Rfl8eOaqlL
-	 C1joqm5w4k1i/jW/yJtCMflqlwfURRn/i8Q6NjQmrOc70qSZSKfuBW6luqcF8Clt0CPm+
-	 Bpg5AkTPOb0Xv2sq+2gJB3LdqK1ed5n0heedWWVeitjRLDsdAI8NSkCTZYmuV794TtvgY
-	 VqP0QLP2//2THWmWXmu7sWhxexMXAJmJEqFMUTw8SrEjyMhLURtG7EJ5RKTgfQqd94tOt
-	 GU6jAGPWyxaMC5tqySRAwDXAXR+LWpsGU/o4CW2pePWHHLuDTyLFmfBB0efWy80iC6A==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b5Cuh2gp;
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=T49UyMlm+WGeqe5N5Z0iRWrjDbUHrmqGBk5TyVHOAoo=;
+	b=l7hTzhWqav121CwJ0B6IqLDjGZoPxi6DfvzeydLndPhdOvwPiW1KC88JEZNkPDY2DjPV
+	 NPd90UjFDk/5t9wL1wScUBewQ5LO3Zw8so0UULKOQ0q/dIUm6nuPcq9VrsKSbHaKnveQx
+	 vCgLHrZv0K/PjNIfkRNp69GuF8FIxnl5JmCSsISiE5s/fvxsWRqb9DvStPBSumrTYVTLB
+	 fQ6Rkz2ewxuochL2EIEjyy1DK6iPc6rESYJ/YbfZDjw/sZ8dpA9bcDBbMF8zuXbDT7rXe
+	 nISlN29Hq1QvuQEKPdPzy64+0FrElCo1t5HGTUI14l+z3uQlCW5sPrfdU3v++r15EDQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794890092;
-	bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=XwX54CAp/VSVKInfGKAgSpCyZTnUPrU9XBENJqy9V5yE2YXGKIrh2rYP3fITCFZbm
-	 hzWHx97mGHUoxRiQcnSby92aROZnYH1XEGYmJpIs8DRt3mlAqVbX1JelXZYowQHiBO
-	 0HeaZR6Fpza678Z3UhDUACKvTO6HAHGY7h86VHUl+8YCYY25hvQFkwo2aqQxt43XJL
-	 uUKcfMfRlre3uqSWpE6idowFIux0tI8VEQgyVGmUnLyo5qPxWKSHP6BY/yzqpA609z
-	 MW8yCTaXQCls9eo1CmS3NSi1UNEl/fbJE3b/kAB9GZ9HmZ0qT0vCTgkwyNh+MwYEPu
-	 nJTpf35SNyKNg==
+	d=lists.u-boot-project.org; s=default; t=1794890093;
+	bh=T49UyMlm+WGeqe5N5Z0iRWrjDbUHrmqGBk5TyVHOAoo=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jqjnb0hzP4GZa06DuDbC8/yqqG1/7uKlJRx+oaX10hXphQeIgMOM0bPzZCbsCubU5
+	 Mpl8R1PYRhIB0rIL7xAko/aFJSwiHf/V457NSBrySy7OZ+mkzIeyTqjOfDqzNNBXCs
+	 CjAYarFITNoIKSYKKuhXNmkuk1e3IPKOEppp2rcxkgzd/9Bk+DLQKiEgm9iaW7E7Sh
+	 KZUYwR53tWc3yaKtC2ATdr+L3I1eoQDwQpz/iPxPol/PjoeTgtJrX7RTb5/iuNW9my
+	 h3iEgKGrsGB8WhlKCcwiq40FzgpDjmd9Im7oiqQnzZLIqx+rnYAzzJ/tOcpDbNzrNP
+	 VO77nVDwvIprA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0F17D81046;
-	Tue, 17 Nov 2026 04:34:52 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3E0994DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:02:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B40554043B;
+	Tue, 17 Nov 2026 04:34:53 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D408970B
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:26:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2F31B81046
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:02:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D071660811
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:26:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Hx1oCeUNmvGP for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 21:02:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 763C580B5F
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::112e"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id g_eUIaQ-juxK for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 21:26:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 82269606A2
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::635"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112e; helo=mail-yw1-x112e.google.com;
+ client-ip=2a00:1450:4864:20::635; helo=mail-ej1-x635.google.com;
  envelope-from=dilipchowdary21@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=b5Cuh2gp
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 763C580B5F
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:02:28 +0000 (UTC)
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-8b4bc216e9dso15367447b3.3
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:02:28 -0800 (PST)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=dR/40db7
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 82269606A2
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:26:15 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-c4203bbb1e9so672535266b.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:26:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794862947; x=1795467747;
+ d=gmail.com; s=20260707; t=1794864373; x=1795469173;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
- b=b5Cuh2gp7HW1DCjD5LsxaAwAUW8r/GGAkbUjQgps0fiF5TxGAGsNkg6v86wOkaNbvp
- U7Hs6hy9JEOUF7Zc+P3tREEwUOriri8FPucEcGl9QNmeRru+PzgYGy3iaAcOyAIibvLT
- 3D2OFesVIG8qhAViqwYO2T6Vxmr3uG+5VcUqJdHEZM+5UUyLRHGKyad3g/ngK5WtqrT9
- cFQaIbCYtBsfPIx0qSWGPWRowkfy85dwWm3aFvfy3IbndJIbG6nL+C1+m/9fh1YhUUm0
- /62URDA+4vyKWKqDj5XvXcOi2RXDOtY5apJuY9BHkJytwilA0MHDQNeUPF6Nvt1WcyfN
- zVow==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=T49UyMlm+WGeqe5N5Z0iRWrjDbUHrmqGBk5TyVHOAoo=;
+ b=dR/40db7wZvUbUDa8+o3F9vfOi2ONrXeOtf4ftGOkxvuTxbTdkvKfM1pdj+cnOJN10
+ wUbFMPgoc9Vzzeoz7mGWY0qrPOCP/aHSAtpM6O8iunEncLSax9nPLT0AXEU+gjLjoDKD
+ hNxAM8uANKLxwBziNI7hS8s9XBSNKm/n86AlZlsfaj7NjJiPWqpP8OYZW2ZC3XY3gZjI
+ qlolGxfkpQ4+NgKhreoY2GVAkI24SHdumPtH2UmQyZnXh72kk3Cuo3byU69GZgX+v32e
+ 12HSF4VNoTfzVDrtClUsIRpVd7GUYAYPUqlo/TYePiogQsiTPgEGr38qLKKg4+MG+kFz
+ VsPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794862947; x=1795467747;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=2bji/ZkitVvrzYoOgIs3uifhefn1GDl44EqY37u/QmM=;
- b=hRZ1yOlSstyO42EONMC2bSk3Zz1cNICgaL348RmZm3oRr9fURaQ7ilbHXuubu0NdbL
- s1GDXl/GVpkJ9evJapSNDCtNN2VY3ncwI1NeudNZ8QshMayXlraGrj8wYMSEJhbCMGQe
- VTgvwx+UiRLr55X5Zj06xN4zaqpjphxc2wCIvoPXSaEznZuwWfJ2lKAXX4BCDMjEuCWR
- 6/M/lxmqnm7beK7IpYjlulEQkgnR+oFcOgRdC3by05ACou/ZOvsDZUwhbMkBcigE/h2E
- pxEH4P6CCBLpIjQZw4bNQTM6jcM8KoCJXJ0GNXR4dUYqDiSVjynF1kOFRsmr8Iht8qJj
- VJ7g==
-X-Gm-Message-State: APuU4Z+fSKRCpj9M66DHnlLdP836ezgC6ELnqqEsDKnvh3f/8s8x1R2i
- X1ZE3vrYA8PtTpwgoNNa+7nuWBPDJjamuKY1rT9uqn9xwhXIX9A6rPbu6fY5pvcr
-X-Gm-Gg: AZFdTZdeSyzFxuTNi3XGeCHONJN5GB7+3Ft4AtbW/+FPqRvXpE3NItzP3u7uG8A7Aq9
- AdT2VgRuk7XOL4cIlAANvQwMUDqF1oCCB7rcXEuV8yDtNyz8Hnfz93g7n0j+aj75577cfpRzAIF
- O8VSaABda4oa7DloA5fJhRGchC5wbDP0/AhTBlq5IfDNnX1NqpQLzwl/eDsBIhLCaD3mmT+23K7
- 9emUX3gp1SYMRJJ75zXLBbpfyxaBIVU9tL1ZPGD4OWZRByUiowb7tj9Od0eNb6pyuUY0G2Sdo+E
- G0xTJPbZJ26czIYRkDMSkj9AzkXWfXWmFHxWk1YFKl3LLibnovBuTzthnXD4bFXdi28BFioobQ+
- Zr2yWmMFZNQmubtY/zHJSGjYBXNryqnKoPrqPK23AZ+xhA6pRsp5ifuIqrLZBFQ7HoK0dFoD86h
- vKysfiAEL8QS40xU0rM0zROShA7eBbsb91ffHuSlWIt6e2X772leN7at8I6quje8lou0uI8N2uy
- GdVgDaKV/V3zi3HGhKfEWhnwk+t8AeF5oYmzhRXO7DnQaAbUBreDJ9bUJRR1zyXPqWMxCwx8h7q
- Tc5j8IZ8Ep+ZbgE6RmajgZOvS7d78jc7RU/zQFL+rSbBj3cVYUnxHBZG1fbh3CIFUarz47CKiBa
- 3sQM4oydQ5SsC7nmeThjw9BavAY7o
-X-Received: by 2002:a05:690c:9413:b0:8b3:b06d:68de with SMTP id
- 00721157ae682-8b4aa3b2d79mr47189637b3.106.1794862946907; 
- Mon, 16 Nov 2026 13:02:26 -0800 (PST)
-Received: from d3sec.localdomain ([216.170.66.174])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b4eb7f0408sm8765837b3.2.2026.11.16.13.02.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 13:02:25 -0800 (PST)
-From: Dilip Mallavarapu <dilipchowdary21@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org,
- Dilip Mallavarapu <dilipchowdary21@gmail.com>
-Subject: [PATCH] fs/cramfs: bound decompression output to the destination size
-Date: Mon, 16 Nov 2026 15:02:09 -0600
-Message-ID: <20261116210209.15246-1-dilipchowdary21@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ d=1e100.net; s=20260707; t=1794864373; x=1795469173;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=T49UyMlm+WGeqe5N5Z0iRWrjDbUHrmqGBk5TyVHOAoo=;
+ b=y0DuqxftwAoceEBlJIC+hMnRLEykv3gKBjUOfKJKQAMbto74G+cXrBGZyYT/WjGKsC
+ YOGDu8j/xsw8AV7j7T9q/QF2LKeTgMFpv38QwiqxKr+Ra+c+tO4j1Jr1FJjpTzvNwf+z
+ V8JhqGhm3a0QL174cmiWuXrArDH9ursuBtesimzF8vCAXrlX+QL1TSgUeHe3+JgZ6ZBE
+ 5umMccAnKHphP9TdH6Ayvrqcvo1BWcZ/4ur+3tjgqrP+Yz4Bkw5YlIl2HX87n8vl37wV
+ QW24gQB5uAcS0aV4w7P00SIPAvlxXN3RBvQIABaTDvN1zZsI8SrECpbUHehjJgLLVHkT
+ cSyg==
+X-Forwarded-Encrypted: i=1;
+ AL+hErEURMtjCocUcvHZW5WendglzM6FLHlizibtEK+82ha4TGDpyxPEIJCLC6hW1hVWk8usdyuC/OQ=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9QMkjgglGeAiuQos/vv+dvGZxGmv406TBqc2uRsCwLGKOelsO/
+ U7HLqwEVcLf3Y5MpQjoZX8YLYqN2W096l2SbVOD8uIz5l7qMFnmOxDv/KrmKzSNTW56qkAPbuxG
+ yPL4bn/nFkKogt7IHkAe/lbSYYbiZWT0=
+X-Gm-Gg: AYBFou1Jni5MoNDtCDY5kOyVkfvWP/ZeT8T2gsS1mGVNpfIpar9RF4Ngg+ztPQ9Uuco
+ h3DSbfNkkd1iHHNnQrAOBFrLpHhBkk3MTPl7YnxgOTJyFVylOrHm6t83alcsF4vFal9XqGhxU6K
+ ku9tTDPw0l26IM07UPQV6vlGxM4ZDESwS7w9lQiRq1mpFuSdqvfyXmvMpSDZkD7CcoHNyDIL0ox
+ 6k1tbuWfX3a+80Zwn9CNW/RYgszYCniq4mAdJKkxnzyZlH97Fnl+/f+xJc43Qg6b8WunB9mh6zh
+ IEF+FklHcayp/dbduz6bkd/udSLUfDG6NTiNHXvi9zH2VD1Koy/kSPlUYkQZ8428hlwJzjZN0r8
+ yv7PnHz4dUl1mKypLCHU/9HtvbzKKmIygOR9sa7XEkjMUmftyyefMdVmioTx+BAUaVNjg7jQ/Fr
+ 1hrouoNnNmk7P7TTJN2uCKSm/0kUBacRYXm5JnSCkrlUz0
+X-Received: by 2002:a17:907:6094:b0:c2e:4292:d268 with SMTP id
+ a640c23a62f3a-c50963067a2mr1109420366b.16.1794864373265; Mon, 16 Nov 2026
+ 13:26:13 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261116205502.14884-1-dilipchowdary21@gmail.com>
+ <767dd299-5aa0-4e4f-a84f-a55395214a30@suse.com>
+ <20261116211731.GL554944@bill-the-cat>
+In-Reply-To: <20261116211731.GL554944@bill-the-cat>
+From: Dilip <dilipchowdary21@gmail.com>
+Date: Mon, 16 Nov 2026 15:26:01 -0600
+X-Gm-Features: AclHuK9Dk4oh3rWTv8SmXVCbX_0phuhQIqRPhnoTIifSbyqZ0REyyETH765SEC8
+Message-ID: <CAPmzV5nK54_k3imwV3UGV9dQjGpa-FjFK-5PEsFz1yrDrOcWKg@mail.gmail.com>
+Subject: Re: [PATCH] fs/btrfs: fix path buffer overflow in subvolume listing
+To: Tom Rini <trini@konsulko.com>
+Cc: Qu Wenruo <wqu@suse.com>, =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ u-boot@lists.u-boot-project.org
+Content-Type: multipart/alternative; boundary="0000000000006377c106606b6dd5"
 X-Mailman-Approved-At: Tue, 17 Nov 2026 04:34:42 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -151,94 +150,179 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-cramfs_uncompress_block() set stream.avail_out to a fixed 8192 bytes,
-unrelated to the destination buffer. cramfs_uncompress_link() sizes its
-buffer as malloc(size + 1) from the inode's declared size, so a crafted
-block that inflates beyond that size overflows the heap buffer with
-attacker-controlled content (CWE-787). The length check runs only after
-the data has been written.
+--0000000000006377c106606b6dd5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Pass the remaining destination size down and use it as avail_out, so an
-over-long block fails decompression (Z_BUF_ERROR) instead of overflowing.
+Thanks Qu, I'll drop the comment in v2.
 
-Reachable e.g. via cramfsls over a directory containing a symlink.
+Tom, noted on the AI policy. To be upfront: I did use an LLM to help with
+the analysis and drafting here. The bugs and the fixes I've gone through
+and verified myself, but I should have said so when Quentin asked, and I'll
+keep future submissions in my own words. Happy to continue only as far as
+is useful to you, the findings stand on their own either way.
 
-Signed-off-by: Dilip Mallavarapu <dilipchowdary21@gmail.com>
----
- fs/cramfs/cramfs.c         | 9 ++++++++-
- fs/cramfs/uncompress.c     | 4 ++--
- include/cramfs/cramfs_fs.h | 2 +-
- 3 files changed, 11 insertions(+), 4 deletions(-)
+ Dilip
 
-diff --git a/fs/cramfs/cramfs.c b/fs/cramfs/cramfs.c
-index 22148ff8fe2..411e707528b 100644
---- a/fs/cramfs/cramfs.c
-+++ b/fs/cramfs/cramfs.c
-@@ -211,13 +211,20 @@ static int cramfs_uncompress (unsigned long begin, unsigned long offset,
- 	unsigned long curr_block = (CRAMFS_GET_OFFSET (inode) +
- 				    (((CRAMFS_24 (inode->size)) +
- 				      4095) >> 12)) << 2;
-+	int inode_size = CRAMFS_24 (inode->size);
- 	int size, total_size = 0;
- 	int i;
- 
- 	cramfs_uncompress_init ();
- 
--	for (i = 0; i < ((CRAMFS_24 (inode->size) + 4095) >> 12); i++) {
-+	for (i = 0; i < ((inode_size + 4095) >> 12); i++) {
-+		/*
-+		 * Bound each block's decompressed output to the remaining
-+		 * declared size. Otherwise a crafted block can inflate past
-+		 * the destination buffer (which is sized from inode->size).
-+		 */
- 		size = cramfs_uncompress_block ((void *) loadoffset,
-+						inode_size - total_size,
- 						(void *) (begin + curr_block),
- 						(CRAMFS_32 (block_ptrs[i]) -
- 						 curr_block));
-diff --git a/fs/cramfs/uncompress.c b/fs/cramfs/uncompress.c
-index 97af8cb2b4f..43ee5f7609c 100644
---- a/fs/cramfs/uncompress.c
-+++ b/fs/cramfs/uncompress.c
-@@ -29,7 +29,7 @@
- static z_stream stream;
- 
- /* Returns length of decompressed data. */
--int cramfs_uncompress_block (void *dst, void *src, int srclen)
-+int cramfs_uncompress_block (void *dst, int dstlen, void *src, int srclen)
- {
- 	int err;
- 
-@@ -39,7 +39,7 @@ int cramfs_uncompress_block (void *dst, void *src, int srclen)
- 	stream.avail_in = srclen;
- 
- 	stream.next_out = dst;
--	stream.avail_out = 4096 * 2;
-+	stream.avail_out = dstlen;
- 
- 	err = inflate (&stream, Z_FINISH);
- 
-diff --git a/include/cramfs/cramfs_fs.h b/include/cramfs/cramfs_fs.h
-index e0c14f04af5..02c4867386b 100644
---- a/include/cramfs/cramfs_fs.h
-+++ b/include/cramfs/cramfs_fs.h
-@@ -93,7 +93,7 @@ struct cramfs_super {
- #define CRAMFS_SET_NAMELEN(x,y) ((x)->namelen = (y))
- 
- /* Uncompression interfaces to the underlying zlib */
--int cramfs_uncompress_block(void *dst, void *src, int srclen);
-+int cramfs_uncompress_block(void *dst, int dstlen, void *src, int srclen);
- int cramfs_uncompress_init(void);
- int cramfs_uncompress_exit(void);
- 
--- 
-2.53.0
+On Mon, Nov 16, 2026 at 3:17=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 
+> On Tue, Nov 17, 2026 at 07:43:31AM +1030, Qu Wenruo wrote:
+> >
+> >
+> > =E5=9C=A8 2026/11/17 07:25, Dilip Mallavarapu =E5=86=99=E9=81=93:
+> > > get_path_in_subvol() and list_one_subvol() accumulate a path across t=
+he
+> > > on-disk inode-ref / root-ref chain with strncat(path_ret, tmp,
+> PATH_MAX).
+> > > strncat()'s bound limits the source copy, not the destination total,
+> and
+> > > there is no depth/cycle limit, so a deep or cyclic ref chain overflow=
+s
+> > > the PATH_MAX path_ret buffer (CWE-787/120).
+> > >
+> > > Use strlcat()/strlcpy(), which bound the total length, and reject the
+> > > path if it would be truncated (which also terminates a cyclic chain).
+> > >
+> > > Reachable via the btrsubvol command on a crafted btrfs image.
+> > >
+> > > Signed-off-by: Dilip Mallavarapu <dilipchowdary21@gmail.com>
+> >
+> > Reviewed-by: Qu Wenruo <wqu@suse.com>
+> >
+> > Just a nitpick on the comment.
+> >
+> > > ---
+> > >   fs/btrfs/subvolume.c | 25 ++++++++++++++++++++-----
+> > >   1 file changed, 20 insertions(+), 5 deletions(-)
+> > >
+> > > diff --git a/fs/btrfs/subvolume.c b/fs/btrfs/subvolume.c
+> > > index 68ca7e48e48..bac9c1d1722 100644
+> > > --- a/fs/btrfs/subvolume.c
+> > > +++ b/fs/btrfs/subvolume.c
+> > > @@ -64,7 +64,16 @@ static int get_path_in_subvol(struct btrfs_root
+> *root, u64 ino, char *path_ret)
+> > >                                (unsigned long)(iref + 1), name_len);
+> > >             path_ret[name_len] =3D '/';
+> > >             path_ret[name_len + 1] =3D '\0';
+> > > -           strncat(path_ret, tmp, PATH_MAX);
+> > > +           /*
+> > > +            * strncat()'s bound limits the source copy, not the
+> > > +            * destination, so a deep/cyclic ref chain would overflow
+> > > +            * path_ret (PATH_MAX). strlcat() bounds the total; rejec=
+t
+> > > +            * the path if it would be truncated.
+> > > +            */
+> >
+> > This comment seems overkilled, and it only covers one call site.
+> >
+> > To be honest, I don't think there is any comment needed for usage of
+> > strlcat()/strlcpy().
+>
+> Yes, and it's the kind of thing which AI tends to do, and then expects
+> human reviewers to remark on. Please note that the AI policy for U-Boot
+> is "please don't".
+>
+> --
+> Tom
+>
+
+--0000000000006377c106606b6dd5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Thanks Qu, I&#39;ll drop the comment in v2.<br><br>Tom, no=
+ted on the AI policy. To be upfront: I did use an LLM to help with the anal=
+ysis and drafting here. The bugs and the fixes I&#39;ve gone through and ve=
+rified myself, but I should have said so when Quentin asked, and I&#39;ll k=
+eep future submissions in my own words. Happy to continue only as far as is=
+ useful to you, the findings stand on their own either way.<br><br>=C2=A0Di=
+lip</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"l=
+tr" class=3D"gmail_attr">On Mon, Nov 16, 2026 at 3:17=E2=80=AFPM Tom Rini &=
+lt;<a href=3D"mailto:trini@konsulko.com">trini@konsulko.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Tue, Nov 17, =
+2026 at 07:43:31AM +1030, Qu Wenruo wrote:<br>
+&gt; <br>
+&gt; <br>
+&gt; =E5=9C=A8 2026/11/17 07:25, Dilip Mallavarapu =E5=86=99=E9=81=93:<br>
+&gt; &gt; get_path_in_subvol() and list_one_subvol() accumulate a path acro=
+ss the<br>
+&gt; &gt; on-disk inode-ref / root-ref chain with strncat(path_ret, tmp, PA=
+TH_MAX).<br>
+&gt; &gt; strncat()&#39;s bound limits the source copy, not the destination=
+ total, and<br>
+&gt; &gt; there is no depth/cycle limit, so a deep or cyclic ref chain over=
+flows<br>
+&gt; &gt; the PATH_MAX path_ret buffer (CWE-787/120).<br>
+&gt; &gt; <br>
+&gt; &gt; Use strlcat()/strlcpy(), which bound the total length, and reject=
+ the<br>
+&gt; &gt; path if it would be truncated (which also terminates a cyclic cha=
+in).<br>
+&gt; &gt; <br>
+&gt; &gt; Reachable via the btrsubvol command on a crafted btrfs image.<br>
+&gt; &gt; <br>
+&gt; &gt; Signed-off-by: Dilip Mallavarapu &lt;<a href=3D"mailto:dilipchowd=
+ary21@gmail.com" target=3D"_blank">dilipchowdary21@gmail.com</a>&gt;<br>
+&gt; <br>
+&gt; Reviewed-by: Qu Wenruo &lt;<a href=3D"mailto:wqu@suse.com" target=3D"_=
+blank">wqu@suse.com</a>&gt;<br>
+&gt; <br>
+&gt; Just a nitpick on the comment.<br>
+&gt; <br>
+&gt; &gt; ---<br>
+&gt; &gt;=C2=A0 =C2=A0fs/btrfs/subvolume.c | 25 ++++++++++++++++++++-----<b=
+r>
+&gt; &gt;=C2=A0 =C2=A01 file changed, 20 insertions(+), 5 deletions(-)<br>
+&gt; &gt; <br>
+&gt; &gt; diff --git a/fs/btrfs/subvolume.c b/fs/btrfs/subvolume.c<br>
+&gt; &gt; index 68ca7e48e48..bac9c1d1722 100644<br>
+&gt; &gt; --- a/fs/btrfs/subvolume.c<br>
+&gt; &gt; +++ b/fs/btrfs/subvolume.c<br>
+&gt; &gt; @@ -64,7 +64,16 @@ static int get_path_in_subvol(struct btrfs_roo=
+t *root, u64 ino, char *path_ret)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (unsigned long)(iref + 1), na=
+me_len);<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0path_ret[name_len]=
+ =3D &#39;/&#39;;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0path_ret[name_len =
++ 1] =3D &#39;\0&#39;;<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0strncat(path_ret, tmp, =
+PATH_MAX);<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * strncat()&#39;s boun=
+d limits the source copy, not the<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * destination, so a de=
+ep/cyclic ref chain would overflow<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * path_ret (PATH_MAX).=
+ strlcat() bounds the total; reject<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * the path if it would=
+ be truncated.<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
+&gt; <br>
+&gt; This comment seems overkilled, and it only covers one call site.<br>
+&gt; <br>
+&gt; To be honest, I don&#39;t think there is any comment needed for usage =
+of<br>
+&gt; strlcat()/strlcpy().<br>
+<br>
+Yes, and it&#39;s the kind of thing which AI tends to do, and then expects<=
+br>
+human reviewers to remark on. Please note that the AI policy for U-Boot<br>
+is &quot;please don&#39;t&quot;.<br>
+<br>
+-- <br>
+Tom<br>
+</blockquote></div>
+
+--0000000000006377c106606b6dd5--
