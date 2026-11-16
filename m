@@ -1,262 +1,170 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5B5C606A334
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 20:24:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7424C606A32C
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 20:42:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oTCl5mYk;
-	dkim=pass (2048-bit key, unprotected) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.a=rsa-sha256 header.s=s31663417 header.b=pwwgH+2L
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TVr6Eazr;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=pkjHKA5W
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7B04A80E0E;
-	Mon, 16 Nov 2026 20:24:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3C2DA6082A;
+	Mon, 16 Nov 2026 20:42:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m7Ax18rJYM3W; Mon, 16 Nov 2026 20:24:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 98FD280E25
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794860643;
-	b=UOGhOKxr3NlKp4i7th/9ITIABRiM4ofiWFpVobg/WfKLisIQ5/dzXI/ipcHixyjqzYzh
-	 +kgB4ugMLzWv6Sw7mzZJVlqncavBqfqGL8c560XMfjWQnCUju/wopMw+7spvmpmNDBSSa
-	 QvrfYu8OLhXtQ2m7DzHeCbnLJfYMZOUtNWOstYA6PCfxT0BbbkYMMcR81US3pYYxJHu5v
-	 tIJRIJy+hzRERlXMV/8Fi0R4qbiXZBQGZ5apvyK/VMtYCtMS/1KE65p3Y9JV16MjqmMuN
-	 n0TPEGjPuThs4Wz/8ua9SzZqvVDr/Xz27jldqLXMMQpj+0XSt2xaNZzhGIK4meAxUAQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Y3zmC3b8RUza; Mon, 16 Nov 2026 20:42:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0996360811
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794861734;
+	b=DsJ0D81vIPFnf0176liJBPOlcFIg7omUibxKXQ1UeNq+0uxCekpeZxugQPiDkQwy1mvu
+	 C19DJK5/GsOqUQYsg2azgTEU99LF+FAzGQNtQeBS7If1EcXGg8cYZKpgVkqmEpZAdLUlF
+	 fInbcndpn4F/eqMjeS1WCo4grYmEWqdntZywpWv1wM7Uz9x1rTxxk1TOsgGymq/Tzeojm
+	 l0/5P3M69VN0zDPNPCm8pcgEXys9DHvyJN9hh1686a6RG+ER333fhYymdexPTOEceIQn0
+	 wx3pkkMb9xT67a9Bir7E8FukXYQ56hlIHfhy118tQAtFNQ1MuXHEdG+Wb9Mie2N5JkA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794860643;
+	c=relaxed/relaxed; t=1794861734;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM2-Signature:Message-Instance:DKIM-Signature:X-UI-Sender-Class:
-	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
-	 References:Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Provags-ID:UI-OutboundReport:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=dsKr5ZfhmXB38JObtSueyJLHs7K62M6vObkAOlT5WXU=;
-	b=B7YStVzmZOmdl5IKZ4roZqzjOTtv8PuLrI+EcA5pkyfywDNXgtd9lcEvXnc3xmmCjOfv
-	 njo0feM3YPdVL/DFuWUArPmuGnKGPSehBHjIpLOiLd5sO1izQ6eSYN4EOhKL1dsUefU+C
-	 2GRbMGDihyjkOETst1atauH54Y/NK/9y4wNlRJj98z2TcMW46WfV4IFcjBLW7wlTe9LJE
-	 8Ayl32gbDeTsDIVtwwg4vAx/NkS8VCdelCFwxcaCCPnH0haxCaniHEJiw1p22SjJIIAYv
-	 3eniQQhfEVCLBgWl7wHDhpSXIC0oVLUhXxJ5KYaZIpAwT2s9v8IVkIGedvARFTVe2Kg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
+	b=qK4rrkhiqNUoJL2ra+B8j3gM5d8FiVCD+eV0a1x+AEFbc+SblU3cKK5xX7pX8DGnA9ib
+	 F9CYHLgNocSlTUrdcclM8/jNI8fvXalkTVbUpaK5z9CgzfzTzWFu2YChNI0bO3Aw4PRXZ
+	 1WW8mb5m53VqiUv8NZqcDb4TOyKiMYlOqDa1QER0bLi0oz81YLHSk1odsEy2NSYAYroEW
+	 rQ62sAKEA67LCfoN3bl9Bu4wTq58npMHpyL1gPaZVDDBqUbVGOhSzPnV+K/Raz8LXDf6u
+	 Itw8uD9Fgvqvd+oVRfrRgPOvYALSFbnuv8OkU2AccYTZJxVz61EqHe1nqsGXGUYjXpg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794860643;
-	bh=dsKr5ZfhmXB38JObtSueyJLHs7K62M6vObkAOlT5WXU=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794861734;
+	bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oTCl5mYk8pD+sz2Q9Dhcthdz+oYgZDYQhpryEW7aB6hIl0bNqQhquRIre2Jw9PeTG
-	 6tnbmfjK7RlyzO1Orc5gNIy0OaRDYiAQeMIN6oRsA0Qfe/E/FmggbAE9iePbayvpHq
-	 AFqk8ghwAX86FTVPUlNS/Yk4J9//qZgPwaUJJ9p7pbaPTVEJD6rDxv1XT2Rk1vRJxb
-	 qbA9fzLb1Nzt9hWI8KPfCdohJzZZWgxNAb3m+kzxQrES6pX+0lC1IZ54vXlhgeTt7L
-	 my0wpJJHVvEMYnyIU3+wd/Xhd/MI/PzPnEyk+1IzEhpSGGiKA6hxBFbyWGvrK+B4uZ
-	 /NopEQJpuE7Kg==
+	b=TVr6EazrNR6hZgjQ257N+RM9mPCEIcnp12IzomO3FyRvVUxtMy7/EBkvwjxQo0FsC
+	 80wLeEvqFlFI2A7ArfabsplOLy+EW1x1nKqurMZulwrksbkCYToKREJR9BuOJKKdvl
+	 SqkXVXAo5cft+Qx0j3dMD4EXzTzfv3CC/IFuZcCyt1WvzlVSmqF6Ss8pC3WR1v0sd/
+	 62cX1iTQesmF3CJRPZZNklHp214SFSkl4AKVAo7l9bben+jX1TlhICgE1Xoagqiooz
+	 T9mNXHgoeOzxEKLSjLx6undlpHzXmKDr/+l1VPel3CSf96d9guOnTrtcMytZPpJgF9
+	 tiCCjm5PGExSQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 98FD280E25;
-	Mon, 16 Nov 2026 20:24:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0996360811;
+	Mon, 16 Nov 2026 20:42:14 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id ADA1D28C
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:24:01 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 4967828C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:42:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9F4D2405A2
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:24:01 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 32ED6405ED
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:42:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Y6QNAwAE24eY for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 20:24:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E4E0B40588
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=212.227.17.22
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.17.22;
- helo=mout.gmx.net; envelope-from=quwenruo.btrfs@gmx.com; receiver=<UNKNOWN> 
+ id REYrw0k02860 for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 20:42:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D20C1405DD
 Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com
- header.a=rsa-sha256 header.s=s31663417 header.b=pwwgH+2L
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E4E0B40588
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:23:59 +0000 (UTC)
-DKIM2-Signature: i=1; m=1; t=1794860637; mf=PHF1d2VucnVvLmJ0cmZzQGdteC5jb20+;
- rt=PHUtYm9vdEBsaXN0cy51LWJvb3QtcHJvamVjdC5vcmc+; d=gmx.com;
- s=s31663417:rsa-sha256:OSZaKF6geg8MexkLu+KxifAwKG3D
- 0emL7w+0DPddW0HYhnRghR38cFXzgnf6DAa87DJ0nyJmyGyCmZNp0bmdlhrcyrOSlqgqp/frGhw
- xalmcZhKeERboTRMs8p91MTZsUJc7fL2bq37fIY/Ab7FZAbfDTEIOdntvhPf751ELXNSIY4Nm1W
- j1FUq3LFM08iQi7X7G7guLU8ubiUaunnQTUfMqm3+YqwVvKSOmvqr9eQHnIVrNL+4GRHiNlK75H
- u4s/+JRKDcMKc2c30jftx/4248P6vbDcNQy/kuq6oJ39yZe/OO3v/a5sFhzWPhucU9Lobiu54HZ
- o49Uz5bLheDJIg==;
-Message-Instance: m=1; h=sha256: tBIrw1C1rIIXNs4ttM8nlL6bsgziwkul2a9JaIuP9Uo=:
- XaoE2froyf3KD/FaSfsp9bnvpBC+oZdhwHR6mMdelyM=, sha512:
- FZInmpnl5In9Fzfae+z5v8hfZLEgQVaIHhTOnzNH48u9TQ7FQcT+SOMF8OfxzLSOEW7i4hCnNRxtLKFpAJkVdg==:
- +sRqAAgDKuYHC1P0FOBkW4Rxc9HdnxrXB3eSjzGAiHBBSOYYkFu54KKk9AoFTm0ZOMySqR6aM97xyYwq1b7Mrg==;
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
- s=s31663417; t=1794860637; x=1795465437; i=quwenruo.btrfs@gmx.com;
- bh=dsKr5ZfhmXB38JObtSueyJLHs7K62M6vObkAOlT5WXU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=pwwgH+2LNO9/TGjksLCqoqNW4uC9gC0IlMwJEAyNY41a+xk7V5IbBJBO3UfFmH26
- 2n0ty7VA1S3EC5Xci1lgQgIxdAF81SKsTWbjMWCFIzZEt/wTcXq2Cof7AYIw1q5TZ
- 2cHLbFsjXJTdaSg5vYo1vKwYcxXQ6sX0yWOzGvD0sN+lthxAmovIljcZJv3PWXGxg
- n8/DWY2OVwW1KSjv9XXy6nKEBrT2BAjTKqnUmgqSzh6A1+Jss4mj/pjeOFfPZFVpc
- wJZq6yxNkJ+CUtLSsIwgin5JKzPOSNa38RY5STYd+FJS1Ibarec+QIY5T7k4SraUk
- abPzs5IzOizRrX5pwA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1N1wpt-1wR1bI0Mpt-00wTz8 for
- <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:23:57 +0100
-Message-ID: <d982023b-dac7-4407-96dc-893742aed104@gmx.com>
-Date: Tue, 17 Nov 2026 06:53:54 +1030
+ arc=none smtp.remote-ip="2001:4860:4864:20::35"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:4860:4864:20::35; helo=mail-oa1-x35.google.com;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=pkjHKA5W
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D20C1405DD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:42:09 +0000 (UTC)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-4a76f0cce5fso2123689fac.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 12:42:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1794861728; x=1795466528;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
+ b=pkjHKA5WWYTiGqZa7SuH3UUmy3exDIKGRjCwxERbiekWId0GMjQEAwaojgaKB/e/Ot
+ i4QRILXM2apmd+qExur/XqH3CI9ykAlYPrbSUAdZcW50cFTzxCPnim7atUQ55aEeGkhq
+ r0c+HFKRojRdfVq8M9sDK4ieJ90qHghenpHmw9tg1EjvQ4fOu65ZkIbCFAU1026XoHho
+ UR1QS6yIBoe8IrimwvN44lzpcIX/UetJcAkec515YnTxq3n2PIrQ6C+3DxE5CrLUI6P6
+ o1IUz6lreU8PPV5bsPXV3wvKpmdEJmn2NoGDCZ4aC3hH5L4RhxkzQF0EWpD7ZJvktjNQ
+ xpXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794861728; x=1795466528;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
+ b=JJQWv92fsIwlylrBDlKXHKCiEpnhz2YIpMqWrn5a79ExdWdb7JM1znjPV8doOI0yC8
+ Er4YbwRjSqbzOmqAuRRrnDdqxxW+PheBn2zRT8g8Xe3YSy6hyKy7xszyEBQq86wAco0+
+ e9fyw/y20yKssLj46/+K3AoncLhuy4IH+3RFlZ71O6uSTqwmSVYseJH3aCVDHgFVAnQN
+ eaVxYcGqlbol+WMnfKsLD3d0UG07mpUg0Etr3f1FzR+/YZORJY+svbFFx3sslPF5rb1v
+ TfNfNXm9MgXKb7FOpP0lWl37WIOVjygIq8wxu8TTNNga00QUKMiv7aNNMxSrSJlTjsDT
+ rQQg==
+X-Forwarded-Encrypted: i=1;
+ AL+hErF6fsDgdfmmqnKdEMUdIuf1WecmupzsNieuEbKican1Ac5Ja0BNRM39d0PagWczD7zy3iUTaqE=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9OiN9TfkI9QWxPNEl3EhOg+eGuO4Ys8/8oH2hiAZCjhuS7jUs7
+ EPoyFNUOqGBkJWEXheW0DzstzzPyPlERSqYpJ4Gv5F9LQNyx064lfwPYbSuaAZc2YgY=
+X-Gm-Gg: AYBFou2Yu8291z5YoJG7u5jnwYqhfbKc/quigFGPbdMeXyMcuKMk7QcPchycTtmDn0I
+ 91vaLxSACNvLmQA6XyUCNzpm45+7oA/XZVRhXbnVrjT1HIrWcOzlwzFgUlk4HkK9fg6sJnJElCE
+ 1XXNZ7CUzqoRxtBWcTH+jVb558JTmiYpLIlt6hSYKmBam7JS6feVbMQcvihwLF/PWZqLi1sgNEq
+ YmsEnptGFidFW9x4Dc6iphXQRT1FChyX1Ucz3zOcQ5fZjwsnxMWdeV/Uo++dqLc8TnX9gExgrMo
+ 4QsnywmxI4VqLE6vFe7P6b6L8GTAGA01CPOB/gdJVBW5dtHNkcJOZivzYOS2TuOQT9CCx81tN7P
+ Oc3FXRzbS3CXyXOYgADBFpmI8obnMzHSp1X0vHUmgjqfOyE5hOfyEHmlDLAfncuaX8+1ZLJFsm6
+ VL1Jld9ij9JX8+Rpd42HYJpGGmkKH1FkZYq7zOJAqV213pcGYiBsIWxnnJm7+PFYpmmi6Xcvy8y
+ O2IUk37GW68zsGpI6ywNixVmRLBiP8N98akk2fN5iSUzCO3b8NCegFtzX/F4WwlGoix7TNy+qxT
+ deOTSUgxhZ6OxTDcmWEhH1gfFVodi1ix1TIdDQnGblRo8pkwsD6ZQOMbK+7zJNx+Nfd4i53FCgb
+ Vrdk=
+X-Received: by 2002:a05:6870:d07:b0:48f:e363:5cc8 with SMTP id
+ 586e51a60fabf-4afdf795d7dmr10184061fac.54.1794861728003; 
+ Mon, 16 Nov 2026 12:42:08 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:7056:3b5b:7d85:4921?
+ ([2600:8803:e7e4:500:7056:3b5b:7d85:4921])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4afe2011c25sm7608243fac.2.2026.11.16.12.42.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Nov 2026 12:42:06 -0800 (PST)
+Message-ID: <f0352e86-58bd-4e6f-aa8f-5253a9c29a55@baylibre.com>
+Date: Mon, 16 Nov 2026 14:42:05 -0600
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Five memory-safety issues in U-Boot filesystem/partition parsing
- (coordinated disclosure)
-To: u-boot@lists.u-boot-project.org
-References: <CAPmzV5kAUpHf5fGDHmQXnyDJxs=Kvgtks2ztva88pG2wj7m9qA@mail.gmail.com>
- <deff7930-1571-43fe-8f05-0c576e115c5f@suse.com>
- <20261116201914.GK554944@bill-the-cat>
+Subject: Re: [PATCH 00/10] binman: support separate binman devicetree from
+ control devicetree
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Macpaul Lin <Macpaul.Lin@mediatek.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.u-boot-project.org, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Carlo Caione <ccaione@baylibre.com>
+References: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
+ <20261113174852.GN554944@bill-the-cat>
+ <CALeDE9PvZgwiAUxdX=-tN1fgDveNOkeM__xCCJeZrK3Di0WxjA@mail.gmail.com>
+ <1b9f2a45-4ceb-48d0-afdb-b406404d98bb@baylibre.com>
+ <01408c47-2928-48e3-ba37-34b835a3b98e@cherry.de>
 Content-Language: en-US
-From: Qu Wenruo <quwenruo.btrfs@gmx.com>
-Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
- xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
- 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
- 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
- 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
- gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
- AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
- BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCat7o8gUJFKS8
- OQAKCRDCPZHzoSX+qAogB/9C5ErH7KGAGpcLPte3Wcfdt3acCkGAuMpCjqOt8BVw30mX0kmF
- SRo2nODjz8YsYhWR1T8L3ylANAS/IGIJ64idBmObaqGHQn845nXLIvG33LqMsAGXmOJdRgTT
- BnBA+QFCEIZpo7L9Qt1dOQdHSpHT31Ta1kKsbDm582KPVBl6KRcJJBnjudIerOA1/L/zEyDa
- YjIfHIcvuM3Xm8AS00iBpsmc151QgCPljqnSRXBiup9C1oMgVlaROhY1iDam4UIQB6glkHQs
- LZhUmFDNimX5LxfOzi2pFJSjJvPclRZVX7Sq6XhK/OFb6IvswN7i0nUYZMQfuGDNqGn70ic3
- AQImzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
- CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
- /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
- GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
- q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
- ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCat7pCgUJFMw7KQAK
- CRDCPZHzoSX+qEjbB/9crFFjips2NKxkt2XUutUIKjBoUlg/xCeFIj8PsTuJePhrV9HzgKsa
- rJgSqo3t78oQWmeaP9WPoDYjfhOkQXEs+G9UwHe/LENm70+Q1jrwY3nlcR3YrkDCJ+EvMZOW
- ackgcOYn46Iri9DN91FbSTszPMnwHi/nf0aeJXicO9krrY5C8mUxv4CSKeKSRg/5BR59uDiy
- 9CMRHDtIDnpDWaLOXtUeowCdiC5O/jA571PMFx3Aolc7g4SSyNbYodblCBOdJrh0CVm2LlQW
- 3SXrvFpSAw7LMVDgsS8pTRt4A11eTIS7mz0zqafTohXP1wt+575IBHK5ZpThQb+PzSQmxAqa
-In-Reply-To: <20261116201914.GK554944@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Cla5UZ4aHVuQ7ioCnfWHM7DtWtQyX9mmdPkF9yBXClpzxm6w2dK
- hnEtEXJP1wKpkp35O0s4io0gXUwTeZlvtKHFg85i+PfdfXzIujW34dVnRyzarZ3pd3TpTSX
- d131hOT7DM4c4eOMETX9js2ABpSzGhvY/Xy6mZfzv9eH+bL9iCtD3YW3kaw/z+m5ehLznkA
- vQyjpcXW30woq6ERBjq5w==
-UI-OutboundReport: notjunk:1;M01:P0:8R0kx6Xz0gA=;+ULMvKkbKDXfKwIIvD8gHU5BkvZ
- 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
- 1Sc=
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <01408c47-2928-48e3-ba37-34b835a3b98e@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -266,128 +174,138 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On 11/16/26 12:45 PM, Quentin Schulz wrote:
+> Hi David,
+> 
+> On 11/16/26 6:17 PM, David Lechner wrote:
+>> On 11/14/26 3:16 AM, Peter Robinson wrote:
+>>> Hi David,
+>>>
+>>>      > Anyone who has worked on hardware that uses a devicetree for the
+>>>      > hardware description should know the mantra "the devicetree describes
+>>>      > the hardware, not the configuration"
+>>>
+>>>
+>>> Thank you for this, I never agreed with describing these in the DT at all.
+> 
+> We probably should do some digging on the mailing list because I believe this was brought up back then. I also disagree (mainly because the Linux kernel will never agree to this in upstream DT, so this prevents us from the dream of running pristine DT from upstream). I vaguely recall there are a few things that are binman-specific and available at runtime by parsing some stuff. It's very vague, because I don't remember. But I wouldn't dismiss binman use of the DT as simply being a configuration format, I believe we use some of its things at runtime too.
 
+The two users of binman nodes at runtime that I found are lib/binman.c which
+is only used by x86 AFAICT and board/BuR/zynq/common/board.c (to locate the
+FPGA bitstream).
 
-=E5=9C=A8 2026/11/17 06:49, Tom Rini =E5=86=99=E9=81=93:
-> On Tue, Nov 17, 2026 at 06:44:56AM +1030, Qu Wenruo wrote:
+> 
+> EDIT: ah I see now reading patch 6/10 that you're aware of that. But phew, is it really worth it to do this incomplete split? I fear we'll split the ecosystem once more.
+
+Which "split" are you referring to? File format, file location, something else?
+
+> 
+>>>  
+>>>      > Binman is describing configuration and not the hardware itself,
+>>>      > therefore it doesn't belong in the control devicetree that describes
+>>>      > the hardware. So we propose encouraging the separation of these two
+>>>      > descriptions into separate devicetree files. In most cases, binman
+>>>      > info is not needed at runtime anyway, so combining it with the control
+>>>      > devicetree is unnecessary, takes up space, and causes DTS validation
+>>>      > to fail because binman is not part of any standard devicetree schema.
+>>>
+>>>
+>>> This is great, and I look forward to this landing.
+>>>
+>>> Forward looking and just a little thinking out loud here, forward looking is the device tree format the most straight forward way to describe the requirements for this? I wonder whether something like toml or even the in tree env format [1] might be better suited?
 >>
+>> I was having these same thoughts. And if we were starting from scratch, yes
+>> I would have advocated for a different source file format as well. Changing
+>> it now though would be quite disruptive to those depending on it. I think we
+>> would need some motivation more than "devicetree is not the best choice" to
+>> justify changing it at this point. And even then the devicetree format would
+>> need a long phase-out period to give people time to adapt.
 >>
->> =E5=9C=A8 2026/11/16 17:24, Dilip =E5=86=99=E9=81=93:
->>> Hi U-Boot Team,
->>>
->>> Thanks for all the work you've put into hardening U-Boot's image
->>> parsing, the 2026 squashfs/disk crafted-image series was great to see,
->>> and it's what prompted me to take a closer look in the same spirit.
->>>
->>> I'd like to report five independent memory-safety issues, all in the
->>> same threat model as that series: U-Boot parsing an attacker-controlle=
-d
->>> filesystem image or partition table from untrusted media (USB/SD/eMMC/
->>> partition, and for some, a netboot-fetched image). I found them by
->>> source review of master v2027.01-rc2 (commit ff8a9bc4), and each comes
->>> with a minimal, self-contained proof-of-concept.
->>>
->>> Reachability for all five is an everyday operation on attached media,
->>> `ls`, `load`, `part list`, `cramfsls`, `btrsubvol`, or distro-boot
->>> scanning,=C2=A0 with no signature verification anywhere in the path.
->>>
->>> Here's the short version of each:
->>>
->>> 1. squashfs: out-of-bounds free() in symlink path resolution (CWE-590)
->>>   =C2=A0 =C2=A0fs/squashfs/sqfs.c : sqfs_clean_base_path()
->>>   =C2=A0 =C2=A0A symlink whose target has more ".." components than it=
-s path depth
->>> drives
->>>   =C2=A0 =C2=A0free(base[i]) with i negative,=C2=A0 a wild free of hea=
-p pointers before the
->>>   =C2=A0 =C2=A0base_tokens[] array. The `if (bc < 0)` guard only runs =
-after the frees.
->>>   =C2=A0 =C2=A0PoC: ASAN heap-buffer-overflow at free(base[-1]). Trigg=
-er: /s -> ../x
->>>
->>> 2. GPT:=C2=A0 integer overflow in partition-entry-array allocation (CW=
-E-190 =E2=86=92
->>> 125)
->>>   =C2=A0 =C2=A0disk/part_efi.c : alloc_read_gpt_entries() / part_print=
-_efi()
->>>   =C2=A0 =C2=A0count =3D num_partition_entries * sizeof_partition_entr=
-y is computed
->>> in 32-bit
->>>   =C2=A0 =C2=A0and wraps (even on 64-bit), under-allocating the PTE bu=
-ffer, while
->>>   =C2=A0 =C2=A0part_print_efi() iterates the full unbounded num_partit=
-ion_entries,
->>> heap OOB
->>>   =C2=A0 =C2=A0read + partition-name info leak. PoC: ASAN, 512-byte bu=
-ffer vs
->>> 33.5M-entry loop.
->>>
->>> 3. GPT: unbounded header_size drives OOB CRC read (CWE-125)
->>>   =C2=A0 =C2=A0disk/part_efi.c : validate_gpt_header()
->>>   =C2=A0 =C2=A0efi_crc32(gpt_h, header_size) runs on a one-block buffe=
-r, but
->>> header_size is an
->>>   =C2=A0 =C2=A0attacker-controlled le32 with no bound (Linux rejects h=
-eader_size >
->>> block_size),
->>>   =C2=A0a multi-GB OOB read before the CRC check. PoC: ASAN read past =
-the 512-
->>> byte block.
->>>
->>> 4. cramfs:=C2=A0 heap overflow in symlink/data decompression (CWE-787)
->>>   =C2=A0 =C2=A0fs/cramfs/uncompress.c : cramfs_uncompress_block() (+
->>> cramfs_uncompress_link)
->>>   =C2=A0 =C2=A0avail_out is a fixed 8192, unrelated to the malloc(size=
-+1)
->>> destination sized from
->>>   =C2=A0 =C2=A0the inode's declared size; a crafted block inflating be=
-yond `size`
->>> overflows the
->>>   =C2=A0 =C2=A0heap buffer with attacker-controlled content. Present s=
-ince 2003.
->>>   =C2=A0 =C2=A0PoC: guard-page SIGSEGV at the allocation boundary. Tri=
-gger:
->>> cramfsls over a
->>>   =C2=A0 =C2=A0directory with a symlink.
->>>
->>> 5. btrfs:=C2=A0 heap overflow in subvolume path resolution (CWE-787 / =
-120)
->>>   =C2=A0 =C2=A0fs/btrfs/subvolume.c : get_path_in_subvol() / list_one_=
-subvol()
->>>   =C2=A0 =C2=A0strncat(path_ret, tmp, PATH_MAX) accumulates the path a=
-cross the on-
->>> disk ref
->>>   =C2=A0 =C2=A0chain with no total-length bound (strncat's size arg bo=
-unds the
->>> source, not the
->>>   =C2=A0 =C2=A0dest)
+> 
+> You can always have a conversion tool from DT to whatever format you want as a way out.
+> 
+>> At the very least though, it could be nice to eventually move the binman dts
+>> source files out of the arch dts folders to make the separation more clear.
 >>
->> That's the biggest problem here, unlike kernel which has VFS layer hand=
-ling
->> such overly long path, here we don't have anything that limits both the
->> source and destination length.
+> 
+> I loathe magic stuff and it's already confusing that -u-boot.dtsi files are automatically added based on some patterns (that most people are unaware of, hence the bunch of -u-boot.dtsi files that only include another -u-boot.dtsi file). So, from yet another location? Don't know if it's a clear win for user experience.
+> 
+>>>
+>>> To be absolutely clear here, I think this series should proceed and I'm not necessarily asking you to do it, more just gathering ideas/opinions.
+>>>
+>>> Peter
+>>>
+>>> [1] https://git.u-boot-project.org/u-boot/u-boot/-/blob/main/board/raspberrypi/rpi/rpi.env?ref_type=heads <https://git.u-boot-project.org/u-boot/u-boot/-/blob/main/board/raspberrypi/rpi/rpi.env?ref_type=heads>
+>>>  
+>>>      > Currently, only Xilinx is doing this kind of separation. This series
+>>>      > makes it possible for more platforms to adopt this separation. The first
+>>>      > patches fix binman so that the image gets the U-Boot control devicetree
+>>>      > rather than the binman one when the two are separate binaries. And they
+>>>      > make BINMAN_DTB work with OF_UPSTREAM, and document the recommendation.
+>>>      > The remaining patches update the MediaTek Genio targets to make use of
+>>>      > all of this.
+>>>      >
+>>>      > Signed-off-by: David Lechner <dlechner@baylibre.com <mailto:dlechner@baylibre.com>>
+>>>
+>>>      My more direct concern with this series is, who has some review cycles
+>>>      to step up and co-maintain this tool? It's already been privately
+>>>      suggested to me that we could drop the lofty "one tool for every project
+>>>      to rely on" goal since most projects continued to develop their own tool
+>>>      for assembling binaries anyhow. And that in turn reduces the scope. But
+>>>      it's still an important part of the project and so needs some people
+>>>      looking after it with a more global eye.
 >>
->> What we need is strncat_s(), but it's not provided in the current code =
-base,
->> so you may need to create a dedicated helper.
->=20
-> Is there some helper function currently in the kernel we can borrow?
+>> I might regret this as I am as overwhelmed as anyone else with reviews these
+>> days. And this is my first time touching/using the binman code so I don't
+>> know much about it yet. But it seems like this is relatively low volume and
+>> I know Python very well and this seems like pure software so I don't need
+>> any specific hardware to validate it. So I could try to help here for the
+>> time being.
+>>
+>> As a fair warning, I do tend to want to be a bit heavy-handed with my own
+>> changes when I am the maintainer. The current binman code looks to me like
+>> Java written in Python 2, which I find a bit painful to read. I would want
+>> to "clean it up" with modern automatic code formatters and linters as well
+>> as add type hints to make it easier for me to read and understand so that I
+>> could maintain it with less effort and also to find latent bugs.
+>>
+> 
+> Please be mindful of the minimum Python version we should support. I think we still support OpenSSL 1.x for example (also by the fact that it's the interface used by LibreSSL I think?). I have no clue what version of Python we want to support, but we're typically supporting stuff well past their end of support date.
 
-I don't think so, mostly because kernel don't use a single buffer to=20
-record the accumulated path.
+Of course. I saw (like Tom already pointed out) that 3.7 seems to be the
+current minimum.
 
-But it shouldn't be that hard to craft an equivalent of strncat_s().
+I would not have though about SSL versions, so thanks for pointing that out.
 
-Thanks,
-Qu
+> 
+> The code is extremely convoluted. Fortunately, there's good test coverage, so doing incremental changes and still having the various tests pass should help refactoring stuff.
+> 
+> Type hints will be an issue as there are some (notably list) that were added only in very recent version of Python.
 
->=20
+The typing_extensions package helps with backporting new typing features to
+older Python. And with `from __future__ import annotations` a lot of it isn't
+evaluated at runtime anyway, so shouldn't break things either. 
+
+> 
+> What I would like you (or anyone) taking over Binman to do would be to actually document how binman works internally, not only the user interface. It currently takes too long to even know how to start patching Binman, which makes people unable or not wanting to get involved with Binman at all, let alone review or maintain it. I for example discovered that Binman generates four times the same image, c.f. https://lore.kernel.org/u-boot/04fd00f4-1bb6-4a29-8e1e-83cdc1b03b74@cherry.de/ and I couldn't figure out quickly why so.
+> 
+>> I also see there is an active fork of binman at [1]. So I would be in favor
+>> of letting that be the ambitious project and trimming down the in-tree code
+>> to only what U-Boot needs.
+>>
+>> [1]: https://github.com/deinde-dev/binman
+>>
+> 
+> FYI, deinde-dev is managed by Simon.
+> 
+> Cheers,
+> Quentin
 
