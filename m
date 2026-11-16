@@ -2,105 +2,104 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9019C606A322
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 16:27:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99151606A32A
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 16:27:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pE86vbRy;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech header.a=rsa-sha256 header.s=zmail header.b=DnRbrOLs
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=dWXSokkV;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=pigmoral.tech header.i=@pigmoral.tech header.a=rsa-sha256 header.s=zmail header.b=TFGIsA53
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EFFA980FA7;
-	Mon, 16 Nov 2026 16:27:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8D97180FAB;
+	Mon, 16 Nov 2026 16:27:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mNFy-VKuoj3k; Mon, 16 Nov 2026 16:27:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F309C80F65
+ id UVlgCXRdsjq7; Mon, 16 Nov 2026 16:27:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7C71080F65
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794846467;
-	b=mlCH3s96IfM/SXF4t7lEH7P2fx3CXsY1uLXrpFsfupr2ZWqjnrjKcHGDxYqWb8y81fPv
-	 lEauMoHpGaBpUUBVIi0o6+O4xzXPWGNpn72hS0z4DWEeEdp4QZkD9UkFEMyAgXQG/wVZG
-	 3H2XYGJLP3Dj2fsO4f09ofWGjQnFu6zDYOfox7Nb2L9W39bGCVxM1pk1DUzRtHOubuQfV
-	 zZEbCGVOOExBRX5UCR5TSRA2mp6Yp/2WR5AKAOH4fNqu591jU/LoiKPbyySalLG2ISJWn
-	 wF2o5hJtz4niLZkIsZiPssLdTlROSFLjS34+BzHTMrtoK/e2YKCI3cefn/evwbrOivA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794846469;
+	b=MBzUIi1FLYbz73GOiJSJuACsA0UX73Fm0+rvLoUzVkvipL5d7dXk6HafYOa+O+LgbvZR
+	 rqroT3ToPUdIjDE3gVX+HtpITIxIVxRU6BEgSeBuafZZKynv75cJ6z1gAQDTZYB19FL6P
+	 sATsOk39dAERGLP/Ia4T4/BsiFYOmbeTPZ3mYoog/loJlNEAeoxU6Ws0a9vP/gnfNv/Sy
+	 tYQvgBjoxTIGOM4FE3J1couhZW0lrcRrmyGCNFuFOX5JTfhfQmtNwrkP5RHklTL7ucDyI
+	 Jcn+V5Kdq3yHR1wQRMJvI4ZT3SCdZV/aCRFKOx99a/NA1uUy9m6ZjJ/jAsIrMUWHjIQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794846467;
+	c=relaxed/relaxed; t=1794846469;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-ZohoMailClient:
+	 DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-ZohoMailClient:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=LgzrYlqcf6LAv/r3kDmgI7DY6O42K0yelIWtj+rCSzI=;
-	b=ai5qyMXu00GbazCE+LpJUgsocLmeJT8+RVu7aHRgEvePUQB0z7TMkbLTCwL6LJNmP9qh
-	 njHXHy75STxjCszd+mOXxkZcY8v4vDbXBJkX+Lu5lgmYubjSXHd/pwE3OEji13YLGU4zL
-	 MVNjf2674w9b595FT6MgmeAmy2CT4LleWgyDUSkRcj1CDwqJ3PRMOKVKZmxn9LfsntWif
-	 mAAa8gBP6STFx3F/kf1yzpxD/emb4pvlh7BQuZhI97opS5tFHe94qG3iTtSMw5+QAB+PN
-	 HuEu5VrIF1gUJV0W5GiEV740Cuim070xLiNMZJACFrpigvvxTumKMOw5AB9i0IYf9WA==
+	bh=s5QMD1dJsemYqhxA+iBqrhVrcXUBtF2E+/jA0h6ZFwQ=;
+	b=QjeLKKlUh4dDFS/cotQJ/KKvb2IyN8n4WsyfJWLMxhQdCPILuKegFYdCo9luuC70fNww
+	 w8Q6wlLQUEmdtjR0l72GfrL2jnp5+j/HEExKsg+NOfswbKcXTpcSORHMATK56NaBX8JJf
+	 iNIB/+LGfDJ6U/fVCHU4fBqRcJRPgYscNP1xgJbk2SX3l9a8RW3mHI8G+szQaOKptLHPA
+	 IcK1OG329gatsNDhrq5jUNwS8bL+3bB1n/qR1/TS+QlxPDXWiN+BpIG4D2HamPY+qqE/3
+	 JE9y7AeaxhTliyPK0gnIjDjVJSb6lYu26/WAcJxZTk7vcLak4SFV5lnWEWOvRvA1New==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794846467;
-	bh=LgzrYlqcf6LAv/r3kDmgI7DY6O42K0yelIWtj+rCSzI=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=pE86vbRyP4I32GQM+EvYxsrWMgdmrq0ngZJyDQ+pSNfGAPGkft4NaiqQNnMjaSboV
-	 jXljBAkxNvccLAEuO7W75Lu+/vaO6KN16B/54tVOu9UXvfi5Mdb+RuStOXGVcAPVqJ
-	 LHasDpOX9y9AReLkIJczTpMoDeBTIv4k8weFPx0Um+4cwm9oS/ITKS+Ogxa/LS3UOy
-	 mf7KvTYSMCAlU7vqx4mmuneb+AzKeHdKZjGS6CyXoBd2p8pfuaw6uyDSOWVzFxZkLU
-	 Pne63xPUYgo570LrGf5OSNdW8dSMZfvnxGZmaRCNtuQ3FLwqNNk1MC4aLQdaMzUtvX
-	 i51UPc004zFQg==
+	d=lists.u-boot-project.org; s=default; t=1794846469;
+	bh=s5QMD1dJsemYqhxA+iBqrhVrcXUBtF2E+/jA0h6ZFwQ=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=dWXSokkVKhAug9srpaGO7ME+jZLEv0hIefLyfk2Ifo8VV0xk9q5L7MOBKsNOZ5MIy
+	 hZw5em50fmQgw4u8nCaIxhwgZghxGYjq9KPCBL+UrHxE9SXEGA9XTz9wgqxzufFQjo
+	 +Cqj2B3QZo69HbTEuSg4ZfgaenGtAkKfo45MbLyevZdBlkF55nwYhran1NX3J0/pya
+	 zFWNhgvR2+MIaduNxJlCw7NyD6WtA4EmsB9iuwfQMMfS+HonQyUchhSeuhmzXprRgI
+	 kr/GPmx7059ku/jXYbIc9r2XRhnTEWm9ZH0Gt68SeWwZNJChLTGY3AEaUTPu11FIsF
+	 EU7bKbR9xuJeQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F309C80F65;
-	Mon, 16 Nov 2026 16:27:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7B15B169
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:27:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7C71080F65;
+	Mon, 16 Nov 2026 16:27:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EB76A4DD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:27:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 61D2840282
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:27:45 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D171640636
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:27:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CKeMXLZ0D3XM for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 16:27:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A211F4009E
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.182.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yBOdD43FFw-8 for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 16:27:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A89BC40612
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.180.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
+ helo=sender6-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=pigmoral.tech
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=DnRbrOLs
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A211F4009E
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:27:40 +0000 (UTC)
+ header.a=rsa-sha256 header.s=zmail header.b=TFGIsA53
+Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
+ [165.173.180.15])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A89BC40612
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:27:43 +0000 (UTC)
 DKIM-Signature: a=rsa-sha256;
- b=DnRbrOLsk/wK4SBfTr/oWY4wNyOExnMbGBM/p9ZCwbbFpU+7Cc1NF2GrdpQh/VIv0eXpQE+O4rhl6Qzdi4ynBcpp91yAd4VTWMmmLiKDVfilNUA0TSH6c1qgNliPVLDAtwzuzCTjsF/HZrA2MfLJJs/J9Gtd+/5C8vPTB/fxEU8=;
+ b=TFGIsA53hpEcVqADtPztcO2tLQhpRhnShWzfwnKIQco9B+v9eYs5NwcKQepG1eTFS+LBhTi7Dg3EX/HVHMOufmOj0wEzyB5scIWxPTE8NlOP/MGjbl+punvcVATLGzN+eVs1MDfSiOFeJ9gp7IHVlCFe3n6ZfABUIob1ZXJnclQ=;
  c=relaxed/relaxed; s=zmail; d=pigmoral.tech; v=1;
- bh=LgzrYlqcf6LAv/r3kDmgI7DY6O42K0yelIWtj+rCSzI=;
+ bh=s5QMD1dJsemYqhxA+iBqrhVrcXUBtF2E+/jA0h6ZFwQ=;
  h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794846445583965.4323201008268;
- Mon, 16 Nov 2026 08:27:25 -0800 (PST)
+Received: by smtp.zohomail.com with SMTPS id 1794846453632967.4080917025087;
+ Mon, 16 Nov 2026 08:27:33 -0800 (PST)
 From: Junhui Liu <junhui.liu@pigmoral.tech>
-Subject: [PATCH v2 0/4] riscv: Add a common memory FDT fixup
-Date: Tue, 17 Nov 2026 00:26:15 +0800
-Message-Id: <20261117-riscv-fixup-memory-v2-0-4731aa6c3fb5@pigmoral.tech>
+Date: Tue, 17 Nov 2026 00:26:16 +0800
+Subject: [PATCH v2 1/4] fdt_support: Skip memory fixup when the banks
+ already match
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22Nyw6CMBBFf4XM2jFtiRVc8R+GRSkDjJFHWmg0h
- H+3oEuXJ/dxVvDkmDzckhUcBfY8DhHUKQHbmaEl5DoyKKG0yGWGjr0N2PBrmbCnfnRvrDOTN5d
- aX41pIA4nRzE/Tu/ll/1SPcjO+9Pe6NjPcXlYg9x7P4FS/wRBosAsrVKpdaoE6WLiNibmeZ7Jd
- lBu2/YBLFvprsoAAAA=
-X-Change-ID: 20260918-riscv-fixup-memory-d8a9f5d67aaf
+Message-Id: <20261117-riscv-fixup-memory-v2-1-4731aa6c3fb5@pigmoral.tech>
+References: <20261117-riscv-fixup-memory-v2-0-4731aa6c3fb5@pigmoral.tech>
+In-Reply-To: <20261117-riscv-fixup-memory-v2-0-4731aa6c3fb5@pigmoral.tech>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>, 
  u-boot-spacemit@groups.io
 Cc: Tom Rini <trini@konsulko.com>, Aristo Chen <aristo.chen@canonical.com>, 
@@ -113,13 +112,13 @@ Cc: Tom Rini <trini@konsulko.com>, Aristo Chen <aristo.chen@canonical.com>,
  Hal Feng <hal.feng@starfivetech.com>, E Shattow <e@freeshell.de>, 
  Anshul Dalal <anshuld@ti.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2383;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2757;
  i=junhui.liu@pigmoral.tech; h=from:subject:message-id;
- bh=bLDmKLptfUbz2RO74AKzdG7q56OOjnTeP1PaiRjIzMM=;
- b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLJ+6+3l9n+24PmsN+JKGv9d0jROOj19FJl0ue7azk+Tn
- FjCHkf86ihlYRDjYpAVU2Th8hf/Z63D8+2IQOt9mDmsTCBDGLg4BWAi854z/Hc0/Lpe68v910k7
- 5rFKdb2KnvZUzJutuOe7eOerN7yds+sZ/kq5fi1iduHkbW8tN/IT7gor4P629AXbm52GOexR+7a
- F8gEA
+ bh=znn9RG7UYqmNYq206+GvXN6qVWbhlOwcBpn6vOOLMXw=;
+ b=owGbwMvMwCWWvDb1VEXc8j+Mp9WSGLJ+6x1hlL4mYCpTuCSqVeWZf/3kRtW8h+F2NzKFrh4p/
+ n5fwNWjo5SFQYyLQVZMkYXLX/yftQ7PtyMCrfdh5rAygQxh4OIUgIm8ZGD4H5q01+gyY1aY/Utv
+ q1mxTdJiyYYRFzhNrZ5YbHdcPsm+kJFhxs4LX3s/r5hXt9BR8EbsibaIbYef7NFQX30gsdOlIdK
+ EEQA=
 X-Developer-Key: i=junhui.liu@pigmoral.tech; a=openpgp;
  fpr=15B30CC69C4BF0CC3C08F85A2A90CDC122DF37BF
 X-ZohoMailClient: External
@@ -134,60 +133,110 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Update the memory nodes in the OS device tree from gd->dram[] in the
-RISC-V arch_fixup_fdt() path, allowing memory detected by firmware to be
-passed to the operating system without board-specific fixups.
+fdt_fixup_memory_banks() writes all banks into the first memory node,
+leaving any other memory nodes untouched. For device trees with multiple
+memory nodes, this can duplicate memory ranges even when the existing
+layout already matches the supplied banks.
 
-In v2, add a check in fdt_fixup_memory_banks() to leave the device tree
-unchanged when its enabled memory nodes already match the supplied banks
-in DT order. This addresses the MPFS case raised in Tom's feedback on v1
-without disabling CONFIG_ARCH_FIXUP_FDT_MEMORY.
+Compare the packed banks with the reg properties of enabled memory nodes
+in DT order and return without modifying the tree when they match.
 
-Updating differing layouts with multiple memory nodes is not covered by
-this series. Memory nodes may carry properties such as numa-node-id or
-reg-names, while gd->dram[] contains only addresses and sizes. When
-ranges are added, split or combined, that information alone is not
-sufficient to determine how those properties should be retained or
-assigned.
-
-Convert SpacemiT K1 and StarFive JH7110 to use the common implementation
-and remove their redundant board fixups. Keep the JH7110 SPL fixup, as it
-passes the detected DRAM size from SPL to U-Boot proper.
-
-The matching case with multiple memory nodes was verified on QEMU using
-a device tree with two memory nodes.
+Updating differing multi-node layouts remains unsupported. Platforms
+that need to preserve such layouts should disable
+CONFIG_ARCH_FIXUP_FDT_MEMORY.
 
 Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 ---
-Changes in v2:
-- Add a common check to skip memory fixups when the existing banks match
-- Drop the CONFIG_ARCH_FIXUP_FDT_MEMORY opt-out for Microchip MPFS
-- Link to v1: https://patch.msgid.link/20260922-riscv-fixup-memory-v1-0-83b3166320e6@pigmoral.tech
+ boot/fdt_support.c | 56 ++++++++++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 44 insertions(+), 12 deletions(-)
 
----
-Junhui Liu (4):
-      fdt_support: Skip memory fixup when the banks already match
-      riscv: Fix up the OS memory nodes from the DRAM banks
-      riscv: spacemit: k1: Use the common memory FDT fixup
-      riscv: starfive: visionfive2: Use the common memory FDT fixup
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 2941df559962..aecf5dd3ecaa 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -525,6 +525,35 @@ static int fdt_pack_reg(const void *fdt, void *buf, u64 *address, u64 *size,
+ #define MEMORY_BANKS_MAX 4
+ #endif
+ 
++/*
++ * fdt_memory_banks_match - compare packed banks with memory nodes in DT order
++ */
++static bool fdt_memory_banks_match(const void *blob, const u8 *banks, int remaining)
++{
++	const void *reg;
++	int off = -1;
++	int len;
++
++	for (;;) {
++		off = fdt_node_offset_by_prop_value(blob, off, "device_type", "memory", 7);
++		if (off < 0)
++			break;
++		if (!fdtdec_get_is_enabled(blob, off))
++			continue;
++
++		reg = fdt_getprop(blob, off, "reg", &len);
++		if (!reg || len <= 0 || len > remaining)
++			return false;
++		if (memcmp(reg, banks, len))
++			return false;
++
++		banks += len;
++		remaining -= len;
++	}
++
++	return remaining == 0;
++}
++
+ /**
+  * fdt_fixup_memory_banks - Update DT memory node
+  * @blob: Pointer to DT blob
+@@ -561,6 +590,21 @@ int fdt_fixup_memory_banks(void *blob, u64 start[], u64 size[], int banks)
+ 		return err;
+ 	}
+ 
++	for (i = 0; i < banks; i++) {
++		if (start[i] == 0 && size[i] == 0)
++			break;
++	}
++
++	banks = i;
++
++	if (!banks)
++		return 0;
++
++	len = fdt_pack_reg(blob, tmp, start, size, banks);
++
++	if (fdt_memory_banks_match(blob, tmp, len))
++		return 0;
++
+ 	/* find or create "/memory" node. */
+ 	nodeoffset = fdt_find_or_add_subnode(blob, 0, "memory");
+ 	if (nodeoffset < 0)
+@@ -574,18 +618,6 @@ int fdt_fixup_memory_banks(void *blob, u64 start[], u64 size[], int banks)
+ 		return err;
+ 	}
+ 
+-	for (i = 0; i < banks; i++) {
+-		if (start[i] == 0 && size[i] == 0)
+-			break;
+-	}
+-
+-	banks = i;
+-
+-	if (!banks)
+-		return 0;
+-
+-	len = fdt_pack_reg(blob, tmp, start, size, banks);
+-
+ 	err = fdt_setprop(blob, nodeoffset, "reg", tmp, len);
+ 	if (err < 0) {
+ 		printf("WARNING: could not set %s %s.\n",
 
- arch/riscv/cpu/k1/dram.c                          | 15 ------
- arch/riscv/lib/fdt_fixup.c                        | 16 +++++++
- board/starfive/visionfive2/starfive_visionfive2.c |  7 ---
- boot/fdt_support.c                                | 56 ++++++++++++++++++-----
- configs/spacemit_k1_defconfig                     |  1 -
- configs/starfive_visionfive2_defconfig            |  1 -
- 6 files changed, 60 insertions(+), 36 deletions(-)
----
-base-commit: 6487c50b8a40f2668ab98a892b9300ad5c181f38
-change-id: 20260918-riscv-fixup-memory-d8a9f5d67aaf
-
-Best regards,
---  
-Junhui Liu <junhui.liu@pigmoral.tech>
+-- 
+2.56.1
 
