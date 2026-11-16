@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4A66606A884
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 14:01:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EAC4606A890
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 14:01:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GDMQuHX7;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=dZ/VIx5n
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=qIVHY7XO;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=D3kg6V2V
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8292F406F6;
-	Mon, 16 Nov 2026 14:01:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 571CD60814;
+	Mon, 16 Nov 2026 14:01:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id b-YFeLtraaeb; Mon, 16 Nov 2026 14:01:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 991C040705
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794837672;
-	b=NY0pVK6ddKw1Es8ZtXgZ3JaakTvgtJdqvTB1D0yONMqDK2otk/MomoGvQwPjmxOIBeqp
-	 66FtcgfH2GUa1wqswfUTq8/WUE1+XPcO6bQ3eiT0QD6XbmiJGMFAxNl3BH/RPYEx4YEtN
-	 KFll5KRDq2bzod5dB2wb4gh2Zqq3vNcpk7lyPPNuhM9HWF14xBaKpX4Lc8ce7Or/anPPD
-	 TCxhdDc0TkGJtp4j6yAowtU3fB+1XTxu15brpnGHllGL7qEwvTO18Yph6mH1dkuiyAINu
-	 ZMZSxeaq8m1jni+SCgpaxiQYKwRYVE/CTRucM6Gij9h7QHh4fGi4vaE72N741V3H2YQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SMp-nRr5-R0r; Mon, 16 Nov 2026 14:01:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2F4EC607F0
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794837674;
+	b=ifVABUavSqziSda7Qmf3eTsgxcmsheZWH/O77mEldmkwPmRlY678QUlyQ79qPE57dTsW
+	 Wccsc4OzGX+BMjgVzK89QfEdTummrH03WhDv//8CzToK8MZwZszZCFhLKNZycLZluX8St
+	 uw2gz5ImC6eLga0kO0WnPjt1/zlIOgwY1FoScOelDKnTYicAYuOjuocz8zK/5+vYGY0fU
+	 mlJeaLDWS0CXWcDSZw+4R/dNT6W+3dPXBxQ3SN8V9+VlX783gIxddmetMtZlUe2HVU3rw
+	 8XAl0mDpQBWbi9MiqgRPNsSzwkvVfUJdqUNnN/EBeiSmu8U/5ZsXq68wPVArGGbJe7g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794837672;
+	c=relaxed/relaxed; t=1794837674;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,115 +33,114 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=w3brToEWN20VywlcqJPIvqAf1+YBBZHnVtTVxhfekfg=;
-	b=XPdibvacWw0fDeqFx8UW0jyLCwS5MYcFp6WUDMJ0MfVVWtX3WEWORHaYv3iHzaJTKKXG
-	 xFEIX93Rvhmp4yOno6OAvOwaWz8EeOkHfFVl6wLBefdVhrhX2iDR21DGLKqkj6nVwu16A
-	 q5iaudBoIhFLBsU9lpE6MlWrpP5lzOoZvbU68uxuOy7p/72MfLW89a1umJGG0TnZU+u32
-	 v7cVus6GciyM1W1iag2uhBWLKJVXw9QE59GHR6YpOcLrAFtA32pBpTdVmozIQ4xIUbzCZ
-	 V75dTl7D9IGOP9uyv9CCFhzJ85cZKHBrZIKkM9JSWFFnERORI9pdXm3vNwPeTas62jw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=/e/QqVGK2V/35Y2G04sK9Wnv3KC0igy6EHM+hHh0gO4=;
+	b=itrBWyrVKuJA5MW2eumxYhSlA+2Rg/XowW4UUjarijeDkcSLoNE64tv4DL/G5vaC3L6u
+	 nKOK3GxBxIZYg1QOIW3tvNQ7NAVjImd+XuqoAeXMLDco86h37Swlh7oo3mKm2ckEaBf5U
+	 6ZeGCt5cxhF50yF/aySHbbsUw/3clBu9Ey/pwNmuPrh6H0cCSG6qqFd2uvIqypku0oqrp
+	 1d7HCSEBYl5NXEqeH5A3tJKNsqw9vAuwp7RPxYpvFcTJn1GfE4elfIMl383cIJ1+u2A2C
+	 Ke7aPbHAAr1gfvHu2seF3Wsu56XBiS3XTqTUrI8CuU/Utj8hJyb6GK/QBmuTxWzOZwQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794837672;
-	bh=w3brToEWN20VywlcqJPIvqAf1+YBBZHnVtTVxhfekfg=;
+	d=lists.u-boot-project.org; s=default; t=1794837674;
+	bh=/e/QqVGK2V/35Y2G04sK9Wnv3KC0igy6EHM+hHh0gO4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GDMQuHX7SA8iQi4InTUbstndXSItK/fiwk3CcGTaW7XPxeovPfyHBU3cbRxDdOJ+A
-	 nonMUR4SnBFoaQ/JyHnN1lCfvv/I3nmggveBETHazllILUdFwk+73LPj88aWK1E0F2
-	 cpj5D9nSgEoFypLmIoamssaJgB8o4uitTilaEVZJ/cxP/SSTHqissaOO+TCFEsHo14
-	 lgpvUOWd4uxbtfqXHEJY8fkMbFswtjqZrYxptPIY8DkHKjEzJIciKNw+/E32felczK
-	 oIHxQoRt4B/9gGWRk/dYQxmW5DjYjEv0BbrcpnpT2FzVnc6g1tNuZ9rorx95MbUZzE
-	 pHmZteKGBWl3Q==
+	b=qIVHY7XOdqlWJjd6YchaHQtVvKjJS+Kje+yhtogvn9vqPbdjmE5V9OIr73nhlMqZV
+	 f0TqKmk5qUYCgl/k6lFpJ58dpV0mTP5ytzBhShBJlqgx3Na7ytEsCDjfyIl5njSFGX
+	 N+9x8PNcHV9q+A8v8cH9KvYwJtlgc0aHGDI64FpY3jMqFDvCgCOi+tV3debmODCuc/
+	 FaMxua3m/i2+IFe0hqWh/mJW+2L4+V0z2Exnl/1spT9ZuizjqXu+McJLU8ZxcHNyCN
+	 j0Lx/krTnxJIo+yaOZ1WCRZASSfm6kY3NhYukiAhnJp5cuMuraM9laglkEWpl5NPyb
+	 yxZhy9pslUewQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 991C040705;
-	Mon, 16 Nov 2026 14:01:12 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 94A602FE
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2F4EC607F0;
+	Mon, 16 Nov 2026 14:01:14 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B03072FE
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 86C2B40274
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:09 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9153680F49
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SZqhO4UgpNpe for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 14:01:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 965494009D
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42a"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zJT67zNq_jnz for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 14:01:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1A9EC80F4A
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::431"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
+ client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=dZ/VIx5n
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 965494009D
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:07 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-492fcbfaa87so1845511f8f.3
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 06:01:07 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=D3kg6V2V
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1A9EC80F4A
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:09 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-48dfc0421d9so3152413f8f.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 06:01:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794837665; x=1795442465;
+ d=baylibre.com; s=google; t=1794837668; x=1795442468;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=w3brToEWN20VywlcqJPIvqAf1+YBBZHnVtTVxhfekfg=;
- b=dZ/VIx5nbqvAqdO4egu5wn8+iSPnCQIjNEgFvvcPoMXUnaFgz9yzuLz+3eMSe+7d3g
- OFD5aZYPq6iRsFRrOdITqLux10HvZO7H+bsmVPXlUEYbPKPYQ6NhwRXB/FlodPsAmjYn
- OpBMkgShgEePF9fscDdin3RWIUw5TYh6gjavRJqG1tsX7zAiMPQn3539dHZQKWGzewVm
- 8pTDq+2VJ+Fr7aD1dvwA7YaF2asM7Yokyi4394EF/UwsKjKYuPk4xTneuNW7nj3GKTo6
- HxmHeCVN6awuhs6zoAMKoTNzh5rgYXpvuaaUPJmmKxSPcStKwG+aWQrPEgbuKq0gPZDn
- qH5w==
+ bh=/e/QqVGK2V/35Y2G04sK9Wnv3KC0igy6EHM+hHh0gO4=;
+ b=D3kg6V2VLMIOaTAjIXlh/PlF0imhcUFTjxkCkDey0rTXK/kd30YC1WYKHa4798LSAV
+ b2y99btqMYXNSg3J3EXADyx1nrtAj1Qrq0+6efqbmeuhqyxUhIAOX7u6D6qSdC2e2IRI
+ c3cqT0BsRFmRWBEWcdMhZg5upw288qtkhQXKu26PMMBj2yf3Pgj7ZJwDB2uuwgL/3sTK
+ h1fzcJZF9wI9k6Frb4YL8Rwj7OuBfhkRwvsQLNoTMn1d2p34rASoxgXEw9llg4z87xKp
+ WD6x/xDlxZQey73bJsiedGHRq1xIQZjDLLPsgtBNrVzLYk2SWAwdeTyyHlEGkoa8f/J8
+ s1tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794837665; x=1795442465;
+ d=1e100.net; s=20260707; t=1794837668; x=1795442468;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=w3brToEWN20VywlcqJPIvqAf1+YBBZHnVtTVxhfekfg=;
- b=pgFgpPxff+PLcZ6p02YnJ2mTrJ38cOlCKUSt/6WMf7+MP1BUwKK22o1aNuOc6ITIWE
- tOy/1L/Mp+fC9EW8bfXvm+meTZrMCUeLeqx+1QaW0Oht9Ec4kl/rGCR/3hHHztSUDEqD
- axUorJ7oFZ0Jogi5H/m0XF78/TIDGi/niYgg0+QP6JtlrvUb5FpeCS6kNdD61qbJf2QM
- TtHnu5RnfQi7cKGfl3Ex8q6/qTGDdrRaX879yVxHDuwxg6UPTUv/XpRWebxxjJuCJ78c
- wnaTE62XZJxpb5SjmOXe7w+UvAj4RxEyyyBcpQPxtuOQKxQzKm8GddudNVisoYTD6iDt
- lN8g==
-X-Gm-Message-State: APuU4Z90uPGOw3Dl8Y3PkZWFMwV8TALxPfwIsjDsLxVs5XW/XXLXy2Kz
- nMtMoyiYWtEgXOv2oYQXriELf2DVS0wpUewcLWRc38o9CRfh1M96xExiZg+wOVjXR4k=
-X-Gm-Gg: AZFdTZdgm3PRvE8p5/XGevowmkbRQFGS4YV4dCZOqbxr7zoSqZL0vOulWlr+sFOx3BL
- +L8Y0nJG9Sosgczl1VEK9WlaZYiRWFT4dtM+5/7K2HR3YSO6QvAOqEyGL4LDOsv24qphk3506Oy
- MuXKTNhaJV2ZQX8Gtj/JJuxYRThJGLAAP/1CQFCVf2pkLPyL/YN23lt5sLS4mjFMl8y6YdMQCGZ
- TSEGuavQMqBwRrniocxWx6Y55ftjJpu9UT8Jvfqh1uvx/DbajmMYZDf5rOdnIqUGflr2cWxTht5
- VT0Ry726+hFt2htzotwdY45n1lXfJ43fYnk0inLDSjL4yslgQuIwQeO3KDoR03rC6w9zNXAVfOn
- T1FY+KoyyY27SE2EQnjkNghoRb3xSs4oo2L7qw5Y+mknMgEeINHYs19Ko6vftowXtZ9XPRzP4Rt
- 5yiZaDjhEhg37TRMNFtmFjdwJUaJaaSyONn9nnlLWgWp6E4vanPzfFRB6GskAVLnEpOi+G8dH7g
- LQE+TDvIMfQR1lOnDUCAi8a1zROaxKmjwwWCshFnuNVz9LdxHDQBCs1YMnnOkraf1y/OLxNeAoB
- UIfBDQOd4gZXh65ZQNV7wEaRv3GhsGymx56sw45R9vZpOcs6gM5ku5BruZUDr333ImK+LXRi7wC
- 46EmVbQyrgcnRA2tv3g5HkevTNOXeHVoVcgIZFjJubmjRnw==
-X-Received: by 2002:a05:6000:1841:b0:48f:d7cd:a5ac with SMTP id
- ffacd0b85a97d-49c6b97336emr26890103f8f.0.1794837665152; 
- Mon, 16 Nov 2026 06:01:05 -0800 (PST)
+ bh=/e/QqVGK2V/35Y2G04sK9Wnv3KC0igy6EHM+hHh0gO4=;
+ b=EYSGIzfpO4AqX5cx8fKJnbqprqRH7nkqkUp71Kz3WxTJ3Jhnljj7fHZqHsfuI3nNwt
+ 6waY073EFY4006MX7wcreyFlHLxlpHQAUIXsMM2dK0W8kdqzGejxgas+Hbet8yWbbVpQ
+ dZjZGuOykKaYdYTvBmmVy3NEErLNMbGCsT6fneTlvAAbO/mPBcSgILiJ9rG/kOmGmgnB
+ Hjq7fxzTXseJwRzh5vWRmoiNJFtAcwK7TvZrxOFDUBGLMPYYxD+PYBeOWfkJgI+9SkcD
+ 7SoZzbc9C9lazQYnlfDGMU+OMxg8ACG3+6FRxFA6pCs5IS/i4UF6gAcXrtJJpf8bFjp6
+ Y1yg==
+X-Gm-Message-State: APuU4Z8lIFezRc1er/1uTxfNGD22vnK2ZbCzSC6FhgYFeUtma9vvIex1
+ vtwxz74Cm++bLHuJULAxEDs4Qj0k7d/dqqNtVOAzaSL5SdBYDaA0nz5pGP++kQG7U6A=
+X-Gm-Gg: AZFdTZfIlxBGaJOrVXR83x+7tyoCYfXv3XKjR+IpU99zLsV4/Qhghta3t9wU7aQQJsA
+ saRg3t0rrEF+VjZ5a1DXUOZu7WWGFQr/6lzlIHc7da3mmlS+V8Ujc/uSpb1OesDA16lZ5m3LE3g
+ QfYjgRLc9VfVYbvNqxCUVv/xy4I0752A4Jqq5bN+VijS4WkLnJkG5RfxXP+NHXN5mPk1lF0Cftd
+ azIJoF4/Ml/p/RNay4ZzfVkrhlHeudFAKYO6eDO/dUVsstPQHxo53V+MqB1c5y4IO7V1aKYQ7tR
+ WVAYreOGUpy9enU0u3D392BpZd74flGY9IktL5ZfYE+xQPtnnkElcz6/Vbuc59IdBcN3lZJ3P/U
+ 01Zi8eowmjKBip5ALOJg7JMZJFnyJy0iMkBEp7fIU8B8jpf5qsVZ0Cm76OwehU76Y1o9HwRciOT
+ zmsbG+wfyCJ06Hag9HMesmCy/N5wAv5muZSMkfX380yk7wRDaELEciUbGV4eAeqJEdiiV0gbNkf
+ aqIWRzo/p2mAHW1xZh9se/Q6KrCRUTX9rFB3POwt2IarkimqyBPvnSnSNXBC36ljqAqGwD63gRU
+ 2mcreOaRanX4lE2ksWpAabMAw1Xcq+S5yAXFqQMsyONMoK+8kZw4qnOVAsA963nDb4b0dxupdO7
+ zbigY1J6qcicZTElW599hbdZLo8TBAsMHds+FIo2tJLdHOA==
+X-Received: by 2002:adf:e190:0:b0:493:8847:841b with SMTP id
+ ffacd0b85a97d-49c70b059e9mr22676672f8f.19.1794837667690; 
+ Mon, 16 Nov 2026 06:01:07 -0800 (PST)
 Received: from macbook.homenet.telecomitalia.it
  (host-95-246-144-141.retail.telecomitalia.it. [95.246.144.141])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c69406640sm22119355f8f.12.2026.11.16.06.01.03
+ ffacd0b85a97d-49c69406640sm22119355f8f.12.2026.11.16.06.01.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 06:01:04 -0800 (PST)
+ Mon, 16 Nov 2026 06:01:07 -0800 (PST)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 16 Nov 2026 15:00:51 +0100
-Subject: [PATCH v3 5/7] spl: support booting FIT images downloaded with
- fastboot
+Date: Mon, 16 Nov 2026 15:00:52 +0100
+Subject: [PATCH v3 6/7] spl: fastboot: support legacy U-Boot images
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-ccaione-upstream-spl-fastboot-boot-v3-5-7b39e7a348c6@baylibre.com>
+Message-Id: <20261116-ccaione-upstream-spl-fastboot-boot-v3-6-7b39e7a348c6@baylibre.com>
 References: <20261116-ccaione-upstream-spl-fastboot-boot-v3-0-7b39e7a348c6@baylibre.com>
 In-Reply-To: <20261116-ccaione-upstream-spl-fastboot-boot-v3-0-7b39e7a348c6@baylibre.com>
 To: u-boot@lists.u-boot-project.org, 
@@ -173,574 +172,242 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Test farms need to run successive U-Boot builds without rewriting boot
-storage. Add an optional RAM boot path for FIT images, including firmware
-needed to enter U-Boot.
+Boards using a single legacy U-Boot image should be able to test it over
+fastboot without changing their image format. Use the shared RAM reader
+and SPL loader, with the downloaded length limiting header and payload
+accesses.
 
-Accept the Android v0 envelope used by the standard fastboot client so
-the same fastboot boot u-boot.itb workflow can be used with SPL.
+Keep legacy support optional and reject compressed images, which this
+RAM path does not yet support.
+
+Reject legacy downloads when SPL FIT signature verification is enabled
+to prevent bypassing that verification with an unsigned image.
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- MAINTAINERS                     |   2 +
- common/spl/Makefile             |   1 +
- common/spl/spl_fastboot_boot.c  |  76 +++++++++++++++++
- configs/sandbox_spl_defconfig   |   1 +
- doc/android/fastboot.rst        |  45 +++++++++-
- drivers/fastboot/Kconfig        |  15 ++++
- drivers/fastboot/fb_command.c   |  29 +++++++
- drivers/usb/gadget/f_fastboot.c |   4 +-
- include/fastboot.h              |   8 ++
- include/spl.h                   |   7 ++
- test/image/Makefile             |   1 +
- test/image/spl_fastboot.c       | 183 ++++++++++++++++++++++++++++++++++++++++
- 12 files changed, 369 insertions(+), 3 deletions(-)
+ common/spl/spl_fastboot_boot.c |  4 ++--
+ common/spl/spl_ram.c           | 32 ++++++++++++++++++++++++++++++++
+ doc/android/fastboot.rst       | 22 +++++++++++++++-------
+ drivers/fastboot/Kconfig       |  7 ++++---
+ include/spl.h                  | 11 ++++++++++-
+ include/spl_load.h             |  2 ++
+ test/image/spl_fastboot.c      | 13 +++++++++++--
+ 7 files changed, 76 insertions(+), 15 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ad224d913ac..d8b59a0a99b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1040,6 +1040,8 @@ M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
- S:	Maintained
- T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu.git
- F:	cmd/fastboot.c
-+F:	common/spl/spl_fastboot_boot.c
-+F:	test/image/spl_fastboot.c
- F:	doc/android/fastboot*.rst
- F:	include/fastboot.h
- F:	include/fastboot-internal.h
-diff --git a/common/spl/Makefile b/common/spl/Makefile
-index 9c94e8f143e..710463f2a3b 100644
---- a/common/spl/Makefile
-+++ b/common/spl/Makefile
-@@ -38,6 +38,7 @@ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
- obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
- obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
- obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
-+obj-$(CONFIG_$(PHASE_)FASTBOOT_BOOT) += spl_fastboot_boot.o spl_ram.o
- obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += spl_ufs.o
- endif
- 
 diff --git a/common/spl/spl_fastboot_boot.c b/common/spl/spl_fastboot_boot.c
-new file mode 100644
-index 00000000000..f52ea83b230
---- /dev/null
+index f52ea83b230..6a765f91cba 100644
+--- a/common/spl/spl_fastboot_boot.c
 +++ b/common/spl/spl_fastboot_boot.c
-@@ -0,0 +1,76 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2026 Carlo Caione <ccaione@baylibre.com> */
-+
-+#include <android_image.h>
-+#include <fastboot.h>
-+#include <spl.h>
-+#include <linux/log2.h>
-+
-+struct fastboot_image {
-+	const void *data;
-+	size_t size;
-+};
-+
-+/* The standard fastboot client wraps a FIT in an Android v0 boot image. */
-+static int spl_fastboot_unwrap(struct fastboot_image *image)
+@@ -11,7 +11,7 @@ struct fastboot_image {
+ 	size_t size;
+ };
+ 
+-/* The standard fastboot client wraps a FIT in an Android v0 boot image. */
++/* The standard fastboot client wraps non-Android images in a v0 header. */
+ static int spl_fastboot_unwrap(struct fastboot_image *image)
+ {
+ 	const struct andr_boot_img_hdr_v0 *hdr = image->data;
+@@ -54,7 +54,7 @@ int spl_fastboot_load(struct spl_image_info *spl_image)
+ 	ret = spl_fastboot_unwrap(&image);
+ 	if (ret)
+ 		return ret;
+-	return spl_ram_load_fit(spl_image, (void *)image.data, image.size);
++	return spl_ram_load(spl_image, (void *)image.data, image.size);
+ }
+ 
+ /* Sandbox tests the loader directly, without a physical USB boot method. */
+diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
+index 75a3e5904b8..d93f4526d5f 100644
+--- a/common/spl/spl_ram.c
++++ b/common/spl/spl_ram.c
+@@ -14,6 +14,7 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <spl.h>
++#include <spl_load.h>
+ #include <linux/libfdt.h>
+ 
+ struct spl_ram_image {
+@@ -51,6 +52,37 @@ int spl_ram_load_fit(struct spl_image_info *spl_image, void *fit, size_t size)
+ 	return spl_load_simple_fit(spl_image, &load, 0, fit);
+ }
+ 
++int spl_ram_load(struct spl_image_info *spl_image, void *buf, size_t size)
 +{
-+	const struct andr_boot_img_hdr_v0 *hdr = image->data;
-+	u32 page_size, kernel_size;
-+	size_t hdr_size = offsetof(struct andr_boot_img_hdr_v0,
-+				   recovery_dtbo_size);
++	struct legacy_img_hdr *header = buf;
++	struct spl_ram_image image = { .data = buf, .size = size };
++	struct spl_load_info load;
 +
-+	if (image->size < ANDR_BOOT_MAGIC_SIZE ||
-+	    memcmp(image->data, ANDR_BOOT_MAGIC, ANDR_BOOT_MAGIC_SIZE))
-+		return 0;
-+
-+	if (image->size < hdr_size)
++	/* Require a complete magic word to identify a headered image. */
++	if (size < sizeof(header->ih_magic))
 +		return -EINVAL;
-+	if (le32_to_cpu(hdr->header_version) || hdr->ramdisk_size ||
-+	    hdr->second_size)
++
++	/* FIT images can contain multiple payloads with separate load addresses. */
++	if (image_get_magic(header) == FDT_MAGIC)
++		return spl_ram_load_fit(spl_image, buf, size);
++	if (image_get_magic(header) != IH_MAGIC)
++		return -ENOEXEC;
++
++	/* Legacy images need a complete header and an uncompressed payload. */
++	if (CONFIG_IS_ENABLED(FIT_SIGNATURE))
++		return -EPERM;
++	if (!CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT))
++		return -EOPNOTSUPP;
++	if (size < sizeof(*header) || !image_get_data_size(header) ||
++	    image_get_data_size(header) > size - sizeof(*header))
++		return -EINVAL;
++	if (image_get_comp(header) != IH_COMP_NONE)
 +		return -EPROTONOSUPPORT;
 +
-+	page_size = le32_to_cpu(hdr->page_size);
-+	kernel_size = le32_to_cpu(hdr->kernel_size);
-+	if (!is_power_of_2(page_size) || page_size < hdr_size ||
-+	    page_size > image->size || kernel_size > image->size - page_size)
-+		return -EINVAL;
-+
-+	image->data += page_size;
-+	image->size = kernel_size;
-+	return 0;
++	spl_load_init(&load, spl_ram_load_read, &image, 1);
++	return spl_load(spl_image, NULL, &load, size, 0);
 +}
 +
-+int spl_fastboot_load(struct spl_image_info *spl_image)
-+{
-+	struct fastboot_image image;
-+	void *buf;
-+	int ret;
-+
-+	image.size = fastboot_get_boot_image(&buf);
-+	image.data = buf;
-+	if (!image.size)
-+		return -EAGAIN;
-+
-+	ret = spl_fastboot_unwrap(&image);
-+	if (ret)
-+		return ret;
-+	return spl_ram_load_fit(spl_image, (void *)image.data, image.size);
-+}
-+
-+/* Sandbox tests the loader directly, without a physical USB boot method. */
-+#if !IS_ENABLED(CONFIG_SANDBOX)
-+static int spl_fastboot_load_image(struct spl_image_info *spl_image,
-+				   struct spl_boot_device *bootdev)
-+{
-+	int ret;
-+
-+	ret = fastboot_usb_run(CONFIG_SPL_FASTBOOT_USB_DEV, NULL, 0);
-+	if (ret)
-+		return ret;
-+
-+	return spl_fastboot_load(spl_image);
-+}
-+
-+SPL_LOAD_IMAGE_METHOD("USB fastboot", 0, BOOT_DEVICE_BOARD,
-+		      spl_fastboot_load_image);
-+#endif
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index b1112fd45e7..67640c7d85d 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -217,6 +217,7 @@ CONFIG_SPL_DM_USB_GADGET=y
- CONFIG_USB_GADGET=y
- CONFIG_SPL_USB_GADGET=y
- CONFIG_SPL_FASTBOOT=y
-+CONFIG_SPL_FASTBOOT_BOOT=y
- CONFIG_USB_EMUL=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_VIDEO=y
+ #if CONFIG_IS_ENABLED(RAM_DEVICE) || CONFIG_IS_ENABLED(DFU) || \
+ 	CONFIG_IS_ENABLED(PCI_DFU)
+ static int spl_ram_load_image(struct spl_image_info *spl_image,
 diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-index 8e15f287f9b..9898348c961 100644
+index 9898348c961..73241e717b8 100644
 --- a/doc/android/fastboot.rst
 +++ b/doc/android/fastboot.rst
-@@ -96,7 +96,7 @@ stub. The ``continue`` command ends the session and returns control to the
- caller. The ``flash`` and ``erase`` commands are available when their SPL
- backend is enabled. A recognized command whose optional backend is disabled is
- reported as unsupported. Commands omitted from the SPL table, including
--``boot``, ``ucmd``, ``acmd`` and the OEM commands, are reported as unrecognized.
-+``ucmd``, ``acmd`` and the OEM commands, are reported as unrecognized.
- 
- MMC flash and erase support is enabled with
- ``CONFIG_SPL_FASTBOOT_FLASH_MMC``. The SPL partition-table parser matching the
-@@ -120,6 +120,49 @@ Reboot commands require ``CONFIG_SPL_FASTBOOT_REBOOT`` and a platform
+@@ -120,8 +120,8 @@ Reboot commands require ``CONFIG_SPL_FASTBOOT_REBOOT`` and a platform
  and ``reboot-recovery`` commands also require a platform
  ``fastboot_set_reboot_flag()`` implementation.
  
-+Booting a downloaded FIT from SPL
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Enable ``CONFIG_SPL_FASTBOOT_BOOT`` and include ``BOOT_DEVICE_BOARD`` in the
-+board's SPL boot order. This load method starts the fastboot session itself;
-+select the USB controller with ``CONFIG_SPL_FASTBOOT_USB_DEV``. RAM and the
-+USB controller must be ready before the load method runs.
-+
-+The host can then download and run a U-Boot FIT without flashing it::
-+
-+   fastboot boot u-boot.itb
-+
-+::
-+
-+   Host                         Target
-+   +----------------+           +-----------------------+
-+   | U-Boot FIT     | -- USB -->| SPL fastboot download |
-+   +----------------+           +-----------+-----------+
-+                                            |
-+                                  acknowledge boot,
-+                                  stop USB session
-+                                            |
-+                                +-----------v-----------+
-+                                | SPL FIT loader        |
-+                                +-----------+-----------+
-+                                            |
-+                                +-----------v-----------+
-+                                | Firmware / U-Boot     |
-+                                | running from RAM      |
-+                                +-----------------------+
-+
-+Use a FIT built for the target, including any firmware required by its normal
-+SPL handoff (for example BL31 or OP-TEE). FIT verification uses the board's
-+existing SPL configuration. Raw U-Boot binaries are not supported. The loader
-+accepts a bare FIT or the Android v0 wrapper added by the standard fastboot
-+client; separate ramdisk and second-stage arguments are not supported.
-+
-+Keep the download buffer separate from SPL, its heap and stack, and all FIT
-+load destinations. ``CONFIG_SPL_FASTBOOT_FLASH`` is optional.
-+
-+``continue`` leaves fastboot and lets SPL try the remaining boot methods.
-+Loading errors also follow SPL's normal boot order.
-+
- Fastboot environment variables
- ------------------------------
+-Booting a downloaded FIT from SPL
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++Booting a downloaded image from SPL
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
+ Enable ``CONFIG_SPL_FASTBOOT_BOOT`` and include ``BOOT_DEVICE_BOARD`` in the
+ board's SPL boot order. This load method starts the fastboot session itself;
+@@ -151,11 +151,19 @@ The host can then download and run a U-Boot FIT without flashing it::
+                                 | running from RAM      |
+                                 +-----------------------+
+ 
+-Use a FIT built for the target, including any firmware required by its normal
+-SPL handoff (for example BL31 or OP-TEE). FIT verification uses the board's
+-existing SPL configuration. Raw U-Boot binaries are not supported. The loader
+-accepts a bare FIT or the Android v0 wrapper added by the standard fastboot
+-client; separate ramdisk and second-stage arguments are not supported.
++With ``CONFIG_SPL_LOAD_FIT``, use a FIT built for the target, including any
++firmware required by its normal SPL handoff (for example BL31 or OP-TEE).
++FIT verification uses the board's existing SPL configuration.
++``CONFIG_SPL_LEGACY_IMAGE_FORMAT`` also permits uncompressed legacy U-Boot
++images, using their header's load address and entry point. Legacy CRC checks
++follow ``CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK``.
++With ``CONFIG_SPL_FIT_SIGNATURE``, legacy downloads are rejected to prevent
++bypassing FIT verification.
++Raw U-Boot binaries are not supported.
++
++The loader accepts these images directly or inside the Android v0 wrapper
++added by the standard fastboot client; separate ramdisk and second-stage
++arguments are not supported.
+ 
+ Keep the download buffer separate from SPL, its heap and stack, and all FIT
+ load destinations. ``CONFIG_SPL_FASTBOOT_FLASH`` is optional.
 diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 9a5251d4b60..637fb9e4541 100644
+index 637fb9e4541..ea3be618470 100644
 --- a/drivers/fastboot/Kconfig
 +++ b/drivers/fastboot/Kconfig
-@@ -67,6 +67,21 @@ config SPL_FASTBOOT
- config SPL_USB_FUNCTION_FASTBOOT
+@@ -68,12 +68,13 @@ config SPL_USB_FUNCTION_FASTBOOT
  	bool
  
-+config SPL_FASTBOOT_BOOT
-+	bool "Boot FIT images downloaded with fastboot in SPL"
-+	depends on ARM || MIPS || RISCV || SANDBOX
-+	depends on SPL_FASTBOOT && SPL_FRAMEWORK && SPL_LOAD_FIT
-+	depends on !SPL_LOAD_FIT_FULL && !SPL_USB_SDP_SUPPORT
-+	help
-+	  Enable fastboot boot to load a downloaded FIT image through the SPL
-+	  image loader. Boards enter the USB session by selecting
-+	  BOOT_DEVICE_BOARD in their SPL boot order.
-+
-+config SPL_FASTBOOT_USB_DEV
-+	int "SPL fastboot USB controller number"
-+	depends on SPL_FASTBOOT_BOOT
-+	default 0
-+
- config SPL_FASTBOOT_REBOOT
- 	bool "Enable fastboot reboot commands in SPL"
- 	depends on SPL_FASTBOOT
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 056d95cb1f8..6685420fb56 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -42,10 +42,13 @@ static u32 fastboot_bytes_received;
-  */
- static u32 fastboot_bytes_expected;
+ config SPL_FASTBOOT_BOOT
+-	bool "Boot FIT images downloaded with fastboot in SPL"
++	bool "Boot images downloaded with fastboot in SPL"
+ 	depends on ARM || MIPS || RISCV || SANDBOX
+-	depends on SPL_FASTBOOT && SPL_FRAMEWORK && SPL_LOAD_FIT
++	depends on SPL_FASTBOOT && SPL_FRAMEWORK
++	depends on SPL_LOAD_FIT || SPL_LEGACY_IMAGE_FORMAT
+ 	depends on !SPL_LOAD_FIT_FULL && !SPL_USB_SDP_SUPPORT
+ 	help
+-	  Enable fastboot boot to load a downloaded FIT image through the SPL
++	  Enable fastboot boot to load a downloaded image through the SPL
+ 	  image loader. Boards enter the USB session by selecting
+ 	  BOOT_DEVICE_BOARD in their SPL boot order.
  
-+static bool boot_requested;
-+
- static void okay(char *, char *);
- static void boot_image(char *, char *);
- static void getvar(char *, char *);
- static void download(char *, char *);
-+static void boot(char *, char *);
- static void flash(char *, char *);
- static void erase(char *, char *);
- static void reboot_bootloader(char *, char *);
-@@ -90,6 +93,10 @@ static const struct fastboot_command commands[FASTBOOT_COMMAND_COUNT] = {
- 		.command = "erase",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_FLASH, (erase), (NULL))
- 	},
-+	[FASTBOOT_COMMAND_BOOT] = {
-+		.command = "boot",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_BOOT, (boot), (NULL))
-+	},
- 	[FASTBOOT_COMMAND_CONTINUE] =  {
- 		.command = "continue",
- 		.dispatch = okay
-@@ -323,6 +330,7 @@ void fastboot_download_reset(void)
- 	image_size = 0;
- 	fastboot_bytes_received = 0;
- 	fastboot_bytes_expected = 0;
-+	boot_requested = false;
- }
- 
- /**
-@@ -459,6 +467,27 @@ void fastboot_data_complete(char *response)
- 	fastboot_bytes_received = 0;
- }
- 
-+static void __maybe_unused boot(char *cmd_parameter, char *response)
-+{
-+	if (!image_size || fastboot_bytes_expected)
-+		fastboot_fail("No complete image downloaded", response);
-+	else
-+		fastboot_okay(NULL, response);
-+}
-+
-+#if CONFIG_IS_ENABLED(FASTBOOT_BOOT)
-+void fastboot_boot(void)
-+{
-+	boot_requested = true;
-+}
-+
-+u32 fastboot_get_boot_image(void **buf)
-+{
-+	*buf = fastboot_buf_addr;
-+	return boot_requested ? image_size : 0;
-+}
-+#endif
-+
- /**
-  * flash() - write the downloaded image to the indicated partition.
-  *
-diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
-index 68fe657f891..cdd88035eed 100644
---- a/drivers/usb/gadget/f_fastboot.c
-+++ b/drivers/usb/gadget/f_fastboot.c
-@@ -489,7 +489,7 @@ static void do_exit_on_complete(struct usb_ep *ep, struct usb_request *req)
- 	g_dnl_trigger_detach();
- }
- 
--#ifndef CONFIG_XPL_BUILD
-+#if !defined(CONFIG_XPL_BUILD) || CONFIG_IS_ENABLED(FASTBOOT_BOOT)
- static void do_bootm_on_complete(struct usb_ep *ep, struct usb_request *req)
- {
- 	req->complete = fastboot_complete;
-@@ -566,7 +566,7 @@ static void rx_handler_command(struct usb_ep *ep, struct usb_request *req)
- 	if (!strncmp("OKAY", response, 4)) {
- 		switch (cmd) {
- 		case FASTBOOT_COMMAND_BOOT:
--#ifndef CONFIG_XPL_BUILD
-+#if !defined(CONFIG_XPL_BUILD) || CONFIG_IS_ENABLED(FASTBOOT_BOOT)
- 			fastboot_func->in_req->complete = do_bootm_on_complete;
- #endif
- 			break;
-diff --git a/include/fastboot.h b/include/fastboot.h
-index f3aa6fcc229..ee0458c582a 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -158,9 +158,17 @@ int fastboot_usb_run(int controller_index, void *buf_addr, u32 buf_size);
-  *
-  * Otherwise execute "bootm <fastboot_buf_addr>", if that fails, reset
-  * the board.
-+ * In SPL, record the request for loading after the USB session stops.
-  */
- void fastboot_boot(void);
- 
-+/**
-+ * fastboot_get_boot_image() - Get the download requested for booting in SPL
-+ * @buf: Receives the download buffer address
-+ * Return: Image size, or zero if no boot command has completed
-+ */
-+u32 fastboot_get_boot_image(void **buf);
-+
- /**
-  * fastboot_handle_boot() - Shared implementation of system reaction to
-  * fastboot commands
 diff --git a/include/spl.h b/include/spl.h
-index f884c24b85e..2b12dbb7215 100644
+index 2b12dbb7215..3348b424b54 100644
 --- a/include/spl.h
 +++ b/include/spl.h
-@@ -998,6 +998,13 @@ int spl_dfu_cmd(int usbctrl, char *dfu_alt_info, char *interface, char *devstr);
-  */
+@@ -999,7 +999,16 @@ int spl_dfu_cmd(int usbctrl, char *dfu_alt_info, char *interface, char *devstr);
  int spl_ram_load_fit(struct spl_image_info *spl_image, void *fit, size_t size);
  
-+/**
-+ * spl_fastboot_load() - Load a FIT after the fastboot USB session has stopped
-+ * @spl_image: Receives the image's load address and entry point
-+ * Return: 0 on success, -EAGAIN if no boot was requested, or another error
-+ */
-+int spl_fastboot_load(struct spl_image_info *spl_image);
-+
  /**
-  * spl_mmc_clear_cache() - Clear cached MMC devices
-  *
-diff --git a/test/image/Makefile b/test/image/Makefile
-index feca0611fcf..67d9b97a2d2 100644
---- a/test/image/Makefile
-+++ b/test/image/Makefile
-@@ -3,6 +3,7 @@
- # Copyright 2021 Google LLC
+- * spl_fastboot_load() - Load a FIT after the fastboot USB session has stopped
++ * spl_ram_load() - Load a downloaded image from RAM
++ * @spl_image: Receives the loaded image information
++ * @buf: Image buffer
++ * @size: Number of bytes in the buffer
++ * Return: 0 on success, or a negative error code
++ */
++int spl_ram_load(struct spl_image_info *spl_image, void *buf, size_t size);
++
++/**
++ * spl_fastboot_load() - Load an image after the fastboot USB session has stopped
+  * @spl_image: Receives the image's load address and entry point
+  * Return: 0 on success, -EAGAIN if no boot was requested, or another error
+  */
+diff --git a/include/spl_load.h b/include/spl_load.h
+index 31ed5651f7b..44c972b10fd 100644
+--- a/include/spl_load.h
++++ b/include/spl_load.h
+@@ -114,6 +114,8 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ 	IS_ENABLED(CONFIG_SPL_NOR_SUPPORT) + \
+ 	IS_ENABLED(CONFIG_SPL_SEMIHOSTING) + \
+ 	IS_ENABLED(CONFIG_SPL_SPI_LOAD) + \
++	(IS_ENABLED(CONFIG_SPL_FASTBOOT_BOOT) && \
++	 IS_ENABLED(CONFIG_SPL_LEGACY_IMAGE_FORMAT)) + \
+ 	0
  
- obj-y += spl_load.o
-+obj-$(CONFIG_SPL_FASTBOOT_BOOT) += spl_fastboot.o
- obj-$(CONFIG_SPL_UT_LOAD_FS) += spl_load_fs.o
- obj-$(CONFIG_SPL_UT_LOAD_NAND) += spl_load_nand.o
- obj-$(CONFIG_SPL_UT_LOAD_NET) += spl_load_net.o
+ #if SPL_LOAD_USERS > 1
 diff --git a/test/image/spl_fastboot.c b/test/image/spl_fastboot.c
-new file mode 100644
-index 00000000000..39dc784e5e6
---- /dev/null
+index 39dc784e5e6..1263416ba8d 100644
+--- a/test/image/spl_fastboot.c
 +++ b/test/image/spl_fastboot.c
-@@ -0,0 +1,183 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2026 Carlo Caione <ccaione@baylibre.com> */
-+
-+#include <android_image.h>
-+#include <fastboot.h>
-+#include <image.h>
-+#include <mapmem.h>
-+#include <spl.h>
-+#include <test/spl.h>
-+#include <test/ut.h>
-+
-+static int run_fastboot_command(struct unit_test_state *uts, const char *command,
-+				int expected_cmd, const char *expected_response)
-+{
-+	char response[FASTBOOT_RESPONSE_LEN];
-+	char cmd[FASTBOOT_COMMAND_LEN];
-+
-+	strlcpy(cmd, command, sizeof(cmd));
-+	ut_asserteq(expected_cmd, fastboot_handle_command(cmd, response));
-+	ut_asserteq_str(expected_response, response);
-+	return 0;
-+}
-+
-+static int download_image(struct unit_test_state *uts, const void *data,
-+			  size_t size)
-+{
-+	char command[FASTBOOT_COMMAND_LEN];
-+	char expected[FASTBOOT_RESPONSE_LEN];
-+	char response[FASTBOOT_RESPONSE_LEN];
-+
-+	snprintf(command, sizeof(command), "download:%08x", (uint)size);
-+	snprintf(expected, sizeof(expected), "DATA%08x", (uint)size);
-+	ut_assertok(run_fastboot_command(uts, command, FASTBOOT_COMMAND_DOWNLOAD, expected));
-+	fastboot_data_download(data, size, response);
-+	ut_asserteq_str("", response);
-+	fastboot_data_complete(response);
-+	ut_asserteq_str("OKAY", response);
-+	return 0;
-+}
-+
-+static int spl_test_fastboot_state(struct unit_test_state *uts)
-+{
-+	char buffer[64], data[32] = {}, response[FASTBOOT_RESPONSE_LEN];
-+	struct spl_image_info info = {};
-+	void *image;
-+
-+	fastboot_init(buffer, sizeof(buffer));
-+	ut_assertok(run_fastboot_command(uts, "boot", FASTBOOT_COMMAND_BOOT,
-+					 "FAILNo complete image downloaded"));
-+	ut_asserteq(-EAGAIN, spl_fastboot_load(&info));
-+	ut_assertok(download_image(uts, data, sizeof(data)));
-+	ut_assertok(run_fastboot_command(uts, "continue", FASTBOOT_COMMAND_CONTINUE, "OKAY"));
-+	ut_asserteq(0, fastboot_get_boot_image(&image));
-+	ut_assertok(run_fastboot_command(uts, "boot", FASTBOOT_COMMAND_BOOT, "OKAY"));
-+	/* The request is only made when the USB OKAY has completed. */
-+	ut_asserteq(0, fastboot_get_boot_image(&image));
-+	fastboot_boot();
-+	ut_asserteq(sizeof(data), fastboot_get_boot_image(&image));
-+	ut_asserteq_ptr(buffer, image);
-+
-+	ut_assertok(run_fastboot_command(uts, "download:00000020", FASTBOOT_COMMAND_DOWNLOAD,
-+					 "DATA00000020"));
-+	fastboot_data_download(data, 16, response);
-+	fastboot_data_complete(response);
-+	ut_asserteq_str("FAILIncomplete download", response);
-+	ut_assertok(run_fastboot_command(uts, "boot", FASTBOOT_COMMAND_BOOT,
-+					 "FAILNo complete image downloaded"));
-+	ut_asserteq(0, fastboot_get_boot_image(&image));
-+
-+	ut_assertok(download_image(uts, data, sizeof(data)));
-+	fastboot_boot();
-+	fastboot_init(buffer, sizeof(buffer));
-+	ut_asserteq(0, fastboot_get_boot_image(&image));
-+	ut_assertok(run_fastboot_command(uts, "boot", FASTBOOT_COMMAND_BOOT,
-+					 "FAILNo complete image downloaded"));
-+	return 0;
-+}
-+
-+SPL_TEST(spl_test_fastboot_state, 0);
-+
-+static int check_download(struct unit_test_state *uts, void *image, size_t size,
-+			  struct spl_image_info *expected, const void *data)
-+{
-+	struct spl_image_info loaded = {};
-+	int ret;
-+
-+	ut_assertok(download_image(uts, image, size));
-+	ut_assertok(run_fastboot_command(uts, "boot", FASTBOOT_COMMAND_BOOT, "OKAY"));
-+	fastboot_boot();
-+	ret = spl_fastboot_load(&loaded);
-+	if (!expected) {
-+		ut_assert(ret < 0);
+@@ -92,6 +92,12 @@ static int check_download(struct unit_test_state *uts, void *image, size_t size,
+ 		ut_assert(ret < 0);
+ 		return 0;
+ 	}
++	if (CONFIG_IS_ENABLED(FIT_SIGNATURE) &&
++	    !(expected->flags & SPL_FIT_FOUND)) {
++		ut_asserteq(-EPERM, ret);
++		ut_asserteq(0, loaded.size);
 +		return 0;
 +	}
-+	ut_assertok(ret);
-+	ut_assertok(check_image_info(uts, expected, &loaded));
-+	ut_asserteq_mem(data, map_sysmem(expected->load_addr, expected->size),
-+			expected->size);
-+	return 0;
-+}
-+
-+static int check_images(struct unit_test_state *uts, void *image, size_t size,
-+			struct spl_image_info *info, const void *data,
-+			void *wrapped, enum spl_test_image type)
-+{
-+	struct andr_boot_img_hdr_v0 *hdr = wrapped;
-+	size_t wrapped_size = 2048 + size;
-+	u32 magic;
-+
-+	ut_assertok(check_download(uts, image, size, info, data));
-+	/* Truncated FIT metadata and external payloads must both fail. */
-+	ut_assertok(check_download(uts, image, sizeof(struct fdt_header) - 1,
-+				   NULL, NULL));
-+	if (type == FIT_EXTERNAL)
-+		ut_assertok(check_download(uts, image, fdt_totalsize(image) - 1,
-+					   NULL, NULL));
-+	ut_assertok(check_download(uts, image, size - 1, NULL, NULL));
-+
-+	magic = fdt_magic(image);
-+	fdt_set_magic(image, 0);
-+	ut_assertok(check_download(uts, image, size, NULL, NULL));
-+	fdt_set_magic(image, magic);
-+
-+	/* The Android envelope is independent of the payload format. */
-+	if (type != FIT_INTERNAL)
-+		return 0;
-+
-+	memcpy(hdr->magic, ANDR_BOOT_MAGIC, ANDR_BOOT_MAGIC_SIZE);
-+	hdr->page_size = cpu_to_le32(2048);
-+	hdr->kernel_size = cpu_to_le32(size);
-+	ut_assertok(check_download(uts, wrapped, wrapped_size, info, data));
-+	ut_assertok(check_download(uts, wrapped, sizeof(*hdr) - 100, NULL, NULL));
-+	ut_assertok(check_download(uts, wrapped, wrapped_size - 1, NULL, NULL));
-+	/* Android padding must not make a truncated FIT payload look complete. */
-+	hdr->kernel_size = cpu_to_le32(size - 1);
-+	ut_assertok(check_download(uts, wrapped, wrapped_size, NULL, NULL));
-+	hdr->kernel_size = cpu_to_le32(size);
-+	hdr->header_version = cpu_to_le32(3);
-+	ut_assertok(check_download(uts, wrapped, wrapped_size, NULL, NULL));
-+	hdr->header_version = 0;
-+	hdr->page_size = cpu_to_le32(2047);
-+	ut_assertok(check_download(uts, wrapped, wrapped_size, NULL, NULL));
-+	hdr->page_size = cpu_to_le32(2048);
-+	hdr->ramdisk_size = cpu_to_le32(1);
-+	ut_assertok(check_download(uts, wrapped, wrapped_size, NULL, NULL));
-+	return 0;
-+}
-+
-+static int spl_test_fastboot(struct unit_test_state *uts, const char *name,
-+			     enum spl_test_image type)
-+{
-+	struct spl_image_info info = { .name = name, .size = SPL_TEST_DATA_SIZE };
-+	size_t size, offset;
-+	void *image, *buffer, *wrapped;
-+	int ret = -ENOMEM;
-+
-+	size = create_image(NULL, type, &info, &offset);
-+	ut_assert(size);
-+	buffer = malloc(size + 2048);
-+	wrapped = calloc(1, size + 2048);
-+	if (!buffer || !wrapped)
-+		goto out;
-+
-+	image = wrapped + 2048;
-+	generate_data(image + offset, info.size, name);
-+	if (create_image(image, type, &info, NULL) != size) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+	if (type == FIT_INTERNAL)
-+		size = fdt_totalsize(image);
-+	fastboot_init(buffer, size + 2048);
-+	ret = check_images(uts, image, size, &info, image + offset, wrapped, type);
-+out:
-+	fastboot_init(NULL, 0);
-+	free(wrapped);
-+	free(buffer);
-+	ut_assertok(ret);
-+	return 0;
-+}
-+
-+SPL_IMG_TEST(spl_test_fastboot, FIT_INTERNAL, 0);
-+SPL_IMG_TEST(spl_test_fastboot, FIT_EXTERNAL, 0);
+ 	ut_assertok(ret);
+ 	ut_assertok(check_image_info(uts, expected, &loaded));
+ 	ut_asserteq_mem(data, map_sysmem(expected->load_addr, expected->size),
+@@ -106,10 +112,12 @@ static int check_images(struct unit_test_state *uts, void *image, size_t size,
+ 	struct andr_boot_img_hdr_v0 *hdr = wrapped;
+ 	size_t wrapped_size = 2048 + size;
+ 	u32 magic;
++	bool fit = image_get_magic(image) == FDT_MAGIC;
+ 
+ 	ut_assertok(check_download(uts, image, size, info, data));
+-	/* Truncated FIT metadata and external payloads must both fail. */
+-	ut_assertok(check_download(uts, image, sizeof(struct fdt_header) - 1,
++	/* Both metadata and payload must fit in the completed download. */
++	ut_assertok(check_download(uts, image, (fit ? sizeof(struct fdt_header) :
++				   sizeof(struct legacy_img_hdr)) - 1,
+ 				   NULL, NULL));
+ 	if (type == FIT_EXTERNAL)
+ 		ut_assertok(check_download(uts, image, fdt_totalsize(image) - 1,
+@@ -181,3 +189,4 @@ out:
+ 
+ SPL_IMG_TEST(spl_test_fastboot, FIT_INTERNAL, 0);
+ SPL_IMG_TEST(spl_test_fastboot, FIT_EXTERNAL, 0);
++SPL_IMG_TEST(spl_test_fastboot, LEGACY, 0);
 
 -- 
 2.56.0
