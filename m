@@ -1,170 +1,173 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7424C606A32C
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 20:42:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18EF5606A331
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 20:45:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TVr6Eazr;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=pkjHKA5W
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WIPEa5NR;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=YPgH32Vk
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3C2DA6082A;
-	Mon, 16 Nov 2026 20:42:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D0E5880FAF;
+	Mon, 16 Nov 2026 20:45:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Y3zmC3b8RUza; Mon, 16 Nov 2026 20:42:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0996360811
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794861734;
-	b=DsJ0D81vIPFnf0176liJBPOlcFIg7omUibxKXQ1UeNq+0uxCekpeZxugQPiDkQwy1mvu
-	 C19DJK5/GsOqUQYsg2azgTEU99LF+FAzGQNtQeBS7If1EcXGg8cYZKpgVkqmEpZAdLUlF
-	 fInbcndpn4F/eqMjeS1WCo4grYmEWqdntZywpWv1wM7Uz9x1rTxxk1TOsgGymq/Tzeojm
-	 l0/5P3M69VN0zDPNPCm8pcgEXys9DHvyJN9hh1686a6RG+ER333fhYymdexPTOEceIQn0
-	 wx3pkkMb9xT67a9Bir7E8FukXYQ56hlIHfhy118tQAtFNQ1MuXHEdG+Wb9Mie2N5JkA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cjy_QyxqAW0Y; Mon, 16 Nov 2026 20:45:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D3B5480DD6
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794861934;
+	b=TffQV3Jh3Bgea1ewhBcexzk/Mmk+yKvEcNKuOafTw/K7D0kJODAbKWZ95sebyB97jdmY
+	 IasoZg4AL9GATLHM4/W5I/i4k+81paWry2PFAkzKYcdehEJKqrgmIzhrSEpBnVrgbQPnR
+	 39tnQc1AlQrG4NOAPdNM4IxXsQDVfjRDAjddtK0bvfwv+9H001Aq9/A/CTaNt2mPYT9w5
+	 wCNaqL3R7Pb2fxLh/OFIKKWPawr3C/ToSanSvhr22eYf8q9EHhVwSJV2Fg+DERwWYykfQ
+	 EibIxXF7bkpatkDKxX7uxmyCtPuU+G7gDABAwSRTQd8Ni2/93oUAjcf4azgGaPLktpQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794861734;
+	c=relaxed/relaxed; t=1794861934;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
-	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
-	b=qK4rrkhiqNUoJL2ra+B8j3gM5d8FiVCD+eV0a1x+AEFbc+SblU3cKK5xX7pX8DGnA9ib
-	 F9CYHLgNocSlTUrdcclM8/jNI8fvXalkTVbUpaK5z9CgzfzTzWFu2YChNI0bO3Aw4PRXZ
-	 1WW8mb5m53VqiUv8NZqcDb4TOyKiMYlOqDa1QER0bLi0oz81YLHSk1odsEy2NSYAYroEW
-	 rQ62sAKEA67LCfoN3bl9Bu4wTq58npMHpyL1gPaZVDDBqUbVGOhSzPnV+K/Raz8LXDf6u
-	 Itw8uD9Fgvqvd+oVRfrRgPOvYALSFbnuv8OkU2AccYTZJxVz61EqHe1nqsGXGUYjXpg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=+swBVzT2YcRO6qS0UkSvcPd5hEvC82rVswgm62Xg/TY=;
+	b=Kz9KwugK87KNCvZPyaLewfMSgSjP4pA5zrPpTqx1rFzETWVzu+6RQuE5XCWjO0+p6zJG
+	 qPSv6Cvn9gS4tUa7idSEUTlw1jLlB2wHhfQCWMQeH7xhrLLTnR/yjK2xBeKqUcxrQFiVx
+	 b8yzWGrxNFmWYhjndmU75CeSwRYwbV1aMT+vX6fJksyY07yztWc4dBQ7kZPz80adCLAXN
+	 2yDak/PFWzh79GWVlBKEyJDLV+Nk/XHyNRQ8RA9l5Q1YEAAayYZHRJa7laAQXyUsorLYS
+	 MCGypz+p+k0DToS4GDdN7pojQ2BorK9T7uKGq2PzURs6zyHihZQTGI+BSZRDHPrgd8g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794861734;
-	bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TVr6EazrNR6hZgjQ257N+RM9mPCEIcnp12IzomO3FyRvVUxtMy7/EBkvwjxQo0FsC
-	 80wLeEvqFlFI2A7ArfabsplOLy+EW1x1nKqurMZulwrksbkCYToKREJR9BuOJKKdvl
-	 SqkXVXAo5cft+Qx0j3dMD4EXzTzfv3CC/IFuZcCyt1WvzlVSmqF6Ss8pC3WR1v0sd/
-	 62cX1iTQesmF3CJRPZZNklHp214SFSkl4AKVAo7l9bben+jX1TlhICgE1Xoagqiooz
-	 T9mNXHgoeOzxEKLSjLx6undlpHzXmKDr/+l1VPel3CSf96d9guOnTrtcMytZPpJgF9
-	 tiCCjm5PGExSQ==
+	d=lists.u-boot-project.org; s=default; t=1794861934;
+	bh=+swBVzT2YcRO6qS0UkSvcPd5hEvC82rVswgm62Xg/TY=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=WIPEa5NRy0grLL+mJn/PDqsFA163/HI5vsu3psA+QSqNedI0AJwyTZ6xVeoJDwM+p
+	 SehroMkG3PvUzOUm3BvQi1uA75/V6FYw17QL3qvexTL4cN1UcXbJwexn/J1GVDAaDl
+	 vxLZypMiT3Ph95uCXQ39OUFc0/v3u6AcWN5i5uwXPVezm02blhCjcxTI7EiXFPE6Fr
+	 KkXXQS0AkNH2Mx/g01wDfOi7AoKl8zYYqgW+B1sPoD/ZdTpab0yTAQK6lUN2XydoG0
+	 EFFHVZQi8CutTPot/2dCHu8Fdbn9LQQhRCMHEaiiYBZ3nr1O4YONtZHDU6yRTWb9Q3
+	 7TNTwNy14Kpzg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0996360811;
-	Mon, 16 Nov 2026 20:42:14 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4967828C
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:42:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D3B5480DD6;
+	Mon, 16 Nov 2026 20:45:33 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 923CE28C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 32ED6405ED
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:42:12 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8686B40670
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id REYrw0k02860 for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 20:42:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D20C1405DD
+ id FKwbj2npF43z for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 20:45:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6BA9C40644
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::35"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::331"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::35; helo=mail-oa1-x35.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+ client-ip=2a00:1450:4864:20::331; helo=mail-wm1-x331.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=pkjHKA5W
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D20C1405DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:42:09 +0000 (UTC)
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-4a76f0cce5fso2123689fac.2
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 12:42:09 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=YPgH32Vk
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6BA9C40644
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:31 +0000 (UTC)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4ba013938d7so41555215e9.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 12:45:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794861728; x=1795466528;
+ d=baylibre.com; s=google; t=1794861929; x=1795466729;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
- b=pkjHKA5WWYTiGqZa7SuH3UUmy3exDIKGRjCwxERbiekWId0GMjQEAwaojgaKB/e/Ot
- i4QRILXM2apmd+qExur/XqH3CI9ykAlYPrbSUAdZcW50cFTzxCPnim7atUQ55aEeGkhq
- r0c+HFKRojRdfVq8M9sDK4ieJ90qHghenpHmw9tg1EjvQ4fOu65ZkIbCFAU1026XoHho
- UR1QS6yIBoe8IrimwvN44lzpcIX/UetJcAkec515YnTxq3n2PIrQ6C+3DxE5CrLUI6P6
- o1IUz6lreU8PPV5bsPXV3wvKpmdEJmn2NoGDCZ4aC3hH5L4RhxkzQF0EWpD7ZJvktjNQ
- xpXw==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=+swBVzT2YcRO6qS0UkSvcPd5hEvC82rVswgm62Xg/TY=;
+ b=YPgH32Vk5ic3O+Wvx0ndXfxCrp5W1AKCrQDMm/JZhBlrIzZGw9tpkvEVIMcONej2uZ
+ ZmI2eCFG/DToZ2G/kttkurNFdm9+7Gm/T+Y3rCKn9TaPwL4UsKCjR0FKyrXt4ljl2QRU
+ pfDjMfdJQhiIJl3tmo8ETTZtd7zCmGX4v+QJaf1XG32afQPvPTkZ6HTW7ysRf2v1noy/
+ eadFayjjmTvQjF3YMK3l5kvCOKOpPAXOtMjQxyrnCzFx4IWK57TCkpZ+ELgjpj4BbadM
+ maYDZM57+RJ1/odVN61yYX5D6fwr7QFCvFmJwj/UdasRrJYNsvzQu2XGydtUK7jB6p6i
+ Pq3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794861728; x=1795466528;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=TzVFzNEACMOIzVzzXb+FKsQ848tlXrLYpoRcUy0y9Lw=;
- b=JJQWv92fsIwlylrBDlKXHKCiEpnhz2YIpMqWrn5a79ExdWdb7JM1znjPV8doOI0yC8
- Er4YbwRjSqbzOmqAuRRrnDdqxxW+PheBn2zRT8g8Xe3YSy6hyKy7xszyEBQq86wAco0+
- e9fyw/y20yKssLj46/+K3AoncLhuy4IH+3RFlZ71O6uSTqwmSVYseJH3aCVDHgFVAnQN
- eaVxYcGqlbol+WMnfKsLD3d0UG07mpUg0Etr3f1FzR+/YZORJY+svbFFx3sslPF5rb1v
- TfNfNXm9MgXKb7FOpP0lWl37WIOVjygIq8wxu8TTNNga00QUKMiv7aNNMxSrSJlTjsDT
- rQQg==
+ d=1e100.net; s=20260707; t=1794861929; x=1795466729;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=+swBVzT2YcRO6qS0UkSvcPd5hEvC82rVswgm62Xg/TY=;
+ b=b7UDF4vNJBdBGNUNt0PQzbom1j3kxyU9I1Yyo/eRMVON3KdaTBPkA1X5rGdxUOFOQ7
+ l0TNW85Zq1Db9x2sbTyqEnrfrNINzCgp4bD8ljFm5qffjPrnGfSovtYjNOONnhR7Qb0J
+ ta6IJeBFe3SMwgVhyX2VRcokCtTE9TwZR6B+nKCQ63LsMVjwzUa7i8+/LBCVJMZ2yTa7
+ szASUzWD2PPW0YMW9WtHOQWY4dk8hDNCK/f78+H7n2Ts1UbdQ3BtpNzY/Z7haP+Fpopd
+ xLtGwLeVvIutKdSaHD3XItgjw2ZwzaBtV83WxZX/oYA41vrfF2WEmKEskKGdZCD8t1Eo
+ MU8A==
 X-Forwarded-Encrypted: i=1;
- AL+hErF6fsDgdfmmqnKdEMUdIuf1WecmupzsNieuEbKican1Ac5Ja0BNRM39d0PagWczD7zy3iUTaqE=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9OiN9TfkI9QWxPNEl3EhOg+eGuO4Ys8/8oH2hiAZCjhuS7jUs7
- EPoyFNUOqGBkJWEXheW0DzstzzPyPlERSqYpJ4Gv5F9LQNyx064lfwPYbSuaAZc2YgY=
-X-Gm-Gg: AYBFou2Yu8291z5YoJG7u5jnwYqhfbKc/quigFGPbdMeXyMcuKMk7QcPchycTtmDn0I
- 91vaLxSACNvLmQA6XyUCNzpm45+7oA/XZVRhXbnVrjT1HIrWcOzlwzFgUlk4HkK9fg6sJnJElCE
- 1XXNZ7CUzqoRxtBWcTH+jVb558JTmiYpLIlt6hSYKmBam7JS6feVbMQcvihwLF/PWZqLi1sgNEq
- YmsEnptGFidFW9x4Dc6iphXQRT1FChyX1Ucz3zOcQ5fZjwsnxMWdeV/Uo++dqLc8TnX9gExgrMo
- 4QsnywmxI4VqLE6vFe7P6b6L8GTAGA01CPOB/gdJVBW5dtHNkcJOZivzYOS2TuOQT9CCx81tN7P
- Oc3FXRzbS3CXyXOYgADBFpmI8obnMzHSp1X0vHUmgjqfOyE5hOfyEHmlDLAfncuaX8+1ZLJFsm6
- VL1Jld9ij9JX8+Rpd42HYJpGGmkKH1FkZYq7zOJAqV213pcGYiBsIWxnnJm7+PFYpmmi6Xcvy8y
- O2IUk37GW68zsGpI6ywNixVmRLBiP8N98akk2fN5iSUzCO3b8NCegFtzX/F4WwlGoix7TNy+qxT
- deOTSUgxhZ6OxTDcmWEhH1gfFVodi1ix1TIdDQnGblRo8pkwsD6ZQOMbK+7zJNx+Nfd4i53FCgb
- Vrdk=
-X-Received: by 2002:a05:6870:d07:b0:48f:e363:5cc8 with SMTP id
- 586e51a60fabf-4afdf795d7dmr10184061fac.54.1794861728003; 
- Mon, 16 Nov 2026 12:42:08 -0800 (PST)
-Received: from ?IPV6:2600:8803:e7e4:500:7056:3b5b:7d85:4921?
- ([2600:8803:e7e4:500:7056:3b5b:7d85:4921])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4afe2011c25sm7608243fac.2.2026.11.16.12.42.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 12:42:06 -0800 (PST)
-Message-ID: <f0352e86-58bd-4e6f-aa8f-5253a9c29a55@baylibre.com>
-Date: Mon, 16 Nov 2026 14:42:05 -0600
+ AL+hErEG/YLw3fTzjgYjMkKpD5uSaVoUKXJF2jtZpwnB0OhQBOvYfMWoUIZyHtKe4gSy0mhYtJBI7aM=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/faXDmNruHigPqIucdcEC49KZVyc/gDaSr74qfUdvdBeeNrYEI
+ dGtlt9Wam+NckBtE+Fmwe0snHz43DQMExTrjbo8SAVAbr+D4tR/8YiscppsVjDrvIzo=
+X-Gm-Gg: AYBFou0gXvzfdh7pdP0v7DQf1VfWXpigkJqn0RF8On/GwPBi0+1o7c/pdVNjVRa0xlo
+ D+Yqnp0AdJnCbPProHGXLCyc6cb8ikV70YtxvXMW0Qd6R34tWgsExedtqsRundq08uTUL+B2HZa
+ ptVaBe+x1aQAdw0qrC8Kljc/TtYDMxC82BrOdny/6i/BETtlmdnhXkS/HSoZVvrJvwHNMb715pD
+ BhnoqWNVsdxJKjxILcWuJJeit0+KIohakHzfvS8ZFxTMGyhExvZkDl2jcE1IFW3CFSEbE2O8LO5
+ y25CBuk+zmy6Rzi+RkdBJGSKkduSi72F3yBPyfL2znbrxK9Nju4LOjR16TKJDjmgeVvO140SmOL
+ v69Uij+s1dNYaYymObRZWFoPZj0V/0FGDVAtLsJX88FVhFrTZ0GdQon/3CpQUeN0RjG6e+PTkhO
+ gEojJmIoD81uCv5s0/PSIqgGBPWUR+FdsZxKnxj+xsYPKSCTxnf5phlVs6bj7wK+1lmbp2dHgxi
+ d3i9g/qWr9ETd3BMktsYfeXNjlNmqBELlWw9glJKUZUvSZtNXzg4Wq0GCtQsGG9GV9We3Bb0ZAR
+ hh8rKiSlKFxtjquF/0A7T1l1aaRxwEln0W+v46V9TZIn0xPGhUqZr8wT5pDKUTyK3Lycd51UJaJ
+ eSAtLXj3/rwDGc5LfD1e3V2MrnRIFfh7+rkYDRTs=
+X-Received: by 2002:a05:600c:c4a2:b0:4bb:7581:2bb9 with SMTP id
+ 5b1f17b1804b1-4bb75812c05mr61196115e9.22.1794861929015; 
+ Mon, 16 Nov 2026 12:45:29 -0800 (PST)
+Received: from [127.0.0.1] (host-95-246-144-141.retail.telecomitalia.it.
+ [95.246.144.141]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb78386902sm16855545e9.1.2026.11.16.12.45.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Nov 2026 12:45:28 -0800 (PST)
+From: Carlo Caione <ccaione@baylibre.com>
+Subject: [PATCH v2 0/7] Enable UFS RPMB-backed OP-TEE secure storage on
+ Genio 720
+Date: Mon, 16 Nov 2026 21:45:03 +0100
+Message-Id: <20261116-genio720-ufs-rpmb-minimal-v2-0-b64eefcfb0f6@baylibre.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/10] binman: support separate binman devicetree from
- control devicetree
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Julien Stephan <jstephan@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Macpaul Lin <Macpaul.Lin@mediatek.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org, Michal Simek <michal.simek@amd.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Carlo Caione <ccaione@baylibre.com>
-References: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
- <20261113174852.GN554944@bill-the-cat>
- <CALeDE9PvZgwiAUxdX=-tN1fgDveNOkeM__xCCJeZrK3Di0WxjA@mail.gmail.com>
- <1b9f2a45-4ceb-48d0-afdb-b406404d98bb@baylibre.com>
- <01408c47-2928-48e3-ba37-34b835a3b98e@cherry.de>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <01408c47-2928-48e3-ba37-34b835a3b98e@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAA/42NQQ6DIBREr2JY9zeARJKueo/GBehXfyNgQE2N8
+ e5Fe4HO7iUz83aWMBIm9ih2FnGlRMFnkLeCNYPxPQK1mZnkshI50KOnoCWHpUsQJ2fBkSdnRlA
+ Cla7KSkmhWd5PETv6XN+v+sdpsW9s5vPwbAyU5hC3S76Ks/ePZxXAQXNhKtl2hpfqac02ko14b
+ 4Jj9XEcXxPu/EjXAAAA
+X-Change-ID: 20261111-genio720-ufs-rpmb-minimal-41e476364217
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
+ u-boot@lists.u-boot-project.org, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Carlo Caione <ccaione@baylibre.com>, Jens Wiklander <jenswi@kernel.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -174,138 +177,61 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/16/26 12:45 PM, Quentin Schulz wrote:
-> Hi David,
-> 
-> On 11/16/26 6:17 PM, David Lechner wrote:
->> On 11/14/26 3:16 AM, Peter Robinson wrote:
->>> Hi David,
->>>
->>>      > Anyone who has worked on hardware that uses a devicetree for the
->>>      > hardware description should know the mantra "the devicetree describes
->>>      > the hardware, not the configuration"
->>>
->>>
->>> Thank you for this, I never agreed with describing these in the DT at all.
-> 
-> We probably should do some digging on the mailing list because I believe this was brought up back then. I also disagree (mainly because the Linux kernel will never agree to this in upstream DT, so this prevents us from the dream of running pristine DT from upstream). I vaguely recall there are a few things that are binman-specific and available at runtime by parsing some stuff. It's very vague, because I don't remember. But I wouldn't dismiss binman use of the DT as simply being a configuration format, I believe we use some of its things at runtime too.
+This series enables UFS RPMB-backed OP-TEE secure storage on Genio 720.
+The goal is to support pre-OS services such as EFI variable storage with
+the same RPMB device identity used under Linux.
 
-The two users of binman nodes at runtime that I found are lib/binman.c which
-is only used by x86 AFAICT and board/BuR/zynq/common/board.c (to locate the
-FPGA bitstream).
+The platform also needs the OP-TEE UFS read fixes [1] and MT8391
+platform and hardware-key support [2].
 
-> 
-> EDIT: ah I see now reading patch 6/10 that you're aware of that. But phew, is it really worth it to do this incomplete split? I fear we'll split the ecosystem once more.
+[1] https://github.com/OP-TEE/optee_os/pull/8238
+[2] https://github.com/OP-TEE/optee_os/pull/8242
 
-Which "split" are you referring to? File format, file location, something else?
+---
+Changes in v2:
+- Replace the extra defconfig with an optional UFS RPMB fragment that
+  also enables EFI variable storage and the OP-TEE RPMB command.
+- Enable the OP-TEE client in the common G520/G720 configuration and
+  select the UFS device tree through DEVICE_TREE.
+- Use generic UFS RPMB terminology in the configuration patch.
+- Explain the failure cases addressed by the discovery-state patch.
+- Add Ilias's Reviewed-by to the EFI variable documentation patch.
+- Link to v1: https://patch.msgid.link/20261111-genio720-ufs-rpmb-minimal-v1-0-701a62dfa034@baylibre.com
 
-> 
->>>  
->>>      > Binman is describing configuration and not the hardware itself,
->>>      > therefore it doesn't belong in the control devicetree that describes
->>>      > the hardware. So we propose encouraging the separation of these two
->>>      > descriptions into separate devicetree files. In most cases, binman
->>>      > info is not needed at runtime anyway, so combining it with the control
->>>      > devicetree is unnecessary, takes up space, and causes DTS validation
->>>      > to fail because binman is not part of any standard devicetree schema.
->>>
->>>
->>> This is great, and I look forward to this landing.
->>>
->>> Forward looking and just a little thinking out loud here, forward looking is the device tree format the most straight forward way to describe the requirements for this? I wonder whether something like toml or even the in tree env format [1] might be better suited?
->>
->> I was having these same thoughts. And if we were starting from scratch, yes
->> I would have advocated for a different source file format as well. Changing
->> it now though would be quite disruptive to those depending on it. I think we
->> would need some motivation more than "devicetree is not the best choice" to
->> justify changing it at this point. And even then the devicetree format would
->> need a long phase-out period to give people time to adapt.
->>
-> 
-> You can always have a conversion tool from DT to whatever format you want as a way out.
-> 
->> At the very least though, it could be nice to eventually move the binman dts
->> source files out of the arch dts folders to make the separation more clear.
->>
-> 
-> I loathe magic stuff and it's already confusing that -u-boot.dtsi files are automatically added based on some patterns (that most people are unaware of, hence the bunch of -u-boot.dtsi files that only include another -u-boot.dtsi file). So, from yet another location? Don't know if it's a clear win for user experience.
-> 
->>>
->>> To be absolutely clear here, I think this series should proceed and I'm not necessarily asking you to do it, more just gathering ideas/opinions.
->>>
->>> Peter
->>>
->>> [1] https://git.u-boot-project.org/u-boot/u-boot/-/blob/main/board/raspberrypi/rpi/rpi.env?ref_type=heads <https://git.u-boot-project.org/u-boot/u-boot/-/blob/main/board/raspberrypi/rpi/rpi.env?ref_type=heads>
->>>  
->>>      > Currently, only Xilinx is doing this kind of separation. This series
->>>      > makes it possible for more platforms to adopt this separation. The first
->>>      > patches fix binman so that the image gets the U-Boot control devicetree
->>>      > rather than the binman one when the two are separate binaries. And they
->>>      > make BINMAN_DTB work with OF_UPSTREAM, and document the recommendation.
->>>      > The remaining patches update the MediaTek Genio targets to make use of
->>>      > all of this.
->>>      >
->>>      > Signed-off-by: David Lechner <dlechner@baylibre.com <mailto:dlechner@baylibre.com>>
->>>
->>>      My more direct concern with this series is, who has some review cycles
->>>      to step up and co-maintain this tool? It's already been privately
->>>      suggested to me that we could drop the lofty "one tool for every project
->>>      to rely on" goal since most projects continued to develop their own tool
->>>      for assembling binaries anyhow. And that in turn reduces the scope. But
->>>      it's still an important part of the project and so needs some people
->>>      looking after it with a more global eye.
->>
->> I might regret this as I am as overwhelmed as anyone else with reviews these
->> days. And this is my first time touching/using the binman code so I don't
->> know much about it yet. But it seems like this is relatively low volume and
->> I know Python very well and this seems like pure software so I don't need
->> any specific hardware to validate it. So I could try to help here for the
->> time being.
->>
->> As a fair warning, I do tend to want to be a bit heavy-handed with my own
->> changes when I am the maintainer. The current binman code looks to me like
->> Java written in Python 2, which I find a bit painful to read. I would want
->> to "clean it up" with modern automatic code formatters and linters as well
->> as add type hints to make it easier for me to read and understand so that I
->> could maintain it with less effort and also to find latent bugs.
->>
-> 
-> Please be mindful of the minimum Python version we should support. I think we still support OpenSSL 1.x for example (also by the fact that it's the interface used by LibreSSL I think?). I have no clue what version of Python we want to support, but we're typically supporting stuff well past their end of support date.
+---
+Carlo Caione (6):
+      ufs: rpmb: validate requests before issuing commands
+      ufs: rpmb: stop the model string at its NUL terminator
+      tee: optee: keep UFS RPMB discovery state consistent
+      tee: optee: enumerate UFS RPMB services when consumers exist
+      configs: mediatek: add a UFS RPMB fragment
+      doc: uefi: mention UFS RPMB for OP-TEE variable storage
 
-Of course. I saw (like Tom already pointed out) that 3.7 seems to be the
-current minimum.
+Macpaul Lin (1):
+      cmd: allow the OP-TEE RPMB command with UFS storage
 
-I would not have though about SSL versions, so thanks for pointing that out.
+ board/mediatek/MAINTAINERS         |  1 +
+ board/mediatek/mtk-ufs-rpmb.config |  3 +++
+ cmd/Kconfig                        |  4 ++--
+ configs/mt8189.config              |  2 ++
+ doc/develop/uefi/uefi.rst          |  5 +++--
+ drivers/tee/optee/core.c           |  8 +++++++-
+ drivers/tee/optee/optee_private.h  |  9 ++++++++-
+ drivers/tee/optee/rpmb_ufs.c       | 18 ++++++++++++++++--
+ drivers/ufs/ufs-rpmb.c             | 22 +++++++++++++++-------
+ 9 files changed, 57 insertions(+), 15 deletions(-)
+---
+base-commit: 934995f642a21ca7f35fa9aed5f061394fcba243
+change-id: 20261111-genio720-ufs-rpmb-minimal-41e476364217
 
-> 
-> The code is extremely convoluted. Fortunately, there's good test coverage, so doing incremental changes and still having the various tests pass should help refactoring stuff.
-> 
-> Type hints will be an issue as there are some (notably list) that were added only in very recent version of Python.
-
-The typing_extensions package helps with backporting new typing features to
-older Python. And with `from __future__ import annotations` a lot of it isn't
-evaluated at runtime anyway, so shouldn't break things either. 
-
-> 
-> What I would like you (or anyone) taking over Binman to do would be to actually document how binman works internally, not only the user interface. It currently takes too long to even know how to start patching Binman, which makes people unable or not wanting to get involved with Binman at all, let alone review or maintain it. I for example discovered that Binman generates four times the same image, c.f. https://lore.kernel.org/u-boot/04fd00f4-1bb6-4a29-8e1e-83cdc1b03b74@cherry.de/ and I couldn't figure out quickly why so.
-> 
->> I also see there is an active fork of binman at [1]. So I would be in favor
->> of letting that be the ambitious project and trimming down the in-tree code
->> to only what U-Boot needs.
->>
->> [1]: https://github.com/deinde-dev/binman
->>
-> 
-> FYI, deinde-dev is managed by Simon.
-> 
-> Cheers,
-> Quentin
+Best regards,
+--  
+Carlo Caione <ccaione@baylibre.com>
 
