@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D47EF606A322
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:39:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FA75606A323
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:40:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=npt8/LBm;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=sopypHKS
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kYvp9BtP;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=s6HOriWE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B380181005;
-	Mon, 16 Nov 2026 17:39:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 499AF40810;
+	Mon, 16 Nov 2026 17:40:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KA1Ygx5ewESt; Mon, 16 Nov 2026 17:39:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E281381004
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794850785;
-	b=b23INwpcks8odeKWLcqCCWDKV64EVZArzldU27wjyExMhkXft31Ir18mC9uOSYNm1+xL
-	 w8RxNh7wiLvyrGhxI2lAm0Begzuw42tu72hCOuRhZAqVkYkYyAVam0sgZ0a/drASVaMeU
-	 7644TRgWyrjoT11pCtNpwnxQqYgIfePdu6zOW13vJ/k4WFBoNIlO46O3uGC/8cySM+dfD
-	 UJZ15lIwBU5RskIEed40Uy90SuT55uuKGQeAHeX9gEN1oj/8Xk2lxnIRMdndnaz0D+mi/
-	 B6h84gcNPpfNa7soug9KFVAuX7yoyh6YQbuSY67zhVI0FuZdeTO7PEnmJeIjVF8s9Dg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8IiPWAqDCczw; Mon, 16 Nov 2026 17:40:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7C65140804
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794850810;
+	b=IiKocurqKDZuy18aWCnTI1QGxJqg4Nf5vqPQaizlV4KvFoywZrGzSxhqanLjdkSHstU3
+	 8h+hGTp4t2q7BGr3Fqy2pY3liwz8HoBdvglZOqxCDeinKhlrWK6uQ/ndpMf5p6WrW7yQs
+	 871rWMp+fWp18B8BEPmVX1O4Xo0Ek+pSGdqXuTU0Q+/1OyV8/+i/kjsf3cSH0gcR1UKWT
+	 /t+3mwSCex2ZYKrLHkgIteSmxIpRD0Y7ph4gflePL/h2jvAsO+WvtunrhwPoy47Fy4zVZ
+	 LTUHA3xeO/0r9xVRgsJI5pKWmyoaxUKW5M3CH2FSmQjVn3emNIcAzM7E1TzCjZ8m9EA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794850785;
+	c=relaxed/relaxed; t=1794850810;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,41 +31,43 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=hlc4hPg6erJ5/454tyDwhqWdsMNRdwueqtcMMQ1VdZk=;
-	b=huqXbsn3Jqkqg/5gpinTzMIKdOXJQWcxisfJOd6U0tp9xBOX42QsYE2hYVuXuSHSit2G
-	 N7UQa8i5HxUdSdbphwpNuTcxaVUA6tf4EY6YVGf9YYvYd3hBZAp6eShSbSHmp5PyiAPMF
-	 BLc2kpXjuugv1aDMRVqI1lqXXDRmlWXUYYRNjfY/P7MXFRbYUIAV2o5/oGdT0Be75yXY+
-	 CRk3SqCVcC/j+MhOgyCnn8+VQCj2M3fIRoLAahHWpV8SI5aD0fB91zma+IZlB8i9APtCP
-	 aTb0nxBCyRbP3QBvE3hrpOO9Ydfjkn+CrdGnNiUdMgZOD1uqSW+GBIsStS337k8m5Cw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=tKCuP7vFCsJOLrB8wyXd2f5bJOb+rii1Cn8v2Do8n8E=;
+	b=fVaQZh/RY1jPcxef4yoZ6+Rmkkq8hjYN8p3QCEyIgKHZaVwz7OFB9M+syRGZm9cPFQoQ
+	 Hz7siwaaBWfXxWl/YzHkOKPQQPjOiXeseTgaMj5FT7Eg6RDqP+OVuLw5XtjL8HnXu9EeI
+	 F1pAjrT3A9gO84bADWUFINUhqsk1FnLYb5mMwt9Y31eQk4dgfxaem/5yt2UlFH2Y8KKeO
+	 +yY4bqEn9LSG0aZXphGMF34xlfKYX9JOOahn5V/6tdXAkFd8Xc95RmmVKp2dwnPXJTex+
+	 cyTG+6DLvTgiABdj3en43G1TGTwo+ieG8d6hCI56TbWu5iRtNOuxAuk/dheKEkoo2mQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=mailbox.org;
+	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=s6HOriWE;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794850785;
-	bh=hlc4hPg6erJ5/454tyDwhqWdsMNRdwueqtcMMQ1VdZk=;
+	d=lists.u-boot-project.org; s=default; t=1794850810;
+	bh=tKCuP7vFCsJOLrB8wyXd2f5bJOb+rii1Cn8v2Do8n8E=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=npt8/LBmLkGzK/IwEBtRyiGOHpd2qzZ1yq4wXB9zMot/WPqV4yHR58dD2BX+xpzF/
-	 0Ptv1FxuGP+N7MHCRbbJolJD+NBqxrj5w0EgUsRueGqUBWqrGHiThr0K2dSMMLLTcb
-	 6OahwBBedHPO0+PS/x1k9h29fRPhHN/E4b4zxPGnjX4z5A6C1ar/GSeQMwhTtTlTGH
-	 59bVthUNt6Bn/Fr6/XivKId67Xsh64Oy9I4dIr+UXEWNSSWZ3tyWnzxwnB17bDAKLI
-	 /kGXN+N5TWpHHL+iPNb3qQ+NgUmSu/IOWwdgpBQM6A/ivpOw9EBSzcM9qti9bEyuFH
-	 wCcb20aKm9VBQ==
+	b=kYvp9BtPqm/vZ4W4ggiySk5gTy2jVrWjMiAkYLQu2eVyzXPxcdSBSHSz+0sxTFr5Z
+	 yaLxPBr/E5AuTbrcP0QUjHR8iUpgoIgDOJF5PwVkXPkf1ol/uMnGtA2Aan6Ucqz7iG
+	 Qc9qaTLo1B0KaeIkzHv2D8NBP6/p2yT+ACw/u3TJz8ZSIoOKCfv58oILveLphgD1qP
+	 /6e8dOp8ywsPWPYrmP6So8ixal2bNeQEOrFxl+ovZYz/KoQmMujrG/0bMnUy1fay+U
+	 1hej5ro5ywyCAt8VpXSOjb/MAZeg9NLou+YZjuRl1ZAbN11BFhFDkFTHNnRgxfQjEh
+	 FLjUkXxX0Js6Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E281381004;
-	Mon, 16 Nov 2026 17:39:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6FE33176
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7C65140804;
+	Mon, 16 Nov 2026 17:40:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 848624DD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:40:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 54750407C4
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:43 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6A8DD40804
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:40:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2UiqPk7jEtLI for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 17:39:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 809D3407C5
+ id CszcL-gHMg_c for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 17:40:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AC0214056F
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.171
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
  helo=mout-p-201.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
@@ -74,41 +76,42 @@ Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=sopypHKS
+ header.a=rsa-sha256 header.s=mail20150812 header.b=s6HOriWE
 Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 809D3407C5
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:42 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id AC0214056F
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:40:07 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jSw9670ygzMlkn;
- Mon, 16 Nov 2026 18:39:38 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jSw9c1fx9zMlj2;
+ Mon, 16 Nov 2026 18:40:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794850779;
+ s=mail20150812; t=1794850804;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=hlc4hPg6erJ5/454tyDwhqWdsMNRdwueqtcMMQ1VdZk=;
- b=sopypHKS12Y7m4/CNoWknlu044qMtZNA8V2zx5d4M/mU3cEBBzNZUCt8FVO6c0gRpgg/qI
- eWE9miTGKeaY4Mtoih6jdZID7zm/VFfE13EQMWi2i7oUn0x9Bzi4HTVa/XDYsc9dTYgmhQ
- XQiMPX71z2EOGTyrqqntRUIPqTVN8cvbsC5+/Ie6xc4Q+KOyk2U6bnuEkjkceUBxoUeOAJ
- d7eWIHJwMk9IFxK5Yj+7SjdQvpRw65yaLQ+oWiH+TErNaSsKKErfl2oS/y9IjjXpqyWqJO
- mRT9iS4PsCZXErGnRlwTbJuWTclveu/o6wCQUEuOhI0JxhZCiwoAYhUFqIUhaA==
+ bh=tKCuP7vFCsJOLrB8wyXd2f5bJOb+rii1Cn8v2Do8n8E=;
+ b=s6HOriWEw5WrX0OXEThAyer4vvWYXXes5yEb0hy1xMGXsqqsaQBozwP8o4eQpJP3zeABom
+ VwZhYcKArpq/1hHZrYKa3wBOYNE7Ybv3KwgodOEOx272/OD56otuHxcvADLDwwqodspMY7
+ TBQ4ca35rWYt6WenWzJtOdkaQTT45QRKumRRN9HghMNpFW7dUUUT8I0TvLVb7RlApyIHZE
+ +VAun/QRodXIBRA196l+rzj1WvmENYWstkpsrchZiWTvWWqe7FCuT2RV+RMkEjCWJroO+g
+ 8q3r0wJEtPW/+lMdU4jWNb9pbm5wcZcRe+cvu4S3Nv/pK0nHEVf3IiRugmPuqQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] net: ksz9477: Constify driver ops
-Date: Mon, 16 Nov 2026 18:39:29 +0100
-Message-ID: <20261116173936.3488088-1-marek.vasut+renesas@mailbox.org>
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] pci: ep: Constify driver ops
+Date: Mon, 16 Nov 2026 18:39:56 +0100
+Message-ID: <20261116174000.3488119-1-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 23064eb52462229b8ae
-X-MBO-RS-META: deaqw38btauz63x3sqmp3adkbthdx11e
+X-MBO-RS-ID: 913a98c6e1723869ba4
+X-MBO-RS-META: prcz1hqcnkn8bz35tr4tt6nicgkco8yn
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -121,7 +124,7 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -130,115 +133,56 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Jerome Forissier <jerome.forissier@arm.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/net/ksz9477.c | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
+ drivers/pci/pcie_layerscape_ep.c       | 2 +-
+ drivers/pci_endpoint/pcie-cadence-ep.c | 2 +-
+ drivers/pci_endpoint/sandbox-pci_ep.c  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/net/ksz9477.c b/drivers/net/ksz9477.c
-index 7ebbe197660..fcd249c83a1 100644
---- a/drivers/net/ksz9477.c
-+++ b/drivers/net/ksz9477.c
-@@ -113,7 +113,7 @@ struct ksz_phy_ops {
- 
- struct ksz_dsa_priv {
- 	struct udevice *dev;
--	struct ksz_phy_ops *phy_ops;
-+	const struct ksz_phy_ops *phy_ops;
- 
- 	u32 features;			/* chip specific features */
- };
-@@ -129,7 +129,7 @@ static inline int ksz_i2c_write(struct udevice *dev, u32 reg, u8 *val, int len)
- 	return dm_i2c_write(dev, reg, val, len);
- }
- 
--static struct ksz_phy_ops phy_i2c_ops = {
-+static const struct ksz_phy_ops phy_i2c_ops = {
- 	.read = ksz_i2c_read,
- 	.write = ksz_i2c_write,
- };
-@@ -215,7 +215,7 @@ static inline int ksz_spi_write(struct udevice *dev, u32 reg, u8 *val, int len)
- 	return ksz_spi_xfer(dev, reg, val, NULL, len);
- }
- 
--static struct ksz_phy_ops phy_spi_ops = {
-+static const struct ksz_phy_ops phy_spi_ops = {
- 	.read = ksz_spi_read,
- 	.write = ksz_spi_write,
- };
-@@ -224,7 +224,7 @@ static struct ksz_phy_ops phy_spi_ops = {
- static inline int ksz_read8(struct udevice *dev, u32 reg, u8 *val)
- {
- 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
--	struct ksz_phy_ops *phy_ops = priv->phy_ops;
-+	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
- 
- 	int ret = phy_ops->read(dev, reg, val, 1);
- 
-@@ -241,7 +241,7 @@ static inline int ksz_pread8(struct udevice *dev, int port, int reg, u8 *val)
- static inline int ksz_write8(struct udevice *dev, u32 reg, u8 val)
- {
- 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
--	struct ksz_phy_ops *phy_ops = priv->phy_ops;
-+	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
- 
- 	dev_dbg(dev, "%s 0x%04x>>0x%02x\n", __func__, reg, val);
- 	return phy_ops->write(dev, reg, &val, 1);
-@@ -255,7 +255,7 @@ static inline int ksz_pwrite8(struct udevice *dev, int port, int reg, u8 val)
- static inline int ksz_write16(struct udevice *dev, u32 reg, u16 val)
- {
- 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
--	struct ksz_phy_ops *phy_ops = priv->phy_ops;
-+	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
- 	u8 buf[2];
- 
- 	buf[1] = val & 0xff;
-@@ -273,7 +273,7 @@ static inline int ksz_pwrite16(struct udevice *dev, int port, int reg, u16 val)
- static inline int ksz_read16(struct udevice *dev, u32 reg, u16 *val)
- {
- 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
--	struct ksz_phy_ops *phy_ops = priv->phy_ops;
-+	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
- 	u8 buf[2];
- 	int ret;
- 
-@@ -292,7 +292,7 @@ static inline int ksz_pread16(struct udevice *dev, int port, int reg, u16 *val)
- static inline int ksz_read32(struct udevice *dev, u32 reg, u32 *val)
- {
- 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
--	struct ksz_phy_ops *phy_ops = priv->phy_ops;
-+	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
- 
- 	return phy_ops->read(dev, reg, (u8 *)val, 4);
- }
-@@ -305,7 +305,7 @@ static inline int ksz_pread32(struct udevice *dev, int port, int reg, u32 *val)
- static inline int ksz_write32(struct udevice *dev, u32 reg, u32 val)
- {
- 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
--	struct ksz_phy_ops *phy_ops = priv->phy_ops;
-+	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
- 	u8 buf[4];
- 
- 	buf[3] = val & 0xff;
-@@ -662,14 +662,14 @@ static int ksz_probe_mdio(struct udevice *dev)
+diff --git a/drivers/pci/pcie_layerscape_ep.c b/drivers/pci/pcie_layerscape_ep.c
+index b7809857565..f8898b6fcb6 100644
+--- a/drivers/pci/pcie_layerscape_ep.c
++++ b/drivers/pci/pcie_layerscape_ep.c
+@@ -59,7 +59,7 @@ static int ls_ep_set_bar(struct udevice *dev, uint fn, struct pci_bar *ep_bar)
  	return 0;
  }
  
--static void ksz_ops_register(struct udevice *dev, struct ksz_phy_ops *ops)
-+static void ksz_ops_register(struct udevice *dev, const struct ksz_phy_ops *ops)
- {
- 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
+-static struct pci_ep_ops ls_pcie_ep_ops = {
++static const struct pci_ep_ops ls_pcie_ep_ops = {
+ 	.set_bar = ls_ep_set_bar,
+ };
  
- 	priv->phy_ops = ops;
+diff --git a/drivers/pci_endpoint/pcie-cadence-ep.c b/drivers/pci_endpoint/pcie-cadence-ep.c
+index e02ea14e4e4..a57849eb4eb 100644
+--- a/drivers/pci_endpoint/pcie-cadence-ep.c
++++ b/drivers/pci_endpoint/pcie-cadence-ep.c
+@@ -134,7 +134,7 @@ static int cdns_set_msi(struct udevice *dev, uint fn, uint mmc)
+ 	return 0;
  }
  
--static bool dsa_ksz_check_ops(struct ksz_phy_ops *phy_ops)
-+static bool dsa_ksz_check_ops(const struct ksz_phy_ops *phy_ops)
- {
- 	if (!phy_ops || !phy_ops->read || !phy_ops->write)
- 		return false;
+-static struct pci_ep_ops cdns_pci_ep_ops = {
++static const struct pci_ep_ops cdns_pci_ep_ops = {
+ 	.write_header = cdns_write_header,
+ 	.set_bar = cdns_set_bar,
+ 	.set_msi = cdns_set_msi,
+diff --git a/drivers/pci_endpoint/sandbox-pci_ep.c b/drivers/pci_endpoint/sandbox-pci_ep.c
+index aa623fa357d..fb6dbea6140 100644
+--- a/drivers/pci_endpoint/sandbox-pci_ep.c
++++ b/drivers/pci_endpoint/sandbox-pci_ep.c
+@@ -156,7 +156,7 @@ static int sandbox_pci_ep_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static struct pci_ep_ops sandbox_pci_ep_ops = {
++static const struct pci_ep_ops sandbox_pci_ep_ops = {
+ 	.write_header = sandbox_write_header,
+ 	.read_header = sandbox_read_header,
+ 	.set_bar = sandbox_set_bar,
 -- 
 2.53.0
 
