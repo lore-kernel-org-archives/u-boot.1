@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3B6B606A32A
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 20:45:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 582EE606A331
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 20:45:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ls8Fu4Ru;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Of1hSEIe
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fzF2Xhwz;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Z1dMPgyT
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C250981005;
-	Mon, 16 Nov 2026 20:45:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 55D0580FAB;
+	Mon, 16 Nov 2026 20:45:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LwnFj_pfrfiK; Mon, 16 Nov 2026 20:45:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0095380FAB
+ id wG5imkbpGy_t; Mon, 16 Nov 2026 20:45:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 21C9781021
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794861937;
-	b=tIUsNDC3hBi3nlhh7bxJvKZcP8t+7FiS5LaZUh1rbXC1Jfgnyhhph0gZBrJLHqyzMraz
-	 LV8+S2+JZkuo4xdmUxgS0OIpwjSwsZCJBJ3h2TpChbsVsaQK7v4yE3ecFqxwEsC19EoQk
-	 b13I2GGNm4aRQPQfbbPy1fjaLszLIaiCr/K+xaLayM8iu1jOuCcMY+f6bUFvNVY9kJbM3
-	 kM1h43VDHrcsTJ1ePM2d+WYlNXwK7PXlpHsoinGgVX/69odUa1BgkXaDJip40nZVxFcXe
-	 18EFskPoHH/DUgSwgK0mQ1+ct8ePxZfQ95dQJk57GqswKKyNa5Zm1uA8sPyWG6sF4mg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794861939;
+	b=sqQc/tiYEBPH8BdJ1PyqxU/imGbYkpeD5iKpZte3uYCGwO5THHmeFqfQ80nXXAgixW2P
+	 iAIRAYXOOPLdHtHwKNzDpj5hDLlRrM+17YNOPk0ymkgVYGtTFlM17dI5EUJjq28JIAPxO
+	 tfhE3/nb63Fj6ZDlTMUkEqhgq9exk7JQaqh5UXOSpP1HpnjZLXa2FuqWEkUouZbd4Ere+
+	 52vcJ8Gd6aMBGQfbcdMcT/nFX6784Ps03hnBv6CGGelICLfpBWedn1PGzOQJxvxVT1OSj
+	 tu+tLmZ9O3v/i2G6IBFJfxSx+IhUBPu7ls8IBMSveAErLL3xcAkD1YUno8y46pLn82w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794861937;
+	c=relaxed/relaxed; t=1794861939;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,117 +33,116 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=OG/jFZVAiaF1mkN6+CeQaXHRODn6hi/FAdGbtixxif0=;
-	b=j8x1EW8uMw/uPsGTMpPuXp7D2yi4suVJ+b3pCwmGAJKVUy1lOiHqj70eftGvlg1MdXLm
-	 fo+ItikMu0pKOj8kmfsWME+mvjMTdIqr3QY5LazzCZp3AjlwHW7crfOH4wab+dw6YEZQ2
-	 rqyq1PakcB7BsLuLA7MadqrsgnfDJrDMHjUsDr1/kq2sWp4BxAS4GiGzVtPaQTO9WzOqH
-	 cEWLYwCMbZbEgH34q6iuJgUFYJ89qL4DFqoD+D/OM3Szf0nE3Ths5dDjsd+vshftfJTxJ
-	 1rpcMb5DCkHRomM83YsMDXo74uBvn2MADe+IkBcFrXMh0ONb+kyzZrqWHJap8DnHhVw==
+	bh=OXLNtdF0c2uSWhKBVQGWWi/rsP5LYwzoSdSz9o7MoBA=;
+	b=mHje2ai+SJaImc7wkqg/q2IJ4T/APC4cWRjZIZmBB5GOMmfTlNDe2tmtlvUgeyCHQ4Cv
+	 DhogsTFzy5HclYxIinD0biQlQwb+Jjju5iL8m9YJYdzKpYknL3Ls+XHVhCgt22ayVs3fb
+	 /Rl98zdBt3jXxGEXiU0yQKchm1fZOq5mCqOUkL8CQWJLcgzkKqA9qkY4Ss+GwG5SPuDYR
+	 5KEa1kl8XCKZUoqd73N7c4z3ITgoeukkPIt09uw/O6PAqMgU7J0w+YmBz1mPZf751jaV2
+	 BxjCQSZ3VLkL3TR2i282Xf53t22rjALDUjkhoouPB/sLih8NpmvT9Y/DPWdHs572Wgw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794861937;
-	bh=OG/jFZVAiaF1mkN6+CeQaXHRODn6hi/FAdGbtixxif0=;
+	d=lists.u-boot-project.org; s=default; t=1794861939;
+	bh=OXLNtdF0c2uSWhKBVQGWWi/rsP5LYwzoSdSz9o7MoBA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ls8Fu4RuSPX4yk63m7lcdH70Bd/UoHZR3AWWIJKQpP0qiibfjgJhYRn5bXAdaHtq6
-	 YEmQDHUmY1aLnOyF2pujBryd7VM01bLvl5OgdutNBLNOxzbxH/BB7qKRxCFumhMELZ
-	 SuIk9F2hQYND0WVZPcojU8L9zCZZV2qPFFrtEYsEMtC64hhWm80TklM+cVSaOxcbUq
-	 evCyfJatitunFnMs9tjQcIi9Xg3+Az8funXhlV0CP1Ug89lzYNsb14UluSzbpr8Jot
-	 yqexVkO/JYknnaJjz7Wf7qo8stT49p6cCTjNb87RL4BkL5zdKkO4uiCKWb1RQd2B3J
-	 Whr5Ev3p6yZ3Q==
+	b=fzF2XhwzENlFmXjfLLlGd4sI/YnXzeu8zaZgtCmeIpqcE7eY5GlTRscKFx+rcrseZ
+	 N+FLNXzJ6PgleD5VNvYNTogxsDfkPHbW0I9YCGsfUCz+rX/5d2nH2No5q2u4rPMQme
+	 5IeecP5utvd7VpFDDYMQ4PYZEhlv1mDEjDvKF8KblknJPF3jaSLeTtiNBQRi2W2rhM
+	 RSEjCh9LzUcjyrZjiggbDWjI0RKSdZMmiAEBvuWFB5XEtw5R3ngpoKNjzNVrkyu+Wh
+	 JFxx9FdgQHddO2StmxiUcKdOMCx/qfaxYiQlu1fT+eJwgVDc72Zut5sEA2vIbN/nWo
+	 E0CINr1y7Kf2g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0095380FAB;
-	Mon, 16 Nov 2026 20:45:37 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6A2F74DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 21C9781021;
+	Mon, 16 Nov 2026 20:45:39 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 20580109
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 501E840670
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:34 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 123BF402DC
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EMI09LVZjrv5 for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 20:45:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 659A040644
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WpUi7pm61ile for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 20:45:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0864F402CD
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::331"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ client-ip=2a00:1450:4864:20::331; helo=mail-wm1-x331.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Of1hSEIe
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 659A040644
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:32 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4bb5b8ef642so24946095e9.1
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 12:45:31 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=Z1dMPgyT
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0864F402CD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:45:34 +0000 (UTC)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4bb55cda775so1944745e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 12:45:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794861930; x=1795466730;
+ d=baylibre.com; s=google; t=1794861933; x=1795466733;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OG/jFZVAiaF1mkN6+CeQaXHRODn6hi/FAdGbtixxif0=;
- b=Of1hSEIezOEmAadLi6ozKqSUKOgl/WmKdJ48PHNDCaTkF/+AP6mECGq6viQfcObVZ/
- K4H61m9eBLupysEbKLhhBPRflRF/pISF2YJ8ToVggTi2UC7OIzDfGOJPoBN+r3DnIPuO
- izUtIjzCtNk0AmmzHxIcel7EL5evnzde5o8I25ntss0KUrdyiZ5XKeVy7362oAI3dHGo
- B1zp1zKn/FXiN2ZDDkR4HuJIlm0cHlSDw9KYjS529w7R8sAA71LWKI0Pcw6bkVTsiGLQ
- hzY5PRKGcJjDaFhE/a8EYuuWzEiBd/T9JNfm6sfRXLwwf6F5I/VjMzw7n1gM2PGvCrhV
- dWYQ==
+ bh=OXLNtdF0c2uSWhKBVQGWWi/rsP5LYwzoSdSz9o7MoBA=;
+ b=Z1dMPgyTBsvAcmOUEraKOKkp0IwEGS0sSP/6r5wp+uJyb5mkPwImQVPtktaiJgXvVT
+ VkmrP00QPw6oZzE85jgi6MpejexfnB2NwwhCDVbLTU4eLBdTyhsnUOyB9cOuFAS0Uf+l
+ N6hZCGLZs6sQYJoZNgD12srjCvgAxTBp4P0cWKUDbaZ1NSxQDamgTWwHKjaMtS9H83Ku
+ yxNBO82F7l5FPOcyqUx4OasLgMaAHPcL7B2LoMQwXIy25T4F1a98bgOH19ch1RsmHiyi
+ N2JNUfgywrp63F2DfpY393KF7tyjcgxdqStb5ayFp5u4rdKCs/eWVvEl4sHL39GvkW1u
+ XCxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794861930; x=1795466730;
+ d=1e100.net; s=20260707; t=1794861933; x=1795466733;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=OG/jFZVAiaF1mkN6+CeQaXHRODn6hi/FAdGbtixxif0=;
- b=NPzJFLdBTlL2A6Q4e5oICTRRjXcY10jBfDRkPTbcDYEOcaTfiDq5YAy7v+JoNFJxZ/
- EDtu3EormQh9MKcvyY7GWIgvnednANjEk5bsKEZt292zHPfOq5h0molRJyMz3S0WwllZ
- cXbcNSAytBiWY8xh2wcpwyL+f6ZV/bI/HlZM1K82c9e5udWai0+a2nZPyAj7ysTGuC+9
- qCR/U8Zo/S4a8YzLbxlX4GI0W2ZWdchw4DfL55LiS35LG4OxIpZha65TIxGJv0+t0CaB
- 4NeDrxXyB8s+gyRXyOCQ7zHh5xXGVDWPjwvZCeclhbcd1al75AudiD302iXe4Mm71PDP
- TFLg==
+ bh=OXLNtdF0c2uSWhKBVQGWWi/rsP5LYwzoSdSz9o7MoBA=;
+ b=1tdRw0wnh+/0KmEzIsFXz+S3HiM+tBisZBMhPzcLhZnqjCbAw3fZh0LLKRjpE3SOTx
+ JnxhhQnFwkmGuSabi5Vu/PuCslLni2Hz6AXcpU41yP7d5tYL5wcGpLv1kHuPCbnesJuj
+ RsS1M96EQXelIdOtDNQTf62FsOVMeb2DDJ1phAA31UPDIpKUGaYJin90PsAlZcFkhg+u
+ UvCeT0V6z4PPE4MDtgHD6FyOW6SMBaWgHZscwdU4AP7P10ZAC8l5A7NSisDjL9clyw0r
+ 0qVAuVGmoaqfNBKkoUAENuBilxKdtpDgOmprIlFMHCtF4RcHcAddRSGi6YD2nGJ2f9FV
+ ulUQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErFG1nGIPwMYm1pETv4G91r/P5g6d1tmU7SG8tGVpIIQ//wfSuRPf4LaAsaa4x10kUgF8p61ENA=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9ie1RX+Vk4PmCNn5GcgVkxng01NIr9E17+l4I7tNU3mTWK0HIa
- UA8Q1BR5b4KFyH3Id6pOr1e5CgDHeXII5mEjImRLAjgLodh7/PhXskcW0Txo2xRjYH4tESGNLSB
- pHeCD
-X-Gm-Gg: AYBFou1B0nscIeh9IsMCW1o3aEWu51EQ6Ky03K3rUI3vPFY9XnSKDt4u33U3QqOhoFg
- DjVkW08VzK3sPYbZYG0QJtplauHqYhp4gr+ZXxHFbmmHT/uBq+hy6XGEO5v1LSL+kSuyMhvYl6g
- 2WI7EgVSiDIJxixuk26R/HWhEJFTEWrSNDLwA/xEq9Bn8LSv9vgAO3DQ/3XAa/5JPcGj6K6p7DQ
- dm1+VHIqVpoTz0Hu/s+LXFuhK/LE8FrEy2pWw7H4Q3wpgEf9Yrw5oD9q5q/ReSRuKXsPOR8xeVn
- bq6xTe6+LveKtM7Ge221sWdTMLGuYmK/CjsRG1ZRqjIn5UUKw+8MERUGwwjsP08Ly4uXmj/y9vZ
- 0PGOZv2rdnlCy5xhocs8RzgOADhDDG44PXWF9R0Ol10hCqwpKFALVWH1H42dEDuoLxc7DPbl2ES
- +kV/h6FxY6bNirjq50mQfRqH9xE0lTl7ePNNIDrtSF1j7zRTBodcPPXZoGclo6GNxtm4H7lrtfR
- eDsQzWOV6hHcLAXYT3Lsl0vq/0kqujl8cvNWo+uXInKcc3JwdJNoWIua7OyBHk6X1vwGGneDvDZ
- E6uW8JWcxQR+V3jbJWA0xbOwa25nLnx78Wim2MHHBWUii5aUK6CtipzedeRYg034OMy8SJS1lDz
- GkWKfzT6/wHhqpbjY9g==
-X-Received: by 2002:a05:600c:3509:b0:4a1:fc98:1cb1 with SMTP id
- 5b1f17b1804b1-4bb55c5f579mr255876095e9.2.1794861930319; 
- Mon, 16 Nov 2026 12:45:30 -0800 (PST)
+ AL+hErF3WZGmjd02ncY4u9anNbg4fM6dd4P6gnE+TzuSdhaOIeiGxvIaOQM16BMChdw9Y2zsYjDxm9M=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8jIK1FBo1J0QNvaKjCyNTxRobO9INmqQt7xLTGq8hEK3b5hE7F
+ /Kul6KqdmdXcB7l/LLsMRV4mxHKvWxST/h0UYTeEESgAz78JT420cLlq7CIdQHgmats=
+X-Gm-Gg: AYBFou2o8Vjs+Ycq2Bcf2kqxbji16GugZhzTTZ5GKHL+67+71C/fn7iWYeKKYzszPeF
+ rVNl02PRhNJ0TtvsTMUS+JZl0vOApPKXon4KCo7Fgx1Jf2XIJVEiRE+4FNldgWYct2qHCfeWS6i
+ pix/N8axmyD0elVao/lsGbbiFwrv4nJUeny4VAhhf5j0cRu21ULw7WG32MZ902b9ZUX2VyGU4vo
+ GSBHl5Hm1CxX0+CAlCcFR/7vxfFqMkYvTOew2zkdYTFkO73GvD4gXmsSzbHymQK9qWGUJWMif1g
+ e7+6+UhBEDfhaEVpAAI0909sohn6DW1jifiWlRgS4hW8SMEFuZPEV+no/7IC3YjCY5d74jv9TTm
+ n8WnDXDb4ACk4a9hRnOWKM9uDO7EVv8p5xluUOTRLXeJf51CKZOqRdhw8QfuazrlvbmLZPMlOHn
+ 2BeRZUKe79pEOky4jkFbihft/Uuy+HpRZMbJakWidcD3ZJRYn5/2O6XkPSdWKyipzAv+4Y0XqN0
+ X6GuR1KG1/rVKeUQj31ZrtPdDR+yYhgqc+ghaHexGzj9kfkUI+2aOyX+t7No8WNBMdKPQQl72XD
+ rueyqYfcikT7lUlY3C9M2fR2u77CEJhDW5+2SEgtFzxYmipLd59z2ik6/kl+Rv/KhqfPuPDXkzo
+ v+ViJwI10SaBGgNcG2Q==
+X-Received: by 2002:a05:600c:1d04:b0:4b5:d95c:2380 with SMTP id
+ 5b1f17b1804b1-4bb7838594fmr14846995e9.11.1794861932956; 
+ Mon, 16 Nov 2026 12:45:32 -0800 (PST)
 Received: from [127.0.0.1] (host-95-246-144-141.retail.telecomitalia.it.
  [95.246.144.141]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb78386902sm16855545e9.1.2026.11.16.12.45.29
+ 5b1f17b1804b1-4bb78386902sm16855545e9.1.2026.11.16.12.45.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 12:45:29 -0800 (PST)
+ Mon, 16 Nov 2026 12:45:32 -0800 (PST)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 16 Nov 2026 21:45:04 +0100
-Subject: [PATCH v2 1/7] ufs: rpmb: validate requests before issuing
- commands
+Date: Mon, 16 Nov 2026 21:45:06 +0100
+Subject: [PATCH v2 3/7] tee: optee: keep UFS RPMB discovery state
+ consistent
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-genio720-ufs-rpmb-minimal-v2-1-b64eefcfb0f6@baylibre.com>
+Message-Id: <20261116-genio720-ufs-rpmb-minimal-v2-3-b64eefcfb0f6@baylibre.com>
 References: <20261116-genio720-ufs-rpmb-minimal-v2-0-b64eefcfb0f6@baylibre.com>
 In-Reply-To: <20261116-genio720-ufs-rpmb-minimal-v2-0-b64eefcfb0f6@baylibre.com>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -184,72 +183,141 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Check frame counts and response space before issuing any commands. A
-malformed request must not program a key or write data and then fail on
-response validation. Use Linux's request shapes so surplus frames cannot
-be sent or silently discarded.
+RPMB_FRAMES relies on discovery to select its target. The initial and
+reset state currently select region 0, while a failed PROBE_NEXT leaves
+the previous region active. An out-of-order frame request can therefore
+reach a region that was not successfully selected.
 
-Fixes: b3cd7ddbbdd5 ("ufs: add RPMB transport over SCSI SECURITY PROTOCOL")
+Require a successful probe before accepting frames. Keep the discovery
+cursor on metadata errors so retrying a failed probe does not skip a
+potentially usable region.
+
+Fixes: 3b39df3bc540 ("optee: implement the RPMB subsystem interface for UFS")
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- drivers/ufs/ufs-rpmb.c | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+ drivers/tee/optee/core.c          |  2 ++
+ drivers/tee/optee/optee_private.h |  9 ++++++++-
+ drivers/tee/optee/rpmb_ufs.c      | 18 ++++++++++++++++--
+ 3 files changed, 26 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/ufs/ufs-rpmb.c b/drivers/ufs/ufs-rpmb.c
-index d9d35a06439..508eb74d976 100644
---- a/drivers/ufs/ufs-rpmb.c
-+++ b/drivers/ufs/ufs-rpmb.c
-@@ -157,16 +157,25 @@ int ufs_rpmb_route_frames(struct udevice *scsi_dev, unsigned int region,
+diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+index a47c76811cd..2abdfd99e5d 100644
+--- a/drivers/tee/optee/core.c
++++ b/drivers/tee/optee/core.c
+@@ -829,6 +829,8 @@ static int optee_probe(struct udevice *dev)
+ 	u32 sec_caps;
  	int ret;
  
- 	if (!scsi_dev || reqlen % RPMB_FRAME_SIZE ||
--	    rsplen % RPMB_FRAME_SIZE || !n_req)
-+	    rsplen % RPMB_FRAME_SIZE || !n_req || !n_rsp)
- 		return -EINVAL;
- 
- 	request = get_unaligned_be16((u8 *)req + RPMB_FRAME_REQ_OFFSET);
- 
-+	/*
-+	 * Enforce Linux's frame counts before any I/O: a key-programming
-+	 * request and a write counter read are a single frame answered by a
-+	 * single frame, a data write may span several frames but returns one
-+	 * result, and a data read is one request returning several frames.
-+	 */
- 	switch (request) {
- 	case RPMB_REQ_KEY:
- 	case RPMB_REQ_WRITE_DATA: {
- 		u8 status_frame[RPMB_FRAME_SIZE];
- 
-+		if (n_rsp != 1 || (request == RPMB_REQ_KEY && n_req != 1))
-+			return -EINVAL;
++	optee_suppl_rpmb_init(dev);
 +
- 		ret = ufs_rpmb_send(scsi_dev, region, req, n_req);
- 		if (ret)
- 			return ret;
-@@ -178,20 +187,17 @@ int ufs_rpmb_route_frames(struct udevice *scsi_dev, unsigned int region,
- 		if (ret)
- 			return ret;
+ 	if (!is_optee_api(pdata->invoke_fn)) {
+ 		dev_err(dev, "OP-TEE api uid mismatch\n");
+ 		return -ENOENT;
+diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+index 5c72b280058..3f9fea532e4 100644
+--- a/drivers/tee/optee/optee_private.h
++++ b/drivers/tee/optee/optee_private.h
+@@ -34,7 +34,8 @@
+ /**
+  * struct optee_private - OP-TEE driver private data
+  * @rpmb_next_region:	next UFS RPMB region to report on PROBE_NEXT
+- * @rpmb_cur_region:	UFS RPMB region selected by the last PROBE_NEXT
++ * @rpmb_cur_region:	UFS RPMB region selected by the last PROBE_NEXT, or
++ *			UFS_RPMB_NUM_REGIONS while no region is selected
+  */
+ struct optee_private {
+ 	unsigned int rpmb_next_region;
+@@ -97,6 +98,8 @@ static inline void optee_suppl_rpmb_release(struct udevice *dev)
+ #endif
  
--		if (n_rsp < 1)
--			return -EINVAL;
--
- 		return ufs_rpmb_recv(scsi_dev, region, rsp, 1);
+ #ifdef CONFIG_SUPPORT_UFS_RPMB
++void optee_suppl_rpmb_init(struct udevice *dev);
++
+ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+ 				      struct optee_msg_arg *arg);
+ 
+@@ -106,6 +109,10 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+ void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
+ 				 struct optee_msg_arg *arg);
+ #else
++static inline void optee_suppl_rpmb_init(struct udevice *dev)
++{
++}
++
+ static inline void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+ 						    struct optee_msg_arg *arg)
+ {
+diff --git a/drivers/tee/optee/rpmb_ufs.c b/drivers/tee/optee/rpmb_ufs.c
+index 0c820e9595d..fbb56305609 100644
+--- a/drivers/tee/optee/rpmb_ufs.c
++++ b/drivers/tee/optee/rpmb_ufs.c
+@@ -8,6 +8,13 @@
+ #include "optee_msg_supplicant.h"
+ #include "optee_private.h"
+ 
++void optee_suppl_rpmb_init(struct udevice *dev)
++{
++	struct optee_private *priv = dev_get_priv(dev);
++
++	priv->rpmb_cur_region = UFS_RPMB_NUM_REGIONS;
++}
++
+ static int optee_rpmb_get_dev(struct udevice **scsi_devp)
+ {
+ 	struct udevice *ufs_dev, *scsi_dev;
+@@ -32,6 +39,7 @@ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
+ {
+ 	struct optee_private *priv = dev_get_priv(dev);
+ 
++	priv->rpmb_cur_region = UFS_RPMB_NUM_REGIONS;
+ 	if (arg->num_params != 1 ||
+ 	    arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT) {
+ 		arg->ret = TEE_ERROR_BAD_PARAMETERS;
+@@ -39,7 +47,6 @@ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
  	}
- 	case RPMB_REQ_WCOUNTER:
- 	case RPMB_REQ_READ_DATA:
-+		if (n_req != 1 || (request == RPMB_REQ_WCOUNTER && n_rsp != 1))
-+			return -EINVAL;
-+
- 		ret = ufs_rpmb_send(scsi_dev, region, req, 1);
- 		if (ret)
- 			return ret;
  
--		if (n_rsp < 1)
--			return -EINVAL;
--
- 		return ufs_rpmb_recv(scsi_dev, region, rsp, n_rsp);
- 	default:
- 		debug("ufs-rpmb: unsupported request 0x%x\n", request);
+ 	priv->rpmb_next_region = 0;
+-	priv->rpmb_cur_region = 0;
+ 
+ 	arg->params[0].u.value.a = OPTEE_MSG_RPC_SHM_TYPE_APPL;
+ 	arg->ret = TEE_SUCCESS;
+@@ -57,6 +64,7 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+ 	ulong cid_size;
+ 	int ret;
+ 
++	priv->rpmb_cur_region = UFS_RPMB_NUM_REGIONS;
+ 	if (arg->num_params != 2 ||
+ 	    arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT ||
+ 	    arg->params[1].attr != OPTEE_MSG_ATTR_TYPE_RMEM_OUTPUT) {
+@@ -78,7 +86,7 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+ 	}
+ 
+ 	while (priv->rpmb_next_region < UFS_RPMB_NUM_REGIONS) {
+-		unsigned int region = priv->rpmb_next_region++;
++		unsigned int region = priv->rpmb_next_region;
+ 
+ 		ret = ufs_rpmb_get_region_info(scsi_dev, region, &size_mult,
+ 					       &rel_wr, cid_buf);
+@@ -86,6 +94,7 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
+ 			arg->ret = TEE_ERROR_GENERIC;
+ 			return;
+ 		}
++		priv->rpmb_next_region++;
+ 		if (!ret)
+ 			continue;
+ 
+@@ -120,6 +129,11 @@ void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
+ 		return;
+ 	}
+ 
++	if (priv->rpmb_cur_region >= UFS_RPMB_NUM_REGIONS) {
++		arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
++		return;
++	}
++
+ 	if (optee_rpmb_get_dev(&scsi_dev)) {
+ 		arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
+ 		return;
 
 -- 
 2.56.0
