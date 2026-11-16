@@ -2,120 +2,120 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 133D0606A31C
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 16:14:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7861606A333
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 16:16:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kL6Q/2lz;
-	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=CSiZt+x2
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LuY6O+58;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AXXW/4Jl
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E33C58101C;
-	Mon, 16 Nov 2026 16:14:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7782E80FBA;
+	Mon, 16 Nov 2026 16:16:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iPaJ02uubvB3; Mon, 16 Nov 2026 16:14:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 07E558100D
+ id 39Buv0PIW0cM; Mon, 16 Nov 2026 16:16:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 62C1E80FB3
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794845659;
-	b=La6q0Z/8idV7VUlS8zPZxvBahnt6U71ppx1EL6n7nInall9aMDCLFJH3EDxn4++bdLDg
-	 LMD5fag40myCHeGxkpFO/C4LjNk1ckul+9hQRX8XCy7yAssT3AK4E3kw7hGH4Sl5CWub8
-	 /MOochYk2l20IRxCazd/j+NibVlfVSwO7cZrDt7ILVR+/xmZwyoCdTBcHw6vIGnJ+5zrL
-	 hpOgKWDuxWhdmmq7CGKIeck314UVT2tyfne2pJVmErnfm/ODCbgL0d2EnQYj9L4TMs5Qa
-	 UAocLUNCYNyrLKDRWetdgNv2Pmk5aZnPPHKe0X5bvDEvO1yIcjgYQbqQhW05Rr9pPBw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794845769;
+	b=DjYUgpw61kXfQU+8+6aQxlElX4R9QGXftcgjuZ+QS39PRC2ddS8GlF7Yk9NV5VCwWzKt
+	 UVg/ZSiX/Sk4Loh9OZUPz0eOXq86oddDZN2DHZSbqELNl5uUxVZ6tV6P5qcWKRJz+YobU
+	 Ai5JFXP6ffOZqXVFDaHZ67EdbhtQsCk/d9pAgbJiP+dadjY1wjQsUjKU36l7T3Qq6gisK
+	 fvsVvZFGevGokdxf6ThzhebGQ4Wz+ZoN4h8TstU295tJmS24EQe7srWp3tMyxbUoMCM/9
+	 CduyirUEu/abomosdP5Zc+Y/NIoXbq1gMblT1HN1lyNZy2mJ8AflH7rbCyah/ZjC55w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794845659;
+	c=relaxed/relaxed; t=1794845769;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-Infomaniak-Routing:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=HAJkRgTmZjFdizEkMU6cPbc7HNOydi+n9VkPFur0CrM=;
-	b=AxY274UATGnRk0V6lISezekvn5AzvsVukVUisHhb6JFHRf0Bv4D0GlFz4YacGt62QHyO
-	 UxhMu5MmMHRVnr0NeFzIofjoQXdYVpmmQJp/5YFLcG8A2Ak9x3cfz36+93IIhmVjZbqns
-	 47H5UUekXJS7m451w07Q/tos6rX5lR7O0d2jjYKHpQbW+qx5e3qOuuIrOul96ip4SrGS/
-	 Yc07G+4OiBMLLNdz98v7IUIJlTWbHnRyIRSK/w+cNHDjv6XVb0Yb0NMdaThQ1q37UHtDZ
-	 A2Q9uxRJtax+spcq1JD2QRt6muflokIbBEMNC9SRaLs1oNySq1hjXAX6oi77NbA78nw==
+	bh=qtrDcfIs1RXQSTpE7uG/zxCKVtGTml2zDU7GmazGxpA=;
+	b=fsgwZtp87ywLczNmVu9+yweHjs+I4rzznpEe4VsykXr08wNVavsOVVPM+1le64gGeNb6
+	 bM/spkmtQoEglK9dU/qDzyhNieL621/SGSxjxQMmUUauvAcjCzLbeOeosnAVqwDT6DjFF
+	 SfLoAwiNT/bdrCwi8m5hrvUOkWdQ2yPKWTMt7qxl6wXxAChW+S5qpO1NEed+dJBLJWwVn
+	 UMZU5ZATni2L/XK84tshJK/W90WNHCsSkXDS+ER7aArK/AsIjK1anig9FJl+qJ2eW1IGU
+	 /8AHClZOoAdb4IF7TnzQpuu/ZhgFuDfumWCqvluSjmuXp2I5iCROLOSroJCyuDGXPYA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="AXXW/4Jl";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794845659;
-	bh=HAJkRgTmZjFdizEkMU6cPbc7HNOydi+n9VkPFur0CrM=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794845769;
+	bh=qtrDcfIs1RXQSTpE7uG/zxCKVtGTml2zDU7GmazGxpA=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=kL6Q/2lzKIcJ6B6dlA/X9QpY8gk8uv5BB06O68l/N4+RwVDDHfwy96vPbSSRMNvgg
-	 QtKUV7LYJF7E6B74NCS+JOe2yPcHJySviMfz8+e/AemewdJ/ivomVkqo3OQODTfxWB
-	 FvKFkirsDfItg+Vii5xkZWjcQ1AVudrRXjYUVlmqeXN0Ac/dh2qyLnR/wagwG/NQRH
-	 vzS4U1/jtj7fW//xeCNJ98MsmOagOlY4T4RFPIuoPGof5wsj/xrmDMlqIAdPZM8viA
-	 DnUNCqcy2K6QThqtjDL5JQZO+veT71WIDStfyIJY1RpvlQg/PUMCbp7TLdWbOArPRk
-	 F1Ksyp6Wwcaew==
+	b=LuY6O+58LHm20IWiwSnaalJoAhcE3zrxg6F0Pgg3vX90zDKxy5j8CrMrii2oZHocZ
+	 KYU940+3SJeMd7ZtmvbZJ6TsG7ZotuH/ckwMVY1YxEmyavDyhCugxwfSdtpcGFOvxh
+	 QJnr2nSWyVUi/V6Pp8gUznaEhyHD6l6FCUJal5VXnnOn7adtylPQEiGXytzL3FtwED
+	 JSf4KQishf8+S0fyB2CxcFOkBjHLqHlRmRk5pUnnbEn0rlfDbns2JfN4wuA4sLrkZ4
+	 UTsPuI7X5BuFPTSUbSKA2Tl/w0SKNVKxc1xuAwVr8Q74pmZ6jZ2srO02p5YbmsYF14
+	 4VmPON+R2Xk9A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 07E558100D;
-	Mon, 16 Nov 2026 16:14:19 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0EBAA260
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:14:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 62C1E80FB3;
+	Mon, 16 Nov 2026 16:16:09 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5CD2E260
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:16:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E807340790
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:14:08 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 49EF380FB3
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:16:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PSUbm_T8ExUe for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 16:14:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D13174078E
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=83.166.143.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=83.166.143.172;
- helo=smtp-8fac.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=CSiZt+x2
-Received: from smtp-8fac.mail.infomaniak.ch (smtp-8fac.mail.infomaniak.ch
- [83.166.143.172])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D13174078E
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:14:07 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jStGP1WBtz2PM3;
- Mon, 16 Nov 2026 17:14:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1794845645;
- bh=HAJkRgTmZjFdizEkMU6cPbc7HNOydi+n9VkPFur0CrM=;
- h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=CSiZt+x2d0amTnAtk83ZYHnRS/w4DEUz1+NyNJLhDYUl0CrQqSYZsveb1nIA9As7c
- cJdLeVhBiF2p0814qdHBx9wyOXspBGhb1mqFJ+3TecWDCpmrDNs5gvGoGU88TkZjI9
- o+wCD2l/regKiLXKIZNW6kcEZWR8l/h3oPbK+iws4Jf88TIJIHrfPAxZMu9mdsvPjd
- Ir2VBZST7iqzicXyns/qa2SrPZ5hhXVIEovTSME4LD0ABTRKWFuD436uVUoI+TaqA0
- kSGw0Gx1us+WPVCfCOkG3zM6YYS4Cc9LgGnT/S+fLDKoDOQxBgP1h9ZW6rYGYtkHca
- zf2NZs9Fns16Q==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jStGN209ZzwTv; Mon, 16 Nov 2026 17:14:04 +0100 (CET)
-From: Quentin Schulz <u-boot@0leil.net>
-To: Quentin Schulz <u-boot@0leil.net>, Lukasz Majewski <lukma@nabladev.com>, 
- Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Elaine Zhang <zhangqing@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, Heiko Stuebner <heiko@sntech.de>, 
- u-boot@lists.u-boot-project.org
-In-Reply-To: <20261115200526.120871-1-jonas@kwiboo.se>
-References: <20261115200526.120871-1-jonas@kwiboo.se>
-Subject: Re: [PATCH] clk: rockchip: rk3576: Use correct mask for UART1
- parent clock
-Message-Id: <179484564425.1840799.10669181884262764679.b4-ty@b4>
-Date: Mon, 16 Nov 2026 17:14:04 +0100
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YEHa1_k1FvZQ for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 16:16:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6EE8E80ED8
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=sumit.garg@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=AXXW/4Jl
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6EE8E80ED8
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 16:16:07 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 4F3074022C;
+ Mon, 16 Nov 2026 16:16:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68DFC1F000C4;
+ Mon, 16 Nov 2026 16:16:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1794845766;
+ bh=qtrDcfIs1RXQSTpE7uG/zxCKVtGTml2zDU7GmazGxpA=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date;
+ b=AXXW/4JliNaMbiGkT7HNWFpQDzs2lFP5+ofe5B9BuvKuqZchpAZvsZGxq0qczHwfn
+ +3ojQ6JXH5yfo/+GMi5IsQioX0XvvrJoKVGL6HAWUneKYDKJqtuvALqZBmyAkb4r+l
+ ylULvQYcN/X16pRUlUgstAVHSrvW3GW8Vdo+k4mCgt3en+ip9pVX2QWz8b5KbI+2TP
+ 0O9vFOY8f5lXSnydu0d3AJLSnfA/IQkQYQ5ZR4u+CfJV7CXnrVNmgGLiPATrhPPML3
+ mJrn1NVmmZ6MJYp05NuYW7MQLJoRByXSaPvAjFuKSzMbBRGD2EtVxV7zhb2W3zGm6V
+ ZebT6SuNC6Zuw==
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Infomaniak-Routing: alpha
+Subject: Re: [PATCH] clk: qcom: qcs615: add SDCC2 apps clock support
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.u-boot-project.org, Lukasz Majewski <lukma@denx.de>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260911-pll-sdcc-talos-v1-1-403f61254a19@oss.qualcomm.com>
+References: <20260911-pll-sdcc-talos-v1-1-403f61254a19@oss.qualcomm.com>
+Date: Mon, 16 Nov 2026 21:46:02 +0530
+Message-Id: <179484576280.21534.4899449642113823435.b4-reply@b4>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,23 +125,75 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Sun, 15 Nov 2026 20:05:26 +0000, Jonas Karlman wrote:
-> Use the parent clock selection mask instead of the shift value when
-> reading the parent clock selection to correctly report SCLK_UART1 rate.
+On 2026-09-11 15:01 +0530, Balaji Selvanathan wrote:
+> Add the SDCC2 apps clock used by the external SD card port on qcs615.
+> The frequency table covers the standard SD rates up to 202 MHz.
+> 
+> The 202 MHz rate sources from GPLL8 which is currently disabled.
+> Vote GPLL8 on before programming the RCG whenever the selected
+> frequency uses it.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> This patch is dependent on this previous submission:
+> https://lore.kernel.org/u-boot/20260721-emmc-v3-1-35cebc036994@oss.qualcomm.com/
+> ---
+>  drivers/clk/qcom/clock-qcs615.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
 
-Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip (u-boot-rockchip-2027.04), thanks!
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-[1/1] clk: rockchip: rk3576: Use correct mask for UART1 parent clock
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/40393084b930d7ed5dcecf7952cea06b9006df68
+-Sumit
 
-Best regards,
--- 
-Quentin Schulz <u-boot@0leil.net>
+> 
+> diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
+> index e9572951e7d..8113effae77 100644
+> --- a/drivers/clk/qcom/clock-qcs615.c
+> +++ b/drivers/clk/qcom/clock-qcs615.c
+> @@ -52,6 +52,16 @@ static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
+>  	{ }
+>  };
+>  
+> +#define GPLL8_STATUS 0x1b000
+> +#define GPLL8_ENA_VOTE 0x52000
+> +
+> +static const struct pll_vote_clk gpll8_vote_clk = {
+> +	.status = GPLL8_STATUS,
+> +	.status_bit = BIT(31),
+> +	.ena_vote = GPLL8_ENA_VOTE,
+> +	.vote_bit = BIT(8),
+> +};
+> +
+>  #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
+>  #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
+>  #define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
+> @@ -140,6 +150,8 @@ static ulong qcs615_set_rate(struct clk *clk, ulong rate)
+>  		return freq->freq;
+>  	case GCC_SDCC2_APPS_CLK:
+>  		freq = qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
+> +		if (freq->src == CFG_CLK_SRC_GPLL8)
+> +			clk_enable_gpll0(priv->base, &gpll8_vote_clk);
+>  		clk_rcg_set_rate_mnd(priv->base, SDCC2_APPS_CLK_CMD_RCGR,
+>  				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+>  		return freq->freq;
+> 
+> ---
+> base-commit: c325d05e486ffc7298796ef1aa22c5a1196b8113
+> change-id: 20260911-pll-sdcc-talos-d61d6ac463f5
+> 
+> Best regards,
+> -- 
+> Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> 
+> 
+> 
+
 
