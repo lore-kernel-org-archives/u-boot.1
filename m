@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D282A606A330
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 18:32:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B413F606A32A
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 18:33:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DUnpTr9C;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=be+ncvpa
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uEQVtLu+;
+	dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=rAzBJ/Dj
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8E5764078E;
-	Mon, 16 Nov 2026 18:32:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 88480407AF;
+	Mon, 16 Nov 2026 18:33:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2WIut5OJqEBU; Mon, 16 Nov 2026 18:32:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CB1B140766
+ id b2siU9YK87VF; Mon, 16 Nov 2026 18:33:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DBA8B40792
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794853920;
-	b=ECR+4q5D5k+KwCU//z9sgH3IGck9XDPl95qcQ6WIHsW+8LIbA7fvrlDUj7TsEa7AatsF
-	 Hdqh3yFuuj5Sb0LccSXRyOaDxHpWQzq/UQK3lvZFv4tOA8c7c/DQIVrB11V0/fs9RJbQk
-	 gadxA3aHG3CNjkMV93Pt6fB4zNMs4+CnJbN4Ycb/q/b9UVKXTSJJzdNvIFz6Honw/RHcG
-	 +FYMWe8W8Cj+NRaeyUKxlDjMUqAZL9E2c+ClNE8b9YHsHTS/+KAUwDZ50yG0TtImq/j2U
-	 4OSoqbKyxD59gGUnRNZ+sWSBPM0PMSq17HRUrQWqxGhYVxsS6aBkkdzsEbB6biKwi4A==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794854006;
+	b=qDg7o8+DA1VZem3AOiixRLXaZGCMJwTzJa3QvWAUEPAUzfWZLFO7EPcMWX2BxbUnZ9cL
+	 5zXIGsZjwkrPjRIxooUk4xYgGNw3HrtTH7JmMK4utPzii30EStxOsD6kpNzexZk0K9tGY
+	 BO1kZmjWtv/838DBnoYD1YVgiDwGL6yCOm4G8QaiLF/GEpDfOcYxQbk+5eGF0l/v5HIVc
+	 iwxEK9Vx79jCBlw2PKVIyWvsONl2UIaQZJiRTaunfv70st8RSwhhdRHTbUztibI26SSHy
+	 ENckM7ZdaQu8gdJF3Soomk4Gq/3wR9CVPSQjyCZerKzCRxyUaW60O5BK9ZGNxOo1Vig==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794853920;
+	c=relaxed/relaxed; t=1794854006;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,136 +33,134 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
-	b=Rrflqh4370IOsp0jAjx5W9z4hefdJ6lj3nkzHO2Wf7hbIHOSLVvCdJ4FhwXTm4/DQd0r
-	 ac4RqAxpz3EUxOSUebsr1EN8L0vlPItrUO8t/UxyLCXnHgze3S4m/UPYa6izr7acMN07b
-	 maXkykTX3vhXFrrJPUAa/VHx8fgAmFk8Bukm/UupTCNGAs8iAdRlUBpCiVDg0fJ9UX/Bp
-	 KRDDMN7vk+7BwMaoqdvLB+qQC9Z1ytikGEXAHYdCOjr6tL5jgqlWAkC0ZsS8M+r+hCIDH
-	 HmYV13xEkQotIBT+KXRMsmf4e1nYt3EP0RhcxzsN7O++UhvjLJIFzWIUUOtbL3pbIag==
+	bh=FjffQ9VrgwNE9U+b2dAKqD8mes2NZyaMbE94PWCu7gM=;
+	b=SybXELpvU1VnR3p+/5Ty+x0xyvfszQ50NnPmc3zi8WE478UWhTve2X1nOukbVFrskUD8
+	 stCeBX0+1+oqnCMChkigSikCA31rCDZcqQrrox4nTmnTOVqTsOSWQNRrWM50eytsQuKHk
+	 cn+xuWC0/QtAXoCUaqP1BSYCjXa9XGkaCgsbGuPL0/ln+pcDcNh+k+Im5p3v6v09/s9C4
+	 XG5IT8AGNjURZJ/BGhQO/GNQRjmEjQOmMsrShrbUfD3ORJlzn6aYDZZ0kTMVRdRq2Wdg8
+	 XO2AZ6FljeDDLxu1wPwdlvIL4T1dEceKUH7HsqSN5eMS+ScnCIYXjhN4drvw//XyX5w==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b="rAzBJ/Dj";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794853919;
-	bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
+	d=lists.u-boot-project.org; s=default; t=1794854006;
+	bh=FjffQ9VrgwNE9U+b2dAKqD8mes2NZyaMbE94PWCu7gM=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DUnpTr9C2gwLWLaqEMCk+bnuaMv86RwSBeMmdjrbULMpqwZnn32F5308zw4bQHM9s
-	 ZrnEyPjiSP4U2QM4QH52PuMGkTnbe2zH3c6HD1QCVfyS1cEBjYtOVZ9ZK2/TR5OeRi
-	 aVPkcGaboXqtttmBdqnJTI6B/UsCNBHMsut2hPtEywLEViqn7Q0gfWwGbrTlt9vP5x
-	 gklJAPt4T81UQxgztoGWF0O0p58OzAYHaheEr03j8QhF3b/JsJdCqPTsXW7RPuHxLS
-	 YiWu94R3TiG031XZeOzJMKrNmVzRo7G3uoK3qN4WlVUBYDqbE2thdxkKGMFU3AnEo6
-	 ACgOdLUquuycg==
+	b=uEQVtLu+yvmMFLwZmxDD2jciMC9I+rrok3HPN9iT/C+CLYBHVoVW8PP+YJDImE0r2
+	 FlY6roCo8aIdgHGcrF3UKr29AalZ7/X49h9kUlrWwzOriaoQXjSmWsokAR/H4Idvot
+	 Fhmu6waRgQ50Olzc22/jknc/FNKJWt20L7SJB8mcagrxjK4tBXyB1ah4EbW9L8J3b2
+	 AGOwaglR1wHxK56Xt8CPtniWENNo6NRYvb1XaLX5LJvwk5RA8qL+AyVbkMxEg34w29
+	 36q+JAHqIkr4aGURVIcCsiWr9vHQr9iEfsJ1yJ/NPOY29dhVVO5BQiR7ksFGT2tINM
+	 F5XcXKZzg0YkQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CB1B140766;
-	Mon, 16 Nov 2026 18:31:59 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6AFA728C
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:31:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DBA8B40792;
+	Mon, 16 Nov 2026 18:33:25 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 43AB2176
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:33:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 4DA70607CD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:31:58 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 29ABC4078E
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:33:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MVKIqc96mRnK for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 18:31:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8431960763
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2d"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X8DtmdtRBxaN for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 18:33:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 62B8840785
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c34"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2d; helo=mail-oo1-xc2d.google.com;
+ client-ip=2607:f8b0:4864:20::c34; helo=mail-oo1-xc34.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=be+ncvpa
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8431960763
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:31:56 +0000 (UTC)
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-716b58a4365so2502010eaf.3
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:31:56 -0800 (PST)
+ header.s=google header.b=rAzBJ/Dj
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 62B8840785
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 18:33:23 +0000 (UTC)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-6ddef424972so4133679eaf.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:33:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1794853916; x=1795458716;
+ d=konsulko.com; s=google; t=1794854002; x=1795458802;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
- b=be+ncvpaGGXLGjCapjWhYVIheAgdJxJD52xWtEPcW35GnkzLEa3wwvToQTDOJ7B2/d
- OqSDMGNcWAKm87zqOnGVNpp3l3BGDc48NaXvOSSv5DVRfisWJW3Fs7MsOrGpoJLolVOe
- PVX88YKJsvoE2kg3iMLBNCdyrt6JU96ZqFgBE=
+ bh=FjffQ9VrgwNE9U+b2dAKqD8mes2NZyaMbE94PWCu7gM=;
+ b=rAzBJ/DjsaQCpAYci7bsUcDo0ziSl4oftuFfftpBc0VWOEN7iZwFX8oxFOmBYU7dbW
+ 1HO+6PEyTvR1nqOSA+6b2Y9yo9Y3L/cWM4Rm3PpLE1QVsX5SvmiXT88LSecQ7/jh6IT1
+ x5f+tMVKqdKbl+O6y0KxQ+TseZoO29FB+hQ8I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794853916; x=1795458716;
+ d=1e100.net; s=20260707; t=1794854002; x=1795458802;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=8iBShbBqjdXaTU3ADmrZWxE668OMtYVM5GORLmuvpB0=;
- b=NOTOsilGxFayghXeBOJdsFY0JqTASNAxEqspmrNCIpaBAs2rXjdS+LVFOKQ4R8i3KJ
- st9JBuWQwb9WnZ78k6eLL8XCVyWyOL09ChP7zENu+olRfalrcWjRQlCyK1u/elnOLpd0
- GkegbDcVbQiVRtrvx8SLJscGKUlzu4FUMglb213XNQOA27W8Qv6Qm+A6ulCzEuOkQ14X
- UJmiFJYLnNM09dZInkj20cpsCAjfyZqmaaI6lXKen5biRWfnmRb6x/P/QJRodTM7GdYS
- nbYPdZxFqXejTPNQ4e7y0PRg38O/jrm4bmAxEO/M5wJMb8UPLzQwYAhsPZY8kca5HlW0
- RamA==
-X-Gm-Message-State: APuU4Z8wRx0eHRV/NhmvFwp2FRCkhiz/2DVCleWt/3XswsP83W2bl6+O
- sZXgSn2qOHiwkfUBaknV4HXugrlZXOfu92P0T24CgeHd8XqFpydQChvx7RlEDuJt9aw=
-X-Gm-Gg: AYBFou1CsqnJ1wD8SkSUStYaLlXLFi053C7pjehwAtzAszXAChgQU0LTBfchLmGRaxM
- 6MLXMOweZ8LldLuGZIYoZ078PxvUYCxXhoasX695NnfsLI7GDBs4kP1namtOrkPVe9JKL5DgLTY
- P96WkcfZIC+G1JVe8t7Rj8OueCA1zy1myeQoYuho3GFpm+Cu+L+UUTRhnZPED8PQlN601DL44fl
- CGpKk8thR+QwUAxMBSg0G6KESANf/yUW5/AAR0zO9N6sNL3xl0Jw4GOTbp0sx/kq2F0sWqaKy35
- HeDkEmZrp7hM3fFIyyc28DrwNEUbgB4nHK+6kRHDxfjd0U3z0JX49jxRn853B13wGoZfmrmXApx
- +q6RlDQ/C0bZzc07uhAkSzm5ETsm9R2ZJiTjNKeO/mY/RiM/tUK70mgu/a5ChL6o7EgVbDm68Wr
- XLAlSswJovGS/UWFT3bZFUFtl2Brgaqnn2H2aCEQ5xLdPLn6qz4CtzCfVjvciaj/KQCeRz9R/37
- zuPr3E+hLnz3iIdcmmiirLDjjNnOjAHS8A7pLbLO3y+aBGW0HSqSOhSQrfp7RtvSSMZRYkr5YJ5
- 7XyioDNAzLcF5csMm2siLMLU1VJaoPTwkp0KR07dBHnLyiho46Ci4QOjyqxf+MMsqP9a73Tu6LE
- sy3+zNwul5YOgsj1+7omKfP6xTy/bZC9MHcaW3+feE9NHKnYA+5uuCOffYyVJ614dW0a2qAYt6m
- bwFBqdIdz2P0ayzHmS8L3TNqfZEPLSn1c=
-X-Received: by 2002:a05:6820:c5c1:20b0:71a:ef4a:8684 with SMTP id
- 006d021491bc7-71aef4a8e17mr1978546eaf.59.1794853915721; 
- Mon, 16 Nov 2026 10:31:55 -0800 (PST)
+ bh=FjffQ9VrgwNE9U+b2dAKqD8mes2NZyaMbE94PWCu7gM=;
+ b=KVNRwajZYPnnfMC8FC1NkMLbvA5Cm1yw4DHyXtrvXffZQDvsTAl6qpRJNbtyghMrkt
+ KRQBwz1ZdKS4OHEgd9Wl3TqSwZPSPFf6Zfc9YPfSZSxvN2RObc9i0hw+3sw/iF9y15iy
+ Fqgp8LNw1AnoGwC65nWaPbvoNH56l51uGdPXJUZzxltCJ38p9YieV7HCbOWnuBUMu2HU
+ /aav5i9AU///eLVvDIpbII/DFCQS80IG54yj1Xm6p1ODSb1tOfjOVmGZhKensH/7A9+G
+ 2GU1o6LdBuUt7+yTuf2GggfK2b4xDqyHERjuQQLTheHOK7nQcY9sv6XsYtZSNpsKz19J
+ p31A==
+X-Gm-Message-State: APuU4Z93YXnAXF+yckdmp+FFZxIF0RFGjer8LqeUe63/6fKy6CMa1hFT
+ sqhPTUnEEu1sl4rNhxYiyWxNtIpBozQ7Wc/uS4BgGOTAwUb8kq2obseQlJVqFfXKrY4=
+X-Gm-Gg: AYBFou3faiUPClgutv6RDLLeof/mFryQqOuQJUAoiGrJygAFdYuiauJkf7qu0RypfwU
+ smeZoCVT9EkHzzN70qKQ+aVW+ubfzTDaozg7TlI1/ldlEEIIY5Mu6gpb7uEiaqO6gRCIAFxDK3Q
+ NEzwof+rdkUz9zjCiPBa7Rpq9nozpIt+DwIjkdRkmp1Ber3fL/E9nobjgepalSK5C1n+cbZwDcm
+ H8X6p5gZRX+jyMQSAs4rNKKpSlUGVabxUB4IepTVm1Vw5L56zkrmUpRIwKJE+yBBPzxAwR3fyBN
+ jjISf9Y7X4+RkdC1Sfihvm2PjelyT3q9KoaRAdk78++7hlgK3to2GRU7EuYcmk2Mf+tvoAAIAAJ
+ b05en7MpAiBVY3lls0NcrIfDPu+7Ci+yr5bFrLl1mtH40Wu+QL/wJaoZCYc447CxoitjdCFY7pq
+ iaPwSucDHutPjzyBkmTuMh6oh0gdq9egErreCt9bAZnVZ81TOb4dOtMdtWIjfe64dBxuDig6Pwn
+ uMZikP889XGay64lUYkOW4cWz7yTr8L17MBCyST/OVbmOpmJD+sHHKscAD7FD72TGHBu042aXC9
+ 5t1oHaLEAGzQ0H0+9DwhUtmzvb/pA2fklfACwTdSMmdbypmaH7h8nMjh8fMa47DSLR3LQRMHoG2
+ Z8Ej8qrt2N9yy4NQ/pT0GCJiNJqzqw2KLilBrff3lxsB+50cc+CfCh/lTxpxWSK8yuOG0BhSWIk
+ y4Kf4AgW8SAzQjCEwSy8KxClkBj/1xsuw=
+X-Received: by 2002:a05:6820:350c:20b0:71a:eef9:f9d2 with SMTP id
+ 006d021491bc7-71aeef9fa86mr2177829eaf.31.1794854002041; 
+ Mon, 16 Nov 2026 10:33:22 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-71ab42cc12dsm9132452eaf.7.2026.11.16.10.31.53
+ 46e09a7af769-86287f0e257sm11137478a34.1.2026.11.16.10.33.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 10:31:54 -0800 (PST)
-Date: Mon, 16 Nov 2026 12:31:51 -0600
+ Mon, 16 Nov 2026 10:33:21 -0800 (PST)
+Date: Mon, 16 Nov 2026 12:33:18 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Javier Tia <floss@jetm.me>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, David Lechner <dlechner@baylibre.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Michael Walle <mwalle@kernel.org>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
+ u-boot-qcom@groups.io, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Denis Mukhin <dmukhin@ford.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Alexey Charkov <alchark@flipper.net>,
+ Carlo Caione <ccaione@baylibre.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ Aristo Chen <aristo.chen@canonical.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH v4 1/8] disk: Add partition lookup by type GUID
- functionality
-Message-ID: <20261116183151.GB554944@bill-the-cat>
-References: <20260428-type-v4-0-b7051dc45a88@oss.qualcomm.com>
- <20260428-type-v4-1-b7051dc45a88@oss.qualcomm.com>
- <a5c42652-7346-4775-a13e-e9d74c393ee6@cherry.de>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+ Fiona Klute <fiona.klute@gmx.de>
+Subject: Re: [PATCH v5 4/8] env: scsi: Fix ENV_SCSI_HW_PARTITION default
+ value type
+Message-ID: <20261116183318.GC554944@bill-the-cat>
+References: <20261115-type-v5-0-79e76209457b@oss.qualcomm.com>
+ <20261115-type-v5-4-79e76209457b@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vZCQxaLfc0dh9iNB"
+ protocol="application/pgp-signature"; boundary="6zlVpOHZP6965yVg"
 Content-Disposition: inline
-In-Reply-To: <a5c42652-7346-4775-a13e-e9d74c393ee6@cherry.de>
+In-Reply-To: <20261115-type-v5-4-79e76209457b@oss.qualcomm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -173,94 +171,41 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
---vZCQxaLfc0dh9iNB
+--6zlVpOHZP6965yVg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 07, 2026 at 03:42:14PM +0200, Quentin Schulz wrote:
-> Hi Balaji,
->=20
-> On 4/28/26 9:31 AM, Balaji Selvanathan wrote:
-> > Introduce part_get_info_by_type_guid() function to enable partition
-> > lookup using partition type GUID. This complements the existing UUID
-> > lookup functionality and provides more flexible partition discovery
-> > mechanisms.
-> >=20
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > ---
-> > Changes in v4:
-> > - No changes
-> >=20
-> > Changes in v3:
-> > - Addressed minor corrections in part_get_info_by_type_guid function
-> >=20
-> > Changes in v2:
-> > - No changes
-> > ---
-> > ---
-> >   disk/part.c    | 37 +++++++++++++++++++++++++++++++++++++
-> >   include/part.h | 21 +++++++++++++++++++++
-> >   2 files changed, 58 insertions(+)
-> >=20
-> > diff --git a/disk/part.c b/disk/part.c
-> > index 4923dc44593..4cb3204ac6e 100644
-> > --- a/disk/part.c
-> > +++ b/disk/part.c
-> > @@ -731,6 +731,43 @@ int part_get_info_by_uuid(struct blk_desc *desc, c=
-onst char *uuid,
-> >   	return -ENOENT;
-> >   }
-> > +int part_get_info_by_type_guid(struct blk_desc *desc, const char *type=
-_guid,
-> > +			       struct disk_partition *info)
-> > +{
-> > +	struct part_driver *part_drv;
-> > +	int ret;
-> > +	int i;
-> > +
-> > +	if (!CONFIG_IS_ENABLED(PARTITION_TYPE_GUID))
->=20
-> We don't have an xPL symbols for PARTITION_TYPE_GUID so you need to use
-> IS_ENABLED(CONFIG_...) here otherwise it won't work in xPL stages.
->=20
-> Or you need to add an xPL symbol for that (see PARTITION_UUIDS and
-> SPL_PARTITION_UUIDS).
+On Sun, Nov 15, 2026 at 11:56:06AM +0530, Balaji Selvanathan wrote:
 
-Jumping back here as I see in v5 it was switched to IS_ENABLED(...). I
-believe the correct approach is CONFIG_IS_ENABLED(...) and introducing
-if needed, or just waiting for the need otherwise, the xPL variant. This
-is because I can see for size reasons xPL and full U-Boot not having the
-same environment notion (perhaps NOWHERE being set) and so we instead
-run in to the other type of compile problem here. Generally speaking
-using CONFIG_IS_ENABLED(FOO) and later adding the xPL symbols, for shared c=
-ode,
-is better than IS_ENABLED(CONFIG_FOO) because we want/need that
-flexibility (there are counter examples, but they are the exception, ie
-we *must* be consistent from phase to phase or know what a previous
-phase has done/next will do).
+> Change the default value from integer 0 to string "0" to match
+> the string type of the configuration option.
+>=20
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---vZCQxaLfc0dh9iNB
+--6zlVpOHZP6965yVg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCavtMEwAKCRAr4qD1Cr/k
-CnDhAP9nOjRScUyhWE0Elr8eDuanb39ppsNjIYhWvQ/7va1lIQD6A29Xpbrdrcb7
-Q+2N8g/S+5PkBBASlmNLZkYdiVZMlgE=
-=DL6r
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCavtMbgAKCRAr4qD1Cr/k
+CqRlAQDNz3YB7MnJPVNiBMrF8EGhrvqKosleDh/HASlJ/ym85wD/XNL3WoqjECAi
+/kmWDL+sJo+SPVvLDg17FOKPbhQiYwM=
+=Q+K5
 -----END PGP SIGNATURE-----
 
---vZCQxaLfc0dh9iNB--
+--6zlVpOHZP6965yVg--
