@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71363606A323
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:39:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D47EF606A322
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:39:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wci5v47P;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=RSsVQRkV
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=npt8/LBm;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=sopypHKS
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 470E24056F;
-	Mon, 16 Nov 2026 17:39:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B380181005;
+	Mon, 16 Nov 2026 17:39:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QB3k6XXxkOvI; Mon, 16 Nov 2026 17:39:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5ABF7404C9
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794850768;
-	b=LbMY8uDTkEcH6bCC4XJIhYjBpLb+iHE/6drUD+aC7T5b1yoylplBBmZZXiEs+jAubS/I
-	 +UzlXewOCTMcY5Q/gUpKfCUYccXJ5FEW66u0kqxArayBUy3Lk43UcsMYUwztrR70mI2lC
-	 QlfRLn41Ly2SurO0epwX+KNVy6qCJ7pwgOLDnmzDxe03DQ2AHR8gIp0cAabozSBJiCRZz
-	 ytN2YzA020xscUqbBurqD8ucECjytYNkBEV5dvuc4UI940WeEXb2nd9UVQxXeLi+VuXJs
-	 vZmFoPBClUc3dRUGVAue0Md4YJCPAmoobTU8Av/QtLFqXqvN3CXG6Jj8oSjCmTLrCNA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KA1Ygx5ewESt; Mon, 16 Nov 2026 17:39:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E281381004
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794850785;
+	b=b23INwpcks8odeKWLcqCCWDKV64EVZArzldU27wjyExMhkXft31Ir18mC9uOSYNm1+xL
+	 w8RxNh7wiLvyrGhxI2lAm0Begzuw42tu72hCOuRhZAqVkYkYyAVam0sgZ0a/drASVaMeU
+	 7644TRgWyrjoT11pCtNpwnxQqYgIfePdu6zOW13vJ/k4WFBoNIlO46O3uGC/8cySM+dfD
+	 UJZ15lIwBU5RskIEed40Uy90SuT55uuKGQeAHeX9gEN1oj/8Xk2lxnIRMdndnaz0D+mi/
+	 B6h84gcNPpfNa7soug9KFVAuX7yoyh6YQbuSY67zhVI0FuZdeTO7PEnmJeIjVF8s9Dg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794850768;
+	c=relaxed/relaxed; t=1794850785;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,90 +31,84 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+m0CBcEW//Ak8o2bPFaChpGiqNpC842n4k990TkIqKw=;
-	b=c3yHFnCbT/dt5TV9oMqw53t/EGBepcm+SUgjuYkS91A2eh3vqP7WvK9PGAtS7EOuC7bW
-	 d407tyhxBtyKTXApzwoAcUxJ6/eCnieOxZ/wxlCh7AWnxe7k5LHltzwFR3D5JLP/0jUuo
-	 cjjPdH1kLCMzr8W6M9MfIKXoxVM/f5u/jbXl5OK5wVp9qP6W4RhFEtALrkv4zSvqk3+hN
-	 0TZH7cSo4p3V6vl6JuM/R6Qp6VsPOrR28t8/pgrSO1n4tTgDVMimA7APqMLYvANGXJyem
-	 9oonElNGLyLxXTVtZaImn/7+K8ob7GWlT5fkADp9K6Aw3GomMAOB6B8KkzWiBxZkeUg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=hlc4hPg6erJ5/454tyDwhqWdsMNRdwueqtcMMQ1VdZk=;
+	b=huqXbsn3Jqkqg/5gpinTzMIKdOXJQWcxisfJOd6U0tp9xBOX42QsYE2hYVuXuSHSit2G
+	 N7UQa8i5HxUdSdbphwpNuTcxaVUA6tf4EY6YVGf9YYvYd3hBZAp6eShSbSHmp5PyiAPMF
+	 BLc2kpXjuugv1aDMRVqI1lqXXDRmlWXUYYRNjfY/P7MXFRbYUIAV2o5/oGdT0Be75yXY+
+	 CRk3SqCVcC/j+MhOgyCnn8+VQCj2M3fIRoLAahHWpV8SI5aD0fB91zma+IZlB8i9APtCP
+	 aTb0nxBCyRbP3QBvE3hrpOO9Ydfjkn+CrdGnNiUdMgZOD1uqSW+GBIsStS337k8m5Cw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794850768;
-	bh=+m0CBcEW//Ak8o2bPFaChpGiqNpC842n4k990TkIqKw=;
+	d=lists.u-boot-project.org; s=default; t=1794850785;
+	bh=hlc4hPg6erJ5/454tyDwhqWdsMNRdwueqtcMMQ1VdZk=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=wci5v47P2CuAyo24xnkBBVvUlagtqY+ROGdXFdVRMuo+yDcbhSdhk46He/gVMlELd
-	 ALUHmPKVjXTvq3WdNwYlH/7JJAZ+i4ak9R2C03oesVw7DqomJl4hn7aqT3GKa/L7UM
-	 vX1TxKQvMbe9FUG4O3Fnly1yKplc9wuwlKwq/sHN/mDF5VMU0kh/jWoJJpMrSGkC+S
-	 D+jVwoZg0xii2d7635nEnlkIHplzJxiLpkbzZV5XigwFiPpRyh0QvBEy0suyKGWquH
-	 P/0kqcL+VVKLcP8mLsB/DwMpAcwEIeJX7TlaFpu/+j8kR+3z0OsYn4oRXs6VoaQHza
-	 0ujZNrDmeGEiQ==
+	b=npt8/LBmLkGzK/IwEBtRyiGOHpd2qzZ1yq4wXB9zMot/WPqV4yHR58dD2BX+xpzF/
+	 0Ptv1FxuGP+N7MHCRbbJolJD+NBqxrj5w0EgUsRueGqUBWqrGHiThr0K2dSMMLLTcb
+	 6OahwBBedHPO0+PS/x1k9h29fRPhHN/E4b4zxPGnjX4z5A6C1ar/GSeQMwhTtTlTGH
+	 59bVthUNt6Bn/Fr6/XivKId67Xsh64Oy9I4dIr+UXEWNSSWZ3tyWnzxwnB17bDAKLI
+	 /kGXN+N5TWpHHL+iPNb3qQ+NgUmSu/IOWwdgpBQM6A/ivpOw9EBSzcM9qti9bEyuFH
+	 wCcb20aKm9VBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5ABF7404C9;
-	Mon, 16 Nov 2026 17:39:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A3D4070B
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E281381004;
+	Mon, 16 Nov 2026 17:39:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6FE33176
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 96765402B5
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:26 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 54750407C4
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1Emdm62idA8l for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 17:39:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9C23C4009E
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::102"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::102; helo=mout-p-102.mailbox.org;
- envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2UiqPk7jEtLI for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 17:39:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 809D3407C5
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.171
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
+ helo=mout-p-201.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=RSsVQRkV
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9C23C4009E
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:25 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+ header.a=rsa-sha256 header.s=mail20150812 header.b=sopypHKS
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 809D3407C5
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:39:42 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jSw8p14mTzKr6g;
- Mon, 16 Nov 2026 18:39:22 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jSw9670ygzMlkn;
+ Mon, 16 Nov 2026 18:39:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794850762;
+ s=mail20150812; t=1794850779;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=+m0CBcEW//Ak8o2bPFaChpGiqNpC842n4k990TkIqKw=;
- b=RSsVQRkVOsUUmQ4oAFkfeNWGdBHb16hymhMNejr6JjDrPXkudyV9mDq6lKxySa4iHej6Sm
- 7p+neV3JJkPe4fDIV55vZ533bwLsNmy72ov4RBwJCAMt23ltCmEGc4mO/6CX8UwC7n1NB8
- 36flZwC+rcwosSwfU5b0bT4FGD1EFRAvr83VZbqEQrGZdU903lfVLJojuu0TPMhCz+AYXI
- +c+5lEhLb8RNTdYzxs3Z9hyf7j42MDYPsCBktPx9qTwvKXw3g2aHCZoDQjf+gIaK6PIk3m
- RHBQBOcHVSXdxaXul+L2IDvhhH/3nGKMk0nfuTR0mDzMzJgFvcm0xooztwfKQg==
+ bh=hlc4hPg6erJ5/454tyDwhqWdsMNRdwueqtcMMQ1VdZk=;
+ b=sopypHKS12Y7m4/CNoWknlu044qMtZNA8V2zx5d4M/mU3cEBBzNZUCt8FVO6c0gRpgg/qI
+ eWE9miTGKeaY4Mtoih6jdZID7zm/VFfE13EQMWi2i7oUn0x9Bzi4HTVa/XDYsc9dTYgmhQ
+ XQiMPX71z2EOGTyrqqntRUIPqTVN8cvbsC5+/Ie6xc4Q+KOyk2U6bnuEkjkceUBxoUeOAJ
+ d7eWIHJwMk9IFxK5Yj+7SjdQvpRw65yaLQ+oWiH+TErNaSsKKErfl2oS/y9IjjXpqyWqJO
+ mRT9iS4PsCZXErGnRlwTbJuWTclveu/o6wCQUEuOhI0JxhZCiwoAYhUFqIUhaA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] misc: Constify driver ops
-Date: Mon, 16 Nov 2026 18:39:11 +0100
-Message-ID: <20261116173918.3488067-1-marek.vasut+renesas@mailbox.org>
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: ksz9477: Constify driver ops
+Date: Mon, 16 Nov 2026 18:39:29 +0100
+Message-ID: <20261116173936.3488088-1-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b50001c0ea200a75169
-X-MBO-RS-META: 7jnkogb8f54pceuptbmxy1o9pimxswfi
+X-MBO-RS-ID: 23064eb52462229b8ae
+X-MBO-RS-META: deaqw38btauz63x3sqmp3adkbthdx11e
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,201 +130,115 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Liviu Dudau <liviu.dudau@foss.arm.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefano Babic <sbabic@nabladev.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>
+Cc: Jerome Forissier <jerome.forissier@arm.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/misc/cros_ec_i2c.c     | 2 +-
- drivers/misc/cros_ec_lpc.c     | 2 +-
- drivers/misc/cros_ec_spi.c     | 2 +-
- drivers/misc/imx8/scu.c        | 2 +-
- drivers/misc/imx_ele/ele_mu.c  | 2 +-
- drivers/misc/p2sb_emul.c       | 2 +-
- drivers/misc/qfw_mmio.c        | 2 +-
- drivers/misc/qfw_pio.c         | 2 +-
- drivers/misc/qfw_sandbox.c     | 2 +-
- drivers/misc/sandbox_adder.c   | 2 +-
- drivers/misc/swap_case.c       | 2 +-
- drivers/misc/tegra186_bpmp.c   | 2 +-
- drivers/misc/vexpress_config.c | 2 +-
- 13 files changed, 13 insertions(+), 13 deletions(-)
+ drivers/net/ksz9477.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/misc/cros_ec_i2c.c b/drivers/misc/cros_ec_i2c.c
-index cbdc55054ba..6e546284359 100644
---- a/drivers/misc/cros_ec_i2c.c
-+++ b/drivers/misc/cros_ec_i2c.c
-@@ -219,7 +219,7 @@ static int cros_ec_probe(struct udevice *dev)
- 	return cros_ec_register(dev);
- }
+diff --git a/drivers/net/ksz9477.c b/drivers/net/ksz9477.c
+index 7ebbe197660..fcd249c83a1 100644
+--- a/drivers/net/ksz9477.c
++++ b/drivers/net/ksz9477.c
+@@ -113,7 +113,7 @@ struct ksz_phy_ops {
  
--static struct dm_cros_ec_ops cros_ec_ops = {
-+static const struct dm_cros_ec_ops cros_ec_ops = {
- 	.command = cros_ec_i2c_command,
- 	.packet = cros_ec_i2c_packet,
+ struct ksz_dsa_priv {
+ 	struct udevice *dev;
+-	struct ksz_phy_ops *phy_ops;
++	const struct ksz_phy_ops *phy_ops;
+ 
+ 	u32 features;			/* chip specific features */
  };
-diff --git a/drivers/misc/cros_ec_lpc.c b/drivers/misc/cros_ec_lpc.c
-index e2a3226362a..33b7f5b8a33 100644
---- a/drivers/misc/cros_ec_lpc.c
-+++ b/drivers/misc/cros_ec_lpc.c
-@@ -241,7 +241,7 @@ static int cros_ec_probe(struct udevice *dev)
- 	return cros_ec_register(dev);
+@@ -129,7 +129,7 @@ static inline int ksz_i2c_write(struct udevice *dev, u32 reg, u8 *val, int len)
+ 	return dm_i2c_write(dev, reg, val, len);
  }
  
--static struct dm_cros_ec_ops cros_ec_ops = {
-+static const struct dm_cros_ec_ops cros_ec_ops = {
- 	.packet = cros_ec_lpc_packet,
- 	.command = cros_ec_lpc_command,
- 	.check_version = cros_ec_lpc_check_version,
-diff --git a/drivers/misc/cros_ec_spi.c b/drivers/misc/cros_ec_spi.c
-index e86791c03a7..006a67a2a1e 100644
---- a/drivers/misc/cros_ec_spi.c
-+++ b/drivers/misc/cros_ec_spi.c
-@@ -174,7 +174,7 @@ static int cros_ec_probe(struct udevice *dev)
- 	return cros_ec_register(dev);
- }
- 
--static struct dm_cros_ec_ops cros_ec_ops = {
-+static const struct dm_cros_ec_ops cros_ec_ops = {
- 	.packet = cros_ec_spi_packet,
- 	.command = cros_ec_spi_command,
+-static struct ksz_phy_ops phy_i2c_ops = {
++static const struct ksz_phy_ops phy_i2c_ops = {
+ 	.read = ksz_i2c_read,
+ 	.write = ksz_i2c_write,
  };
-diff --git a/drivers/misc/imx8/scu.c b/drivers/misc/imx8/scu.c
-index 5d3db0bc4df..a76fb5f9b6a 100644
---- a/drivers/misc/imx8/scu.c
-+++ b/drivers/misc/imx8/scu.c
-@@ -227,7 +227,7 @@ static int imx8_scu_bind(struct udevice *dev)
+@@ -215,7 +215,7 @@ static inline int ksz_spi_write(struct udevice *dev, u32 reg, u8 *val, int len)
+ 	return ksz_spi_xfer(dev, reg, val, NULL, len);
+ }
+ 
+-static struct ksz_phy_ops phy_spi_ops = {
++static const struct ksz_phy_ops phy_spi_ops = {
+ 	.read = ksz_spi_read,
+ 	.write = ksz_spi_write,
+ };
+@@ -224,7 +224,7 @@ static struct ksz_phy_ops phy_spi_ops = {
+ static inline int ksz_read8(struct udevice *dev, u32 reg, u8 *val)
+ {
+ 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
+-	struct ksz_phy_ops *phy_ops = priv->phy_ops;
++	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
+ 
+ 	int ret = phy_ops->read(dev, reg, val, 1);
+ 
+@@ -241,7 +241,7 @@ static inline int ksz_pread8(struct udevice *dev, int port, int reg, u8 *val)
+ static inline int ksz_write8(struct udevice *dev, u32 reg, u8 val)
+ {
+ 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
+-	struct ksz_phy_ops *phy_ops = priv->phy_ops;
++	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
+ 
+ 	dev_dbg(dev, "%s 0x%04x>>0x%02x\n", __func__, reg, val);
+ 	return phy_ops->write(dev, reg, &val, 1);
+@@ -255,7 +255,7 @@ static inline int ksz_pwrite8(struct udevice *dev, int port, int reg, u8 val)
+ static inline int ksz_write16(struct udevice *dev, u32 reg, u16 val)
+ {
+ 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
+-	struct ksz_phy_ops *phy_ops = priv->phy_ops;
++	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
+ 	u8 buf[2];
+ 
+ 	buf[1] = val & 0xff;
+@@ -273,7 +273,7 @@ static inline int ksz_pwrite16(struct udevice *dev, int port, int reg, u16 val)
+ static inline int ksz_read16(struct udevice *dev, u32 reg, u16 *val)
+ {
+ 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
+-	struct ksz_phy_ops *phy_ops = priv->phy_ops;
++	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
+ 	u8 buf[2];
+ 	int ret;
+ 
+@@ -292,7 +292,7 @@ static inline int ksz_pread16(struct udevice *dev, int port, int reg, u16 *val)
+ static inline int ksz_read32(struct udevice *dev, u32 reg, u32 *val)
+ {
+ 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
+-	struct ksz_phy_ops *phy_ops = priv->phy_ops;
++	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
+ 
+ 	return phy_ops->read(dev, reg, (u8 *)val, 4);
+ }
+@@ -305,7 +305,7 @@ static inline int ksz_pread32(struct udevice *dev, int port, int reg, u32 *val)
+ static inline int ksz_write32(struct udevice *dev, u32 reg, u32 val)
+ {
+ 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
+-	struct ksz_phy_ops *phy_ops = priv->phy_ops;
++	const struct ksz_phy_ops *phy_ops = priv->phy_ops;
+ 	u8 buf[4];
+ 
+ 	buf[3] = val & 0xff;
+@@ -662,14 +662,14 @@ static int ksz_probe_mdio(struct udevice *dev)
  	return 0;
  }
  
--static struct misc_ops imx8_scu_ops = {
-+static const struct misc_ops imx8_scu_ops = {
- 	.call = imx8_scu_call,
- };
+-static void ksz_ops_register(struct udevice *dev, struct ksz_phy_ops *ops)
++static void ksz_ops_register(struct udevice *dev, const struct ksz_phy_ops *ops)
+ {
+ 	struct ksz_dsa_priv *priv = dev_get_priv(dev);
  
-diff --git a/drivers/misc/imx_ele/ele_mu.c b/drivers/misc/imx_ele/ele_mu.c
-index 65a4779c041..06f88fc9630 100644
---- a/drivers/misc/imx_ele/ele_mu.c
-+++ b/drivers/misc/imx_ele/ele_mu.c
-@@ -237,7 +237,7 @@ static int imx8ulp_mu_bind(struct udevice *dev)
- 	return 0;
+ 	priv->phy_ops = ops;
  }
  
--static struct misc_ops imx8ulp_mu_ops = {
-+static const struct misc_ops imx8ulp_mu_ops = {
- 	.call = imx8ulp_mu_call,
- };
- 
-diff --git a/drivers/misc/p2sb_emul.c b/drivers/misc/p2sb_emul.c
-index 3dac6bd82e3..2f86a2481ae 100644
---- a/drivers/misc/p2sb_emul.c
-+++ b/drivers/misc/p2sb_emul.c
-@@ -242,7 +242,7 @@ static int sandbox_p2sb_emul_map_physmem(struct udevice *dev,
- 	return 0;
- }
- 
--static struct dm_pci_emul_ops sandbox_p2sb_emul_emul_ops = {
-+static const struct dm_pci_emul_ops sandbox_p2sb_emul_emul_ops = {
- 	.read_config = sandbox_p2sb_emul_read_config,
- 	.write_config = sandbox_p2sb_emul_write_config,
- 	.read_io = sandbox_p2sb_emul_read_io,
-diff --git a/drivers/misc/qfw_mmio.c b/drivers/misc/qfw_mmio.c
-index f397384054a..559740e6312 100644
---- a/drivers/misc/qfw_mmio.c
-+++ b/drivers/misc/qfw_mmio.c
-@@ -98,7 +98,7 @@ static int qfw_mmio_probe(struct udevice *dev)
- 	return qfw_register(dev);
- }
- 
--static struct dm_qfw_ops qfw_mmio_ops = {
-+static const struct dm_qfw_ops qfw_mmio_ops = {
- 	.read_entry_io = qfw_mmio_read_entry_io,
- 	.read_entry_dma = qfw_mmio_read_entry_dma,
- };
-diff --git a/drivers/misc/qfw_pio.c b/drivers/misc/qfw_pio.c
-index e2f628d3383..5bd6d972f8d 100644
---- a/drivers/misc/qfw_pio.c
-+++ b/drivers/misc/qfw_pio.c
-@@ -56,7 +56,7 @@ static int qfw_pio_probe(struct udevice *dev)
- 	return qfw_register(dev);
- }
- 
--static struct dm_qfw_ops qfw_pio_ops = {
-+static const struct dm_qfw_ops qfw_pio_ops = {
- 	.read_entry_io = qfw_pio_read_entry_io,
- 	.read_entry_dma = qfw_pio_read_entry_dma,
- };
-diff --git a/drivers/misc/qfw_sandbox.c b/drivers/misc/qfw_sandbox.c
-index 1002df75339..f42f393510d 100644
---- a/drivers/misc/qfw_sandbox.c
-+++ b/drivers/misc/qfw_sandbox.c
-@@ -109,7 +109,7 @@ static int qfw_sandbox_probe(struct udevice *dev)
- 	return qfw_register(dev);
- }
- 
--static struct dm_qfw_ops qfw_sandbox_ops = {
-+static const struct dm_qfw_ops qfw_sandbox_ops = {
- 	.read_entry_io = qfw_sandbox_read_entry_io,
- 	.read_entry_dma = qfw_sandbox_read_entry_dma,
- };
-diff --git a/drivers/misc/sandbox_adder.c b/drivers/misc/sandbox_adder.c
-index de1c6357582..9ca7cd38ed2 100644
---- a/drivers/misc/sandbox_adder.c
-+++ b/drivers/misc/sandbox_adder.c
-@@ -39,7 +39,7 @@ static int sandbox_adder_probe(struct udevice *dev)
- 	return 0;
- }
- 
--static struct axi_ops sandbox_adder_ops = {
-+static const struct axi_ops sandbox_adder_ops = {
- 	.read	= sandbox_adder_read,
- 	.write	= sandbox_adder_write,
- };
-diff --git a/drivers/misc/swap_case.c b/drivers/misc/swap_case.c
-index d4a5620c62c..e9f991fe6d9 100644
---- a/drivers/misc/swap_case.c
-+++ b/drivers/misc/swap_case.c
-@@ -383,7 +383,7 @@ static int sandbox_swap_case_unmap_physmem(struct udevice *dev,
- 	return 0;
- }
- 
--static struct dm_pci_emul_ops sandbox_swap_case_emul_ops = {
-+static const struct dm_pci_emul_ops sandbox_swap_case_emul_ops = {
- 	.read_config = sandbox_swap_case_read_config,
- 	.write_config = sandbox_swap_case_write_config,
- 	.read_io = sandbox_swap_case_read_io,
-diff --git a/drivers/misc/tegra186_bpmp.c b/drivers/misc/tegra186_bpmp.c
-index a1585b81867..09434d78f43 100644
---- a/drivers/misc/tegra186_bpmp.c
-+++ b/drivers/misc/tegra186_bpmp.c
-@@ -241,7 +241,7 @@ static int tegra186_bpmp_remove(struct udevice *dev)
- 	return 0;
- }
- 
--static struct misc_ops tegra186_bpmp_ops = {
-+static const struct misc_ops tegra186_bpmp_ops = {
- 	.call = tegra186_bpmp_call,
- };
- 
-diff --git a/drivers/misc/vexpress_config.c b/drivers/misc/vexpress_config.c
-index e7655ceff74..0a34a666c51 100644
---- a/drivers/misc/vexpress_config.c
-+++ b/drivers/misc/vexpress_config.c
-@@ -83,7 +83,7 @@ static int vexpress_config_write(struct udevice *dev,
- 	return vexpress_config_exec(priv, true, (void *)buf, size);
- }
- 
--static struct misc_ops vexpress_config_ops = {
-+static const struct misc_ops vexpress_config_ops = {
- 	.read = vexpress_config_read,
- 	.write = vexpress_config_write,
- };
+-static bool dsa_ksz_check_ops(struct ksz_phy_ops *phy_ops)
++static bool dsa_ksz_check_ops(const struct ksz_phy_ops *phy_ops)
+ {
+ 	if (!phy_ops || !phy_ops->read || !phy_ops->write)
+ 		return false;
 -- 
 2.53.0
 
