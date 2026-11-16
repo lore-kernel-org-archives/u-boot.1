@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2EE2606A323
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:43:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE746606A31C
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:44:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wMNKIrgZ;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=M1N2+lpl
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=elzkrkCa;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=L9sqh7Y9
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B217C40850;
-	Mon, 16 Nov 2026 17:43:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A432740588;
+	Mon, 16 Nov 2026 17:44:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Gl8kborg86Ps; Mon, 16 Nov 2026 17:43:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 50A9B4083B
+ id NSivn_rme71Q; Mon, 16 Nov 2026 17:44:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AD97940562
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794851036;
-	b=WfGfZMn8p/sbw90a5bXT9GwFBhchsx2v30yBbOMRGPgFw1jqHdHd3+A6a9FtCMktjlzL
-	 IDh4uw6v8Xi+LhX/M/NrSOUmvReDnybl7HYS5Y82rN2PfdVP4Rxi7K2jlJOGTrdrLb0O1
-	 10Q06zLkuRl63uGejdeGzx1qHockMo0rN/9Nn/62sHnZGUWkr7+cX872pmlrkTpiq2NDB
-	 4NsVrjPrng2bRe5dIrNaq9TLCoriPI6RI0x9HkOWYUWM20dn1TDPS4s407apyRc8OlTdK
-	 j4tBgIz5lFPnjP2AWhYgzKxxjBsqytewVT0R3O/ioHmUaYGYR07fSGcp3sedS8TJEhg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794851063;
+	b=JX+CgVYAHgCbP5h3VFbRF/sfjt1pDhqm7Dwu04VsFZIh8v5HOZljp8SFQeSfZtDUecfS
+	 5jN7EEyZlij785612pLP2UksEMU7YDyv9dIOBV9N9GeD+aqiXwA5+msPR8dWMuFR1B+1n
+	 OvyBHSFs1k4tcvre5fr2E1MaaAawy67cr5VSIz0VlCQAunMdRfL4e8aTqBsXGSI+/6bvf
+	 /5IqPhyAlIwkStqWbeFm74cPk3JQONRkI8QB+taqrK8i+zC368zjfVbAodR5Q4BNYuZlB
+	 tv8Z3r3udyYbYijCk2AgG8gfCqvLH6cW+2vyEiDCaefYE4D4q3XaxMnzzX41stjItfg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794851036;
+	c=relaxed/relaxed; t=1794851063;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,102 +31,85 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=PxuAPNHwrgntwXUHt1FRFPjH1yUSBiwRuSce1CgpC18=;
-	b=fXpY1Z43ELyBBbGM6RBfR0JENfaRhMot2O95nBCFs1PwJK7pg1u+bebaXzbDL36o+Bpl
-	 mMG7jGJibW1nwwB6uWFAB8fajc/SDlV6loj41U1HYfVvUwrdC/y5UHQKC76xY9hfffrEh
-	 4yMz2wxyKUMUm1ZsGiRi4KekWG/hhyajZwAsOn+c+z0Q35E7HHxCHcBn/ABK4g4uv9GQh
-	 p9nO2jYcfhwnjHay8lFJu5FYoCesZE4V77zH27qFGMDJWIkUPnbfzMaAPANc//aVTwp51
-	 iLoDqFE2LR8F/F7EaUseOXA/GVoE+5roTXfSyyskqFbMHqlKN3jyIkDxDE08905YYcw==
+	bh=0iHnl/59fW+cPMtlxPa5E2jxfc+/B6PpMr1etktrRQk=;
+	b=LzyCeWr91WD8kxskNfeivcV0q1pxtZ0FeC8N13dk23gb6C/ReELwfdb3ZVqvxR3tdRQy
+	 pyj+/AkwBWCu1lNGvFQT/JsZ3dfM8QgLpkflChoqWU0X+TEapZ7/OZnQIuJKxNED4RTgC
+	 rJW1swpj+EUDokoZ6YKVgO59Ds3Ix7UXh3+o1fOUFtx7dZV6dEz7Vfyb/cwc1Zw4ZLjUw
+	 GjT63gUduJ3kE6KrvsjTgiZhNUAQYSbsrQHEEjSC6oho0eXJ3FxoyUpw2XkXv84FZ74NH
+	 2jWI7LD6Zpy5A3K9r3FbxXhWxAiVuMi6z94U/FrZx25md+MXvaj+kQujxCD23F7S9Cw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794851036;
-	bh=PxuAPNHwrgntwXUHt1FRFPjH1yUSBiwRuSce1CgpC18=;
+	d=lists.u-boot-project.org; s=default; t=1794851063;
+	bh=0iHnl/59fW+cPMtlxPa5E2jxfc+/B6PpMr1etktrRQk=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=wMNKIrgZNVcAe6oi4e3D0I518VVzCRci+YKtvArCf15yQmBjUHF7JGdJtsLNiu9rO
-	 Kkx3pkXl1Jpk+jkVw0227yssGT70tfRLTBZSkCIdwAqj062cizy9vglTUfWB1l+dSQ
-	 s4rTL+8EEOkdDiC8crfwORbMANpiQkWvagdth4fEHDSiFPJzVLmgvy2YgNOCDe1+dj
-	 E6+S6lv/VTMjToz0qCY/+IH5p1ubVVGsj5ClYxZ0BqMBn3hK8YAZrHWzXIErKJwdEL
-	 g+Xfoy6JuxB/13B6FBbiI5QthuUnDEIPyTLGQmKHzRn16lsRHqKsUtkbHA0ey2oukr
-	 WfVgvhLanxWbA==
+	b=elzkrkCagDXqU4OdvNm57Qc+tnv90xl/HVfpjBFYAe7zdRMmgi9PGFZyRHTR9nbt2
+	 BQd74BIzC77z1cSC49U3becUAiYlTBhacYPOo4lzyuKEM1MUu0pOZDjw9WNJ8Mbgc5
+	 Cjq95j0M3vzm9MsaVigBp+5y6EoDRLdCgzc+6IMNNZExSuoSlhdI1Bz25+LYz6Kxmr
+	 aZwAXw210+1nhDiDx1EoYw1bidQTgmbGw2w0Bbhffy9tsejii665+X15KsSxn8SEjU
+	 2b8NQfR7N4qdeUWgSETlVBFYicR2jd3H/kp++8C3aX6fZZLsHeU6AkUtu4GltvyPTQ
+	 ghMpCm8iImUEQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 50A9B4083B;
-	Mon, 16 Nov 2026 17:43:56 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id B915E4DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:43:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AD97940562;
+	Mon, 16 Nov 2026 17:44:23 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E85EE2FE
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9F03960793
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:43:55 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id DA7BD810D8
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xV4f5nOqejr2 for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 17:43:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 19E516075D
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::201"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::201; helo=mout-p-201.mailbox.org;
- envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id H6GSqpmmvhRI for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 17:44:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D1BDA810D6
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=80.241.56.152
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.152;
+ helo=mout-p-102.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=M1N2+lpl
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 19E516075D
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:43:53 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+ header.a=rsa-sha256 header.s=mail20150812 header.b=L9sqh7Y9
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D1BDA810D6
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:21 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jSwFy0BpgzMllg;
- Mon, 16 Nov 2026 18:43:50 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jSwGV20kLzKnCX;
+ Mon, 16 Nov 2026 18:44:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794851030;
+ s=mail20150812; t=1794851058;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=PxuAPNHwrgntwXUHt1FRFPjH1yUSBiwRuSce1CgpC18=;
- b=M1N2+lplWTsjma3cpkZ1XlFIPn+UTzMWjDslMBtPeDcPpD9UHa6U1h13CHB7wyK8SbfKV0
- eyBwJ0yzQeIUOsSXUQ319Nmsfh4JkZu2YGbrYrd9Nm/ClPC7wSYM6u4DVrtnIUitvuWv1G
- GAmBZiB0bcFBmetCVmuxH297UDE6ugFAKoCtq4N5+aYV9Px3RQQdciDpaoK75bvrf0fVIi
- 7gix2+x5Qvzxl4BL/rAwzeSdxEPYPMdzXH+Fq8GTyrKyFFXWt7eWaGnJoYd4omNFaUVm2G
- i5ojzyQrvG5rYuOwZYK8B+hcYyLthn1ucuH14Q/MKc4AqH8QajKN5+umpTXujg==
+ bh=0iHnl/59fW+cPMtlxPa5E2jxfc+/B6PpMr1etktrRQk=;
+ b=L9sqh7Y9aLqrLpjll0YVOVVdEk6ih2EKOIsuR76eJeH9GDREhdm3QHQqzjFUpv8DI60Hli
+ 4E6dO8SV+hSPnz6uKyvZwiPrC7JnrgTtMuFYQG2dai1/1kvI/k//wXMzc4kmNV7QqR3cft
+ WRzz/+ylnFhxd1o3a8m3TMZVsX1MqBySs6x/jOOmxmwPPwxA32puViHKL+AgyvqANL2Uq0
+ Ca79aoVDXSLu8Ux4Xam9ITdfuc8Ymf73AHc50jndjLuFQZlk+Muq0bQVRSHAW9DXGEvuPw
+ cDMbCSwXHlgCEPKy+dNC/pqFUaZNNobl/QUbTiO6vtDpAq358DSRAtFJ7FW8uw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Bradley Morgan <bradley.morgan@linux.dev>,
- Daniel Palmer <daniel@thingy.jp>, David Lechner <dlechner@baylibre.com>,
- Eugen Hristev <ehristev@kernel.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Hiago De Franco <hfranco@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Leo Liang <leo.liang@sifive.com>,
- Mario Six <mario.six@gdsys.cc>, Max Filippov <jcmvbkbc@gmail.com>,
- Michal Simek <michal.simek@amd.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Tim Ouyang <tim609@andestech.com>, Tom Rini <trini@konsulko.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>,
- Zhuxu Ran <zhuxu_ran@zohomail.com>
-Subject: [PATCH] sysreset: Constify driver ops
-Date: Mon, 16 Nov 2026 18:43:33 +0100
-Message-ID: <20261116174340.3488324-1-marek.vasut+renesas@mailbox.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] tpm: Constify driver ops
+Date: Mon, 16 Nov 2026 18:44:11 +0100
+Message-ID: <20261116174416.3488353-1-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b11ecd5c7d50cac2f2b
-X-MBO-RS-META: uww9ib8bk89f474yxyuo8e3yw7xahkbm
+X-MBO-RS-ID: 5045f5923793e7694ab
+X-MBO-RS-META: 1n7f3k8rfctkxjq7h5qb9ja1f9hcyx71
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,421 +131,178 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Bradley Morgan <bradley.morgan@linux.dev>
-Cc: Daniel Palmer <daniel@thingy.jp>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: Eugen Hristev <ehristev@kernel.org>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Hiago De Franco <hfranco@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
-Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: Leo Liang <leo.liang@sifive.com>
-Cc: Mario Six <mario.six@gdsys.cc>
-Cc: Max Filippov <jcmvbkbc@gmail.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>
-Cc: Tien Fong Chee <tien.fong.chee@altera.com>
-Cc: Tim Ouyang <tim609@andestech.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
-Cc: Yao Zi <me@ziyao.cc>
-Cc: Zhuxu Ran <zhuxu_ran@zohomail.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/sysreset/poweroff_gpio.c           | 2 +-
- drivers/sysreset/sysreset-ti-sci.c         | 2 +-
- drivers/sysreset/sysreset_ast.c            | 2 +-
- drivers/sysreset/sysreset_at91.c           | 2 +-
- drivers/sysreset/sysreset_cv1800b.c        | 2 +-
- drivers/sysreset/sysreset_gpio.c           | 2 +-
- drivers/sysreset/sysreset_max77663.c       | 2 +-
- drivers/sysreset/sysreset_max8907.c        | 2 +-
- drivers/sysreset/sysreset_microblaze.c     | 2 +-
- drivers/sysreset/sysreset_mpc83xx.c        | 2 +-
- drivers/sysreset/sysreset_octeon.c         | 2 +-
- drivers/sysreset/sysreset_palmas.c         | 2 +-
- drivers/sysreset/sysreset_psci.c           | 2 +-
- drivers/sysreset/sysreset_qemu_virt_ctrl.c | 2 +-
- drivers/sysreset/sysreset_raa215300.c      | 2 +-
- drivers/sysreset/sysreset_resetctl.c       | 2 +-
- drivers/sysreset/sysreset_sandbox.c        | 4 ++--
- drivers/sysreset/sysreset_sbi.c            | 2 +-
- drivers/sysreset/sysreset_socfpga.c        | 2 +-
- drivers/sysreset/sysreset_socfpga_soc64.c  | 2 +-
- drivers/sysreset/sysreset_sti.c            | 2 +-
- drivers/sysreset/sysreset_syscon.c         | 2 +-
- drivers/sysreset/sysreset_tegra.c          | 2 +-
- drivers/sysreset/sysreset_tps65910.c       | 2 +-
- drivers/sysreset/sysreset_tps80031.c       | 2 +-
- drivers/sysreset/sysreset_x86.c            | 2 +-
- drivers/sysreset/sysreset_xtfpga.c         | 2 +-
- 27 files changed, 28 insertions(+), 28 deletions(-)
+ drivers/tpm/tpm2_tis_core.c | 22 +++++++++++-----------
+ drivers/tpm/tpm2_tis_i2c.c  |  2 +-
+ drivers/tpm/tpm2_tis_mmio.c |  2 +-
+ drivers/tpm/tpm2_tis_spi.c  |  2 +-
+ drivers/tpm/tpm_tis.h       |  4 ++--
+ 5 files changed, 16 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/sysreset/poweroff_gpio.c b/drivers/sysreset/poweroff_gpio.c
-index d9220024f47..ca695393136 100644
---- a/drivers/sysreset/poweroff_gpio.c
-+++ b/drivers/sysreset/poweroff_gpio.c
-@@ -72,7 +72,7 @@ static int poweroff_gpio_probe(struct udevice *dev)
- 	return gpio_request_by_name(dev, "gpios", 0, &priv->gpio, flags);
- }
+diff --git a/drivers/tpm/tpm2_tis_core.c b/drivers/tpm/tpm2_tis_core.c
+index 1fdf8cfa319..0a2201df19c 100644
+--- a/drivers/tpm/tpm2_tis_core.c
++++ b/drivers/tpm/tpm2_tis_core.c
+@@ -37,7 +37,7 @@ int tpm_tis_get_desc(struct udevice *dev, char *buf, int size)
+ static bool tpm_tis_check_locality(struct udevice *dev, int loc)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	u8 locality;
  
--static struct sysreset_ops poweroff_gpio_ops = {
-+static const struct sysreset_ops poweroff_gpio_ops = {
- 	.request = poweroff_gpio_request,
- };
+ 	phy_ops->read_bytes(dev, TPM_ACCESS(loc), 1, &locality);
+@@ -62,7 +62,7 @@ static bool tpm_tis_check_locality(struct udevice *dev, int loc)
+ int tpm_tis_request_locality(struct udevice *dev, int loc)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	u8 buf = TPM_ACCESS_REQUEST_USE;
+ 	unsigned long start, stop;
  
-diff --git a/drivers/sysreset/sysreset-ti-sci.c b/drivers/sysreset/sysreset-ti-sci.c
-index 451fc5de735..2674d6f07c5 100644
---- a/drivers/sysreset/sysreset-ti-sci.c
-+++ b/drivers/sysreset/sysreset-ti-sci.c
-@@ -55,7 +55,7 @@ static int ti_sci_sysreset_request(struct udevice *dev, enum sysreset_t type)
+@@ -92,7 +92,7 @@ int tpm_tis_request_locality(struct udevice *dev, int loc)
+ static int tpm_tis_status(struct udevice *dev, u8 *status)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 
+ 	if (chip->locality < 0)
+ 		return -EINVAL;
+@@ -118,7 +118,7 @@ static int tpm_tis_status(struct udevice *dev, u8 *status)
+ int tpm_tis_release_locality(struct udevice *dev, int loc)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	u8 buf = TPM_ACCESS_ACTIVE_LOCALITY;
+ 	int ret;
+ 
+@@ -172,7 +172,7 @@ static int tpm_tis_wait_for_stat(struct udevice *dev, u8 mask,
+ static int tpm_tis_get_burstcount(struct udevice *dev, size_t *burstcount)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	unsigned long start, stop;
+ 	u32 burst;
+ 
+@@ -208,7 +208,7 @@ static int tpm_tis_get_burstcount(struct udevice *dev, size_t *burstcount)
+ static int tpm_tis_ready(struct udevice *dev)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	u8 data = TPM_STS_COMMAND_READY;
+ 
+ 	/* This will cancel any pending commands */
+@@ -218,7 +218,7 @@ static int tpm_tis_ready(struct udevice *dev)
+ int tpm_tis_send(struct udevice *dev, const u8 *buf, size_t len)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	size_t burstcnt, wr_size, sent = 0;
+ 	u8 data = TPM_STS_GO;
+ 	u8 status;
+@@ -301,7 +301,7 @@ release_locality:
+ static int tpm_tis_recv_data(struct udevice *dev, u8 *buf, size_t count)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	int size = 0, len, ret;
+ 	size_t burstcnt;
+ 	u8 status;
+@@ -403,14 +403,14 @@ int tpm_tis_open(struct udevice *dev)
  	return ret;
  }
  
--static struct sysreset_ops ti_sci_sysreset_ops = {
-+static const struct sysreset_ops ti_sci_sysreset_ops = {
- 	.request = ti_sci_sysreset_request,
- };
+-void tpm_tis_ops_register(struct udevice *dev, struct tpm_tis_phy_ops *ops)
++void tpm_tis_ops_register(struct udevice *dev, const struct tpm_tis_phy_ops *ops)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
  
-diff --git a/drivers/sysreset/sysreset_ast.c b/drivers/sysreset/sysreset_ast.c
-index 4e15ebd53cc..021359a86a7 100644
---- a/drivers/sysreset/sysreset_ast.c
-+++ b/drivers/sysreset/sysreset_ast.c
-@@ -46,7 +46,7 @@ static int ast_sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
+ 	chip->phy_ops = ops;
  }
  
--static struct sysreset_ops ast_sysreset = {
-+static const struct sysreset_ops ast_sysreset = {
- 	.request	= ast_sysreset_request,
- };
+-static bool tis_check_ops(struct tpm_tis_phy_ops *phy_ops)
++static bool tis_check_ops(const struct tpm_tis_phy_ops *phy_ops)
+ {
+ 	if (!phy_ops || !phy_ops->read_bytes || !phy_ops->write_bytes ||
+ 	    !phy_ops->read32 || !phy_ops->write32)
+@@ -444,7 +444,7 @@ static int tpm_tis_wait_init(struct udevice *dev, int loc)
+ int tpm_tis_init(struct udevice *dev)
+ {
+ 	struct tpm_chip *chip = dev_get_priv(dev);
+-	struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops = chip->phy_ops;
+ 	int ret;
+ 	u32 tmp;
  
-diff --git a/drivers/sysreset/sysreset_at91.c b/drivers/sysreset/sysreset_at91.c
-index 457042c7aae..6e865e1e9e6 100644
---- a/drivers/sysreset/sysreset_at91.c
-+++ b/drivers/sysreset/sysreset_at91.c
-@@ -51,7 +51,7 @@ static int at91_sysreset_probe(struct udevice *dev)
+diff --git a/drivers/tpm/tpm2_tis_i2c.c b/drivers/tpm/tpm2_tis_i2c.c
+index 93efccc7757..a358014ea2a 100644
+--- a/drivers/tpm/tpm2_tis_i2c.c
++++ b/drivers/tpm/tpm2_tis_i2c.c
+@@ -92,7 +92,7 @@ static int tpm_tis_i2c_write32(struct udevice *dev, u32 addr, u32 value)
+ 	return tpm_tis_i2c_write(dev, addr, sizeof(value), (u8 *)&value_le);
+ }
+ 
+-static struct tpm_tis_phy_ops phy_ops = {
++static const struct tpm_tis_phy_ops phy_ops = {
+ 	.read_bytes = tpm_tis_i2c_read,
+ 	.write_bytes = tpm_tis_i2c_write,
+ 	.read32 = tpm_tis_i2c_read32,
+diff --git a/drivers/tpm/tpm2_tis_mmio.c b/drivers/tpm/tpm2_tis_mmio.c
+index fc62dcda9ef..679abcc107c 100644
+--- a/drivers/tpm/tpm2_tis_mmio.c
++++ b/drivers/tpm/tpm2_tis_mmio.c
+@@ -70,7 +70,7 @@ static int mmio_write32(struct udevice *dev, u32 addr, u32 value)
  	return 0;
  }
  
--static struct sysreset_ops at91_sysreset = {
-+static const struct sysreset_ops at91_sysreset = {
- 	.request = at91_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_cv1800b.c b/drivers/sysreset/sysreset_cv1800b.c
-index 74ba2c2bd8f..6bb4a285cf1 100644
---- a/drivers/sysreset/sysreset_cv1800b.c
-+++ b/drivers/sysreset/sysreset_cv1800b.c
-@@ -63,7 +63,7 @@ static int cv1800b_sysreset_probe(struct udevice *dev)
- 	return 0;
+-static struct tpm_tis_phy_ops phy_ops = {
++static const struct tpm_tis_phy_ops phy_ops = {
+ 	.read_bytes = mmio_read_bytes,
+ 	.write_bytes = mmio_write_bytes,
+ 	.read32 = mmio_read32,
+diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+index c433e8088ac..3ca2d6f6b12 100644
+--- a/drivers/tpm/tpm2_tis_spi.c
++++ b/drivers/tpm/tpm2_tis_spi.c
+@@ -187,7 +187,7 @@ static int tpm_tis_spi_write32(struct udevice *dev, u32 addr, u32 value)
+ 	return tpm_tis_spi_write(dev, addr, sizeof(value), (u8 *)&value_le);
  }
  
--static struct sysreset_ops cv1800b_sysreset = {
-+static const struct sysreset_ops cv1800b_sysreset = {
- 	.request = cv1800b_sysreset_request,
+-static struct tpm_tis_phy_ops phy_ops = {
++static const struct tpm_tis_phy_ops phy_ops = {
+ 	.read_bytes = tpm_tis_spi_read,
+ 	.write_bytes = tpm_tis_spi_write,
+ 	.read32 = tpm_tis_spi_read32,
+diff --git a/drivers/tpm/tpm_tis.h b/drivers/tpm/tpm_tis.h
+index 93f622f2910..32d4f9200ed 100644
+--- a/drivers/tpm/tpm_tis.h
++++ b/drivers/tpm/tpm_tis.h
+@@ -110,7 +110,7 @@ struct tpm_chip {
+ 	u8 rid;
+ 	unsigned long timeout_a, timeout_b, timeout_c, timeout_d;  /* msec */
+ 	ulong chip_type;
+-	struct tpm_tis_phy_ops *phy_ops;
++	const struct tpm_tis_phy_ops *phy_ops;
  };
  
-diff --git a/drivers/sysreset/sysreset_gpio.c b/drivers/sysreset/sysreset_gpio.c
-index 47018844a51..bb9d285f5d4 100644
---- a/drivers/sysreset/sysreset_gpio.c
-+++ b/drivers/sysreset/sysreset_gpio.c
-@@ -33,7 +33,7 @@ static int gpio_reboot_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops gpio_reboot_ops = {
-+static const struct sysreset_ops gpio_reboot_ops = {
- 	.request = gpio_reboot_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_max77663.c b/drivers/sysreset/sysreset_max77663.c
-index 8febcf8de6c..a4ed763f743 100644
---- a/drivers/sysreset/sysreset_max77663.c
-+++ b/drivers/sysreset/sysreset_max77663.c
-@@ -41,7 +41,7 @@ static int max77663_sysreset_request(struct udevice *dev,
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops max77663_sysreset = {
-+static const struct sysreset_ops max77663_sysreset = {
- 	.request = max77663_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_max8907.c b/drivers/sysreset/sysreset_max8907.c
-index 6f62af9bffe..ac268dc5e61 100644
---- a/drivers/sysreset/sysreset_max8907.c
-+++ b/drivers/sysreset/sysreset_max8907.c
-@@ -26,7 +26,7 @@ static int max8907_sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops max8907_sysreset = {
-+static const struct sysreset_ops max8907_sysreset = {
- 	.request = max8907_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_microblaze.c b/drivers/sysreset/sysreset_microblaze.c
-index b81d82f046b..031b6cd72e0 100644
---- a/drivers/sysreset/sysreset_microblaze.c
-+++ b/drivers/sysreset/sysreset_microblaze.c
-@@ -20,7 +20,7 @@ static int microblaze_sysreset_request(struct udevice *dev,
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops microblaze_sysreset = {
-+static const struct sysreset_ops microblaze_sysreset = {
- 	.request = microblaze_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_mpc83xx.c b/drivers/sysreset/sysreset_mpc83xx.c
-index dca49299f77..4aa1707d4fd 100644
---- a/drivers/sysreset/sysreset_mpc83xx.c
-+++ b/drivers/sysreset/sysreset_mpc83xx.c
-@@ -203,7 +203,7 @@ static int mpc83xx_sysreset_get_status(struct udevice *dev, char *buf, int size)
- 	return 0;
- }
- 
--static struct sysreset_ops mpc83xx_sysreset = {
-+static const struct sysreset_ops mpc83xx_sysreset = {
- 	.request	= mpc83xx_sysreset_request,
- 	.get_status	= mpc83xx_sysreset_get_status,
- };
-diff --git a/drivers/sysreset/sysreset_octeon.c b/drivers/sysreset/sysreset_octeon.c
-index c16223720e5..c08243e7c0b 100644
---- a/drivers/sysreset/sysreset_octeon.c
-+++ b/drivers/sysreset/sysreset_octeon.c
-@@ -32,7 +32,7 @@ static int octeon_sysreset_probe(struct udevice *dev)
- 	return 0;
- }
- 
--static struct sysreset_ops octeon_sysreset = {
-+static const struct sysreset_ops octeon_sysreset = {
- 	.request = octeon_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_palmas.c b/drivers/sysreset/sysreset_palmas.c
-index 9e3aa403488..e80c78ca482 100644
---- a/drivers/sysreset/sysreset_palmas.c
-+++ b/drivers/sysreset/sysreset_palmas.c
-@@ -41,7 +41,7 @@ static int palmas_sysreset_request(struct udevice *dev,
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops palmas_sysreset = {
-+static const struct sysreset_ops palmas_sysreset = {
- 	.request = palmas_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_psci.c b/drivers/sysreset/sysreset_psci.c
-index 89b4f2dcaec..1bf6af0821b 100644
---- a/drivers/sysreset/sysreset_psci.c
-+++ b/drivers/sysreset/sysreset_psci.c
-@@ -30,7 +30,7 @@ static int psci_sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops psci_sysreset_ops = {
-+static const struct sysreset_ops psci_sysreset_ops = {
- 	.request = psci_sysreset_request,
- 	.get_status = psci_sysreset_get_status,
- };
-diff --git a/drivers/sysreset/sysreset_qemu_virt_ctrl.c b/drivers/sysreset/sysreset_qemu_virt_ctrl.c
-index ce15e776f8f..cd693eb55e1 100644
---- a/drivers/sysreset/sysreset_qemu_virt_ctrl.c
-+++ b/drivers/sysreset/sysreset_qemu_virt_ctrl.c
-@@ -45,7 +45,7 @@ static int qemu_virt_ctrl_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops qemu_virt_ctrl_ops = {
-+static const struct sysreset_ops qemu_virt_ctrl_ops = {
- 	.request = qemu_virt_ctrl_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_raa215300.c b/drivers/sysreset/sysreset_raa215300.c
-index 32dfcb0aec8..17cb35c4e9c 100644
---- a/drivers/sysreset/sysreset_raa215300.c
-+++ b/drivers/sysreset/sysreset_raa215300.c
-@@ -47,7 +47,7 @@ static int raa215300_sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops raa215300_sysreset_ops = {
-+static const struct sysreset_ops raa215300_sysreset_ops = {
- 	.request = raa215300_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_resetctl.c b/drivers/sysreset/sysreset_resetctl.c
-index fbe3999b960..f06382956ce 100644
---- a/drivers/sysreset/sysreset_resetctl.c
-+++ b/drivers/sysreset/sysreset_resetctl.c
-@@ -21,7 +21,7 @@ static int resetctl_reboot_request(struct udevice *dev, enum sysreset_t type)
- 	return reset_assert_bulk(&priv->resets);
- }
- 
--static struct sysreset_ops resetctl_reboot_ops = {
-+static const struct sysreset_ops resetctl_reboot_ops = {
- 	.request = resetctl_reboot_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_sandbox.c b/drivers/sysreset/sysreset_sandbox.c
-index 93179f90bbb..a9fa187945d 100644
---- a/drivers/sysreset/sysreset_sandbox.c
-+++ b/drivers/sysreset/sysreset_sandbox.c
-@@ -95,7 +95,7 @@ int sandbox_sysreset_get_last(struct udevice *dev)
- 	return state->jumped_fname ? SYSRESET_WARM : SYSRESET_POWER;
- }
- 
--static struct sysreset_ops sandbox_sysreset_ops = {
-+static const struct sysreset_ops sandbox_sysreset_ops = {
- 	.request	= sandbox_sysreset_request,
- 	.get_status	= sandbox_sysreset_get_status,
- 	.get_last	= sandbox_sysreset_get_last,
-@@ -113,7 +113,7 @@ U_BOOT_DRIVER(sysreset_sandbox) = {
- 	.ops		= &sandbox_sysreset_ops,
- };
- 
--static struct sysreset_ops sandbox_warm_sysreset_ops = {
-+static const struct sysreset_ops sandbox_warm_sysreset_ops = {
- 	.request	= sandbox_warm_sysreset_request,
- 	.get_status	= sandbox_warm_sysreset_get_status,
- 	.get_last	= sandbox_warm_sysreset_get_last,
-diff --git a/drivers/sysreset/sysreset_sbi.c b/drivers/sysreset/sysreset_sbi.c
-index 458191206b2..c4a71363e62 100644
---- a/drivers/sysreset/sysreset_sbi.c
-+++ b/drivers/sysreset/sysreset_sbi.c
-@@ -38,7 +38,7 @@ static int sbi_sysreset_probe(struct udevice *dev)
- 	return -ENOENT;
- }
- 
--static struct sysreset_ops sbi_sysreset_ops = {
-+static const struct sysreset_ops sbi_sysreset_ops = {
- 	.request = sbi_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_socfpga.c b/drivers/sysreset/sysreset_socfpga.c
-index a07b0f4fd55..8d979ff7333 100644
---- a/drivers/sysreset/sysreset_socfpga.c
-+++ b/drivers/sysreset/sysreset_socfpga.c
-@@ -43,7 +43,7 @@ static int socfpga_sysreset_probe(struct udevice *dev)
- 	return 0;
- }
- 
--static struct sysreset_ops socfpga_sysreset = {
-+static const struct sysreset_ops socfpga_sysreset = {
- 	.request = socfpga_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_socfpga_soc64.c b/drivers/sysreset/sysreset_socfpga_soc64.c
-index e1267ac118a..5e4fcf95b6c 100644
---- a/drivers/sysreset/sysreset_socfpga_soc64.c
-+++ b/drivers/sysreset/sysreset_socfpga_soc64.c
-@@ -76,7 +76,7 @@ static int socfpga_sysreset_request(struct udevice *dev,
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops socfpga_sysreset = {
-+static const struct sysreset_ops socfpga_sysreset = {
- 	.request = socfpga_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_sti.c b/drivers/sysreset/sysreset_sti.c
-index 110b7e23afa..862b9411392 100644
---- a/drivers/sysreset/sysreset_sti.c
-+++ b/drivers/sysreset/sysreset_sti.c
-@@ -65,7 +65,7 @@ static int sti_sysreset_probe(struct udevice *dev)
- 	return 0;
- }
- 
--static struct sysreset_ops sti_sysreset = {
-+static const struct sysreset_ops sti_sysreset = {
- 	.request	= sti_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_syscon.c b/drivers/sysreset/sysreset_syscon.c
-index d853830d5ae..2b485963a30 100644
---- a/drivers/sysreset/sysreset_syscon.c
-+++ b/drivers/sysreset/sysreset_syscon.c
-@@ -35,7 +35,7 @@ static int syscon_reboot_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops syscon_reboot_ops = {
-+static const struct sysreset_ops syscon_reboot_ops = {
- 	.request = syscon_reboot_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_tegra.c b/drivers/sysreset/sysreset_tegra.c
-index 10bcd3a1873..d498aaea73a 100644
---- a/drivers/sysreset/sysreset_tegra.c
-+++ b/drivers/sysreset/sysreset_tegra.c
-@@ -29,7 +29,7 @@ static int tegra_sysreset_request(struct udevice *dev,
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops tegra_sysreset = {
-+static const struct sysreset_ops tegra_sysreset = {
- 	.request = tegra_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_tps65910.c b/drivers/sysreset/sysreset_tps65910.c
-index 98da56661c0..957c73f04f2 100644
---- a/drivers/sysreset/sysreset_tps65910.c
-+++ b/drivers/sysreset/sysreset_tps65910.c
-@@ -43,7 +43,7 @@ static int tps65910_sysreset_request(struct udevice *dev,
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops tps65910_sysreset = {
-+static const struct sysreset_ops tps65910_sysreset = {
- 	.request = tps65910_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_tps80031.c b/drivers/sysreset/sysreset_tps80031.c
-index 50024fe4e79..1a0dc2adb16 100644
---- a/drivers/sysreset/sysreset_tps80031.c
-+++ b/drivers/sysreset/sysreset_tps80031.c
-@@ -29,7 +29,7 @@ static int tps80031_sysreset_request(struct udevice *dev,
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops tps80031_sysreset = {
-+static const struct sysreset_ops tps80031_sysreset = {
- 	.request = tps80031_sysreset_request,
- };
- 
-diff --git a/drivers/sysreset/sysreset_x86.c b/drivers/sysreset/sysreset_x86.c
-index c2f28c65280..51eb16bc551 100644
---- a/drivers/sysreset/sysreset_x86.c
-+++ b/drivers/sysreset/sysreset_x86.c
-@@ -144,7 +144,7 @@ static const struct udevice_id x86_sysreset_ids[] = {
- 	{ }
- };
- 
--static struct sysreset_ops x86_sysreset_ops = {
-+static const struct sysreset_ops x86_sysreset_ops = {
- 	.request = x86_sysreset_request,
- 	.get_last = x86_sysreset_get_last,
- };
-diff --git a/drivers/sysreset/sysreset_xtfpga.c b/drivers/sysreset/sysreset_xtfpga.c
-index ab71ea11a0b..2165a1cfdcd 100644
---- a/drivers/sysreset/sysreset_xtfpga.c
-+++ b/drivers/sysreset/sysreset_xtfpga.c
-@@ -25,7 +25,7 @@ static int xtfpga_reset_request(struct udevice *dev, enum sysreset_t type)
- 	return -EINPROGRESS;
- }
- 
--static struct sysreset_ops xtfpga_sysreset_ops = {
-+static const struct sysreset_ops xtfpga_sysreset_ops = {
- 	.request	= xtfpga_reset_request,
- };
- 
+ struct tpm_input_header {
+@@ -265,5 +265,5 @@ int tpm_tis_init(struct udevice *udev);
+  * @dev: TPM device
+  * @ops: tpm_tis_phy_ops ops for the device
+  */
+-void tpm_tis_ops_register(struct udevice *udev, struct tpm_tis_phy_ops *ops);
++void tpm_tis_ops_register(struct udevice *udev, const struct tpm_tis_phy_ops *ops);
+ #endif
 -- 
 2.53.0
 
