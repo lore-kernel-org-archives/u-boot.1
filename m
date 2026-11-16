@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D60C606A31C
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 11:00:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B32E606A329
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 11:00:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=H1KwcIAQ;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=s4YeX6q4
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ae/dkrFC;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=FfTv3a3v
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3A2D560824;
-	Mon, 16 Nov 2026 11:00:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B4F9A60825;
+	Mon, 16 Nov 2026 11:00:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qU6X-LZydOTy; Mon, 16 Nov 2026 10:59:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E231C607A3
+ id j00tsWjmjNDu; Mon, 16 Nov 2026 11:00:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7CE3A607A3
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794826799;
-	b=AmUL8PwNDd0/s8ZpeMJ84ITB3jRAk3uxHRw9U9zp8z5W7Ab1vYaF5cYWvU4cMXOlYEJk
-	 zWAym047on2R1vYNY7ElM5AbzAH+Nx4X8rwy1iO/JYHeBzUNTBm/xP70WcgsA8Y/lz4Lw
-	 Fuahwskwts6IXCnGmy7QVvFmvwXHuY1bGnCz9B2d59ImRZ7FINj/mGzo3x1G9qcCJ98Q4
-	 46AMLTKfFcJefr2Lxstct5B2fvix73gOuTEzw2cEqE1SpPkdbD+lgTTzuhVYf3Q8JnqY8
-	 MhizzzZ3DpnqMtkA63E3+SIuw5KzUOxlD84SvDmQIgJ7uTRxBFe1Vh7bPxjowEu2Amg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794826800;
+	b=Chxp2TFihEweM/Fcz8eYz0e+WtIAVkwTR6jbx3W1KVDq5vQmnj9IQITIh6hpSXJhbcCP
+	 GLdGoDRHvPms+3PgjKZUF7jvzid5GatUUIfymR5YBma5beGjysUOtcKstGhe0TKHCnotd
+	 v0k/wO1TMkGXAyQYiRrt6lU4SXhD/pC1C+suV9moR8Qon6Gqi8td1RVAbAZauKkuYfLz2
+	 Zwkeyutmz0SQxCYxPujvRCmFayba2UVe32io+NE1BeNFNg8Och+YEhpejEF56VUdUjmgk
+	 +r/mCUKO3J9hmR3fBUmkbIlWJXckv6S5iW09PM44prfdDASCZq2jEGE1AC4qOHhyjiA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794826799;
+	c=relaxed/relaxed; t=1794826800;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,112 +33,112 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=+apbvMt7AamGZlDDWJoSf/aZgtGSM07yfTVZ/5VqX0E=;
-	b=sxLKT3U3VqicQyersZu2n44mPsIdPt2QIuxk3KUwE30jt+Nc8YKaH2DaPw5nU7+H7jwl
-	 VftfVnGzgFypj5RBFG8o5zne2Knh3ZemQGo3y2kHc95er+sOiS04XPXK71T3Fu1kcA4Vw
-	 tXeuK39tJ6yyk15zko5J8/9KRF7LshAQuEqVnZRZHroR3sgaAkvBz3cZPM9dQiBcq9xEK
-	 rHCgfHzzLs9W4YZw7WjUVEuVyY/+K0oHl+AnkB2zG7Pl0HH71F6NB1Ih2y4wGm4z1n9i9
-	 1bJCvZe2g0dSlRmj6WcKeuYfknESQyvFBCg4pCc6lE+VJEfDl1WZe6BYO3MGxWUDvzA==
+	bh=28nJLlgvi7fcsuk/UJ+3xJsbOvVWwzS/XHAUvMC4SwY=;
+	b=Vq7qyiQPXPWBMlmgndmIHONocnDbNE79AoVfm3D0JNbHkpT4atDT6uGJHuQMzttMmSuP
+	 087sV3mUuJC1v/yDX9bJxiCWkep4X1SZalLsWj6S5SZ7phZIyI/a6N5enENhzO4n6zTx0
+	 ScT5UaMtwHKZSkF0ZisGloTmnCI5/6PH9JhgcKccx/J7NMCkGprnCbKV2EqoWx1SS5LYh
+	 vlVkk9FbzrHLBFa7u31G6s4n0N56RRtfsCcvtErlhjAtmOvzAJdyZOK3pArLLUkKUl3E1
+	 FRTsAdk5qOKAK9gDHwO5g9EAMWa9SMFbNHxmSCOkJhzLz9WNga1gs50cP49iEiZPAnQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794826799;
-	bh=+apbvMt7AamGZlDDWJoSf/aZgtGSM07yfTVZ/5VqX0E=;
+	d=lists.u-boot-project.org; s=default; t=1794826800;
+	bh=28nJLlgvi7fcsuk/UJ+3xJsbOvVWwzS/XHAUvMC4SwY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=H1KwcIAQHAq9p0+h5K7HYt8ddMXdXI74oGfXzQi1GI+8Qdmv79gWTLWfU6wN0PQwh
-	 cdIXHOR3igfKYluu8WUbMxVrzlSaMksl6j1iKo6FhLzKb0XHoicmvZgFGyJnrTRS1d
-	 GqEkIvMuyJrMHyIHKoWhGLp008EqeoC5tAzmjssZXCdPo3S0jjz13dxRUlBW+/oRIp
-	 UFJNcn/BNLhIYbr4bOUDH9RN088JtYVs+zH8Q/7uSpjPmI/riV1HeDQkVDxFWaCUcM
-	 HzFK1yS3WI/jctTWkXyiq1C5wzu8pd9pV8STIN3ztls+JgXsknUCRqHUOPwiSyqd4n
-	 TWPyD7RbJvwYw==
+	b=Ae/dkrFCkfMwRNjEUdo9vW+HNdpO6kEUBX0T915jYLMN2LsG4AQRBuZisuLC97x7y
+	 1j6oiAfR3LcAFMIRbBC0Ap8SKEt+y6ojKBZfqDivU0k3WMFIWTSLDREEioXVDkxtbJ
+	 yYTF2zUBtn5Zw1FACHgXAWnxVAhEyTPvTsKXNqU8koigz+1UgM1vUWa9FJUuCcVLz+
+	 dCB8pyOf6SOPG09AkEwEKnTGT3OYg+TUknFcGTsuMHmLV8TpvHiu6SruqWhgUfscPP
+	 JWa0aTRwjT8fJXq0sWWmyNWxjbACxqdtFdZfIU7I8ai+xDXE6gbFrEyda7Q760h/xE
+	 Xd6XQh0+z4wUw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E231C607A3;
-	Mon, 16 Nov 2026 10:59:58 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 934104DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7CE3A607A3;
+	Mon, 16 Nov 2026 11:00:00 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A38E21A6
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 85A3E40068
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8A2B880D48
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pA7SeD7upFqy for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 10:59:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 831E040070
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LYCYhM9J0uib for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 10:59:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8D71A80D44
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
  envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=s4YeX6q4
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 831E040070
+ header.a=rsa-sha256 header.s=google header.b=FfTv3a3v
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8D71A80D44
  for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:39 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a35ac4475dso19639225e9.2
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 02:59:38 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4a210470b49so26583165e9.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 02:59:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794826777; x=1795431577;
+ d=linaro.org; s=google; t=1794826778; x=1795431578;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=+apbvMt7AamGZlDDWJoSf/aZgtGSM07yfTVZ/5VqX0E=;
- b=s4YeX6q4A5m6glryTb5ZmjsWtRO071QSeNRdt5HhjYHvqDhgWQuR+i7toVL0UCIMMR
- Pt6hufDJiad88lywpcm+iIN9s7SME4RGEzUklQyB569EuXpo05MgAYzYmduaUyOeryET
- CSNh+NZhcTWAysnX4P+sNDv8RQNmARFEayU4Im9FUcZyAoYkXOiETPB+p74vPC7zMyya
- XvCCgVHuYpPd1C2mvpBRWx4dIz/HAzzQyDEkxuPr4AaxU1rOIw0BljKAQM2Uui9GrRMn
- 5T8qubHJvZU6wUmWugbZbuVwxACiIM9kPF066y58zt9hLiDitqTy6DtjgwcWANdyTt1x
- EyKA==
+ bh=28nJLlgvi7fcsuk/UJ+3xJsbOvVWwzS/XHAUvMC4SwY=;
+ b=FfTv3a3va6pLPeWmy6BX8h6I6Hij6Lf0yaU+3q04VysWaOkUxml9G7wPKgoSN2AbLt
+ 9qbgQjPDRIAh3gwdJ8ciFHLkJssHirYxL0JnDtoG7sSnb8sa+z0/WCzgAUVRf3V5RTOz
+ ilxt+iK5aqSEgwFXopwfuKW6daiDjkKwWfUcaiqSQnX9jHChPRZ0JrqxrNhuwodOPrCz
+ XRD2wtxfVscE/nMna9zvjwpI9sKPWn2qkYbXgXwlTiQCZMV8tKRxd+iGLNBiiLHQEz7J
+ MT7Ju5CvdWUqSicqx+S0gwoaM+p7+uGzse/8sDBsNnZGXoS7ZLDS92Uqb4Ytj9VAvXUk
+ djBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794826777; x=1795431577;
+ d=1e100.net; s=20260707; t=1794826778; x=1795431578;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+apbvMt7AamGZlDDWJoSf/aZgtGSM07yfTVZ/5VqX0E=;
- b=BQ0Y8L8UQLDm1rU00UMLDaAgj7XsNZifL/hg98R7tCL4qDxF6nl8JT7w07dMw8d2zW
- fgOkLA4krBYIZx66qTDKtGT0CL5sbqqlwtp8gMr+dkar2xxkx2YoyLVv7hwuw/xSvxcS
- 1wSP4UNB8M7H3QOr2scTCcFJ0NicNoy++uBO7kFOnWaZe2zvcXM4OjjC+7uqNRCBeEfZ
- 2R8mGq8PkaE19qoFAQtBXKqu7koQHqyNjNV7baC1L1ysOhpIoKx6pHo85IxBd80njSGN
- XmPIAwR8Ks/t78h6gAcdOE56ZTb7mqPfL/4FBNvO0R76WMYMyFxoaCVemjqippph4osE
- tUsA==
-X-Gm-Message-State: APuU4Z8f0PhePmTbZsiSkyf+NeKQw0unvwmoR/0OS9vCoiblSC0bctJz
- 2rTaDJhe4xWgc9AK1N0jglASOU9VXU4pWfO5T3jHaUz7uEe7UTZAYU0pxsOoXuSTlGk=
-X-Gm-Gg: AYBFou3ZzP2Oek0WmX4bWg07zdv1jcLJMSdh6AwROc4N+RAiy2worydHweeVdT9Mqkv
- q2APtGE9hnAxAD07+WLmlpLwETxzbyn7Y4Y0tD5rDyL3ORsJQLFaMEwnfJj7daFjgEOnQcI6hlL
- 6WKJyTdaBN2C7jcsyd6dKEnttLxOoY5kY6LK679v6SH5sYkDLNdejwExfbYmpoU0WnmDpbU92yH
- +WVJAy3BZePiwYlyuSPUPabJg7Bv7CSMIYCqrsjPf3AhI4jJztWk+dS5HXdGouG58yO2D33szWp
- n7zMUcFDEU/fB5CSj2Rs5b8Rp8jfvt1wfTRAdesaODq5aPyHUU4fdgOkYaH+jT/vFzAgmQEU0WU
- nrmI+uSrwMlAs73DRKnHHDQRgExAcUg3g2Y+mPi9KGrEsXooLk6WpmI41TL/z+5gBJmTSavrvBb
- N2who7C/cVHzQ18qpDAqTNyPIxcim/iJkMUW+W7RMzVE+b4wEtNb1apXeiNE/O39tvMwGUGQAue
- dlS9KIZYz4RwIpVkLLsmApJZUZ2p0wXBhEfp6OZoN+sZS0+sibOLyeST9KVePrK95bVb3ltcZTf
- WW2BsA657kdXDX54anQZ9u36CvRvED0wJJpmKu9ogBDcPU8+
-X-Received: by 2002:a05:600c:8b8a:b0:4a1:9078:911 with SMTP id
- 5b1f17b1804b1-4bb55abbadamr220926865e9.31.1794826777088; 
- Mon, 16 Nov 2026 02:59:37 -0800 (PST)
+ bh=28nJLlgvi7fcsuk/UJ+3xJsbOvVWwzS/XHAUvMC4SwY=;
+ b=XDVX+6qEuJw+K7LIL/oiYsY6jQfRR1ZFH3jZsDNhg4/5TDXQYo6mJKVote06TXBikP
+ nAKPKqgt02Zn/GpciAI7HLsWsA1boVozoIUTpd1tRWxcHhpIjXTyHIkBwrX2e6OyMDcC
+ 2szG/tzAAFoZSlMd53jjV4siM6Z+Sb1VJb5/TytCYREoOk3BUQr2uxdALLHIljNiL3zC
+ 1f7q75p6uvLm0bum8R3QtmIlpiffYEjV1r5f73I1UFijpFfCl1YVbCQfQ1QXeRoVK2ii
+ HAzhYX0tuwHcJo480XKGvo72g8XNQFtiUgV+teKQ/Nn3t8T0n5gz5hZnqoN7Nl7Igb85
+ mhmg==
+X-Gm-Message-State: APuU4Z+m74oT+QDVPutTQ1cu9Z+CHNrwfFSOtIeKbm3zN2WnCH5Jegls
+ UbcEPIE57nNQYYPUMdX3YLxRfSgzwaZS/nPPO5XvCaUg1GTTRmyAt5d43C30u2sABSs=
+X-Gm-Gg: AYBFou06sas4XCgZDFsoCsM6VdF+iXrqgwzsPw1l7j6xcyISKcAO092IpHIPavXPEhe
+ mnP9RwKvtrEyZ57aexZD6GRxKSTyWVh5WR78KJuVbP3DEsiWqU9fy8Q7/FgqMyMKzI3NSpto91H
+ goIIBVuw48yqPY7+dCaHnP1bGwB0sQfQ1e/F/G90XuKKxCpvzhN0y3s27/WHQBoKYfrYp67j1vL
+ M2NT4/E/3uKjKKTcYrTSXbPNhsCwKht4irfUEJbgmT64Z1lFYWGGKtBHNgVDYxawk4iU/J3UCOK
+ 7x/X9/dCmgXiSDXRLKC0UsskPyHsttgWmaXAd9h8Jox/7JCOqpeQADAZlxFBTIM0YwIqLW0PAaS
+ nNhXw+0gmx56U27gLLqiwoieirrXy2/iGFAXlq9RN+AxqxuD4KdOJSEZo10HA9sBUFiWIBax6Qh
+ voH43F0XxCZL/4SJWOTPqAXebuyDcJZT4HTZ5OsBzb4ocO4uNgBtmLZCXXGl4o+pLmhIL1Fth+P
+ yT4jcxVD4XM/CZdSAHODUTN+/ClPMiH3xwM9bq5Mw0qVFZrRKQFLMnqdiZ0hz11B2LM4km8BEYq
+ UFJ4P2scsEndNDu2PRzUW1Reg5agHcMIsSI3GzLNAffrJiVeAg==
+X-Received: by 2002:a05:600c:a00d:b0:4bb:6842:66ef with SMTP id
+ 5b1f17b1804b1-4bb6842670dmr122523035e9.30.1794826778176; 
+ Mon, 16 Nov 2026 02:59:38 -0800 (PST)
 Received: from artemis3.elfringham ([2a0a:ef40:ee3:3401:d23b:e87d:8bff:70bb])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb64ec7b58sm219594065e9.5.2026.11.16.02.59.36
+ 5b1f17b1804b1-4bb64ec7b58sm219594065e9.5.2026.11.16.02.59.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 02:59:36 -0800 (PST)
+ Mon, 16 Nov 2026 02:59:37 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 16 Nov 2026 10:59:33 +0000
-Subject: [PATCH v3 13/15] buildman: Cope with CPP="gcc -E"
+Date: Mon, 16 Nov 2026 10:59:34 +0000
+Subject: [PATCH v3 14/15] test: Fix test_basic file system tests
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-qcheck_fix-v3-13-b6cf7e96944b@linaro.org>
+Message-Id: <20261116-qcheck_fix-v3-14-b6cf7e96944b@linaro.org>
 References: <20261116-qcheck_fix-v3-0-b6cf7e96944b@linaro.org>
 In-Reply-To: <20261116-qcheck_fix-v3-0-b6cf7e96944b@linaro.org>
 To: u-boot@lists.u-boot-project.org, 
@@ -165,76 +165,48 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Allow the use of "gcc -E" as an alternative to "cpp" when set in the
-environment as the value of CPP. Accept it as a valid command for
-running the preprocessor and adjust the test to not depend on a fixed
-number of arguments. Also split it into parts for constructing the
-command list so that the validation for running a command does not fail
-when it tries to find an executable named "gcc -E".
-As well as -E accept --preprocess. Also accept clang instead of gcc.
+Ensure that /sbin is on the path so that distributions that do not have
+it will still be able to successfully run these tests that need fsck.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- tools/buildman/boards.py    |  4 ++--
- tools/buildman/func_test.py | 11 +++++++++--
- 2 files changed, 11 insertions(+), 4 deletions(-)
+ test/py/tests/test_fs/fstest_helpers.py | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/tools/buildman/boards.py b/tools/buildman/boards.py
-index 5d5d3a3822b..1e871c9921d 100644
---- a/tools/buildman/boards.py
-+++ b/tools/buildman/boards.py
-@@ -12,6 +12,7 @@ import glob
- import multiprocessing
- import os
- import re
-+import shlex
- import sys
- import tempfile
- import time
-@@ -244,8 +245,7 @@ class KconfigScanner:
+diff --git a/test/py/tests/test_fs/fstest_helpers.py b/test/py/tests/test_fs/fstest_helpers.py
+index d25326ee993..c8fa0b006ae 100644
+--- a/test/py/tests/test_fs/fstest_helpers.py
++++ b/test/py/tests/test_fs/fstest_helpers.py
+@@ -3,15 +3,21 @@
+ # Author: JJ Hiblot <jjhiblot@ti.com>
+ #
  
-         temp = None
-         if b'#include' in tools.read_file(defconfig):
--            cmd = [
--                os.getenv('CPP', 'cpp'),
-+            cmd = shlex.split(os.getenv('CPP', 'cpp')) + [
-                 '-nostdinc', '-P',
-                 '-I', self._srctree,
-                 '-undef',
-diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
-index fce615ba8b8..7a5f9ba22c1 100644
---- a/tools/buildman/func_test.py
-+++ b/tools/buildman/func_test.py
-@@ -378,7 +378,12 @@ class TestFunctional(unittest.TestCase):
-     def _HandleCommandCpp(self, args):
-         # args ['-nostdinc', '-P', '-I', '/tmp/tmp7f17xk_o/src', '-undef',
-         # '-x', 'assembler-with-cpp', fname]
--        fname = args[7]
-+        # If 'gcc -E' is defined as the preprocessor then the args list will
-+        # have an additional item, '-E', at the beginning which changes the
-+        # number of items in the argument list. In order to guarantee picking
-+        # up the filename use -1 as the position which will always be the last
-+        # item
-+        fname = args[-1]
-         buf = io.StringIO()
-         for line in tools.read_file(fname, False).splitlines():
-             if line.startswith('#include'):
-@@ -424,7 +429,9 @@ class TestFunctional(unittest.TestCase):
-             return self._HandleCommandObjcopy(args)
-         elif cmd.endswith( 'size'):
-             return self._HandleCommandSize(args)
--        elif cmd.endswith( 'cpp'):
-+        elif cmd.endswith('cpp') \
-+                or ((cmd.endswith('gcc') or cmd.endswith('clang')) \
-+                and ('-E' in pipe_list[0] or '--preprocess' in pipe_list[0])):
-             return self._HandleCommandCpp(args)
++import os
+ from subprocess import check_call, CalledProcessError
  
-         if not result:
+ def assert_fs_integrity(fs_type, fs_img):
++    # Some distributions do not add /sbin to the default PATH, where fsck lives
++    local_env = os.environ.copy()
++    if '/sbin' not in local_env["PATH"].split(os.pathsep):
++        local_env["PATH"] += os.pathsep + '/sbin'
++
+     try:
+         if fs_type == 'ext4':
+-            check_call('fsck.ext4 -n -f %s' % fs_img, shell=True)
++            check_call('fsck.ext4 -n -f %s' % fs_img, shell=True, env=local_env)
+         elif fs_type == 'exfat':
+-            check_call('fsck.exfat -n %s' % fs_img, shell=True)
++            check_call('fsck.exfat -n %s' % fs_img, shell=True, env=local_env)
+         elif fs_type in ['fat12', 'fat16', 'fat32']:
+-            check_call('fsck.fat -n %s' % fs_img, shell=True)
++            check_call('fsck.fat -n %s' % fs_img, shell=True, env=local_env)
+     except CalledProcessError:
+         raise
 
 -- 
 2.47.3
