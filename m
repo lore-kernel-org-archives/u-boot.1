@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EAA1606A31C
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 10:59:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5299606A32C
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 10:59:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=noL45Cp9;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ZyUetVQC
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ObpveCZT;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OSl15Iml
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EC6514057C;
-	Mon, 16 Nov 2026 10:59:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9B871607DC;
+	Mon, 16 Nov 2026 10:59:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 77e5FtEJu79t; Mon, 16 Nov 2026 10:59:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3F7E840581
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794826781;
-	b=An0cYJN4GwYc9cQoy2mmiOjsEZgQtlMVzOQ9zU2BAKiA6D6ksKNEuulAt2l2U9riEeSA
-	 05yg/QfuNLDS3SI+G8AQ4HSKxEncOipwNY+m3HFAcJmEXA7ItdhUHSq5L+qzpgAJgynGz
-	 oIFcg6jkLIEb8/vq4pZJd3XAWe4uXlThIVdVrwQuogqDokyq6V/LkXMhmeKr+KGiwzGb/
-	 obMZIWLLQCnWbSKtfJBXso5YGv5ODr7JMx+4uJxqGTx6AEJAgLrxI4J6mth/K+8V0xF6F
-	 yPyKBNN4uMNj+rNQr6Z7iWCOQzcwExhWmlgJMfOejWa2I2msapnhaKdeYBuixPbpVrw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id b8sMp5MQOzes; Mon, 16 Nov 2026 10:59:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CE424607B9
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794826783;
+	b=lTF3n7Qf53MzRjjeNJ0V3MZuTApd3mYOy79azFD7j8gaq24Wl6J7Hl2lngwsPNIlbtH1
+	 oBv4gwsRqyMkgbOFQzksT5mOWCtAmppWM+2ivbHGDz7SuKeKOk905pytlXNQDl0O+rZOn
+	 yK1K+yWPLv2OQ4prrw92OB1Y3o1Y4FcuahCO8y3goUI7y5N3K2DRPsEtBCG8Jj9ijp8UA
+	 020PUB1RIkXh20LDr3Im+eLEZl3tk4n2alsyMe/7+LVc+wVs8ElbrrbfGAvgD5pPD7fM9
+	 r3qCrGDbnYfgpfSos0qVBmKWja3bzywYs8H8nPfKnqKN11HzG5mguYvYa7gERoqBlkA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794826781;
+	c=relaxed/relaxed; t=1794826783;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,112 +33,112 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=/n60E2l9V4vtCmFRRDNlLPXjzDSEkBUl7arc+gsjUHo=;
-	b=KQN+0Q5oL/ZRXPfhaqUb+VF6DMBJpANugHMEBJprzhugd9My+59w2ZFN2W0a66/5KP8c
-	 1qLATOkk6jCLFMajnG97GYxXBH/f1YHRX1U8F2jFMyyfi6JNLq3lQrP+KESuBwTeN5jCS
-	 zdrnMD+OHEN/au7TPHeptfoxwPivU6D0OdDEVrH9oGwF41586iJlzlSnLQq57GoswB1FM
-	 CC3WegcTdkpouU7gPJLxZ2rtP/7bRN21Uwos6o8BklPvy5tdLcPvxkfF2Z2nB8aDsw3Dh
-	 NCjnEA9XvTof45jGRvm4m2k3wV7j0fA4LXuOwLexRFhBLHU/oJ4x17sueVPbqyCjKiA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=A9f14Du1Xru0UudhfNsrkHUKhKJvwd1p9eClG47J8Gk=;
+	b=nJsX/TZFYkpCDhZPHO2tn/+X9tDbiFV7be9ryqXbhLh6Pf5LVyrz1z1w3A5a9VoTM+L5
+	 0wET307vfqQzlAIEcio8kvn68l0mcDTrtRWIcOM4cmqlDC2LGeXoeH6MSd8GOwB0Uip6A
+	 LJgzaOMcbCT1nFDb1YihGDvv1Mg/crL59VGSuarFFYEoFafxGG5tzgZ9YwEAxeaBeLuts
+	 N0PHYJT83xHhxKrnnVneQWDuAk4YO3Q/KNJXLM5PDTYvki7d/tuHgOI4b/k5XyZ3kIWWn
+	 082aXn3BAaWv99hY/DSW66yamAK6hFVl7VbgPvrVmR8XYyjW3WvLyqpJ/8tvexn4F8g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794826781;
-	bh=/n60E2l9V4vtCmFRRDNlLPXjzDSEkBUl7arc+gsjUHo=;
+	d=lists.u-boot-project.org; s=default; t=1794826783;
+	bh=A9f14Du1Xru0UudhfNsrkHUKhKJvwd1p9eClG47J8Gk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=noL45Cp9NUFyWryJtpsTiVq9zqXcERoYGCRw2i0CN0KNSxTqnJ5wC68upu19kLVZA
-	 qsqMSZLtA6MsTMitD84/LGA9YflZFh9FVnc278NE7GQ7q497FCKiNwd4VycuKaazGM
-	 Fn14bsj0edCWlynWmUVOJuqGD1AKJk6Rm4GELj26Ctn/2cTAy+xYwLwYEhPMmDrab3
-	 j/V3tAfBor4HXnObj9yjkRPHCHqJSmhvlBiGU54zsMO4nJ44f8d+r8HzwNWGY4uIbs
-	 acHXNrt5rWuXtZB+aUELVlDfxjfddAkALAqsIS0PrffzjZWm/HKNJTh5+2T204RmGs
-	 Oe3/4Ki6cAcog==
+	b=ObpveCZTfR/xqLhY5x5pN4iUERw5ZypW791imxrzzx76/zHwV0ypU0FXJzkZ2axVw
+	 DS1jLyGdwmlBkYJUCrIcbt+O/FBtDAJmaGqL752XWo/FatBxbCIr+YR2d1Xa4i33Xu
+	 Du+UIO4heBN5SgeCFl8Ms/p2tU6w5ECqJT9hi9Gys9TWrikgOqiOK0pphLH727gW5l
+	 pEiIa4alvRNdgOQdjTkxe+59zmat9OamxCmLf2Lnj9ukFNqPrg/Lj4UomcOliexsjB
+	 rCU4ckgiSKc3dtj1LZ+U+myPXwVvM8Sj9P+f/dc6FRUw8t68xGETtCgOiBPLC1dZjo
+	 qFjrgLd3ebNGg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3F7E840581;
-	Mon, 16 Nov 2026 10:59:41 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4A6E31A6
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CE424607B9;
+	Mon, 16 Nov 2026 10:59:42 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7A73728C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4823480D48
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:32 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6CA444057C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ti4dnrGqVYEa for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 10:59:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3A89580D44
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::336"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bIAYyJ-5ui2A for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 10:59:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1155640572
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
  envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=ZyUetVQC
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3A89580D44
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:30 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4a1b07c3c5fso37174495e9.1
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 02:59:30 -0800 (PST)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=OSl15Iml
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1155640572
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:59:31 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4ac95761c85so20239505e9.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 02:59:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794826769; x=1795431569;
+ d=linaro.org; s=google; t=1794826770; x=1795431570;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/n60E2l9V4vtCmFRRDNlLPXjzDSEkBUl7arc+gsjUHo=;
- b=ZyUetVQCQ8rxOzsHsIh6YCt7N7kdLY1e1xFkWyBIBVjtvOFK4eaWO8i2ZfjKC+2vR8
- Z7nYqNMUc3Dxc23lI94d2m9ezYVe9NNx55qtguOE2caFoWUXD+S2niNKICdybGwXfu7M
- wbqHN1Cyzop0J0Qvl5oHbm8UkjNf/lbckQ/tceGuNUy1pdlF+WMsXtpsw576F/HM8D7Q
- QFqyslOaagW4sRjkBE1poGZ+sDcCtksWhGS7Sx0M0LOa6HcUYnWAOTsw/qTZMhRBA9OW
- FA1FjH9OqUlUgivl44xiKbmexbpUat9hXGD0vxoUSOtlFIyVbfFqNtGLx9nF+p6N50Uq
- 5rHg==
+ bh=A9f14Du1Xru0UudhfNsrkHUKhKJvwd1p9eClG47J8Gk=;
+ b=OSl15ImlIyRLdcGJqX8d5qbXDOTmfEgDSR2mHODJwitAVtQEGnu4t5/Cu87bw8DDSj
+ ilHZCnsGNrfv7VkuvsqKMqprzorQNCHWxosmP7MmNGF/1ArqNzcnIRLiucJpC8CmO/B8
+ YazJpyrAvfv7ot97QRB4psUz567t3Lz/mHSdrYp+6VpGa/47hyHSc69aqX7HK7WFUrJC
+ KK8QT0rjlCEtkP8yi+MqHUDpV6hCehG8rTRmKiYtnbWw0/KdMx952fQpuqj1narWp893
+ RreTaZgnwdMc5/hVMgUSWbv73+K+ujmZdD5ySLGxp20DX9OeoK52z4mris5WnMSu4Iqh
+ R0TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794826769; x=1795431569;
+ d=1e100.net; s=20260707; t=1794826770; x=1795431570;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=/n60E2l9V4vtCmFRRDNlLPXjzDSEkBUl7arc+gsjUHo=;
- b=GfhQy6uKG/B3xrAxNgnx0BgH1QSISEeNetcj+TlnmZTgmTLFpN/pxShSA+wq8ovQ1U
- RmAn3E3WrRiq8N05jP/gZOy5oYtg0Avsnbgk+1NyQT4NGtOLVI+1Bv9PoAFwHIdtXpD5
- 4mm0uikZIrTQwx6HEvqvDI2FJa3ktCzHaA5In/4InNCQIYfin+QWSKuL+4uTyv+NFzue
- zolhuw8JYgjGRCv29LFVx19HE6fvoBHelr77/cvBTG2+WyVENvVvH6S7Ck0gtvKyiVYK
- UkWNeYDz4k+4+HCNiNSb+gHZnmUQXkgmyArHO035nRHuw3E3avZXlgYqunLBiuv7T9vB
- rY3Q==
-X-Gm-Message-State: APuU4Z+LMEAtJE0APtI1vHtYqYk1g/UFDLkub0Av6HOrHoMrmfgMxmjt
- 6FnU97UDS8ykhg4vQCUSp/bQTQ3sDiy1deg4eMxp5NYCmg7PPr6/KDmhOQksG7jnsD8=
-X-Gm-Gg: AYBFou2L1ie9VAysS6kPG1Okgypv1866yKw6sbWVRyMG9rn9+vRsZpEk5MsRWaejs2d
- W90aZhwB3QqrLPIuo1UD5ybIXxzqjJmcEWOqPfssN6th+9/0EBYODNq40NAV1i2Ppd44CBDWXy2
- Qrf12Q8/cOLys+P4BbJ7U3Jz9Dhd1Dy4y8l1Eye3T2CYhDT+e3mYM/eXRHDpM6o0LGIf7BYDs6c
- UYKVPtK7D3qHADY5wU8JRoHPigh5DYYXTreNF5rRJtU3NWqi8lRgO52vHRdfqaQ5+X0u3WnSPIs
- ANZFBv23e0oaxuBDi1P0AdJ8N5Ny3csatejVNVClid5ZknKHfMdmg0KzhiOWNHbsgxUHmymbMV0
- f/mseM3PO30QYaooD8H1FnU7CynKVENRRFl8HPMqgpo/PZsYCz9Ar/5OIjYYfA8JC5OzcyAFQIK
- TF92m3lwsS3NbY5SOxtVzvO5xs2fLLRl3WL1y7myOqTJR+RY6LkyryCPmPa8Jbj4AzzhIXVVbh6
- +P+SwR3A12eiICJt519ILg/6SCGFpQwRGNWHW3P9RP+TvMT5OCR5kvYdupodiZOsCwWtQ0g6MYP
- ugivWR2Iex45b5hPJghPfOt9WRK9QVJJutNtr8hZ5cJC2aD2
-X-Received: by 2002:a05:600c:8b34:b0:4a2:1364:252a with SMTP id
- 5b1f17b1804b1-4bb559f7039mr211992905e9.3.1794826768911; 
- Mon, 16 Nov 2026 02:59:28 -0800 (PST)
+ bh=A9f14Du1Xru0UudhfNsrkHUKhKJvwd1p9eClG47J8Gk=;
+ b=Sq8ptwtU1CVzGUU7D/ujrniUc+JsL2bpQEpAzDV6VYIiRak0s0qiI+m3E1MVMqTXD+
+ g5a0Ddx9uPE+vlD0EhZls/6M3IfNKjW/zXvZOdcYWwVqFNUe3nFcCyjPdOuEMKx6ZYJx
+ mEV7ZMxFxGigwI7F4p4wOMpobM5PpIQO5ALGU38s7Kmj6UF56vOXWzBIB8Dxtt1tKRlV
+ QdQyrPbn6mOxHx+/Rh4soxUBMUJpTz9x0sxXVEufccS6JL6Vs+SnGkvzqp8uDdqn+tqJ
+ Xti8LlVvWebaTNS++zI+xW65vhxYI1Avt/blOp7kVQ9iEbs08k/ffIF+4ejmfuDyrxQS
+ e8vQ==
+X-Gm-Message-State: APuU4Z9ayF7QDchjtXFkkP6NtkaZtrwsA5nid/UfoB7+0ai9+zfZT5f3
+ qE4xF8a8aUiZlhFToUGOtKuHhkCYPMf2222H23UNMAjNfhr2sguRYqVcN9Nge7KFXoU=
+X-Gm-Gg: AYBFou2IBNyXTqjhUXAoHFKX/09FEHd0ZZ06ZBLUdh62VB9zTZZwxqLZPqJmdsTNTP8
+ 2e7vlBCMZ3ICusw7zWpfe3OjhYarJ4yjX2OuicEhy57/OJ4G2RbQB+w9IE0eSvPQkwNreukEVT/
+ 7nR1JMmdyKsY1QI/69/i4oJgGG19RTOGtZtgAVo7XJ51HeehLZOV1HWpnUbqQbE5RZryj2rwhnw
+ G87LCDwOpR9iORvw5ZdFWdmhtuDzXoKb/1oetnsJOMV+kfUHEgoGcwMl4h9cZcHfezC0gi9IWl+
+ QgGv/xsir9EW+rv9F8cRcED/9WnoOBPfHDPDsJ/LtGwzkwSn8u+5tj/wyCWS2/g0hjfzDpmLBcJ
+ 2JGfYuX0StdBZREdI1+6Illtex9nUiID8VsAbfo6PmewohlR7Gw3SWo7fqiQnmmnjiU1TlqBSVZ
+ benyVzoMq3udXzXM/EEoWjKtNeLcMEhKiDcMegp84EvjMosIjMvr2LGIio7KYnhLSL75ZS4s6jF
+ JdR2sNz8b8i+LkIEFmSd6mxsCgbYCMObz41QW8xvK87ZhCcu0g97EA1RSdRMRR/GY74wJZvmlRM
+ mqj4XT+vxoB0XWgtIMyt+N/f15dVXzaqy/jgLafPsQYiv0Wrr0i6CnV0lkCrCTvBJQTUSw==
+X-Received: by 2002:a05:600c:8b35:b0:4bb:6b6b:fbaa with SMTP id
+ 5b1f17b1804b1-4bb6b6bfc3dmr86431735e9.16.1794826769846; 
+ Mon, 16 Nov 2026 02:59:29 -0800 (PST)
 Received: from artemis3.elfringham ([2a0a:ef40:ee3:3401:d23b:e87d:8bff:70bb])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb64ec7b58sm219594065e9.5.2026.11.16.02.59.27
+ 5b1f17b1804b1-4bb64ec7b58sm219594065e9.5.2026.11.16.02.59.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 02:59:28 -0800 (PST)
+ Mon, 16 Nov 2026 02:59:29 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 16 Nov 2026 10:59:25 +0000
-Subject: [PATCH v3 05/15] buildman: Use mock environment to ignore DTC variable
+Date: Mon, 16 Nov 2026 10:59:26 +0000
+Subject: [PATCH v3 06/15] binman: Use mock environment to ignore DTC variable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-qcheck_fix-v3-5-b6cf7e96944b@linaro.org>
+Message-Id: <20261116-qcheck_fix-v3-6-b6cf7e96944b@linaro.org>
 References: <20261116-qcheck_fix-v3-0-b6cf7e96944b@linaro.org>
 In-Reply-To: <20261116-qcheck_fix-v3-0-b6cf7e96944b@linaro.org>
 To: u-boot@lists.u-boot-project.org, 
@@ -170,42 +170,53 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When testing the toolchain setting of DTC in buildman, use a mock
-environment to avoid making changes to the environment and give the test
-more control over the environment in use. This avoids test failures due
-to being passed an unexpected value for DTC.
+If the environment contains the DTC variable and it is set to a relative
+path this can cause the tests testFitFdtListDir and
+testFitFdtListDirDefault to fail as they change the current working
+directory so that the value of DTC no longer points to a valid dtc
+binary and so the tests fail. Instead create a mock environment that has
+the DTC variable removed from it just for the duration of the test.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- tools/buildman/test.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/binman/ftest.py | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-index 7ee9496ffb3..81ff2716bb4 100644
---- a/tools/buildman/test.py
-+++ b/tools/buildman/test.py
-@@ -1012,8 +1012,10 @@ class TestBuild(unittest.TestCase):
- 
-     def test_skip_dtc(self):
-         """Test skipping building the dtc tool"""
--        old_path = os.getenv('PATH')
--        try:
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 567ffa96b2b..50fb25325a2 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -7984,18 +7984,26 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testFitFdtListDir(self):
+         """Test an image with an FIT with FDT images using fit,fdt-list-dir"""
+         old_dir = os.getcwd()
 +        local_env = os.environ.copy()
 +        if 'DTC' in local_env:
 +            local_env.pop('DTC')
-+        with unittest.mock.patch.dict('os.environ', local_env, clear=True):
-             os.environ['PATH'] = self.base_dir
+         try:
+-            os.chdir(self._indir)
+-            self.CheckFitFdt('fit/fdt_dir.dts', False)
++            with unittest.mock.patch.dict('os.environ', local_env, clear=True):
++                os.chdir(self._indir)
++                self.CheckFitFdt('fit/fdt_dir.dts', False)
+         finally:
+             os.chdir(old_dir)
  
-             # Check a missing tool
-@@ -1038,8 +1040,6 @@ class TestBuild(unittest.TestCase):
-             toolchain = self.toolchains.Select('arm')
-             env = build.make_environment(toolchain)
-             self.assertNotIn(b'DTC', env)
--        finally:
--            os.environ['PATH'] = old_path
- 
-     def testHomedir(self):
-         """Test using ~ in a toolchain or toolchain-prefix section"""
+     def testFitFdtListDirDefault(self):
+         """Test an FIT fit,fdt-list-dir where the default DT in is a subdir"""
+         old_dir = os.getcwd()
++        local_env = os.environ.copy()
++        if 'DTC' in local_env:
++            local_env.pop('DTC')
+         try:
+-            os.chdir(self._indir)
+-            self.CheckFitFdt('fit/fdt_dir.dts', False,
++            with unittest.mock.patch.dict('os.environ', local_env, clear=True):
++                os.chdir(self._indir)
++                self.CheckFitFdt('fit/fdt_dir.dts', False,
+                              default_dt='rockchip/test-fdt2')
+         finally:
+             os.chdir(old_dir)
 
 -- 
 2.47.3
