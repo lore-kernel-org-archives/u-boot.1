@@ -2,126 +2,160 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA0CA606A32F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 13:08:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10A84606A31C
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 13:19:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TgbWE5o4;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I5QbEObh
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EmrTOVva;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=GUpl7zxZ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9248380D7B;
-	Mon, 16 Nov 2026 13:08:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D603F80A88;
+	Mon, 16 Nov 2026 13:19:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id njPHlqzhcqdi; Mon, 16 Nov 2026 13:08:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6FCFF80E75
+ id LQEpHTTBR-au; Mon, 16 Nov 2026 13:19:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0AD9C80ADC
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794834524;
-	b=lIqMpSfTHUgJgFKiATmOT2EPWo5NMNtyJuooPsevc1MbROJCF9+IZHyzioixpseapWef
-	 paICM/duVu2RdoGSFHVfXm/BmxHde89v6VayXRUmBFrR/pigMXY4PfKpk8tc2DD7pr2/B
-	 33cWmwS2kJukuejtSj7wRYk2i+6HvygJZPDqrFKVXuwdFG4Xau+lo6aqthdHVMl/FYH1n
-	 aBa960td7Sc7djZb/R3Ka5fWR+BNloDXhg8X88S2Xov1Yozme6wcuWKp1FJy+08eEdh7D
-	 PNw771OsI1HutKealzX7VX/w66x7E59OdhnaspAeEKE8BZzuxbxZA7pB5CH9wsz+I0Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794835191;
+	b=KcbajX6dBqjd8EnhmuU+eEyKbiSia6v84SDnsChe8w4z5f/I/RSz5G5ajrpcaqOn2+2b
+	 eBJbZCrSXwtLNtMJatlXC8JFj/1scyL0KSUp8xdlQ49hQoYQSkIa+DHZFk/c0Nseg8rHo
+	 VFj7TheIqf9yLBu7iE94utpcdRtVImotnix8RVXe87vAfh3AhPGN4ji93gY6yoo86zBbC
+	 Q8YtRbyv64auAIkMNKV37Mhvrmqk8E5RuZ6WZcLoENh9WQS28YeKpHUa+wnObxakNFkI6
+	 UEBEA3s3cpoVgtAM+SomB+GKeXlJTcEJaKRfO8YCZxffrOfCyR1oDD1XGEHz8forZOA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794834524;
+	c=relaxed/relaxed; t=1794835191;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=/e8Txj9Aa8va0D4HGgm7/2urpPKKAEYifpAOsZzDbXs=;
-	b=lA2Zf/1GpJ6qXZM3q82uS1UYskduAsTDHIqRKJKcVxKn2Yv9VFL0R3qxR1Nocnr6FUNL
-	 Zl/Ra6u6vKTthAFn1+cazQcXLkIEzXDSzMqBFsirJG/3lFmTQadnjNSpVgE+eC+gmwmdm
-	 tFlOmUdn2TqY/5xc6kZXNTAcgVTxNfu+wl3lBFagXBZl4zKEKNO44KasGwDjrecC+QEjj
-	 8B9oP80hEqLRlU7piagkmiYgQFPPAuey84TzwqjkDr9RANUUncoZguDp71dbx0KLkJRjE
-	 fLymZqamLclDKG3O5mwec4mpn/slmUPQxnzY1u/2M7B7WWpT5tGQwW+sCsDjWyLHOcg==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Mime-Version:
+	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Cc:Subject:
+	 From:To:X-Mailer:References:In-Reply-To:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=m2QvMRo3xhsEKowEuGUqbaw5b7nU0LjUmP+BO2wxu7s=;
+	b=BzuZ8Ux4E0KoBSZKTAk44pLaYOXOODVHqzdlAbdovbWLCsz2EwvNilqvUjV/83JxrC7C
+	 K5ncC3opGmTRPaIo0mwjYih6LnybCzidAOr0u1omYJwNtZWMkyTMxcsAJxaKj3u+dDfgR
+	 GC5E7YnGx0IXckmA6TdyJu0nqv7lF415LC8bOwXhJikdFUtzTIWAeUgJwaWJ7BCy4ms5F
+	 Hm4DPszhJRvqCoQQErySwwuSuuq6i+VR8WD00Hwkbm1V4wG35OU9kK0yiOxZUMM+aqPCM
+	 5uuTGpemTqtun7lKy6fTcBERHq1+ZCxCS0iJa0b17G19lYVWKlykSX718dnT+5RBbFg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794834524;
-	bh=/e8Txj9Aa8va0D4HGgm7/2urpPKKAEYifpAOsZzDbXs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794835191;
+	bh=m2QvMRo3xhsEKowEuGUqbaw5b7nU0LjUmP+BO2wxu7s=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=TgbWE5o4JpnbPMwClTN4GOdQEZg+6lRtJ+T7L7K1Ou5T4wdc8Bj2mMW3sgtiX7t8a
-	 Zi7UK784LO90blakWw22O24Cm3QfeWTtNCdW7Lejk08UgjA7MeG7K3ud13b1mXGn14
-	 o74vWymb4VGp71e5OhP4zPIsEQpCNAuN3X+B5ovHOff4ASkGDydl66gjS3ofDOGW41
-	 hEJOmev7/hLPP1HnvP0no+kbfogVh479mT38Q3H6qrxW4t+SOMch6dWT0JC/5ZETvb
-	 73wy71pT24Gc+qSszEp9fwlSzFmRbWd7qxgAI+hoheJNX+JR+Wwq643GwcDIV3m7ke
-	 KHich+FGPW4gw==
+	b=EmrTOVvavgEl53cr3S2NYC/Pu9Oq0wCdRMNwhlvOgKEd9Qss0etGWXSj+Mbe3kL8/
+	 zzqRUYnPB4sfnUtbHxH+eKOH9Yg1pS/TI+OWgAmu+I0DoscAHNweA6eixNq0EhR/mf
+	 FdFXsOrglcr6x7t3Dv16xq2Io0UapgukCb/xWJTHOah7jYtTpMsC4XONKPMDdsS41I
+	 vkA6FjD6TFs22nLEcJptd1ZhiIe73yt6a2uWHLtW+hZymQS5PWCyX0Jzl3tZwKOfN9
+	 V8z7axQbabkD3jiwTj7eSRng9Ipdc1rG9MOeTOkLJqOeIgT2g3YsalQ2nqQZqpPyfu
+	 HwNnw18GiHEuw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6FCFF80E75;
-	Mon, 16 Nov 2026 13:08:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 12344169
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:08:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0AD9C80ADC;
+	Mon, 16 Nov 2026 13:19:51 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8E1A028C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:19:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 046C24069A
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:08:39 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 73B85607A8
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:19:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9vKTKc9_IS74 for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 13:08:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C8ACF40693
-Authentication-Results: smtp4.osuosl.org; arc=none
- smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3K6gfoLNZ623 for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 13:19:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 47FD460768
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::433"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=I5QbEObh
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C8ACF40693
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:08:37 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 8167162487;
- Mon, 16 Nov 2026 13:08:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFAEE1F000CF;
- Mon, 16 Nov 2026 13:08:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794834515;
- bh=/e8Txj9Aa8va0D4HGgm7/2urpPKKAEYifpAOsZzDbXs=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=I5QbEObhJPVrE/F5DPDPtYtaZXmsOmLgEVVne3x4GzKC/J/2jLeSrl3NV4zPCrNLV
- 0yUqmQ2NdKBPw9Tzp3nCvsCTSd2rU2bOQ4CJfpnGHXP33jQkKbyRskcDmEKSO9I6ec
- 8dcQv9ibNRRML+l1gdouzZV4CvZ46T9N2lvevcf144mR9hI9+CJ0uKQ5zqJsifta7H
- J6OAqGBUs0NeCmD+PlEg1QnutV0Ow2rnccENwXkdnshXtVIpUWNIR2Vl/ONUxR6LKw
- TEFeghSI6qqVA9LNhDEHoQX0fJdpMQoPtogWsOpdVrhJY9UW/aNIFMxqkO60221+Uz
- WfzCMxb5+Za1A==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: York Sun <york.sun@nxp.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- u-boot@lists.u-boot-project.org, Sebastian Siewior
- <bigeasy@linutronix.de>, Rob Herring <robh@kernel.org>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Francesco Valla
- <francesco@valla.it>, Anton Ivanov <anton@binarly.io>, Aristo Chen
- <aristo.chen@canonical.com>, Petr Hodina <petr.hodina@protonmail.com>,
- Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>, Guillaume La Roque
- <glaroque@baylibre.com>, Lukasz Majewski <lukma@nabladev.com>, Marek Vasut
- <marek.vasut+usb@mailbox.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marex@nabladev.com>, Michal Simek <michal.simek@amd.com>,
- Peng Fan <peng.fan@nxp.com>, Daniel Golle <daniel@makrotopia.org>, Sam Day
- <me@samcday.com>, Pengpeng Hou <pengpeng@iscas.ac.cn>, Alexey Charkov
- <alchark@flipper.net>
-Subject: Re: [PATCH v2 0/7] Support fastboot boot in SPL
-In-Reply-To: <avr9DX4apWNryHVi@macbook>
-References: <20261104-ccaione-upstream-spl-fastboot-boot-v2-0-cf9781441ed5@baylibre.com>
- <179458689495.70612.1391691837782870153.b4-ty@b4>
- <xhkdbld6tqcto.fsf@mkorpers-koolstof.csb> <avr9DX4apWNryHVi@macbook>
-Date: Mon, 16 Nov 2026 14:08:32 +0100
-Message-ID: <xhkdbik1wrkj3.fsf@mkorpers-koolstof.csb>
+ client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=GUpl7zxZ
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 47FD460768
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:19:48 +0000 (UTC)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-4a2f4ca0dcfso77274f8f.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 05:19:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1794835187; x=1795439987;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=m2QvMRo3xhsEKowEuGUqbaw5b7nU0LjUmP+BO2wxu7s=;
+ b=GUpl7zxZ+0jthLmsOe1rvdBFjBMMDAhDYD60jlZWfh7piSvjzpwO1tH2N1/RecGS0q
+ yp5fh9qHYN9jnHH4CFr5fwAP8vfXIV1tdR4f2FUxiBTwWeNkEn+KDc48MIgJ3rBEsiCc
+ C9qPUE9Dhb+hOfdmBR73xpSsx37cxx8nZWccViW4SvmwHztxo8tMGa0+A1L83wezE2Xx
+ OxzF0ySHHQSubyBZrRPXqKhPxuDYSRS7wLMiVdC+mA2m0GQJfEF7DgvtGADa9VCqNXNM
+ 8zwsjU8sGOkFAepQhcJWCo9OjPYQitzqO0vV85Sp17bOtcCpgd0+Tjj/ilLFFegO5Jif
+ jFWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794835187; x=1795439987;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=m2QvMRo3xhsEKowEuGUqbaw5b7nU0LjUmP+BO2wxu7s=;
+ b=M9yq7rQZI8jPKG8/5BDEE/EWdfgr5hH7mZWiEc9zXIkWC2MtlzIBDnaGdZi2pIDfur
+ xsZUFRwWWsZFagIde91Hb82V3RZSJEJFibPaYEfcMlUu5y6Di3xY/5vG/KBOsWr0f3dP
+ v/hwPSEiNqtC2D8o7EbhBVM3Wwi9xmUv4wIrcl0aN8XAedCaTBzsitv39JeMoxWGwA/y
+ 29bcbDHoW9zgyvDTs4aZqhiMH1SUsSNUlwMR9iQiJO/Jpdk3DkKLqo/3sZovXsa7cXm8
+ SVYESpyxIbfyp51bTF6RfPIzDqTw41gSYsFZCVWDmRcD7C4ZWdAOARiLBOo4z14z3nFy
+ 6qKw==
+X-Forwarded-Encrypted: i=1;
+ AL+hErER0o5AYBhOiVO3az7ap+pYdLyx4oCWjSCBnj7ajAyYa7fL40yR/sALlTvgehyHFzMiYBct6hI=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9K5cOfdyoL71On4JCI5koUXFv4yNuaLa4Y3/nsORVnTE3/JDwq
+ 2o1QSrUBi+Ocv/4qU+CSubppkiT4iezTLk922ZqvdftTYovuVwYcXY0NyQiG3vi+RSA/JQDm+i+
+ MUJ+IDpc=
+X-Gm-Gg: AZFdTZe7ggFzuDWS5JhJfEGLVoKv5FyDh+PtkqQ6P0XI3IuWw9HlrXzgnUmszJs2a8k
+ BC7pN8FH4CF9+YsVxV4f4pXlklD39zBP0h/keFykeP3ohF4ncn3MPS1fjSyllpoQRMnwTGlzjka
+ 7mo+xPi/O/vlzHy8lFq0wI4LNwRGZLjHtkhJMHeS8G7Ku/wxmPJcxmmsYcn72zoYtaPMGWUTyuu
+ Ih8bdnvpJ1QzAURQGYM1UIoW0koMPoBPUxkL0bVRganmfz6XRDusWUIOts/IVEz83U03/oEBK9b
+ txKRIgvL7ifbwKBuhU7UVQ4galx4HJIBQ7TKzuGpSnrU7QeIv1zfMdfFJFNoNQIor4Tyf98z/7T
+ Y1ibDva6PgOdkvnFjAEBjgrdB5xCEd3Co0GZZaV4p0linY3Q5tzcqUY2FTdXQgxBrWcXhQFTSiN
+ gxFQZvjpjGwaGpHGEoezB/INpvApn5/MGPzqEVSJIanmjOZsOt6ZG2CnlIfgY6pWrz9+4rsv4Ea
+ INz6xB2M28nFSsif0v0N52p3m4/xHVBdXMoPD9SvxEeIOsNt/Dcb7Ga8fbx6xFzxunPcmJVBG9L
+ VuZOWnQNb3RQ3iitkswYkUJZETc9Blmy6ANepkMrnExKjo31NHRQPHpJb/5a8PxMl8bAhK7r5cc
+ WBVFGWLza5iGJDEjJJisd2dR9eqDsUmKRA7p0hea1n+zgGam9sALIMf16qm1+IAB2WKQp1jmB7z
+ 5qX8QV/HDe5+hiZCH83fPHinoisZC1w00JznIdLIC6n84b0zJcBR713PDbOW6vwqrssN4nJuzCk
+ HCOIOn1VCO02i87Lm7pAeCHM8yMetZR4yMbiXMAbScRJqBE+36lY0JaGU/EbR7Wgl7qcX6Lrye2
+ ysV4dBteRWezFxAsLYExs/iNPeDJm3XIXi9rwqSeLnqc/l2YY0lqItgrxKuI9LYHBc/JCGRQPNy
+ 0CPd/UDDWHZ783f5rF9/WtzAvVVUg/Rb/mkhJN/iLU4n912PwqcankezB+H8zUiVvUVm9CA==
+X-Received: by 2002:a05:6000:4213:b0:493:8c32:94 with SMTP id
+ ffacd0b85a97d-49c726db093mr21107569f8f.38.1794835186980; 
+ Mon, 16 Nov 2026 05:19:46 -0800 (PST)
+Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-49c5d22394esm22923210f8f.3.2026.11.16.05.19.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Nov 2026 05:19:45 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 16 Nov 2026 15:19:44 +0200
+Message-Id: <DMWNZ0QJD18L.3OSZ80YNFQ5A3@linaro.org>
+Cc: "Jens Wiklander" <jenswi@kernel.org>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Tom Rini" <trini@konsulko.com>, "Jan
+ Kiszka" <jan.kiszka@siemens.com>
+Subject: Re: [PATCH v4 2/2] optee: do not announce RPMB from within a
+ supplicant RPC
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+To: "Igor Opaniuk" <igor.opaniuk@oss.qualcomm.com>,
+ <u-boot@lists.u-boot-project.org>
+X-Mailer: aerc 0.21.0
+References: <20261029-upstream-optee_rpmb_b4-v4-0-e2e4c5330d37@oss.qualcomm.com>
+ <20261029-upstream-optee_rpmb_b4-v4-2-e2e4c5330d37@oss.qualcomm.com>
+In-Reply-To: <20261029-upstream-optee_rpmb_b4-v4-2-e2e4c5330d37@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,88 +165,144 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 16, 2026 at 13:55, Carlo Caione <ccaione@baylibre.com> wrote:
-
-> On Mon, Nov 16, 2026 at 11:40:19 +0100, Mattijs Korpershoek wrote:
->> Hi Carlo,
->>=20
->> On Fri, Nov 13, 2026 at 17:21, Mattijs Korpershoek <mkorpershoek@kernel.=
-org> wrote:
->>=20
->> > Hi,
->> >
->> > On Wed, 04 Nov 2026 10:40:20 +0100, Carlo Caione wrote:
->> >> Support fastboot boot in SPL
->> >>=20
->> >> Test farms need to run successive U-Boot builds without rewriting boot
->> >> storage. Add optional fastboot boot support to SPL so an already-runn=
-ing
->> >> SPL can receive U-Boot over USB and hand off to it in RAM. U-Boot pro=
-per can
->> >> then load the operating system using its usual boot methods.
->> >>=20
->> >> [...]
->> >
->> > Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/u-=
-boot-dfu (u-boot-dfu-next)
->> >
->> > [1/7] spl: fit: reject failures loading an explicitly requested FDT
->> >       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/co=
-mmit/1a3297db459c3baebdd7d51a7b6e740d3e29816e
->> > [2/7] fastboot: invalidate stale and incomplete downloads
->> >       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/co=
-mmit/6abd0cfcf58db69fad1130a8b4b1c3584b2f7de4
->> > [3/7] usb: gadget: fastboot: do not boot after a failed acknowledgment
->> >       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/co=
-mmit/72e4069217d76b4d358f561dd2c8160acf0fe485
->> > [4/7] spl: ram: allow loading FIT images from a supplied buffer
->> >       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/co=
-mmit/154c4246d60a2012d5fb23920fd1e77e7159ea55
->> > [5/7] spl: support booting FIT images downloaded with fastboot
->> >       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/co=
-mmit/fddc8df36f5219e3742e3b8eb3a9b0f21c30b315
->> > [6/7] spl: fastboot: support legacy U-Boot images
->> >       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/co=
-mmit/02172ea8e838e9a3a00b30bf7f868d5b273af173
->> > [7/7] spl: fastboot: support raw U-Boot images
->> >       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/co=
-mmit/4dce3b1e0e17625ed73f37784433c54da4cd719c
->>=20
->> This series seems to introduce some build errors in the CI:
->>=20
->> Building current source for 1 boards (1 thread, 112 jobs per thread)
->>    sandbox:  +   sandbox_spl
->> +common/spl/spl_ram.c:109:12: error: =E2=80=98spl_ram_load_image=E2=80=
-=99 defined but not used [-Werror=3Dunused-function]
->> +  109 | static int spl_ram_load_image(struct spl_image_info *spl_image,
->> +      |            ^~~~~~~~~~~~~~~~~~
->> +cc1: all warnings being treated as errors
->> +make[3]: *** [scripts/Makefile.build:272: spl/common/spl/spl_ram.o] Err=
-or 1
->> +make[2]: *** [scripts/Makefile.xpl:553: spl/common/spl] Error 2
->> +make[1]: *** [Makefile:2452: spl/u-boot-spl] Error 2
->> +make: *** [Makefile:179: __sub-make] Error 2
->>     0    0    1 /1              sandbox_spl
->> Completed: 1 total built, 1 newly), duration 0:00:34, rate 0.03
->>=20
->> Link:
->> https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/jobs/146829
->>=20
->> Can you please fix this and send a v3 ?
+On Thu Oct 29, 2026 at 5:44 PM EET, Igor Opaniuk wrote:
+> mmc_init() calls optee_rpmb_available() once the card has been set up.
+> When the first initialisation of the eMMC is triggered by the RPMB
+> supplicant, that is while OP-TEE is blocked in an RPC and holds its RPMB
+> mutex, the announcement opens a nested session to device.pta, whose RPMB
+> enumeration takes the same mutex. OP-TEE's second thread then tries to
+> sleep through the notification interface, which U-Boot does not
+> implement, and spins forever. This happens whenever a TA touches its
+> RPMB secure storage before anything else in U-Boot has initialised the
+> eMMC, for example a TA call issued from the shell right after reset
+> ("optee_rpmb read_pvalue" with the AVB TA, "tpm2 init" with the fTPM).
 >
-> Oops, yes, I'll fix this and send a V3.
-
-Thanks, dropped v2 from u-boot-dfu-next in the meantime
-
+> Linux never runs into this: the RPMB device is registered by the MMC core
+> long before any TEE client, the OP-TEE driver announces it from a
+> workqueue rather than from an RPC, and the kernel implements the
+> notification wait. U-Boot serves every RPC synchronously on the one
+> thread it has, so record in handle_rpc() that a supplicant request is
+> being serviced and skip the announcement in that case: OP-TEE is using
+> the RPMB already and will find the device when it probes.
 >
-> Thanks,
+> The counter lives in the OP-TEE driver's private data and is therefore
+> maintained in handle_rpc(), which only the OP-TEE driver reaches, rather
+> than in optee_suppl_cmd(): the sandbox TEE driver calls that function
+> too, with a device whose private data is its own sandbox_tee_state.
 >
-> --
-> Carlo Caione
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+> ---
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+Tom can you pick this up directly? I can do a PR, but I only have a single =
+OP-TEE patch
+
+Thanks
+/Ilias
+>  drivers/tee/optee/core.c          |  7 +++++++
+>  drivers/tee/optee/optee_private.h |  6 ++++++
+>  drivers/tee/optee/rpmb_emmc.c     | 11 +++++++++++
+>  3 files changed, 24 insertions(+)
+>
+> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+> index a47c76811cd..f7670096b61 100644
+> --- a/drivers/tee/optee/core.c
+> +++ b/drivers/tee/optee/core.c
+> @@ -424,6 +424,7 @@ static int from_msg_param(struct tee_param *params, u=
+int num_params,
+>  static void handle_rpc(struct udevice *dev, struct rpc_param *param,
+>  		       void *page_list)
+>  {
+> +	struct optee_private *priv =3D dev_get_priv(dev);
+>  	struct tee_shm *shm;
+>
+>  	switch (OPTEE_SMC_RETURN_GET_RPC_FUNC(param->a0)) {
+> @@ -450,7 +451,13 @@ static void handle_rpc(struct udevice *dev, struct r=
+pc_param *param,
+>  		break;
+>  	case OPTEE_SMC_RPC_FUNC_CMD:
+>  		shm =3D reg_pair_to_ptr(param->a1, param->a2);
+> +		/*
+> +		 * Tracked here rather than in optee_suppl_cmd(), which the
+> +		 * sandbox TEE driver shares with its own private data.
+> +		 */
+> +		priv->in_supplicant++;
+>  		optee_suppl_cmd(dev, shm, page_list);
+> +		priv->in_supplicant--;
+>  		break;
+>  	default:
+>  		break;
+> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_=
+private.h
+> index 5c72b280058..416fa66db4f 100644
+> --- a/drivers/tee/optee/optee_private.h
+> +++ b/drivers/tee/optee/optee_private.h
+> @@ -35,10 +35,13 @@
+>   * struct optee_private - OP-TEE driver private data
+>   * @rpmb_next_region:	next UFS RPMB region to report on PROBE_NEXT
+>   * @rpmb_cur_region:	UFS RPMB region selected by the last PROBE_NEXT
+> + * @in_supplicant:	non-zero while a supplicant RPC from OP-TEE is being
+> + *			serviced
+>   */
+>  struct optee_private {
+>  	unsigned int rpmb_next_region;
+>  	unsigned int rpmb_cur_region;
+> +	int in_supplicant;
+>  };
+>  #else
+>  /**
+> @@ -48,11 +51,14 @@ struct optee_private {
+>   * @rpmb_original_part:	the previosly active partition on the mmc device=
+,
+>   *			used to restore active the partition when the RPMB
+>   *			accesses are finished
+> + * @in_supplicant:	non-zero while a supplicant RPC from OP-TEE is being
+> + *			serviced
+>   */
+>  struct optee_private {
+>  	struct mmc *rpmb_mmc;
+>  	int rpmb_dev_id;
+>  	int rpmb_original_part;
+> +	int in_supplicant;
+>  };
+>  #endif
+>
+> diff --git a/drivers/tee/optee/rpmb_emmc.c b/drivers/tee/optee/rpmb_emmc.=
+c
+> index d4abc48f764..a40573c9281 100644
+> --- a/drivers/tee/optee/rpmb_emmc.c
+> +++ b/drivers/tee/optee/rpmb_emmc.c
+> @@ -210,6 +210,7 @@ void optee_suppl_rpmb_release(struct udevice *dev)
+>
+>  void optee_rpmb_available(void)
+>  {
+> +	struct optee_private *priv;
+>  	struct udevice *dev;
+>  	struct uclass *uc;
+>  	u32 tee_sess;
+> @@ -219,6 +220,16 @@ void optee_rpmb_available(void)
+>  		    !device_active(dev))
+>  			continue;
+>
+> +		/*
+> +		 * mmc_init() may run from the RPMB supplicant itself, while
+> +		 * OP-TEE is blocked in that RPC and holds its RPMB lock. A
+> +		 * nested call would then deadlock, and OP-TEE is about to use
+> +		 * the device anyway.
+> +		 */
+> +		priv =3D dev_get_priv(dev);
+> +		if (priv->in_supplicant)
+> +			continue;
+> +
+>  		if (optee_open_enum_session(dev, &tee_sess) !=3D 0)
+>  			continue;
+>
+
