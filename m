@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7204F606A333
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 14:01:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3F46606A339
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 14:01:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=loChTZW+;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Ojq+vSxZ
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=z8/LfZz9;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=QBnzA8Ko
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CF3B780F19;
-	Mon, 16 Nov 2026 14:01:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8C24940693;
+	Mon, 16 Nov 2026 14:01:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FqmWTVryaElO; Mon, 16 Nov 2026 14:01:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F0D7C80EDC
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794837663;
-	b=aHZfuQN0FsEB54sPNXA63TxGaQW138ptWApCAYqGBi8pBM8evbvQsBUZ9pGBSehIFIj8
-	 VLSTSj61xQOcdcInUGaKnRCPK1fy82Ok4XAlxbWY6ncfUEQW2oHi3Wi3j3jGNhY99fuTZ
-	 DFFIyk4ywZkGk9rEhrCf/3cpWXoGeILcH+2GDcs1aDNBsac8fCa6FxRH3WNIF8mO19DTG
-	 xuf6yAeDmwWpv5qT6a+9ORw83Tvn8CgeRkR1ABVQLSVtAkH9D3p+JMaL37lGPw8H02JPl
-	 uhGOMdpi2QHAndrz04euRFmYseKjKJntR6mRkTSz8oRHQaovtc1lVge32GNoR9TFWHQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zaQRHxfOKqbK; Mon, 16 Nov 2026 14:01:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C05E94069A
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794837664;
+	b=A1oOnpgvzIF5IylIEX1/lbvLdFBnWyE8RnVZeiYo6sEHEhZlWj0763QGblDTNiwlNlm/
+	 KPCWJLDP/HR/WFNKQ3XddmzRpTuUn4pCNKdVg84Ycjf6FxQU4IeVm0BQtGfJpi4cbIGjR
+	 vS/fj/dtnYZJ+epDRMhjaZXPAN93gWd7U5Wu1Je5PCJnrrSWMHpSe550ChGPJ26IcAny9
+	 HJd8z3OPKeHi1ryc5XcSxGUtI2D55wz7XvhRrMI8JKEW/2MxU/XihR73YjagkyZMGjc8H
+	 5KM15GXMEWc3N1Z85s79zR2iaYtnnLKBJmJi5b36MjH0rXg50lLO2ufo6BuNqfZt64A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794837663;
+	c=relaxed/relaxed; t=1794837664;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,115 +33,114 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=A5HiogpMdEZ8+wFEOZSFr2xI59/87Cz1IvHsmcehGvQ=;
-	b=f/mlJQxWthRxC0oIfib+B7pu8/i6BwkVlkfdPTPZvsm4UVoq1mVuBrMYzEDP6NkcXIaf
-	 YUZGTC0lzzAV8yba1jrBvTe7sKXgqUtXF6zcCWABl2Y3xOI8nWjWN1xzViPJgnhZnR0hv
-	 2TLxMqxJInJR9Vt7W3WmTbjp5KqHgQ1JKzToHCLkj/k/DGH9km+mSZpoAriW646w3qCJ+
-	 ayPdwWzLxA/KiUmdcl+c9V0r4UhSOM21wI0mvrHVfONFsBOX0R3mVLKfPmwT/fCKUKPJU
-	 dhZ3kNSS+UR/DOzW+YbxscXxfUaB4pUazP4e+pFQnAjsXCpf4ljDUAYJrLbeIDRLTqA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=FiAF9BvFmRjgEUwkbp/eNax4pZwharKY+eps4zXB1KY=;
+	b=fHWifckl65n/rFhpZtlbjcUJKwc00w+YLi5BcNldqc2gXDM3Mk+0+Za/ELNxVO6JvMUy
+	 IWQ0xoExL7YiFazcI5ISeZED1mmW5jYP7Kak2eIC5+Pp/qbAWZojaQXhSNXGZLWgR0yjs
+	 aL1tRqW5vZcdmXJBsDgARoxfsDBplFRJ479zqRNAH0at18y3uphtRos6ndbDGGK1+Mb8w
+	 AVEyu+cFVleTb2Djtm9MLQsGTKC7oi+P/YsfU+gRR/itrVzDdwm9aad9i08PJoA8n9Ml6
+	 ARcoa2dzjtDkVCWNdvGS/Aln4mm0Vjt0SnyEmNsK/Xhn9k6PcvlNxJC+W1Hoquz4vpQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794837663;
-	bh=A5HiogpMdEZ8+wFEOZSFr2xI59/87Cz1IvHsmcehGvQ=;
+	d=lists.u-boot-project.org; s=default; t=1794837664;
+	bh=FiAF9BvFmRjgEUwkbp/eNax4pZwharKY+eps4zXB1KY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=loChTZW+qBVlHfYOvtTPUU5IQMhRzDgjPIvXL845zTc+Et0dXrUfLR5wlKVKpBxMs
-	 6RFyGzP8yIyPr7zgbA6nv+UfsOer+56f3A/C0zgLAbWG/y8chSe2hRYqlws3/2M14j
-	 wJULZfVa3u+Xqu5cnnHoebDqeV39SY/TSpCm0E6Ep/J8rvzJKLwQByt+MaHJcyhGvW
-	 7PsUVThAPvxC7ANgzGoYp6OfbpV37qWhTAfdNrX90h5fPB/J/XTC9gVStjuYLmyu2U
-	 a8BK8TBWU/03+XDHZTVvKw4BdPejvsd7xqJYvNeX25NpADof6r7OTjcgD3hz23cXgL
-	 SBfcw6LasbP9A==
+	b=z8/LfZz9za+QWhKI9u0vM9lPF9EDo2lhVFu+zjL9fE/S1AGUHrExufkLHkQTXBIQl
+	 xQCpxFfTbCOwcej2E81NtGlKyBGLAGzkbd5plOOhirnQ5FvhJEwm22lKiwPN4l7vUZ
+	 KHL8WpfTFYt9sNcS217fte9VPsp7t9M2M1+YSbTkbq6BoSvObaeCnQH+xgPDPoDUjq
+	 Dfr/nlwvfpJS9uW+ckcUV+mgacMmIjtWd+ALE/hG/Nysmc3zjG7hH+/fOG2SgYTA0z
+	 qiNhW9oe4If/z5wTohnAetVD/Igea11Rjxqaf89QZD4Guw6/Jna6FPYgyeiljDoJJ0
+	 +GnY6ue7jycVA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F0D7C80EDC;
-	Mon, 16 Nov 2026 14:01:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id C2E612FE
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C05E94069A;
+	Mon, 16 Nov 2026 14:01:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 18151109
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B54BB6078A
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:00 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0A737400D5
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gN0dOptRd-QM for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 14:01:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 81A3F6078F
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iy8_D_cvEtcA for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 14:01:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6445E4009D
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::431"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
+ client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Ojq+vSxZ
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 81A3F6078F
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:00:59 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c50d3ac6b51so179199166b.1
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 06:00:59 -0800 (PST)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=QBnzA8Ko
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6445E4009D
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 14:01:01 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-498f5fa4f70so3757672f8f.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 06:01:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794837657; x=1795442457;
+ d=baylibre.com; s=google; t=1794837659; x=1795442459;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=A5HiogpMdEZ8+wFEOZSFr2xI59/87Cz1IvHsmcehGvQ=;
- b=Ojq+vSxZZF3YZWQ9lR61HjWy4lxTIOzYF1AgrLbJYHhbyA70p94r9s+O24zT1b+6Nt
- kri/zF1Lb1j9V/ypMyqoyviHXCD2Zs2HTy3GYgdrfGSyi/AurINbrS6de59J+gTcUvWr
- M8zNzRTZUzBScA5i7OKTl7Wk9HX9Bfo6oLl6S1jx/dRuKV6v3AGUnNrkLTpgc0wibpwJ
- 9jn0qfqMWqPog3M11tjc17wgQSilpfcCy6aly5pc7fycwZmY0ZaKragnoF3v6N6VRCna
- qWLwb+TpE/TpPNPI2zhGZ8nonO8gIBTwwfZeDPJUjCp8mbzhrBDCPwR41zT9wcUAy3p4
- FSGw==
+ bh=FiAF9BvFmRjgEUwkbp/eNax4pZwharKY+eps4zXB1KY=;
+ b=QBnzA8KonLGWCetU88LE7NyUWn7Wm8fpXY26mOIJp0v5CrtJW4JM9ULkadLvjmjJQ+
+ 2THvlSEySNd7qlSd73+GaTtuO33MbgW0znGZyMkoWrNhOFm9AzFKCORhDu1qzJlYAlQN
+ zOV9ZjY5lKaR5h+02uOIdn1NzCDQ7GFFuJ0QQ2hYLkEHZmm9GPVHz/CBOtZ6ica5TohP
+ y/09JzFW9TaoZY5QlHQ5ruKKI4ca7lUv0551pq99/vbrrSxzYmDU5lRCVC9grneF0hX6
+ RQ9AtrDpj56qP81z+hpM944/QmqbICuCessVMke2TPMC8/Tt9ykQMpMY/ZhRr7DDjBIg
+ e7xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794837657; x=1795442457;
+ d=1e100.net; s=20260707; t=1794837659; x=1795442459;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=A5HiogpMdEZ8+wFEOZSFr2xI59/87Cz1IvHsmcehGvQ=;
- b=x4G2DBgQ8B29wkBI/YJ3iKhhIrF+Vpk2MKnzYd053tm/btzjqV/Njf0E6sbOIYKKME
- Hkhl2+Fr0q4IAUu1xGEP7Am0Q2f3u/LUo14Afab+m4UH3Vdtw+atBgoSuOABvM/Mx7Ak
- WEJBuGhdYkrQ9WAioDvO22rI9EmPtBGHuc3AIBmsWljSPzdvsdWjCTCsvLFNac+41PAv
- V5eXBOsKkZhBS0FgCqvi/OssRouciKw0duNY0HvyJ0U41tKewq72WAhikMhNbB+1uVBA
- KHrEb5Idg+hv9I+lTCufEMp+XLHmiuqfyDsN25Bp2PhVGuwlRqkKYRFMF1P1LXpiNyQ4
- 8RxA==
-X-Gm-Message-State: APuU4Z+02Dc8o/mZACIN7cGgyLE2EiQ8suCcmQk16GehQz0zMiXKqPzh
- QSvvdGOdmdraSWz0h+Nfbh85y03UtCB5mrAxwtmhOcq+TsiiVsARbFyuU0wd0yRy5A4=
-X-Gm-Gg: AYBFou31gBitEdSdiOBTxgKJckUxk5Pc/uV97JifHkvF9jrM/pHqMePRGQPWBiHdoUG
- vzLPSJAYANFU25PYnjej7Axg0ruGKbHcYfNm3M4Ym0/h3qH6MckbO1x0gTKhtXmdd1FuRc4cwwH
- 2Nxwk/LWoU5HSOBK3HW6V0dmEgdTJWpBug/WYgMAeRNhStmLbAEws7bjC7hAsZozgG2cMad2MGZ
- Wv3Lp3E8EawOXVlM+yQJw6ovUFxK5/G77hTTvcKDpysckfbDNmN3RsACdIV1F0wIC7xf8ijR8PU
- C21JK3qoaMi1T8uQZhtBwxNAf8u05U7RAYT40Bz9dHqrmBiZ9HXfzJu+NMBtmSZ4CgeUCd4ZX2W
- 5eoWaL+dUtIo1ExGSDKZnrwwHaAZrSDUp2WnbvOI6ZLTk58zWUAMN/aNUdLxxN1gnunRuVUzNyy
- FZtdVtJzpI4O43LblaCAAyOa041Ig4298xxYjQFXjn5/JAEPMP8ew3JDnNZ24Ysa8a5yLEDdoiP
- QJketDA7ypp+qYHxU47ygWBFstdigpW8tt1Gutit4EzO7RW/2qkD6qy295sLwPMB7RDKn5JFSj4
- eBj1XwxBYYRb5iymVAbhATPXdz7GjmAUULEaVyK0h04dn4p1/t+NLfccAgoub5KFWN3gyRnuAnc
- S2bhUUo1aBhaxIE/JZvWqIMrnvTMWs7FhWzAZcClo9vvFtQ==
-X-Received: by 2002:a17:907:8e88:b0:c3f:8c92:3b54 with SMTP id
- a640c23a62f3a-c507b02df5emr1212036766b.0.1794837657227; 
- Mon, 16 Nov 2026 06:00:57 -0800 (PST)
+ bh=FiAF9BvFmRjgEUwkbp/eNax4pZwharKY+eps4zXB1KY=;
+ b=iyz2DDWAbVWB0XO/niPo4W7XGz1cBfq1HKbFw79a5BkYhl/ydR8aI2DJaMMwxG669W
+ Yl8byL2UaHZnsXB4H9YjFLL4esxILaNaIMu5H2SuR8jK3C1kGvNNPZGXGSk6LraqYGXn
+ PS297y/3hX0Y2aie1zkiOPFps+NMtlZPBYAOifH7Df47CteXCgWFt/WrPELGNYTlfqt/
+ qwdjGZXWNaOYqDkb4kgSThBRowqVUSErXQm+kQpakr5QFGQcu8UCW7zIYiAhR4WDr62K
+ Epd8WkTpAk8nsN43jBOVTds+PSh/CfmYLOy5G/YNZ1UNNRin3GW8iePsQRv/pL1icUb8
+ pmCA==
+X-Gm-Message-State: APuU4Z9HprMz6biexjyVi5pcGN+zRgzlkDkzuGQdBUGn9uQcolLXjwit
+ Yr0PSufdhH8Y8difKOaRO2VQT1kN1iEnKfESHYKbiNo7EIrtPnOy+Oa+Wahz4CsCGao=
+X-Gm-Gg: AZFdTZdXAmFTb06mGS1RwJoUhtnqvSZrVV1JEVeFWaN8U4XB0UDXJSjDDbWSp08JXu9
+ 2RAf4r9+bL3KAfSr9fJz5wO/pfx+cO1Zn/ayGocy4fNTgWpRGVNI65+0XbwMSphWmktCBMDRqRG
+ lnrzrqgPpZ9Xbeg6uPgeQq+FyiKrwrBU1XKEi5xnB6VyXU6urTx9qjMO1O43TXbH8HcibNpI/qD
+ 71OYMHNvZymyR8+m7071fotbiBbkVlnYLtJ6kPAy1VSh2uwxXBwRu2bCuWeUOc/vzcxNL6HdJwh
+ 9MFmjDgTiF9XMWGISHMUdi+u55LWwffhQfNMaW/KXE6k42Rj2bGJgMcWqEQa25vcz9XEZCPkOVk
+ WxFGPmkz+UpuPH5O/lkDCSM9Wx2/cFMiMsF2fPXmzDpioC21eGtU0hT1G5bjXaDb9k4IwtbVkOF
+ fEhEn1oqvPfA2E3fiYfvNmrx4cDcIWTUdeUiX8jjHrZvUR96X1cVmwXATHB4Li2bvkxNdtnVRFD
+ rj14k9pGra0SMpzycR4s3qKgieEP1fw5mcDAFZOo7njAacT5lVCakcGe0l+2LEqbP4tjcgbCu0K
+ C1W4HIYQj6Ls5UPB9wXZ+b01HiSMUK5sHK+enPv4AUqX9AOkkpeDYVBo2Hf422yTghrBZOPTNJo
+ 5hc/KPrfCM0i9OobTSIUGZH/3Fdm/KRdB0kX6Lr2zBfR8KQ==
+X-Received: by 2002:a05:6000:4201:b0:490:9fe2:6a37 with SMTP id
+ ffacd0b85a97d-49c70ed8f15mr26213894f8f.17.1794837659052; 
+ Mon, 16 Nov 2026 06:00:59 -0800 (PST)
 Received: from macbook.homenet.telecomitalia.it
  (host-95-246-144-141.retail.telecomitalia.it. [95.246.144.141])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c69406640sm22119355f8f.12.2026.11.16.06.00.55
+ ffacd0b85a97d-49c69406640sm22119355f8f.12.2026.11.16.06.00.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 06:00:56 -0800 (PST)
+ Mon, 16 Nov 2026 06:00:58 -0800 (PST)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 16 Nov 2026 15:00:47 +0100
-Subject: [PATCH v3 1/7] spl: fit: reject failures loading an explicitly
- requested FDT
+Date: Mon, 16 Nov 2026 15:00:48 +0100
+Subject: [PATCH v3 2/7] fastboot: invalidate stale and incomplete downloads
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-ccaione-upstream-spl-fastboot-boot-v3-1-7b39e7a348c6@baylibre.com>
+Message-Id: <20261116-ccaione-upstream-spl-fastboot-boot-v3-2-7b39e7a348c6@baylibre.com>
 References: <20261116-ccaione-upstream-spl-fastboot-boot-v3-0-7b39e7a348c6@baylibre.com>
 In-Reply-To: <20261116-ccaione-upstream-spl-fastboot-boot-v3-0-7b39e7a348c6@baylibre.com>
 To: u-boot@lists.u-boot-project.org, 
@@ -180,140 +179,96 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-A U-Boot image may embed its device tree, but a FIT which explicitly
-names an FDT must not boot after that FDT fails to load or verify.
-External FDT data is copied to its load address before verification,
-so ignoring the error can leave an unverified device tree for U-Boot.
+A new session or download must not retain the size of an earlier image.
+Otherwise a failed transfer can leave commands operating on stale or
+partially overwritten data. Only mark a download complete once all
+expected bytes have arrived.
 
-Keep support for U-Boot images without a separate FDT, but reject
-failures for an explicitly requested FDT in both firmware and loadables.
-
-Fixes: d879616e9e64 ("spl: fit: simplify logic for FDT loading for non-OS boots")
-Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- common/spl/spl_fit.c  | 16 +++++++++++++---
- test/image/spl_load.c | 42 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 55 insertions(+), 3 deletions(-)
+ drivers/fastboot/fb_command.c | 14 +++++++++++++-
+ drivers/fastboot/fb_common.c  |  3 ++-
+ include/fastboot-internal.h   |  3 +++
+ 3 files changed, 18 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 64e5f95546f..4e47118c022 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -490,12 +490,17 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
- 	 */
- 	image_info.load_addr = ALIGN(spl_image->load_addr + spl_image->size, 8);
+diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+index 63b0f5705fe..056d95cb1f8 100644
+--- a/drivers/fastboot/fb_command.c
++++ b/drivers/fastboot/fb_command.c
+@@ -318,6 +318,13 @@ static void getvar(char *cmd_parameter, char *response)
+ 	fastboot_getvar(cmd_parameter, response);
+ }
  
-+	/* The caller may ignore a missing FDT, so initialize the output. */
-+	spl_image->fdt_addr = NULL;
-+
- 	/* Figure out which device tree the board wants to use */
- 	node = spl_fit_get_image_node(ctx, FIT_FDT_PROP, index++);
- 	if (node < 0) {
- 		size_t size;
- 
- 		debug("%s: cannot find FDT node\n", __func__);
-+		if (fdt_getprop(ctx->fit, ctx->conf_node, FIT_FDT_PROP, NULL))
-+			return node;
- 
- 		/*
- 		 * U-Boot did not find a device tree inside the FIT image. Use
-@@ -896,6 +901,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 	int ret;
- 	int index = 0;
- 	int firmware_node;
-+	bool has_fdt;
- 
- 	ret = spl_simple_fit_read(&ctx, info, offset, fit);
- 	if (ret < 0)
-@@ -911,6 +917,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 	if (ret < 0)
- 		return ret;
- 
-+	has_fdt = fdt_getprop(ctx.fit, ctx.conf_node, FIT_FDT_PROP, NULL);
-+
- 	if (IS_ENABLED(CONFIG_SPL_FPGA))
- 		spl_fit_load_fpga(&ctx, info, offset);
- 
-@@ -958,11 +966,11 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 
- 	/*
- 	 * Booting a next-stage U-Boot may require us to append the FDT.
--	 * We allow this to fail, as the U-Boot image might embed its FDT.
-+	 * A U-Boot image may omit it when the FDT is embedded in the binary.
- 	 */
- 	if (os_takes_devicetree(spl_image->os)) {
- 		ret = spl_fit_append_fdt(spl_image, info, offset, &ctx);
--		if (ret < 0 && spl_image->os != IH_OS_U_BOOT)
-+		if (ret < 0 && (has_fdt || spl_image->os != IH_OS_U_BOOT))
- 			return ret;
- 	}
- 
-@@ -999,7 +1007,9 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 			debug("Loadable is %s\n", genimg_get_os_name(os_type));
- 
- 		if (os_takes_devicetree(os_type)) {
--			spl_fit_append_fdt(&image_info, info, offset, &ctx);
-+			ret = spl_fit_append_fdt(&image_info, info, offset, &ctx);
-+			if (ret < 0 && has_fdt)
-+				return ret;
- 			spl_image->fdt_addr = image_info.fdt_addr;
- 		}
- 
-diff --git a/test/image/spl_load.c b/test/image/spl_load.c
-index 334ec77b18e..166cf331194 100644
---- a/test/image/spl_load.c
-+++ b/test/image/spl_load.c
-@@ -367,6 +367,48 @@ SPL_IMG_TEST(spl_test_image, IMX8, 0);
- SPL_IMG_TEST(spl_test_image, FIT_INTERNAL, 0);
- SPL_IMG_TEST(spl_test_image, FIT_EXTERNAL, 0);
- 
-+static int spl_test_fit_missing_fdt(struct unit_test_state *uts)
++void fastboot_download_reset(void)
 +{
-+	struct spl_image_info expected = {
-+		.name = "missing FDT",
-+		.size = SPL_TEST_DATA_SIZE,
-+	};
-+	struct spl_image_info loaded = {};
-+	struct spl_load_info load;
-+	size_t size, offset;
-+	void *image;
-+	int node, ret;
-+
-+	if (!IS_ENABLED(CONFIG_SPL_LOAD_FIT))
-+		return -EAGAIN;
-+	size = create_image(NULL, FIT_INTERNAL, &expected, &offset);
-+	image = calloc(1, size + 128);
-+	ut_assertnonnull(image);
-+	generate_data(image + offset, expected.size, expected.name);
-+	if (create_image(image, FIT_INTERNAL, &expected, NULL) != size) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+	ret = fdt_open_into(image, image, size + 128);
-+	if (ret)
-+		goto out;
-+	node = fdt_path_offset(image, "/configurations/config-1");
-+	ret = fdt_setprop_string(image, node, FIT_FDT_PROP, "missing");
-+	if (ret)
-+		goto out;
-+	spl_load_init(&load, spl_test_read, image, 1);
-+	ret = spl_load_simple_fit(&loaded, &load, 0, image);
-+	free(image);
-+	ut_assert(ret < 0);
-+	return 0;
-+out:
-+	free(image);
-+	ut_assertok(ret);
-+	return 0;
++	image_size = 0;
++	fastboot_bytes_received = 0;
++	fastboot_bytes_expected = 0;
 +}
 +
-+SPL_TEST(spl_test_fit_missing_fdt, 0);
+ /**
+  * fastboot_download() - Start a download transfer from the client
+  *
+@@ -328,11 +335,11 @@ static void download(char *cmd_parameter, char *response)
+ {
+ 	char *tmp;
+ 
++	fastboot_download_reset();
+ 	if (!cmd_parameter) {
+ 		fastboot_fail("Expected command parameter", response);
+ 		return;
+ 	}
+-	fastboot_bytes_received = 0;
+ 	fastboot_bytes_expected = hextoul(cmd_parameter, &tmp);
+ 	if (fastboot_bytes_expected == 0) {
+ 		fastboot_fail("Expected nonzero image size", response);
+@@ -436,6 +443,11 @@ void fastboot_data_download(const void *fastboot_data,
+  */
+ void fastboot_data_complete(char *response)
+ {
++	if (!fastboot_bytes_expected || fastboot_data_remaining()) {
++		fastboot_fail("Incomplete download", response);
++		return;
++	}
 +
- /*
-  * Build a FIT with external data, overwrite one property of the image node
-  * with a hostile value and check that loading fails with the expected error.
+ 	/* Download complete. Respond with "OKAY" */
+ 	fastboot_okay(NULL, response);
+ 	printf("\ndownloading of %d bytes finished\n", fastboot_bytes_received);
+diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+index 9184bc6346d..59a08018a79 100644
+--- a/drivers/fastboot/fb_common.c
++++ b/drivers/fastboot/fb_common.c
+@@ -15,6 +15,7 @@
+ #include <cpu_func.h>
+ #include <env.h>
+ #include <fastboot.h>
++#include <fastboot-internal.h>
+ #include <net.h>
+ #include <vsprintf.h>
+ 
+@@ -261,5 +262,5 @@ void fastboot_init(void *buf_addr, u32 buf_size)
+ 				       (void *)CONFIG_FASTBOOT_BUF_ADDR;
+ 	fastboot_buf_size = buf_size ? buf_size : CONFIG_FASTBOOT_BUF_SIZE;
+ 	fastboot_set_progress_callback(NULL);
+-
++	fastboot_download_reset();
+ }
+diff --git a/include/fastboot-internal.h b/include/fastboot-internal.h
+index 610d4f91414..41411601da3 100644
+--- a/include/fastboot-internal.h
++++ b/include/fastboot-internal.h
+@@ -13,6 +13,9 @@ extern void *fastboot_buf_addr;
+  */
+ extern u32 fastboot_buf_size;
+ 
++/* Invalidate downloaded data when starting a new session or download. */
++void fastboot_download_reset(void);
++
+ /**
+  * fastboot_progress_callback - callback executed during long operations
+  */
 
 -- 
 2.56.0
