@@ -1,104 +1,104 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 514CF606D7B3
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 11:06:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 256DB606F1FF
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 11:06:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jU0BkeOs;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=HXQuhX0O
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bIfYzJui;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=GDOrvnO2
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D314A60814;
-	Mon, 16 Nov 2026 11:06:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 03721405DD;
+	Mon, 16 Nov 2026 11:06:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 01FHN0_lDyEE; Mon, 16 Nov 2026 11:06:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 89694607E4
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794827205;
-	b=SSSY/tnEf6Csc2Wk2kI8ndNyPah/34hXiFyA+mTb02Vcpu/oxOEeMCPhMQ+aS0EV/aYS
-	 RT884qgraRGY12ysDqrpMEA1X+4O7Ve6OpNnpIctpC4gmMNpbq4cSCAuvodHcFlGLcOan
-	 PmjR7YM5zONpOTNyoAmhEszA87t8LqdMJwvY1knsYY31WfU32jiwY03k/xu50eNLUAPZI
-	 QrxopnS3UH0qIC6fkBUUC9CFWATXA9xZzZmHM/OIeseti0SYwHWYDJ2mELGEC9ceuA8Jq
-	 pXHAEX6xOmd97+wle9Id0U9S+9ZxbEk+KjuCLFGqrqO9ri4kh1i8rYIMdm0vGlpnjog==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EXUYaaOh79jD; Mon, 16 Nov 2026 11:06:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4A32C406A3
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794827207;
+	b=W4hfFTiZuLGDVa3RODNvMr8ilpMs1quvm3lW2q2jCUNA4JE5wuinUA7LGksqtocEphw4
+	 fgqvbjGEUN9ACwxOJ8FljeAxxdSWvVofDzo95qgI3FtzVEFTlqijosxTyodInmWxOMu8c
+	 2mVm7ZJNbD22z9icZKeOKeniibrOP8m7QEwIZhJU25BTKj2SFudz8WHOthxyBt7bKvy+t
+	 cMIHzI+H8qrG2QyK0KBnLi6zjc7F1DTaZznlx5E4LwJ+pJLgkML45Y1LHq/dfGe5y1BM1
+	 Ae1oSuMFTZ1M8PkWRKTYnqeq4fmWUuUxY3WFyoXNe/qZGYtN5rPtpc5rwUeB7IJmIPg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794827205;
+	c=relaxed/relaxed; t=1794827207;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:X-Mailman-Version:Precedence:
+	 X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ki+yKtIBXO0L9nXzRbVqVrvj//OvMZpcMJaQUD5qKrA=;
-	b=AiRAjwEXvcNwaCXdKKFAYh9z8+CG0Psib3j4/nwh0oNTp5DqllfqRdch4r2nTJMwCwNA
-	 1kCAXpxVGZNpo8L/OE6UvWAN2CJvKz/5W6dARZcD5d72SLY49qMdJKv/m5XqByUP9UxmQ
-	 Dpi0xRKgNhuJOFCpiZUmbbnV8BSnbb4g2PpYxrKe54G9siSeuqpvRFrTdFoSsMZdvUccO
-	 pfAZMLacO08PxDzkILg0Nc149FaZxgSUd4N96wz4W9QdKt4RLy59WlxlDyqWnAZGlCKoB
-	 2hjumjqp+OquvpZPOihrk8VxOABxa+qV9k2LiD+yHHyeK18OV3up3k9WhAFv/5MAUVQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=FJhee7VNhMQsiFA/ODCzTfHuAsHKpT6h3aX9t7X5UqM=;
+	b=E3cgzZ7A2DlregYNg+Z9F5GkWNK91jHU7ebXmKQqFjRbLTUv4/iQsP2/RvAwIG7+My92
+	 k1hildtmmE+1M1eiZCiOEYlCkT29JieiXQKbOSewMVK9LKNNqfMz0e1QQFFTg5Z92GFGq
+	 JRAVfA0gzrzdi2yRlq0qLjnrxVxdiMES3jjzgHYgUO8p2ZlIH7OK8Rx/pgV0KFMwPtuA8
+	 m/k+5I48/UTUV2g7wkUmNx1o2PX9SvWKLyVXzALXl/tCLgmePeu1/nSbTQToiKfcyTlJq
+	 KmDI8lY3aolPW5ftMachbtvP6BsYDadoE9Ybt/K9Jqme3io1FE23iNl8JbzHDP/1zxw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794827205;
-	bh=ki+yKtIBXO0L9nXzRbVqVrvj//OvMZpcMJaQUD5qKrA=;
+	d=lists.u-boot-project.org; s=default; t=1794827207;
+	bh=FJhee7VNhMQsiFA/ODCzTfHuAsHKpT6h3aX9t7X5UqM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jU0BkeOsJrHNvPQYip51Xc8cN3C0kGKJ2JEa1CvT0BUm6mOsUg5u8zFavswKRY5zK
-	 va59KkurhASXZ2G+yePM+Qr5/0ixgdWbhBPF8Foad79RNShQV4CIQ4rE3vfaixKSWg
-	 8SA1l7peJ8q6u68FDzHg6VAh39HILv/m8lDv2rVRPxFwPsfT9WGJDjnLAlJUIO1/Ih
-	 zjrlgILVub0C45WoHsjy76njrO5CdzoAsoRkfSq+8eAsniTUF8xxwEfn0RXRKn3TNb
-	 r2OPUewH/MjnF55m8JVoTZcFhBL+d7pUnzGeFooQr3KWwfhEJruIihGw0hXC5pmeMH
-	 4gJPVfBX3KJjA==
+	b=bIfYzJuit0/8HigQLwxbVShSpTNhd6xpHaU2hE4beAwriH0c5zPJwy1SwaUSrV43O
+	 7HtZw0foTdyOCqnRI5oJquWYPHTof9WE3ih6B87BUMWnUUvUpD1L6rJrw/HChcctA+
+	 cTvExotz6UKCtAelEMYzpaCU0b9f4hzetCLvwV3QZN1MY2FnO9WErhobU/H4bZ069X
+	 mdvgNUVl8wFjcjowJ0Ohk4WKKxZPBXKvHzoQ75pOoUSz5Hb3HzxrdMUGV1jK9ageXP
+	 FqIX56t4aA6Q0tWO9c5OBsNm9FXqm5sWWYuelspc2Hb3TTQc1DMKKvJnCagMNo/74y
+	 ivaJSa2ObU0Dg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 89694607E4;
-	Mon, 16 Nov 2026 11:06:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id F34C628C
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4A32C406A3;
+	Mon, 16 Nov 2026 11:06:47 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id F28021A6
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E54D7405DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E409640070
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id C39PPWFa85Qe for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 11:06:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 33406405CF
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.152
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.152;
- helo=mout-p-102.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id eR7BoWYUfeZZ for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 11:06:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D4B9140068
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
+ helo=mout-p-101.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=HXQuhX0O
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 33406405CF
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:39 +0000 (UTC)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=GDOrvnO2
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D4B9140068
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 11:06:40 +0000 (UTC)
 Received: from smtp1.mailbox.org (smtp1.mailbox.org
  [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jSlRb11fvzKnCX;
- Mon, 16 Nov 2026 12:06:35 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jSlRc6t5Xz8sWd;
+ Mon, 16 Nov 2026 12:06:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794827195;
+ s=mail20150812; t=1794827197;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ki+yKtIBXO0L9nXzRbVqVrvj//OvMZpcMJaQUD5qKrA=;
- b=HXQuhX0OBE+E9evPnB2T9duDYvy1c799WQzAtq1h8kKwFol8Mypv3CVCPSvQt9Ayx+olTn
- KyEMiYGFYYG+mpN2HP/sv7RU1lmqEPyzPv1GAho+QvMoA5nPpoTAbWMYqV8YGZk1aWHVcq
- 9+zCaUe8ywZ1T+FeQAdL1MU8Yxc6BwXpQ2QIGvofJwHRiHOWwGjEbei4TDj8d4hJpcPm1G
- OFrro/JT3HQlKbk3vDZU2boT7Hja/LXtk6vWxmRZqB3uXBUURLbAD9BDVVYak2RXhgylCb
- qPtKW++fgrtO9nZExj0hYYA61+ljSMzJsuxZG1rfVyjUPGW9bccKk8i7kZ7YUA==
+ bh=FJhee7VNhMQsiFA/ODCzTfHuAsHKpT6h3aX9t7X5UqM=;
+ b=GDOrvnO2wyaUI1CoejBPNGsYMnutFfsYANbBnEZjHUbLUuvYk8t+rj883eZvWzUhwns/DR
+ E9TiESi2VNu5CtPgsNZ1ysvauZVZIezh65iuGzyOdzrnYA/O4vfDbwv9QfLY3vx8+Dl7pj
+ FuTVGCxBSwHDLy5kVleFhMZPfMc3Zg8tquj4b7pFnAoCNdgaICk9HAamZSKY2BhIjb8nnO
+ kI5M5hy9yFMAzcpFEhvn8qxnJpUnd2qzXC1ogUjJLUV96Z4w51E5DO4Uy5O6HmRg7sPhIX
+ sSJ4QXvA8iFUksXNlBzkzOu6TzsTBGbD2a9IvaHAdgm3PnuKa4I5ylTaHk/IYQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -111,18 +111,17 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH 4/9] firmware: scmi: sandbox: Add SCMI voltage domain protocol
- attribute handling
-Date: Mon, 16 Nov 2026 12:05:40 +0100
-Message-ID: <20261116110615.3394324-4-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 5/9] scmi: Add powercap and telemetry protocols
+Date: Mon, 16 Nov 2026 12:05:41 +0100
+Message-ID: <20261116110615.3394324-5-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261116110615.3394324-1-marek.vasut+renesas@mailbox.org>
 References: <20261116110615.3394324-1-marek.vasut+renesas@mailbox.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 633726fdc450f09cfd2
-X-MBO-RS-META: mentzsxpci6f391hpjwf99i5c7gqq4bz
+X-MBO-RS-META: f8obksdhgqcxmosmhsj6dbiargubszb3
+X-MBO-RS-ID: 174b5430f7be4e2f821
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -135,12 +134,11 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add handling for the SCMI voltage domain PROTOCOL_ATTRIBUTE command.
-Report regulator count.
+Add macros and names for SCMI powercap and telemetry protocols.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -157,44 +155,38 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Udit Kumar <u-kumar1@ti.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/firmware/scmi/sandbox-scmi_agent.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ cmd/scmi.c               | 2 ++
+ include/scmi_protocols.h | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-index b0f19e99d52..c6666bfbd25 100644
---- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-@@ -997,6 +997,21 @@ static int sandbox_scmi_voltd_version(struct udevice *dev, struct scmi_msg *msg)
- 	return 0;
- }
- 
-+static int sandbox_scmi_voltd_protocol_attribs(struct udevice *dev,
-+					       struct scmi_msg *msg)
-+{
-+	struct scmi_voltd_protocol_attr_out *out = NULL;
-+
-+	if (!msg->out_msg || msg->out_msg_sz < sizeof(*out))
-+		return -EINVAL;
-+
-+	out = (struct scmi_voltd_protocol_attr_out *)msg->out_msg;
-+	out->attributes = ARRAY_SIZE(scmi_voltd);
-+	out->status = SCMI_SUCCESS;
-+
-+	return 0;
-+}
-+
- static int sandbox_scmi_voltd_attribs(struct udevice *dev, struct scmi_msg *msg)
- {
- 	struct scmi_voltd_attr_in *in = NULL;
-@@ -1325,6 +1340,8 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 		switch (msg->message_id) {
- 		case SCMI_VOLTAGE_DOMAIN_VERSION:
- 			return sandbox_scmi_voltd_version(dev, msg);
-+		case SCMI_PROTOCOL_ATTRIBUTES:
-+			return sandbox_scmi_voltd_protocol_attribs(dev, msg);
- 		case SCMI_VOLTAGE_DOMAIN_ATTRIBUTES:
- 			return sandbox_scmi_voltd_attribs(dev, msg);
- 		case SCMI_VOLTAGE_DOMAIN_CONFIG_SET:
+diff --git a/cmd/scmi.c b/cmd/scmi.c
+index 1aa20c7bd96..8ab4451cdbd 100644
+--- a/cmd/scmi.c
++++ b/cmd/scmi.c
+@@ -29,7 +29,9 @@ struct {
+ 	{SCMI_PROTOCOL_ID_SENSOR, "Sensor management"},
+ 	{SCMI_PROTOCOL_ID_RESET_DOMAIN, "Reset domain management"},
+ 	{SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN, "Voltage domain management"},
++	{SCMI_PROTOCOL_ID_POWERCAP, "Power capping and monitoring"},
+ 	{SCMI_PROTOCOL_ID_PINCTRL, "Pin control management"},
++	{SCMI_PROTOCOL_ID_TELEMETRY, "System telemetry"},
+ 	{SCMI_PROTOCOL_ID_VENDOR_80, "Vendor specific (0x80)"},
+ 	{SCMI_PROTOCOL_ID_VENDOR_81, "Vendor specific (0x81)"},
+ 	{SCMI_PROTOCOL_ID_VENDOR_82, "Vendor specific (0x82)"},
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index ed64db4e4e9..1a58549555d 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -24,7 +24,9 @@ enum scmi_std_protocol {
+ 	SCMI_PROTOCOL_ID_SENSOR = 0x15,
+ 	SCMI_PROTOCOL_ID_RESET_DOMAIN = 0x16,
+ 	SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN = 0x17,
++	SCMI_PROTOCOL_ID_POWERCAP = 0x18,
+ 	SCMI_PROTOCOL_ID_PINCTRL = 0x19,
++	SCMI_PROTOCOL_ID_TELEMETRY = 0x1b,
+ 	SCMI_PROTOCOL_ID_VENDOR_80 = 0x80,
+ 	SCMI_PROTOCOL_ID_VENDOR_81 = 0x81,
+ 	SCMI_PROTOCOL_ID_VENDOR_82 = 0x82,
 -- 
 2.53.0
 
