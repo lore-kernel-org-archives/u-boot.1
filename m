@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77236606A884
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 03:30:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D876A606A881
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 03:30:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=v2lBS+5C;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=lafUl5wn
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jRDnDyIY;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=CAsEwX+/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4396C4060F;
-	Mon, 16 Nov 2026 03:30:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B3BDC80D91;
+	Mon, 16 Nov 2026 03:30:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0BBPfu_6SlIE; Mon, 16 Nov 2026 03:30:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 29AC240602
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794799809;
-	b=h765tIA91gL2RZPomiPoPqX2KInzDmOBjMRiAuvELXTU+u4fFxtJCY5su39hSFPvnl6d
-	 e2im6EHbQ7SiAWbJ6x6dSORQWwQkYU1HdfS5ezYfUHwzAvt3JsEyKSD0gUDkL0zKctfef
-	 tiMVMdXiW08CfJLswZh8ez2jFIbpGPX0pVykltRGT6tHspJQdTk6pVtPc/eG9B8Uxdjav
-	 1bMElH6R0x1ql8UsKvWEMcQM69UKvEbxEEJZp8yzMPgBKopcctq9TV9Dna0Bt7hdGC9X5
-	 4XnhRKiQ/DN+3ji9i+VWjxTAShtpgWixQMVmmD+invJK5MhaUsRlX8RC3k+YVSLJn2A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1vxcS_kX6RJa; Mon, 16 Nov 2026 03:30:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9CC6D80DE1
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794799810;
+	b=oakZGgwFAgVDMpZGlYhtIx29S+mcBcCyOvrbrglUfwPc5RhfnZZD/2UXEm0h9TEYgUa7
+	 FRCqTmMrUlk4XJ498/xS16AToPDl8lpI5f7KHYQFpXe4Vcc2GqlyfEIEz7jzsHLWIao71
+	 OOl8tt5cwbJV71ziFSW3/5ONYUOumJqBuDVbzdjA8XYna1GDQaihnL7YVe76DQyvuylxP
+	 AddHyuzFijcYW0kzJ76b4lAgntvWO611nlGEhaSXiOLH0iAPZlzqhVPu0ulomLHZzlQhk
+	 iGlsPc28uz8Zsu0vzNhxI7t2Qc0Fd+t+H2LutnU41WP2sRAGlJWCb/oq20OlbT4MifA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794799809;
+	c=relaxed/relaxed; t=1794799810;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,88 +32,91 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=oCz/BJHmHjbARqmDi5vo/uI6Hn2Rxo9L+HHnEq7l3/Y=;
-	b=TDPgxbvYqC0TRwRvgMlH193Pr2e7WTNavIlCqrSOih/H7UQeMPPJD1FhvdGO7jhZjCS6
-	 /azOkQJkZoKGrvtxtdk6Pq4znqfv7OItbpcrKvdaa8qiJ6bpB4QhkzjhNPu12SdMIX+XS
-	 9b3ykBzC23eeKiF10qWy948Qod/S9DCz24ZdXD4szXXI/Os21KRGfPq8mjQAyJ2pO355L
-	 0AkRWjXOAhjuXy/Os0WHhOcFQU1cDSxz8GmoqIO8Gpdjj82k0jSLYO7dzLkN3nPx9/1lc
-	 y79jLm7XROSJP7Fg/YbzZB2O1BIEZuhkMWXjQGDXhgm0UOP/bpRNGtvvmPS2tgtLutQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=w0Vi6X0Y52d38kUwvhSupS+YB2Wnw/UWiQXVYBAsie8=;
+	b=m+XgpmUujMHAm4kQyH2xcYJtchwrq8kbgDY5ptZhu55RGBJfC0/u1/heKhecWo+/zfKX
+	 CycbEaU+sxLJAj5iX9EZMRnsVaHEMS5TqpYPga0fao9amU82hkypHMUtCgvmWnqWfZ0DH
+	 QHUBhfrO2qYNM15IU9Vbzq+OXxmsncJjnVrcXCttoLnpCrLHqMwEQ7l+nLA4Qifd0hqOP
+	 sMxK8i77y4x3LWHV8YZEyjlKREFkURhVjHdU07bTJ0sheRq70RmF31Oc09jH9b0JFThGQ
+	 Jj8Cp0xdAKTwDSbaV0nowltK3bTaoaMgmyPRCWKJOJOvw6xmA56DHj2ejRvKemjur6g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794799809;
-	bh=oCz/BJHmHjbARqmDi5vo/uI6Hn2Rxo9L+HHnEq7l3/Y=;
+	d=lists.u-boot-project.org; s=default; t=1794799810;
+	bh=w0Vi6X0Y52d38kUwvhSupS+YB2Wnw/UWiQXVYBAsie8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=v2lBS+5CDzTvGXFOLksYx4pspyQclM/b1e9lI6bPV72F67zdZ9TqO+2lc+1gO7+Ut
-	 OHjenE+JOIID6hDblL9e7EBzw0gMYhw1JNCO/UL/2zd6azN05GFfQS/ulJIn2S374/
-	 NL7Pz0J57Hc2oygSsiqmN9Kl2S9AGAAgEzaCtRcEiOJvT9qO5pCZbA0D657E2x0nXl
-	 Wju8J2tXEt1Wlbaaf/EKI6rKKNIzwchKeIhOL897tcS+1kCtRSQUq/zKI7ukyO/Xr4
-	 KMC66TATtSJMKsq7+5mv2M0vxgu7REaNrMG2B0lxkvxlORy9XSXqa51sD/ptE8BbfD
-	 i6a8dtQFv6ueA==
+	b=jRDnDyIYEZIaJjBccwz8nh2wo5CW9CCzVMUDcW8hLjBJXscW/5epyGbNk56uE1dxT
+	 ZW2kJiROUKAz2ENXLPjMtqanPJa+X/jZ/t1G27f6mp2alznlaxQQS5JzNGImi9ieRu
+	 7hklBvDBMQ3nuLnV+2Gy/WvZLK3B/1J7HXpAhysz48Vm3VXGIXCNuyBc8aRDEHnf5W
+	 PQ0IseSR4Pzr4I5fo3HPol/KWvT8JqQ3VDLbBeCj4aifAUODJrr+XQ2l+3FCVEW4+0
+	 nixisdc/LBAuLg6PRRZaWRMBHxHLViaRi8/o+x3tJjuS5ob3q5QDYTNBhbNuyh2rC/
+	 jAhLfmW6SIkcg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 29AC240602;
-	Mon, 16 Nov 2026 03:30:09 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 14F40D7
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9CC6D80DE1;
+	Mon, 16 Nov 2026 03:30:10 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3D1BF4AB
  for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:30:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EF68A605F1
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:30:02 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2F2CF4008B
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:30:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EC6qwrrCx7mp for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id npVwz3DRUDBQ for <u-boot@lists.u-boot-project.org>;
  Mon, 16 Nov 2026 03:30:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org ABA0D605DF
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.172;
- helo=mout-p-202.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3745E4008C
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::101"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::101; helo=mout-p-101.mailbox.org;
+ envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=lafUl5wn
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by smtp3.osuosl.org (Postfix) with ESMTPS id ABA0D605DF
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:30:00 +0000 (UTC)
+ header.a=rsa-sha256 header.s=mail20150812 header.b=CAsEwX+/
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3745E4008C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:30:01 +0000 (UTC)
 Received: from smtp202.mailbox.org (smtp202.mailbox.org
  [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4jSYJj5QFkzMlF6;
- Mon, 16 Nov 2026 04:29:57 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jSYJk35m2z8vWy;
+ Mon, 16 Nov 2026 04:29:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794799797;
+ s=mail20150812; t=1794799798;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=oCz/BJHmHjbARqmDi5vo/uI6Hn2Rxo9L+HHnEq7l3/Y=;
- b=lafUl5wndQt1Q6Wp/UO/jOUN0Lk8Ytea2aQsGTQiucgYFAFfCg5ppxEBHBx1VUPHDRIhRC
- wDeJkaVriCR6SA0hiuiq6pUv6AJcueRy0/I1PRhHU897Rubvnc7Vh3J9zCqz4T7LUT9kyZ
- TEPXkvbZennPkUcgfVDT4hTxCgcZc4vxkrWRI83P5Q3jt2KIUmoa5LYXNSaKVmlD/wJKvR
- 9RWD1UEGGfcWYUJrrpNPvZeKRhK0mht6lMOm3OEoPn8pxeG0s/TZGNQ5gDMgOSmAPmwFCx
- JJ3/kjiUU+EuE+j53qlroPrnTseRECQ44PjjSwesWkwEvnZuWoqH4MmfVGw/6w==
+ bh=w0Vi6X0Y52d38kUwvhSupS+YB2Wnw/UWiQXVYBAsie8=;
+ b=CAsEwX+/KeCVMV0kel8F+KOJZUrvmPBHrfQyywz/nim73Ty+4y15nhE5HmEcfp1U6Y9DLK
+ 0svJi1JOtS026ix3c1OJKeLsWTEpq3KjSoEUqAiKMimd9G0efBELi0/3dxtC2+dBcmf6/8
+ cMl5D5wJgEpos7Dbzbr2WREod71eulqrm8L4LaqzT5V1F5gNrs8YVOYXCrNrDceGSiwsmL
+ EsRRTgOVoRaIep9MKPpdg2fuXCXPpEoqnDxG7a/hWWB3Dbkri8k0OPyBunLLw6C3M/k7s1
+ LlLwgxsA1DacQ0jipN0S+YlNWrgJxmrzJT/OdvoqtXhfrvTY5LecYm4ZlR3lgA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/5] remoteproc: renesas: Add Cortex-A76 management suppport
-Date: Mon, 16 Nov 2026 04:29:08 +0100
-Message-ID: <20261116032949.3145053-4-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 5/5] doc: board: renesas: Document Renesas R-Car Gen4
+ Cortex-A76 start
+Date: Mon, 16 Nov 2026 04:29:09 +0100
+Message-ID: <20261116032949.3145053-5-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261116032949.3145053-1-marek.vasut+renesas@mailbox.org>
 References: <20261116032949.3145053-1-marek.vasut+renesas@mailbox.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: db4fe470d5fed967652
-X-MBO-RS-META: m1zqk9j88rsy9edzrc564jssswh5ep4b
+X-MBO-RS-ID: 0cff6b3590c8d9e2f68
+X-MBO-RS-META: wppmkk48eg6o9paysfwd8x6bf6tjmcmq
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,27 +129,13 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add Cortex-A76 core load, start, stop, restart, is_running support
-for up to four CPU cores present on R-Car Gen4, in addition to the
-existing Cortex-R52 support.
-
-The Cortex-A76 remoteproc behavior is almost identical to the
-Cortex-R52, except there are up to four cores and the 'rproc stop'
-of a Cortex-A76 core requires cooperation from the stopped core.
-The stopped core must set its CPUPWRCTRL register bit 0 and enter
-WFI to power down.
-
-Example code which must run on the remote core that is powering off:
-"
-core_n_power_off_core:
-  mov x0, #1
-  msr S3_0_C15_C2_7, x0
-  wfi
-"
+Document the usage of remoteproc on R-Car Gen4 U-Boot port
+and clarify how to start Cortex-A76 cores from U-Boot on
+Cortex-A76.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -154,337 +143,257 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/remoteproc/renesas_apmu.c | 267 +++++++++++++++++++++++++++++-
- 1 file changed, 265 insertions(+), 2 deletions(-)
+ doc/board/renesas/rcar-gen4-sparrow-hawk.rst | 240 +++++++++++++++++++
+ 1 file changed, 240 insertions(+)
 
-diff --git a/drivers/remoteproc/renesas_apmu.c b/drivers/remoteproc/renesas_apmu.c
-index aa07e0901e7..3fd7f325fff 100644
---- a/drivers/remoteproc/renesas_apmu.c
-+++ b/drivers/remoteproc/renesas_apmu.c
-@@ -14,8 +14,11 @@
- #include <malloc.h>
- #include <remoteproc.h>
- 
--/* R-Car V4H/V4M contain 3 clusters / 3 cores */
-+#define RCAR_APMU_TIMEOUT_US		1000000
+diff --git a/doc/board/renesas/rcar-gen4-sparrow-hawk.rst b/doc/board/renesas/rcar-gen4-sparrow-hawk.rst
+index 08f6111a571..420431d2153 100644
+--- a/doc/board/renesas/rcar-gen4-sparrow-hawk.rst
++++ b/doc/board/renesas/rcar-gen4-sparrow-hawk.rst
+@@ -308,3 +308,243 @@ matching core number to both ``rproc load`` and ``rproc start``. Example:
+     The MPIDR register value above is 0x80000200 . Cortex-R52 MPIDR register
+     bit 31 is always set to 1, bitfields AFF2[23:16], AFF1[15:8], AFF0[7:0]
+     describe core affinity, in this case this is cluster 2, core 0.
 +
-+/* R-Car V4H/V4M contain 3 lockstep Cortex-R52 and 4 Cortex-A76 cores. */
- #define RCAR4_CR52_CORES		3
-+#define RCAR4_CA76_CORES		4
- 
- /* Reset Control Register for Cortex-R52 #n */
- #define APMU_CRRSTCTRL(n)		(0x304 + ((n) * 0x40))
-@@ -28,6 +31,28 @@
- #define APMU_CRBARP_CR_RBAR_MASK	0xfffc0000
- #define APMU_CRBARP_CR_RBAR_ALIGN	0x40000
- 
-+/* Base Address Register for Cortex-A76 #n */
-+#define APMU_CL_BASE(n)			(0x400 + (((n) & 0x3) * 0x40))
-+#define APMU_CL_PWRCTRL(n)		APMU_CL_BASE(n)
-+#define APMU_CL_PWRCTRL_PCHPDNEN	BIT(17)
-+#define APMU_CA_BASE(n)			(0x800 + (((n) & 0x6) * 0x100) + (((n) & 0x1) * 0x40))
-+#define APMU_CA_PWRCTRL(n)		APMU_CA_BASE(n)
-+#define APMU_CA_PWRCTRL_WUP_REQ		BIT(0)
-+#define APMU_CA_PWRCTRL_IWUP_EN		BIT(4)
-+#define APMU_CA_PWRCTRL_PCHPDNEN	BIT(17)
-+#define APMU_CA_FSMSTSR(n)		(APMU_CA_BASE(n) + 0x18)
-+#define APMU_CA_SAFECTRL(n)		(APMU_CA_BASE(n) + 0x20)
-+#define APMU_CA_SAFECTRL_DBGGEN		BIT(13)
-+#define APMU_CA_RVBARPL(n)		(APMU_CA_BASE(n) + 0x38)
-+#define APMU_CA_RVBARPL_MASK		0xFFFFFFFC
-+#define APMU_CA_RVBARPL_VLD		BIT(0)
-+#define APMU_CA_RVBARPH(n)		(APMU_CA_BASE(n) + 0x3c)
++Cortex-A76 core start
++---------------------
 +
-+/* Cortex-A76 APSREG */
-+#define CA76_APSREG_BASE		0xe6280000
-+#define CA76_APSREG_AP_CLUSTER_AUX(n)	(0x10 + (((n) & 0x3) * 0x1000))
-+#define CA76_APSREG_AP_CLUSTER_AUX_INIT	0x3
++The U-Boot for Cortex-A76 remoteproc implementation is capable of
++starting additional CPU cores in the SoC, Cortex-R52 and Cortex-A76.
++This subchapter demonstrates how to start example code on Cortex-A76
++cores using the U-Boot on Cortex-A76 remoteproc.
 +
- /**
-  * struct renesas_apmu_rproc_cr52_privdata - remote processor private data
-  * @regs:		controller registers
-@@ -40,6 +65,18 @@ struct renesas_apmu_rproc_cr52_privdata {
- 	u32		*trampoline;
- };
- 
-+/**
-+ * struct renesas_apmu_rproc_ca76_privdata - remote processor private data
-+ * @regs:		controller registers
-+ * @core_id:		CPU core id
-+ * @trampoline:		jump trampoline code
-+ */
-+struct renesas_apmu_rproc_ca76_privdata {
-+	void __iomem	*regs;
-+	ulong		core_id;
-+	u32		*trampoline;
-+};
++The piece of position independent assembler code below can be compiled
++for the Cortex-A76 core, can be started from any 4-Byte aligned address
++and prints CPU core program counter (PC) address and MPIDR onto HSCIF0.
++The MPIDR register encodes CPU cluster and core position and is useful
++when identifying on which specific CPU core does the code execute. The
++program counter (PC) can be used to determine from which address did
++the code running on the Cortex-A76 core start executing.
 +
- /*
-  * CRBARP address is aligned to 0x40000 / 256 kiB , this trampoline
-  * allows arbitrary address alignment at instruction granularity.
-@@ -51,6 +88,17 @@ static const u32 renesas_apmu_rproc_cr52_trampoline[4] = {
- 	0xabcd1234	/* jump target (rewritten on load) */
- };
- 
-+/*
-+ * CRBARP address is aligned to 0x40000 / 256 kiB , this trampoline
-+ * allows arbitrary address alignment at instruction granularity.
-+ */
-+static const u32 renesas_apmu_rproc_ca76_trampoline[4] = {
-+	0x58000040,	/* ldr x0, 8 */
-+	0xd61f0000,	/* br x0 */
-+	0x567890ef,	/* jump target LSB (rewritten on load) */
-+	0x1234abcd,	/* jump target MSB (rewritten on load) */
-+};
++.. code-block:: console
 +
- /**
-  * renesas_apmu_rproc_cr52_load() - Load the remote processor
-  * @dev:	corresponding remote processor device
-@@ -230,6 +278,209 @@ U_BOOT_DRIVER(renesas_apmu_cr52) = {
- 	.priv_auto	= sizeof(struct renesas_apmu_rproc_cr52_privdata),
- };
- 
-+/**
-+ * renesas_apmu_rproc_ca76_load() - Load the remote processor
-+ * @dev:	corresponding remote processor device
-+ * @addr:	Address in memory where image is stored
-+ * @size:	Size in bytes of the image
-+ *
-+ * Return: 0 if all went ok, else corresponding -ve error
-+ */
-+static int renesas_apmu_rproc_ca76_load(struct udevice *dev, ulong addr, ulong size)
-+{
-+	struct renesas_apmu_rproc_ca76_privdata *priv = dev_get_priv(dev);
-+	u32 trampolineaddr = (u32)(uintptr_t)(priv->trampoline);
++    #define HSTDR        0xc
++    #define HSFSR        0x10
++    #define TEND         0x40
 +
-+	priv->trampoline[2] = lower_32_bits(addr);
-+	priv->trampoline[3] = upper_32_bits(addr);
-+	flush_dcache_range(trampolineaddr,
-+			   trampolineaddr +
-+			   sizeof(renesas_apmu_rproc_ca76_trampoline));
-+	invalidate_dcache_range(trampolineaddr,
-+				trampolineaddr +
-+				sizeof(renesas_apmu_rproc_ca76_trampoline));
-+	flush_dcache_range(addr, addr + size);
-+	invalidate_dcache_range(addr, addr + size);
-+	asm volatile("dsb sy\n");
-+	asm volatile("isb sy\n");
++    .macro mprintchr, chr, rt
++            mov          \rt, \chr
++            bl           printchr
++    .endm
 +
-+	return 0;
-+}
++    .macro mprintnl, rt
++            mprintchr    #'\r', \rt
++            mprintchr    #'\n', \rt
++    .endm
 +
-+/**
-+ * renesas_apmu_rproc_ca76_cluster() - Return cluster ID for core ID
-+ * @core:	core ID
-+ *
-+ * Return: cluster ID
-+ */
-+static int renesas_apmu_rproc_ca76_cluster(int core)
-+{
-+	/* R-Car V4M has 4 cores per cluster */
-+	if (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A779H0)
-+		return core / 4;
-+	else
-+		return core / 2;
-+}
++    start:
 +
-+/**
-+ * renesas_apmu_rproc_ca76_start() - Start the remote processor
-+ * @dev:	corresponding remote processor device
-+ *
-+ * Return: 0 if all went ok, else corresponding -ve error
-+ */
-+static int renesas_apmu_rproc_ca76_start(struct udevice *dev)
-+{
-+	struct renesas_apmu_rproc_ca76_privdata *priv = dev_get_priv(dev);
-+	u32 val, trampolineaddr = (u32)(uintptr_t)(priv->trampoline);
-+	int cluster = renesas_apmu_rproc_ca76_cluster(priv->core_id);
-+	int ret;
++    # Wait a bit before printing to avoid corrupting active HSCIF output
++            mov          x0,     #0x00040000
++    1:      sub          x0, x0, #0x00000001
++            cmp          x0,     #0x00000000
++            bne 1b
 +
-+	/* CA76 boot address and valid flags set */
-+	trampolineaddr &= APMU_CA_RVBARPL_MASK;
-+	trampolineaddr |= APMU_CA_RVBARPL_VLD;
++    # Set up HSCIF output
++    mov                  x0,     #0xe0000000
++    orr                  x0, x0, #0x06000000
++    orr                  x0, x0, #0x00400000
++    orr                  x0, x0, #0x00100000
++    orr                  x0, x0, #0x00040000
 +
-+	writel(upper_32_bits(trampolineaddr),
-+	       priv->regs + APMU_CA_RVBARPH(priv->core_id));
-+	writel(lower_32_bits(trampolineaddr),
-+	       priv->regs + APMU_CA_RVBARPL(priv->core_id));
++    # Print newline
++    mprintnl             w1
 +
-+	/* Clear Cluster OFF bit */
-+	clrbits_le32(priv->regs + APMU_CL_PWRCTRL(cluster),
-+		     APMU_CL_PWRCTRL_PCHPDNEN);
++    # Print PC:
++    mprintchr            #'P', w1
++    mprintchr            #'C', w1
++    mprintchr            #':', w1
++    mprintchr            #' ', w1
++    bl                   printchr
++    bl                   printchr
++    bl                   printchr
++    mprintchr            #'0', w1
++    mprintchr            #'x', w1
 +
-+	/* Clear Core OFF bit */
-+	clrbits_le32(priv->regs + APMU_CA_PWRCTRL(priv->core_id),
-+		     APMU_CA_PWRCTRL_PCHPDNEN);
-+	ret = readl_poll_timeout(priv->regs + APMU_CA_PWRCTRL(priv->core_id),
-+				 val, !(val & APMU_CA_PWRCTRL_PCHPDNEN),
-+				 RCAR_APMU_TIMEOUT_US);
-+	if (ret)
-+		return -ETIMEDOUT;
++    # Figure out start address and print it
++    adr                  x2, start
++    bl                   printhex16
 +
-+	setbits_le32(priv->regs + APMU_CA_PWRCTRL(priv->core_id),
-+		     APMU_CA_PWRCTRL_WUP_REQ);
++    # Print newline
++    mprintnl             w1
 +
-+	/* Wait until CAXX wake up sequence finishes */
-+	return readl_poll_timeout(priv->regs + APMU_CA_PWRCTRL(priv->core_id),
-+				  val, !(val & APMU_CA_PWRCTRL_WUP_REQ),
-+				  RCAR_APMU_TIMEOUT_US);
-+}
++    # Print MPIDR:
++    mprintchr            #'M', w1
++    mprintchr            #'P', w1
++    mprintchr            #'I', w1
++    mprintchr            #'D', w1
++    mprintchr            #'R', w1
++    mprintchr            #':', w1
++    mprintchr            #' ', w1
++    mprintchr            #'0', w1
++    mprintchr            #'x', w1
 +
-+/**
-+ * renesas_apmu_rproc_ca76_stop() - Stop the remote processor
-+ * @dev:	corresponding remote processor device
-+ *
-+ * Return: 0 if all went ok, else corresponding -ve error
-+ */
-+static int renesas_apmu_rproc_ca76_stop(struct udevice *dev)
-+{
-+	struct renesas_apmu_rproc_ca76_privdata *priv = dev_get_priv(dev);
++    # Read MPIDR
++    mrs                  x2, mpidr_el1
++    bl                   printhex8
 +
-+	/* Clear DBGGEN_PPDN bit for core down to 'OFF' mode */
-+	clrbits_le32(priv->regs + APMU_CA_SAFECTRL(priv->core_id),
-+		     APMU_CA_SAFECTRL_DBGGEN);
++    # Print newline
++    mprintnl             w1
 +
-+	/* For Core OFF */
-+	setbits_le32(priv->regs + APMU_CA_PWRCTRL(priv->core_id),
-+		     APMU_CA_PWRCTRL_PCHPDNEN);
++    # Prepare core power off, used by rproc stop
++    mov                  x2, #1
++    msr                  S3_0_C15_C2_7, x2
 +
-+	return 0;
-+}
++    # Halt and do nothing
++    3:      wfi
++            b            3b
 +
-+/**
-+ * renesas_apmu_rproc_ca76_reset() - Reset the remote processor
-+ * @dev:	corresponding remote processor device
-+ *
-+ * Return: 0 if all went ok, else corresponding -ve error
-+ */
-+static int renesas_apmu_rproc_ca76_reset(struct udevice *dev)
-+{
-+	renesas_apmu_rproc_ca76_stop(dev);
-+	renesas_apmu_rproc_ca76_start(dev);
-+	return 0;
-+}
++    # Print char byte of register w1 (clobber: w9)
++    printchr:
++    2:      ldrh         w9, [x0, #HSFSR]
++            tst          w9, #TEND
++            beq          2b
++            strb         w1, [x0, #HSTDR]
++            ldrh         w9, [x0, #HSFSR]
++            bic          w9, w9, #TEND
++            strh         w9, [x0, #HSFSR]
 +
-+/**
-+ * renesas_apmu_rproc_ca76_is_running() - Is the remote processor running
-+ * @dev:	corresponding remote processor device
-+ *
-+ * Return: 0 if the remote processor is running, 1 otherwise
-+ */
-+static int renesas_apmu_rproc_ca76_is_running(struct udevice *dev)
-+{
-+	struct renesas_apmu_rproc_ca76_privdata *priv = dev_get_priv(dev);
++            ret
 +
-+	return !readl(priv->regs + APMU_CA_FSMSTSR(priv->core_id));
-+}
++    # Print hex content of register x2 (clobber: x6, x7, x8, x9)
++    printhex16:
++            mov          x8, #16
 +
-+/**
-+ * renesas_apmu_rproc_ca76_init() - Initialize the remote processor APSREG register
-+ * @dev:	corresponding remote processor device
-+ *
-+ * Return: 0 if all went ok, else corresponding -ve error
-+ */
-+static int renesas_apmu_rproc_ca76_init(struct udevice *dev)
-+{
-+	struct renesas_apmu_rproc_ca76_privdata *priv = dev_get_priv(dev);
-+	int cluster = renesas_apmu_rproc_ca76_cluster(priv->core_id);
++    1:      and          x1, x2, #0xf000000000000000
++            lsl          x2, x2, #4
++            lsr          x1, x1, #60
++            add          x1, x1, #'0'
++            cmp          x1, #'9'
++            # >= '9' => add 'a' - ':'
++            blt          4f
++            add          x1, x1, #('a' - ':')
++    4:
++            mov          x6, lr
++            bl           printchr
++            mov          lr, x6
 +
-+	/* If the core is running already, do nothing. */
-+	if (renesas_apmu_rproc_ca76_is_running(dev))
-+		return 0;
++            sub          x8, x8, #1
++            cmp          x8, #0
++            bne          1b
 +
-+	/* Disable AC TEST */
-+	setbits_le32(((void __iomem *)CA76_APSREG_BASE) +
-+		     CA76_APSREG_AP_CLUSTER_AUX(cluster),
-+		     CA76_APSREG_AP_CLUSTER_AUX_INIT);
++            ret
 +
-+	return 0;
-+}
++    # Print hex content of register x2 (clobber: x6, x7, x8, x9)
++    printhex8:
++            mov          x8, #8
 +
-+static const struct dm_rproc_ops renesas_apmu_rproc_ca76_ops = {
-+	.init		= renesas_apmu_rproc_ca76_init,
-+	.load		= renesas_apmu_rproc_ca76_load,
-+	.start		= renesas_apmu_rproc_ca76_start,
-+	.stop		= renesas_apmu_rproc_ca76_stop,
-+	.reset		= renesas_apmu_rproc_ca76_reset,
-+	.is_running	= renesas_apmu_rproc_ca76_is_running,
-+	.device_to_virt	= renesas_apmu_rproc_device_to_virt,
-+};
++    1:      and          x1, x2, #0xf0000000
++            lsl          x2, x2, #4
++            lsr          x1, x1, #28
++            add          x1, x1, #'0'
++            cmp          x1, #'9'
++            # >= '9' => add 'a' - ':'
++            blt          4f
++            add          x1, x1, #('a' - ':')
++    4:
++            mov          x6, lr
++            bl           printchr
++            mov          lr, x6
 +
-+/**
-+ * renesas_apmu_rproc_ca76_of_to_plat() - Convert OF data to platform data
-+ * @dev:	corresponding remote processor device
-+ *
-+ * Return: 0 if all went ok, else corresponding -ve error
-+ */
-+static int renesas_apmu_rproc_ca76_of_to_plat(struct udevice *dev)
-+{
-+	struct renesas_apmu_rproc_ca76_privdata *priv = dev_get_priv(dev);
++            sub          x8, x8, #1
++            cmp          x8, #0
++            bne          1b
 +
-+	priv->core_id = dev_get_driver_data(dev);
++            ret
 +
-+	priv->regs = dev_read_addr_ptr(dev);
-+	if (!priv->regs)
-+		return -EINVAL;
++Compile the piece of position independent assembler code above for
++the Cortex-A76 core as follows:
 +
-+	priv->trampoline = memalign(APMU_CRBARP_CR_RBAR_ALIGN,
-+				    sizeof(renesas_apmu_rproc_ca76_trampoline));
-+	if (!priv->trampoline)
-+		return -ENOMEM;
++.. code-block:: console
 +
-+	memcpy(priv->trampoline, renesas_apmu_rproc_ca76_trampoline,
-+	       sizeof(renesas_apmu_rproc_ca76_trampoline));
++    $ cpp code.s > temp.S
++    $ aarch64-linux-gnu-as -march=armv8-a -o temp.o temp.S
++    $ aarch64-linux-gnu-objcopy -O binary temp.o output.bin
 +
-+	return 0;
-+}
++Load the piece of compiled assembler code into memory, and start the
++code on the Cortex-A76 cluster 1 core 1 as follows:
 +
-+U_BOOT_DRIVER(renesas_apmu_ca76) = {
-+	.name		= "rcar-apmu-ca76",
-+	.id		= UCLASS_REMOTEPROC,
-+	.ops		= &renesas_apmu_rproc_ca76_ops,
-+	.of_to_plat	= renesas_apmu_rproc_ca76_of_to_plat,
-+	.priv_auto	= sizeof(struct renesas_apmu_rproc_ca76_privdata),
-+};
++.. note::
 +
- /**
-  * renesas_apmu_rproc_bind() - Bind rproc driver to each core control
-  * @dev:	corresponding remote processor parent device
-@@ -239,7 +490,7 @@ U_BOOT_DRIVER(renesas_apmu_cr52) = {
- static int renesas_apmu_rproc_bind(struct udevice *parent)
- {
- 	ofnode pnode = dev_ofnode(parent);
--	struct driver *cdrvr52;
-+	struct driver *cdrvr52, *cdrva76;
- 	struct udevice *cdev;
- 	char name[32];
- 	ulong i;
-@@ -249,6 +500,10 @@ static int renesas_apmu_rproc_bind(struct udevice *parent)
- 	if (!cdrvr52)
- 		return -ENOENT;
- 
-+	cdrva76 = lists_driver_lookup_name("rcar-apmu-ca76");
-+	if (!cdrva76)
-+		return -ENOENT;
++    The example below does use ethernet loading of the Cortex-A76
++    firmware, however, it is perfectly fine to load the firmware from
++    either SD card, NVMe, or other storage media.
 +
- 	for (i = 0; i < RCAR4_CR52_CORES; i++) {
- 		snprintf(name, sizeof(name), "rcar-apmu-cr52.%ld", i);
- 		ret = device_bind_with_driver_data(parent, cdrvr52, strdup(name),
-@@ -257,6 +512,14 @@ static int renesas_apmu_rproc_bind(struct udevice *parent)
- 			return ret;
- 	}
- 
-+	for (i = 0; i < RCAR4_CA76_CORES; i++) {
-+		snprintf(name, sizeof(name), "rcar-apmu-ca76.%ld", i);
-+		ret = device_bind_with_driver_data(parent, cdrva76, strdup(name),
-+						   i, pnode, &cdev);
-+		if (ret)
-+			return ret;
-+	}
++.. note::
 +
- 	return 0;
- }
- 
++    The example below does use load address 0x4b000000 for the Cortex-A76
++    firmware. This address is located in DRAM and may be overwritten by
++    other software while the Cortex-A76 is running.
++
++.. note::
++
++    The example code does invoke ``msr S3_0_C15_C2_7, x2`` instruction with
++    register ``x2`` set to ``1`` before invoking the ``wfi`` instruction.
++    This sets per-CPU ``CPUPWRCTRL`` register bit 0 ``CPUPWRCTLR_PWDN``,
++    which must be set on the CPU core in order to power off the CPU core
++    when the ``wfi`` instruction is invoked. This setting is mandatory for
++    the correct behavior of ``rproc stop N`` of the CPU core N, in case of
++    this example, that is ``rproc stop 6`` for CPU core 6. In case the bit
++    ``CPUPWRCTLR_PWDN`` is not set, the CPU core remains in power on state.
++
++.. code-block:: console
++
++    # Configure ethernet address, adjust as needed:
++    => env set ipaddr 192.168.1.10
++    => env set serverip 192.168.1.1
++    => env set netmask 255.255.255.0
++
++    # Load Cortex-A76 firmware into DRAM at address 0x4b000000
++    => tftp 0x4b000000 output.bin
++    # Configure Cortex-A76 cluster 1 core 1 entry point
++    => rproc load 6 0x4b000000 ${filesize}
++    # Start Cortex-A76 cluster 1 core 1
++    => rproc start 6
++
++The expected output of ``rproc start 6`` a print of both MPIDR and PC register
++values on HSCIF0.
++
++.. code-block:: console
++
++    Load Remote Processor 6 with data@addr=0x4b000000 448 bytes: Success!
++
++    PC:    0x000000004b000000
++    MPIDR: 0x81010100
++
++.. note::
++
++    The MPIDR register value above is 0x81010100 . Cortex-A76 MPIDR register
++    bit 31 is always set to 1, bitfields AFF2[23:16], AFF1[15:8] describe
++    cluster and core affinity, in this case this is cluster 1, core 1.
++
++Other Cortex-A76 cores in other clusters can be started by passing a
++matching core number to both ``rproc load`` and ``rproc start``. Example:
++
++.. code-block:: console
++
++    => rproc list
++    ...
++    3 - Name:'rcar-apmu-ca76.0-apmu@e6170000' type:'internal memory mapped' supports: load start stop reset is_running
++    4 - Name:'rcar-apmu-ca76.1-apmu@e6170000' type:'internal memory mapped' supports: load start stop reset is_running
++    5 - Name:'rcar-apmu-ca76.2-apmu@e6170000' type:'internal memory mapped' supports: load start stop reset is_running
++    6 - Name:'rcar-apmu-ca76.3-apmu@e6170000' type:'internal memory mapped' supports: load start stop reset is_running
++    => rproc load 5 0x4b000000 ${filesize} && rproc start 5
++    Load Remote Processor 5 with data@addr=0x4b000000 448 bytes: Success!
++
++    PC:    0x000000004b000000
++    MPIDR: 0x81010000
++
++.. note::
++
++    The MPIDR register value above is 0x81010000 . Cortex-A76 MPIDR register
++    bit 31 is always set to 1, bitfields AFF2[23:16], AFF1[15:8] describe
++    cluster and core affinity, in this case this is cluster 1, core 0.
 -- 
 2.53.0
 
