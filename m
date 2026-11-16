@@ -1,147 +1,149 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56E04606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BACCA606A336
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PmauiiiS;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tdkJNpk9
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=capWyjoL;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=KX8pbmvU
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2844D605CB;
-	Tue, 17 Nov 2026 04:34:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7EC7B80C68;
+	Tue, 17 Nov 2026 04:34:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZqWhZbJE390W; Tue, 17 Nov 2026 04:34:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6DAD1605DA
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890084;
-	b=pHWKSe6fiucFy+/KL/Ta1eNNHbUiiPM/TxWT8gY2aJUac1a7R+Nkws94OGfG2/9LYYGI
-	 foKV8ZKn7fqNyemaQ841eI8r4yvxqCIlE9Xj+ffVkgZg6g0oF+So6dHtkT6tWTNdlhpFy
-	 nkDdXRaklfxefMz+OdYLdJy1qXLlq+CybGe3CKswHBzNJdIy+lz2hqLHM/xs66XBjhxdH
-	 2I8/v+g/m/cRRufxcYns/95MwMNkjWUoGzKbKELBKdMNNDTJ66+T1/xbgsCrzTjI3VeIt
-	 m3NsQLSoBilMzY6bSX+vWjEXEH23oOpU10SyvvQ7Qrxu3Uo8+NOTxqmYE+Atz2g1WFQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lrloG_0FaF2p; Tue, 17 Nov 2026 04:34:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5C60680C70
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890086;
+	b=a/JEawxC7ZYtgVLubJfiupjzkADauWg0JJVcyDz1tFS+yJbIWcH7b6lgNWqKTQura/N/
+	 UMw7dDdnLriWuF6ab0AeGDp5WQe1HsnrK3EldNvQ0io0A/oFGXCflTuXVq6eCFE93GN+C
+	 AjcnPtWL8xlT6VbghkHjSoPryZnzh25U/Jvvgt4vmDaqjqk21fo9WlTxQWy808N+aAci8
+	 jS0MY42bDmNz2NsCLDJ/PMWoEiz6ULJ5XYDylI1DD2ihrAu77pctEkxTPmEGRyjaCGNir
+	 EN0ycb/AgFbWhW5+OmYx7N8Y47XSfGS5jvs1NCo402XJQ67RmYn9j0xWblrkM/yuRBw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794890084;
+	c=relaxed/relaxed; t=1794890086;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=vUrO9jphDSwhafEHzxkcRGpkKIwGI4iB9NaMOLbhxCo=;
-	b=QjljNAoFoUqZQrMexIrV8vevJr8RsmJ/FMRt8DF2DCoSqpSttx7ovmDrpus0pOOYOSf8
-	 c3y5HOOAVoYn2f5oUl0A0QEPLEg7sSF/lJyR15EQkJvHNVKqWnt69IZ+HZfoKvFESJSne
-	 DIdUvTQYt2W17p3VWONTGHf05zqnRKitDhnF8CKgq3wVBXBC+2Ka4QMK4KlhhVGcqZMbT
-	 wYi8CUgmf3Xfx10q8YwCR+YRtpM06pbwIUDESspLYhSXkbYRxzTRCE8+KjpoJDaqXsswo
-	 sHNj1cWDXKzmD7fc7dNdwAURWB1dJdsHh6RwWBh5BMKwgSmkBOo7/WLzYc4cd67kbGw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=TfJWhBKLqtQaTV+U+oNrEqm/fWZauyQPEV2DgIt6c0s=;
+	b=eaapAalTjuks4ZrQiZa48pQ6FQR9xYd4t8LvET89lrZCKhsBamij26WMTbDAhPeBAPdW
+	 5FDiI/YfMliAZXoO4eXrkF9yNk7EnVCEMAXzbAHu6tTLesAClWjMClvxEVOx9QKGR6qRT
+	 E0qUCUAEXOPapwD4cbsy5qYc0d82qsI3sqGyWvWyCkOcfBuvvUrVQUzKAM8wXZ7SmaEzH
+	 NDnN4cbckw6g0D7FzAXdJaeEt+5GiDBOm3wrB7Mo1Baf38hVKoZSLgBBeFiF4oKArLP9g
+	 X8J/dgzd3tOgKqMreCB7mQ/lBEsWHRBfdZe52x6bcAw3FlC6WDXyFFqnecs6Rj7N6Zg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=KX8pbmvU;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794890084;
-	bh=vUrO9jphDSwhafEHzxkcRGpkKIwGI4iB9NaMOLbhxCo=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=PmauiiiSWEJjzoir76gGaRn9i+88LkvDH+niYhyRfku7jASqNySOVsCo7+IENbc7K
-	 BZCh4m4ioLnjBkIQ+LtXKvggaxitJHmNHFEXdehWIs9NPRMewtepbbjSVqU4DUHMVj
-	 GrwuEKmyR6EXWbCE4eeFgQ3Qi3EleIHObZkh5CrW5opOWKCafxTtIt5zQpKwlOyJhY
-	 C7f0n1dO1tcHSZr5WQ/DR1/QrIMppi5jTB5RvXYslOnJZ1Y8uXaPtegdd7mO9Cd/wp
-	 IAtIELjtSf1K9xCrtrz4XOvalEyyZS9hz+FUVjnOp2yevVNJ1wtRvcVWdG21uTHrfy
-	 3j0B+mJkZZCgg==
+	d=lists.u-boot-project.org; s=default; t=1794890086;
+	bh=TfJWhBKLqtQaTV+U+oNrEqm/fWZauyQPEV2DgIt6c0s=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=capWyjoLUcr7Tg1FoL8PvmYfKLB6KZqY3ohQzNG45NUCyub/j6CpU9uzu1hJtEEQ8
+	 eQ9VYCZ4dBf+t1+KCnxz0tFeKGHpAuw4CZWN5w0UFyaeJLrniEAelU3CzpF0V9p9M+
+	 y2uWQLGlpccOFZqSOEQbh32+psT9jSkqnPHTR+NM3attq/w+5dobiGCjgujHMIV9D3
+	 NdLpK/E4zM7Pelo0HXirBvrZYATr+9faeMjPnqCS1+ILgcB+w6bbdZnWs/fC5r/mxk
+	 /5AspsbEqKEesOBS5H4sLbG5SiwqBLpDxoRC6uzG/KdZcUjn+DLJBtXpytck+92xUN
+	 A29aWD8+FnV7g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6DAD1605DA;
-	Tue, 17 Nov 2026 04:34:44 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1FD354DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:55:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5C60680C70;
+	Tue, 17 Nov 2026 04:34:46 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id ACDD94DD
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:00:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 088F540723
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:55:35 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8C98881046
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:00:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3mI6-WMb5RG2 for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 20:55:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4AF5E40684
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::1131"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X8ZkFhtxZMkQ for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 21:00:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 35FE980B97
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::634"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1131; helo=mail-yw1-x1131.google.com;
+ client-ip=2a00:1450:4864:20::634; helo=mail-ej1-x634.google.com;
  envelope-from=dilipchowdary21@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=tdkJNpk9
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4AF5E40684
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 20:55:33 +0000 (UTC)
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-8b2d14968c9so39510197b3.0
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 12:55:33 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=KX8pbmvU
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 35FE980B97
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:00:36 +0000 (UTC)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-c50604721c8so634474866b.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:00:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794862533; x=1795467333;
+ d=gmail.com; s=20260707; t=1794862835; x=1795467635;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=vUrO9jphDSwhafEHzxkcRGpkKIwGI4iB9NaMOLbhxCo=;
- b=tdkJNpk90QZqwZQFX2wmrchn+xfIMf0brtu5frZILHIn7R8a/83e4mwcC11cxs1Vua
- XORpqaiX0d9BdAA1VaOYXtId3ZYGGeNtdAhd4nK661JJ12lrUymZWdCJv7WvsKEw0tLY
- hCBZzdAauhySPfBJlxZmdjptjkSXG+rEpRZppHzrkMn3knF2ehnD5ozFecGB1CppV41w
- CraP7y4CBtN9pL85PQCkIPKncAs3T99ZovicdW+4dfKDoFw6bhPsm1MOfyEYQIb8zMSc
- 3g/mN1UUU5Z4stK/MpFY0g79WeVbh0bi1vuEPjcexWgR7cPH3JP+Y+rNfe50BjNKdqaK
- rjVA==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=TfJWhBKLqtQaTV+U+oNrEqm/fWZauyQPEV2DgIt6c0s=;
+ b=KX8pbmvU3jmVmpEV8JJCGiGMv+u3x+ifl8+4bEr1JmQcUZY+jkn/htPXxd5jPirA1Z
+ SEXpCge6VWyrUDFY/yHnvqjNwHivZnPDDhQccY/xZZvl3/M8CeKUO+ue9q7AUTnRbgnB
+ ySOI/puDRLDCI2zFW7KlQik4ODNvSyJRjeKmJsIshP3ZFbICMGwh8kUftDWLP3UOeVWy
+ WnGEoBNO2MCHN5iC57c7feWfn4EfwxHpfIGArjvA7wsDQG4ycAYH9P5kxTyftSYjZVja
+ Fm9uwoYjaCxN6dwUvsE6XSC4qFezNmSA+Nr/81SA6yrwjCdb+XBIS1IvSI0Nf3n4UOac
+ e7zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794862533; x=1795467333;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=vUrO9jphDSwhafEHzxkcRGpkKIwGI4iB9NaMOLbhxCo=;
- b=DV0HhRs6CDR1X21Iqe62omOdVAabqgVzC+WX50GfSGD+p81ZK4BXK4L7Xmiv4cThb/
- wBji8dZzgGysw4mvyPjRDJu8MTpRzpeMVXh5ofFVZYc8dt1jGECy4xU7AOO1qL8pnUsX
- Ysaa8xfFsvq8864N765Mhv5t9+V+kbR863JfBM335tNEzlx70rzmCabiHx4qzqXcJUJB
- 6lEyuR/oOdYetDALM/wuGZJ+GuDUFrF0MtvjrnKFO50svzFXx+HY5pc/SdUdoicOcw2I
- mMPWEXMlE0U/+uzZlAY9dGmkA+oDdgXzJVr17UbylQXeo83+261B65D/RkPJrQle61MU
- 8mMw==
+ d=1e100.net; s=20260707; t=1794862835; x=1795467635;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=TfJWhBKLqtQaTV+U+oNrEqm/fWZauyQPEV2DgIt6c0s=;
+ b=S31tQNrV5B0YbWvYcpFDTDhIE1+J95s9EBX+TZgOMroTnLa6Uqza5eF49aRLxnakUy
+ /JKyt6fh8Ac7OBkFmsRDdvAYfod2EScF2h7VaPqbGk2Dric84203U38+HEGjsCzwyXji
+ 1tNL4Z6rgg7745deMQWVNTEdMiJ0LPaj9MpcBWwwd/HZCnDbja3y3p4XkB0ROXypx+wG
+ eWdIbY30cbVh8IsLRdloZ4s9M9aW/EIuOaB40ktt6L0fZZvQuJQgDFgoLT+EEfCB8RiD
+ Yz2cXSjZhrNLH/kH6d/BlMeL3lfpSqWzTI8rSdVxUEeX4H+mG3JtOHAfGeU5leyjhnmx
+ 5/Kg==
 X-Forwarded-Encrypted: i=1;
- AL+hErEjHn1fPm3LQuOIhydaVkBBUoqH2g5jbEjRdm+k4w55rJ6UcyR+qlWXBfylZ7Z1DzamYGO3/4Y=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/rprYrfq1FXM/HzPKqw5nVEAbpnoHip7hYdMfy/6EueK/AFLbd
- TucNlZp1HuOhKFpwAo4GkK9fBN/QnyMMNPPQmQn4nDP/dBpx7QvWwjAA
-X-Gm-Gg: AZFdTZe0/ZOqBs+r+bv1M/0RkXiTyiQh9xIUm227lqEhAw/FuV0X01T8zeCcYqM5Lg9
- KtHQI0ViQKiHRyAKpAoDIANE2TF3vidvTylhAr+i8tLgbqzujapo03Chgo7CYzoyEJvFHGJ5G0s
- +C14kNp6N31sgDh1HffsF55ixfeMf42yOiRBs6ZLj9lNDFO1BJnzypF+V6ZE2yPDEmR4P9nzZp6
- kZUStEoigHYRrAajBTX0wTuITspO0tqm0CToHCA2YAmmpmdfhrK1YierQ9FXoPIKsO9XzR0/jP8
- gwA8nnsau7x6h3Z5qZqMbrf3FXLHsTs1y6aC14vD2NArmRoIn6+oZYoed19ndA6Ta6vrVrtEF40
- pt5keOxQ5appoOdrXK3iszcLskhyqcZZJEb4V3P9qZOqAKT5mr/TeB2M7Pub6cZTJDQQbEtKRNk
- mq6kd2iJzWwGzeeMYT1dwf8uOqjNyqrCehHmiiAolUFn1gO5hSO6apg7g6b/Ipi4bd1fb0YnG8j
- hTBqqI8D5jOoWR5YjDzEWje4pPRihIRVkDDtLUOJ8LBMGlRmVr7B0Pr+UXT+ErRVT/kD4M9dcIk
- qE7gvsw6q3OgMuFuLvd9g6g2jJ5byZCZTmkEFwjkLAO+NsQdOp7SUOIDYUL5opbVezYDpzNnTgf
- qw/p+zTjMP+TqSknjfEqa7cWtFdKl
-X-Received: by 2002:a05:690c:113:b0:8b4:cb03:c8ed with SMTP id
- 00721157ae682-8b4cb03d0abmr28161447b3.46.1794862532752; 
- Mon, 16 Nov 2026 12:55:32 -0800 (PST)
-Received: from d3sec.localdomain ([216.170.66.174])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b4ebd4ea26sm8587217b3.16.2026.11.16.12.55.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 12:55:32 -0800 (PST)
-From: Dilip Mallavarapu <dilipchowdary21@gmail.com>
-To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Qu Wenruo <wqu@suse.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
- Dilip Mallavarapu <dilipchowdary21@gmail.com>
-Subject: [PATCH] fs/btrfs: fix path buffer overflow in subvolume listing
-Date: Mon, 16 Nov 2026 14:55:02 -0600
-Message-ID: <20261116205502.14884-1-dilipchowdary21@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ AL+hErEL38wbqFrx7j3iRS8OSydcUiLvovqjjTDiAKK6jwWALeul/QSLZlq+k4cbcEfPbJsQ075aAIA=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/Ov4kpEBK4+WToVXbgukNVzNQ/7mIs0iuhXKu6JrKIK529RzPH
+ nlnRN4BJqiQ1q/Fw3ynZVjdlS+LOVG08sKiz3J+A6H03HObrK4NCaP8bP1PYC9CWWKAHhmM4lwf
+ BuUhV9YKd32dHmyWqDwA/qKvB2sDp9+A=
+X-Gm-Gg: AYBFou0OcuBfAI9FUJIIxWyhAedbyebJblEy4gfcJWAtsYwuVPGrLtIwFP+3+f6pMtW
+ fyvjKud4hksHgL8haNXh6CdxfGBMWZ0zVIpHwHHt1qEyw1e+zkmdyzyOrbnk27ZvNmCrbfreMvE
+ KfK2eOfv5zXU4d01bXYN9lT4lh5SAFR7r9oIxpL4Hu10kh60eNpWmhRQiY2G6J2f9L4DRVvi+EU
+ QWszm0zcOUCuDvfbSQvB88IU/oqmpU9vOUWm611dvgMVvw7TqhAqjKfrSxAhnSSSMmg26u9oCMg
+ cTJM9zyc3l+EpHcy2A8udo0p2MuCFPiA5ZfDabove4bUAXiUhrnoRG2vAc9psTdBSkhl6GHlRc4
+ 7UKLoaRmn+W6hDCgkzPsDgh0GDXfMuwRPxgTqzwjp27VVjLxUfz/x9tv/MgTNm3I3c+A/grChnK
+ gSSjtPQNU+y3Njphzy/qmyW6M=
+X-Received: by 2002:a17:907:9605:b0:c4d:31c5:cda with SMTP id
+ a640c23a62f3a-c50963afc72mr969167566b.21.1794862834932; Mon, 16 Nov 2026
+ 13:00:34 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAPmzV5kAUpHf5fGDHmQXnyDJxs=Kvgtks2ztva88pG2wj7m9qA@mail.gmail.com>
+ <deff7930-1571-43fe-8f05-0c576e115c5f@suse.com>
+ <20261116201914.GK554944@bill-the-cat>
+In-Reply-To: <20261116201914.GK554944@bill-the-cat>
+From: Dilip <dilipchowdary21@gmail.com>
+Date: Mon, 16 Nov 2026 15:00:21 -0600
+X-Gm-Features: AclHuK8oqX2NqTbt-KC7k4nt8w5Yy7ETtdC1dUlv90ZLSIufESitj6Msx6ejX3o
+Message-ID: <CAPmzV5kihm867vB4Tt8uyL_ozJA-dHXRcGrpszLw4QzdaWUPBw@mail.gmail.com>
+Subject: Re: Five memory-safety issues in U-Boot filesystem/partition parsing
+ (coordinated disclosure)
+To: Tom Rini <trini@konsulko.com>
+Cc: Qu Wenruo <wqu@suse.com>, u-boot@lists.u-boot-project.org, 
+ joaomarcos.costa@bootlin.com, richard.genoud@bootlin.com, alchark@flipper.net, 
+ kabel@kernel.org
+Content-Type: multipart/alternative; boundary="000000000000b25e7b06606b11df"
 X-Mailman-Approved-At: Tue, 17 Nov 2026 04:34:42 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -152,80 +154,310 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=0.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-get_path_in_subvol() and list_one_subvol() accumulate a path across the
-on-disk inode-ref / root-ref chain with strncat(path_ret, tmp, PATH_MAX).
-strncat()'s bound limits the source copy, not the destination total, and
-there is no depth/cycle limit, so a deep or cyclic ref chain overflows
-the PATH_MAX path_ret buffer (CWE-787/120).
+--000000000000b25e7b06606b11df
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Use strlcat()/strlcpy(), which bound the total length, and reject the
-path if it would be truncated (which also terminates a cyclic chain).
+Hi Tom, Qu,
 
-Reachable via the btrsubvol command on a crafted btrfs image.
+Short answer: there isn't a strncat_s()-style helper in mainline to borrow.
+The kernel's bounded helper is strscpy() (copy-only, returns -E2BIG on
+truncation), and the kernel has moved away from the strcat family entirely,
+VFS never forward-concatenates paths, d_path() builds the path backward
+from the end of the buffer.
+ I don't think we need a new helper for the fix, though: U-Boot already
+carries strlcat() in lib/string.c (BSD semantics, ~19 callers today). It
+bounds the destination and returns the length it would have produced, so
+the check is just:
 
-Signed-off-by: Dilip Mallavarapu <dilipchowdary21@gmail.com>
----
- fs/btrfs/subvolume.c | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
+ if (strlcat(path_ret, tmp, PATH_MAX) >=3D PATH_MAX) {
+     ret =3D -ENAMETOOLONG;
+     goto out;
+ }
 
-diff --git a/fs/btrfs/subvolume.c b/fs/btrfs/subvolume.c
-index 68ca7e48e48..bac9c1d1722 100644
---- a/fs/btrfs/subvolume.c
-+++ b/fs/btrfs/subvolume.c
-@@ -64,7 +64,16 @@ static int get_path_in_subvol(struct btrfs_root *root, u64 ino, char *path_ret)
- 				   (unsigned long)(iref + 1), name_len);
- 		path_ret[name_len] = '/';
- 		path_ret[name_len + 1] = '\0';
--		strncat(path_ret, tmp, PATH_MAX);
-+		/*
-+		 * strncat()'s bound limits the source copy, not the
-+		 * destination, so a deep/cyclic ref chain would overflow
-+		 * path_ret (PATH_MAX). strlcat() bounds the total; reject
-+		 * the path if it would be truncated.
-+		 */
-+		if (strlcat(path_ret, tmp, PATH_MAX) >= PATH_MAX) {
-+			ret = -ENAMETOOLONG;
-+			goto out;
-+		}
- 
- 		btrfs_item_key_to_cpu(path.nodes[0], &key, path.slots[0]);
- 		cur = key.offset;
-@@ -128,7 +137,10 @@ static int list_one_subvol(struct btrfs_root *root, char *path_ret)
- 				   (unsigned long)(rr + 1), name_len);
- 		path_ret[name_len] = '/';
- 		path_ret[name_len + 1] = '\0';
--		strncat(path_ret, tmp, PATH_MAX);
-+		if (strlcat(path_ret, tmp, PATH_MAX) >= PATH_MAX) {
-+			ret = -ENAMETOOLONG;
-+			goto out;
-+		}
- 
- 		/* Get the path inside the parent subvolume */
- 		btrfs_item_key_to_cpu(path.nodes[0], &key, path.slots[0]);
-@@ -146,9 +158,12 @@ static int list_one_subvol(struct btrfs_root *root, char *path_ret)
- 		cur = key.offset;
- 	}
- 	/* Add the leading '/' */
--	strncpy(tmp, path_ret, PATH_MAX);
--	strncpy(path_ret, "/", PATH_MAX);
--	strncat(path_ret, tmp, PATH_MAX);
-+	strlcpy(tmp, path_ret, PATH_MAX);
-+	strlcpy(path_ret, "/", PATH_MAX);
-+	if (strlcat(path_ret, tmp, PATH_MAX) >= PATH_MAX) {
-+		ret = -ENAMETOOLONG;
-+		goto out;
-+	}
- out:
- 	btrfs_release_path(&path);
- 	free(tmp);
--- 
-2.53.0
+That gives the "bound both sides, reject on overflow" behavior Qu
+described, and since a cyclic ref chain keeps growing the accumulated path,
+it crosses PATH_MAX and gets rejected too, which also breaks the cycle. The
+direct path_ret[name_len] writes are already bounded by the existing
+name_len > BTRFS_NAME_LEN check.
+ I've just posted the btrfs fix as a standalone patch ("fs/btrfs: fix path
+buffer overflow in subvolume listing").
 
+If you'd prefer a strscpy()-style API that returns -E2BIG rather than
+relying on the strlcat return value, I'm happy to port strscpy() from the
+kernel as a separate prerequisite patch, but I'd keep that independent of
+the fix, since strlcat() already closes the hole with what's in tree.
+
+Thanks,
+Dilip
+
+On Mon, Nov 16, 2026 at 2:19=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+
+> On Tue, Nov 17, 2026 at 06:44:56AM +1030, Qu Wenruo wrote:
+> >
+> >
+> > =E5=9C=A8 2026/11/16 17:24, Dilip =E5=86=99=E9=81=93:
+> > > Hi U-Boot Team,
+> > >
+> > > Thanks for all the work you've put into hardening U-Boot's image
+> > > parsing, the 2026 squashfs/disk crafted-image series was great to see=
+,
+> > > and it's what prompted me to take a closer look in the same spirit.
+> > >
+> > > I'd like to report five independent memory-safety issues, all in the
+> > > same threat model as that series: U-Boot parsing an attacker-controll=
+ed
+> > > filesystem image or partition table from untrusted media (USB/SD/eMMC=
+/
+> > > partition, and for some, a netboot-fetched image). I found them by
+> > > source review of master v2027.01-rc2 (commit ff8a9bc4), and each come=
+s
+> > > with a minimal, self-contained proof-of-concept.
+> > >
+> > > Reachability for all five is an everyday operation on attached media,
+> > > `ls`, `load`, `part list`, `cramfsls`, `btrsubvol`, or distro-boot
+> > > scanning,  with no signature verification anywhere in the path.
+> > >
+> > > Here's the short version of each:
+> > >
+> > > 1. squashfs: out-of-bounds free() in symlink path resolution (CWE-590=
+)
+> > >     fs/squashfs/sqfs.c : sqfs_clean_base_path()
+> > >     A symlink whose target has more ".." components than its path dep=
+th
+> > > drives
+> > >     free(base[i]) with i negative,  a wild free of heap pointers
+> before the
+> > >     base_tokens[] array. The `if (bc < 0)` guard only runs after the
+> frees.
+> > >     PoC: ASAN heap-buffer-overflow at free(base[-1]). Trigger: /s ->
+> ../x
+> > >
+> > > 2. GPT:  integer overflow in partition-entry-array allocation (CWE-19=
+0
+> =E2=86=92
+> > > 125)
+> > >     disk/part_efi.c : alloc_read_gpt_entries() / part_print_efi()
+> > >     count =3D num_partition_entries * sizeof_partition_entry is compu=
+ted
+> > > in 32-bit
+> > >     and wraps (even on 64-bit), under-allocating the PTE buffer, whil=
+e
+> > >     part_print_efi() iterates the full unbounded num_partition_entrie=
+s,
+> > > heap OOB
+> > >     read + partition-name info leak. PoC: ASAN, 512-byte buffer vs
+> > > 33.5M-entry loop.
+> > >
+> > > 3. GPT: unbounded header_size drives OOB CRC read (CWE-125)
+> > >     disk/part_efi.c : validate_gpt_header()
+> > >     efi_crc32(gpt_h, header_size) runs on a one-block buffer, but
+> > > header_size is an
+> > >     attacker-controlled le32 with no bound (Linux rejects header_size=
+ >
+> > > block_size),
+> > >   a multi-GB OOB read before the CRC check. PoC: ASAN read past the
+> 512-
+> > > byte block.
+> > >
+> > > 4. cramfs:  heap overflow in symlink/data decompression (CWE-787)
+> > >     fs/cramfs/uncompress.c : cramfs_uncompress_block() (+
+> > > cramfs_uncompress_link)
+> > >     avail_out is a fixed 8192, unrelated to the malloc(size+1)
+> > > destination sized from
+> > >     the inode's declared size; a crafted block inflating beyond `size=
+`
+> > > overflows the
+> > >     heap buffer with attacker-controlled content. Present since 2003.
+> > >     PoC: guard-page SIGSEGV at the allocation boundary. Trigger:
+> > > cramfsls over a
+> > >     directory with a symlink.
+> > >
+> > > 5. btrfs:  heap overflow in subvolume path resolution (CWE-787 / 120)
+> > >     fs/btrfs/subvolume.c : get_path_in_subvol() / list_one_subvol()
+> > >     strncat(path_ret, tmp, PATH_MAX) accumulates the path across the
+> on-
+> > > disk ref
+> > >     chain with no total-length bound (strncat's size arg bounds the
+> > > source, not the
+> > >     dest)
+> >
+> > That's the biggest problem here, unlike kernel which has VFS layer
+> handling
+> > such overly long path, here we don't have anything that limits both the
+> > source and destination length.
+> >
+> > What we need is strncat_s(), but it's not provided in the current code
+> base,
+> > so you may need to create a dedicated helper.
+>
+> Is there some helper function currently in the kernel we can borrow?
+>
+> --
+> Tom
+>
+
+--000000000000b25e7b06606b11df
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi Tom, Qu,<br><br>Short answer: there isn&#39;t a strncat=
+_s()-style helper in mainline to borrow. The kernel&#39;s bounded helper is=
+ strscpy() (copy-only, returns -E2BIG on truncation), and the kernel has mo=
+ved away from the strcat family entirely, VFS never forward-concatenates pa=
+ths, d_path() builds the path backward from the end of the buffer.<br>=C2=
+=A0I don&#39;t think we need a new helper for the fix, though: U-Boot alrea=
+dy carries strlcat() in lib/string.c (BSD semantics, ~19 callers today). It=
+ bounds the destination and returns the length it would have produced, so t=
+he check is just:<div><br></div><div>=C2=A0if (strlcat(path_ret, tmp, PATH_=
+MAX) &gt;=3D PATH_MAX) {<br>=C2=A0 =C2=A0 =C2=A0ret =3D -ENAMETOOLONG;<br>=
+=C2=A0 =C2=A0 =C2=A0goto out;<br>=C2=A0}<br><br>That gives the &quot;bound =
+both sides, reject on overflow&quot; behavior Qu described, and since a cyc=
+lic ref chain keeps growing the accumulated path, it crosses PATH_MAX and g=
+ets rejected too, which also breaks the cycle. The direct path_ret[name_len=
+] writes are already bounded by the existing name_len &gt; BTRFS_NAME_LEN c=
+heck.<br>=C2=A0I&#39;ve just posted the btrfs fix as a standalone patch (&q=
+uot;fs/btrfs: fix path buffer overflow in subvolume listing&quot;).<br><br>=
+If you&#39;d prefer a strscpy()-style API that returns -E2BIG rather than r=
+elying on the strlcat return value, I&#39;m happy to port strscpy() from th=
+e kernel as a separate prerequisite patch, but I&#39;d keep that independen=
+t of the fix, since strlcat() already closes the hole with what&#39;s in tr=
+ee.<br><br>Thanks,</div><div><span style=3D"background-color:transparent">D=
+ilip</span></div></div><br><div class=3D"gmail_quote gmail_quote_container"=
+><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Nov 16, 2026 at 2:19=E2=80=
+=AFPM Tom Rini &lt;<a href=3D"mailto:trini@konsulko.com">trini@konsulko.com=
+</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
+On Tue, Nov 17, 2026 at 06:44:56AM +1030, Qu Wenruo wrote:<br>
+&gt; <br>
+&gt; <br>
+&gt; =E5=9C=A8 2026/11/16 17:24, Dilip =E5=86=99=E9=81=93:<br>
+&gt; &gt; Hi U-Boot Team,<br>
+&gt; &gt; <br>
+&gt; &gt; Thanks for all the work you&#39;ve put into hardening U-Boot&#39;=
+s image<br>
+&gt; &gt; parsing, the 2026 squashfs/disk crafted-image series was great to=
+ see,<br>
+&gt; &gt; and it&#39;s what prompted me to take a closer look in the same s=
+pirit.<br>
+&gt; &gt; <br>
+&gt; &gt; I&#39;d like to report five independent memory-safety issues, all=
+ in the<br>
+&gt; &gt; same threat model as that series: U-Boot parsing an attacker-cont=
+rolled<br>
+&gt; &gt; filesystem image or partition table from untrusted media (USB/SD/=
+eMMC/<br>
+&gt; &gt; partition, and for some, a netboot-fetched image). I found them b=
+y<br>
+&gt; &gt; source review of master v2027.01-rc2 (commit ff8a9bc4), and each =
+comes<br>
+&gt; &gt; with a minimal, self-contained proof-of-concept.<br>
+&gt; &gt; <br>
+&gt; &gt; Reachability for all five is an everyday operation on attached me=
+dia,<br>
+&gt; &gt; `ls`, `load`, `part list`, `cramfsls`, `btrsubvol`, or distro-boo=
+t<br>
+&gt; &gt; scanning,=C2=A0 with no signature verification anywhere in the pa=
+th.<br>
+&gt; &gt; <br>
+&gt; &gt; Here&#39;s the short version of each:<br>
+&gt; &gt; <br>
+&gt; &gt; 1. squashfs: out-of-bounds free() in symlink path resolution (CWE=
+-590)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0fs/squashfs/sqfs.c : sqfs_clean_base_path()<br=
+>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0A symlink whose target has more &quot;..&quot;=
+ components than its path depth<br>
+&gt; &gt; drives<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0free(base[i]) with i negative,=C2=A0 a wild fr=
+ee of heap pointers before the<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0base_tokens[] array. The `if (bc &lt; 0)` guar=
+d only runs after the frees.<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0PoC: ASAN heap-buffer-overflow at free(base[-1=
+]). Trigger: /s -&gt; ../x<br>
+&gt; &gt; <br>
+&gt; &gt; 2. GPT:=C2=A0 integer overflow in partition-entry-array allocatio=
+n (CWE-190 =E2=86=92<br>
+&gt; &gt; 125)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0disk/part_efi.c : alloc_read_gpt_entries() / p=
+art_print_efi()<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0count =3D num_partition_entries * sizeof_parti=
+tion_entry is computed<br>
+&gt; &gt; in 32-bit<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0and wraps (even on 64-bit), under-allocating t=
+he PTE buffer, while<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0part_print_efi() iterates the full unbounded n=
+um_partition_entries,<br>
+&gt; &gt; heap OOB<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0read + partition-name info leak. PoC: ASAN, 51=
+2-byte buffer vs<br>
+&gt; &gt; 33.5M-entry loop.<br>
+&gt; &gt; <br>
+&gt; &gt; 3. GPT: unbounded header_size drives OOB CRC read (CWE-125)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0disk/part_efi.c : validate_gpt_header()<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0efi_crc32(gpt_h, header_size) runs on a one-bl=
+ock buffer, but<br>
+&gt; &gt; header_size is an<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0attacker-controlled le32 with no bound (Linux =
+rejects header_size &gt;<br>
+&gt; &gt; block_size),<br>
+&gt; &gt;=C2=A0 =C2=A0a multi-GB OOB read before the CRC check. PoC: ASAN r=
+ead past the 512-<br>
+&gt; &gt; byte block.<br>
+&gt; &gt; <br>
+&gt; &gt; 4. cramfs:=C2=A0 heap overflow in symlink/data decompression (CWE=
+-787)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0fs/cramfs/uncompress.c : cramfs_uncompress_blo=
+ck() (+<br>
+&gt; &gt; cramfs_uncompress_link)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0avail_out is a fixed 8192, unrelated to the ma=
+lloc(size+1)<br>
+&gt; &gt; destination sized from<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0the inode&#39;s declared size; a crafted block=
+ inflating beyond `size`<br>
+&gt; &gt; overflows the<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0heap buffer with attacker-controlled content. =
+Present since 2003.<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0PoC: guard-page SIGSEGV at the allocation boun=
+dary. Trigger:<br>
+&gt; &gt; cramfsls over a<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0directory with a symlink.<br>
+&gt; &gt; <br>
+&gt; &gt; 5. btrfs:=C2=A0 heap overflow in subvolume path resolution (CWE-7=
+87 / 120)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0fs/btrfs/subvolume.c : get_path_in_subvol() / =
+list_one_subvol()<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0strncat(path_ret, tmp, PATH_MAX) accumulates t=
+he path across the on-<br>
+&gt; &gt; disk ref<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0chain with no total-length bound (strncat&#39;=
+s size arg bounds the<br>
+&gt; &gt; source, not the<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0dest)<br>
+&gt; <br>
+&gt; That&#39;s the biggest problem here, unlike kernel which has VFS layer=
+ handling<br>
+&gt; such overly long path, here we don&#39;t have anything that limits bot=
+h the<br>
+&gt; source and destination length.<br>
+&gt; <br>
+&gt; What we need is strncat_s(), but it&#39;s not provided in the current =
+code base,<br>
+&gt; so you may need to create a dedicated helper.<br>
+<br>
+Is there some helper function currently in the kernel we can borrow?<br>
+<br>
+-- <br>
+Tom<br>
+</blockquote></div>
+
+--000000000000b25e7b06606b11df--
