@@ -1,130 +1,122 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 634F3606A31C
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:44:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 244CD606A31C
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 17:44:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CENgKIfk;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=qkwirifZ
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aHTOz1zg;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=N1Fq55AQ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3DBE5810D6;
-	Mon, 16 Nov 2026 17:44:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EF08A40795;
+	Mon, 16 Nov 2026 17:44:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dGTVkw_kBtwv; Mon, 16 Nov 2026 17:44:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5B962810D8
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794851083;
-	b=m54XWCCxwyKml+69t9V/VkM6JZR5SR2pMtED1+L1cl8rzcttibqhFKYe6AzlqwlBr0Ge
-	 8hGpho0ILEoTh1wz3p0A+l9HxAXr3btISYk4SMUZdK4EUzG9gEjI2mrAoOErR/Pe8MvsU
-	 VEHNsFGE95elx5bzHYtiqVPrZpeqjDVL77cWtfNJktzFPwe9YgH1kEdwy1DU2Nlf8NcRI
-	 ufDLvISHwbxpo9OoOYzn1nVkA+5sxELYI9wTxIrnc/sEhreids0ZVeBD7OGHz/OQDkcsg
-	 HuusjgVfAgSFyrHDpOnT7EubR9Ylu3FvtIyPxpmTqVymXE3R0ppcZ4IQUfzIrs4zLvg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zs3goDs_AxxG; Mon, 16 Nov 2026 17:44:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 253984076E
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794851096;
+	b=Lywfocj8/ELHmcyvGbNHF9dG9tviByJQcNfe/oofmI7+zquHNOBKp3pYVHq08XG+brB5
+	 U1xEHP9hH7GbpSNQNUkcz50azy6+c5CgBf8T+LLP6/nJiaU0f1sgArpRXfKqGmBrynJLY
+	 DSK59uxm3FqicmpSahy7+9WuWPpIjZxzl2Gd433B0RfgvtU8VwoZV8BPJTfULE0reYWsQ
+	 sm0cb9A6EKh07Jmcj8ZDuBzsez8zNtozkXkHy3SX3TEqNiNiA5VVvt9neXWExW/fVVvou
+	 D3QA8kir8E7DZvS9G+vF4QdtFNX8e9c3mL8G1Cim4aDtSxor63uBe4oMZEUclNwJEUA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794851083;
+	c=relaxed/relaxed; t=1794851096;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:
+	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=wsrh29DOzfoh9oEq0wOmZnDYPHeQc9yF26PM7fyW3kw=;
-	b=c4uxSZc8uXxUqDJHD20FLU/1siIBLGlgSi13l+YtFD/4aQqj5TjoQ18FoHg0FHyn25OL
-	 WFOrP529R1zsGoADSQoW0F7/ZvuGCJVEL7CNgeFwaqTnHn8oOQM6e7t09AjM8KQWPRlHz
-	 ri2OLQNSTRNCaWZDg36ZlKbejUZRR6cCNv9pomQr7XVOsgpLhBNGzLozSHHsxsNIBs4Bs
-	 IYG4JaWdM25l81ThLxLaRcELLiWXx2OIBN0OF/IRuOai6DF5F4etCogldKHzyI5f4vjr/
-	 XD6RMM6hyf/KP/kr0FsZO4LeBDhb1VwtNBbhB2iO4HAm/6zYI1Ce+sCFIBa+iBmB3gA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=19SU79c/dKy70MeuqnzIopypOzcTe5r+dn3rgoHv+b8=;
+	b=Dx/ScYfoLAnmSI6vUkrJ1lE2U9isSIILR1k+ayTBuIMlXJxoChth9jH67smH3fT3jCZD
+	 NMY8NTqgl8flddeaQRMBri7FgJb4ATPLo5JJE64JJUk7akgfh1+8M1epnVs6YgKznogUu
+	 /0T8M9hLNCNWcu7W7qqpP2K2h6iKdCaoQR7UD/xZPuMh5sS7ahNuM+uG8HDsdLHwby/HW
+	 Z5/ayNBFKyuWE4rMynFNq1c3/NTzbyynpkmWce4VqRdpY8RYEQVkrZHgoDxHpHiJQoaLI
+	 ADMDuOSmqytY/v3KOj5AKukMZ93JJCdbOsBxUEjhrheKiBD0JxeyF9OpgBIHWol+9xg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=mailbox.org;
+	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=N1Fq55AQ;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794851083;
-	bh=wsrh29DOzfoh9oEq0wOmZnDYPHeQc9yF26PM7fyW3kw=;
+	d=lists.u-boot-project.org; s=default; t=1794851096;
+	bh=19SU79c/dKy70MeuqnzIopypOzcTe5r+dn3rgoHv+b8=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=CENgKIfk9SdhPyklJJ9G6LJLGfAcNRX/O+ISoxqVu7fzl8ZATRyAbW9KyaR6SAHEi
-	 x6U3guRFoF1l6m9NvHztwniNY3pRIONED0GHgbzOZqLkrvL/bsIYhSIPww4fD4dBF9
-	 jiPTKzBnVnYLoQx02j9itEXyB4Ef9qcjOdhiyiM8vMraOrr41eVSJ4S94jN4kAoyZ9
-	 n90dKaOKzP3Sksue0BXu6oXUQT5JoXw5ezLqXQEbsluV395IZFTMlAWS6y8LQ/IVQM
-	 6s7qu/k0sMMpXDn6Hb9G8K4uxNh40D/n6g+919WM4jnqoahqTT+fmNglFaO683oSj6
-	 g3U4TSClj5LpQ==
+	b=aHTOz1zgcEqotLCZV/K6WigWznumb7HSqPzB/EhusgHDIStvnKPXN1JkLOqpYK2js
+	 e5MlyuQGejNioQgPR6lsZed4AuvyeYyuRFgciDfUFegeJi1nB0cDu9mazj1MXIppRV
+	 +9IPgiPTBcnUq6mxplwESV3jVK0d1+OsKEBhNdmCuHqaYfrnLsTQA1crhoqj0qXKyo
+	 /O73lFx5bohuT6AdTg6BYRhD3D9zrZyfIa1g26zQto66sid25P9p5Zr4DMKHoPgfKk
+	 7EpyZ36N3z6C10ybGhgrqio2DgVp8U6xk817jDZOqwn5DhBvfNClwj+MfeHIL+VRJS
+	 4czmRslSXfDzw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5B962810D8;
-	Mon, 16 Nov 2026 17:44:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 253984076E;
+	Mon, 16 Nov 2026 17:44:56 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 047354DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:41 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 3D01E176
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DE2D7405B7
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2ECDF4076E
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v9_Ju6cyT4Xa for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 17:44:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EDFFA40583
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.171
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
- helo=mout-p-201.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
- receiver=<UNKNOWN> 
+ id GVEFR9cl_eOl for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 17:44:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 663BD40756
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::201"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::201; helo=mout-p-201.mailbox.org;
+ envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=qkwirifZ
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EDFFA40583
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:39 +0000 (UTC)
+ header.a=rsa-sha256 header.s=mail20150812 header.b=N1Fq55AQ
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 663BD40756
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 17:44:52 +0000 (UTC)
 Received: from smtp1.mailbox.org (smtp1.mailbox.org
  [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jSwGr3hgSzMllZ;
- Mon, 16 Nov 2026 18:44:36 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jSwH53KXKzMllQ;
+ Mon, 16 Nov 2026 18:44:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794851076;
+ s=mail20150812; t=1794851089;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=wsrh29DOzfoh9oEq0wOmZnDYPHeQc9yF26PM7fyW3kw=;
- b=qkwirifZUhBHB0/bHvqxzMfKrbdeAoyKcx9BJByFoxzrqPbZ7rQ5/hLLla1EULLehxRQmr
- E3ilDNPiaB5w9KD++LAWCtV4CGnfq127aPo+DwPXEB2GwLgFcer/MQY6V/10ZJkomJecnW
- zUbZXHJGv5uwNNoHd2l8KEvzKxlTEFAlxgXqzOxwmyqGwzjKbDdOl7l0X6ZW0bM3R88Kxb
- /JCiiNEKW26S4WJRDE7iWQzd81SGcQbc3Eb8tShNnutoBBY0wCod7XbP27S3Twiyl5JWIf
- xERIfwUILkVmSW0b8a4A5QQns3BD1Xmbk2rijBMOuEo61UAmPHNBmcJb653I8Q==
+ bh=19SU79c/dKy70MeuqnzIopypOzcTe5r+dn3rgoHv+b8=;
+ b=N1Fq55AQox7pPnYjx6OoX9oKMiQTGd3bGKDiMsL/lLVSEahLjcc8DQonKhw676K0sbKLYD
+ 15rleHZB02K+WgDNGt98KdZEghx2ghnr3V8/aE90oTo7xbpXCnfZjiCyLDNAdaHc8nuet2
+ 3W6mfP4T/57iXeDuqzoiuinW2mB20YhvEYr/7nrfIW6+2FCwbxeVK+wDmb9NOz57ptocSG
+ ItwFVvMFR1pxux+K/jN2nnuh4GkUBEOZCNj71Jg7VQKBZbQM0yS6l49Uvev0uu4foWyi/u
+ P0xQ2yGt+AktHrRrfF1Jfjz4uzNJrzgTVysoPaDnxhgswMQT030YUS/dP5ZTVg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- David Lechner <dlechner@baylibre.com>,
- Federico Amedeo Izzo <federico@izzo.pro>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Ryder Lee <ryder.lee@mediatek.com>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Weijie Gao <weijie.gao@mediatek.com>, u-boot-qcom@groups.io
-Subject: [PATCH] ufs: Constify driver ops
-Date: Mon, 16 Nov 2026 18:44:25 +0100
-Message-ID: <20261116174431.3488372-1-marek.vasut+renesas@mailbox.org>
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Lukasz Majewski <lukma@nabladev.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] usb: Constify driver ops
+Date: Mon, 16 Nov 2026 18:44:42 +0100
+Message-ID: <20261116174446.3488393-1-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: dep9qpyxa51nte8baxgi3eas4yhuhmeu
-X-MBO-RS-ID: 793eec284b2f9c1dd1e
+X-MBO-RS-ID: 5f71df1c32280022875
+X-MBO-RS-META: ahafqh83qkzzb6ma4iufonbs4ebgcy8c
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,160 +138,85 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: Federico Amedeo Izzo <federico@izzo.pro>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Cc: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Ryder Lee <ryder.lee@mediatek.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>
+Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+Cc: Lukasz Majewski <lukma@nabladev.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
-Cc: u-boot-qcom@groups.io
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/ufs/cdns-platform.c         | 2 +-
- drivers/ufs/ufs-amd-versal2.c       | 2 +-
- drivers/ufs/ufs-mediatek.c          | 2 +-
- drivers/ufs/ufs-qcom.c              | 2 +-
- drivers/ufs/ufs-renesas-rcar-gen5.c | 2 +-
- drivers/ufs/ufs-renesas.c           | 2 +-
- drivers/ufs/ufs-uclass.c            | 4 ++--
- drivers/ufs/ufs.h                   | 4 ++--
- 8 files changed, 10 insertions(+), 10 deletions(-)
+ drivers/usb/gadget/dwc2_udc_otg.c | 2 +-
+ drivers/usb/musb-new/am35x.c      | 2 +-
+ drivers/usb/musb-new/musb_core.c  | 2 +-
+ drivers/usb/musb-new/musb_dsps.c  | 2 +-
+ drivers/usb/tcpm/fusb302.c        | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/ufs/cdns-platform.c b/drivers/ufs/cdns-platform.c
-index 40883a187b0..36cb7f8dc14 100644
---- a/drivers/ufs/cdns-platform.c
-+++ b/drivers/ufs/cdns-platform.c
-@@ -85,7 +85,7 @@ static int cdns_ufs_init(struct ufs_hba *hba)
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index 4dc049d64b1..e680cf6c64b 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -136,7 +136,7 @@ void *get_udc_gadget_private_data(struct usb_gadget *gadget)
+ 	return gadget->dev.device_data;
+ }
+ 
+-static struct usb_ep_ops dwc2_ep_ops = {
++static const struct usb_ep_ops dwc2_ep_ops = {
+ 	.enable = dwc2_ep_enable,
+ 	.disable = dwc2_ep_disable,
+ 
+diff --git a/drivers/usb/musb-new/am35x.c b/drivers/usb/musb-new/am35x.c
+index ca4d798642e..572abd2b50d 100644
+--- a/drivers/usb/musb-new/am35x.c
++++ b/drivers/usb/musb-new/am35x.c
+@@ -666,7 +666,7 @@ static int am35x_resume(struct device *dev)
  	return 0;
  }
  
--static struct ufs_hba_ops cdns_pltfm_hba_ops = {
-+static const struct ufs_hba_ops cdns_pltfm_hba_ops = {
- 	.init = cdns_ufs_init,
- 	.hce_enable_notify = cdns_ufs_hce_enable_notify,
- 	.link_startup_notify = cdns_ufs_link_startup_notify,
-diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
-index 48854792cbf..55ebb6ec50d 100644
---- a/drivers/ufs/ufs-amd-versal2.c
-+++ b/drivers/ufs/ufs-amd-versal2.c
-@@ -485,7 +485,7 @@ static int ufs_get_max_pwr_mode(struct ufs_hba *hba,
- 	return 0;
- }
- 
--static struct ufs_hba_ops ufs_versal2_hba_ops = {
-+static const struct ufs_hba_ops ufs_versal2_hba_ops = {
- 	.init = ufs_versal2_init,
- 	.link_startup_notify = ufs_versal2_link_startup_notify,
- 	.hce_enable_notify = ufs_versal2_hce_enable_notify,
-diff --git a/drivers/ufs/ufs-mediatek.c b/drivers/ufs/ufs-mediatek.c
-index 268627d5863..4ab03c3d7f3 100644
---- a/drivers/ufs/ufs-mediatek.c
-+++ b/drivers/ufs/ufs-mediatek.c
-@@ -373,7 +373,7 @@ static int ufs_mtk_device_reset(struct ufs_hba *hba)
- 	return 0;
- }
- 
--static struct ufs_hba_ops ufs_mtk_hba_ops = {
-+static const struct ufs_hba_ops ufs_mtk_hba_ops = {
- 	.init			= ufs_mtk_init,
- 	.hce_enable_notify	= ufs_mtk_hce_enable_notify,
- 	.link_startup_notify	= ufs_mtk_link_startup_notify,
-diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-index 6357fd82e12..958a27bcdc0 100644
---- a/drivers/ufs/ufs-qcom.c
-+++ b/drivers/ufs/ufs-qcom.c
-@@ -649,7 +649,7 @@ static int ufs_qcom_device_reset(struct ufs_hba *hba)
- 	return 0;
- }
- 
--static struct ufs_hba_ops ufs_qcom_hba_ops = {
-+static const struct ufs_hba_ops ufs_qcom_hba_ops = {
- 	.init			= ufs_qcom_init,
- 	.get_max_pwr_mode	= ufs_get_max_pwr_mode,
- 	.hce_enable_notify	= ufs_qcom_hce_enable_notify,
-diff --git a/drivers/ufs/ufs-renesas-rcar-gen5.c b/drivers/ufs/ufs-renesas-rcar-gen5.c
-index c6e436fe197..1a2bf96730e 100644
---- a/drivers/ufs/ufs-renesas-rcar-gen5.c
-+++ b/drivers/ufs/ufs-renesas-rcar-gen5.c
-@@ -198,7 +198,7 @@ static int ufs_renesas_get_max_pwr_mode(struct ufs_hba *hba,
- 	return 0;
- }
- 
--static struct ufs_hba_ops ufs_renesas_vops = {
-+static const struct ufs_hba_ops ufs_renesas_vops = {
- 	.init			= ufs_renesas_init,
- 	.hce_enable_notify	= ufs_renesas_hce_enable_notify,
- 	.link_startup_notify	= ufs_renesas_link_startup_notify,
-diff --git a/drivers/ufs/ufs-renesas.c b/drivers/ufs/ufs-renesas.c
-index a206e3c6d58..1ada5288ea8 100644
---- a/drivers/ufs/ufs-renesas.c
-+++ b/drivers/ufs/ufs-renesas.c
-@@ -300,7 +300,7 @@ static int ufs_renesas_init(struct ufs_hba *hba)
- 	return 0;
- }
- 
--static struct ufs_hba_ops ufs_renesas_vops = {
-+static const struct ufs_hba_ops ufs_renesas_vops = {
- 	.init		= ufs_renesas_init,
- 	.hce_enable_notify = ufs_renesas_hce_enable_notify,
+-static struct dev_pm_ops am35x_pm_ops = {
++static const struct dev_pm_ops am35x_pm_ops = {
+ 	.suspend	= am35x_suspend,
+ 	.resume		= am35x_resume,
  };
-diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 2ca4fb2a020..50597c26759 100644
---- a/drivers/ufs/ufs-uclass.c
-+++ b/drivers/ufs/ufs-uclass.c
-@@ -2198,7 +2198,7 @@ static int ufs_start(struct ufs_hba *hba)
+diff --git a/drivers/usb/musb-new/musb_core.c b/drivers/usb/musb-new/musb_core.c
+index 17ec0d3acbd..7856af42ba9 100644
+--- a/drivers/usb/musb-new/musb_core.c
++++ b/drivers/usb/musb-new/musb_core.c
+@@ -205,7 +205,7 @@ out:
+ 	return ret;
+ }
+ 
+-static struct usb_phy_io_ops musb_ulpi_access = {
++static const struct usb_phy_io_ops musb_ulpi_access = {
+ 	.read = musb_ulpi_read,
+ 	.write = musb_ulpi_write,
+ };
+diff --git a/drivers/usb/musb-new/musb_dsps.c b/drivers/usb/musb-new/musb_dsps.c
+index b73f3531ce2..41d1d3db586 100644
+--- a/drivers/usb/musb-new/musb_dsps.c
++++ b/drivers/usb/musb-new/musb_dsps.c
+@@ -508,7 +508,7 @@ static int dsps_musb_exit(struct musb *musb)
+ }
+ 
+ #ifndef __UBOOT__
+-static struct musb_platform_ops dsps_ops = {
++static const struct musb_platform_ops dsps_ops = {
+ #else
+ struct musb_platform_ops musb_dsps_ops = {
+ #endif
+diff --git a/drivers/usb/tcpm/fusb302.c b/drivers/usb/tcpm/fusb302.c
+index fe93ff3d339..b77fe0fa204 100644
+--- a/drivers/usb/tcpm/fusb302.c
++++ b/drivers/usb/tcpm/fusb302.c
+@@ -1293,7 +1293,7 @@ static int fusb302_get_connector_node(struct udevice *dev, ofnode *connector_nod
  	return 0;
  }
  
--int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
-+int ufshcd_probe(struct udevice *ufs_dev, const struct ufs_hba_ops *hba_ops)
- {
- 	struct ufs_hba *hba = dev_get_uclass_priv(ufs_dev);
- 	struct scsi_plat *scsi_plat;
-@@ -2316,7 +2316,7 @@ static int ufs_scsi_buffer_aligned(struct udevice *scsi_dev, struct bounce_buffe
- }
- #endif	/* CONFIG_BOUNCE_BUFFER */
- 
--static struct scsi_ops ufs_ops = {
-+static const struct scsi_ops ufs_ops = {
- 	.exec		= ufs_scsi_exec,
- #if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
- 	.buffer_aligned	= ufs_scsi_buffer_aligned,
-diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-index 9f55735602b..7a8f715e8cd 100644
---- a/drivers/ufs/ufs.h
-+++ b/drivers/ufs/ufs.h
-@@ -699,7 +699,7 @@ enum ufshcd_quirks {
- struct ufs_hba {
- 	struct			udevice *dev;
- 	void __iomem		*mmio_base;
--	struct ufs_hba_ops	*ops;
-+	const struct ufs_hba_ops *ops;
- 	struct ufs_desc_size	desc_size;
- 	u32			capabilities;
- 	u32			version;
-@@ -810,7 +810,7 @@ static inline void ufshcd_rmwl(struct ufs_hba *hba, u32 mask, u32 val, u32 reg)
- 	ufshcd_writel(hba, tmp, reg);
- }
- 
--int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
-+int ufshcd_probe(struct udevice *dev, const struct ufs_hba_ops *hba_ops);
- 
- int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
- 			   int desc_index, u8 param_offset, u8 *param_read_buf,
+-static struct dm_tcpm_ops fusb302_ops = {
++static const struct dm_tcpm_ops fusb302_ops = {
+ 	.get_connector_node = fusb302_get_connector_node,
+ 	.init = fusb302_init,
+ 	.get_vbus = fusb302_get_vbus,
 -- 
 2.53.0
 
