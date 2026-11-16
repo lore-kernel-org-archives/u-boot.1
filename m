@@ -1,150 +1,148 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 716DF606A323
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08281606A32C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 04:34:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XiQUKY8q;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=sueiEqvy
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DWs7oCa/;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gqqHVWKk
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4B7166085D;
-	Tue, 17 Nov 2026 04:34:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D9DEF81083;
+	Tue, 17 Nov 2026 04:34:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GBclSu8WCHwc; Tue, 17 Nov 2026 04:34:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7B76F60849
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890095;
-	b=gon5J0jretnJlTwRjwVmlt5WzzkUMShY2NfNlZfm/1I1cLSHh96DySu9g2Lr4FdYvDXS
-	 g27HDj8q7c/It+y8zLX0te38Eroplk9mRe4tzFTLy6beH1R3mVtYK20U8JUJZ7T1Z+2WH
-	 vC6k4YfVnC7iw6td6yjh/MgQh3Z3nPX/MPcNaijThGcnQOu79gojtK2vJhSWjoyj36Hzn
-	 Qta2r0n6Kyh3LWvQYOKEWkK1tBpqPjQ6NdlCrh9fqrIbXqklgKGJXt0kgoko8pdMrCsaE
-	 GfmFrSoO1zyj8YWdvCDw1KrWeKtrQInCJfWmshrzYpmJKVVwHysuZXUR7uojvnwnhrw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UadzrQv2AY9C; Tue, 17 Nov 2026 04:34:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 251E781091
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794890097;
+	b=X0TwErf68SD2uReEb0s4qYFDZwYJ1JFM6fnCdAkxposa+dRQUTp97zWCo1TBqOBtN66C
+	 4e40S6pfOIYa4uq4hoYjQjon91Z8zlMNaIVqiPkyHG2EiioBOQN+XibU/s6n6cD0SFnGl
+	 AFnEPRLxxbI+AEGbooqDX4hfkDrWKB/TENM9Usoe9lQ+nje0/LsULSaGVpELH8qoIAJvo
+	 Ot+s1az0NfmwQZ6+up0Jve+ZDCP1Z7GKnj+d/ORTECwobnbaMA5jNfi+HFom+knhFuBRK
+	 Xc0uT/AOdjnfYgohN9F6rglLe1oNewFDBLn8kRvrbu80O2ER1AyrJG5DH2qeorHmLgg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794890095;
+	c=relaxed/relaxed; t=1794890097;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Nv7Psu8WEx+4zKSsz0ct9qGuND9uBk+q8iMocyWDLjM=;
-	b=PoqK3q1J5D2O8ZA1b2m1IEBqUnf1xUMM87ugtKJSOafMEk3c2LVIdi1hHbIiUwz7DGsN
-	 TlutDQf0rG0xWW2roB/yQg134fJt6RE5WEedo70K6ta02jrBhHBOZROw5l2pgP2Wn8fHu
-	 SuSHAXc5zF/+sSrgu1Cu4lVNpBoj2fFt3TjFLDxVmL4Rn1Q1S8uN7SmOx71MEzxCv7gR0
-	 NTTmc5YxVM55wWe99RNmcI3I3Uwd9jNK0s3kWswKc59xMePGUMEpkn6M6OgCUdpkHbCY/
-	 5RyZyEf/c0KdGMAlUBoetR2BUKm+pOZxp3oM+YCWOEaComE7L2TbOvQgd/qPWieoWgg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=sueiEqvy;
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=/sAsQBV5/p4Oq7HNtAwLQuvrN4es80oVcXGtlYTm4UA=;
+	b=FSmTc+YacwxYA5zYr5kZv1vQ6SOVSyfsTdUsLf+wtr6TD8yCqHlGAzkkAWkOQENyRegv
+	 2QbhjoqvPdl/sWRz6BEaFr6Su+h7cDc8DrCLkQRLIgT8tEE7gBRNqmg/rcCE3gp3pyZ2F
+	 0hUCpAZ2UQHgaNQCf1tdES0V1kc8Cjz4duCnjv6Pf/efNd7xKLsnapGqSi0qEsYzuKlN3
+	 OHtvtVrbE/orOO05ZXqUn7gicYUHJNYMR9XFYykzsaQtm0LBCebOJwsJPAz8Ls4Oj3Bbe
+	 nJCBOPrd+K3PzNKO+myQS/rat7X2rTcInVWnX935Px2SamlBD2FqFy4XqMH0X+A0QCg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794890095;
-	bh=Nv7Psu8WEx+4zKSsz0ct9qGuND9uBk+q8iMocyWDLjM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=XiQUKY8qm/5GPyVPB/KmTTr7Mk5VsIft+ND8INva5Ul0C9mhtk0qXZNMEBWoBf5cm
-	 23c8qFdYy0SKauGgFOEGnCNyreBD5Fo7vdkXF0xI71UC0WATarF5YYma7ONysXSDBO
-	 /eo3opnxkVhBDy8nxWwoJ/m2cqLNRcxEFjxTpKL3xJQF2WvHATr66Yctzi3G/art9r
-	 cMfGFRNd9UpJEt3D1jgDtyknwdKC67D9JfKZBSIZZPpywGp/+kg4lDkQoXYyd4109v
-	 48mR6DIIKl7+UEaXegqmJ5Irh3jCJqXk6MhIq6hvUdLa7ri0X/WdYvwx38Zy0+UEop
-	 J5a0w3OMcse9Q==
+	d=lists.u-boot-project.org; s=default; t=1794890097;
+	bh=/sAsQBV5/p4Oq7HNtAwLQuvrN4es80oVcXGtlYTm4UA=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=DWs7oCa/kpfV/wq73FlA5mxyaqPCoGaT4tYoAHphBWb4We7GdiPFh+PrvM7NcISxE
+	 9sPcLM4FvJPCfTxJFEDnkwGgOUbGx0V14TPL2P6bG2ZZAIIM/aATMgycC+ajtWMHYM
+	 L+6HmbD7k5i9pzD1gupogWNaJyIf6KiyqClSFKEQErZYS8bLqg4fBbAjTB6w7YIMu8
+	 yB3wPIjQjcsDt6atbSayZRDgkYUXRbIEw1xrIWjYHfIcgvSpzjKlmKtDRcjPz6MOgQ
+	 KEueGfWkvp/Lx6eNr9Z3x09FWC9NaW74rI2fihSNp8PZNmq8UPfMwE3O49c7C4Fyj9
+	 s86sais6OcfEQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7B76F60849;
-	Tue, 17 Nov 2026 04:34:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 251E781091;
+	Tue, 17 Nov 2026 04:34:57 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 203481A6
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:43:52 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E56BF70B
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:58:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0A02B6067D
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:43:52 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CB91260774
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:58:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xyoiTtFry6Xq for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 21:43:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 500E060600
+ id yHKvDpatlJ3j for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 21:58:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 061F860739
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::b136"
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::112e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b136; helo=mail-yx1-xb136.google.com;
+ client-ip=2607:f8b0:4864:20::112e; helo=mail-yw1-x112e.google.com;
  envelope-from=dilipchowdary21@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=sueiEqvy
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 500E060600
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:43:50 +0000 (UTC)
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-67dc7eb1442so358616d50.0
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:43:50 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=gqqHVWKk
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 061F860739
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 21:58:11 +0000 (UTC)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-8b4bc5b8de5so2431987b3.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 13:58:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794865430; x=1795470230;
+ d=gmail.com; s=20260707; t=1794866290; x=1795471090;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Nv7Psu8WEx+4zKSsz0ct9qGuND9uBk+q8iMocyWDLjM=;
- b=sueiEqvyl6ywTsbzHNFWjKUJbyWweWQPx/4qsASBOm8RvaO7P+Ark2mGArek726Ddo
- +iStwh48JAUZtW9uJmMb4GQpSepFM/anQQlbxw26/4ObJ+fnXm/NRaZvgLXuqLMJOQJa
- XZj7WaQ4kTaUezI3bKV5qC0CrsbcMpRQPlCLTIo05Ng1haYV3diULzCaeagCpTquHjpI
- cuFja2nGqbH0LS7qVoJOVgK10zvxLxytqkW0jC6S6TH5uxLc7x22j5rE+39xv3tHoulw
- aTSHG6eh8tIPMvyMv5rWKF7EbRGwvI4KzcehjyL60u2xekOMnhD6yTWUySY4wb0lFYSZ
- NOjQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=/sAsQBV5/p4Oq7HNtAwLQuvrN4es80oVcXGtlYTm4UA=;
+ b=gqqHVWKkIkVGPKqmYByBH1aQc0AJ1e6BDvvjzdS/CO2W/iJPLa9lKrEcRYJ7OKXarz
+ n7s4J7ZpI+HAk/0JAY1GpWm8+gDl1y5zJS7QIffR4iMi3gw6uVVIJ8FYEGlK0M8OBeB9
+ ADQn5D9EonMzZBZfo0jxoFufkFJpXy42QOtFXFOp+LL3HCUGosMjp75GFSPXmwgi7Nqz
+ ZjiMSE9BeryHrPtIbpxIOe1JJ3a09mvZJgO1LztAqRTU2dj8ZRKPZgTPLyz1QW/SNHUd
+ LRqOfFtCpZR4YnNdV+IB4UU6f8sIct5K+JuyJs/onVC2efw6+2eMibyjYVXxKrtVE0Pl
+ aKxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794865430; x=1795470230;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Nv7Psu8WEx+4zKSsz0ct9qGuND9uBk+q8iMocyWDLjM=;
- b=uN198FG2qE/MXRTpecilrHmTUK8DjNCo2+st61RrDLFgZUlutRg+EHPsJEsGNNO23j
- OkFu1aJn7L+eeXuxWy26/ToqjbtuPK0G+403fZ6+4bA4fnhV+PAyVacx+p46J8x2yH55
- cCWGVQHhlXRDJ9b12kIgnnN3nLlkdNtIaEGdE9tME2YiSzU4YCSAeufW+H8ZD0loHzmP
- +S9cSllVM5qnONjsgqFBlSqAybAZE4VAdI/hOiXWazmSmNtzeY0xlDiZH7lSe5F4biJH
- zPG8obX5S9Q3uBld4egNV885/u8GBDOZ6CsBbLmXwkLzkPoZUTc4Xk8r/hKZTbL7Igsp
- yB0g==
+ d=1e100.net; s=20260707; t=1794866290; x=1795471090;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=/sAsQBV5/p4Oq7HNtAwLQuvrN4es80oVcXGtlYTm4UA=;
+ b=ER20GeA80EddxgwbrH6BDKCcoJhJOopDnhHVb3kyS4rWGpg6znakkWXQE+mQJnMAxL
+ apCTJyQ0qq74c1UYb07Z4oWgI9D63yqK7cdzAQYbfJF2OQOPTbLCqETw8fpNWjX35f4V
+ amsKDfYH0wd/+5N/U2LBlMzLhSJciT+Rnk7EXYUoV/O5K4SHDotnBrctwb91Sa5dhGKz
+ /6t1NosqK2tHCluVdkeeCs7FxMaNahvZvJo/nnL7SbU8KKvQRC2Ns2qoNIs9qbp9neKI
+ t1PQXw+mtp39S2R1Gm22bVrPnTvX7Wo3R61lIFsP2BDnwAQFpPvaxh3Nrhn2Q5PrI3+e
+ TRsA==
 X-Forwarded-Encrypted: i=1;
- AL+hErEx8atNEiW9nhTpElt+ha/IV1OriJYgtRomkOGb3sbS7TBUxkGb70952ViAQrAFFKDiG646JSY=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9dWS+imW1h96tJ/LNiiSZvXymyEErHBdtaOcysORv8+pSGHb8K
- FTJbGcw4ARMzijVdPsTrjE+496z6uxzXi9yhLR+Lp6797Wn8MfesgX59Ai6dV7aI
-X-Gm-Gg: AZFdTZcxIvd7iX7QhAuwU3oicISBi76myURYa/h+vRmivnHHQfGUPciHoTyhK/DKttF
- DUDizJtXWGzQbuZdht+0GUmnlh3Wp1A7qQrpQpboUi8RdVzPZq7e/hz2LQbGNsF1paIGIR1bw44
- XUSL+y1+nyf+oe5wp9doUMq6x0rM2w5xqzbvoZaMgYwsaZn/hyd1lna7LBPtTTo/vOyfyC34dO1
- Vgd4v0gte04kJDJbeG3XDER0Sj8CtZtjM/HARLIwrB1loD2mWmbvlgRkuFy2QfWjdO1op1WXEOS
- 1z9c1/3Rt/euXff0YU/kaxcuDwidp4ZjXmySyr3QrcU18oIUcRGoqzEvA4v7wxuV8RapwVuOwM/
- w8TpoWFUVdaXeq5fvCHl7sl/aJgtI+6LJ3VaD3qZi8BIoze3IYTYoiizQo58JDumQsY6ZUSpRf4
- fj152Cyr1ikxVfmeWu+RtDDO3wYA6Du2QDoih+alA1QcuQiB6Sytm6DPmV/Ydxq7eLfXkte/1XM
- /HA/E3HxVm21/A8ywkKYSmqaarec/uE+zGUqB18ncO0KExp9S3N1L8offHsfn76Rw53WLZYMkis
- HVu5YWvboQnidqN2XkEAdyiZJYD+9mIN/M3lzMYynf99w8U/7xNN2+pAHB693fv2yypx32tVeFF
- Uei49X7YucrTO7P1zvIad+xPiQIKFLg==
-X-Received: by 2002:a05:690e:1441:b0:67d:b8a9:2574 with SMTP id
- 956f58d0204a3-67db8a92965mr2707159d50.20.1794865429690; 
- Mon, 16 Nov 2026 13:43:49 -0800 (PST)
+ AL+hErF1k0fQjczIJ6KRaoFx4scs+BW3J1CvrLLSMgrJjs8V+HLfe655oNmNA6yA0zU3giTYFeV6UfU=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/hiutjqLzRTNzPwZ2HnWhu9+uErwp4FDVpGiGHK7NCFaVo7pL3
+ osW5HNyODr2ofOXDnKslUOZL4UAb9ZUwrIiS0YA6uLCMLy5i7MzjmHSs
+X-Gm-Gg: AZFdTZet9NC5jRe+9289IYrdEic1pMA4tKpjNZT/DgQUZqxstrqje/JVcKBaMyzavO8
+ Oph44l9ue9VVbMYyx3fh1h845zbMOoxxhHu5HW09pJCDt34KHkIk8QxkR+FQeniLRrc/WmiPAJC
+ Y69+hpq/ICZWk0qTDKVPkG22N2f21jVFBirszasQNnVds8QF7JvdKZg5TE3nqdOC55jphIMKHBe
+ qWSenv2oOlcBopHZp3IPjvkhPy8k024H8QToV53xUJHbevFUESBZm63i9QOC8X9GRLBo1ydaTJ4
+ bNDtiJ55tMBgBtEzTmC0wCkyQKS7lT6P1+VHsuTO8ht16xjV/WPeQcNtnRD/jKK2qnjYL5BpQqN
+ LAbvWLbuaNrS+lXB/yEiIWd0bQCMEOQfJrusJ/25yjXJyvW3aOmHUz/XRG7Ef6Ye7EFH5mgn07M
+ u3huTcD1Qvl5RWNADiTjvw6/y+A1YqwxY75SuHkanZwZwxKjkwDh0oAQRvbEso6i5AwA+v9QGa/
+ UqtrpYFBELYV3gGh/nzBhvTLtDTiYM8JSSYo4kGoaKJNA1GMVZxa3QETqu99KrHux00gVvO7s3v
+ dg0DYDO3MflxkI/p2NyCELeHDpdm/lx+3CPJ5I9o+9OR8IFSuMnjihiSgUQCOi0bphoPjBpLnY2
+ lJPnJEzc9iBlJwLupUXo/u4m3gND6
+X-Received: by 2002:a05:690c:68a:b0:8b3:648d:46b9 with SMTP id
+ 00721157ae682-8b4ee2cbc44mr4781547b3.35.1794866290174; 
+ Mon, 16 Nov 2026 13:58:10 -0800 (PST)
 Received: from d3sec.localdomain ([216.170.66.174])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b4ec2a5b1dsm9280467b3.36.2026.11.16.13.43.48
+ 00721157ae682-8b4ed01d566sm8425407b3.38.2026.11.16.13.58.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 13:43:49 -0800 (PST)
+ Mon, 16 Nov 2026 13:58:09 -0800 (PST)
 From: Dilip Mallavarapu <dilipchowdary21@gmail.com>
-To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Qu Wenruo <wqu@suse.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+To: Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org,
  Dilip Mallavarapu <dilipchowdary21@gmail.com>
-Subject: [PATCH v2] fs/btrfs: fix path buffer overflow in subvolume listing
-Date: Mon, 16 Nov 2026 15:43:33 -0600
-Message-ID: <20261116214333.17947-1-dilipchowdary21@gmail.com>
+Subject: [PATCH v2] fs/squashfs: fix out-of-bounds free() in symlink path
+ resolution
+Date: Mon, 16 Nov 2026 15:57:57 -0600
+Message-ID: <20261116215757.18682-1-dilipchowdary21@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261116205502.14884-1-dilipchowdary21@gmail.com>
-References: <20261116205502.14884-1-dilipchowdary21@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -166,70 +164,53 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-get_path_in_subvol() and list_one_subvol() accumulate a path across the
-on-disk inode-ref / root-ref chain with strncat(path_ret, tmp, PATH_MAX).
-strncat()'s bound limits the source copy, not the destination total, and
-there is no depth/cycle limit, so a deep or cyclic ref chain overflows
-the PATH_MAX path_ret buffer (CWE-787/120).
+sqfs_clean_base_path() computes the first index to free as
+count - updir - 1, where updir is the number of ".." components in an
+attacker-controlled symlink target and count is the base path depth.
+When a symlink escapes above its depth (updir >= count) the index is
+negative and free(base[i]) is called on pointer-sized values read from
+heap memory before the base_tokens[] array (CWE-590). The caller's
+"if (bc < 0)" guard runs only after the frees.
 
-Use strlcat()/strlcpy(), which bound the total length, and reject the
-path if it would be truncated (which also terminates a cyclic chain).
+Reject the escaping path and free only entries we own.
 
-Reachable via the btrsubvol command on a crafted btrfs image.
+Reachable from sqfs_search_dir() when resolving a path through a symlink
+on a crafted squashfs image (e.g. sqfsls host 0 /s/x with /s -> ../x).
 
 Signed-off-by: Dilip Mallavarapu <dilipchowdary21@gmail.com>
-Reviewed-by: Qu Wenruo <wqu@suse.com>
 ---
 
 Changes in v2:
 - Drop the inline explanatory comment (Qu Wenruo, Tom Rini)
- fs/btrfs/subvolume.c | 19 ++++++++++++++-----
- 1 file changed, 14 insertions(+), 5 deletions(-)
+ fs/squashfs/sqfs.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/fs/btrfs/subvolume.c b/fs/btrfs/subvolume.c
-index 68ca7e48e48..a62d547b3b7 100644
---- a/fs/btrfs/subvolume.c
-+++ b/fs/btrfs/subvolume.c
-@@ -64,7 +64,10 @@ static int get_path_in_subvol(struct btrfs_root *root, u64 ino, char *path_ret)
- 				   (unsigned long)(iref + 1), name_len);
- 		path_ret[name_len] = '/';
- 		path_ret[name_len + 1] = '\0';
--		strncat(path_ret, tmp, PATH_MAX);
-+		if (strlcat(path_ret, tmp, PATH_MAX) >= PATH_MAX) {
-+			ret = -ENAMETOOLONG;
-+			goto out;
-+		}
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 2092e3c1c71..caa8baecfeb 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -391,12 +391,18 @@ free_strc:
+  */
+ static int sqfs_clean_base_path(char **base, int count, int updir)
+ {
+-	int i;
++	int i, start = count - updir - 1;
  
- 		btrfs_item_key_to_cpu(path.nodes[0], &key, path.slots[0]);
- 		cur = key.offset;
-@@ -128,7 +131,10 @@ static int list_one_subvol(struct btrfs_root *root, char *path_ret)
- 				   (unsigned long)(rr + 1), name_len);
- 		path_ret[name_len] = '/';
- 		path_ret[name_len + 1] = '\0';
--		strncat(path_ret, tmp, PATH_MAX);
-+		if (strlcat(path_ret, tmp, PATH_MAX) >= PATH_MAX) {
-+			ret = -ENAMETOOLONG;
-+			goto out;
-+		}
- 
- 		/* Get the path inside the parent subvolume */
- 		btrfs_item_key_to_cpu(path.nodes[0], &key, path.slots[0]);
-@@ -146,9 +152,12 @@ static int list_one_subvol(struct btrfs_root *root, char *path_ret)
- 		cur = key.offset;
- 	}
- 	/* Add the leading '/' */
--	strncpy(tmp, path_ret, PATH_MAX);
--	strncpy(path_ret, "/", PATH_MAX);
--	strncat(path_ret, tmp, PATH_MAX);
-+	strlcpy(tmp, path_ret, PATH_MAX);
-+	strlcpy(path_ret, "/", PATH_MAX);
-+	if (strlcat(path_ret, tmp, PATH_MAX) >= PATH_MAX) {
-+		ret = -ENAMETOOLONG;
-+		goto out;
+-	for (i = count - updir - 1; i < count; i++)
++	if (start < 0) {
++		for (i = 0; i < count; i++)
++			free(base[i]);
++		return -1;
 +	}
- out:
- 	btrfs_release_path(&path);
- 	free(tmp);
++
++	for (i = start; i < count; i++)
+ 		free(base[i]);
+ 
+-	return count - updir - 1;
++	return start;
+ }
+ 
+ /*
 -- 
 2.53.0
 
