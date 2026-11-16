@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 699CC606A32A
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 10:28:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6330A606A329
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 10:28:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=y41343yr;
-	dkim=pass (2048-bit key) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=BnVTJcck
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZCXlHo4o;
+	dkim=pass (2048-bit key) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=VBqMxZW+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4903B60666;
-	Mon, 16 Nov 2026 10:28:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1B56E6073E;
+	Mon, 16 Nov 2026 10:28:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1lqM35vvDnJ2; Mon, 16 Nov 2026 10:28:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 964CD606AE
+ id gatV5AdZRqKJ; Mon, 16 Nov 2026 10:28:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 31CA5606CA
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794824921;
-	b=NQjPIa19wORa8uNaJYgJiplr7zeL8HOJIv/4h3ehzq3gkduboRMKuM3S59aU9Hzib2Eh
-	 IN+zAbs2+dGkyMWW3SFBqPhMAB1B+OH1ft6GPXBocKaaj24Go3oP/XjLPu1lNPmji6Ymm
-	 HAtTb5I5O/YFI3YeHfhG1heJwymtXgIzyGP5gHjCQZyykNVBnicGeSF5jhhIEotgnIZuU
-	 dc7VYszGASFJOa95noe84Lhei/LYP9f5mVc5rBg+8N2qMgRnczvPjM0zXhNHBLyINN/rH
-	 rsMms+B1y1g6Lmu+s2lTUOusuJoP9KEY5aSrK/CcRm5+eDqTwLaWqA3KyDzrZiEsbYw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794824932;
+	b=rTMg8dGNj78PWj3Faut0HnhgNQOIvvCveJIxNspe1TUn/mioJYt9bz+WqyDYhTpH0lDv
+	 rClkMghzqzzmjrIt0AbsZ6qF+hKa8W90XyPoc8+zjHhMeGj6/bAnw9ANk+hJsmEEVhyxr
+	 gS+QfKuEKxuv3eZRxJF5QNpfxRQdpkSgw5cnWN/qeOYiB7WWNn0krhc2ST0FXl2NOftbU
+	 e/tj+DrvyOG1aMHlDXOtROiu2NhcHj9I2aZVJETHq2xDvWFMUR+ypaqU1gEj/2ZfPfUYT
+	 pUN0bit0/O2vNKdDr0nEjEeAQjn4zPQdWU+NYQP8B5FYLi6Xtg9WqDPWTuEGkEcgfkA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794824921;
+	c=relaxed/relaxed; t=1794824932;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,75 +31,80 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
-	b=nvIwlEFQ5TZSYoOtzT41dLwsvB9vTRhkv+YaufU6+RCqIkGnKsvp2QWOgEOPcfJe+0PQ
-	 yzxsbV/d7GdjM6ZGn4XgPK/KpuJtAMxDhAmfuG6UOJSh5dxCPCTjcQhXwLVGzvGER2hMZ
-	 sqcIueqXDZB9+mWZqdCjTRZ6jikyqWIqOmALxr3C4wldUJkim2LqV+d4T2RmS/CCY6My1
-	 LMIus22Wa9/vF2VsMW9eJqGRbo0KmWHNojgxOLyzer1UZyg2nTtm1E71uv1kRDapTyXrz
-	 n4IOj19uoBnZ2rrRMH0PhuDxBTb1n4GG2m0hQT5mrmPRN/5kPIYCtED474nkFelJK3g==
+	bh=LBCt9XPvBOS5oJyISZKDYc+PuTAGzOrGHm1GHFIecg8=;
+	b=QX1Q7KIccHCs0nVsYlozykjDViaoOk/Xvq50UiYPdkDsRDnlt/Q3J5wZlUW+BLe8m+Mq
+	 kma92zH9UhSa22bjEg9iPQny6CUC0VdBmIuQcmbECSnQZRyKzzFCIwuS3DH4azg4KQmpJ
+	 QZIB/m1JHzlv3Xn3jt1p9ZP/OEBimAQcb2tUQPgEUvX34tKdMvXPWjvN1N0H3RpVatKgV
+	 6j93vic9NV7DPqp1MrTmbxvigulPLs/VxkFBkQ5BYZ/RlKRXa1hkOFW3xxhP/4gUqaikA
+	 3PgtvPS2+Lumaj4jRMVx/qE27oyNrG3+s+ghVk2wVNqUhJ5Efnj2rA8S9SrSYJTXKjg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=freeshell.de;
+	dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=VBqMxZW+;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794824921;
-	bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
+	d=lists.u-boot-project.org; s=default; t=1794824932;
+	bh=LBCt9XPvBOS5oJyISZKDYc+PuTAGzOrGHm1GHFIecg8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=y41343yrJDstISHaobEMrhC73z22nsAKhQLzAs1Z9s4KGmfD80XHx60DNj7KNDhzb
-	 uyrM2Cx1w+pCpGOGIoffd7McRo/XT54IJ+H29/5idJUdIstN1iInTyQQ75W+s3bQBc
-	 6j4zq1JTeltSqxoSv3T3seBK4xWT/IHHgB0dI2MZvcirJEWyLltjvfqvqizUFDSXzN
-	 qrNjmeW/qRCBlvJNPCetlvjuxWgaCpxwoNTQzzLgUENruZW3zZnXQFUDjczapyJKi7
-	 Tqxr2SSPaXlrTmeouh/RZoAHP/CwSmz6AGLAGeQCVJCZ0HIL4fNlpFh+0CLbt5tYP9
-	 xao+DFIhB63FA==
+	b=ZCXlHo4o8rVloRJHCORF4SuhemVQhRt6Pr04tCFtHt+3SksFfHQwplSEtvfTkdw4A
+	 BNLczX/tim7jTJFM25C1nAJJM/SpJNmL2m8gquyZyn7/VGEnMbjqXmpMdYTt6goJl9
+	 TAGHuf/Du3fXJGz3aneHjuFUvMa3nd69LITuVHcQ44l+dNPOEpdCKPmpcY3tzqG1Am
+	 d0YWGeZZnB+jYzLs8yTvLKcGmEC/ohHfYyMF0KOCJfNZSy+l3nRprYVlBYozRJ7mzH
+	 gRcpSMJNEfVEzoiQBXUYwJG71ol/lmVrlUxlkBm7C2RE2SmvAFDVjuKv6mNg1pkm7Q
+	 jL2B+68ONilSg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 964CD606AE;
-	Mon, 16 Nov 2026 10:28:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 16B964DD
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:28:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 31CA5606CA;
+	Mon, 16 Nov 2026 10:28:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DF64428C
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:28:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 050C1400FB
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:28:38 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C61A0606CA
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:28:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id khthHVoR9EUq for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 10:28:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 467774009D
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZI9aaJn5arQe for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 10:28:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E22A3606AE
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=116.202.128.144
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
  helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=freeshell.de header.i=@freeshell.de
- header.a=rsa-sha256 header.s=s2025 header.b=BnVTJcck
+ header.a=rsa-sha256 header.s=s2025 header.b=VBqMxZW+
 Received: from freeshell.de (freeshell.de [116.202.128.144])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 467774009D
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:28:36 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E22A3606AE
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 10:28:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1794824861;
- bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
+ s=s2025; t=1794824868;
+ bh=LBCt9XPvBOS5oJyISZKDYc+PuTAGzOrGHm1GHFIecg8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=BnVTJcckfLFMb6j57o+HjnH2W0nadwKrroixBAMhft+yGE9CxvDkFN4UzEFMzvlcu
- tYymGVFL+f5jsico6Ln4f5nbTiMcoAp0a6cZOM/AA2jGPBV38KDI5Kx34F+UNMWxT4
- jLdozq13fSBR7+y87Bg/SoEvlmME7yQ56AcGxe/PCsxuIX0WWSVGenIf7tMkPbUlqh
- 1/a8r9Z1Sr9s2rgTKVdIAXYkK8+sBcAjJjTYhd1cKrVc0H7+2tgyFjvDlKqohA2CDA
- QhMa3ksD8Bda8X+Tm2mxSmPPKC5SVnjMj7mMnNFfBcNRv8LTUcDMyrCot1UHE3zL7K
- xlO/gPYJbVWKA==
+ b=VBqMxZW+bejOgYXpRH7ob9FY4xCFcntgb81ClfuX+f2MAlOX9e1FaIHXlEHcwCtdE
+ N3L+zaakXXkGmAwkIJYmxsrR0PUOXVVQZBNC81BI59je7izHBiCTwWVEdUk3WxUkMd
+ zykMjlOMrzbUROD3L4PQFaI2DkLEGdCtO1XpWYqpaLE4uCKEme77IA69W1uR5rtFzS
+ ugKJSrbAG0yVc/4tr2zmyTml5VNubP49GweD+8/Pw33EAF5P9vH1TFZm+DiJYM+RF1
+ RcblroA6CLoRVPIAMXVz3HRAGcIPdWsq5yj2R1OyahOowZ5U/MJQ8Dxq5DgoNmdY+i
+ LQqGt1vVCGapQ==
 Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 3E499B221572;
- Mon, 16 Nov 2026 11:27:40 +0100 (CET)
+ by freeshell.de (Postfix) with ESMTPSA id 8D13EB221467;
+ Mon, 16 Nov 2026 11:27:46 +0100 (CET)
 From: E Shattow <e@freeshell.de>
 To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
- Yixun Lan <dlan@kernel.org>, Tom Rini <trini@konsulko.com>
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
+ Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>,
+ Yixun Lan <dlan@kernel.org>
 Cc: E Shattow <e@freeshell.de>
-Subject: [PATCH v3 3/4] configs: spacemit: k3: enable CONFIG_BOOTSTD_FULL
-Date: Mon, 16 Nov 2026 02:26:29 -0800
-Message-ID: <20261116102653.36927-4-e@freeshell.de>
+Subject: [PATCH v3 4/4] riscv: dts: spacemit: k3: adopt com260/pico-itx 8gb
+ memory override
+Date: Mon, 16 Nov 2026 02:26:30 -0800
+Message-ID: <20261116102653.36927-5-e@freeshell.de>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261116102653.36927-1-e@freeshell.de>
 References: <20261116102653.36927-1-e@freeshell.de>
@@ -118,67 +123,52 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Define minimal env variables for boot in spacemit-k3.h with fdtfile
-as the CFG_EXTRA_ENV_SETTINGS sentinel, and enable CONFIG_BOOTSTD_FULL
+Adopt [1] "SpacemiT K3 use 8gb memory size on CoM260 and Pico-ITX"
+
+1: https://lore.kernel.org/linux-riscv/20261115195112.32120-1-e@freeshell.de/
 
 Signed-off-by: E Shattow <e@freeshell.de>
 ---
- configs/spacemit_k3_defconfig | 9 +--------
- include/configs/spacemit-k3.h | 6 ++++++
- 2 files changed, 7 insertions(+), 8 deletions(-)
+ arch/riscv/dts/k3-com260-ifx-u-boot.dtsi | 9 +++++++++
+ arch/riscv/dts/k3-pico-itx-u-boot.dtsi   | 9 +++++++++
+ 2 files changed, 18 insertions(+)
+ create mode 100644 arch/riscv/dts/k3-com260-ifx-u-boot.dtsi
+ create mode 100644 arch/riscv/dts/k3-pico-itx-u-boot.dtsi
 
-diff --git a/configs/spacemit_k3_defconfig b/configs/spacemit_k3_defconfig
-index f49442951c8f..9bf582564d07 100644
---- a/configs/spacemit_k3_defconfig
-+++ b/configs/spacemit_k3_defconfig
-@@ -19,25 +19,18 @@ CONFIG_RISCV_SMODE=y
- CONFIG_RISCV_ISA_ZICBOM=y
- CONFIG_STACK_SIZE=0x100000
- CONFIG_FIT=y
--CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
- # CONFIG_BOARD_INIT is not set
--CONFIG_HUSH_PARSER=y
- CONFIG_CMD_TLV_EEPROM=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MTD=y
--CONFIG_CMD_DHCP=y
- CONFIG_CMD_DNS=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
- CONFIG_CMD_WGET=y
--CONFIG_CMD_PXE=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_MTDIDS_DEFAULT="nor0=d420c000.spi"
- CONFIG_MTDPARTS_DEFAULT="d420c000.spi:128k(bootinfo),512k(fsbl),64k(env),1024k(esos),384k(opensbi),-(uboot)"
-diff --git a/include/configs/spacemit-k3.h b/include/configs/spacemit-k3.h
-index 9dd545e2a3b2..39d10059926e 100644
---- a/include/configs/spacemit-k3.h
-+++ b/include/configs/spacemit-k3.h
-@@ -6,6 +6,12 @@
- #ifndef __SPACEMIT_K3_H
- #define __SPACEMIT_K3_H
- 
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	"ramdisk_addr_r=0x130000000\0" \
-+	"fdt_addr_r=0x138000000\0" \
-+	"kernel_addr_r=0x140000000\0" \
-+	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"
+diff --git a/arch/riscv/dts/k3-com260-ifx-u-boot.dtsi b/arch/riscv/dts/k3-com260-ifx-u-boot.dtsi
+new file mode 100644
+index 000000000000..cce42122a015
+--- /dev/null
++++ b/arch/riscv/dts/k3-com260-ifx-u-boot.dtsi
+@@ -0,0 +1,9 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (c) 2026 E Shattow <e@freeshell.de>
++ */
 +
- #define CFG_SYS_NS16550_IER	0x40
- 
- #define RISCV_SMODE_TIMER_FREQ	24000000
++/* https://lore.kernel.org/linux-riscv/20261115195112.32120-2-e@freeshell.de/
++ * riscv: dts: spacemit: k3: use com260 8gb memory configuration
++ */
++/ { memory@100000000 { reg = <0x1 0x00000000 0x2 0x00000000>; }; };
+diff --git a/arch/riscv/dts/k3-pico-itx-u-boot.dtsi b/arch/riscv/dts/k3-pico-itx-u-boot.dtsi
+new file mode 100644
+index 000000000000..8995d5e137eb
+--- /dev/null
++++ b/arch/riscv/dts/k3-pico-itx-u-boot.dtsi
+@@ -0,0 +1,9 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (c) 2026 E Shattow <e@freeshell.de>
++ */
++
++/* https://lore.kernel.org/linux-riscv/20261115195112.32120-3-e@freeshell.de/
++ * riscv: dts: spacemit: k3: use pico-itx 8gb memory configuration
++ */
++/ { memory@100000000 { reg = <0x1 0x00000000 0x2 0x00000000>; }; };
 -- 
 2.53.0
 
