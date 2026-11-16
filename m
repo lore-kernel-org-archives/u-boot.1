@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5685606A882
-	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 03:24:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B85E606A33E
+	for <u-boot@archiver.kernel.org>; Mon, 16 Nov 2026 03:30:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=czB7gx9d;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=pqckRfLG
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=d+5Sj08B;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=vLcgAzT4
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C9805605B1;
-	Mon, 16 Nov 2026 03:24:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 05C0180DDD;
+	Mon, 16 Nov 2026 03:30:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZpALSHGyr84C; Mon, 16 Nov 2026 03:24:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C696C6060D
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794799449;
-	b=hxxICATbDiVwtGavEufvxSpo80k0PT+VHXSl0OHS7L6EJSBL1hzcJNMx9uzUikPP/dwc
-	 OmlJw7j8T3lWWm/FFYYZb416c+ixzpLgzJqeuiWEFV8yLzvf3hbxlFdvaVb5/AuZ4QlTM
-	 TA1Q6fDLZkZgP3dpAgrkgmUtqHkcog7qCVq5UaUwK+2yIlcwdqhnuSI21zkhYIVut5cD2
-	 fwjmGR1UD4KmpaF+PSPUUCh5uCGzXMTwPcdfOhdioCbFLq81cnGsubs3CasVm8/7KZLIC
-	 7qnswNhDL9Ch/tHVnq7OQEuAcyk1KubCWt13CcUtip2hl2aI1sMcetSve3xVyVoX+Mg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id es-XCB3cdgf0; Mon, 16 Nov 2026 03:30:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 332DC80CBF
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794799802;
+	b=abo5yfJ6oz4LQznusTfjNluXOQ7KlK3Z7qoQAxe93hEqEnlFF2j8QnGNAqoMPtGywxf5
+	 MmQ6JhWF+gX0ANxSp1/SIBiUL3OtN+ezleeVO3SxHkqALSnBJNEXRPGNLku1V05kGZbEd
+	 Gnw1U9ug2sHWdHKRrc9D/VeK0a/ZKQBxnJ/JvS6giMpc+JdbgKSRuH+Vdwyq0Y5nNENSu
+	 yL+PNstfWtSq0MEdIo3fJ/w3T8OTAWPfsgyxVM2NkeOuGz4jBC0Y0VQ2jx+QataSPYdgq
+	 z1ITzTnhLmrWLX/gmzweyJHOmfOHA8mbCJ4vEfS5GVYaj6VqWOMdWkJjwbv9+BXl5hg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794799449;
+	c=relaxed/relaxed; t=1794799802;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,87 +31,85 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=YVHMKnMrJg4FDVGBtogczf9QTQm2U3XoSTnu1a2Q+9Q=;
-	b=ffM1S9XHiTtmDHq/mvrF/N+PqWlAMS0TCBaZqvGA0CoHA+D1vzIdXnBrVwwSBlK5drPV
-	 0GrdjfJ5VRKK+NULr6QC+0u/sD4W0o3krUXionzYOiKruLNj+TFrf4fIe50mC8ezuREld
-	 oJ2viaoV6tb+hdGTWAaFYMPfylucT4FGxOjhctoEE/oYoJDObtDGhgX5+D+Y4MAuXnrUP
-	 +McveplrZmvTYyDFhqXOD2s2MGqxohw5QICgUHW42rW0WpIHcZI/8w5fBiNZD6RoSFNcZ
-	 yCblU/PQ/h7LqrOiqH42xzrztQry5aVIhj4G7K8HCPEChPn6rRUtpQGrhi2sgF3Re9w==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=QuZJ+dmjMPSiMI8BMFdUCvooBJM27XCoZORTXc3elOE=;
+	b=ARXEU59jhmjKTRojUsS0aph3HYwjFfOCMjv/bfoRjATYprD0eBwfyXgmHWXbJfS3dL4F
+	 bYDF1DVU4pETAgaMnUNhU05dABeGzgsbT5qQEm6KLxvyIwNqebjWFAjjZ9EUoCs7man9p
+	 EXYHuGWzxGL16gq6CB9gBdZG+8Jow+175qW8GtWUi85woe2pOrRMgmlJI0Taebpfxnhje
+	 GMZeMDBKHUkkFwZsqpCMSzjwOSXLTHj+XwEF6GWPyMfKDzsmFOnTzlWp9IWbgYwJ3TGAM
+	 DtAJVXM0TQTiZPvX1Fsy//grXqcXGio9H7hvOYxvrwBG49VaSm8Z7wlw+SnJawx/LJg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794799448;
-	bh=YVHMKnMrJg4FDVGBtogczf9QTQm2U3XoSTnu1a2Q+9Q=;
+	d=lists.u-boot-project.org; s=default; t=1794799802;
+	bh=QuZJ+dmjMPSiMI8BMFdUCvooBJM27XCoZORTXc3elOE=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=czB7gx9dkrvIx+fjobE5V1LoCuo7ngcUF+66a0xNaCAQCcp51HVhiKwUw337PtfKb
-	 etcCAszCpIxn9RNNwfnet6A1VlpcgJ+9QoKRNlYz7htjMjVATp0Rvx6nD0nhcgmvKP
-	 Vez1VFlYOOlsnY+lwOr3lN30SZ8EyWJ3iIOPgH48fVlTh8/cTqpBptHzUf6Ri073Ok
-	 R4VK/pWTQLfPfd2LD9dP0MJTAHZP/KwuRkoHBsKXz4mc2Cd3kqqDQiBg5VbN5vaasL
-	 p1CQPrXTRp27uGl8F6TSnNq/OJxmFfJSX8AoRX7L8FiwXoC5m3ZKAxauPavXcceZBH
-	 YAhGC9Si0/WmQ==
+	b=d+5Sj08BCvd254oFb2n0I4pa98RWI9XvU6kvDVMcnNCI2CiVcK7qZxqxrKxRI1HB+
+	 AjNeGEZUst7/MV7p6lYIcYfLGgUO8duiEX4FiPanrM1+Z68aQCCsu/9f5+HuVPvy1V
+	 DVgjgp+FBsdxt8aZ8sMslNQ39/XhzlOAP7u1lYqyk3poL7XkTadIzyoF9aYU/Ry6br
+	 iu7xwRzA/m8xo++7y8+XMzzNf5QtQZo4tNicMp391TwoHA2xRlr8dK5IXQ5+FY7XjW
+	 xOO90rCEiNFqcwTTMbZh8WtZ0JsLxyHROJgaRxORW6NldR+GZwxW7SqaqcO29Spryw
+	 Uy6HTzeLpGkSA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C696C6060D;
-	Mon, 16 Nov 2026 03:24:08 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1D9881A6
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:24:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 332DC80CBF;
+	Mon, 16 Nov 2026 03:30:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id E0113D7
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:30:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 101274008B
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:24:08 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CBAEB605F1
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:30:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kUAvqmxI7_0x for <u-boot@lists.u-boot-project.org>;
- Mon, 16 Nov 2026 03:24:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1796B40012
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::101"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::101; helo=mout-p-101.mailbox.org;
- envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tjFNwb9kMdSz for <u-boot@lists.u-boot-project.org>;
+ Mon, 16 Nov 2026 03:30:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B6006605DF
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
+ helo=mout-p-101.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=pqckRfLG
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1796B40012
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:24:06 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=vLcgAzT4
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B6006605DF
+ for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 03:29:59 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jSY9v6F9Fz8vBb;
- Mon, 16 Nov 2026 04:24:03 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jSYJg5gJYz8v4B;
+ Mon, 16 Nov 2026 04:29:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794799443;
+ s=mail20150812; t=1794799795;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=YVHMKnMrJg4FDVGBtogczf9QTQm2U3XoSTnu1a2Q+9Q=;
- b=pqckRfLGfFRGTS2OV9zeDwrosn7CqW6bD4lC74DJjUb4CQcRuRWKIQbHhDg0rF/NL7wJxy
- cGTlGGNHZpX7ME9iRvY2Nr3NgYbaRe4jCGtkgMiYdGYD/EXTRPNgzzn+FURBMB6HIg2gjN
- 48NUAFWG0BuAYcE6W3yB87aE7CDml/+iIrsHOm4zMPdEdFVXetfp1FpvzCKE+bHXIJhJxL
- SlPVXXgLCZq9vIDd3Nvi7jH7cdTVWylVnSE6ptCZAGmxiOATd16uYGD4VyCOvYnMs8WIXe
- WEbpqjMMK4D/sh9kQErAD2+slbQpfCiOah7tRuHztjeJSCCqwHfy7+nQdD02Sg==
+ bh=QuZJ+dmjMPSiMI8BMFdUCvooBJM27XCoZORTXc3elOE=;
+ b=vLcgAzT4cirsXoJKoPxtNGX1UAiEMVP+OHd0+/hrgeD13MrXqG/tBFu+XbKKjRWQYbPHRL
+ id+V/eEsaG95UMLarLKyN9dhy0NVgXZqFo4Oh3Iekta6bLcRqYfK0WQI6vD3awc3sMLBz2
+ CXRodVZzmxNmVW3iwxz//UbF9RzKVbhzahEFbEozjjwJvXvLBRIbytxcoluHCMSJbrTBGq
+ ybKDYk/3qN6+MfNXODnDnoMarYEvGpOwfOnPkdsY5OC/ShLdGuIXps7X9mo9UxCN+u9rUm
+ T7VR+rbMomBUAhbmvqln8BHR0D/8OIVZcf+7Wi4cAG4QBQDNEGnNRY5EVDh5ZQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: r8a779g3: Set counter frequency on Retronix
- R-Car V4H Sparrow Hawk
-Date: Mon, 16 Nov 2026 04:23:53 +0100
-Message-ID: <20261116032401.3144569-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 1/5] remoteproc: renesas: Set valid Cortex-R52 BAR flags only
+ in .start callback
+Date: Mon, 16 Nov 2026 04:29:05 +0100
+Message-ID: <20261116032949.3145053-1-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2f245441a77250cf97c
-X-MBO-RS-META: r96qzdmtu44zfw7w9nawrb4x9cnc8dji
+X-MBO-RS-ID: 0e4a70f532466f159d8
+X-MBO-RS-META: b1cmjoesphiej5k9jesow11j4eyi8x7t
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,15 +126,18 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The counter frequency is currently set correctly only for Core 0. In
-case U-Boot is configured for multientry, then the counter frequency
-is not set correctly for the other cores. Set the clock frequency to
-16.6 MHz for all cores to assure consistency.
+Set valid Cortex-R52 BAR flags only in .start callback to prevent early start
+of Cortex-R52 core 0 in .load callback.
 
-This currently does not affect any existing setup, but would affect a
-system which would start the other CPU cores using the U-Boot built-in
-PSCI provider, once that PSCI provider is extended to support start of
-the other cores.
+In case the Cortex-R52 is the boot core, then the Cortex-R52 core is spinning
+on a spin table implemented in arch/arm/mach-renesas/include/mach/boot0.h ,
+which polls for valid flags in BAR register before allowing the core to
+proceed with a jump to its entry point. Those valid flags in BAR register
+must therefore be set only in .start callback to prevent the core from
+jumping early, right after the .load callback.
+
+Cortex-R52 cores 1 and 2 are not affected by this, neither is core 0 in case
+it is not a boot core.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -144,21 +145,40 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- configs/r8a779g3_sparrowhawk_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/remoteproc/renesas_apmu.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/configs/r8a779g3_sparrowhawk_defconfig b/configs/r8a779g3_sparrowhawk_defconfig
-index 8513fe4f040..8c87e1b4390 100644
---- a/configs/r8a779g3_sparrowhawk_defconfig
-+++ b/configs/r8a779g3_sparrowhawk_defconfig
-@@ -5,6 +5,7 @@ CONFIG_ARCH_RENESAS=y
- CONFIG_RCAR_GEN4=y
- CONFIG_ARM_SMCCC=y
- CONFIG_ARMV8_PSCI=y
-+CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_OFFSET=0x3f80000
+diff --git a/drivers/remoteproc/renesas_apmu.c b/drivers/remoteproc/renesas_apmu.c
+index 91586a99e0d..d5a28c663ce 100644
+--- a/drivers/remoteproc/renesas_apmu.c
++++ b/drivers/remoteproc/renesas_apmu.c
+@@ -76,12 +76,6 @@ static int renesas_apmu_rproc_load(struct udevice *dev, ulong addr, ulong size)
+ 	asm volatile("dsb sy\n");
+ 	asm volatile("isb sy\n");
+ 
+-	/* CR52 boot address set */
+-	writel(trampolineaddr | APMU_CRBARP_CR_VLD_BARP,
+-	       priv->regs + APMU_CRBARP(priv->core_id));
+-	writel(trampolineaddr | APMU_CRBARP_CR_VLD_BARP | APMU_CRBARP_CR_BAREN_VALID,
+-	       priv->regs + APMU_CRBARP(priv->core_id));
+-
+ 	return 0;
+ }
+ 
+@@ -94,6 +88,13 @@ static int renesas_apmu_rproc_load(struct udevice *dev, ulong addr, ulong size)
+ static int renesas_apmu_rproc_start(struct udevice *dev)
+ {
+ 	struct renesas_apmu_rproc_privdata *priv = dev_get_priv(dev);
++	u32 trampolineaddr = (u32)(uintptr_t)(priv->trampoline);
++
++	/* CR52 boot address and valid flags set */
++	writel(trampolineaddr | APMU_CRBARP_CR_VLD_BARP,
++	       priv->regs + APMU_CRBARP(priv->core_id));
++	writel(trampolineaddr | APMU_CRBARP_CR_VLD_BARP | APMU_CRBARP_CR_BAREN_VALID,
++	       priv->regs + APMU_CRBARP(priv->core_id));
+ 
+ 	/* Clear APMU_CRRSTCTRL_CR52RST, the only bit in this register */
+ 	writel(0, priv->regs + APMU_CRRSTCTRL(priv->core_id));
 -- 
 2.53.0
 
