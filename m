@@ -2,150 +2,213 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1EA2606A323
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 07:36:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C5ED606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 07:38:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zwrwYu8o;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=dvOABS4g
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=REX8bSMm;
+	dkim=pass (2048-bit key, unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.a=rsa-sha256 header.s=selector1 header.b=2+8ftafk
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C12C180FB5;
-	Tue, 17 Nov 2026 07:36:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D4FE580DA2;
+	Tue, 17 Nov 2026 07:38:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2mGJe7hoNLqb; Tue, 17 Nov 2026 07:36:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E111A80FBA
+ id Ojg7seRbp9H2; Tue, 17 Nov 2026 07:38:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 152CC80C35
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794900961;
-	b=Kbc5DLSMB+eO6jcg4E9n5E8RjYCv6Jn7A5MB8w0cg+WPDmZxZvHjtHtfSClN8QBn2ZrY
-	 ToLtsLG8xEw1CdL3qJFu/PFKPWUqggvK86hy8UFCHWl8A2sSi7K7YhCf5bfEXIdldfZBV
-	 jh9PxYBdsi725o42Vxfk0gZdMGgqSXfGs1itYpJ5DT1j9C9yKGbRuuCcbjWhA0CRgKI1I
-	 FRTJ2icOA191157mRkkRb+vCM/5KVqb6rMdU0V2XTcrPKAkdxDcA0iCaVSxj/JSz754Wu
-	 Hng1GIRAHG8XDCKRrnVEXmSDHxzG8d5ntX26oIEY2StQQdcRrt60PJ8wZmqH/y0gIJA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794901120;
+	b=QTsP31o4HeKRwWA5qx9mZLOIeRBRu/uJyHMNyhd20mKJj8X66E5ucXx0VqUZEPLTgO2s
+	 E7YN4G6cO+BvG7o4oatI/dq73plCDSBJ81uKYv4OniUWno2nbT7mv10TztnLlX+d0LT3+
+	 P82WQ8UccfQ7nd0tGY4qwJ9L7Wcw2ubt3tBUNvJ3osTsFU0BKSz2yR2/+PCRbB4cCsMhG
+	 wbuseBjMVX3yZPN/HAgosVVMb10Omtiher6q6RdS94gYa+NRFvPAxXIGnxfIeu411wU3D
+	 3X7XBwmNRwX4t6riF3o8G2LtJ0vCbqOUDCaxDLufGfuAYBP2qENmCCWd0w/C3sz0Qdw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794900961;
+	c=relaxed/relaxed; t=1794901120;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:References:From:Content-Language:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Sx98axkIWQqjtC7u/wgflhmRLv2AhAJnccGpcYL/vqo=;
-	b=IFwzHGPTpHB2qrMgtv33PZ88jtSL82JSM8z8P1d5tX0vJXnlgDMXLjb8IPLEVBLlmjNu
-	 dFz3g47MP+w8UnjEvMGifvt2qIAZOIcMMF7TKyzUtJvWKfMbEvWhk0oN4GzOelIw/H1h0
-	 W/JaR39Va+Aa9j44FttLF0lpfO8pvEXUlqCmOuG7RGHz9/flvibD14PB+RYjzWnifKS0v
-	 ZhEyCYxVeXbbzFFeOPAWrf7Dat6gep2Tv+BowQCRq72eCpYv2tt1xxViKNs+TVDhG46ty
-	 TLwjZ27/Olac7cd1GWD7/RWJQhlQRpHekHIJKwMjjDrH3jUexExYcIE5emWgUQJvDLA==
+	bh=3g1x9rVsEVBuaGeV1k52CR24eeTqEs0Jhdln4TVRFHI=;
+	b=C0j18352GqAC1Q5wIBCqbW5IoDOUQ8QpaEoTZ8AzeWYbUZN/d+qFDvfVtmcR6IV/xUoA
+	 U48FylctXGqz2pqdaUGpF6ODXeK9HREikq73a0x3058okrFeBqDR2hGaEylypOlzIf8OA
+	 dNvwvZUCX3ez6o2cpMzOgGW+14I+5HD9/594eozD+UqvRtE3fy5IHr8ZHfcP/E0k/NDHt
+	 aQvtY1Y0sQkptEGShNrznhjZj8TjzaUvIOxDuSxS5iVzkgWW/Ykx5/fwUyS7Wpwep0SFK
+	 e7VG8Y0HlwjvB59ERcLmnY2aMJ8FC7MBXsCJb0P5r1N1bZMp7ZlrDY6DNJl2yLZlobg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=dvOABS4g;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794900961;
-	bh=Sx98axkIWQqjtC7u/wgflhmRLv2AhAJnccGpcYL/vqo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794901120;
+	bh=3g1x9rVsEVBuaGeV1k52CR24eeTqEs0Jhdln4TVRFHI=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zwrwYu8ol2IIdvEORm2z/5dh8R5Bxjm6a6FEKCoXyXeclZn3TK59fdQgNuZ4cCM3g
-	 uQEw0q7UshTFmKESD673qx6gIw2jnXguKWBK4CqXpKMJEgUsyZPwN6HFoz/k0JRN60
-	 E9IIEQLOi8xezP8ZwgZUxowapLtbpCzLIKV+PBpEKHYuFtVTH93oKemA5rliWlokEk
-	 NzQU2tv6Vcm1Gv/Ip24RHANY8vWoh0EOyX8ce41/vmHjI4Gj/wOQXZN/Y1aJbWdZGP
-	 X08514dDWJqz8/KuaB1J8i9GYpb6puu7F78xmJhaAAoWwEke+LL87sFna4zNJMKB+2
-	 iLYlWIiXiL3rA==
+	b=REX8bSMmN3sWRsOW8NNV9gGedDskTbjvmGVkFmGnNtpY1rKC+FME9PYKdByaFjkN5
+	 fZOfLgnP6d6PY1Pr+3h9o15i7MPTbrg5DNVm0fDTGnjQCVhGXMoF60cA5Ch85thUOt
+	 X+o+UeqYjpJT+FwbioTzLk6ZXx4C1tqB+jGDurPB+7EOw7zakOcIkmjL+2CxKQ/6Nj
+	 GfrhWypWz2Ml2Ds1Kqg0cbQIj/TNuyocHbIifSnPp7XCwjt9BxgjAJEX4/yNi6CA9M
+	 GuD/kyBqjxwZWVKE9xTNPz9tqy1sHkYS1SyPj6YB0Y7qGeTTK5QDOxk+6ADgC/pLJk
+	 qqaNtWwfWgn2Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E111A80FBA;
-	Tue, 17 Nov 2026 07:36:00 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7ACD628C
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 07:35:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 152CC80C35;
+	Tue, 17 Nov 2026 07:38:40 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 76676A0E
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 07:38:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6691E80FBA
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 07:35:59 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 53A2B60825
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 07:38:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v2o1RIUX-_6V for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 07:35:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 40EC780FB5
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::b12a"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qU5_rtXlbtWz for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 07:38:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3BA50605F7
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c201::1"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b12a; helo=mail-yx1-xb12a.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=dvOABS4g
-Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
- [IPv6:2607:f8b0:4864:20::b12a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 40EC780FB5
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 07:35:57 +0000 (UTC)
-Received: by mail-yx1-xb12a.google.com with SMTP id
- 956f58d0204a3-67db763cec7so2000197d50.1
- for <u-boot@lists.u-boot-project.org>; Mon, 16 Nov 2026 23:35:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794900956; x=1795505756;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Sx98axkIWQqjtC7u/wgflhmRLv2AhAJnccGpcYL/vqo=;
- b=dvOABS4gy+PZBjDIAtVf8hIhG/pICOtwlW+4jv8q12yMKiRgnseMSVT30dB6CgDM/0
- WTznR/c/VmTKM0VSLlem0TTccwjIblGy/B1hf06KJvPsn+/DN6oeRjbUFueEmUIku962
- cO0OHUSWBs2rr96pSgS2HcKEB/R2S2oZ1xfH93i+lmF0mpJ1F1Itlg02N030Ut7DIrkp
- jnpFMWNyoW0269BY8HZ9FgkFcOFKA9WyWRQFuDqPPrBHYTM3Rx2FJGwJczP/OcHO9bQh
- ldtsN+yYF0kKc1KBjxazrJqm6A3oM3MhrDUOaFtAaAhDJxjHqtuzwqY2Hz4hjyupdML1
- +0Qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794900956; x=1795505756;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Sx98axkIWQqjtC7u/wgflhmRLv2AhAJnccGpcYL/vqo=;
- b=VXaeVkjX2GMwR+cEmiS9NcNDiP+kIYByEavzFt6mEz4/F9cY5uNEl7Wmd8K44fzjCm
- SCWNus95FOya7Ku4msZFF8KoPVL1wu8lfjqUbhavIfqDEhsD42HA8MqpYYhMuHluESyz
- NKhNRFo6DM1NzQzEoHlguKo7J0hxoVKyVXJgM+v9+ghiroN9PgEzLqS91ybVuPQysNLZ
- EPIgDB+iwVn6ZNlmLNJ9POR9DyuABBjZMJF6TlZLtlGTYUNUmhcIcytft4Q12HSyzubX
- ZFvw+QpuNGw6wtJtmxC/4LE7noNaU28hs4QC1ge2UkVNyHwzo0Leh8CP0Aqa49+PSuTb
- oonA==
-X-Gm-Message-State: APuU4Z+oNmeN+MM8hnNbA7zXoYUnZxIndQyMPzRA34KmC/+6Rj2+Z7eV
- xaMxuBMDGMlpsQhnxNUskAwaFn4HLRBWV6E/sidl+kL1QEx0v2ncFIe58ZV5UmXY/sdydipfI9v
- 1gde45mvIOYbOt4MBVyMd3ZAOI0t30r2uxfQbhoRTYg==
-X-Gm-Gg: AZFdTZf6/A8T7rIWVJ+qnZu2Gn2yYizVs9nGSjoTojc+7pvhMnWpOxMH43gtSFZdsgm
- wNE3bpp75SD783WONfHVrdW99esE7GNFRODBSVnx7ZqYFR+2sgfLciWJnXQm36uXjU0gjRb1MqS
- lG52fAANiU0M2LPjVWbLDE2yoqTBHCDCq6NOEPFCf+hlwaBRt69lmlel3NDZmCo6z9VcyV7lt6M
- 4N37+keHxhi8rwmBbjNj1EKxAy6qjzmeLl73ck5ot4h9M0eUMnLCPlIjHpJXlg/wr85unG+Frzf
- vpzTWAFJct2PnibDBJO7tS3tsQ4nE05f12iadwQi30kxAu2BpWqRRkKonXtoAi1s47tyGqkiLjO
- ZUU7Q4OmI6Iy9UFPjUEWAhVQ1QRVJlEK2mQvSUVGHYdPFp/D9SkM7TNJcvAp3kbu/6KSWT/xC2D
- AfqFiR32MGBD+DLSHFOsZiNC9/F1v2t5407b7nak6e2BUQ/Im+YOvS4xE+/sFwYzGk6Bk1q0xrx
- boLe4so/z0RIH2vIbO8Sp61AiF28fyubodlALhvXOAcEcorNuzjYiMDLi2qvfxrKHNNHaoRQYmh
- XAOE1XgnfXDukkpNsPCm1EEElsuxCZgBfXN+UewDpAHtydrB2q5DPELoXshQEY74xTGp1JrBNmT
- 4hwuAA5VDbJQD1Hi2yZ8puQw8Sh9D4VP/KjtkwUdU2wHlPnebQSBPv79zEAVs5wi+tajCdF9Bnz
- CFpTgRL6zgCLE1GpAv6a93NNIfrAQB0tiSjkjzn/V/f1cDtBTijXO6D4FX/dN9m6UbPQk4S38yY
- 3Dx6p6Qk4RCYd/s3A==
-X-Received: by 2002:a05:690e:14c6:b0:67c:24d8:604b with SMTP id
- 956f58d0204a3-67d89372b97mr5846292d50.21.1794900956266; Mon, 16 Nov 2026
- 23:35:56 -0800 (PST)
+ client-ip=2a01:111:f403:c201::1;
+ helo=am0pr83cu005.outbound.protection.outlook.com;
+ envelope-from=mikhail.kshevetskiy@genexis.eu; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.a=rsa-sha256
+ header.s=selector1 header.b=2+8ftafk
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3BA50605F7
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 07:38:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3g1x9rVsEVBuaGeV1k52CR24eeTqEs0Jhdln4TVRFHI=;
+ b=2+8ftafk8cnZdL0O//lX/QPuEtKL5cZOUrPzsg2zt2NOtOiY9xta0wCSWKIrPgk88V1K7TXMd7tMbfEt3Um1ENUb3XHjFLD4o28eGvX7i4YIzt2hQEDp9Am43aZKorTN8hI3472QY+Hjww+x7IgMdUeaMb4uxS3KKUJk27wTw15SHp9XwFwQnXFTOVf4GOxBg8x7kYYSf9jLmlwiESZQ3/1y7RhgnHwQwyEQPaSTb1FlUkfpy/ox8h9SdpgPmbaIO0Wei770OEBY91mySRPIDfEFVEQHWf93t5paqddlWX7RiB8fvPh+r0IbR66rNiVfUAaM+09BwTdtho1zr3uugQ==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
+ by VE1PR08MB5792.eurprd08.prod.outlook.com (2603:10a6:800:1a6::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Tue, 17 Nov
+ 2026 07:38:24 +0000
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc%3]) with mapi id 15.21.0615.013; Tue, 17 Nov 2026
+ 07:38:24 +0000
+Message-ID: <935542c9-f52b-40c7-bf45-0984dbee09ae@iopsys.eu>
+Date: Tue, 17 Nov 2026 10:38:18 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] spi: spi-mem: add spi-mem caps support
+To: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Vignesh R
+ <vigneshr@ti.com>, Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Eugen Hristev
+ <ehristev@kernel.org>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Chin-Ting Kuo <chin-ting_kuo@aspeedtech.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Mark Brown <broonie@kernel.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Guodong Xu <guodong@riscstar.com>, Raymond Mao <raymond.mao@riscstar.com>,
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>, u-boot@lists.u-boot-project.org
+References: <20260927235716.1872707-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260927235716.1872707-2-mikhail.kshevetskiy@iopsys.eu>
+ <8ffb90d8-4717-45ff-87d8-145f9271811d@kontron.de>
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Content-Language: en-US, ru-RU
+In-Reply-To: <8ffb90d8-4717-45ff-87d8-145f9271811d@kontron.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MR1P264CA0165.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:55::13) To DU2PR08MB10037.eurprd08.prod.outlook.com
+ (2603:10a6:10:49a::20)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <cover.1794221712.git.harsimransingh.tungal@arm.com>
- <e2d5fca8121bf452af978a2cef749b5add724d42.1794221712.git.harsimransingh.tungal@arm.com>
-In-Reply-To: <e2d5fca8121bf452af978a2cef749b5add724d42.1794221712.git.harsimransingh.tungal@arm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 17 Nov 2026 09:35:20 +0200
-X-Gm-Features: AclHuK94vfD4vL345EClADD_n2p6DTEsG-oFilgiykm_Vkrz7OjX_9uvHYGnjpk
-Message-ID: <CAC_iWjJqjM1xs7BOh1c=HmKtojpGTJhJLxUEuSTF8KZRfb_H3w@mail.gmail.com>
-Subject: Re: [PATCH v7 17/22] efi_loader: enable TEE runtime
- QueryVariableInfo() over FF-A
-To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Cc: u-boot@lists.u-boot-project.org, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|VE1PR08MB5792:EE_
+X-MS-Office365-Filtering-Correlation-Id: ac681207-2e20-47d7-7515-08df447dc280
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|1800799024|376014|366016|23010399003|921020|261022105027099003|261021121427099003|4143699003|260925021911599003|11063799006|260925021311599003|260925022911599003|10067099003|56012099006|261026121527099003|261026140227099003|261028144727099003|261022075727099003|261102123227099003|261021123027099003|261009221727099003|261009223327099003|261009221227099003|261009223027099003|18002099003|6133799003|22082099003|261009220027099003|3023799007;
+X-Microsoft-Antispam-Message-Info: PajlAm5SqSXPbePBOsCtIOIHD6zCFVaKXddr5wu2fJBWn4ylPrW7GTUGNXHt/Qh++BbN7wKSMCsRqDYXcd1ScJ3vMtj+eK9LZq+Q1Bx7L+w9ASk7tk8/KN/uCcthwtkSTuHv6iZXZAsxcbh+ktPWQ7grB4gdMMUliB3JObqFqVFmAZyQEwMao4zC6IuMWjJJJeibkOFXh12weXqTcxTs/230oazWy9MAr22lU1uoMwqSwmZ4tXKhvP8Yr4Hnsd6l8nDbxL5DJrr9LH9kv+aoO9qL7vB40oTH6p5AlSEREhwGA8etWkb7STu35lhIUv/Fc5SA1bmJhBMraN3epDZHk0Cmy45f3B3rAZrNa+t1exGG4iEIupenR5S9q6VtofwUi7ayk/Y9QBaciwNXPzKJXjrsiEQQMFmnIzbl1rc6oxZpiP/dj5frrJBN9Xc9kfeRLTKkpYiv/hcQb/n6VgREo4p19ylBAtbgR3NJuUDVhZFSiat1YlB5t47xNvdupX4pX5w3zqdYq5fr/0Evw6wpaxr17FtGpjSzOh8jxFNuHym1gcD3X3z5bT6Af1ofN+FY+T4AGT9CLqns2Lfx6iGrJJDKSknskZAoJ1qGBL4hcGn3Ee2fQUGY0N8KJJR/TmLmpGtxNilhvJtRpT1mcxlBWAZDX9e9edh7lXDTWmaVsENXkAyrTfeKmzl5+NtQ9CU7wx2CLllJ/Rkp1cXHy4ojfg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(1800799024)(376014)(366016)(23010399003)(921020)(261022105027099003)(261021121427099003)(4143699003)(260925021911599003)(11063799006)(260925021311599003)(260925022911599003)(10067099003)(56012099006)(261026121527099003)(261026140227099003)(261028144727099003)(261022075727099003)(261102123227099003)(261021123027099003)(261009221727099003)(261009223327099003)(261009221227099003)(261009223027099003)(18002099003)(6133799003)(22082099003)(261009220027099003)(3023799007);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VXpyM3NZa05LQ29Fa2ZhZlBCWlpjRkR0ZXRNa0lLZ2JZRVR0bDB1Q2toTjVa?=
+ =?utf-8?B?YXZEOThZK2xEeXRxMGs5Nm92VmF3RzJvblJxZXpmcTZwVnpEWWQ5TzFSMGIr?=
+ =?utf-8?B?ak5XWlMvdzU3eTdJNWVsZTFUQzdGQnkwMllTS0VMVFZrOUpuV1hQTTVwUDhH?=
+ =?utf-8?B?RUVNLzU0dzBhKytTZkgyKzQxMTF2ajVMalA1YWJiNFIzYUsxbFFzdFZDUmxV?=
+ =?utf-8?B?dGZhSXQ2cHl5NzBEUmZmTlF5VWYvZzBaYkVDMFVDZTQvbTJyR0Y2TTVkVkRJ?=
+ =?utf-8?B?eUZERkhqcW1abGxGUUNSWXRuVFRNK05lTWJMNldaMWpKa1pRNWFmYmhGMkp2?=
+ =?utf-8?B?Q0RtSzlwTDBRNkRuNWpjWHZXeUh1QWNERGZab0hucVRNMEhkSmRLYUs3d0RS?=
+ =?utf-8?B?cERmQ01haFZTd2xLSEI4bzEvaVhsdWw1eG9LTkx2cG9sZHpUWjl6WXZVMXJ0?=
+ =?utf-8?B?QTRhNzhib0NvRU5kUGc1S2dEb1NCRDZXQTVZMm5NdjJkQ3pDY2hHcGM4UDZ6?=
+ =?utf-8?B?SjZaTXJtZHd4SWppRkpOUktjQ2xwaVc3TEFZWkg3aUpsSlRwbm5Wc0NidGxJ?=
+ =?utf-8?B?MkthRmdjS0drMzJzaGgrWHdMUnpwUno2dWZReWJJSytaZGVFT0MraENYcVJX?=
+ =?utf-8?B?RERMTVVtN2w2R1ViVTFBd0gwOEtRb2tRQ1JjS1psWUpDanhkSWhhVFNZb2ZR?=
+ =?utf-8?B?aThXK2Vud2Q3TUdqSHkweWFGdU0zZFVROHJkNGR3WUZKZ0treXY3QWJWbTQ1?=
+ =?utf-8?B?R1lGMHZPMXpTZTBpRWJCSi9vSEhmMXJYTXZQSWU1bVRuQ05OWXBUMGZRa3k1?=
+ =?utf-8?B?NjJlUzdwd1ZXVmVtbnNnTnVyOVVUcHRCQ0diL0lKMHc2ZGpseGR4WG1VTTNX?=
+ =?utf-8?B?VHJXMHZqK2V4ZUVpQTVtUjRiaTNrQ2JxenFZdUd0d3lpVFp1dEhaUVpnWmpy?=
+ =?utf-8?B?SWY4SDQ0bFQxbXplaHRKTFBKOXI2N0pWWUUreFlHcFZzZUtkd2s4aEx6dmFI?=
+ =?utf-8?B?TjZJK0dUVTZzR1Bkdi9PZFUraytYcWFBdWZVOWFkYWcyM2w2c25TTzl0WDE4?=
+ =?utf-8?B?V0loaEJRQ3RGUGw1NUFmaUMxNGc0ay9JSGlVYjI1TzU3b21nOHNKVGI2eHh4?=
+ =?utf-8?B?NVRXUnNkL2FqaWlFMGY4OEtqSlVvQ0kra29QMXFLeDFMclg0a2VMcEZZcVFV?=
+ =?utf-8?B?Ti9CNkI0U0JLYTBKdFMyMW04Y1h4WE5RaXBoTGRreHlYNlFVbnU1YStmMlRp?=
+ =?utf-8?B?KzhDeVFSUVVlaUxaaGlsVlVkRklWNldxS1ljZjZqcSt3S0ozeGxyVkMyWnN4?=
+ =?utf-8?B?RzRjZDBXS3VTQ3NGK3pvTy93cE1ycGlmVStoajI3T2IzZ0RwdVBnRmhoNUlr?=
+ =?utf-8?B?dWFBY0hmWHZkaWpIeEw4SktndVE3YmNFOGl4QmpRakJzQTVOdFZQYkExdU1Y?=
+ =?utf-8?B?eEx1ZFQrUEp1cyttMTVjY0s0T0xkTURQQytEdnYycUQ0L3VWbk5WV3M4cGJW?=
+ =?utf-8?B?WkErNmtrYXNjUitZTGZyZ2t5MEhoUXRFaXUyUDdQbHovayswZjZtSSsycVZl?=
+ =?utf-8?B?MDU1bnlMWGZNOWFKVkFXQ2J4UG5Dd2lJR0I0MXR2WmxTSGY0aFBwMG9SMlpN?=
+ =?utf-8?B?UVdXSnNWTTlSdEl4b2UrWkdHVXJHaGgyUWNwWDZKS012S0FhcExtM2t6SjB1?=
+ =?utf-8?B?elh3enkzWEQ3ZnJWNXI3azBOYm5lNkJHclEzUy9Lam5ZVEFwblVvSGVLWjBX?=
+ =?utf-8?B?Z20vQWlHUVJjNWVCZ1NLdFU0bFphNU4ydGlpQ05QWHR4SUIvNmRsMHcyRUU5?=
+ =?utf-8?B?UkhoUnAxeVdVeWFISmdReHB4NVZvV2xLRjZRNVBPbTNndHU1Y1grdXcrL216?=
+ =?utf-8?B?TDN4bExMMnE3MmhNZVNQcDlnMjl5ODlNbExYaThsZWt6Z3ZMdFY1b1pEMWFq?=
+ =?utf-8?B?M1I2YWRKK3crVi9mSEEvTDQxdUk5VFc0Q1lWNjdUdHF3SHdHN3lOQkxZL3lL?=
+ =?utf-8?B?UzFUcmI1bStubFBwbnBJNlhFVm1tTEtxVm5NcHNMM0g4L0RaVksyVmhjaEhp?=
+ =?utf-8?B?engrQ0VKT0E1ZzFoT2ZvNnBFRVpibFNKYkZMbkY3M2l6OE5xeWJwN2pLYmU1?=
+ =?utf-8?B?MnVRLzdsRHgrNVZsM3JrOXk2cFY1NUVMSHFBamFSS2VLRWJqRW1FVkgwTUVX?=
+ =?utf-8?B?V3NJdE5ZSlNwb3gxMkJiNEZxc21Pa3k3UGUyTDlCZGplS1VyMEh5V3Y1Z04y?=
+ =?utf-8?B?MjZiN3krWTk2Y2hjdHhQbkFLK1Z3NmloZm9aVk1oSXdraE1Zb09peU1IMy9V?=
+ =?utf-8?B?V0VRMm1MNk1DMGdsakFHQlk3cUQ4NWgxbzh4N01MSXBaVGdqZFA2VVlDVS9W?=
+ =?utf-8?Q?vQtoIlhZy27YIe/U=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac681207-2e20-47d7-7515-08df447dc280
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2026 07:38:23.8471 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hK++T6kcEKqoAK3DbIW29a1a0hWh7cEZYuHbVpOXCMP1TbugqtbkPL/dzRErd217Hx3W/AR/vWG/vT+e3ATojpdQen+mTmQJ3XBby9Jr9gE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5792
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,158 +218,80 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, 10 Nov 2026 at 11:58, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
->
-> Add the TEE-backed runtime QueryVariableInfo() implementation for the
-> FF-A/MM variable backend. The runtime path uses the shared MM
-> communication path after ExitBootServices() and returns the variable
-> storage limits reported by the MM secure partition.
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
->
-> ---
-> Changelog:
-> ===============
->
-> v6:
->
-> Ilias:
->
-> - Restore OP-TEE runtime callbacks when FF-A runtime mode is disabled
-> - Rename FF-A QueryVariableInfo runtime handler with _ffa_runtime suffix
->
-> v4:
->
-> Ilias:
->
-> - Split the runtime QueryVariableInfo() support out of the combined
->   runtime variable-services patch.
->
-> v3:
->
-> Ilias:
->
-> - Rename TEE/FF-A runtime handlers to private *_int_runtime names
-> ---
 
-In order to call set variable at runtime EFI_RT_SUPPORTED_SET_VARIABLE
-has to be enabled. Linux will mount efivarsfs as RO if that's not set
-in the config table. How was this tested for runtime support?
+On 10/7/26 10:54, Frieder Schrempf wrote:
+> On 28.09.26 01:57, Mikhail Kshevetskiy wrote:
+>> This makes code more generic. Also it allows check for DTR support
+>> and emit DTR operations only if it supported by the spi controller.
+>>
+>> This is necessary for spinand DTR support.
+> Could you mention the corresponding Linux commits here, or if possible
+> pick them directly with U-Boot-specific changes included?
 
-Thanks
-/Ilias
->  lib/efi_loader/efi_variable_tee.c | 64 +++++++++++++++++++++++++++++--
->  1 file changed, 60 insertions(+), 4 deletions(-)
+It will be quite hard. The following linux commits were involved:
+ *4a3cc7fb6e63bcfd  ("spi: spi-mem: Introduce a capability structure")
+ * cb7e96ee81edaa48 ("spi: spi-mem: Check the controller extra
+capabilities")
+ * a9be454927de3b6d ("spi: cadence-quadspi: Provide a capability structure")
+ * 9a15efc5d5e6b5be ("spi: spi-mem: Kill the spi_mem_dtr_supports_op()
+helper")
+ * a433c2cbd75ab76f ("spi: spi-mem: Add an ecc parameter to the
+spi_mem_op structure")
+ * 030ace430afcf847 ("spi: spi-mem: Allow specifying the byte order in
+Octal DTR mode")
+ * 8618271887ca10ac ("spi: spi-mem: Limit octal DTR constraints to octal
+DTR situations")
+ * 29c8c00d9f9db5fb ("spi: add driver for NXP XSPI controller")
+
+and maybe some other.
+
 >
-> diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-> index 9bcdef5887f..5a887348c39 100644
-> --- a/lib/efi_loader/efi_variable_tee.c
-> +++ b/lib/efi_loader/efi_variable_tee.c
-> @@ -1201,6 +1201,59 @@ out:
->         return ret;
->  }
+>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+>> ---
+>>  drivers/spi/atmel-quadspi.c |  5 +++
+>>  drivers/spi/cadence_qspi.c  | 10 +++---
+>>  drivers/spi/nxp_xspi.c      | 12 +++++---
+>>  drivers/spi/spi-mem.c       | 61 ++++++++++++++++++++-----------------
+>>  include/spi-mem.h           | 19 ++++++++++--
+>>  include/spi.h               |  1 +
+>>  6 files changed, 68 insertions(+), 40 deletions(-)
+>>
+>> diff --git a/drivers/spi/atmel-quadspi.c b/drivers/spi/atmel-quadspi.c
+>> index b2b96e1c4b9..37d97c094f8 100644
+>> --- a/drivers/spi/atmel-quadspi.c
+>> +++ b/drivers/spi/atmel-quadspi.c
+>> @@ -1286,11 +1286,16 @@ static const struct spi_controller_mem_ops atmel_qspi_mem_ops = {
+>>  	.exec_op = atmel_qspi_exec_op,
+>>  };
+>>  
+>> +static const struct spi_controller_mem_ops atmel_qspi_mem_caps = {
+> This should be struct spi_controller_mem_caps instead of
+> spi_controller_mem_ops, I guess.
+Thanks for noticing.
+
 >
-> +/**
-> + * efi_query_variable_info_ffa_runtime() - get information about EFI variables
-> + *
-> + * This function implements the QueryVariableInfo() runtime service for
-> + * OP-TEE with FF-A runtime transport.
-> + *
-> + * See the Unified Extensible Firmware Interface (UEFI) specification for
-> + * details.
-> + *
-> + * @attributes:                                bitmask to select variables to be
-> + *                                     queried
-> + * @max_variable_storage_size:         maximum size of storage area for the
-> + *                                     selected variable types
-> + * @remain_variable_storage_size:      remaining size of storage are for the
-> + *                                     selected variable types
-> + * @max_variable_size:                 maximum size of a variable of the
-> + *                                     selected type
-> + * Return:                             status code
-> + */
-> +efi_status_t EFIAPI __efi_runtime
-> +efi_query_variable_info_ffa_runtime(u32 attributes, u64 *max_variable_storage_size,
-> +                                   u64 *remain_variable_storage_size,
-> +                                   u64 *max_variable_size)
-> +{
-> +       struct smm_variable_query_info *mm_query_info;
-> +       efi_uintn_t payload_size;
-> +       efi_status_t ret;
-> +       u8 *comm_buf;
-> +
-> +       if (!max_variable_storage_size ||
-> +           !remain_variable_storage_size ||
-> +           !max_variable_size || !attributes)
-> +               return EFI_INVALID_PARAMETER;
-> +
-> +       payload_size = sizeof(*mm_query_info);
-> +       comm_buf = setup_mm_hdr((void **)&mm_query_info, payload_size,
-> +                               SMM_VARIABLE_FUNCTION_QUERY_VARIABLE_INFO,
-> +                               &ret);
-> +       if (!comm_buf)
-> +               return ret;
-> +
-> +       mm_query_info->attr = attributes;
-> +       ret = mm_communicate(comm_buf, payload_size);
-> +       if (ret != EFI_SUCCESS)
-> +               return ret;
-> +       *max_variable_storage_size = mm_query_info->max_variable_storage;
-> +       *remain_variable_storage_size =
-> +                       mm_query_info->remaining_variable_storage;
-> +       *max_variable_size = mm_query_info->max_variable_size;
-> +
-> +       return ret;
-> +}
-> +
->  /**
->   * efi_set_variable_ffa_runtime() - runtime implementation of SetVariable()
->   *
-> @@ -1281,9 +1334,10 @@ efi_set_variable_ffa_runtime(u16 *variable_name, const efi_guid_t *guid,
->  }
+>> +	.dtr = true,
+> Anyway, the Linux driver doesn't set mem_caps and doesn't enable DTR. I
+> think it should stay disable here, too.
+yeah, I think you are right. I'll remove DTR caps atmel-quadspi in v2.
 >
->  /**
-> - * efi_query_variable_info() - get information about EFI variables
-> + * efi_query_variable_info_runtime() - get information about EFI variables
->   *
-> - * This function implements the QueryVariableInfo() runtime service.
-> + * This function implements the QueryVariableInfo() runtime service for
-> + * OP-TEE without FF-A runtime transport.
->   *
->   * See the Unified Extensible Firmware Interface (UEFI) specification for
->   * details.
-> @@ -1357,18 +1411,20 @@ void efi_variables_boot_exit_notify(void)
->
->         /* Update runtime service table */
->         if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
-> +               efi_runtime_services.query_variable_info =
-> +                               efi_query_variable_info_ffa_runtime;
->                 efi_runtime_services.get_variable = efi_get_variable_ffa_runtime;
->                 efi_runtime_services.get_next_variable_name =
->                                 efi_get_next_variable_name_ffa_runtime;
->                 efi_runtime_services.set_variable = efi_set_variable_ffa_runtime;
->         } else {
-> +               efi_runtime_services.query_variable_info =
-> +                               efi_query_variable_info_runtime;
->                 efi_runtime_services.get_variable = efi_get_variable_runtime;
->                 efi_runtime_services.get_next_variable_name =
->                                 efi_get_next_variable_name_runtime;
->                 efi_runtime_services.set_variable = efi_set_variable_runtime;
->         }
-> -       efi_runtime_services.query_variable_info =
-> -                       efi_query_variable_info_runtime;
->         efi_update_table_header_crc32(&efi_runtime_services.hdr);
->
->         /* Record that ExitBootServices() has been called */
-> --
-> 2.43.0
+>> +};
+>> +
+>>  static const struct dm_spi_ops atmel_qspi_ops = {
+>>  	.claim_bus = atmel_qspi_claim_bus,
+>>  	.release_bus = atmel_qspi_release_bus,
+>>  	.xfer = atmel_qspi_xfer,
+>>  	.mem_ops = &atmel_qspi_mem_ops,
+>> +	.mem_caps = &atmel_qspi_mem_caps,
+>>  	.set_speed = atmel_qspi_set_speed,
+>>  	.set_mode = atmel_qspi_set_mode,
+>>  };
+> [...]
 >
