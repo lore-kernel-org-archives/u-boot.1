@@ -1,205 +1,123 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBD86606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 11:28:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C56B4606A329
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 11:37:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WUOkMdFO;
-	dkim=pass (1024-bit key, unprotected) header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256 header.s=toradex-com header.b=Z4Whm6kB
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=okaV80rz;
+	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=cSS0e7g4
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 910DB80D63;
-	Tue, 17 Nov 2026 11:28:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 96F94605FF;
+	Tue, 17 Nov 2026 11:37:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QGxusULW4W7t; Tue, 17 Nov 2026 11:28:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3140480CDE
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794914899;
-	b=biNDuprKm84nLZvgAdlzKITYWEEHiiVq777vYQavm+81KM2SFYmKvVJbj0YGO2zLQL9b
-	 n+dt3Fo6dp/lvlaGArgECaC2eTmT7e3198iwZrm4lrNKmwuP3OU70KPZgVPhAX/e2rMBf
-	 t0cJAYpQd5TupdhSkSFnsq4RXp2/cvydXyWHkDHgBYuxGMrVDF/njnHKNZDkKDazLKIxk
-	 3cBDW7lvjz9IKiSfD0Pu6NZd0PGnD/toIglfejPxPNiDtyGuwl4wsFVFtfzOujmIdAn5T
-	 cW6QGac5SzfbSejTJdpzBLjIvXdM+zHjmPsvNRxN0OczQdOay1jWGPTXqd/EV76G7PQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TOtoIB8JJgPH; Tue, 17 Nov 2026 11:37:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A5A4E60854
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794915452;
+	b=QtOVjx8cuEW4PB5TZp8UcK8XOX+sT4bTk0thuVKoR9Y9TckXE+Ke57/n4ZuDQGcayMHj
+	 QgRVIpRo6kuqtz9T9XGJDXBSDzIIE3sVvE7t1LtXvMrZYoHKGXOZFkPaaBIKzS2HLM5QK
+	 RJARVlR87oer7YkXkj1O8QbysKduEYEhX2L+zKKGqiSXoE52jGJKuPPaVvZVQgPLN4LZW
+	 sL5Kda63CrlAv/3LRx57WQ2hpqsWjBl3Hj54fy1t3Q+pYkJZQmGnCQWZGSS1ADNbyMYy8
+	 qQQEbh+fS6qUutSuy8Ii6wb62RPwH14JE8uRmUL2REt5bfZSPGXxplGPWPtzL9SkaXA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794914899;
+	c=relaxed/relaxed; t=1794915452;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:X-MC-Unique:X-Mimecast-MFC-AGG-ID:Received:
-	 Received:Date:From:To:Cc:Subject:Message-ID:References:In-Reply-To:
-	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-LD-Processed:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Mimecast-Spam-Score:X-Mimecast-MFC-PROC-ID:X-Mimecast-Originator:
-	 Content-Type:Content-Disposition:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=drA2jGWvTqAU7JrkY0ZVrtYcadpb8BRbSy9rlSW2Zp8=;
-	b=AYdFdtxW5LMaiOyQjqmVUb7WFpTRpBxgl5BQS7x612hvPVJCMKyWhII4t8rtd6k5ufai
-	 cSdhJjHxeC0uOT2TTLts+pcGTNA0q13EvWD+7dC9qhoTC1QXnx78lmpbLOYiXqGzyBjSf
-	 aO97/l+yFBrzTRCRUmBRj0H4Cd8R9I3q5wQvuY+H2GCw5UmEoD9ehdekGV7IbS79zb49U
-	 mKAemhRj6bBG++JEG/nAG5KFHtR5SNF7HylTZyAhfJJ1qnfAd0Nf26wvO83f+Uv4DjbmN
-	 5d7+XStRTVYHtSaeeqBffawsGqXWjJmULM5JHKO8vvakrheblo34Z+zLBSd9aFaonfA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Infomaniak-Routing:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=nbuLZf4B47rqkZyjITu9BRi0daojHfSnMWOhk631zcE=;
+	b=ZAKXInB5DkLO6KtfX6y4hrfT5lEUsiirJxGRAcV29FNS6luBX5SCJedfNnpDMCy+WTKt
+	 YHcPKRU5l9ex03vKAwX/6eA80kSEbjQjjueR0NV0bpM5VlGHES6W5UxiRYK6gNNqNFEig
+	 pP3+EdSrtuViGnATxs9KSDzEHGxhqrGfXcJhGVNFKCxbk10LZlKBlXNLD95ff2KK3DvTl
+	 gxs7JTec4fAMefFVdd/DetPmodEy+/NJ+6Xacaw7BJNw/kIqz8R+B+xpzB6ww9LwrVMrD
+	 HuEg5X1X//YhUekkHZVVuvYxJ8c+j0TJ/ocnVMkqbUOSaSW+qCd5D8qtwni1K1dqT1Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794914899;
-	bh=drA2jGWvTqAU7JrkY0ZVrtYcadpb8BRbSy9rlSW2Zp8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794915452;
+	bh=nbuLZf4B47rqkZyjITu9BRi0daojHfSnMWOhk631zcE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WUOkMdFO0B6kQI2MaoFRh5FDzOq6PLVEeRSUDZV00qORRYq1QwuJ+8/wa3S2MJ7f2
-	 WsoY4Ma9ZpU4Ze51N9Nt4A3xktDwBhYwfiUeYkLhc8KBvjnYFC5xszXs5wKUZyKvxr
-	 yyfVrNpp9LZ7ZJyGa2TXjgoGRHG+fIIm0BZ8k7nnmBgsC8fYI3IEUigRfGuLDQNvCk
-	 5UBTfyifZzdJbvy23mbevOphDu14sU4Jrv3ek816bEjPjrYTlLzMEGnk/IYff9KLj5
-	 dXqdbppzDlKM1AfXAdxjEoIelxtcYH3U0YXR/5A2yyC6dCvxOLS7UIYMJ5c5qnsARf
-	 4k3Ctu4xXW4fg==
+	b=okaV80rzE/EzS1zyPQTJqb7Gc3W5zLAybQqUpFscgaKEXXyh2rRliFttFV8WR85fX
+	 N1k9dmoqVuLjCggFC5DidRZ5M+Dq+DtlN7U7Hxoa79OIqvzih5HQ5qoPDkURsfFuXl
+	 DVqsuvHUZjsuhKeV1G+AaSMJU73cLSUa5f9+5Dw0tTdXg7+xNZjY0wWKa4A1uYYAa8
+	 jP8yU9dQFjLP8NT7CR2Nt8IvSms7fpi8a22WpDDExR5vthIwRi50VytwotPUXNldj4
+	 1lf5dfxavtFAUHtdHfMIVisbbU8xKUbyrDtynzJ6SdRnzMEotWe7cqdyqMPZKfaMf+
+	 Nrnbih4n6USNQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3140480CDE;
-	Tue, 17 Nov 2026 11:28:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A5A4E60854;
+	Tue, 17 Nov 2026 11:37:32 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 91A6770B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:28:17 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id AEDE670B
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7A05A40737
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:28:17 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8C18A405AA
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Subn_7J0xm3M for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 11:28:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2675C40547
+ id diVL3g87Aocu for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 11:37:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DC23B4050D
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=194.104.111.113
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=194.104.111.113;
- helo=de-smtp-delivery-113.mimecast.com;
- envelope-from=francesco.dolcini@toradex.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256
- header.s=toradex-com header.b=Z4Whm6kB
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2675C40547
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:28:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1794914893;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=drA2jGWvTqAU7JrkY0ZVrtYcadpb8BRbSy9rlSW2Zp8=;
- b=Z4Whm6kB6JpKg2gIXF7UTvdxO9q5dh+tN5/yKHoSjHlSDjLZr6JIzistbPuODftaHwnnD7
- YoVFnFFjVcCUkmeVRzCZ6LLKzVqS+wE2E3jSyIWDFInG5/IXb2XuoZODW7tWGkudnJJVdA
- KuYd62Hrk036GcTGp0Y/0ba4ek/gnrc=
-Received: from ZRZP278CU001.outbound.protection.outlook.com
- (mail-switzerlandnorthazon11021119.outbound.protection.outlook.com
- [40.107.167.119]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- de-mta-68-sAH-Ug5yOA-fzBmwYwAYGQ-3; Tue, 17 Nov 2026 11:28:10 +0000
-X-MC-Unique: sAH-Ug5yOA-fzBmwYwAYGQ-3
-X-Mimecast-MFC-AGG-ID: sAH-Ug5yOA-fzBmwYwAYGQ_1794914890
-Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:2e::8) by
- GV0P278MB1877.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:6d::13) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.14; Tue, 17 Nov 2026 11:28:04 +0000
-Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
- ([fe80::88:6821:13f5:a5b2]) by ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
- ([fe80::88:6821:13f5:a5b2%3]) with mapi id 15.21.0615.013; Tue, 17 Nov 2026
- 11:28:04 +0000
-Date: Tue, 17 Nov 2026 12:28:01 +0100
-From: Francesco Dolcini <francesco.dolcini@toradex.com>
-To: Sergio Prado <sergio.prado@e-labworks.com>
-Cc: u-boot@lists.u-boot-project.org, festevam@gmail.com,
- sbabic@nabladev.com, uboot-imx@nxp.com, trini@konsulko.com,
- marex@nabladev.com, o.mandel@menlosystems.com
-Subject: Re: [PATCH] board: toradex: verdin-imx8mm: adjust U-Boot proper
- offset for eMMC fastboot
-Message-ID: <avw6QW3OO4Lw0631@francesco-nb>
-References: <20261117101519.3952636-1-sergio.prado@e-labworks.com>
-In-Reply-To: <20261117101519.3952636-1-sergio.prado@e-labworks.com>
-X-ClientProxiedBy: ZR2P278CA0068.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:52::11) To ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:2e::8)
+ arc=none smtp.remote-ip="2001:1600:19:7ff8::190e"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:1600:19:7ff8::190e; helo=smtp-190e.mail.infomaniak.ch;
+ envelope-from=foss+uboot@0leil.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=cSS0e7g4
+Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
+ [IPv6:2001:1600:19:7ff8::190e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DC23B4050D
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:29 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jTN4k21nVzfD;
+ Tue, 17 Nov 2026 12:37:26 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1794915445;
+ bh=nbuLZf4B47rqkZyjITu9BRi0daojHfSnMWOhk631zcE=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=cSS0e7g4Ib1p/KJdxIr1rx3akQROLs5UFwiI4XjjBjKNgbmUPF5PFPdVaM/0GNdHS
+ PrdomFTPp5VbcKVYBkvI6HHqSBW96YbTdN4cQ2+RRqPNWzrHgqkgh0b2JuFyowKiF7
+ 4Bi2Zx/yJFVldUPlidsfKxLuvY535BEM0V0HSXhrZXPYbfA30dVzkjJ3od03WuloEa
+ 8eIa+fC4rEmROv5BYwC5el+4iZ1fwTs/YBsPILzZy4umRBx+/Dhprl76mzx5YxsmUz
+ gJLopuiKkd3zu3A+SASPxU/BD2zSgiUIzLzF3pKQJfF78B5dM2/cagvddUeCBtawdz
+ p0BDlXOUL4dbg==
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4jTN4j0Npkz9TN; Tue, 17 Nov 2026 12:37:25 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Tue, 17 Nov 2026 12:37:10 +0100
+Subject: [PATCH next 1/8] clk: rockchip: rk3308: improve PLL_CON() user
+ friendliness
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZRAP278MB0495:EE_|GV0P278MB1877:EE_
-X-MS-Office365-Filtering-Correlation-Id: c45bd816-3d45-449c-6aaa-08df449dd868
-X-LD-Processed: d9995866-0d9b-4251-8315-093f062abab4,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|41320700013|1800799024|10067099003|56012099006|261026121527099003|261026140227099003|261028144727099003|261022115727099003|261022075727099003|261021121427099003|261022105027099003|261102123227099003|261009223027099003|18002099003|22082099003|3023799007
-X-Microsoft-Antispam-Message-Info: JQinnTyT1OXppvsRLlypeTuzwjyM+5sPcWrjjlO4CmkO9QKS/9ZPEQwnAWqlUwYpKLcl7e18+bmzsGXPGyzfsVQC2wLbrXGYveTNxaPWxmIWFQdd4bl4R8z/clGdfAWTFdnBmn6NY9Ydrd9sN+BOUVCiOt2yWzVC7ZiMVdMkMU8CfkTxxXfcphzDZZQJqF/lzTP1K4sl5iunylu8ELPgFdXZfiGWWuA0G+hIZ5uqKtFqKMz/7majjn6QZSM8tTv7V0MVhAfT1ilNvmowkJqMuegtZfJ9MMjYFlswy7+UZJx26Yn+RaccqKP+fecuJkeUkWDNPDS7JL1Upd/n6/dfTel2ul0SQE94M7MA4j02b9QW9lTeSUydM9tZA9p+z/ajU/i1HpA0PJN/RzrSQ1gO9OYUOH5c59E5NitvG63tfGfFcCejah3Bk6XMgcbUovF8wYMI9PUyO2j4nuTlm8bGewXzkW46aYuXL018p0KeCNJGTS6fAaG3CGreEvEBp1mBbeAochT+B1axrltXWbuFvwdzbUHYm0V7IOZH0UTyKtkVDCZQTVJLYRxk73gNglmEk9Ncn6+e+HH4/L85r5AWmFQXCcq/yNnxBQpmdjnfBEN7+KHymI+sQZAi7Jdff0wS/LsVQmdCB5tO5+MdZ7Zhud7IWXrBs/CxGaVqinVGEZ8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(41320700013)(1800799024)(10067099003)(56012099006)(261026121527099003)(261026140227099003)(261028144727099003)(261022115727099003)(261022075727099003)(261021121427099003)(261022105027099003)(261102123227099003)(261009223027099003)(18002099003)(22082099003)(3023799007);
- DIR:OUT; SFP:1102
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ldTqMSQw69vZpx8uUudnOEe3XiZ8ofcZTw6CoyLNz0JUs8IArrYgBxg8v8hH?=
- =?us-ascii?Q?OhMDGtXJmPpYyfwhYviIOnzLtdh1iu0A//5mO2IeCe3KOE0eFSyfNPAZujRX?=
- =?us-ascii?Q?OmAatoXiwxWJto9w30DRWw9ZiExDzpuYXhf2g9vVPwgclWRlzwbkeo9VFCFU?=
- =?us-ascii?Q?BPNOYLkmNCi/5+gtx8I0SbHX9H1FB5+WOLFVP/orXF7B4jrz1cNMkj8ORnhF?=
- =?us-ascii?Q?e7u8mebSJ+/NA+MMyuIyNqCXr3FLm4+BE4c6N87M25r+v0QWNhYkxZJQ875w?=
- =?us-ascii?Q?0X8Gf4hz9C2EFFd7g0yMRZsqS8XAsUOIfYgBdAARC4Q4SU4thV3rjM47MuoT?=
- =?us-ascii?Q?VXTkgnPqjHKeHmfNmJBS4bSDMy9M1KT4FvCF09TbEtHWmJ57nGJaNCfxTz52?=
- =?us-ascii?Q?p+8vQ8pM/WlFNZRop+sZvWyqTQGJ4cXqshr+eO1bC27GzDAroJYGEkuc+LZr?=
- =?us-ascii?Q?H7eyp3WQMNTVOkW9A10LNUGoNoViTEnH2y8gzEr9RVtNFczuf3vdpUOk7cFH?=
- =?us-ascii?Q?GcbKlJedXq5WnwfRBwU1HHgzV15hn9gnRt1HWEVe5Set6iQntzCz+Kxz426W?=
- =?us-ascii?Q?mgtMdgYVrSSvpkLeSo47MfYnwif9wNkhSI/1HcFuMhZM35lje64eMF4cqreG?=
- =?us-ascii?Q?nlMe3M0ectZttQLqF8UDwxCAQrAa9y3i6pn2NtlN9+DjUIp09mTn1FiEQdUw?=
- =?us-ascii?Q?zyfrmIjIrdXzIOuAQdPkbgZmt5K5qL1/8o2J95BCtnhVU+p05I2KR1ubSUML?=
- =?us-ascii?Q?Vth/KUiYWph0hqqmKuw8Sn3Q3/2WvNRrZt1/yHZ9vhiSvKdF1Z4C4UUZG4TZ?=
- =?us-ascii?Q?RPDtxO4lLvu6dvo/Hg+CzNB0MEwqPWio9MXPIqehNB5dEnxDCNtsQuue+Bi3?=
- =?us-ascii?Q?sX1k/+vrkT4v/C6l5EVyUos8V2xqJBaqdgYGsNyzng5csWGn0Hnfrux37mQb?=
- =?us-ascii?Q?ClS1lNPxkGdINMa0lFp2LptLofIbWpVD5SH0280512bjbvdBK9JDfQGhNmM3?=
- =?us-ascii?Q?5Pimhs6NjFvsHsFVL281L9m18t421FRf7BKHv2Gqwb2voPoqSlwB8bb03j7+?=
- =?us-ascii?Q?v6aHcEnRezUvIpZKb+79/vtyEw8rRAEerrV5LhOrO+bFsbC9Lyb2uGdfcE++?=
- =?us-ascii?Q?DjgqyjmBKEV40v8zsS6uFFeCrVlBMGcyc6mx07W43uIcrjyYTa1wuKWZuIfa?=
- =?us-ascii?Q?Vi5+FE+7HeJmLNrSuGzFQjqMGq3mfatn1Nyqx1k5opDR3ghVhc5K9thTXRqY?=
- =?us-ascii?Q?xay1HnVpBcrZ313uPMKaXZhJa71eN32kD56kWTSfodPqi8SZkuoSXBJxGPIE?=
- =?us-ascii?Q?gCaQ2rUgO6+Sn0lA5SMh/kxTWhCqZGEpMk+kV2+P0DeFpLkqRPabExiwNa6N?=
- =?us-ascii?Q?2oYAevjdlOj/o5jmgI8SzsspUxNmpMd3b4torN1SdOuV5SKgCpYvUG8BbDNz?=
- =?us-ascii?Q?VuTLQIWrsp8l+yLknQT7aK4IZQUWkwh8zmAMVMHxlLi0uie+5AZhQ7kpULy0?=
- =?us-ascii?Q?pFqWK6vwdCeCG7Cbw+q9JbnVEwa/tQbcq4CCR2w23+Szb92KFQ0y0cJTVdSv?=
- =?us-ascii?Q?PkF9pPgdlaJhEktqs1PjrtAea/cDCrVIfBMTxh0Hc189EV26ZfDvSlP54/qQ?=
- =?us-ascii?Q?htF+peett+Nlc7uXIv2vswxmpvmp4ZWFYi4YSf0U4jFWH/x60xvaDDFri7J8?=
- =?us-ascii?Q?PctgK+Llu4tPMlBNvLMjYUXLVyxbDPLCleyHtwn+EnfquM2O+wWAVMIzpdq6?=
- =?us-ascii?Q?OnzDzE+7JOrSyt+NuAsLRt6e0QQ6SsU=3D?=
-X-Exchange-RoutingPolicyChecked: ksjwGMHqCtYm9I7DBDU8V95dLsFdr/BFjdhukFNVEX5SRjnvBB8gRdqfuxi2p/jRNI/Q1ufBzCxw/v/klffwCTkEjbJ9u6GiALyZeNHWUB3GlseDsZcm5SO3LbtsMSL2nIV4BPTeciYYOz4iI2UhfTrUUVR/5P65e7e86ajHayFOJrLbdY92JD3ZjCkyDntE1DMComl66hc8V6BvWavcxdTqglOxcuqrvubX0AuXNKkm5AA/VnYA5MVNrTvNq4i+MJ16To2C7qPePHcXyTUE1X7Ib9OTtbgSkspIC0Ltz3MpKhXd+2tsKenwpXcQCQQzuzvTFt+pC/iBFzRJBvhuHg==
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c45bd816-3d45-449c-6aaa-08df449dd868
-X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2026 11:28:04.2335 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: A4S9R8FQDJta3IAvyJDszhr+IfQ1m2Pq5ngcGvtauhRsd0u20W0xRDWERmPuvkdLAAoGQnk28/FY5ph0Gq5WPkvMVoLld2XBrkqeTUyajW8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB1877
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: jPb2jJf9ld3l8j3aOdMjK3S0gqKvBTqQrXhX_puC3wI_1794914890
-X-Mimecast-Originator: toradex.com
-Content-Type: text/plain; charset=WINDOWS-1252
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261117-rk-clk-better-con-names-v1-1-25521d4e37c3@cherry.de>
+References: <20261117-rk-clk-better-con-names-v1-0-25521d4e37c3@cherry.de>
+In-Reply-To: <20261117-rk-clk-better-con-names-v1-0-25521d4e37c3@cherry.de>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
+ Lukasz Majewski <lukma@nabladev.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Alexey Charkov <alchark@flipper.net>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.17-dev
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -209,69 +127,67 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello Sergio,
-thanks for the patch.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-On Tue, Nov 17, 2026 at 07:15:19AM -0300, Sergio Prado wrote:
-> The Verdin iMX8MM boots from the eMMC boot partitions with the eMMC
-> fast boot fuse enabled, so the boot ROM loads flash.bin from offset
-> 1 KiB instead of the usual 33 KiB. The SPL loads U-Boot proper from the
-> fixed sector CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR, so the board
-> device tree moved the FIT in flash.bin to 0x5fc00 to compensate.
->=20
-> That override only works while the fit node is placed directly in the
-> binman section. With CONFIG_IMX_HAB, imx8mm-u-boot.dtsi wraps the FIT
-> in an nxp-imx8mcst node with its own offset of 0x57c00, which takes
-> precedence, so a signed flash.bin has the FIT at 0x57c00. When booting
-> from eMMC, the SPL does not find the FIT at the expected sector, treats
-> the data there as a raw U-Boot image and fails to authenticate it:
->=20
->   Authenticate image from DDR location 0x40200000...
->   bad magic magic=3D0x75 length=3D0x206d version=3D0x63
->   bad length magic=3D0x75 length=3D0x206d version=3D0x63
->   bad version magic=3D0x75 length=3D0x206d version=3D0x63
->   Error: Invalid IVT structure
->=20
-> Adjust the sector in the SPL instead, as the Kontron SL i.MX8MM does,
-> by checking the fast boot fuse and the boot partition, and drop the
-> FIT offset override. The FIT is then at the default 0x57c00 for every
-> boot medium, with or without HAB. This also applies to the MX8Menlo,
-> which reuses the Verdin SPL code and U-Boot device tree.
->=20
-> Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
+There's no PLL_CON8/16/24 in the TRM so one needs to do an additional
+lookup the header file to know what exactly this refers to.
 
-...
+Use new macros that reflect the names used in the TRM.
 
-> +unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsign=
-ed long raw_sect)
-> +{
-> +=09/*
-> +=09 * The image offset on SD/MMC devices is 33 KiB, except for eMMC boot=
- if
-> +=09 * fastboot is enabled. In this case it is 1 KiB. In order to make th=
-e
-> +=09 * bootloader universal, check the fastboot OTP boot fuse and adjust
-> +=09 * the offset.
-> +=09 */
-> +=09if (!IS_SD(mmc) && (readl(OCOTP_BASE_ADDR + 0x470) & 0x80)) {
-> +=09=09switch (EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config)) {
-> +=09=09case EMMC_BOOT_PART_BOOT1:
-> +=09=09case EMMC_BOOT_PART_BOOT2:
-> +=09=09=09raw_sect -=3D 32 * 2;
-> +=09=09=09break;
-> +=09=09}
-> +=09}
+No intended change in behavior.
 
-Why do we need the runtime check on the fuses? verdin imx8mm can boot
-only from eMMC and with fastboot enabled, so this runtime check is
-redundant, everything is known at build-time.
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ arch/arm/include/asm/arch-rockchip/cru_rk3308.h | 5 ++++-
+ drivers/clk/rockchip/clk_rk3308.c               | 8 ++++----
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-Francesco
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3308.h b/arch/arm/include/asm/arch-rockchip/cru_rk3308.h
+index 091ae82d7cc1..bc90440cfb1e 100644
+--- a/arch/arm/include/asm/arch-rockchip/cru_rk3308.h
++++ b/arch/arm/include/asm/arch-rockchip/cru_rk3308.h
+@@ -24,7 +24,10 @@
+ #define AUDIO_HCLK_HZ	100000000
+ #define AUDIO_PCLK_HZ	100000000
+ 
+-#define RK3308_PLL_CON(x)	((x) * 0x4)
++#define RK3308_APLL_CON(x)	(0x0000 + (x) * 0x4)
++#define RK3308_DPLL_CON(x)	(0x0020 + (x) * 0x4)
++#define RK3308_VPLL0_CON(x)	(0x0040 + (x) * 0x4)
++#define RK3308_VPLL1_CON(x)	(0x0060 + (x) * 0x4)
+ #define RK3308_MODE_CON		0xa0
+ 
+ /* RK3308 pll id */
+diff --git a/drivers/clk/rockchip/clk_rk3308.c b/drivers/clk/rockchip/clk_rk3308.c
+index 605566f71981..244fe503a85d 100644
+--- a/drivers/clk/rockchip/clk_rk3308.c
++++ b/drivers/clk/rockchip/clk_rk3308.c
+@@ -51,13 +51,13 @@ static struct rockchip_cpu_rate_table rk3308_cpu_rates[] = {
+ };
+ 
+ static struct rockchip_pll_clock rk3308_pll_clks[] = {
+-	[APLL] = PLL(pll_rk3328, PLL_APLL, RK3308_PLL_CON(0),
++	[APLL] = PLL(pll_rk3328, PLL_APLL, RK3308_APLL_CON(0),
+ 		     RK3308_MODE_CON, 0, 10, 0, rk3308_pll_rates),
+-	[DPLL] = PLL(pll_rk3328, PLL_DPLL, RK3308_PLL_CON(8),
++	[DPLL] = PLL(pll_rk3328, PLL_DPLL, RK3308_DPLL_CON(0),
+ 		     RK3308_MODE_CON, 2, 10, 0, NULL),
+-	[VPLL0] = PLL(pll_rk3328, PLL_VPLL0, RK3308_PLL_CON(16),
++	[VPLL0] = PLL(pll_rk3328, PLL_VPLL0, RK3308_VPLL0_CON(0),
+ 		      RK3308_MODE_CON, 4, 10, 0, NULL),
+-	[VPLL1] = PLL(pll_rk3328, PLL_VPLL1, RK3308_PLL_CON(24),
++	[VPLL1] = PLL(pll_rk3328, PLL_VPLL1, RK3308_VPLL1_CON(0),
+ 		      RK3308_MODE_CON, 6, 10, 0, NULL),
+ };
+ 
+
+-- 
+2.56.1
 
