@@ -1,159 +1,136 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3126606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 09:58:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8DE0606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 10:07:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EGIdzNg0;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=hdD+vjVf
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mx+duFwP;
+	dkim=pass (2048-bit key, unprotected) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=C33JrN8Q;
+	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=i6FNNxOg
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8CC4F60774;
-	Tue, 17 Nov 2026 09:58:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8EDD081096;
+	Tue, 17 Nov 2026 10:07:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WtldeDc_-S9g; Tue, 17 Nov 2026 09:58:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EB40560844
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794909480;
-	b=F1AUtt5yjT3L8t+Bb9F0u2c9j9x1aW1tHGDx7ILlYncoFwJdWLo9stJ/ycmYTrzUV5CV
-	 w7gBr5ZmWJ9JHuJtJjko0XXnEXZf1DVu2HcZIYqUZeb4gFfeIuJH+kwkNvofr+zhkpxFP
-	 LbWyuN2weNl8FgUqj7tORDo453VlQvkiB8MamI5li75NQmztkvFEZUFdKJZQzhlPJGa1N
-	 iAupjxFtF2oA+P6OuMTRgjta9ujaoh849tCNxd5vO0f5HnY9kIobIAMaqS7fYgQ5KICsk
-	 nmjD1pcTI0pkqjJy7SA5MtvmHeEa0kJZn6P6yQ+NQutf9L3m0OF9bUSl8JOmcT3pE7Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YZaMIbJ4ABLI; Tue, 17 Nov 2026 10:07:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D995481067
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794910034;
+	b=k8EpxBga0oJvJjjMjv5XsoVhwjQ/IlToT53BHGbcYwPBq2oK+6ukR3hpRzshyFhWO7Dh
+	 QEX1xdAAVYDjmrGUEVzPx/KVPXLkItXmZi6jCJlvIdGejSmtKGsOJOsjqApOgIdk7awx7
+	 7ftsa/EqGLRMGy22mdKXSMNjI//MKNeON1sS0/UBSgj/nx1Sh8N1P/TugVDOFknW8Cnuc
+	 LBJnJH2+mBWKI6Xj9ptXm8VtBFnF8HJArEw+Q8kgvpwZZ7rCDU8yPn9tN+iiDoJmOBxoL
+	 MlcNEYBdG7k4h8FNmqtkBXnGP2X5S+UCQ5UADscNZkrTrpJqYULctnrY4n8w2mOUoSQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794909480;
+	c=relaxed/relaxed; t=1794910034;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=cRjJ4ZFaJj8tOMfMMcZJjDQkR5NbOq1vdyCJWoXbZzk=;
-	b=NSaPUCS/5W0oChHp8z4kUPJfdqpi+bZr2z3mYiCNIOsliAGGykN9hWRqOjsZzX1b4NT0
-	 SuV2OoquAg/CTjNv3gLf+2j6MWhWH5SflmBTIrmVt29N4Ro3zhPvtBk3gvNXu/mVmVB+O
-	 aynfA+PjIvHSfeQ9iZzghUtGHM2I4EwrWVxKHybTYm8M7VmUMMe7xIGFDlPbWKIeRD10B
-	 V5UiGCn+r2heZpNxNk9igVM3DngOhMw+fMntCRbUHmAd37uueidok5PMtL9taY3I1c0ZK
-	 i82GZaXz67l/6a1HMSvul3t3/b81QsVECADv7/tl2NXzbWYwnW/gPVJ/miSDT9x2e9g==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 From:DKIM-Signature:DKIM-Signature:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=qymroRTTEpNJSYBU+p1HMeV3CuruNz/S0kU/ZY7OILQ=;
+	b=NnFXSbzq+hAeiX4DFCGo+q1x1GNuOlzepk2ml/rZGrYmU3dBSndKkOPnBzwOOPu9e2vW
+	 b9/ZdgzDMLvruzX2DibxwAUtL2tMTYRGVPoMCaIVP9xvk0TOrw5Cf/Rw5+aoxEZpmIDsR
+	 EprpsHLBXHKAUeQEhqs521RIXRhRXKK0N7MwgbC9zlP2o8CqQk2pXk8IwDT2nYohbNoFJ
+	 nELzYscXGjJdU6cD9O8+gB85yoEjaTqJuPqHSDGFGquqq2JeRlCWhpw22fDSjzKdWK5E1
+	 JGm7TONkDiJcNBuDau8sYt5kN87nXdiqQ9BoJqsDfkGZMXu2DDSzzmbt9xDATrjX0+g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794909480;
-	bh=cRjJ4ZFaJj8tOMfMMcZJjDQkR5NbOq1vdyCJWoXbZzk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794910034;
+	bh=qymroRTTEpNJSYBU+p1HMeV3CuruNz/S0kU/ZY7OILQ=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EGIdzNg0DZ3thGE1+xbNyvs+H5SPBzuy2e9Hv6IdRa7uav52PoIHkqrzYOLUZ+X6q
-	 YPa7fxE2Ao++D1tFdV8RmaTY7Z/HgNiei0vogV6SeGfQrvVv2B6Uv+7MeJOl8T9t6Q
-	 m54ZUOyCHqlKFF9IUIwU09wytocmwzWiyNcGPluzsrSO2Jywqb+j4vs4rtO1ayZgwL
-	 IXa1CgmHlqs5nizVwChEHIpy8R/QLpO2MbanD75keFscYPeE5DMlZHpbp/ZKVNxJ61
-	 5aozy5RsTbd/KyGmnFakW5SYMhmqRPkM0/0nahNTsWm+v5RyvVis/fq5WfKi5iqPUV
-	 MCmdnd4F7WpXg==
+	b=mx+duFwPKJbky78BktJSW/wWXnHTrUvoH3FWygi4al4arT3MX245Lr1hNj+jcLBsI
+	 HjNdwm/resnJ1ZaQ/xa+SrHyYa+fDrrzPfRpynDAlOSiNEGMbsBGf7UjpuSPZWg0Hl
+	 IBvtGXDGohSQ6mb3ppEcIJkTinhjNVMkkjEJLLot8xlOfcYuyb2binyop24uK4XS6u
+	 7oyPuCGqVXenuCUY/MHbXB6zxbpWQweM+bytXfXQJ9yBV0nkbp2dS8D4GpAgdfazAu
+	 mWwdKUJz+k1u1N0GDicuCQTzQAR3SA3utV/FqDsXDz8yZFtg06BwMTweUnCexEWnIC
+	 sFchZaMjDkW2g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EB40560844;
-	Tue, 17 Nov 2026 09:57:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BF22270B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:57:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D995481067;
+	Tue, 17 Nov 2026 10:07:13 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AA47C1A6
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 10:07:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9C45B402CA
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:57:56 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8F4B140301
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 10:07:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ntTGAKHRwt-o for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 09:57:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org AA0064017B
+ id JYHWkOi2nFWy for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 10:07:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 964D64008E
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::336"
+ arc=none smtp.remote-ip="2a0a:51c0:0:12e:550::1"
+X-Greylist: delayed 430 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 17 Nov 2026 10:07:11 UTC
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=linutronix.de
+ header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=C33JrN8Q; 
+ dkim=pass header.d=linutronix.de header.i=@linutronix.de
+ header.a=ed25519-sha256 header.s=2020e header.b=i6FNNxOg
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=hdD+vjVf
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AA0064017B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:57:54 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4bb6adaf0f1so18913255e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 01:57:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794909473; x=1795514273;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=cRjJ4ZFaJj8tOMfMMcZJjDQkR5NbOq1vdyCJWoXbZzk=;
- b=hdD+vjVfrOMj1+J2cWpD8Y0c6hFtc8o2TZ6eVs8R13VmsAmzpE7vXPyuzsCejt3fVO
- M2RnyyE2+sNobJm/bxWd4nGKV6oUN/zKd7DrKoOnoPh/H8Rr1zw/LD+wDNHIy0f7BWVh
- E2s+4486lDQljgiReMr8hFGmIvwRhvhPFTd4gX/mGEBeRjbClQ3cyDjfM1v3vKCijRj0
- l9h3HsRsDHVQmK3ZOW4AgkRGUceG041yfxEEpPHUX5VjQ6aFgZTQmWa8fkLGoeMW1ekA
- PIZg4PT6cmzCALHLOY1dgtEuXH5LpzJimg7aq12Y6hs7FG/ZjsVdfSApgW/6OK1Eb8jK
- MCJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794909473; x=1795514273;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=cRjJ4ZFaJj8tOMfMMcZJjDQkR5NbOq1vdyCJWoXbZzk=;
- b=PpGD3dbXciDALHSd4qaOFcFpFqQV4YTkwF298PYaw14jMwicLrusn6c+D4vkaHHfDg
- ek+ygIOFYWFUoUfzK/vLA/N094RTBVjztooC5CBA2mVzsGJGgIP9EFLGAr9OvsEqBbHK
- VgoM+GVu5ZiPfnm16UiAFAwfpcDjkLJoQ3ETBD+T5FjNXFIciIYZcETMWQezRFPtkQr5
- HuYQgReXItsnCcUUBh9o3AV1FSvjeHqUveNkbXGQsBHoZv6++BUwV4omi5zE4v98sxmy
- aV+LRY0vmsgRM33+aAHz93tgl8/udi5foCgRwx8yTiCL5jea94DK74XV4IpKKahUw8QS
- S27w==
-X-Forwarded-Encrypted: i=1;
- AL+hErHlW2eGnkp2lwEZ01Q7PJVqrMOrOtkK8ZRl0NEf9Mjq2xXZlkTD6z/dnYvoySLNb0l+uri2XwU=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/E2xBqIAEHq4ZcAKCE87x0FPyKR3XnAqabOzPC5LVHrIz0Xt0R
- bUgDxtPoLQwhOMWnJV7fo1IUNt8tIB+5fiG6xgWnsfuE82v9+H/jVob5CqgPa1Bs+ZE=
-X-Gm-Gg: AYBFou3jb1QYoOr8KAe5S2Z8M+36Ynty9cMb1r26636vakwky7ehYWyefY0u69MtoZu
- MwrwnkxrP7+qRvFJe8qhlmtwtzhc5yGROTllJbaFaVpJv/TxXpZgZ/H/U0n7eG+c3Uxzoivlc7A
- HfOEG6lqvoPcjRAUFuslXzTt0VfrA0DBru7YLCt25IUElCLE6yCo7X7DzyFkKDhmzaTlaBOMPtm
- 5C4VSp4gqf89VPvtrbd5Ie9+UwxgnKoyrIWCYEWZnz5homN+EnZGwp7wRSqrHJcIwCuu2XPqkjI
- kIuIL/vjI6Wfu3jugKxfGVQTIbPkwTaPelXPkXQdYkCjTABvjUS/NHl0FHdsmp/3fcrck+Mv4XY
- JRUrcl1mjQHK5C1TQZVbngeb2NSecyWU+HGdibBpdOcwYTWjNDKKBstfb6APWfqOBLo2HC7ATxr
- XsSbJ5USwtexldEM1J5ptgXMkhdWpsx3vwHotuhLbFaX5rD8OjdmCeTcEoQ2z/z997HK69tj7pz
- Ff1iqWPo+B6wwr0BVs9MR8fwatKXaEP2icFth8tZt6de/A4PlGhki1SYvT41Bj/ad47lKNsF0ch
- IEQt55nhn/D/oLYduHZGq9LDW5FVuloqkdw/3OXF6iQGpevj7RtGQEozvapUf1xqq2Es4Lkt0L4
- d1Bu9JSQ6R10y
-X-Received: by 2002:a05:600c:1daa:b0:4ba:2bfc:c8ab with SMTP id
- 5b1f17b1804b1-4bb55a4801bmr285179955e9.15.1794909472754; 
- Tue, 17 Nov 2026 01:57:52 -0800 (PST)
-Received: from macbook (host-95-246-144-141.retail.telecomitalia.it.
- [95.246.144.141]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb784e9073sm59502465e9.6.2026.11.17.01.57.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 01:57:52 -0800 (PST)
-Date: Tue, 17 Nov 2026 10:57:51 +0100
-From: Carlo Caione <ccaione@baylibre.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Macpaul Lin <macpaul.lin@mediatek.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH 0/3] mediatek: mt8189: add SPI NOR boot for Genio 520 and
- 720 SPL
-Message-ID: <avwlBOmH3TCPPqYl@macbook>
-References: <20261116-mtk-genio-720-spl-nor-v1-0-7a926f80dc78@baylibre.com>
+ client-ip=2a0a:51c0:0:12e:550::1; helo=galois.linutronix.de;
+ envelope-from=gregor.herburger@linutronix.de; receiver=<UNKNOWN> 
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 964D64008E
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 10:07:10 +0000 (UTC)
+From: Gregor Herburger <gregor.herburger@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1794909595;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qymroRTTEpNJSYBU+p1HMeV3CuruNz/S0kU/ZY7OILQ=;
+ b=C33JrN8QXZ4la9q8wHoMNAUNmZdJiQYTBaUQZYpg3LtP8Kh4wQJpLd+qPLsZnlMVbZVlYT
+ s3+HpN6bNNwltcjWPAKlxMXO2jZuiP0a4cxrViqqoAXbzQcJ/VRn6N4e3bRM8b+ZUQuwDi
+ 5cHrcQnn9IYblUUIFM8aL44MS0/Gul0o656Z49J63TzPh9l/5abo+kfZVp+F3nRtJ5c2Mq
+ gBYACB6P96IYFWwrFDhP98HtNcvZU3RoGug04PvefUQrV66kOuArNIEztk8dqGx8ch63I/
+ poaCKxb07Oeg4fDbq3AH54jSTn4HF+CsR+F1oKZIKfpDjgElTaWb1H6B/JcYrQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1794909595;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qymroRTTEpNJSYBU+p1HMeV3CuruNz/S0kU/ZY7OILQ=;
+ b=i6FNNxOgnBQFWEZrlLR1ElgB6M9e6bodou/jQiKbzpwTKcvU/KlCHkVUEkteyXKGsf1D6X
+ RZaftfrtduuQW+Aw==
+Date: Tue, 17 Nov 2026 10:59:45 +0100
+Subject: [PATCH RESEND v4 1/2] rpi: set boot partition from devicetree
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261116-mtk-genio-720-spl-nor-v1-0-7a926f80dc78@baylibre.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261117-tryboot2-v4-1-d59fa66de789@linutronix.de>
+References: <20261117-tryboot2-v4-0-d59fa66de789@linutronix.de>
+In-Reply-To: <20261117-tryboot2-v4-0-d59fa66de789@linutronix.de>
+To: u-boot@lists.u-boot-project.org
+Cc: Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ =?utf-8?q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Gregor Herburger <gregor.herburger@linutronix.de>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794909594; l=1357;
+ i=gregor.herburger@linutronix.de; s=20260226; h=from:subject:message-id;
+ bh=4+bM65tNui9B6ZZpfMJj/iUKxmOuDh9UNLJF+ikkIho=;
+ b=szPdR2QkquW9WJPCmjZ1qj562bMAJVCSxweGNB+Ix/DtQILPJC07DKc9Wg9jBMLicTZS0gB5d
+ 572BxJBLA/SBbYkk7+gLE9hzyl6zYNqgqgt+Gw6xW0/zBETcMSBLnRC
+X-Developer-Key: i=gregor.herburger@linutronix.de; a=ed25519;
+ pk=u72Lv7+/lS5CC1hmSrb17lv/6CK7HBh4Lvz77PHA5LM=
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -163,23 +140,60 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 16, 2026 at 18:05:52 +0100, David Lechner wrote:
-> This is the last boot option for the Genio 520/720 EVK boards, after eMMC
-> and UFS. This one worked with no runtime changes needed, so it is just
-> devicetree, config and documentation.
-> 
-> Tested on Genio 720 EVK.
-> 
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
+The Raspberry Pi has the "tryboot" feature where it can boot from a
+different partition enabling failsafe A/B updates. After boot the
+firmware sets 'partition' property in /chosen/bootloader.
 
-Reviewed-by: Carlo Caione <ccaione@baylibre.com>
+Set the env variable boot_partition accordingly to allow boards to
+create a bootcmd based on the boot partition.
 
---
-Carlo Caione
+Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
+Tested-by: Peter Robinson <pbrobinson@gmail.com>
+---
+ board/raspberrypi/rpi/rpi.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index 1da5df92351c..8354fec833cc 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -480,6 +480,20 @@ static void set_serial_number(void)
+ 	env_set("serial#", serial_string);
+ }
+ 
++static void set_boot_partition_fdt(void)
++{
++	void *fdtp = (void *)gd->fdt_blob;
++	u32 partition;
++
++	partition = fdt_getprop_u32_default(fdtp, "/chosen/bootloader", "partition", 1);
++	if (!partition) {
++		printf("Failed to the get partition property.\n");
++		return;
++	}
++
++	env_set_ulong("boot_partition", partition);
++}
++
+ int misc_init_r(void)
+ {
+ 	set_fdt_addr();
+@@ -489,6 +503,7 @@ int misc_init_r(void)
+ 	set_board_info();
+ #endif
+ 	set_serial_number();
++	set_boot_partition_fdt();
+ 
+ 	return 0;
+ }
+
+-- 
+2.47.3
+
