@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BD86606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 09:19:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07579606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 09:19:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=OR/a0b0r;
-	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=W5sIW0YM
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gWe9xTkZ;
+	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=NT8Y28Vc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1FA6060849;
-	Tue, 17 Nov 2026 09:19:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 70B31608A4;
+	Tue, 17 Nov 2026 09:19:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1jFEpKcFF7C8; Tue, 17 Nov 2026 09:19:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6790E60873
+ id 2yfX71hImsPB; Tue, 17 Nov 2026 09:19:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 53419608AE
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794907193;
-	b=Spo+Rw+rsOLApi249wK0byDZk+VMsc7hy/nCndRDFhdQwsGzZrimJLHAX9V0zojiPOYB
-	 C0JOI2UJ/wl3ir49Y5kKO6iL5ADlto3oczEOojj6WxIkj54NcJy+mpQvzACqCwsCaO4M3
-	 5qZFW7FxIJpAe6Gt7QfOR7YWozXgOHeLWoAAUb3IgFb/1g6FRPmNHf3hyLr/5Tv4wa3Im
-	 cVk045ykAaGp0s9yCNauZibJ204T5MhR1ecGp6wT99xdFip87p75ZMHF1pNfU8o+bSNun
-	 /WgYnSdBbY7Cs+Ep4PihucBBoBFmX6oFCd6+jThJ42YopCohrxj/xfW6IHwZbn+3ftA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794907196;
+	b=sGZ3nKkwsrcQflUxfGevbtVsRLp/5HxU/Dy6B/DH/RLwwDThV0nrtu5bu0pGKqHKv6U4
+	 SEk0t15Xt3NrL8dK2Wo6nj2KLfbqNF4P5gmV4C4LPeQPwLijXn2xecdLRJ3rb++20uxrz
+	 bLowyJAfBWNU5L81BMpV44Ve7RqXX29GeWnlKYMKcR4sJ+jla7Var9sCOQwyri4M4ESxs
+	 Z9rqp/dlP9XGSyv0h/EFvl6uJu0hB5p+haLR/xbx57d2VwSImlXoGQx3UO1xkEeD78sq5
+	 dTvkc4p93s1heC9/3MnuT3wzOS+sJl0WnqHIedFxE39sHQemacIxUtKTWL+y23NEksw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794907193;
+	c=relaxed/relaxed; t=1794907196;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,80 +32,80 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Infomaniak-Routing:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=HG6oijAqTP3HsJjlEJGxlB+rFE2p+4N4iKyd5yUHuY8=;
-	b=FgOxfus/INUqeLr98mWKsYVdswxoeVid4Ty7j5dTIL165I5r4CR9c4j6dsV/pqMTTGnO
-	 X6K5DczfBx1uQ6h7LE2F/hIRJdyf/G5Yn8eNjP+hiFIGcntQ+RdtfuUiaGahYA9A7t4AV
-	 sf7xeZHx4M6YN3i1ll7fMK3MatEn07dH91i6zC6UPaXXN6bf4pYCSbHWyx0AL9u1e8hq+
-	 FwiH0feMGF4cUL6Dd70soXgBzTdxfGalyD0KD7K2RoFNMZi/hrXQUD2+iR+8L9gihUl/m
-	 8PH3miOZqYjojjh8h5dryGNw65bF9MM2cEM1seLjkdkvnTdyYQs6Dx6v3w/4JxsSreQ==
+	bh=JUrFyXgV5zNv6RTzN1iLGYELyrK3vk4qt0xMNJgqjrY=;
+	b=n4HERU4nRHgCz8kNLL1zWPFwT9XteOWjo/46J/t3n/MQZJ/7jC2kpbdA8ENop3F0GOFL
+	 q1S7/eP0DlN1hSmLZXxu6I/XLUZ0VBV0mrwMt7moN6KvQWXCACyqH8AnhqMwwKdidJiyE
+	 DaNCIk2dHMHfRQuAJqRdomC2GbcfgF2lYdsxVa+3hZShh8vvAt1fTL1P1GDzDNExSlpib
+	 FpMkTrZkodAn3B46V2f4ZNno9yDm7YkBHN499CZKJaiJdEm+P0u8NfEu+HuzP1n7oyJIH
+	 zAbSOqunFIm5Z9D2sVcEH2KXG+sJRnxp0aO/CpUuu2BvCP2bipCYEx31pdSIYEoTD+A==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794907193;
-	bh=HG6oijAqTP3HsJjlEJGxlB+rFE2p+4N4iKyd5yUHuY8=;
+	d=lists.u-boot-project.org; s=default; t=1794907196;
+	bh=JUrFyXgV5zNv6RTzN1iLGYELyrK3vk4qt0xMNJgqjrY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=OR/a0b0rzGMNKT+o39Fs/GhvLlv1rKnFy1Ukv6L+h8Htynx/GrO4nDPFqWlKmi61z
-	 MUU1hWe6E7uI+H++i7xjg7UNB6qHrv53BaROz4iJyprV+o5fhnx4yAT8H6uph/i0Za
-	 geiznUOFO1fmUyHDIFRIOGpIrdrYuii5O5YbAGvOEQMJvXbJIV4nB00Gt5vPrIVHVe
-	 Agli0IReYIuqsxMCpczn41Vmva5CdCJPmqs8pHzGlSJ3WYHNWXz5CBVV24bYGgFoyM
-	 lia98QE9fhQIRSkLyerQ4m30hlAgFjUqM1enYC9Hmk/dHYSev6GiR8SGRKZPv+11Mn
-	 eTtLhXE5WaPKw==
+	b=gWe9xTkZmNvmcbKoTZRP/rT6TquuFH+e33ao+81YjMQIjc5a7fGdAANZkEzZoI94f
+	 TxKMgzYIKWMinjouzd9Q39ijnp/8SWD7jcdBXaKseEgs+qx2QlQNu8aG7cC02rrOm+
+	 qnF03HpnE3cZOdeGCRcIqtBh6UUx6q6D9uWmOBueMCFLt0XEldojWT71TzzSSe2igP
+	 7oWLEWOwXGdOCg/XOozLJw1N+4hULzky7sdMHAIEaqu7TPsYMjkeVuHfYrdC6M7p5P
+	 kS8QoopwKX0epDuhR5PzbDRWQXM3oEJmWSx9vkqgQpQiCAzsZFp42cRYNQJvw8FzNO
+	 S8MvUHOrjfvKQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6790E60873;
-	Tue, 17 Nov 2026 09:19:53 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0C1E713C
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:19:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 53419608AE;
+	Tue, 17 Nov 2026 09:19:56 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 015ED13C
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:19:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E65CB80F70
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:19:45 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E7524404C1
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:19:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X1v8_eOx6CgK for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 09:19:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C326080DFD
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:1600:19:7ff8::190e"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:7ff8::190e; helo=smtp-190e.mail.infomaniak.ch;
- envelope-from=foss+uboot@0leil.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5-kcpf15NTaF for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 09:19:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0F2AB40433
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=185.125.25.10
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.25.10;
+ helo=smtp-190a.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=W5sIW0YM
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
- [IPv6:2001:1600:19:7ff8::190e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C326080DFD
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:19:44 +0000 (UTC)
+ header.a=rsa-sha256 header.s=20231125 header.b=NT8Y28Vc
+Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
+ [185.125.25.10])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0F2AB40433
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:19:45 +0000 (UTC)
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jTK1p1jhqzr9;
- Tue, 17 Nov 2026 10:19:42 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jTK1q3C3dzwT;
+ Tue, 17 Nov 2026 10:19:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1794907181;
- bh=HG6oijAqTP3HsJjlEJGxlB+rFE2p+4N4iKyd5yUHuY8=;
+ s=20231125; t=1794907182;
+ bh=JUrFyXgV5zNv6RTzN1iLGYELyrK3vk4qt0xMNJgqjrY=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=W5sIW0YMAPOIMzKAtR5kvwMi8+I3DHnwqemDJYzzCvpED8DbaBipFnesTJqQLc2IT
- eAZkqG0GqR8ulW0KRZmUPf3w41hLMWqOF/QLqadCZJFEONW8YhMnHlQ4ZLnc1ifcMI
- lKGywx2tifwm6q4+eUxGB0BuF8AmutyPGB7kYbOToMlGDT3onzEuKOTFYtFFDJ7Kai
- qQzllRFYvCSL1sUtSwJLLae7sT+IAdwXUoN14+2bIq8Bq9SoF5c3o/67IA0NinNjEo
- lfJn+vW1AAyG1GeMQIghiag/ttVIE2GcyxJ/m3LSKWIl4o9aabooqV61uQQZPonTQj
- 0UXWNX5Getw2w==
+ b=NT8Y28VcMGSqdjBCyI8EIHTey3BNb2Ur242zrh3ZmGkhE/r/FHTtUeIEsEDAeZuJ9
+ wmf1bq7YQhkOwPJVwvS2w0cquQHHLiu2iqssaVutErySeQ5fy1k7vJwHfBsh0LAI9p
+ /Sclf6P5wMSAsEI8Zad9X9Qa1MHZptu+b6IpphyKlaMIfiV3dtPJAmO+3f38aYDa9l
+ xMY6ZMHXhbLr8AdnlbJNYxMlEan/kRWpGv9/rzB3xFo5xTtS0ORJjt6GiPO/TdiaFM
+ aDbAfDHG11WcC7Oh3VnQ0QHXyGrBtGJeG7C/q33DFLq8qHPDboi+0rcptTBS9jQbQ7
+ kgPGfAxxKOwPw==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jTK1m3lmXzbDC; Tue, 17 Nov 2026 10:19:40 +0100 (CET)
+ id 4jTK1n5rgKzj1w; Tue, 17 Nov 2026 10:19:41 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 17 Nov 2026 10:19:09 +0100
-Subject: [PATCH next 07/10] doc: rockchip: fix incorrect section header
+Date: Tue, 17 Nov 2026 10:19:10 +0100
+Subject: [PATCH next 08/10] doc: rockchip: use sphinx admonition instead of
+ subsection
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261117-rk-doc-follow-up-v1-7-2cc0910f9455@cherry.de>
+Message-Id: <20261117-rk-doc-follow-up-v1-8-2cc0910f9455@cherry.de>
 References: <20261117-rk-doc-follow-up-v1-0-2cc0910f9455@cherry.de>
 In-Reply-To: <20261117-rk-doc-follow-up-v1-0-2cc0910f9455@cherry.de>
 To: u-boot@lists.u-boot-project.org
@@ -142,31 +142,38 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The correct term for Rockchip platforms for the code running from the
-ROM is BootROM, so let's reword to match that.
+Make notes an admonition instead of a subsection so it is easier to read
+and pops to the eye.
 
-Fixes: a70ce65eec42 ("rockchip: doc: add back to ROM section")
-Suggested-by: Jonas Karlman <jonas@kwiboo.se>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- doc/board/rockchip/rockchip.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ doc/board/rockchip/rockchip.rst | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 086d3fb5d739..72a316e58dad 100644
+index 72a316e58dad..41c8defd6888 100644
 --- a/doc/board/rockchip/rockchip.rst
 +++ b/doc/board/rockchip/rockchip.rst
-@@ -582,8 +582,8 @@ config-flash.ini:
- Boot flow
- ---------
+@@ -328,13 +328,13 @@ To build rk3588 boards:
+         make evb-rk3588_defconfig
+         make CROSS_COMPILE=aarch64-linux-gnu-
  
--Back to ROM
--^^^^^^^^^^^
-+Back to BootROM
-+^^^^^^^^^^^^^^^
+-Notes
+-^^^^^
++.. note::
++        On RK3036, the SDMMC and the debug uart share the same iomux, so if
++        a SD card is the boot medium, the debug uart must be disabled.
  
- Rockchip SoCs have the ability to load a second loader binary.
- If enabled, the TPL/SPL code will return to the BootROM, which will then
+-* rk3036: SDMMC and the debug uart share the same iomux, so if
+-  a SD card is the boot medium, the debug uart must be disabled.
+-* rk3066: eMMC and NAND share the same iomux, so if in MaskROM mode
+-  and a NAND is the boot medium, clear the emmc_flash_sel bit in GRF_SOC_CON0.
++.. note::
++        On RK3066, eMMC and NAND share the same iomux, so if in MaskROM mode
++        and a NAND is the boot medium, clear the emmc_flash_sel bit in GRF_SOC_CON0.
+ 
+ BootROM
+ -------
 
 -- 
 2.56.1
