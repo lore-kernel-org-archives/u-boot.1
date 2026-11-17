@@ -1,151 +1,147 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DCA7606A331
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 19:31:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CE11606A32A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 19:49:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=apL4o13o;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=wmNqitWC
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RiEBlJvj;
+	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=YK2b6Deh;
+	dkim=pass (1024-bit key, unprotected) header.d=forwardemail.net header.i=@forwardemail.net header.a=rsa-sha256 header.s=default header.b=SdzQxm/v
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 85E1580F70;
-	Tue, 17 Nov 2026 19:31:16 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LIzzcVFgBCG2; Tue, 17 Nov 2026 19:31:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9F0C18116A
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794943875;
-	b=Cp48UwCRpT+QtMrIgjEpekS58kERpVYIxS1Z7HZnDdV+ZZjrqQragWA/ov5oqGD+PDxz
-	 +/E5isWfE50t2oOvxquMNkxmVybRDjrEjpUUkttkkaJvIq1L+YCDD45YOcZiX4SKgQEh7
-	 va/G4qvibRAkT/ojWsko4iTn/5zRu+tVnyz21jkqSOORtdFhtDxHv3rddVOCyIA+sEmLW
-	 PzCoelm4LY9WTKdmKkP06hNv13dgCNlgFa3+DKdcpCx1f/nLX/LfpJu49uv59jUwccvLi
-	 qtC81VdiTMTRbXzTvalxoe3xa8KWyN9zBKvom8TTFr0QGyfXcDhHKMAx8BmPcZAWCkg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794943875;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=VHFgUCLPR7qOaE67cYVk4IhBfAc5uO7QV5TMzD76uyE=;
-	b=aAo4sAqPmtcpmEKmwSVuxfd3DYJLJ1RlXqOx6/tje9finLKTUZYICp4EUbWMDkQM6P7h
-	 y2ZrKQBgx9rollFu7GB4FwYpmwF94s+QxAkUy2VP7k+cqqOguQiwe3795Gahppa1/jTC3
-	 Quxz2C+hTg+jtRDd2PmS/LfBPylnfhMxfmg2a2J4407xlxUVB9kjcwLD7AdR94j77hId0
-	 MywexXeUxHKADJcrV+dNCxkkwh+plaW1B1mp2hF0HnOMrWXduN3HRsl9l+GxFYJ6c6rtO
-	 imgXqQlqNghyhVKDJsLZtSwNO6/zxVNp48VgsCkVkD0oxGqQ0rYGU4MQ0BhPZgeelfg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794943875;
-	bh=VHFgUCLPR7qOaE67cYVk4IhBfAc5uO7QV5TMzD76uyE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=apL4o13osCALe/em8FWzzpqqXBixXXh5VY9ZzOFH/LOhD7ywFyKrhnylABb73qzKl
-	 UaOY1D1svCq7WCHjZzH20KKd84qgaJz7pqsA/Zd0JnRNSjeXGXbGovdk6JEAOjuyKj
-	 Ji4MZSMgg2JF4yh75OVM0g+sFB8lu03s8Fr9l+YrN1ePdBmXp1/IklXKpuXDKR79yt
-	 9i6fRdcgQ9HCGGGow4Bw9esvvcK/XUItqOtqkCBihUQUjjovBTl9L92fpwNvxVWl9p
-	 /nA9GW3q2wCi2Pv8WJhwmniSMnzTSRiuTnr9/Ug6IGc4DkUYZggNIfbCACzTP7lHRt
-	 lNYS5ubZd0WIQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9F0C18116A;
-	Tue, 17 Nov 2026 19:31:15 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8B18F49B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 19:31:14 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6FE2860729
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 19:31:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E5AFD607E7;
+	Tue, 17 Nov 2026 19:49:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KHZNLVoDxXep for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 19:31:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5F893605F7
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::72e"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::72e; helo=mail-qk1-x72e.google.com;
- envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=wmNqitWC
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5F893605F7
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 19:31:12 +0000 (UTC)
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-93f22a8515eso21294885a.2
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:31:12 -0800 (PST)
+ id mEGJXicKNM3z; Tue, 17 Nov 2026 19:49:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EB76C60739
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794944987;
+	b=Ozn/3IDU20apjCNIYhPC8DmhSyOpDpomjAuxvKMuyo7SlXRtMdb8MjRj5hOX/Qb9HzVE
+	 Rdgbfxm2vzMDnX49BdgTPLY5wh3EA+GNDOCuMEZZ7bns54SSgwtKJAOhrvYThjhhU6nFh
+	 qJ6j8KKmYSJL9VwjgYNz8poRmdkEwL8YpyV2fNe4FhSvg34AtXjhU/tuQDFAE0XCGAK1C
+	 7Vv8SjO5/6jhqVA+9IeZ/eR/nTUPFZFr9xGQDl9EC5qY+xiHLRqD0y5Y1vxWguf3WQk/+
+	 mo2nRAHasgbeLKm6XGKcyBrTmOz5NyfXNmlY8wyr46EJl1NP3py+EOHgS2O/LVwpyqQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794944987;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:DKIM-Signature:CFBL-Feedback-ID:CFBL-Address:
+	 X-Forward-Email-ID:X-Forward-Email-Sender:X-Forward-Email-Version:
+	 X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+	 X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+	 Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=qtt7TcIZb+R3JGnLzUsVo6WgUztNy28bMorwsdswl0w=;
+	b=bmRaV2RZX4Sjv6K8ZjRnUgdrZRAS7PaW7k21Mwm16cLXmMqKvxLcd2DECM11m/dlw/Ts
+	 Z73GlKX9H2OKiiqe3eaPrWlqK9LQLFRGGh2SF/x+KzhFzXa7awc1Bc80kpBOxd7s6Ra3Y
+	 hObp1MFazsy8ySXFvBbSwvML83Ulh2+AFSL/f9i0dS8aVyda6bABdxnXFktik3u5kLvYS
+	 vWJVPjSZ+n9WYj0q8+irON8Q7rRFkW6S8lJrtHFdXPXD+0FAJXellGJzPk/juZe4rs+S5
+	 la//PwuMexO3mhcerEeD03U1fIKa8/ye/2Kg2x3RpcPaGm/sQoBVvzpPoCwPCIerE0w==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=kwiboo.se;
+	dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=YK2b6Deh;
+	dkim=pass header.d=forwardemail.net header.i=@forwardemail.net header.a=rsa-sha256 header.s=default header.b="SdzQxm/v";
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794943871; x=1795548671;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=VHFgUCLPR7qOaE67cYVk4IhBfAc5uO7QV5TMzD76uyE=;
- b=wmNqitWCdn5bPnoMDRgsb4n9O7jmmj+XJg7KyMjhp6I3RSj5hSVLfNG/F7E0ObatUa
- KMqmurq+mdzNKBzz5yv9+eoeLJVrJUeBKX5tWFDvQHe6vQc1Uw2iKBXCjai1OBLDLvyd
- qGzusMmVtxkfLJc/f8eBr+62mhoQvONHr8ivc+XRfaDvpNUx5qyPwtOc7bD/m+0AVRqY
- 3DB6yw8gOVgKDVvuRmUn9tn/uhlQVpL/fwNJUnToQnbOiEL1XW7uvKJ+AkuTSs1Q9z5N
- jENlFqbW7noSv/FgkBMfmpykfwzYNqBq8EKIySHzUN02crEwkvHtHc0eKDKfeHooz3fp
- w2LA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794943871; x=1795548671;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=VHFgUCLPR7qOaE67cYVk4IhBfAc5uO7QV5TMzD76uyE=;
- b=KoT1X4ak1DPy6EjcFLrBZFynIAJvoebA/GMVgJ98ZRygFToa0LirjiKnwBN42xPj9V
- YNL0q2YM+u8cyZ5NqzcYXEXIhUn33Ku99YUgR3mKRLY0eUcy2UHzcR+y0GvWGS8z1pS3
- LFlxUM3Rnk5Eig82b8UBcjnnKt5ElQ1EwdJWL3XjAPl551qtnURAEuIETQxfo9/Btz8m
- lSPlBgAaW8tWaEu0Sj2HP1UvWar9RO7UFSAme68Pa03BBRxzYXvIP8A9GL+hDk+RIVjt
- uHKZCnnSCGPNL69k9GSOOdrX6fgpdKjgiFzgOqjrc+0KRBQZoc6F1p+5JB1e1UQmzqEA
- tJ2Q==
-X-Gm-Message-State: APuU4Z+oGkbudSu1WnUxpFU7X5GJqLJcWNM1xFRbMjlKod7dUmSZ1+Tm
- 74jXliKWQpu0lJnUMRqj7LCrPjDBSwyl8FkOUR+4vL5wdPmGjdhIDt/MK0tfqJE4030=
-X-Gm-Gg: AYBFou1v5d8LNAoK8RrekMQmjgYHjLzoWlStTV0tF4Xg7zvd89YW8A24jReEQ+puv5t
- kAHY/obQZZnw4mczyHjOL9yY7X9GHpwY7VmYLsjKfeXJlAYdicwcS1UcfVoz/uw8oQru15sdn30
- q4B/m+WIENIJ5G8CW11tgd5njen37pVimatZZ7EdSczaJW79Gd1gst8bLLWt78unJYIaqzvdgFB
- HQ67U5moFkAuGPq6pc+UQ45WJfHHJnHBDzIvOWQXmciKrcIpaiSfo+8OBl+GBdWPEBPTCekwjnn
- rx4cHdsRQq1yqG5Jv3f+IiGKHrRqLAzEHh7kdd6iq0NzTi04xbXcnCtIkg+7WXSeJOsH3sd290a
- SPbuIm0wNX6947EYWS9y+6QCPdB9wHbBgkNrzq5XKpWVUfj+OCMycN+2jdxWyViDDmVSPnjyOhK
- WT/dQgqQjkAzD3i4LZftwMoVc/OcNeY87NHym3q1Dz/pubDkINTIrw2v6VoXtruO5bxOJyNedJP
- 6Bmdu5K4o/NK8qmcIDIeaMCnDuXRw8/hufrFwWgG0Ui+/MniYsWABADOO7TPxrI8CEzziL3hDcQ
- nUzoUm42s31mc/0r8ezdmnfaO3d/ZqTxJdZRlOR4h+6LFqm9Hl4qoCCYyWdPABPtEtcLw7W7P7w
- Y4AQZ7rYrPR8vWau6cR8LJfVHN1Mv1f3ho0csaeKO8JLcLcw=
-X-Received: by 2002:a05:620a:2907:b0:949:5ee9:ab27 with SMTP id
- af79cd13be357-9499965e07amr111675685a.83.1794943871193; 
- Tue, 17 Nov 2026 11:31:11 -0800 (PST)
-Received: from localhost ([204.244.107.52]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9499b75aa1csm2022385a.20.2026.11.17.11.31.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 11:31:10 -0800 (PST)
-Date: Tue, 17 Nov 2026 14:31:10 -0500
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-To: E Shattow <e@freeshell.de>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v4 1/2] doc: develop/sending_patches: add tips for series
-Message-ID: <avyrfjvcAVBe4qQ5@maple.netwinder.org>
-References: <20261112-doc-sending-patches-v4-0-d6f4b7e3eeba@linaro.org>
- <20261112-doc-sending-patches-v4-1-d6f4b7e3eeba@linaro.org>
- <33c70db1-226a-4108-b690-ad07cecf7752@freeshell.de>
+	d=lists.u-boot-project.org; s=default; t=1794944987;
+	bh=qtt7TcIZb+R3JGnLzUsVo6WgUztNy28bMorwsdswl0w=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=RiEBlJvjRiMQWn1FX1BbVHZWsyv9B6nqEqLaHjOApIwABTPzakrq8Aw2hMjiYMssP
+	 KOo2yWWbtCktB3APV6Pi5lS3zk9LMZlgQgtdhYu6bYujYfFZ00Sz7UZx9U5ThNt+5V
+	 dWhUzhAnNSF93gHB3xVmfWjTEbpUI0qviYxOh5JaBjQRJD/hvqOATcg9AgiId8/6w6
+	 y30X6LQWn3FppVTxJNfweEIQ74W4J5SBlAHxJxs2MLerwco6aHri+cgyIK4+GuQVli
+	 L3fXUYPrdJyz237ONRcQcucFDiw2tY0O48/Y2tIq1equFiw3KP0+84X7LvFmR76nRm
+	 shY2M1dPhQE8g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id EB76C60739;
+	Tue, 17 Nov 2026 19:49:46 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0D71C1E7
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 19:49:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id F311460761
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 19:49:44 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ICZTIZPCFtF1 for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 19:49:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1BCCE60739
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=2ff8=jh=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=YK2b6Deh; 
+ dkim=pass (1024-bit key,
+ unprotected) header.d=forwardemail.net header.i=@forwardemail.net
+ header.a=rsa-sha256 header.s=default header.b=SdzQxm/v
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1BCCE60739
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 19:49:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From:
+ Content-Language: References: Cc: To: Subject: MIME-Version: Date:
+ Message-ID: CFBL-Address: CFBL-Feedback-ID; q=dns/txt; s=fe-e1b5cab7be;
+ t=1794944981; bh=qtt7TcIZb+R3JGnLzUsVo6WgUztNy28bMorwsdswl0w=;
+ b=YK2b6DehVSnIkKA6GhV0DUYFg+8v/5wIsYuHgB3UX5WRpFcjBR/SjGJfi5Ux7nqJ1VFoFh5ss
+ dDaHsErAidfd/rhgeVKa/GuZYwPQqtAQWkh4Ivnnu4bD7Dy016o5untBm+rfRKxSNPfUULqToVo
+ 1/m01gKrDMB0SKA3v/NG1/0ZoKav1p99iv8u782+s9eSagxf0YY71RmZdpZO5Kyj/nNbqBz+Ep5
+ 8AqJxd7+qpjoc6xEfMpAGeMUwCxwBUMgdIw4i52i+S2+9Pf23KM/OFtA2JCflkFWBoaxrYj9D6O
+ 8b4KEGFPJdOgniaW4fcGV/0NonflEpb8RajqtBQaqJJw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=forwardemail.net;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From:
+ Content-Language: References: Cc: To: Subject: MIME-Version: Date:
+ Message-ID: CFBL-Address: CFBL-Feedback-ID; q=dns/txt; s=default;
+ t=1794944981; bh=qtt7TcIZb+R3JGnLzUsVo6WgUztNy28bMorwsdswl0w=;
+ b=SdzQxm/vP25PxmyXUTn5ZCumfx2NMj1AlmWv21qXv7SD01Vj2/mnkh8PnwrFVbw/qRffyeH+e
+ a6VI4RiSmZMlzQE01WSMHiW+VFi/5V97BbiCfSzaaE3UVNzrzD5yV7IYSu1pxpf8kb8LX1uBCob
+ mE6o+RSF2LH1t1W1MgyQ5Fg=
+CFBL-Feedback-ID: 6afca1c5f6345fcef6bd695f:83eb6c6eaf010e89907d23a5917ad511
+CFBL-Address: abuse@forwardemail.net; report=arf
+X-Forward-Email-ID: 6afca1c5f6345fcef6bd695f
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.19.28
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <c336839f-36fd-42ec-9db0-322d5c13eebe@kwiboo.se>
+Date: Tue, 17 Nov 2026 19:49:38 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <33c70db1-226a-4108-b690-ad07cecf7752@freeshell.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH next 3/8] clk: rockchip: rk3506: improve PLL_CON() user
+ friendliness
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <lukma@nabladev.com>, Alexey Charkov <alchark@flipper.net>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+References: <20261117-rk-clk-better-con-names-v1-0-25521d4e37c3@cherry.de>
+ <20261117-rk-clk-better-con-names-v1-3-25521d4e37c3@cherry.de>
+ <94e836e4-fe65-4891-839b-1998c02c2b77@kwiboo.se>
+ <d4467ddf-13e3-405e-9c89-93bdeb02a5e1@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <d4467ddf-13e3-405e-9c89-93bdeb02a5e1@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,90 +151,100 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Nov 12, 2026 at 03:19:18PM -0800, E Shattow wrote:
->On 11/12/26 13:55, Ralph Siemsen wrote:
->> +
->> +A series of related patches can be sent as a "patch series", as described
->> +above. Individual patches should be small and self-contained. Likewise,
->> +this also applies to each "patch series". Keep the following in mind:
->> +
->> +* large series are harder to review. Maintainers are busy and may postpone
->
->This reads a bit awkwardly. Maybe "A large series is harder to review"
->or "large series patches are harder to review", depending on what the
->meaning is you are wanting to convey.
+Hi Quentin,
 
-I'll see if I can reword it more clearly. I was referring to series with 
-a large number of patches. The existing document already talks about 
-(individual) large patches.
+On 11/17/2026 7:06 PM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 11/17/26 6:59 PM, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 11/17/2026 12:37 PM, Quentin Schulz wrote:
+>>> From: Quentin Schulz <quentin.schulz@cherry.de>
+>>>
+>>> There's no PLL_CON8/16/24 in the TRM so one needs to do an additional
+>>> lookup the header file to know what exactly this refers to.
+>>>
+>>> Use new macros that reflect the names used in the TRM.
+>>>
+>>> No intended change in behavior.
+>>>
+>>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>>> ---
+>>>   arch/arm/include/asm/arch-rockchip/cru_rk3506.h | 4 +++-
+>>>   drivers/clk/rockchip/clk_rk3506.c               | 6 +++---
+>>>   2 files changed, 6 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3506.h b/arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+>>> index 9ddd6215fc53..331b100ced54 100644
+>>> --- a/arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+>>> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+>>> @@ -48,7 +48,9 @@ struct pll_rate_table {
+>>>   #define RK3506_SOFTRST_CON0		0x0a00
+>>>   #define RK3506_GLB_SRST_FST		0x0c08
+>>>   #define RK3506_GLB_SRST_SND		0x0c0c
+>>> -#define RK3506_PLL_CON(x)		(RK3506_PMU_CRU_BASE - RK3506_CRU_BASE + (x) * 0x4)
+>>> +#define RK3506_PMU_GPLL_CON(x)		(RK3506_PMU_CRU_BASE - RK3506_CRU_BASE + (x) * 0x4)
+>>> +#define RK3506_PMU_VPLL0_CON(x)		(RK3506_PMU_CRU_BASE - RK3506_CRU_BASE + 0x0020 + (x) * 0x4)
+>>> +#define RK3506_PMU_VPLL1_CON(x)		(RK3506_PMU_CRU_BASE - RK3506_CRU_BASE + 0x0040 + (x) * 0x4)
+>>
+>> Please consider something like following:
+>>
+>>    #define RK3506_PMU_CRU_OFFSET		(RK3506_PMU_CRU_BASE - RK3506_CRU_BASE)
+>>    #define RK3506_PMU_GPLL_CON(x)	(RK3506_PMU_CRU_OFFSET + (x) * 0x4)
+>>    #define RK3506_PMU_VPLL0_CON(x)	(RK3506_PMU_CRU_OFFSET + 0x0020 + (x) * 0x4)
+>>    #define RK3506_PMU_VPLL1_CON(x)	(RK3506_PMU_CRU_OFFSET + 0x0040 + (x) * 0x4)
+>>
+>> That would closer match what I had prepared for existing and have
+>> prepared for new SoCs, i.e. RK3562 [1] or RV1126B [2] ;-)
+>>
+> 
+> Yeah, I wasn't too happy with what I came up with.
+> 
+> So, I'm actually wondering if this is just wrong? Shouldn't we rather 
+> have a pmucru driver, separate from the cru one? Then we don't need an 
+> offset relative to CRU_BASE, only from PMUCRU_BASE (so the hardcoded 
+> RK3506_PMU_CRU_BASE - RK3506_CRU_BASE, or currently 0x10000, can be 
+> entirely removed).
 
->Either seems to me like injecting your opinion about what is easy or
->difficult to review which does not align with my view of this that the
->difficulty in reviewing a patch series is proportional to the discipline
->in focus the author has for presenting their idea and developing it to a
->meaningful change with the assistance of code review; 
+The upstream dt-bindings header and clock driver for RK3506 already
+include PMU clock ids, so not sure that would be possible (or easy).
 
-Knowing how to present ideas clearly and develop them based on review 
-feedback is something that must be learned. Some people are naturally 
-good at it, but the rest of us appreciate all the guidance we can get.
+> I briefly looked on linux-rockchip ML for an RK3506 
+> base DTSI but didn't find any (but maybe I'm bad at searching :) ).
 
->if it will
->require a great deal of involvement then don't expect to just dump your
->code off on the list and have it be merged because you gave this "gift"
->of 100+ small patches in a series, or even a single patch large-or-small
->that is several disjointed ideas or bug fixes.
+I have prepared and was hoping to send out missing GRF dt-bindings and
+base DTSI based on [3], excluding USB nodes (missing dt-bindings), very
+soon.
 
-How can we help an author to recognize that their code is going to 
-require a great deal of involvement from the reviewer? Most submissions 
-are made in good faith, with lots of effort on the author's part. The 
-author cannot read the reviewer's mind, so we have to try to document 
-expectations as best we can. That was my goal with this change.
+However, CI failed for my latest rk3506 branch so may take some extra
+time to sort out final touches before posting, as I would like to cross
+reference any RK3506 related Linux and U-Boot postings.
 
->Nothing happens "quickly". The point of bug fixes being independent is
->so they can be reviewed and verified independently from unrelated
->changes. Quickness is not the driver of getting merged or not merged, or
->it should not be.
+> I 
+> think this would align better with other SoCs like PX30, RK3399, RK3568, 
+> RK3588 and RV1126? What do you think?
 
-I'll reword it without "quickly". But I do think that certain bug fixes 
-are more urgent, and should be handled "quickly". Such fixes should not 
-be bundled into a series with other changes. Which seems pretty obvious, 
-but still worth writing down.
+For most newer Rockchip SoCs we seem to treat any consecutive CRU
+related reg-blocks as a single CRU, i.e. RK3588, RK3576, RK3528, RK3562,
+RV1126B and RV1103B. If the two CRU reg-blocks would have been separated
+by something else I would likely have agreed, not sure it is worth
+trying to change something this late for RK3506.
 
->> +* tools like ``b4`` and ``patman`` send the entire patch series to
->
->Do correct me if I am mistaken: for consistency I think we are
->recommending people use b4 and patman, and not tools similar to these.
+[3] https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/blob/rk3506/arch/arm/dts/rk3506.dtsi
 
-Indeed those two are recommended earlier in the document. I'll remove 
-the ambiguous "like" and just write "The b4 and patman tools ..."
+Regards,
+Jonas
 
->> +  reviewers, even though individual reviews may only care about some 
->> parts.
->> +  Filtering out the relevant parts takes time away from actual reviews.
->> +
->What is an "actual review" ? That sounds so strange.
+> 
+> Cheers,
+> Quentin
 
-I meant "actually doing code review", as opposed time spent filtering 
-out emails (parts of series) that are not of interest to the reviewer.
-
-The tools collect reviewers for each patch in a series, but they send 
-all patches to all reviewers. So if the series contains changes to 
-driver A and B, each with their own maintainer, then both maintainers 
-have to dig out the part they care about.
-
-To avoid this, authors need to be aware of this when using the tools. 
-One warning sign is a large list of auto-generated recipients, which 
-usually indicates that change needs to be split up further.
-
->Drop my R-by tag, thanks. -E
-
-Will do.
-
--R
