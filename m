@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A6F3606A32A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 12:27:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6B56606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 12:27:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=a8tzYNCu;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=0mCLdj10
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=B866umyC;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o5RvoPMQ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 71C51407F9;
-	Tue, 17 Nov 2026 12:27:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 92594608C4;
+	Tue, 17 Nov 2026 12:27:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cXRSLFacMCfw; Tue, 17 Nov 2026 12:27:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 78B4C407E6
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794918464;
-	b=sHg6+9LovwP6USRmdde6DK2yK6y9m/NxkLHFy5Ze81/3PPBVanFr+4eU0OnJruUd9IQB
-	 cPjGfKn3JlvZYOt9JjLoDSNpzYD73pOHYdsaUsvh60dzKHpfdpE8i5Zq/wsAqk9m0WDOp
-	 biHQh1I3xxhvwnKCI3WzJoRfdKrDuqs8K11lFeCCNoZUV8GADU1MHy6KNPh7OjZkjIQhf
-	 HNeTJizzg0Vhwufw3SYDlw9yRzgvFv2p3CBtmXwpjELnY05dq7XbzcPCZXSzPVXvNPJ2M
-	 jAb95mRZmsC+DswEj5eeEkeevcZG9APcU/iWopndBWqZqmMMOKoAfJ/4Fve76EZf98w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EXSLVajfdhTA; Tue, 17 Nov 2026 12:27:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E6A226086A
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794918463;
+	b=TkGOjroLlSj1YB6v11FvtXjrjZzI+8F1qImvXJktfbEFxpRTqVZXC3k4CpzA8tBdGIXe
+	 IkD/qLtl4ADKX5XmgsQ2JE6AatoQ8oDSxn1SJ54zJypF1raCneUIE/grhOZdnQK0AJvLH
+	 ET8dQ4UDr0pUjWuYyik964Mw7TAy19tbqAOFltiMD51cUcbbRrkHmumrXHpfVtwUCDagK
+	 fl2gVW/ROzA5Ec8WfchLcL3Xw851rn4el4SzyzCDCy33vYFP4XAkxcakK5cAqmEgBOhiV
+	 uaFjekL7TvlZwEoGjR+FhALeNDojK8B3kAPntO5aKLCIismxMt89jzXVKh9ON9iIM+g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794918464;
+	c=relaxed/relaxed; t=1794918463;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,106 +33,108 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=7OSu7iPWS0z0R78bPDC336EEC1vU6JDJmkvUdjzVbsM=;
-	b=cPU0lePezuOq7pMzj6ap16R9cBZQ32+qiWqpFrZ0/IdwkO95HjhNodceEavGtl+eOOpQ
-	 IAEJeTjpJx0b3Nkq2RaHy7J3cFqZRkoXjq0UsEdJ8UF8Jw3WeVS9JyfQiHtm2MMmLKsvG
-	 CMLXnRYnpQOERO1qf35Tk+6WLq31PMKtZYirOsVX7wjnUHGLYKYG/8CIgI6JWs4WmoKM4
-	 LE8yMYV5B2Xsvn0rXU6jN/zND0QVRp2Coi292q0k18AgXvzKxKcbhj/2+r2xt7QqsLYJp
-	 kPQ8SHGbqM7/ZyyZEGqTPJF6rrwGFJs/vJoOCwSZyKO8Lw4BsNOgGjLvNnMz70O5OdQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=lU5ykpYWtAOqsDeeloZnZUNojIrXPwskNd/Kd2GwfB0=;
+	b=RxdePLJxnE+BoiEpOi4pCPMMwNH3xzBEzX/DPf6VebH+DmGrkbldnapoZscn6Nq15dsT
+	 iW949jVYJq2lGHIl/rDnSL89ktfJeCPzdaTzDWEzBk/idALo1XOiYEQJUakM27uZmbt0F
+	 ptO9igPpQRkrBBr0XYgNIOtZ+myh7RhFN191ISsuwNz65T/bja/oMhNARytCZuMWUQOyt
+	 3iv+F2vu44iDSx0y0+hy2CW5iLo0/vpAzoyXdAtLi3aRoixFJjGHGW7rDqHlI8U2XWmLi
+	 LqZqP2t21igGRxgVYObp7tmV3OYCl9gT35dDaEIhfDf1PCiFSfcC4bIPFo+nrZtO+2Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o5RvoPMQ;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794918464;
-	bh=7OSu7iPWS0z0R78bPDC336EEC1vU6JDJmkvUdjzVbsM=;
+	d=lists.u-boot-project.org; s=default; t=1794918463;
+	bh=lU5ykpYWtAOqsDeeloZnZUNojIrXPwskNd/Kd2GwfB0=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=a8tzYNCuv/+T61hwZDh/En/dkR0D+sfwoP/+h3vlWosGMKxRLM4eaxVtgz/0u6U6q
-	 JUO3tHa5EV8jxu6bgTH5ABK/Y3K4hhB1ipLAUh56mfjmCDwUyPogyv6XFHRmTAB/ya
-	 UzFBkks3DLQZxFnmPlNhN1OGUgC3MRh7nlh6qBQvKnmGQ8GFrqRImnosXXlCgoJKp6
-	 luBEnUMNp53EbU0sYaSuIkV5iDVfEhEsO2aatNwlJHZYXX7ASTIzKikKyO2hES4Qg6
-	 q9X9fGaALrWx1EOPIhIZsJ1YaNx1WBgJcqy1I8NrSFnA6yNLg3a3lBPnhhaF36Lrw2
-	 /QmlmB8SwnKjw==
+	b=B866umyC2o290HdZ3v8aRUowmprs0gzDrDO2gQE9ciCw3PU/4Pv8d0VVkwqAWq0gS
+	 UUQRwys0ujJkCYgJRY39zaM0ktcHzl5ceShpfDnpF6pdKcETQbt1sN/hlwuUv5w1fE
+	 1kHqAedhEjhQIpF/CTroa6E9yYMQm1vhlTRJU1qldp1kq83mO+ab7kfRkqnk5ATIXb
+	 NRxb9DQ74N1qPAA3BvXS4PwkQmNk2d6NvfvwXV+qINxXQibmndZajEB4d9DQpVrVqj
+	 +64U+RgvfQk6+sXqBcQ3qO1JCnubSfShNQHPIHhhAQES/Cy0xatZI+0iAMCjdvKL9m
+	 jGiJe+MPwTVlw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 78B4C407E6;
-	Tue, 17 Nov 2026 12:27:44 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9CCBD105
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E6A226086A;
+	Tue, 17 Nov 2026 12:27:42 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2ADA3105
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 83CE740308
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:41 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1BB2960887
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ge2EcNhnRhXg for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 12:27:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 757AE4008B
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42f"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oB4g-p_MxeXk for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 12:27:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 05ABD608B1
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42f; helo=mail-wr1-x42f.google.com;
+ client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
  envelope-from=ansuelsmth@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=0mCLdj10
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 757AE4008B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:39 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-48e46e449e8so3369984f8f.3
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 04:27:39 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=o5RvoPMQ
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 05ABD608B1
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:37 +0000 (UTC)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-490d59c3edaso602306f8f.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 04:27:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794918458; x=1795523258;
+ d=gmail.com; s=20260707; t=1794918456; x=1795523256;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=7OSu7iPWS0z0R78bPDC336EEC1vU6JDJmkvUdjzVbsM=;
- b=0mCLdj10rrsdxX4B5usd4Iww/pu8obR2bCjE/J/TWTHr2yHsWuFrhfDhw1k2fWapJF
- PMtzkOMPUId4RfytjBVmhMxZEK5NrcDI+YS1f/rb+PGhuJhUpIxdb2Zxqj953up15HPh
- kGkdYKQh0Et1jtHu8/3bQ5SIv7EoN79ouoo9xWkqChm3baelDbRaUFYc6iqsRssW7N1M
- Zpfp/vGaFLgcWlSWxTbOP+JzGhXolKV8eafsHox2EzfGwJwbNhnoiNy0BPW+Z8WS2RGi
- wAKhXLu6O378EgkY4nVbygQFA3ZlzyFQxmhFqdnD/K70rKU5YwnkQAxALpLEYzL1mdc6
- 2o6A==
+ bh=lU5ykpYWtAOqsDeeloZnZUNojIrXPwskNd/Kd2GwfB0=;
+ b=o5RvoPMQXdH+FelxuNQkygmhLFLkLLZfNByhMxHdi+lN9VrUgsFd9W7XNOTSbgjxL9
+ iAOICZluYabKTAQS9a2HrVZTC7CjlJXGw59AaCK5S2/e2rLLnSpgIPYmyRm0HgAeJIXi
+ K4U0I2ld9sAXbTJecl/43p6YqtFA/whnPw2wtSmWXgwatgpMFVoVXfpXC3aTLBsLkW9M
+ nT1o/X/VeXhHLtT/5q2iCUYhLHfYodPGKOgeSpa0Z6/xlhQvoewq6V0Pjt5ts+eBZs9r
+ OzNxkJvw74x9y4Wlvpj3IhqGmyWg9OoPO6xLH80eCt+Ar4Tsh2gFm3BaAfgi4Zyydecz
+ U1Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794918458; x=1795523258;
+ d=1e100.net; s=20260707; t=1794918456; x=1795523256;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=7OSu7iPWS0z0R78bPDC336EEC1vU6JDJmkvUdjzVbsM=;
- b=kynPbYXgoC283/MVo2DtlWVbUHx8DvrSNjv3T5qRGhBvziLrW4Dzr47MtGhUlTsCIi
- HZtEYVil8imxqmTNs37qFXrrioJ4nUk7I6+gnS7DgESb3kmqEQFcbmkTcYCCtkLs4/XR
- 15ISRIvBbxUsO1FdfXuiG8G/ZnYqC8beH4RM526KhnqEA/e3k0r8QyfGnqsV27vjg/M5
- 7H231kTeEUazR975HP8f60xY4p12KIBSFi1de7yHzluT/KdsqPrSTS8AVVkpAgRJ4xNK
- 8xuSE1cZiyv+O0109/G1Yh+jk1YCj7J5+DX7NXAqJAaR9amACfuKQUv6JiqCpuIymnh+
- i64g==
+ bh=lU5ykpYWtAOqsDeeloZnZUNojIrXPwskNd/Kd2GwfB0=;
+ b=2l7h5XmnbLdLNY3oAKnhAxk3e+z04S9oFB6lP1fbBwMU6cnUXrizKp0H1FeGEshCiu
+ CaJ/FwNy1xv3t9AIcXOV+FWpL0J7/ZDzK0rcUGOXLYnpnAAvj9L5oQIuyG/MCt+RZbO3
+ 15laN0VMiKBU/xZjF+amBN40ccGhlN2OSTq7ljH/IC99az+rS2N7QkDW+fko1N+yd4bx
+ dc1YCPzwv3F0OkNKfZFrQwC3YvnqvkJ435QnmmgrIF3IyRZivsDimF81TWrr1qM6q32h
+ 99yeL3EGCwAes5ANfH/ZUgrBiEhH3eVHoqkNB5cdLvUrwi8gcVvxY3/fropO7DEXJTNX
+ EPsQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErFTzjlzb69uCaHPlqPy/8CXvRO/LIgUUnaR3hUhA7bnt/hIo5uU3L9E7BhW5FNHLYQbqN5s5WE=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z8wDyNdCcRJ7EuiRHVZsohTwJRaIHCncjnT0azHEEfaMio+qmaa
- wldCD/vlaPisVduOjs6LF2uKfjLfDstxEyYXFSG1XMaoyjBssG7M+iEq
-X-Gm-Gg: AZFdTZeXT40FuRrlGmm4NEbB7bbPv+myDVOd0utREhk+9ELhgxJilEN+G0SKkWzuyMg
- kkLr5OLyLftGwhhV9+Q6mUgEFr1XZLGJVeyDz+zpQl1HzcMhTf6LrarvgAewiGtn8lzSluXqGTp
- 7/j+0N9cLcFBf7NK9m+1E/uIrMIo4peA/qbxFEZpT1yQPeaG68svZsId+HX/nibYgsPObAp70Hy
- xV30YpBoX8YSZeKaRCCTiWJSnQ/Q0jTbZEZHGilhfeiuzfb91ydo58dJWUZPyy53IWkXhMHe/p2
- +PbLIsZOAf2d69wpT8R76he6CAjyLGkt3e9NoLqK7JYxVxT01kdgVxzxwFP75qaEsHrB48jP5sm
- +mNiq5H2EB5OarVCdmswrTHgUrPy0ZppMksyWpo2kyUa5pBK54qLDMFM/RFHN1I54lHZBOvzvBi
- MmdGQAwi2LMoUIr9/wv822kRnJxF/MAFGO+LzpfDFvnHn7jtI5GILg4ekvtqLYZNw5ja766E5qR
- YLN00BcqSNER55NNTmpQQnUUNg1WgELCQhhv57eVynLjtAyZvsb/qU7wGGfYjT7a8w0z6hnQo6y
- b6Z5JZR0x2Wqlcyjd3H9MAbcYqdbmgWsUGD0ke+6b3jZIM+CL1cwthW19FV/d0B2Mvniyltnz45
- it4O+P46r9iM+TVbafNkOHv56MepBLEOGM3E=
-X-Received: by 2002:a05:6000:25ee:b0:490:b23b:802d with SMTP id
- ffacd0b85a97d-49c71d475ddmr25740192f8f.37.1794918457955; 
- Tue, 17 Nov 2026 04:27:37 -0800 (PST)
+ AL+hErElTnTjjjdA0CV7yadfCittTOLyQd7nQnCFTS1+38d8UJn/DXlEokdDVIFh6/eIDAxt7fW2cOQ=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9kIAtfKr3TE7TKvdMQnRoL2X88AhwhnpDqRnbuoLuUkU4wTnE/
+ HmjFVrPE9e4+ydnSE+Vgf7HmSYql0BOlgKxV3Yo1MKuiZy7h1ZT0q1cA
+X-Gm-Gg: AZFdTZf53Awiv6lZ8y04MVJ1Ch6g96iXodQmtMFnWKUuWwakwmRsR7vEWxTpsqTs1Fd
+ UwJ/VnzlpoQaOR3aCol4hlRNz0B++37U1hEK/BeU4nYPaBsxY1Qgvy5HF8tRt57K6OHBcMNLbR9
+ 7977aygkSQguLtQVk1ZSGwY89A0NGE6qV2ogMfGhNTAelJT4HTsqUdrPDyn5fKsnTuEHlh2ZCDn
+ 9bYOo3dYP9HMOkI4DR6P3lEqcJ78kKMDydVtSL9yHPXbamRmwr+99HuBjKe5zpkUs1NQZptaPj/
+ TFyrCCL0vkL/u3OMcnF2/HpLKXOTm5n5ke6Jnteue/BYNBxcqkyQiWSisM7S31RrwMxjf6eg5Lh
+ CM1sC41wNIIm18vCZ9JHdisJ28RVT3ih0Z8eLaqZfc2qiw/WfR5xwfJfJq7PM6KqVz6KnBvy3Io
+ 6zIwhS/6NG97pyz6JEcQrGim3HB7coAkQEu5DgB4l99OjhK7uYvgBTFm11f9m/mGHoMEXSANhU9
+ +bj6nxuO1pwJ0CfaRcprHRoEy1YiGKkF+ROUrwMa4pzmtlmxJmE7OCDbNAOillnAzLWmecBp/h3
+ ej6Q/E0YwtTG040W71/Sfeinu6RPSQMWgIQV5e12mxTp5R38j1U7eZH0JNhHEL6B3UYlyvjwFyE
+ 5qAHvJYbdDxh4W0LNYOyykrTCI/0rPJkWiDU=
+X-Received: by 2002:a05:6000:29cb:b0:48e:127a:c914 with SMTP id
+ ffacd0b85a97d-4a372b3119fmr4015527f8f.5.1794918455853; 
+ Tue, 17 Nov 2026 04:27:35 -0800 (PST)
 Received: from Ansuel-XPS24.localdomain (93-34-92-103.ip49.fastwebnet.it.
  [93.34.92.103]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-4a33c344a58sm5243151f8f.34.2026.11.17.04.27.35
+ ffacd0b85a97d-4a33c344a58sm5243151f8f.34.2026.11.17.04.27.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 04:27:37 -0800 (PST)
+ Tue, 17 Nov 2026 04:27:35 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -158,10 +160,10 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Neha Malcom Francis <n-francis@ti.com>,
  Jerome Forissier <jerome.forissier@arm.com>,
  James Hilliard <james.hilliard1@gmail.com>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v12 8/9] doc: develop/driver-model: firmware_loader: document
- new FS and FIP API
-Date: Tue, 17 Nov 2026 13:27:13 +0100
-Message-ID: <20261117122715.7983-9-ansuelsmth@gmail.com>
+Subject: [PATCH v12 7/9] doc: dtbinding: Update documentation for Generic
+ Firmware loader
+Date: Tue, 17 Nov 2026 13:27:12 +0100
+Message-ID: <20261117122715.7983-8-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261117122715.7983-1-ansuelsmth@gmail.com>
 References: <20261117122715.7983-1-ansuelsmth@gmail.com>
@@ -177,188 +179,202 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Update the firmware loader documentation with the new
-get_fw_loader_from_node() and request_firmware_size() API and the new FIP
-config.
+Update documentation for Generic Firmware loader to YAML schema,
+generalize it from FS specific and add new property and example
+for FIP loader.
 
-Provide additional example and description of the new suggested order of
-operation on dynamic buffer allocation with request_firmware_size() and how
-to reach a firmware loader device.
+Also add details on the usage of 'phandlepart', 'mtdpart' and 'ubivol'
+property.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- doc/develop/driver-model/firmware_loader.rst | 95 ++++++++++++++++++--
- 1 file changed, 86 insertions(+), 9 deletions(-)
+ doc/device-tree-bindings/misc/fs_loader.txt  |  48 --------
+ doc/device-tree-bindings/misc/fw_loader.yaml | 112 +++++++++++++++++++
+ 2 files changed, 112 insertions(+), 48 deletions(-)
+ delete mode 100644 doc/device-tree-bindings/misc/fs_loader.txt
+ create mode 100644 doc/device-tree-bindings/misc/fw_loader.yaml
 
-diff --git a/doc/develop/driver-model/firmware_loader.rst b/doc/develop/driver-model/firmware_loader.rst
-index 2d11a74d5e2f..d4e8063e9d72 100644
---- a/doc/develop/driver-model/firmware_loader.rst
-+++ b/doc/develop/driver-model/firmware_loader.rst
-@@ -1,7 +1,7 @@
- .. SPDX-License-Identifier: GPL-2.0+
- .. Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
- 
--File System Firmware Loader
-+Firmware Loader
- ===========================
- 
- This is firmware loader for U-Boot framework, which has very close
-@@ -13,9 +13,17 @@ and binary) from the storage device in file system format into target location
- such as memory, then consumer driver such as FPGA driver can program FPGA image
- from the target location into FPGA.
- 
--To enable firmware loader, CONFIG_FS_LOADER need to be set at
-+FIP firmware loader can be used to load a firmware from a specific FIP entry
-+referenced by the specific UUID into target location such as memory, then
-+consumer driver such as PHY driver can load such firmware to make the PHY
-+operational.
+diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fs_loader.txt
+deleted file mode 100644
+index 542be4b25a0a..000000000000
+--- a/doc/device-tree-bindings/misc/fs_loader.txt
++++ /dev/null
+@@ -1,48 +0,0 @@
+-* File system firmware loader
+-
+-Required properties:
+---------------------
+-
+-- compatible: should contain "u-boot,fs-loader"
+-- phandlepart: which block storage device and partition the image loading from,
+-	       this property is required for mmc, usb and sata. This is unsigned
+-	       32-bit array. For example phandlepart=<&mmc_0 1>, meaning use
+-	       that MMC0 node pointer, partition 1.
+-- mdtpart: which partition of ubi the image loading from, this property is
+-	   required for ubi and mounting.
+-- ubivol: which volume of ubi the image loading from, this property is required
+-	  for ubi and mounting.
+-
+-Example of storage device and partition search set for mmc, usb, sata and
+-ubi in device tree source as shown in below:
+-
+-	Example of storage type and device partition search set for mmc, usb,
+-	sata and ubi as shown in below:
+-	Example for mmc:
+-	fs_loader0: fs-loader@0 {
+-		bootph-all;
+-		compatible = "u-boot,fs-loader";
+-		phandlepart = <&mmc_0 1>;
+-	};
+-
+-	Example for usb:
+-	fs_loader1: fs-loader@1 {
+-		bootph-all;
+-		compatible = "u-boot,fs-loader";
+-		phandlepart = <&usb0 1>;
+-	};
+-
+-	Example for sata:
+-	fs_loader2: fs-loader@2 {
+-		bootph-all;
+-		compatible = "u-boot,fs-loader";
+-		phandlepart = <&sata0 1>;
+-	};
+-
+-	Example for ubi:
+-	fs_loader3: fs-loader@3 {
+-		bootph-all;
+-		compatible = "u-boot,fs-loader";
+-		mtdpart = "UBI",
+-		ubivol = "ubi0";
+-	};
+diff --git a/doc/device-tree-bindings/misc/fw_loader.yaml b/doc/device-tree-bindings/misc/fw_loader.yaml
+new file mode 100644
+index 000000000000..9a767ff57469
+--- /dev/null
++++ b/doc/device-tree-bindings/misc/fw_loader.yaml
+@@ -0,0 +1,112 @@
++# SPDX-License-Identifier: GPL-2.0+
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/misc/fw_loader.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+To enable file system firmware loader, CONFIG_FS_LOADER need to be set at
- <board_name>_defconfig such as "CONFIG_FS_LOADER=y".
- 
-+To enable FIP firmware loader, CONFIG_FIP_LOADER need to be set at
-+<board_name>_defconfig such as "CONFIG_FIP_LOADER=y".
++title: U-Boot Generic Firmware Loader
 +
- Firmware Loader API core features
- ---------------------------------
- 
-@@ -23,11 +31,11 @@ Firmware storage device described in device tree source
- -------------------------------------------------------
- For passing data like storage device phandle and partition where the
- firmware loading from to the firmware loader driver, those data could be
--defined in fs-loader node as shown in below:
-+defined in fw-loader node as shown in below:
- 
- Example for block device::
- 
--	fs_loader0: fs-loader {
-+	fw_loader0: fs-loader {
- 		bootph-all;
- 		compatible = "u-boot,fs-loader";
- 		phandlepart = <&mmc 1>;
-@@ -40,20 +48,31 @@ device, it can be described in FDT as shown in below:
- 
- Example for ubi::
- 
--	fs_loader1: fs-loader {
-+	fw_loader1: fs-loader {
- 		bootph-all;
- 		compatible = "u-boot,fs-loader";
- 		mtdpart = "UBI",
- 		ubivol = "ubi0";
- 	};
- 
-+(FIP loader follow the same exact implementation by just using the
-+dedicated compatible "u-boo,fip-loader")
++maintainers:
++  - Christian Marangi <ansuelsmth@gmail.com>
 +
- Then, firmware-loader property can be added with any device node, which
- driver would use the firmware loader for loading.
- 
- The value of the firmware-loader property should be set with phandle
--of the fs-loader node. For example::
-+of the fw-loader node. For example::
- 
--	firmware-loader = <&fs_loader0>;
-+	firmware-loader = <&fw_loader0>;
++description: |
++  Generic firmware loader for loading images from block storage devices
++  (MMC, USB, SATA) and UBI storage.
 +
-+And firmware loader device can be reached by the use get_fw_loader_from_node API:
++  The fs-loader loads firmware images, while the fip-loader locates a
++  Firmware Image Package (FIP), optionally at a specified byte offset
++  within the selected partition.
 +
-+For example:
++properties:
++  compatible:
++    enum:
++      - u-boot,fs-loader
++      - u-boot,fip-loader
 +
-+.. code-block:: c
++  phandlepart:
++    $ref: /schemas/types.yaml#/definitions/uint32-array
++    description: |
++      Specifies the block storage device and partition from which the
++      image is loaded. Required for MMC, USB, and SATA devices.
 +
-+	get_fw_loader_from_node(dev_ofnode(dev), &fw_loader);
- 
- If there are majority of devices using the same fs-loader node, then
- firmware-loader property can be added under /chosen node instead of
-@@ -63,7 +82,7 @@ For example::
- 
- 	/{
- 		chosen {
--			firmware-loader = <&fs_loader0>;
-+			firmware-loader = <&fw_loader0>;
- 		};
- 	};
- 
-@@ -117,6 +136,44 @@ compilation is required for both driver and FDT.
- File system firmware Loader API
- -------------------------------
- 
-+.. code-block:: c
++      The first cell is a phandle to the storage device, and the second
++      cell is the partition number.
 +
-+	int get_fw_loader_from_node(ofnode node, struct udevice **dev);
++  mtdpart:
++    $ref: /schemas/types.yaml#/definitions/string
++    description: |
++      Specifies the MTD partition from which the image is loaded.
++      Required for UBI devices.
 +
-+Get firmware loader from referenced node
++  ubivol:
++    $ref: /schemas/types.yaml#/definitions/string
++    description: |
++      Specifies the UBI volume from which the image is loaded.
++      Required when loading from a UBI device.
 +
-+Parameters:
++  partoffset:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description: |
++      Byte offset within the selected partition where the FIP header
++      is located.
 +
-+* ofnode \*node: node where the "firmware-loader" phandle needs to be parsed
-+* struct udevice \**dev:  pointer where to store the firmware loader device
++required:
++  - compatible
 +
-+Returns:
-+	0 on success
-+	-ve when error
++oneOf:
++  - required:
++      - phandlepart
 +
-+Description:
-+	Parse the "firmware-loader" phandle from the passed node and
-+	probe and put the matching firmware loader device in the dev pointer.
++    properties:
++      mtdpart: false
++      ubivol: false
 +
-+.. code-block:: c
++  - required:
++      - mtdpart
++      - ubivol
 +
-+	int request_firmware_size(struct udevice *dev, const char *name)
++    properties:
++      phandlepart: false
 +
-+Get firmware size from Firmware Loader driver
++allOf:
++  - if:
++      properties:
++        compatible:
++          const: u-boot,fs-loader
++    then:
++      properties:
++        partoffset: false
 +
-+Parameters:
++additionalProperties: false
 +
-+* struct udevice \*dev: An instance of a driver
-+* const char \*name: name of firmware file
++examples:
++  - |
++    fw_loader0: fs-loader@0 {
++        bootph-all;
++        compatible = "u-boot,fs-loader";
++        phandlepart = <&mmc_0 1>;
++    };
 +
-+Returns:
-+	size of firmware
-+	-ve when error
++  - |
++    fw_loader3: fs-loader@3 {
++        bootph-all;
++        compatible = "u-boot,fs-loader";
++        mtdpart = "UBI";
++        ubivol = "ubi0";
++    };
 +
-+Description:
-+	Get the firmware size before reading it to validate how much buffer
-+	is needed for it
++  - |
++    fw_loader4: fip-loader@4 {
++        bootph-all;
++        compatible = "u-boot,fip-loader";
++        phandlepart = <&mmc0 0>;
++        partoffset = <0x100>;
++    };
 +
- .. code-block:: c
- 
- 	int request_firmware_into_buf(struct udevice *dev,
-@@ -151,4 +208,24 @@ instance:
- 		return ret;
- 
- 	request_firmware_into_buf(dev, filename, buffer_location, buffer_size,
--				 offset_ofreading);
-+				  offset_ofreading);
-+
-+Example of request_firmware_into_buf API from a "firmware-loader" defined in
-+the device node and dynamic buffer allocation:
-+
-+.. code-block:: c
-+
-+	ret = get_fw_loader_from_node(dev_ofnode(dev), &fw_loader);
-+	if (ret)
-+		return ret;
-+
-+	buffer_size = request_firmware_size(fw_loader, filename);
-+	if (buffer_size <= 0)
-+		return buffer_size < 0 ? buffer_size : -EINVAL;
-+
-+	buffer_location = calloc(buffer_size, sizeof(*buffer_location));
-+	if (!buffer_location)
-+		return -ENOMEM;
-+
-+	request_firmware_into_buf(fw_loader, filename, buffer_location, buffer_size,
-+				  offset_ofreading);
++  - |
++    fw_loader5: fip-loader@5 {
++        bootph-all;
++        compatible = "u-boot,fip-loader";
++        mtdpart = "ubi";
++        ubivol = "bl31";
++    };
 -- 
 2.55.0
 
