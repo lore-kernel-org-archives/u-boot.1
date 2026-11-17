@@ -1,145 +1,169 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA367606A338
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 16:47:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBF8B606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 16:58:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=INHpn8qU;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=DuK50ctH
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oP+5ZiM9;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Jtaz1Yx7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 810384075F;
-	Tue, 17 Nov 2026 16:47:46 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id z7qwrIXbW9_l; Tue, 17 Nov 2026 16:47:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9F54C408E4
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794934065;
-	b=Xvowf6Iccj6SKD1fl++N0nGSTVU+zdApp23+ltJeVB2pLaRHnxgf7MKwN9Mdj5kHNZCm
-	 eGH5clVS7wUkW4o+7I+2wliCMFFUlxOYaTtYPvnKvEnPcu5C5utisWCvUO/YOHwYmc40G
-	 gwcGrDh6s+IdN5udEMKKvIcMuDjk94R6A9xRHNLeed4RPZGIi+hlxS+vwPSWh5vIH+ibE
-	 kiKVsR7IJE654kICxqIKqttmPFoH5fzfXLepU2ggDkuCAq54pf4Xu3OBdZY482pBzUZuj
-	 opZaoB3rM8iF480m/YB33iDncsIosmCtHL+x+ALVLIbdfrOqkws2q3CyWxc3PF6KLXA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794934065;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ql78kZPgJ5y85EdnpmuOro+Z921I14ULlLixvuCOGQU=;
-	b=CjZAvBP7wxkC6o8WYSXrE02TtwMLfG/EqtoSOYmvP0fxALcKanVCQP/dNWVAM+v7q/x+
-	 4sxRQIbM0ayViwv14iakt/OKf/Jgp2+R7ExTQjET96HJdx9t5MFECnMM5bF+2Kx0c4RaU
-	 xHmKGx4laTy60q+w54L8jsK8kFFYHV7LTuE4fpVkhwYqM9eDDzuPD92MNrOPVpLd5UOrl
-	 8TuKWN2NRnjcw3iZHZ4baRtFtKwFBz85tPPgw7XZSPkG/k2san6jGmVDcjGCc0Z4zjXhy
-	 tLGD1p4v6Jb5Ngvkpc03bl8lgyDbGOXz7jsyW1iC8feh2nyF1RLiGB52EgYbAoRUBMg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794934065;
-	bh=ql78kZPgJ5y85EdnpmuOro+Z921I14ULlLixvuCOGQU=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=INHpn8qUkVf9qOctuLrnXNw4rX/zickxYzsG56LP9hOWI/36tK7Tx/gDDEfWvWYjE
-	 GYkPRFpZgvOmgu9g/3tLsGdUuElwHcUEgPJyEgbMHjp1tzWg5/2sEd3imn82y3IAUA
-	 4Eg81zTNUcWG9JSzwfFpRTalcua2bHr41BOVroBAEXO2WH8UqVQ6bk9CKBNLa2vTns
-	 c4J39vrPPl1HVU6b3hIAZpSNfYB6T88LxiVdh2Zevx8gg1zOe+m42ocVURYzydeijL
-	 f9B/Jr2Cnhs+ed0GOs04oYPhKJMt2Z5U3JN77jHhAYGvacxDJDceoK3wW4MUeaObos
-	 UkH710n5uSj0Q==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9F54C408E4;
-	Tue, 17 Nov 2026 16:47:45 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E620F1A6
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:47:43 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CBDEE60906
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:47:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A42E760812;
+	Tue, 17 Nov 2026 16:58:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hd0-ymhSB8RW for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 16:47:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E597260729
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::336"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=DuK50ctH
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E597260729
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:47:42 +0000 (UTC)
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-862df509d48so776054a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 08:47:42 -0800 (PST)
+ id BWsZbA3Na5w6; Tue, 17 Nov 2026 16:58:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CCE246081A
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794934731;
+	b=kP2ArGmZ1u74T6zlLJG/nSdkHzTKBYM8v+TQcAQmyU413XZf1uzOzI9KLtV8xmOd20bT
+	 3TGtVgs23I8qAD6NLmE0P+H94PmoYeEssCRTyL1xqYpC8hh4BQxlahP2Z2pH0mkgazNOV
+	 MT4pd2Mw8Y6j/zRWHQO6tT5N6yhoHfyJx/GqBzRmSHmkqRrSsrxzbrWECk81v+orlT9pS
+	 VgVM66dt+mTh2AL+chC2GV65vyvLRnCmuCnpVysXRX5JgC9oEdhM4GBuUgqJHT78F76zh
+	 Z5a4II0rXgF8un4+4GrU00MylV0lVa3ozsta08lQCyNHtao6nxaUlymGmgEFZBL4UKQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794934731;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=HJrV/BJxe7iSsVGMbhGhJGQHFOmVr2VSllCLFKTaSfg=;
+	b=nuvxx0VVWkcfknQkOzUGwBEVR8Mli74DTEPViS8PFpOivHnpLciHxj4vWli0mCo6mgX0
+	 T9D/aHbkR7iy21iBAA4ifI/ipSERqHmFzLxSvAs++mMcx5nYo8S3Yps6AyOB1y829PESu
+	 TmpBNpQoWKfjxpqj6DgLMwIi2SYgi0MFW+jxQ5cEpuZ7q92Mm3xpWIdFnZnay1I8oCVr3
+	 75+48ifgDVxZ540DEot/CmnK3td4CTYV8cRY3lFEKucuNMAhHE8J3z/E/xRbYJMK6Uq7x
+	 MJJIjWyq4NdMq7nsyg0/xSNbWIQbb2/sqD/2FdeCjwpUVI+tFZHcXdQfE9mMg7OeiHg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1794934061; x=1795538861;
+	d=lists.u-boot-project.org; s=default; t=1794934730;
+	bh=HJrV/BJxe7iSsVGMbhGhJGQHFOmVr2VSllCLFKTaSfg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=oP+5ZiM9bD9XXxxLC5ZcGxtZ+WR4Cl7fQPNpakuauoq8j4gXBMkEfUrSweewUrE/2
+	 cP+a2EWzDmA0D/j7xnxtE/gNHxnLRxCinzKkKpE/HZm4RN+X8XDetd5Atpur9myHOP
+	 161COzcPtKw0qPBI0SczVZiqWYdxI+BmiFpXta+ez5zOtDFN/doGX3frLPOBVApUlR
+	 u5h15CoEbtdpkycxqY3/j37Yee5D5dzwrbQMypUj0gRXWnCaeR1S1DjZvig/dgdDHt
+	 fZu1JjAdjH7mZAwAS5Hz0v08/bYMYhC2N8ZLiRhySaqcwzp63DAMStWPtZlhBcUpKY
+	 XKmtmNCY49O7w==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id CCE246081A;
+	Tue, 17 Nov 2026 16:58:50 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id F39591A6
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:58:49 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id DCB06811E6
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:58:49 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QfJqBPqUJntQ for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 16:58:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org ADCF581134
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::32e"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ envelope-from=bmeng.cn@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=Jtaz1Yx7
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id ADCF581134
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:58:47 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4a214c5c4c0so731395e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 08:58:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1794934725; x=1795539525;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=ql78kZPgJ5y85EdnpmuOro+Z921I14ULlLixvuCOGQU=;
- b=DuK50ctHAEMSIHDTHQgPagGJXS0yTCWbAb8BJPqozvBF4XXUJMOU6Da1w9CDTgtvCP
- AUvyaDE0GSz8nJJ1lC+Mh4hB15hE9sUBfM5trJVUwZABVxq9uYjzpBitS5Tsq+EXudkl
- wr6bjGnTzA8yHcVoDY4E3yhPh8gBLVK20p+Zc=
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=HJrV/BJxe7iSsVGMbhGhJGQHFOmVr2VSllCLFKTaSfg=;
+ b=Jtaz1Yx7hMCuoj4WPbHNn8LG0XQYKPW64w/UDQKIysqLNcdAVISd8T9FdYxlHTvbe+
+ BtOidZ5WWKjaW++WyPD7hhxtkEtK5p/a3AE6qhKVWeWdnH9cCW2XHj40M/CI9kXgnP8H
+ Q5WA6WRza6GQwAxyJFkjm8VCJX/FLMVITTSQCxhSaxPvbPv+9EBumcJinHEa2CG1A29V
+ 4vIrQOOExle8peqAbckUzlqrVuhLigW0kmJi9pdvj/scjQCzpLhNK4sGCXB3O5WBF/OO
+ vE+t/8XB6K01oaeOT0UUuSG7iGoZ1M1S50kA3kGUDv3WXqIVWkqQa7KKmYc5rOGXsEfW
+ rdnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794934061; x=1795538861;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ql78kZPgJ5y85EdnpmuOro+Z921I14ULlLixvuCOGQU=;
- b=qsWbPsauqQql1w+vRpjQQkE7AsCPq8MzLO9Lw6a8UeXYjiIkASSNIqBkdKH0j1RVlv
- QVS9rOFnLfZrHNhRp3GtvgRHDDjk6xbc9TgYKJMXu2bZJMP4704O+cL1z3BHBmvzWqaj
- fu8zVesEh2E9VkltyZbbvKQtyf/5u6OXdeO2VvLjQPgKrUHmIeKYtM9OPfT3plSZx9HR
- UfTZ0n4/QH9LUBM/+WM4+jHdFFUMmMYj+ba3rB8NbaljJ/0esi5ZXukpPSdPdglyB1Jv
- r5dtQmG2xJfmTVvWRGGvXs/ksQB+MSKEy0AYZlGDBZL7+pszE+gOGNpshkNLe428kImc
- Y2cw==
-X-Gm-Message-State: APuU4Z8VdTg1rQI4Pos9h0DK3wa6mqEGh2pdpY616kcvzIwdbIAMArth
- rytcqCzPBnf1gF/41GAFFt1rYlBelN3urrsb9TtChQAFGlYmpiuGnrmhThdEW0QAT9mJwI9rKKs
- 3WOkvaPn+Kg==
-X-Gm-Gg: AYBFou3fpwbmZnOXvyb8qSBjBhulFb79Ri1tYQthL0Wl0Y1CFjjcyxdryPLRBgZgCC7
- P4pOymKuUJylytOV/6oIs55eDgyT1XTbTA1M+pqxd1pMiW+vfWevYk1dn1qBMUIqnLJoenu9PeT
- bGrduPe5D6ml0V/E5WYu2WkpcjiTtZsc/86JbwZSVxTrHm3vxsLFYnogoO7gM7B18V3ukSDhzxp
- sT+GF4+RBAOGIxKzz4Zh4pMfxqZD+wXTlml3XcZo45w9zgtWwwF2QDjwnhy1bq7Ulqj5CeNqS2h
- bg2WzCaaPt5b56Sn99p7dLnmheusKU1Oz6g7h8Nx+Zc4HRM+CMyZ/zlSqrwGU4MXSBPiiDHiSCG
- 6+snggwVxxIyQxwq6aUnEy29F8Et5A6DVcCHO55WLQ1fwHBe07SNAKzRn0eSNdAYgugBdNADoRt
- h7QwBe4/2Ii6j+aZVJm29MhQa9iJB3WEZcxcNO0+tOn8ZqCemJDtzgDdizHGUdeH5rBBpxABWah
- QaOuur0ZrFAbWqyrmD3NOGeOsEpDN+zZY0d92yCltTjsa1xob+uaE3nInv8qKzrlFhnalHJesLD
- zdDZ7sOTvnSNUG/I4PhtIH8qLz7NrNB0UMD2s+TE0IIYDLxoCocsRVZ7Z+sJKuG3cYcVfHncDw6
- +hs7UX88mZbLQ9sleTv6VWLdUl/5DIqZP+Epbt4azkxlGLwe+sxEybvPEE1qE+ldadTBSmWwpsp
- k/iJ27+gHLxObOsBwe2/6kp9HjP9n5lAC7HQ1G2q1ajXKHl3bhOrevW85eom56VNxnBmA5tyEsW
- SeK
-X-Received: by 2002:a05:6830:3492:b0:845:8a98:3f1b with SMTP id
- 46e09a7af769-862ddd01700mr2409296a34.35.1794934056082; 
- Tue, 17 Nov 2026 08:47:36 -0800 (PST)
-Received: from bill-the-cat.tailc58245.ts.net
- (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-862a82c4625sm9701331a34.22.2026.11.17.08.47.34
- for <u-boot@lists.u-boot-project.org>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 08:47:35 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org
-Subject: [PATCH] doc/git-mailrc: Start updating
-Date: Tue, 17 Nov 2026 10:47:32 -0600
-Message-ID: <20261117164733.2806843-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20260707; t=1794934725; x=1795539525;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=HJrV/BJxe7iSsVGMbhGhJGQHFOmVr2VSllCLFKTaSfg=;
+ b=S7KY94j6lTUvz681lNWCPgPZ+904SzLrlDshfP01dSHxe+smr7vss4FMr56GZRTA1x
+ YbvVXeJc0mJP9bkZ+6D1SG7cZGC5gEALzIL1Uguh5QXyjMx2GSCwmqn7Gg/l8sjW86ef
+ hoQh8mCrkpoNrJIriVaD8qxmpOVged98nLH+w0WnZzSReNj8rUQHXJDC6bLJHDQeJKKo
+ n32xhNt79Rjz5Pmjz75NgKHgwuLdnMEEeRUixthA/Tr5JlVQW2o6gZvVkLqwem2zKnAj
+ 4GnBnLcq30Ft1xJ2dCgmn66skmYnpeNKFvV2/ZPLZt38oG4OKb+hZ5x9FKCGOJYodSfi
+ OgCQ==
+X-Forwarded-Encrypted: i=1;
+ AL+hErE7wYAYlo4KlmDdfRiGPS0qIkXtf20SXrPits+aRhiA+UB9QkENErkseHPIG7n5Lrn1efdvN+o=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/Jz8n6FDzq4dBLJJifQzEIhOILTmBW0+bfRR6pLIO1od+HbVOm
+ VdHmMqX6OnEAZBzg1F8vnDpezMyBr69XdY523aYXT5aogek7OPIQQyudEibkypChveu6THZ5qF4
+ TtrSG1M5JC2vvM4scfTOsflMGpepK89o=
+X-Gm-Gg: AYBFou245uhv6Ug/CyPosPBdzvXIV4vZl5I8pZUXZZwk1OqmtD7spp41lTfcsukuUCK
+ DF1g/HgbP5crogyUf4G0bfkM8nxVrWlQylUE0u6OR6roaUL6h7mYy7DIWzaNg/3kSSPg3fEAlrK
+ 4PIYWVOpi5xraWuXWg3rM7ScVGOPKzsA0trRqlh/M/hzbOIC1iAdY8mRZ0hJJTTiL1poGll8hO2
+ 0zK9aMI0EmZ7c9d24shKu5uqcgCT+ZykmSBFPXGlboJN5BhChCOode6LQwxsdVaG8tVW9MlYgw8
+ /P3c581Ko5MvyQ1IR9R6H/eRmJLddVHWmdodydT/wPG8kQPCPPxlCdTaYQ6H1zsKYedADNf4+Yz
+ puPITnJk7yj+4h63uiLPPAi0QOjUPdbVpRT+7GDmPVKEo1fRNP0RRI+C2FAVtqmQU1uT9yOtJn1
+ bN
+X-Received: by 2002:a05:600c:4e16:b0:4a2:729:f7ce with SMTP id
+ 5b1f17b1804b1-4bb55a47429mr296572055e9.8.1794934725010; Tue, 17 Nov 2026
+ 08:58:45 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
+ <20261113174852.GN554944@bill-the-cat>
+ <CALeDE9PvZgwiAUxdX=-tN1fgDveNOkeM__xCCJeZrK3Di0WxjA@mail.gmail.com>
+ <1b9f2a45-4ceb-48d0-afdb-b406404d98bb@baylibre.com>
+ <01408c47-2928-48e3-ba37-34b835a3b98e@cherry.de>
+ <f0352e86-58bd-4e6f-aa8f-5253a9c29a55@baylibre.com>
+ <4adb08da-1ab4-4849-9001-f0b54065b5d0@cherry.de>
+ <273552c3-9bc2-4b60-9a9d-6d6082369fe9@baylibre.com>
+ <20261117143531.GQ554944@bill-the-cat>
+ <aea66a5f-088e-4e17-8188-4a06357de7d4@baylibre.com>
+ <20261117144440.GR554944@bill-the-cat>
+In-Reply-To: <20261117144440.GR554944@bill-the-cat>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 18 Nov 2026 00:58:32 +0800
+X-Gm-Features: Aa3M54qX8LQJGKdESyxDwTZHM9sc314nOBuuwYQHOWQ8LUbNOtDhVew16xqTAEo
+Message-ID: <CAEUhbmWb5-d9PmTDZJZdAGG3egmmwHFEMTnSzQYLXwqMGOXiAw@mail.gmail.com>
+Subject: Re: [PATCH 00/10] binman: support separate binman devicetree from
+ control devicetree
+To: Tom Rini <trini@konsulko.com>
+Cc: David Lechner <dlechner@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ u-boot@lists.u-boot-project.org, Michal Simek <michal.simek@amd.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, Carlo Caione <ccaione@baylibre.com>,
+ Bin Meng <bin.meng@processmission.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,148 +173,111 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-2.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The file doc/git-mailrc can be used by git and other tools that read
-this file format, such as mutt, to make it easier to email patches by
-providing aliases. The file is also long out of date, so do a first pass
-at the moment to more closely update the current state of who maintains
-what.
+Hi Tom,
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- doc/git-mailrc | 47 ++++++++++++++++++-----------------------------
- 1 file changed, 18 insertions(+), 29 deletions(-)
+On Tue, Nov 17, 2026 at 10:53=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> On Tue, Nov 17, 2026 at 08:39:26AM -0600, David Lechner wrote:
+> > On 11/17/26 8:35 AM, Tom Rini wrote:
+> > > On Tue, Nov 17, 2026 at 08:31:00AM -0600, David Lechner wrote:
+> > >> On 11/17/26 6:52 AM, Quentin Schulz wrote:
+> > >>> Hi David,
+> > >>>
+> > >>> On 11/16/26 9:42 PM, David Lechner wrote:
+> > >>>> On 11/16/26 12:45 PM, Quentin Schulz wrote:
+> > >>>>> Hi David,
+> > >>>>>
+> > >>>>> On 11/16/26 6:17 PM, David Lechner wrote:
+> > >>>>>> On 11/14/26 3:16 AM, Peter Robinson wrote:
+> > >>>>>>> Hi David,
+> > >>>>>>>
+> > >>>>>>>       > Anyone who has worked on hardware that uses a devicetre=
+e for the
+> > >>>>>>>       > hardware description should know the mantra "the device=
+tree describes
+> > >>>>>>>       > the hardware, not the configuration"
+> > >>>>>>>
+> > >>>>>>>
+> > >>>>>>> Thank you for this, I never agreed with describing these in the=
+ DT at all.
+> > >>>>>
+> > >>>>> We probably should do some digging on the mailing list because I =
+believe this was brought up back then. I also disagree (mainly because the =
+Linux kernel will never agree to this in upstream DT, so this prevents us f=
+rom the dream of running pristine DT from upstream). I vaguely recall there=
+ are a few things that are binman-specific and available at runtime by pars=
+ing some stuff. It's very vague, because I don't remember. But I wouldn't d=
+ismiss binman use of the DT as simply being a configuration format, I belie=
+ve we use some of its things at runtime too.
+> > >>>>
+> > >>>> The two users of binman nodes at runtime that I found are lib/binm=
+an.c which
+> > >>>> is only used by x86 AFAICT and board/BuR/zynq/common/board.c (to l=
+ocate the
+> > >>>> FPGA bitstream).
+> > >>>>
+> > >>>
+> > >>> Maybe it's worth checking with the board maintainers if we can go f=
+or another mechanism so we can sunset binman nodes in U-Boot FDT entirely?
+> > >>
+> > >> That would be ideal.
+> > >>
+> > >>>
+> > >>>>>
+> > >>>>> EDIT: ah I see now reading patch 6/10 that you're aware of that. =
+But phew, is it really worth it to do this incomplete split? I fear we'll s=
+plit the ecosystem once more.
+> > >>>>
+> > >>>> Which "split" are you referring to? File format, file location, so=
+mething else?
+> > >>>>
+> > >>>
+> > >>> My understanding is that few boards will need binman in the U-Boot =
+control FDT, due to needing access to binman nodes at runtime. Most won't, =
+but the fact we cannot fully migrate means we need to support both forever,=
+ and then we increase complexity for what benefit? For the sake of "correct=
+ness"?
+> > >>
+> > >> The one ARM board should be easy enough to find a solution for. The =
+x86 stuff
+> > >> will be harder since that was all created/maintained by Simon.
+> > >
+> > > Which x86 boards are these?
+> > >
+> >
+> > This is what I found so far:
+> >
+> > x86 (through lib/binman.c):
+> > * intel_opregion.c and apollolake/fsp_s.c find the intel-vbt entry.
+> > * fsp2/fsp_init.c finds intel-fsp-s.
+> > * fsp_silicon_init.c calls binman_set_rom_offset.
+> > * acpi_nhlt.c uses binman_section_find_node and binman_entry_map.
+>
+> OK, I can see there will be less, but not no, boards using this once the
+> chromebook devices only Simon supported are dropped. The answer may
+> involve looking at how we handled the various firmware files prior to
+> binman taking over that job. But it's also probably worth at this point
+> saving discussion until it's time to start on it, and seeing if Bin Meng
+> has any input on alternatives for handling this problem.
+>
 
-diff --git a/doc/git-mailrc b/doc/git-mailrc
-index d6045875864c..f745279bfa58 100644
---- a/doc/git-mailrc
-+++ b/doc/git-mailrc
-@@ -12,11 +12,9 @@ alias u-boot uboot
- # things simple and easy to look up/coordinate.
- alias abiessmann     Andreas Bießmann <andreas@biessmann.org>
- alias abrodkin       Alexey Brodkin <alexey.brodkin@synopsys.com>
--alias afleming       Andy Fleming <afleming@gmail.com>
- alias ag             Anatolij Gustschin <ag.dev.uboot@gmail.com>
- alias agraf          Alexander Graf <agraf@csgraf.de>
- alias alexnemirovsky Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
--alias alisonwang     Alison Wang <alison.wang@nxp.com>
- alias angelo_ts      Angelo Dureghello <angelo@kernel-space.org>
- alias apritzel       Andre Przywara <andre.przywara@arm.com>
- alias bmeng          Bin Meng <bmeng.cn@gmail.com>
-@@ -29,29 +27,21 @@ alias freenix        Peng Fan <peng.fan@nxp.com>
- alias iwamatsu       Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
- alias jaehoon        Jaehoon Chung <jh80.chung@samsung.com>
- alias jagan          Jagan Teki <jagan@amarulasolutions.com>
--alias jhersh         Joe Hershberger <joe.hershberger@ni.com>
--alias kevery         Kever Yang <kever.yang@rock-chips.com>
- alias leyfoon        Ley Foon Tan <lftan.linux@gmail.com>
- alias lokeshvutla    Lokesh Vutla <lokeshvutla@ti.com>
- alias lukma          Lukasz Majewski <lukma@denx.de>
- alias macpaul        Macpaul Lin <macpaul@andestech.com>
- alias marex          Marek Vasut <marex@denx.de>
- alias mariosix       Mario Six <mario.six@gdsys.cc>
--alias masahiro       Masahiro Yamada <yamada.masahiro@socionext.com>
- alias mateusz        Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
- alias mbrugger       Matthias Brugger <mbrugger@suse.com>
- alias monstr         Michal Simek <monstr@monstr.eu>
- alias prom           Minkyu Kang <mk7.kang@samsung.com>
--alias ptomsich       Philipp Tomsich <philipp.tomsich@theobroma-systems.com>
- alias sbabic         Stefano Babic <sbabic@nabladev.com>
--alias simongoldschmidt Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
--alias sjg            Simon Glass <sjg@chromium.org>
- alias smcnutt        Scott McNutt <smcnutt@psyent.com>
- alias stroese        Stefan Roese <stefan.roese@mailbox.org>
- alias tienfong       Tien Fong Chee <tien.fong.chee@altera.com>
- alias trini          Tom Rini <trini@konsulko.com>
--alias wd             Wolfgang Denk <wd@denx.de>
--alias priyankajain   Priyanka Jain <priyanka.jain@nxp.com>
- 
- # Architecture aliases
- alias arch           arc, arm, m68k, microblaze, mips, nios2, powerpc, sandbox, superh, x86
-@@ -73,19 +63,19 @@ alias s3c            samsung
- alias s5pc           samsung
- alias samsung        uboot, prom
- alias snapdragon     uboot, mateusz
--alias socfpga        uboot, marex, dinh, simongoldschmidt, tienfong
-+alias socfpga        uboot, marex, dinh, tienfong
- alias sunxi          uboot, jagan, apritzel
--alias tegra          uboot, sjg, Tom Warren <twarren@nvidia.com>
-+alias tegra          uboot, Svyatoslav Ryhel <clamor95@gmail.com>
- alias tegra2         tegra
- alias ti             uboot, trini
--alias uniphier       uboot, masahiro
-+alias uniphier       uboot
- alias zynq           uboot, monstr
--alias rockchip       uboot, sjg, kevery, ptomsich
-+alias rockchip       uboot, Quentin Schulz <quentin.schulz@cherry.de>
- 
- alias bcm283x        uboot, mbrugger
- alias rpi            uboot, mbrugger
- 
--alias m68k           uboot, alisonwang, angelo_ts
-+alias m68k           uboot, angelo_ts
- alias coldfire       m68k
- 
- alias microblaze     uboot, monstr
-@@ -96,39 +86,38 @@ alias mips           uboot, danielschwierzeck
- alias nios           uboot, Thomas Chou <thomas@wytron.com.tw>, smcnutt
- alias nios2          nios
- 
--alias powerpc        uboot, afleming, stroese, wd, priyankajain, mariosix
-+alias powerpc        uboot, Bradley Morgan <bradley.morgan@linux.dev>
- alias ppc            powerpc
--alias mpc8xx         uboot, wd, chleroy
-+alias mpc8xx         uboot, chleroy
- alias mpc83xx        uboot, mariosix
--alias mpc85xx        uboot, afleming, priyankajain
-+alias mpc85xx        uboot
- 
--alias sandbox        sjg
-+alias sandbox        uboot
- alias sb             sandbox
- 
- alias superh         uboot, iwamatsu, marex
- alias sh             superh
- 
--alias x86            uboot, sjg, bmeng
-+alias x86            uboot, bmeng
- 
- # Subsystem aliases
--alias dm             uboot, sjg
-+alias dm             uboot
- alias cfi            uboot, stroese
- alias dfu            uboot, lukma
--alias eth            uboot, jhersh
-+alias eth            uboot, Jerome Forissier <jerome.forissier@arm.com>
- alias kerneldoc      uboot, marex
--alias fdt            uboot, sjg
-+alias fdt            uboot
- alias i2c            uboot, hs
--alias kconfig        uboot, masahiro
-+alias kconfig        uboot
- alias mmc            uboot, freenix, jaehoon
- alias nand           uboot
--alias net            uboot, jhersh
--alias phy            uboot, jhersh
-+alias net            uboot, Jerome Forissier <jerome.forissier@arm.com>
-+alias phy            uboot, Jerome Forissier <jerome.forissier@arm.com>
- alias spi            uboot, jagan
- alias spmi           uboot, mateusz
- alias ubi            uboot, hs
- alias usb            uboot, marex
- alias xhci           uboot, bmeng
- alias video          uboot, ag
--alias patman         uboot, sjg
--alias buildman       uboot, sjg
--alias pmic           uboot, jaehoon
-+alias buildman       uboot
-+alias pmic           uboot, freenix, jaehoon
--- 
-2.43.0
+From the x86 side, I'd keep the current /binman lookups for boards
+that need them and handle their migration separately from the Genio
+series.
 
+For a follow-up, I'd start by checking which supported boards still
+use the FSP-S, VBT and NHLT lookups. FSP-M already gets its location
+and size from binman symbols, so that's one option worth checking for
+FSP-S in U-Boot proper. Braswell's use of CONFIG_VBT_ADDR is also a
+useful reference for boards with a fixed VBT location.
+
+Regards,
+Bin
