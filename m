@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43223606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 12:27:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8B95606A323
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 12:27:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=j/lRw3Ra;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yoG52wcX
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=K87lqSO2;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cyzIlIhM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F3D26608B0;
-	Tue, 17 Nov 2026 12:27:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3494C407E0;
+	Tue, 17 Nov 2026 12:27:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RF7TzS8jzyOf; Tue, 17 Nov 2026 12:27:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 479C2608A6
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794918456;
-	b=GUqjK6CruodPjTsxdglUd8VjE+85AjzbvWXAbF0x/kcPRFTlgKN09xf8uN6/2IETXqag
-	 K/L1Gom3Fl/SgHVrbpIYUplNZZ14nUk09Tt862MWHtOmmzbxE7g1AsL2w1OH+YVovtllz
-	 RZxPXHCMsYvcnZPYmKfISlrE/cW8p6yx3KpUHxF7I8ZkPWfZNb5WT7VdhA6aIn/AIIO7B
-	 bvX0BgJxspih+9Lnr+ph9AssP+mgoW4nR28xdyNGfXgDEQwTYs56+h9+LuXlds2Fa/G/i
-	 +np8cIbpfAJNcH5V0uvtmqs2BxMJnU8UCdE8Mw8wixEpsw9ZZQu31uX9EuOpK62ajJg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id C5bT4fOtne77; Tue, 17 Nov 2026 12:27:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 554AA407D0
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794918458;
+	b=G2dyzy3ZIuRxPrRyuOWLpm5FcCt/bnVF4eM7tgG2pjMnAVBIr0ooW7abJd/0uAb7HmAu
+	 c6M8tJYJVX6bZlHk9uSx+fZf8o7Z33TbVr2cKfxlk5ti7ItYTaPyA1fii0ivb+s8InwK2
+	 mUFxRRFPfZuWENcUsPa4qlXUe9egL8wKewh+yutOACzAYx64Rf+GkRfAnjQnEkis0Ysbo
+	 0FPEi5qTkfyHhDXEvauoSp3v5XIUreK7KFUe0m+K+nKrAT+3walU9Ckyc5iSAFCBXFdrW
+	 fxOiziKWxyIhZPHWQLVZDedGQmY16TUIUJyoIZi2T10L4wmd41fcU+jGhpWoC8jMmEQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794918456;
+	c=relaxed/relaxed; t=1794918458;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,106 +33,106 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=/AxGcG4fWDCuE+0PNw6/3N8jrGEKSUuRgQI4WbGWtr4=;
-	b=XSc0Q/GYUqcIHmzlQyQuUduyxVwrs4TbRLMtexBZ1RQCoy5GY24qvO5i+GS3aGOgDNw0
-	 BEExppACZ9SBUGzJnLn5kFDhb1R/Z0KY+oNAp0avS6PjF3eZFfBnFD2ntZfAswg5c6CxQ
-	 e2zh96Vc09lwI9Z3vmkZ0cVHxhIDYtmS2fxx/6UIMF6h4JVXd6hP+9b3tdBcAgWmA6KOF
-	 ZWeIQQa4sfFfkBtQN/bI4dDE19uc/2k+wus8u1I8iRM1pWH6QhNShIvZzlWxuMKz2Dtv0
-	 yJPKMIxLM6Qv3J+zBoDaKYPWotRY8AmcCcjWIcVyhrdYktRfEfLynIthyTcyIES5W1A==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=JRo8IzQ/JwXsRwbZt3MEnNiwFqRRuuJNm84yXN+8mOY=;
+	b=HrROg38HPlX123AjslilhYomBeLt563sEG3AMAvIwnsDRIsCIcV0b4K9M/YLlpYSaw/U
+	 jtTdlleMFejC+IiCtoqaLJXX026ws7CgYTmJ4poMApRZIMqKWn0NpJRNMBEd25pP2mi9K
+	 0cSIujMsNZVJQHZw16h91mye7mL1zl4B5hSft+MEZQPbThc7OtO70him0okLrrwoMkqzP
+	 0BACprJdrfWXki0phhyA9GYtFC2H5lms8krX2ufis+KqHcBVMEXa3i0sLBam8EO/sQfyW
+	 3W0EIOccO4oesDBxWKs3xWGsk8yCo7vZTrUf8KXVEfVfo7Y/PTHU+LJy9jKN6B3ZC4g==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794918456;
-	bh=/AxGcG4fWDCuE+0PNw6/3N8jrGEKSUuRgQI4WbGWtr4=;
+	d=lists.u-boot-project.org; s=default; t=1794918458;
+	bh=JRo8IzQ/JwXsRwbZt3MEnNiwFqRRuuJNm84yXN+8mOY=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=j/lRw3RaNV/8o3XTFZUbSugVyJnJI51Fm0COSm6u/rFlA/SYlnvdhx/A1rXK9l5nk
-	 tUW00wCnHC0V1pAox5DLMRHqYWQ4F5Ewpz7//I70LC1dDIBW09Bj7U3xCnfgao53eE
-	 idocGMRv+LGgiNDMdVFHFLI7aFaErtXb2nDNAX4L+UT4Tprk4Wf8IDmirXzHJiq/qx
-	 58khlITSzD5rcJeZNCr5Yp4H0Hy9MU5ShW+PLztb+Ht8FFxreh4R76bVyjXm2Y1EEz
-	 k6nPmH2tljNHRvskyksXRGz3FEks1QQ7EoHiNnKk7ckgAqY/vR0fcfmxXhoYTz+e5g
-	 jAuiKrLLWTE6g==
+	b=K87lqSO2jr6F6SJBML1uMhMTTRb1Pe7hub+l9gkRFRofcytOpOY/C9S81KHdrwYGR
+	 SiPFWJKnr/UtLNkXeK2YuPRaoMRos4H3qpoDtvx3twRmY8JObHHSnQFdzCYTkJyIPb
+	 I/xbKYblTbBatgjvPbEdgaGFM3AL5nJ/tceE8Dx1t7octJG43m2WdS2xDLOokLyJfZ
+	 zmF2Lnv7eEHlsSqZK1hLSSjhvaGZeVgzJKX653yqPcM5xpHBeu2s0f55YzJIOkycjg
+	 sa9DIrc6ZJhIVYg4uaNUtVaYqN1Ui7JgNT4ZmQrM4dLvUuVZgLZaPf/i6w8iyoaGz9
+	 yHwbBlMtDrJsA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 479C2608A6;
-	Tue, 17 Nov 2026 12:27:36 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B8EE70B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 554AA407D0;
+	Tue, 17 Nov 2026 12:27:38 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7C7112FB
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 01E8B40308
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:33 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6E5B080FC6
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Xd0OAXgVdJCZ for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 12:27:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org DF0714008B
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id P1qUmxTF8aD3 for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 12:27:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7AEAD80FA9
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
+ client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=ansuelsmth@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=yoG52wcX
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DF0714008B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:31 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-498f5fa5103so2091492f8f.2
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 04:27:31 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=cyzIlIhM
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7AEAD80FA9
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 12:27:33 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4bb666304fdso6929185e9.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 04:27:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794918449; x=1795523249;
+ d=gmail.com; s=20260707; t=1794918452; x=1795523252;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=/AxGcG4fWDCuE+0PNw6/3N8jrGEKSUuRgQI4WbGWtr4=;
- b=yoG52wcXaPbsKoNWTykK69Ne29tqrQlUeqJS0N7/TsXpIkunrTqX9UmPFVfMGx8CPr
- PXnuzX7L6UHAQZMSDTmM2hRJHntG2DG/Qz51tc0qFVJA4HNfnymaCkDWm3PBrop8jJ9i
- KdXGf/tqvqxy68QvMlfG0+KMACg/mMdnE1SOyYOvIaZMjQT/ZTn/NsRXgADhfp9h6pUs
- wkLY1lbK3g6Sm5va8j+84kt8f4K3hlxYQFDWEOU50OxJMtT/vRYBub/9m7nDoeJa7IJJ
- ISr7upndXGeiZ7r1L11LTXKssyNaE2/Eaz3CJdNW7zw4bg5/A1UIYXipl7RCUabe7imf
- PysA==
+ bh=JRo8IzQ/JwXsRwbZt3MEnNiwFqRRuuJNm84yXN+8mOY=;
+ b=cyzIlIhMEGw8CdsFPmGV//ti9MV2+2pAkC1b1CFHQd6dPWSzW+jnUCwZq2ULmOtN99
+ Hvu2CrBi9jgQyBphKQ5qTY9vSlkEvr41UFmnqcpbLaYysPAKF8lvqe27LplGVubR4NLB
+ p2mDu2w53rH/ve2BEexl2jDduBsHeGwTZy8JVSrPIZc9iUTD263SB1JrejzU4IaBJUr8
+ 72PXJzKSxAnY2wdKPjR3+E83pStIRVZXHFYonmxd6+V46C7YhK2BVb6WMsXhdeNnSybm
+ rYgp0A/OkVa2Jf6/lxf8b13+aDM0C0Fd1m61/2Ct9f1zgL6z8IG4eSPDsZmLK156SFaT
+ 4fug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794918449; x=1795523249;
+ d=1e100.net; s=20260707; t=1794918452; x=1795523252;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=/AxGcG4fWDCuE+0PNw6/3N8jrGEKSUuRgQI4WbGWtr4=;
- b=VGgSItwRNwi2hPFEiVBctIVfxupLRWXwO7u3Z73v93+B5d1v7MLZCH1+mzH9w2oe2q
- QnkljiowffERhQUmb+MU4llAl4AxsEpLhakLU+LUcB1oKhGZ50027ojxzM3hqF2HxM6x
- Q1/MvNAXWdfYXC9bVej7G3TUFmCvm+d+a6LSUfWuAKdZPJiuBhl3jF9GtOd7yw8JPso7
- pPb/6HsEfshOEbRJ1kRiuBsdctw3iF1Ox5Z7rKAZcgbZCeVhP767LH14JvhmHGnNJkp1
- 39G6u+E4+YvaJspKJWuLB/RmkmQNvAEBIbGyFEW4WoT/ReLKzi77iopLoGvf5077jAXS
- oILw==
+ bh=JRo8IzQ/JwXsRwbZt3MEnNiwFqRRuuJNm84yXN+8mOY=;
+ b=vSq2TkmRwoHVfMq9k2OVLVD8raJQaEhj0qYaSLCt6Ek7TN/nGeJlNcnqS4Y8Q0mIGu
+ Ad1J013BoivHEl1Hm7sRth2t/IWaVuBHg01Rdn1uEj5v8Xxcok6Y7FtXhBbmuB4sI1o6
+ gtbk0c8BLUpi2hxfDrtozB0bmvpzD/vobW9fbcnN4rZJDRResu2exdYYZNrAPwu7HiQw
+ ebnMmHxptTwtt0he+9B9Gyl6ih7QuasHghwAiyl/5Yg6f9iGiNl9qKZrGoRrZ4SqvvHA
+ FQZmg3lVlyjH7gpMFArkrkC4jWBZc+DQ8GHSnH01T8KMMrDK4U/jY5oeXXKQxJR5TUPW
+ HKSw==
 X-Forwarded-Encrypted: i=1;
- AL+hErGsevc8KCyjVG7z0DFKCO+LWiqfB/h9EuylKGzIvFRiGazZw1h4hnvJWggXhie0k5eWns5+mug=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+ery17QArWXwfVg5qq9qXA9YfWK70P0AOiFBFPi4Gemzb4vRiO
- QuojpNlz9ZmAOxZheMO4QZlLjhQS10Xchu3YVuxoer/EwvsqDb5mdKG+N93Waw==
-X-Gm-Gg: AZFdTZdspT5g0uo8+Bo410SBddKX5RpWYKRf6vYkEhiPKToHoYP/BH3nxYeOs0NF+e5
- ztcz1nQNSiYDfEE0YEeBgSZEj+oOK6F2U8EArTMV1oQsgxjdYr69znvMY29+uB7vfP1VoTFaisR
- tG4CYuiG1JvLblBx9CsJ3u/8mfojfMa/rroSIJhlj/VtJduXth7Zz3brHzcqamr2pMe6/6nngj3
- RagRO61zEB0EGQcfGB3SVreXqvEMHrInmT2iCD9xqAoazvndNPsnPql0p8WLn37UbV7Mziry9GF
- TxA0s9wJg9uIuI5tBZFKH4/SOkulRPnApDRvLiXwena9HOXy8/dOiBpfAGKYNqmJsZIIauQAZtD
- jE42PEWVBlfPcHJsjwJ2XdeaGCGtoa9lssAX5lYmy43Ybd8LEK4FhSP0HxahFeUJNJ9dX2L7ZNI
- 99kwR9alKlNqVcbKrardDxyAWLxYjOQXCjgrdvVvkP8XgvNTBtTGRQuHlWjd0aYv/c/2ND3qL2+
- zvxBBJFcVVvjwlucTv4R3QTpRz9tWg/kuhpW03rRQnAQ5F1i+lT2Ik2POY6eGsr9REGS8te1bnK
- mlj2DS91kRE8H3UGz9ZhnU0zBEnbWNrxRENx/90ETwclZaerhwhRRj0JPYqTfdZoL6vN0lDLvhq
- CGz1sYOBj5mw8BOnhpenvDDt1N7B4xGVYVw==
-X-Received: by 2002:a05:6000:4812:b0:49b:f45e:655f with SMTP id
- ffacd0b85a97d-49c72ba71e7mr27098259f8f.45.1794918449398; 
- Tue, 17 Nov 2026 04:27:29 -0800 (PST)
+ AL+hErFkADtCvmU4tSwmXgwIq4XnQGIWSl50lshPmCfrm/oIBnxZQoCS6rE7DdAqPR/CWrENYfj6GlA=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z950jbWNnP5i0kT0DdJafqe1Vs/JV6XcVI316L4UJkqF3xc5NPU
+ Er1xLqaw/ksMMHvXb9ZfVe8EI3l3meay7IOkBHx1TpRzVGBXHchCSah5
+X-Gm-Gg: AYBFou18WDSev/1D1SCYoOQ+zILuM+nLFDdgIQuVm6bYLr75CVeu7ILKHO6g9vArEs2
+ cnlZdWulJOUHaOup1zX1D+TASZ9TfZ4ArxUh9G6dwQJCIn/mN7BEJrIHWHbSOslEtn8ygfRUilp
+ xCLzwxHrWQ8i2fXFogdZ77PPRbI/GFzgwwQUnIuCYtAzMxVncFsqDyD0NJyB3DiTcl4+BzUWL+X
+ JAU6JFIX7JC3cTbdrzyRAfPSiB+/Dvsb8Vhi/6H1fUCWNVvD+MHcCoGiEeSPz6B76HDTIfok+6K
+ kS8nJPFVfbjm4qFAMlVBQV8slwkhDocgwb+nFcqPwYS4CIgX8pWXfjZJmYV5H0XS/YaD9XJn7n/
+ J+FQvzpewOFGgzsiAK4ozV0J7tR+a5pVmdtYk8Wxp/Taly68O6wGN+5itT0w9FneTUQqJlfaaDx
+ Adqxt4Rz+/mr0MQ4axx3k9BVSkf0fktfKIh5YZlVZC4iW46epTRvcE1/PoY1uhoLonxXQe41slN
+ ceavZmKiPqcORl1WtV4VyRpMLajNcMckbSDIvw5YrQ7GKeUVm+nnxfWnVMak1j3GEIClys43AG3
+ My8I57lCVk/YllAH+KHYE+/rixmmzUUTRKvPaY6AOOKKtnPZPFJxnY2jbvLpYWPFourh4ZLwbZ2
+ gS42R1/olwZMXnKg5ZyJ7LlahXNuNFlEbJw==
+X-Received: by 2002:a05:600c:4584:b0:4bb:5e8c:13bc with SMTP id
+ 5b1f17b1804b1-4bb7837a4b9mr53285865e9.7.1794918451827; 
+ Tue, 17 Nov 2026 04:27:31 -0800 (PST)
 Received: from Ansuel-XPS24.localdomain (93-34-92-103.ip49.fastwebnet.it.
  [93.34.92.103]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-4a33c344a58sm5243151f8f.34.2026.11.17.04.27.27
+ ffacd0b85a97d-4a33c344a58sm5243151f8f.34.2026.11.17.04.27.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 04:27:28 -0800 (PST)
+ Tue, 17 Nov 2026 04:27:31 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -158,10 +158,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Neha Malcom Francis <n-francis@ti.com>,
  Jerome Forissier <jerome.forissier@arm.com>,
  James Hilliard <james.hilliard1@gmail.com>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v12 4/9] misc: fs_loader: validate requested offset on reading
- file
-Date: Tue, 17 Nov 2026 13:27:09 +0100
-Message-ID: <20261117122715.7983-5-ansuelsmth@gmail.com>
+Subject: [PATCH v12 5/9] misc: fw_loader: implement request_firmware_size() OP
+Date: Tue, 17 Nov 2026 13:27:10 +0100
+Message-ID: <20261117122715.7983-6-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261117122715.7983-1-ansuelsmth@gmail.com>
 References: <20261117122715.7983-1-ansuelsmth@gmail.com>
@@ -185,139 +184,45 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Make sure we are not requesting an offset for the requesting file beyond
-the size of the file.
+It might be useful to get the firmware size before reading it to allocate
+the correct size. This is needed for case where the firmware size change
+across different firmware version and is not always the same. In such case
+the only way to handle this scenario is to allocate a big-enough buffer to
+read the firmware.
 
-If it's such the case, log an error and return -EINVAL.
+To better handle this, introduce the request_firmware_size() OP to get the
+firmware size before reading it. This way proper buffer can be allocated
+and dynamic firmware size can be better supported.
 
-Code is reworked and split in various subfunction to permit re-preparing
-the filesystem after a fs_close (called by fs_size) and reduce patch delta
-of upcoming support for reading ONLY the size of the requested firmware.
-
-Dedicated mount function are created to mount relevant filesystem only once
-and follow the same if-else logic pattern used by the prepare functions.
+FS loader is updated to handle the new .get_size() handler.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/misc/fw_loader/fs_loader.c | 98 ++++++++++++++++++++++++------
- 1 file changed, 78 insertions(+), 20 deletions(-)
+ drivers/misc/fw_loader/fs_loader.c        | 28 +++++++++++++++++++++++
+ drivers/misc/fw_loader/fw_loader-uclass.c | 19 +++++++++++++++
+ drivers/misc/fw_loader/internal.h         |  7 ++++++
+ include/fw_loader.h                       |  9 ++++++++
+ 4 files changed, 63 insertions(+)
 
 diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
-index b1eb0311dd2b..01b0a221c8a7 100644
+index 01b0a221c8a7..00f72ae24233 100644
 --- a/drivers/misc/fw_loader/fs_loader.c
 +++ b/drivers/misc/fw_loader/fs_loader.c
-@@ -49,6 +49,16 @@ static int mount_ubifs(char *mtdpart, char *ubivol)
- }
- #endif
- 
-+static int mount_fs_dev(struct fw_loader_plat *plat)
-+{
-+	if (plat->phandlepart.phandle)
-+		return 0;
-+	else if (plat->mtdpart && plat->ubivol)
-+		return mount_ubifs(plat->mtdpart, plat->ubivol);
-+	else
-+		return 0;
-+}
-+
- static int select_fs_dev(struct fw_loader_plat *plat)
- {
- 	int ret;
-@@ -63,10 +73,6 @@ static int select_fs_dev(struct fw_loader_plat *plat)
- 			ret = fs_set_blk_dev_with_part(desc,
- 				plat->phandlepart.partition);
- 	} else if (plat->mtdpart && plat->ubivol) {
--		ret = mount_ubifs(plat->mtdpart, plat->ubivol);
--		if (ret)
--			return ret;
--
- 		ret = fs_set_blk_dev("ubi", NULL, FS_TYPE_UBIFS);
- 	} else {
- 		debug("Error: unsupported storage device.\n");
-@@ -79,18 +85,26 @@ static int select_fs_dev(struct fw_loader_plat *plat)
+@@ -191,8 +191,36 @@ out:
  	return ret;
  }
  
--/**
-- * fw_get_filesystem_firmware - load firmware into an allocated buffer.
-- * @dev: An instance of a driver.
-- *
-- * Return: Size of total read, negative value when error.
-- */
--static int fw_get_filesystem_firmware(struct udevice *dev)
-+static int fw_get_filesystem_mount(struct udevice *dev)
-+{
-+	struct fw_loader_plat *plat = dev_get_uclass_plat(dev);
-+	struct fw_loader_env_info info = { };
-+
-+	generic_fw_loader_env_info(&info);
-+
-+	if (info.storage_interface && info.dev_part)
-+		return 0;
-+	else if (info.storage_interface && info.ubi_mtdpart &&
-+		 info.ubi_volume)
-+		return mount_ubifs(info.ubi_mtdpart, info.ubi_volume);
-+	else
-+		return mount_fs_dev(plat);
-+}
-+
-+static int fw_get_filesystem_prepare(struct udevice *dev)
- {
--	struct firmware *upriv = dev_get_uclass_priv(dev);
- 	struct fw_loader_plat *plat = dev_get_uclass_plat(dev);
- 	struct fw_loader_env_info info = { };
--	loff_t actread = 0;
- 	int ret;
- 
- 	generic_fw_loader_env_info(&info);
-@@ -100,10 +114,6 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 				     info.dev_part, FS_TYPE_ANY);
- 	} else if (info.storage_interface && info.ubi_mtdpart &&
- 		   info.ubi_volume) {
--		ret = mount_ubifs(info.ubi_mtdpart, info.ubi_volume);
--		if (ret)
--			return ret;
--
- 		if (!strcmp("ubi", info.storage_interface))
- 			ret = fs_set_blk_dev(info.storage_interface, NULL,
- 					     FS_TYPE_UBIFS);
-@@ -113,6 +123,56 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 		ret = select_fs_dev(plat);
- 	}
- 
-+	return ret;
-+}
-+
-+static void fw_get_filesystem_release(struct udevice *dev)
-+{
-+#ifdef CONFIG_CMD_UBIFS
-+	umount_ubifs();
-+#endif
-+}
-+
-+static int __fw_get_filesystem_firmware_size(struct udevice *dev,
-+					     const char *name, loff_t *size)
-+{
-+	int ret;
-+
-+	ret = fw_get_filesystem_prepare(dev);
-+	if (ret)
-+		return ret;
-+
-+	return fs_size(name, size);
-+}
-+
 +/**
-+ * fw_get_filesystem_firmware - load firmware into an allocated buffer.
++ * fw_get_filesystem_firmware_size - get firmware size.
 + * @dev: An instance of a driver.
 + *
-+ * Return: Size of total read, negative value when error.
++ * Return: Size of firmware, negative value when error.
 + */
-+static int fw_get_filesystem_firmware(struct udevice *dev)
++static int fw_get_filesystem_firmware_size(struct udevice *dev)
 +{
 +	struct firmware *upriv = dev_get_uclass_priv(dev);
-+	loff_t size, actread = 0;
++	loff_t size;
 +	int ret;
 +
 +	ret = fw_get_filesystem_mount(dev);
@@ -328,28 +233,84 @@ index b1eb0311dd2b..01b0a221c8a7 100644
 +	if (ret)
 +		goto out;
 +
-+	if (upriv->offset > size) {
-+		log_err("Offset %#x beyond file size %#llx\n",
-+			upriv->offset, size);
-+		ret = -EINVAL;
-+		goto out;
-+	}
++	ret = size;
 +
-+	ret = fw_get_filesystem_prepare(dev);
- 	if (ret)
- 		goto out;
- 
-@@ -127,9 +187,7 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 	}
- 
- out:
--#ifdef CONFIG_CMD_UBIFS
--	umount_ubifs();
--#endif
++out:
 +	fw_get_filesystem_release(dev);
- 	return ret;
- }
++	return ret;
++}
++
+ static const struct fw_loader_ops fs_loader_ops = {
+ 	.get_firmware = fw_get_filesystem_firmware,
++	.get_size = fw_get_filesystem_firmware_size,
+ };
  
+ static const struct udevice_id fs_loader_ids[] = {
+diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
+index 7f19d6c4af4c..4e67f2559fa2 100644
+--- a/drivers/misc/fw_loader/fw_loader-uclass.c
++++ b/drivers/misc/fw_loader/fw_loader-uclass.c
+@@ -210,3 +210,22 @@ int request_firmware_into_buf(struct udevice *dev,
+ 
+ 	return ops->get_firmware(dev);
+ }
++
++int request_firmware_size(struct udevice *dev, const char *name)
++{
++	const struct fw_loader_ops *ops;
++	int ret;
++
++	if (!dev)
++		return -EINVAL;
++
++	ret = _request_firmware_prepare(dev, name, NULL, 0, 0);
++	if (ret < 0) /* error */
++		return ret;
++
++	ops = fw_loader_get_ops(dev);
++	if (!ops->get_size)
++		return -EOPNOTSUPP;
++
++	return ops->get_size(dev);
++}
+diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
+index 9ff43e872554..1abe7504a81e 100644
+--- a/drivers/misc/fw_loader/internal.h
++++ b/drivers/misc/fw_loader/internal.h
+@@ -32,6 +32,13 @@ struct fw_loader_ops {
+ 	 * @dev:	Firmware Loader device to read firmware from
+ 	 */
+ 	int (*get_firmware)(struct udevice *dev);
++
++	/**
++	 * get_size() - get firmware size from Firmware Loader driver
++	 *
++	 * @dev:	Firmware Loader device to get firmware size from
++	 */
++	int (*get_size)(struct udevice *dev);
+ };
+ 
+ #define fw_loader_get_ops(dev)	((const struct fw_loader_ops *)(dev)->driver->ops)
+diff --git a/include/fw_loader.h b/include/fw_loader.h
+index 99c47380a172..01f242dcbefd 100644
+--- a/include/fw_loader.h
++++ b/include/fw_loader.h
+@@ -38,6 +38,15 @@ int request_firmware_into_buf(struct udevice *dev,
+ 			      const char *name,
+ 			      void *buf, size_t size, u32 offset);
+ 
++/**
++ * request_firmware_size - Get firmware size.
++ * @dev: An instance of a driver.
++ * @name: Name of firmware file.
++ *
++ * Return: Size of firmware, negative value when error.
++ */
++int request_firmware_size(struct udevice *dev, const char *name);
++
+ /**
+  * request_firmware_into_buf_via_script() -
+  * Load firmware using a U-Boot script and copy to buffer
 -- 
 2.55.0
 
