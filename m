@@ -1,127 +1,204 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 575BE60A2608
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 13:07:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE4CD606A32C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 13:09:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0Rn9x/61;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=2gQFyIk7;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=T1OcXzzl
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uX28IZKL;
+	dkim=pass (2048-bit key, unprotected) header.d=phytec.de header.i=@phytec.de header.a=rsa-sha256 header.s=selector2 header.b=eEitO/qD
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ADBA981119;
-	Tue, 17 Nov 2026 13:07:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9E3FB40596;
+	Tue, 17 Nov 2026 13:09:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V7R38dMo9uRm; Tue, 17 Nov 2026 13:07:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C6660810D3
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794920854;
-	b=SInv4jPSZyj1/CtvES7zWkiy5s24pBYuDmB5nDEePOYw7polkPAmE6mAqm76ESM319S+
-	 jgQsGNb/m7Xq7Adkl56f30ly0l9QvIL8EfXantbVB4vabSBasr4yalQvKItyMKaIuJ43P
-	 ohWmXkKyXGZlIRs0WGgHxgPG7jsXfrbsUefmcfsarwlPeQiHBsADnnlSlMhWupftkto+R
-	 CUlCdZaKVA7bi7/Qr+rOBrzw3arANuSzbvHIwwhCqCkKw6ryiAFcmbLhtCumG5yqFxPOD
-	 MElIWVMv0O/qRaT5VM3w+NTN4PTTJlcfvhS8lnfjiu+5KfGwtLCVRhngvN3tQIWalvw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0AB3b9Xud8m0; Tue, 17 Nov 2026 13:09:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C85F2407FE
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794920944;
+	b=gXDtLXkrYTCoe2K5n/u5jTqEUurLWm+zZKHzfMJZBZ7eIlZBRH9DxSuPBUBKSJcSVdC7
+	 wcb5JJxOTY8NIEHHwUTu9Y8ZwYHXnwbdhS9MjUMDBrDCFejTWYB/WIBfidja/oSUwmhJ7
+	 wnFk7TTjXOm0LvpfWAZ/mkDlYFQOWsPYpC4ZXq5sp/Ahno1PcHHnxLdaOtu+/97Qjvrjx
+	 bUSCNt+3LOIx1dhImWbOFSKb6XiFjFftExi4tcyCgmHzsh7fEok/5zGbLHs5WVztu4dkK
+	 zY0N0YY14a14Fc4oTaiSRCq6r61E6rP9veWAV1fLrPB41VdOTyV+oBK3KpEvcIKCt2g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794920854;
+	c=relaxed/relaxed; t=1794920944;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Date:
-	 DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=PC3/gbXKnaBKVLWA7nkhikC7c/ncv1cKJRsnywocWgM=;
-	b=YaYBfsyKfnWykEBLqWqqRkb3ax2sOpNBFcMgUnzuY27NJ9xxL87ycSebc6P3sOW7HRJH
-	 ZKcrvgUU247i3ABqq8I52sQOonNsZ/dvlDvG2mNIXYqD34By7nzVBk2eZaTpSNbbrIwAR
-	 pUORJ3Y97RFbMg7Xd2gWVHgnMwSVF085S50rhERmUASwpjJHUBJe3yT+itT9MRq6MYpNq
-	 PWZqHF4BQhLxnwKHSyZ86gHUWKuc+jszMMhGIaLEe6SZThtEy/nr5e4KewQro/1Z+tIJu
-	 4xUolC3VA8v29TOi/gBMlWj1nJNoyC6YtcdnOVJv24/MLh2dmYMIm93wzJK9Q1gSeFA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:From:Content-Language:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:
+	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=P+bJ2rOUdR+uNtSjCPsP2qhDCJnelUYQS8Xs7xcEbKc=;
+	b=QVGMZOTcLvCmKbiqJOYuTlC5pKVjRBCsk/jT17ZLX36TB03GHjwSVdbLjoSKRgOdkx5o
+	 rxQ4oSKgwWlhk6Ipa4Op6fLQ0ybvkNMM1JdX/w3f0NIiz7vnKmNeCtPtPqGDpIEcK5ECL
+	 df0oC8APbYqHflPtUxdiyiOKnL5odfuQ8TCh2Gl/ISuo5RndhnXDasD4tPdJMFlEhEFo/
+	 hONnHBNXJtMd4vQ1qboYZZEFnqd26PVmi7cSuyspFFUTqVQJJWCLeIDCBeHP1c+q+s+PK
+	 WMTCntmoLcElixsiGEqmrzgoUXJjJ2g+NjZKCqiBtRYeASc9VOlC0OOtSAwV3XxTDzQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794920853;
-	bh=PC3/gbXKnaBKVLWA7nkhikC7c/ncv1cKJRsnywocWgM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794920943;
+	bh=P+bJ2rOUdR+uNtSjCPsP2qhDCJnelUYQS8Xs7xcEbKc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0Rn9x/61Avp07S9hGkis5ttD4uroYhWpReAq1PK0j1B2j1t5gfIlDUA8+CRqONZRc
-	 6rCxGngdMm4BkEzfN1LG3ucBub+YyCj6BBVd97Q2kYEsoRimnz8g7qj/2Wf63Sev3z
-	 bO0f6O/gj5I+JFHRHrwzymg77vWyPchG45oi6/ba/nx0GIf1pRxmS98MiocnH4VIa9
-	 sevsC+hv7qXSG5ZlWrr1c6ki3T4HPwqcgI7BAtub/8zNvc+jxNP8CGs0OtK8dU8s0M
-	 Ej8/M9EtgHq3yeWTJVjG5INWnV87OwGuYuts39y19tLX3670qDZbb729oQc578lENS
-	 XB0UIlEcOGpKw==
+	b=uX28IZKLdoBPgcvssC+81euDKHS4All+eVxj4nUK99ZfK0rEJGhRCPp1bYzFqhAmL
+	 fr+Eo15jlbwIA+dzFaVV0PH8YaPX31yJfShzmSKXLp3wqtOgMb6uQk+E8ADXokf0A3
+	 gXlIfYtdliYPAG9wnrztIjr7TkLioHnpUmLA/NPC5vEugyOZhSLGsxDHVQbUdEtTmS
+	 DbNXuMjaknlDaexHu0CbI/bA0pPD6fufInYPPsDijnNP8a/+mp4xDu/J/xmF0bn+oy
+	 m6dkJ0MetVFtZe34CBeyiJvAUDs2FtJOIx5JtpNlFCPYuUhGMwwaEM7NiwPcv3wamB
+	 vlxddmBDEYs2Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C6660810D3;
-	Tue, 17 Nov 2026 13:07:33 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 47D421A6
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 13:07:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C85F2407FE;
+	Tue, 17 Nov 2026 13:09:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5BB3B105
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 13:09:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2D98860872
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 13:07:32 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4D21580CA9
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 13:09:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7U_2W8WaZbLJ for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 13:07:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0CA2360863
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=193.142.43.55
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=193.142.43.55;
- helo=galois.linutronix.de; envelope-from=gregor.herburger@linutronix.de;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=linutronix.de
- header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=2gQFyIk7; 
- dkim=pass header.d=linutronix.de header.i=@linutronix.de
- header.a=ed25519-sha256 header.s=2020e header.b=T1OcXzzl
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0CA2360863
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 13:07:30 +0000 (UTC)
-Date: Tue, 17 Nov 2026 14:07:27 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1794920848;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PC3/gbXKnaBKVLWA7nkhikC7c/ncv1cKJRsnywocWgM=;
- b=2gQFyIk7AICJGxYrv84AlChADYXox552RbtndaTmP58KhCqRoLPAHlJiN16qgZ5bwJ+onc
- PPBsEEiQUGVyzC0lrrP8qKL0tdh4dBLJjfnqt7CMgl7OkYXIuPmNpyn0y5cuCev2OxyTZV
- KPhkeGGfo0go/7BPQIDohybnACp4eN7eIgptpmFLqT+lggGaUNLDkoHnIzU2hLtkf/YjhP
- hJL8L3mmTKKBO37kfOoLZmE9R+dHK+KsWUo9H+V+bXd1sGuD+Io+wwu9xXuiDtqzgSimKx
- 1XJ98+sunYsBnbzMRHusWkA0IPRtwNGRrQj93WEv6dgQ1aWYFSeEyBNU2zvWeQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1794920848;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PC3/gbXKnaBKVLWA7nkhikC7c/ncv1cKJRsnywocWgM=;
- b=T1OcXzzlkViuyD/5evPXlZnPqnavJLn+HSOLScpjHZsefqB8tqO5muLqPzjMmEaRw8YnNT
- lvVFbmLuz1MwplCA==
-From: Gregor Herburger <gregor.herburger@linutronix.de>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.u-boot-project.org, Matthias Brugger <mbrugger@suse.com>, 
- Tom Rini <trini@konsulko.com>,
- Filip =?utf-8?Q?Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH RESEND v4 0/2] rpi: copy /chosen/bootloader node with
- properties and set boot_partition
-Message-ID: <3urp4kepg2inxxx5n6fgqfbs7nzlndgojr55idsjgalojpar6t@an4npiosmgdp>
-References: <20261117-tryboot2-v4-0-d59fa66de789@linutronix.de>
- <CALeDE9Pay-8Szx_kxFBx5de08BNOZrxvELtthjECij7UvuUr-w@mail.gmail.com>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X_jLNlvBfWQE for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 13:09:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 08BF580C5D
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c200::5"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::5;
+ helo=duzpr83cu001.outbound.protection.outlook.com;
+ envelope-from=w.egorov@phytec.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=phytec.de header.i=@phytec.de header.a=rsa-sha256
+ header.s=selector2 header.b=eEitO/qD
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 08BF580C5D
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 13:08:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=P+bJ2rOUdR+uNtSjCPsP2qhDCJnelUYQS8Xs7xcEbKc=;
+ b=eEitO/qDRnE4CD1IDMFB4xxKNqFwSLyJ60ut5kOm3mc0xEVx2AiLCt8dR91/QjkcRXuqJYRo5L9d6g1BIjhPTdyeiQCBRhSQru9hcPTY5lP7ObX2vp36FpYCF7mj+SzDmNjH/HpFbdolv1Wgru9aIWwxTE5z8O9i1SStbKMEGiYQQbYg9gm245hzEMGQCGjnDLR5H3p/AzPH2Y/AvvFy5EkTXgQ7YFJVV1xRxagjj4XzpigTR21u1jyRZxWJweNr9mliKahxbSHt4bqsATQZZdLINGmSVQi3DZqwQrkD2690vLo0CQVz2dw+ci8/rf5prQOnOrLvEC9dTeegK/HKWQ==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by DB9P195MB1825.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:39c::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.13; Tue, 17 Nov
+ 2026 13:08:56 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::295f:9a59:b66a:621a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::295f:9a59:b66a:621a%5]) with mapi id 15.21.0615.013; Tue, 17 Nov 2026
+ 13:08:56 +0000
+Message-ID: <6be0723f-a662-4d84-bdf6-ed142fa4f43b@phytec.de>
+Date: Tue, 17 Nov 2026 15:08:17 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] fdt_support: Add /chosen/bootsource fixup
+To: Quentin Schulz <quentin.schulz@cherry.de>, trini@konsulko.com,
+ ilias.apalodimas@linaro.org, sjg@chromium.org
+Cc: kever.yang@rock-chips.com, anshuld@ti.com, aristo.chen@canonical.com,
+ alchark@flipper.net, u-boot@lists.u-boot-project.org,
+ upstream@lists.phytec.de
+References: <20261014143328.3135006-1-w.egorov@phytec.de>
+ <20261014143328.3135006-2-w.egorov@phytec.de>
+ <cba6b6a3-2e61-4bf0-af99-6429f9da3350@cherry.de>
+From: Wadim Egorov <w.egorov@phytec.de>
+Content-Language: en-US
+In-Reply-To: <cba6b6a3-2e61-4bf0-af99-6429f9da3350@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: ZR1PEPF000077EB.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:918::449) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CALeDE9Pay-8Szx_kxFBx5de08BNOZrxvELtthjECij7UvuUr-w@mail.gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|DB9P195MB1825:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5b71aa26-b5d5-4393-50e4-08df44abef92
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|23010399003|376014|1800799024|10070799003|18002099003|22082099003|261009223027099003|11063799006|56012099006|10067099003|4143699003|261102123227099003|261026121527099003|261022115727099003|261021121427099003;
+X-Microsoft-Antispam-Message-Info: UkTDaUJF7amtUzQS4TMVLsJAqaWX6lJdsw8lbfYZ+F1KfX/zzqhPdti1IFeQJXWfG8OTcfepxvbvsNxe2jVJLWts0lY+J2G6ME5FU1W4RnhwQvXY3Jb4GJfl4Vz6Q74pdZiZ/7Qhq6IzsY+nQxUhzjSQ+/VQPJpaNX+/fPuoiFnxU7MJMLIFl7LLYuRTTB/PksMx75l9Eg32aJUj5dkfBXlGXBNv2/hpKaA39CLOzaAV8k9rbtpfYwzK7e9rtGSFhc2+hiRq+MhO/8KrtQjpvIHk0A4cx9Y5MXLGTJi8r6WLTcHcMUxrJDz5oHNeyeopTVWAYhu0gNdhxYCpDlogJPAItTZia9oTXn5aKTzPjE3NVUdY5Lx60TJAyvWGEcp6YUYIYYTCRoQtDZA6Nw04P0V5JioJwwXED8gAbh83d6wHOfmmcDYZxk+Vqspb0QZAvywUMHkf3ucIYIZrIzJGgmunxgJsdiaKmec5QwHBlMsWaBtvEtyowrup8oNiZRZ9vAxrqTiBzv8gewWeRLIKWrfsAO/ko0xS2i2frcn7k1YeDqdvoEDzYH5tVyS5H66pqKAmXVmMkPjCGmbodTHimOj/sjAwJ0TfiWDh2o34u/4+NI808r1BIJfOzUmy+CD7Z8cPixmbwa4oaAhRfOHSJ+2yb5/uwHjfMPrWbRFcW88=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(10070799003)(18002099003)(22082099003)(261009223027099003)(11063799006)(56012099006)(10067099003)(4143699003)(261102123227099003)(261026121527099003)(261022115727099003)(261021121427099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?KzA3Q3E2MGJ0R0ZkTDF5NFNLdmNJMWNFSnNuc1JLSllKaGJNYmZoOGw0VXVU?=
+ =?utf-8?B?dkU3VWNSUVc2M0NQQ3RIRlcwU0J5bXRCOWh6YytzSUVKUFRSYVJGZUJzNFFK?=
+ =?utf-8?B?WlBKK2N6ZDQ0MzFpS1ozZDU4VFE4cW44K28vbUxNdHdPNXExQXI1ZGE4TDBu?=
+ =?utf-8?B?akRNSDhnZDZnZ2tvUjR1Wkw1RVlPekRIaHc2YkRRKy9oSEtXeS9CZy9yN3Jr?=
+ =?utf-8?B?OHFPdHIrb2pKbzRFY2xyTjhQS1Z6K1Y2dzRzWlNHQjdERFJKYjZ0VklLeFFJ?=
+ =?utf-8?B?TjFwTE9UdktMOEpUV2Z1Ti9ZWnBRM2JSa1FPRjVsRHB2MFN3M2JFcVdlNE9H?=
+ =?utf-8?B?SldWbFNGdC83bDdTeVpMY1ZqTDN6WXdwMkc4Vi85QW1ISmdNc1Y3WC8zMlZ3?=
+ =?utf-8?B?M3JXODAzdEczMTZJMm51enlZWlQrdTYyODlONEJVdVUrUmRrSS9CR2hNdFFT?=
+ =?utf-8?B?ZG9mTmg1TVVnZVBKdFBnSlROSVgyd3BmQ3YyQ3VJc1ArRU43ZDU1ajA1b1VP?=
+ =?utf-8?B?RUtVSy92QW9XZ2o1Q1R1UkZtZjF0eE9GV01Sb1RhSGc2WURzdjlLZk5jdWdH?=
+ =?utf-8?B?cklVUy9YOUVUOU1uQUhiekRSanFoSHRkcVp3d0szenEwTU1zem9jdmxiS25Q?=
+ =?utf-8?B?TC9UY3Z3WFJZNHRSeHNCanJPaTM2aHdqOWlGOEZxZ0RyWU1vWjFiWlVGSFZp?=
+ =?utf-8?B?NS9RN2h6RmxVSWZFbE8zbnE3ZzIrVU14TERIUjhHR1RqenFUNWNGa2ZRemxF?=
+ =?utf-8?B?RVBNQTZHQ0ErMzFhYXNPSXo0MjFZazVURHVkQmdYY2pTblh6UWR3ZXVPWmJQ?=
+ =?utf-8?B?eGFSZDI3N0dWNWpHMmtGY2dBTGFvY1lUMklUU1Z3bVVDLzY2S3REZW1zWVVo?=
+ =?utf-8?B?S3JMZm5VL2p2N1JRcDQ1WFVMN3hQMXdnYSt6djRESDdJaGNsLzdBUjdwSFpK?=
+ =?utf-8?B?OW9uMlUyQUx0d0hKUWNvdTA5ekh6Vm05TDY1ZlM1U3pWM2UwRWk0Y1NKSW11?=
+ =?utf-8?B?dFYxbVdWVXlLOVdNT0RRRDR2NFVvR3NkWERhMkhvK1VhVWpkUHdMT0F1UWlY?=
+ =?utf-8?B?dVJIMVNJMm11dWhGMG9CYmUvenNmZ1lCOHlSaGl6OXl2dUN0Z2RENkZ3MzFu?=
+ =?utf-8?B?Mnl6T2gwK1VkbkxOOUx4YU5QWEZtdkM2ZTlJT3g3eGdJK0hqZ1FyUVN5cGZF?=
+ =?utf-8?B?UGUxelBZTllDc0pRK1VIMGdyN2lHNUUyS2R2Z1FWTUJ1Ui94S2V5TjJudXp2?=
+ =?utf-8?B?VkFEV1Vwek9TRjZVTUhKeWIrY0NMY3JIeTBjaWg2akh2aDA1R0hjVGlLa0Vp?=
+ =?utf-8?B?aEhQRmplR3JnaXNhUnRZa01jVTBqb3JxalFQRzFPQ0hNQmsxNHJIM1V3WTd5?=
+ =?utf-8?B?aFBMY0lxKzJtY2pvUHpNVUtDcnZ1a2tpMXFmN2pYeE1EcXh3YWhucGZSdmta?=
+ =?utf-8?B?U2JMK1pNRDR2ZFhxL3FDSFlqQUJZUGVRcnlLc3dsbkFYWGg4Q084UThEZVJD?=
+ =?utf-8?B?ay9XVElUUHgwMlJETVhxVFVPbGY1NStsUkw3RjdqVFVBMkhJYVlVeExmV0t3?=
+ =?utf-8?B?NkhFVWV3ckErLzlSWWpRbWtXYnBLYXBveDNCZzFscEp0T3ltc2cvcktTNHdw?=
+ =?utf-8?B?MlFtbDFBYXdaWW1DWUNKYlNQa3RhZi94K3FHaVcvM2tCbGRSMFZEUkwxZG1S?=
+ =?utf-8?B?M1FSTWVmUXkvbStXelFYSmdkUFQ4Mm83RG8yaURySVpsdlZpa1pKWjlmSU1Y?=
+ =?utf-8?B?UjRYamUwVCtpZTJZaWcrQ1UySjdSTXJpbU1ZaTEvL1p5REUwRE1uVlY4R3dR?=
+ =?utf-8?B?K25iOGVncU5Bdlp6YUhSSDdENC9UcGJvWkRFWkdBM1F2b2JaREVrUjFCRWUx?=
+ =?utf-8?B?cWtDZVZVcHZQYnRoY095T0ZWUVkrTzRJOFdUZDZsQWRIMmhsbUY5Vjk2Sytl?=
+ =?utf-8?B?MWRSaXQ2Nk1mRUxhYWpWVTBhSVVPV3J3UHJDcWxHSXp1L04zdnNSTkFLaUlj?=
+ =?utf-8?B?NXI0Zm1lc1lrbW5jN1ZkbXJjTDNSdmpLOWZzOWo1S2grVWYxQWtNdVppV01C?=
+ =?utf-8?B?VzhQd1lGQnVxNDUzcGhoaFk4TnBqemxrTDU5aFV2YTFOTW5UakhRb0F6c2Nu?=
+ =?utf-8?B?SzJKRkRpOHBWUVA4MnpEdWNvdWVNWU0vSm1uYTNRc2pQbE5nZzNQVUZ3WWVq?=
+ =?utf-8?B?N3RielozcmhQTTlBNFRiRk5wRlJTeWdYbTIwL3dMaHppelRGUkJlNFQzZ3Bq?=
+ =?utf-8?B?RWxMQ05YZ1laT3dJdXFsQ0V1YnE1SFBXOW1YWUduc1BvWHUzbGtHZW12SSs5?=
+ =?utf-8?B?UnVYOFJVYWRDVHpIcm1FaHFtL1JUeHVtRmxKb3FMZVhRTlhnanlJQ1lwOFRp?=
+ =?utf-8?Q?2iBYXH3uP1u7Q2Wg2HWE54D9i3w78d3f3CN9JVUw+gf/0?=
+X-MS-Exchange-AntiSpam-MessageData-1: ot8hSzDbKXEYPw==
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b71aa26-b5d5-4393-50e4-08df44abef92
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2026 13:08:56.0930 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NhCrTc5+7orv+MKOtNiyChWNqGdAqTZBJRRYgzLgUyx02O1BHs+NEE6YOaxKYliXC4f4pyVS+LrW5ZKeWb0ZAg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB1825
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -131,35 +208,89 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Peter,
-On Tue, Nov 17, 2026 at 12:57:43PM +0000, Peter Robinson wrote:
-> Gregor,
+
+
+On 11/9/26 6:35 PM, Quentin Schulz wrote:
+> Hi Wadim,
 > 
-> I have your series in patchwork, doing multiple "resends" doesn't put it
-> any higher in my review and testing queue. I am sorry, it's on my list, I
-> am in the process of getting to it but unless there's any changes needed
-> this doesn't make any difference.
-Sorry for the noise. This iteration of this series is around since August so I
-thought resending it would be appropriate. As I know now that it is in your
-queue I will not send any updates unless changes are needed.
+> On 10/14/26 4:33 PM, Wadim Egorov wrote:
+>> Set /chosen/bootsource to the node of the device the BootROM booted
+>> from. Platforms provide the path via bootsource_get_ofpath(). By
+>> default we pass on what a previous boot stage has set in the control
+>> device tree. The property is only set if the device tree has a node
+>> at that path.
+>>
+>> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+>> ---
+>>   boot/fdt_support.c    | 42 ++++++++++++++++++++++++++++++++++++++++++
+>>   include/fdt_support.h | 26 ++++++++++++++++++++++++++
+>>   2 files changed, 68 insertions(+)
+>>
+>> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+>> index 2941df55996..0d04d6f7e9a 100644
+>> --- a/boot/fdt_support.c
+>> +++ b/boot/fdt_support.c
+>> @@ -334,6 +334,46 @@ __weak const char *board_fdt_chosen_bootargs(const struct fdt_property *fdt_ba)
+>>       return env_get("bootargs");
+>>   }
+>>   +/*
+>> + * By default pass on what a previous boot stage recorded in the control
+>> + * device tree of this stage.
+>> + */
+>> +__weak const char *bootsource_get_ofpath(void)
+>> +{
+>> +    if (CONFIG_IS_ENABLED(OF_REAL))
+>> +        return ofnode_read_chosen_string("bootsource");
+>> +
+>> +    return NULL;
+>> +}
+>> +
+>> +int fdt_fixup_bootsource(void *fdt)
+>> +{
+>> +    const char *path;
+>> +    int chosen, err;
+>> +
+>> +    path = bootsource_get_ofpath();
+>> +    if (!path)
+>> +        return 0;
+>> +
+>> +    /* Only record a path this tree has a node at, so it can be resolved */
+>> +    if (fdt_path_offset(fdt, path) < 0) {
+>> +        debug("%s: no node %s, not setting bootsource\n",
+>> +              __func__, path);
+>> +        return 0;
+>> +    }
+>> +
+> 
+> I'm wondering whether that's a good idea. SPL's DTB is a very stripped down version of proper's, so I could imagine setups in which you boot e.g. from USB via the BootROM but not have USB enabled in SPL and thus it's missing from the DTB.
 
-Best regards
--- 
-Gregor Herburger
-Linutronix GmbH | Bahnhofstrasse 3 | D-88690 Uhldingen-M�hlhofen
-Phone: +49 7556 25 999 35; Fax.: +49 7556 25 999 99
+Good point, I am dropping it in v3.
 
-Hinweise zum Datenschutz finden Sie hier (Informations on data privacy 
-can be found here): https://linutronix.de/legal/data-protection.php
+> 
+>> +    chosen = fdt_find_or_add_subnode(fdt, 0, "chosen");
+>> +    if (chosen < 0)
+>> +        return chosen;
+>> +
+>> +    err = fdt_setprop_string(fdt, chosen, "bootsource", path);
+>> +    if (err < 0)
+>> +        printf("WARNING: could not set bootsource %s.\n",
+>> +               fdt_strerror(err));
+> 
+> suggestion: switch to log_warning
 
-Linutronix GmbH | Firmensitz (Registered Office): Uhldingen-M�hlhofen | 
-Registergericht (Registration Court): Amtsgericht Freiburg i.Br., HRB700 
-806 | Gesch�ftsf�hrer (Managing Directors): Dr. Wilfried Wessner, 
-Katharina Kopp, Alexander Gieringer
+Will do in v3
+
+> 
+> but i guess this matches what's currently in fdt_kaslrseed.
+> 
+> Cheers,
+> Quentin
+
