@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E4A1606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 11:37:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9DC4606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 11:37:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zjSSxI9/;
-	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=PPMvyOr8
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=cW+ivPmr;
+	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=h1kvJYWJ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 283C0810C1;
-	Tue, 17 Nov 2026 11:37:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B27046088F;
+	Tue, 17 Nov 2026 11:37:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oupvwhyri0qS; Tue, 17 Nov 2026 11:37:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4BDD2810BC
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794915462;
-	b=kyuXDFOlioYybR+/tM4PcZ0tuzWY9oZV2xlpIK8rDKeS04gQbLjWgmqEK/dxDTJFG0yT
-	 MDQHgWntP+8+CtE214Q70Wj5D7UAV7yCd/vkcGPffR42s2F3+VpJGFKvR2CpaoXx58OtX
-	 2cMQPrIrYsmrL2/xtTPs3YpoXh7zZTWAaj1cgaLqokbxDYmcxW0tNVd5D5BE2yvRJxzFi
-	 BGllYfu7L6+96//AWNVmpV/bMXaiDCJKyKKNh4NgNbHOtjY7bCcRLPwkxPAGROIqfvYWC
-	 FkybylXnqyxS4Yy0gugTrF3Q1iaf44CuTKnCarxXyMx1F56hZe5q+4226qh6M/KByoA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IV5DVZw9MPoU; Tue, 17 Nov 2026 11:37:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D8FBF60887
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794915464;
+	b=jgscqbzf9Jccd6mnWzHKBpxsB5BnDV7PpW7eC4G2sB9bqpi2qBtfyhegFf+bGojkBvZq
+	 P85F9doETBHK84W/DUmIPfQ9YNdPMQsIh6/JXLlJK9EZ+PLEU0m0p3rqOWqwca49zKZFO
+	 2AIjKv5mV64pbaAiwkh6Quw8rkB2QQJ0r+AsvDTMjI34smk68eLUvBr3BxL1yLWbhngLB
+	 B1QWIt11XhMsWWSNIb69SONO1gd8CIjJxqcOhmo2tq//buuJVrLlDRyPtFsLU02Yz2Cim
+	 ezx9Z7RH3DJic5jzAukhjIBta9l5jtpCpHQYvURfHK+Qr4UfSZBMbhYa+fp0h2MZckA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794915462;
+	c=relaxed/relaxed; t=1794915464;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,82 +32,80 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Infomaniak-Routing:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=sMOJuBSX0HUQD6XF/r6F2OJDXqY/8zSWMaFGvk3289M=;
-	b=iksSM6Il5j+nXIg3XuRY36OWAT2X2pTxkJyCl/YRYu863sYnTTpbwJmaZ1CcGeHURaE8
-	 RvX8DcRAeKd9w7WfwuAU0qtIvEtAiGP5gOGciP4Fvh0Yn7QEE21lKnX/gM/T1HSgBw/Wy
-	 rczlm+otpW9fOklvO9OakWf392C7sZSjne4t+WCVY1gPggvAM+4klKUIvrRZ6iIeGp6+P
-	 cwISyB7iWQlJ4BympZm1fNCVlm+GsPHjompyX6DsEkGWxLcu7LKldMcMdetBQ0O/qlcSH
-	 MLihpRQ7/FBrPUMYX9KqQ2tzrkt7hpELFMHkhAJu5kHepSaDvo2+FApbZMDF6jeiJDA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=0leil.net;
-	dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=PPMvyOr8;
+	bh=ZCru7Zxm6epqUCNwFINnIky2gXSejYW/XSPC3+l9jJI=;
+	b=DRL86HMng/2waIsqXENkZvWGnhWlqGVNPuOtRfJjhqkhB4SxbSf3rwTSDAljXmrLEz6B
+	 YxujsNetZfQoBIl9hag9c9lTHIGuizWsp5H/1FMjmlAZ26wGpzhGyY4V3Tqi1lLEakDhB
+	 5BGSwR2NEp5r8s9ZpFbQQKbFGKrguwvNoWJjmIKWvcnQ+Pd7SUd5JGGg/SOTO6KIVbZyu
+	 QtzSR8Ej7F33mD/1vMzC/SefKyLvAQDLqg9ZU8/AdaKO0VqS2Tt2eZ1gVreCQG6EOy6Xn
+	 IZHBqY7Fn/fdSK8Qd4pl+jz0Tk0YK9sWzPQWdUws5fP+YaE+vxxeQJ+vXg/fXkThSGQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794915462;
-	bh=sMOJuBSX0HUQD6XF/r6F2OJDXqY/8zSWMaFGvk3289M=;
+	d=lists.u-boot-project.org; s=default; t=1794915464;
+	bh=ZCru7Zxm6epqUCNwFINnIky2gXSejYW/XSPC3+l9jJI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zjSSxI9/tfmqetxwnXLjEqaXzeg5EffYOKERoz+T816Q4mM5QRPz9Q23qZ3b0eVL5
-	 nJLhvD9LnMNjxOPnBjqXmplPz2Z6BBaIodfOIU7Vf7e0dcAVeUOscsbjBStqIpLyc+
-	 QtC5fk6vu5q8SimwDixmRswVhChFD3M9dlLlDa5F9jRKYjq9Rx6vz8OYt37MuS/mJZ
-	 EaI0yupQLqrn1RGqdzzPu+rqL814YsmdqSL/o9Avdk4o4xJWBLaUxP/a7mP0djuMo8
-	 nMJERjkxiuJBA1QlST6NSuOXQwbyk2qmQy7UNZe9A1GaFiMjz8qzgrViKkmF64mvwe
-	 E/O3r8CfgucuQ==
+	b=cW+ivPmr7QY7T6JMKfAwaksq3ateNdbvxCbUzG7ImOz7JboMz1S2/0kxIf8BbJtfZ
+	 mNf5AY1mnh1yW6oELWg2qcTlKmPaYz5O0AXj0nEOV1Naad8tOcZhckdmQtST9CAW5G
+	 GnLaM+KNUIyz6tKZZqqQjNHmt2C0VT8VTlueKXE0SYDgtWNQ64gLlkFq1+YqYGOqb7
+	 o3iiib8E7Ic+Q4HAELapQRQV7bMW9y1SOuipn1YItt6Sn3BQH/fTUG8msbHMX1x72G
+	 414Y+5fGETPL6AXYBuu48HktDfhuIy/AlwJ4A7UBlcF/3afudc65mpj/oszNSi2RtK
+	 VL7R2ukGTbH1g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4BDD2810BC;
-	Tue, 17 Nov 2026 11:37:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D8FBF60887;
+	Tue, 17 Nov 2026 11:37:43 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3DE34977
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:35 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 2DF4C13C
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3B11F810A1
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:35 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 13FFC8109F
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 49x6R7izHACJ for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 11:37:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1FD018109F
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=45.157.188.8
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.8;
- helo=smtp-bc08.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
+ id toGzTQohjTCx for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 11:37:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 38C8A81027
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=185.125.25.12
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.25.12;
+ helo=smtp-190c.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=PPMvyOr8
-Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
- [45.157.188.8])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1FD018109F
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:33 +0000 (UTC)
+ header.a=rsa-sha256 header.s=20231125 header.b=h1kvJYWJ
+Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
+ [185.125.25.12])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 38C8A81027
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 11:37:34 +0000 (UTC)
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jTN4q0Y92zwK;
- Tue, 17 Nov 2026 12:37:31 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jTN4r5NBWz18Z;
+ Tue, 17 Nov 2026 12:37:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1794915450;
- bh=sMOJuBSX0HUQD6XF/r6F2OJDXqY/8zSWMaFGvk3289M=;
+ s=20231125; t=1794915452;
+ bh=ZCru7Zxm6epqUCNwFINnIky2gXSejYW/XSPC3+l9jJI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=PPMvyOr8q1DL9+bIrdAnALNugrU9Q9YqQYUGjNcIl4+Yg/WqvyZf6WD+UvE2abq+Y
- g5APaOnBoHxem77Xq9toHBA3vWNMWS4HDTOlid/zgPC4SChvlpzWvBqApcrbTYB2Jx
- R5zu5aMxxeHK2dATZ7uzUdUZklE9K2fH3hyF2NWSVHgjHp3C2n2RES7NY5+SctWJNf
- dB5tZu2Hp4lDT4UJAjDk4L9NbxhsmlgUYOFXPsfulsN2sGDx0BZSHi7prFouPFW6ts
- Vl7xICkIQqBCCZvwpgyj5s/InRbmC9GAC1LgEKrivBmOLWkdko7LEZvOyOaXmFEqzV
- F0Cc1w+1IF+NQ==
+ b=h1kvJYWJOhFFXIj9wiDU2ezHEL5y73UDk5unnTNzhWLiGBBbof3xkhhV+HROyGYwl
+ x/OC1qa7NKaXbx0DyKFXtNUefag2c3Qd1uorp50+A/b4AVr0TBDu9LkjtsM83+SO6V
+ W6ruiZ6IqeyrDSptTLHzfxBN/8Seh1hKZ2yi8HyJoBWgHILWnDaVVasqCQtlTfYBZP
+ DVsl0TiqLT2tHELzYDe6X1kKizNO4Z/AWr5vnDmSg+CrCVbNYeQXt3J+vrbCY68yeg
+ zuUzzKsIGzhckquIdI9zI1AMiR5ZxPwC9tzhOubFhgCQKE50kqbJIABx5O0tARV/m2
+ K23XaeqyBcAPQ==
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jTN4n4yNlz7PY; Tue, 17 Nov 2026 12:37:29 +0100 (CET)
+ id 4jTN4q5nVZz98f; Tue, 17 Nov 2026 12:37:31 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 17 Nov 2026 12:37:15 +0100
-Subject: [PATCH next 6/8] clk: rockchip: rk3576: improve PLL_CON() user
+Date: Tue, 17 Nov 2026 12:37:17 +0100
+Subject: [PATCH next 8/8] clk: rockchip: rv1126: improve PLL_CON() user
  friendliness
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261117-rk-clk-better-con-names-v1-6-25521d4e37c3@cherry.de>
+Message-Id: <20261117-rk-clk-better-con-names-v1-8-25521d4e37c3@cherry.de>
 References: <20261117-rk-clk-better-con-names-v1-0-25521d4e37c3@cherry.de>
 In-Reply-To: <20261117-rk-clk-better-con-names-v1-0-25521d4e37c3@cherry.de>
 To: u-boot@lists.u-boot-project.org
@@ -137,9 +135,9 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-There's no PLL_CON88/96/97/104/105/112, PHP_PLL_CON128/129 or LPLL_CON16
-in the TRM so one needs to do an additional lookup the header file to
-know what exactly this refers to.
+There's no PMU_MODE, PLL_CON8/16/24 or PMU_PLL_CON0 in the TRM so one
+needs to do an additional lookup the header file to know what exactly
+this refers to.
 
 Use new macros that reflect the names used in the TRM.
 
@@ -147,91 +145,57 @@ No intended change in behavior.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/include/asm/arch-rockchip/cru_rk3576.h | 10 +++++++---
- drivers/clk/rockchip/clk_rk3576.c               | 20 ++++++++++----------
- 2 files changed, 17 insertions(+), 13 deletions(-)
+ arch/arm/include/asm/arch-rockchip/cru_rv1126.h |  9 ++++++---
+ drivers/clk/rockchip/clk_rv1126.c               | 12 ++++++------
+ 2 files changed, 12 insertions(+), 9 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3576.h b/arch/arm/include/asm/arch-rockchip/cru_rk3576.h
-index 6adb532a37b4..8af39102ea79 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3576.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3576.h
-@@ -108,7 +108,11 @@ struct pll_rate_table {
- #define RK3576_LITCORE_GRF_BASE		0x2600E000
- #define RK3576_CCI_GRF_BASE		0x26010000
- 
--#define RK3576_PLL_CON(x)		((x) * 0x4)
-+#define RK3576_BPLL_CON(x)		(0x0000 + (x) * 0x4)
-+#define RK3576_VPLL_CON(x)		(0x0160 + (x) * 0x4)
-+#define RK3576_AUPLL_CON(x)		(0x0180 + (x) * 0x4)
-+#define RK3576_CPLL_CON(x)		(0x01a0 + (x) * 0x4)
-+#define RK3576_GPLL_CON(x)		(0x01c0 + (x) * 0x4)
- #define RK3576_MODE_CON0		0x280
- #define RK3576_BPLL_MODE_CON0		(RK3576_BIGCORE_CRU_BASE + 0x280)
- #define RK3576_LPLL_MODE_CON0		(RK3576_LITCORE_CRU_BASE + 0x280)
-@@ -126,7 +130,7 @@ struct pll_rate_table {
- #define RK3576_SDMMC_CON0		0xC30
- #define RK3576_SDMMC_CON1		0xC34
- 
--#define RK3576_PHP_PLL_CON(x)		((x) * 0x4 + RK3576_PHP_CRU_BASE)
-+#define RK3576_PHP_PPLL_CON(x)		((x) * 0x4 + RK3576_PHP_CRU_BASE + 0x200)
- #define RK3576_PHP_CLKSEL_CON(x)	((x) * 0x4 + RK3576_PHP_CRU_BASE + 0x300)
- #define RK3576_PHP_CLKGATE_CON(x)	((x) * 0x4 + RK3576_PHP_CRU_BASE + 0x800)
- #define RK3576_PHP_SOFTRST_CON(x)	((x) * 0x4 + RK3576_PHP_CRU_BASE + 0xa00)
-@@ -135,7 +139,7 @@ struct pll_rate_table {
- #define RK3576_PMU_CLKGATE_CON(x)	((x) * 0x4 + RK3576_PMU_CRU_BASE + 0x800)
- #define RK3576_PMU_SOFTRST_CON(x)	((x) * 0x4 + RK3576_PMU_CRU_BASE + 0xa00)
- 
--#define RK3576_LPLL_CON(x)		((x) * 0x4 + RK3576_CCI_CRU_BASE)
-+#define RK3576_CCI_LPLL_CON(x)		((x) * 0x4 + RK3576_CCI_CRU_BASE + 0x040)
- #define RK3576_CCI_CLKSEL_CON(x)	((x) * 0x4 + RK3576_CCI_CRU_BASE + 0x300)
- #define RK3576_CCI_CLKGATE_CON(x)	((x) * 0x4 + RK3576_CCI_CRU_BASE + 0x800)
- #define RK3576_CCI_SOFTRST_CON(x)	((x) * 0x4 + RK3576_CCI_CRU_BASE + 0xa00)
-diff --git a/drivers/clk/rockchip/clk_rk3576.c b/drivers/clk/rockchip/clk_rk3576.c
-index 8fd44138a453..03f5bfb61679 100644
---- a/drivers/clk/rockchip/clk_rk3576.c
-+++ b/drivers/clk/rockchip/clk_rk3576.c
-@@ -43,19 +43,19 @@ static struct rockchip_pll_rate_table rk3576_24m_pll_rates[] = {
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rv1126.h b/arch/arm/include/asm/arch-rockchip/cru_rv1126.h
+index 20e580a8eb3d..9390c71fce15 100644
+--- a/arch/arm/include/asm/arch-rockchip/cru_rv1126.h
++++ b/arch/arm/include/asm/arch-rockchip/cru_rv1126.h
+@@ -149,9 +149,12 @@ struct cpu_rate_table {
+ 	unsigned int pclk_div;
  };
  
- static struct rockchip_pll_clock rk3576_pll_clks[] = {
--	[BPLL] = PLL(pll_rk3588, PLL_BPLL, RK3576_PLL_CON(0),
-+	[BPLL] = PLL(pll_rk3588, PLL_BPLL, RK3576_BPLL_CON(0),
- 		     RK3576_BPLL_MODE_CON0, 0, 15, 0, rk3576_24m_pll_rates),
--	[LPLL] = PLL(pll_rk3588, PLL_LPLL, RK3576_LPLL_CON(16),
-+	[LPLL] = PLL(pll_rk3588, PLL_LPLL, RK3576_CCI_LPLL_CON(0),
- 		     RK3576_LPLL_MODE_CON0, 0, 15, 0, rk3576_24m_pll_rates),
--	[VPLL] = PLL(pll_rk3588, PLL_VPLL, RK3576_PLL_CON(88),
-+	[VPLL] = PLL(pll_rk3588, PLL_VPLL, RK3576_VPLL_CON(0),
- 		     RK3576_MODE_CON0, 4, 15, 0, rk3576_24m_pll_rates),
--	[AUPLL] = PLL(pll_rk3588, PLL_AUPLL, RK3576_PLL_CON(96),
-+	[AUPLL] = PLL(pll_rk3588, PLL_AUPLL, RK3576_AUPLL_CON(0),
- 		      RK3576_MODE_CON0, 6, 15, 0, rk3576_24m_pll_rates),
--	[CPLL] = PLL(pll_rk3588, PLL_CPLL, RK3576_PLL_CON(104),
-+	[CPLL] = PLL(pll_rk3588, PLL_CPLL, RK3576_CPLL_CON(0),
- 		     RK3576_MODE_CON0, 8, 15, 0, rk3576_24m_pll_rates),
--	[GPLL] = PLL(pll_rk3588, PLL_GPLL, RK3576_PLL_CON(112),
-+	[GPLL] = PLL(pll_rk3588, PLL_GPLL, RK3576_GPLL_CON(0),
- 		     RK3576_MODE_CON0, 2, 15, 0, rk3576_24m_pll_rates),
--	[PPLL] = PLL(pll_rk3588, PLL_PPLL, RK3576_PHP_PLL_CON(128),
-+	[PPLL] = PLL(pll_rk3588, PLL_PPLL, RK3576_PHP_PPLL_CON(0),
- 		     RK3576_MODE_CON0, 10, 15, ROCKCHIP_PLL_FIXED_MODE,
- 		     rk3576_24m_pll_rates),
+-#define RV1126_PMU_MODE			0x0
+-#define RV1126_PMU_PLL_CON(x)		((x) * 0x4 + 0x10)
+-#define RV1126_PLL_CON(x)		((x) * 0x4)
++#define RV1126_PMU_MODE_CON		0x0
++#define RV1126_PMU_GPLL_CON(x)		((x) * 0x4 + 0x10)
++#define RV1126_APLL_CON(x)		((x) * 0x4 + 0x00)
++#define RV1126_DPLL_CON(x)		((x) * 0x4 + 0x20)
++#define RV1126_CPLL_CON(x)		((x) * 0x4 + 0x40)
++#define RV1126_HPLL_CON(x)		((x) * 0x4 + 0x60)
+ #define RV1126_MODE_CON			0x90
+ 
+ enum {
+diff --git a/drivers/clk/rockchip/clk_rv1126.c b/drivers/clk/rockchip/clk_rv1126.c
+index 018232dcb027..ac5791aaf050 100644
+--- a/drivers/clk/rockchip/clk_rv1126.c
++++ b/drivers/clk/rockchip/clk_rv1126.c
+@@ -55,16 +55,16 @@ static struct rockchip_pll_rate_table rv1126_pll_rates[] = {
  };
-@@ -2454,11 +2454,11 @@ static int rk3576_clk_probe(struct udevice *dev)
- 	       RK3576_SCRU_BASE + RK3576_SCRU_MODE_CON0);
- 	/* fix ppll\aupll\cpll */
- 	writel(BITS_WITH_WMASK(2, 0x7U, 6),
--	       RK3576_CRU_BASE + RK3576_PHP_PLL_CON(129));
-+	       RK3576_CRU_BASE + RK3576_PHP_PPLL_CON(1));
- 	writel(BITS_WITH_WMASK(2, 0x7U, 6),
--	       RK3576_CRU_BASE + RK3576_PLL_CON(97));
-+	       RK3576_CRU_BASE + RK3576_AUPLL_CON(1));
- 	writel(BITS_WITH_WMASK(2, 0x7U, 6),
--	       RK3576_CRU_BASE + RK3576_PLL_CON(105));
-+	       RK3576_CRU_BASE + RK3576_CPLL_CON(1));
- 	writel(BITS_WITH_WMASK(1, 0x3U, 6),
- 	       RK3576_CRU_BASE + RK3576_MODE_CON0);
- 	writel(BITS_WITH_WMASK(1, 0x3U, 8),
+ 
+ static struct rockchip_pll_clock rv1126_pll_clks[] = {
+-	[APLL] = PLL(pll_rk3328, PLL_APLL, RV1126_PLL_CON(0),
++	[APLL] = PLL(pll_rk3328, PLL_APLL, RV1126_APLL_CON(0),
+ 		     RV1126_MODE_CON, 0, 10, 0, rv1126_pll_rates),
+-	[DPLL] = PLL(pll_rk3328, PLL_DPLL, RV1126_PLL_CON(8),
++	[DPLL] = PLL(pll_rk3328, PLL_DPLL, RV1126_DPLL_CON(0),
+ 		     RV1126_MODE_CON, 2, 10, 0, NULL),
+-	[CPLL] = PLL(pll_rk3328, PLL_CPLL, RV1126_PLL_CON(16),
++	[CPLL] = PLL(pll_rk3328, PLL_CPLL, RV1126_CPLL_CON(0),
+ 		     RV1126_MODE_CON, 4, 10, 0, rv1126_pll_rates),
+-	[HPLL] = PLL(pll_rk3328, PLL_HPLL, RV1126_PLL_CON(24),
++	[HPLL] = PLL(pll_rk3328, PLL_HPLL, RV1126_HPLL_CON(0),
+ 		     RV1126_MODE_CON, 6, 10, 0, rv1126_pll_rates),
+-	[GPLL] = PLL(pll_rk3328, PLL_GPLL, RV1126_PMU_PLL_CON(0),
+-		     RV1126_PMU_MODE, 0, 10, 0, rv1126_pll_rates),
++	[GPLL] = PLL(pll_rk3328, PLL_GPLL, RV1126_PMU_GPLL_CON(0),
++		     RV1126_PMU_MODE_CON, 0, 10, 0, rv1126_pll_rates),
+ };
+ 
+ static ulong rv1126_gpll_set_rate(struct rv1126_clk_priv *priv,
 
 -- 
 2.56.1
