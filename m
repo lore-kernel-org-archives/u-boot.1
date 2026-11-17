@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC359606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 01:25:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7285F606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 01:25:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vmar/7c4;
-	dkim=pass (2048-bit key, unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.a=rsa-sha256 header.s=selector1 header.b=AZxnaPAN
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bWFu1Bwg;
+	dkim=pass (2048-bit key, unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.a=rsa-sha256 header.s=selector1 header.b=EEhlbe7w
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7358C40856;
-	Wed, 18 Nov 2026 01:25:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 34A0B6086D;
+	Wed, 18 Nov 2026 01:25:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id q0M1rI9KxZY7; Wed, 18 Nov 2026 01:25:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6EA244084A
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794965155;
-	b=QBRYbPjGMFdW3CMyxF7yfM7XiT6D1imEF78OZaI4i0NgStE938kKz5Freoyhge20Jc5B
-	 84t5ABPEmSbcjaQGcz5LLyh6/EhcfsVw6zhyI4nb6c0tOH74Rjjs67eMPxe4AIMiemkQ3
-	 LcG4fl9BeJroPqLgCFQkma9eXCzjn/NhGt2QsVlDkZMJSabmhW+/XkSHensY9tadXod9Z
-	 7CPYEY9pAYKsAccxnamedNsahi8O62cmkpDX2angl8PfneWKz41Zo3DmU6K9hD2YQlg+J
-	 Rr2XzpkQp49gw24Bv89W66zLt+Bp25LK3enbcTkET0hgs3ILVdymGkhZZh80Vpfmu1w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LKSVT8NHMVhm; Wed, 18 Nov 2026 01:25:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1FCCB60860
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794965157;
+	b=lnF6ea2QhCJ3skHZchuewX1IIfQFYGmLlECW298CLGsNEU3tT4dS+FniGbsnZ1czLyoc
+	 OmWR9Cvn7PZsUYG4S/Kacmi8WjepoHaL7jiun5+uZl6qdIhYRFZk2AiW808jsbrLnPET3
+	 z9SxBlT7Pr9eXs+YokPY9d5i/cOPZCJmZlSEJh9kdswAnMVOSlTKJxK8G6r1GdQZ30SPr
+	 4RIUO/5jlbPKkFiXjFz1+VT8vJZ9hn7AGl03/nLL4O6p4TSF2RLO2GnqdVJOi8cNAj2jg
+	 8OJ0riredRX8/dAq2FCFw5zyjNX8bxiInGwY8bJHvA45239kEBBJHPgVI4jlFPnuryA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794965155;
+	c=relaxed/relaxed; t=1794965157;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -46,73 +46,73 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=NlxIjJT4+MP21+gD7BvtcjYlMI4vX2iR/EApR4VC+3A=;
-	b=Ns8w1dJepC4x5LMmnEUCMzK30/rAy6Mr7Nu3B2hgn6uwCQ+Ej/fD+DpTR3nlnn1uImcJ
-	 O9UzlkSmgL/6LBHSnSn7tcG5XNKjDYtpNhmvZ7QiYvi6Kt804bFW3x+95i+6hC0TSpgkH
-	 WAJCyMImZAkz0dA9yapRBasBpB1imTIosdEB7Xu19/hftAfvSEncwaqBRVH/jqezpqOw6
-	 TSBQ6woB8NGSk/lVkGSgNvRTcSbeCUTSEfp6s2Esc+9teYvnQ2WgSWPHko+xuzq9aCe9G
-	 TIeprtsYxkHQUl7wcbI/2P3fJZYquSUtWZzmFVTdkxr2Au6Cp1RlUn5eti3JHF4Vxrw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=Iv6jjx5kzrqEq7mZigzoPvANsrKwrdXiURFUKhT21cc=;
+	b=bmGaIepnZw+vZvOhdvo+MrcrKKRq+MHsvfjJX/a06gs1HVxea502CkdUKRFIsL1RuOKJ
+	 Vw367ByozsNIoPaE5HSmhAHxs56OkketZWX8HrFQq/mwRyM8bh83c6f8hpyIGS/4MZXVx
+	 ZD5aMFP02wHL3Sl0zXfa2bGv1ErM0eKY2G9lgdn9U5Y2HN/JdkDhOYgCJHfg6gu5IdVK8
+	 GMc2fQjYJYiLkUfoFlU/pn3GVeeBN6xwLlzWEe7K1KCilUzl/d7pJzOHUWrDHPAUgxxxT
+	 yTF3lDCQhCyxsdB0BXUXDiBhj8Yn4uk/Tt6Ztx9p0tD/tO3rcsrHJJDsEM2p7CM4yzQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794965155;
-	bh=NlxIjJT4+MP21+gD7BvtcjYlMI4vX2iR/EApR4VC+3A=;
+	d=lists.u-boot-project.org; s=default; t=1794965157;
+	bh=Iv6jjx5kzrqEq7mZigzoPvANsrKwrdXiURFUKhT21cc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vmar/7c42Nu6NBUfht5qJWi67SqEK4CLyoFhZlbDBSS9mtrax/MUZDA44Pq1H+Z6G
-	 1TYDmRNDNnu+Y28ATDpVnnX5zpgLy1TuAOmTaHFc2hmfWQuPa6qQcfC9p1aLZ0N9Ba
-	 qlfLFbyYUDOgdoGkFsx976SYQdJva67Xq6sEsZD28oES7hdLphnBiTg7ZyiE/MAqNx
-	 c9BxLCU6itD4AVGPphkMszpoxX5RuCYUZ8Jc0SM4LFzvwmutxtNhJGzD3XbSHNT7mp
-	 Kd5owagCdOknyz8pi/ipUbMvqij9NlygSjloZ2Cb6R8W+Bk7KC+63ZYogN60Dd+piL
-	 QJlRyqcL3jwBg==
+	b=bWFu1Bwgo0FqIHxzpGyD01ShlvgQyNX5Sl7GIUlIqqjT9wCvxFlBaQQk2JudfJiqc
+	 yNrXnQ7KhlGjzj3L0/SzVB/pSQ8+6aErhan6nBbaoX0ZsqBfE3WLYJOpbNcBxjNOW6
+	 gRh3NZTFeMvr6cjhRzI0ZapTPsax0YfA7pSUfyll3qlbHjG3TxL2uUGRjurz4qRAKn
+	 84TgZuMoqTYyWZZR4HSnZFQS//jxbIsDb3CT/hpNDcvb9AphDAnH7Z/goGmO53BtRL
+	 eq+9D9RCAIi2sldafZ95Si0VBhUOKqDSiPj7F/bYNAtuF6eODr3BDE5rZnPfHe53cd
+	 FnsjWAhvlNVKw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6EA244084A;
-	Wed, 18 Nov 2026 01:25:55 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8A82049B
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 22:05:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1FCCB60860;
+	Wed, 18 Nov 2026 01:25:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3EFC91E7
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 22:05:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 70DE880EF4
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 22:05:19 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 255AF405C6
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 22:05:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id azhYp4nsBdzM for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 22:05:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9D5A980E67
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c201::1"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AHoVGstII70u for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 22:05:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D5A8840598
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c200::5"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::1;
- helo=am0pr83cu005.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c200::5;
+ helo=duzpr83cu001.outbound.protection.outlook.com;
  envelope-from=mikhail.kshevetskiy@genexis.eu; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.a=rsa-sha256
- header.s=selector1 header.b=AZxnaPAN
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9D5A980E67
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 22:05:18 +0000 (UTC)
+ header.s=selector1 header.b=EEhlbe7w
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D5A8840598
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 22:05:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NlxIjJT4+MP21+gD7BvtcjYlMI4vX2iR/EApR4VC+3A=;
- b=AZxnaPANNG9aa5kOuAV2eWIIsobff/VRALkpGf8RILcF+27BGLTggIJLW59v+Gq3pn0UVzc/HKGyemHzrXRL2fx93LXg+nb5yvORk25BSTblgnKT8hjnwUGuwr1yZwb3t7GDNnsz+WE7rrF2Q73g5vqEuM0bntD5cBY3eBEo+cBzXQoADqVscvrZDXNf7gOeUEVU+6HdEu3jyR8CVs8RS8SXtF+4yPEHTX6cenRrLe4Iy+3Q9csWxFTSRHje5i7q2XIksPNAE+hIsgQwI1Kk4RxoU8rV49Y+BMD6P6gbTUCH+B+aEeGQoK7Kgte+P8jkHMCErzDd7COMGuYAxv3CoQ==
+ bh=Iv6jjx5kzrqEq7mZigzoPvANsrKwrdXiURFUKhT21cc=;
+ b=EEhlbe7wLTo3dpmHRpvICgtDvFFtX4A2d/skrMr/Yj2XHo50w2bN/C0eEoueMaJNxPGXumHgcLsuPb0NZogzamQeEQxShIyTR1p3AUu8/aeEW6kdiFWswoVpuzuivD50dcRseC3leusjelRbIDGIyvrcUIdTWLahzMnXCQKwmMnCSQTN0g/sZ4wjp015D1FuMKHWqG0oAVpDJ2MqdAWhqX+nKnTZ9T2SNBbLWfgm0TjPbpj6Ihnxr8/xSkyDnoZPvevwy4ugDVG5ObwDOqgLd5VOMkv46xD2zPKIKiG5KOZgaZ7jr9r8sRpJclqdf7vCxitKAP9tx3I32IoOmAy0FA==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
- by GV2PR08MB8750.eurprd08.prod.outlook.com (2603:10a6:150:c2::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.10; Tue, 17 Nov
- 2026 22:05:13 +0000
+ by AMDPR08MB892675.eurprd08.prod.outlook.com (2603:10a6:20b:749::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Tue, 17 Nov
+ 2026 22:05:18 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%3]) with mapi id 15.21.0615.013; Tue, 17 Nov 2026
- 22:05:13 +0000
+ 22:05:17 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -140,9 +140,9 @@ To: Tom Rini <trini@konsulko.com>,
  Boon Khai Ng <boon.khai.ng@altera.com>, Cole Munz <Munzzyy1@proton.me>,
  u-boot@lists.u-boot-project.org
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v2 3/6] spi: spi-mem: Create a secondary read operation
-Date: Wed, 18 Nov 2026 01:04:46 +0300
-Message-ID: <20261117220449.3134408-4-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v2 4/6] spi: spi-mem: sync code and behavior with linux
+Date: Wed, 18 Nov 2026 01:04:47 +0300
+Message-ID: <20261117220449.3134408-5-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261117220449.3134408-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20261117220449.3134408-1-mikhail.kshevetskiy@iopsys.eu>
@@ -154,58 +154,58 @@ X-ClientProxiedBy: MI0P293CA0011.ITAP293.PROD.OUTLOOK.COM
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|GV2PR08MB8750:EE_
-X-MS-Office365-Filtering-Correlation-Id: 41e342b2-cb51-40b6-e0de-08df44f6dac3
+X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|AMDPR08MB892675:EE_
+X-MS-Office365-Filtering-Correlation-Id: ba7407f9-1aab-4e60-efdf-08df44f6dd21
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|7416014|1800799024|366016|23010399003|38350700014|921020|11063799006|56012099006|261028144727099003|261022075727099003|5023799004|261022105027099003|261021121427099003|261102123227099003|261026140227099003|10067099003|261026121527099003|261009223027099003|22082099003|18002099003|6133799003|3023799007;
-X-Microsoft-Antispam-Message-Info: Glp16O+6Csw+ReO6VODw1CZ85aGHuOOB/4AQrvc/V4xpXXbJMtFRtiD8o6HpbSHo/tFSaO9qel96a+OG9ASU+b93BSgEPPy612rZVVwjOD1RMI/KeClTtYUauoHW/J30OZZ21GxX0vKyiN7aylmba8Es//+oMLRn2Mb1WOgFiPfZ+wu/ZggZWuF3wOoPokcTgA89KTifz+S9vPY5AHjYQPRhEFe2a1QmZPJKvYsbuGg8oyB1qa5ja6S0TwFrlEKCUZ/eU1VsnFrlnPiPY/j3V4dUSaH7tXJuNBiadRsxp3Ssc44VmoWvA/fvYpZ49+l5jqO8WmCQXtFt3cFUcmnUhRPzFCusNYs8Nww2wvqJUD3QQUFbj1ti4wquXjk7/g8pgk17D9r+0Q1halNGWQqcIWb6o9k2AwamUYgGYX9MPHugCByl72J0OYNP1ZgK+stmfunARW5TNIwcCR1WLInfRFrq4q3QzwHS0gt/LyhQLmBejim9/M1kEyheib4bRdhRm5tcWue+2xiNKeapWuAC4/nctpuIunU+zijgqYjJuCagHwYSy2ERZFpTrK7E9NA+BCvhYEBv4eCVWArAAWW7ITFHoJgbewfHpjp8r+oRyNE0w7lZBpi2XG9kmZmkbnfw57KhP8CrvyJrREv+F7+2nr6hZi5zE8/z0Us4vM8qNyTRAKS3gu9ZzxW1y/EJ0MQmuraeoVewB3iCGM5auOOvBPpO+V85dAaUw0R8qrO2uXc=
+ ARA:13230040|1800799024|376014|7416014|52116014|23010399003|366016|18002099003|22082099003|261009223027099003|921020|11063799006|56012099006|5023799004|261102130727099003|261102123227099003|261028144727099003|261026121527099003|261026140227099003|261021121427099003|261022075727099003|261022105027099003|261021123027099003|38350700014|10067099003;
+X-Microsoft-Antispam-Message-Info: yInk8hv8OkrwaNJh67oV3sgPL8VS2mpY2uC5F6YSbr9nx/1TlI922ENDs9mcWVOofuU1fX9IuZMFlD8NzBNX/SNRj7NjAXjGdzA57COTx+QmBEfCu0bjWzu+fl93OpSE5qQRFhC1PVlN/LMqK3t/5RJ87+qNZ7gY2IJE3ZInMzT7UgIvou07lsewmBsHuESDHMKDmiH8W8wMhmKZYhSaGxbdL+O9VUGxfGU6m6P+GWRwqJVoVCgxlIsm1kOfsFRCMaF1gxGwVMiIEEbxi4a4x3TuljsPioBx2slBXAk26IXcChOLyH4m2+x9gUAW8kScQgoSyisU7vN4wscyBt2DIy8IQ/3fVPta5xnjOtNGVrhUk9xgj4JEzlGZO7ctGQnTnF/W/duY4JluFy+qfurR1HCFvl2wcXupoAoIUxCCyjETdIrGiMvWZCglF5uYIU7BT+g+OPQf2K4yBdqDs4Lyl3m+OwMrabBsNycN+ew/FgMCVtViVlzRhAgzAoPzDqpZHOXTFk5pu9Ba95veUo8EWW09XV6gnwdmFEsAU+N6VNQSNiGTgvot5VRy8LxJap1grHNG5yvs4ga9M1vl7w7Lx0ja1u3NA2TMc9VAKM9pq/FPIcj2gpp2X1fv+OL0Ca8UBm0C35uN2V3IcRVOrXpHF3dJSBzmnpj8HPv52mrrarK/Fwd+8QeDYA6d41db5UhMlAP9OO4h1arCiplDXOetl8U6yTvngjArzGT//qomPX0=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(7416014)(1800799024)(366016)(23010399003)(38350700014)(921020)(11063799006)(56012099006)(261028144727099003)(261022075727099003)(5023799004)(261022105027099003)(261021121427099003)(261102123227099003)(261026140227099003)(10067099003)(261026121527099003)(261009223027099003)(22082099003)(18002099003)(6133799003)(3023799007);
+ SFS:(13230040)(1800799024)(376014)(7416014)(52116014)(23010399003)(366016)(18002099003)(22082099003)(261009223027099003)(921020)(11063799006)(56012099006)(5023799004)(261102130727099003)(261102123227099003)(261028144727099003)(261026121527099003)(261026140227099003)(261021121427099003)(261022075727099003)(261022105027099003)(261021123027099003)(38350700014)(10067099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZfTdM5Gnfr27MJOUI/TeaowuPswWY8C650eZEDC8SOcn2Az0Q9aNACLH1ne1?=
- =?us-ascii?Q?q2ms8mZ9VRQCbppwzwxrXU1F19bLXemAc9Cu33oY3uNMiAlXyagXiOanZ3/n?=
- =?us-ascii?Q?zjKAvVBTfaTxLii8UxP1FhQyevqrv+BcNmyW3klhhzGW0RtcUbXCSPTa3xFH?=
- =?us-ascii?Q?a9d0h+3dFOvykvm+UQTQldWMeaXz8iIwwPmrlVA+i/furj+Lym5GNESmzPAn?=
- =?us-ascii?Q?hqvHynx7OyxHogNnjoGZoN1uiLCjw6HM9mQeyvtT7J/8Xzx9L21aqHLOtlkV?=
- =?us-ascii?Q?hTMErMu2D63K3aC9Un8eQaUttKgKLfwNUmWIoWwlRGfOccmKcbN3KTustOIE?=
- =?us-ascii?Q?Gh6Rc9KvhCh6JliYUxRHeqwjCipdJHBYs1/VP5VK6ypW+iMCl1McUeZ1kyxF?=
- =?us-ascii?Q?LcofpURaVOeon82TUR7+ZTO0W7fs/AjcDN/VoRslhXsN6rgo9f/jUIwDT1TH?=
- =?us-ascii?Q?J+ZNj1m1LAiFnzCOhO9mpM+cQya4QiSSMEknvJLvt6gSGrxVPzNV/wj5W0Hg?=
- =?us-ascii?Q?MCbImE2933bRxeZ813XkFNOhxKg+lmEqYhyUVfM85P3lbr8NlNodiQVsbhOA?=
- =?us-ascii?Q?bZMLAv+F3egU/DeCiJvOKoOOR0Pv3EvxKde2ku3TGVMrs72LJ55lGC7+2F3N?=
- =?us-ascii?Q?GmWokaFqbCJ2+zoBLJ2gYVGy/pGRdAVYHrtzfmRj7YQI5E6UR3Sp5nlGoUpl?=
- =?us-ascii?Q?iDHqP/Gn6VF4DoVjekLe9zOEIPkUCSxFKqxrOVrvM7/eTIuCC9TtKL8aNWXW?=
- =?us-ascii?Q?ZFNFGRcyatBsxymu9XH2Uf8TeZ7bJ9my9LRJ89e2jQMhFwGD3g1EcqsIdPxx?=
- =?us-ascii?Q?avG9pH6qN4SzvsJTzvZtVVMWAld/DWxT0fQuctCp+XkHeUXK7I5pSg0JTYqU?=
- =?us-ascii?Q?h1jXPi8+OZmzE7CoEV+uuniwaR8jv11o1ofYEZu0jTid0odK0CG9bDnDUSvA?=
- =?us-ascii?Q?P7zfJI0YPhH8vCUkKb+sZaK+l5/Y8H004W80oU6V8jSBD3Y6QTIAd2M8cams?=
- =?us-ascii?Q?Ok0ksWHFgzGtIQef7ETP3GGlB+0gWg5RBs9ri7FMZJfMu738HelKHBh24T0i?=
- =?us-ascii?Q?BTm1ChCbgWsXo1rh575QMiZxyv9luxtzg+8iNgmlSkIqF6yxLAdRu1WeJKq2?=
- =?us-ascii?Q?tAKgiliYJH28CwwWMDs7TQv+Alus/WFnPRF52UekgUEfZ876HXqWxLk/4UH0?=
- =?us-ascii?Q?AwimfSihXYIZOyDhc+a+LpAs5vv4DUhwpAcfz1LfFOSVbyUTGT0zjEEIe2BX?=
- =?us-ascii?Q?LAsRADtGtvKQVO0Tun9nC0XnG+0TI5dChNk0b4aIon7Dgx9HU6p2VjU7W0Av?=
- =?us-ascii?Q?shUbHi6XrIjmXFDVkPIN5s3/XyjTxbJ2d8+qBlW6S/HvONX3dfyjDyFKSa2b?=
- =?us-ascii?Q?hGJn+FAadN/z5PyWoobWLeHp8OHEk5BnYBgFunyN1qhryjAN0pA1Drh8yQjn?=
- =?us-ascii?Q?IIKQX8t/YBeFgQK29oc86JTtmVucS+DLn8QOpatlUmgWJInyQ4PAm+1h0mJI?=
- =?us-ascii?Q?ZtIbW68TVA7B+Q59minOkKyGecCszK/3ZTCOsxfhQz/FyEliH3f7q3qhsIyH?=
- =?us-ascii?Q?7Z/DxyLGOfY2dKLf2cjIxgGKMH+dwDtPBzUFP/YDGEU3Oo1bZRWvou1o2H7Y?=
- =?us-ascii?Q?NasJ0lFjKot61eapSkbQsB1JIgsxRKpIHkjiXj38HzNk2xTbMN6pE3aDMtWr?=
- =?us-ascii?Q?HHMt/BL+r8dHhD0xUqtRh0uxfhK/kw/j9m1ctSDkIdL7esE7x1AyaReEgIH6?=
- =?us-ascii?Q?JxS/6m8vHahD/m+cZ0hZR2wJH75nY5s=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?xb5LTDkoO7KzbIskenItia0t/+uOLcxoYYWyvuc8hEc6ZLLB5se2ssGGWvg1?=
+ =?us-ascii?Q?OJfQO+xK4Lj65ybXWPym986KXmV5G4fyp+4cFVQiatvCSCifMTOkMMNZi+Zj?=
+ =?us-ascii?Q?ZkoBvd6Z7send0BAX8OP/wjaVBxvYqzbB+IcdSRw969sJrW1r1/4TiAeTbOS?=
+ =?us-ascii?Q?LuJs5PLLshk6RgLb2SHDiG84HTUxMdGk0OTQFT93II9JhryKRaLpkG5ubDhU?=
+ =?us-ascii?Q?gOAfdRPL4T6L9GRJ1tGxcImBpxb5AwDpSN0ddzJ6QDEM3WKrupogTyFEqm7f?=
+ =?us-ascii?Q?3ZcN1UQhnmtS42F1JVKNB78aOyfdIREUvoWCldjO3DQod82uWcED+chljJRV?=
+ =?us-ascii?Q?JooNwhxt556z+8ZzBZvJDE4GqFEahZoRtIWxLkdn2LzlFJu4Q+FlU3NF7zbg?=
+ =?us-ascii?Q?vfyCydz0mqx0n+kffjAZJABVbS7VMWBejNUFDzkT2K83yi9SDjdo1HRQmGhK?=
+ =?us-ascii?Q?H/koEMR7jITQ0RBazQQ2kNAfblBIdRCQpSppMEAoyCHGTlsymIdWzdn4ERRj?=
+ =?us-ascii?Q?3WvHFbu8CiVO0ZkJ5czUfLcKSW51mUWkbq1gS/L3pW/BcFMz0q0NL9H4mdDz?=
+ =?us-ascii?Q?R8NpP5OFGjVcGYdt8fVUtPXLLWDnSSCAVwv138vQrMWxqkhpKm41mbXo6ott?=
+ =?us-ascii?Q?5xu1ok6MZGaSExwHFbB2LpGDtQ5m1SGl70rZQ7OfDYkKBTnUoEoZV404lscn?=
+ =?us-ascii?Q?dq0/UIRS9CvUTjNOVEi0H3u/zVyBMWFdqBS/+h8J8br2tXLhrtXzPoel23hV?=
+ =?us-ascii?Q?JXbeHztKfJTtuhSALeLz/rRfrKC+gmsZ4tUnXDc6gVS2zSCdiC0Mhw+IcTMy?=
+ =?us-ascii?Q?4+gRN1lEMQ3TNoxyIXu2IFeA5wXlMjRow41lqn5EAWG782k76/MgGRaIECrS?=
+ =?us-ascii?Q?6rRD6I/yBD1CYO+FNIOqtuWoyCd7eAdvfZg8soJf2AftKhVrIUepKHEdS/Kn?=
+ =?us-ascii?Q?ps5t3KY2Ibgc86ZO/HP18webZ6PLedu2e3lglVTIE51X+zfS862vfMj/cmhp?=
+ =?us-ascii?Q?AXbAtMNJbX2+CyHt3WH9UXmJInUBtdJxBaWgnzjWy9AMsLC3puDRfj3ckdez?=
+ =?us-ascii?Q?naZ65wiOo3PNjjiTOgAG7b0QpKsI583UDTq8lLX4RSKNP8haTq68fr4rxbT6?=
+ =?us-ascii?Q?4Rhm/8XTuEudqnrSpcskDpBx/PZeGB1YCe9v/cvTrE/nXFZQY8LewcxdBFqT?=
+ =?us-ascii?Q?sfMwpGCm26exbtTH6QCCcS8O31+NReth0TXP4zqCH6aREUhYyM0VwDmYCEI6?=
+ =?us-ascii?Q?LX0aoFNVzwABq6FhwB1Wh+T5rLNxElSIbNQ73w6qSkajIy/ZfRUadJ5UhIAA?=
+ =?us-ascii?Q?9xgRQyF36TUStMHIOtNWqMQH2+1bJEgEHL2KP/l/99YC/I2SPqcKIrvWRTgg?=
+ =?us-ascii?Q?2H37FoF/b0wt00HiSreGLma6RejcCsWpuxgszmJ/1CF5yJbxZsas1T/MIa/n?=
+ =?us-ascii?Q?ypcSqGa4ilb+L1lceQ0FBEEUKTEeiJw81o/Ffm2keoDWOdodht7GhMCBCiim?=
+ =?us-ascii?Q?unu5tnRG5HnKACDbYb0oRglk8aeZHN1g3kCkHmFxbCb5dnryK7FiUUsQ9xAH?=
+ =?us-ascii?Q?IxC0+Yuo7esqczbDlbDWtmQd7w7UxycF9om6oSrtMSM8Mmc3OkU2uNOUsI8S?=
+ =?us-ascii?Q?IUQI/Wo3aSdWdxGrRcGL08kHZA4aCiwVe4KE+wSC9VfZ3Sxf+C/nh0i1heXc?=
+ =?us-ascii?Q?bNov9V9h5t8Nf3SHB/qKTNIa8iJ3WRXy3tMkw64Q2O39qAU0O2hQnxviVTBk?=
+ =?us-ascii?Q?WGe+YcpniKcMGnzrbwyyFql2NZGvw30=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41e342b2-cb51-40b6-e0de-08df44f6dac3
+X-MS-Exchange-CrossTenant-Network-Message-Id: ba7407f9-1aab-4e60-efdf-08df44f6dd21
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2026 22:05:13.4396 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2026 22:05:17.4920 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BGe+MTd6KQdgT/KHgtKFidb7w6X374V7Ece/V37w4RcWqTNtCLG7RlmdyKERTiOqfHgO1LaPUQnkQE5LDQuRcFesTLTNkzJK3V4B0iSELjU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB8750
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3wVO3OdUrVZ/38jig6ZsPaybqr3JtX84cJ37wfkRkZQQVmu6q/RcIRMDycMQKRq78c62eV7xmc7Nn2eFp4XoZ5xp4YLwts8hg8aES0JjoWU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMDPR08MB892675
 X-Mailman-Approved-At: Wed, 18 Nov 2026 01:25:48 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -219,112 +219,214 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Miquel Raynal <miquel.raynal@bootlin.com>
+Align code and behavior with linux-7.3 release.
 
-In some situations, direct mappings may need to use different
-operation templates.
+Changes:
+ * add comments
+ * use the same error codes as used in linux
+ * add more checks for spi_mem_op
+ * add macros necessary for spinand dtr support
+ * remove unused macros
 
-For instance, when enabling continuous reads, Winbond SPI NANDs no
-longer expect address cycles because they would be ignoring them
-otherwise. Hence, right after the command opcode, they start counting
-dummy cycles, followed by the data cycles as usual.
-
-This breaks the assumptions of "reads from cache" always being done
-identically once the best variant has been picked up, across the
-lifetime of the system.
-
-In order to support this feature, we must give direct mapping more than
-a single operation template to use, in order to switch to using
-secondary operations upon request by the upper layer.
-
-Create the concept of optional secondary operation template, which may
-or may not be fulfilled by the SPI NAND and SPI NOR cores. If the
-underlying SPI controller does not leverage any kind of direct mapping
-acceleration, the feature has no impact and can be freely
-used. Otherwise, the controller driver needs to opt-in for using this
-feature, if supported.
-
-The condition checked to know whether a secondary operation has been
-provided or not is to look for a non zero opcode to limit the creation
-of extra variables. In practice, the opcode 0x00 exist, but is not
-related to any cache related operation.
-
-Acked-by: Mark Brown <broonie@kernel.org>
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-[Linux commit: 6f96f2fa152518d93ffeedbea781db50aef7f7dc]
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/spi/spi-mem.c | 17 +++++++++++++++++
- include/spi-mem.h     |  5 +++++
- 2 files changed, 22 insertions(+)
+ drivers/spi/spi-mem.c | 65 +++++++++++++++++++++++++++++++++++--------
+ include/spi-mem.h     | 26 +++++++++++++++--
+ 2 files changed, 77 insertions(+), 14 deletions(-)
 
 diff --git a/drivers/spi/spi-mem.c b/drivers/spi/spi-mem.c
-index 351ca725524..ee6c9b6f3a2 100644
+index ee6c9b6f3a2..1367c9d3290 100644
 --- a/drivers/spi/spi-mem.c
 +++ b/drivers/spi/spi-mem.c
-@@ -639,6 +639,23 @@ spi_mem_dirmap_create(struct spi_slave *slave,
- 	if (info->primary_op_tmpl.data.dir == SPI_MEM_NO_DATA)
- 		return ERR_PTR(-EINVAL);
+@@ -22,8 +22,11 @@
+ #include <dm/device_compat.h>
+ #include <dm/devres.h>
+ #include <linux/bug.h>
++#include <linux/bitops.h>
+ #endif
  
-+	/* Apply similar constraints to the secondary template */
-+	if (info->secondary_op_tmpl.cmd.opcode) {
-+		if (!info->secondary_op_tmpl.addr.nbytes ||
-+		    info->secondary_op_tmpl.addr.nbytes > 8)
-+			return ERR_PTR(-EINVAL);
++#define SPI_MEM_MAX_BUSWIDTH		8
 +
-+		if (info->secondary_op_tmpl.data.dir == SPI_MEM_NO_DATA)
-+			return ERR_PTR(-EINVAL);
+ #ifndef __UBOOT__
+ /**
+  * spi_controller_dma_map_mem_op_data() - DMA-map the buffer attached to a
+@@ -213,6 +216,45 @@ bool spi_mem_default_supports_op(struct spi_slave *slave,
+ }
+ EXPORT_SYMBOL_GPL(spi_mem_default_supports_op);
+ 
++static bool spi_mem_buswidth_is_valid(u8 buswidth)
++{
++	if (hweight8(buswidth) > 1 || buswidth > SPI_MEM_MAX_BUSWIDTH)
++		return false;
 +
-+		if (!spi_mem_supports_op(slave, &info->secondary_op_tmpl))
-+			return ERR_PTR(-EOPNOTSUPP);
++	return true;
++}
 +
-+		if (ops->mem_ops && ops->mem_ops->dirmap_create &&
-+		    !spi_mem_controller_is_capable(ops, secondary_op_tmpl))
-+			return ERR_PTR(-EOPNOTSUPP);
-+	}
++static int spi_mem_check_op(const struct spi_mem_op *op)
++{
++	if (!op->cmd.buswidth || !op->cmd.nbytes)
++		return -EINVAL;
 +
- 	desc = kzalloc(sizeof(*desc), GFP_KERNEL);
- 	if (!desc)
- 		return ERR_PTR(-ENOMEM);
++	if ((op->addr.nbytes && !op->addr.buswidth) ||
++	    (op->dummy.nbytes && !op->dummy.buswidth) ||
++	    (op->data.nbytes && !op->data.buswidth))
++		return -EINVAL;
++
++	if (!spi_mem_buswidth_is_valid(op->cmd.buswidth) ||
++	    !spi_mem_buswidth_is_valid(op->addr.buswidth) ||
++	    !spi_mem_buswidth_is_valid(op->dummy.buswidth) ||
++	    !spi_mem_buswidth_is_valid(op->data.buswidth))
++		return -EINVAL;
++
++	return 0;
++}
++
++static bool spi_mem_internal_supports_op(struct spi_slave *slave,
++					 const struct spi_mem_op *op)
++{
++	struct udevice *bus = slave->dev->parent;
++	struct dm_spi_ops *ops = spi_get_ops(bus);
++
++	if (ops->mem_ops && ops->mem_ops->supports_op)
++		return ops->mem_ops->supports_op(slave, op);
++
++	return spi_mem_default_supports_op(slave, op);
++}
++
+ /**
+  * spi_mem_supports_op() - Check if a memory device and the controller it is
+  *			   connected to support a specific memory operation
+@@ -231,13 +273,10 @@ EXPORT_SYMBOL_GPL(spi_mem_default_supports_op);
+ bool spi_mem_supports_op(struct spi_slave *slave,
+ 			 const struct spi_mem_op *op)
+ {
+-	struct udevice *bus = slave->dev->parent;
+-	struct dm_spi_ops *ops = spi_get_ops(bus);
+-
+-	if (ops->mem_ops && ops->mem_ops->supports_op)
+-		return ops->mem_ops->supports_op(slave, op);
++	if (spi_mem_check_op(op))
++		return false;
+ 
+-	return spi_mem_default_supports_op(slave, op);
++	return spi_mem_internal_supports_op(slave, op);
+ }
+ EXPORT_SYMBOL_GPL(spi_mem_supports_op);
+ 
+@@ -265,8 +304,12 @@ int spi_mem_exec_op(struct spi_slave *slave, const struct spi_mem_op *op)
+ 	int ret;
+ 	int i;
+ 
+-	if (!spi_mem_supports_op(slave, op))
+-		return -ENOTSUPP;
++	ret = spi_mem_check_op(op);
++	if (ret)
++		return ret;
++
++	if (!spi_mem_internal_supports_op(slave, op))
++		return -EOPNOTSUPP;
+ 
+ 	ret = spi_claim_bus(slave);
+ 	if (ret < 0)
+@@ -629,7 +672,7 @@ spi_mem_dirmap_create(struct spi_slave *slave,
+ 	struct udevice *bus = slave->dev->parent;
+ 	struct dm_spi_ops *ops = spi_get_ops(bus);
+ 	struct spi_mem_dirmap_desc *desc;
+-	int ret = -EOPNOTSUPP;
++	int ret = -ENOTSUPP;
+ 
+ 	/* Make sure the number of address cycles is between 1 and 8 bytes. */
+ 	if (!info->primary_op_tmpl.addr.nbytes || info->primary_op_tmpl.addr.nbytes > 8)
+@@ -807,7 +850,7 @@ ssize_t spi_mem_dirmap_read(struct spi_mem_dirmap_desc *desc,
+ 	else if (ops->mem_ops && ops->mem_ops->dirmap_read)
+ 		ret = ops->mem_ops->dirmap_read(desc, offs, len, buf);
+ 	else
+-		ret = -EOPNOTSUPP;
++		ret = -ENOTSUPP;
+ 
+ 	return ret;
+ }
+@@ -847,7 +890,7 @@ ssize_t spi_mem_dirmap_write(struct spi_mem_dirmap_desc *desc,
+ 	else if (ops->mem_ops && ops->mem_ops->dirmap_write)
+ 		ret = ops->mem_ops->dirmap_write(desc, offs, len, buf);
+ 	else
+-		ret = -EOPNOTSUPP;
++		ret = -ENOTSUPP;
+ 
+ 	return ret;
+ }
 diff --git a/include/spi-mem.h b/include/spi-mem.h
-index 81166492da2..08d854b1e52 100644
+index 08d854b1e52..a69fd0d0948 100644
 --- a/include/spi-mem.h
 +++ b/include/spi-mem.h
-@@ -201,6 +201,8 @@ struct spi_mem_op {
-  * struct spi_mem_dirmap_info - Direct mapping information
-  * @op_tmpl: operation template that should be used by the direct mapping when
-  *	     the memory device is accessed
-+ * @secondary_op_tmpl: secondary template, may be used as an alternative to the
-+ *                     primary template (decided by the upper layer)
-  * @offset: absolute offset this direct mapping is pointing to
-  * @length: length in byte of this direct mapping
-  *
-@@ -213,6 +215,7 @@ struct spi_mem_op {
- struct spi_mem_dirmap_info {
- 	struct spi_mem_op *op_tmpl;
- 	struct spi_mem_op primary_op_tmpl;
-+	struct spi_mem_op secondary_op_tmpl;
- 	u64 offset;
- 	u64 length;
- };
-@@ -338,11 +341,13 @@ struct spi_controller_mem_ops {
-  * @ecc: Supports operations with error correction
-  * @swap16: Supports swapping bytes on a 16 bit boundary when configured in
-  *          Octal DTR
-+ * @secondary_op_tmpl: Supports leveraging a secondary memory operation template
-  */
- struct spi_controller_mem_caps {
- 	bool dtr;
- 	bool ecc;
- 	bool swap16;
-+	bool secondary_op_tmpl;
- };
+@@ -22,10 +22,18 @@ struct udevice;
+ 		.opcode = __opcode,				\
+ 	}
  
- #define spi_mem_controller_is_capable(spi_ops, cap)	\
+-#define SPI_MEM_DTR_OP_CMD(__opcode, __buswidth)		\
++#define SPI_MEM_DTR_OP_RPT_CMD(__opcode, __buswidth)		\
+ 	{							\
+-		.nbytes = 1,					\
+-		.opcode = __opcode,				\
++		.nbytes = 2,					\
++		.opcode = __opcode | __opcode << 8,		\
++		.buswidth = __buswidth,				\
++		.dtr = true,					\
++	}
++
++#define SPI_MEM_DTR_OP_PACKED_CMD(__opcode, __addr, __buswidth)	\
++	{							\
++		.nbytes = 2,					\
++		.opcode = __opcode << 8 | __addr,		\
+ 		.buswidth = __buswidth,				\
+ 		.dtr = true,					\
+ 	}
+@@ -45,6 +53,14 @@ struct udevice;
+ 		.dtr = true,					\
+ 	}
+ 
++#define SPI_MEM_DTR_OP_RPT_ADDR(__val, __buswidth)		\
++	{							\
++		.nbytes = 2,					\
++		.val = __val | __val << 8,			\
++		.buswidth = __buswidth,				\
++		.dtr = true,					\
++	}
++
+ #define SPI_MEM_OP_NO_ADDR	{ }
+ 
+ #define SPI_MEM_OP_DUMMY(__nbytes, __buswidth)			\
+@@ -116,11 +132,13 @@ enum spi_mem_data_dir {
+ 
+ /**
+  * struct spi_mem_op - describes a SPI memory operation
++ * @cmd: the complete command
+  * @cmd.nbytes: number of opcode bytes (only 1 or 2 are valid). The opcode is
+  *		sent MSB-first.
+  * @cmd.buswidth: number of IO lines used to transmit the command
+  * @cmd.opcode: operation opcode
+  * @cmd.dtr: whether the command opcode should be sent in DTR mode or not
++ * @addr: the address attributes
+  * @addr.nbytes: number of address bytes to send. Can be zero if the operation
+  *		 does not need to send an address
+  * @addr.buswidth: number of IO lines used to transmit the address cycles
+@@ -129,10 +147,12 @@ enum spi_mem_data_dir {
+  *	      Note that only @addr.nbytes are taken into account in this
+  *	      address value, so users should make sure the value fits in the
+  *	      assigned number of bytes.
++ * @dummy: data for dummy operation
+  * @dummy.nbytes: number of dummy bytes to send after an opcode or address. Can
+  *		  be zero if the operation does not require dummy bytes
+  * @dummy.buswidth: number of IO lanes used to transmit the dummy bytes
+  * @dummy.dtr: whether the dummy bytes should be sent in DTR mode or not
++ * @data: the data attributes
+  * @data.buswidth: number of IO lanes used to send/receive the data
+  * @data.dtr: whether the data should be sent in DTR mode or not
+  * @data.ecc: whether error correction is required or not
 -- 
 2.53.0
 
