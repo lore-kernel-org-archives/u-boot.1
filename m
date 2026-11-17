@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86DE0606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 15:04:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C628606A32A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 15:04:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jkAOGYlt;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I4pBPrYJ
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Y4STv5w2;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T12PXwOe
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 660858120D;
-	Tue, 17 Nov 2026 15:04:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5448B8120E;
+	Tue, 17 Nov 2026 15:04:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id F7FlQ0ZZvgOz; Tue, 17 Nov 2026 15:04:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B3AA7811EB
+ id iQEHAhzsa60y; Tue, 17 Nov 2026 15:04:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5DFB581210
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794927873;
-	b=SY3xnp6YuNN7faAdeGLGyPRialK8udRaOMOknvBxBhcqEJs3+vujDDo6FLD9Tx5j4pyQ
-	 ORodJ2sOUdHXcJjwGfnGPy7FQGawqd88Bkfmabmmp+C31HWTN93gV3VlF+TMYRRz1sj7G
-	 y7sRNVdkIR0Vxiw/HKPyQpSdXZkp3OfLAWFaXKZV7EZWFeCxaGtDYZDFbxMQM554gdtTZ
-	 tRXI5ZvwZ/LAkRvtBTr3rgq/QIdZBHoyh9YFwJU/U2E1SiNip5v0Thn9owB1JO2wxEEzI
-	 o9uE6QfU0kz2vZJHySfTKqtdu16jElibrGqd+UqUOpANebNU15D0gu+DBO30ga3507Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794927875;
+	b=NEXek0P7WslgqJygKgtrphM3qL/9bBZ5EnyJ7itMCtTEuZ80wnSQs76M3xT1oPInW1YH
+	 fO4xMr1OFqEZSPV9cfupGhWGbzhPvxjaZzhxx/2acFl7ihQgE9A7Wb+jcaArMr/c/UgfQ
+	 6sEjtXlWmJ/mGJgWQoRUhjfPwMwUbnwYYxTFDIM/VnCAFmGGsd89qhKVj0uaVyuTFtGcL
+	 9Np1gRAEBIQpvHNExW7uEgFjDOnGq8IJc/qI6vPcKHj+f11HggULdyMT+R130Lkjt9ZW4
+	 zOhUkj1JGBHAAA0pd6JEUhwVzh0G0c4ErnhdYZMJQqZUA9iaGx3cm9lLTLlmeKoCRVQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794927873;
+	c=relaxed/relaxed; t=1794927875;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,75 +32,79 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=C0InE+SL0IlVxxydJtmBs0dN6+LrbGVAbT0ENaDwa9E=;
-	b=ohi/vhAUU8S7V6CIQr94hc73ZWnBZf+FMoV5QR0sTnFYtOt//FkNkL8oaOHvlOYBtXaR
-	 1dsOedQrKeLjmLWCUF4mjDvcJjH8AT7mVELDCeMnx0nTlqeYXjdBybdxGb2VPOlR4zHoK
-	 oH2yfSpQnOT5egr6z9OwnOgwE7KvR3WKdm+6worT/aGELm2rzcC2NnoEEDZKh7rnTro9N
-	 vqojlu9DXuh3mrETkAADQhdXwZRHWQcqI0X/tVQXuh1fUzUf5cuUExtvj2WuVKIVZ57nv
-	 SSxEM4piuZzIfEN7a4rm8wiHbK3TvjcqtJaEpwADNmLj904qbSqDytjTsLJDn4N5MLw==
+	bh=G3Gi36CP60f/+YgXQefsv/tAFp9Ha9stpYGwuvsj6RI=;
+	b=JuXyVtiAf7z4mT7glV7Im+Atn1xuQz4iIWJE5fZG3Y2KMJi5E/gMDu9AdU1yj0Y28Fw5
+	 Kyf5CT8gaG5oHcZXDLFS2PzpAOH49oOS8NFWg8mJCmDbZF2tGw2hpZBmV8phCxRo1fvKy
+	 puSphKL9p++45pEnAGLTOgp7oVwyRWC3mnNaglJgiPcSrcYO4W0OBP4sa8QWgvmkMX38g
+	 PbErqfVMoW/lOVPmB2Jyl/cwJQGi2e/59X8PKToNKHIl+PxGnQYooiheM3U/ZZ8v9NKUb
+	 fOm2H8ipKspFtLGM0bKmK+5VFX2ioQ1DvzhgJISEVS7/hoEPuvcGt8sdJLIehVt1J0Q==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T12PXwOe;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794927873;
-	bh=C0InE+SL0IlVxxydJtmBs0dN6+LrbGVAbT0ENaDwa9E=;
+	d=lists.u-boot-project.org; s=default; t=1794927875;
+	bh=G3Gi36CP60f/+YgXQefsv/tAFp9Ha9stpYGwuvsj6RI=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jkAOGYltr3HepdM2Tdv0cjz6BCEdlE7pq9KGmt007JbzIRRPuEyYct/kUpFQUGp/O
-	 qsF/Q1XpQoHp6f4dT77RTvHwxFv6NZaJRIFJ4whFHUOFp1AA1VTW1vaiDomSV6MQXv
-	 FNALcGxdHZ4XEVf3f6uETd+IPICcN+ZBFgzP3byJDfFUsEmSXnPbKcCqMw6wTQIf1k
-	 l1HYFVHcbdq4kP+oZy1RAuDcNHeoCIyN+6P9xOtD3GfGAQjfPvd4q6pDfxe+f6smp+
-	 9DzNEZdoRi/I7tysmTlfgYvqiN+UYrlVC7kPx0o9effYxjchLpI+rgrltng6q49QOF
-	 /cPSoD2IbGlLg==
+	b=Y4STv5w2N0w7oWkaxDyUh0YPENc7UwQulyHkqoC4T44+vqstSgwC0xNRtBXmVi4It
+	 j7xlOwQi6Oo3Gt1TEaYh6f38LYupqJLE/sHGLgNC3gRP7bhqL7/XRPD/5BS0glA7TC
+	 Y6fs2N2U5Y1xNEXS4Mh3UNariv6jxp/uETHlkBXIJXbpGqFCiN7SYK9xZdzCfUFxe/
+	 2QV4+kE3BOTVvI7OdeMPDQq/7ERbyaFkqnv+/AmpsazAaK+ISSo/0+NPk873LWiSYR
+	 K0tc5rIqYrXKvpNkzLAh+w0KYsiml9DLLMhqOnlJ051283dwKrZqbG8wC+/jjIRZMi
+	 /7+p7dq1aXzsg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B3AA7811EB;
-	Tue, 17 Nov 2026 15:04:33 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id C4B261E7
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:04:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5DFB581210;
+	Tue, 17 Nov 2026 15:04:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 91BD0D5B
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:04:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B6ABF407E2
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:04:22 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 70138811FB
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:04:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mIcRqUQOhcGt for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 15:04:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 263704055F
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8ISZzK8sj_Rw for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 15:04:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 694E8811EA
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=I4pBPrYJ
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 263704055F
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:04:21 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20260515 header.b=T12PXwOe
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 694E8811EA
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:04:23 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id AB20F623A8;
- Tue, 17 Nov 2026 15:04:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0C0A1F000C7;
- Tue, 17 Nov 2026 15:04:19 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D7B47635B2;
+ Tue, 17 Nov 2026 15:04:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 379041F000CA;
+ Tue, 17 Nov 2026 15:04:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794927860;
- bh=C0InE+SL0IlVxxydJtmBs0dN6+LrbGVAbT0ENaDwa9E=;
+ s=k20260515; t=1794927862;
+ bh=G3Gi36CP60f/+YgXQefsv/tAFp9Ha9stpYGwuvsj6RI=;
  h=Subject:From:To:Cc:In-Reply-To:References:Date;
- b=I4pBPrYJfWjIP76FsnYTfUQOC+91OR34l4bPdBVeP7wKqVTCln0f0OUI2XVdQlraX
- +e8YaIvLaZ7ZA0gf5f0g2dWhlrXEt1rF3qklNG5nj786c5GL/6ne82fDesY4HBMpGq
- FiLA/WAG+7gT3X9QTooSZ0cP2FO7P+AOzI3hUgh2Q/yYdLzvYkkeyH/4sCi25+0ScE
- 8fJdmkTeZQ2gGiPe9XvCFZypaPHUmV8ZY9fC/9CbyDao+5hnl0HE/uP0giHGsnSYo4
- ETteYqjiSYY0uTHm0YOi3irSSXB0Eo5YDQIPqrworyAOBfSiCvIjuD1CoyPHZzGVZl
- YXYxsTYUqSjDg==
+ b=T12PXwOegIHY/B9RAn6uwhy4POKGdu5lSd3nQfu89VpUHd8vTwqabWARY39mELuhP
+ 7b17j/h6zqLTk6mdz2IaMGHoSaEPSUdoKoUignsuFYYWhUat7zOb5+sGfVlO6tuUxw
+ XQ8QlgDkfpC6k0QGE2IJGnC1p78vBucNjd5stU9sBUZPARVIgKabtNfHiPsE1+M1RD
+ EBRy+EhDQuOXJoFA17BiX0e3OFNpRIc9VBvKdYlzXnaKZ7YaFz9bAoNSekmH5haXQJ
+ hOq58rVVJRJDDVCcNtdxKIWwHlQ2yVM6OWLp328ZYjLGElNy2A2SVh/0g9xsZ+noUp
+ 3O7GZs2AfySMg==
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 5/6] usb: gadget: f_sdp: report a closed part as the
- boot ROM does
+Subject: Re: [PATCH 6/6] usb: gadget: f_sdp: refuse unauthenticated loads
+ on a closed part
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Ana Bobillo <anabobillo3@gmail.com>
 Cc: u-boot@lists.u-boot-project.org, 
@@ -111,22 +115,22 @@ Cc: u-boot@lists.u-boot-project.org,
  Tom Rini <trini@konsulko.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>, 
  Francesco Dolcini <francesco.dolcini@toradex.com>
-In-Reply-To: <76f24ab2-df43-4951-bdde-399aed2489a9@gmail.com>
+In-Reply-To: <3369ea11-628e-4e70-82b1-9a42afd54598@gmail.com>
 References: <4bdba9dc-0c21-4e33-8f20-2c0a7ebba0d6@gmail.com>
- <76f24ab2-df43-4951-bdde-399aed2489a9@gmail.com>
+ <3369ea11-628e-4e70-82b1-9a42afd54598@gmail.com>
 Date: Tue, 17 Nov 2026 16:04:03 +0100
-Message-Id: <179492784367.252888.2397855892377279993.b4-review@b4>
+Message-Id: <179492784367.252888.17611718272373396749.b4-review@b4>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=639;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=587;
  i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=YZAvgG8VJpt+jThXlH034kHxGvOmUF0rDFVMHmLUNz0=;
- b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq/GzoH7OZNwYfSUvMAgqIgXL8zZ2rof5/KXKRu
- UKR7ru4CGaJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCavxs6AAKCRAZDR20Zk4Z
- NdfICADL8cPj7cEo47wnleaBgW/VUSp8mtesPRUZ1sL7AaZQCZ4ls64RR4vf5RbRC+MngMxhd4N
- t22GH8gs+53OmiJVG6yAwZC2dk6Bcy8gAD48cbZZLVlo9zUU9djDTn5BY49nsndCOrYSv3jktzy
- qLLL5C8Odt1HIm3vqrXi4gZluNba8ipGY2dpwrp6ZmHsFupsySnOT9aB99tv1ROFiioVTd7w8fp
- c46j9MUn9qRFp8+UABDavmeEqIYhPMkRaEEfDgLqw4m4BRbN9HAnOKxdgiSJdhORVjLeQZ/SWw4
- wzDoc75k4LQKr3Su1Ec+TjqBpBN5B3mDwyTQMz40vPl3Iwsh
+ bh=XeWzRHIFK9NjS3OUlZN3OmGpO9ugM68o607RQTxelPY=;
+ b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq/GzoZP2ujzpWmMmCYYo3i/AKkGPZYrmKWvjYJ
+ /pKJgT55NqJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCavxs6AAKCRAZDR20Zk4Z
+ NU6VB/0ZDR1Sd5XZ9DCdaMY+BH0w4O1Zm1WQ2gGAOn81gIEmI93lTzN8x9bm2BnZGgUJCndLKTG
+ IHgWkhxSG4UtoMpHId0iZVys0OdVbRMm09XbNMOM8cnNXBATCg/2oFYXoGpaG8gblY8vVs3QUd1
+ foXIWgX0wjA+JgbYP7erppB4zyYeQ7OtUV9FQPKA6L0NkBJchoBmemcbocUSL3U9A0KcXxGgv/1
+ eUIVKttereK0KHy1tYs+AH+ur31XPLStAgcM+U0yUDmL1ENTBmjZpQy5TwJIeOidK7YBDeJ79iV
+ rndWmVBoJjGe0HQlnzwdZknGxjJ8zCKUrJ6JKTgo5ZZZeZY2
 X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
  fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -146,15 +150,13 @@ X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, 04 Nov 2026 07:18:13 +0000, Ana Bobillo <anabobillo3@gmail.com> wrote:
-> The SDP gadget implements the serial download protocol of the i.MX boot
-> ROM, but always reports SDP_SECURITY_OPEN in its HAB security report
-> (report 3), also on a part whose secure boot is fused closed, where the
-> ROM reports SDP_SECURITY_CLOSED.
-> 
-> Add sdp_is_closed(), a weak hook that says whether secure boot is
-> enforced, false by default so that other platforms are unchanged, and
-> implement it for i.MX:
+On Wed, 04 Nov 2026 07:18:16 +0000, Ana Bobillo <anabobillo3@gmail.com> wrote:
+> On a part with secure boot fused closed, the i.MX boot ROM's serial
+> download mode only runs an image it has authenticated, and NXP treats a
+> ROM that reads out memory there as a vulnerability (CVE-2022-45163).
+> The SDP gadget in SPL takes the ROM's place in that chain but does none
+> of this, so a host on the USB port of a closed part can run any code it
+> sends:
 > 
 > [...]
 
