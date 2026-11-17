@@ -1,159 +1,148 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61705606A32A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 17:19:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ACCC606A32A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 17:28:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SN+En7og;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=AoJoHSPF
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lP8mXDmR;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=p8njTWMP
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2AB9180DB8;
-	Tue, 17 Nov 2026 17:19:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0280160890;
+	Tue, 17 Nov 2026 17:28:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vCAA8MS3bQFK; Tue, 17 Nov 2026 17:19:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7F9A9811E6
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794935995;
-	b=JrEWGLuGEiWmDAXEj/ufDpbFigh5muTdV99AIzwZkkkwvPg5ZNZkei27vuVfi5ZzgLRP
-	 29ESyZRJ9K+ugTlZQ1Jj7OkijiUrjYWBAhYhEXoyD4ElMLzYT/Vr6re3bJjr9mW3VeHI2
-	 qWhMdRbE8tCNaTtVEqAtUZ3yo9zsVmVlVSTxprv1v+7E5xgIEsJg76e5VYbJ9LwqiYDlY
-	 gG3rYqjOyZ2Fu63QC5pRwtPzHopsFcvUBA9YgawwNQraX0BeQ+XJ+OLEgq34bOv+s+GcT
-	 wd1+vcVEQ4ckyL5EeOz/h6pM8Sns2s0SzsS990tl3AH7kJVyvknBJIbLA8T16IgSSwg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ydFR9bkS-PnX; Tue, 17 Nov 2026 17:27:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3FAF36079A
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794936479;
+	b=K87PPhRUt7umyknJxyM2aGQBNg2FaIpIXEf6J+Lfs6i8glNpzanwmp6HvGTwngNcSV53
+	 yfY47yViVKHzeOF65vTkyaDTQIpmiySQ5hERN57QV4brhqns6yDlTAoN2agVYr/T61UNa
+	 CDuk02VdMipN7DMFblzRnHDvRuPE51Pi8SUrYTdsGWxKkhA7mEKmtSqIolIMN4MXM3kfc
+	 c2+d+OyZakghuTArHR6ceC0FYqJDw/1cRn4PsxA3ofOraARNvG/f6el1JBZJ2cVlsV9+C
+	 aTQSbjzrnnLsiDfIGPkvEYsmkNMGsS8fjNydW2bPuMnShbflN1bVPXrUIAVAdjnuTNw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794935995;
+	c=relaxed/relaxed; t=1794936479;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=K8wnpTH1nMrGErigShulRXCPGdlWe7in6ejye7fYl2k=;
-	b=YI6Avpe9N6Nxl2TsMvFoycfE3DxqvZRs1hu5iumjkPQ+nMxDT3FfEfaY0EzdM5XR2Tmq
-	 M4xbFvCI6WlBinJ95ffBslOJnYcBPixOcW8VLRsVp+iREhiX0gQDlZNT3lrm8PbLcsfjj
-	 H4EZyJWxSsRxqCgQssZTMHw1sJwKIB1sZvpPJjPIn238ZMdZ2L8e7OouRYS03un4sQrL8
-	 WKEc+TRURMn0oGQrm1WhYVF/5I6oasBr7RyWizHILXP2ePi1Xtsi1QPEbQmD+epy5gg9m
-	 wNC9oPMo0ADmW0NzWvgPNDz7AK5HcifEn1z46t5DWXPc5imeXzHKU+6U7a4BnxvyWKg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=bt0QJctYkBcYwa24DqdpH0M8z820AsJXwWwI9jJk3mQ=;
+	b=Aq/VnMuGNf5IKz2FZ2nvVFwSRRVDLOPx2VycUA/pVLvukVgqlaJm7tDgdNBobchbxrN4
+	 IicevVNOuYo0L1MgjdY/qNMaWoceSr34io73jJMpdXQWN4uMXX3rTIqUuRhTwH/ezP3nS
+	 aGyTsePVHNvChzYTOszBwRzid6jg9MqkxKA3NifmiAhhx0ooUjrNB4R9rTGk5C6LWCiSL
+	 TnCSUrSRq76H2JxDNTf7IFl9xYewVcklMCvzidUaSu9ebDZ4fasLCRvC+Sl2WZQeULmX4
+	 TsoMu5ICULTrmLtLU8t4kiceCSL5QwkUrD5Z+fYYn31K62GsBjgmCBr55yNbBqNxIlw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794935995;
-	bh=K8wnpTH1nMrGErigShulRXCPGdlWe7in6ejye7fYl2k=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1794936479;
+	bh=bt0QJctYkBcYwa24DqdpH0M8z820AsJXwWwI9jJk3mQ=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=SN+En7ogKE4yzBjuhWKfddf6lqipyOzJgllutAa2CkLm3M8Om5EyiTfeRUnkOZTMp
-	 aHwOS+M5v8vr0EYV9YIn74DamTqe1u40CAh7Ar3dCy9lvr77XVEgG66DYi3I3RfNbp
-	 5CAJfjmi8oPQIsFxWIlqzcq1fBXATW+DC3J6odW2jMj1qEe2SP4aO8zSZvMI4dmbs6
-	 hwqy1sC+y6fMkp32AO41n1Nkw3keFvnCN8egZIOq0h9hyXjOwx6sBbR7+2h8ztGOaq
-	 FS8hfCARORyAzHrVeRoWQ4iAjFVnj04MyLgcaLtqTKvrss+gMD9oCZZGC6PZp3L4SU
-	 W5pSUrsvLTFLw==
+	b=lP8mXDmRu5x+xkjTXK6YJB0lfzozHbjUmRq1nqhhVcs+ydqiCdAvl+tnJ49NaSHkn
+	 WVmKvT3h24gD9zW45FIXolYriZfLmccty9dRaWMDMtWv+Iq3qAFbW9qU6DQvwkjxiq
+	 cxMtvRsgmLSHpJwAu0QUyc8/PVIGy94KPnNonokW6iMhv6/sMfwK2vYNgcGc4Fs8lW
+	 ThaYn27pRpDLHTOtgb5iTV3fZhmQKacQHf/vXMiUUN3n6ZG9ZFnNcNsenmNh1lIq6U
+	 VNx8bVmDiVgtUq9Lchzgq8lYyfmEDMfpOiChQm3OSMRuRERKNbVLitGYV/Y8fC0zO+
+	 OHmfiqJ5nk4KQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7F9A9811E6;
-	Tue, 17 Nov 2026 17:19:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3FAF36079A;
+	Tue, 17 Nov 2026 17:27:59 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id ED2EA105
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 17:19:54 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id DA9B41A6
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 17:27:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DECDC40897
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 17:19:54 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C0242407E5
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 17:27:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Sg8YfefVTn03 for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 17:19:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EE25B4082F
+ id uX0fveGmcZWk for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 17:27:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9BF56405F4
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e2d"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e2d; helo=mail-vs1-xe2d.google.com;
- envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=AoJoHSPF
-Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
- [IPv6:2607:f8b0:4864:20::e2d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EE25B4082F
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 17:19:53 +0000 (UTC)
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-7d2ccd3c7a2so3430137.0
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:19:53 -0800 (PST)
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=p8njTWMP
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9BF56405F4
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 17:27:56 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4a214c5c4c0so1025905e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 09:27:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794935992; x=1795540792;
+ d=gmail.com; s=20260707; t=1794936474; x=1795541274;
  darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=K8wnpTH1nMrGErigShulRXCPGdlWe7in6ejye7fYl2k=;
- b=AoJoHSPFny4aQtBwpGg9jNJ+bwDwCX1uC0cknrr+uw79wHlf2Xqtokc3hC2PCEcrei
- 5qYxc2hZ3z97tYJ7aWSSLLt6B9ryiaxHyavV+LF01ETmw0U5/EyDppBUy+dPkedX9Ynz
- SZiFaWYbJzgVJGV/Wy4RKbrIh+FRrWSGL2skMZlyu4K+jX2JmLWXGMyT2A8S+zZSMLyC
- U4wSI3AqqHNKaKWvp45HaPvPzBW0uW9pymkkqK+Fb+GNEItopNyyskBgu/qMJygb8PKN
- 53hestWpg757nsgFsRx7fq0fOzz4iagl04ycNVEGZTOexuJMriaEZAe84GmGiz1x65aP
- ayKw==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=bt0QJctYkBcYwa24DqdpH0M8z820AsJXwWwI9jJk3mQ=;
+ b=p8njTWMPnKFLiIBEZlgx8Eqd6O8HzvTif9O/7rNguUNn2JyCunIgY3tW7Kf+0cfcRT
+ ifezdLdx06EBIrs19Q9O4dOPJUscyTjSHE6BQ4hRaB9OyshUs3Hb16g5FrdaDMLLPykb
+ 0buV7Ypks1fyFJhCQeeHjn509RVHJqjTk4uJm0QrMAWriDHrUiFgXloFR0sDBNZgrJTS
+ 6Wh0kFNzYuf82PtwkcXR7NJ4n4z37FcMtD/hafpkxnbwIDgjFAlO4XEHubd4vh3apyjq
+ rMis0U3K6oSzpipS3GgoCnJqAGPKOCcjzZgWwecMYdMKq6O4RxfFum70eViG4mrCQSZF
+ cqVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794935992; x=1795540792;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=K8wnpTH1nMrGErigShulRXCPGdlWe7in6ejye7fYl2k=;
- b=QnjKj8AgtDl8ScNqwLfTf+Zqip7fNvTePiJasO/U1lvFGxo9OKr+Vj9wRdSa1GZTQH
- 9sujG+q79Bpidp/QiWZ9/CDDhJXZ/nKvqgza+Fogt930Z+c1+NXWfZJDemYLBUdc6My+
- h0D2qfzxH4pdlP8ZQANTnHYOd82RZ7Co64CB3aZFlbzIj4QSTUf7ARyojI+EtulXLuUM
- ZEL5sqhbej+xBP9eZtseq2sf5n96+tDUHigOPUKfbgp4eMZS4py2HaF0VjMJdMLLGkHE
- 3W1y6h3lhEAz3kheWn06qQBrmrRPnHDHpvc9bhkwcI0MMdp5eL7xjCNyYCN/x5hW5GQM
- nnbg==
+ d=1e100.net; s=20260707; t=1794936474; x=1795541274;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=bt0QJctYkBcYwa24DqdpH0M8z820AsJXwWwI9jJk3mQ=;
+ b=oKStxCVzF2u2t43Cbf4qNXrcIEd7JbeXAiwXKtxPfhMYYS5kgjZOfdVCy6J9p97q7/
+ phyk1lXtMHHj1xZJu93oVcNfWNVMoeE8i5dVxq7idkzKrcLoCLiNeZyEGICBFPfJlHCX
+ LlH/m4IWfZbb3c/su4fXsKgj25mH/upKnKoeJSOUNUCwBVP3w/VhMd7hJEwcMJBJbYX1
+ aPpGz18Pc7PHS/uRWnqCst221QoaT0TWe62ffllw7DpwEwYKnjUE16TRiEW4uf8ELoae
+ eDVo4vRV9GVwKoHRrd7hV69UFyvbMgWDcEDIwTIYuaxu+ZtAksX1vg2q4CjWEue1VLbJ
+ tt1w==
 X-Forwarded-Encrypted: i=1;
- AL+hErGTYZU4HOkr51RvsKd0CfJIkUjQ8CWdoFlT2eaCJti4anx/1v5Xty783fWyYHtEVf97tWNsfPg=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/EnHu0y5YWtGaV7LzQR3TayaXWVRWZXG20zuuJmTezxcXcDsNv
- x/7zXNUDGuaB6X86IE7aj2AvPh0z3OHpatabAPryRwwX3E8aSyrxv+i51oZDfvdKFPQ=
-X-Gm-Gg: AYBFou3Jxny4s0RFA3SuYOBqFONWOlSMUpFDda1V5Mvlf9oByEdPf01dD6XhIEU3T12
- MxAwvSuKqsha1nAo63sZ2h89A0GTpxuBhNz+joguFJDJBj8SuaZRM7Ig44hwp5a6kNdHf5fCdxc
- N0C9m+yBIvdx/oKIOB5ZxsNFm55Zf0Qzd55PHgkXf8J9Sc7n7WGo5ggkC4MmsKZYoxPMjlryeAW
- SFUc7HINHR8pZi+id/X1Od6OpxcUYYoLTg4y8uauXrrXKJxvbaF91MTXjWJqq25FPtVKj6YHyjQ
- 6WPOj2Myfdk8/zW7IhjiP9mmTpv29A9PQPr55wYbJtZlh4e66ffefM6OOmOZN7+o7RYLK3GgmXw
- 09QWZW5VnOnMTZj9VeM6GiQ7OOiSJADvLkec6p6aVwtJr1HHNVlzwzSYUJ1JPTsFAodBLmylWLd
- tS7htK7k6/JG5XDYk4g9PlloZea4DryKt6frGq0KvTGgjxQm0uscGmK3VRDyJPe2Wh9aNL3n+Iu
- CqQLT5MFmtMG2U+F//SWgEHxRzeuuWsh6eGbkSz8hNvD922qpZiUy9fj3ORVv9yiq5jVnlur3fh
- 4bN1XtDlMmmxAREcxKoxaeFa2LHBJQDw/Y+JmrrMlVAC/qxLmhgMnYHCmmI25tIk3ooVEREfJcA
- IAQE3fSlSy4Su6f+RD7fKfmuezCAOQTK+y6FyW4LMDlW1SJ74TjLpSNHAxIJ5
-X-Received: by 2002:a05:6102:418d:b0:7d0:5688:f511 with SMTP id
- ada2fe7eead31-7d64d756ecdmr4145603137.16.1794935991912; 
- Tue, 17 Nov 2026 09:19:51 -0800 (PST)
-Received: from maple.netwinder.org ([204.244.107.52])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-99e4a1cb543sm176415241.5.2026.11.17.09.19.50
+ AL+hErEMfMdomZ5KWdgyyKfPcrbW5gaMmCZ3OqIdn+fv5DBh0TjipdVZ/QCGXA997Xe/TG/c878gNxk=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+vHvD0WaFj29nS4J7FjjJI10husn5mDNuacJZ6wDe/xdvcjF7k
+ g8LU/kx1ykK6A+g0pllwZMjstdkSXujgL4jntvynYQxWwDe8Gssq7gz/
+X-Gm-Gg: AYBFou1mcxbfAG6FqLrwFTt2EhmYsD3sb0A7ye0XGAndhkiWurUkzZSqE0AWER8+r1h
+ sME3bXYEVo1sDm6FYWdfcvjJZuiMNsLnTDyul+1KcvxpqYK7KTJamDCWKDjN21MVujxgdq8Ljxs
+ 8LyS3MJedRN3s0uXDrX7xddu8tPnQonLjUPr8zbYR4z/sl1GyknCYgFDEEz3YgN5wKmgOWw9Jtm
+ EpPV6gh3a7GEzFzGeyYa6FDHN6WyPvVqeFKmnZVg/aY1NOFsTMAGhTYaWwy54EiqzaCtnYKFsvr
+ Mx73DGlIoBh0ioZekxG27QuiCBwk7IEQyI3NzRjQeBfn+vuo1XnfHNmcVnfzLHnOSpcZUOPFPNS
+ 739AGyHxI806aWYpgEtBOFTTX9k7cV8AH3wI/Lig58KyZcLR1hjCa3i9004ovluQqntHG2uijL1
+ kbLB1/xXowD2lCbxDApUBHxhVvcXWa1pJx4SQpfQpIsygf+3N3UsXB8q7EVt/eLSttlsc/GObby
+ hBPruDi4/YPLI4g1JW578Yv17WTkHOR0/C3HISuAbN53C6PnOiyoI38uREJCI/dqxl3nsswWAG3
+ vw9c83FeP5XfDAvBsys7QtJAZxblv6/6vj4rgONj7EnFYDKC009guGt4YHtizXSSt2HXchviQHm
+ Z/6kRAQyRDYVYOftWP7/6E+JxKnHDu2uWJ/YS7sb5XnhXskTX5MCPUNXSBmNeGMQWpCXj5b8wsd
+ Rhpkp2o5AnkEpS
+X-Received: by 2002:a05:600c:6208:b0:4a7:6bc7:f778 with SMTP id
+ 5b1f17b1804b1-4bb55a93a9amr284600585e9.30.1794936473950; 
+ Tue, 17 Nov 2026 09:27:53 -0800 (PST)
+Received: from cypher.home.roving-it.com
+ ([2001:8b0:fb11:0:3889:86e0:d449:e2e1])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-4a38b9b986esm5671635f8f.59.2026.11.17.09.27.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 09:19:51 -0800 (PST)
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-Date: Tue, 17 Nov 2026 12:19:46 -0500
-Subject: [PATCH RESEND] mtd: rawnand: nand_base: fix pr_warn text
+ Tue, 17 Nov 2026 09:27:53 -0800 (PST)
+From: Peter Robinson <pbrobinson@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.u-boot-project.org
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH v2] disable VBE by default
+Date: Tue, 17 Nov 2026 17:27:42 +0000
+Message-ID: <20261117172749.2114252-1-pbrobinson@gmail.com>
+X-Mailer: git-send-email 2.56.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261117-nand-fix-config-symbol-v1-1-666cc78678f7@linaro.org>
-To: Heiko Schocher <hs@nabladev.com>, u-boot@lists.u-boot-project.org
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Tom Rini <trini@konsulko.com>, Ralph Siemsen <ralph.siemsen@linaro.org>
-X-Mailer: b4 0.16-dev-401aa
-X-Developer-Signature: v=1; a=openssh-sha256; t=1794935990; l=1413;
- i=ralph.siemsen@linaro.org; h=from:subject:message-id;
- bh=KDr4Um/1Kake5hvul0fskSafU5yW1PrxHFLtFQVk5n0=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgG/ALfT0jfT5dAzjFlh+rTh9j4pAiw
- vPQ/tR3mihuAFYAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QLEiaMUl6oM0jukyHDWXBhyv1DeAC0HL2ixuiSIf9SXo0wS2XD4a1NOUvnJ4ZbeV3Vaoe5zD8BY
- NjwO9HnOgUww=
-X-Developer-Key: i=ralph.siemsen@linaro.org; a=openssh;
- fpr=SHA256:12SQdavZEBUxPbBBtqQJgZ9F8vSvwTB6kFlSNgb4IcM
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -163,51 +152,89 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The config symbol CONFIG_MTD_NAND_ECC_BCH does not exist now, and it
-also did not exist in u-boot 2014.10 when this line was added.
+The VBE protocol needs explicit device support and as
+such isn't particularly useful by itself without that,
+it also adds size and the potential of an attack vector
+so devices that wish to use this protocol should
+explicitly opt in to it like all other large features
+in U-Boot.
 
-Change it to CONFIG_NAND_ECC_BCH.
+This also cleans up some other missing dependencies
+around VBE/VPL.
 
-Fixes: 4e67c5712529 ("mtd,ubi,ubifs: sync with linux v3.15")
-Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 ---
- drivers/mtd/nand/raw/nand_base.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-index 48e3685d995..7271b6989da 100644
---- a/drivers/mtd/nand/raw/nand_base.c
-+++ b/drivers/mtd/nand/raw/nand_base.c
-@@ -5070,7 +5070,7 @@ int nand_scan_tail(struct mtd_info *mtd)
+v2:
+- Leave enabled for SANDBOX
+- Add some other missing VBE/VPL dependencies
+
+ boot/Kconfig | 10 +++++-----
+ lib/Kconfig  |  1 +
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 8fcdc36c931..44f5e7994db 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -519,7 +519,7 @@ config SPL_BOOTSTD
+ config VPL_BOOTSTD
+ 	bool "Standard boot support in VPL"
+ 	depends on VPL && VPL_DM && VPL_OF_CONTROL && VPL_BLK
+-	default y
++	default y if VPL
+ 	help
+ 	  This enables standard boot in SPL. This is needed so that VBE
+ 	  (Verified Boot for Embedded) can be used, since it depends on standard
+@@ -720,7 +720,7 @@ config BOOTMETH_QFW
+ config BOOTMETH_VBE
+ 	bool "Bootdev support for Verified Boot for Embedded"
+ 	depends on FIT
+-	default y
++	default y if SANDBOX
+ 	select BOOTMETH_GLOBAL
+ 	select EVENT
+ 	help
+@@ -749,7 +749,7 @@ config VPL_BOOTMETH_VBE
+ 	bool "Bootdev support for Verified Boot for Embedded (VPL)"
+ 	depends on VPL && FIT
+ 	select EVENT
+-	default y
++	default y if SANDBOX
+ 	help
+ 	  Enables support for VBE boot. This is a standard boot method which
+ 	  supports selection of various firmware components, selection of an OS to
+@@ -757,8 +757,8 @@ config VPL_BOOTMETH_VBE
  
- 	case NAND_ECC_SOFT_BCH:
- 		if (!mtd_nand_has_bch()) {
--			pr_warn("CONFIG_MTD_NAND_ECC_BCH not enabled\n");
-+			pr_warn("CONFIG_NAND_ECC_BCH not enabled\n");
- 			BUG();
- 		}
- 		ecc->calculate = nand_bch_calculate_ecc;
-
----
-base-commit: 3973f3c4d24df75ca90d7c0a9f03e5e5c9b48f32
-change-id: 20261030-nand-fix-config-symbol-836c140d4e0e
-
-Best regards,
---
-Ralph Siemsen <ralph.siemsen@linaro.org>
------BEGIN SSH SIGNATURE-----
-U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgG/ALfT0jfT5dAzjFlh+rTh9j4p
-AiwvPQ/tR3mihuAFYAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
-AAAAQDLc9M+y+4NvgJ2jo/cZy7FV9LED6KUQkZltMoVosipiHn+hEovGoSBcKIXZmioe5q
-VMZ7PKy3tG5GVlQfJwlQw=
------END SSH SIGNATURE-----
+ config TPL_BOOTMETH_VBE
+ 	bool "Bootdev support for Verified Boot for Embedded (TPL)"
+-	depends on TPL
+-	default y
++	depends on TPL && VBE
++	default y if SANDBOX
+ 	help
+ 	  Enables support for VBE boot. This is a standard boot method which
+ 	  supports selection of various firmware components, seleciton of an OS to
+diff --git a/lib/Kconfig b/lib/Kconfig
+index a05baa8af00..e86548985d8 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1054,6 +1054,7 @@ config TPL_LZMA
+ 
+ config VPL_LZMA
+ 	bool "Enable LZMA decompression support for VPL build"
++	depends on VPL
+ 	default y if LZMA
+ 	help
+ 	  This enables support for LZMA compression algorithm for VPL boot.
 -- 
-Ralph Siemsen <ralph.siemsen@linaro.org>
+2.56.1
 
