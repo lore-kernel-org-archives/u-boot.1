@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7D96606A32A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 15:17:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A179A606A32C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Nov 2026 15:43:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=a3jUpkiz;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JQSK+l/M
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=u9GMVgN+;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k6Ii5nHm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A5CD5811CB;
-	Tue, 17 Nov 2026 15:17:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 73A4080D62;
+	Tue, 17 Nov 2026 15:43:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fXAeb0zfNPku; Tue, 17 Nov 2026 15:17:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 06A72811B5
+ id M3FOM78PV1nJ; Tue, 17 Nov 2026 15:43:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BAAE080D52
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794928634;
-	b=UMz0UyIq4nuRz9bMqEwSlBE4RQ0fpJDPufd6O3Pe2O5D7+20qMjkB2W0zk6L/s7q+0M1
-	 EibpPXpi6i6Fkq7fZ9cG3LeiyrAI12bbNX90NWUA2+3qPsjPsLgrHBp1VwNH9glgv2De0
-	 22OcnO5npOX2H26fMwxcU3hUkWPdqjEFpa6R2Fy1Vm5tuTDZ5z8FJV86veChrRF3vdF4C
-	 ULAe9EKCTP6RmMfCF3AIYwtESHQ1dQf5AjJV3nZTFJuhtr2T05JtXz0q16YHOyK0CN47F
-	 qYmmkrEkArDQS6di5Ev+iwTHRxy6XYvdo2mrqyVPb4uUFw95z/QrkZsv+UC3tCrgwYQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794930225;
+	b=gD/3RdFzs2O5V1gM1QuJJTidLOV3jCS3Rmb7eTS/YYOSpXJczMWEU60+Zz19MVB1i0Sx
+	 PxrPJV0tW/Br/zhwt2Xup7xTkKnZkVl4NyxYFUTy62vmMhYu2aUcssVqzQKKswGh1ycr5
+	 ZxyFbO1kryxhebOsxlzDAXcgsuAISsNOAO0ZV94Q5GCLozbKLO6pFNCvt1r7BLHZg1GEj
+	 43Enx+Q9tDq6YIbrCu33zu6nK2GZREryAiiu8Us6HbgkTr8Lo5OHOUXyGPehrDVSdngHN
+	 p/rZQCp20VvFHw7i42IgUrQLEbPdatFf8qDFOUCwXRA/yVGx1nCpOTr2zTUuT3/EKCg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794928634;
+	c=relaxed/relaxed; t=1794930225;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,85 +31,83 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=hfF/g10sVuJiOcerBC44PAuxDY2LgidL7HOPUUhAhhY=;
-	b=tcCfKzdSP0jT/M5zVPqGqk+ddFw7fUE04N11jDW3EIi4pgRJGRfaHO9bWIMqmfRj9k9U
-	 G1Sn5ADRA1+phAf0KQHA4ndpFxV3LIFHTyF4XN3Bk1MIU7Z3TMu8ae2uh8QGK8unouk8A
-	 5P9rsOiJye78qGAsJcnHl/lqLXn/1fRGl30bB53udGgKnq1at+kfsrrzZEdm20vpQQZxy
-	 2qzNXqcItGmf0Gfnq6mB/fnaMx3bKXK1SQ+rtUmL/iyW1M+WBXu1uGPjvfGMlu+vG2EX4
-	 WwLWdkRb+k5YuwIHcKlW3uyYlStSTg2Qx6zGAKx4hR1g+SrBheGNVTFIZMmC/EfHFWQ==
+	bh=DWaBvaLx6/OnRXR6rhYVXQ+isR/TXmRMU3VfjhDzako=;
+	b=m0SrvnkVV9mGjb+RI7h0qOgIjrNjl93hU6ayUHbOfFhXuxITcnYFW3tCewnjmLER43af
+	 r8z6SHd2dNT0hepyw2p8NDmG3L2shhljwq4h4UsIw+7n9ZbUiPxfK6qtKENtu335dg6q/
+	 CSxNrLa0hU6WBMHcKuXvNuk7m0juPqmab9WzAHLolUkS1nEeOBF8G73emgZ+VYU5tX8oi
+	 WkLQ9NxgvaT2JN0yQq1ZCAC4Hj9pMkXhRvd0W+5MxiPmcplaADmO/RSNwOjs1eQpCY/On
+	 SwBM7IJC/ZOnu2/N8KSZbzLoVwDgCwOLjLZ2TbCI88S6EJrWV9mt/fdtZ2C56xFIdHw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794928634;
-	bh=hfF/g10sVuJiOcerBC44PAuxDY2LgidL7HOPUUhAhhY=;
+	d=lists.u-boot-project.org; s=default; t=1794930225;
+	bh=DWaBvaLx6/OnRXR6rhYVXQ+isR/TXmRMU3VfjhDzako=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=a3jUpkiznHaIe0oFtEXQth0tSEickGrrsXrtEOWieVCtE+v+6Oqn4lNcV3f7wXbEA
-	 ixTE2d5QVafhyoRDET1hCVQc7yJiObLUu4ZpHg4bSDa9A3Ka5tVYTG/UoNFLWDFw0Q
-	 OZGAEKey9NAHBmwUMuMVilKoPt/lSM58qc1il1vF3d7C7xH5sDJTbWbRP5/jzqrYhM
-	 okL/yJQ02KE8XQzR5FzYJQcegl7oz9W5KNZ0jTRiA2wtytWrbUjY4nPprqjCScaJjw
-	 duau1llUipeXFdfHbVgesM13OOlqP8o6TV03VkzqIsHgGbeBQ3/vdqAgVKnQ1gQixw
-	 jkh0cG9JYwOfw==
+	b=u9GMVgN+YL8tHHBZ1ztbXZ+oOeG6Tnsgi1uvuM7OIQra2uXgg+EW8lvWMisl0IbQ6
+	 rnWdX9QmKsxGeosvPQjMh/CW0xvACRjup1tGxBttTFudNPnC5gjmc/pKN9PcRoTUiL
+	 aTIxNEw6aD23eUQkJyZl8KnBQlSQmyg7T+bjzCjJgnWQJGuPHq45TcoSkwWSUfIwFn
+	 Xpv0bSyUPDOHh9FrjgVLEp/3jyPcjH0nOYUDlsIKM+wmjTuzHjaSUhik5yUrZYWo3n
+	 ge17r6GAGovlusSAeEaE+XDVQxq/2uz/AzVkuA8YnEivMyR057ACY2oUtsGcx+44SF
+	 GsEUaMKqbKXjg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06A72811B5;
-	Tue, 17 Nov 2026 15:17:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BAAE080D52;
+	Tue, 17 Nov 2026 15:43:44 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D69A21A6
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:17:12 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D8B8E105
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:43:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C80B0408B7
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:17:12 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id CA846408D4
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:43:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fdGCHlNJ8MSJ for <u-boot@lists.u-boot-project.org>;
- Tue, 17 Nov 2026 15:17:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0BBC94083E
+ id kxrnuWhM3KlP for <u-boot@lists.u-boot-project.org>;
+ Tue, 17 Nov 2026 15:43:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3CC5E405D6
 Authentication-Results: smtp4.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
  envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=JQSK+l/M
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0BBC94083E
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:17:12 +0000 (UTC)
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=k6Ii5nHm
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3CC5E405D6
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 15:43:41 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 7FB98410A5;
- Tue, 17 Nov 2026 15:17:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E33361F000C4;
- Tue, 17 Nov 2026 15:17:10 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 37D4060D21;
+ Tue, 17 Nov 2026 15:43:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E0991F000C4;
+ Tue, 17 Nov 2026 15:43:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794928631;
- bh=hfF/g10sVuJiOcerBC44PAuxDY2LgidL7HOPUUhAhhY=;
+ s=k20260515; t=1794930219;
+ bh=DWaBvaLx6/OnRXR6rhYVXQ+isR/TXmRMU3VfjhDzako=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=JQSK+l/MxHWJnl9Wnf/YftstwItw5fkb2oH8lz+cukx9Pdt4TBovrnh2ZDB67liOK
- p+Xe0RSiw56MxDGtLvFO5X6gat5U1u9xDQu+wIPz6LyJbYtGmAuVMo7L2WPkhaHlbU
- MU8PXKLhVhquG0yvOWctFjExsaI5b10+lzN5Fssx31sCdJTQ/qXsMR+9dAsW1uKY2t
- p846X6kNIIzyWNus4O5qgm8MQ67XIWhv8NCvjgzC7wmpnS5vhRMzpjRN2DGeM6Cwnd
- r1PG7dPhVgBl+TFKk7rxYbcobA3zFVtZti+zgZbh+zN3D/5S49WR8n31sI0XWPTCOT
- 7H3BSjiDMjUQA==
+ b=k6Ii5nHm/DNEu80sIoiqol7fUr1rG1opQIaI6l8zAklCGjrpEN7vM/eLbaQ4h2gXT
+ d49R0+1VMsj8oUabXlR6URcSsQRwQpZgn8GhIcpMDRveCq1wJpq7/FdjosSx0YtbyE
+ k0em91PtlOl9mQD0OMsiCSFilYJQx7CllwqH74CIO85CXMJDsvQsLkYdJFUatHmqjT
+ woj5rBQ6ZkcYqfGUi8tozsmF9UBw0m/z79aroK6E0WMKJfOCw7DGGFwQXxwowVYyrX
+ LhF7nh6PyxP2zuPavwOfJqdnEuB8umbeo6gF8448YP5a8koeMusBI+YMbl6xBWzTL0
+ g6Q+ooZ2gNOLw==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- u-boot@lists.u-boot-project.org, Jerome Forissier
- <jerome.forissier@arm.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, James Hilliard <james.hilliard1@gmail.com>,
- Lukasz Majewski <lukma@nabladev.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 3/3] common: update: Port DFU TFTP to LwIP
-In-Reply-To: <20261109032700.2839970-3-marek.vasut+renesas@mailbox.org>
-References: <20261109032700.2839970-1-marek.vasut+renesas@mailbox.org>
- <20261109032700.2839970-3-marek.vasut+renesas@mailbox.org>
-Date: Tue, 17 Nov 2026 16:17:09 +0100
-Message-ID: <xhkdb7bibqyh6.fsf@mkorpers-koolstof.csb>
+ u-boot@lists.u-boot-project.org
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Fabrice Gasnier
+ <fabrice.gasnier@foss.st.com>, Lukasz Majewski <lukma@nabladev.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH] usb: Constify driver ops
+In-Reply-To: <20261116174446.3488393-1-marek.vasut+renesas@mailbox.org>
+References: <20261116174446.3488393-1-marek.vasut+renesas@mailbox.org>
+Date: Tue, 17 Nov 2026 16:43:37 +0100
+Message-ID: <xhkdb4idfqx92.fsf@mkorpers-koolstof.csb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -133,20 +131,12 @@ Hi Marek,
 
 Thank you for the patch.
 
-On Mon, Nov 09, 2026 at 04:26, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+On Mon, Nov 16, 2026 at 18:44, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
-> Make DFU TFTP compatible with LwIP by implementing a slightly different
-> and simpler TFTP loading using do_tftpb_raw(). The loader supports all
-> the functionality that was supported by legacy network stack, but has
-> to implement CONFIG_UPDATE_TFTP_CNT_MAX manually.
->
-> Tested on Renesas R-Car H3 Salvator-X(S) board using both:
-> => env set updatefile update.itb ; env set loadaddr 0x50000000 ; dfu tftp
-> => tftp 0x50000000 update.itb && dfu tftp 0x50000000
+> Set the ops structure as static const. The structure is not accessible
+> from outside of this driver and is not going to be modified at runtime.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-Jerome, since this is series is network related, will you pick it up?
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
