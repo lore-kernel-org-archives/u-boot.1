@@ -2,162 +2,122 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC14E606A32A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 13:15:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 173F5606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 13:18:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BW8r1HPc;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=OypMbb+W
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jSzjdyMX;
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=udUgqr29
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 70EE3811D4;
-	Wed, 18 Nov 2026 13:15:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DE3C780DA9;
+	Wed, 18 Nov 2026 13:18:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bHm9zgyBkyy7; Wed, 18 Nov 2026 13:15:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 586B0811B1
+ id PmRdf6ZY6PHo; Wed, 18 Nov 2026 13:18:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C5BAC80F4E
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795007730;
-	b=RwihiD/M+JShI8HcDNBIdlj1R3lyPPbv0H9XLtwkV2lXjQTinyT5paSiwAiKwzjlR74c
-	 PuyTzw/q1k+utwdniRcwN9/m4D67p3bDFUmTIOk3mq11QEL7Eg4BwkWbORQwbsMsutkpN
-	 8Hrwz1HPsOPxkTFKWGV5tvoUb2nZHuqBI1gkVhmt5eMFvlVt9Vt2x0oP7nZvuM2a4v6Kn
-	 0qtqhMFYNDUW/l5xqu1YvY/BcEaEsZdt5AUi4LGQdSYhcIGFE29uWk+XncLCoGOen4PFr
-	 7GI0aVfrqLIryOOHhLc3hSAldVwQrnIH3NYkE7N8Tlis1GwiOuDNtJMDTmc1GcqItqw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795007905;
+	b=HgxZFeRi+JtrzRB5Ojm963XV5NMfNHagSvPFDIi3LdD6OfYj4JXAEjf6wGdftJEU0Aoy
+	 fnmtqVK8rYawHh5/M107leFbv60rzmCGg/acPW8XPGNjC+mEJFMaYgsPpCioQvFnO0lpa
+	 KJLJiNJ3lrdhfDkZZJP13dtpNQtlyjph1QDd3YmejSBCYuwVMQYZeek8zeyG7a0+yP1Hz
+	 eq9/ELfwz1OIaaA/hXCtW8SEga0d2vJrTgnr2/m6ihthUpZmHmZ1v6zP13DyRQ+/BFDVQ
+	 ZSKy7IATFuRDL+yCUjR4v+dxS99OJAIBJ0qkCEXgdoPUW72UYBgJJLg03jQtGLjzjsA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795007730;
+	c=relaxed/relaxed; t=1795007905;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=2JQSr8Je2KNqG9wPJWU2+9sDzS6SL9sB6BFZYpj5Ys0=;
-	b=RcIltBRiKGt5GuZIH4Aoc3rAR6ZnSSsVzeCsg9W+yHZ2pMbUzQSzjq0skiKgTcY7gUMt
-	 fU1ojbthSDcFLpiXEqE7CRxy7QkqfgsH3qrhljJ3Faw61p7qzlsRBsq2aHOyYXC4ZNsSg
-	 cYf/B3lwo0rNY0as63AvRm63Lhu8A3RpIV0dbDNpNvxvfxy42Gg2OqPFfADR6laFtfsUQ
-	 M12eimgQ61l7CC4iqlwWnq1jk4ogS8ZoIprFbSl9lmReM03QbDIJipf+d6xNcaypGDzUb
-	 mh50/bhnH325p+uhRFXqOAwgSNdhjjD1gJWFF8l2QiJzGXLZSD36iuq8oG/H3g+lUjg==
+	 Received:Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=IESqVCzFfEywFZMN+GJuVr/aZjjFl/9d50Nf03pJC4k=;
+	b=TeRjzNhFsjnk+0Nej711CsdHlnFYpNJT62dbdW8lvH7nqKfvCB+bcnZmzYgfqrl/SWSb
+	 Gq67LjNuyac8Hk7hI9OzMmh3WfN2sHvf1wfWd5INuqqKVwfnJQIyxC/py8INBAqcuC+ZS
+	 fBLRQmy4QzVH6X8SmjjxJBRaZbt0fE6wwBeUumFn9bhM/8PZouz4+yVoIb7bjyw47Wd/c
+	 P8r9HJiXq5nZ1bKq/CVwgjzjXcQAHJjvDrFLSeSm2yiMM6ziw/Wjn5yAif4P0L+UhVZ+3
+	 M5YmuHglWit8/TezKhT7CnMeSrtP18pSl99MvmbdCDLXM4oUwUwrwsYty5I6kqZUqVw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=udUgqr29;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795007730;
-	bh=2JQSr8Je2KNqG9wPJWU2+9sDzS6SL9sB6BFZYpj5Ys0=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=BW8r1HPcW5iBKXPoYhbBMAQ7UPJemcJL4t4arrb4+U9anwTs3r+vAZdPjgy3GWsWX
-	 pP7fsD5t3z4O3OzNYfARdnZihcb41xkwgBKSenkSI7gZvyYE9W0+o8jpIqzmOh0ofY
-	 pBPA/C44QJe4pPZE2RU32tKVgp3onCe/ugKBjsYH+34uZU0W1LmtdH28aStZuQzAkQ
-	 aWjnBNlKaCeppKLNg23qYp3RJ+faOkmYk+nmAH+z/IP82Di2YuuJB2qL06TQddupRO
-	 86xhYl5lYRmd2d1p5F2LE1DrCx9hj2ew6gWFVFW4hWCgLceJ86bzvs9CcfZc76bqIt
-	 Qkij9pAnK2roQ==
+	d=lists.u-boot-project.org; s=default; t=1795007904;
+	bh=IESqVCzFfEywFZMN+GJuVr/aZjjFl/9d50Nf03pJC4k=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=jSzjdyMXtP5n4Qle++SC7jDTv+x0XxqMz4JRLwmHanSB6OTfSha7NuKwAwsisB31W
+	 LK5CVGl8wBT7+7gpim4uF2VuhkW+XFA6GPwRY1uSURrk3bCWi2iddHim5yYqW38SFe
+	 4r0B3Oaoe/nBuyHrfIPOWi5HkpTLoCzJOOQ45SK9ACcn4FOsmCDEqOWFPg1Jx8XCja
+	 hDYAt9PAofdEIaDzYR6+rZ/zUWllQiJUc+fce0qQ83GWxpUzHJigHdiUNLxjTJTdb4
+	 7XZAIt/07khF1T40Kl8mQ4XFblE7pih6Ygl58fWOPnakrDgjTUtlun+NOU27gh5r8P
+	 CWSUF9TX7VPfA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 586B0811B1;
-	Wed, 18 Nov 2026 13:15:30 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B8FCA0E
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:15:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C5BAC80F4E;
+	Wed, 18 Nov 2026 13:18:24 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id A541BA0E
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 180464089D
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:15:29 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8B34780F4E
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8AV3JE9-OAwX for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 13:15:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2C84640895
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::431"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::431; helo=mail-wr1-x431.google.com;
- envelope-from=glaroque@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=OypMbb+W
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2C84640895
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:15:27 +0000 (UTC)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-4a32576da88so479698f8f.3
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 05:15:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795007726; x=1795612526;
- darn=lists.u-boot-project.org; 
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=2JQSr8Je2KNqG9wPJWU2+9sDzS6SL9sB6BFZYpj5Ys0=;
- b=OypMbb+WKWMN7BouxyZd9h26YcOlzGz5PGaA6BtENgFBMSJG4rjn5Zk3F6UhD6J+k2
- /21XnnyNIkKxy+k6v94eSVfCMc1QbTLvQZ+hSpwjneIEQi9O5tyrBZ3H/V+cX0MCvsjv
- MT80GtL4gUZxg8BnjdA/d4Dih/LKx71rAfRvvNXjeEXJ/FiZdyrbZVtSBcvJIWkDuDvw
- ec908x1RCp7gkT0XUvHWHfrp2t3rCKnf/FQMSfatg/m+NXYjVj8sF3VvaxdmQ52DWHZ+
- 65fljKxJWkR2f8SsELskTuus9JqurqVejUkZKzOGdtwgOIZFR2WCLYfOAy7MNZ9A2wIA
- 9q2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795007726; x=1795612526;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=2JQSr8Je2KNqG9wPJWU2+9sDzS6SL9sB6BFZYpj5Ys0=;
- b=YuNBHiuSDjI6PmYJWGUTRTrR1/u770qS8S+Ah15a23ay9kTjtU60wtIF+8T0EEDyAt
- Qfh+pVW5r1P9HSunoFHuDZAmK6/Z459okJENiwsegOGAiOjIPuG2tAXeis7YUU3ILNmP
- 5eJ2sRCScNvq88Yf4YG0AP4s9EiE19jaJY0QbDFyXZcmxMKjF2u4zHyWcbmn7nte4owx
- rzy/Lx41N2tXJdFuLthRsxpfPOaxAX8ZTfW/yu2i6FN/z+ADCgPdsF6wgeK82aP1HdbL
- Ml6DuQeQGth62gtHn77U6e0EIrICyziWtfY9kPBwFpWbFQxYoK7gEolV7b6mP3SZYPKX
- uDYg==
-X-Forwarded-Encrypted: i=1;
- AL+hErGMIQnPZQ8L2Y5eeErdB1WA18edhGXkpIRVZ4ObztRg867HGk3LVOeSdw5th/zu6tWiWBcZh1M=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+rryi73cpchiiJVGMpqaKecWN/saP1DgMmtLraL58N4xt5/MbV
- Ndu7uLaKJ5ngx/46VzE/YWFU/B2UN+7LO5kgFUVZw4K6oC+8qV4RKNg4GazHBAVWxsQ=
-X-Gm-Gg: AZFdTZc4I80tlaZXiQ1XC0lmYX4xnll/qCRlKsSHPao46xzKfGpWYhmdRTf/H+obyzL
- IduQzloaX/sFqDbRFZGPsPLJNEUPsgL47YqWSIpozpE9aoorvdTOFhbqlcgwZTS/TG++DvmOLGl
- 5/kpEMnb2nhZBhNzZZ9xOel/1xA6DwUIRW6L33RPtoiylQUgIABTzIqCIlxz08Ov/LVYwcJePa2
- IlQ++sXDs03AJs3aOon0KAcgY91Z45GCElBCngYhZAZxpQ1kdC08ds6/chrAeDloFc883tt6aSs
- Zr+P1KLFkiRTZR2uNDBz2wafwbWntQKxhso6ilMZdDsKJypIPdFXwqqDV4VPOq33lDX4HgZssXW
- t/m+jBDChAlTvthVXzsHzvmjhcvDXtaZdKmtVGTy/I3r4NuLJH91MSCYIefqxqtXiqu/Ga+5YYn
- cHmKVvPeuGIEncrwK/2RPNmhmSj9isrn+2XL4bJDjuvAbA9jJHTc+Hm4wZu6D6hLg0d4bXvbH/o
- +PvHw9pEPr+RhaMgnab56tOPrzb+mquRw93qFM1YUum0E69cC/mYI9dzwXYLKKOb85yLSUIiKyY
- J/vyxJP0N4/E6zDyWHbgmEw2HPR3qwYR7FmCPY2SFUlUSW5nBn8=
-X-Received: by 2002:a05:6000:258a:b0:48c:5304:5e50 with SMTP id
- ffacd0b85a97d-4a62d6d7305mr5731031f8f.0.1795007725681; 
- Wed, 18 Nov 2026 05:15:25 -0800 (PST)
-Received: from [127.0.1.1] ([2a01:e0a:e50:3860::e1d1:d182])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4a654a8c37fsm4691305f8f.18.2026.11.18.05.15.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Nov 2026 05:15:25 -0800 (PST)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Vp4IlO20SBBn for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 13:18:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7B6B380DA9
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=udUgqr29
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7B6B380DA9
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:20 +0000 (UTC)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id DF4911A16D0;
+ Wed, 18 Nov 2026 13:18:17 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id A3F425FE9B;
+ Wed, 18 Nov 2026 13:18:17 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EC54A11BC1F9B; Wed, 18 Nov 2026 14:18:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1795007892; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=IESqVCzFfEywFZMN+GJuVr/aZjjFl/9d50Nf03pJC4k=;
+ b=udUgqr29aMKOKFeZqyqGt3UJ5UKDSwJEvmKT7VC+KJnGcM6DsncgzjeuD84L8ThplfTzHL
+ p1FW6dnwe5rkIs2h69vG+8/bMXu5RrkZa0P750QANQsWqNFhtV/ulFSfQZAtO2KFQlmkV4
+ 3WBg4oCS2hsLvnstSPHBoKh0aAkp2CT5oraI234wFPBPokCm4mBEMBmXC1dwrlU03QrMUg
+ zBW3bTiR3m5dHQ8JLhjG8yFr3h7DzueJVROso7LKwyREVNWvaukpJ2C3CnN/UfpLANes3l
+ tTNrvFLjPrHIkq1WVqzdt/BT+bwZ2F85A5xbMa/kcJpl4N/AarttJEw8IOxwzQ==
+From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
+To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
+ Kendall Willis <k-willis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Abhash Kumar <a-kumar2@ti.com>,
+ Thomas Richard <thomas.richard@bootlin.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v7 00/20] Introduce resume for J7xx SoCs
+Date: Wed, 18 Nov 2026 14:17:47 +0100
+Message-ID: <20261118131807.135859-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.55.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH] fastboot: spi_flash: fix getvar partition-size of raw
- partitions
-From: Guillaume La Roque <glaroque@baylibre.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tom Rini <trini@konsulko.com>, 
- Ariel D'Alessandro <ariel.dalessandro@collabora.com>, 
- u-boot@lists.u-boot-project.org
-In-Reply-To: <20261117-fastboot-spi-flash-blksz-v1-1-17965dcd19e1@baylibre.com>
-References: <20261117-fastboot-spi-flash-blksz-v1-1-17965dcd19e1@baylibre.com>
-Date: Wed, 18 Nov 2026 14:15:21 +0100
-Message-Id: <179500772115.763411.8817762815229506674.b4-review@b4>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795007725; l=389;
- i=glaroque@baylibre.com; s=20261019; h=from:subject:message-id;
- bh=pfSbHSu+5N1oMP1U/CDOg1hAQ9ohM62nSwES6m8Q8r4=;
- b=g1rSvOci2QBQU6GbAuiPtUqAz+HvSzyfb25QxPfBp5tisW7pudaf20ch52YC7nF4DLerwuX3H
- oeTb1tOWjrZCjkPsqg9ggo6VGJuK0AlfvEuBDJ/Q23m5sis98Lw1vcO
-X-Developer-Key: i=glaroque@baylibre.com; a=ed25519;
- pk=nMpSg4NT6M6q143E089emouMc+MXpHO9CWmnEUfjhjI=
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -169,17 +129,216 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, 17 Nov 2026 18:21:43 -0600, David Lechner <dlechner@baylibre.com> wrote:
-> Set the block size of a raw SPI flash partition to one byte, the unit
-> its offset and size are given in, so that getvar partition-size does not
-> multiply the size by an uninitialized value.
+This series allows J7200/J721s2/J784s4/J722s to resume from suspend.
 
-Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
+On those SoCs, a magic value is set in a PMIC register by the DM
+firmware just before suspend, then everything but the PMIC and DDR is
+powered off.
+At resume/boot time, the magic value has to be read back by U-Boot SPL in
+order to know if we are indeed in a resume situation.
+That's the purpose of j7xx_board_is_resuming() introduced here.
 
--- 
-Guillaume La Roque <glaroque@baylibre.com>
+Then, if the SoC is resuming, the DDR has to be brought out of
+retention, at full speed and get out of low power mode.
+Between those steps, the DDR_RET pin has to be de-asserted. But the
+DDR_RET pins of all DDR chips are tied together on a single GPIO, so
+it's impossible to resume one DDR chip after the other, they must be all
+resumed at once.
+That's why it's orchestrated from board_init_f() and not in the k3ddrss
+driver.
+
+Once the DDR is fully functional, the next steps are:
+- retrieve the LPM memory region from DTS
+- authenticate certificates from LPM memory region and apply firewalls
+- ask TIFS to restore TFA and its own minimal context
+- start TFA on remote proc
+- load and jump to DM
+
+Disclaimer:
+---------
+There's a potential attack vector in this sequence, because OPTEE could
+be modified before being reloaded.
+Also, if the certificate replay is skipped, then TFA can be read from
+MSMC.
+
+Patches 1-3 add LPM helpers for all SoCs
+Patch 4 adds the resume detection for all SoCs
+Patch 5 adds common code for DDR retention pin
+Patch 6 enables GTC at resume
+Patch 7 detects IO+DDR resume state for j7200/j784s4
+Patch 8 stores the wakeup reason in MCU_PSRAM0_RAM for j7200/j784s4
+Patch 9 sets the PMIC NSLEEP triggers
+Patches 10-12 add the DDR resume sequence for all SoCs
+Patches 13-16 add the resume flow for all SoCs
+Patch 17 updates the pm-cfg and schema to a new version
+Patch 18 removes now unneeded background firewall on DDR for j7200/j784s4
+Patch 19 extends the firewall for ATF region to TIFS
+Patch 20 add the resume flow documentation
+
+Tested on J722s HS-FS, J7200 GP, J784s4 GP, J721s2 GP
+
+https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/pm/lpm.html#tisci-msg-min-context-restore
+
+It needs lpm_memory_regions described in DTS [updated to v6]:
+https://lore.kernel.org/lkml/20261117130737.141993-1-richard.genoud@bootlin.com/
+
+Changes from v6:
+- rebase on u-boot/next:
+    commit 6201222134cd ("lzma: Update LZMA SDK code from 25.01 to 26.05")
+- drop patches from am62 LPM series (merged in u-boot/next)
+- apply errata i2487 as am62 does (indeed, the memory was seen as
+  corrupted when the first suspend was longer than 40 seconds)
+  in patch 11 ("ram: k3-ddrss: Add j722s DDR resume sequence")
+
+Changes from v5:
+- gather {Acked,Reviewed}-bys
+- remove j721e support
+- Check lpm image size retrieved from DTS
+- Fix size when loading optee+certificate
+- Update U-Boot documentation TODO
+- drop resume state from global data since EARLY_BSS is set, using
+  static variable is ok
+- make CONFIG_K3_LPM default n to prevent from breaking configs with older
+  TIFS
+- check lpm_reg_size in extract_lpm_region
+- replay DM certificate with ti_secure_image_auth_apply_fwls()
+- drop special hanling for j722s in j7xx_board_is_resuming by adding
+  another call to ctrl_mmr_unlock()
+- add missing calls to k3_set_lpm_core_* for each soc
+- panic if clearing isolation fails
+- add resume boot flow and disclaimer in uboot docs
+
+Changes from v4:
+- rebase onto v2026.10-rc2
+- add disclaimer in do_resume() for 2 potential attack vectors
+- include needed patches from AM62 LPM series
+- fix minor checkpatch warning (!xxx instead of == NULL)
+
+Changes from v3:
+- rebase on:
+    commit 8d5f30b52f7c ("Merge patch series "env: migrate static flags list to Kconfig"")
+    + AM62 LPM series
+
+Changes from v2:
+- enable GTC counter at resume
+- factorise __weak j7xx_board_is_resuming()
+- reset PMIC NSLEEP triggers register in one place
+- gather Reviewed-by
+- fix comment style in k3-ddrss.c
+- clean and Factorize k3_deassert_ddr_ret()
+- change printf in dev_err in ti_sci_cmd_proc_auth_apply_fwls()
+
+Changes from v1:
+- drop unneeded patch: configs: j784s4_evm_r5: enable TI_SCI_POWER_DOMAIN
+- factorize j7xx_board_is_resuming (that lead to patch renumbering)
+- drop From: field duplication from patch 1
+- use SYS_K3_SCRATCH_LPM_ADDR config option instead of hardcoded value
+- add missing board/ti/j722s/pm-cfg.yaml
+- migrate missing K3 platforms to new pm-boardcfg
+- remove struct lpm_addr_info mem_addr_lpm; (globals are forbidden at this stage)
+- rework ti_secure_image_auth_apply_fwls()
+- Fix pointer arithmetic: mem_addr_lpm->context_save_addr + FW_IMAGE_SIZE
+- Fix K3_LPM_WAKE_SOURCE_PMIC_GPIO value
+- Fix spellings/comments
+
+Abhash Kumar Jha (4):
+  board: mach-k3: r5: common: enable GTC after core_resume
+  board: evm: Enable de-isolation of IOs at resume for j7200 and j784s4
+  board: mach-k3: r5: common: Store wakeup reason on scratchpad memory
+  arm: mach-k3: Update pm-boardcfg for all k3 platforms
+
+Prasanth Babu Mantena (4):
+  firmware: ti_sci: add low power mode operations
+  mach-k3: r5: common: add helper functions needed in LPM resume
+    sequence
+  arm: dts: k3-j7200: Remove background firewall on DDR
+  arm: dts: k3-j7200: Extend firewall for ATF region to TIFS
+
+Richard Genoud (TI) (9):
+  arm: mach-k3: security: introduce ti_secure_skip_cert()
+  mach-k3: r5: common: introduce j7xx_board_is_resuming()
+  mach-k3: r5: common: introduce k3_deassert_ddr_ret()
+  board: mach-k3: r5: common: Set PMIC NSLEEP triggers bits at resume
+  ram: k3-ddrss: Add j722s DDR resume sequence
+  ram: k3-ddrss: support j784s4/j721s2 DDR resume
+  arm: mach-k3: j784s4: Enable LPM resume flow for J784s4/J742s2 SOCs
+  arm: mach-k3: j722s: Enable LPM resume flow
+  doc: board: ti: Add Jacinto resume flow
+
+Thomas Richard (TI) (3):
+  ram: k3-ddrss: Add exit retention support
+  arm: mach-k3: j721e: Enable LPM resume flow for J7200 SOC
+  arm: mach-k3: j721s2: Enable LPM resume flow
+
+ arch/arm/dts/k3-binman.dtsi                   |    7 +-
+ arch/arm/dts/k3-j7200-binman.dtsi             |    4 +
+ arch/arm/dts/k3-j722s-r5-evm.dts              |    4 +
+ arch/arm/dts/k3-security.h                    |    1 +
+ arch/arm/mach-k3/Kconfig                      |   10 +
+ arch/arm/mach-k3/common.c                     |    6 +
+ arch/arm/mach-k3/common.h                     |   17 +
+ arch/arm/mach-k3/include/mach/hardware.h      |    1 +
+ .../arm/mach-k3/include/mach/j721e_hardware.h |   11 +
+ .../mach-k3/include/mach/j784s4_hardware.h    |   10 +
+ arch/arm/mach-k3/include/mach/k3-ddr.h        |   16 +
+ arch/arm/mach-k3/include/mach/security.h      |    2 +
+ arch/arm/mach-k3/j721e/j721e_init.c           |   32 +
+ arch/arm/mach-k3/j721s2/j721s2_init.c         |   57 +-
+ arch/arm/mach-k3/j722s/j722s_init.c           |    8 +
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |   52 +-
+ arch/arm/mach-k3/lpm-common.h                 |   33 +
+ arch/arm/mach-k3/r5/Kconfig                   |    8 +
+ arch/arm/mach-k3/r5/Makefile                  |    1 +
+ arch/arm/mach-k3/r5/common.c                  |   21 +-
+ arch/arm/mach-k3/r5/lpm-common.c              |  444 +++++
+ arch/arm/mach-k3/schema.yaml                  |  146 +-
+ arch/arm/mach-k3/security.c                   |  108 +-
+ board/beagle/beagleboneai64/pm-cfg.yaml       |    5 +-
+ board/beagle/beagleplay/pm-cfg.yaml           |    7 +-
+ board/beagle/beagley-ai/pm-cfg.yaml           |    7 +-
+ board/phytec/phycore_am62ax/pm-cfg.yaml       |    7 +-
+ board/phytec/phycore_am62x/pm-cfg.yaml        |    7 +-
+ board/phytec/phycore_am64x/pm-cfg.yaml        |    5 +-
+ board/phytec/phycore_am68x/pm-cfg.yaml        |    7 +-
+ board/ti/am62ax/pm-cfg.yaml                   |    7 +-
+ board/ti/am62px/pm-cfg.yaml                   |    7 +-
+ board/ti/am62x/pm-cfg.yaml                    |    7 +-
+ board/ti/am64x/pm-cfg.yaml                    |    5 +-
+ board/ti/am65x/pm-cfg.yaml                    |    7 +-
+ board/ti/j7200/pm-cfg.yaml                    |   92 +-
+ board/ti/j721e/evm.c                          |   25 +
+ board/ti/j721e/pm-cfg.yaml                    |   92 +-
+ board/ti/j721s2/pm-cfg.yaml                   |   94 +-
+ board/ti/j722s/pm-cfg.yaml                    |   94 +-
+ board/ti/j784s4/evm.c                         |   25 +
+ board/ti/j784s4/pm-cfg.yaml                   |   94 +-
+ board/toradex/aquila-am69/pm-cfg.yaml         |    7 +-
+ board/toradex/verdin-am62/pm-cfg.yaml         |    7 +-
+ board/toradex/verdin-am62p/pm-cfg.yaml        |    7 +-
+ doc/board/ti/img/boot_diagram_k3_current.svg  |  444 ++++-
+ doc/board/ti/img/resume_diagram_k3.svg        | 1638 +++++++++++++++++
+ doc/board/ti/j7200_evm.rst                    |   14 +
+ doc/board/ti/j721s2_evm.rst                   |   14 +
+ doc/board/ti/j722s_evm.rst                    |   14 +
+ doc/board/ti/j784s4_evm.rst                   |   14 +
+ drivers/firmware/ti_sci.c                     |  181 ++
+ drivers/firmware/ti_sci.h                     |   92 +
+ drivers/ram/k3-ddrss/k3-ddrss-lpm.c           |    2 +-
+ drivers/ram/k3-ddrss/k3-ddrss.c               |  270 +++
+ drivers/ram/k3-ddrss/lpddr4_k3_reg.h          |   94 +
+ drivers/remoteproc/ti_k3_arm64_rproc.c        |   10 +-
+ include/linux/soc/ti/ti_sci_protocol.h        |    8 +
+ tools/binman/etype/ti_board_config.py         |    4 +-
+ 59 files changed, 4214 insertions(+), 199 deletions(-)
+ create mode 100644 arch/arm/mach-k3/lpm-common.h
+ create mode 100644 arch/arm/mach-k3/r5/lpm-common.c
+ create mode 100644 doc/board/ti/img/resume_diagram_k3.svg
+ create mode 100644 drivers/ram/k3-ddrss/lpddr4_k3_reg.h
+
+
+base-commit: 6201222134cd704b5717211fc917e2ca6263577a
