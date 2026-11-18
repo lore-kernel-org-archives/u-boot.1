@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB683606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 13:18:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F551606A33F
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 13:18:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Pm+oxVSA;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=y06NOYpE
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ngEeUPyw;
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=IJXfox2m
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A7DB440A0D;
-	Wed, 18 Nov 2026 13:18:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 513F580DA9;
+	Wed, 18 Nov 2026 13:18:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f3cz-z8Pvpqy; Wed, 18 Nov 2026 13:18:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D966A409ED
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795007929;
-	b=AQv094pnlkPSK+wjUquzs7v1vPlBryaNMo/gKhb+XD4/rfQGe7tcbNcLWAl7kpLC8Ljt
-	 LsSny9gtu5pdOJx9Qi2U81d7DCI2mArmvQKht7rBkIhmpWlxGvAenZckqHyxnOIaqbjyW
-	 FnqZxr0v6PtdpTuPhkbrm5gRhgHQNANmgcI/bEDe+GFWLL8Nm3S7nA7WXzdJcc6MaJ6dv
-	 dj2ER6I6D4SgrOzwGruerp6s+4kDlQKk7JL82ilNQuPS6m277u7UTwrqsAe28sPtKhf9l
-	 iTX8yXDnqlkub5WsxQqfgeDnKRvoTkDgjX0QMP7Ae0xCYGh8zxd6H3kZXuJKmLicHWQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9DpqA-vtyQ7w; Wed, 18 Nov 2026 13:18:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 92D75811D4
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795007931;
+	b=nqzHaYLMO4zfYlrg05JjJjjbxzgvEfnIMMBcjjG9HleKYfSJ5bgM71P8Gzf4aksmtKMj
+	 wS1Syt+lRcje9SH2QZfChN56fMJQuoyPZuvTzz2kdDyY9JBcacckHeh7m031uD/FnnQ1i
+	 dI3X1xdHuchAIiFpJtOsKjcmByZeYyHHYOJ0EW8AwDXn9zfT0u2XOLiSBvu+Utb6Dlhsw
+	 tABjNANN6V2ZOtw8hsS4+OTlhN7JR/q1XEVZi3bLBFW5pY71AAdq3rc5zXTrWp45rj2kP
+	 PGbk/LUZ4FbJtGMIy2SJe1ju615JTXHXG4IdfgRpSt3tYXUeN8OcKFCGFLGQ1sLuJbQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795007929;
+	c=relaxed/relaxed; t=1795007931;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,71 +32,71 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Zq58mLGvVNaQN8zSHZcQ4IMLOOY2jtx834LpFMJeop4=;
-	b=ahc01MZa3/NYAC/6iRJ/Qthk7207egrx3+JTEXbYYp3xG/9ejdzLvHYUDaa1AjUsgnXn
-	 OiWUwOc83OuV/klUUGaexPqS+VYdCcS6X+tumZqyjGID8ivTCIVSQrQIfB+5WYO0VCldl
-	 24fUj74+w+z1+KSpzc4kS8s7PDk/eXkPvizaPgGyodhrUpH4a08xVmdoCBzAYufqWevyn
-	 RP5apBIaWfuwkjlS5jwio8y6Nam/J7hbC4do1uwjlZoe8aEC2ruy8HYeir5g6LPE/C3qP
-	 8dnI/dRVY7Uor+M1Zz47/Vy+CEnUinPoqm662PnGlPhiYVGzyoIix2Xh35K+OLP8E2Q==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=sfAzHKLZwLT9+J1EOsT9bdCJta0Yu1AWhyq1ftXoeKI=;
+	b=bG9KcQC/fm2m8pNqtW6uyvToiNV6N1VAjsulc83739zyHvobjgtZtrFMFBPbrOy8/C2t
+	 TG8IEO6hQuGLSA5MEaEBA+8iHrdC7XL5kjgEfZtQEGdJLVxJa/s/r6G3MFTFdu7Neo6EL
+	 eo/IdbDZzztFSQPIzGRNTKsbuhc+9PJ7KLuaECeUAcQpTBpZkgaZglX7qc/ffqpRXFFQj
+	 Tqjeoonb9AEmHsnbfz/6MkoD6PzE212nULXDKFFCvrQqkpx1rmQKNUMsdIBit5kdNNYVW
+	 Ukn58JHigtobpAxiq0V52QiSYGDkqQHL/gCnuDue3AkbBYOvtpv3VAF7t4I7m2dhGvw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795007929;
-	bh=Zq58mLGvVNaQN8zSHZcQ4IMLOOY2jtx834LpFMJeop4=;
+	d=lists.u-boot-project.org; s=default; t=1795007931;
+	bh=sfAzHKLZwLT9+J1EOsT9bdCJta0Yu1AWhyq1ftXoeKI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Pm+oxVSA5pAMqaK+lrpsipFRg5cCA7O1DvVYX00Exk198gMX27iz5+p8O+69HkFNy
-	 iRhFBHqspaSQiH3KEsjfZZmway4K4Ko2JfbhhUMxrN2GpJ0Hl+HvWyiq4d1S2Kn45V
-	 kMkvWTX5Xb+nq/b5pVgmEhkmYtbBIIBU8d33soqCtnwOkt0QlaS70qkXWfBvnIhABE
-	 /LaTQiiTvkl8g2Cm2/6GCBARObB5kRa3zbBYcYeDvGH1p6tqVffyhd2jCJXmxDIDD3
-	 AiabAA68SbNHccjGdyYWB+SIdGDlz8ZQY1x9PdMewqwCscBB7lcusScoe3PMTKqBTf
-	 E0IGZdOMRHMfg==
+	b=ngEeUPywbtDNra9snnrdOMONEsToeoPk9SjafW/h46QIsYuju/lYV+sOfgbvW8nzN
+	 VD8PxBIR1FtPQY4BYVhNW+WMph3Tm/sVnvADEVS43HBtUBIK08hZu0IHALNxdGowY3
+	 fcGLDUKgB9vmfCkbAPQkIjlRvYCqKm8SBVLBnABoqS2qmbdrpiaIcHPYUihsUQDyYn
+	 wTnB6My7KPmsYOKT54PqZjUGwgrA3yO5+noQxdRhflZ4MUDHPp5rc+C3yFZ5s0MePq
+	 hKZGrcUKEvL73SNGQ5A9fwL2hiX2q3z0u7d4e1Ax9UJ/9Dd7EHCw2M3bbv5TApnLU7
+	 jPqzZwL7Lda0A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D966A409ED;
-	Wed, 18 Nov 2026 13:18:48 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 00F1161
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 92D75811D4;
+	Wed, 18 Nov 2026 13:18:51 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 20FCD70B
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id F2DD340486
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:47 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1291040A0E
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1H2ZjVsA0ZRP for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 13:18:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9887C40481
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
- helo=smtpout-03.galae.net; envelope-from=richard.genoud@bootlin.com;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wn-EUJv7CbAa for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 13:18:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 20D59409F7
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=y06NOYpE
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9887C40481
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:46 +0000 (UTC)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
+ header.a=rsa-sha256 header.s=dkim header.b=IJXfox2m
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 20D59409F7
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 13:18:48 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 2F9614E41627;
- Wed, 18 Nov 2026 13:18:44 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id D2D6C1A16D4;
+ Wed, 18 Nov 2026 13:18:46 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id EFB625FE9B;
- Wed, 18 Nov 2026 13:18:43 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 9D8205FE9B;
+ Wed, 18 Nov 2026 13:18:46 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 53BE111BC1D4D; Wed, 18 Nov 2026 14:18:37 +0100 (CET)
+ with ESMTPSA id 6A47511BC1443; Wed, 18 Nov 2026 14:18:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1795007919; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1795007925; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=Zq58mLGvVNaQN8zSHZcQ4IMLOOY2jtx834LpFMJeop4=;
- b=y06NOYpEMobRl6UavtmF98i+efKYT7CUj6bNhRY2/GoBGbCcSEQjm00DCSXbNYYrZ65GuS
- FuWLh4VVPSCMhVbg5qoOjyP2OaFmlzLdaSsiUdnOYbj9wBVS0tyC9CQjwnjtzJmT6jbe9i
- IeB9X5/wemXREiINrT1/qSDQvBlk4/yTCwub3uNG1V+4j/p6NCSqmLaYd2KtZRKPUv0ouy
- OdMKXRxZHFneefrEXeCf1Ami2OAjFf7ANkxzLKl65NO6kULdeNwZJVyXPkuOOpk1P/+6gr
- X53Q28oyeu1WZylRu4bdreESygLqyB9CYHOMgwC18QZv/XmXxolUNl2PbbRnbw==
+ bh=sfAzHKLZwLT9+J1EOsT9bdCJta0Yu1AWhyq1ftXoeKI=;
+ b=IJXfox2mC58+ezJXWs6qC/p+m9IpHd4uKpZd6CWIqNKFzwp7/CHZELHsLP6b3uSMjnavxl
+ 7rHtp3UVtnQMWdOt6XutNWjSgOV+Zw2XgT1gIDT9D5C0/x1qqj2ta4XbGDwXiPs+t8oJfF
+ WH4G8Dc7sZWxUcWhN+bKhQiLbAF1onJ+fzAOoC3uDFnSmFbBauc5dqW8O+3/1oova8dg5p
+ CgtAn7lx8Zee9BIVVs4/EvDYhn0o96bt14iDS2ukWjQa6BuCZdmn7o8KY9NjMksz6mp2b1
+ yXOGZjsn+BSgjqIdqpT/P1oCPsC6vidw/w/0hZVROr2g3rvCDW/GQUSSn6/Z8A==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
@@ -110,9 +110,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v7 05/20] mach-k3: r5: common: introduce k3_deassert_ddr_ret()
-Date: Wed, 18 Nov 2026 14:17:52 +0100
-Message-ID: <20261118131807.135859-6-richard.genoud@bootlin.com>
+Subject: [PATCH v7 06/20] board: mach-k3: r5: common: enable GTC after
+ core_resume
+Date: Wed, 18 Nov 2026 14:17:53 +0100
+Message-ID: <20261118131807.135859-7-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261118131807.135859-1-richard.genoud@bootlin.com>
 References: <20261118131807.135859-1-richard.genoud@bootlin.com>
@@ -132,72 +133,81 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Deasserting DDR retention pin is quite similar from J7200, J784s4
-and j721s2 SoCs.
+From: Abhash Kumar Jha <a-kumar2@ti.com>
 
-Instead of duplicating almost the same code, add it in lpm-common.c.
+The GTC counter values are restored in the resume sequence by TIFS as
+part of the core_resume API. Enable GTC counter after it is restored.
 
-NB: On J7200, there's a latch, so the clock needs to be toggled.
+Also add a check to make sure that rproc_load only enables the GTC counter
+in the case of a cold boot.
 
 Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
+Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/mach-k3/lpm-common.h    |  2 ++
- arch/arm/mach-k3/r5/lpm-common.c | 27 +++++++++++++++++++++++++++
- 2 files changed, 29 insertions(+)
+ arch/arm/mach-k3/r5/lpm-common.c       | 11 +++++++++++
+ drivers/remoteproc/ti_k3_arm64_rproc.c | 10 ++++++++--
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-k3/lpm-common.h b/arch/arm/mach-k3/lpm-common.h
-index 27a27065442c..17352b06353f 100644
---- a/arch/arm/mach-k3/lpm-common.h
-+++ b/arch/arm/mach-k3/lpm-common.h
-@@ -15,6 +15,8 @@
- void __noreturn do_resume(void);
- void lpm_process(void);
- int save_lpm_region_idx(unsigned int image_id, unsigned long image_start);
-+void k3_deassert_ddr_ret(const char *pmic_name, unsigned int ddr_ret_val,
-+			 unsigned int ddr_ret_clk, bool toggle);
- void k3_set_lpm_core_bus_node_path(const char *node_path);
- void k3_set_lpm_core_compatible(const char *compatible);
- #else
 diff --git a/arch/arm/mach-k3/r5/lpm-common.c b/arch/arm/mach-k3/r5/lpm-common.c
-index 5d484f6df037..f1d16f38157f 100644
+index f1d16f38157f..f949ff0904ed 100644
 --- a/arch/arm/mach-k3/r5/lpm-common.c
 +++ b/arch/arm/mach-k3/r5/lpm-common.c
-@@ -46,6 +46,33 @@ enum k3_resume_state {
- 	K3_RESUME_STATE_RESUMING
- };
- 
-+#define GPIO_OUT_1 0x3D
-+void k3_deassert_ddr_ret(const char *pmic_name, unsigned int ddr_ret_val,
-+			 unsigned int ddr_ret_clk, bool toggle)
-+{
-+	struct udevice *pmic;
-+	int regval;
-+	int err;
-+
-+	err = uclass_get_device_by_name(UCLASS_PMIC, pmic_name, &pmic);
-+	if (err) {
-+		printf("Getting %s init failed: %d\n", pmic_name, err);
-+		return;
-+	}
-+
-+	/* Set DDR_RET Signal Low on PMIC */
-+	regval = pmic_reg_read(pmic, GPIO_OUT_1) & ~ddr_ret_val;
-+	pmic_reg_write(pmic, GPIO_OUT_1, regval);
-+
-+	if (toggle) {
-+		/* Now toggle the CLK of the latch for DDR retention */
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval | ddr_ret_clk);
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval & ~ddr_ret_clk);
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval | ddr_ret_clk);
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval & ~ddr_ret_clk);
-+	}
-+}
-+
- bool j7xx_board_is_resuming(void)
+@@ -313,6 +313,7 @@ static void resume_rproc_f(void)
  {
- 	static enum k3_resume_state k3_resuming;
+ 	struct power_domain rproc_pwrdmn;
+ 	struct udevice *dev;
++	void *gtc_base;
+ 	int ret;
+ 
+ 	ret = uclass_get_device_by_seq(UCLASS_REMOTEPROC, 1, &dev);
+@@ -323,6 +324,16 @@ static void resume_rproc_f(void)
+ 	if (ret)
+ 		panic("power_domain_get_rproc() failed: %d\n", ret);
+ 
++	gtc_base = dev_read_addr_ptr(dev);
++	if (!gtc_base)
++		panic("Get GTC address failed\n");
++
++#define GTC_CNTCR_REG	0x0
++#define GTC_CNTR_EN	0x3
++
++	/* GTC counter values have been restored by TIFS, so enable the counter */
++	writel(GTC_CNTR_EN, gtc_base + GTC_CNTCR_REG);
++
+ 	ret = power_domain_on(&rproc_pwrdmn);
+ 	if (ret)
+ 		panic("power_domain_on failed: %d\n", ret);
+diff --git a/drivers/remoteproc/ti_k3_arm64_rproc.c b/drivers/remoteproc/ti_k3_arm64_rproc.c
+index 403c6bed2e8c..9b8a6b7dc53a 100644
+--- a/drivers/remoteproc/ti_k3_arm64_rproc.c
++++ b/drivers/remoteproc/ti_k3_arm64_rproc.c
+@@ -17,6 +17,7 @@
+ #include <dm/device_compat.h>
+ #include <linux/err.h>
+ #include <linux/soc/ti/ti_sci_protocol.h>
++#include <mach/hardware.h>
+ #include "ti_sci_proc.h"
+ 
+ #define INVALID_ID	0xff
+@@ -78,8 +79,13 @@ static int k3_arm64_load(struct udevice *dev, ulong addr, ulong size)
+ 	/* Store the clock frequency down for GTC users to pick  up */
+ 	writel((u32)gtc_rate, rproc->gtc_base + GTC_CNTFID0_REG);
+ 
+-	/* Enable the timer before starting remote core */
+-	writel(GTC_CNTR_EN, rproc->gtc_base + GTC_CNTCR_REG);
++	if (!j7xx_board_is_resuming()) {
++		/*
++		 * In case of a fresh boot, enable the timer before
++		 * starting the remote core.
++		 */
++		writel(GTC_CNTR_EN, rproc->gtc_base + GTC_CNTCR_REG);
++	}
+ 
+ 	/*
+ 	 * Setting the right clock frequency would have taken care by
