@@ -1,177 +1,158 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EDA060A261B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 16:27:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2286606A320
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 16:37:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lJt52KFO;
-	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=s3w4h+Dh
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YQEwPBEi;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=o1HXbB1f
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 23DF760711;
-	Wed, 18 Nov 2026 16:27:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8BB028122A;
+	Wed, 18 Nov 2026 16:37:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id doxN9E5_cAeT; Wed, 18 Nov 2026 16:27:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6C81B60853
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795019269;
-	b=JFIHFDO+9NBDUgPoVtbAhpnFa94PUrJ212IKF/H3SPq1ak9/WAmQpMdSCO11kbhKHqTq
-	 eHN3ZNE+bxmJeAsgRs44vCZj4NLCNT/u1O51C28klDkn4TyyYDSxtxtTLWG+5KtddPSAx
-	 lhzUoFWvHiR26P/LJw2dmc93Xug3qEayZWeecvpHIziuKWBQ4Wd1gLMfwsmL2FFT8DpX9
-	 7HPhND169qDnCVIKH2ytZZ+mku0/pau5C1bSpfMQXT5yNorRil99yaCF78qUsE6OXtf3P
-	 +VwLLBDjGamP0grZqGGCh5tLmaoXakGJgvAhZBCzcV6C/mn5RvV6yQf+oXBpeLt8fww==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oRJm4YLcOBGm; Wed, 18 Nov 2026 16:37:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org ABFAE8110A
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795019861;
+	b=JjqBKRwQiYCTH43ASAAxQRZPVBY0cfXOMl3byw2Z19VpeZegPtpxhor8PSpBL6+LCaNx
+	 uUBtX51irpSSFqd0i0u0n0doP/hhzBTliK/X3x4lCK/M/2IQWsEIHSskxL7QtmLo9wDx/
+	 PlF46EM8eTP0jr15WmWjnYrcO1Ah5IBaJBNyRe+Fo+QKvcZPJmekswt5SlJbfAO4Mo9IV
+	 pxxBkZBBi6eLKCRl/DU33QXvWTbiDg2HgL4JYpkomr0SX6hZNERmpOX4TSgdv7aA5evN6
+	 QFpgm3YDF1PZxDQiw8+XZnFU4gAE0v5RAD6nmiBXfHIvKoFtl01Y8dTqMPSsR9AVPtg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795019269;
+	c=relaxed/relaxed; t=1795019861;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=lw5FOIbUTOBBiyJTrzzmI98X4DUGTlf2hnFEZpSZSWU=;
-	b=QL4tg4Thn7KM0kZg/WfECJR/0fSIpEklvD7zqNy68GttVbMg6xghfqtE/T5PrO02w//K
-	 90gTGdg3Zsgo1K1c20Lnr5mcp7XsZ4ojnkuGA7he30Aa3EeXAusscu97UYnyPJqnAECAb
-	 gwSp5FYd25QWD7gvemGQmbE5jpm+ERFHj8T5fD+QTqflLhnZ1HXfODABTCPGTZaq8u83S
-	 6OPr2yTo07ZtghbwONuKabsfGilrcf/EhtIRCM6Z7RWsBmPBuUuHpqGHeVESiMrVDG7ia
-	 Ai0UhQJqYQjuCVKM9GupPV/tQZ0InahP/cy0lNFgwLpYJpHHftlTHyLXUP9IFavjKng==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=55WRykGkeIRoZceQm3j2zo141I9boOl2NBxXC93z4QI=;
+	b=FoSVFDoWo1mJ5PtJRs6QSZj+lwHQaykNCrkMoEBci+Y4gkeGCDnqRZKMHhbnXMVtO8x9
+	 d+mBIkVnx7cZGPaA1WedUYwMoho5dc/F8S9JJ0gyRhkPTsthXAliCUZ2TBwnZbzIsSpeA
+	 ZTpOwTRUynyVQBAIEzlgwDAPg169hecalNHElYGZY02CWZnXjvuvnQXWt2Z1/B0BB9/hP
+	 bWESyGEvRTiE1QCLPr3stmC2p2bwzcCjVsRYxDZev2qYA7cZzxknJbLrHLGyn2Lm2bhsz
+	 REfMEcNXp2Vq6FjRHpE0T9iKzNzgELLtF8n/D9JVq13Pe0rUz4pbiGuHihtnnIHo6aQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795019269;
-	bh=lw5FOIbUTOBBiyJTrzzmI98X4DUGTlf2hnFEZpSZSWU=;
+	d=lists.u-boot-project.org; s=default; t=1795019861;
+	bh=55WRykGkeIRoZceQm3j2zo141I9boOl2NBxXC93z4QI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lJt52KFOvzxFwr7HCQU01pQ5iexHEHH2NGJGmYUXHAKGeS0B78FRxHHIe2AUbz69d
-	 roijDsQGqHsfheCUbYFCfe5jbc8MbWAJ2HMlqNG3kxUH6Wqx8nDnjYfN0vvPsh4+4a
-	 8h0BN4u/R/q/jz6OEFrIxUSOChLtKLE0OSj+uulxTX6wmrFIC5dbpE/QsVInYmB0dU
-	 iWFK6HgmfznbbLKEIU2ThBXKhX+n6B9Di5EdHQ+5Cz5a9Y1Y8TDOcCDTMMmTlZ9WxH
-	 mEa5otzjIMTSKyHGnV58WXVKCMBUWmHXPhPcilT96c756Abkv+Zaff8yet/iwrmk4i
-	 RvwJFoG/ONTpw==
+	b=YQEwPBEidzijQqnpMwU9Hcj956EjbOKUH81kxZsdnSV55/R+GGHOEM9Uc1ItGg7p8
+	 MOw+VZKZkm8U1FH2GgayBAXoRXfxFq0HVRnHeYK3wUbQPGSxBkdXZSmalB90wLjshY
+	 r1kr3xFGPcXljmAlW0vYLfF5yq0yzK7nXQnzfsxBUGPSm91qU1rroas6Y2XyQ0zNVK
+	 Cg9yvXZk75qssksEcWrB5yXRCc1U67QAOasDpzZ23iw27e579x8XJPTXaCUorD2CQg
+	 HAn8zUgxVzjrYmAq9CJUJf02xKsMoL7YFrppueOKpbejeGxvup3ZdawGO+nnFVGb9M
+	 wfJT1S2Y7s1jg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6C81B60853;
-	Wed, 18 Nov 2026 16:27:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ABFAE8110A;
+	Wed, 18 Nov 2026 16:37:41 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0CCCCA0E
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 16:27:48 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id F018513C
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 16:37:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id ED6454082F
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 16:27:47 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E146C4099C
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 16:37:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dpvDy6ciEgvK for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 16:27:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7117740807
+ id b1j2La6h-SUc for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 16:37:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CE15B4071F
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.123
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
- helo=smtp-relay-internal-1.canonical.com;
- envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=s3w4h+Dh
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7117740807
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 16:27:45 +0000 (UTC)
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3AA273F2DA
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 16:27:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1795019263;
- bh=lw5FOIbUTOBBiyJTrzzmI98X4DUGTlf2hnFEZpSZSWU=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=s3w4h+DhtFgXKar8T3o8S5tom1pUfy6aKCHBmonu3/eRjZ1wD97/34RRGWKP0gawV
- 8aaQ7VVPQxhJlOiWtq67Dx2y38VkGHWRkMsmlQ8sigW9RnjFKCNcLvMymTCwt/jrAj
- oHZoVghaL1MuzGZCDvKrZnnvXfBja6Tr0fIMELzFTx04kVD6afY9vG8K5ERo2s062N
- uLzTSJjgYovgEMWy8gpyG1dwTFRzq46L7J9j/lSxG6pweem538XxrL1Q8/bK1A7tJj
- 2433MLCPoubB3nH7yo7xS/fV69Nd7B+lF4nxD/G6jzjTeC2qm9Lt2Ip4pTOgo8TDWR
- 66HLnRaTYaVPvQCFFehxIWz5ok8cN5rnlocLQj3YuIysuqwDuETKM3451pErS6IBnB
- 1K2UPTavs/f6SsnGOKKtaV9YWypxpnwKnCrwoZWebckSWnX3lLs7umWRIgbTdBBAqW
- huRAyjR/QmMy5tgqKYG9m1k8jB5h0UAJlR465Gw5CFq4LwIpz8tNNOutm19QVllvyK
- 6XbyqK2evIWHBsb0AEem9B5qA1pI8Eg07sshp5oNoZZ14+jgelmYKcR4PkO8D/bR+K
- qSNiV6gQsjiNcRai1e3Cd7pEhZ6dYhA0yYch23Ns4xGxvnpX+NutWhGlLPqCZiaxU/
- YFAae3b4PMriniGH7719lj00=
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-49febef74e3so14743465e9.0
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 08:27:43 -0800 (PST)
+ arc=none smtp.remote-ip="2a00:1450:4864:20::334"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
+ envelope-from=glaroque@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=o1HXbB1f
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CE15B4071F
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 16:37:38 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4a140e7405dso11668565e9.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 08:37:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1795019856; x=1795624656;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=55WRykGkeIRoZceQm3j2zo141I9boOl2NBxXC93z4QI=;
+ b=o1HXbB1fKD/XsoOSckevQwveWrv1ZzDXSq+MeAdzHJ4Ck4wOh4Vt6m0WywKKMr9Cxb
+ m9f+dOA3xn7oVejn7gs79ZK2AcdB69WpCQ7n+KQh7mPxFwPOTBP4I6kQAFBUVxU7R7wM
+ XiQGOpfy+mlYnZYwKOX98GDfU0Mq1iJgwyICB3/QUr04xBL0z1NJKU0TYfvoSLP+orMq
+ m7+WdPTqK94YI51dZzinEiKNq4tLHVfwXRyOvztHPlIzrFFOVCF+mHRNh4uuJYdSZP7e
+ 7hldskcQHYcduY22gTFLMZGvbEfOqwFWEPC1xV8FHwfRKpRrg73j+lRD+aEQiYY4/HDA
+ PWEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795019263; x=1795624063;
+ d=1e100.net; s=20260707; t=1795019856; x=1795624656;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lw5FOIbUTOBBiyJTrzzmI98X4DUGTlf2hnFEZpSZSWU=;
- b=SiIXLA28ar20I/cR19d2jijyrGuIvbhMkf9rbD2FaAeiFSNjh5pzIlk4Ny+Dqm36p4
- XiIUyOu/18o8Sz/hc1eBs/CjXNL2kzxXF4rrtRwcXCa8wYe0iaJtYkbQl/YlNgvcfMoA
- PvRzhMrkTyeMnOfNzWDfyRBT/2yj7Fz8COotN+848KSatUpTOf7MSKTC/toADgc/AZFf
- 2hV4+OH3Qa9q5uQ/pQvmE+GYo1P1TYTkN11XzKay2tZJswQ5kqCPvpUAHkVaZFCLq/EO
- 2Yn4xNPmPQmqzmntgAiElfwKCvioU4ynkMA39ZpcVhHlCb3fJJW1ZYHgGGBjFmfiKi1J
- gTgA==
+ bh=55WRykGkeIRoZceQm3j2zo141I9boOl2NBxXC93z4QI=;
+ b=KG6rDMXZVGiXbnTMheXWE9UlH1PE89Y64ovoFUPRDXlT5Q+9xLB5cj21E34TaWlXOc
+ wPQZjMpO4rJAdrCgPi+WUtdPSGwS8LkiXzB066LEwWFV5xEUZCcbrvXWxQZG7YTwDTqe
+ +LCI61Oc+vRatHBIv5nsLRJNRfEK2tAYrQILFaOipRsavR33/K7WxXKKj8DGfFH0i38C
+ k9sr0+phe/k+TId2BsFaCnN/JV2+WWfDaMvPd9mwkYgPi4Xkx5cFMGnU0b9WaR9QS/4f
+ ktWyjZN/1SeoYdQyVNqtIzJDBFzcAF/LSF5FY1eCVvSxOW02XbVvdTnYqSieUsrzZiuE
+ 6WJQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErHsPe7rKalimtnp+BJ7143gGptyJMcVTjYs1kwa62UB+zfgGUBYTzAMcsevvJNzUTjxZMv8ZX8=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9BnOYac5T4Nau4iNAGw4OqKQ4imdeV88QH2Zj7hieh86LKpKUf
- 9LIv2hrpYkDY764TrrpwMN1pme7xIDM1c1n5iSZqJnA+B80ACY3vHRNyaOrc8Me4tF82RGTyS9n
- cdjsVogqzK2oj/tflF5bIdIZaFaFwhfAfoTCtCvotmputyqEAjEc88U7Lf7gorgbNX92GR/3USr
- Q9aAYo9Nv1MQ==
-X-Gm-Gg: AYBFou2alwpAMUwh1wp5j+f0IyT5qR5H0JKoVLTxthpKXXfkbrmxWvi0KSCCEkYCbCt
- lpyu0MW1Dp5OoUNnbeJhI08J+xpKnksQq8KTh+AiIJfz0SHypc87KH7oEy5g5TnFoewJH6Qbhe1
- X3TlUTlEu+QcNawgR6MrUZ5lt077WddDL3J8E1L3Rp+5m8pcaxZES0oaR0beeCbb0VLyN5oz0jY
- 1QuihLksAt/lYTaN7DvH2UKWN+dnydx5AYuf13fnPeebwOsCljqREQHWlXyKELti28TVoExAxN8
- gGacEw0wgRWjNIFWBGiv/dLKzO9vbItUZ+UpO3HgSYHI76YYI/qkJB6QJSfrTkaNMAdwzNSI5OL
- JZ8/SzKjKLmOfrv1ifu1T/Zmn0kLl8hDFKPctiO7VJm19Q7Q9rLY3DJv+LigdDhr9lOCgxPkkwV
- bayP3ERAZ0O7OwO+Y4C2Z4VKlt/rDMzRYzYTEXJy3KWTR1fTBfOkic/hUua8b5kCOcMVoEpIfPf
- g==
-X-Received: by 2002:a05:600d:82e8:b0:4ba:4928:8aec with SMTP id
- 5b1f17b1804b1-4bb7da18d83mr55098145e9.9.1795019262822; 
- Wed, 18 Nov 2026 08:27:42 -0800 (PST)
-X-Received: by 2002:a05:600d:82e8:b0:4ba:4928:8aec with SMTP id
- 5b1f17b1804b1-4bb7da18d83mr55097745e9.9.1795019262470; 
- Wed, 18 Nov 2026 08:27:42 -0800 (PST)
-Received: from ?IPV6:2a02:908:1242:30e0:a017:1403:86b3:9a38?
- ([2a02:908:1242:30e0:a017:1403:86b3:9a38])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb7e57664esm35349995e9.1.2026.11.18.08.27.41
+ AL+hErFuS+nR6Qt6xdLHmpKv84kjJAsg7Ic1ZLiJkg3jCXXN41Qv7NQbvtVi3aTbUOSizY8tECrf9As=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9aL7vnGGal59WxSZloTZJw5l8fS2Gp+zPMTBPdrK3kDoqIiBBv
+ M3Fiumv0evSKq/cjCA54BkYmnHVtZ6PFeGjbgJSIsD8NNq2t9XewXTV3WranBm2lqPU=
+X-Gm-Gg: AYBFou1M1Q0Hxt017X1WvthwUuE+yfo7yfS5ZkrDVae6OsyHqU15hdIkgWnA4RWjBcp
+ 15yp8OVhAp9lfhXSG8HqQDQqJfQnspJ8uqDZk7bhksEwK/TOpp42beIU+rlWA7KjMVlQ/KBmwmw
+ po3Ue5GUvxoxovZbomYrPTOlDei8jImz6Pdu4+5iFug0g+TYRtBuPxizrXyT0riBO/iRnL5d6cf
+ FqgJKpsyzLh6hnyuWcFi+oA2keAh6/bVsX+slVZ735Xe3uLoMee6UMugu//9b6ugX4DFcrPQgWP
+ 5kqv8Ag3iWrEKMVs1JlTXj7sLTGYrkW01oJBpDPs1xM5kyR3p5NrG9TVmQrXtkI5QMoK6X8TV9N
+ h51dBEAIqnZ96xqgZ27WjFsd/e7lFeBnZckr8/Fni/Fo6kwpSFzT+btIRL2Cx1v0N227XPORaxw
+ Ks079TH77NnFDgAOOVaJ02BKQm4HSdajWFfJqbq0FiqCDUGgk2/GzHTfjl6MiTLst0rp3JikilP
+ /YQ56pDRPrUjGJZWb5f7jdzOAlqjDDGlRWnI6XIsU+bVa103Z3+LCNfX61iGP4DYeyPps/jMfOV
+ 98XVKFMOEQAVxjjPrNGsRUTvyENOMGZeCha/JqZ6cx5jY4LEZPA7GG5uVw/3Iw0XEveBbtS3/SQ
+ xTXAiRqs=
+X-Received: by 2002:a05:600c:4e87:b0:4a5:75d2:c104 with SMTP id
+ 5b1f17b1804b1-4bb7da2db77mr64790265e9.22.1795019856256; 
+ Wed, 18 Nov 2026 08:37:36 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:e50:3860::642d:5bda?
+ ([2a01:e0a:e50:3860::642d:5bda]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb784231basm152585475e9.11.2026.11.18.08.37.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Nov 2026 08:27:41 -0800 (PST)
-Message-ID: <763ce829-d9f2-42e4-b6ae-5a2ddf5117e2@canonical.com>
-Date: Wed, 18 Nov 2026 17:27:40 +0100
+ Wed, 18 Nov 2026 08:37:35 -0800 (PST)
+Message-ID: <e724725f-0fef-4c97-8bd7-6dfeec457ad7@baylibre.com>
+Date: Wed, 18 Nov 2026 17:37:35 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] boot: pxe: pass the initrd to EFI applications
-To: Tim Surber <me@timsurber.de>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: Junhui Liu <junhui.liu@pigmoral.tech>,
- Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>,
- Alexey Charkov <alchark@flipper.net>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
- Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <2113981400.38169.1794275897389@app.mailbox.org>
- <DMYG3PDX1XU2.1CEBB4VRVJHNC@pigmoral.tech>
- <cdd58082-06b2-4581-abbd-0e585b928291@gmx.de>
- <CAC_iWjK=P+qbzcDxPfGco6zBSS1DgxOkSAsDY8LLCs6YndXYXQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAC_iWjK=P+qbzcDxPfGco6zBSS1DgxOkSAsDY8LLCs6YndXYXQ@mail.gmail.com>
+Subject: Re: [PATCH] net: fastboot_tcp: enforce rxbuf and stream offset bounds
+To: George Kola <georgekola@google.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, Simon Glass <sjg@chromium.org>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ u-boot@lists.u-boot-project.org
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
+ Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+References: <CAOTQ16LH4V_A86PAoa6C+s4WODCqhW+1aTfTm=kMsYi+Pe6mvQ@mail.gmail.com>
+Content-Language: fr
+From: Guillaume La Roque <glaroque@baylibre.com>
+In-Reply-To: <CAOTQ16LH4V_A86PAoa6C+s4WODCqhW+1aTfTm=kMsYi+Pe6mvQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,55 +162,174 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/18/26 17:24, Ilias Apalodimas wrote:
-> Hi Heinrich and Tim
-> 
-> [...]
-> 
->>>
->>
->> Hello Aswin, hello Junhui,
->>
->> Function label_boot() is called by this call sequence:
->> extlinux_boot->pxe_process->handle_pxe_menu->label_boot
->>
->> But also by bls_boot() and extlinux_pxe_boot->pxe_process.
->>
->> The description of 841abbc6d561 ("boot: pxe: support booting PE/COFF EFI
->> applications") sounded like it would only concern network booting via
->> boot method PXE and not other boot methods like extlinux and bls and
->> specifically not booting from block devices.
->>
->> The extlinux boot method before 841abbc6d561 booted via the Linux legacy
->> entry point and not via EFI.
->>
->> If a change of the bls and extlinux boot methods is intended, this
->> should be clearly communicated.
+Hi,
 
-One unintended change is that the extlinux fdtoverlay parameter (see 
-CONFIG_OF_LIBFDT_OVERLAY) in extlinux.conf will be ignored for EFI binaries.
+i'm not able to apply your patch with b4, git or patch comand, it's 
+malformed please resend it properly.
+except that :
 
-> 
-> I agree we should fix the original patch and intention. However, Tim's
-> patch enhances functionality and seems irrelevant to the breakage, it
-> just happens to fix it, although we still priotarize EFI instead of
-> extlinux for example.
-> 
-> I'll have a closer look at the patch tomorrow, but I don't see
-> anything wrong with it.
-> 
-> Thanks
-> /Ilias
->>
->> Best regards
->>
->> Heinrich
+Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
+
+Regards
+Guillaume
+
+Le 15/11/2026 à 18:12, George Kola a écrit :
+> tcp_stream_rx() copies incoming TCP payload bytes into the static
+> 74-byte rxbuf without validating rx_offs or len, enabling a single TCP
+> segment larger than rxbuf to overwrite adjacent globals. In addition,
+> tcp_stream_on_rcv_nxt_update() treats cumulative rx_bytes as unread
+> buffer bytes without subtracting data_read (causing fragmented reads to
+> parse stale bytes and multi-command memmove() calls to overflow rxbuf)
+> and does not bound cmd_size against FASTBOOT_COMMAND_LEN, while
+> tcp_stream_tx() does not clamp copies to maxlen or guard tx_offs <
+> tx_last_offs.
+>
+> Handle overlapping TCP retransmits in tcp_stream_rx() and return -1
+> when offset + len exceeds sizeof(rxbuf) so tcp_rx_user_data() aborts
+> with TCP_RST. Derive unread = rx_bytes - data_read in
+> tcp_stream_on_rcv_nxt_update(), reset the stream if unread exceeds
+> sizeof(rxbuf), reject cmd_size > FASTBOOT_COMMAND_LEN, ensure txbuf is
+> NUL-terminated, and clamp tcp_stream_tx() copies to maxlen.
+>
+> Fixes: 443d319180a6 ("net: add fastboot TCP support")
+> Fixes: bf962de97c37 ("net/tcp: improve tcp framework, use better state machine")
+> Signed-off-by: George Kola <georgekola@google.com>
+> ---
+>   net/fastboot_tcp.c | 68 ++++++++++++++++++++++++++++++++++++----------
+>   1 file changed, 54 insertions(+), 14 deletions(-)
+>
+> diff --git a/net/fastboot_tcp.c b/net/fastboot_tcp.c
+> index b9b4f707b1..aa2dcb1443 100644
+> --- a/net/fastboot_tcp.c
+> +++ b/net/fastboot_tcp.c
+> @@ -25,8 +25,19 @@ static void tcp_stream_on_rcv_nxt_update(struct
+> tcp_stream *tcp, u32 rx_bytes)
+>   	__be64	len_be;
+>   	char	saved;
+>   	int	fastboot_command_id, len;
+> +	u32	unread;
+>
+> -	if (!data_read && rx_bytes >= handshake_length) {
+> +	if (rx_bytes <= data_read)
+> +		return;
+> +	unread = rx_bytes - data_read;
+> +	if (unread > sizeof(rxbuf)) {
+> +		tcp_stream_reset(tcp);
+> +		return;
+> +	}
+> +
+> +	if (!data_read) {
+> +		if (unread < handshake_length)
+> +			return;
+>   		if (memcmp(rxbuf, handshake, handshake_length)) {
+>   			printf("fastboot: bad handshake\n");
+>   			tcp_stream_close(tcp);
+> @@ -38,18 +49,22 @@ static void tcp_stream_on_rcv_nxt_update(struct
+> tcp_stream *tcp, u32 rx_bytes)
+>   		memcpy(txbuf, handshake, handshake_length);
+>
+>   		data_read += handshake_length;
+> -		rx_bytes -= handshake_length;
+> -		if (rx_bytes > 0)
+> -			memmove(rxbuf, rxbuf + handshake_length, rx_bytes);
+> +		unread -= handshake_length;
+> +		if (unread > 0)
+> +			memmove(rxbuf, rxbuf + handshake_length, unread);
+>   		return;
+>   	}
+>
+> -	if (rx_bytes < sizeof(u64))
+> +	if (unread < sizeof(u64))
+>   		return;
+>
+>   	memcpy(&cmd_size, rxbuf, sizeof(u64));
+>   	cmd_size = __be64_to_cpu(cmd_size);
+> -	if (rx_bytes < sizeof(u64) + cmd_size)
+> +	if (cmd_size > FASTBOOT_COMMAND_LEN) {
+> +		tcp_stream_close(tcp);
+> +		return;
+> +	}
+> +	if (unread < sizeof(u64) + cmd_size)
+>   		return;
+>
+>   	saved = rxbuf[sizeof(u64) + cmd_size];
+> @@ -60,6 +75,7 @@ static void tcp_stream_on_rcv_nxt_update(struct
+> tcp_stream *tcp, u32 rx_bytes)
+>   			     strncmp("OKAY", txbuf + sizeof(u64), 4) == 0);
+>   	rxbuf[sizeof(u64) + cmd_size] = saved;
+>
+> +	txbuf[sizeof(txbuf) - 1] = '\0';
+>   	len = strlen(txbuf + sizeof(u64));
+>   	len_be = __cpu_to_be64(len);
+>   	memcpy(txbuf, &len_be, sizeof(u64));
+> @@ -68,25 +84,49 @@ static void tcp_stream_on_rcv_nxt_update(struct
+> tcp_stream *tcp, u32 rx_bytes)
+>   	tx_last_len = len + sizeof(u64);
+>
+>   	data_read += sizeof(u64) + cmd_size;
+> -	rx_bytes -= sizeof(u64) + cmd_size;
+> -	if (rx_bytes > 0)
+> -		memmove(rxbuf, rxbuf + sizeof(u64) + cmd_size, rx_bytes);
+> +	unread -= sizeof(u64) + cmd_size;
+> +	if (unread > 0)
+> +		memmove(rxbuf, rxbuf + sizeof(u64) + cmd_size, unread);
+>   }
+>
+>   static int tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void
+> *buf, int len)
+>   {
+> -	memcpy(rxbuf + rx_offs - data_read, buf, len);
+> +	int orig_len = len;
+> +	u32 offset;
+> +
+> +	if (len < 0)
+> +		return -1;
+> +	if (rx_offs < data_read) {
+> +		u32 skip = data_read - rx_offs;
+> +
+> +		if ((u32)len <= skip)
+> +			return orig_len;
+> +		buf = (char *)buf + skip;
+> +		len -= skip;
+> +		rx_offs = data_read;
+> +	}
+> +
+> +	offset = rx_offs - data_read;
+> +	if (offset > sizeof(rxbuf) ||
+> +	    (size_t)len > sizeof(rxbuf) - offset)
+> +		return -1;
+>
+> -	return len;
+> +	memcpy(rxbuf + offset, buf, len);
+> +
+> +	return orig_len;
+>   }
+>
+>   static int tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void
+> *buf, int maxlen)
+>   {
+> -	/* by design: tx_offs >= tx_last_offs */
+> -	if (tx_offs >= tx_last_offs + tx_last_len)
+> +	u32 avail;
+> +
+> +	if (maxlen <= 0 || tx_offs < tx_last_offs ||
+> +	    tx_offs - tx_last_offs >= tx_last_len)
+>   		return 0;
+>
+> -	maxlen = tx_last_offs + tx_last_len - tx_offs;
+> +	avail = tx_last_len - (tx_offs - tx_last_offs);
+> +	if ((u32)maxlen > avail)
+> +		maxlen = avail;
+>   	memcpy(buf, txbuf + (tx_offs - tx_last_offs), maxlen);
+>
+>   	return maxlen;
+
 
