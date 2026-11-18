@@ -1,159 +1,205 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9063606A32A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 18:01:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3150C606A32C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 18:17:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=A3BnwWUq;
-	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=INPHCNJ3
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=h9/TjLUN;
+	dkim=pass (1024-bit key, unprotected) header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256 header.s=toradex-com header.b=ODj/5E+Z
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4C7AF606CF;
-	Wed, 18 Nov 2026 18:01:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 80D128116A;
+	Wed, 18 Nov 2026 18:17:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pLU1sy0gcJCi; Wed, 18 Nov 2026 18:01:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5A1D260658
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795024880;
-	b=nMw6FO6jSFgVWcK8h21lWfgW0YdBuVmV8O1aVEHBpirI9X8H6YKjeaRZ641qORmXroAw
-	 zpn5BKyuxR7zpG6aBIzJBlgBL1+u82olqbhvstRVEAvsa7xw7H5i3rq8kpynTmlXB0usO
-	 p3gYZTT0b40Y8SAdQHJS98BjX+yVpxrEuVSJ6FXzaPaaGckTmUJE1u/gD4sg/JPEnvwXO
-	 +nYaP5qeAKGbJM3icVEoVpvvN2C9Xkk7yxtQxOJ4VBlHL7PPEQcWNc0HAkcTdX/5EZSEj
-	 jd+KjJnH54eslbx5GP+1SlwNNnG9VrLAKPxGRU7vWpXUER4fsBE5frbW2LLP9kntiOw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fdUxuulLj5Ga; Wed, 18 Nov 2026 18:17:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C10AF81148
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795025877;
+	b=bFfJrlZOXC6pd+LJyBnYTnVSdi/eomYRz/bpvUrXzk/y4uLAbk+Sy/8UBZuQl7bhWT8F
+	 XgihMcQM1+oWush4ads31qQ3nqdXYnA5yVhC/3S7gV6+TTM9lt4M8jGBw0ulPU4e4H8I/
+	 sqBz1UFuEmdGi17kKNjED+YNN6N51MF0TIewH+McEfzgfs+wLJ+iR6CEQ5fT52ybytqYN
+	 e2nUneC4wEAI/3IH3dohxsQ0VJsRSl3v1z6NvgaJmG4lfRCG8f6k/sOBAmpNF79gQyc71
+	 72eA47SeVM0gXa4uI5AHltXevWplam7yUPnJAIBFd2kJaEvKoDzFTD9FkB06r4V+8Rg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795024880;
+	c=relaxed/relaxed; t=1795025877;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=5C0okh6trukmeeaOIfmUWM/1ZOe/8VMFh0Man0hg6Rw=;
-	b=huYDfrCb6BbUWksQxd7Xm9obyB5dbNRPm7BTteZVIkEf6nluaMv9thNSL/X1JHo0y5C1
-	 ivLyWbfkq9T7+y8uqfVOT5U7Y3yJU/EvY7iUA6aHl4oSDgzaLyKWLbp8On38T7oq0lDux
-	 uevSU8OP5FStOpIliSKgzy1uOY3nF9xW8InbZ2XnN8GkDbbjYXpcYW0zI9dGFZ+9VP1Sq
-	 /Mjx/RPwM1NSR0PVtz1v2ut/iNHcOFV6JGJgocGdrlihW4tJTtr4NgrPa5BazBZM0WSY5
-	 rsQ/BzB+JN3IkJd7SAexGJP04bZnRTZj5ga1NQ+fh2de65ttAgRnapXc3rneKhFXyTg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=oss.tenstorrent.com;
-	dkim=pass header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=INPHCNJ3;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:X-MC-Unique:X-Mimecast-MFC-AGG-ID:Received:
+	 Received:Date:From:To:Cc:Subject:Message-ID:References:In-Reply-To:
+	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-LD-Processed:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Mimecast-Spam-Score:X-Mimecast-MFC-PROC-ID:X-Mimecast-Originator:
+	 Content-Type:Content-Disposition:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=S7bP+x0nv6+vcWoxqgDYDM1B9grtEtcAkPYNunYPofI=;
+	b=lQHz6V4PKIsavfbKm8ycsLXESjou2SoibJLeQNXsGttViiKXhb4/IyYs28/zpAt7k7g/
+	 aOhdCzPHH95PX7GKupug1VkLNjhbt43B2EU0Zzseiv0FhXkpy+DXb05Lfi1bVqjAgNmmj
+	 vhO96Tae2E0Zi999aknkpexJ+1JtZVIKDboTG5pHyl6y/xYl+Qv+Dqf5UUdW4PzsBWjvs
+	 NG7SghHXzMSr9iplv/nRMUxfeiC5PwMKZoAtHczflwzD/W3i1ZjX0ulu7Qs/Afkh4Rh3y
+	 WwA0MFPCjafv8Fvf85hYOzaJvDGdumeOhyFDyU3Gq46qgEUlsqKXHx374rXgHaIqX3w==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795024880;
-	bh=5C0okh6trukmeeaOIfmUWM/1ZOe/8VMFh0Man0hg6Rw=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=A3BnwWUqB9Yb2G6b3Z+rMZau0XVYqNGNvv/Ut18/moLfYgfDtgIYllSgNT41VEKyX
-	 rBB+Dsx61dTPjfNtsg+tY6ynnBIxS6QP1jlAqMSuPQJivdM//sajhhzl4o414Zq60w
-	 DhD+q1OZP9N16m/ZEWd+UFWgrQcTW5WziOvzvRDceJnPb0S+pswdv5X+hNdPJ+GF6W
-	 M5iLwvnVORC62vzDHpUsLoxBaTcJYgTym/Q9319Sj8IYOUw1qNrhtR2XOENCtsFjnO
-	 sijPAj1BEpl4pNZXoJAcI+B8vojdJWYDjLzho/YlDMmmx6JAiA80S6FnVneZAgiiON
-	 0I7jWwzXjpHyQ==
+	d=lists.u-boot-project.org; s=default; t=1795025877;
+	bh=S7bP+x0nv6+vcWoxqgDYDM1B9grtEtcAkPYNunYPofI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=h9/TjLUNGYPf0qY4oI+PPsxIyjxdS4tLiVRwLBWX1vjMYTs7HAOg+qudO1c2GP48I
+	 OC4+MgYAEg0qPWDjSyTA4dkriAIhwsqY/KqCKm37YOxnOMYLeQ6dcRG1dPT/8oKN0b
+	 KBCnqL44QAQaAWoO/cqLs/Sfzkd1mAVEajE/AGuv2AE2WtmiMD4jc7Yjus148wVUdU
+	 EojYcvTn9MLtmga5gHQ7qpFAJ9g3rRuLtWlvnMqJU4EL+k2Lw82TKzA2BlKIH0iLr/
+	 ouGiAr82wCwe596vNTRYEAHKlxItOkuoLYrhbwUM1DmgC6znUiEZabEZoFoGI7L95J
+	 xm0j24xf+2azA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A1D260658;
-	Wed, 18 Nov 2026 18:01:20 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id B1FB19F8
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 18:01:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C10AF81148;
+	Wed, 18 Nov 2026 18:17:57 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 33F1049B
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 18:17:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A31E760658
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 18:01:18 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 19BF2400A8
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 18:17:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gWOlpCcNTWVS for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 18:01:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 71D9860622
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::1131"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1131; helo=mail-yw1-x1131.google.com;
- envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.tenstorrent.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com
- header.a=rsa-sha256 header.s=google header.b=INPHCNJ3
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 71D9860622
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 18:01:16 +0000 (UTC)
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-8b0d126f631so12585537b3.2
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 10:01:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1795024875; x=1795629675;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=5C0okh6trukmeeaOIfmUWM/1ZOe/8VMFh0Man0hg6Rw=;
- b=INPHCNJ3Ba3Jn1pMW24t2s/WMaF1BNNnc5YSPPajDuwgLymIhi4g78orHrQeDOdEJq
- jF/YKJxOSZruyn+WR4iNEBfx4jN8wIExGsB1TcpO7BAjjXjFMLHRj6g4/F3B/W+IVOZR
- RjcAWi9/S8hdNMOgMleNOcTg6szFOc9K89xwtB9g2OSxckxbJWY5le8Aew6b+N+GlNs9
- 1C66JrbukqSh6CEb+0WKQHURLd9IEjKdzU7sYtAUcP9eaabsKoh+hi8wnkj2d2hqzBKG
- RFxLYn1TXPIwe3rCiDVXgcLptUwlyZ/tdrp6TexwUhzBMkvPDzGAqT7CzC/OrHpINJXM
- 9S/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795024875; x=1795629675;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=5C0okh6trukmeeaOIfmUWM/1ZOe/8VMFh0Man0hg6Rw=;
- b=Qe3XizBAbD6ujBFArEZwusKOZSE1dZRY4ZBM5FfIWfrjtZsa+gjEkqP6TtfTl9cdll
- ij/oDvSMgOSb/+0K8q7hLhgG/X7demJRG8r1kRDHQ4qObdSRi7fvWAbua3N/giFNyq+D
- 04lN4tNENoA0FMgPrpPdwevGeDrz8UCAA6SDt5H0KR02eehBBQIstLBMDZFXRDgMdTsG
- EDA1Pr+IfesY6GSBdvT/qCotk5avHP211tLZRaDkgE/23kN0jQFeOZ2KbniK4zU+Hb1M
- 8BecHVBoUyP/r4RJHRaEet3U/wC/xXjJC6THb6g40CNIlAT5jqTkPJ4/ZHLxxd6aO7+M
- WG3w==
-X-Forwarded-Encrypted: i=1;
- AL+hErG/IYvBUFPhauTTa2UU8Aa4J+GMPerSv12XfDwsDbmPzf/OsCas8H2VaN523gdpZjU5cZAySBk=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+OANdQlXC+kqPSjv7hOqSu1e3VkcrJFEmHuD2kJpLLvAzqNnxu
- YSARfyvHSPMJ9u0e65dVxFZH92HpRE45uw574v4x0+P9SXvr9EfMWpyMjqUefGlDCp1+A/Yk4a5
- 2wicckPg=
-X-Gm-Gg: AZFdTZeh05MfklzVyv7QvXJeaaYU2sJYXKjEmTQDfbtNY5/CpHbUPx7ZEdHd7LhoC8S
- A2I0FDjHQHq7c6AiWwvEq61yzVDgMyXIZxuhkdaVflF64wjCPQi+mhCkIBXNn/Eg5/uNg6uK9Ga
- /jrufSYVUXoCVga+O9gWKz0U+t2Ps3X0EFv+JDYNo4Ns2WpDzN6jeB4GEe0TH+fZ8f+Lm55i805
- 3ZthYcHxpDgZTWNFCpUX8q2NEfGWTRgW1GiFwBY+aqNG1KAAxqw3fgonL09WnkI/TpJmOiLw+Kw
- KQlRt7jC+phWXr+8acaxeGk/6LKsG6dU5qTiKw9hOHuJFOBAgamtAiWxkckgm54GzjLwj9KJKFz
- 6oNollFS7Pn6S16WHVFKS1uTOTdsbw9r+KYkKgavsBRXyWJa/o6F0hq9xg485vNVnhAHpcuqkEZ
- nYFgZ7rUkkLZF4p7Unf21Z9kLy1wuR194amTXPh+umpRVGvLCyZscYs/vvr6g0fNdgoBFxrJ/8+
- uw6HD18fb2BeKNzMZFlMs7BzjUTU1VNX0xSHdvQKyMXIpzoap1JJ51kznsCZrPSKlLf3xWKZDH/
- XjuhuNcZTFPDaU7v5gqa+/m7sxEbI4Z6f9IlJCvkUtncwBpb3F1uvZGDDY1bfBDPRVLArNB9dT7
- aHv8=
-X-Received: by 2002:a05:690c:3502:b0:8b3:2250:aed1 with SMTP id
- 00721157ae682-8b4fed54c5bmr14314617b3.26.1795024875035; 
- Wed, 18 Nov 2026 10:01:15 -0800 (PST)
-Received: from [10.200.24.109] ([12.55.13.134])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b4fe031343sm21648437b3.9.2026.11.18.10.01.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Nov 2026 10:01:14 -0800 (PST)
-From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Wed, 18 Nov 2026 12:00:57 -0600
-Subject: [PATCH] riscv: Disable M-mode IMSIC and APLIC nodes in DT passed
- to next stage in S mode
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dCEwsLxswN3h for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 18:17:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0A70E40095
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=194.104.111.113
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=194.104.111.113;
+ helo=de-smtp-delivery-113.mimecast.com;
+ envelope-from=francesco.dolcini@toradex.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256
+ header.s=toradex-com header.b=ODj/5E+Z
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.111.113])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0A70E40095
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 18:17:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1795025872;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=S7bP+x0nv6+vcWoxqgDYDM1B9grtEtcAkPYNunYPofI=;
+ b=ODj/5E+Z0tZ+ThhVmXGfETbsm+MvacFhLEmAXhP5EHqhEYc0LGwuSy7n7C9NDz16lcnJzO
+ rmGi3jeMdaOEbXaC4CzdtarfFma3rYiYrLcflmi3S5cmFngYvvL73o2Udkj3OSXtCG7Obg
+ YUXKe0Qb39jJ+nVrcDuFzOjFGer7BBw=
+Received: from GVAP278CU002.outbound.protection.outlook.com
+ (mail-switzerlandwestazon11020103.outbound.protection.outlook.com
+ [52.101.188.103]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ de-mta-90-BcHUVSfFMZS9Iag8VSEk3Q-1; Wed, 18 Nov 2026 18:17:48 +0000
+X-MC-Unique: BcHUVSfFMZS9Iag8VSEk3Q-1
+X-Mimecast-MFC-AGG-ID: BcHUVSfFMZS9Iag8VSEk3Q_1795025868
+Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:2e::8) by
+ GV0P278MB1031.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:4d::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.615.16; Wed, 18 Nov 2026 18:17:46 +0000
+Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::88:6821:13f5:a5b2]) by ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::88:6821:13f5:a5b2%3]) with mapi id 15.21.0615.013; Wed, 18 Nov 2026
+ 18:17:46 +0000
+Date: Wed, 18 Nov 2026 19:17:44 +0100
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
+To: Sergio Prado <sergio.prado@e-labworks.com>
+Cc: u-boot@lists.u-boot-project.org, festevam@gmail.com,
+ sbabic@nabladev.com, uboot-imx@nxp.com, trini@konsulko.com,
+ marex@nabladev.com, o.mandel@menlosystems.com
+Subject: Re: [PATCH v2] board: toradex: verdin-imx8mm: adjust U-Boot proper
+ offset for eMMC fastboot
+Message-ID: <av3ryJ-k_Zltq6AO@francesco-nb>
+References: <20261118174255.3388175-1-sergio.prado@e-labworks.com>
+In-Reply-To: <20261118174255.3388175-1-sergio.prado@e-labworks.com>
+X-ClientProxiedBy: MI1P293CA0015.ITAP293.PROD.OUTLOOK.COM
+ (2603:10a6:290:2::14) To ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:2e::8)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261118-mimsic_maplic_fixup-v1-1-52dea8f39779@oss.tenstorrent.com>
-X-B4-Tracking: v=1; b=H4sIANjn/WoC/yWMUQrCMBAFr1L220C2UoleRaS0ybaumBqyVoSQu
- 3etX4/hMVNAKDMJXJoCmT4s/FoU8NCAvw/LTIaDMrS2PSGiM5GjsO/jkJ46E3/XZGyHYzi6YM+
- uAzVTJj326vX2Z1nHB/n3LwW1bj4HZe53AAAA
-X-Change-ID: 20261118-mimsic_maplic_fixup-051bd38d0985
-To: Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org
-Cc: Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>, 
- Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>, 
- Troy Mitchell <troy.mitchell@linux.spacemit.com>, 
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-X-Mailer: b4 0.15.1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZRAP278MB0495:EE_|GV0P278MB1031:EE_
+X-MS-Office365-Filtering-Correlation-Id: db36aa5e-4c3e-492a-7d00-08df45a03ee5
+X-LD-Processed: d9995866-0d9b-4251-8315-093f062abab4,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|23010399003|22082099003|18002099003|261009223027099003|3023799007|261021121427099003|261022075727099003|261026121527099003|261102123227099003|10067099003|56012099006
+X-Microsoft-Antispam-Message-Info: 6hv89J8jRe8RnMliEGk5nSmIpnRpgnh3GAhQ39QDB7Wmyl5P04r5N/KP2C6E/EMb3T4aXoW5hWA6DLzp9KWKRB9e9Axd3Mpzzw410s33xq11DyAkP7ED3KbbzTbuJzpIXNAw35o/DjL3qxyxFVKLYfpVpkaBQAYGCD8zZIQfD/ZGOWPLd4n2Fxl68NACfn5Ao7Zz+OerqTN+mcOvG3OL8p/hyrTGnx8YkAi0Cyt/xaa8rBLd2qKsLnqP/M+/YMAQqX046hZvQFX9CdR9iH7UMB0XnUreEcZpPeIByBKlji/uwm1Pm+DJx8rpxT6cFm4q/1MzLJ8E14vhYAwtKZxF3n7wsBOUeLN+Asg9yUalFp+3nNIXXBMRweSfTKTq0tphpGr3pEOSHzMZz9kpMkDhxFEw93cbQDRa4pC4wG1SBE9wLsgpvnu7V4zKVTzo+E+vBcHIIX/NtpbmZGSX8GL598JvAsbyVgwfGJUYPn69H3fNiB3qtUj0BKlDsNworOPnpdzDu9+7peNg+qC+S4bOuZTM8qf0NNbeGmsSfZ5RPf0JrheI+6gU+3GdYQIj2WA8el+0MeVckTOCCuuqzpHRYYy8qc2mDCQ8sWDBGVXoDeG1R2OcZf0phcy0dJ/VmEQhh7Q24hyd1LQkUGXSfd1idVOvUJjk5UjmCqf5kv/wt3g=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(22082099003)(18002099003)(261009223027099003)(3023799007)(261021121427099003)(261022075727099003)(261026121527099003)(261102123227099003)(10067099003)(56012099006);
+ DIR:OUT; SFP:1102
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?WweW4YLRnj6w0kzCT6XI2LjSR+JvYMQAtu/auhT1j0M2A1majODmEvzoWmp2?=
+ =?us-ascii?Q?6Ki4AaWg44ePTGT10o8RuwjeWKgxg+J+0KdlwiQE+QZ8ICAy9mTh0/Wct+vg?=
+ =?us-ascii?Q?GrSY/M2hDmgKOjHnXZmae6+l/fCN2K9DNTwC8QNiZIZPHhLwRDEIc1YyM9/P?=
+ =?us-ascii?Q?uoBd3Hb+/2+/zSGcDmgedqaFiOUlCUyRLGgWKIzpqPHXnzr3pJJRfO+uIrrI?=
+ =?us-ascii?Q?DEv9ga1dG2CRKiz+FGPbXK+CyuD7bLJG9zmy8tBj62a02WPi6KIfhDkeojwX?=
+ =?us-ascii?Q?ILzRZXWRJjf+udqaEHGYt9t25Hxb/PQbBT1wvDh2baQRj1rJ891gy6yWBCg5?=
+ =?us-ascii?Q?LRG/MpVq5rrQESef7gIVrMTYcph2wkZwDR7PGfAZt8S1IzN+on8UP9pjdI6v?=
+ =?us-ascii?Q?ne14uUIHxpb72Lltspi0TfvWyNZtqYWmHS09rbRp3ktPU1D5NDIfYO4mHkqI?=
+ =?us-ascii?Q?GjtkA/2wAU8Eito/CFCccKvziTIz7nqk0qDvj04xkW44VbwkFZ3gJjjJJ7F1?=
+ =?us-ascii?Q?H05nfnBD/+GaUeYdTSuuJNwrgm6z7WbV5Z+eeftjHb2AACaUTI7rF0bi8o8Y?=
+ =?us-ascii?Q?VD5tm7OsAJrLQ/yoovvw2f0YAkx8E9bezjDhnyXWnnYpBcU/ARdssDp3iFoW?=
+ =?us-ascii?Q?VGKaBialZE9uMVMYXUONGl5mMosIJGrQZi9KYgIq12sHnoxG6BwA9R7dn+ue?=
+ =?us-ascii?Q?epk9+IBVmwVhMkmI8Cer9U7/k15HRrhlVQsrXf12XMJQICe7UA3mxSsA6A7C?=
+ =?us-ascii?Q?tAiwRCbqq5DCzdB6C7mX0MCtcfi2rz5n5HKwbuESrwXtQ58yVcMfVE8ayeo7?=
+ =?us-ascii?Q?Ob3Nwk2ZUBLO2+Ouk19OPvHIFUC6sBATrGtjpwJXlryHjzNEUByMyS9VZ2GR?=
+ =?us-ascii?Q?d6eByZ/a8wL7pevYlxPNgIqEL74JkHayVddSFxoZ6m8hZIlBybyNdP5lln8z?=
+ =?us-ascii?Q?70jWW+HQ9C5K2xYCBhWOZKfVg/lFJfwWkUW6lKtHc8Oo3eEnZO3Pa3v5TJSt?=
+ =?us-ascii?Q?VoHs8miNWH+re5EuUtKzpqCieeXB14KSGRZSntNEyd2ZR3W2I7VZqUKiVvVb?=
+ =?us-ascii?Q?cqC03m+A3U/21f43mAIgBdYkUatQs54b/o4dmCY6Cj/9gEzh2FxAxlSDJ5YE?=
+ =?us-ascii?Q?/GspJmKt9b/Ip1qrJ3N/7gRyn7PHC6p6hVL4v8FfK3MwoKsqj9O0KvnbLGCz?=
+ =?us-ascii?Q?SshGCMRXaak9meEvNIzhwFH/kduH8VD9UkiW/0HvJ1Tc9n84Z4TEJnaLH080?=
+ =?us-ascii?Q?y2UnVFsuDzGQJ09KKu1nz3mU5JgLy8Tq0k8zvT6qqlurJGwDlBmSTBUFJat1?=
+ =?us-ascii?Q?LrEq8rURoG2j6+z4q+yejwcPa7tiulp/ar1Ue+frr+9zjUKw8wlhks3ANRan?=
+ =?us-ascii?Q?IQ6bujA9BoHTLr/AT1Db4sLWbi7X18t9jMWCh4eh80Vqu/XqU0tUWCd2gt//?=
+ =?us-ascii?Q?3GWHQJhnBbHV/w+uLbyxt1rTrsGpJQMaE/Izbup5W5x48XC0BCdses7wSt6E?=
+ =?us-ascii?Q?MlFDCJ+eXISoZFTcrMH1G35aNktniag3iDqeXdqKGheKUPXxNATVfPqwl+Nv?=
+ =?us-ascii?Q?6zK+hS8m9CRNPihW0IQzS9v7gk8mNwfOJG23eltRFw9P6Au3/o4SPJJ34cZy?=
+ =?us-ascii?Q?BdePTmmhyuwTBdrVqvIf4MJUT3lYZWYYx4MGu4itVpKsi8eIM9QOwwDNP7SD?=
+ =?us-ascii?Q?FgIS1jtPUo86yVFgba9yv/bkvZwz3t5xh6Bcij+jCtkm1zibFwvn32ydAhBv?=
+ =?us-ascii?Q?zh96yqgBL9JypIZB0FyYoXMSEqo1koE=3D?=
+X-Exchange-RoutingPolicyChecked: BGCXx96L/Rad5lwBscKOkxE0TJ5T2a8SwV5WxdlbY9zoDDDNsp1u3Ffyzc5X6wtgk2b3TrQvYPQoVDzDmRJVKl3mF7GaR3ByDl8+172QhqbXoAfPWUO2RG/NP+7o2R1ufEXCJLGAzwfI1R/4hVQkWDG57vo7dhIE4rAH8vee8FviI6OTvj1vLhU1wsiJ+0e81d/6tdjg5LHjv7huOosV8HQKBKkDO4dAlSYPd/ItuJXMPN4EPwpzUKxoJfvpPMnRk4Q1eUT1Ez9Q0oX4oKNs2cKtU425mjFE6+BHDpngOitU8sZ9TsK3frbSc+BM3EFS+cE+fyHMNbnF0rIEMcxzJw==
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: db36aa5e-4c3e-492a-7d00-08df45a03ee5
+X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2026 18:17:46.3888 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FwBk3Fkfl7Q+RaUu9VWK3GjiJLKf4MTM56KdKs9le0FEGs9OUqQ0JSFdpc4EynkP7hoWohjUE84K0qLzQReQylzUOAlErrXQOgLQ4p/WQDM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB1031
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: HkQIAantJh5r1ex8PLlqzou33VPGpnc_vaOEH1yDw7g_1795025868
+X-Mimecast-Originator: toradex.com
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -163,142 +209,29 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When U-Boot is running in S mode and is used to boot linux, the DT passed
-to linux can either be the bundled in DT U-Boot and OpenSBI use, or be
-loaded by U-Boot from some boot media. In the former case, OpenSBI fixes
-up the DT to disable the M-mode IMSIC and APLIC nodes on an AIA system.
-These controllers are to be managed by M-mode software, so this is done
-to prevent linux from trying to probe them.
+On Wed, Nov 18, 2026 at 02:42:55PM -0300, Sergio Prado wrote:
+> The Verdin iMX8MM boots from the eMMC boot partitions with the eMMC
+> fast boot fuse enabled, so the boot ROM loads flash.bin from offset
+> 1 KiB instead of the usual 33 KiB. The SPL loads U-Boot proper from the
 
-This fixup doesn't happen in the latter case because U-Boot loads a
-fresh DT from boot media. Add a fdt fixup to do this similar to OpenSBI.
-This gets rid of prints like this during linux boots.
+[...]
 
-[    0.000000] riscv-imsic: interrupt-controller@a0000000: no parent irqs available
-[    0.000000] riscv-imsic: interrupt-controller@a0000000: failed to setup state (error -22)
-[    0.000000] OF: of_irq_init: Failed to init /soc/interrupt-controller@a0000000 ((____ptrval____)), parent (____ptrval____)
+> Drop the FIT offset override and set
+> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR to 0x2c0 instead. With flash.bin
+> at 1 KiB and the FIT at the default 0x57c00, U-Boot proper starts at
+> 0x58000, which is sector 0x2c0, with or without HAB. Do the same for
+> the MX8Menlo, which uses the same module and includes the Verdin U-Boot
+> device tree.
+>=20
+> Suggested-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
 
-[   10.727605] platform cc000000.interrupt-controller: deferred probe pending: platform: supplier a0000000.interrupt-controller not ready
-
-Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
----
- arch/riscv/lib/fdt_fixup.c | 84 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 84 insertions(+)
-
-diff --git a/arch/riscv/lib/fdt_fixup.c b/arch/riscv/lib/fdt_fixup.c
-index 6dfd1a2d5b8..ce8c18a7b92 100644
---- a/arch/riscv/lib/fdt_fixup.c
-+++ b/arch/riscv/lib/fdt_fixup.c
-@@ -117,6 +117,80 @@ int riscv_board_reserved_mem_fixup(void *fdt)
- 	return 0;
- }
- 
-+/**
-+ * riscv_node_handles_mmode_external_interrupts() - Check if interrupt controller handles M-mode
-+ * external interrupts
-+ * @fdt: Pointer to the device tree
-+ * @offset: Offset of node in DT to check
-+ *
-+ * Return: true if controller handles M-mode external interrupts IRQ_M_EXT (11), else false
-+ */
-+static bool riscv_node_handles_mmode_external_interrupts(void *fdt, int offset)
-+{
-+	int i, len;
-+	const fdt32_t *interrupts_extended =
-+		fdt_getprop(fdt, offset, "interrupts-extended", &len);
-+	if (!interrupts_extended || !len || len % (2 * sizeof(u32)))
-+		return false;
-+	for (i = 1; i < len / sizeof(u32); i += 2) {
-+		if (fdt32_to_cpu(interrupts_extended[i]) == IRQ_M_EXT)
-+			return true;
-+	}
-+	return false;
-+}
-+
-+/**
-+ * riscv_aia_mmode_imsic_aplic_fixup() - Disable M-mode APLIC and IMSIC nodes in DT
-+ * @fdt: Pointer to the device tree in which nodes are to be disabled
-+ *
-+ * On RISC-V AIA systems, M-mode software manages the M-mode APLIC and IMSIC.
-+ * If S-mode U-Boot loads a device tree from boot media, the DT nodes for these
-+ * could still be enabled, so fixup the DT to disable these nodes before passing
-+ * it to the next S-mode stage.
-+ *
-+ * Return: 0 on success or error otherwise.
-+ */
-+static int riscv_aia_mmode_imsic_aplic_fixup(void *fdt)
-+{
-+	int offset, err;
-+
-+	/* Disable M-IMSIC in APLIC-IMSIC configuration */
-+	fdt_for_each_node_by_compatible(offset, fdt, -1, "riscv,imsics") {
-+		if (riscv_node_handles_mmode_external_interrupts(fdt, offset)) {
-+			err = fdt_status_disabled(fdt, offset);
-+			if (err < 0)
-+				return err;
-+		}
-+	}
-+
-+	/* Disable M-APLIC in APLIC only configuration */
-+	fdt_for_each_node_by_compatible(offset, fdt, -1, "riscv,aplic") {
-+		if (riscv_node_handles_mmode_external_interrupts(fdt, offset)) {
-+			err = fdt_status_disabled(fdt, offset);
-+			if (err < 0)
-+				return err;
-+		}
-+	}
-+
-+	/* Disable M-APLIC in APLIC-IMSIC configuration */
-+	fdt_for_each_node_by_compatible(offset, fdt, -1, "riscv,aplic") {
-+		int len, imsic_offset;
-+		const fdt32_t *msi_parent = fdt_getprop(fdt, offset, "msi-parent", &len);
-+
-+		if (msi_parent && len >= sizeof(fdt32_t)) {
-+			imsic_offset = fdt_node_offset_by_phandle(fdt, fdt32_to_cpu(*msi_parent));
-+			if (imsic_offset >= 0 &&
-+			    riscv_node_handles_mmode_external_interrupts(fdt, imsic_offset)) {
-+				err = fdt_status_disabled(fdt, offset);
-+				if (err < 0)
-+					return err;
-+			}
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- #ifdef CONFIG_OF_BOARD_FIXUP
- int board_fix_fdt(void *fdt)
- {
-@@ -165,5 +239,15 @@ int arch_fixup_fdt(void *blob)
- 	if (err < 0)
- 		return err;
- 
-+	/*
-+	 * Disable M-mode APLIC and IMSIC nodes in DT passed
-+	 * to next stage if we're in S mode
-+	 */
-+	if (!CONFIG_IS_ENABLED(RISCV_MMODE)) {
-+		err = riscv_aia_mmode_imsic_aplic_fixup(blob);
-+		if (err < 0)
-+			return err;
-+	}
-+
- 	return 0;
- }
-
----
-base-commit: 83b1ec64ede9998566e6a82b22848c20a33f4aff
-change-id: 20261118-mimsic_maplic_fixup-051bd38d0985
-
-Best regards,
---  
-Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
