@@ -2,120 +2,127 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61BDB606A325
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 07:23:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D9FE606A889
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 07:24:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=hKAJ1w1p;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=lGkP6adV
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PQyk4M3S;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=B4XCRca0
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3738A4083D;
-	Wed, 18 Nov 2026 07:23:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 289C440811;
+	Wed, 18 Nov 2026 07:24:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HK4oC_DRcIg2; Wed, 18 Nov 2026 07:23:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6CB7040844
+ id JMAyxpZoBvGM; Wed, 18 Nov 2026 07:24:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6140340576
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794986621;
-	b=tRRdC691Dh1xwnnDcJ/JBK8ZO+sC9qbJjlEidmLcunCcYouAheGosimnm8801hNmneC5
-	 B/w0PLZ1zlz/8ySR/HvcAMMVknROXVYCPz1bUVuusoqD/lmOpuAGXmh9j3T7wTSbj3lfV
-	 henjZbG2m2bFJCWc2HLSKITLGdDxmb/nWHFQHnpYKDC3qnZuot2IjhrMTZ8QV5virQC52
-	 MT1rWqRCNwGCBvJoNzS+lmJVahgTj88jjVX59taOrBvmN0hTtVqY9pj48LIdOkKO+TTNp
-	 ujrd0Dg2mb6J1GyITlRGKTVs7wL/D9p3gasRoQKhPmPtM3iN9pnP1w5jFDbrqfMCfKQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794986683;
+	b=spRutyDj2JE009Dg2PmabBDuFJsCqDMFY8n/7i4QZSttfxf+V6iNXcQTpsbmQX88tY4v
+	 icHqTwOi/6OWJ6poNbyH29GomnbyJtRqDx3oZT+5YpR7SEFwMlMaTav/6swqi5aH9NJZ3
+	 x/YMRI9ARTUFPpXaozsEj6idFz1pYO7Q0v2he4dyZ8/izmYlf8HD3CqhzwxUhivElP1OD
+	 3PK/9ZoinumEf3CW6iZyyX4UsXjTnf/txbXH4GHzQigTnSFuOGC8s1lHDt4W6owGtE06v
+	 g9VNFNza1auA6b88pUteH3xY8kWkFr1QsYl/lQ54y5V0ehWQ2Fb/KGJeoTh6PrX5+QA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794986621;
+	c=relaxed/relaxed; t=1794986683;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=zppwL0CL1EI4qOfDo/HmPoxrELTFdgH8Jh1xwl+sgPE=;
-	b=VRdoD/iOm9dwRvxcJ/Q6eDsS8IAi9ridIGd813UOrJGiEnxguRezX4bSOLnKomj0Tqlp
-	 2dVw8coaR3Z+tKsbBPQj5sZ7453mZs9wcoPt1tloLf3jZbPDMduLxywUpwTdxI7c55NDT
-	 VowEZ6qk4U5+uSUx1lLeaVIIZ+m+lD0dgF5B+7YTERW0LNKc3rZQI3GQQ3GsBIewPgI6F
-	 w2CQbKWM0NL8URW12CMScZXRkIo7j9hdYxbrnMkd0xvfNwcoedfQtggebydALEA0ASzrY
-	 RvcXNSyeR3HahObbKleVnNjnyJXZ1ATaWPzBy6kghJYTzq4doyy21qJ/NkFC3J3UDvQ==
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ZpVamJk9B1Yv8trk1P/8GUPceE6VVOLD9zC/r95MqJg=;
+	b=CWSyAOM3w0T4GDTlgFlVueRZTgRLNTb/VMECCVIIy6NRe+yOTrv3eJOv/VKxhS+f25ll
+	 p42dCMKI7/bHaBOIpIWyNgn5zzCJjuPbw74rxIWW2QXmdumnK6ObmEVwhjIxPwbRIuHqf
+	 zCJhYfhoOhRXptiUvPBg2FFmPfFhQ75ZCKqFOAcXQ48FqPza25rSo58CUpddmhBnEwVN4
+	 xB9LLRzeNynBo/vgkudRzslEYmJVUjckY8pfMkY/kA6qJlAGR9Ug2hgLrLt1OCaOFFN7W
+	 m/PIHYwfIxKOQNIR9UUFX551Jc5U/9w+u4i0wP5oCKAHMC04CmSi2hkAt0n01mtgjuw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=mailbox.org;
+	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=B4XCRca0;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794986621;
-	bh=zppwL0CL1EI4qOfDo/HmPoxrELTFdgH8Jh1xwl+sgPE=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=hKAJ1w1pD7FLn1dQlar8jXFzVb9RPa/3jgTykySpoPHbsnqvc7uADoY8KGuuyEdLc
-	 kODpfqa734adZ0Ko6CrE2b0c7+mzizV39WzpFWNLr+f5r/r5uhxHih9Wm4xdl4fcgs
-	 uEnrMudqn7CYvlHanWnugMgCjauo1yqj++bsDWWRQaJNdRaNhs7MuD3lS/J5ELcPSt
-	 8Rxf55nk68EAMCN0fucxICN4f5M90tdAOSH6ocsCe0DgtwPIt2WtPppUzJj2df5pP6
-	 vDhzDteueR+8cuEV03v1rT3o3cDFeKahLHG8Fc4ts+Z5Uoxrw9+6MrBb7jDeGyZQt0
-	 zkY9pTUDgb/HQ==
+	d=lists.u-boot-project.org; s=default; t=1794986683;
+	bh=ZpVamJk9B1Yv8trk1P/8GUPceE6VVOLD9zC/r95MqJg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=PQyk4M3SsyAwwBe615uw1gVpDc8Ypi6A+CN+j1S3g9aCdj0vWiH+weChLD4MebZ7W
+	 YjMEwf2Kd+Ca7TJ/bg7bU9JaSwD3qDiSbEsm57IpYKXLji5sulxV7Y6mYtYLck15Cg
+	 Kwu9xpxKDASMLVAOCCqdQUA9fJrWHRZFevuqBNBqhFuJgBd7O5UPxaqzunNcRo62+9
+	 6kaKRZTJL78hVmz/tyP/6tksnVH3VzK5TABEysXpALSzXHMtujKy12oOblu2u7iJ7s
+	 PwFJ+AMm4COc5oKM4Kk6A3o6mqXYl+Vw4tWnqThyICTJKQBYxoe26TasxMXSjVDU1k
+	 FoUPGSAGoblnA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6CB7040844;
-	Wed, 18 Nov 2026 07:23:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E8CC59F8
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:23:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6140340576;
+	Wed, 18 Nov 2026 07:24:43 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 80C7A1E7
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:24:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CF3A4400A7
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:23:39 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7DB9240576
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:24:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W2mYgHijb8gz for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 07:23:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A90FB4005D
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=80.241.56.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.172;
- helo=mout-p-202.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JFqk8pwsIllo for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 07:24:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8BBA14055F
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.152
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.152;
+ helo=mout-p-102.mailbox.org; envelope-from=marek.vasut@mailbox.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=lGkP6adV
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A90FB4005D
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:23:38 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ header.s=mail20150812 header.b=B4XCRca0
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8BBA14055F
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:24:40 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4jTtPM37xYzMlxC;
- Wed, 18 Nov 2026 08:23:35 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jTtQZ2Cp3zKvht;
+ Wed, 18 Nov 2026 08:24:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794986615;
+ s=mail20150812; t=1794986678;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=zppwL0CL1EI4qOfDo/HmPoxrELTFdgH8Jh1xwl+sgPE=;
- b=lGkP6adV9gP9zPqf5/gSRQh6bMIVM4ytDii4bMFMRhJ8ZAXzcHexIqIoPD5dwmuqWyUBmT
- Vz1DIGyCRXCLaxoCyR3tZi9bYA/R66XfX0vtv9BlVJdJXIL06tWkFbs1H5g4+XYSi5pQBT
- iaGNnCz2ElzJf1rYl9BOS+SRNG8w4kPJgKSnm/kdT5ZNOYGrq+QcKAvJ6MGShuRzVeeiP1
- aM4vQYpJET8mycXXEi31PhpYJz//K+eAyT+YkP8JOkq2/397x5ZIG3LnPQYNax3pu7QyX1
- 4UmoV5LkDq7ex0LsXqI9FrVFOOZGPb00fTt7to6VUUj5oUizWvM/L2A6LDQIIg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-To: u-boot@lists.u-boot-project.org
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alexey Charkov <alchark@flipper.net>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Hung-Chun Tseng <alan.tseng.cs@gmail.com>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] usb: onboard-hub: Move usb-onboard-hub into drivers
-Date: Wed, 18 Nov 2026 08:23:08 +0100
-Message-ID: <20261118072332.627163-1-marek.vasut+renesas@mailbox.org>
-X-Mailer: git-send-email 2.53.0
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZpVamJk9B1Yv8trk1P/8GUPceE6VVOLD9zC/r95MqJg=;
+ b=B4XCRca0TbUPNB3uO9MymIwrV4czAXFKtbwAbc/pmuU0DjZgFy6kPlAmE+m437Rd6SX9Yr
+ WKRBlXbCIzSC5sgIP4Xf4gYemw7KE/Glx9iYzlJPG4LQHvl4wmyDuPmauRCMVt/73ZtnpR
+ Ai/bWQancGt5XgmMGgzUIR90c8rsbsFRK1Nu3uRWO1BG2sXy0gKwBjos6DuW56sUNwRMKu
+ l7DWVgxQTltpZX3qlfK5eMdzyH+EwVl9gOEJ0369+jEArx4AEL58jWn4Bg9R1sUTCderds
+ Xgt1h//njHzhKdOs9GUPiJNRXiASWXsWfjRIShllkZEhZZSOXUBW0IzP2V4EiA==
+Message-ID: <2ca62998-18f4-4d20-8a0b-a4dec28ba34f@mailbox.org>
+Date: Wed, 18 Nov 2026 08:24:36 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 4cda71a80942d91696f
-X-MBO-RS-META: cc3cy7mnip93446d19nrf6j1qmccczhm
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/20] clk: altera: Constify driver ops
+To: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+Cc: Boon Khai Ng <boon.khai.ng@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Lukasz Majewski <lukma@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
+References: <20261116173546.3487841-1-marek.vasut+renesas@mailbox.org>
+ <PH7PR03MB7063CC325305C2B9A92A091EAD7B2@PH7PR03MB7063.namprd03.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <PH7PR03MB7063CC325305C2B9A92A091EAD7B2@PH7PR03MB7063.namprd03.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 759e8aeef09a971179e
+X-MBO-RS-META: hrd3eqr3kf8of18hcoptfg5e7sxmy4hk
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,64 +132,28 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Move the onboard hub driver into drivers, this is a driver and should
-not be in common/ . No functional change.
+On 11/17/26 3:27 AM, Alif Zakuan Yuslaimi wrote:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
+Hello Alif,
 
-Cc: Alexey Charkov <alchark@flipper.net>
-Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Cc: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-Cc: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: u-boot@lists.u-boot-project.org
----
- common/Makefile                                  | 1 -
- drivers/usb/common/Makefile                      | 1 +
- {common => drivers/usb/common}/usb_onboard_hub.c | 0
- 3 files changed, 1 insertion(+), 1 deletion(-)
- rename {common => drivers/usb/common}/usb_onboard_hub.c (100%)
-
-diff --git a/common/Makefile b/common/Makefile
-index d62ea34599e..ac6a2d1ae6a 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -35,7 +35,6 @@ obj-$(CONFIG_PHYLIB) += miiphyutil.o
- obj-$(CONFIG_USB_HOST) += usb.o usb_hub.o
- obj-$(CONFIG_USB_GADGET) += usb.o
- obj-$(CONFIG_USB_STORAGE) += usb_storage.o
--obj-$(CONFIG_USB_ONBOARD_HUB) += usb_onboard_hub.o
- 
- # others
- obj-$(CONFIG_CONSOLE_MUX) += iomux.o
-diff --git a/drivers/usb/common/Makefile b/drivers/usb/common/Makefile
-index db8f35c10c4..e7d5356e521 100644
---- a/drivers/usb/common/Makefile
-+++ b/drivers/usb/common/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_USB_GADGET_DWC2_OTG) += dwc2_core.o
- obj-$(CONFIG_USB_ISP1760) += usb_urb.o
- obj-$(CONFIG_USB_MUSB_HOST) += usb_urb.o
- obj-$(CONFIG_USB_MUSB_GADGET) += usb_urb.o
-+obj-$(CONFIG_USB_ONBOARD_HUB) += usb_onboard_hub.o
- obj-$(CONFIG_USB_R8A66597_HCD) += usb_urb.o
- obj-$(CONFIG_USB_EHCI_FSL) += fsl-dt-fixup.o fsl-errata.o
- obj-$(CONFIG_USB_XHCI_FSL) += fsl-dt-fixup.o fsl-errata.o
-diff --git a/common/usb_onboard_hub.c b/drivers/usb/common/usb_onboard_hub.c
-similarity index 100%
-rename from common/usb_onboard_hub.c
-rename to drivers/usb/common/usb_onboard_hub.c
--- 
-2.53.0
-
+>>   drivers/clk/altera/clk-agilex.c  | 2 +-  drivers/clk/altera/clk-agilex5.c | 2 +-
+>> drivers/clk/altera/clk-arria10.c | 2 +-  drivers/clk/altera/clk-mem-n5x.c | 2 +-
+>>   drivers/clk/altera/clk-n5x.c     | 2 +-
+>>   5 files changed, 5 insertions(+), 5 deletions(-)
+> 
+> Looks good to me.
+> 
+> However, drivers/clk/altera/clk-s10.c still has a non-const socfpga_clk_ops table.
+> Could you fold the same change in here so drivers/clk/altera/ is consistent?
+> Thanks.
+> 
+> Reviewed-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+I sent a v2 of only this patch in-reply-to the 01/20 patch v1 to avoid 
+flooding the list with the entire series again. Thanks !
