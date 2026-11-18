@@ -2,160 +2,120 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19EDE606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 06:51:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3D4D606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 07:11:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lg8MQTXn;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=TyCWOmFD
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HOKZ5xCX;
+	dkim=pass (1024-bit key, unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.a=rsa-sha256 header.s=default header.b=GNeNNQ33
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C52D240821;
-	Wed, 18 Nov 2026 06:51:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B3A9340807;
+	Wed, 18 Nov 2026 07:11:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XXFUdNw0wNUW; Wed, 18 Nov 2026 06:51:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CD219407FB
+ id cYqtsCMzXGtA; Wed, 18 Nov 2026 07:11:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7ECD4407FF
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794984695;
-	b=TpBNKl7GfmqrbvTVbFsSer7VY8HVGppLzZS42Z2XLqPEksNS8m82hTEDJKKLlrSAinnD
-	 UeGMOoX1I+wYzbH+sz8Fp8M3fNVxkGkkQD92NOuMBAxvjR3HddLBbphZUYCWtsY6ysILP
-	 sFmlEHoa0FZN6fpD3i6Me6IMNtjAPLYTeJJA/YCdV8x82SJhXkEF+aew1IsE311eyzVUw
-	 bwRgQ02bGSJ3yAvq5QNEjEGCW5LTIBtpLcTl+cZyGZSb3BieOC366t3UN4FxqUThtO5Tr
-	 m+jMWcV+V7zjMHXolvo4fPcLX+7mfmm7IHxXTf41Godp1ZKRpBgAINYzRQ9vW5mb0FA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794985918;
+	b=FGyJydSCjEeP1y9mjMhX98Ne/BYekHBBcHS4tkdN0HvHkuH0uPAkn1C6/8mLLiK8fffl
+	 UYikHpcXI335aC6zb91bc5qM9F4zWHXH/9mNU7KtY1ngCA3QQeAZhUJNQ+ma0Zns6f03L
+	 l82JOuWTsb2GLn4aCsZzzUgUyXjGshkGN89T+jqWGPh/sT/1n0u+wzsc7brERQ5qrr7dw
+	 8G33MSil4vqYxizi+nIOjoxN2pIIDOGdZkKLu56hKF096jJHujUzNp8Hv5j0d7Wqwuqvr
+	 odJMU3VLeJrxm6eGF3qwoJj8cZ2QA8I4MJEIDFdLVJAQ2xRazWL2nuROpUxdeIRffIQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794984695;
+	c=relaxed/relaxed; t=1794985918;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=gsd0lqEmEi3WMLwaQ/VU8lEiqRo6Dq3D8xPRyyHInuA=;
-	b=ZdtzBaslzVHTu8anoLtJRLw+/OMBGdgb9+c+xBy3Fux55vW+D5MvrNw4LysAQclNhe8J
-	 jUeJ13rNdQlP/F9sFMjFoWHV1yBEFSv8J6AxPlfIcIElF2ptzXn8aOKRug23tWIJJgGNW
-	 JNhyxLzQmn3rZeHvAIPrII0hWu9QTPYXV//4gNIEXJruVkFgPgVZyOnKsn0xD8MO/IchV
-	 TYrdKowWYXy9qaZAKoINAJ3y4VjX3jbgorByR58xrofNTsdfL7rK85N2/TNGXHft4D5Z4
-	 3ngy6ibovPEoycUQEF+CDDJeQknbLFtHOOe+OpDmxfV4ieYJGtKBgP8EVy/CuypjRWg==
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:
+	 Content-Language:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-HM-Tid:X-HM-MType:X-HM-Spam-Status:
+	 DKIM-Signature:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=35BEuwuptUuqJhm97acAizspGK2hwGXZXJ+ULUzcVl8=;
+	b=f6J5HweYQ2MGhKdcSRieYIQTY1ffnCXTeh0dZhSGo2+TEt65zLLkqsdOfdllkLimLFYo
+	 Wpx9hQrMbmbwa0pWrp6MIx9GQ7HWpDW8MX+CWVuadL0Qb9mObStkt/1kN8DKU3pcCtqQU
+	 HLl3FfT7dgNmKiETYKpFFebM6pvotXItST8n+K711zM6z07/25188k6W8fSlOfwGr55q7
+	 sA4/0o1My0AYLBUAwmhmWrhroEkBsWzLx3aISjpyauRhMzu4Yek0kxRJgeBf0QIRYlD3d
+	 sSPxhLLoVDJoYQyKLJ/GQ618gjNEwRaU/XnxRdF+jkflMf3z1V9UBucfaz9dwwGMszg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=TyCWOmFD;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794984694;
-	bh=gsd0lqEmEi3WMLwaQ/VU8lEiqRo6Dq3D8xPRyyHInuA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794985918;
+	bh=35BEuwuptUuqJhm97acAizspGK2hwGXZXJ+ULUzcVl8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lg8MQTXn67ygnsoVYbja6FAejvuCfESTSKhSpjtNwVk8z/Z8XOdkTqMm9eIRcyuIL
-	 9DGdDARU6tRule4YCyZZ9mYkUYgSlHPxU5iNRCJwXIeFV0aAdoG98F1aiMs3VTuwVY
-	 HmlxmHomPOMLcWWpx2EnfCXq6SkTMAb4Fqr9MrorawseVm1SGzqq50Syi6PXzP/l/k
-	 AVpCRUMpfLT0IFM2RhAC86qRfY0hLJRxbDZZB9ByJ23k/eq8jeopKQ/eUKl0qi/3J4
-	 zkdGoXekx3PMY2vAiOzH+psG+2FhQngfF4AQ2zJwOOY1i8XD7uYUagRC45p8/yXQRL
-	 IzXe8p0f5KLjQ==
+	b=HOKZ5xCXBy98QM1MyBzCQ2t04Hp1F2A+abiEP2R19bpriGFML/kEXaloht3du0kiE
+	 S2/K6d22O1SQnSgkNcSTIpaFZ+6tOkKh4ARRxVWYTdlg25KUbcut8UvSTaU79QzKUl
+	 B+3Qrq1NuSRwF6wMfwbI892DpOMsZofz3ukduIhd0mWf0DRuvGxwuYo7NGZZmoYz7y
+	 iLRSgCAFk3l1ohYMB8Zb4vT4nFVbHKxcA4PXvENXMe98yqSwnQfYU8cs/Heml+2Sqi
+	 8PiWQRNTcamwiKT168tYT+1+wvVyHjOQf9MOd5ex3Rsg2pV1VjrN+t4MWHZWoYd7ad
+	 mcIxLzS/IyYvQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CD219407FB;
-	Wed, 18 Nov 2026 06:51:34 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A6C989F8
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 06:51:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7ECD4407FF;
+	Wed, 18 Nov 2026 07:11:58 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D9CA91E7
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:11:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A4284407FB
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 06:51:32 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B9B04400A7
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:11:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oHZZRzSIuCKH for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 06:51:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 92F1E407FA
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::434"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=TyCWOmFD
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 92F1E407FA
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 06:51:28 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-4a5024b3c28so657273f8f.0
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 22:51:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794984687; x=1795589487;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=gsd0lqEmEi3WMLwaQ/VU8lEiqRo6Dq3D8xPRyyHInuA=;
- b=TyCWOmFDAtqUOuYBQ+eYio8XvGxegJiO1xpLGXsEixf7Nd00plItiDcDdeqVV4Oi/t
- S8Ev6sJnpgFIJEGfCxBuQGCa0tLv6cFQRohd3ZN2EHzVsC/Hgb5PCPyGHQjk+8Yf8MSV
- +FmdUd8i+yYJyrfSCMiuObwq3ZaJUReV8dXCBtf9KWzRutABdlST3PbVbRRoA7yanGWN
- kJ6l4Wtm08+W3IlGo2gLaFQGsys13BNlBAKtzFPkDDOfijWEvk4e38X8nF1zwwphL6ai
- KJq0Z9hPjUaFK0SDEAruVtvJvWpEvleAIFOjcFTl+CQhyuN0vAJsYt5LbK2385A6a4Bb
- LdTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794984687; x=1795589487;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=gsd0lqEmEi3WMLwaQ/VU8lEiqRo6Dq3D8xPRyyHInuA=;
- b=ZOyx397QfG7L2kYR2yrMH16uMrFryWCmJpdNvSjbbWijqCFahtwiEeCy47x54B+198
- sFWpPE3jM3lxgNPGyr5j0HxNMQiWJxWHzSESvV2tFJn4QEgFTnUkpCe7D00HKREt7meV
- 6vdYFe9J5ntwdlW9rYKb7dLZuXb0GcbUVmDJHMrn5BZe4tGJ4au1JlaX/CiSngptVVR2
- uZvI1JKQAcBVs1gWmTm2dr5JU1XfzV1hsVWt1hUsZtCIbOoWg2EINIZSY/lwXgFkM6V8
- tqcJz2vWWzhqTSDaNFTgTTCYcVVM78KkFYWLy1VytPQ20pLvRVycN7nmaVlY4Jovha26
- U8bg==
-X-Gm-Message-State: APuU4Z96KsRfbKTHUKCNAP+feh9+yg+UMYQwcffWOubX0dRHhwAhEQGS
- 2nHqxNXHRMC1ZPFE6Sal1K2RBR49kJdRLM2rKvJnVwPwQd+qqLOz8Xwi5dXfC+SuzXA=
-X-Gm-Gg: AZFdTZfTey7wbBFyzZIdCOkhQkdriAyB3d8fCMQyy9yPzMQwsBYqft0M34ZzY/AGoPG
- JDU204qjiJ6zRN9+9GOoTO5y5n5wZJKnPvYB7IweFgFIu2gHuGvgnyqa4U1EnEvrDvs7e3j0m4u
- Rycmgc/B0yVgTdHaKpmwuFXpO/tO3T6w9fl60dGFByKselli7HJ+7sdVqqly6gzKKZtbId8kegF
- +TeBCPnVc8F9rXgLbfBYnkeLMLmECI+qXYKHAtAs8sagPaHoTUz7G9oG4TjFp0NwXRuMjfKAQKk
- PJdkJc85MWDpXoVF9oqTtHwWc+b4cWmQcv41zMoNToUoPG4PVleqZ94rGJWKe4yg70noW3YCkfz
- ostrxAMbW7NJWtHrZ1CNfEwOwgDdyqX7L7ISQKfzYcGnrm8lJAyHYnRK1BmnFYGrP0uQvonD8mt
- 3tFtJgoJxgknP0+EgiNA4dL2BfX+Rg8Bcv+kIcPaZ73ohy6Wu0IXLtvqw+1XUzwip1+gVliyjvf
- yWOnaI3+YPTS8FVsPhQ2MrjQlHfeBcStSb4IS+7f4rheMH9gQOA/FYQJ0TwP9EKUFuTfAWFs+qh
- 3bQXwz5+KAlASjhWbScBI3V88nJsvAtNE6amDGn2GPrDK0AAxWlP66eh5+TyZwYGgW5dZbKey61
- Q/Zcuj5U=
-X-Received: by 2002:a05:6000:2681:b0:4a7:851a:e619 with SMTP id
- ffacd0b85a97d-4a7851ae893mr614298f8f.2.1794984686836; 
- Tue, 17 Nov 2026 22:51:26 -0800 (PST)
-Received: from macbook (host-95-246-144-141.retail.telecomitalia.it.
- [95.246.144.141]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4a6573baaaasm3104604f8f.58.2026.11.17.22.51.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 22:51:26 -0800 (PST)
-Date: Wed, 18 Nov 2026 07:51:25 +0100
-From: Carlo Caione <ccaione@baylibre.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@nabladev.com>, 
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- York Sun <york.sun@nxp.com>, Francesco Valla <francesco@valla.it>, 
- Anton Ivanov <anton@binarly.io>, Aristo Chen <aristo.chen@canonical.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut <marex@nabladev.com>, 
- Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>, 
- Daniel Golle <daniel@makrotopia.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sam Day <me@samcday.com>, Pengpeng Hou <pengpeng@iscas.ac.cn>, 
- Alexey Charkov <alchark@flipper.net>, Kevin Hilman <khilman@baylibre.com>
-Subject: Re: [PATCH 0/6] Support fastboot boot in SPL
-Message-ID: <av1KkSo_66l1C33S@macbook>
-References: <20261014-ccaione-upstream-spl-fastboot-boot-v1-0-d29df15fb9b8@baylibre.com>
- <179492230542.246593.14014203987510433850.b4-ty@b4>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5S1AHkSsRNLD for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 07:11:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 047C94005D
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=210.79.60.68
+X-Greylist: delayed 307 seconds by postgrey-1.37 at util1.osuosl.org;
+ Wed, 18 Nov 2026 07:11:54 UTC
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=rock-chips.com header.i=@rock-chips.com
+ header.a=rsa-sha256 header.s=default header.b=GNeNNQ33
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=210.79.60.68;
+ helo=mail-m6068.netease.com; envelope-from=chenjh@rock-chips.com;
+ receiver=<UNKNOWN> 
+Received: from mail-m6068.netease.com (mail-m6068.netease.com [210.79.60.68])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 047C94005D
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:11:52 +0000 (UTC)
+Received: from [172.16.12.163] (unknown [61.154.14.86])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 551a0303f;
+ Wed, 18 Nov 2026 15:06:39 +0800 (GMT+08:00)
+Message-ID: <bcfaf696-2aad-4528-9fff-e909c0254b0c@rock-chips.com>
+Date: Wed, 18 Nov 2026 15:06:37 +0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <179492230542.246593.14014203987510433850.b4-ty@b4>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/4] ram: rockchip: px30: allow multiple SDRAM types
+ selection
+Content-Language: en-US
+To: Quentin Schulz <u-boot@0leil.net>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>
+References: <20261025-ddr-multi-v2-0-b82ff9c860ba@gmail.com>
+ <20261025-ddr-multi-v2-2-b82ff9c860ba@gmail.com>
+ <a10d5dd9-ecdd-44e2-acce-8cb33501adec@0leil.net>
+From: Joseph Chen <chenjh@rock-chips.com>
+In-Reply-To: <a10d5dd9-ecdd-44e2-acce-8cb33501adec@0leil.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0aa1ed7aa1d503aakunmd0dd24f92e464a
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaHkgeVhhCGUkZTkhNTk1OT1YVFA
+ kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlNSlVKTk9VSk9VQ01ZV1kWGg8SFR0UWUFZT0tIVUpLSU
+ 9PT0hVSktLVUpCS0tZBg++
+DKIM-Signature: a=rsa-sha256;
+ b=GNeNNQ33JjnR8pU/Z4IQJYQhLo7q4aVDAtrRa5rLhJ97xohJ0Qb1g8HfeSup+xBHIJP70XmhewVu422wO4OXZzgxEbh3vfR7qa2agzDd4dwJvmu/HP5fECA4YCAtaxrXPI4S80C76Wxx5a7E7+PEo6TUQHAFJifz8KxxWzBBArE=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=35BEuwuptUuqJhm97acAizspGK2hwGXZXJ+ULUzcVl8=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -165,53 +125,126 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Nov 17, 2026 at 14:31:45 +0100, Mattijs Korpershoek wrote:
-> Hi,
-> 
-> On Wed, 14 Oct 2026 14:24:28 +0200, Carlo Caione wrote:
-> > Test farms need to run successive U-Boot builds without rewriting boot
-> > storage. Add optional fastboot boot support to SPL so an already-running
-> > SPL can receive U-Boot over USB and hand off to it in RAM. U-Boot proper can
-> > then load the operating system using its usual boot methods.
-> > 
-> > The standard host command, fastboot boot u-boot.itb, accepts a FIT built
-> > for the target, including any firmware required by its SPL handoff.
-> > Uncompressed legacy U-Boot images and raw binaries are also supported
-> > when enabled by the board. Raw binaries use the board's configured load
-> > and entry addresses. Legacy and raw downloads are rejected when SPL FIT
-> > signature verification is enabled.
-> > 
-> > [...]
-> 
-> Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
-> 
-> [1/6] spl: fit: reject failures loading an explicitly requested FDT
->       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/088e6f84ba52e62b96b018d48fc0a9d5deb57307
-> [2/6] fastboot: invalidate stale and incomplete downloads
->       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/c99169ecd5aacd748dd2a84837ae80b346fd8e07
-> [3/6] spl: ram: allow loading FIT images from a supplied buffer
->       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/0160e29255b32b0f0158da4cae69bf360aa9e6d2
-> [4/6] spl: support booting FIT images downloaded with fastboot
->       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/93ba4e8d4d3d5c75470e9e4a805997260182d9d5
-> [5/6] spl: fastboot: support legacy U-Boot images
->       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/a8ed070e54f83cb16149db910b2c46297e7e7828
-> [6/6] spl: fastboot: support raw U-Boot images
->       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/c52cc53f454a3f7e039357a839a2b92f56432bc6
+Hi Quentin,
 
-Hey Mattijs,
-just to double check because I see this reply to my V1, but the revision
-to apply should be V3 at [0].
+在 2026-11-11 23:41, Quentin Schulz 写道:
+> Hi Massimo, Joseph,
+>
+> On 10/25/26 8:30 PM, Massimo Pegorer wrote:
+>> Allow the inclusion of more than one SDRAM parameters set in the PX30
+>> sdram driver. The driver applies included sets in alphabetical order
+>> (DDR3, DDR4, LPDDR2, LPDDR3), stopping at the first one that makes
+>> SDRAM initialization function to complete with success. This order is
+>> debatable and not based on any specific reason.
+>>
+>> Due to limited PX30 TPL maximum size, including support for more than
+>> one SDRAM type can require disabling some configuration options such
+>> as CONFIG_RAM_ROCKCHIP_DEBUG.
+>>
+>
+> @Joseph, can you help us out here?
+>
+> We are trying to do the same thing that px30_ddr_333MHz_v*.bin from 
+> Rockchip's rkbin is doing: do DDR initialization without knowing which 
+> kind of DDR is soldered on the PX30-based device. Is there something 
+> special we need to do or know? For now, we are trying to initialize 
+> with DDR3 first, then DDR4 if it fails, then LPDDR2 if that fails too, 
+> then LPDDR3 if all fails. The first DDR init that doesn't fail is 
+> deemed successful. I do not know if this is correct, can you please 
+> provide some guidance?
 
-[0] https://lore.kernel.org/all/20261116-ccaione-upstream-spl-fastboot-boot-v3-0-7b39e7a348c6@baylibre.com/
+Sorry, I can't offer much guidance on this topic.
 
-Thanks,
+>
+>> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+>> ---
+>>   drivers/ram/rockchip/sdram_px30.c | 40 
+>> +++++++++++++++++----------------------
+>>   1 file changed, 17 insertions(+), 23 deletions(-)
+>>
+>> diff --git a/drivers/ram/rockchip/sdram_px30.c 
+>> b/drivers/ram/rockchip/sdram_px30.c
+>> index c7ff924b2c5..7f51b9c4f8f 100644
+>> --- a/drivers/ram/rockchip/sdram_px30.c
+>> +++ b/drivers/ram/rockchip/sdram_px30.c
+>> @@ -123,27 +123,24 @@ u32 addrmap[][8] = {
+>>     struct dram_info dram_info;
+>>   -#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3) + \
+>> -    IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4) + \
+>> -    IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2) + \
+>> -    IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3) > 1
+>> -#error "This driver only supports one DRAM configuration at a time"
+>> -#endif
+>> -
+>>   struct px30_sdram_params sdram_configs[] = {
+>>   #if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3)
+>>   #include    "sdram-px30-ddr3-detect-333.inc"
+>> -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
+>> +#endif
+>> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
+>>   #include    "sdram-px30-ddr4-detect-333.inc"
+>> -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
+>> +#endif
+>> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
+>>   #include    "sdram-px30-lpddr2-detect-333.inc"
+>> -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
+>> +#endif
+>> +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
+>>   #include    "sdram-px30-lpddr3-detect-333.inc"
+>> -#else
+>> -#error "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP option"
+>>   #endif
+>>   };
+>>   +static_assert(ARRAY_SIZE(sdram_configs) > 0,
+>> +          "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP 
+>> options");
+>> +
+>>   struct ddr_phy_skew skew = {
+>>   #include    "sdram-px30-ddr_skew.inc"
+>>   };
+>> @@ -691,19 +688,11 @@ out:
+>>       return ret;
+>>   }
+>>   -struct px30_sdram_params
+>> -        *get_default_sdram_config(void)
+>> -{
+>> -    sdram_configs[0].skew = &skew;
+>> -
+>> -    return &sdram_configs[0];
+>> -}
+>> -
+>>   /* return: 0 = success, other = fail */
+>>   int sdram_init(void)
+>>   {
+>>       struct px30_sdram_params *sdram_params;
+>> -    int ret = 0;
+>> +    int ret = 1;
+>
+> @Massimo: question: why the need to change ret to 1?
+>
+> Because the driver enforces sdram_configs array to be non-empty, we're 
+> guaranteed to do at least one loop and thus ret is guaranteed to be 
+> set properly.
+>
+> Cheers,
+> Quentin
 
---
-Carlo Caione
+-- 
+Best regards,
+
+陈健洪 (Joseph Chen)
+chenjh@rock-chips.com
+福州瑞芯微电子股份有限公司
+Fuzhou Rockchip Electronics Co.Ltd
+福建省福州市铜盘路软件大道89号软件园A区17号楼 (350003)
+No. 17 Building, A District, No.89,software Boulevard Fuzhou,Fujian,PRC
+TEL：0591-83991906/07-8573
+
+
