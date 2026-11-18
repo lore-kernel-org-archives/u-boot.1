@@ -2,127 +2,112 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D9FE606A889
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 07:24:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60868606A32C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 07:32:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PQyk4M3S;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=B4XCRca0
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vMkTiE6m;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jrH4d9xr
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 289C440811;
-	Wed, 18 Nov 2026 07:24:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 34B6440853;
+	Wed, 18 Nov 2026 07:32:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JMAyxpZoBvGM; Wed, 18 Nov 2026 07:24:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6140340576
+ id r3B4f00g3VHZ; Wed, 18 Nov 2026 07:32:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3566D40848
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794986683;
-	b=spRutyDj2JE009Dg2PmabBDuFJsCqDMFY8n/7i4QZSttfxf+V6iNXcQTpsbmQX88tY4v
-	 icHqTwOi/6OWJ6poNbyH29GomnbyJtRqDx3oZT+5YpR7SEFwMlMaTav/6swqi5aH9NJZ3
-	 x/YMRI9ARTUFPpXaozsEj6idFz1pYO7Q0v2he4dyZ8/izmYlf8HD3CqhzwxUhivElP1OD
-	 3PK/9ZoinumEf3CW6iZyyX4UsXjTnf/txbXH4GHzQigTnSFuOGC8s1lHDt4W6owGtE06v
-	 g9VNFNza1auA6b88pUteH3xY8kWkFr1QsYl/lQ54y5V0ehWQ2Fb/KGJeoTh6PrX5+QA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794987130;
+	b=H855Ng2a3a5XppSg9Fmwzmp7zdLizrzAdFY4TjPXqVuiWrSIq6Iu5L5GWowH7pBjYVEg
+	 ckguuueJ2Me5u63tZ4RRD16XWOHWnXb+lPdAvXe53AP27ezdQyL2GKUgLgWEqFS+8n27h
+	 hRkk1yDqlkDRw1WsnyCKVCGztopSY/GqxfxhK8qZBJK9Gmvg/vsVU65MJuEdF4RlHcrDO
+	 8CwxAdfBw49FjkrbIj+AOby5BdyD2ERXAakewcA3cOsu2d8/3dz8OZqjQPVuc8CWSge9v
+	 DE5LNeLVRxS55Jb7ZUIsF09f36SSV/8ekU05cVB7kyf5q4Fi1UFTpJ268k7P4BLEsgg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794986683;
+	c=relaxed/relaxed; t=1794987130;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
+	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ZpVamJk9B1Yv8trk1P/8GUPceE6VVOLD9zC/r95MqJg=;
-	b=CWSyAOM3w0T4GDTlgFlVueRZTgRLNTb/VMECCVIIy6NRe+yOTrv3eJOv/VKxhS+f25ll
-	 p42dCMKI7/bHaBOIpIWyNgn5zzCJjuPbw74rxIWW2QXmdumnK6ObmEVwhjIxPwbRIuHqf
-	 zCJhYfhoOhRXptiUvPBg2FFmPfFhQ75ZCKqFOAcXQ48FqPza25rSo58CUpddmhBnEwVN4
-	 xB9LLRzeNynBo/vgkudRzslEYmJVUjckY8pfMkY/kA6qJlAGR9Ug2hgLrLt1OCaOFFN7W
-	 m/PIHYwfIxKOQNIR9UUFX551Jc5U/9w+u4i0wP5oCKAHMC04CmSi2hkAt0n01mtgjuw==
+	bh=pa5ahd62sZdjP7VWuTdJbTmhSHpeLU5tXVv66AuAAQE=;
+	b=SW1hHufN8B9hk+n3zpih4gbK55qKlwZOtAD+3hTsQPHf6WkNAcqNEHmrXzB4LgM+rnbJ
+	 i5EU7/R0bFIVT4CVU3cNS2zzJZn7JbsZPaEOpxzkNvyUxRgEXLyDvUvXwRSLwZv8a5Bsd
+	 gglgaoa+pFw9N2Zkgrr+NDmQ8A3ZEdSU8rN4F4ptkZE0G/FUeBZytBo7W6Aelgic/I89x
+	 GlC2233NEGWcStxk86pnAgFfrrgQAthzmRHg3pqSI3dv5pvhIUKdWXpMU7ypNzjUfccp7
+	 sCVKoAafkkw9iPD5AQ9lh/AKEbnN/9MrYCvzT5X3cFVG3IJIu02HxXyOngyUdpi0C0Q==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=B4XCRca0;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794986683;
-	bh=ZpVamJk9B1Yv8trk1P/8GUPceE6VVOLD9zC/r95MqJg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794987130;
+	bh=pa5ahd62sZdjP7VWuTdJbTmhSHpeLU5tXVv66AuAAQE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PQyk4M3SsyAwwBe615uw1gVpDc8Ypi6A+CN+j1S3g9aCdj0vWiH+weChLD4MebZ7W
-	 YjMEwf2Kd+Ca7TJ/bg7bU9JaSwD3qDiSbEsm57IpYKXLji5sulxV7Y6mYtYLck15Cg
-	 Kwu9xpxKDASMLVAOCCqdQUA9fJrWHRZFevuqBNBqhFuJgBd7O5UPxaqzunNcRo62+9
-	 6kaKRZTJL78hVmz/tyP/6tksnVH3VzK5TABEysXpALSzXHMtujKy12oOblu2u7iJ7s
-	 PwFJ+AMm4COc5oKM4Kk6A3o6mqXYl+Vw4tWnqThyICTJKQBYxoe26TasxMXSjVDU1k
-	 FoUPGSAGoblnA==
+	b=vMkTiE6m0DTXbI3Fh+KMTruIjYpGO+qKby6P/UevDHNLzZb/J1k1zGPC/70B+bq5V
+	 yCPyEGromiBhZBf8Njr+b9Y/ATJQvIyexmjrxtsOD9ZjUAOpWhgvkRuMFc8K2DVckC
+	 aUhu3+PMn8OBoQLWBk379sQkpg6CbMvIGABh/F7+ey7IaXXlWEWvPjDMjX1Bb4umX4
+	 KytzxOQA7nmQmyC3bFE46FajzY2Qw8rAL4tpkrcdizzRux/5YX5qRFZKxvK+fWxbnm
+	 VtOrK4ShGwc8XbTCuTg5eYM8ru8Q60gP0UU3teVpvI55bV4CV2mzUshb0jTrstw6vT
+	 DtTrk89kvMwLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6140340576;
-	Wed, 18 Nov 2026 07:24:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 80C7A1E7
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:24:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3566D40848;
+	Wed, 18 Nov 2026 07:32:10 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4E7DD9F8
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:32:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7DB9240576
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:24:42 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 401C181091
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:32:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JFqk8pwsIllo for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 07:24:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8BBA14055F
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.152
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.152;
- helo=mout-p-102.mailbox.org; envelope-from=marek.vasut@mailbox.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=B4XCRca0
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8BBA14055F
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:24:40 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jTtQZ2Cp3zKvht;
- Wed, 18 Nov 2026 08:24:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794986678;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZpVamJk9B1Yv8trk1P/8GUPceE6VVOLD9zC/r95MqJg=;
- b=B4XCRca0TbUPNB3uO9MymIwrV4czAXFKtbwAbc/pmuU0DjZgFy6kPlAmE+m437Rd6SX9Yr
- WKRBlXbCIzSC5sgIP4Xf4gYemw7KE/Glx9iYzlJPG4LQHvl4wmyDuPmauRCMVt/73ZtnpR
- Ai/bWQancGt5XgmMGgzUIR90c8rsbsFRK1Nu3uRWO1BG2sXy0gKwBjos6DuW56sUNwRMKu
- l7DWVgxQTltpZX3qlfK5eMdzyH+EwVl9gOEJ0369+jEArx4AEL58jWn4Bg9R1sUTCderds
- Xgt1h//njHzhKdOs9GUPiJNRXiASWXsWfjRIShllkZEhZZSOXUBW0IzP2V4EiA==
-Message-ID: <2ca62998-18f4-4d20-8a0b-a4dec28ba34f@mailbox.org>
-Date: Wed, 18 Nov 2026 08:24:36 +0100
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vdhqgz0Fqu8b for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 07:32:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 399868107F
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=jrH4d9xr
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 399868107F
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:32:07 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 595CC6186E;
+ Wed, 18 Nov 2026 07:32:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E30A1F000C4;
+ Wed, 18 Nov 2026 07:32:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1794987126;
+ bh=pa5ahd62sZdjP7VWuTdJbTmhSHpeLU5tXVv66AuAAQE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=jrH4d9xrg8UXX8HcQrZS2SftQKvfbQCZStMAlXxG/enZX6MiRwHuVARHzNJpNpNT5
+ oG8j7nQAC09milq0xmj8ZDP2198J3/82032JjwXDiXiRUbQ0stgnVT6gwhtdVbHOBL
+ 68ZSIP9Nxu57QMIPJQNSnzACeuA+S9tTGYLoZulv3bwZCceoSIMjVyVxb5cB7PXV8g
+ kXeqaEww9ZYCrXS8I11QMb48cBefIcvPPQSvxmtbOCMspmxYaEP3VoccmBX9Lp+orS
+ bQl7sIklsgjful9pzrhq1KgGiLxHQCggNJTF5tB3sD53Vvz6IP1+EJJkWB+wmeSZm9
+ +p3RUGStaLqbA==
+Date: Wed, 18 Nov 2026 07:32:03 +0000
+From: Yixun Lan <dlan@kernel.org>
+To: E Shattow <e@freeshell.de>
+Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
+Subject: Re: [PATCH v3 0/4] Spacemit K3 enable Linux boot
+Message-ID: <20261118073203-GKC156369@kernel.org>
+References: <20261116102653.36927-1-e@freeshell.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/20] clk: altera: Constify driver ops
-To: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-Cc: Boon Khai Ng <boon.khai.ng@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Lukasz Majewski <lukma@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-References: <20261116173546.3487841-1-marek.vasut+renesas@mailbox.org>
- <PH7PR03MB7063CC325305C2B9A92A091EAD7B2@PH7PR03MB7063.namprd03.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <PH7PR03MB7063CC325305C2B9A92A091EAD7B2@PH7PR03MB7063.namprd03.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 759e8aeef09a971179e
-X-MBO-RS-META: hrd3eqr3kf8of18hcoptfg5e7sxmy4hk
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261116102653.36927-1-e@freeshell.de>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -132,28 +117,55 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/17/26 3:27 AM, Alif Zakuan Yuslaimi wrote:
 
-Hello Alif,
+On 02:26 Mon 16 Nov     , E Shattow wrote:
+> Adopt some fixes needed for Linux v7.2.10+ boot and enable
+> BOOTSTD_FULL together with minimal env addr variable defaults.
+> 
+> Build and test only with vendor BSP k3-br-v1.0.10 having reduced [1]
+> configuration to avoid a memory resource conflict. The vendor BSP SPL
+> in its default configuration attempts to load opensbi separately from
+> u-boot main app, and also attempts to load an embedded controller OS
+> image, neither of which is useful for mainline opensbi, mainline
+> Linux, and mainline U-Boot.
+> 
+> Changes since v2:
+> - Add patch 4/4 which adopts a proposed Linux series [2] to reduce the
+>   initial memory configuration to 8GiB for CoM260 and Pico-ITX boards
+> 
+> 1: https://lore.kernel.org/u-boot/20261029003327.1890979-1-e@freeshell.de/
+> 2: https://lore.kernel.org/linux-riscv/20261115195112.32120-1-e@freeshell.de/
+> 
+> E Shattow (3):
+>   riscv: dts: spacemit: k3: override reserved status of mimsic and
+>     maplic
+>   configs: spacemit: k3: enable CONFIG_BOOTSTD_FULL
+>   riscv: dts: spacemit: k3: adopt com260/pico-itx 8gb memory override
+> 
+> Junhui Liu (1):
+>   riscv: dts: spacemit: k3: Drop guest properties from M-level IMSIC
+> 
+>  arch/riscv/dts/k3-com260-ifx-u-boot.dtsi | 9 +++++++++
+>  arch/riscv/dts/k3-pico-itx-u-boot.dtsi   | 9 +++++++++
+>  arch/riscv/dts/spacemit-k3-u-boot.dtsi   | 4 ++++
+>  configs/spacemit_k3_defconfig            | 9 +--------
+>  dts/upstream/src/riscv/spacemit/k3.dtsi  | 2 --
+>  include/configs/spacemit-k3.h            | 6 ++++++
+>  6 files changed, 29 insertions(+), 10 deletions(-)
+>  create mode 100644 arch/riscv/dts/k3-com260-ifx-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/k3-pico-itx-u-boot.dtsi
+> 
+For the series, 
 
->>   drivers/clk/altera/clk-agilex.c  | 2 +-  drivers/clk/altera/clk-agilex5.c | 2 +-
->> drivers/clk/altera/clk-arria10.c | 2 +-  drivers/clk/altera/clk-mem-n5x.c | 2 +-
->>   drivers/clk/altera/clk-n5x.c     | 2 +-
->>   5 files changed, 5 insertions(+), 5 deletions(-)
-> 
-> Looks good to me.
-> 
-> However, drivers/clk/altera/clk-s10.c still has a non-const socfpga_clk_ops table.
-> Could you fold the same change in here so drivers/clk/altera/ is consistent?
-> Thanks.
-> 
-> Reviewed-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-I sent a v2 of only this patch in-reply-to the 01/20 patch v1 to avoid 
-flooding the list with the entire series again. Thanks !
+Reviewed-by: Yixun Lan <dlan@kernel.org>
+
+-- 
+Yixun Lan (dlan)
