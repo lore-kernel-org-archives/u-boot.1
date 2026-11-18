@@ -1,113 +1,125 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8BBF606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 09:24:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CFF2606A334
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 09:53:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EDax5sBF;
-	dkim=pass (2048-bit key, unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=AsdVMltG
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=njtNI5/a;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UKOa5xW8
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DD2E4405CF;
-	Wed, 18 Nov 2026 09:24:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 669B5608A3;
+	Wed, 18 Nov 2026 09:53:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SWl2jdUu79Di; Wed, 18 Nov 2026 09:24:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8E9F4405D7
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794993862;
-	b=LONaKhT3SWsC6+RYWGbtpzDvuboMjZ/UMuKXRBQOv7EQg1aJxWioNj+82Wz4cRrjyAW9
-	 DWTXsbXDgxm8iFmgcnXNiElJbxSQn3dMZXZEUCXbyRiBQg5GJXBaj2XGpo2YKDFS9eGd6
-	 Mg7Tiz/GQHQBOIlaVu49SEaZmBbG0r42GxEbnIUSX5LKcXIchr+CfWq6hUOs3nEsLaM7V
-	 aHaqrF0pTuAtmyCYUeSzCsLlAYIOUjz3L+p6PKL4wczW9I23JTbHE+7QvDv/gZ2mQlMTH
-	 1z1PZZz4pye85WxQUWKwdvpOqKp9JHeXhNBOwQ9OmnLZOZOyPUYu0QpXo1GEf6pN6UA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1vSs55T3za4O; Wed, 18 Nov 2026 09:53:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 23AEC6084B
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794995613;
+	b=AI1YDi4lYbhLI8SG2tfz4eAfOm+5bqzz6uStmPBBF3KcIXjRkYZMrku0G6lFw80Hkmov
+	 KfDU0jhOzbkSExc6Yl1qf77w8/f/p5IoxmETZJ03q37h3USpB5o7LXwAO/lfhGkKSEvR8
+	 +LD/wbkq5VqlayGk4E0WlXgfKGG/xCud+DpED4aNYzOYCGYtILr5rgPzqRnOap6DsiuCY
+	 MUcqDACqeYg1zq3WSV4VZx3StsETslR+vCOGovMVORRSpT58Trv3pPkWLzm6hz7q5NljN
+	 95yUVMyizOpwlEZyshP6ZdT+jLUU+aeVLOFd8nT1Trgc162u1DYxXtiIPp0MwiWC8vw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794993862;
+	c=relaxed/relaxed; t=1794995613;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=mUbsEpsUFp9bvEpgFOY4YKjCUEeBAiAOSSs5ZYuhVrk=;
-	b=ptd7OIFhqN0eyH5dRa2k6mFr8xxmjjeLo1saEz/Ng/jAuoXIC9ICpA1StTl16fTttUqz
-	 4ocbFQVpTLSAg3nh4C4qIYAgvNQ73d91NJXAe0ek7m3z05HotwiufspLKx+W68lVWUr8q
-	 Jv+ur6ek3Bk+aFKTjUO2Mt1HdtsHAi8EuLKFJDmAL27Tl1wvq9Tvi4vWtZDY1Bs/BGjgG
-	 U4cBJIj2jPB6HhFySE3gJHNSQBpBI8DymNViPD4DRQYQ+H8WGRxOhNLyttql4EYmLyAzn
-	 d3433a0uAKrxhVSXy0u97jRxhUbDVv/lG9vWpIQE1IQNfBEcSndcbWZaJ44224JFC6A==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
+	 Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=QD3BZVrHgVqbwcXG5uvAOOAjOuy2DfvW0dA1TB6wknM=;
+	b=kSs//hUThjYa/kTFE/ZrYYS3nTgz4/pcL/g60SuFz/n6fZ25S3//RpGCitxJy5EkP6/Y
+	 PwJFYvzRPm2Z6S1200QLZc5yYkqdl5YGZueh2UciFwiPuo2QokwFru+/WT/E63Usg8fSW
+	 kiTzyV1M5ugK6UHrv3ZVrp9DDTQdus9EUkT4r4npomTCgBt8ha2FPj82j0BnUDNIs5EqW
+	 8fT01IiYHToN++yv2i0iKcdtQYNVZqVFuI/vaOMw1VVctFU7JjNLkWFsr7VEiVohD+NKc
+	 xm0ABlW57xMxMWqZxZ7OumrKKbXjxJrClyhPaKs9fMTCXJ1zViAMf3SAJzokbF27UQg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794993862;
-	bh=mUbsEpsUFp9bvEpgFOY4YKjCUEeBAiAOSSs5ZYuhVrk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794995613;
+	bh=QD3BZVrHgVqbwcXG5uvAOOAjOuy2DfvW0dA1TB6wknM=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EDax5sBFaYT9xZUYiaNPakwwQsC1Ly4/SRCxigDcb92Pdqeziq9WEj9PuEMYvrk7D
-	 TQrUtZaTZBUEXXgM5syIlWy5JstTOeLbi44sY9kZaJskt9JWb/ZRGl86skmuXaUULg
-	 UdqW1PELHWSfpdejxMMMKCxM1d2DaQtyxYegh1zw8hQeXypmkdxlLtshJXNJ/y7FRF
-	 hn2PwGba5dDgKrR3YEeCnxb+ocD1RKPyTjfq7n056jYP01j2k2pReJ7RAQ3MdawZof
-	 Qfy+ci0akI6uzK+4vV+/ROxJsvcNoRxqx5tZOzGJXObfugPeHGug/0D9qqLeYpLEcB
-	 dfhx7xPyta7Fg==
+	b=njtNI5/auc/gTgddz6zpzAlopABzAIfZkgDgqf4jsgRDEVzVA5OCkNUor4lwd2e90
+	 wOH8iLE+/mzuKXDwwqjNLYBDQ3Co/OeXVpkKjn1M3/6c3nZ5W08/JGoNuThKWizXcG
+	 NMVvxwvYFE9pgbqo+AgrNx42ih+2xRVVItQyY9XIdGAiMqKImrRw+KdP1xOIvhU2zj
+	 08OjphIMJZ5W7Auvo5HP0aqygL26YFkzfKftlfA+mJQL7JtmVRmHS2ifCfbn0hImun
+	 bJWOyW8HVz43UIujLqblYHbyipOf+2ufWqQrtlb+7/ejYKq8zilCQcsOmEHGncAX87
+	 t66C4o0C19ppA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8E9F4405D7;
-	Wed, 18 Nov 2026 09:24:22 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 78DA349B
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 09:24:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 23AEC6084B;
+	Wed, 18 Nov 2026 09:53:33 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 87DD361
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 09:53:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5BC3080D52
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 09:24:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 79D2B80CD4
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 09:53:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ibwN4LNi9ENI for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 09:24:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 905A280D1F
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=217.194.8.81
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.194.8.81;
- helo=mail11.truemail.it; envelope-from=francesco@dolcini.it;
- receiver=<UNKNOWN> 
+ id XoQJHRpSKm6g for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 09:53:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 70F4C80C86
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256
- header.s=default header.b=AsdVMltG
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 905A280D1F
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 09:24:15 +0000 (UTC)
-Received: from francesco-nb (93-38-173-255.ip71.fastwebnet.it [93.38.173.255])
- by mail11.truemail.it (Postfix) with ESMTPA id 5A7481FE45;
- Wed, 18 Nov 2026 10:24:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1794993852;
- bh=mUbsEpsUFp9bvEpgFOY4YKjCUEeBAiAOSSs5ZYuhVrk=; h=From:To:Subject;
- b=AsdVMltGPbfC9xoP01dygAFEFwBEmNE9GJVR9eU+dvy1aCirhawRNyNChteyEqK9F
- jVmrykYCmJwRrx8rhgWNt5l9WMBtdnZJiSIkidCpxgaJHXsy5N8WXdoMx7mm2YnhTr
- MCoIHAJMIU7InC8i53OPxXJxYIV3TPAQkmIvU+BqpCxUu3CFXZwQnJb7feDo5uWlI2
- RoYuoxzXXPjuN3BPmRbOHG3+iH3eppjzq5qJ7PzJF5ul4V92VzED9e5n4KgAwp6bqq
- 2YoaBPGvBhuKhNA04YA7MqnZA0vN0SzBSXBBl3+sNelqWxyfmob1l0el246jgrH8bk
- yW+rMLKceFiFw==
-Date: Wed, 18 Nov 2026 10:24:08 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Sergio Prado <sergio.prado@e-labworks.com>,
- u-boot@lists.u-boot-project.org, festevam@gmail.com,
- sbabic@nabladev.com, uboot-imx@nxp.com, trini@konsulko.com,
- marex@nabladev.com, o.mandel@menlosystems.com
-Subject: Re: [PATCH] board: toradex: verdin-imx8mm: adjust U-Boot proper
- offset for eMMC fastboot
-Message-ID: <20261118092408.GB133044@francesco-nb>
-References: <20261117101519.3952636-1-sergio.prado@e-labworks.com>
- <avw6QW3OO4Lw0631@francesco-nb>
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=UKOa5xW8
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 70F4C80C86
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 09:53:29 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 3E36945B48;
+ Wed, 18 Nov 2026 09:53:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB6881F000C4;
+ Wed, 18 Nov 2026 09:53:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1794995609;
+ bh=QD3BZVrHgVqbwcXG5uvAOOAjOuy2DfvW0dA1TB6wknM=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=UKOa5xW8U/4IytCCDpZtgrTZRwgEnjwGCkjuT7l4tEpJP6pr60a6IyBEzKY3ruv+K
+ zFXzFKKeIORH/pYU4wI90uflpoRk0vOdSbvc8OGUDRnRHbAeml2ft+uOudSUMNpA+S
+ 8jnqktxUwSRskjz//9K5LbGrfY8cW23aI25owq3Fms//1YvqgJ2GtViomk6P6K//6r
+ 5L0NBK0pi4mthtYfHH1/2YX8x75BCe9frnyLvziZpcT7KgZVVtDNQJjslAn9WwwjEb
+ yEb40q+uZccX2im6OAH/05ux1/AsIQg/4JZT6DuQgcpLmEz82kl+mHrrbjJjXhSa2T
+ YZsx12TGZIfaQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, Simon
+ Glass <sjg@chromium.org>, Lukasz Majewski <lukma@nabladev.com>, Marek
+ Vasut <marek.vasut+usb@mailbox.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, York Sun <york.sun@nxp.com>, Francesco Valla
+ <francesco@valla.it>, Anton Ivanov <anton@binarly.io>, Aristo Chen
+ <aristo.chen@canonical.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marex@nabladev.com>, Michal Simek <michal.simek@amd.com>,
+ Peng Fan <peng.fan@nxp.com>, Daniel Golle <daniel@makrotopia.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sam Day <me@samcday.com>,
+ Pengpeng Hou <pengpeng@iscas.ac.cn>, Alexey Charkov <alchark@flipper.net>,
+ Kevin Hilman <khilman@baylibre.com>
+Subject: Re: [PATCH 0/6] Support fastboot boot in SPL
+In-Reply-To: <av1KkSo_66l1C33S@macbook>
+References: <20261014-ccaione-upstream-spl-fastboot-boot-v1-0-d29df15fb9b8@baylibre.com>
+ <179492230542.246593.14014203987510433850.b4-ty@b4>
+ <av1KkSo_66l1C33S@macbook>
+Date: Wed, 18 Nov 2026 10:53:26 +0100
+Message-ID: <xhkdbv75upisp.fsf@mkorpers-koolstof.csb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <avw6QW3OO4Lw0631@francesco-nb>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -117,69 +129,150 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Nov 17, 2026 at 12:28:01PM +0100, Francesco Dolcini wrote:
-> Hello Sergio,
-> thanks for the patch.
-> 
-> On Tue, Nov 17, 2026 at 07:15:19AM -0300, Sergio Prado wrote:
-> > The Verdin iMX8MM boots from the eMMC boot partitions with the eMMC
-> > fast boot fuse enabled, so the boot ROM loads flash.bin from offset
-> > 1 KiB instead of the usual 33 KiB. The SPL loads U-Boot proper from the
-> > fixed sector CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR, so the board
-> > device tree moved the FIT in flash.bin to 0x5fc00 to compensate.
-> > 
-> > That override only works while the fit node is placed directly in the
-> > binman section. With CONFIG_IMX_HAB, imx8mm-u-boot.dtsi wraps the FIT
-> > in an nxp-imx8mcst node with its own offset of 0x57c00, which takes
-> > precedence, so a signed flash.bin has the FIT at 0x57c00. When booting
-> > from eMMC, the SPL does not find the FIT at the expected sector, treats
-> > the data there as a raw U-Boot image and fails to authenticate it:
-> > 
-> >   Authenticate image from DDR location 0x40200000...
-> >   bad magic magic=0x75 length=0x206d version=0x63
-> >   bad length magic=0x75 length=0x206d version=0x63
-> >   bad version magic=0x75 length=0x206d version=0x63
-> >   Error: Invalid IVT structure
-> > 
-> > Adjust the sector in the SPL instead, as the Kontron SL i.MX8MM does,
-> > by checking the fast boot fuse and the boot partition, and drop the
-> > FIT offset override. The FIT is then at the default 0x57c00 for every
-> > boot medium, with or without HAB. This also applies to the MX8Menlo,
-> > which reuses the Verdin SPL code and U-Boot device tree.
-> > 
-> > Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
-> 
-> ...
-> 
-> > +unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long raw_sect)
-> > +{
-> > +	/*
-> > +	 * The image offset on SD/MMC devices is 33 KiB, except for eMMC boot if
-> > +	 * fastboot is enabled. In this case it is 1 KiB. In order to make the
-> > +	 * bootloader universal, check the fastboot OTP boot fuse and adjust
-> > +	 * the offset.
-> > +	 */
-> > +	if (!IS_SD(mmc) && (readl(OCOTP_BASE_ADDR + 0x470) & 0x80)) {
-> > +		switch (EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config)) {
-> > +		case EMMC_BOOT_PART_BOOT1:
-> > +		case EMMC_BOOT_PART_BOOT2:
-> > +			raw_sect -= 32 * 2;
-> > +			break;
-> > +		}
-> > +	}
-> 
-> Why do we need the runtime check on the fuses? verdin imx8mm can boot
-> only from eMMC and with fastboot enabled, so this runtime check is
-> redundant, everything is known at build-time.
+Hi Carlo,
 
-Maybe remove the override in the dtsi and set
-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x2c0 (check also menlo)?
+On Wed, Nov 18, 2026 at 07:51, Carlo Caione <ccaione@baylibre.com> wrote:
 
-Francesco
+> On Tue, Nov 17, 2026 at 14:31:45 +0100, Mattijs Korpershoek wrote:
+>> Hi,
+>>
+>> On Wed, 14 Oct 2026 14:24:28 +0200, Carlo Caione wrote:
+>> > Test farms need to run successive U-Boot builds without rewriting boot
+>> > storage. Add optional fastboot boot support to SPL so an already-runni=
+ng
+>> > SPL can receive U-Boot over USB and hand off to it in RAM. U-Boot prop=
+er can
+>> > then load the operating system using its usual boot methods.
+>> >
+>> > The standard host command, fastboot boot u-boot.itb, accepts a FIT bui=
+lt
+>> > for the target, including any firmware required by its SPL handoff.
+>> > Uncompressed legacy U-Boot images and raw binaries are also supported
+>> > when enabled by the board. Raw binaries use the board's configured load
+>> > and entry addresses. Legacy and raw downloads are rejected when SPL FIT
+>> > signature verification is enabled.
+>> >
+>> > [...]
+>>
+>> Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/u-bo=
+ot-dfu (u-boot-dfu-next)
+>>
+>> [1/6] spl: fit: reject failures loading an explicitly requested FDT
+>>       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/comm=
+it/088e6f84ba52e62b96b018d48fc0a9d5deb57307
+>> [2/6] fastboot: invalidate stale and incomplete downloads
+>>       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/comm=
+it/c99169ecd5aacd748dd2a84837ae80b346fd8e07
+>> [3/6] spl: ram: allow loading FIT images from a supplied buffer
+>>       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/comm=
+it/0160e29255b32b0f0158da4cae69bf360aa9e6d2
+>> [4/6] spl: support booting FIT images downloaded with fastboot
+>>       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/comm=
+it/93ba4e8d4d3d5c75470e9e4a805997260182d9d5
+>> [5/6] spl: fastboot: support legacy U-Boot images
+>>       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/comm=
+it/a8ed070e54f83cb16149db910b2c46297e7e7828
+>> [6/6] spl: fastboot: support raw U-Boot images
+>>       https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/comm=
+it/c52cc53f454a3f7e039357a839a2b92f56432bc6
+>
+> Hey Mattijs,
+> just to double check because I see this reply to my V1, but the revision
+> to apply should be V3 at [0].
+>
+> [0] https://lore.kernel.org/all/20261116-ccaione-upstream-spl-fastboot-bo=
+ot-v3-0-7b39e7a348c6@baylibre.com/
+
+Yeah, I did explicitely apply v3.
+Here is the history of what I've done:
+
+$ b4 shazam -s -l --check 20261116-ccaione-upstream-spl-fastboot-boot-v3-0-=
+7b39e7a348c6@baylibre.com
+Looking up 20261116-ccaione-upstream-spl-fastboot-boot-v3-0-7b39e7a348c6@ba=
+ylibre.com
+Checking for newer revisions
+Grabbing search results from lore.kernel.org
+Analyzing 8 messages in the thread
+Looking for additional code-review trailers on lore.kernel.org
+Analyzing 36 code-review messages
+Checking attestation on all messages, may take a moment...
+Retrieving patchwork CI status, may take a moment...
+---
+  =E2=9C=93 [PATCH v3 1/7] spl: fit: reject failures loading an explicitly =
+requested FDT
+    + Link: https://patch.msgid.link/20261116-ccaione-upstream-spl-fastboot=
+-boot-v3-1-7b39e7a348c6@baylibre.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: passed all checks
+  =E2=9C=93 [PATCH v3 2/7] fastboot: invalidate stale and incomplete downlo=
+ads
+    + Link: https://patch.msgid.link/20261116-ccaione-upstream-spl-fastboot=
+-boot-v3-2-7b39e7a348c6@baylibre.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: passed all checks
+  =E2=9C=93 [PATCH v3 3/7] usb: gadget: fastboot: do not boot after a faile=
+d acknowledgment
+    + Link: https://patch.msgid.link/20261116-ccaione-upstream-spl-fastboot=
+-boot-v3-3-7b39e7a348c6@baylibre.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: passed all checks
+  =E2=9C=93 [PATCH v3 4/7] spl: ram: allow loading FIT images from a suppli=
+ed buffer
+    + Link: https://patch.msgid.link/20261116-ccaione-upstream-spl-fastboot=
+-boot-v3-4-7b39e7a348c6@baylibre.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: 261: WARNING: Use 'if (IS_ENABLED(CONFIG...))'=
+ instead of '#if or #ifdef' where possible
+  =E2=9C=93 [PATCH v3 5/7] spl: support booting FIT images downloaded with =
+fastboot
+    + Link: https://patch.msgid.link/20261116-ccaione-upstream-spl-fastboot=
+-boot-v3-5-7b39e7a348c6@baylibre.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: 288: WARNING: Use 'if (IS_ENABLED(CONFIG...))'=
+ instead of '#if or #ifdef' where possible
+    =E2=97=8F checkpatch.pl: 454: WARNING: Use 'if (IS_ENABLED(CONFIG...))'=
+ instead of '#if or #ifdef' where possible
+    =E2=97=8F checkpatch.pl: 479: WARNING: Use 'if (IS_ENABLED(CONFIG...))'=
+ instead of '#if or #ifdef' where possible
+    =E2=97=8F checkpatch.pl: 488: WARNING: Use 'if (IS_ENABLED(CONFIG...))'=
+ instead of '#if or #ifdef' where possible
+  =E2=9C=93 [PATCH v3 6/7] spl: fastboot: support legacy U-Boot images
+    + Link: https://patch.msgid.link/20261116-ccaione-upstream-spl-fastboot=
+-boot-v3-6-7b39e7a348c6@baylibre.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: passed all checks
+  =E2=9C=93 [PATCH v3 7/7] spl: fastboot: support raw U-Boot images
+    + Link: https://patch.msgid.link/20261116-ccaione-upstream-spl-fastboot=
+-boot-v3-7-7b39e7a348c6@baylibre.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: passed all checks
+  ---
+  =E2=9C=93 Signed: DKIM/baylibre.com
+---
+Total patches: 7
+
+Somehow 'b4 ty' send the wrong confirmation email.
+
+You can double check at
+https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commits/u-boo=
+t-dfu-next
+to make sure, but I believe this is v3.
+
+Thanks for following-up on this.
+
+Regards
+Mattijs
+
+>
+> Thanks,
+>
+> --
+> Carlo Caione
