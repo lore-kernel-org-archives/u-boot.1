@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26813606A32A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 00:08:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63D1B606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 00:22:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=emLJKH+U;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=TwZXa3Gq
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gB9V/BsZ;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=LRCThZSY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DBA0640844;
-	Wed, 18 Nov 2026 00:08:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0D4784082F;
+	Wed, 18 Nov 2026 00:22:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AuYTvQyVnOa2; Wed, 18 Nov 2026 00:08:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0F4AF4082F
+ id BiZbLcHdlv3M; Wed, 18 Nov 2026 00:21:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 298A6407F0
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794960499;
-	b=fcdAuEMELvegZJCF29GtOqKIjhege9FMXamXCR8MbYeVudYCudOHkNCQUnR68OPr2DDa
-	 vfxGHRy/o6VGgS94x4ZWoh8WyljMW9818p9xY5NER/LrwkBl+r8jBLGGIQBFVUsV/V3EJ
-	 z9MbCewbegpVxbWiskBzPmOuSlxO4Uql84RBZGhbDO7gUBO+kkOxkeFk2jbvV1zC/noJ1
-	 ittT3fOoOLe503ov7rS78mItYl+ljf5FAfxGonofQlqGdyQVagTRU/vAZ51wWxzUE/L4J
-	 /hL1VLbVYQlD4GDV6nXq+2K+R7qNaf2aKBNIvtlYAX0oqROKeFH9ZD6fBbnMfr6g4Nw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794961319;
+	b=fR/FjG2lVUKfMn0MP/Nhrc7AhnHvsB4n+IdZd2zAuEdlS5OU5gzfar/JG1Ltv4TZ3s4s
+	 Kc8MqFIgnp2VEA8LUSIvGa7X8wrbxhlI8O+SsHrTGU9idpyemSwdX/MRMwnRZxC5JM8BC
+	 YsYUrrbA+de+VwEAn8Dmb8jnUjtvSlfTy7B22+5aREI7YnvmhHcPRX+XlOy4FwXdKwqQK
+	 RfPwFreNqNXqE5d+29yBjCleD5ff3HOJdX+OUhGZ6+n5S3KDxMLVaeu/oQo6RK1lOih0V
+	 I+pYIh+VNSIS/1KtBKGccPwLOQb6WlFhS7YzHaJSzBALecUM328611u9muTGuT/6mbw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794960499;
+	c=relaxed/relaxed; t=1794961319;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,131 +33,131 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=3nj2oDebac4orm+63oUu525plADQQyFrMEBBAF24UXk=;
-	b=XEqTZfXTVHwMxCKUZcSUn7UtkDnVLBDQaJ9Jh3Fcyle11T9byB9Qxpdckjd0ftUw5dw0
-	 1dPKauADV4Z9ogkE15r5rLOlBg9hRVX3gcCqAzjP2OBn6rgKKhnpu7A2CEek07tljMsOr
-	 Jr25qV9808W+Ixq8Vsw+iKfXNS4Gt+Ta6AgxVxLlo3J3x9pcdXNu3TlxbOm27CJoZ66LC
-	 pKiPrYV0OdHOBOrl1f8tkYHIqO6TVefu0bD3hDCY2hhdKMbrBc33vh0gQQSeEOCU/MPb8
-	 bcedPS+0I0fPOLMUad2GrUw9oNhRTTIbBuqCZ5kEa/hbiIVxSRCv6xIDmRrdoDRrizw==
+	bh=WzGVM5l/bBY9UZnfFfysvdHozSt1w0mu3Xc1MF0OQbM=;
+	b=joKYm8Ewgq3Sr1ICDO/gvJHKM/t+JU0/7Vo1053DZmKy8mz4J4WiVg5m0l8GuPq8m15X
+	 EnCHXVkPmxImu7CKr0k9fdiPzSXqRIz491xrbAL4neBfA6Jk/EmbRWMmW9N9/DxyGwlKW
+	 wGhM1S5eGgkG0GpiBnGS6j2pV46Z8cKJIuwy+MJttJLCr17anX3VHytjo8v7G9ZVdSERR
+	 c1//N0StOqZ/noixjSRjG6QVY+NhKVZe1tUO0jnmNQxVTmBVKenzmuM870uTjNtw+0U3z
+	 5ulGPn9WuPds8d4l/pfCNaDltZN24EDwke0c9Qdn2zWkgB9wB41oxrd816D+EuPMuig==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=TwZXa3Gq;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794960499;
-	bh=3nj2oDebac4orm+63oUu525plADQQyFrMEBBAF24UXk=;
+	d=lists.u-boot-project.org; s=default; t=1794961319;
+	bh=WzGVM5l/bBY9UZnfFfysvdHozSt1w0mu3Xc1MF0OQbM=;
 	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=emLJKH+Ujp/t21GnERMwC5BFAEHzjTPmC5ypua3hmJQ3m/D4GtHa3WRPxs/QTvpaj
-	 4b3Go/Zwed80UfO32PdsK8NaAf6GVhvKnsT9PVVlJ2zyeTglkbd//9gANftpSoUckR
-	 nyfr13wIsuU+PeI4AzAH80I/aoq80E78klb1/WUlQzJXVJzshcEIUsMLPxPoWBWsgJ
-	 Q6JWU/5VAPeB5O5Iaij+vNyoz4XMdBmGbfZ1xQ8vmJkQyV1c59SodZtM1NAg9wBpmi
-	 jhNTnukxuD/3xrgN9tvloMOpd44vg6cQWba1IPZrGpfpgQKAC3zO52mijAcC6mWVX8
-	 aFQskDyjivDHg==
+	b=gB9V/BsZvEkjBfiye4gO4cOgnplpC8sVMFr/jdCzjdlSPoqcta1r4cnihBjtd5Gga
+	 +h+cRJAiYdOBXbBOKUdMdX06Xkzho7z1p/C1i7xD6mIPiguN+3e+ySDK6H6Ru51c4H
+	 yaIQzNf5vy+tXeRroOS40CPsAlbsTW9iDpTj6vYSULLbfYAV4dfoHiRJDrKwDwhcmD
+	 GR1bWjUG5PPHWiFGN/udsnTA26SLRYH6EAboa7tnwmifj34UCS1Mn7Pso/tEU7rlmF
+	 KzvvS8Lrz59VuVuPb7Vm0tduWZ3ecZp4VLE/Vb5xgttcTEUtlJLFVUcH76oFEvkZ5E
+	 r8CqF1FwdA8fA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0F4AF4082F;
-	Wed, 18 Nov 2026 00:08:19 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 16356105
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 00:08:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 298A6407F0;
+	Wed, 18 Nov 2026 00:21:59 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 73DE9A0E
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 00:21:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 06D314082F
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 00:08:17 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5A07180E5C
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 00:21:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HzUKRG6gmbVZ for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 00:08:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C7F6D40822
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c31"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vd8cqnbDXePD for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 00:21:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 396DC80DF0
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c31; helo=mail-oo1-xc31.google.com;
+ client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=TwZXa3Gq
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C7F6D40822
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 00:08:14 +0000 (UTC)
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-716d052dc23so224185eaf.1
- for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:08:14 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=LRCThZSY
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 396DC80DF0
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 00:21:55 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-8479f46ecd8so235991a34.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 17 Nov 2026 16:21:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794960494; x=1795565294;
+ d=baylibre.com; s=google; t=1794961314; x=1795566114;
  darn=lists.u-boot-project.org; 
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=3nj2oDebac4orm+63oUu525plADQQyFrMEBBAF24UXk=;
- b=TwZXa3Gq1ADmT4gtcLwDBH+im6qDxpPKKcmvbRg4pL6M+oa0dOOBrLV6ilCwXkiAm8
- Wka4xEuPdHPMnVdrEtXZ3uTHGvapX0B///z26wR0CxSGuMP+7eUYQlrvXcYfIFHUIXxG
- nACyhdCJmN3r0S86f89ej4EALQWYFt9KqP5yXafU93Y4SHUz6I3xxSl19Vc2lHUwaopS
- BVRBJkPACMQIuAcGZAyrCz+kEGb4gL5GCP8HMWWgaVrPcuOHRRXoLPbsHJR/Nqi1/G0p
- Sv5T0Dfxe8aRTNmGbhxISdV9lhs/iUshHSBNl234AO+rO4T9H3qqStG1mbkp89AOdqOo
- qo6g==
+ bh=WzGVM5l/bBY9UZnfFfysvdHozSt1w0mu3Xc1MF0OQbM=;
+ b=LRCThZSYew0ccqIlMHXaw3cgQmczvdrOi0Wb11NQ4xGAY2VfRaW3tMIAHyT9cLO2RA
+ 0K/OWXRl0QQwTBMhCeVxlfeas8s0uIh9GX2GfjQALuoILG+8VnIgwIUwefWDqawAX7PM
+ yodh0KmyDkW54gHLJpmHaGIzBXXMcYTH9g9nJTUd6ofpTx+a6na3EYhNCcx30slZvqyU
+ 0DnzwyxHPa5Ujsh3g5OzREceG3Cji70wsGz/5t9wc4JAi6SCC9yXfK9/0+10vYtvweVE
+ Ld9melO5Wv8EEwXj0PwEhDKeLKiCkF6Dr0rqYkJqprWGvTmBfMLROyjJIIh/BPcPR1hj
+ O4VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794960494; x=1795565294;
+ d=1e100.net; s=20260707; t=1794961314; x=1795566114;
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=3nj2oDebac4orm+63oUu525plADQQyFrMEBBAF24UXk=;
- b=CdvxYB4cn4SGJ1DdBOVAYu6Ki3VFqmAtpXcmSW7X4r9W3YeG7exAT3trwK/VbV0lUG
- O/2Nbgzw53Yp46B5k66As7dYnVqq0VtDpWrKwQpt7HkVOw2socicURdyulJn2e2EfMQ/
- s+4odo/qnjRYZd4gUtlo4Jw0H6A2zAZLBwWPRMA/iBBI4n1RZRwsHi1KvscZh4BqF/5A
- SRXnjmsJleDYYQkZ1TlhZU2SEMjnnuTmPDrfSurG9qDNXmW2X2a6QFqjo+ZsTvMW66Rz
- LkuRwEbYg8gEI0MrvGQom7jQKesfmy4RjhndhIcBIn/lBkq8axtMBpTb6ODvwLMpxxPO
- pa+g==
-X-Gm-Message-State: APuU4Z8D0VnWkHR7aBVY93QbCDWjrjJPtwTdpwi9NUjZPIM0B2doLoge
- 5FZrzyjaVKG3w+K608hDa4VYW3q1XXPcbc1bMAj+VOShAwQTUMc+P5XHjQOt3p1zI2M=
-X-Gm-Gg: AYBFou2luGSOnDQicDq0aFnZatrkgvPz1Tcsw9IQKaICrRm8AG54VcDBDO1qS/xBzwW
- BSzw7jlLA9YvZEMXEO9gykkHk2uR3ZIC0WX9UrgqX9TdRKQYfFxQg7eRzkIJy7iOY7Tz9TWq4R3
- t1kBvGnYZTKu8fxg+EyAjNuJhSqDq4u2KKnqPkKOlqSBMhVvi/SnhOYjTdiWiHX9q8FGdR9xCcG
- Sl6NwgUGoQTPG1JcPzjkswJNNC5VlAf4SMc3BRdjSSV+qNPyQ2eCeA50r2+odshe38hL3kJzcof
- 3i/5DKEH3jUGHOTyFOu1t0x2uO2BW7O59DnTT65bC3eH2cgGwekjQ4HtZ7Tah666HHbfnxColp8
- dD9rZ/5Jlev1FqaGQFbdcx8K4u0PsmA9E4LK/iMcmDBcVzIbOiNCo0PXGWWv+JhOPcj+h5tMvMC
- tw1EE9io+MeQD8uf9wjf1EpwPZj3AjxAycKr8jYBOqb0V6qlIh/T8GJQMPZJR+23iturTKmtwfg
- q6LTO5/Z300R86EEtUQxKN1Fn43kfhbRM4jcdtw2DHZtqZTW4Y8i6UaWayyjgtDwYiVIKTiXHSG
- wIl2o4VY9q8mIz19KHV72opyzMC62pu11g==
-X-Received: by 2002:a05:6820:83cb:20b0:71a:f253:8ac9 with SMTP id
- 006d021491bc7-71b1864d6e6mr574309eaf.78.1794960493997; 
- Tue, 17 Nov 2026 16:08:13 -0800 (PST)
+ bh=WzGVM5l/bBY9UZnfFfysvdHozSt1w0mu3Xc1MF0OQbM=;
+ b=P2H7PLt+KUHi8hlQs+H3jiBDUsijv7vqK6sGdrOo8qRDaXfy0VGCPMrDmJW8kaFWiM
+ sk0zAwNKELuXxdyEqdjsbJnF+70Tu0rAN/cPjnRwCa41jq9/AF14KszOAK2IwDjyVZ13
+ 3ZKwbvVcveTi/D7kdNIqgHtvsOyu1Ky+YZe25IadNwhd08G0IFlxnyZTVqCfsg3lKvlD
+ 4ukltp+oU8V01zxZYPsbWuOsXKlK+prwZrNRiDQOSy/zP+NY+FCbVHRpB3IZbkSYzTXV
+ GtLrwi84xx0VPqYn9PW+/gV6vSeVZ53I0lKDzkUXPMdsYGR1FyvYSaEhBDBYRhGnfKn4
+ tQug==
+X-Gm-Message-State: APuU4Z83WULNfQdk2aOsHgposbTbA0lFnoBBLKQD0PQvkyGfu/mdEvS4
+ AeJZGEX9dXzjimChdS/btWSW9MAJrHLk3q1dkRcBxZqgNFkT5bzt1GReMXHH+ZdhK7k=
+X-Gm-Gg: AYBFou2sHw5mh8+Lfh6dBCkOjFPHaDSQ7qqXgy4EBeXC+doKzp4QHu8kMRaIqKmkjXs
+ DM8zKhMF8Zc2LZxaO8QlmMVRKE5dKg1Bs94h9Vmle0SQuEUbKm3hsp2IfF/OsynWPmlgW8yvFsm
+ r0rVXH6nttZkm0tkNaGSBl5iJelD3j/fRplE0dQvchpYBCJ2F3f6S64+CiaS9caofURkUWVF5oa
+ OQ821gkW7ofArxoHLgW2AwKI909lEVRqw7W5noqz4dkC6Nj00zZPxfYr+F8CKJbVL65e/dGuBYg
+ lCG1e11L6xtaTzDycgjSW4NtaYJ7lKrT+wjlcHevsaJsS0Yelt2XKnObKtzrG8DTsKGKNZinYIq
+ b1DFgj9XC0RWpG7GjX7WFmMTJ1xtQ8+NgGeZdeT/MHANRR3OYYscD7O4ylN35SseCFFsYJtJtOS
+ uRgX1jaIIJt8Og3HFy1U/1AaqF3d30RTB1Y0fNR7sXWYP9Vjhq/cakV89MSwUQZvTsdpGaF+oRd
+ /Y1O4OgtGwty+H6wnVndRaTIU/zQnCGe8IfdySYh2jkA3inWY6JHZpnE749ocZoJePr67dz8t8Y
+ zyBRoSG5qeUvJJdYsQ3d642wc2xy7bNV0A==
+X-Received: by 2002:a05:6830:2315:b0:862:ca2e:919f with SMTP id
+ 46e09a7af769-862f090aab0mr1119747a34.18.1794961314090; 
+ Tue, 17 Nov 2026 16:21:54 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:4c3c:99a4:6f4a:ad27])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4b73f876f2bsm766922fac.2.2026.11.17.16.08.12
+ 46e09a7af769-862f0212ea3sm818260a34.17.2026.11.17.16.21.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 16:08:12 -0800 (PST)
+ Tue, 17 Nov 2026 16:21:52 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 17 Nov 2026 18:08:01 -0600
-Subject: [PATCH] fastboot: block: fix wrong device pointer check
+Date: Tue, 17 Nov 2026 18:21:43 -0600
+Subject: [PATCH] fastboot: spi_flash: fix getvar partition-size of raw
+ partitions
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261117-fastboot-block-check-dev-v1-1-31f05c746bfc@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDQAyF4atI1g0Y7Sj0KqULJ0ZNW5wyGUUQ7
- 95p3Tz4Fu/fwSSqGNyKHaKsahrmDLoUwFM3j4LaZ0NVVg0RtTh0lnwICf078At5kry9rMjOUd2
- KuzZcQr5/ogy6/dP3x2lb/FM4/XpwHF977xCefAAAAA==
-X-Change-ID: 20261117-fastboot-block-check-dev-c55137e546c0
+Message-Id: <20261117-fastboot-spi-flash-blksz-v1-1-17965dcd19e1@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQ6CMAyA4VchPdvEziDqqxgOHXRSJYys0xgI7
+ +7U43f4/xVMkorBpVohyUtN41RAuwq6gaeboPbF4PbuSEQNBrbsY8xos2IY2Qb048MW9Hzm3h2
+ oOYUaSj4nCfr+ra/t3/b0d+ny9wfb9gGRc/nAfAAAAA==
+X-Change-ID: 20261117-fastboot-spi-flash-blksz-ba9ad23178f5
 To: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Dmitrii Merkurev <dimorinny@google.com>
+ Tom Rini <trini@konsulko.com>, 
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>
 Cc: u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1110; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1137; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=AJVNOFznryjupSE7AZ4scU3MB7m0UGQAMxEGPzFadn0=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq/OxkW0f3t3zGSNYZfcc9NrpfDAWVU8BOG6coi
- sBOpbWJ0oGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCavzsZBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A03wIAJm+ueP0duWD5r5BU9qMN1OLAHMQLv7B3dUXHbF
- uQU79MS0YODCF2Nf3vPPfbBgpHBijsORi8BVUgt/Ia3j2sjRLIbasKM7HW6/EPqdCK4rctB9yd2
- N+7bN9agDuBIHLAnfQryTgMrJUSSz7BC4MWHog+wlImgXNGJ0KTHF6MnekSHXCAaHLBU3bZxez6
- dvAx7aefDkvnqOMKzbPJybAPMuX80NuGDjK71bIHIojXfqHCbLupOoeywhjkgFCFO0q+mZR8Nit
- ZSMQSpowndBuutAZiBiuWgjKTGyATc8qNfk4eNtJUFA4K3eoXrbHgrQI6Kq86wU51MuLMnDx0W5
- VHkk=
+ bh=VpOg5b3z9LXrWzpvCyUFqY637YwKdhNC5DnvEN1F8gM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq/O+YgmlLBbH1Fq/cEJVskRGMDoL3AiKU/j9rv
+ 2pwknZ8aCmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCavzvmBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/APy4H/3RRhwFMPWjUuKrLefG2PT2LbSVavHm0JkQyouo
+ /GB5sF2rHsxrQGgkJ9XiUIKTEjsNr3LnP/GaGw3noB2jQuSZ3hhjzx4Lh7f7yqUMsDAJH7cndCC
+ DFSmYGl2mmIf7PjjjuAK4fAz1ePN1IIDCoTzAacM7vZqnZ6wgWiMfm8n/nk27JRfq+y8zFF1Vwu
+ V2WdUZYM6Pj2Nx1hpuDit5kxkrXNKUY5CHxWS+f5oNerPmFmuv8YGpsGWieox+BT8sa4a6ukbOm
+ yxeevD/7h/fD/CupDalQb2iCxloGeIoCv0TaOh0jtQxFEFN5KQusuKjDY9fh1WqdgzVoZ6yxcdy
+ rEIc=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -172,39 +172,38 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Check the block device returned by blk_get_dev() instead of the pointer
-to where it is stored, which is never NULL, so that a missing device is
-reported to the host instead of being dereferenced later.
+Set the block size of a raw SPI flash partition to one byte, the unit
+its offset and size are given in, so that getvar partition-size does not
+multiply the size by an uninitialized value.
 
-Fixes: 4bf92b541af6 ("fastboot: blk: introduce fastboot block flashing support")
+Fixes: afca60620ad7 ("drivers: fastboot: Add support for SPI flash memory")
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/fastboot/fb_block.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/fastboot/fb_spi_flash.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
-index 68593244ab9..16b94b8a0b2 100644
---- a/drivers/fastboot/fb_block.c
-+++ b/drivers/fastboot/fb_block.c
-@@ -147,7 +147,7 @@ int fastboot_block_get_part_info(const char *part_name,
- 	}
+diff --git a/drivers/fastboot/fb_spi_flash.c b/drivers/fastboot/fb_spi_flash.c
+index 691be7c7ef7..b15e633acbd 100644
+--- a/drivers/fastboot/fb_spi_flash.c
++++ b/drivers/fastboot/fb_spi_flash.c
+@@ -52,6 +52,7 @@ static int raw_part_get_info_by_name(const char *name,
  
- 	*dev_desc = blk_get_dev(interface, device);
--	if (!dev_desc) {
-+	if (!*dev_desc) {
- 		fastboot_fail("no such device", response);
- 		return -ENODEV;
- 	}
+ 	part_info->start = simple_strtoul(argv[0], NULL, 0);
+ 	part_info->size = simple_strtoul(argv[1], NULL, 0);
++	part_info->blksz = 1;
+ 	strlcpy((char *)part_info->name, name, PART_NAME_LEN);
+ 
+ 	return 0;
 
 ---
 base-commit: 6201222134cd704b5717211fc917e2ca6263577a
 base-tree: https://git.u-boot-project.org/u-boot/u-boot.git next
-change-id: 20261117-fastboot-block-check-dev-c55137e546c0
+change-id: 20261117-fastboot-spi-flash-blksz-ba9ad23178f5
 
 Best regards,
 --  
