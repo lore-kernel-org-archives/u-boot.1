@@ -2,150 +2,111 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41B2B606A320
-	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 15:28:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D0FF606A334
+	for <u-boot@archiver.kernel.org>; Wed, 18 Nov 2026 15:35:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zb0itnh4;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=gh5/RIhB
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nQcgHbQp;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech header.a=rsa-sha256 header.s=zmail header.b=bZy7DIUK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1A59D80E68;
-	Wed, 18 Nov 2026 15:28:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 61ED781196;
+	Wed, 18 Nov 2026 15:35:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pSfxukaQYhiC; Wed, 18 Nov 2026 15:28:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5003D80DE7
+ id 2PyjjuCSpa6c; Wed, 18 Nov 2026 15:35:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C580D8119E
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795015699;
-	b=LjNhXjBzeG/nB2yPnHytKbr4lle5jkiYwW2DPiQA4RzZ3zwpiv2/kPVMY/MXVZCVbieS
-	 UNUBdMeOHjlQmz/VLriUKAo3eWocTVI1PLRk9pAt9HQvePMZRvB3agXVu5+MXi74CrBI9
-	 JfD7g1by60cgg2S75sw31+p8vhoXSPmRK3qHl/3R7QsvjsBYCS+zfkhjfi7rhtCATSdoH
-	 Q08io/9Yllb+BjAs8A/r2+xh3ZjiudaFS5C6bFvwxeOrWezSxnvQ68jzWTd4xSSap8mS3
-	 NM1q0B72+hUxBNBP4jAMWI3P6xi3YW4tbcLufOFYYtyk6+2B2AX+JOi+gLgLQDaMtlw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795016140;
+	b=D4QcqFz4/BsWCc5fsxKmDLLMaAQVmh2a91SegQtGWx0naClRk0QoqTOn4WXb2UCVzKTf
+	 5DNhCXqwUy+oYD657g1+LkBVJV1VbaC9f93EYeXpnikw+/oaeCt5ybM+wOl+etcwFEo5u
+	 epbujKZqtcKDptyGzq4dvLgtGNQxy3wMvagI0idOue2J2liJxkor62Se9miSJ/FveQw5d
+	 bFQJLu9FVyUu0zV0RMRucya5EVZUMAFwt/hGdBESXm15Xk7LPnHt22Jc7wVJXo8/l1BZX
+	 RTiZMob2pfaseWTeP2ZkVNfIH/mJ8abkjGw9DBf8CPGDDmMzZKsGzk3DIy0OXJtVIHw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795015699;
+	c=relaxed/relaxed; t=1795016140;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=XfcyARD4dYF8RL6BBppGB6NPtsD5hjElSnSXvGgKBXw=;
-	b=GmloDQ7F6jtCuduDay0RlA0R2jan0hXEGcDTiNAuXmBLLsf9NwCRLfOWNelOpK46+hhz
-	 dUKwVmgGi5YEdDsj14IpSW2rB5sNrmGuNSHkFayMoZYXbqRudGyZwsTeHMacjUEzCW/sY
-	 CvXTQqa/Gt2Az2oROwBZYpbY/475JwmzLvNvjx1IHk5rzKCVdXMELaGQgTQZpygJbe9bc
-	 f9VFVitGMDP1wdaAZ2QsnuGVxDu9hkNHw49VrU1K+FBVmEXIloGhIEyRdMFH7dL4hZXmj
-	 mwR1yNmi3V1FTkuzT6+lfmPil8y1w9Gd5RW4WOUSmeTRwAoTraq4TJPEHci2ixZO1+g==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Mime-Version:Content-Transfer-Encoding:
+	 Content-Type:Date:Message-Id:To:Cc:Subject:From:X-Mailer:References:
+	 In-Reply-To:X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=mVjGApybbPTvC1hldAGbDmvuw+lFp5qhOx6coOSpeeY=;
+	b=iQABBzHJW+PVlEg2Y4/7rGzP+jDG1+oN0wVUJkCp9ZD16d8luSB1LzJ+w2Pr0wxdUL2i
+	 ryNqUJmVx2sSGzBuFks+VDS20DwtAcyV9al32w69bB+wG/5lcdQ2fXGxxml02UGnKDVvr
+	 bG/detZm5X+CfvLvIDP3mKe/lPgEabAumD5M/Nkh/l8i93i+APVWxxD9lIUaso2qQWvPw
+	 zlU0S1etyy91jet7dwahhiNivl8KeweIVX8JSh4P8cqRtz4kJ2M6pdkY2MspL/uNnSDEh
+	 lzrlR/r9lGmV8JPtgdNIXer1xDpzZDsTbyBXmXTt7iuhmq5V3FS+RyfW5T41DZhSA4g==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795015699;
-	bh=XfcyARD4dYF8RL6BBppGB6NPtsD5hjElSnSXvGgKBXw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795016139;
+	bh=mVjGApybbPTvC1hldAGbDmvuw+lFp5qhOx6coOSpeeY=;
+	h=Date:To:Cc:Subject:From:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zb0itnh4SSuiHfd9bM+1zDm/9AjDnNEK2Xr+efjAOY6d039DqEfWzox1g5DQ1X3+W
-	 mKQpNB+NBOe+8dbf1fMlBh5lZUHORiFs+vjUSYmYXbp+qtFw9UFgQZopBCFgJtDS0i
-	 iBIRfiepVvrIa9VA7SryhmBW2oqsznvc9aF0Vr3kg8GuhLRNmcUTG516iBL/k9SZDa
-	 5w1wi95pu+NG2kq7ZDS4TMmY7hWcsgqMXt+80deM/7gGDHYqkCwClVRScVJaWRTaVv
-	 2bG3voY4o+r2LI186NLzKHrw9VaV1H2UDntrwD26/+nSdkr0EntVJutBwhsPEejGw7
-	 CHcPEVImF3ojw==
+	b=nQcgHbQpHcZ9K3RWace4p9Of8sQmoKm88+wDyjTEuXNqj4NixBoLK0uHUexbwJuUe
+	 j1gyyqsnAGjgFd6JhlAnsj6yqDEmCmKBIqXTAe2hlDQ1/ngxwKRvlNqB5QV5AiMncn
+	 SzwY9Ed6YLxXlIOdjoRCn6v+LTtS7+JbvTyuYHejusqXbZhEmTC9ti/EDrFoBKKPVS
+	 YkXdJ+aGYWOtrkO/5rKBwOa/KaPf6JJjLIbKG5PB3Bo05yEG/qpFwSETASWfgbtz/C
+	 tcwxoUXj1qH5kIYs3VjA64e6WHOuHjbLNoo5vSbIxcXPx5aT8xZ24wT8msvnUIqJ42
+	 5k38nJvTNuPbw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5003D80DE7;
-	Wed, 18 Nov 2026 15:28:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C580D8119E;
+	Wed, 18 Nov 2026 15:35:39 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E0BB4A0E
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 15:28:17 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 527D428C
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 15:35:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DE0A54091D
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 15:28:17 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 381FA40895
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 15:35:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CLQfytDVbnqa for <u-boot@lists.u-boot-project.org>;
- Wed, 18 Nov 2026 15:28:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 24BC340875
+ id Rl8vkYuWEERo for <u-boot@lists.u-boot-project.org>;
+ Wed, 18 Nov 2026 15:35:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 31CD440812
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.180.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
+ helo=sender6-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=gh5/RIhB
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 24BC340875
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 15:28:16 +0000 (UTC)
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-4a451915d8aso588559b6e.2
- for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 07:28:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1795015695; x=1795620495;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=XfcyARD4dYF8RL6BBppGB6NPtsD5hjElSnSXvGgKBXw=;
- b=gh5/RIhBg1eXhI6blNjLU8yKhAr8GJ216j/gWJqqQEE/yPXIkiZgd4UgTQ3BC/42Kp
- pVqbPFyVatJAUbcrfqyR36QAVyigzngk3gpxqemdVNfNIMBzBNb35DWnGRH8dc8QFWOo
- VajM8jPKBgSAwCNO2aLcMX31RewuDx7IWL1y4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795015695; x=1795620495;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=XfcyARD4dYF8RL6BBppGB6NPtsD5hjElSnSXvGgKBXw=;
- b=fIA5Wm9uKgXRVDNvBGt9i8QogbAHrjTkE966IwXLEJcvbNpdRCBtOidvCuuM2zK0pB
- mxdtOcb3aOE3aRMVMmbEISYUAqtzu7ubS4khPM0uW/pRsh8kg+aybquzqRndzF7Dlcb2
- pXKMwUbP4SRcaIqsBGyFJQdu0imsDP+EsoQebU4hDEt1WjWE4lbnt+gPpuFsXEF3X73C
- 2/mUTTXXsBOoHpV/rdOwTLDwOkK5wLcHzfWtTWOaVgtesQ9lPafe8fUxoeOXxhMkTo9s
- FvmRKhQpNSD9ZMzUWb+NKYfZH5oMtzrfGd6OEJh/zK436XemVbXQgnd2AG/9McQ0a2Ss
- c1JA==
-X-Gm-Message-State: APuU4Z8U2jUkwz1CkfofBCNqV1yKixdmCMymghTGt2wUb1tcmzL5snSH
- ewvaYrVAhkCGHSLb+uMKmeFvg/CuKXlRu0VC30tlmyVd0Dd0J1a0nwcaoksHROBZ/wQ=
-X-Gm-Gg: AYBFou0fDgS7sDNYEGVBk5J5aB8Jet8dEpAJHRDK7OEhXHe1YN5QngxE/4BAhqjmB5I
- K6Db6zAPeCaK7Tmbx0ZngVhPtsnVwD5a9WLvdiwsZWvgReHLeGK7f3YgPnHt/w8HJd9TWCsD1r1
- 5sZ1ohD8nwOGAJQt44MusqzjG+jyS+mnFquln/ptjdrfENDIZVYRYRvm4jgZDG99MYcHJOIDUKN
- DwtOiQibKWOGkdUizdJR9v5YL/O0OCxdgu7f0tlNq09uiubxQzbPVKgkrR28goIfRbwbCG7i1CU
- on+Khg8zrrp99jObM1S/PxEMlWFgzl8i10ayfd+1rzjeaSzFtfJV7tgYVJj8jyuZYt/3DRI/8it
- 3HTsIaZ2sbrKQ4+uGiXbBSbQLkHFCP8SHdEdtlHLFWXzAcwH8ywwTPFEWwicnISC7LDK8A8pOxJ
- rwzd/ACB8au/QrCdT/KDoimOHiM++GX+HXk3Df3HcrI8NPxEFgSqXiycYJibJ4r8xJSNmav0OdA
- 27lZULtyjpmh9hJL/UJ/ELzfo0PKq1UUigZHq2ItuiC4TypyP5ETwAlWZwcUxpRr3/KUGnb8+a2
- HSR+MhYUJbX6Fdv2L2W1wNP0rHYJIHQ/XcMVRCiUfbstHRp1F9zhaDa70uf5qQenIcgyt11Jhxn
- j6ETSgmlloCu0eoZa80iFqwe7Q9kl9MQ0bV1lkdg2arYaIb3aYnQcWnz5BOYWl4qSZ2KSK2E/3M
- k4o2Uhj8v0W9jkn6cwMG7f3NNgosvx28k=
-X-Received: by 2002:a05:6808:4f50:b0:573:1dfa:f0cf with SMTP id
- 5614622812f47-5773fc54cbcmr3709862b6e.51.1795015695577; 
- Wed, 18 Nov 2026 07:28:15 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-5777a2bbc1bsm1796843b6e.5.2026.11.18.07.28.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Nov 2026 07:28:15 -0800 (PST)
-Date: Wed, 18 Nov 2026 09:28:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Romain Caritey <romain.caritey@microchip.com>
-Cc: u-boot@lists.u-boot-project.org, Leo Liang <leo.liang@sifive.com>,
- Tim Ouyang <tim609@andestech.com>, Yao Zi <me@ziyao.cc>,
- charles.perry@microchip.com, mamemaria.mbaye@microchip.com
-Subject: Re: [PATCH 0/4] riscv: support running U-Boot proper at any address
-Message-ID: <20261118152813.GW554944@bill-the-cat>
-References: <20261117235433.3601945-1-romain.caritey@microchip.com>
+ unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech
+ header.a=rsa-sha256 header.s=zmail header.b=bZy7DIUK
+Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
+ [165.173.180.15])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 31CD440812
+ for <u-boot@lists.u-boot-project.org>; Wed, 18 Nov 2026 15:35:31 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256;
+ b=bZy7DIUK+QT+c+yfpxc4UJyQauG8xr38PtTVU9CmWV9DZJF1s3jTgMBfvA0Zd63pvk6WZheLBRDy+h3MrY55XDQSCN4yxRKtBfkNH30t2tB4oIRov+ta5JtKVjxYEeaFg1JHIYh1HLrTH0nwsyiBLKBmIi1LWUzNyc3RZx/9H78=;
+ c=relaxed/relaxed; s=zmail; d=pigmoral.tech; v=1;
+ bh=mVjGApybbPTvC1hldAGbDmvuw+lFp5qhOx6coOSpeeY=;
+ h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
+Received: by smtp.zohomail.com with SMTPS id 1795016107479663.1964997984178;
+ Wed, 18 Nov 2026 07:35:07 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="B4N5qR09m7UWq81G"
-Content-Disposition: inline
-In-Reply-To: <20261117235433.3601945-1-romain.caritey@microchip.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 18 Nov 2026 23:35:02 +0800
+Message-Id: <DMYG3PDX1XU2.1CEBB4VRVJHNC@pigmoral.tech>
+To: "Tim Surber" <me@timsurber.de>, "Aswin Murugan"
+ <aswin.murugan@oss.qualcomm.com>, "Jerome Forissier"
+ <jerome.forissier@arm.com>, "Tom Rini" <trini@konsulko.com>
+Cc: "Sumit Singh Dhami" <sumit.dhami@oss.qualcomm.com>, "Simon Glass"
+ <sjg@chromium.org>, "Alexey Charkov" <alchark@flipper.net>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+Subject: Re: [PATCH] boot: pxe: pass the initrd to EFI applications
+From: "Junhui Liu" <junhui.liu@pigmoral.tech>
+X-Mailer: aerc 0.22.0
+References: <2113981400.38169.1794275897389@app.mailbox.org>
+In-Reply-To: <2113981400.38169.1794275897389@app.mailbox.org>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,72 +116,96 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Tim,
 
---B4N5qR09m7UWq81G
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks for your work.
 
-On Tue, Nov 17, 2026 at 03:54:09PM -0800, Romain Caritey wrote:
-> U-Boot proper on RISC-V must currently be loaded and run at
-> CONFIG_TEXT_BASE. This series adds a POSITION_INDEPENDENT option, as on
-> ARM, so that it can be run from another address, for instance when the
-> previous stage does not load it at a fixed place.
->=20
-> This is needed for the Microchip PIC64 SoC [1], which has two
-> clusters running U-Boot from different addresses. With this series, a
-> single U-Boot build can run on both clusters, instead of one build per
-> cluster with a different CONFIG_TEXT_BASE.
->=20
-> Patch 1 replaces la by lla in start.S. With -fpic, la loads the address
-> from the GOT, which only holds the right value once relocations have
-> been applied.
->=20
-> Patch 2 adds a checkriscvreloc build check, modelled after
-> checkarmreloc, to make sure only R_RISCV_RELATIVE relocations are
-> generated. This is the case for every configuration with -static -pie.
->=20
-> Patch 3 moves the .rela.dyn processing to a subroutine and drops the
-> unused symbol-based branch, so that it can be called twice.
->=20
-> Patch 4 adds POSITION_INDEPENDENT, INIT_SP_RELATIVE and
-> SYS_INIT_SP_BSS_OFFSET: start.S fixes the relocations for the run-time
-> address before any C code runs, including board_init_f_alloc_reserve()
-> and harts_early_init(), and computes the early stack pointer from
-> __bss_start. The first hart to enter _start applies the relocations,
-> the other harts wait for it to be done.
->=20
-> Note on Kconfig: POSITION_INDEPENDENT, INIT_SP_RELATIVE and
-> SYS_INIT_SP_BSS_OFFSET are now defined in both arch/arm/Kconfig and
-> arch/riscv/Kconfig, with the same meaning but different dependencies.
-> I kept them per architecture to keep this series contained to RISC-V.
-> They could be unified in a shared place (for instance a common Kconfig
-> with per-architecture dependencies) as a follow-up, if preferred.
+On Tue Nov 10, 2026 at 9:58 AM CST, Tim Surber wrote:
+> Since commit 841abbc6d561 ("boot: pxe: support booting PE/COFF EFI
+> applications") label_boot() runs every image with a PE/COFF header via
+> efi_binary_run(). That includes regular arm64 distro kernels, which
+> carry both the "MZ" PE header and the ARM64 Image magic and were booted
+> with booti before.
+>
+> The initrd named in the label is still loaded to ramdisk_addr_r, but it
+> is not handed to efi_binary_run(), so the EFI stub starts the kernel
+> without an initramfs. With a stock Debian arm64 kernel (storage drivers
+> and ext4 as modules, root=3DUUID=3D) this ends in
+>
+>   VFS: Cannot open root device "UUID=3D..." or unknown-block(0,0): error =
+-6
+>   Kernel panic - not syncing: VFS: Unable to mount root fs
+>
+> Pass the loaded initrd to efi_binary_run(), which installs it with
+> efi_install_initrd() so the EFI stub can fetch it through the
+> LoadFile2 initrd protocol.
+>
+> Tested on FriendlyElec CM3588 NAS (RK3588) with Debian linux-image-arm64
+> Fixes: 841abbc6d561 ("boot: pxe: support booting PE/COFF EFI applications=
+")
+> Signed-off-by: Tim Surber <me@timsurber.de>
+> ---
+>  boot/pxe_utils.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
+>
+> diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+> index c60429a5e1..21b05ff9da 100644
+> --- a/boot/pxe_utils.c
+> +++ b/boot/pxe_utils.c
+> @@ -807,13 +807,22 @@ int label_boot(struct pxe_context *ctx, struct pxe_=
+label *label)
+>         if (IS_ENABLED(CONFIG_CMD_BOOTEFI) &&
+>             efi_check_pe(buf, kernel_size, NULL) =3D=3D EFI_SUCCESS) {
+>                 void *fdt =3D EFI_FDT_USE_INTERNAL;
+> +               void *initrd =3D NULL;
+> +               size_t initrd_sz =3D 0;
+>                 efi_status_t efi_ret;
+> =20
+>                 log_debug("using bootefi\n");
+>                 if (bootm_argv[3])
+>                         fdt =3D map_sysmem(hextoul(bootm_argv[3], NULL), =
+0);
+> =20
+> -               efi_ret =3D efi_binary_run(buf, kernel_size, fdt, NULL, 0=
+);
+> +               /* hand the initrd to the EFI stub via LoadFile2 */
+> +               if (initrd_addr_str && initrd_addr_str !=3D kernel_addr) =
+{
+> +                       initrd =3D map_sysmem(hextoul(initrd_addr_str, NU=
+LL), 0);
+> +                       initrd_sz =3D hextoul(initrd_filesize, NULL);
+> +               }
+> +
+> +               efi_ret =3D efi_binary_run(buf, kernel_size, fdt, initrd,
+> +                                        initrd_sz);
+>                 if (efi_ret !=3D EFI_SUCCESS)
+>                         log_err("efi_binary_run failed (ret=3D%lu)\n", ef=
+i_ret);
+>         /* Try bootm for legacy and FIT format image */
 
-This is a good thing to see. Yes, in a follow-up please move the options
-to arch/Kconfig (and a short menu for them, similar to "Skipping low
-level initialization functions") with correct per-arch dependencies.
-Thanks!
+Your patch fixes the missing initramfs in my PXE boot setup on my
+several RISC-V boards.
+
+However, the tabs in this patch seem to have been replaced with spaces.
+This also affects the context lines, so b4 shazam fails to apply it:
+
+  Applying: boot: pxe: pass the initrd to EFI applications
+  Using index info to reconstruct a base tree...
+  Patch failed at 0001 boot: pxe: pass the initrd to EFI applications
+  error: patch failed: boot/pxe_utils.c:807
+  error: boot/pxe_utils.c: patch does not apply
+  error: Did you hand edit your patch?
+
+I had to apply it with git apply --ignore-whitespace. Could you please
+check and resend it with the tabs preserved?
 
 --=20
-Tom
-
---B4N5qR09m7UWq81G
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCav3D9wAKCRAr4qD1Cr/k
-CmlxAP490b03ZIUsvbUXUB6gkkK5hPbg4PF6l30AyBp2y2ej5gD+KVhddLKy/Tmo
-wI5tyFPA1ffv2rA4h555E9YYESmTsAE=
-=RuEi
------END PGP SIGNATURE-----
-
---B4N5qR09m7UWq81G--
+Best regards,
+Junhui Liu
