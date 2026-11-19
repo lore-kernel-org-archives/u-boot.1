@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35679606A320
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 17:02:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC406606A320
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 17:02:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Fdd6/XGU;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=DsxVYtCs
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QgzYZwqT;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=JkEDIAuH
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 05832407B9;
-	Thu, 19 Nov 2026 17:02:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ADB4A8148A;
+	Thu, 19 Nov 2026 17:02:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cNQuumGxbSzc; Thu, 19 Nov 2026 17:02:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4A7AC40B81
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795107761;
-	b=LZqqwxbguuOe2gMHXXTjaN0fbMZlZu2L1mY1vcOUdbw46nSVT4FVmtDKyyUoB+uqdjho
-	 0qk7goc6UQ8cTBsZMs1WwSDI0wTpZNP2YeqIfLeUh5tei2fqC2R0bz1FcoO35pFkKJP0q
-	 lVQJGUGfcQyPymTic1e8vYeHNS5fAsQIwORrnBWSPYFyMpNvlzVfTViI1ijFY8AGB7T2d
-	 dxLOcVrZ5yqtF0r5w+HrlWqVAopKbW3/g3shfFMixIYHhcbafQoCqBYW7MqKRaW9nHqTX
-	 ebk+mbw89FytRpOUGzZCabDI577bZUsijYgkJ9rPR3tSBKXBzaFanMyjS955gvj2s2A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OZjljENKuWhw; Thu, 19 Nov 2026 17:02:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E91A98144E
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795107763;
+	b=A0XrcenUSkyrOl5+vCeCR7rdyEEIt0WIXDnv9TRPanlr2a4Ku6eDgs9itFY7ZCNHjU1w
+	 YpQ82NOTdlNXdJl0UMBBYY9n/WQ8GYmPlXiaF+zfK+m6boA6Q66FtEvcJ3/r3+Kayl8+2
+	 KAv/J9RuEq5yjU6tKeLyVHudcXaW+jAR5A1AS0QF7gydkxOQAyiYjyxlP7Ptz8ybWi0ND
+	 yvUrB7Yr4iPgeElajEbAm1yjNF7EFszDCEu42hkA4S70iqQ5toTs93p/9arQ/FjzK363u
+	 iePfIJnMGZYIMX48U7dblkn3oeovP1GneLdPNxuBImGTBbvPbKnQn4Sl2S5RzrOw85A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795107761;
+	c=relaxed/relaxed; t=1795107763;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,113 +34,113 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=I/yI3F45EriPGcNxrnDnKzeZq+tVlzSfuE7QaOBB/k8=;
-	b=grN9FKuooCzaNstHqf77d5650vxBAP49jqfuhLXmy0fTGhbYQfIE0pwbk9AFIfOX+XGD
-	 4SlJ3EVPKbyUt4If4n6PkkhmpIpDKUGWHqFkBZY1jG1YArpAEs+gpzxyxt6lBz1/idL3q
-	 Kp3FnQQvSznv9T1AxX8FqnBytk8W7RoYDaDcYdjUpsIlzAlCSHoVb1k9k0jrNPd0DHbdB
-	 MAezDHa4iTil8J5dGOYto18r0IfGZoqZ4ckXdX2PxSPYqhB8SDvx2SPFtZSgK+ZwLkzJe
-	 dSeDIHpKb1GQMzgSoAAtkprQ5ntIKDVvrUEMeX0/k+AFM/M0ejTbA2BcFFgZx9ChTxg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=yxJ9wh8GpvDvOCLvHQVbKSJugjGbyRqGh8Ir4rXDurY=;
+	b=kKvJY/Axl1a/snuEpItS0QGsmvpmv48N2SwrtoM0u4mZp6SoEGiykzwRFDKHGEggFGH/
+	 EGw/yiPTRNmyy5OIlo4RXSa/YDIuzDu06twuIpVQhropBywOaaCVH5ASH3PXSYPuVlh87
+	 1hpFbXPt1RM3w3tGpFaTQtRSdkDocWRr/GP0VmU0E39bza/t0AD/8c8c5tv808q4paUVR
+	 QAnBtXafw2SNIl9XMc23gnMS1FBufPd8kZ4o2pNMNnXOr/2hJlsutBK2NiET54LwzzakA
+	 B6am82C7o0o+UU18eaQcgQuKl5AFVIxvKwqYCVgckczhK7nxAmIzbl73cyRluDV07Ww==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795107761;
-	bh=I/yI3F45EriPGcNxrnDnKzeZq+tVlzSfuE7QaOBB/k8=;
+	d=lists.u-boot-project.org; s=default; t=1795107763;
+	bh=yxJ9wh8GpvDvOCLvHQVbKSJugjGbyRqGh8Ir4rXDurY=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Fdd6/XGUsGtKZsss9NMVlJWtM5pDiYEQR8fga8uCNO104IL9y0j8aWwnRnfvAHmge
-	 AaGKYGAnslfUQja+vmXDLU9QVWQ6LerEbeBFJpQarD7UXr8v3zn1SoP208pQ0D7qkC
-	 1cQ4wvgFLykwDdSDjgGN7+W2RiLuQDNHMYW1TjjZH0X1Oytrk/xJm+NTUmWFc6iHHf
-	 /ODLUKlZWHqGctSvMWfdsA6D2YdhTqNpVhRv4vaaa77guLx3F3lY35evFdIa/JhvM+
-	 agFIMLML50AsARTckiIcpvvfoOLK2Me//kC5xc9xDNW01kgriXnXkD426B4YnCMIbp
-	 Gb17nhOn6d6oQ==
+	b=QgzYZwqTsjtlGHEFpddAgVUfaUr5ATlh4kTJg/GgF3QPfA4X7Ow5sMGtlfWhuzu/e
+	 YkYfSullDFlzlHarPd3QaVE2Xm4wdBBuP/D1ral14R2fsayiK+H3DTMPw6/Y3wRZeK
+	 H1g5CUzUiGGMlaHSXs9xntp1/R9OGL8xTEGzx6Y5n/Qk/ZteT/H5wjrmoAb4cDJZo0
+	 AIV1APSzR8ZiiawDVc53zQJDTtfhDWplJs/ss9RtfmfeeyJvYrY5OTIr74e9a5RjDb
+	 Ew72AYGMBeGYZC4LPNVNBoHYJrepAIZLpcfB9bnYJiKOYyiV1HptvEIbCcw/Bj2rhX
+	 +DZZ1FFvmaC/w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4A7AC40B81;
-	Thu, 19 Nov 2026 17:02:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E91A98144E;
+	Thu, 19 Nov 2026 17:02:42 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 080522FB
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 17:02:38 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 3A53622B
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 17:02:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 05AF3401C8
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 17:02:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2121C401C8
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 17:02:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eyOHtqXW29bS for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 17:02:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1064440180
+ id CRnVno0HnvBR for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 17:02:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5235F40180
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c36"
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c30"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c36; helo=mail-oo1-xc36.google.com;
+ client-ip=2607:f8b0:4864:20::c30; helo=mail-oo1-xc30.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=DsxVYtCs
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1064440180
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 17:02:36 +0000 (UTC)
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-71b30ed75a1so477638eaf.0
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:02:36 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=JkEDIAuH
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5235F40180
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 17:02:37 +0000 (UTC)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-6d68de53053so1768084eaf.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:02:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795107755; x=1795712555;
+ d=baylibre.com; s=google; t=1795107757; x=1795712557;
  darn=lists.u-boot-project.org; 
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=I/yI3F45EriPGcNxrnDnKzeZq+tVlzSfuE7QaOBB/k8=;
- b=DsxVYtCsJvao68RiovJY2aZmHYADs7rbmGOeLHLbg2Wa4p95+QkJqn+rMINgRW7PlW
- Z6xNCUYxPPGpQuL+aH4jmFnaofNS8za16huzjUcWaZAZOJ2T3PiYpwE4kJIw+VMQajjS
- 20bbKTiCuuh1t7vCdWpaSGykWEna05PCt+V9vCj4WG1FRKql74ajrYRn7A4G0vFR4deS
- Shq5KMnDdenwzo3Q3azgGVFm1s1semtQ9p7/c89anRbUSm+rnxH4NmSHdIkn2TwOGRIS
- j46k5eJxGAHIkR6MHRYNIPv1zbbOkayN5ddVqJD9A6CXXkBoGFiLxWZN9YLUUtDD4wST
- MaPw==
+ bh=yxJ9wh8GpvDvOCLvHQVbKSJugjGbyRqGh8Ir4rXDurY=;
+ b=JkEDIAuHC165aWhVWc/428AAWqZtY3foC+kfbRIr6O4a9bBBWpWBvDUU63UqC6/fIl
+ jqLfzotsH0RbdogA0WcIwFkBiXbXi/6X3VGXBJeqLNs+K/OLx+tJA8EIkK9uaoBRfrah
+ zv6Td14pefNaYSXrnAmfcLYq1JnrKe2E9LBSUndOnz1UGIFNf231gUnKXYDUihsAYv2v
+ fUgdrmdnaX2rcLRqD5oZBEqTXXo88JJn7Zdo33aSxxTSPRaa9bkvD42q/3igRzw1TKWR
+ kD/UpvsislxlgmegEWnOnAu0gGLUnu/fam28sp7zTugT052qT9UgqhMm2SAgJ4OJ3OBY
+ CFwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795107755; x=1795712555;
+ d=1e100.net; s=20260707; t=1795107757; x=1795712557;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=I/yI3F45EriPGcNxrnDnKzeZq+tVlzSfuE7QaOBB/k8=;
- b=llwVttZOoqTGA94MutRoU6r0vneT9FGNBrc2i3oQ0bWiwM5TpWzVolCAT7jz+kUH7E
- qkuZXeLtRs/n7mRhjQRTG03J4ZzDIQ8LAMGvS2nVQrU4hcvjawa59J8nPrnTPp/fOINw
- Fol//2AEpTuY5tS3q9Z6hza/DrjY9FdzPwzdb9CQkhFHVIvAbmm3hSt9ywD6sUdkZyRt
- OjrJg2jBfLVCNiRipqDPG2LG1APChFfYl1h3PoHsKi6io9oH+ujaDrI2p5nHgcmqdYMJ
- Ofk860E0SL1F8gIVNYLDq1UC2zVveUaM4iiCxXwcNNHATN0aPalXxhy/88rgzXVr5sul
- CjAg==
+ bh=yxJ9wh8GpvDvOCLvHQVbKSJugjGbyRqGh8Ir4rXDurY=;
+ b=RuHlolru+PTC5Jqtqed4efQYcbWs4+8e2wY90uUtwFQThcRRaSQy/or/n5Mt9tLE5V
+ jNABPqDbAO/5QOfpmvhLAKHwVmvoKypdVg8dB+KOSkjJ4QzlHbboZjHsDCo4WEIaxyuX
+ e6LeOy+WvjZayykSKiVpnaI3PHeXlG+pjtgL2/uKKkj2AZDiuSL/VqotVD3xmyT79QT+
+ huyrpdGW4a6MlnRMce6rWuIEJOv9UdDgOaKRvfRZa7QHq+VDB2qMx8+B6gT8UJ8T7BnX
+ THf2ZmzmxCIL0seN3VXe5t7fgenf/Eu7aXIuM9UK46LrnivWoRDopOYNtcqLcpd3/hnL
+ WMVA==
 X-Forwarded-Encrypted: i=1;
- AL+hErFKYfWMd2tGY3Isz5DtVqGZJ9+F+HyU/ytV5BP12vWvR5fJ0tazpL1s5+VWDbKY0eiH30WZYQ0=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z8oRrk8qoDbtUAwvU9KP9J01uxTkcV42D02R3MtuplBoQ/fnp2X
- iaDOLhQa2w5fkkDAGLbxy/fGAwFx1WuRqt66J46It+EDIrg6xo3bjND0nqJQGPyKiXEEH5UObwZ
- My2xK
-X-Gm-Gg: AYBFou3K77VdOrCqw4A1je7eihtdvWp6eu2Y7TePHleS6vZmEsIXBsiziqC5aMW517F
- iLh0aQzYAQ9hjahsLedkKPNMODeixnRZ4Gm9tbEkLBTXVwdMSRqoe2JQJztd3Ikf01NoBbQhzAR
- /ZrPal9vE0q2FrAzQTj0NtSuMU7ZFDsolv05rjMsfl8xeFNYZ+bomorC4rF2EwPE2OBfkb3BB6r
- zEsGB0dKHtaUWKvGVR5AB+g75tumdMIRUguEfX7P0LajYNGbjEXAaycVkugItF4roAbizEUKpGW
- 1NavOTP2jWYy9cOfYOYV8RCCnGZ5Lmd7H7KJcexV58Vaq12/7moheKc8fKSyFJFMjguM8lqHpk9
- /LfEo+OPyFzEQjV7bdmcQ1x/4JfufOdNiAl94/l38sgvM1tlcLdAPHmdyDiNUnerV+ziWY+tlcz
- GSjG1riyz98OOcQ0aSFDTYIJ7l0Hw8Wnn5dsQYNLXd1kJZracpvnd1V1iF9ErkUU7pWZjuI21tE
- z0rMYTFpF01hgip4KB0oeZWDRbhZaUyCPVeV0vsI4PIezQEq9ognt6gnlTR+k0uPLmKRG8RxMJc
- x13MMRSzsO7cfLTypjdjRL04mQCb6/YeGQ==
-X-Received: by 2002:a4a:ec49:0:b0:717:da:ba31 with SMTP id
- 006d021491bc7-71b3957f531mr153820eaf.78.1795107755592; 
- Thu, 19 Nov 2026 09:02:35 -0800 (PST)
+ AL+hErFlwUva3ehc216XkLjGyz/nz4f/kY7nge8TKXXhLwudaClP/T1SsL1l5hOIsBBwzguu85dWUec=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8IJAk94eey4PmbTis8HZxD7tgynt6BdEe7+R4CqtMjM9lbAZLz
+ 4pk386lclB47FAvhUpIMvP3oesvKKeMBB92K4JK4XKq9yosaQo3MnfdAt1+hoScj94slbyci//s
+ r1bMH
+X-Gm-Gg: AYBFou2WxQNe64YFwtyd0nXtQdvFYqQbbEIzHGJgHRk8DdbGIIQybxvBmszB6a1LJCx
+ hPWcFoYq6pxjioE79r9XCeYft5KaTJAAp3ylac80rCoJkrn5rRsz73pB+z1hQdoyqgUh5AohJhW
+ 56qRLss/eB//j4FvbbOp5AvPxxlWdpM+wryLkTjODJy+S8bPFZObVmZ0M2w5pMJFnNZ9ICH4arY
+ NF96ELGeIlSb8QkUJPbT1p2SS6v8dcsT3GZV6jEUQO0koB4ftdOti2pODFJKV+qNq/oAw8X3Y2U
+ DOwv/nTwn8bWCehfMcV1PzN+rNsUB5TFbHR/tEtsyByg01LcfAJG7iazgCkUyxEGZ9pA1ix49LL
+ jc0/D9WumpfcE5N5Ax4C82hzpxNUl0CdBkvRor3gpiWT6Hz2nRS2LT+908XdEB7Mf2kuKHQM8o0
+ xT/O6VUn9ljUsoLAm6Kn930GTVyECgFla7J5FsfpkYGQ8rmHi55hyR80uYDzFeRiEkJoGVovDiX
+ e9iSFoYLqbtjG2ooGNWikS6g/yIG0HramzTBb34NMjakAfVVYsm6IVgFe8KBt1T8usf70mwaSfS
+ CKr837UrMItWtIsoRmTpQTirEcupUo0fkw==
+X-Received: by 2002:a05:6820:3383:20b0:71a:f253:8ac9 with SMTP id
+ 006d021491bc7-71b39581b62mr107878eaf.78.1795107756820; 
+ Thu, 19 Nov 2026 09:02:36 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:43e1:bc37:7497:58db])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-71b380e4a6dsm381290eaf.13.2026.11.19.09.02.34
+ 006d021491bc7-71b380e4a6dsm381290eaf.13.2026.11.19.09.02.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Nov 2026 09:02:34 -0800 (PST)
+ Thu, 19 Nov 2026 09:02:36 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 4/6] fastboot: block: Add GPT/MBR partition table
- flashing support
+Subject: Re: [PATCH v3 6/6] doc: fastboot: Document block device selection
+ syntax
 From: David Lechner <dlechner@baylibre.com>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: Guillaume La Roque <glaroque@baylibre.com>, 
@@ -156,23 +156,23 @@ Cc: Guillaume La Roque <glaroque@baylibre.com>,
  Simon Glass <sjg@chromium.org>, Sam Day <me@samcday.com>, 
  Francois Berder <fberder@outlook.fr>, 
  Vitor Sato Eschholz <vsatoes@baylibre.com>
-In-Reply-To: <20261115-fb_gpt-v3-4-7ddd7ef832f6@oss.qualcomm.com>
+In-Reply-To: <20261115-fb_gpt-v3-6-7ddd7ef832f6@oss.qualcomm.com>
 References: <20261115-fb_gpt-v3-0-7ddd7ef832f6@oss.qualcomm.com>
- <20261115-fb_gpt-v3-4-7ddd7ef832f6@oss.qualcomm.com>
+ <20261115-fb_gpt-v3-6-7ddd7ef832f6@oss.qualcomm.com>
 Date: Thu, 19 Nov 2026 11:01:50 -0600
-Message-Id: <179510771079.2216103.16224552807473939977.b4-review@b4>
+Message-Id: <179510771079.2216103.2835646029655280990.b4-review@b4>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1921; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2830; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=aJrY61HtzKwjH/zRASNpOGBCijEGV9a8J6l633lPr+M=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq/yuZK8e9Dfcfi2LtE+K9iV/2nhvLTvF7oeurg
- 9+L/1ym9sKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCav8rmRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A4fIIAJY3PXDE/BzU0oUcBrgTHpfv+Gjj4w+QIGc1T58
- rv/c7DbeT4p2PpkgYKME6OxukV6tnZJwX1Py4ZXSbb8UUzXOzBmXsmH0XqtwzpY1VQEX/40u2NT
- 4E9F41X+sjMYZNmvQMrMrjPH2sjI0NXz8+KDLzuB+vqTB8CF0PpLA+UcmvCAb2JAEIlDx/7VPQl
- iJzniHjIqE1giY7M9XRWekAkgrJo5O5kaECSnjaIMFvKKEZ3DqJft1as0vn0oUoUPwLwUvSW5O6
- NdnpH0+bwynepbdq4DimrxlAtcS0PAOEXNUkYoUmyiEo4Q7rM6gQXK00yjVPXMUsC9HV4+rwpJg
- +TAI=
+ bh=2/kSqaERrfaKbO2gtDvKBX2rdpQZ7nsA2KfP0s2F9jo=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq/yufQaQMFvN+CIoHo+yNG2AP91neXPPRqYIvY
+ KM71jKObbmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCav8rnxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AWQQIAJFSQ6faMCwnbSjpHvbTkbwPMam9ObNhSUgd3Jd
+ 65ZVb3IprWT4UZ04OK45ETNz+oxSkNIcrgX2oU+fKh0g4+9L1J7p2v4HfKyN/mYdb2iqFb18rPK
+ wTgVR85B5KD38/Vyeh9b1iPXSDFZp1Xtw27OEfY99xUn9fDg6lyRRxq767go82Y71+8phR4v3l6
+ VEyrbvieXMwlvihwAI4/9lGVlU9jiuPTV5Dh1PkSDeCwQHW5vXxtEKRYHyzjoXndAJdcTUDK7Em
+ P5Y9idvJ9z7Dg2/HeyZ3bi7bDluabEJDwZRKryhOTjZyP6mt4f09i5bxvaryTG8aO8B6h+m/gmb
+ dnWQ=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -184,70 +184,80 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> Add support for flashing GPT and MBR partition tables to the
-> fastboot block backend. This enables operations like "fastboot flash
-> gpt gpt.img" and "fastboot flash mbr mbr.img" for block devices.
+> Document how the block backend selects a device: a partition name is
+> looked up on CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID first, then parsed
+> as "<dev>#<partname>" or "<dev>:<partnum>". Add examples for flash and
+> erase, and note that "<dev>#gpt" and "<dev>#mbr" select the device for
+> partition table updates.
 > 
-
-...
-
-> +int fastboot_block_get_table_dev(const char *interface, int default_dev,
-> +				 const char *part_name, const char *table_name,
-> +				 struct blk_desc **dev_desc, char *response)
-> +{
-> +	char dev_str[16];
-> +	const char *sep;
-> +	size_t len;
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> - Document "<dev>#<partname>" and "<dev>:<partnum>" instead of
+>   "<dev>:<partname>"
+> - Use sentence case for the new headings
+> - Cut the duplicated GPT/MBR text down to one "1#gpt" example
+> - Mention erase and the partition-size variable, which use the same
+>   lookup
+> - Drop Mattijs's Reviewed-by since the documented syntax changed
+> 
+> Changes in v2:
+> - No changes
+> ---
+>  doc/android/fastboot.rst | 32 ++++++++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
+>
+> diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
+> index 8e15f287f9b..404ebfe5f54 100644
+> --- a/doc/android/fastboot.rst
+> +++ b/doc/android/fastboot.rst
+> @@ -195,6 +195,33 @@ The Fastboot implementation in U-Boot allows to write images into disk
+>  partitions. Target partitions are referred on the host computer by
+>  their names.
+>  
+> +Device selection for block devices
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 > +
-> +	if (!strcmp(part_name, table_name)) {
-> +		len = 0;
-> +	} else {
-> +		sep = strchr(part_name, '#');
-> +		if (!sep || strcmp(sep + 1, table_name))
-> +			return 0;
-> +		len = sep - part_name;
-> +		if (!len || len >= sizeof(dev_str)) {
-> +			fastboot_fail("invalid device", response);
-> +			return -EINVAL;
-> +		}
-> +	}
+> +When using ``FASTBOOT_FLASH_BLOCK``, a partition is first looked up by name on
+> +the device set by ``CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID``. If it is not found
+> +there, the name is parsed in the same way as by other U-Boot disk commands::
 > +
-> +	if (!interface || !strcmp(interface, "")) {
-> +		fastboot_fail("block interface isn't provided", response);
-> +		return -EINVAL;
-> +	}
+> +    <dev>#<partition name>      # partition selected by name
+> +    <dev>:<partition number>    # partition selected by number
 > +
-> +	if (!len) {
-> +		*dev_desc = blk_get_dev(interface, default_dev);
-> +		if (!*dev_desc || (*dev_desc)->type == DEV_TYPE_UNKNOWN) {
-> +			fastboot_fail("no such device", response);
-> +			return -ENODEV;
-> +		}
-> +		return 1;
-> +	}
+> +``<dev>`` is the device number on the interface set by
+> +``CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME``. It is parsed as hexadecimal, as
+> +in other disk commands, so ``10`` is device 16. It can be followed by
+> +``.<hwpart>`` to select a hardware partition, e.g. an eMMC boot partition.
 > +
-> +	strlcpy(dev_str, part_name, len + 1);
-> +	if (blk_get_device_by_str(interface, dev_str, dev_desc) < 0) {
-> +		fastboot_fail("no such device", response);
-> +		return -ENODEV;
-> +	}
+> +Examples::
+> +
+> +    fastboot flash boot boot.img          # partition "boot" on the default device
+> +    fastboot flash 1#boot boot.img        # partition "boot" on device 1
+> +    fastboot erase 1:3                    # partition 3 on device 1
+> +
+> +The same syntax applies to ``flash``, ``erase`` and the ``partition-size``
+> +variable.
+> +
+> +Partition name formats
+> +^^^^^^^^^^^^^^^^^^^^^^
+> +
+>  For GPT/EFI the respective partition name is used.
+>  
+>  For MBR the partitions are referred by generic names according to the
 
-The default device goes through blk_get_dev() while "<dev>#gpt" goes
-through blk_get_device_by_str(), which also selects hwpart 0. So a
-previous "<dev>.<hwpart>#..." command can leave the default device on a
-boot hwpart, and a plain "gpt" would then write there. Calling
-blk_dselect_hwpart(*dev_desc, 0) after blk_get_dev() would avoid that.
+The end of this "Partition name formats" section says:
 
-The same applies to the default device lookup in
-fastboot_block_get_part_info() now that patch 2 allows selecting a
-hwpart.
+  The interface is always ``mmc``.
+
+I don't think that is true now, so we should fix up that part too.
 
 -- 
 David Lechner <dlechner@baylibre.com>
