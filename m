@@ -1,126 +1,132 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 403DD606A332
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 09:19:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73807606A324
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 09:31:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UsmoWct6
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QmnY5Bez;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dSS1eoE9
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 12671606F6;
-	Thu, 19 Nov 2026 09:19:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 476B940A29;
+	Thu, 19 Nov 2026 09:31:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ursCoGRGfApy; Thu, 19 Nov 2026 09:19:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C5F9E60A94
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795079990;
-	b=PPqmNfaVVL6ta+tWyajQLaReyPDX6ghhUB1VDw1Cno8cFhnutDYkS+OcAOq8Hu49tVQC
-	 j1vhDGb9EYhjCaRRJdjvHmpTrxD2z1pdvs8Ui3HVDf6s3+J4pNHg6JFSMbkWVLuCTJryx
-	 lRMyJE0nNrGljI8/A+YtXwTlRqoAKTf7usLwLAufdZQjs2iL+O2gJCmagkIdgXyHN/S/W
-	 3xj14tZc/Iiu286fLyVdKl/3l0djdhxoh3gehc2ipKFaTnP7ZT8IH9NwrZtRleNcvX66n
-	 AqBOMT7KZYoiSckUy+AjrXp+g9hiIsJRZqtpKXdfZryyVeTEzS8OueLb2m1tcUcxcBA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yPFQ3lpM1U9A; Thu, 19 Nov 2026 09:31:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 246C340799
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795080686;
+	b=NA3nZW7AeV5fBG8sWyEUpGB9Hm3ITkWh7YG+N7IoRmP2wbRGiOsHUqqy7p6GzN4PGBqO
+	 fs4d+okBQhyOxNYxisMTCsFkWA21Q2i3iiLTyPTHLLVytgSIHaYcAR485N1XMxemqboqB
+	 Iom/hoTf665JcxO5rq2slF2c5dIXoqCmKeC2j5jJKHJsk2WyrRKeL69k9N3BYZy+wzNWP
+	 y/mvN2P+2BYmFO4IHAFIiNtNLfir2NtugbSgs71f4RkOopUArPH5b8djFsXB1sih/sK+k
+	 Q2VCUyHa/+UeIXtERPbAbopmHcbA41GojQOJdRM+zv57NOWcAtsqfCi41k5Cr7z7Ttg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795079990;
+	c=relaxed/relaxed; t=1795080686;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:X-QQ-mid:
-	 X-QQ-Originating-IP:Received:X-QQ-SSF:X-QQ-GoodBg:X-BIZMAIL-ID:
-	 EX-QQ-RecipientCnt:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:X-QQ-RECHKSPAM:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=57uM9fqyp+9Ukrrz8+WOu6bbUHkfSXerAbMIv91mRw4=;
-	b=CR94PryfSU68qmCyvqq7/oG++xYVdyMLjQjzXphYCNkfLRb/aMP9YYfqpopQ1SZxhguU
-	 POBW15tUkJ/nFnjUOPXGvBop9de+vaqRAVjrwA3uIGHAh+bD4T2mbcC0LBZZHguECkSf0
-	 VUke4kMMgezBaz6LsMS6kFS5zOsSx6tWqdNxeCHj/4TiKeWwT/dFctmh0jSPv7QTGr466
-	 ljRXV6cgxgoNS7ICzIshfZs5dJjIGb+xOLtTcAyoUrFEMIsmsUz3cxsdcwVAEWQFv/Rnf
-	 Kiwuk8s6GbEvHILMhTcyp8XrMYIIlll6ORbkr4XZR+thfwKy0No6xMeKUYUcDROSlQA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=FRosFTyc7qXshWa+ME6kG0D+Jr5IZfoKrky/ZOoCNLI=;
+	b=cid1lkR1QqBWoRS4N2CS1ddS44GQNVqqRc1C4KtQjej4IHaFTVmb06LfGgwc4en4L6up
+	 OgZCnu6/C93oqd8sx+coHAgTdw17HfTr12VHFxiNmQ642VLyx8r/haw/00AUKiDEdmpdQ
+	 8RNSCP7JYAzM96RAce08FCP3FtezVdjIKrDNSxxmFNLfb3mIgfqpHqJW0J5hcbMGdH7bS
+	 Ozvs2KFFWuouchRxx/JhLXF+jyMdpZP2dsh3lmUIIlGBlrA1EKzRjgDipKT5dyFd63pN3
+	 9f0B6+Quc820PJNxrD3ydTvPAkoZ6bqE+F5HNAjigXkhBM0qPx6DEVfAaBKJj3sXPYw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dSS1eoE9;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795079989;
-	bh=57uM9fqyp+9Ukrrz8+WOu6bbUHkfSXerAbMIv91mRw4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795080686;
+	bh=FRosFTyc7qXshWa+ME6kG0D+Jr5IZfoKrky/ZOoCNLI=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UsmoWct637R1phX/omvWTcqluOwNimUKJ4dMUWMDEyMZ0dH619USUbG6wau3QZLDE
-	 FJgSQ3RyGd68tju9lnUCD6A53+KdyP9Yh9VXMK/hmjHv6H4YQTdFOJ8Acyr/Hlb+GA
-	 GHYjY7sNJUAkWeQ+N/DNJSFwZZR4yGAVmgp4cBv09uN/qFoNOd8JS2yu+GlknuwkGB
-	 ne5fFKAHiGCIJtBa78akCK6Y1TDNJ8AYHQxdn8fcBcRm0WTJ2IF9cb11Q0KButES41
-	 qXO8RFtQspMw21KWCsfV7tPYinY2d7tTDn17sq4aCwkAndKQ2L+iNchemwL0YQlsHL
-	 1cxA01LofHX7w==
+	b=QmnY5BezgOnwW42N6H1CnGcT7HGus6GmUZrXOWD0jgp1xhdBWxXtpijRva3cuw73l
+	 B8Cy1wDXtFwnZPT6tpnUSPGR9KPtWY4YsnGGyDG2cJZ0Sq6GobydGo0XRX1ZmC9t8N
+	 vw3uope6iIjX8YyYePcp8QA68GgMnGMiI6U4Nn7zKRVBcArjMQLYrHl15oQw18FlBE
+	 EtRoTVjoD9oA+QwS+ptpESmhhTqQvLDTtL/YIEXefxu89O37bh/IZUvceNPiiBUWef
+	 u2vnPhTVykBWlzRdJ4uzgz4UbtnW/2E1dkJsuTDCxWTUXFbNp8JPfeOHHYo66I9QAs
+	 D791QUVhENNlg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C5F9E60A94;
-	Thu, 19 Nov 2026 09:19:49 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6C72570B
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:19:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 246C340799;
+	Thu, 19 Nov 2026 09:31:26 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 416B8A32
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 533DE404E5
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:19:48 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3322940799
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lCdH4vQJc5gq for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 09:19:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 4295C404E2
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=43.155.80.173
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=43.155.80.173;
- helo=bg5.exmail.qq.com; envelope-from=luojia@rustsbi.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=rustsbi.com
-Received: from bg5.exmail.qq.com (bg5.exmail.qq.com [43.155.80.173])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4295C404E2
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:19:46 +0000 (UTC)
-X-QQ-mid: zesmtpsz3t1795079886tb4937d8a
-X-QQ-Originating-IP: wiFCxWD7O6KmJpk4Su/6CISArDiX3OhIUNS+iiTkA8Q=
-Received: from jiangzhouqi-ubuntu-4090-01.. ( [36.110.52.2])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 19 Nov 2026 17:18:04 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 14524517842153177509
-EX-QQ-RecipientCnt: 11
-From: Zhouqi Jiang <luojia@rustsbi.com>
-To: u-boot@lists.u-boot-project.org
-Cc: trini@konsulko.com, tim609@andestech.com, leo.liang@sifive.com,
- me@ziyao.cc, sjg@chromium.org, alpernebiyasak@gmail.com,
- jiangzhouqi2025@iscas.ac.cn, plucky@rustsbi.com,
- Chao Liu <chao.liu@processmission.com>,
- Daniel Maslowski <info@orangecms.org>
-Subject: [PATCH v2 1/3] riscv: Describe SBI_V02 in terms of the SBI version
-Date: Thu, 19 Nov 2026 17:18:40 +0800
-Message-ID: <C333C8B0E169374B+20261119091842.3062208-2-luojia@rustsbi.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261119091842.3062208-1-luojia@rustsbi.com>
-References: <2744044E69DD25E5+20261115143808.1812787-1-luojia@rustsbi.com>
- <20261119091842.3062208-1-luojia@rustsbi.com>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ufj48KReGDsX for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 09:31:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8E8C340792
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=dSS1eoE9
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8E8C340792
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:21 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 5A03B61FC3;
+ Thu, 19 Nov 2026 09:31:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 909351F000C4;
+ Thu, 19 Nov 2026 09:31:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1795080680;
+ bh=FRosFTyc7qXshWa+ME6kG0D+Jr5IZfoKrky/ZOoCNLI=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date;
+ b=dSS1eoE9udvKOg9BO7NAinOrYpL5NLc48F4PXxL4xOMWvWkCLaV2JF5/ZwUu3jO7V
+ S0U3OtwoTNGy8cgc532sTZE4P8hCb/74nsMH+oPQr8iiiXvY/7UPh1jSFJuQoZjrJi
+ DV9uSv0ZtAQ49K2KNogV1Q1EmKmSYMUlxXTh3ab81zU8QSiWSrl/G70CtyuM0fqBRt
+ rd159RhkO85RFRD00BFYldCmJmjYXd/MQJTR4XM7UMNddV5te6CqT4ViNkW6r5Lv6+
+ Ri4Z2/s3oL2LlIktrlXyR2jO2bNR0Ab0P7eDmpKO7tbTiv/wdE4ob1LDsLVo1sUQjE
+ dom1TtDWSIRWQ==
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpsz:rustsbi.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: NRLj+a+1JRyJWRwt1EZ/WoyN0yIO1SG5/xsSqw6tGKW4RM+shplapE7k
- JCjmXzGWeBS3wBTlY3GxTvAO+7LliAndjlIdz1YXVZwquRf+7HBnAAyei2IghHG0C2mlEzR
- 9XD8FhYehvjeJDzRLfv7d4hws3O10hEHsfnoC+ZDrMxV9cYpnxL0WnPmwrQa4gVhAatDa1X
- l7zJjdBVAO4dtBhZ/dSH0ndZ+QGhqfJh1V/OEWWwwQCAIR8fjVh2gK8LoQY3ZiZjS9QLSDQ
- mVhLvU5bK8Rup+k0chx99mn5HQjIgTXD150CKTgKtnwcxFnSJl/dVlsdcyWnUuZ06XGXNba
- MBqYquZYf9pIrzaPWqHxk2EypMQWWMREa+IzkfdA42K0YdCnwyvAYL0CgCfhOqA5oNPwMf3
- QPK05TOgzusBnqKvuWfX8S7DmDDtR1L/JsuWSjLfP081ZSP74Wu687UzpqO0sQUFxg85wFR
- 8Mtq68xL/M3jw/+5CueNYuCpQE5xriujQ/vl//p7QMzfLAqZULZ+pELzmOuHgx794YK75U9
- 08WtjjPWRfVN0hTrldB6WgbHSUjbd1+kZEMDG+A174bz5DtTd1xRLMbftpXMVE75VV8q43q
- f0vhT+IOEqoybnPgyg5DXg2bUGtTtVJcXLTXcVt5gsI8KHW7u/RWs5JUUBCb35lg2mut5Ur
- /wh2XkxNVUrBC77dTeri341YJ3NgteWpeuaM0j8yS7HQAXnRrvbFG5XnayooqYQZQbz+vxC
- JQhq8p5wblPnxoE/xaLEM01qBlXXDbQoTG1XLOV1NLgOcB28nEa6sWbWJsX8dHVTLjY7Bxw
- K7m/rtnDz1O1gJLlxg7Mhv62il6IgsZ/W7XwZFt5ESyv7AMhaRFPapQjiqVlUs3IV+n+OWA
- CYMEyIyPgZ1wsBSkZ/u+um9ukGgbc0WhC6duF6Bgxjw3adlz9ppHOje+KXxWRfxG3txjAQd
- nTS4IaQIhZ95/Op+dCfCgAyvvs9XtW/jbz/tvxHVv99J3wqx/8fMcmFOS
-X-QQ-XMRINFO: Mp0Kj//9VHAxzExpfF+O8yhSrljjwrznVg==
-X-QQ-RECHKSPAM: 0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 1/3] bootstd: android: update the rollback indexes of a
+ known-good slot
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org, 
+ Tom Rini <trini@konsulko.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Guillaume La Roque <glaroque@baylibre.com>
+In-Reply-To: <20261111-upstream-android_rollback_misc_b4-v1-1-47d17e8a5d92@gmail.com>
+References: <20261111-upstream-android_rollback_misc_b4-v1-0-47d17e8a5d92@gmail.com>
+ <20261111-upstream-android_rollback_misc_b4-v1-1-47d17e8a5d92@gmail.com>
+Date: Thu, 19 Nov 2026 10:31:14 +0100
+Message-Id: <179508067427.516692.11077611451436557680.b4-review@b4>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5509;
+ i=mkorpershoek@kernel.org; h=from:subject:message-id;
+ bh=gTrFkUw6bEy48VLE4qskTBF7P8rWw4tgK6v+cNAf0b8=;
+ b=owGbwMvMwMUoySu7Jc1P0pTxtFoSQ9a/g0/nM+4Vfca92bek+lBnz5eo7CcCwaZf5S6rOy7xq
+ Puyc49bJ6MxCwMjF4OsmCKL3kun5dvks/YFC69lgBnEygQyhYGLUwAmkjibg2Eh55RGqSn2XDqm
+ Xhu4H66y9Pl5QntNgJTewpfNy7J3aR2Su7xWlzfZlNlVMiNk6vbeKPWmY5dD6iVvybX6P7eqOvG
+ jUzDqmDKvXc/WnZO26ar9flVve2US4/opvvJcUV++fe3XSNc2rLT9wjrzqUJySPRl7Smfvmsutl
+ uzJklRLTcmrUhrcwurtplXGbufZc3Df2Xh1t/lhZutEp5fjnr8g/Wc0DfF24cNErdV+D18G9jf+
+ 6r1vfkpq61b/b6eP/icT1Mt7xnbg2/yb5KucP9wu2GzL+Oe7oTfhrlVRS9+LtNRqXOtfKCQwhj1
+ +67mivkd9hv019p1hTOYiQtnnnvhG5/Gfr1XPKTs/LLNAA==
+X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
+ fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -130,37 +136,162 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Describe SBI_V02 by the SBI version it requires so the help applies
-to any SBI firmware implementing v0.2 or later.
+Hi Igor,
 
-Signed-off-by: Zhouqi Jiang <luojia@rustsbi.com>
----
-Changes in v2:
-- Split the SBI_V02 help update into a standalone patch.
+Thank you for the patch.
 
- arch/riscv/Kconfig | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+> libavb only checks the rollback indexes of the images against the stored
+> ones. Storing the new values is left to the bootloader [1], and the
+> Android bootmeth never did it, so the stored indexes never advanced and
+> older, vulnerable images kept verifying.
+> 
+> Raise the stored indexes to those of the verified slot before booting
+> it. With A/B, wait until Android has marked the slot successful, so a
+> failed update can still fall back to the previous slot. Without the
+> OP-TEE AVB TA there is nowhere to store them and nothing is written.
+> 
+> [1] https://android.googlesource.com/platform/external/avb/+/refs/tags/android-17.0.0_r1/README.md#updating-stored-rollback-indexes
+> 
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> ---
+>  boot/android_ab.c       | 34 ++++++++++++++++++++++++++++++++++
+>  boot/bootmeth_android.c | 48 ++++++++++++++++++++++++++++++++++++++++++++++++
+>  common/avb_verify.c     | 35 +++++++++++++++++++++++++++++++++++
+>  include/android_ab.h    | 19 +++++++++++++++++++
+>  include/avb_verify.h    | 16 ++++++++++++++++
+>  5 files changed, 152 insertions(+)
+>
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index f2b1110aa24b..48745f2c2d2d 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -376,6 +376,40 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>  	return slot;
+>  }
+>  
+> +int ab_get_control(struct blk_desc *dev_desc,
+> +		   const struct disk_partition *part_info,
+> +		   struct bootloader_control *abc)
+> +{
+> +	struct bootloader_control *disk_abc;
+> +	int ret;
+> +
+> +	if (!dev_desc || !part_info || !abc)
+> +		return -EINVAL;
+> +
+> +	ret = ab_control_create_from_disk(dev_desc, part_info, &disk_abc, 0);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = -ENODATA;
+> +	if (disk_abc->crc32_le != ab_control_compute_crc(disk_abc))
+> +		log_debug("ANDROID: Invalid A/B metadata CRC-32\n");
+> +	else if (disk_abc->magic != BOOT_CTRL_MAGIC)
+> +		log_debug("ANDROID: Unknown A/B metadata: %.8x\n", disk_abc->magic);
+> +	else if (disk_abc->version > BOOT_CTRL_VERSION)
+> +		log_debug("ANDROID: Unsupported A/B metadata version: %u\n",
+> +			  disk_abc->version);
+> +	else if (disk_abc->nb_slot > ARRAY_SIZE(disk_abc->slot_info))
+> +		log_debug("ANDROID: Wrong number of slots %u\n", disk_abc->nb_slot);
+> +	else
+> +		ret = 0;
+> +
+> +	if (!ret)
+> +		memcpy(abc, disk_abc, sizeof(*abc));
+> +	free(disk_abc);
+> +
+> +	return ret;
+> +}
+> +
+>  int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
+>  {
+>  	struct bootloader_control *abc;
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 6f7e232d2c3c..3d1e64aa2b41 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -8,6 +8,7 @@
+>  #define LOG_CATEGORY UCLASS_BOOTSTD
+>  
+>  #include <android_ab.h>
+> +#include <android_bootloader_message.h>
+>  #include <android_image.h>
+>  #if CONFIG_IS_ENABLED(AVB_VERIFY)
+>  #include <avb_verify.h>
+> @@ -438,6 +439,38 @@ static int avb_append_commandline(struct bootflow *bflow, char *cmdline)
+>  	return 0;
+>  }
+>  
+> +/**
+> + * slot_is_known_good() - Whether the selected slot has booted successfully
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 386241efd4a..0edf0247983 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -476,8 +476,7 @@ config SBI_V02
- 	  single hart needs to boot and enter the operating system. The booting
- 	  hart can bring up secondary harts one by one afterwards.
- 
--	  Choose this option if OpenSBI release v0.7 or above is used together
--	  with U-Boot.
-+	  Choose this option if the SBI firmware implements SBI v0.2 or later.
- 
- endchoice
- 
+nitpick: Why can't have successful in the function name? This matches
+slot_info[slot].successful_boot so it seems more appropriate than
+'good'.
+
+For example slot_booted_successfully()? Feel free to pick another one
+
+> + *
+> + * With A/B, Android marks a slot successful (boot control HAL) once it has
+> + * booted far enough; until then a new update is still on probation. Without
+> + * A/B there is no such signal and the slot counts as good.
+> + *
+> + * @bflow: Bootflow being booted
+> + * Return: true if the slot is known good
+> + */
+> +static bool slot_is_known_good(struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> +	struct android_priv *priv = bflow->bootmeth_priv;
+> +	struct disk_partition misc;
+> +	struct bootloader_control abc;
+> +	int slot;
+> +
+> +	if (!IS_ENABLED(CONFIG_ANDROID_AB) || !priv->slot)
+> +		return true;
+> +
+> +	slot = priv->slot[0] - 'a';
+> +	if (part_get_info_by_name(desc, BCB_PART_NAME, &misc) < 0)
+> +		return false;
+> +	if (ab_get_control(desc, &misc, &abc) < 0)
+> +		return false;
+> +	if (slot < 0 || slot >= abc.nb_slot)
+> +		return false;
+> +
+> +	return abc.slot_info[slot].successful_boot;
+> +}
+> +
+>  static int run_avb_verification(struct bootflow *bflow)
+>  {
+>  	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> @@ -539,6 +572,21 @@ static int run_avb_verification(struct bootflow *bflow)
+>  		}
+>  	}
+>  
+> +	/*
+> +	 * Rollback protection: libavb only compares the rollback indexes, the
+> +	 * bootloader stores them. Raise the stored indexes to those of the
+> +	 * verified images once the slot is known good, so that a bad update
+> +	 * which never boots cannot lock out the images it replaced.
+> +	 */
+> +	if (result == AVB_SLOT_VERIFY_RESULT_OK && slot_is_known_good(bflow)) {
+> +		AvbIOResult rc;
+> +
+> +		rc = avb_update_rollback_indexes(avb_ops, out_data);
+> +		if (rc != AVB_IO_RESULT_OK)
+> +			log_warning("rollback indexes not updated: %s\n",
+> +				    str_avb_io_error(rc));
+
+So this is ran on every boot? is the index incremented each time?
+Sorry if I don't follow, this is a bit unclear to me.
+
 -- 
-2.53.0.windows.2
+Mattijs Korpershoek <mkorpershoek@kernel.org>
