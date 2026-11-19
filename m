@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D217B606A320
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 23:33:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E0E7606A320
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 23:33:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0OgarS2u;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=UaeBfV6T
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EztLWLlU;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=aTbsZ2XP
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7AF1C40E05;
-	Thu, 19 Nov 2026 23:33:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 288C240E0A;
+	Thu, 19 Nov 2026 23:33:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IKPpnJc1xZTP; Thu, 19 Nov 2026 23:33:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 64CE540DAD
+ id a93NoUBYMzyP; Thu, 19 Nov 2026 23:33:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3DF6640E0D
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795131218;
-	b=EurZOOv37vqmlZyL8Fo8TyIPFqso1Hc+sgvnZgk6X4IFtLR/ez0SH0yxXTcx+EVGi4eM
-	 SXaNidOw1lgy6mGqSxOTwxd8468bnulKPUYdx40F9hwr+VSy5a+QF3wGuWLc/LOBrWcin
-	 TdYNJS3SFjLp4a2vL6QDqDJpeObkus4T6HUYZX8T08MgpmnLE/IH1O2okt3Stx9b9gtC2
-	 aEICcE7CmITG+8lLyipacFhifVisUCEuX0TkQU8N6nxG9nnTKVKn1Um/Tk5KTTwAiHqbc
-	 Ybum0fJRfx/0hu+/5tl5Z0LJMgTkSpVJ2HHRpbiAnIi+vnECU6CKBwSK5H0rNjBfbww==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795131220;
+	b=fdVDTUZCNq1b2/bU4s1ecRUcX4f7dgycTxMsboWIBOtfEC1l0SdWImVPyhdlT/Vvx2aN
+	 ArAelmsE734pfRP7xer59v7toJ9MsEhRefdjpROzsgYaq3GbrkFgUGJEeVMM110li2Tx6
+	 QubtuYpDdnEa8dUbAkWIEmwe9P9VBHEKsQX3HjGtpa/7BEZftlnJLUfQ3w029vlNTFCg6
+	 62V9ccwqM2eikz+o4gzwdV66NmUoJ4jyEqFQ3PmbNVN7A1smrppL/ZAbGss4pMmo6VXvj
+	 8xj4OjQWAGzCg8fX2EoC4mhBrESwDGQpy9LUYOgtwmg2mPh2Vu3u5XxeopyCSItcuUg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795131218;
+	c=relaxed/relaxed; t=1795131220;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,135 +34,137 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=g6BnY9EzHb3bs5Cf6HA+AmFsauRd8X3MJaC5bXVCEoM=;
-	b=VoOMhxIbZJzlkuOK0vfucyfl3ZC/vJLd9MdGO+sh3eeFT6Jq/0GMilvGITgVa6oSXsLp
-	 fI9H573dr6/LnM8xuBW7B2l8zZ7hvRB0B3rLQo7TO5GjpTPmlXW0TjH6I6OrKINIeKzJU
-	 50EiAT397r0CfSsiubD7DnX+7lowPHPxXJu5AIYiSYo1yM86shIYzYMMjxePm6gW6/Cjt
-	 e8sPtEoDvKuVwsi7EWJMhjqQtCWg3HlCU1cH+6MBmB+MtAl3jsw4PRYw7OkvKApfL/YU0
-	 dTaVN49fGfupx1TeXYhxcuHGzgczHaCSo+S9GidYoCv5YJfcT4iHfThyT/Xx0TgRE5Q==
+	bh=TQNdeRAp57Fdajxju2ItfO0ZVgJNbHhFX8PPueIE/yY=;
+	b=XKYbIZhIqMphLD1P4PWsatoNaipI/1ciLvMpVP9h5RQrxg3jHzo2LcAVACfFLqgdpvyv
+	 Oul4fuAZxrQLphCaWIw4r90jBCtvSe5ks5u5pniT96I/MFr92AWiKAQ5uGOeGK3Myu1+4
+	 ad/gmvCurzPgA9yGlGqZAoEenlmtQ4x3yXW9HUwECxJlHqNeeXIdd3I9SPKJOPHjqT6kr
+	 ynpLq/1pygH0ty6fPvHVrLBfqaGL2CbNsQj0emYCPaPPlNJU+uTDDbbVfYGSd897BEx+Y
+	 OdUoosCVZBb8SmbdZrFgjAt0QRZX9girm0W3hKC3NVBUn5KfQrvWGsoGR1d11sqoDdw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=aTbsZ2XP;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795131218;
-	bh=g6BnY9EzHb3bs5Cf6HA+AmFsauRd8X3MJaC5bXVCEoM=;
+	d=lists.u-boot-project.org; s=default; t=1795131220;
+	bh=TQNdeRAp57Fdajxju2ItfO0ZVgJNbHhFX8PPueIE/yY=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0OgarS2unepgV2WznymLVv9HBbsnLPwmczgHHo4UNPpb2pMtSLkvsb7Vtq8jt4DNe
-	 8nGR+6NsCkqffIj46cCeme9Af7Didd+Wa/LgolMPORaT9e1AIqQmfQAfWSzq9WFkYc
-	 llZzRtOifYKG4NVgO/8u5aIV4c9BXrm7Ik9IFJ8EtHaFDrLKzRlFxT6BxjZyri7slN
-	 aJf+A1ha2sjlO6zuiHDgpMxjdbWR/QoPMvPLCwnX/rBBkIMFKMBzS0W0jggn5qx82l
-	 zOL8k8w2uPlu0oZDk10pOMrkfOj2x8AeXcFKix63aLxaFqpXql3rMViM2JmdYtI4Ls
-	 d/B4GHwmmwSqQ==
+	b=EztLWLlUYZkX4KrsG6Ugk3gCzPSM7dxTFcAHFq7Aiiw5PMMs2hABXUroNVCMsiRXH
+	 xQxuOKploMSOOUenm8p1kJI3B0goExzG0CQeoOOtxVLx94NQupmuGb4PRFGG7cRu14
+	 xq70BUSjM3PJOGGAxI9+M8LIHOPIejBlzTLVDLy+juTxmMePrFOZjXZL4a+5Nug7qr
+	 xOvjiT2t4PWrcuN5/5Q2uV790iStDoUTYSZtI3Dp6WvqzL76fL/0T5DCiY8osdGO1A
+	 GLszJKA3B7Kzd27U+cvr9clMCGVCvt9DceCUFuF+n3GhlJe9QPi//+K34oVXkiRAjO
+	 Hz+pqy2aLZDFw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 64CE540DAD;
-	Thu, 19 Nov 2026 23:33:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D8EAB1E7
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3DF6640E0D;
+	Thu, 19 Nov 2026 23:33:40 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 94C29260
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id BF3FB81380
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:35 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7A8E440DAD
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PL2jv1UC7OoV for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 23:33:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 774F28130A
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::229"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id l9h_rbyv-jdr for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 23:33:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9491E40DAA
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:4860:4864:20::2f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::229; helo=mail-oi1-x229.google.com;
+ client-ip=2001:4860:4864:20::2f; helo=mail-oa1-x2f.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=UaeBfV6T
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 774F28130A
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:33 +0000 (UTC)
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-4d198f1a591so326952b6e.2
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 15:33:33 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=aTbsZ2XP
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9491E40DAA
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:36 +0000 (UTC)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-4877837890fso222012fac.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 15:33:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795131213; x=1795736013;
+ d=baylibre.com; s=google; t=1795131215; x=1795736015;
  darn=lists.u-boot-project.org; 
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=g6BnY9EzHb3bs5Cf6HA+AmFsauRd8X3MJaC5bXVCEoM=;
- b=UaeBfV6T1AIiFofkhYzxn9MhHIHye9w5BGgeQah0TzOUxpUg3i+qUXI0YIeNsOB8cA
- wkuWoSK95aL4jPDiteknDVGfuT8bOe5007eY4RLCHRQ7jwa0IYQLZ+LIp0pGIFjMMrj1
- 9W+/tgmfEi8E9V8OF76qSv1Y7XcoWlxUwR7/36xJvd7d/wF9rO8Bb5RP0ljppAJRli/J
- 3HxgR41OuSuwtnX2xlvj8sYrkRT2FkneymWEY8sKdEw9kwj2AVvVuIIToUU+ajCCmPyO
- /K+hbqiXiU3FnrgQcuqp+2hZASjMbLnbk3K6u1EG8T47iv4peR53hNfgNTT6HjpXYnbd
- W3nw==
+ bh=TQNdeRAp57Fdajxju2ItfO0ZVgJNbHhFX8PPueIE/yY=;
+ b=aTbsZ2XP5ds8ScJHhUmE6whFfHeJBVgQ+8ZzknXUM/zYviryyuw7SaBfmvuUhackaU
+ +d0tpYj07oQMPYM2XZO+GEC1OUU2e/EgY6VNCnnXsRcMjOVxFWLiSU4S1suqwIsSzGFs
+ KhEIAZhGEOUEvVMCXOiyDrUTyker5X93cIsFoU4e03z/2e+rd+S04m0mFAXHGnA7XZZ4
+ mtQzq6f6NpZS9hpCxEB2E1QH2jbbZAHUyFaeN+SY59D/06RrL8vFHC8gYPzkpvpiwPbz
+ eK6v7LGJco3bUIoNaBdH/9u60omR6usn6pCtHJACj9ARjJVE9VRG+IHOvwDO3tCsCM+g
+ 06PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795131213; x=1795736013;
+ d=1e100.net; s=20260707; t=1795131215; x=1795736015;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=g6BnY9EzHb3bs5Cf6HA+AmFsauRd8X3MJaC5bXVCEoM=;
- b=v3Jc7QUo20bWKHP0CGnDj4eL/8oYEh4YXJujwroJ9AzTY0618HBdS9JwZCyeo5EIsl
- VsuqNpTX67wl+644t2c/slFjTfr5qZKvljhRYgBfKKvSU05mxSyXhyL7naclVfpk4U3w
- UyBUDTRQavmvX0caEmKnYVIa2kjCOXDuNZwG/FsKNTdZXXqg8s777aNUNCt4waNJ+shu
- QcRa11H9p4K2AIP/pnzWbh0PBEPm98e/G5ldZARBejEeyfmLgYEedGcEoRtAs4Z+xY9V
- /XuRyF2FZtYhFV73wJIDWJfDObKrXRX7SuEa0P7Ne8E3/LfbMsBUbCg3GIY5TKbixdrE
- vSpw==
+ bh=TQNdeRAp57Fdajxju2ItfO0ZVgJNbHhFX8PPueIE/yY=;
+ b=14XFanon0iYQrVbAugU5ZFGKsBPnRf88xsRGX/tT5HIZF6erNDv6Stro2QhNV8ahoY
+ oIYdEsu0wI7uERB5NzTNqb1ACHerLPy5jpGKvgp6gBhPWeo5YzqQICtQM6c1Lt+K+QhN
+ 9Ai8nBERqxjfJpRE8BZtL7ed+aYws35YCBU+0q3IW6Nyr7bUoxKt6QIVl8khVDarFY/O
+ maI2My5IxLB+tltTnc2ik2FGGVjqCEfDrfnNAEpMlmffXfNpcxWnCGNmPdNwl98aiEPh
+ H87xupu/Pt+TUdU2tjXmV9aaahwEZ38JvticOWeJKPSlULgYb1ubibX8oC1EUgmsf6L3
+ +VVg==
 X-Forwarded-Encrypted: i=1;
- AL+hErHwgVCFot3hY8YaQLaGMVRsRfGMVyeFoDzpX3C1EAVwjFGIKPcGT2JmujGa1fAdp2blVbrtxzo=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/LeHlWiZyoUYasu0OxAqN3yQZOxuYHmfxHw47apmtxdHOmpwEP
- YDUmqz0adKvz9UynHdNrwCSbPFm9DardKIZdigTqp/Ve48fv+Z/7pn/50NULbtwNJGY=
-X-Gm-Gg: AYBFou0YlIHM+J7IwrfMP60VAi0wz8v5BMdRj/26aTWx3r/WumeASDHTIbzRJJtDMFa
- v2JJ+0DcybWPqMVQAke1c4GcjasSLQcMnoiwliZuy2hvwPJdw8J4qU/VXBs6dniqI2zuRGMgxjT
- EqqwzsjTZp/u9hICjYhYkzfa6xkGh53faYaHjhCOS6c+ysxqhYgKMU5C4jZABhKeKyIYm2Omj5o
- q6y4bFBSsBsswSt6hj6LM47Z85E9hd9BzZfqVsvOHPH2ircOnV5AvZ1+8Z5BI/WkkdxLNNwjeas
- CiZteSOLR16hd4yReVI3X4iJ6lFrLj7PZdBotyVKlRyOsTisvq0OIJw3O9wOYdBqVk5SArp1Rcy
- dFv8kLCAtJ1LZsOb2m88b3ze/dOWGqNcx7aoZs8r/2miCJarrjEsxJrnVVS25JK8MtVrBgPcAqi
- o1OiQjRw2bUvcoGy2g2QjfNxtN/GZpBP8NxJQSxUySTNTnshhhjjZ2g5bKjfvbv7SF5Nb/87N82
- 8mnJBL3QU32pOmSnhXbZwj9xDziKqPC4R7Njk+Sw2fFnuQhwqtfpduxoh82gh+SZgjma15ctHhi
- NgDBljH/CqYYR106M9wQB1Ihe/XCKiT3+Q==
-X-Received: by 2002:a05:6808:c3cb:b0:577:2888:47b3 with SMTP id
- 5614622812f47-57a0ac33d63mr1817919b6e.44.1795131213016; 
- Thu, 19 Nov 2026 15:33:33 -0800 (PST)
+ AL+hErG3RO0Eg1efNP+pvY3Y++8kb5xLJsGC0lXc9YLyiFCVKpwTU9HnSj/q0TAFLU/AxggX5U211XE=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/M29z0dI0EanckM/hIO8zdQuCENxlSgl9XcvggVg/YhHdga7gD
+ z2eOOd+GDUzi7tJRvD4T+JH/Ai0aBmxGVRXUFF7Fs5PYMvfavyLbtcJ6qVsKQu7mBl4=
+X-Gm-Gg: AZFdTZfVGGgV0joUC2MCJOTqbq8koJ7F/m97rlXV2Bil1IeV7rlII+ZYnLdxyfClAhH
+ QUafTu966qeqDDFVU5THym4MRYVbxNKu2NSu0bG3p5ZpjOhpsLa4irLHSR3o7aXofM/xkweHtyE
+ W0C6pkhY1flvcJGq1kvdbNCya+OFec5GDXhL4UEGux9Ldk9mDppem6bXgDO3Q+YGVfC81K/AGt/
+ xw1caqb4VB8uKRCcaT3yhUeWvVN1AcDCVTtMoCONW56puSUc3CYy2pdA64cUaYYVLPfXjSUBDId
+ I1xIACTeva3nNnFMz1S3oYN99n/1+FQggVvMPboi1qGq7IbdeyvA4dGCFZvM25LHvdew1llImOp
+ 1Hq0rX9P975PFw6RlW3UskvFDqboqNk4ECPZzbJoi+RHxvK7G/eoV/znHDJONmRZ1E7+iBgt0Jj
+ hC2Ma7TPwjy39qHj1Vbd6TCCsSJa7Kq+XoSKCClCQPqro6eeDNFucYyB5NyvemAgQe1ABuS1N4g
+ xIT1wvf36Gkdw1kdhP0/EP5MzjfMWerBCRMXx46YW0Ww52/FJ9/TEk8ouyPkjaVbHjUh6IuETu/
+ PFSd7YbMnxdH0E7kkts2arF2DuRsPiO1CQ==
+X-Received: by 2002:a05:6808:1925:b0:539:c292:8b04 with SMTP id
+ 5614622812f47-57a07d12f6cmr2201130b6e.8.1795131215059; 
+ Thu, 19 Nov 2026 15:33:35 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:43e1:bc37:7497:58db])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-57a34250ef2sm813561b6e.3.2026.11.19.15.33.31
+ 5614622812f47-57a34250ef2sm813561b6e.3.2026.11.19.15.33.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Nov 2026 15:33:31 -0800 (PST)
+ Thu, 19 Nov 2026 15:33:33 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v3 2/4 RESEND] binman: pre_load: Add HSM signing
- support
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 3/4 RESEND] binman: pre_load: Require key-name for
+ file-based signing and fix integer division
 From: David Lechner <dlechner@baylibre.com>
 To: yan wang <yan.wang@softathome.com>
 Cc: sjg@chromium.org, alpernebiyasak@gmail.com, trini@konsulko.com, 
  alchark@flipper.net, paul.henrys_ext@softathome.com, 
  philippe.reynes@softathome.com, marex@nabladev.com, raymondmaoca@gmail.com, 
  u-boot@lists.u-boot-project.org
-In-Reply-To: <20261117095322.16813-3-yan.wang@softathome.com>
+In-Reply-To: <20261117095322.16813-4-yan.wang@softathome.com>
 References: <20261117095322.16813-1-yan.wang@softathome.com>
- <20261117095322.16813-3-yan.wang@softathome.com>
+ <20261117095322.16813-4-yan.wang@softathome.com>
 Date: Thu, 19 Nov 2026 17:32:57 -0600
-Message-Id: <179513117714.2216103.1816933711277143464.b4-review@b4>
+Message-Id: <179513117714.2216103.2105831055136402867.b4-review@b4>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6784; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4148; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=Ye9ZxmWrAnRc+Ho8RTsBkBxr2p8gQcScnbjiBoK5Nq0=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq/4c0WVlAlGBRyNmdd3GpHUwKYD+KXQ5yfxYfP
- 84YsJMJsf+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCav+HNBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A85YH/2XW19+GmZeiWVnp56uCmS09ohR+KY0aFFcXs9g
- wz3RQ9Y1VUnTnmsFU72uWzG7Xfcx9A+QJgwyZ0+dqV6KXT0ar786wQxjtKgkASqYrEWW3p/74JC
- RdbzMo/0N5HSQcAoJlw53aYc7MX6FGyYBNnIRldSrEgM06YACt4wEQNlrDq3d4rXQS2AbMpi4/z
- g8lJNLuyGkDVIS38IJ37T7zOqqY1LuSqVlXIszqs8gHkSOPsTHpiPuVqZ5UIDmA13x8bhCCx5DE
- 8kTFkN/cdeT68U9qgSZBo6iJtBgCl0/LUy3I+A1KsEuSDkNNYuQrQcnNwFjz7WuzhMu2VtSCuS0
- CqaM=
+ bh=bzAUYuAPAL7lPGuhTSwIY6JOR9kB32HNiO7syvdSJKg=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq/4c7My1sv3tpZgbaO95xZmbJeCQjk7/vkboCc
+ MyF/XX2UWKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCav+HOxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AB9IH/3XIH47n3ptdsK0aabKsN+pkRHXwXNismgNZD3C
+ TvsH7nt2HYpdbg72nVGO6hIbblAV2A8eEmuRUD41znc2Abcu0PDGCg7QDDWWZPBicEr0bPEm/qy
+ Ms81lYU4FmfhPql7oqqPFet7PIoSghTrCZFrLW4bZh8QH3hujCJZ70MscsDlrpdtEfk5Rtc9Ov3
+ 04Y/G3THuW/qHWhbX8s48LBb+T7dTIjpH65yf9lTtK0y3WuGeOb2PXU1l7iRwox4E9mqv89f4AM
+ WqCFBoYHlMRHl6eN8GkokNNwVME6qpAhk0pNVvDVX0mg72On0Pj7LyvzKGY3PJpKUHwrlUXE5F0
+ NP4E=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -174,171 +176,110 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> Signing the pre-load header currently needs the private key as a file
-> on the build machine. Add support for signing through a hardware
-> security module (HSM) over PKCS#11, so that the private key never has
-> to leave the token. The signing is done by the pkcs11_tool bintool
-> added earlier in this series.
+> Without a key-name property, os.path.join() is called with None and
+> binman fails with a TypeError traceback rather than a useful message.
+> Report a clear error instead when file-based signing is used without
+> key-name.
 > 
-> The HSM is selected with a new hsm-key property holding a PKCS#11 URI
-> (RFC 7512), in line with FIT signing, for example:
-> 
->    hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
-> 
-> The URI can identify the token with token=, serial= or slot-id= and the
-> key with object= and/or id=. When hsm-key is present, it is used
-> instead of key-name. Both RSA (PKCS#1 v1.5 or PSS) and ECDSA are
-> supported.
-> 
-> Host-specific and secret values are kept out of the devicetree and are
-> passed as entry arguments:
-> 
-> - pre-load-hsm-library: path to the PKCS#11 module (.so). If it is not
->   given, the module-path= query attribute of the hsm-key URI is used;
-> - pre-load-hsm-pin: pin for the token. If it is not given, the
->   PKCS11_SIGN_PIN environment variable is used. The pin is passed to
->   pkcs11-tool as '--pin env:...', which requires OpenSC 0.15.0 or later.
-> 
-> For example:
-> 
->   binman build ... \
->         -a pre-load-hsm-library=/usr/lib/softhsm/libsofthsm2.so \
->         -a pre-load-hsm-pin=<pin>
-> 
-> The HSM configuration is validated in ReadNode(): parse and validate
-> hsm-key early, including the hash, the signing algorithm (RSA or ECDSA)
-> and the padding scheme (pss or pkcs-1.5), and record the expected
-> signature size.
-> 
-> Add _BuildHeader(sign) as a shared helper that calls a sign() closure
-> twice — once for the image and once for the first header — and
-> assembles the padded header.
-> 
-> Add _SignHsmData() to write data to a file, call pkcs11_tool.sign()
-> with the pre-computed HSM parameters, verify the signature length,
-> and record a missing bintool if pkcs11-tool is absent.
-> 
-> Update _CreateHeader() to dispatch to _SignHsmData() via _BuildHeader()
-> when hsm-key is set, returning a dummy zero header if the tool is
-> missing.
-> 
-> Refactor _CreateHeaderRsa() and _CreateHeaderEcdsa() to pass a sign()
-> closure to _BuildHeader(). The RSA PSS salt length is calculated from
-> the hash digest size. The behaviour is unchanged.
+> Use integer division for the RSA and ECDSA signature sizes. Using //
+> gives an int result as semantically expected for byte-count tables.
 
-If I understand correctly, the previous review asked for adding _BuildHeader()
-and doing the refactor as a "no functional change" separate patch. That seems
-reasonable to me to not mix it up with the HSM stuff this patch is actually
-about.
+This also looks like two separate changes in one patch that should be split.
 
+And since patch 2 depends on the // change, this should come first in the series,
+not last.
 
-> @@ -77,6 +136,28 @@ class Entry_pre_load(Entry_collection):
->                  };
->              };
->          };
-> +
-> +    Example with HSM signing::
-> +
-> +        binman {
-> +            pre-load {
-> +                content = <&image>;
-> +                algo-name = "sha256,rsa2048";
-> +                padding-name = "pss";
-> +                header-size = <4096>;
-> +                version = <1>;
-> +                hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
-> +            };
-> +
-> +            image: blob-ext {
-> +                filename = "sandbox.itb";
-> +            };
-> +        };
-> +
-> +    Invoke binman with::
-> +
-> +        binman ... -a pre-load-hsm-library=/usr/lib/softhsm/libsofthsm2.so \
-
-Need to escape \ here or make the doc comment a raw string.
-
-> +                   -a pre-load-hsm-pin=<pin>
->      """
+> 
+> Signed-off-by: yan wang <yan.wang@softathome.com>
+> ---
+> Changes in v3:
+> - Move to position 3/4 (was 2/4 in v2), after the HSM signing patch
+> - Place the key-name check in the else branch of 'if self.hsm_key_uri:'
+>   in ReadNode() instead of at the top of _CreateHeader(). This is both
+>   earlier (validation happens at node-read time, before any signing) and
+>   clearer: the else branch makes explicit that the check only applies to
+>   the file-based path
+> 
+>  tools/binman/etype/pre_load.py                | 15 ++++++++------
+>  tools/binman/ftest.py                         | 11 ++++++++++
+>  .../security/pre_load_missing_key_name.dts    | 20 +++++++++++++++++++
+>  3 files changed, 40 insertions(+), 6 deletions(-)
+>  create mode 100644 tools/binman/test/security/pre_load_missing_key_name.dts
+>
+> diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
+> index c550de1efc7..1bcf48dfb36 100644
+> --- a/tools/binman/etype/pre_load.py
+> +++ b/tools/binman/etype/pre_load.py
+> @@ -54,15 +54,15 @@ def _parse_pkcs11_uri(uri):
+>  PRE_LOAD_MAGIC = b'UBSH'
 >  
->      def __init__(self, section, etype, node):
-> @@ -87,6 +168,22 @@ class Entry_pre_load(Entry_collection):
->          self.header_size = fdt_util.GetInt(self._node, 'header-size')
->          self.version = fdt_util.GetInt(self._node, 'version')
+>  RSAS = {
+> -    'rsa1024': 1024 / 8,
+> -    'rsa2048': 2048 / 8,
+> -    'rsa4096': 4096 / 8
+> +    'rsa1024': 1024 // 8,
+> +    'rsa2048': 2048 // 8,
+> +    'rsa4096': 4096 // 8
+>  }
 >  
-> +        # HSM properties (optional); populated from hsm-key URI in ReadNode()
-> +        self.hsm_key_uri = fdt_util.GetString(self._node, 'hsm-key')
-> +        self.hsm_library = None
-> +        self.hsm_token_label = None
-> +        self.hsm_token_serial = None
-> +        self.hsm_slot_index = None
-> +        self.hsm_key_label = None
-> +        self.hsm_key_id = None
-> +        self.hsm_pin = None
-> +        self.hsm_hash_name = None
-> +        self.hsm_sign_name = None
-> +        self.hsm_padding = None
-> +        self.hsm_sig_size = None
-> +
-> +        self.pkcs11_tool = None
-> +
->      def ReadNode(self):
->          super().ReadNode()
->          self.key_path, = self.GetEntryArgsOrProps(
-> @@ -94,6 +191,91 @@ class Entry_pre_load(Entry_collection):
->          if self.key_path is None:
->              self.key_path = ''
+>  ECDSAS = {
+> -    'ecdsa256': 256 / 8 * 2,
+> -    'ecdsa384': 384 / 8 * 2,
+> -    'ecdsa521': (521 + 7) / 8 * 2
+> +    'ecdsa256': 256 // 8 * 2,
+> +    'ecdsa384': 384 // 8 * 2,
+> +    'ecdsa521': (521 + 7) // 8 * 2
+>  }
 >  
-> +        # The PKCS#11 library may be supplied as an entry arg so the
-> +        # host-specific library path is not committed to the board DTS.
-> +        hsm_lib_arg, = self.GetEntryArgsOrProps(
-> +            [EntryArg('pre-load-hsm-library', str)])
-
-The documentation says that pre-load-hsm-library should not be in the devicetree
-but this still uses GetEntryArgsOrProps() which would allow it.
-
-> +        if hsm_lib_arg:
-> +            self.hsm_library = hsm_lib_arg
+>  SHAS = {
+> @@ -239,6 +239,9 @@ class Entry_pre_load(Entry_collection):
+>              self.hsm_hash_name = hash_name
+>              self.hsm_sign_name = sign_name
+>              self.hsm_padding = padding
+> +        else:
+> +            if not self.key_name:
+> +                self.Raise('key-name is required for file-based signing')
+>  
+>      def AddBintools(self, btools):
+>          """Register pkcs11-tool if HSM signing is requested"""
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> index 8caf275d466..d4522e905e0 100644
+> --- a/tools/binman/ftest.py
+> +++ b/tools/binman/ftest.py
+> @@ -5981,6 +5981,17 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+>          self.assertIn("Node '/binman/pre-load': The key ecdsa521.pem doesn't have the expected size",
+>                        str(exc.exception))
+>  
+> +    def testPreLoadMissingKeyName(self):
+> +        """Test file-based signing with missing key-name property"""
+> +        entry_args = {
+> +            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
+> +        }
+> +        with self.assertRaises(ValueError) as exc:
+> +            self._DoReadFileDtb('security/pre_load_missing_key_name.dts',
+> +                                entry_args=entry_args)
+> +        self.assertIn('key-name is required for file-based signing',
+> +                      str(exc.exception))
 > +
-> +        # PIN from entry arg or environment variable, NOT from the DT. Use
-> +        # state.GetEntryArg() directly, since GetEntryArgsOrProps() would fall
-> +        # back to reading a 'pre-load-hsm-pin' property from the node.
-> +        pin_arg = state.GetEntryArg('pre-load-hsm-pin')
-> +        self.hsm_pin = pin_arg or os.environ.get('PKCS11_SIGN_PIN')
-> +
-> +        # Validate HSM config early, before any tool is loaded, so a bad DT
-> +        # fails immediately regardless of whether pkcs11-tool is installed.
-> +        if self.hsm_key_uri:
-> +            try:
-> +                uri_attrs = _parse_pkcs11_uri(self.hsm_key_uri)
-> +            except ValueError as e:
-> +                self.Raise(str(e))
-> +            self.hsm_token_label = uri_attrs.get('token')
-> +            self.hsm_token_serial = uri_attrs.get('serial')
-> +            self.hsm_slot_index = uri_attrs.get('slot-id')
+>      def _CheckSafeUniqueNames(self, *images):
+>          """Check all entries of given images for unsafe unique names"""
+>          for image in images:
+> diff --git a/tools/binman/test/security/pre_load_missing_key_name.dts b/tools/binman/test/security/pre_load_missing_key_name.dts
+> new file mode 100644
+> index 00000000000..262219fb6ab
+> --- /dev/null
+> +++ b/tools/binman/test/security/pre_load_missing_key_name.dts
+> @@ -0,0 +1,20 @@
+> +// SPDX-License-Identifier: GPL-2.0+
 
-RFC 7512 slot-id is the decimal CK_SLOT_ID, not the slot index. pkcs11-tool
-takes the ID with --slot and the index with --slot-index. With SoftHSM, slot IDs
-look like 598648507, so a valid "slot-id=598648507" fails here and "slot-id=0"
-picks the first slot. Please pass it through as a slot ID and use --slot.
-
-https://www.rfc-editor.org/rfc/rfc7512#section-2.3
-
-> +            self.hsm_key_label = uri_attrs.get('object')
-> +            self.hsm_key_id = uri_attrs.get('id')
-
-RFC 7512 id is the CKA_ID as percent-encoded bytes (e.g. id=%01%02). unquote()
-turns that into the str '\x01\x02', but pkcs11-tool --id expects hex ("0102").
-Something like urllib.parse.unquote_to_bytes(v).hex() is needed.
+nit: GPL-2.0+ form is deprecated use GPL-2.0-or-later instead.
 
 -- 
 David Lechner <dlechner@baylibre.com>
