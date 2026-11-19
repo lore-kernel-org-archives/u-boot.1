@@ -1,170 +1,174 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5E3E606A320
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 23:33:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94B12606A320
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 23:51:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BNvpgzQS;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=gCTTna8t
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bHKTZ5/c;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=RYIVxAcx
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9ABC940E38;
-	Thu, 19 Nov 2026 23:33:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 68D4260D8E;
+	Thu, 19 Nov 2026 23:51:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pthdTycaIn_Z; Thu, 19 Nov 2026 23:33:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D5E0840E2E
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795131228;
-	b=e4ZmT0xqCEyZRRy7QNeBpFq5c7bM0Gm65feoloBjCcU/1FZpXXpNz8RfCTaoLUGgXWRY
-	 W2lS/G0JMBw9oh5IyWHCsuTMyA8ZA/MGv9O1f5uo0BX1sS/bTBCtAz79sdOySP7icvSM1
-	 ILpglH81jIy0Pz/7BKpuhBBrM/ewoofoBPr0Rp62LXE9g9/WH4WZ/EaQpqa15hfFLLiaM
-	 L+TnZ4DxkWXjpLZsTVBf498jF6IdSVB2g0362hb3sl3rxXVlqnZYRd1C+EBI245spLjSC
-	 3bCpQwwvp/QecAqPZ1AmB0UMsP7O9XNaN7N4EpKuv9hj0Mmwqu+LVQs+Kux7Qg2Irpg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id K_CCM5wsmW54; Thu, 19 Nov 2026 23:51:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B334560E02
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795132316;
+	b=nxSrX0zF7kOLin+kESfdzwk5EZIp8ElcPCw55YjpyXgnuxY+P9M1vmKz3AiCYHAdRDGK
+	 uYX0Ae6zv6X7YgE4Fs1bHnmaCPIK/QUnnXhxz90SO22yQZyw1tqJLSeAY/vOshSREhKfC
+	 pynr001BRDELEYHzT2HxYS8fPYw7ZVeDHE1xO1U2aCaBC9gIpaPSuRCt4Y7hIrUPXOMcC
+	 lmuLKcXI3kDAQ6+mfw5YM8Z/sVq/2iXI12xkBlFSgZxdtNUV+h9JYju69YNX+m51smM2a
+	 irolixo2UbWNWoirsSFVUk/J587k4puZQj6a1gTDMi9zewCVwZHmEa3yePPxLA6XtDQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795131228;
+	c=relaxed/relaxed; t=1795132316;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=roKH5a5UyAKhSXHeYYa3AZLrIuwMDZP3YSqibdnHolI=;
-	b=s7sWThLcg+v7KlR8WslV7eILIAinTv5EVckPuaqH4kbtQVK9O4psO1d9A3Al9EJlNvyG
-	 z/9GJ3gre6NeMfrB2vWfqttUduF8pdrlS/Ovf0jbu8GL78sEFXV592sKmVOv/HyT8arJC
-	 be5fef030myAeCKIizSI9Aom9UjCokvKX3aUg98b5bfy3/S38SuCOPBx3I2lv8j7MDh3P
-	 DzMs3Y6zomN031TMWH4SOKZ07sz7R62di4ZEL3bVGn9Oj6olhgkul2ohzH4CSyf6K0g2n
-	 ocqZlG9aIzmBAK/2uKQYaftn8TaBXiHVLLQXKlmrtj1GYhw/UDFoGe69FyNV4ipQ2Vg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=cnLWP2KnWVpzJ2xNxnRyxxvWLVc9dXMQ9waqomITYKk=;
+	b=OIJwqYIloyoqjAzsanUv+gqc6a6rq0+fA9iJQJ1o/rr3GttsiiqbtitJGEuDiXi0QEv2
+	 SWDZNNMqyX/e+bxOL2Y8E7IZYEiWYpRt0CIFw2ZzJ+ycO4jD8/b2l7NeLT4y/97bOt+HZ
+	 IO2EH974AhHy0/KuiQj9DT6omfd+DDrqYklwRYIHcF4iqwI15+mknLUd9EQYGeeQdrYCN
+	 YoFPe9vgDjyk4sL+QU/7uDNlgsBx0ol07cY2I0ysbwNXRj2D5bHcCl5KXztQ6c21HR7cU
+	 +hQ1ewquYZuFuucbfvU8dBSdc7LhAV8tAb39ZdnO2eRPSeFH/0rklvGVcP5suL6E56g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795131227;
-	bh=roKH5a5UyAKhSXHeYYa3AZLrIuwMDZP3YSqibdnHolI=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795132316;
+	bh=cnLWP2KnWVpzJ2xNxnRyxxvWLVc9dXMQ9waqomITYKk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BNvpgzQSWyKXaOOKrM2b77N/OX8OdHzjgV9+ximIUAdsQXRYs/WXWeGfNgRO4bYGA
-	 GEL7a/pJ+MNE4PO0rR43H8hJQa35OOj+D3OqEZTMLFfRXhbf5eruHW8CuV7IjeMJFq
-	 cXWbna2pOql3TV7MFp7DOx1YIDCy/jalqAoU5S7BobH+CyY0u9MeLKssUNEPCDlEa6
-	 gv+3dy44bjYu7zJOBdcY0hIDfPiDcFFBFKxmlflT64CTZxs/csBpZAmbUC4XXO9aSU
-	 r2TSxQ5ma3QEpA2ixLJ6wB18miJZQZiq6t8BOlW9Ck3g1X9zIvyhnkQtMqs/lE0rrp
-	 jEM2abA6Gmf5w==
+	b=bHKTZ5/cJj/rhio9EfWc++IB/K/hCunQfRgA+UKHf4wZP0nZdmR30DyYToqctjXjc
+	 gq81dqVqBS4CuoIlJyHpgHNUvQ3Eypho6lYXs/wBBbGURb17XuGjjB2QT2+b/wVDhA
+	 wNXJiCK3gkjLpFa9qwLWKigDLhy+SI05K7Ak20GAeU2/Y6YMmD4uF3kPfFcl0EZTGW
+	 N8vHYueAQDV6K4KUJSSSPZIsWjVTRX8dtemy//rXsjLsjjZlYrP4XREz+VcFiy85ys
+	 LsWoKYvaeRVyrHhQQKJRNGRDplmWiHGlZFARReEXAmvkdpUiL0jw2tKusQG9wQtDn/
+	 EAdVMkOqB15vA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D5E0840E2E;
-	Thu, 19 Nov 2026 23:33:46 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8F01A79D
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B334560E02;
+	Thu, 19 Nov 2026 23:51:56 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9069A260
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:51:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 80A3560E44
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7694440E05
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:51:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fd2b9wVk-665 for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 23:33:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A8DFF60D98
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::335"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hY8SdQ7PAjBs for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 23:51:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A320240DF5
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::335; helo=mail-ot1-x335.google.com;
+ client-ip=2607:f8b0:4864:20::32b; helo=mail-ot1-x32b.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=gCTTna8t
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A8DFF60D98
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:33:39 +0000 (UTC)
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-86103aaac12so909976a34.0
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 15:33:39 -0800 (PST)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=RYIVxAcx
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A320240DF5
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 23:51:52 +0000 (UTC)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7f84a55e31aso237852a34.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 15:51:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795131218; x=1795736018;
+ d=baylibre.com; s=google; t=1795132312; x=1795737112;
  darn=lists.u-boot-project.org; 
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=roKH5a5UyAKhSXHeYYa3AZLrIuwMDZP3YSqibdnHolI=;
- b=gCTTna8tVNKY8mhq0ZmG9v6YeuUkxB98ahnLVgViESEMnDIh5uE85pvfs6tjCi6N5K
- Vp3Qnkjsa8twOsvy7ZMQgc5htkW1LTnn1R8buxD+hmaaLU8iADlDoaVoMlZucQmixi80
- m7vD68RkJl4Tn11WpK2sgOdTCXhPifsN9CxZ4UR6vur5KueQxmSgBVDvQB0SOliFGnTW
- 9/5BgdHUfMoJV25ZM5/VKo0x7qG0POxmrZJgGNVfj/U0mmuN/e9UrUQwqYI41muC7RRo
- 8ABoBptAauU4YugeOiuyf7uMbiAe824uNvFbmH5nHzGPzWKlDsvj9+ZBPetprMnwp0QJ
- xVSQ==
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=cnLWP2KnWVpzJ2xNxnRyxxvWLVc9dXMQ9waqomITYKk=;
+ b=RYIVxAcxBHpfpZnDrNxhf2H7+vo8RPAJOL5sD9zRRCZERmFML2puEotZTecaee0ZKv
+ oV9bj1CMutUippmIkA1wqEqIelRTp76JUVAalOKKKChCNs8+hPCi2yqnP5LwqZ6tmV4i
+ LNsrNtqI9y4dUiefy89RXfJlDe5lLSo0/xox4G0aZPUWA4dhUt2MGDCMKSeGnNW3zw9V
+ 7EzyBGa1NP/D3a9657QrfVHWBjXmPaikrMVmQgxN6/mB8NSa7wyJ/CzynA2+gDAFWnxR
+ AP49iWO6QGojjubbx42751Nc2wO2flwyhlyYIYu/pyKNRQ62Fm8kojSezNVbf3WfWGYN
+ kWcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795131218; x=1795736018;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=roKH5a5UyAKhSXHeYYa3AZLrIuwMDZP3YSqibdnHolI=;
- b=QZTL1wzoXD49TuhroeF3XczsdfEg91Si7jCgxPf7xReCSTpIsWVBR+ra9N8YZg6tjJ
- ySpOCzbHwMCdqjZfIOJ263OdC+c8VbDdu53uAPSL3V4ee6V8czEiCBPgKNx6ypXi2jaF
- 37d/jf04U090vv2Ee+jA00DcnaIrPfl/gcKd1A86g8Em17wjbwpOeVykXZEj/ZYe6vn2
- R/6U+b/m98DIEGq122PhQ9pGjX2yglJ6QADxZYqgWMvVaJrFrI4b3NxmwWsIK8vHL3im
- KmimlwxG6lMo7scEaDo8D4pH/jmRC2r84C57AO+1OB+90n/1L9lHjuFC8My3ICkqKY5y
- solg==
+ d=1e100.net; s=20260707; t=1795132312; x=1795737112;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=cnLWP2KnWVpzJ2xNxnRyxxvWLVc9dXMQ9waqomITYKk=;
+ b=ANf84TtJulmN4ADkbvBgQJPTUsTrSZrwWxowCZznOYnzfivpnR79jzddw6jLFoGY9Z
+ RrEbIGq9MYYTl1FY+uqunf/mp8irIE1BJKcWLzXdDXfsqmVXqiwclGFZvvo7EUrR0zYW
+ D0sqHbCeyRzCpCizg7FHs/tcpQtBs95/T4MGMUHH1xquyo85P89vBLJGoupe1z90uyUt
+ /GDco8DR5QtXnm1x8UnTvI8/9uM8/PrduF+wnCPP2wuiad/raoQvUhXP7+RjsoZJjUrs
+ vNU1zFOFgLcRCyJQ9TG4QG6QhEPusNKVGWlyGPNVev5lXOTFz2ZewI7zU4o/mVqJWaN3
+ t3aQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErHZGdUMy7yLSas0sZiBxRtXEe2QFZrUb/O8vYWStQugDqprdLl6Km5FW0VoJc0IwPQOgHqbnSc=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+y8MGWxW7Tm+1BOVFN28MpP/DWNgSBPbIAMnT6lxtbb0zEIjDG
- IRZrr95zeRVj08EGWRuuWMHKHmpWW2kYfFpp7hlsmq+inQvVKsfbClM+W1Ogg0jk/Rs=
-X-Gm-Gg: AYBFou0BMcJ5XM9/A9sZ1/u73Rg4PMEklk7TbeWtVI+SNmn/fC9x5FXREVN9b07Juai
- C+4MuG+lKR98bPWyitr9XiZlfR5icZhHA5qrB3VC3PRN3mGYtrva2a6VIUKJQ4Sypum1zMvfAEs
- xUDWL0I2j8YhpvP+p3q2Z9RgQg4JJEuVAtQKgcOQwTnHSHy1yX2jd18ZGCfQXNe7OBTWJJsHlZd
- hYI4uLGRYCikORKKWD23eitqfJkwVKYMou4GHaiBniSKZyKG7y06o64lwyOiqfrP+N4ENkSclqq
- eot+wWUwGTf84oSV0k8sEzHf+W5W1XbcmafS4DLv14H0YNlgDVoUBmbCbGwK+0VZ71ShDjBZqiD
- adlkVVgyfLgWH4Wc3Ocu0OE0N6fLYLaEYVBwdiQ1n36hGyQW8d7tYvluwaw0lHg3668P5K+z7io
- vuE9yFMKA7al911QOJ5MJ5kJWcjHA5PFrbPqoLelZIhBBCqqswOBDsLpz0Eoeo3jxMh+X8MYvEO
- Vt7mjrWcSHs9D3DbUULOGgip2pKMoIONUYkB7Uz2j43VpeyX8akJCax5ciDynPvavYrsVt6PrlS
- Xhwni3mxWIansxxUK2OSQtLsw2gHkyC0eF9kFYYGaRKHsPIr1OD6p5A=
-X-Received: by 2002:a05:6808:16a4:b0:540:8ca:36e3 with SMTP id
- 5614622812f47-5797c1b5467mr2268296b6e.19.1795131218122; 
- Thu, 19 Nov 2026 15:33:38 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:43e1:bc37:7497:58db])
+ AL+hErFM0bn5XJQvRvyLER+KUoOGEqZDWgPwT+9sA4XbCwkMNWZwOALXgMQZ5vhOHaCqFY/+LLwHEmY=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z90D00n1KNYdi9R9sqjINbGr7t1bQ/OiLZhJO7hTNvNftc3V0ja
+ RJIHXRgsCWX1JK+O3UWyRT1G4hA6eeIO2fKcKL8tF22h7qbtueGmP7nfbaj2kUq0W6M=
+X-Gm-Gg: AYBFou3yU9ke+Y6hfJl+1UzseBdSrxO5cZcOLDVJ5rit/7EdTsY6BYW3qXegW5PpOmF
+ uRe42IzJq4kj7DpH+44GHzp3QVXxuccTVDdDRS/nUQrddlaFvkYSdG4KY/IOeCeMkQfSEr37aGD
+ a3ogtclfBLYLFTHQN+QffFC9OYHyW0BouhQqIrY5GuXr9IDyuzY7IsEpQFJNYj4peCuooeQBiQD
+ Wl3bwUkc6Rkkpa0gwxbmPKGIeGwpXAJk531RUXeD9MIBRy89ePr6JfAvVY7qaOxVWNKDPSxYdss
+ emegnCr9kaUBYm9x8NmxU1YDVwr4sbGtB8nHoLMfepU5LyyCXRi7uD4Da+HbmegaUkrzQ87DRUX
+ nWQcjsf3BFIVoSuDeQrXlNCdXZZJzprsUOFVPy0AVmtheXtgw88k2Rg6nm3Pn/gj8A8hF6NHxbS
+ qvA/kc4Cl8VZlan5Npvhuxht5FS1pb/XHV+5miJPoWXcb8XQ6HzP3JpkN/370KKEYqdXc8OPNZd
+ Z04/HFUCuev3+JnUFSV6BTqcA5GNW92rfrhP11LqT8VzzBujEnjOX6FhCAuSvqE/888kEr+CIih
+ YKYxsOF1VkbSmailrJwqOV9go6vA36PBwmaTaLH9dyuynk1OCYUQtyTjakEW4Zn5a8NYvGiQd+9
+ ZhQkZA/ojRC6/5x+OQ7nq0HV6
+X-Received: by 2002:a05:6830:640e:b0:862:c172:769c with SMTP id
+ 46e09a7af769-86315ab1b56mr2039544a34.29.1795132311896; 
+ Thu, 19 Nov 2026 15:51:51 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:43e1:bc37:7497:58db?
+ ([2600:8803:e7e4:500:43e1:bc37:7497:58db])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-57a34250ef2sm813561b6e.3.2026.11.19.15.33.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Nov 2026 15:33:36 -0800 (PST)
+ 46e09a7af769-863168f3964sm812847a34.14.2026.11.19.15.51.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Nov 2026 15:51:50 -0800 (PST)
+Message-ID: <9e662c2f-eab2-486e-9fba-9d0679bf3c8f@baylibre.com>
+Date: Thu, 19 Nov 2026 17:51:48 -0600
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 4/4 RESEND] binman: Add functional test for pre-load
- HSM signing
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/7] configs: mediatek: add a UFS RPMB fragment
+To: Carlo Caione <ccaione@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ u-boot@lists.u-boot-project.org,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Jens Wiklander <jenswi@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, Johan Jonker
+ <jbx6244@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20261116-genio720-ufs-rpmb-minimal-v2-0-b64eefcfb0f6@baylibre.com>
+ <20261116-genio720-ufs-rpmb-minimal-v2-6-b64eefcfb0f6@baylibre.com>
+Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-To: yan wang <yan.wang@softathome.com>
-Cc: sjg@chromium.org, alpernebiyasak@gmail.com, trini@konsulko.com, 
- alchark@flipper.net, paul.henrys_ext@softathome.com, 
- philippe.reynes@softathome.com, marex@nabladev.com, raymondmaoca@gmail.com, 
- u-boot@lists.u-boot-project.org
-In-Reply-To: <20261117095322.16813-5-yan.wang@softathome.com>
-References: <20261117095322.16813-1-yan.wang@softathome.com>
- <20261117095322.16813-5-yan.wang@softathome.com>
-Date: Thu, 19 Nov 2026 17:32:57 -0600
-Message-Id: <179513117714.2216103.5003226155603382774.b4-review@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2761; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=pWsNUrYnMMW1rQ3Oxj+/UNMDC7WglqoshdzlsxjxHCw=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq/4dBjHVd7YQsTNG0O2KYr+5cFzvjJX8zE7jhY
- OFFlXe7MLSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCav+HQRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AlKUH/Rb7WRQ3M4d7VMcrDfMEb2QZBHqq1LvKVLVB6P4
- SEIB9/NCQDkgTXa8wJ1obj4oBa8JKgdz+871U+c3H86FLP+ng4Iwix+AFXdy9PeI8ky/GSVVZCZ
- xaNF2z3H4FGSEndIKJ+Hx2M6edwQYZo8xOUh73PsE0mIWvn1IKK/lxVbJjDgTaZRdAnsg6LLIVS
- +vlUj0VhXwe5RqJecYCAYvb3kA0OgFP7m6CzxtT3+w3HMilu91yUfmCqULmfhYdlAe9tMJ9obHJ
- 0FnyB2j2gpUCaqlAIYPb2ATeX5BMGeJVZJmje6HR40yen2FgHHchf8WHV3/YRzOWmqASOWIcEFi
- x5ac=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+In-Reply-To: <20261116-genio720-ufs-rpmb-minimal-v2-6-b64eefcfb0f6@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -174,69 +178,68 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> Add end-to-end functional test for HSM-based signing of pre-load
-> headers. The test verifies that binman can use PKCS#11 libraries
-> to sign data via hardware security modules and can generate pre-load
-> headers with HSM signatures.
-
-I see mocks in some of the tests, so that tells me we might not actually be
-doing full end-to-end testing in all cases. Is it possible to write the tests
-without the mocks?
-
-And I think we might need to add opensc to the CI Docker image so that the
-tests actually run on CI.
-
+On 11/16/26 2:45 PM, Carlo Caione wrote:
+> RPMB-backed services need provisioned storage and matching secure
+> firmware. Keep them optional so the Genio 520 and 720 can use their
+> existing defconfigs for both eMMC and UFS. Share the OP-TEE client
+> configuration and select the UFS device tree with DEVICE_TREE.
 > 
-> The tests create a SoftHSM v2 token, generate RSA and ECDSA key pairs
-> on it with pkcs11-tool, and verify the resulting pre-load header
-> signatures. RSA signatures are checked with preload_check_sign; ECDSA
-> signatures are checked with Cryptodome because preload_check_sign needs
-> the private key.
+> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+> ---
+>  board/mediatek/MAINTAINERS         | 1 +
+>  board/mediatek/mtk-ufs-rpmb.config | 3 +++
+>  configs/mt8189.config              | 2 ++
+>  3 files changed, 6 insertions(+)
 > 
-> - Add _MakePreLoadHsmToken() to set up the SoftHSM configuration from
->   fit/softhsm2.conf, locate the library through p11-kit, initialise the
->   token, generate a key pair and export the public key in DER format.
-> - Add testPreLoadHsmSign, which generates an RSA-2048 key pair and checks
->   the header, for both pkcs-1.5 and PSS padding, with preload_check_sign
->   using the public key exported from the token
-> - Add testPreLoadHsmEcdsaSign, which generates an ECDSA key pair and
->   verifies the signatures with Cryptodome, since preload_check_sign needs
->   the private key for ECDSA, which an HSM never exposes
-> - Add testPreLoadHsmModulePath to check that module-path= in the URI sets
->   the library.
-> - Add _GetPreLoadHsmPins() to collect the PIN passed to each sign() call.
-> - Add PIN tests that check the PIN source order: the pin entry arg, the
->   environment variable, the entry arg taking precedence over the
->   environment variable, no PIN at all, and a PIN in the device tree
->   being ignored.
-> - Add testPreLoadHsmBadSignatureLength to check that a signature of the
->   wrong length is rejected.
-> 
-> Error-path tests, which do not need SoftHSM, cover an invalid padding
-> scheme, an unsupported hash, an unsupported signature algorithm, an
-> invalid PKCS#11 URI, a missing pkcs11-tool and a signing failure
-> reported by pkcs11-tool.
-
-Please add SoftHSM cases for serial=, slot-id= and id=. They would have
-caught the two URI mapping bugs in patch 2.
-
-
-> diff --git a/tools/binman/test/security/pre_load_hsm.dts b/tools/binman/test/security/pre_load_hsm.dts
+> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+> index eaf645086f6..8159cdbaf5f 100644
+> --- a/board/mediatek/MAINTAINERS
+> +++ b/board/mediatek/MAINTAINERS
+> @@ -4,6 +4,7 @@ S:	Maintained
+>  F:	arch/arm/dts/mt8189*
+>  F:	arch/arm/dts/mt8371-genio-*
+>  F:	arch/arm/dts/mt8391-genio-*
+> +F:	board/mediatek/mtk-ufs-rpmb.config
+>  F:	configs/mt8189.config
+>  F:	configs/mt8371_genio_*
+>  F:	configs/mt8391_genio_*
+> diff --git a/board/mediatek/mtk-ufs-rpmb.config b/board/mediatek/mtk-ufs-rpmb.config
 > new file mode 100644
-> index 00000000000..5671559c838
+> index 00000000000..dcb59e6ce18
 > --- /dev/null
-> +++ b/tools/binman/test/security/pre_load_hsm.dts
-> @@ -0,0 +1,21 @@
-> +// SPDX-License-Identifier: GPL-2.0+
+> +++ b/board/mediatek/mtk-ufs-rpmb.config
+> @@ -0,0 +1,3 @@
+> +CONFIG_CMD_OPTEE_RPMB=y
+> +CONFIG_SUPPORT_UFS_RPMB=y
+> +CONFIG_EFI_MM_COMM_TEE=y
+> diff --git a/configs/mt8189.config b/configs/mt8189.config
+> index a60f67bd7cb..54de8d94861 100644
+> --- a/configs/mt8189.config
+> +++ b/configs/mt8189.config
+> @@ -51,6 +51,8 @@ CONFIG_MTK_SERIAL=y
+>  CONFIG_SPI=y
+>  CONFIG_DM_SPI=y
+>  CONFIG_MTK_SNOR=y
+> +CONFIG_TEE=y
+> +CONFIG_OPTEE=y
+>  CONFIG_USB=y
+>  CONFIG_USB_XHCI_HCD=y
+>  CONFIG_USB_XHCI_MTK=y
+> 
 
-nit: GPL-2.0+ form is deprecated use GPL-2.0-or-later instead.
+FYI, we have some other changes in-flight that might cause merge conflict
+with this. So I can take this patch through the Mediatek tree after the
+rest of it lands if we want.
 
--- 
-David Lechner <dlechner@baylibre.com>
+Otherwise,
+
+Reviewed-by: David Lechner <dlechner@baylibre.com>
+
