@@ -2,125 +2,123 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21BD5606A320
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 12:01:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2965A606A326
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 12:06:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HStLlxUK
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nCRMiHIT
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D531D40A69;
-	Thu, 19 Nov 2026 12:01:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CEB3540A37;
+	Thu, 19 Nov 2026 12:06:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZwJaU6wH58GI; Thu, 19 Nov 2026 12:01:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EC1F6406D6
+ id 7qIQKJTmhBhY; Thu, 19 Nov 2026 12:06:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B75D2407E2
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795089714;
-	b=mjqZPMv3VY/jp3zD1dpkMkcVRoO9Y0h7bMM11ilvTl9Dd+n7+GO8lOM0WLXsEW9+J7wf
-	 jzr+6JKeoU6EaBdeucbJ9GmV0Bun7NI/sgHoOjk2yilr4LXK3y1D4bt8CriE+TkFDN53i
-	 xhbb2CvNyP7q32uWpXhgNhw/XZBjCHXmp8ky0+BxgkVWaADENLY4IuwcCOtCuu39QddW1
-	 xiGQEFijOdMj3q0W9nkNd+Mw9/fQPUj79z20hXJOMXopsbL03H1iuSYCP1mgq7O/Es6OJ
-	 aix8QdzkWztLaU1Hq9r1UgvXXMnrkAM+k4Br5u8ja8jAThZxr17RS/7BQJFZbofL1mA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795089973;
+	b=OEqwooM9OTxh6K4JNSrWDbx/1IXVEELqtWtnqxPPyOlidbN/uzyD4szhJ6pX8b03+21t
+	 tLXQLSB68Y4YPdcbItY/kBkBF0S5/K4QwIgSkcOOGLKV3zwFXO78d8J8SmKDZUkx73+3D
+	 9hlI0/FmyYyCqJBSX91eEbssyXLXpq/WkA5/Q7PCxfRZtj+2aoR8yaOifFru85IULiQjy
+	 t66cm8OGyEIibagInI3yhpm64oKrp2Y96osHxF2j4cjCWx7OW1ieJjgt4UmThAu9ZfZGz
+	 1uYctLFWtA/kE8Lm1Cab28MJxuoPaoZwu9qZTgYbiQtDLC6JTj26TbCEJEM73jv10hA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795089714;
+	c=relaxed/relaxed; t=1795089973;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:X-QQ-GoodBg:
-	 X-BIZMAIL-ID:EX-QQ-RecipientCnt:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:
-	 X-QQ-XMRINFO:X-QQ-RECHKSPAM:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=QqaT8whBAbbemAjCzqG4LzqTEIiFtr8nqg1zNzHh73k=;
-	b=IXzRRVGdHKX1OCn2yKSoWPpewOPR1has/E9eYLge8Kmulq0tEDLmGnrH9EA5Ku67EsSw
-	 bGDP54keu808FScXvu6Z7XBkKgE0Vc5eMsUGgq4k5aCfa6x9JuWJ9p3wUCQqCaWPNLWh5
-	 rehQgJjueQa7Wzc8iPNSusIQ5Wv13eGFfJYgo4qkzVYwYQk+GjWPjnIPe1C2nsMBEKOsZ
-	 56wpEzN0fCdiQ4XtUXSGlWjiPIjsV/9YV3tcxqWBQlyARaQy0QE+TP5C5zP0/QP8QzJ5p
-	 NmmIKAc3Px3VudYIiC7fi39eYQAUDMMCFErlZFVcrWzxNM9dECNMG7iMxF4Vw4Oj+IQ==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:X-QQ-mid:
+	 X-QQ-Originating-IP:Received:X-QQ-SSF:X-QQ-GoodBg:X-BIZMAIL-ID:
+	 EX-QQ-RecipientCnt:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:X-QQ-RECHKSPAM:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=RqQvAcP4UG4wvRc5Axk0JWJCjwOqcH5t9/dtIdbHxSk=;
+	b=ZqZtwNPtDdqmg8EcVm9jRie+g3xgoqCQOKyQmV5XX+4PCx62otrxDu6PxQpzUP5+/8yZ
+	 D6Y5a0RDsJVEug4aRDUaEk3TfLU6CuRSqP327hYH6Ypi0KsNJ3HkOdZg0srRtfWt16PW5
+	 QILzEHgB3oQdl9k2jyJUQc/pIMnDi4ZAUFt2EmwzbEKR7w1UaBHWPoRyQpuqvEYQYaEZs
+	 EUGk6xvDm8WCq4VpH62ShM3rGaw3HG7Wu2qiwizaQzoGJ2TZgrOk7BaaXPrD0irkCH3Uz
+	 bmQLba6lPpx19YW0FunZc90M6ePEmSW3UDw2K9pdOGHUIe0ZGlf6CNtifiXEVDtf90Q==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795089714;
-	bh=QqaT8whBAbbemAjCzqG4LzqTEIiFtr8nqg1zNzHh73k=;
+	d=lists.u-boot-project.org; s=default; t=1795089973;
+	bh=RqQvAcP4UG4wvRc5Axk0JWJCjwOqcH5t9/dtIdbHxSk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HStLlxUKH509F28cqKEcJX9CD0wU6aEBTWmwrLXWsSoaGBzg15aB5gOnGxcfnaKOB
-	 un9s7+qIn9n5yngTja92UzLWRo162X/22GtzHxVBMLxlw3KCspbkjQxbjGjnAaK5Nv
-	 MMc5rdWx57chC9eeNu7M7ahixJOrHjdQeMS8cXYr0uHtr+pmAstd09dVVt4O8G9eP/
-	 nSRV3Qfj3A7eS8O9EiVctTuYR20Z27BISrA5ivTK9JFcfmxrK/7tZfpMSqNysCgV64
-	 eyRcSHQBr9jVLLTb3mI+EoyY0yOG++4MIaKucvi2Fk4XSDGt4gA2P0fcTorLlE1lgW
-	 xa1ED87xoSvBQ==
+	b=nCRMiHIT21vRpeBf7ZVgBtG342nbOsRDnjm/LxP2ykRcjROtgw+LCdWqPeip5rYMA
+	 aJfFrkQvnhqGDr1ai+BI95FxyMZReQsed/6gSnjWUHD4fi5rhJnUeKJ1u15Kaylwmb
+	 N/gzkTOfrI6P2ApBCl7hY6U8LiUIAxnJUFKHHfc/iFtG/T8cio60zq+l6QJlTwoq0n
+	 +Kh5byf7mluL4MykB/ttj4DRFn1s4PMEulULgb+qNqHKyk4A1EtkQqVMB+QxllMuIy
+	 /enqhmjwDWUDuvFqNlbIBh1SYtJcVtphxfkGr0lgmhib33GUUxCN7Ckp0OMfq6mYqJ
+	 29lTnEuXXitNA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EC1F6406D6;
-	Thu, 19 Nov 2026 12:01:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E74AE260
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:01:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B75D2407E2;
+	Thu, 19 Nov 2026 12:06:13 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 18A301E7
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:06:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D9CC540527
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:01:52 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 097BC404FC
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:06:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CYpBKZEvSJp3 for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 12:01:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D5964404FC
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=18.194.254.142
-X-Greylist: delayed 9714 seconds by postgrey-1.37 at util1.osuosl.org;
- Thu, 19 Nov 2026 12:00:48 UTC
+ id YUSbGuBDvLJ1 for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 12:06:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org DBA75404D7
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=43.155.80.173
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=43.155.80.173;
+ helo=bg5.exmail.qq.com; envelope-from=luojia@rustsbi.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=rustsbi.com
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=18.194.254.142;
- helo=smtpbgeu2.qq.com; envelope-from=luojia@rustsbi.com; receiver=<UNKNOWN> 
-Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D5964404FC
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:00:45 +0000 (UTC)
-X-QQ-mid: zesmtpgz4t1795089601tc5847f5a
-X-QQ-Originating-IP: ACPkFr9j3L2RE3oCxI15ka/fKfbsr81FoqWXAB8p0g0=
+Received: from bg5.exmail.qq.com (bg5.exmail.qq.com [43.155.80.173])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DBA75404D7
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:06:08 +0000 (UTC)
+X-QQ-mid: esmtpgz14t1795089910t4b67142f
+X-QQ-Originating-IP: I3vNl3Y2YxFfgBqirLH4B+tzE1FNUKIB7Nox22gBykk=
 Received: from jiangzhouqi-ubuntu-4090-01.. ( [36.110.52.2])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 19 Nov 2026 19:59:58 +0800 (CST)
+ id ; Thu, 19 Nov 2026 20:05:03 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 13655552842107644753
-EX-QQ-RecipientCnt: 9
+X-BIZMAIL-ID: 10209088857281885960
+EX-QQ-RecipientCnt: 12
 From: Zhouqi Jiang <luojia@rustsbi.com>
-To: Yao Zi <me@ziyao.cc>
+To: E Shattow <e@freeshell.de>
 Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, tim609@andestech.com,
- leo.liang@sifive.com, sjg@chromium.org, alpernebiyasak@gmail.com,
- jiangzhouqi2025@iscas.ac.cn, plucky@rustsbi.com
-Subject: Re: [PATCH] riscv: Add RustSBI firmware support
-Date: Thu, 19 Nov 2026 20:00:39 +0800
-Message-ID: <A529EF9EAC548DDB+20261119120038.3129288-2-luojia@rustsbi.com>
+ leo.liang@sifive.com, me@ziyao.cc, sjg@chromium.org,
+ alpernebiyasak@gmail.com, jiangzhouqi2025@iscas.ac.cn, plucky@rustsbi.com,
+ Chao Liu <chao.liu@processmission.com>,
+ Daniel Maslowski <info@orangecms.org>
+Subject: Re: [PATCH v2 3/3] riscv: Document SBI firmware support in SPL
+Date: Thu, 19 Nov 2026 20:05:21 +0800
+Message-ID: <2B41D9A9B2F3A92D+20261119120520.3129425-2-luojia@rustsbi.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <av7gh5SblUm5WYA1@pie>
-References: <av7gh5SblUm5WYA1@pie>
+In-Reply-To: <35001dcd-3fec-48a9-8b1f-e2cc68c644b8@freeshell.de>
+References: <35001dcd-3fec-48a9-8b1f-e2cc68c644b8@freeshell.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpgz:rustsbi.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: M3uTjkO5QXGxZe1f8OKUX3AMDJCjMUMDSY/pjWYwgQW8yjhFmWVBN8ux
- 7NPEBEf4Og3RzHPgZzCvd+YyUjA/+/c+xBArHVQ4yeEjtyE8aZw0iPAD7HMguTUH18tMoX6
- cmbVfMjFExSfsEmGNGJgCfrU96J9jYAGsGc02uuZGjO6+8nTSaRIzOobg68/HPUUoSlA82a
- ZhsCEnqb1ORvo7Fgg07B4kZ+635V8ZHuiQxwf5FVSmuryEYj4p3oieQnMaEAIJ4HgEgsGhS
- YiBT5Aq4ClhA89EnXW+Rt7U9OFwGnOR6tOB4AnsJ16VNgKkbsDdaW/Tu/P7V6e+kwdbGNne
- 8Vrd7xh1N/6CQM8c6d933I5PZmdwPOscVaI2qdPGkB+URz0fwk2yUD7sjDmIzNyyhzyzZFz
- 0QjIoNRidPFTEql4MtME+P1DBAI6wjrCFhHHLY/oWIK6X4olBqftkFozYqMWf4v0JtgVJQf
- q21Q3VyhRiE9RjUa0GfyDF2m1fHKFLjXJ2ZUoYPqVDNIVAyVnrRoVddaAGkXrB/qaHmjGLm
- TSzK1WOz9qlBQL8gkKoTaNC5cYzxkG3RezFSVBgXmDg8uSTS6R1CiZX+qmyU2KKo3erno3J
- 0lLdW8hOZKr5wHitemyVrfTkkKA1gpR3lvS/DuOuArBEFDL9JDBx8Roih/h3U0t3hCArjwB
- mmxhKDGVKUvQ6KbJJgF0YIUrsAajQt8sIvYggc4qRlT1vYJvrgvtm+QjurKS5ZIfYWRmDUC
- z5E7AxhUQVrH4usKvt5FTko7ioYSX7W3DSgKXZJO1cMT6J5XH9PHXUA3pdsquf1Iy6ztjBp
- abC4xMte1ola8bc6SPbxB9WEKIEdnkZzAuEcsfYbwkpfe2Ssn8EP9LQdimBbmxbbYZP0j98
- EAmaiV0SgOj3mOiHyduTVmTjtMevRCKmksFsP7wpG/1eho3OtkngZpquBStxXLnnLGeiC2J
- Y1wDXSg+/r2XaWwp5SyUdp23nSgfzDsdHlP8C43gccmrFiwyE7zTazIKYdbYnr1x/NuGgMN
- jFgOITle1bXD71CRUYHOLBynl9hRDZjh7l96nxB5cbsK9kXD+tlMg2a56NcXU=
+Feedback-ID: esmtpgz:rustsbi.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: NojR6Ao/DkEDIZRKP2OskZiC2pijqNa6tS01jbDTm8lnFInHsRAFtGsK
+ mgNR24iR2VyZjW6yChf/Wy4kApBGbfterl1DUw9sAseqKGmdIHKTi08vPBpiIBATZnp3ZlW
+ 5izcbnLSnWmjL3ajKbtz6ej31WljrD/jxobr11izhLuPEpn1iUkYPJ0/SPyCKImAfcOOdtM
+ 2g/h5TqTTJS0oTw7WO4hHKqe2BIhJT4JMa171nPeXz37CRGAHsp+c1ItZ4quD0p+SyI+pYt
+ f0DNem3QGU2wSUhbVrLN61XN9ueY8Npn14OTXSM47cV6DXPceGZVmQZpZSd8UHGIGyMnAZf
+ q1k/6qaFgRmp0MkRq8ggeHg6YMxwko4swGRJyxQ0X4z/paKElQDJXXdKdSMoeIYg0UxBGBj
+ xWFWEgcWk1meGTaWGXckn3dVQN2M5goqdh6Oqx+/ip2mgTYl0ivnuSy/yK0NPNCgjTg/Xh/
+ +EhdDN/ljuZZdttuuiK79jwk47xkdxViCDFrzWJz0MpG/rlgEOQ30EtgO4ms9lqf/5/F2kf
+ 4UvbDUPVOI6hbUIQ1dFizoYD1jDqh9TBqCeL3j3AyPGF88kkxCCeN8VyEB5i/axbLWcFJSy
+ WaOD0UmRD+CqtzoWv/+lZhLz2U1AYOKE4tzfhokcHxQu1xXNdekLWPTHfKAepvLwk3SdNF1
+ OI2BQe+GGev8HrXd4ILnb1XQw9pXHIXoj95a75+hHaa9u+7G294Vk0PnydBYt1U4Hq+KgD4
+ FZL9bEKsmzBmzV1gwiJU4okd+3Vq9x6nqqK+b/emYh6B2ol3nEuLvWa9SdY+PHiR8Z3Ji4t
+ 2vgC7blCxmdGar8SF4BGTMjfUL4SmSS+jdasZiNdCCx3GfZBja0QUqO0Q5k1qsEG7S/FNt6
+ 5fPQOfoSIwXay4HiI8UCcC4XKKaAqhqTjsO5L36HYlRSjwe/R9kqZ8wK9wj1zcBnIbS219x
+ WYqfAy/RTR+b3mYCAaa0sRt8kHev2+xvUTfwKbDy8dWmJXGVphWvQbBujZk6f+gmadnFeWC
+ A6mxTkPDgTwxfUSlgFBNPJc3c+rOby+w/1kAaUDTDDqvopQYKr
 X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
 X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -134,41 +132,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=no
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Ziyao,
+Hi E,
 
-Thanks for following up.
+Thanks for the review. I'll post a v3 series with two patches covering
+the SBI_V02 help text and the RISC-V firmware documentation.
 
-> > Would that alias be
-> > useful, or would you prefer using OPENSBI= for both?
+> > +	  RustSBI Prototyper dynamic firmware also supports this handoff.
 >
-> I prefer to keep using OPENSBI=.
+> How is 'RustSBI Prototyper' distinct from 'RustSBI'. Is this a
+> registered trademark? Is it a company name?
 
-Agreed. I've dropped the alias patch. Both OpenSBI and RustSBI use
-OPENSBI= and the existing FW_DYNAMIC handoff.
+RustSBI is the project name. RustSBI Prototyper is its SBI firmware,
+built on the RustSBI runtime.
+The guide now uses "RustSBI dynamic firmware" to identify the
+implementation and build mode. It lists OpenSBI and RustSBI with links,
+and the example uses the actual filename, rustsbi-prototyper-dynamic.bin.
 
-> > 3. Document SBI firmware support and scratch options in the RISC-V
-> >    architecture documentation and SPL Kconfig help.
+> U-Boot main app build for SpacemiT K3 packages OpenSBI fw_dynamic.bin
+> and so I'm not understanding this explanation you have provided.
+
+The guide now describes OPENSBI= as a build input for packaging firmware
+and explains the FW_DYNAMIC handoff in the CONFIG_SPL_OPENSBI case.
+It gives the board load address requirement for firmware that needs a
+fixed link address.
+
+> > +uses ``0x1`` to disable boot prints and ``0x2`` for runtime debug prints;
 >
-> The documentation itself should probably not stay in SPL Kconfig help
-> text. You could inform the reader to refer to something in doc/ instead.
+> It could be 0x3 for both options?
 
-doc/arch/riscv.rst now explains how to supply the SBI firmware and how
-SPL passes the scratch options through the FW_DYNAMIC handoff.
+Yes, 0x3 sets both OpenSBI print flags. The guide describes how SPL
+passes the options and refers to the OpenSBI flags in the Kconfig help.
 
-> > Would carrying a firmware name for display be useful, or should
-> > the existing labels remain as they are?
+From your reply to the cover letter [1]:
+
+> > Would you prefer to keep the alias or
+> > use OPENSBI= for both firmware implementations?
 >
-> I prefer to keep them as-is.
+> Correct, keep OPENSBI= and no additional aliases please.
 
-Agreed. v3 keeps the existing FIT descriptions and SPL debug messages.
+I've dropped the alias patch and use OPENSBI= for both implementations.
 
-I'll send v3 as a two-patch series, with the SBI_V02 help cleanup in the
-first patch and the RISC-V documentation in the second.
+> > The U-Boot "sbi" command identifies the implementation at runtime.
+>
+> Is there a common use for this that "sbi" command should be
+> enabled for most users?
+
+I used it to confirm which firmware was running after booting each
+image. The existing optional command is sufficient for that check.
+
+[1] https://lists.u-boot-project.org/pipermail/u-boot/2026-November/641123.html
 
 Thanks,
 Zhouqi
