@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73807606A324
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 09:31:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59EF1606A320
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 09:31:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QmnY5Bez;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dSS1eoE9
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RqHTGTBe;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fOmpN/sG
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 476B940A29;
-	Thu, 19 Nov 2026 09:31:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D18C460B21;
+	Thu, 19 Nov 2026 09:31:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yPFQ3lpM1U9A; Thu, 19 Nov 2026 09:31:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 246C340799
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795080686;
-	b=NA3nZW7AeV5fBG8sWyEUpGB9Hm3ITkWh7YG+N7IoRmP2wbRGiOsHUqqy7p6GzN4PGBqO
-	 fs4d+okBQhyOxNYxisMTCsFkWA21Q2i3iiLTyPTHLLVytgSIHaYcAR485N1XMxemqboqB
-	 Iom/hoTf665JcxO5rq2slF2c5dIXoqCmKeC2j5jJKHJsk2WyrRKeL69k9N3BYZy+wzNWP
-	 y/mvN2P+2BYmFO4IHAFIiNtNLfir2NtugbSgs71f4RkOopUArPH5b8djFsXB1sih/sK+k
-	 Q2VCUyHa/+UeIXtERPbAbopmHcbA41GojQOJdRM+zv57NOWcAtsqfCi41k5Cr7z7Ttg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WDKHIwqilv7w; Thu, 19 Nov 2026 09:31:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9980C60622
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795080687;
+	b=D0SPX3yz85IOzGLtN2yzFgo8v8ud/v3lDaEWblPUZTw2wovAxmL4H4zYVptNI59cmbIh
+	 I7BU+c2clQRlyrC5DEXh1zNhDopIGW7rMI3OQt46f/+piqcfIMqtVfjdWDq5O9WjDcr+F
+	 kIxJLhy/TQ7uikJULsI+dbXqmExHq46RCwNvWZrWS9Ks0tomjOhEAgH1tRiCVMRKtoeD5
+	 ClL+OK9L8/bt85dLfOgfkP2EZ2OAJTLMO9xN2Evsu25iAFZdOLJtaQRztlaw3/jYLUcRL
+	 gq+4ZdBMK558ejhkpSg3YrCkhmh4+hLZ0OZ2bZ5CetByL03xJkfu4ArTeNHZuo3cHBQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795080686;
+	c=relaxed/relaxed; t=1795080687;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,99 +32,99 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=FRosFTyc7qXshWa+ME6kG0D+Jr5IZfoKrky/ZOoCNLI=;
-	b=cid1lkR1QqBWoRS4N2CS1ddS44GQNVqqRc1C4KtQjej4IHaFTVmb06LfGgwc4en4L6up
-	 OgZCnu6/C93oqd8sx+coHAgTdw17HfTr12VHFxiNmQ642VLyx8r/haw/00AUKiDEdmpdQ
-	 8RNSCP7JYAzM96RAce08FCP3FtezVdjIKrDNSxxmFNLfb3mIgfqpHqJW0J5hcbMGdH7bS
-	 Ozvs2KFFWuouchRxx/JhLXF+jyMdpZP2dsh3lmUIIlGBlrA1EKzRjgDipKT5dyFd63pN3
-	 9f0B6+Quc820PJNxrD3ydTvPAkoZ6bqE+F5HNAjigXkhBM0qPx6DEVfAaBKJj3sXPYw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=QqXBkU+UMG2FDReKXdl1Lxa4s5zATlzq3G9tdPIUZNY=;
+	b=CJ06Ug6QPV8FabzFbUDEi8hH6cIW4+dou17eopAT59vUdXIYBoDIPTGYMkj9Ktzc3kE6
+	 BoCkKfobg8T1FUQDL6tu/eUemI7WcjRq3Xut0BA/5xfncXgHhrajnxq2HxNFYxf/fR6bT
+	 6Ori6s4O61/4EKVc47EWDcEI0pl+AdBRzgPqcHUV46svPTlaGkr08vq5mCMS2BNuIu/Zr
+	 FpfW+9yVAgIfH18Kqh1Lsfb6VlcrGqILTVYfDs956NPR7j0N0Oq99eS9sebFzjobVMvEo
+	 cqW1dBVcMldixobnNAbZJEX1tN+SRFWR50Pgi7a948M/mq6mdbAA7RGVJqRTqEuJtmQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dSS1eoE9;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="fOmpN/sG";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795080686;
-	bh=FRosFTyc7qXshWa+ME6kG0D+Jr5IZfoKrky/ZOoCNLI=;
+	d=lists.u-boot-project.org; s=default; t=1795080687;
+	bh=QqXBkU+UMG2FDReKXdl1Lxa4s5zATlzq3G9tdPIUZNY=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QmnY5BezgOnwW42N6H1CnGcT7HGus6GmUZrXOWD0jgp1xhdBWxXtpijRva3cuw73l
-	 B8Cy1wDXtFwnZPT6tpnUSPGR9KPtWY4YsnGGyDG2cJZ0Sq6GobydGo0XRX1ZmC9t8N
-	 vw3uope6iIjX8YyYePcp8QA68GgMnGMiI6U4Nn7zKRVBcArjMQLYrHl15oQw18FlBE
-	 EtRoTVjoD9oA+QwS+ptpESmhhTqQvLDTtL/YIEXefxu89O37bh/IZUvceNPiiBUWef
-	 u2vnPhTVykBWlzRdJ4uzgz4UbtnW/2E1dkJsuTDCxWTUXFbNp8JPfeOHHYo66I9QAs
-	 D791QUVhENNlg==
+	b=RqHTGTBeI4Hm/zBqyPpMMddGWqeoT8S1JBMoJCJbo99AwjF3HXpxTsCfipL5xiJAs
+	 fBbhF0fepxxKIHbJ41/y57h6DHmRiIrOoWnuzfEdZZG186rwBLvEBphPvEe1yooG7U
+	 XjOx/j7z7tr3/yvlmU6MeP34w7yLr5HOMhshwYOL8AgKv++ls+jcnmBCKndMhm06Df
+	 OkCMWEQcaWDRyHjYu2FWFmzxUu+unsGWDrJ1lTUBnuMpYxAlW8v5FqAeyK1CKBeToK
+	 4cwyn8iPYlWbDIip7lag8yxC/dfyXCyN8uzuI+BaHzlQwyxKRBWJcz8qyTPhdNgm30
+	 R44PfU/xb1sEg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 246C340799;
-	Thu, 19 Nov 2026 09:31:26 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 416B8A32
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9980C60622;
+	Thu, 19 Nov 2026 09:31:27 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2347970B
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3322940799
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:24 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 096FB60622
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ufj48KReGDsX for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 09:31:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8E8C340792
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BFlNkYOmHIfH for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 09:31:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CE75860896
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
  helo=tor.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=dSS1eoE9
+ header.s=k20260515 header.b=fOmpN/sG
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8E8C340792
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:21 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CE75860896
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 09:31:23 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 5A03B61FC3;
- Thu, 19 Nov 2026 09:31:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 909351F000C4;
- Thu, 19 Nov 2026 09:31:19 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A3622621AD;
+ Thu, 19 Nov 2026 09:31:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBA371F000C4;
+ Thu, 19 Nov 2026 09:31:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1795080680;
- bh=FRosFTyc7qXshWa+ME6kG0D+Jr5IZfoKrky/ZOoCNLI=;
+ s=k20260515; t=1795080682;
+ bh=QqXBkU+UMG2FDReKXdl1Lxa4s5zATlzq3G9tdPIUZNY=;
  h=Subject:From:To:Cc:In-Reply-To:References:Date;
- b=dSS1eoE9udvKOg9BO7NAinOrYpL5NLc48F4PXxL4xOMWvWkCLaV2JF5/ZwUu3jO7V
- S0U3OtwoTNGy8cgc532sTZE4P8hCb/74nsMH+oPQr8iiiXvY/7UPh1jSFJuQoZjrJi
- DV9uSv0ZtAQ49K2KNogV1Q1EmKmSYMUlxXTh3ab81zU8QSiWSrl/G70CtyuM0fqBRt
- rd159RhkO85RFRD00BFYldCmJmjYXd/MQJTR4XM7UMNddV5te6CqT4ViNkW6r5Lv6+
- Ri4Z2/s3oL2LlIktrlXyR2jO2bNR0Ab0P7eDmpKO7tbTiv/wdE4ob1LDsLVo1sUQjE
- dom1TtDWSIRWQ==
+ b=fOmpN/sG4yU4K7hBxTN1do4sY4XXrJDci6NwhvNeE/AwNe61DPL36a9ncIHCxGpGf
+ xV8yLGtmCrMerWuuui940mt4Mudh+jHkVbEhwuonq4k2Al2awy90GKPF3O9J4lKJ96
+ GGvRAakB1yvCNXzups3OCbo/kotlvvsY3H1CjOSHMFSodFF0Cm4hYaNzqPxm3HC1Za
+ WGjHgRL641y4T1lK0n2DjRFqcEtdAfHuA93DJXHuiTd8imCp9hyg9eoCplMQ8MCgv5
+ WBJu6k7qJtNJEZwTm9teKwCrEpwhDsHHw15Er56LCveZ9mIMi0lwk03066qp2qmjX3
+ o7OVrH61dIXwA==
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 1/3] bootstd: android: update the rollback indexes of a
- known-good slot
+Subject: Re: [PATCH 2/3] android: sync bootloader_message.h with AOSP (misc
+ system space)
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Igor Opaniuk <igor.opaniuk@gmail.com>
 Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org, 
  Tom Rini <trini@konsulko.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
  Guillaume La Roque <glaroque@baylibre.com>
-In-Reply-To: <20261111-upstream-android_rollback_misc_b4-v1-1-47d17e8a5d92@gmail.com>
+In-Reply-To: <20261111-upstream-android_rollback_misc_b4-v1-2-47d17e8a5d92@gmail.com>
 References: <20261111-upstream-android_rollback_misc_b4-v1-0-47d17e8a5d92@gmail.com>
- <20261111-upstream-android_rollback_misc_b4-v1-1-47d17e8a5d92@gmail.com>
+ <20261111-upstream-android_rollback_misc_b4-v1-2-47d17e8a5d92@gmail.com>
 Date: Thu, 19 Nov 2026 10:31:14 +0100
-Message-Id: <179508067427.516692.11077611451436557680.b4-review@b4>
+Message-Id: <179508067427.516692.994258223515304798.b4-review@b4>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5509;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6821;
  i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=gTrFkUw6bEy48VLE4qskTBF7P8rWw4tgK6v+cNAf0b8=;
- b=owGbwMvMwMUoySu7Jc1P0pTxtFoSQ9a/g0/nM+4Vfca92bek+lBnz5eo7CcCwaZf5S6rOy7xq
- Puyc49bJ6MxCwMjF4OsmCKL3kun5dvks/YFC69lgBnEygQyhYGLUwAmkjibg2Eh55RGqSn2XDqm
- Xhu4H66y9Pl5QntNgJTewpfNy7J3aR2Su7xWlzfZlNlVMiNk6vbeKPWmY5dD6iVvybX6P7eqOvG
- jUzDqmDKvXc/WnZO26ar9flVve2US4/opvvJcUV++fe3XSNc2rLT9wjrzqUJySPRl7Smfvmsutl
- uzJklRLTcmrUhrcwurtplXGbufZc3Df2Xh1t/lhZutEp5fjnr8g/Wc0DfF24cNErdV+D18G9jf+
- 6r1vfkpq61b/b6eP/icT1Mt7xnbg2/yb5KucP9wu2GzL+Oe7oTfhrlVRS9+LtNRqXOtfKCQwhj1
- +67mivkd9hv019p1hTOYiQtnnnvhG5/Gfr1XPKTs/LLNAA==
+ bh=GhZM9VWKBNu2AjVzJMScdCjxl2DBGYQRdgM/l5y3QgE=;
+ b=owGbwMvMwMUoySu7Jc1P0pTxtFoSQ9a/g0+zf1hE/FrGW+SZFyy08706Y2zHQ79KtUReHW85y
+ wlbKg92MhqzMDByMciKKbLovXRavk0+a1+w8FoGmEGsTCBTGLg4BWAiLH4cDBvTliznnJ+dVxx6
+ z/5jmaDaNHvF5V3m3Xoimp2zJpWcKfb7H+PyTPK8ku6io1xZvmYz0g8YqO5UzTbXkrGvUVKN+Fo
+ bmPCxJSUjlnNr7lT/c9tzE/KUXx5aZJi7/rfh9MUfmxf+unX7tuNExmn31lnoz3AQkVh4N0hy5Z
+ cW+W3F8lP7Dj/SEdt1RGZ9Xt2NJ6umSk+PrBJ+Vmtf+8GGW+Dph0qHdB2elM18Ry+32dqEXQr84
+ nOl+u32hVvM9oX+qZn5TaN7xTa2noLaW1v/mmRsURTg4ebmejLh3KwqZ7n/n/nUDda9mZPHqJVg
+ tKjp3cS+DxHs9acO7lBcFLbtIotyktAXHy5Lrh0lz2LCAA==
 X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
  fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -148,150 +148,168 @@ Hi Igor,
 
 Thank you for the patch.
 
-> libavb only checks the rollback indexes of the images against the stored
-> ones. Storing the new values is left to the bootloader [1], and the
-> Android bootmeth never did it, so the stored indexes never advanced and
-> older, vulnerable images kept verifying.
+> Android uses the "system space" of the misc partition (32 KiB in) to
+> pass messages to the bootloader: the Virtual A/B merge status, the Arm
+> MTE mode and kernel command line flags. Add their definitions from
+> bootloader_message_core.h at android-17.0.0_r1 [1], copied verbatim like
+> the rest of the file so that later syncs stay a plain diff.
 > 
-> Raise the stored indexes to those of the verified slot before booting
-> it. With A/B, wait until Android has marked the slot successful, so a
-> failed update can still fall back to the previous slot. Without the
-> OP-TEE AVB TA there is nowhere to store them and nothing is written.
-> 
-> [1] https://android.googlesource.com/platform/external/avb/+/refs/tags/android-17.0.0_r1/README.md#updating-stored-rollback-indexes
+> [1] https://android.googlesource.com/platform/bootable/recovery/+/refs/tags/android-17.0.0_r1/bootloader_message/include/bootloader_message/bootloader_message_core.h
+
+I've downloaded a copy of the above repo, and using the
+android-17.0.0_r1 tag, I see some differences between the AOSP file and
+the copy we have here.
+
+I do think that these diffs make sense (for example, using static const
+instead of constexpr).
+However, it feels misleading to me that we say it's a verbatim copy
+because it's not.
+
+Please reword the commit message.
+
+More details below
+
 > 
 > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 > ---
->  boot/android_ab.c       | 34 ++++++++++++++++++++++++++++++++++
->  boot/bootmeth_android.c | 48 ++++++++++++++++++++++++++++++++++++++++++++++++
->  common/avb_verify.c     | 35 +++++++++++++++++++++++++++++++++++
->  include/android_ab.h    | 19 +++++++++++++++++++
->  include/avb_verify.h    | 16 ++++++++++++++++
->  5 files changed, 152 insertions(+)
+>  include/android_bootloader_message.h | 92 +++++++++++++++++++++++++++++++++++-
+>  1 file changed, 91 insertions(+), 1 deletion(-)
 >
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index f2b1110aa24b..48745f2c2d2d 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -376,6 +376,40 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->  	return slot;
->  }
->  
-> +int ab_get_control(struct blk_desc *dev_desc,
-> +		   const struct disk_partition *part_info,
-> +		   struct bootloader_control *abc)
-> +{
-> +	struct bootloader_control *disk_abc;
-> +	int ret;
-> +
-> +	if (!dev_desc || !part_info || !abc)
-> +		return -EINVAL;
-> +
-> +	ret = ab_control_create_from_disk(dev_desc, part_info, &disk_abc, 0);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = -ENODATA;
-> +	if (disk_abc->crc32_le != ab_control_compute_crc(disk_abc))
-> +		log_debug("ANDROID: Invalid A/B metadata CRC-32\n");
-> +	else if (disk_abc->magic != BOOT_CTRL_MAGIC)
-> +		log_debug("ANDROID: Unknown A/B metadata: %.8x\n", disk_abc->magic);
-> +	else if (disk_abc->version > BOOT_CTRL_VERSION)
-> +		log_debug("ANDROID: Unsupported A/B metadata version: %u\n",
-> +			  disk_abc->version);
-> +	else if (disk_abc->nb_slot > ARRAY_SIZE(disk_abc->slot_info))
-> +		log_debug("ANDROID: Wrong number of slots %u\n", disk_abc->nb_slot);
-> +	else
-> +		ret = 0;
-> +
-> +	if (!ret)
-> +		memcpy(abc, disk_abc, sizeof(*abc));
-> +	free(disk_abc);
-> +
-> +	return ret;
-> +}
-> +
->  int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
->  {
->  	struct bootloader_control *abc;
-> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> index 6f7e232d2c3c..3d1e64aa2b41 100644
-> --- a/boot/bootmeth_android.c
-> +++ b/boot/bootmeth_android.c
-> @@ -8,6 +8,7 @@
->  #define LOG_CATEGORY UCLASS_BOOTSTD
->  
->  #include <android_ab.h>
-> +#include <android_bootloader_message.h>
->  #include <android_image.h>
->  #if CONFIG_IS_ENABLED(AVB_VERIFY)
->  #include <avb_verify.h>
-> @@ -438,6 +439,38 @@ static int avb_append_commandline(struct bootflow *bflow, char *cmdline)
->  	return 0;
->  }
->  
-> +/**
-> + * slot_is_known_good() - Whether the selected slot has booted successfully
+> diff --git a/include/android_bootloader_message.h b/include/android_bootloader_message.h
+> index 286d7ab0f31e..9092f74c4db8 100644
+> --- a/include/android_bootloader_message.h
+> +++ b/include/android_bootloader_message.h
+> @@ -27,11 +27,15 @@
+>  // 0   - 2K     For bootloader_message
+>  // 2K  - 16K    Used by Vendor's bootloader (the 2K - 4K range may be optionally used
+>  //              as bootloader_message_ab struct)
+> -// 16K - 64K    Used by uncrypt and recovery to store wipe_package for A/B devices
+> +// 16K - 32K    Used by uncrypt and recovery to store wipe_package for A/B devices
+> +// 32K - 64K    System space, used for miscellanious AOSP features. See below.
+>  // Note that these offsets are admitted by bootloader,recovery and uncrypt, so they
+>  // are not configurable without changing all of them.
+>  static const size_t BOOTLOADER_MESSAGE_OFFSET_IN_MISC = 0;
+> +static const size_t VENDOR_SPACE_OFFSET_IN_MISC = 2 * 1024;
+>  static const size_t WIPE_PACKAGE_OFFSET_IN_MISC = 16 * 1024;
+> +static const size_t SYSTEM_SPACE_OFFSET_IN_MISC = 32 * 1024;
+> +static const size_t SYSTEM_SPACE_SIZE_IN_MISC = 32 * 1024;
 
-nitpick: Why can't have successful in the function name? This matches
-slot_info[slot].successful_boot so it seems more appropriate than
-'good'.
+In the original file, these are constexpr:
+https://android.googlesource.com/platform/bootable/recovery/+/refs/tags/android-17.0.0_r1/bootloader_message/include/bootloader_message/bootloader_message_core.h#50
 
-For example slot_booted_successfully()? Feel free to pick another one
+I understand that we can't have that in U-Boot, but we should mention in
+the commit message that some U-Boot specifics adaptations were needed.
 
-> + *
-> + * With A/B, Android marks a slot successful (boot control HAL) once it has
-> + * booted far enough; until then a new update is still on probation. Without
-> + * A/B there is no such signal and the slot counts as good.
-> + *
-> + * @bflow: Bootflow being booted
-> + * Return: true if the slot is known good
-> + */
-> +static bool slot_is_known_good(struct bootflow *bflow)
-> +{
-> +	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
-> +	struct android_priv *priv = bflow->bootmeth_priv;
-> +	struct disk_partition misc;
-> +	struct bootloader_control abc;
-> +	int slot;
-> +
-> +	if (!IS_ENABLED(CONFIG_ANDROID_AB) || !priv->slot)
-> +		return true;
-> +
-> +	slot = priv->slot[0] - 'a';
-> +	if (part_get_info_by_name(desc, BCB_PART_NAME, &misc) < 0)
-> +		return false;
-> +	if (ab_get_control(desc, &misc, &abc) < 0)
-> +		return false;
-> +	if (slot < 0 || slot >= abc.nb_slot)
-> +		return false;
-> +
-> +	return abc.slot_info[slot].successful_boot;
-> +}
-> +
->  static int run_avb_verification(struct bootflow *bflow)
->  {
->  	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
-> @@ -539,6 +572,21 @@ static int run_avb_verification(struct bootflow *bflow)
->  		}
->  	}
 >  
-> +	/*
-> +	 * Rollback protection: libavb only compares the rollback indexes, the
-> +	 * bootloader stores them. Raise the stored indexes to those of the
-> +	 * verified images once the slot is known good, so that a bad update
-> +	 * which never boots cannot lock out the images it replaced.
-> +	 */
-> +	if (result == AVB_SLOT_VERIFY_RESULT_OK && slot_is_known_good(bflow)) {
-> +		AvbIOResult rc;
+>  /* Bootloader Message (2-KiB)
+>   *
+> @@ -81,6 +85,92 @@ struct bootloader_message {
+>      char reserved[1184];
+>  };
+>  
+> +// Holds Virtual A/B merge status information. Current version is 1. New fields
+> +// must be added to the end.
+> +struct misc_virtual_ab_message {
+> +  uint8_t version;
+> +  uint32_t magic;
+> +  uint8_t merge_status;  // IBootControl 1.1, MergeStatus enum.
+> +  uint8_t source_slot;   // Slot number when merge_status was written.
+> +  uint8_t reserved[57];
+> +} __attribute__((packed));
 > +
-> +		rc = avb_update_rollback_indexes(avb_ops, out_data);
-> +		if (rc != AVB_IO_RESULT_OK)
-> +			log_warning("rollback indexes not updated: %s\n",
-> +				    str_avb_io_error(rc));
+> +struct misc_memtag_message {
+> +  uint8_t version;
+> +  uint32_t magic; // magic string for treble compat
 
-So this is ran on every boot? is the index incremented each time?
-Sorry if I don't follow, this is a bit unclear to me.
+This is indentented differently in the original file. Why did we change
+it?
+
+> +  uint32_t memtag_mode;
+> +  uint8_t reserved[55];
+> +} __attribute__((packed));
+> +
+> +struct misc_kcmdline_message {
+> +  uint8_t version;
+> +  uint32_t magic;
+> +  uint64_t kcmdline_flags;
+> +  uint8_t reserved[51];
+> +} __attribute__((packed));
+> +
+> +// holds generic platform info, managed by misctrl
+> +struct misc_control_message {
+> +  uint8_t version;
+> +  uint32_t magic;
+> +  uint64_t misctrl_flags;
+> +  uint8_t reserved[51];
+> +} __attribute__((packed));
+> +
+> +#define MISC_VIRTUAL_AB_MESSAGE_VERSION 2
+> +#define MISC_VIRTUAL_AB_MAGIC_HEADER 0x56740AB0
+> +
+> +#define MISC_MEMTAG_MESSAGE_VERSION 1
+> +#define MISC_MEMTAG_MAGIC_HEADER 0x5afefe5a
+> +#define MISC_MEMTAG_MODE_MEMTAG 0x1
+> +#define MISC_MEMTAG_MODE_MEMTAG_ONCE 0x2
+> +#define MISC_MEMTAG_MODE_MEMTAG_KERNEL 0x4
+> +#define MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE 0x8
+> +#define MISC_MEMTAG_MODE_MEMTAG_OFF 0x10
+> +// This is set when the state was overridden forcibly. This does not need to be
+> +// interpreted by the bootloader but is only for bookkeeping purposes so
+> +// userspace knows what to do when the override is undone.
+> +// See system/extras/mtectrl in AOSP for more information.
+> +#define MISC_MEMTAG_MODE_FORCED 0x20
+> +
+> +#define MISC_KCMDLINE_MESSAGE_VERSION 1
+> +#define MISC_KCMDLINE_MAGIC_HEADER 0x6ab5110c
+> +#define MISC_KCMDLINE_BINDER_FORCE_RUST 0x1
+> +#define MISC_KCMDLINE_BINDER_FORCE_C 0x2
+> +
+> +#define MISC_CONTROL_MESSAGE_VERSION 1
+> +#define MISC_CONTROL_MAGIC_HEADER 0x736d6f72
+> +#define MISC_CONTROL_16KB_BEFORE 0x1
+> +
+> +#ifndef __UBOOT__
+
+I understand why we need the #ifndef, but again this is not a verbatim
+copy
+
+> +#if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
+> +static_assert(sizeof(struct misc_virtual_ab_message) == 64,
+> +              "struct misc_virtual_ab_message has wrong size");
+> +static_assert(sizeof(struct misc_memtag_message) == 64,
+> +              "struct misc_memtag_message has wrong size");
+> +static_assert(sizeof(struct misc_kcmdline_message) == 64,
+> +              "struct misc_kcmdline_message has wrong size");
+> +static_assert(sizeof(struct misc_control_message) == 64,
+> +              "struct misc_control_message has wrong size");
+> +#endif
+> +#endif /* __UBOOT__ */
+> +
+> +// This struct is not meant to be used directly, rather, it is to make
+> +// computation of offsets easier. New fields must be added to the end.
+> +struct misc_system_space_layout {
+> +  struct misc_virtual_ab_message virtual_ab_message;
+> +  struct misc_memtag_message memtag_message;
+> +  struct misc_kcmdline_message kcmdline_message;
+> +  struct misc_control_message control_message;
+
+Same here, original file does not have "struct" prefix
+
+> +} __attribute__((packed));
+> +
+> +#ifndef __UBOOT__
+> +#if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
+> +static_assert(sizeof(struct misc_system_space_layout) % 64 == 0,
+> +              "prefer to extend by 64 byte chunks, for consistency");
+> +#endif
+> +#endif /* __UBOOT__ */
+> +
+>  /**
+>   * We must be cautious when changing the bootloader_message struct size,
+>   * because A/B-specific fields may end up with different offsets.
+
+Side note: the ifndef is now #ifndef _BOOTLOADER_MESSAGE_CORE_H in AOSP.
+Should that be changed here as well?
 
 -- 
 Mattijs Korpershoek <mkorpershoek@kernel.org>
