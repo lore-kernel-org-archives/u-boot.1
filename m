@@ -2,122 +2,123 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F9ED606A320
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 12:26:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8B47606A320
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 12:36:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Xf5PD5/1;
-	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=BPa3UI88
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Q5kfEXyX
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C93AC4067D;
-	Thu, 19 Nov 2026 12:26:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BD5DC40852;
+	Thu, 19 Nov 2026 12:36:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id etgjm1GKlsBR; Thu, 19 Nov 2026 12:26:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A67D3405F9
+ id nOr3yEE9a3Xx; Thu, 19 Nov 2026 12:36:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F182E40810
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795091174;
-	b=MKvSXF31HwjVWLEw3gNyJ6MnvGp+sdVoambNmCS04fJniL0gMcCWYOqWdtc2XWsMu+j6
-	 eupaVayZowvXngXzWiT6MZVCq5U9iKUNdEhWhhSXTs7/N8nCmiLASNXO3v6XVGVXX0oki
-	 62cxa9hZ5m+VQTPRPv9uQT3AWWu5FKK6hSmuZDCrspZDXr5VXohivqXmF1lZxTAc/Ppfd
-	 5IFVfvpp8WE/7Sp3cgHSaGqIIzTt9yYoNIdM869OdiMU3zYpzrYIF/9Gnunz+klYFFOLq
-	 f1QN9CDKPlOj25jcJIlRtHiDEUNlopEWjwyJS/N41M9no/CDod51KhUFi2anYw4ZLqg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795091764;
+	b=VPs4bRXxODHYICxYHQgTsrOEmlFRe5cDr9ndMr+Ux8EPCzsIfuBpbsVKS++3pJfGYK2M
+	 Rtg0p8jjcnF3VqH+wpbmTlDdEWeH6TI/X1sNE7YppAG2MswXKJQ94lMvu3J2/BBXiiH34
+	 rS+G79Fki0NzcglT68amPx+9YzuTPJwe7kSXcnUfvVHy+AfwIaUi0U4PU4Iv+Ltvsnzvi
+	 hzJZWRDKuzXTYFAdhSNosxt5cA5zQ7Moa/99tE8Xzjb9z0L6MNiD+0EyIGWdm5XoCoq8e
+	 m4wV3gncSpNQD3M7SVJMFlDCN4pgIZPpRrEN50yvccAx9xQttqxFbMOmc0iZeNaYwDg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795091174;
+	c=relaxed/relaxed; t=1795091764;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=0V9mF/TgHMWpuaTP/FTmjeJgYasE20OcebTxUP/UU/E=;
-	b=QLT7gvOPK51y0sjHJnXLx7R2ategvyRilO8ugGNoWtfGh4WwZYj6AzCkoPEYbySvgdrL
-	 wUADqPBWYaJHl+q5Hlz+GouWu3W1kjEuJhIxPk0QRM9fCmyEz8mJAutOJWWR5k9WC4FVT
-	 t3p1CRoGrf1WB08ZsWi7ngWwlB1HiRxBelOzbLVld00LhercOWXGCzfg3mzLRe6yFRdmQ
-	 v6f2trNkhIRrzcbfsKE9P8pRWQXZxlN/J1mnpCa7QK7fC8jxNSGoDW+ksNeE/vvWSYzy6
-	 RPinPaL9iK9XaRVMNIXWPYvs8yYG2D2P/GV53yzkkJYwe5CNSyUgvO3uuNylZGPJSgw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:X-QQ-mid:
+	 X-QQ-Originating-IP:Received:X-QQ-SSF:X-QQ-GoodBg:X-BIZMAIL-ID:
+	 EX-QQ-RecipientCnt:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-QQ-SENDSIZE:Feedback-ID:
+	 X-QQ-XMAILINFO:X-QQ-XMRINFO:X-QQ-RECHKSPAM:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=2ZHnID6nP+kTrCrreEFuQdZ4YAMHUQxjb9HT4cY74y4=;
+	b=JV7jGH12VQmBgkEIDt35abGLKq9fP32n3TXuu5gRz2PV1EFjEm1XjnlLIJ+DvhZd7nz7
+	 i7NVkpCuPfG3D96nmSetR2H7Io+TRPVIWOEmGgKHVGwyGgCH5h5s+H5yv8kQulvPUfsJu
+	 bfQvlOGaxEJmZmjfPx+x4ItLLnknCwW74VDMlRMdIRt1TYDRtMnxCfM2j8uRraKVE6+tw
+	 pjfURox2oR7idhve6trEoi4VS7WIKylwXT4O6Ql5FGP28+TOPaKSH1WWw6RQ37m8egsue
+	 gjBTlLY14lrACP95FFSzcVWV9+bPveL6sNRv0gamK75tC0gO47wdlQ+URuNUdzSClhg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795091174;
-	bh=0V9mF/TgHMWpuaTP/FTmjeJgYasE20OcebTxUP/UU/E=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Xf5PD5/1+APuZIKwuJLcJ/qfpeVzbNZNzKwehJn3LOiF73/XCPNN7BROlApDK4HNX
-	 ZrLOL7rixW3zSpUhmrNRBJFZUTyISioRfKoHgmbQQU8rdMrcDmfQyGbWXBT1ZS0WLS
-	 r/MWf1IDueZPFtY5hh5w9mJ0oP/iYDgdepTGyjpnC/s8wmcbzx92fYBQvnlsvaZIMZ
-	 OwJZbNX5LXWcBjZlGSJvW6WRGDtbHbnzyammU1LcdWJH8PTvjJy9plaPQIv29ZtCJa
-	 9FL5ZIIKjo0s4rHwaDdnSSz1lsTeZR8V2fOA9zgsFYMoOSzoqdARw/DkT6uN+CF68T
-	 9CJR8uHHdpVLg==
+	d=lists.u-boot-project.org; s=default; t=1795091764;
+	bh=2ZHnID6nP+kTrCrreEFuQdZ4YAMHUQxjb9HT4cY74y4=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Q5kfEXyXuL/GCDKTeIH21b0/FE+zBB9fhenwwVpIwRh+YsW3kcykGnOf5co41wc+W
+	 KN1mySx4/c0J11mrZwvl3BZ6teVZUIgCYLjWCyaZHO5FPOzEJf/bPY/Sk8AtC9kDa/
+	 veLFXwK3FOoNS+q/c39dID48rokjeET3M2q9GBhZbwVQYz/yRPn1sjriCIne+CRZVK
+	 KCSIlctMqE7e1Z+THjXKUPnfj4UVYQJ2/3rC8JUrJkwtOJOrIsYv9eokxRkAp0kbMt
+	 lBkNq0Z60YPdAogk/s7y2/ldvkksiiZ/Q8ApL/6OLDymjJASl07D7pAEnzZCQ73BK/
+	 rK7bf8d6Vsu2A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A67D3405F9;
-	Thu, 19 Nov 2026 12:26:14 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 41316A32
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:26:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F182E40810;
+	Thu, 19 Nov 2026 12:36:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 10CCC2FB
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:36:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2800740526
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:26:13 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0E35F81310
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:36:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 71dMpoX5HBnP for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 12:26:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 450AD404FC
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=45.157.188.8
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.8;
- helo=smtp-bc08.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=BPa3UI88
-Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
- [45.157.188.8])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 450AD404FC
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:26:09 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jVd3z1q4czgf0;
- Thu, 19 Nov 2026 13:26:07 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1795091166;
- bh=0V9mF/TgHMWpuaTP/FTmjeJgYasE20OcebTxUP/UU/E=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=BPa3UI88nto/5DIZ9iKqQvJCrki/MyEOw2/Q1O2pQs6Sgv8sk38SrM9my6iaJP/TG
- 5Bu0A4MlG2FC7sicGzBpiTEmm7v3gtJx7mgiImsxQLRkgqqb7O9QwJmc9ZgShbGELM
- ge95kiCejTj/9vN5zPXeplTAspPOT4xw3dYqvPMSb6Fx2S9WLEJXXIb+I+kOK6lmwq
- ylBdcy+APPFtRjG2EXry1dfPegmQx1Vgf6RjW0K7nJrojRdYEtheRdhlNqBTZr2khg
- 4OVff6v3hSB/6vFK7b1kz/kkAuuFuMVDIkbBzQ3khXIo1zXVFpZT3WeiDkn2mLthSh
- 9q52/WpuUW2Mw==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jVd3x1dnBzRg2; Thu, 19 Nov 2026 13:26:05 +0100 (CET)
-Message-ID: <7fe28def-9db2-48bb-ad02-ff9c3aa593d3@0leil.net>
-Date: Thu, 19 Nov 2026 13:26:04 +0100
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sf0fbOu322VF for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 12:36:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D885E812F9
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=114.132.58.223
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=114.132.58.223;
+ helo=bg1.exmail.qq.com; envelope-from=luojia@rustsbi.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=rustsbi.com
+Received: from bg1.exmail.qq.com (bg1.exmail.qq.com [114.132.58.223])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D885E812F9
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:35:55 +0000 (UTC)
+X-QQ-mid: zesmtpgz8t1795091704te5a37934
+X-QQ-Originating-IP: +vHOixPUvBo7LmmSfmS4imLzbDfnWJPE64g8soBn3As=
+Received: from jiangzhouqi-ubuntu-4090-01.. ( [36.110.52.2])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Thu, 19 Nov 2026 20:34:32 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 1013508859816826133
+EX-QQ-RecipientCnt: 12
+From: Zhouqi Jiang <luojia@rustsbi.com>
+To: u-boot@lists.u-boot-project.org
+Cc: trini@konsulko.com, tim609@andestech.com, leo.liang@sifive.com,
+ me@ziyao.cc, sjg@chromium.org, alpernebiyasak@gmail.com,
+ jiangzhouqi2025@iscas.ac.cn, plucky@rustsbi.com,
+ Chao Liu <chao.liu@processmission.com>,
+ Daniel Maslowski <info@orangecms.org>, E Shattow <e@freeshell.de>
+Subject: [PATCH v3 0/2] riscv: Document RustSBI firmware support
+Date: Thu, 19 Nov 2026 20:35:28 +0800
+Message-ID: <AEF561F2E6C94301+179509169842.3130233.16129671820912856303@rustsbi.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next] rockchip: sdram: expand types of DDR that can be
- supported
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Cunhao Lu <1579567540@qq.com>, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20261117-rk-ddr-types-v1-1-0d00e87a0fc3@cherry.de>
- <CAC928Hb00=uq3-6=F6j=KBHWHkmhot0ia0iVd4PrGLLdj-7Reg@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <CAC928Hb00=uq3-6=F6j=KBHWHkmhot0ia0iVd4PrGLLdj-7Reg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpgz:rustsbi.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: N6euzTYZA5gviPeopw6e3bKKyoPamCMSbPDIQG+wJIoA03BUQ17RsUzI
+ 5HBZ0CHDRuz8pa5MdT4+Ic2rpxIyjClLekmeQVvkv4GvfmEAK26U925oEqlNhCxET9avL3d
+ BaxX7RcXeyJNDuFv+HEVGErvl88pVs9F6NMzIB3Uxb8cTFq5H/VZdii0kVnDHh1Pmlrk43v
+ 1sqicbj51FCHehpOmW4UZso6xBBCYUp/IlBUIE6RF/WiNtpM0hBUmAvQp2R75XvdGqhywjw
+ nn0pQW65gSP3AybToYps/wuZZ7ATg4fuy/VMqjyT0zb4wNIgzsa6vunS+AHvkF5UWR+cihN
+ FozXQaCPh/EbH2KBVYELEuywQeJHjsesXpBWcHiysC65VpMIABxC9kILXn0AG6ZUhMU1y67
+ EGdu/d7K+L/L1nTC2pjWELFFKIUDvLcgyT1/HgAVbCogrpyLTW3cDtnYQDrUG36Fu1N1aSI
+ dhLPxslQceNrdaIApsrOt8H4/Eo0hCvUCxMW59F2GJ/2ah2B0va+xyWvK0xbf/9AOCSC7GZ
+ YGoQnfkOFh3JsNjZ4j65WbxUMJTZcTWvFH0WKRaIVVvUsCritK3VNu37s5wfVR7N/1C2351
+ PAvRt9lCFtciimZuaNk6uYJSsEtXpui/PejwsXt8hAHW8kDmhGeLN6q+zr65B6CP29XCcoI
+ 7fSlCgjcHLGeQjjF9lUd6x0NMvH1VYEdmx3oPIX3d6Mkgr39023+517G0enXz1sAVKaogwH
+ klWElBZ/GznexUapUOHadpOwI1yP9O/xKn+5uPp2u+TXjq79tZdHQmJWqe909aR0goGpdKD
+ YAZAt2t2bziU3w8d7x07JVhLziK5Idu14yXoQ/7L9IaHETtfg9aC+wDZvOHax7hZ+GhjK7D
+ Dtx4GY/fOqvDlhVTNqL+7OvRuTj/SW+PA5ruOmMpYPJTH0Nvv4I3mO1nmzLMOxUMwcGfO1X
+ 8RRLAsYl+Dj+Tx3CgMcMPaWc1n11LzRNnVXBIDQTyKYIuhN8o97I8n1QgrYvS3UkstUMmZB
+ HAySgFG8mvENw+FTjWT7hK9NXIy75thA1VTUqrnjScL80142/cm560bL7a5ZM=
+X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -127,87 +128,36 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-11.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Massimo,
+U-Boot SPL can start RustSBI dynamic firmware through the existing
+FW_DYNAMIC handoff. Document how to pass the binary with OPENSBI=,
+alongside an independent update to the SBI_V02 help text.
 
-On 11/17/26 7:07 PM, Massimo Pegorer wrote:
-> Hi Quentin,
-> 
-> Il giorno mar 17 nov 2026 alle ore 14:09 Quentin Schulz
-> <foss+uboot@0leil.net> ha scritto:
->>
->> From: Quentin Schulz <quentin.schulz@cherry.de>
->>
->> Joseph from Rockchip confirmed[1] the values we can get from Rockchip's
->> blob from the OS register for specific DRAM types.
->>
->> Add DDR2 and DDR5 to complete the list.
->>
->> Add comment on where the values originate from for future reference (and
->> to hopefully hint that those really shouldn't be changed).
->>
->> [1] https://lore.kernel.org/u-boot/501ace01-874b-4c61-b412-c297920c91a5@rock-chips.com/
->>
->> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->> ---
->>   arch/arm/include/asm/arch-rockchip/sdram.h | 3 +++
->>   1 file changed, 3 insertions(+)
->>
->> diff --git a/arch/arm/include/asm/arch-rockchip/sdram.h b/arch/arm/include/asm/arch-rockchip/sdram.h
->> index 1c28d4aefb90..2e88febbcf28 100644
->> --- a/arch/arm/include/asm/arch-rockchip/sdram.h
->> +++ b/arch/arm/include/asm/arch-rockchip/sdram.h
->> @@ -6,8 +6,10 @@
->>   #ifndef _ASM_ARCH_SDRAM_H
->>   #define _ASM_ARCH_SDRAM_H
->>
->> +/* Written by Rockchip blob's/U-Boot's DDR init in [15:13] of some "OS" reg */
->>   enum {
->>          DDR4 = 0,
->> +       DDR2 = 2,
->>          DDR3 = 3,
->>          LPDDR2 = 5,
->>          LPDDR3 = 6,
->> @@ -15,6 +17,7 @@ enum {
->>          LPDDR4X = 8,
->>          LPDDR5 = 9,
->>          LPDDR5X = 10,
->> +       DDR5 = 11,
-> 
-> Does it really make sense to add DDR5, now?
-> 
-> DDR5 is not supported by any of the Rockchip SoCs, as far as I know and based on
-> information available in the public domain. There was already a DDR5 = 10 (as a
-> placeholder?), and it was wrong because LPDDR5X = 10 instead. At the moment,
-> DDR5 = 11 seems to me like another placeholder with the risk of changing again
-> in the future and leading to confusion. I would define it only when it will be
-> really useful, i.e. when there will be a Rockchip SoC supporting DDR5.
-> 
+Thanks to Tom Rini, Yao Zi, and E Shattow for the feedback on the
+earlier versions.
 
-I checked RK3562, RK356x, RK3572, RK3576 and RK3588, they all don't 
-mention DDR5 so I agree it may be premature. The upcoming RK3668 seems 
-to only support LPDDR5/5X/6, so we probably should wait for that to 
-happen, maybe they'll change the meaning of 11 in the register :)
+Changes in v3:
+- Drop the RUSTSBI= alias patch, including its binman test and help.
+- Describe the SBI_V02 requirement using the SBI version.
+- Document the existing OPENSBI= input, the board load address and
+  how SPL passes scratch options to the firmware.
 
-Looking into currently supported SoCs, none also advertise DDR2 support, 
-so maybe that's also not very useful.
+v2: https://lists.u-boot-project.org/pipermail/u-boot/2026-November/641115.html
 
-What prompted this patch was the answer from Joseph[1] confirming the 
-bitfield values mapping to DDR types, and my desire to document that 
-this is not a simple enum, so it should be kept like that (and not 
-reorder/fix contiguity).
+Zhouqi Jiang (2):
+  riscv: Describe SBI_V02 in terms of the SBI version
+  doc: riscv: Document SBI firmware inputs
 
-I'll just reject this patch, we can always add the comment once we have 
-an RK3668 board with LPDDR6 and we need to update the enum to reflect that.
+ arch/riscv/Kconfig |  4 ++--
+ doc/arch/riscv.rst | 20 ++++++++++++++++++++
+ 2 files changed, 22 insertions(+), 2 deletions(-)
 
-Cheers,
-Quentin
-
-[1] 
-https://lore.kernel.org/u-boot/501ace01-874b-4c61-b412-c297920c91a5@rock-chips.com/
+base-commit: f6e8f09ed39347359ebddd983b96993c78b4ec7d
+-- 
+2.53.0.windows.2
