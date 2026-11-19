@@ -2,151 +2,164 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6050606A320
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 18:11:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89DCF606A32F
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 18:15:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=l6IruTBK;
-	dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=g9a05Aak
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oXc7lzqD;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=X9Gqoobq
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 99EC78149C;
-	Thu, 19 Nov 2026 18:11:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4E4C3814C7;
+	Thu, 19 Nov 2026 18:15:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bCAmKlELadxv; Thu, 19 Nov 2026 18:11:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E18BB814A1
+ id dR6x5qKwxi5f; Thu, 19 Nov 2026 18:15:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1EB6D814BC
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795111866;
-	b=HtfvX8FoGd9VoA/OqN0Gj49tFzIgcpB8+jAEKJbi4HFGrvHsGz2hAkxRIu9QGz5kX4DO
-	 BkrA6QShvMkp6FGJI5GP2znNTYQAOEn3xaPa6ZEojhHct5WU8qocpw97Ag+6mEoJ3tjA3
-	 gMF6xBRZLXAnLwGxKIpA0ro7fBFQLh/emsMzsBHFcOIuyHMgVgZh+6aj9YvuDM0X2I7GE
-	 8xrWnjKdBoMHwlfhdrgxjciTpFdr6fYgmPPAccU4yKbi3ruO4xyIC2LuhHl/mo4G4fl+B
-	 AFne5chHytlmp0B2IXkio7+krXgNXGisxwwpJc2gXdCHKrrZLNKD4TSyb3ZHxIU+TTw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795112136;
+	b=Xei839v2Uk7/qJzd4PPkdh3a6zaU5a5AfoNzsblbt3WJOpjTJmJK1WSlcmBkAvDk01Vl
+	 tJJ+HOs7DtumR5zmGjBbXHcpN3pVLpEb1FS7baTEbhSNZVT6sWDMLpoXkR0M452AQM2Px
+	 +utXztXB3d8JF9bXpDvv4epeRHQJHYC5+B37s6G1zJO11DZhXWCK9eqiQyUhbet6cC/XA
+	 yaZkErquK2PXrALtCvZ5WbHwKsOQhpnInw/dfVKu0lELRXHeUyMdBtvmT4WfZ9XQBljtZ
+	 NZkAVAKUQDwomV2CWOzsbIB59Vwy4Coxk6gkbeY3hWtLApLGJixx1/E1bEl+Upj6WKQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795111866;
+	c=relaxed/relaxed; t=1795112136;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:In-Reply-To:
-	 References:Subject:Message-Id:Date:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailer:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=Lo4Zyv9WTLNp4rNKSylNExrq5AarmTW5O0nsD5XyIoo=;
-	b=ay9COvyJ+UucIifFf4JnRY1kRK3+pWYmQYAk5E8tf5DnDLF3sKE90zAogxYKZZu4nFxw
-	 46XLE/KiWz7UfrfA+eXgmKvM/ju7a4Mw4vgGr9gkq2imLMog7eTU/VVma64Yo8CBeEwfA
-	 ktg7MB5Fjzkjc2EsncpyAd6lHotaP8riTtBRhe7hxfRcmb3kr3TIkHl3L2ZSGEe/10Lv9
-	 4vkQ38EMxHDNgoBTgsXdf3kxrfquMypmrGZ9DwCmG/pOU0CRf4/wqmNy2VbFrhHzupH4W
-	 88Fa6CxwkxHIzYOWdKS11JVpd08ITLsALroTcHST7ukjMszUTmt/yXvy5yyCVwKUOBQ==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=mgFT+mOnP9889oDFDAulvMpBHM3TBlqA9HtP29F5UEw=;
+	b=I0VypS4fYgkMUbzIka966V8GYGmkEKdUPSJNg91qsYFOfnyXJqxk4hYYRPVcVMP4shCq
+	 0I2ATDFtdy5fEHmXmg4t19PwJ0DuVtxlaeD6qpMBtVLvW5hoW7aEY7tSty+wgM4mQ5lVr
+	 UxQPzB456H0E5Lb+kcZ0uon7mlkL1EkR0PexDEuArUqJIHi5P+7VFd+wWwAvPAGpYTywF
+	 GHgTw2gFpMOFZW3qOlREigiWIzhjJhTHJvSf3nJGQzWrEp+IaDdJ2RQd4TksGwYd3N+7g
+	 uNO8A7DXVxK85JJbBaOSh4ERMvgwAehR3BxCxiXzHQ0AONFSCeX6uHeU8MebEOHK6CQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795111866;
-	bh=Lo4Zyv9WTLNp4rNKSylNExrq5AarmTW5O0nsD5XyIoo=;
-	h=From:To:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795112136;
+	bh=mgFT+mOnP9889oDFDAulvMpBHM3TBlqA9HtP29F5UEw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=l6IruTBKWpYp2ZJncAl6g3f9e/Rg0wKlCV+2fgHsfYP5IPsTMYVVjViaYvUXhXQNs
-	 mTYx49y9C5TzvjyT8mu14ICyi2LZyMBRaRal/4qiCqboaCIVMfJx07DjvgFHqhK80H
-	 0KcJwYs8O7P3hlHHhFH9feoSacWLSnMaDcF7FaVTd0jgrzGg5cvlaosAsPfsycLAid
-	 HQXkq0Z8tLQWkgBCt/FzcYC6LLr874/A0WviESrNU2yOl5ee+5TI7jugWg4RyXjQyF
-	 N9nlFnWgBOOUaUwXU4UVXWGgh4wuk56aS/egg4BdeHrPU23xjz9WQPs+I/YcN1pcXA
-	 o5CY5VcQa+6tQ==
+	b=oXc7lzqDIGPjqK5218tMVDvvbwW2wwk503aXxS9KMKvPnjNx5287jZ8MbperKGO7B
+	 qBgcwZefOhExckbsPjcLJxSYaO0LIkmrgSBMW6eLVD1tNa+ss6IvQ6EljYEgftCfkN
+	 wfqt88UvEJTH1tEay7X0SdTtaoYc+xADHsjJkBMo7/3PBoaU85c/b6iL0GIPNv0zaT
+	 5fzxWJMKB4e+5a6JrMhSTOwBoqYtTjFeqBfXCoAyhlz0bVvqP+j+2o9iL2GTSVs7xn
+	 HmZMcQp2FbXJ4UDERMkZZK22zeTvr7gJuBWn+eNw9nY3XwrIbOQzj07E8YnW5fBNWL
+	 7UedpMlQKv6Zg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E18BB814A1;
-	Thu, 19 Nov 2026 18:11:05 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3B86C465
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 18:11:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1EB6D814BC;
+	Thu, 19 Nov 2026 18:15:36 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id DA58E465
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 18:15:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3889140AD7
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 18:11:00 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D8337401FC
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 18:15:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RvbuU9Ff15yS for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 18:10:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 686FF40AAB
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::334"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X4KibBJfTBv9 for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 18:15:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 759BC40080
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::335"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::334; helo=mail-ot1-x334.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=g9a05Aak
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 686FF40AAB
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 18:10:59 +0000 (UTC)
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-8470d7d430fso31425a34.3
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 10:10:59 -0800 (PST)
+ client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
+ envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=X9Gqoobq
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 759BC40080
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 18:15:33 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4bb6c7b6dbdso35771595e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 10:15:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1795111858; x=1795716658;
+ d=linaro.org; s=google; t=1795112131; x=1795716931;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Lo4Zyv9WTLNp4rNKSylNExrq5AarmTW5O0nsD5XyIoo=;
- b=g9a05AakUDGrCfim+vbH+1MTYK1vZQGh8tijDprpIB8FMYMcKzvYGmZw2IDMb1dQCx
- Ryr+khHuuAUs83zA3VEd0E61qLBkfAMsmiaXCZ2g+t7Cc1gL5EH76JBt676JQXrx+A3o
- tT2YBcnSsSu3kTcrCGpeNIealnk9Iu/55T4lo=
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=mgFT+mOnP9889oDFDAulvMpBHM3TBlqA9HtP29F5UEw=;
+ b=X9Gqoobq/9pHBFgNzwoiEVcoObI3LMLO8qQQjFdtsK0/eYkRL8CQlCS7y4JTfOTik5
+ ExzPrgjZeneXEX6WuTPV+QeJ3pbn1soYDh6v3px68FNrkTQ7cD3kwu5LRHwM5Xct5Ve4
+ /Co3oKAVqiAKUDzBp3kImfSwyEmnz1rU53RTBOlBt3dJRgF88JvMSVmBVlct1ezY8SlU
+ GX5pznlQPpuluKHyvOkFg2L3HCVOTueYj6Bk9RnExi0UdhG034fBYZ3znyQ11XNF3eya
+ 1yHMOhjLBQIJlp9qlWTOfgDmXxwwNl4B6XsnJ+Ft0ALcqAFCpGenArdVLir4q2CG9KLB
+ ng7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795111858; x=1795716658;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Lo4Zyv9WTLNp4rNKSylNExrq5AarmTW5O0nsD5XyIoo=;
- b=sbh4kY245wnwbA9IuKJ+k4IMjtgGdsjj6b++sv0bR1xi1l3YtRpupEyUP+qtB59MQ8
- N3Os+l0kU5YniUGvl9h2L8rL0++U8pxu7oLN3J7mev7W+ESp5WnUt7a7Iu6BTYo4ykrO
- 2rz7+xC4x8IL89D4RLu881PiSiJ15PeQlzjYdNYX0HGhG8eD8Cj1Gja+ZNA94IrjL4zA
- t4OH7ujyLH6cw0Jc5yFEU8IMaVYhRy7jH7ip+XB/Qv4RE/btWHtK5UP/I1IM6ZM0tjVJ
- hWmS2tjL7jyimp8W2dg/cJ9UU6eYpThZR1LphFLyZwbY9C9VvjBJPYpGPRsarr5/Run7
- 2GFg==
+ d=1e100.net; s=20260707; t=1795112131; x=1795716931;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=mgFT+mOnP9889oDFDAulvMpBHM3TBlqA9HtP29F5UEw=;
+ b=zA6luVko7Hx6q3FwH9eVGc7jSrgPOd8pIk2clpn6Slw8lH22EG934zstfbYhmSU2yo
+ VFI5vfyANWwUF0Wevx4NQAnq3SCeFA6vAk8VBjCvLcy9IWPiJMoAI+K3Z581i6UXkMIB
+ e850fjpbkJZteplpAR8rxTTjEfxUO5yw67x7hw/a6XwbLDtKg3jg0YKWi40i+NO9XGRO
+ ccQGCFgMgQuSUM4gWrSdIMgHlM1dvB51Q0zA1BhhSg2ahjMajaRjmzS0kPzt5FyT8xvU
+ 8vgII+TpxmW+puvx6bZPCiBhsnlPTdDj6QWr4wutQZZKh+6qWEx7ZONILDaI8c6GhJwz
+ r2jg==
 X-Forwarded-Encrypted: i=1;
- AL+hErGpgFKAMI+rIPEAgey5WLQGBa15J+Ak16Wpkgiyww3Cd6DgIoJXhltMov8p/QWPdAvpMYf0Ofs=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/NK47sUXpuDyR3TU9yOCGpXY1I4ejM3XG/N7alBd1ciBwuU+QF
- WcEZBUo2h5k03NBkG3zYze3HNyyad9QG84zyMnKNdFhGraHwRCnxX7aS3WPWMZKYAdMObC1jqaR
- fWd0BSuCDnQ==
-X-Gm-Gg: AYBFou2ax5KNZYRuCw2Ta6uDy3uUexGYVy9WleJ0dh7ZQcepNxnDoozj9KjvcrtaSdz
- deQNATdAiKZUaDvRBVCxd4a6tRaj2NuBFc56KpnL/W/2Yu3IuyCgGyUDNLEKwq7ADiFkctvBx8h
- rT9CXeiWdSqpUm6nuFzKnnRCsOuIbkCgkPC4fYJIakRdQH6gM7Z7l/mf/FSZG8y/s0UJVofZW0J
- sVExJrL3/YLxOL4JfknvztXT77F1zeI1yDWn58heC2icQZ2K3YptDkGziApD7Uep3d3wJrYsrud
- opyfSe0B2rkE4PXn6QrTu56i8Vt+bYqO8Pu8bWaqRHYFVtlS61AgZ1rtyaCsQV9g3a6EZQqyLQc
- bxTZcFX8dbBxF5o1dd41Kfu/Rr/oS41lAS9Bri99Gr56rWlcqXJq6/03eA1TDRwXttvZ4qdQGMw
- XHmA3CPpQAGfzU0zYW3m6GXKcE78CjkHjEBFSV3n284UJxW272MP8CB5dCGflIzPROwRlBatjgQ
- nXrryJQfbTM5g0zXUqmIrR3QSykzKQg4u+hp7dic5YvkWm7KsGSx9ct88968Q/YQe8n1SThM+0Q
- g/FXmQ4ATBrvbZa2rU8Oqw/EcMG2vDh4hpgaAnB3tB+4fcWewzpeqi9FDVwRxnQidugMJkZ78Z5
- DFUk92K3IRwBLAKmAeepBdB30D7GtnB8fhysF5lHbEmvV9CNl1c+37GMKlgRGKNT8RnrN7fzBf+
- 0yg95wzROY1KfxkfgHiNMNF2Yjs45dKw==
-X-Received: by 2002:a05:6830:230b:b0:862:9993:2d27 with SMTP id
- 46e09a7af769-863159027bcmr900109a34.20.1795111858183; 
- Thu, 19 Nov 2026 10:10:58 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-863168bdba0sm213594a34.7.2026.11.19.10.10.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Nov 2026 10:10:57 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Randolph Sapp <rs@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Kumar Gala <galak@kernel.crashing.org>, 
- u-boot@lists.u-boot-project.org, Daniel Golle <daniel@makrotopia.org>
-In-Reply-To: <b33d1c37d001192a911db58dbadc5f7223051a7d.1794614217.git.daniel@makrotopia.org>
-References: <b33d1c37d001192a911db58dbadc5f7223051a7d.1794614217.git.daniel@makrotopia.org>
-Subject: Re: [PATCH] lmb: Check available space below the allocation limit
-Message-Id: <179511185743.565509.10208647729764081303.b4-ty@b4>
-Date: Thu, 19 Nov 2026 12:10:57 -0600
+ AL+hErHtx1fRIO6Hnef072JTh0fs7/JuyQLxfr3AECk6kYBMX6wHBUjzESC2ZE/aPYfnP45nd7nxO6A=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z98yZI9xDO+FGL7iQbv2cfVF5zqXkr5tRd/HFXjjyNRVbIKAtlZ
+ ezmGITLBWv1PzKEyx/eJNVijrqgvvsS4kq5jf/UYw1r8S95poGxBjteN30+YK9WnYBs=
+X-Gm-Gg: AYBFou02H8PZzSwqwmJuHs176PeYcPhIW/pu/8q/uh3MvYYnaL6yEZoiSofp9+o2hwg
+ QcSiWmYaVgKgPhhl/I+JCpJUXWeWtV76/fHk3q+NXOHSy7AoFFufsv+WvtQgeB/Eght71MMez3W
+ LpZHZ1ipYRn/rQ08VR4HCUBNBlp9nFykcIKwgxaFTMPBepz//EEETR8+vGwpcYdynHNtvNugr2w
+ V1MNdIu9um9hQh4JnUZXMHO1dKJh1/ilqoOJ0w/UcmYBd8qmTxUM6NjqICCZ32QsHPHFDE7jc3e
+ VHaDAKPd8iUCIkAjg6MowfwTbSwtyyiPLGeGV3uy3+DPA0E3MMe/d8F1LjgJnuV1HdhanDXEWio
+ 28G/Cllo5p0jBXGeqIw76/+zQXbCCXU4MWjU0eIYPWftOCUpjkk6O9fFpdfVy+mU4Mx82iCjrWB
+ qvs6193sSMRiEMAd/wFTkTDX0GtMZD/ynXVxWH5qaaLOr8Q8JRZc5pdiO6sTaRyiQJD0teL+zu2
+ VsmgfVAY7F3Lwrr8txjcuDCHE2iWKKuhq5rKD7mk+vWbzgO4nEtPH6AUKRKzDCrQ6nDnq1hel5R
+ 5jctKCDYtuZE6NbdFK0UdRe/01njmZeioqj34FkTOfKZcMUSOK+UB3o3PKKFesvUAQ6ssLUhNeo
+ Rj46DcXQ=
+X-Received: by 2002:a05:600c:8184:b0:4a3:5a7b:6002 with SMTP id
+ 5b1f17b1804b1-4bb8881e969mr6958715e9.28.1795112130434; 
+ Thu, 19 Nov 2026 10:15:30 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:ee3:3401:678a:3519:4af3:27da?
+ ([2a0a:ef40:ee3:3401:678a:3519:4af3:27da])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab6b9add26sm1063616f8f.44.2026.11.19.10.15.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Nov 2026 10:15:29 -0800 (PST)
+Message-ID: <078dc2f2-f7ac-4741-a683-c35d4ecc8296@linaro.org>
+Date: Thu, 19 Nov 2026 18:15:29 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 06/15] binman: Use mock environment to ignore DTC
+ variable
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ u-boot@lists.u-boot-project.org, Kory Maincent <kory.maincent@bootlin.com>,
+ Linus Walleij <linusw@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
+ Alexey Charkov <alchark@flipper.net>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Carlo Caione <ccaione@baylibre.com>, Yao Zi <me@ziyao.cc>,
+ Michal Simek <michal.simek@amd.com>, Marek Vasut <marex@nabladev.com>
+References: <20261116-qcheck_fix-v3-0-b6cf7e96944b@linaro.org>
+ <20261116-qcheck_fix-v3-6-b6cf7e96944b@linaro.org>
+ <0ff5c700-9ad7-4aed-8309-aa40e6e3cab9@cherry.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <0ff5c700-9ad7-4aed-8309-aa40e6e3cab9@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -156,25 +169,100 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, 13 Nov 2026 23:57:22 +0000, Daniel Golle wrote:
-
-> A limited allocation checks the full bank size before applying its
-> upper address limit. If the remaining range is smaller than the request,
-> subtracting the size can underflow and reserve memory outside RAM.
-> Check the available range before calculating the candidate address.
-
-Applied to u-boot/main, thanks!
-
-[1/1] lmb: Check available space below the allocation limit
-      commit: c1958b5f6cce03956d309ce422b5d9f819955d4a
--- 
-Tom
 
 
+On 19/11/2026 17:13, Quentin Schulz wrote:
+> Hi Andrew,
+> 
+> On 11/16/26 11:59 AM, Andrew Goodbody wrote:
+>> If the environment contains the DTC variable and it is set to a relative
+>> path this can cause the tests testFitFdtListDir and
+>> testFitFdtListDirDefault to fail as they change the current working
+>> directory so that the value of DTC no longer points to a valid dtc
+>> binary and so the tests fail. Instead create a mock environment that has
+>> the DTC variable removed from it just for the duration of the test.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   tools/binman/ftest.py | 16 ++++++++++++----
+>>   1 file changed, 12 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+>> index 567ffa96b2b..50fb25325a2 100644
+>> --- a/tools/binman/ftest.py
+>> +++ b/tools/binman/ftest.py
+>> @@ -7984,18 +7984,26 @@ fdt         fdtmap                Extract the 
+>> devicetree blob from the fdtmap
+>>       def testFitFdtListDir(self):
+>>           """Test an image with an FIT with FDT images using fit,fdt- 
+>> list-dir"""
+>>           old_dir = os.getcwd()
+>> +        local_env = os.environ.copy()
+>> +        if 'DTC' in local_env:
+>> +            local_env.pop('DTC')
+>>           try:
+>> -            os.chdir(self._indir)
+>> -            self.CheckFitFdt('fit/fdt_dir.dts', False)
+>> +            with unittest.mock.patch.dict('os.environ', local_env, 
+>> clear=True):
+>> +                os.chdir(self._indir)
+>> +                self.CheckFitFdt('fit/fdt_dir.dts', False)
+>>           finally:
+>>               os.chdir(old_dir)
+>>       def testFitFdtListDirDefault(self):
+>>           """Test an FIT fit,fdt-list-dir where the default DT in is a 
+>> subdir"""
+>>           old_dir = os.getcwd()
+>> +        local_env = os.environ.copy()
+>> +        if 'DTC' in local_env:
+>> +            local_env.pop('DTC')
+>>           try:
+>> -            os.chdir(self._indir)
+>> -            self.CheckFitFdt('fit/fdt_dir.dts', False,
+>> +            with unittest.mock.patch.dict('os.environ', local_env, 
+>> clear=True):
+>> +                os.chdir(self._indir)
+>> +                self.CheckFitFdt('fit/fdt_dir.dts', False,
+>>                                default_dt='rockchip/test-fdt2')
+>>           finally:
+>>               os.chdir(old_dir)
+>>
+> 
+> os.chdir() is not thread-safe as it changes the cwd for the whole 
+> process, c.f. https://www.man7.org/linux/man-pages/man2/chdir.2.html
+> 
+> Nothing your fault though, and I don't know how to properly fix that.
+> 
+> For this patch, here:
+> 
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> I'm wondering though, do we actually need patch 4 which removes DTC from 
+> the env if we properly patch the env such that it doesn't matter whether 
+> it's present? If we really need it, maybe moving it after this patch 
+> here with justification that it's not actually used anymore (and was not 
+> working before anyway), would make more sense to me. Just nitpicking 
+> though.
+> 
+> Thanks!
+> Quentin
+I am happy to just drop 4/15. The patch was only there so that nobody 
+would think that the DTC env variable was needed and in general stuff 
+that is not needed is best off removed. As for ordering, to me it felt 
+better to remove it first, which fixes both issues, then make the tests 
+more robust. But I have no strong views on it.
+
+If you would like a V4 then please let me know which you would prefer, 
+to drop or move or just leave as is. While the rest of the series has 
+some minor optimisations that could be picked up, 4/15 is the last thing 
+in need of any change.
+
+Thanks,
+Andrew
