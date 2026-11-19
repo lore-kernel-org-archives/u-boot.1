@@ -1,250 +1,151 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9DD360A2610
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 14:16:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2178606A325
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 14:19:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aAC+//x3;
-	dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=L5shuLyz;
-	dkim=pass (1024-bit key, unprotected) header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com header.b=T/K9vFJq
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aBpaCNhO;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=s1prhXHm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 396C160D8E;
-	Thu, 19 Nov 2026 14:16:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9D22C40659;
+	Thu, 19 Nov 2026 14:19:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h1rURVsWz8Um; Thu, 19 Nov 2026 14:16:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0CC2860D7D
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795097808;
-	b=pQI41ifHZ35g8zylVIss1R3Wl6dEr/8JHidUTUdBuBPrWNw8nl03kC8idNM4Q9wIVbt+
-	 nY7qTDtGT8U9VAXPzRKimThzbBce1q3CMmsX930d7PjApFr8r12dlLRmeRzWtFts0h1c7
-	 aIKwJTF8rbzizxLpZFJROZO1uhLdDOXa/azR9d9NXvYOd0kLMESUEhVm8AGdY6TSNm3Zj
-	 cf4YJHjtp3I7GZgdKYPoIm8HwAKKSS0lmfk5v5oV7uiEiNzcUquY1/bEdX7bfRDGYbjyO
-	 6j7JRxENKYjFWIFcNKIrwz4Eya8hrvnZ/A8UzsTkaCHeAD0xgNu1w/8mafkhszHUZkg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lxdyxTrqqj4X; Thu, 19 Nov 2026 14:19:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6C39F40A47
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795097964;
+	b=sJNA3Gdqngxmm75I1y7Zj1AY4q946M8yITetK9E+iVJ0jtYiURpW6IcfRDaLOsgfNok1
+	 6H5AIYX0U5rERo2rwhtDpJs42iyduB953KZkGeHgZVhP7UZU8KtjgpRrESUvazK9l49F7
+	 Ye8paKsMTxV0M631xjIxvtqWu+Gx+teLlCop3oV3RyMveybMsfaHutgC/dwA+wSMI5DV7
+	 mzXLjwrpdF85+LpdruqqxsQNXd7TMT4PcmS1I1zSciZuavczVfh8Qc10lOFWhzpLks2ss
+	 7wx1Vm6VeLEwOiMhZECeF7/g5bdKSKo8hSceJXP3QyqRo+E7lah2Q0Wu/tkp8+waFGg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795097808;
+	c=relaxed/relaxed; t=1795097964;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:DKIM-Signature:Received:Received:
-	 X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
-	 Received:Received:Received:Date:From:To:CC:Subject:Message-ID:
-	 X-PGP-Fingerprint:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-EOPAttributedMessage:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Hrfm76k1vwngeY/Or6kwCmyiDufaKR9joLC7vK0J3Zs=;
-	b=kSNE8WBfJ3d2foO2qfsa0/eJYq0u17pDCAcrBU5+VPDzVN0tTVUGcWToBuCLlih580xL
-	 segpFAye+7AQDpAYrfrEJml/4BQENLnFojopT6Dn/Xl0UpuQZr6X16UaVlJefS0mYcqVU
-	 n5NqxgZ0uoVnxaod5UrknEG3DEVzSO5gIQ3eUncsmZf8vXkiXaJrAXeIZ8j+w/QyOLUz9
-	 jOEgXumMpQJOhMRfrCT6H++z/1ClhOy9JSrQ/QXIbmkbcIoNfuSxUNQwpFFqIgR06CK1y
-	 e8bj43HqSkKE6WhLlpKBNu32FVxVdo3PwNrHzvpR/C+QpHiyUTk5yH6hJJJUU3pcbqQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=ti.com;
-	dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=L5shuLyz;
-	dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com header.b="T/K9vFJq";
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
+	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=eONiby0OxVQAK1bqQaLfvtnouuaPlaAAn1fLsLMaNr0=;
+	b=XH74NkwUguzSbl5td2NjWF7K/2B1JuYKm4PmSGL/b1DcG/Y8xA2emPcFVVOlDzWMth/B
+	 QH+PbUkmR9ovt6cV206RTwVARdEgRRezhSFlE6uXAdw5gsq8iVJgrkjTeJ6ciOs15hUQO
+	 alaBiZgMG57Jru8G/bvyT6eymX3rnPSx5V5RxpP5oxXfD+U/yPqXpqO7hWzJYGrYlhx63
+	 BrCkBTQIPCHyJuI4zKcqy5DC+uen4AkeD1OAVlhH93LKfvV5dhuj2H4tmbZBQHZ7rdgS3
+	 Sxv2P8dEplralA8fWpT0V3WHeYNlQ2eKG+hqYCe1wuWUdQIAs0W64PZlubCUwEOEMsQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795097808;
-	bh=Hrfm76k1vwngeY/Or6kwCmyiDufaKR9joLC7vK0J3Zs=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=aAC+//x3vKy6JDNELm8/PhTm/LLhqqlvP6nWRX1AqKKwmv7cMe9qVAJRoFoqvcVeP
-	 yDWOKANFhu+aHVYlzzgViqSTF+aOHOhlhI+0/ta3hRZA/84+kSQTrpns1n5xdV+sop
-	 7OSivwNh/bs8wQfiKauGZq5qQJAmWZJCZOj0bpONJG73ibF0uWk7x2bI7w/UKfqMbd
-	 LHqokMTL9nkUSBn0sCqEO+EVDBdGvq+g5rcxDV2p1pLHMmCygK8e7STu0Wyti7fI0U
-	 8s5heJVoUZbxy7+DPkvPoi06ijgRUf27SDGNvtdG4WHLUrupawNez3VjQ3RE2EYXnx
-	 8VSLh3UqipMow==
+	d=lists.u-boot-project.org; s=default; t=1795097964;
+	bh=eONiby0OxVQAK1bqQaLfvtnouuaPlaAAn1fLsLMaNr0=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=aBpaCNhO3KwZvm71EkQ/4hSuFXEyweMXWMQVGGnKvlg5rRQGZQxvid9WeA0ZxoLzd
+	 Ih1M9CoEkG09W+jPZg12KE7+sOnVRMz60r342L1n4r+3nqE34S5YVbUlwAouEHsfUx
+	 1IEDAXR0GKnEPWciSI0mmcnMDKjxlqGuwNRFdl/gul7ow5eNa9KowH2uzsj+FXL3ig
+	 uV5RJEVKpNkJVsye9grFgdFcLDs7tKOjlDu163BxD+TFS4EOiufZD2cH55kvroAHdw
+	 D2A10qD6qEp7ZJyst0n1+Y3/dHfjZGviN4b5ZbG90adh3PcbW8Sm8YXT03g8o+36nL
+	 8ZWNyFc65zKnQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0CC2860D7D;
-	Thu, 19 Nov 2026 14:16:48 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 50AF022B
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 14:16:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6C39F40A47;
+	Thu, 19 Nov 2026 14:19:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E8F4E22B
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 14:19:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 35BFC60D7D
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 14:16:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DAD804057B
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 14:19:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hGGUmaJXiam5 for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 14:16:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 680916064F
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=148.163.154.28
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
- helo=mx0b-0002e601.pphosted.com; envelope-from=bb@ti.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=L5shuLyz; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ticloud.onmicrosoft.com
- header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-ticloud-onmicrosoft-com header.b=T/K9vFJq
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
- [148.163.154.28])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 680916064F
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 14:16:43 +0000 (UTC)
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
- by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AJBjRxn825527; Thu, 19 Nov 2026 08:16:30 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=proofpoint-05-2026; bh=Hrfm76k1vwngeY/
- Or6kwCmyiDufaKR9joLC7vK0J3Zs=; b=L5shuLyzbdirU/Vuaz6h4r0ACllDEzd
- EDwchjqRfWNt7Cei1JtlfvSwT0kN7UNMDVDX+LAgMIXTFixe6BvcsRPPJcMqfIWU
- SswAoA7XF6w75+necZBqRz5UX8TFgm9xClJMbm1tLqKCKs1hr+D9M1+XRaTor+yg
- 2QA1AuT9mC4/lLtEXPbC2oBNrdn3Qa8j0/PhMejHXz2JCU95fny1MVTk+U2Qa/dQ
- 6/P4iSrOQUze6inzDJxI3fOn/0ukfhOhwK6sU/BFjtjbg0FM10CCYHjKyfkwx41N
- 83GJv99iB+xbWZ1HyO7qwfSIg82nh1AANgYFhz7iONoJgLupw1XmBcQ==
-Received: from bl2pr02cu003.outbound.protection.outlook.com
- (mail-eastusazon11011059.outbound.protection.outlook.com [52.101.52.59])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4j1p6d401w-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 19 Nov 2026 08:16:29 -0600 (CST)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TGSsjSn8aony for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 14:19:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0CA5140581
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32d"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
+ envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=s1prhXHm
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0CA5140581
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 14:19:20 +0000 (UTC)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4b467581b98so27154635e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 06:19:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ticloud.onmicrosoft.com; s=selector1-ticloud-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hrfm76k1vwngeY/Or6kwCmyiDufaKR9joLC7vK0J3Zs=;
- b=T/K9vFJqJ5MC9/D1Znt7wLNRutORXWp4t3NCdw81Y1K9J/UPfjXY3caTvc/BjD2I9wfUvpN7pkQkA/rglRfArfv9Ii7/UU9sBYrpJJ+WJrzZLn3u36QSyp+OYuVWrPeXXcdq5VZG/nUhvQL8UW1BeXtbzPtJxRs8qRh5CIT0D0k=
-Received: from DS7PR03CA0124.namprd03.prod.outlook.com (2603:10b6:5:3b4::9) by
- SA1PR10MB5687.namprd10.prod.outlook.com (2603:10b6:806:23f::8) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.592.12; Thu, 19 Nov 2026 14:16:25 +0000
-Received: from DS2PEPF00006E20.namprd05.prod.outlook.com
- (2603:10b6:5:3b4:cafe::5b) by DS7PR03CA0124.outlook.office365.com
- (2603:10b6:5:3b4::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.13 via Frontend Transport; Thu,
- 19 Nov 2026 14:16:25 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 198.47.21.195) smtp.mailfrom=ti.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- DS2PEPF00006E20.mail.protection.outlook.com (10.167.23.213) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.639.5 via Frontend Transport; Thu, 19 Nov 2026 14:16:24 +0000
-Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 19 Nov
- 2026 08:15:37 -0600
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 19 Nov
- 2026 08:15:37 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Thu, 19 Nov 2026 08:15:37 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.75.137])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6AJEFbUT100394;
- Thu, 19 Nov 2026 08:15:37 -0600
-Date: Thu, 19 Nov 2026 08:15:37 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Markus Schneider-Pargmann <msp@baylibre.com>
-CC: <u-boot@lists.u-boot-project.org>, Tom Rini <trini@konsulko.com>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, Daniel Schultz
- <d.schultz@phytec.de>, Udit Kumar <u-kumar1@ti.com>, Richard Genoud
- <richard.genoud@bootlin.com>, Anshul Dalal <anshuld@ti.com>, Aristo Chen
- <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>, Kory Maincent
- <kory.maincent@bootlin.com>, Paresh Bhagat <p-bhagat@ti.com>, Julien Panis
- <jpanis@baylibre.com>, Jacob Parker <jparker@basepowercompany.com>,
- "Mattijs Korpershoek" <mkorpershoek@kernel.org>, Igor Opaniuk
- <igor.opaniuk@gmail.com>, Johan Jonker <jbx6244@gmail.com>
-Subject: Re: [PATCH v4 0/7] K3: wait for TIFS init before CTRL_MMR unlock
-Message-ID: <20261119141537.vao7cvrakzbugn7k@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20261104-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v4-0-e211cba9f3ea@baylibre.com>
+ d=linaro.org; s=google; t=1795097959; x=1795702759;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=eONiby0OxVQAK1bqQaLfvtnouuaPlaAAn1fLsLMaNr0=;
+ b=s1prhXHmTt4tK5Yb2Bd/KpRsGxDFMd/a73Sgx6yn6UqZHTBLQ5JVt2U/XphCy+nbc1
+ 7CrP0JuPWG/L2wTvCSrVUHRKlqcmjNR/bX57mn5R5rb8gVTmRveGCIUPBfml7irepTyH
+ nkeDcEj3mRyfJP8svbExpr1VU/d0V6+TcpQeN3jA7+VxUNXGAObUrni04Hs0za+U5wjE
+ U8jEBVhTRcStcFtQA/VFcvyjvvMgKx6q6EGDWB6sZ4kPARA3wEsE6QxLDp/9uPiCkwbb
+ YZem9LUoiXiusupt8i2toWpLSmMGeFRfaPl4AWDLVXhnyvrXSgh3e2DxXbA/SlcecDHx
+ FUVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795097959; x=1795702759;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=eONiby0OxVQAK1bqQaLfvtnouuaPlaAAn1fLsLMaNr0=;
+ b=QJnwpzSp/RExIWX1fGxY0TfipHX+3Sk7FADCwNqcJ2crwV06r5FUSPrEU4nGlkxs3H
+ RaAee+lDJrRY58kgYjINASvLo7O75CuT1n5SIIpymf6ilGWQLiLspOiKdx4QHL65DM0q
+ vePZkFfWPx+EMBrEk/RtJRVEDCYOuU8YcMBOiK5qmDZgIwBl9uFgkN+PhLdlxAK9JcpS
+ WEAl0CaHsIRb/50sziz9GB4fictEUDWFOL4vycB/6ItKs+S61hjYQxtl9K0L/L/mSnow
+ scnTstRk0A/A9x4/zhr0h+7x4pO7ExKg+kL/mH063tbefYNgI1c3S6SpntsKSFnRjgvf
+ tR1g==
+X-Gm-Message-State: APuU4Z8XHtRqdP1Jk6AOdJyHix6AzIhKEpHCzSWvjKm2ftwKCapIDMwC
+ Ooyg9qBqa+RA5wazTVRIFILg+olpxGfNDQ0st+pK6r7T4LniBN0BmTzfEBwEkafdA7o=
+X-Gm-Gg: AYBFou35KXtJlEbkatw4Ks7GyLceIcfXnqRCEogERfTxfrBuy6Uw2D8NOwqt72lXz3k
+ pjWc/j1rSQO9ZdQvHfUcikF9Y8bbYe19bR/eGpftfjnKLJFafCAw9EbLM1Ki9uGiGDgmQP7M1VC
+ oQcUaVJ+56nDt821JqG9uAZ1XvKTujqR2Ur9jpQsSJjAuzQDzp47H1bFxNZykUy3GBi95pca726
+ ZopwsHcropC/WEYkbCvysr1GIMF3vqXAi5fYz7Dse+KjqXO/+/l/0bgx+GkLS0LPSdymf/NGxaA
+ KnjjQoDzFtmFhYAiARH0RI6MKM+KXO3/b6ooN7RYjV1t/FKuFEcjpXTx2MMeGVkr2Mw3+ucPBbk
+ A64WtMsEZPxwKNwdUz177SAyYK/U8XDQhNJWiKg3Lv4iymWCtG24ZwY5jbZQTpeX9Zw4ogHWFpG
+ UzA1qT3e5jt1eSGgnny4GzS/3NDfh9GrxwR0v3m5RScPTeSBiud3Cr2L2lJLzODPAcBlP8Xo1+l
+ UkMmf51ucr0tjRj5dQiEw2tTVBQtzJh9hU7P2guNxz9AXmUJw6SS4rSKgyx8UbcmnWR4iKRDAkJ
+ hREUJihNiQnKMCWl/giBq8dQvdk8IjrTIaQ97ybLAojJBrQ/
+X-Received: by 2002:a05:600c:620c:b0:4bb:665c:a078 with SMTP id
+ 5b1f17b1804b1-4bb7da4917bmr118122025e9.28.1795097958808; 
+ Thu, 19 Nov 2026 06:19:18 -0800 (PST)
+Received: from artemis3.elfringham ([2a0a:ef40:ee3:3401:e7a1:b979:32dc:a16b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab5490e40esm74892f8f.27.2026.11.19.06.19.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Nov 2026 06:19:18 -0800 (PST)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 19 Nov 2026 14:19:18 +0000
+Subject: [PATCH] doc: develop: Update docs on testing
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20261104-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v4-0-e211cba9f3ea@baylibre.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00006E20:EE_|SA1PR10MB5687:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63b486f3-2fb1-4893-2e0c-08df4647b16b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700016|376014|23010399003|7416014|10067099003|18002099003|22082099003|6133799003|13003099007|56012099006|261022113327099003|261028144727099003|261009223027099003|261026121527099003|261102123227099003|261021121427099003|261022105027099003|261026140227099003|261021135927099003|261021123027099003;
-X-Microsoft-Antispam-Message-Info: zpKiMtSDGWObpke7kJ2ccmtN/+94fVEy2LeYR+HkN1vCld1Bq3riaJgAOz6e/iymGUN7RAiGYJ984ADoYCmfSIaI7YVmgz+w0WLu/pDapsiB5WtiM5Pc0Wd6C6jFfoXWv9FIot3VTMi+e4y13dpF4FD19zd81VIxfweRyR0bqBt3Fu4cXPZG46VkWbPp0OXaglGH1fS7UPmshbJr55WJxFuV4km4RPc/KGEBYXUuIbxX2aFvA3WDGEO6OhTObht68v68EJbyxz+nISGIKvhZnIe6mNulJ/3KqglDepbxd2gVzEYBSiIToiPL1czKOVpEiD0fUWxY2VV2DCoF4005o+RJ2T8rxRMwdDGf808qxc6BaWt6MGBTWBdRY1FT+Q4bGBaZTeCfcxj31Acpa4tH4gaB2sdE0LxrX7CamvnI69wljyTf0skfvxGYOSw+vgGbFcxd2KJg2CS5p0Khty6Rpsg9yIBbC5WR+1xnwH7ZTbCRrn6Zd4m6NU9zKnGKeIflr1jzYddNeVt51yCVJTFox7D7sWtxk1nYuquDGz+y7hoQtHFBgVLjFnEMPEr+YJV453zkqvL1Upo96IG1mGYJvid4gVtOSxIbsDMTVLXk/tCKlPTXrMzFcZfiV/Jb5kt8r1j8W276kv9un1NdZl0/yg==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700016)(376014)(23010399003)(7416014)(10067099003)(18002099003)(22082099003)(6133799003)(13003099007)(56012099006)(261022113327099003)(261028144727099003)(261009223027099003)(261026121527099003)(261102123227099003)(261021121427099003)(261022105027099003)(261026140227099003)(261021135927099003)(261021123027099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: OA5+ROWQ3bjCtO7Pn+S7/Rlmha83iZcTdjo8KnF6+/cEztkWJzKaxXUlulwd5RL4F2b2fa2NnwRuCzPmlg3bf5nTPWAoocj8byyNLf3Z/FifPVwh85eZlJ+vOq5mFwrQ/5jKyeRcqxh8mCAybAC16TVDQ0Ta9rIkZf0dZ/HC52+afyu/I96PD1eHKW0IrkLvPQD2rt7RrStAssP3Q/ecO3NxIjN20I0RN2JMhyfIFEhgmnXTfBaFAmH2Vb4NRO/HvPXhj1wGcTIRp9qY/FJjlLJ3eDCSw7Cezo3VUAIzNx2Ih/3y6Bq/U6ls705Ozk+Mf8oKGboMizEpIGKb6MlRBcoQ7KLA5aM9tUk68wqSNzehv+phGlcOufOXc9V7lqw/JUAPWN2yD9i5HwfnjTuYVyHEK9KRVZOzaJf01QnbxiBQ8mzuKQauMDL8C50HsDZr
-X-Exchange-RoutingPolicyChecked: mfH0pnNof91gvKNXP9DffuxKjJq90Lg8I8ZuYkz6BnXwRBWIGVt/LhioUS+kcVLv8pppcf5qFSRuoITiPl0Xs0oL7o4kmBRJIszU0M65MhkJQuhJ6W6HkGUX3Cog0CoGbeIwWxvHu0HCuLg4kTxYddjcw1UJe2FV98B/kRMq9lKA2d/a7E/3tBP1WizriJ1odRP5ie4xEBl16Dp4Irz5yffbF/0OqxpmDHLmw/THNM46CfGJjhtkqJjeVA9rrU7W2G2HETtxmM+4F7l4wlWFfAR9uJ4kDaBq1QQ4PqV6EJTUG1Rlrta4OWKUJRKAcLVfR5Z3VkZIMcuNjWZOmkjyhA==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2026 14:16:24.2063 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63b486f3-2fb1-4893-2e0c-08df4647b16b
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00006E20.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB5687
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDA1NiBTYWx0ZWRfX5tsCWBLGq2Qu
- ENo01QM+4MMcyp8DwqZm8RRda42TJoqqwfbFluhxjX5VlJsitXTdslGTJyTDLF8BW5X5ySDXTLD
- MpNTZettmmJdTtNRzO2Wei7GQyj//lJrUWMMD/RYKldawVQ30GtuNPO6hxrLQ5xLV32QmTkQ7zZ
- KgiFdD6V7gKXKewxbtbN3+Htz+OV6dHGya5emdf9vDBmophgWIGidbTdbKX7cnLYu0f/SevrVCz
- 1a+w4WMahBOYdTOB6TOr8bXZN0XoAQAAlifJJ0YkfFlqsPyIJIylqeHZ4yRHxGShCA00Sj7IOcD
- 90f6kCxCkDwhoZ4xF3PGBHd9yxEVw/nAVBUzBlzTDNEa4hc6hbRvAu75wu8INT8LD9HOGQLK8/I
- Ofxj2WrlfR/lwz9c6ahs/N90Tsnu8TH13WqUMdn17S6bQwai7kr+Rh/adrOMw/uyU8OKaGo63ic
- fRcBLVEtxsYgI5CAmkw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDA1NiBTYWx0ZWRfXzAD2U5iEoJyO
- FYRHTz1u85ief+SMOtesdc3YeYozE3clB0yplTXYqzMwsPSDXjP7yP/q05vv04uiQvlowErVwhl
- rmfINKDaFQvkAuG4cDvXlq5Jm5jDgf0=
-X-Authority-Analysis: v=2.4 cv=Qc/zLcbv c=1 sm=1 tr=0 ts=6aff04bd cx=c_pps
- a=MNM/txilNqeExyaWs+jKwg==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=AlMIdn_sM9wA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=jwouBfj2j3NM8CExmVVE:22 a=bC-a23v3AAAA:8 a=IpJZQVW2AAAA:8 a=sozttTNsAAAA:8
- a=1VxDqnHFAAAA:8 a=k-42gJp3AAAA:8 a=KKAkSRfTAAAA:8 a=P-IC7800AAAA:8
- a=DfNHnWVPAAAA:8 a=cm27Pg_UAAAA:8 a=ng00cqXeAAAA:8 a=VwQbUJbxAAAA:8
- a=pGLkceISAAAA:8 a=8Qelafo1Zfu9TgaA1SYA:9 a=QEXdDO2ut3YA:10
- a=FO4_E8m0qiDe52t0p3_H:22 a=IawgGOuG5U0WyFbmm1f5:22 a=aZ5uHUMKh6B-zo3GvD48:22
- a=uCSXFHLys93vLW5PjgO_:22 a=cvBusfyB2V15izCimMoJ:22 a=d3PnA9EDa4IxuAV0gXij:22
- a=rjTVMONInIDnV1a_A2c_:22 a=tYf5d_5LUfVMvSn2BupC:22
-X-Proofpoint-GUID: BaMMo21iXLccsSKt5Opwpzwc2e4LN8DW
-X-Proofpoint-ORIG-GUID: BaMMo21iXLccsSKt5Opwpzwc2e4LN8DW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-19_03,2026-11-19_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 phishscore=0 bulkscore=0 clxscore=1011
- suspectscore=0 malwarescore=0 priorityscore=1501 spamscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611190056
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261119-doc_test_updt-v1-1-7ae6705d83a9@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAGUF/2oC/yXMQQqDMBBG4avIrBtwgoh6lVLEJH/ruFDJRCmId
+ 2+sy2/x3kGKKFDqioMidlFZ5gx+FOTHYf7ASMgmW9qamVsTFt8naOq3NSTjKtfYqgXXaCg3a8R
+ bvv/f83VbNzfBp2tC5/kDKTxMbXEAAAA=
+X-Change-ID: 20261119-doc_test_updt-b4b8249e16e8
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -254,97 +155,139 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On November  4, 2026 thus sayeth Markus Schneider-Pargmann:
-> Hi,
-> 
-> this series uses a TIFS barrier before doing the ctrl_mmr_unlock(). This
-> specific implementation works for the platforms where TIFS is already
-> running at this point. Note that other K3 platforms may have the same
-> problem, but for these this implementation is not straight forward.
-> 
-> This series is only tested on am625 HS-SE. I don't have any other HS-SE
-> boards.
-> 
-> Best,
-> Markus
+Update, clarify and correct the documentation about 'make check' and
+similar. The current docs do not accurately describe what 'make check'
+and similar targets do nor what is needed to be able to successfully run
+them.
 
-Thanks for fixing this for us Markus! It's been a long standing issue 
-for a while unfortunately.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ doc/develop/codingstyle.rst |  7 +++---
+ doc/develop/testing.rst     | 55 +++++++++++++++++++++++++++++++++++++--------
+ 2 files changed, 50 insertions(+), 12 deletions(-)
 
-Reviewed-by: Bryan Brattlof <bb@ti.com>
+diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
+index b8d2bf23a54..e91bdcb7e53 100644
+--- a/doc/develop/codingstyle.rst
++++ b/doc/develop/codingstyle.rst
+@@ -378,9 +378,10 @@ Some minor things:
+ Tests
+ -----
+ 
+-Please add tests when you add code. Please change or expand tests when you change code.
++Please add tests when you add code or change code not already covered by
++existing tests. Please change or expand tests when you change code.
+ 
+-Run the tests with::
++Run the tests for the sandbox platform with::
+ 
+    make check
+    make qcheck   (skips some tests)
+@@ -392,5 +393,5 @@ will be much faster (10-100x or more) if they can directly call run_command()
+ and ut_check_console_line() instead of using Python to send commands over a
+ pipe to U-Boot.
+ 
+-Tests run all supported CI systems (GitLab, Azure) using scripts in the root of
++Tests are run by supported CI systems (GitLab, Azure) using scripts in the root of
+ the U-Boot tree.
+diff --git a/doc/develop/testing.rst b/doc/develop/testing.rst
+index 1d19b49e82c..4a741a02d0a 100644
+--- a/doc/develop/testing.rst
++++ b/doc/develop/testing.rst
+@@ -7,6 +7,34 @@ U-Boot has a large amount of code. This file describes how this code is
+ tested and what tests you should write when adding a new feature.
+ 
+ 
++Test dependencies
++-----------------
++
++Some of the tests below use external utilities to prepare files that are
++needed by the tests. In most cases these need to be installed to be able to
++run the tests successfully. These dependencies are in addition to those needed
++to build U-Boot.
++
++On Debian or Ubuntu::
++
++   apt install yamllint cgpt xilinx-bootgen u-boot-tools softhsm2 \
++     vboot-kernel-utils opensc coreboot-utils libengine-pkcs11-openssl
++
++You also need the utility fiptool which is built from the Trusted FIrmware-A
++source code::
++
++   cd ~/src
++   git clone --recurse-submodules \
++     "https://review.trustedfirmware.org/TF-A/trusted-firmware-a"
++   cd trusted-firmware-a
++   make fiptool
++   mkdir ~/bin
++   cp ~/src/trusted-firmware-a/build/fvp/release/tools/fiptool/fiptool ~/bin
++
++If ~/bin did not exist previously you may need to logout/login so that it is
++included in PATH.
++
++
+ Running tests
+ -------------
+ 
+@@ -14,27 +42,36 @@ To run most tests on sandbox, type this::
+ 
+     make check
+ 
+-in the U-Boot directory. Note that only the pytest suite is run using this
+-command.
++in the U-Boot directory. This runs the pytest suite on various configs of
++sandbox. It also runs self tests on binman, u_boot_pylib, buildman, fdt and
++dtoc. Code coverage tests are also run on binman, fdt and dtoc.
+ 
+-Some tests take ages to run and are marked with @pytest.mark.slow. To run just
+-the quick ones, type this::
++Some tests take longer to run and are marked with @pytest.mark.slow. To run
++the tests but excluding these marked slow ones, type this::
+ 
+     make qcheck
+ 
+-It is also possible to run just the tests for tools (binman, buildman, etc.).
+-Such tests are included with those tools, i.e. no actual U-Boot unit tests are
+-run. Type this::
++It is also possible to run the tests for tools (binman, buildman, etc.). This
++does exclude the main pytest suite run on sandbox but does run the quicker
++ones. Type this::
+ 
+     make tcheck
+ 
+-You can also run a selection of tests in parallel with::
++You can also run a selection of tests in parallel, but not including the code
++coverage tests, with::
+ 
+     make pcheck
+ 
+-All of the above use the test/run script with a paremeter to select which tests
++All of the above use the test/run script with a parameter to select which tests
+ are run. See :doc:`pytest/usage` for more information.
+ 
++As the tests are run on various configs of sandbox the unit tests will be
++testing mostly core U-Boot code and the few drivers used by sandbox. These
++tests will not be testing your platform code and probably none of the drivers.
++
++For testing your platform code and drivers please see the section on "Testing
++real hardware" in :doc:`pytest/usage`
++
+ 
+ Sandbox
+ -------
 
-~Bryan
+---
+base-commit: f6e8f09ed39347359ebddd983b96993c78b4ec7d
+change-id: 20261119-doc_test_updt-b4b8249e16e8
 
-> 
-> ---
-> Changes in v4:
-> - Update SPL_DM_EVENT commit description
-> - Add a patch to separate EVENT and SPL_EVENT
-> - Link to v3: https://patch.msgid.link/20261030-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v3-0-2a67384ed0ef@baylibre.com
-> 
-> Changes in v3:
-> - Added patche to add SPL_DM_EVENT
-> - Changed the patches to not wait for TIFS and unlock after
->   spl_early_init() but instead at EVT_DM_POST_INIT_F.
-> - Link to v2: https://patch.msgid.link/20261016-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v2-0-c7ab53f79b34@baylibre.com
-> 
-> Changes in v2:
-> - Create a common helper k3_sysfw_wait_ready() to make the purpose of
->   the get_ti_sci_handle() clear.
-> - Extend the series to the other SoCs with the same boot process: am62a7,
->   am62p5 and j722s.
-> - Link to v1: https://patch.msgid.link/20260923-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v1-1-300ddb9f5be8@baylibre.com
-> 
-> To: u-boot@lists.u-boot-project.org
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Daniel Schultz <d.schultz@phytec.de>
-> Cc: Udit Kumar <u-kumar1@ti.com>
-> Cc: Richard Genoud <richard.genoud@bootlin.com>
-> Cc: Anshul Dalal <anshuld@ti.com>
-> Cc: Aristo Chen <aristo.chen@canonical.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Kory Maincent <kory.maincent@bootlin.com>
-> Cc: Paresh Bhagat <p-bhagat@ti.com>
-> Cc: Julien Panis <jpanis@baylibre.com>
-> Cc: Jacob Parker <jparker@basepowercompany.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
-> Cc: Johan Jonker <jbx6244@gmail.com>
-> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
-> 
-> ---
-> Markus Schneider-Pargmann (7):
->       event: Split EVENT and SPL_EVENT sections
->       arm: mach-k3: common: add helper to wait for TIFS initialization
->       dm: core: Add SPL_DM_EVENT
->       arm: mach-k3: am625: Wait for TIFS initialization
->       arm: mach-k3: am62a7: Wait for TIFS initialization
->       arm: mach-k3: am62p5: Wait for TIFS initialization
->       arm: mach-k3: j722s: Wait for TIFS initialization
-> 
->  arch/arm/mach-k3/Kconfig              |  4 ++++
->  arch/arm/mach-k3/am62ax/am62a7_init.c | 17 +++++++++++++++--
->  arch/arm/mach-k3/am62px/am62p5_init.c | 17 +++++++++++++++--
->  arch/arm/mach-k3/am62x/am625_init.c   | 17 +++++++++++++++--
->  arch/arm/mach-k3/common.c             | 10 ++++++++++
->  arch/arm/mach-k3/common.h             |  1 +
->  arch/arm/mach-k3/j722s/j722s_init.c   | 17 +++++++++++++++--
->  common/Kconfig                        |  8 ++++++--
->  drivers/core/Kconfig                  | 10 ++++++++++
->  9 files changed, 91 insertions(+), 10 deletions(-)
-> ---
-> base-commit: 75df64103873fac09642860cedadaffb8cf6b2c7
-> change-id: 20260923-v2026-10-next-topic-am62-hs-se-fix-unlock-race-15fda445257e
-> 
-> Best regards,
-> --  
-> Markus Schneider-Pargmann <msp@baylibre.com>
-> 
+Best regards,
+--  
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
