@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63964606A324
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 16:21:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B113606A332
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 16:25:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=b8KR47Tz;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=SAHRA+BA
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GLlcHJ0B;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=FPLVBux9
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2EC0781366;
-	Thu, 19 Nov 2026 16:21:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 21CA2813AB;
+	Thu, 19 Nov 2026 16:25:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2lTAxnBUrjfp; Thu, 19 Nov 2026 16:21:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F136B80E26
+ id e9eq-6j__jTg; Thu, 19 Nov 2026 16:25:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 664AE813C6
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795105260;
-	b=DGTWKQVzFRB2qGAIggSZO3x7vGzDMsW1eVrSmyewRyYzaV7bfhB85W4uYHcsWuK2dQwg
-	 j6V//IeDaMICf4jS/SW4Kv8XoXdwL91gkDqTu0vm4hLF2B620hTQXw3SUEukSmWzSkUKp
-	 JBFXQ5BM+FhXJfaYxYbyWJBlSG9UkleorbWqVYjiejvTQMv92k1gyVbq/z2/Q2iXarEqI
-	 M2bXlV1lFrovrkvenj48DeGroNqzcCW+/b2rw41do2t9y44JNvMx0WtX84dWItg9CKQQm
-	 PJAj4OvV81EmuO526jFBDmPBt3J8h+LWe/X68HD6XqyEBE4h1YzgUNlvyIEP0AbVRhA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795105543;
+	b=ddC+zgmc6d29/zfKfasvgRRj1WSQtU3cpQT1Y81wq6SVhJbYhBfrc8o6CWhaN94SoKXC
+	 1rw5oEWkGkowX6TwDIhX/sCUNjkxjJLLIR3g3/+7ADubnzfoL4RZOZpAsCKjKUz/i3CVb
+	 VIQWWKuh0nf4ICr681Jq4X+1CajR+6Ys9xU5oCcmC4ghnYBKjlvmDLFbtKjhDWHKqDxBz
+	 +GPNV2wFvk+GZYCeMqJWvb58FSqdGJPuTY5bgtb8mQ+nHbyJMB7tvXL9yklfiBn8mVeus
+	 Ht3iyW0wuHb52XZI9Qq5lvooK/Ml5Gkr/Ah1w9dukKQLcMj4QA+bRveP3TxVvaS7ZkQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795105260;
+	c=relaxed/relaxed; t=1795105543;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -46,80 +46,78 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=eENlN6LlHwFP7GLLy7YEVxesoJXjzGxVlDPuj4ks2QY=;
-	b=UAigR+Ir4/ZCDamMs3AQhRqMTsVyQFoUoiPPR1/xeMp6oRLR5AKbhlJPGFI41lmFQhDO
-	 +typs6QMp+vUEBcKbyCBz8WfuxPjQ//7BAtQUP/OHVwoI9Ou+F+/ZjQG1xKOXYzF4e5Kn
-	 NvSZ6JlG5jrNP3d+0haaYOMzqJospetFh9ZtLwbCxHR/KcYOGA4U1l30rwbhNON9p+NVV
-	 WloUnV/Nld/IyQMLD0kwqiDeP6+fAu1AUQcGSq9snN7VKKMLw9whnS5j3WsbPnhIuwunM
-	 /kdMoEMdbUdzhqzFkQfqfF49/SIMJblUzWdHMVHtS2+NP8AvjHn1LgmvcTWP7ILiWTQ==
+	bh=DyPTpmeZMtbt3igoN+kjMIw9V6IVJpEL1CyIucusrFQ=;
+	b=UJLHciyEV9Tl9DM4In4+Ir+VRQ2ZW71mRVdHCNLrWRrN0pH2VjQixKjtaaRKn+Nn5HGs
+	 iCRpXJn7+K3S1xkP8OHjUbb0/3eT1Bqk4x+r3fUX776SjT6SCyYSgx2OAX2Q74w3/uIm3
+	 SAb8teX2mQfexobZIlX9nG9x0m/iVbCAhgLFTth7v8cbgBsHdR3I9rNc0gV1abL5DcHR/
+	 lzrl2ddG1sk6tnhAQOx8Hf4fG2/QfwpsrWPaY9yHDOyUz1Za7DxpAi/8CI6usymjqU2jM
+	 t2fCHJXh6anLC6/4U8EUKL/Krn9WW21NKBCmidO8yi1c6/yuyT3q5NsssVcDh8oe/Tg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=cherry.de;
-	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=SAHRA+BA;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795105260;
-	bh=eENlN6LlHwFP7GLLy7YEVxesoJXjzGxVlDPuj4ks2QY=;
+	d=lists.u-boot-project.org; s=default; t=1795105543;
+	bh=DyPTpmeZMtbt3igoN+kjMIw9V6IVJpEL1CyIucusrFQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=b8KR47TzmSMqTl4S1T0wt6iD342iitgroamiQw9dcuVsSpqO5v6+W0sZOzBOdsZ4V
-	 PQgAOkwfz4YdbhbFBNIxFJJ0cyRe1dcKPwrgsPW0p68u52sbKrzfi/HkRhyGLqFSyJ
-	 xv3IU4KEed6jVL+zSrZbvpoXkeAAeN3ui/WUQwHousxhU/r8i8b1RBToEx4ND+mDxz
-	 FIJAa/7QIqGajfGUWHAi5zydo418SrKQvQFWnTNNGzncR8gjE4uFEIr/xk7gmeZw/7
-	 qtzpNkOKCXZQz6cJlQddiKkWKNEcUP3jrAhODMspikmzG7UgDjhwJYoVQ5U74kSszY
-	 HycDRsh8nLnKA==
+	b=GLlcHJ0BufWwQ8yKdJ6Y+6GoxusBxnTy27un6wPvKvZN11+orZifLVFcLTzXJnoxa
+	 7Z5PFgXFHLy5Y6whQApSHslDY1maPiSdX5EQ1QTAj4PvB9kreArGQgLQIMiEGabODh
+	 PtK0C8hdKiidzh9WuZdT7KJJvbU8d2t8fXrKdRWw4ZZjfGMl00psDLYx+h7X3g2yl8
+	 JPhVFRAAOC34eXxA6GpNZWaCvfuOtESGy5E5LB6mX34v435q4crmlQMHwXC1sB7QCw
+	 HcFM6edFwJ+bPFSjk8wRDrb4XNdsPUO0UjFgJpGF8l+8DReI5VwhJh9XxwZMYk9PxK
+	 CejPFxe+iafTA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F136B80E26;
-	Thu, 19 Nov 2026 16:20:59 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id ECCC91E7
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 16:20:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 664AE813C6;
+	Thu, 19 Nov 2026 16:25:43 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D9E0A1E7
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 16:25:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id DDB6D80E26
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 16:20:58 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id BFBE0401F6
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 16:25:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UAlu1BhFE_L0 for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 16:20:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AFA7280C94
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c200::5"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rTGLQAG8clOU for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 16:25:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D1EB4400E6
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c20f::7"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::5;
- helo=duzpr83cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c20f::7;
+ helo=osppr02cu001.outbound.protection.outlook.com;
  envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=SAHRA+BA
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AFA7280C94
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 16:20:56 +0000 (UTC)
+ header.s=selector1 header.b=FPLVBux9
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D1EB4400E6
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 16:25:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eENlN6LlHwFP7GLLy7YEVxesoJXjzGxVlDPuj4ks2QY=;
- b=SAHRA+BApwLfU+OCCTvCiQB7afCnK1kaVYa18VD/XQNiA0c9HM5xVBFdky2vfoiwMgHo1TkMVs/KHmlX7IIdCbGdZSApw4tnMg1Gc7h+dLNOE/YHEGJApvoILmA9oRGnP35AT+KKEPGlYcXRiyfqJXAhyqQX9RaN5rgz0jRCU/Y=
+ bh=DyPTpmeZMtbt3igoN+kjMIw9V6IVJpEL1CyIucusrFQ=;
+ b=FPLVBux9tkmSk0VW8f380Sce5khfRHkYVwGytwiFUwce41r5mERiiG6bFBNVyfMagMvvlZd3NIAG7y6dWbqnWykX/qOLqxPi99RNzfruCeAdYosEQJs4UsdIcpCo8mQMxHgTDRMje8VmayACNAw1uD1k7ttjcSYR5kLLr5zfRno=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by GV2PR04MB12339.eurprd04.prod.outlook.com (2603:10a6:150:309::12)
+ by AS8PR04MB8883.eurprd04.prod.outlook.com (2603:10a6:20b:42e::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.10; Thu, 19 Nov
- 2026 16:20:47 +0000
+ 2026 16:25:34 +0000
 Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
  ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
  ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0639.010; Thu, 19 Nov 2026
- 16:20:47 +0000
-Message-ID: <7a7df675-96bd-4483-bb29-6a4d67b97a07@cherry.de>
-Date: Thu, 19 Nov 2026 17:20:45 +0100
+ 16:25:34 +0000
+Message-ID: <6f202e6a-5ee9-45bf-9abb-7f5f80f8f5e2@cherry.de>
+Date: Thu, 19 Nov 2026 17:25:33 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 4/5] binman: x509_cert: support PKCS11_PIN environment
- variable
+Subject: Re: [PATCH v6 5/5] binman: Add BINMAN_X509_KEYFILE to override the
+ signing key
 To: Sergio Prado <sergio.prado@e-labworks.com>,
  "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
 Cc: trini@konsulko.com, alpernebiyasak@gmail.com,
@@ -127,81 +125,81 @@ Cc: trini@konsulko.com, alpernebiyasak@gmail.com,
  pbrobinson@gmail.com, sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com,
  xypron.glpk@gmx.de, jj251510319013@gmail.com, Wojciech.Dubowik@mt.com
 References: <20260728113535.128601-1-sergio.prado@e-labworks.com>
- <20260728113535.128601-5-sergio.prado@e-labworks.com>
+ <20260728113535.128601-6-sergio.prado@e-labworks.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260728113535.128601-5-sergio.prado@e-labworks.com>
+In-Reply-To: <20260728113535.128601-6-sergio.prado@e-labworks.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0902CA0033.eurprd09.prod.outlook.com
- (2603:10a6:802:1::22) To PA3PR04MB11153.eurprd04.prod.outlook.com
+X-ClientProxiedBy: VI1PR0902CA0042.eurprd09.prod.outlook.com
+ (2603:10a6:802:1::31) To PA3PR04MB11153.eurprd04.prod.outlook.com
  (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|GV2PR04MB12339:EE_
-X-MS-Office365-Filtering-Correlation-Id: fa3c4a98-0545-41b8-69cb-08df4659116e
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AS8PR04MB8883:EE_
+X-MS-Office365-Filtering-Correlation-Id: e5296653-07b8-404c-3deb-08df4659bca3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|366016|10070799003|376014|1800799024|23010399003|10067099003|4143699003|11063799006|261022113327099003|56012099006|261021130227099003|261022105027099003|261022075727099003|261009221227099003|261021135927099003|261021133027099003|261021121427099003|261102123227099003|261009223027099003|261021123027099003|261022115727099003|261026135527099003|261026140227099003|261026121527099003|261026130827099003|261028144727099003|22082099003|18002099003|6133799003|3023799007|4133799003;
-X-Microsoft-Antispam-Message-Info: GvvUC59ur5f0nOGjOCfhhJAhv1XswpFUp0LkNnYOKcAMROXDoImoA8KwwWIOmRZX+MDeqPbejJUCPYLnCVHmkus7iFxI3Fen4UM+gDNx+VNX5yDFEF/k2DfXHL0Gv1WhqJ2cr4q5rFuItA1uUi+GWozV0ZbHiMDZ09M1+c/McPxZRbRLet0gZDjJKsSTpsHLiXtncWb+0H48uIIn3la0LBM9fFnyPien6P7Ne2Av5f5pR9b0e1t+wuDbL57VwA0vq8hO29sgOiOBd8ByuulV7VFXqxXlkr3dRnZH+m9lrV0Zm2lfVjS93x3SX7Z9slaHzjeqNziW++7it6FE34QQfdxW/Ocb1YyfSDidQUSjgWuUWpbbhOVHPDyB7W1+Q8ipEsO8OJcDyHqdPBhULj4zQXBYNMuzyLbgGubAxQR05z/5EoSlYy6NWlQAlIsbaCg/rBsVOD0Ie8ulRe7HNXXwfj47a6cTzjLD4WNzcPGzo7+anAyvJYNqkotD7ysTIP3yRxRg5yubi6l4vNg+bjKQBbrZcrt2DD+G5g+JC+3rruXREf3KjKuDrwJRXQw5HKPE/E0DHWNz19RjKv+fc4UVnB3YRwLUsef0rfsjlt/AMD8bzz8j+RYmAY4Q4Ya9wbTVQ/5iNEwDBg3dLDvASu/GlU8toSEVinmwJbYFxKQtQMY=
+ ARA:13230040|23010399003|10070799003|366016|1800799024|7416014|376014|18002099003|22082099003|3023799007|5023799004|11063799006|261026140227099003|56012099006|4143699003|261026121527099003|261102123227099003|261028144727099003|261022075727099003|261022115727099003|261022105027099003|261022113327099003|261021135927099003|261021121427099003|10067099003;
+X-Microsoft-Antispam-Message-Info: NMuBq/vTCUCyCMunWyL228xgqSWlEmwNJjFm/9wvBpGdM2SuQnzihmwE+hzYrDOC4QieYF7tnhcIsmlBkDwJiVTAHt/MXpssxHK/UJxrE4wtKjd86b237aYFyxCGlSVKxIKxVEVBAOofsb6mLNGmwt849IfSp057p6+FLJxij+ZbcG1h3KGn5QyiNj8i1cfJrhYX3DHi0NvoT4A2AiDXUlpcForJSkO6Avg3u4WuXIpMieBKm/oJKQGxJYbanY7wEkRDjzLpOVZvGTAVTk9F3+XAdCcgkvIqPABMrDDR7S0s0VRDI+YcaAuBBv5G/+h7yRYzIT993dZZZvQpTJiasL+YEp4huNmNEbQn/OUX6zl24PhHUhODTLBVeLMq1nIsMJe3/QNh2Gr+L0AhN+CbmbRSZHjsExKFgluHHrqnuVzWfLSC9CAdD49PuklXT+Ca5Oknju2KsJpt4ZSUnkOZq+YFUQDihHZy42NNPaOA5TmUvWDV12zwSbPNleBsTg2kAMoidTYrj+jgVOfG4j9oAVPO5jdpGmqUl+1vAFbcvbeE9btU7eufjzXt49yBsnF27XNSp7nzV2jWsorPekhbkvB0sMyfwnES79Wa/pgswGyQf/JnxWWJ0KLGyLTwbjvyArOcIVjoZA8Kzx1oy6fDs5QgNQeTVqMTtZLp/8S7j+w=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(366016)(10070799003)(376014)(1800799024)(23010399003)(10067099003)(4143699003)(11063799006)(261022113327099003)(56012099006)(261021130227099003)(261022105027099003)(261022075727099003)(261009221227099003)(261021135927099003)(261021133027099003)(261021121427099003)(261102123227099003)(261009223027099003)(261021123027099003)(261022115727099003)(261026135527099003)(261026140227099003)(261026121527099003)(261026130827099003)(261028144727099003)(22082099003)(18002099003)(6133799003)(3023799007)(4133799003);
+ SFS:(13230040)(23010399003)(10070799003)(366016)(1800799024)(7416014)(376014)(18002099003)(22082099003)(3023799007)(5023799004)(11063799006)(261026140227099003)(56012099006)(4143699003)(261026121527099003)(261102123227099003)(261028144727099003)(261022075727099003)(261022115727099003)(261022105027099003)(261022113327099003)(261021135927099003)(261021121427099003)(10067099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z2VJWThENEEzYUxsNS9iMjZGVkJJcWQ4M3ZRZG0wUVRzUnJzblNNMXg5VFJH?=
- =?utf-8?B?TjBSbTA2cDVkcTR3Ni80Z2syaFUxZUFLSnFrOWZKcHA0OXY1WFl0YUdMS3dY?=
- =?utf-8?B?bHZkL1N1K0JRaE1DMUlRbE5IUWZROHdEU29vZnNINCtkRW9pWVI1Szl4c2RO?=
- =?utf-8?B?TE5weUE3UjJKc3RMdFE5cUpxN0FhaTNVS0lmSVFuL09yV1VpNDFadGIyQ1Bi?=
- =?utf-8?B?Qkg2bVBOLzBPeHMxa1N3YitLakJLQmQwSWV5SlZLK3B1MytGaHVVL2tVNTlq?=
- =?utf-8?B?NXRGa3ZjYjRqQ2FlQ2lmNzVyaDZTeWQ5clRsdjZ2cFR3Y1hlcm5OVC9pUGNI?=
- =?utf-8?B?Ky96QStSUm9sL281YlRpc3pmcVlNZ2dzMkxwMG5VZGRCWHNvV2NNejllSHhK?=
- =?utf-8?B?eVpJblpWVmUrbmJueVFQS3ZLUVRRbHVTcUpQN2RJUG9TV1F0bm9HQkxBSFRT?=
- =?utf-8?B?REF0ZDFlbUwxRllGRkV6T2JiVlo1TkpBeHpiRWxWWEJTMVpzaDZSVGdDejNL?=
- =?utf-8?B?WDFyYmwvQmR1SEtzQUtWQmVkZk9NbUY5SVNqK0RBOGpmR3dTbkR5em91QWN1?=
- =?utf-8?B?WWNETm9RaUVPamY3UkllaDJaZTBrbXBMRER4ZmwwT3lWREdiTm5PTUk1a2U4?=
- =?utf-8?B?SGM5emRHcDRrVytuS2ltcTRRbnUySXo5NTRXYnVCb3k1bERHZTk4bmZyRE9p?=
- =?utf-8?B?NnMrYXFIZHR5dTJ5dVdjZzNiaDJxOE5zM01UZFlsaWxIN1gxdm5kVW12SURJ?=
- =?utf-8?B?WkVvQklybkFPcnBidng3eU9TTnRxRnU3bFcrZEtZNUxUZ2R1UGFGWDZkVDVp?=
- =?utf-8?B?UGtYMURnZEUwNFVrZC9RYzdxdnNuRmZnU0VxSFVyK2R2QytUQjRIbVRub0dD?=
- =?utf-8?B?NGM1Z0ZZMFYzY2NhRHVITXZ1eThSRkxUZ2Y2UlMrVkRpRWI3cGZ3cTJ0T1li?=
- =?utf-8?B?d3dvQ1JhbjRFamIraEVheVQ5dG1weHc1N1gzVHJVd0RwbTQxVjhkOWFXZzJB?=
- =?utf-8?B?OEQxd1ZrZ3NlQ2NjdVlBcHZkQU1KZVNDS014YXhBYlJqYjV0N0c1cXMxR1ZV?=
- =?utf-8?B?QnoyaW5yTDJRZGxpdHhRamJOdkNoYS9WNjZCNGJoYWxGamFIWWxNd1Q2ZVJF?=
- =?utf-8?B?SDhqU245eDBndFJXTktCUXVBSGxwMGYvRUU0K2NNOGFlK1ZTMXZtSk0rd3Iv?=
- =?utf-8?B?QWNIUWMrQTY5QjJqR2oxR0laMGNYMTRUdlNha3h2TE15MGNJdDEyd1NpSGIv?=
- =?utf-8?B?K1h5Z3ZEdDVDaTViVEY2Q2xFSlBqVXQyVkxrT3h0T09tL1lrR3Bmb1ZuMmVs?=
- =?utf-8?B?OFY0N2hSTWcwM0Z1T0hHUll4UXQwQWxyRk1KY1NhS0t5Njd1dW44enB4a0tq?=
- =?utf-8?B?UmxTbGxONnUzcFdiM2w1OGNtVldzSm56aHV1K2E4SExPMEdLMUhhcEVBbnNQ?=
- =?utf-8?B?RjFhQWlSK3ZtaWFiZXM0OStHL2JlSnZCZmh5d29FMWxmalVBV0RzemNRVWNC?=
- =?utf-8?B?ZUc1QnNleUkzbENrU1VOdVdad0hoOTVyTG9sTUhoWTMxYmlram9nS0huS0di?=
- =?utf-8?B?Q3JmRHBPelV6NVcrOVpRTk12YmJxbi9CNnZhbkFES1M4TnVZU0ZQWFBhU3M5?=
- =?utf-8?B?ZVlCeEpDOWdSclI2ZVRHdkNJVE5EWStRZjNzNlVndUtXb2RYMUl4YU8yMnVq?=
- =?utf-8?B?NXJreFZ0WkZPcCswTmlTM0YySExEUXlVR3pmd0lydHE3bWU2eDl5NUZlNGhL?=
- =?utf-8?B?ZHZxdlBwcjljT21JSzR6bXhLemhjWEV2cXhhMlBzdHZLTzVzeFJnSHVkYmRt?=
- =?utf-8?B?bFowdGU3UTdtVndLWW9nUDV2Q2dRTG1ETVFCTzR5Ylp4WEhITXBDV3p0eDdp?=
- =?utf-8?B?N205cUR4UUZWQlV2cWRabWtlMEFWYU5zZ1pWUlpCdXhxWWROTjR4TzNQR3hS?=
- =?utf-8?B?SFJvNlZqQmRpb0g3SXBpYkdRUFgwY01ZVVk2WFhGRVdwQ1poTjRJNTJBVWFo?=
- =?utf-8?B?YU5CTWV4T0FwZDNWT0dLZnhPcG8wUGU5TEZ6MjEyb2w4V1BTRmhKQlRpbEQr?=
- =?utf-8?B?Z3FoQzcxc2RjNmgrYkFkU1NiMmdhMWhhSTFnRjBUaTFjb3BEaEtCbHZPeWl4?=
- =?utf-8?B?eW1meFJUOEtxZ05EZmRseVV3T1JNYWc2OVBmdXRTdzBZVVhBdDF0U3ZYdDEv?=
- =?utf-8?B?MjNteXpFK3pWRjhyNy8rUy9taFZna1R5NnQ1VFpzU0cvS0Y5amlJWEx1Nyth?=
- =?utf-8?B?YXRhR01mUGJhMTd6K3c1REFMeTNGdlBPdXlQZUtKNVFudUxHVm1xaHlRbkM1?=
- =?utf-8?B?RDZBMVpFakRMUVNtQ1F0Ny8yZGZWN1Z4T3FXSS9LVE1BOWJtUEJDVkVWR3NT?=
- =?utf-8?Q?reqthW6hyBZN9Wx1BNEpy1t6jtXeMyMYCfOZTQ4goXhhD?=
-X-MS-Exchange-AntiSpam-MessageData-1: 6vQ3QipbgbeUa9EM8b9a9lwYF+rRC5grOhc=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a0dSRUxzb2xBSWFzRWoyTGlPSEZBbVZ5bEI5azRFd0Vudm0zRW1BWmVDZGt5?=
+ =?utf-8?B?cTdUTWRHRGVwT20wQ1NMSVE1OGtRTGpmQjZkanR4d3FNYnArZzBTTnJYQk83?=
+ =?utf-8?B?YTBnQVV1SmxzdHNicVpreDlmRHYreW9ZWVQ5Qitla3Rvd2FZZjVnT0lKMjE1?=
+ =?utf-8?B?NVdtaDBua2huNVAyVEpZQ01JVDZ5MVdpVzJXZEpCNGdPc3VsWGpqU3hlV0lX?=
+ =?utf-8?B?VHNiS3E4M2N0RXlUeW5ibXNHS0huQTFPR2ZaN1hPQUVoVGJHZ25KVnNRWE42?=
+ =?utf-8?B?MjZRWkJxbUh3czU0elpNRTdLWTBid2IxN05kNlZ1QVYrVnBxQm1QaGNUcFBS?=
+ =?utf-8?B?NWpZV3NJUVBJVFh6Z0hGbUhJcUt0cTdEV3hpajkzK3NzYWdWTG8rU1lzaWdB?=
+ =?utf-8?B?ODc3SjhRcmd2dWdYYnhLUzZMNHYzcEpPVVNLNHovTDh2eUIvckNPemhTUTJZ?=
+ =?utf-8?B?cVljYU1qcFQ2S1AwbEs1LytVU1JNR2VGd2F6aHlpN1VMc2RHczVPR1lRZDNp?=
+ =?utf-8?B?YTJ6M1ZoY2wxMVVPSnZvSzl6UWhDQ0hlU2RKbGYwNkJ0bUpNWS9tOWtuTnp6?=
+ =?utf-8?B?NHFPRGtJQVhoWnJKSnJWWjJSNHgzek0vdU11NkgwMDdlQUFiOHZHaEJGdDA1?=
+ =?utf-8?B?MUNpV0FtVjhBaUNEZTdhZmlPNGFpbHNnbGlOMGlobHZFektIRit1QmVHQS9i?=
+ =?utf-8?B?eHU1WWtnUE11YzZvMExvYmZCVXQzLzJFYWQwSFBweEt1cytoTlpiRGZBSyti?=
+ =?utf-8?B?RDl5VUxFa0FCRjBMTXJMZndNVWNNam5UMitOZWhXcUt1N250b1FCRDBPK1ZS?=
+ =?utf-8?B?VEM3dTdyc3kwS20wQnRzclE3YWtVajB3bk9zWGRmSC83VWZNQ1Ayb3N3MWlK?=
+ =?utf-8?B?ZlJaSFU5SlNrdjlLRjMxekJlRGhpc2ZWOERVRDdhT3ROcWRNTVBQRG9VQ3li?=
+ =?utf-8?B?TmhYdG9NNDBjUkl1ajdGZXFZVFAxQzRVNXFIL1o1dmYxMTJlSml4Y1h0emJh?=
+ =?utf-8?B?S1BLQmdZaEdpbEY0V0NOQXVrd051Ym9KMjRsd2pDNGlKbVdIaDk3OE1xRmVu?=
+ =?utf-8?B?S2laemYrc0dKWS9ZVnNvV1ByeUtnTXA4YUl4aFBUektTdFJWMFZJWCtCandq?=
+ =?utf-8?B?RHNCUWtkMmpTc2xpTWtsL0ZGc3ZScmxHK1FGZkttbTBVdDZxWEdnOGpOdVA2?=
+ =?utf-8?B?c1ZmdUlXRkJ0NGVTZkNhdm45VXBjR0FSc1BZa2FLem1RcTZmMVgwVnhBSEc5?=
+ =?utf-8?B?d0h2dE03VmliOU95LzJkNWlxeEZDK1RBRHdmUjR0MERFZ0FrNEtWaWNiN0li?=
+ =?utf-8?B?cEJOVDZVZ0NiU0dhUXlWWkU1UHZsYmxDcFVoNVpsZG5CNkRHMDJBRjNURnVT?=
+ =?utf-8?B?blREb0xZSEtwY3JKNS9YNTRPd1JDb1BiTlQ0S092d2UvNzVTd0VJWERMWEE4?=
+ =?utf-8?B?Q3dUejd1QTZJZTdJMDVNMm1jUnZWM0t0dWl2N1NxeTM5QmZLQnB1SmtLMFc3?=
+ =?utf-8?B?a0VobHJQVnFGNVB3Z1NldEZqbk0rRUcvSW4wWUZSazFVZ0kxaXB2bFVteFNs?=
+ =?utf-8?B?Y2J3UGNMYnM2U0lRbGk0NGtJelZnYlN4aFdFa09nSEhLdGlsaWhkcTc3dWlE?=
+ =?utf-8?B?N1pCVjFMbzRUMkYraGxGUDI2bVVZS0p0S2tVSzA4UWVndFZOcjlWQ0NTajVt?=
+ =?utf-8?B?NTVhRCtEeUZNWHFsWVJPYUdrM28zOFRobW15UHd5a2RaQ2FsNVJCeCtVWUJx?=
+ =?utf-8?B?aHRla01zd25RNVlTTnN1SHpNMHpvSXBwNUZLakRISUxzQ1djTHhaa0ZsWVNS?=
+ =?utf-8?B?ZjZDMExoVDhYaXpDdGZXbGI0Y1ZZYjJZNlpnMWNQdjl5SzFuSHB4bDdwb2RT?=
+ =?utf-8?B?VDFwUTFYZ05vdlVGYmxkYXJrZi8rTkMremkyTW1YYks4ZVREazMzd2dEMXJm?=
+ =?utf-8?B?VHZad1QxUUh2MDUwZDJEaUJSU2FWaHQxYnB3OVVzeW9IRWljSDJRaDJxL0dB?=
+ =?utf-8?B?cm83dWxKUllpN0VFcGVQM1FyKzlQdWtVb0x6eUhqbmlYMTh3MTBLWGkySGFJ?=
+ =?utf-8?B?UXJacTVway9wWHNKbm1MUVhqQ3MvRndlTHdPa0pLY3B4cE0wU2xIMXVWLzBv?=
+ =?utf-8?B?TjF3bHNMQmlXNlVQV2NnSnZlUzYxUFd1emZKNk5yNFA4RSt6WURjYi9zSEhZ?=
+ =?utf-8?B?NXhwd3VBMVJpTTZqb2hSU3BZemRYcTl3aTE1QXVnUyttb0hrQ0xhL2VjMDFD?=
+ =?utf-8?B?bXRFSEFmUHBReWhYYnJ0UC8rZURJV2FTd2wrMXFhOVVPem1NM2hrNDFZdEFR?=
+ =?utf-8?B?WUNMbXY0bzcwZEI5UGZMN09qdkwwcWw3UjAwUEhiRFBNbmQ0a2ZyVkphcHhl?=
+ =?utf-8?Q?UGLcii4JxGwt+Ty73iwzOXl/iT8/zZKFli3MHPX4nPOfx?=
+X-MS-Exchange-AntiSpam-MessageData-1: i+CCBPRctWZnU2Op1mG8tu4sHxGZYVrO6os=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa3c4a98-0545-41b8-69cb-08df4659116e
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5296653-07b8-404c-3deb-08df4659bca3
 X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2026 16:20:47.0020 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2026 16:25:34.2445 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZnVelSmw9RD+9IIw24ivJPeKl7jUga9h4CNBr1jW5HgCh5L+vdWxevZNJc4BBZTYtAweo6UQPXR4TFDM+RbUeymuH6r1k25Iyfvl/8GtZSU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB12339
+X-MS-Exchange-CrossTenant-UserPrincipalName: /mDajsH/937j8QPbwkvda0SWQQsr2FOYNsbEnWnN0cKoGRfvQG4h4ZqfwHgqigCqn1pSAsA60CEDijLU1jxfV+v8UD+NjhYtpeNq0jkTe0Q=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8883
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -211,272 +209,44 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Sergio,
 
 On 7/28/26 1:35 PM, Sergio Prado wrote:
-> Signing an x509 certificate entry with a key held in an HSM needs the
-> token PIN. It can be put in openssl.cnf via pkcs11-module-token-pin, or
-> in the PKCS#11 URI itself as a pin-value attribute, but both mean writing
-> the PIN into a file which is part of the build. That is not
-> user-friendly in CI, where the PIN typically arrives as a secret in the
-> environment.
+> The key used to sign an x509 certificate entry comes from the image
+> description, either as a 'keyfile' property or as a 'keyfile' entry
+> argument. Neither is convenient for a build which must not carry the key,
+> such as one signing with an HSM.
 > 
-> Read the PIN from the PKCS11_PIN environment variable and append it to
-> the URI as a percent-encoded pin-value attribute, as described by RFC
-> 7512. The rewritten URI, not the original, is what reaches
-> 'openssl -key'.
+> Add a BINMAN_X509_KEYFILE make variable which, when set, passes
+> '-a keyfile=<value>' to binman and so overrides the image description for
+> every x509 certificate entry in the build::
 > 
-> PKCS11_PIN is a fallback. A URI which already has a pin-value or a
-> pin-source attribute is passed through untouched, since the PIN named by
-> the URI is the one OpenSSL uses; appending a second pin-value would
-> silently override it, as the last occurrence wins.
+>      URI="pkcs11:token=mytoken;object=mykey;type=private"
+>      make BINMAN_X509_KEYFILE="$URI" OPENSSL_CONF=/path/to/openssl.cnf
 > 
-> Note that PKCS11_PIN keeps the PIN out of the build files but not off the
-> openssl command line, where it is visible via 'ps' and may be recorded in
-> build logs. Configuring the PIN in openssl.cnf remains the option which
-> avoids that, and this is documented alongside the variable.
+> The variable is a plain keyfile override, so it takes a path to a PEM key
+> file just as happily as a PKCS#11 URI; signing with an HSM is simply the
+> case which needs it most.
 > 
-> Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
-> ---
->   tools/binman/binman.rst         |  11 ++++
->   tools/binman/etype/x509_cert.py |  31 ++++++++++
->   tools/binman/ftest.py           | 105 ++++++++++++++++++++++++++++++++
->   3 files changed, 147 insertions(+)
-> 
-> diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-> index 86e15741fa35..106c34efb76c 100644
-> --- a/tools/binman/binman.rst
-> +++ b/tools/binman/binman.rst
-> @@ -1595,6 +1595,17 @@ If both are given, the ``pin-value`` in the URI wins. Note that a PIN placed in
->   ``ps`` and may be recorded in build logs; keeping the PIN in ``openssl.cnf``
->   avoids that.
->   
-> +As a third option, binman reads the PIN from the ``PKCS11_PIN`` environment
-> +variable and appends it to the URI as a ``pin-value`` attribute, so that the
-> +PIN does not have to be written into either file::
-> +
-> +    PKCS11_PIN=1234 binman build ...
-> +
-> +``PKCS11_PIN`` is a fallback only: a URI which already has a ``pin-value`` or
-> +``pin-source`` attribute is passed through untouched. It keeps the PIN out of
-> +the build files, but not off the ``openssl`` command line - for that, use
-> +``openssl.cnf``.
-> +
->   .. _`BinmanLogging`:
->   
->   Logging
-> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-> index 6d7883af58ef..66c9987976c2 100644
-> --- a/tools/binman/etype/x509_cert.py
-> +++ b/tools/binman/etype/x509_cert.py
-> @@ -7,6 +7,7 @@
->   
->   from collections import OrderedDict
->   import os
-> +import urllib.parse
->   
->   from binman.entry import EntryArg
->   from binman.etype.collection import Entry_collection
-> @@ -70,6 +71,9 @@ class Entry_x509_cert(Entry_collection):
->           self._cert_rev = fdt_util.GetInt(self._node, 'cert-revision-int', 0)
->           self.key_fname = self.GetEntryArgsOrProps([
->               EntryArg('keyfile', str)], required=True)[0]
-> +        if self.key_fname.startswith(('pkcs11:', 'org.openssl.engine:pkcs11:')):
-> +            self.key_fname = self._add_pkcs11_pin(self.key_fname,
-> +                                                  os.environ.get('PKCS11_PIN'))
->           self.sw_rev = fdt_util.GetInt(self._node, 'sw-rev', 1)
->   
->       def GetCertificate(self, required, type='generic'):
-> @@ -178,3 +182,30 @@ class Entry_x509_cert(Entry_collection):
->       def AddBintools(self, btools):
->           super().AddBintools(btools)
->           self.openssl = self.AddBintool(btools, 'openssl')
-> +
-> +    @staticmethod
-> +    def _add_pkcs11_pin(uri, pin):
-> +        """Add a PIN to a PKCS#11 URI, so that signing runs unattended
-> +
-> +        Appends a 'pin-value' attribute holding the PIN, percent-encoded as
-> +        required by RFC 7512. A URI which already says where its PIN comes
-> +        from is left alone, since that takes precedence over the PIN passed
-> +        here.
-> +
-> +        Args:
-> +            uri (str): PKCS#11 URI naming the signing key
-> +            pin (str): PIN to add, or None if there is none
-> +
-> +        Returns:
-> +            str: Value to pass to 'openssl -key'
-> +        """
-> +        if not pin:
-> +            return uri
-> +
-> +        # Only the query component can hold pin-value / pin-source
-> +        query = uri.partition('?')[2]
-> +        if 'pin-value=' in query or 'pin-source=' in query:
-> +            return uri
-> +
-> +        sep = '&' if query else '?'
-> +        return f'{uri}{sep}pin-value={urllib.parse.quote(pin, safe="")}'
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 10373a2fa899..e91768c52fe9 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -35,6 +35,7 @@ from dtoc import fdt
->   from dtoc import fdt_util
->   from binman.etype import fdtmap
->   from binman.etype import image_header
-> +from binman.etype.x509_cert import Entry_x509_cert
->   from binman.image import Image
->   from u_boot_pylib import command
->   from u_boot_pylib import terminal
-> @@ -7001,6 +7002,110 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->                                          entry_args=entry_args)[0]
->           self.assertEqual(U_BOOT_DATA, data[-4:])
->   
-> +    def testX509CertPkcs11Pin(self):
-> +        """Test signing with a key in an HSM, with the PIN from PKCS11_PIN"""
-> +        self._CheckPkcs11Provider()
-> +
-> +        token = 'x509-test-pin'
-> +        key_label = 'testkey'
-> +        pin = '1234'
 
-question: should we use different key label and pin?
+I'm only worried by two things:
+- keyfile is too generic of a name and might be reused by other entries 
+in the future and this will break them,
+- it applies to all x509 entries, so a binman node with multiple entries 
+will only ever be able to use one keyfile.
 
-They are already used in testX509CertPkcs11.
+I don't have anything better to offer, and you could technically already 
+call binman with -a keyfile, U-boot just didn't call it based on an 
+environment/make variable, so:
 
-> +        env = self._SetupPkcs11Token('testX509CertPkcs11Pin.', token,
-> +                                     key_label, pin)
-> +        env['PKCS11_PIN'] = pin
-> +
-> +        # This time the URI carries no PIN, so binman appends the one from
-> +        # PKCS11_PIN before handing the URI to openssl
-> +        entry_args = {
-> +            'keyfile': f'pkcs11:token={token};object={key_label};type=private',
-> +        }
-> +        with unittest.mock.patch.dict('os.environ', env):
-> +            data = self._DoReadFileDtb('security/x509_cert.dts',
-> +                                       entry_args=entry_args)[0]
-> +        self.assertEqual(U_BOOT_DATA, data[-4:])
-> +
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-issue: same remark as in patch 2
-
-This remark applies to the whole series, please apply to all occurrences 
-in the series I don't think it makes sense I highlight everywhere the 
-issue occurs.
-
-question: should we have a test for pkcs11 engine?
-
-> +    def testX509CertPkcs11PinEngine(self):
-> +        """Test PKCS11_PIN with an engine-prefixed PKCS#11 URI"""
-> +        uri = ('org.openssl.engine:pkcs11:pkcs11:token=mytoken;'
-> +               'object=mykey;type=private')
-> +        entry_args = {
-> +            'keyfile': uri,
-> +        }
-> +
-> +        # openssl is forced missing so that this needs no pkcs11 engine to be
-> +        # installed; what matters is the keyfile it would have been given
-> +        with unittest.mock.patch.dict('os.environ', {'PKCS11_PIN': '1234'}):
-> +            with terminal.capture():
-> +                self._DoTestFile('security/x509_cert.dts',
-> +                                 force_missing_bintools='openssl',
-> +                                 entry_args=entry_args)
-> +        entry = control.images['image'].GetEntries()['x509-cert']
-> +        self.assertEqual(f'{uri}?pin-value=1234', entry.key_fname)
-> +
-> +    def testX509CertPkcs11PinNotUri(self):
-> +        """Test PKCS11_PIN is ignored when keyfile is not a PKCS#11 URI"""
-> +        # A path which merely contains 'pkcs11:' is not a URI, so it must
-> +        # reach openssl untouched
-> +        keyfile = '/keys/pkcs11:key'
-> +        entry_args = {
-> +            'keyfile': keyfile,
-> +        }
-> +        with unittest.mock.patch.dict('os.environ', {'PKCS11_PIN': '1234'}):
-> +            with terminal.capture():
-> +                self._DoTestFile('security/x509_cert.dts',
-> +                                 force_missing_bintools='openssl',
-> +                                 entry_args=entry_args)
-> +        entry = control.images['image'].GetEntries()['x509-cert']
-> +        self.assertEqual(keyfile, entry.key_fname)
-> +
-> +    def testX509CertPkcs11PinSubclass(self):
-> +        """Test PKCS11_PIN reaches the TI K3 x509 certificate subclasses"""
-> +        uri = 'pkcs11:token=mytoken;object=mykey;type=private'
-> +        entry_args = {
-> +            'keyfile': uri,
-> +        }
-> +
-> +        # These read 'keyfile' through Entry_x509_cert.ReadNode(), so the PIN
-> +        # must survive into the entry they build
-> +        for dts, name in [('vendor/ti_secure.dts', 'ti-secure'),
-> +                          ('vendor/ti_secure_rom.dts', 'ti-secure-rom')]:
-> +            with unittest.mock.patch.dict('os.environ',
-> +                                          {'PKCS11_PIN': '1234'}):
-> +                with terminal.capture():
-> +                    self._DoTestFile(dts, force_missing_bintools='openssl',
-> +                                     entry_args=entry_args)
-> +            entry = control.images['image'].GetEntries()[name]
-> +            self.assertEqual(f'{uri}?pin-value=1234', entry.key_fname)
-> +
-> +    def testX509CertAddPkcs11Pin(self):
-> +        """Test adding a PIN to a PKCS#11 URI"""
-> +        add = Entry_x509_cert._add_pkcs11_pin
-
-nitpick: do not use a variable for a function
-
-I find it makes it harder to know what's happening by quickly looking at 
-the code. You can keep it if you want, I just don't like it :)
-
-> +        uri = 'pkcs11:token=t;object=o;type=private'
-> +
-> +        # No PIN to add, so the keyfile is unchanged
-> +        self.assertEqual(uri, add(uri, None))
-> +        self.assertEqual(uri, add(uri, ''))
-> +
-> +        # PKCS#11 URI, in both the provider and the engine form
-> +        self.assertEqual(f'{uri}?pin-value=1234', add(uri, '1234'))
-> +        engine_uri = f'org.openssl.engine:pkcs11:{uri}'
-
-question: is it really supposed to be 
-org.openssl.engine:pkcs11:pkcs11:token... ?
-
-See the duplicated pkcs11: in the URI.
-
-> +        self.assertEqual(f'{engine_uri}?pin-value=1234',
-> +                         add(engine_uri, '1234'))
-> +
-> +        # URI which already has a query component, so '&' separates the PIN
-> +        self.assertEqual(f'{uri}?module-name=softhsm2&pin-value=1234',
-> +                         add(f'{uri}?module-name=softhsm2', '1234'))
-> +
-> +        # URI which already says where its PIN comes from, so it takes
-> +        # precedence and the keyfile is unchanged
-> +        self.assertEqual(f'{uri}?pin-value=5678',
-> +                         add(f'{uri}?pin-value=5678', '1234'))
-> +        self.assertEqual(f'{uri}?pin-source=file:/etc/pin',
-> +                         add(f'{uri}?pin-source=file:/etc/pin', '1234'))
-> +
-> +        # PIN percent-encoded as required by RFC 7512
-> +        self.assertEqual(f'{uri}?pin-value=a%26b%3Fc%3Dd', add(uri, 'a&b?c=d'))
-> +        self.assertEqual(f'{uri}?pin-value=a%20b%2Bc', add(uri, 'a b+c'))
-> +
-
-question: should we have a test with / in the pin?
-
-Since we're calling urllib.parse.quote(x, safe="") which means / is also 
-quoted.
-
-Cheers,
+Thanks!
 Quentin
