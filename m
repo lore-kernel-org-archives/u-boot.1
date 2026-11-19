@@ -2,110 +2,127 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2788606A320
-	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 11:42:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21BD5606A320
+	for <u-boot@archiver.kernel.org>; Thu, 19 Nov 2026 12:01:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=qg2oOgQG;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=eAHY4JB4
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HStLlxUK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A630D40A71;
-	Thu, 19 Nov 2026 11:42:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D531D40A69;
+	Thu, 19 Nov 2026 12:01:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W3JA98Rjwhih; Thu, 19 Nov 2026 11:42:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6311C40A6A
+ id ZwJaU6wH58GI; Thu, 19 Nov 2026 12:01:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EC1F6406D6
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795088574;
-	b=qHeSSyGQIR6+Vn75xgRRiy2C0Xs7gFYql1ZpAdhqg7oiVC1ioYeq2NAOt5FpE6D/BXK3
-	 wYyTfDFFm+dobJtIJjxybGgQ1o5ylbOtOIETO+rFNRE4MNpztRpKhqn0fN8Po82dVBNL8
-	 TFx44KzZIwYFun0oKqDFXRpWkUNjqFdqTTFiy95rvjLJhhYCfzxoehPfOrEKI2r1F89T5
-	 qfJSs6M1KM+KPI+1zio3y0h18jteM5/xNp7c5myUf0fUu8SvFbaS23NvJG5DyXql0I5Mm
-	 N2AlqlCW1eQdtc2KHt9zmknbmLR0sK2KU7hYFnPy9/WsAtxAWadHyfIBtTzW2+RNqqg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795089714;
+	b=mjqZPMv3VY/jp3zD1dpkMkcVRoO9Y0h7bMM11ilvTl9Dd+n7+GO8lOM0WLXsEW9+J7wf
+	 jzr+6JKeoU6EaBdeucbJ9GmV0Bun7NI/sgHoOjk2yilr4LXK3y1D4bt8CriE+TkFDN53i
+	 xhbb2CvNyP7q32uWpXhgNhw/XZBjCHXmp8ky0+BxgkVWaADENLY4IuwcCOtCuu39QddW1
+	 xiGQEFijOdMj3q0W9nkNd+Mw9/fQPUj79z20hXJOMXopsbL03H1iuSYCP1mgq7O/Es6OJ
+	 aix8QdzkWztLaU1Hq9r1UgvXXMnrkAM+k4Br5u8ja8jAThZxr17RS/7BQJFZbofL1mA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795088574;
+	c=relaxed/relaxed; t=1795089714;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=E9zKL5MvMUc1PRIsW1MREaLsrxuYSNZQk4Yp6EkhwV0=;
-	b=qR28O65NtgXD3GO+rbwwMTvCUsXHQMOvQK4m1S+QsfeQJbQ9EdXFIIFQ4/2mlPfobvcQ
-	 YP0QTC7MOvoUhw4t1vzakUtUOT97u3jCKnYew9O7qPADeD7RnuYvlsKyVUpKtPp8F8G4U
-	 oZqjOuxT3/MfFd6AU4gwLeilazyM9VwoKt+/HgT8gCdXR2GRm9gcFYc6v6SbW/VDsmxqO
-	 QxBZ6uejga1fTTcNQ6w0KA4ebkciCEXKSkBDzQogjdOSQ6yL5jjxEsMdI1LN83tpyJNpK
-	 vfT5rvKn14Mw3U5oL+SvuxzskkIowO58cMcDSzc5Ahn4NvwYA7UikYIMi0VncUdr4dw==
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:X-QQ-GoodBg:
+	 X-BIZMAIL-ID:EX-QQ-RecipientCnt:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:
+	 X-QQ-XMRINFO:X-QQ-RECHKSPAM:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=QqaT8whBAbbemAjCzqG4LzqTEIiFtr8nqg1zNzHh73k=;
+	b=IXzRRVGdHKX1OCn2yKSoWPpewOPR1has/E9eYLge8Kmulq0tEDLmGnrH9EA5Ku67EsSw
+	 bGDP54keu808FScXvu6Z7XBkKgE0Vc5eMsUGgq4k5aCfa6x9JuWJ9p3wUCQqCaWPNLWh5
+	 rehQgJjueQa7Wzc8iPNSusIQ5Wv13eGFfJYgo4qkzVYwYQk+GjWPjnIPe1C2nsMBEKOsZ
+	 56wpEzN0fCdiQ4XtUXSGlWjiPIjsV/9YV3tcxqWBQlyARaQy0QE+TP5C5zP0/QP8QzJ5p
+	 NmmIKAc3Px3VudYIiC7fi39eYQAUDMMCFErlZFVcrWzxNM9dECNMG7iMxF4Vw4Oj+IQ==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795088574;
-	bh=E9zKL5MvMUc1PRIsW1MREaLsrxuYSNZQk4Yp6EkhwV0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795089714;
+	bh=QqaT8whBAbbemAjCzqG4LzqTEIiFtr8nqg1zNzHh73k=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qg2oOgQGF6ukkD6aDhPEJK+UYIuaTKZTs0bzzvZNXrnumw3julhGV1rRHrpnMIPEA
-	 bVI0Zec/bBocbrE11ullmb+B+NvlN+pzl4iOur9QfxxScbrqmBV2pXxZwwcPk88qOz
-	 pSDjG8W7XXf54ai5G1r0K5jMPiOmzDXJWZmVxB8DfDewsyKCMIefsskkfE3AYaN2Nk
-	 r0YKiRrow5/lhiF0nHk0xNl5IZCMs7E9MG8ZeK2rh10O3LooETAIjidvXDp3wzL1aO
-	 fyc8Sbr6Jl799q5gWMERVrOFeMpTe94GGk0PO23SQaC7U60sVoo44eWZ4LpS5QNSe/
-	 p7gbyTwq2Qw0w==
+	b=HStLlxUKH509F28cqKEcJX9CD0wU6aEBTWmwrLXWsSoaGBzg15aB5gOnGxcfnaKOB
+	 un9s7+qIn9n5yngTja92UzLWRo162X/22GtzHxVBMLxlw3KCspbkjQxbjGjnAaK5Nv
+	 MMc5rdWx57chC9eeNu7M7ahixJOrHjdQeMS8cXYr0uHtr+pmAstd09dVVt4O8G9eP/
+	 nSRV3Qfj3A7eS8O9EiVctTuYR20Z27BISrA5ivTK9JFcfmxrK/7tZfpMSqNysCgV64
+	 eyRcSHQBr9jVLLTb3mI+EoyY0yOG++4MIaKucvi2Fk4XSDGt4gA2P0fcTorLlE1lgW
+	 xa1ED87xoSvBQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6311C40A6A;
-	Thu, 19 Nov 2026 11:42:54 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1D2071E7
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 11:42:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EC1F6406D6;
+	Thu, 19 Nov 2026 12:01:53 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E74AE260
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:01:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0316F60D56
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 11:42:53 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D9CC540527
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:01:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9EjnbijheGeO for <u-boot@lists.u-boot-project.org>;
- Thu, 19 Nov 2026 11:42:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 933EA60AE4
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=eAHY4JB4
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 933EA60AE4
- for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 11:42:50 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=eAHY4JB4a43he+MBHslzh92E6wSeZJ05svH4cWhPD6DGaMsm0FGc8RVyv+qrASeeI+c8NmYo2clkgPkLkzE/w0+wOXTiY3BL1VrrN/aaZtxbQIUhoMsvh4UgCIqPElSbEtLpBU//E2HcikHZogfuFwxKI8a4oOhdh6VJPQBSeKY=;
- c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=E9zKL5MvMUc1PRIsW1MREaLsrxuYSNZQk4Yp6EkhwV0=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1795088541830251.98915415293357; 
- Thu, 19 Nov 2026 03:42:21 -0800 (PST)
-Date: Thu, 19 Nov 2026 11:41:59 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Zhouqi Jiang <luojia@rustsbi.com>, Yao Zi <me@ziyao.cc>
-Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com,
- tim609@andestech.com, leo.liang@sifive.com, sjg@chromium.org,
- alpernebiyasak@gmail.com, jiangzhouqi2025@iscas.ac.cn, plucky@rustsbi.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CYpBKZEvSJp3 for <u-boot@lists.u-boot-project.org>;
+ Thu, 19 Nov 2026 12:01:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D5964404FC
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=18.194.254.142
+X-Greylist: delayed 9714 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 19 Nov 2026 12:00:48 UTC
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=rustsbi.com
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=18.194.254.142;
+ helo=smtpbgeu2.qq.com; envelope-from=luojia@rustsbi.com; receiver=<UNKNOWN> 
+Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D5964404FC
+ for <u-boot@lists.u-boot-project.org>; Thu, 19 Nov 2026 12:00:45 +0000 (UTC)
+X-QQ-mid: zesmtpgz4t1795089601tc5847f5a
+X-QQ-Originating-IP: ACPkFr9j3L2RE3oCxI15ka/fKfbsr81FoqWXAB8p0g0=
+Received: from jiangzhouqi-ubuntu-4090-01.. ( [36.110.52.2])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Thu, 19 Nov 2026 19:59:58 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 13655552842107644753
+EX-QQ-RecipientCnt: 9
+From: Zhouqi Jiang <luojia@rustsbi.com>
+To: Yao Zi <me@ziyao.cc>
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, tim609@andestech.com,
+ leo.liang@sifive.com, sjg@chromium.org, alpernebiyasak@gmail.com,
+ jiangzhouqi2025@iscas.ac.cn, plucky@rustsbi.com
 Subject: Re: [PATCH] riscv: Add RustSBI firmware support
-Message-ID: <av7gh5SblUm5WYA1@pie>
-References: <avr-_7CNcFit18nw@pie>
- <1388F640AFD6F7C7+20261116151554.2375371-3-luojia@rustsbi.com>
+Date: Thu, 19 Nov 2026 20:00:39 +0800
+Message-ID: <A529EF9EAC548DDB+20261119120038.3129288-2-luojia@rustsbi.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <av7gh5SblUm5WYA1@pie>
+References: <av7gh5SblUm5WYA1@pie>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1388F640AFD6F7C7+20261116151554.2375371-3-luojia@rustsbi.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/295.64.54
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpgz:rustsbi.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: M3uTjkO5QXGxZe1f8OKUX3AMDJCjMUMDSY/pjWYwgQW8yjhFmWVBN8ux
+ 7NPEBEf4Og3RzHPgZzCvd+YyUjA/+/c+xBArHVQ4yeEjtyE8aZw0iPAD7HMguTUH18tMoX6
+ cmbVfMjFExSfsEmGNGJgCfrU96J9jYAGsGc02uuZGjO6+8nTSaRIzOobg68/HPUUoSlA82a
+ ZhsCEnqb1ORvo7Fgg07B4kZ+635V8ZHuiQxwf5FVSmuryEYj4p3oieQnMaEAIJ4HgEgsGhS
+ YiBT5Aq4ClhA89EnXW+Rt7U9OFwGnOR6tOB4AnsJ16VNgKkbsDdaW/Tu/P7V6e+kwdbGNne
+ 8Vrd7xh1N/6CQM8c6d933I5PZmdwPOscVaI2qdPGkB+URz0fwk2yUD7sjDmIzNyyhzyzZFz
+ 0QjIoNRidPFTEql4MtME+P1DBAI6wjrCFhHHLY/oWIK6X4olBqftkFozYqMWf4v0JtgVJQf
+ q21Q3VyhRiE9RjUa0GfyDF2m1fHKFLjXJ2ZUoYPqVDNIVAyVnrRoVddaAGkXrB/qaHmjGLm
+ TSzK1WOz9qlBQL8gkKoTaNC5cYzxkG3RezFSVBgXmDg8uSTS6R1CiZX+qmyU2KKo3erno3J
+ 0lLdW8hOZKr5wHitemyVrfTkkKA1gpR3lvS/DuOuArBEFDL9JDBx8Roih/h3U0t3hCArjwB
+ mmxhKDGVKUvQ6KbJJgF0YIUrsAajQt8sIvYggc4qRlT1vYJvrgvtm+QjurKS5ZIfYWRmDUC
+ z5E7AxhUQVrH4usKvt5FTko7ioYSX7W3DSgKXZJO1cMT6J5XH9PHXUA3pdsquf1Iy6ztjBp
+ abC4xMte1ola8bc6SPbxB9WEKIEdnkZzAuEcsfYbwkpfe2Ssn8EP9LQdimBbmxbbYZP0j98
+ EAmaiV0SgOj3mOiHyduTVmTjtMevRCKmksFsP7wpG/1eho3OtkngZpquBStxXLnnLGeiC2J
+ Y1wDXSg+/r2XaWwp5SyUdp23nSgfzDsdHlP8C43gccmrFiwyE7zTazIKYdbYnr1x/NuGgMN
+ jFgOITle1bXD71CRUYHOLBynl9hRDZjh7l96nxB5cbsK9kXD+tlMg2a56NcXU=
+X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -115,118 +132,43 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 16, 2026 at 11:15:56PM +0800, Zhouqi Jiang wrote:
-> Hi Ziyao,
-> 
-> > Please quote the context on reply, so the mail is easier to read. I'm
-> > adding Tom's comment back here.
-> 
-> Thanks, and sorry I omitted the context in my previous reply.
-> 
-> > > > To be clear, I think all of the changes to make things more clearly
-> > > > generic here are good. At first read, it looks like aside from display
-> > > > strings and a different scratch options value, RustSBI and OpenSBI are
-> > > > interchangeable as far as U-Boot is concerned? If so, I'd like to
-> > > > explore continuing down that path more.
-> >
-> > On Mon, Nov 16, 2026 at 01:42:33PM +0800, Zhouqi Jiang wrote:
-> > > Thanks. You are right: RustSBI and OpenSBI are interchangeable here because
-> > > RustSBI implements OpenSBI's FW_DYNAMIC handoff protocol. This reflects
-> > > ecosystem compatibility rather than a formal RISC-V standard for
-> > > inter-firmware handoff.
-> >
-> > So if RustSBI could be supported through OpenSBI's handoff protocol, why
-> > not simply keep the current OpenSBI stuff as-is, only replace the
-> > fw_dynamic.bin with RustSBI's binary?
-> >
-> > From the view of this patch, I don't see any improvements by separating
-> > RustSBI stuff out for the current situation.
-> 
-> I agree. For v2, I will remove the separate SPL_RUSTSBI option and use the
-> existing FW_DYNAMIC handoff. The current draft keeps RUSTSBI= as an alias
-> for OPENSBI=; both use the same FIT entry and handoff. Would that alias be
-> useful, or would you prefer using OPENSBI= for both?
+Hi Ziyao,
 
-I prefer to keep using OPENSBI=.
+Thanks for following up.
 
-> > > I initially considered merging the tags, but I now prefer to keep
-> > > SPL_OPENSBI and SPL_RUSTSBI separate while moving the shared handoff code into
-> > > a common path. This keeps firmware-specific details, such as scratch options,
-> > > explicit and leaves room for other SBI implementations.
-> >
-> > However, scratch options could be modified through Kconfig options
-> > easily. Even with a separate Kconfig option introduced, others still
-> > need to alternate it to use RustSBI-compatible scratch options.
-> >
-> > So I think, like what I have said before, a documentation to explain
-> > support status of different SBI implementations, and
-> > SPL_OPENSBI_SCRATCH_OPTIONS' effects on them, might be more appropriate.
-> 
-> Agreed. I have documented the supported implementations, firmware input and
-> scratch options in the RISC-V architecture documentation.
-> 
-> In your earlier review of the original patch [1], you also wrote:
-> 
-> > These changes should be defnitely split into separate commits, since
-> > they're related to too many different components (riscv, boot flow, spl
-> > loaders, binman, and doc).
-> 
-> > > @@ -476,8 +476,7 @@ config SBI_V02
-> > > -	  Choose this option if OpenSBI release v0.7 or above is used together
-> > > -	  with U-Boot.
-> > > +	  Choose this option if the SBI firmware implements SBI v0.2 or later.
-> >
-> > This change itself looks like a good clean-up, and could be accepted
-> > independently with RustSBI support. Please split it into a separate
-> > commit.
-> 
-> I plan to split v2 into three patches:
-> 
-> 1. Make the SBI_V02 Kconfig help text generic.
+> > Would that alias be
+> > useful, or would you prefer using OPENSBI= for both?
+>
+> I prefer to keep using OPENSBI=.
 
-Makes sense.
+Agreed. I've dropped the alias patch. Both OpenSBI and RustSBI use
+OPENSBI= and the existing FW_DYNAMIC handoff.
 
-> 2. Add the RUSTSBI= firmware input alias, binman test and missing-blob help.
+> > 3. Document SBI firmware support and scratch options in the RISC-V
+> >    architecture documentation and SPL Kconfig help.
+>
+> The documentation itself should probably not stay in SPL Kconfig help
+> text. You could inform the reader to refer to something in doc/ instead.
 
-Whoever, the code would be largely identical to the OpenSBI handling,
-no? This is one of the reasons I dislike the idea.
+doc/arch/riscv.rst now explains how to supply the SBI firmware and how
+SPL passes the scratch options through the FW_DYNAMIC handoff.
 
-> 3. Document SBI firmware support and scratch options in the RISC-V
->    architecture documentation and SPL Kconfig help.
+> > Would carrying a firmware name for display be useful, or should
+> > the existing labels remain as they are?
+>
+> I prefer to keep them as-is.
 
-The documentation itself should probably not stay in SPL Kconfig help
-text. You could inform the reader to refer to something in doc/ instead.
+Agreed. v3 keeps the existing FIT descriptions and SPL debug messages.
 
-> > We should probably not cover every possible SBI implementations in a
-> > board-specific documentation. A better option might be explaining the
-> > support status of different SBI implementations in RISC-V-specific doc
-> > doc/arch/riscv.rst, and keep all the board-level ones as-is.
-> 
-> Agreed. I have kept the board documentation unchanged and moved the
-> firmware information to doc/arch/riscv.rst.
-> 
-> One point I'd appreciate your and Tom's thoughts on: the existing FIT
-> description and SPL debug message say OpenSBI even when the binary is
-> RustSBI, although the U-Boot "sbi" command can identify the implementation
-> at runtime. Would carrying a firmware name for display be useful, or should
-> the existing labels remain as they are?
+I'll send v3 as a two-patch series, with the SBI_V02 help cleanup in the
+first patch and the RISC-V documentation in the second.
 
-I prefer to keep them as-is.
-
-> [1] https://lore.kernel.org/all/avr68Io04mE4YFs-@pie/
-> 
-> Thanks,
-> Zhouqi
-
--- 
 Thanks,
-Yao Zi
-
-Meow-mrrp-mrow, I'm a cat.
+Zhouqi
