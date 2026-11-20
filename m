@@ -1,137 +1,188 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BD5060A2629
-	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 18:54:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 328A360A2623
+	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 19:01:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=M2wo4BSS;
-	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=DL+HtZT2;
-	dkim=pass (1024-bit key, unprotected) header.d=forwardemail.net header.i=@forwardemail.net header.a=rsa-sha256 header.s=default header.b=fTtenRxh
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=K2t96HOK;
+	dkim=pass (2048-bit key, unprotected) header.d=jannau.net header.i=@jannau.net header.a=rsa-sha256 header.s=fm2 header.b=p8X/CmP0;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=0J1JY/Je
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E743540838;
-	Fri, 20 Nov 2026 18:54:38 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iV_fAedFGdQG; Fri, 20 Nov 2026 18:54:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A6BEF4064C
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795200877;
-	b=kHc6KLLxSsgTczL62E5JuOMfKveSRFEz0WOIRrygGdgcdaYkOK8BE2PUjzpYwCLneIeX
-	 aEIOxRQaM4Bwvtqb1LfalT7zQLkmasVWeY3BcRulRwg+baxYRB5aG1rpC2ycXllTsGfuu
-	 FS/1BwL3Dv/phBn4ga5jwzCLOA+Ox3+Z6ObcJxxHO4GA5WijElRXuS6+PWhLBoSBEBK+2
-	 UuhUdi15ak4KvGugK7hF0Y/GPtt9ToaqDA+BzuBET8W9hp/se0mAfwgMr4popBrBb2rXe
-	 QXVcCcqY3Af469Qxna/6DyEVUw1tarXX5YCBylWJn2Ba2E8HibuPDlF2mq/duYgMyuw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795200877;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:DKIM-Signature:CFBL-Feedback-ID:CFBL-Address:
-	 X-Forward-Email-ID:X-Forward-Email-Sender:X-Forward-Email-Version:
-	 X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
-	 X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
-	 Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=CSyXkpmQpJrSqWHuGSZHoSrr0SU0hwP0p8VHtIBUO78=;
-	b=C7/Bp/4YU2v66tlNTOMJHpp1prja7kGq/XZv03U5aDjiyRzAxv4h/vWyE8is9MFJ5wyc
-	 Xk3Alen8pKEpbeXzTC1/fI/7ZdvX1eD6xim7u95cNETjQpB1OdghHuR/DIzJ6MYe4QLyS
-	 J2sQ60O63VSZ37/wJCK7TuYgIONxyJ53cmjoGAWZmpUmTJ58Y7MWTo8QpGCp7JK0PpgSC
-	 hJ3ImlhFc6K54VmnNUS3QPnuYtOUD2i+338G3rV1l3aa3eNt4zy0quYEx44QIwLEc6PAG
-	 Mgb0WyXrMAqs9Rk5VtWGGGcqGUcp02YZekruc/2a62nE5Iukac3ZYczF0uWB6NGqSJQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795200877;
-	bh=CSyXkpmQpJrSqWHuGSZHoSrr0SU0hwP0p8VHtIBUO78=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=M2wo4BSSA0efkdmYeVkqUGz4E7oYWLplOVI8gx/yxHI1UbgF1zxeyXD9Iw7MahcuE
-	 DEKX+RuGxUphEj032kVb37umnFU4HpvHo8JjJyG90iZFbn8qy8zLH8ujJd8QZX0JyT
-	 O9cg0ifRBIkmsNcXbPlXUBe3gbHs1yYd0FuTOgGZjMBJX/L93DLGVHADCRkCbkXYkr
-	 jE5koynpgWAsgWxjBnhx3/k0/jibRZtFlwaCAXJvuiYu7CK8+OQmanqPmVk09KkXnD
-	 RgMj1kF4Z+TNHUj8F4tp5MJKNXrjlubUbkmZ0faVv/3QFXQLa/1c8gjMoJPe/guSVS
-	 p3tBzOOF76meg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A6BEF4064C;
-	Fri, 20 Nov 2026 18:54:37 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D0423169
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 18:54:35 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CDCDA60609
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 18:54:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 067AF60616;
+	Fri, 20 Nov 2026 19:01:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B4TRaVwAOAeX for <u-boot@lists.u-boot-project.org>;
- Fri, 20 Nov 2026 18:54:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8A689605F9
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=121.127.44.66
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=8890=jk=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ id hrChOOutRYOq; Fri, 20 Nov 2026 19:01:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4FF9B60618
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795201284;
+	b=AIAaXevADwY3Eq6MCzmE5pvy9dEas6SU5bGOwVJVSiem3QeqIztX+Wj78ztxPJrDHugR
+	 BuRKa0Z5H6TG9NOWGrU0AIvO3YjdI/Aw2n0iVrf1sJcw7RnCf//935685acTuhU7oSLhP
+	 SbKhT36wIs1f1qwF7e31uT9GfSEfWEpOUliGiRPPVOG37/OxM2irH8Uf8O0+J08JQMUJQ
+	 u3zIXrJdJJeAT5tjat1Ya0E4kVjPqNHgV4VxzdLHOH64mrTmKzsgYZUu/EcN1ofFUOOzb
+	 7JlvHiGBAAz2RbTK144GuLzRqpk6bh4W6THJh2QA3LF7JbhmICKlZfhxhBvFoUubalg==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795201284;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:DKIM-Signature:X-DKIM2-Info:DKIM2-Signature:
+	 X-DKIM2-Info:Message-Instance:X-ME-Sender:X-ME-Received:
+	 X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=iiJipBn850reirK6+kncrgNMfk2pdS/rDQbCsvsHvmc=;
+	b=BsuEfTBab2jQn6taIirF0W9OlckLpsRR0Y9yTX2FqHk7lPpg/RtPJ+I5PnUV8sZ0l0GI
+	 XB7iSl99i0RWJnh9EY+ZGVqRGS2SBAFCtuQrjqSubPQc3AirjExWantMj5YQ9DOzXiry4
+	 +B9CEoTzezlZ6jIJ8Opukz/MEcvcqpKIkx8qBib22e5PyHgQeScqIYLH3jyVnLIRsZZbz
+	 ibsszheotLHU3itlf4ftC4EzXoizZHz0Ldf483B17aeRadn0mlaT6kxA4UTMVdymCh2+g
+	 m8id34JtYARspQ0gHZ+UQ9iGHzP1bDiiu1sPO3TJ6bg8wnp7GRq78cAP+mlEYuEyTuw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1795201284;
+	bh=iiJipBn850reirK6+kncrgNMfk2pdS/rDQbCsvsHvmc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=K2t96HOKbyUemGhqnv1dG/E8ahmxKUEHWKZydMIwfzOMSw41fRNpV/8pYyMujO4cl
+	 Zv1G317R2NOGR1NOAfqbzVykZ9Ck1HoDuT6UahXfwXuG3bH6bKrhvmGiMhHJzoqz9S
+	 DtuTpeOVT+Z3U7rW4rMl58OuOtcHs9NIGuEzQNNHqK4oCjgusLr/C5HEEA+iwNvtU+
+	 EqC+voI3TAnIlgYd55DrS1KKVVnCjyCbJoiCfhcWmXIMRuqX05joaOC6/j3H0dkCky
+	 d8znz9wcfGhoD00QuKG3yJqOtaf0XByNlIsMrKqQDnOxX57DTMSdaqykcb1up38uyx
+	 1wCbmuzQdkVXQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4FF9B60618;
+	Fri, 20 Nov 2026 19:01:24 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 819209CF
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 19:01:21 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6F21940E8B
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 19:01:21 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DswrUy1tHGUi for <u-boot@lists.u-boot-project.org>;
+ Fri, 20 Nov 2026 19:01:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 333C840E89
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=202.12.124.151
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=202.12.124.151;
+ helo=fout-b8-smtp.messagingengine.com; envelope-from=j@jannau.net;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=DL+HtZT2; 
- dkim=pass (1024-bit key,
- unprotected) header.d=forwardemail.net header.i=@forwardemail.net
- header.a=rsa-sha256 header.s=default header.b=fTtenRxh
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8A689605F9
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 18:54:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From:
- Content-Language: References: Cc: To: Subject: MIME-Version: Date:
- Message-ID: CFBL-Address: CFBL-Feedback-ID; q=dns/txt; s=fe-e1b5cab7be;
- t=1795200871; bh=CSyXkpmQpJrSqWHuGSZHoSrr0SU0hwP0p8VHtIBUO78=;
- b=DL+HtZT2K7Pnh7EyN29cI9Qk1IHaDYTf3obJ0GJU6QZ++BsOkgsh9MgvJsLUV1MLPwMfQL7r6
- 99Ig4z+wGHcNq0FbtNEdb9zh8LtgmReuBDgzInnK1xxjLj5CkRlDEno7q8xUByIk6FwL09gLRt2
- 4oXijMbQRPLsyYDLC1lsBoMXMn2TX+EOXrk0CNNn40JAv6iotBqEealUSPMkyx3o6YE3IeHdcSU
- DfkOCIz4LIKBM5G67yC26VUDgjL4vytJrmQP3GIDYWFDyrr0ae6MggaTGfaOy+h6ffK8oidv0BL
- mMnTgcssRVVGp2abTmmJwy3m4OcdkwIu6pFQxDWSWyUg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=forwardemail.net;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From:
- Content-Language: References: Cc: To: Subject: MIME-Version: Date:
- Message-ID: CFBL-Address: CFBL-Feedback-ID; q=dns/txt; s=default;
- t=1795200871; bh=CSyXkpmQpJrSqWHuGSZHoSrr0SU0hwP0p8VHtIBUO78=;
- b=fTtenRxhlfuX+htU0r8/UCRzR7ZLfo3jMISPKAbKUB0KAtiL55EhndGhjU+aXn/EFIacn0Epx
- u7g29m88gdRGtEJPddx3FLF9lb+zKCyzhzENLsgXfVAw/5neTyUE5vvbmIC2yYqoWgLcsdNYWqS
- bAWRrs664UMdkyXXUMQDaCo=
-CFBL-Feedback-ID: 6b009763af551cf52062463c:8ed1a0de79c6199f5a6e05cadad56ee8
-CFBL-Address: abuse@forwardemail.net; report=arf
-X-Forward-Email-ID: 6b009763af551cf52062463c
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.19.33
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <f050bec2-ca93-4ffc-97a0-2e840638920c@kwiboo.se>
-Date: Fri, 20 Nov 2026 19:54:25 +0100
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=jannau.net header.i=@jannau.net
+ header.a=rsa-sha256 header.s=fm2 header.b=p8X/CmP0; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=messagingengine.com header.i=@messagingengine.com
+ header.a=rsa-sha256 header.s=fm3 header.b=0J1JY/Je
+Received: from fout-b8-smtp.messagingengine.com
+ (fout-b8-smtp.messagingengine.com [202.12.124.151])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 333C840E89
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 19:01:19 +0000 (UTC)
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailfout.stl.internal (Postfix) with ESMTP id 9E0EC1D0047E
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 13:53:18 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-05.internal (MEProxy); Fri, 20 Nov 2026 13:53:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1795200798;
+ x=1795287198; bh=iiJipBn850reirK6+kncrgNMfk2pdS/rDQbCsvsHvmc=; b=
+ p8X/CmP0t7n6MHmeSrNySasRr6L/iJNgIZwII3JMo7dIHBz9eu0C5jYzco4y2JFB
+ CbVubs69rd0Up6APQ3my/fj8E95tBN2GjleTn47ufUFztfPmwY4o8jyvKa5FjA7L
+ zH2uCYfIadDZVdubeJBCYI0yShf84gH6jtVRgc1gRB78AGUmZpaR12sxinQh8zBb
+ FRN9RqOtzuUtOzfX4lzLn2cWsxAY4TTqyOr5AalmPE2/po0cJ0n7Nik7oxoAYbxp
+ dwbbbAEdOFV7+AmMX06wNLxgcAGaL0OOedGWP3/W2fw9sr9eZKUY0MYQt9giGDpP
+ nXJiVHbhDH1/euiU+pPoBg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1795200798; x=
+ 1795287198; bh=iiJipBn850reirK6+kncrgNMfk2pdS/rDQbCsvsHvmc=; b=0
+ J1JY/JeJrma6I0XA+wjQWjorqIRb7VdMt9UH8nX3KovmULSwWhSO24RdVV3Hpi1E
+ QQwbISLHVoNsYNQZiHH1ppD3GE6QbLFl4Vma8osVmHfFvQB6NWbCdjG0xnznflqo
+ ciGjeg54HYzvPIurPU8yhSNnMvHfJEbSU5YgsComL1o4h8jfqPAM8m7Q1gb0hG/F
+ jZL0I0kAMJTxEuq8rcxLhnd7pJN8tUzzk8Y34azNXnGs6AcAmMnT2p0+ciQOmq8c
+ D1JaXydbfahYBupTJ8Nkl/5tdVUw0+WiH3dCIAy6UiCwvlQlLV/rvewT03R+M92e
+ ataSxTczj5W/ZVv6ydYzA==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+ repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+ action=sign d=jannau.net a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1795200798; d=jannau.net; mf=PGpAamFubmF1Lm5ldD4=;
+ rt=PHUtYm9vdEBsaXN0cy51LWJvb3QtcHJvamVjdC5vcmc+;
+ s=fm2:rsa-sha256:5KnZfHJu2ZtObtxmphMYqOiIbrrU+mpCLKuPEqHWR9yCurB
+ lIYyf5NbSbciWjk5Hf2SoIaYtpNBWcGLqD+Wrz6brjk6cYNVAsgN9YGfhAiklEFi
+ fLyMEbFwW8aqB1r7CigQV/weQX0YnUm94mtbQ7H+jsawBQhFgThJZnwt52yGPtqM
+ kEtTAY6zGcB5h6oH5zV4T75m6NgX8vogWBbfiZW4LqSIVnoYOBb+c0xQ2WEm9MB3
+ sGxlW3P7bNAip+J/BQnfdlw/VW0KKZhgrDXrZfarxGBYsV12twK5wCVGNhJ759fZ
+ cEZdgtLuvdbMfVzW0l+Nc0VTx0vDvzMtbJLi7Lg==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+ repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+ action=mi-m=1; hc=12;
+ hn=cc,content-transfer-encoding,content-type,date,feedback-id,
+ from,in-reply-to,message-id,mime-version,references,subject,to;
+Message-Instance: m=1;
+ h=sha256:Utu1eENU9ExXd3GViukhIgmpayfwzXHGWkx40Hfft1A=:2m6kMX31ZvVoOQthNIdR686NyQo80Zfgai2Y+9K7r7A=;
+X-ME-Sender: <xms:HpcAa3hYCE63nGsYqYupueRCBMV1YUFIFbLkms0Vu4OsKqirunNnFQ>
+ <xme:HpcAa-CYksz6P7jRtUshtBTVfB9iggvW2EyVkeJLTWRmGeZZ3Puuem7FKVzRk-u_k
+ U-_ocYRYaiFkdUUEgrAy45tLZFAeMacP0JbpOkUh5u-04vCywNuIv5w>
+X-ME-Received: <xmr:HpcAa9vlgibDjg0LY_VLMCb_jZTruG2yIy1jm9L0TD480e22YxueWW-2W3Flod_RCHv7aUtqBbXW7A2gxJvpY-TxvfkZ44-RZ_M9ww>
+X-ME-Proxy-Cause: dmFkZTF40NY3j+ynN54GON3MNlAVzxJLtPAx2Hedsg+UjTHj4zhL7JTRhAJpFoXsLtvn+d
+ lqP28eeB/BzEKpHqS1aE0+eMkKY3CaL4Kd1ab7pTKj71pDm6Q2932xedD8+/6RWYLt1Czy
+ se4sW5hWg3zR4ZwAPtaB4BBpz3CUPGBBKncmjcZVDZeuALhJjD010wD8WQDSVMVovLzHpd
+ eX6y5K5z3VcfqK/1d8wCfoxHFm7g39w/fJGF/1QrK6LIeZvtqkFpz4Xv5ssVbGumUJwN71
+ AOtPCYYcwZGGBR8w+SJVJHQmuAE4PQ82dv2/TzBiysxC0z9kpgUlKX564Oj2+rPjlig4Cd
+ FcVqqrLmAOEHKs18hAA2HHT6vyUSvzjr09dZAM5uppYHdhbYKEw5Jl4LuVqPV0sYVJCG8j
+ WD4tzZcX+G8gvx5D8PZo5wodzbsBCRr6v0BC9IcGEt4xV+S/skJAkQcCjHzNN4XbklCW8W
+ jv9Gr8+O6yhDfqOtkECeNHRHZtyIlFPR+KmezbPEefx6ElSE2m0ZuRfWHqV9Pu0UJDA0nI
+ NTJ5G8GbknaIiT6QJayn0TyWbksjRq8iUEDBlTrTnrEh3wo/hLasbGDXjMSYXgHaUDb8sm
+ r5UQ/VbE7n27ymoc6mdhJF9QeDNhSZWTK0R96+u3vpVBBcFtPc2xBykPf2Aw
+X-ME-Proxy: <xmx:HpcAayee2rALDli1TLE3i6zc-cIN-Gg9J5oka3yoKHQ3XI1mfBUfBQ>
+ <xmx:HpcAay-x49dIOZxssUTCsqFpjB-kVKD0djqetODe7nsJ5_4mHJ6UjA>
+ <xmx:HpcAa1SLKslCKWpBRYKS1nK3182nt6b_KK3AJpjY_RLbFmc8BhbBDw>
+ <xmx:HpcAa7qf2LBmCxT5skbRJL-_SiPhoDfvkTR1NWtCWNuT7bGyhSGVxw>
+ <xmx:HpcAawj_yjAFTwcZLOEe5viVbol7GdryvoBboKUn3KLPocU_gM3PHVte>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 20 Nov 2026 13:53:17 -0500 (EST)
+From: Janne Grunau <j@jannau.net>
+Date: Fri, 20 Nov 2026 19:53:07 +0100
+Subject: [PATCH v2 1/4] doc: apple: Add Apple M3 as supported SoC
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: RK3572 / OK3572-C support on top of your rk3562 branch
-To: Quentin Schulz <quentin.schulz@cherry.de>, Cunhao Lu <1579567540@qq.com>
-Cc: u-boot <u-boot@lists.u-boot-project.org>
-References: <tencent_907535C1D3F4C91824948CA407902292FA0A@qq.com>
- <eb5ff808-d165-44f4-8620-48d68028ff71@kwiboo.se>
- <77ff29fb-545e-4e28-be30-2a0e6c2fdff2@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <77ff29fb-545e-4e28-be30-2a0e6c2fdff2@cherry.de>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261120-apple-t603x-support-v2-1-606b4f5fadc5@jannau.net>
+References: <20261120-apple-t603x-support-v2-0-606b4f5fadc5@jannau.net>
+In-Reply-To: <20261120-apple-t603x-support-v2-0-606b4f5fadc5@jannau.net>
+To: u-boot@lists.u-boot-project.org
+Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, asahi@lists.linux.dev, 
+ Anshul Dalal <anshuld@ti.com>, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1696; i=j@jannau.net;
+ s=yk2025; h=from:subject:message-id;
+ bh=2m6kMX31ZvVoOQthNIdR686NyQo80Zfgai2Y+9K7r7A=;
+ b=kA0DAAoWoRs8240vZWYByyZiAGsAlxeh8R+y+Ja44Nq6UEWVTcAwtpsxvgkVhoa061x4IfALt
+ oh1BAAWCgAdFiEEYivpiACrfCFcfeBWoRs8240vZWYFAmsAlxcACgkQoRs8240vZWY5+wEA+tQt
+ 2bWvAAISCks35wzzsU5o9UBWEbLp8kdNIKF4c8ABAK/wSzAtRkH9290qpyhYGWLXSkmjdUwFUUO
+ /ZzHklqwC
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -141,148 +192,59 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Quentin, Cunhao,
+Adding M3 (t8122) to the documentation was missed in commit a1a47eee6763
+("arm: apple: Add Apple M3 (t8122) support").
+Since Apple silicon SoCs have switched to upstream DTS stop listing SoCs
+with device trees. The expectation is that u-boot support is added
+together with Linux support. So the device trees might lag a little
+behind. Since u-boot's dtbs are usually not used on Apple SoCs this is
+not an issue.
 
-On 11/20/2026 5:43 PM, Quentin Schulz wrote:
-> Hi Jonas, Cunhao,
-> 
-> On 10/22/26 9:16 PM, Jonas Karlman wrote:
->> Hi Cunhao,
->>
->> On 10/19/2026 9:49 AM, Cunhao Lu wrote:
->>> Hi Jonas,
->>>
->>> I've been working on U-Boot support for the Forlinx OK3572-C board, which
->>> uses the FET3572-C module. After finding your RK3572 support, I rebased my
->>> work onto your rk3562 branch and now use your SoC, clock, pinctrl and RAM
->>> drivers.
->>>
->>> I have three follow-up patches:
->>>
->>> - Add optional RBOOT + DDR + SPL three-stage image support to mkimage.
->>> - Add optional RBOOT firmware support to binman.
->>> - Add the OK3572-C device tree, defconfig and build documentation.
->>>    (With Forlinx OK3572-C BSP Alpha1)
->>>
->>> I have verified the complete boot flow from eMMC on the OK3572-C. The
->>> bootloader, kernel and root filesystem are all stored on eMMC, and the
->>> board boots into a minimal Debian 13 system.
->>>
->>> Do you have a submission plan for the RK3572 support in your branch?
->>> Would you prefer me to send these changes as a separate RFC series based
->>> on your branch, or coordinate them with your SoC support series?
->>
->> For Rockchip platform we typically require device tree for new SoCs and
->> boards to be picked from upstream Linux (the devicetree-rebasing tree).
->>
->> So the first step is usually to upstream dt-bindings, device tree and
->> core drivers to Linux before patches for the SoC are submitted to U-Boot.
->>
-> 
-> Just to be clear, the limitation only applies to dt-bindings and the 
-> various Device Trees, but not to drivers. You're free to submit driver 
-> support for new SoC whenever you feel like it. Of course, without a 
-> dt-bindings agreed with upstream, the driver may not be compatible with 
-> the dt-bindings once finalized, hence why it's a good idea to wait at 
-> least for the dt-bindings for the driver to be merged in the Linux 
-> kernel before sending patches for it in U-Boot. I think it's a 
-> technicality since they (driver and its binding) are usually contributed 
-> together in a single series, but you could do that, that's fine on my side.
-> 
->> My rk3562 branch contains a long queue of new RK SoC support, some are
->> waiting on Linux upstream support, others are waiting on open U-Boot RK
->> refactoring series and/or other mailing list discussions. eMMC/SD-card,
->> Ethernet, RNG, OTP, SARADC and USB2 should be fully working for all the
->> pending SoCs in the rk3562 branch. All (or most) patches in rk3562
->> should eventually hit the mailing list, at least that's the goal.
->>
-> 
-> I think I've caught up with all your patches? Three series awaiting a 
-> new version (or feedback) as far as I could tell:
-> - https://lore.kernel.org/u-boot/20260805174509.2968252-1-jonas@kwiboo.se/
-> - https://lore.kernel.org/u-boot/20260804214442.2592597-1-jonas@kwiboo.se/
-> - https://lore.kernel.org/u-boot/20260804105721.2402406-1-jonas@kwiboo.se/
-> 
-> Is there something I missed that I should be doing? Let me know if I 
-> somehow skipped a series or if I need to act on something.
+Fixes: a1a47eee6763 ("arm: apple: Add Apple M3 (t8122) support")
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ doc/board/apple/m1.rst | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-Not that I know of, will continue and refresh series now that clock fixes
-have landed, thanks!
+diff --git a/doc/board/apple/m1.rst b/doc/board/apple/m1.rst
+index 900c5e6d91ea..66ed247eca26 100644
+--- a/doc/board/apple/m1.rst
++++ b/doc/board/apple/m1.rst
+@@ -9,6 +9,7 @@ the following SoCs work:
+ 
+  - Apple M1 SoC (t8103)
+  - Apple M2 SoC (t8112)
++ - Apple M3 SoC (t8122)
+  - Apple M1 Pro SoC (t6000)
+  - Apple M1 Max SoC (t6001)
+  - Apple M1 Ultra SoC (t6002)
+@@ -24,8 +25,8 @@ On these SoCs the following hardware is supported:
+  - NVMe storage
+  - USB 3.1 Type-C ports
+ 
+-Device trees are provided in dts/upstream/src/arm64/apple/ and available
+-for all M1 and M2 (t8103, t8112, t600x and t602x) devices.
++Device trees are provided in dts/upstream/src/arm64/apple/ and available once
++they are merged in the Linux kernel tree.
+ 
+ Building U-Boot
+ ---------------
+@@ -82,5 +83,7 @@ supported SoCs.
+      - Base Address
+    * - M1 (t8103) and M2 (t8112)
+      - 0x235200000
++   * - M3 (t8122)
++     - 0x2a1200000
+    * - M1 Pro/Max/Ultra (t6000/t6001/t6002) and M2 Pro/Max/Ultra (t6020/t6021/t6022)
+      - 0x39b200000
 
-Currently have following series in mind for a refresh and posting:
-- misc fixes/improvements for rk3506 support
-- cleanup: remove unneeded syscon driver for rk35xx
-- cleanup: remove uses of rockchip_get_cru() helper
-- refactor rk3506 clock driver (baseline for rk35xx clock drivers)
-
-And then continue with following:
-- add support for rk3562, rv1126b, rv1106, rv1103b
-  - held back pending: cleanups and clock driver baseline
-- add support for rk3538 and rk3572
-  - held back pending: upstream dt-bindings
-- continued clock driver cleanup/refactor for existing socs
-- consistent tpl handling
-
-> @Cunhao, the typical policy we have is that the first who contributes a 
-> patch usually gets to work on it until it's satisfactory and can be 
-> merged. We also typically do not care about unofficial trees, however 
-> close they are to upstream: if you have patches, and you feel they are 
-> good enough, you can send them even if another contributor has their own 
-> patch for the same thing in their tree (and haven't sent patches yet). 
-> Of course, do not go to a contributor tree and get patches from there 
-> without having permission to do so. Please do not use LLMs "to be the 
-> first" (or at all, we don't really like those here).
-
-Personally I typically have no issue with others picking non-WIP marked
-patches from my tree to possible help speed things along, at least not
-after a quick ping. I have several Linux patches that landed upstream
-that where submitted by others :-)
-
-> I know Jonas has many many many patches in his tree and he's been a 
-> relentless contributor and reviewer for anything Rockchip in U-Boot (and 
-> I know he's very active in other communities as well), I'm very grateful 
-> for that. I'm pretty sure Jonas was careful not to send too many patches 
-> and overload me, so that is also very much appreciated.
-
-Correct, I have tried not to keep too many series alive at the same time and
-switched focus to fixes when issues with existing code was discovered.
-
-> I'd like to both avoid duplicated work (Jonas and someone else doing the 
-> same work) and also putting too much pressure on Jonas by contributors 
-> "having to wait" for patches to land on the mailing list to start/resume 
-> bring up of SoCs. "Putting all eggs in the same basket" kind of issues :)
-
-I mostly just want to have consistent code and features for any new and
-existing SoCs (focusing on newer RK35xx SoCs). To avoid spending too
-much future time on possible cleanups of inconsistent code, I just
-completed similar steps that I had already done to help bring up prior
-RK35xx SoCs.
-
-Patches still not being posted is in part due to trying to prioritize
-what I though was going to be quick cleanups and fixes ahead of adding
-any new SoC support, and also getting consensus on clock driver handling
-using patches to refactor an existing SoC (rk3506) instead of tying to
-sneak in inconsistent clock handling code using a new SoC.
-
-I will try to reduce my pending queue by posting a few updated and new
-series this weekend.
-
-Regards,
-Jonas
-
-> No promise on when I can look at patches, I'm the sole custodian at the 
-> moment and there's some decent backlog already :) That shouldn't prevent 
-> you from sending patches to the mailing list and/or reviewing other 
-> people's patches to help out, it's just that things will take time to 
-> eventually get merged.
-> 
-> Cheers,
-> Quentin
+-- 
+2.56.1
 
