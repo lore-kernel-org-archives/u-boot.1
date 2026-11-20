@@ -1,153 +1,160 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7210C606A332
-	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 13:21:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8664D606A337
+	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 13:21:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Sn50dbiB;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xYibhPtx
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=cNQ6UCCw;
+	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=ZvFw3cJc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4D31A81774;
-	Fri, 20 Nov 2026 13:21:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 63FCD60E90;
+	Fri, 20 Nov 2026 13:21:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H0CinhgrEjMw; Fri, 20 Nov 2026 13:21:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 563F581765
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795180902;
-	b=EdKgFBREsKHNy4sxj+A5oqsodbAk/V4r/iGsXK9N5HoiDcQpzsDOeMfrz9DTcNeZK8Wi
-	 h7WEdkKHYBYXoc4j01TwVZKcnoumjkNiWfSMlfa1z/PGDUwBrZOadAMHjIx2rDWeetL1R
-	 41UBcQIjd8AVX8whTuHfRAbgSK/EGhWJnHGEwoHOmOX7hd4RJM42zhigRFljUUyN5FFR7
-	 G3DWF2TVnj2t3U2DeEcOL+7RYafiQBMc9rkwU7gf18jDJX5Vp0MD9fmPi8+xbYPKKXSj3
-	 6MuzT+xcE6s38I7BAABOmtwe7s42f+4rzoA7JESVi5XJapwYT8UkIgWdM/1knW6Gc0w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Auar3haqX8vp; Fri, 20 Nov 2026 13:21:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 312DD60E61
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795180906;
+	b=ASJcm/Pqt8tYO2psW7JhO+fHt9ZxVCs78j69IWiJTpawtZxwcLO3ZAJsVPcdv/k0Vl9B
+	 WRoXXqZYgPMaE9BGTDbbbWnT9WfVz0Z+9ECBh2QkOCDkuyxjTgKWL/WMBG6Tp8GrMtEQd
+	 6lWasvbKJX8q72d3ra47Pxi0xb+YWWKUqcBpwk/diSSP6tv/C8yY43C1NBMkE6ilcHxZh
+	 bhaEthz24VeaWdA4faOwKxocI5suFAjjvtGv+7ItKvgSW8oXsgUyHHt72h/eaprCrfVeF
+	 aX/ZtnTww5CxC09g6PO/pqxNl3riOMVbgX4RwMXpjgOSVTmNcqvTfGUGvWUNb9z5mLw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795180902;
+	c=relaxed/relaxed; t=1795180906;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=l4K9aNDAXzlxVIlvvMl7TJRGXklOAca+gjHoc70DTzk=;
-	b=G2Mt8hXYDv4fKOyKxx/yy+TKsQCTjfh0gj6lhqMrNznffxSm3ZkUtjXVsaMjXR98N8DF
-	 n4puVJ9vuX6r/whA6jr1DKawla3kRs81qpFjGkpz/S7g2nKp3l2r/J+nF7oxfgAQr6LGJ
-	 35z77550jmVj05GL4Fp4dLNK4TrLhQUWegKk9kWHRxO+dhgSIfCjjgWMeGxo27v/mG09E
-	 140iFC26hcmolrV8X1tBbMjxonzWeBmBCIvtz+P1b6NMVxL6yYZ2J66fQQ0h2U+ba8qld
-	 J/bUDXIaiP4b08crW+nEOYKxYMLV4ulpctZKC6t4nFJCfUduTz4TbudW2ibsx/+NAVw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xYibhPtx;
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=BF7cQQ5H6yatCwAkfYs7jH2NY7ERLXSSarmL04k1LOQ=;
+	b=stlKCs5vTC2EMiPEMGkBShO7QLD3E48OqMSTKwdCVbBLEyBoUH2v6pOtvhH2zmCdVIlP
+	 kAr99UrqLWnXJBiE059bPXoVltYu4hpglhCQ43eejBPt1sFGJMCniAcbKWPCX+rn1H7nc
+	 aalBhxXwP6JoFJUzKNPmMsUO/JEJDimLdUZZEQU+hrcJZDjIceqnZmDIocCBU4TzHN78u
+	 wo9yndeQ7BaT3doBvCK0CHL/RIVawEpUrYHiGBnhrWABIHbg8T/q088paSHROzEeg7XKj
+	 sfi5zxgvIU1iVv5DuYMJfdMQLKGFXoPgkbAdKYvp0RnT7DH4d2G1ZQvBVjTT5Wvoi7A==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795180902;
-	bh=l4K9aNDAXzlxVIlvvMl7TJRGXklOAca+gjHoc70DTzk=;
+	d=lists.u-boot-project.org; s=default; t=1795180906;
+	bh=BF7cQQ5H6yatCwAkfYs7jH2NY7ERLXSSarmL04k1LOQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Sn50dbiBh/KVmJNoC9P/wx3u1O+79gBmmUEJJP5U2eOncECVYDuoU8JObj8m0Uupb
-	 9HlwpsrRKJsqaQKFAMcYexNVi/ToZCxwkMAkQeW8nsifYspg+eWzcLh0BJIgm/2qmK
-	 T2bksnq2INCgxN8fbkO7bL9nQ+Z/tO8183NtR8nKrEgI1ta4+ZL/Tsb9hHH9c1ihLR
-	 r7y8k1EGplsHrjAytFqhcrpOxOp/iL4tgCw46Q3rRqb4tiuPoFE11AHWCbqWG7xUTK
-	 5mdWtOmVbPoHPYf+7dUKtVUqsTi948UnMfKsTOyLlmyVGq0FOioyp1ymXnAFdAFjbu
-	 rHhXcf6vm2myQ==
+	b=cNQ6UCCwNWkJa6P0uGlAcucHqWjzYiDcf2HUZiu3HRheQp7DJ3ldad+HMm/SY27pB
+	 VslAQtL4x0acKBJ+HgOVwVwG5e2kKgMF1GG/i0EjW5GjK7r9rzbO71KRwQgk3uBbTJ
+	 co6IrJdHWHBuOn5ZcWO33wWNodtIBgdnGSBNKO3sHBFompT4eGsFQY4YrUXRMDyXql
+	 FJ5sehwtjbyevVolLgAf1w4JyOWl9j+/MMzLKrwvAikBhyhprVusN1i+XpbvO3KfDs
+	 36s9nX5z6epfyQvmh/QxufH1ccNVwq7tiNWiqwUocu3t8T4xJsBTC10YtE0ChVONZG
+	 w448R6yb72GKQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 563F581765;
-	Fri, 20 Nov 2026 13:21:42 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id CEC291E7
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 312DD60E61;
+	Fri, 20 Nov 2026 13:21:46 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E7A8A1E7
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 13:11:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B5335814A0
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:55 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D958E40A30
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 13:11:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SbRlCpg8G2oL for <u-boot@lists.u-boot-project.org>;
- Fri, 20 Nov 2026 11:10:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AF24581678
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::429"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::429; helo=mail-wr1-x429.google.com;
- envelope-from=eichest@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=xYibhPtx
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AF24581678
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:54 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-4a5024b3c28so1271373f8f.0
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 03:10:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795173052; x=1795777852;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=l4K9aNDAXzlxVIlvvMl7TJRGXklOAca+gjHoc70DTzk=;
- b=xYibhPtx0bQwJfLTR6pUetS3fQvkimg32li2t+cWx/g9QSGB2/BKJUhQTU83z3Hggy
- wo9TF8QmPP0MUTjlxmF+RwcoMpJrT8WIWBK6RQnaUeH5K86gC8Y6hN8MtXAixpA2ZNnt
- x104KtDnX5bGl4cXe7+R9rxN0yq9aLKDcsu7hf6idpHyJ22QG3dejrbIIdlyNWMIEc80
- eSXz1pL5L+UcbUOZIIOEuLf6lEU3oL8JdfpuDKN8H6BwZ7wLZ+eULlC8TepXUrFiLUO8
- XHY6opI+QnzJT8Ys6xzen5yvv5qsN/7TXr0Brl+hmp1hnfMlQgq8GpbuWXA5rRLIw/eF
- ER+g==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fefYVeW1tRJV for <u-boot@lists.u-boot-project.org>;
+ Fri, 20 Nov 2026 13:11:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2529F40208
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=ZvFw3cJc
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2529F40208
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 13:11:37 +0000 (UTC)
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 9DF123F6ED
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 13:11:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1795180295;
+ bh=BF7cQQ5H6yatCwAkfYs7jH2NY7ERLXSSarmL04k1LOQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=ZvFw3cJcrcLvlzwiBvlY9M4NBHYhxW6j89vzmY1H8RipCz1XYw9gBNJvu2WO9eew8
+ 1QzSlXzxqX8gOUV0Uw+D3sgsC4l5BQk2kffpXUJfETxrZvGSqjAQzR5xGrkdxfXmyb
+ Zz9bOzRAZ47z/cAkScz3G11L6cfWXLOKv99HjNSZHcwR5bsW/EQFg4MNIGL1jbQV2+
+ pMKcLFwP7pX6PXlKIpXWYaEZaWV/EWHjEeJ6NnZ87chkYXSbMitCNNYcC2sbxIo4yf
+ AFFlSEQe5P8hciY6QpTfMbhiuXysfKXdQ0l0F7giL8E5RR9KCZyUwb2ixhsOS0HBFl
+ guykpv3vp6vB9BQlZy5MP/WM4d7lfHjaApls+OZmng8mPTSePrm3IoFSM21ZGPgjMG
+ qgTQGhtQCKyPW8h6bx5OiofdnNp4WLbDeWwlKPzWdZvzNtHdiGcN57Ehn/D+1Fqu5F
+ iiTxtaCiMyDrEKN9bKnXEMDoDjwgjZ/5svmxVBHqEzgRvEjWnOYciheaoXFbDbSGz4
+ dELTpwxLWUlHLYJhDAkRH9YPTguq1skRpha7EzbTZAffn3tVYmd2eg98rF6Lzdbb70
+ +vjlR7Kk2K1ZnCqF1bOOHerKkCqEyM3N3YNulKJHSyZcfYMEa7jsuPYHIQuHtfJEDV
+ 90xIQeLwrDeN5Hy+vR6I9Eoo=
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-cdacb64970bso613280a12.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 05:11:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795173052; x=1795777852;
+ d=1e100.net; s=20260707; t=1795180294; x=1795785094;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=l4K9aNDAXzlxVIlvvMl7TJRGXklOAca+gjHoc70DTzk=;
- b=Trnha7DxNTxEVfJjghGVKvlybnwe0QO+2/NgI1xjnmarJTK7v9KGKaimt3CTfvZ6nY
- r3X1X05T1R6/Jot+/YivdKp+gzq9BFO1hRcJpszLaXS4yU4ALcujJrE1NJ6CGdiDAgXy
- FQZbCpHun5pRbGJcZsTuZKdmWifZpP0vJNIMvO98vHyZsuDyAdoanSPnMq8AkFrzPMzb
- 2jLK2y0B6Q9b7LgCEoNp6iujlKm+YjaaKM0fcUCXP6d55jvoNV08kcezMv+C5OodsIMw
- Vaj52knRRCLb4ytKlv1z39+LcBFHz6JY5Z7KBtd459NRTK4Lp+6iay7snxmhLmRns8yx
- ls1g==
-X-Gm-Message-State: APuU4Z8Z6okB8Hc75rBqGd1Mq7wK8bH7dGV5w6L5qiZbpnGFi0tRxZB1
- K4Z+gZH6VmPaPkACjs8etmLJgUSaSewyceFSzpio9lxTlf6SvPPbX/4r
-X-Gm-Gg: AYBFou0cPDXS6lQImtSCFJBBs8XM4Fy3Lwzn+6jOdvdbOHLbS29bLCQVKSgbpMM/NEa
- YPx/UzW8B9XDI/MWTSWvcI7W6vsAOc2kqYEeZ0DqFUPpR6JOyJGodRS137XRqxxx+qa+iSP1DvO
- o65lteP07frizJu9fpmJcp5LAg7tRpnSizL9SEuAmHlYjZWViYCsJzo/sRLmzlqhCferPADqZGQ
- aMabb2AikJuA8i1L3MJbWDKs+9Uj7p4xFlzpdNOJkC+SL7aQY9poA4yjn5Tkc8JlBMdgNrxrAdE
- NuRPldwg5jHfco4WEUL8813diPfBbB2+5WgLvSUTcClyijeqicYWuMH8GLrZwuW/Xm738bOPb65
- R2avZR0NqdhEZKgC2TmYUIjCdhAJ+GSUaJHd2O77jP4p5yqgTK1d23o5b84p70qpvAH6FxMruI3
- MijKaJ5hi66y8woIx3byuRFOnX1+prW//vR4xJxrkyXP3xkkAsTSM26jH/+aGa9QBa3CuLGPfGo
- z0uEQ9ZcbV3+CQMolIXkBeOo7UfHuI5TrOkZq/l5JCbao+T28ZL9km92x6xqFQHj1agqdsSKbGq
- DxH5WHdPSdVHVzm0d5OkVQ/wrVSWK6iRe9YXmXFJdocK
-X-Received: by 2002:a05:600c:4e0b:b0:49e:65f2:db64 with SMTP id
- 5b1f17b1804b1-4bb887fb66cmr63398095e9.5.1795173052182; 
- Fri, 20 Nov 2026 03:10:52 -0800 (PST)
-Received: from eichest-laptop.toradex.int ([2a02:168:af72::cb4])
+ bh=BF7cQQ5H6yatCwAkfYs7jH2NY7ERLXSSarmL04k1LOQ=;
+ b=yXae4sogct13OMl4SFGbsAYWFAgqzzuzC9GXjP/28jLqGdG6EGQSzIUw6vKzOlmCIB
+ dgftCRBoUERDXb9NAXQqdB3yqCOODqv/55jsqYOtPN9WBHFIyxSuClIbxQkfv0r/xZW0
+ tTwdemmRwQJDcPsIWTK3wFLVSmwSnsymn1FMBzCmDwn+KtVX1HOetnTIfxy7+8rhJbPV
+ Ci4KHmyPh0K/kIZ4lPy8EZh9raMYxHHW4oKqV/NadYEETW+q6LYMvcA7xi8wXGYSV2er
+ hIILK90xo6YpT9HjucYkEksc5hhCNMD3/LTXplEVDIgo5ONG4Qbz9rLGJr25JcWxsrue
+ PD2A==
+X-Gm-Message-State: APuU4Z9huCYu+GyFujn0Gt9ibEfuwYzp25ohmh3PuG6G3R22suHnuCml
+ 085wm2yrTIRmUVo4eCjEi7MzOZmubZbdNJlWOWxmAXC/ho57kncUKf+Noh63vH5rqNNy6j8jtI0
+ 7eowBYX9OZJiXqwigE+x7HN2OZMrE9sgsM3cvDFO3uT4I+oXThw9RY4RiZlk+BSb0G6PTR97BMh
+ F6r/hEdjnxDQZ2KsSesVLM
+X-Gm-Gg: AYBFou2uy+/Nw3T4jsi+LVoV/SUdGRk9hh8YAJlZQsBc15Ih5VwOi30796lcQMVnUI1
+ iRHSvRkTeyI5EYp0XPrFa/oaho28Y4ANYtNFXDfRAdPNyMSHH9pGf2z9Hjcm+GNaoPIhGG64vjV
+ YHaGSguiw2zyM8SinfyAyRf1VKULlzECeXZLAvSbcqchQ9cCtUo+NmHLc3cjLNT4ANCK0lOacEE
+ CSKnKhSi7HME94+xp2BlbJMKSdCH+lPhxMfCt6bpo6q/vEPMB3MZ4CUrOlyJi0rBmlnzx7o8kKZ
+ cd9u5CLiBMRpcyCZv/f3a9J+RJCW41N7mA6kk9dU1h7y/SDmfElQhRc46r1q+ENexeSEoiKTr2v
+ xkbYbNp3E59HOKBDnd/uaxZrJ8M1Sy6X+u1JjD6OzzyzeZuVQa1jwQQLf8D8jmeRNKTtJvtNyS1
+ XlPIUbQ1EWFPg2I/pRxEqGhktFKbVxOZiVnYZTMSKsHXs=
+X-Received: by 2002:a05:6a21:7704:b0:400:6229:d6b4 with SMTP id
+ adf61e73a8af0-4014dd61d2fmr2414094637.73.1795180293791; 
+ Fri, 20 Nov 2026 05:11:33 -0800 (PST)
+X-Received: by 2002:a05:6a21:7704:b0:400:6229:d6b4 with SMTP id
+ adf61e73a8af0-4014dd61d2fmr2414070637.73.1795180293283; 
+ Fri, 20 Nov 2026 05:11:33 -0800 (PST)
+Received: from noble-uboot.tail872496.ts.net
+ (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb884865a2sm79108005e9.3.2026.11.20.03.10.51
+ 41be03b00d2f7-cde6d028a54sm1191896a12.18.2026.11.20.05.11.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Nov 2026 03:10:51 -0800 (PST)
-From: Stefan Eichenberger <eichest@gmail.com>
-To: trini@konsulko.com, ilias.apalodimas@linaro.org, peng.fan@nxp.com,
- jh80.chung@samsung.com, tanmay.kathpalia@altera.com, sbabic@nabladev.com,
- festevam@gmail.com, uboot-imx@nxp.com, francesco.dolcini@toradex.com,
- lukma@nabladev.com, dlechner@baylibre.com, msp@baylibre.com,
- stefan.eichenberger@toradex.com, Max.Merchel@ew.tq-group.com,
- nora.schiffer@ew.tq-group.com, primoz.fiser@norik.com, jbx6244@gmail.com,
- aford173@gmail.com, cniedermaier@dh-electronics.com
-Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 7/7] board: toradex: colibri-imx6ull: enable the clock
- framework
-Date: Fri, 20 Nov 2026 12:10:13 +0100
-Message-ID: <20261120111037.110741-8-eichest@gmail.com>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261120111037.110741-1-eichest@gmail.com>
-References: <20261120111037.110741-1-eichest@gmail.com>
+ Fri, 20 Nov 2026 05:11:32 -0800 (PST)
+From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Daniel Golle <daniel@makrotopia.org>,
+ Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v2 0/2] boot: fit: bound the external data size on the
+ imagemap storage path
+Date: Fri, 20 Nov 2026 13:11:06 +0000
+Message-ID: <20261120131113.1044702-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261115143134.25791-1-aristo.chen@canonical.com>
+References: <20261115143134.25791-1-aristo.chen@canonical.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -161,182 +168,113 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Francesco Dolcini <francesco.dolcini@toradex.com>
+This series bounds a read that the FIT loader sizes from unsigned
+metadata on the imagemap storage path. It addresses Coverity CID 661899
+from the scan report in [1]. It is partial hardening rather than a
+complete fix; what it leaves open is described under patch 1.
 
-The PHY supply is a regulator-fixed-clock, and since commit a5d990854f2c
-("regulator: fixed: fix regulator-fixed-clock") gave that driver a probe
-hook calling devm_clk_get() it cannot probe without CONFIG_CLK, so its
-150ms startup delay is skipped and the first FEC probe finds no PHY.
-Enable the clock framework, which also makes the hand-rolled FEC clock
-setup redundant. The ENET2 reference clock selector (gpr1[14]) is now
-the IMX6UL_CLK_ENET2_REF_SEL clock, its parent set through
-assigned-clock-parents. Only the ENET2_TX_CLK direction (gpr1[18]),
-which no clock models, stays in board code.
+fit_image_load_storage() in boot/image-fit.c reads an external-data
+sub-image from the storage device with a transfer sized from the FIT
+data-size property, and fit_image_load() only checks the image hash
+after that, in fit_image_select(). data-size is in the exc_prop[]
+exclusion list in boot/image-fit-sig.c, so it is not covered by the
+configuration signature and stays under the control of anyone able to
+modify the boot medium even when FIT_SIGNATURE is enabled. For an
+uncompressed image with a load address that the caller asks to have
+loaded (a ramdisk or a loadable, for example, but not the kernel, which
+bootm moves later) the read goes straight to that address, so an
+inflated value writes past the end of the image before the hash can
+reject it.
 
-Drop setup_gpmi_nand() as well. The regulator probe now probes the CCM
-in initr_dm, before board_init(), and the CCM driver sets ENFC_SEL to
-pll2_pfd2. setup_gpmi_io_clk() then writes MXC_CCM_CS2CDR_ENFC_CLK_SEL(3),
-which on i.MX6ULL only covers bits 17:16 of the 3-bit field, leaving
-ENFC_SEL at the reserved value 7 behind the back of the clock framework.
-The GPMI loses its clock and every NAND command times out. With the
-clock framework the CCM driver selects the ENFC parent and the mxs_nand
-driver enables the GPMI clocks and sets their rate.
+Patch 1 checks the size before such a direct read: an image whose
+data-size is larger than the memory that LMB reports as free at the
+load address is rejected with -EFBIG and a message. This is the check
+that Daniel proposed in his review of v1 [2]. It replaces the
+CONFIG_SYS_BOOTM_LEN ceiling of v1, which had nothing to do with the
+destination and limited the size of every sub-image on this path. The
+other branch, where imagemap_map() allocates the buffer from LMB at the
+requested size, is no longer touched, and neither is Kconfig.
 
-The serial driver probes the CCM before relocation, and the ~80 clocks it
-registers need around 13 KiB from the pre-relocation malloc pool, more
-than the 8 KiB default. Raise SYS_MALLOC_F_LEN to 32 KiB.
+The commit message of patch 1 spells out what stays open:
 
-With the clock framework the usdhc, i2c and gpmi drivers take their
-rates from the CCM driver instead of mxc_get_clock(), and the usdhc
-assigned-clocks in the device tree are now applied.
+- Free memory behind the real payload can still be written before the
+  hash check rejects the image.
+- The destination of a direct read is not reserved in LMB, so a
+  sub-image that was read directly is not protected from a later one.
+- lmb_get_free_size() stops at every used region. A valid image is
+  refused when the load address of a sub-image is still recorded as
+  used after an earlier load in the same session.
+- The helper has two more edge cases, with more than one RAM bank and
+  with a reservation that ends at 4 GiB on a 32-bit phys_addr_t.
 
-Tested-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
-Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
----
- .../dts/imx6ull-colibri-eval-v3-u-boot.dtsi   |  6 ++++
- .../toradex/colibri-imx6ull/colibri-imx6ull.c | 34 +++----------------
- configs/colibri-imx6ull-emmc_defconfig        |  2 ++
- configs/colibri-imx6ull_defconfig             |  2 ++
- 4 files changed, 15 insertions(+), 29 deletions(-)
+The numbers behind the last two points are in [3].
 
-diff --git a/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi b/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
-index 8494b1a2c60..1712f38edbf 100644
---- a/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
-+++ b/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
-@@ -29,6 +29,12 @@
- 	bootph-all;
- };
- 
-+/* RMII reference clock from the internal ENET PLL, not from the pad */
-+&fec2 {
-+	assigned-clocks = <&clks IMX6UL_CLK_ENET2_REF_SEL>;
-+	assigned-clock-parents = <&clks IMX6UL_CLK_ENET2_REF_125M>;
-+};
-+
- &lcdif {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&pinctrl_lcdif_dat
-diff --git a/board/toradex/colibri-imx6ull/colibri-imx6ull.c b/board/toradex/colibri-imx6ull/colibri-imx6ull.c
-index 01387e87294..ea83d53c27b 100644
---- a/board/toradex/colibri-imx6ull/colibri-imx6ull.c
-+++ b/board/toradex/colibri-imx6ull/colibri-imx6ull.c
-@@ -7,10 +7,7 @@
- #include <asm/global_data.h>
- #include <linux/delay.h>
- 
--#include <asm/arch/clock.h>
--#include <asm/arch/crm_regs.h>
- #include <asm/arch/imx-regs.h>
--#include <asm/arch-mx6/clock.h>
- #include <asm/arch-mx6/imx-regs.h>
- #include <asm/arch-mx6/mx6ull_pins.h>
- #include <asm/arch/sys_proto.h>
-@@ -57,15 +54,6 @@ int dram_init(void)
- 	return 0;
- }
- 
--#ifdef CONFIG_NAND_MXS
--static void setup_gpmi_nand(void)
--{
--	setup_gpmi_io_clk((MXC_CCM_CS2CDR_ENFC_CLK_PODF(0) |
--			   MXC_CCM_CS2CDR_ENFC_CLK_PRED(3) |
--			   MXC_CCM_CS2CDR_ENFC_CLK_SEL(3)));
--}
--#endif /* CONFIG_NAND_MXS */
--
- #ifdef CONFIG_VIDEO
- static const iomux_v3_cfg_t backlight_pads[] = {
- 	/* Backlight On */
-@@ -94,25 +82,16 @@ static int setup_lcd(void)
- #endif
- 
- #ifdef CONFIG_FEC_MXC
--static int setup_fec(void)
-+static void setup_fec(void)
- {
- 	struct iomuxc *iomuxc_regs = (struct iomuxc *)IOMUXC_BASE_ADDR;
--	int ret;
- 
- 	/*
--	 * Use 50MHz anatop loopback REF_CLK2 for ENET2,
--	 * clear gpr1[14], set gpr1[18].
-+	 * Drive the ENET2 reference clock out to the PHY: ENET2_TX_CLK_DIR
-+	 * (gpr1[18]) output. The ENET2_CLK_SEL (gpr1[14]) half is the
-+	 * IMX6UL_CLK_ENET2_REF_SEL clock, set up from the device tree.
- 	 */
--	clrsetbits_le32(&iomuxc_regs->gpr[1], IOMUX_GPR1_FEC2_MASK,
--			IOMUX_GPR1_FEC2_CLOCK_MUX1_SEL_MASK);
--
--	ret = enable_fec_anatop_clock(1, ENET_50MHZ);
--	if (ret)
--		return ret;
--
--	enable_enet_clk(1);
--
--	return 0;
-+	setbits_le32(&iomuxc_regs->gpr[1], IOMUX_GPR1_FEC2_CLOCK_MUX1_SEL_MASK);
- }
- #endif /* CONFIG_FEC_MXC */
- 
-@@ -135,9 +114,6 @@ int board_init(void)
- 	setup_fec();
- #endif
- 
--#ifdef CONFIG_NAND_MXS
--	setup_gpmi_nand();
--#endif
- 	return 0;
- }
- 
-diff --git a/configs/colibri-imx6ull-emmc_defconfig b/configs/colibri-imx6ull-emmc_defconfig
-index c56e9a90bc1..82f1d9e8b83 100644
---- a/configs/colibri-imx6ull-emmc_defconfig
-+++ b/configs/colibri-imx6ull-emmc_defconfig
-@@ -1,6 +1,7 @@
- CONFIG_ARM=y
- CONFIG_ARCH_MX6=y
- CONFIG_TEXT_BASE=0x87800000
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFDE00
-@@ -64,6 +65,7 @@ CONFIG_TFTP_BLOCKSIZE=16352
- CONFIG_BOUNCE_BUFFER=y
- CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_BOOTCOUNT_ENV=y
-+CONFIG_CLK_IMX6UL=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0x81100000
- CONFIG_FASTBOOT_UUU_SUPPORT=y
-diff --git a/configs/colibri-imx6ull_defconfig b/configs/colibri-imx6ull_defconfig
-index d65e5c16957..55990719f28 100644
---- a/configs/colibri-imx6ull_defconfig
-+++ b/configs/colibri-imx6ull_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_ARCH_MX6=y
- CONFIG_TEXT_BASE=0x87800000
- CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x380000
-@@ -74,6 +75,7 @@ CONFIG_TFTP_BLOCKSIZE=16352
- CONFIG_BOUNCE_BUFFER=y
- CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_BOOTCOUNT_ENV=y
-+CONFIG_CLK_IMX6UL=y
- CONFIG_DFU_NAND=y
- CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1000000
- CONFIG_USB_FUNCTION_FASTBOOT=y
+Patch 2 adds two sandbox unit tests to test/boot/imagemap.c. Both build
+a FIT with one external-data ramdisk that has a load address and load it
+through a mock imagemap device with verification on. In the first the
+data-size is 1 GiB; it checks that fit_image_load() returns -EFBIG and
+that the mock reader was never entered. Without patch 1 the read is
+attempted and the test fails with -EIO. The second checks that a valid
+ramdisk is still read straight to its load address. The tests are
+skipped when FIT is disabled, since IMAGEMAP does not depend on it.
+
+No in-tree boot flow hands an imagemap device to bootm yet:
+imagemap_create() is only called from the unit tests and
+bootm_info_set_imagemap() has no caller, so the new check does not
+change any in-tree boot flow.
+
+This version no longer covers one case that v1 happened to reject: a
+data-size close to 4 GiB makes the size arithmetic in imagemap_map()
+wrap when ulong or phys_size_t is 32 bits wide. For that case the
+series leaves the behaviour of current main unchanged. Daniel has said
+in [2] that he will fix it in imagemap_map() itself.
+
+Verified on sandbox: each commit builds, and the imagemap and bootm unit
+test suites pass with the series applied (16 and 7 tests). The series
+also builds with FIT disabled, where the new tests are reported as
+skipped, and boot/image-fit.c compiles with the boot commands and the
+legacy image formats disabled, the configuration that needed the
+Kconfig change in v1.
+
+The series is based on current main and does not conflict with the
+imagemap series in [4]: the two apply in either order, and the test
+suites pass with both applied.
+
+Link: https://lore.kernel.org/u-boot/20261109221650.GA3741582@bill-the-cat/ [1]
+Link: https://lore.kernel.org/u-boot/20261115205059.62cd55fdb132@makrotopia.org/ [2]
+Link: https://lore.kernel.org/u-boot/CAA=k7=keU0TbGea8vV7Ht9ziL50YZ=tufUrnXDcQOYahJ7tV3Q@mail.gmail.com/ [3]
+Link: https://lore.kernel.org/u-boot/cover.1794614777.git.daniel@makrotopia.org/ [4]
+
+Link to v1:
+https://lore.kernel.org/r/20261115143134.25791-1-aristo.chen@canonical.com
+
+Changes in v2:
+- Patch 1: bound only the direct read, by the free memory that LMB
+  reports at the load address, instead of bounding every read by
+  CONFIG_SYS_BOOTM_LEN; no Kconfig change any more (Daniel)
+- Patch 1: describe the limits of lmb_get_free_size() in the commit
+  message
+- Patch 2: add a test that a valid ramdisk with a load address is still
+  read straight to it; the comments of the existing test no longer
+  refer to CONFIG_SYS_BOOTM_LEN; new subject
+- Rebased on current main
+
+Aristo Chen (2):
+  boot: fit: bound the external data size on the imagemap storage path
+  test: boot: imagemap: check the data-size bound on a direct read
+
+ boot/image-fit.c     |  17 ++++
+ test/boot/imagemap.c | 205 +++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 222 insertions(+)
+
 -- 
-2.56.1
+2.43.0
 
