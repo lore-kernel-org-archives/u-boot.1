@@ -1,114 +1,147 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4318F606A326
-	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 10:48:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 985FF606A320
+	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 12:49:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=g1xbCmcP;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=hQb4gjxA
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m+edYJMc;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=kxVIcc9h
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1629C40E1E;
-	Fri, 20 Nov 2026 10:48:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6914B81375;
+	Fri, 20 Nov 2026 12:49:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZkuYv8JVENXD; Fri, 20 Nov 2026 10:48:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B1F0F40E10
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795171699;
-	b=SJagcZvdAFcWD52dxrYLsKmZmd8J3ZN0I2RAk6aoqkc2SpSrp5mkcTHBZZ+4a/oNkICQ
-	 U0qkvOUKHtLFYlWyDXmgG5XK3SAJXL7+wVNflo5GwqcTW0GTJqPU+m+gd/f5elI6eNAzM
-	 0JkVyARy8kJo4EXFiNA7Yo+hsUZLf0FrJtJ7AeBJhlGmDbcn7TJHbRPiw/4xbqgrXkv1H
-	 jaPvi6riXseax6UaU9UgfOOwpAfdTSpMWSMMDuXp2OIqhAGML3PTFv2c12LAwtV7QAykT
-	 oNEqbANpoWD3CZt4CbKwvRLwcRe9erpDCoku25rCKntYvLuQuKMpv0OW7SReOsiQTlw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lmrcsm7oqW2F; Fri, 20 Nov 2026 12:49:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B8DD481397
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795178964;
+	b=mYM0Uuis0SAkIqnnFJBxb7wCXHDVjdMiut8IPpMdVZgFrKHhMcd78Sq964/2UPAvmMmb
+	 9rSCvqHarsQ/0arfs/NUQpwTqRUvYSUoQidkySKU6W9/TxpbiSBIZgxGWamzlnLq2jj3O
+	 Yw8TFAmrAGPplmSnUJHFLYODAdoeGWG4JCUdWcao4+NBVkGEoRzzXebkmvBihGumF6dFR
+	 CVohJ5VyQBHj/NXF8y80ChWLW0/jJl/bWwGj8sI7cFLdEIrlC84CY5ewLT/Eh+mwJsG8E
+	 c9TFOdLPE+GFVQtQwnvJbBt3+r79MrdAAc3WmRXxCzLWPCB1ZwKNtF2vU0nGZi0LAbw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795171699;
+	c=relaxed/relaxed; t=1795178964;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-ZohoMailClient:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=wlP6WwAtJCWNt0tlfROt39hjL8HmCmcyOFNg3wZvw9w=;
-	b=Jrgxo3EWtvWjvMOtVcy1qzzyFSmqZ5/UrksQcWrIxuIwaYRFLBPwBrwEvjv8Zltid3KN
-	 HjlX4N8JuEBdZXD1tU0JmQl+N5//PMdwlnleIQuGw/6DFmYRVGaqWkK1tPW0uaYKAOWmA
-	 JznXDxSkoLR5gJGNOPNLAc44NFbu6QiEkesXe6VeKP/w1LSPQuKCNNOkB55z9owHuNWOR
-	 KJNE/PEFEZ3zfCkn9IlzNRwELh2Cm4SQfbyclIHsWbsl/ezWEi75vvC+zYwdGoRfUNHUs
-	 LEoqxyQxO25ZNs7J4nJtl4Tv9KbmgmxVs5Y1cfsuxCfI+Vw5ZmLOQIrI2nVNBEsDxqQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=ziyao.cc;
-	dkim=pass header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=hQb4gjxA;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=jYE4JvNMVq/bTd8S43Y/Id2EJZwgx3s8+84hbuHo16M=;
+	b=MU6xmVzxmokipLO9Fhp2th7kUjMpekFAKJ3cL01BAGPVESsA3DQpFCT+8RvYO+BWCkFz
+	 G4lXIxk6oCPLs4xLeFe/1gWgMuQQIUx2YO7o8bllI9yb56sBAzI/Bt31BoF0JVWw6E4TB
+	 Su0R2C7HewPd5KPKXW/VkOFaztL15yrTWdzHYVQJu01cvctbcSHHv6ZrwDavYW80swwTm
+	 YQrgnM4FZpLGYPtibyy/6qz3Ne9gYHDizN9GbxGqy5SMdgGLBZ8Yy5mW6vpiyiiiOJivT
+	 Bsn9PizG3MLT9n5u6KgovrZmw0XDfw6+Ui1QZkOE3+uDFxqEWXnjT1IeN3ddz6XE/QQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795171699;
-	bh=wlP6WwAtJCWNt0tlfROt39hjL8HmCmcyOFNg3wZvw9w=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795178964;
+	bh=jYE4JvNMVq/bTd8S43Y/Id2EJZwgx3s8+84hbuHo16M=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=g1xbCmcPNjLlp+E6/K7zeuHSFjeKQvkEK3vogdfKcnr0T3NwIQtjIXzzLPK56vFyI
-	 qsQLtg4u2XCb4yFdVgxlxN2aCHMPfMqR32xW9GTmU/safwiQHzFhYFUXOtCr/WK8nJ
-	 rkSUjCFaUPUaqIpZF//2tfjFnckHDIIFmFVJ7tE0PyEvbjrwvIndj9NExWTr+8QFK7
-	 gk5dmlWLpMAu+S2h23PZk0tBVI6WmA2d04TJaIm2wxHZZtdS3girQ1GDLQaN7a8ZO4
-	 /E0akpdHEoUzKftD52pb8+tcTYc14AGA/OglsC8iy5Hbq9XEL3w3008We2PLBw9T4t
-	 pc35JL0CykZEw==
+	b=m+edYJMcNmUx/X+TZ6Ev2m3y4CmPYgegR1Vonwv86V00HjYFrgMjBKmdT58hVhsdn
+	 2Fntm80mjobYyKH4kmTrWuJlwPghBEqytzp6ALpCZ4ncealKKK8XiI6ms4Lx0/lt42
+	 ZtFn/izcdTpCzVPkov45N8W1s20l/GoPj85oywsxpzrV0FkkgfhsyP2xD27pG5AIRN
+	 zGIoGBHo1GLXIC3f9e2KB6hfvRO3cFw3SE2YpBoYkvEk0JxB7JXwKUQtZK0JwsqYad
+	 sw0bv7awZCKeId+ZzIyB7ci4r538pNiMNY1ZTdhw5RvMHuzg6kI2S4V6SfLwqHoRIp
+	 rB7AoFwumdCJA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B1F0F40E10;
-	Fri, 20 Nov 2026 10:48:19 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4272770B
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 10:48:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B8DD481397;
+	Fri, 20 Nov 2026 12:49:24 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id AEE0D465
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 12:49:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 33FEA40E10
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 10:48:18 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 94EA4606F3
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 12:49:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hHNE054Mobul for <u-boot@lists.u-boot-project.org>;
- Fri, 20 Nov 2026 10:48:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D26D240D62
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.182.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=hQb4gjxA
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D26D240D62
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 10:48:16 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=hQb4gjxA8sARrHz67l/vUW/Nb60o+yJqTEnDFSUY8uaDqv9yYK5is34CYA5WQjvJayn0BP616M64BPIs/3QVA+DAg+JRL6mCx91nYsSilH14JhcEs7vC9fmLW3thXz0cVBfYFfnh6EPTlGGZkAQ+RZ/gX8lkaWccdlMEP3+sxbI=;
- c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=wlP6WwAtJCWNt0tlfROt39hjL8HmCmcyOFNg3wZvw9w=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1795171661907836.7516580520182;
- Fri, 20 Nov 2026 02:47:41 -0800 (PST)
-Date: Fri, 20 Nov 2026 10:46:48 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org
-Cc: Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
- Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>,
- Troy Mitchell <troy.mitchell@linux.spacemit.com>
-Subject: Re: [PATCH v3] riscv: Disable M-IMSIC and M-APLIC nodes in DT passed
- to next stage in S mode
-Message-ID: <awAlGMMg-6tcb1N7@pie>
-References: <20261119-mimsic_maplic_fixup-v3-1-e028e28fb958@oss.tenstorrent.com>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id blyfvPh42sP1 for <u-boot@lists.u-boot-project.org>;
+ Fri, 20 Nov 2026 12:49:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AB103606F2
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::b130"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::b130; helo=mail-yx1-xb130.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=kxVIcc9h
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id AB103606F2
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 12:49:21 +0000 (UTC)
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-67db23d8892so1013091d50.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 04:49:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1795178960; x=1795783760;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=jYE4JvNMVq/bTd8S43Y/Id2EJZwgx3s8+84hbuHo16M=;
+ b=kxVIcc9hR/Xc3d/1ExLUUXxynitzBslgS7Neeaxhb2uKgo65R8ZoAv3V/Nz43dfERH
+ s+oWuJQloFjhg5YM67mw0Q+LpgeLs4BvYT+dwFTRXLSNfi6/NLz/0xlS4AuIA/VXCl4G
+ Ci95sNRTOzchNQFS9pRccedcvwVZ4FfAe5275apZokQAAqqkbAH7K6/FZAPu9TeC5HEc
+ CQoqf+3QCfQyb81/ftfPkRiIHs56aawywhrX+iOcCUHmRyHCxLTgPbOXJnC47AicC466
+ fXR5sbLgueFPBUcQVpnXTFv5m3Q7cGKDveKAL+Hli0io0AyQKIdGXN4U54CFVYbCl0Tn
+ M9Ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795178960; x=1795783760;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=jYE4JvNMVq/bTd8S43Y/Id2EJZwgx3s8+84hbuHo16M=;
+ b=yjL+VaPK8XPdL0F4qbYr93a/5/ro/MoDLtVMfzhnj693Im+UfGfSALVhi+sDPPDqjd
+ NaBiv4HrqDel8EyclkrGgkwDwZQbNnKAxFnNz8JbI2lnJbNnfUOMKIjFETx1qU12diZy
+ K/Out+c0wxb7L4/9l1tsI+aI2/CPnvlk6HBXXsz9G/Pb8JXAZ+Z6C0wVynjzeaziJLS/
+ 3I+fdI/jzVW+7cydI8RXSilyexPCtBoG5P/t38oo+uAmHH+SxZ4PL0gORvShdN/30+ej
+ m8Jj9tWVNxEUg1ibhIUhpd7HOuYxc6FUiGXh+Hvq7HLIESx+zmyKLwIJovtuCtAa6wzR
+ 6iyA==
+X-Forwarded-Encrypted: i=1;
+ AL+hErHbr8Pei0jjrPL+Dfz49UrcBSp5PuXbnvFDLoXRupSQFDWEw0ySGb44OsBlJhzkjQwiT0ZEhGw=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+nTlUfDzvFMXzM2hSoJIwik7vsove7Vxc7KBmfGhVqbVC18Ezq
+ ghffD/n4SkxAC+iMyaMCESsFb7eFJn9bKuvbT8/h0I4ZFtoAad0f3wiRBKoj+ReZHvsQFnZaYzL
+ 9DKBLcxRx9PpiQMtyqmyuFSX1pm8YWg60uEN16GYscg==
+X-Gm-Gg: AZFdTZcQFiE50xKcSKMSngrdYUElSl0Gt8mUuW6LfpsM2VmBEX85wfq3TFeDgSS2Ox2
+ WzLxZNMM+USWv0ECkNoyx94+QKQONVakfgd7HXYg2AX6+cub1NLpvBOk2pX+84Y/hrHW1ZxZi8+
+ raFPCmg9y7m5DFk533kHuStAa5UbYTREDlPU6bosTrKnA1gtVCSKFwqzLnsPcy6xi94MvL/QIBU
+ T6FeQpd6t7KwE15McaHuN4/6lNjeC92ATm7D4g2ZEDAkQAN/Ntdjx1kTeZnAf9l5rroEUvYhOSn
+ Wl1sfj1gnWEfjMiQ0QgZhWAgsGKzb0pVBJQOV1h7NULIQXCqjJF+lr/qY4krD1cprk1Ll1F5rMv
+ Q45S2PiIzCe8S4ZpPF1fxuVl+mvbf9MQ368zkRhLKLnA5EBC0FB86jzwnWbH61Z/wOrF9bOFrwV
+ h3We/gt+aYXAowaNhpcbPqsdbKR7ZOrV4Xzs2FbA/3bYwnjTIqmsiJI3IFuMtobDaO3t40KW6oK
+ Jb4KdUt+VgEoapgsiwLg0URK26QDg4nrMk8/tG6cDqwf819SBnJjFMDnhk5n1NeOYSAb0YlLTRm
+ GmgO4dZquPkL4KnG7H3R7nHRxBKcw03kLdETGUw2FkA812Ews9/zoLDaRtUIZr2N79a/eY3Uccz
+ 9DjUya2QtDdd5WKJHJoE1UNps+2NHMDL1XPDaL4AqY9TVkfKuGZmFRoF+NIEzIL56RBZsdKR1Fo
+ qREg7qWl/kuqZxsZasmc5YVvDnlrGQ5GCjFFOW4t1XnSZNO1xpnVXrExy7BcLvNSilfSmX
+X-Received: by 2002:a05:690e:440d:b0:67a:4c43:3bab with SMTP id
+ 956f58d0204a3-67df4446bf1mr1034360d50.60.1795178959833; Fri, 20 Nov 2026
+ 04:49:19 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261119-mimsic_maplic_fixup-v3-1-e028e28fb958@oss.tenstorrent.com>
-X-ZohoMailClient: External
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/295.158.14
+References: <20261120075756.2548804-1-pbrobinson@gmail.com>
+In-Reply-To: <20261120075756.2548804-1-pbrobinson@gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 20 Nov 2026 14:48:43 +0200
+X-Gm-Features: AclHuK84k1CNatPLApGQ0GMiftrrYbZMmIrO_zGPbQV9tcFTNw0NFZlBjr0QHTU
+Message-ID: <CAC_iWjLpwoeRJnfJ=M1UBmHJEHb0snj3+rpsQgSXBbVOa5hJyw@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: efi_fdt: fix use-after-free in
+ efi_load_distro_fdt()
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -118,193 +151,47 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Nov 19, 2026 at 09:47:07AM -0600, Anirudh Srinivasan wrote:
-> When U-Boot is running in S mode, the DT passed to the next S mode stage
-> can either be the bundled in DT U-Boot and the previous M mode stage
-> use, or be loaded by U-Boot from some boot media. In the former case,
-> the M mode stage can fix up the DT to disable the M-IMSIC and M-APLIC
-> nodes on an AIA system (for example, OpenSBI does this fixup). These
-> controllers are to be managed by M-mode software, so this is done to
-> prevent S mode software from trying to probe them.
-> 
-> This fixup doesn't happen in the latter case because U-Boot loads a
-> fresh DT from boot media. Add a fdt fixup to do this similar to OpenSBI.
-> This gets rid of prints like this during linux boots.
-> 
-> [    0.000000] riscv-imsic: interrupt-controller@a0000000: no parent irqs available
-> [    0.000000] riscv-imsic: interrupt-controller@a0000000: failed to setup state (error -22)
-> [    0.000000] OF: of_irq_init: Failed to init /soc/interrupt-controller@a0000000 ((____ptrval____)), parent (____ptrval____)
-> 
-> [   10.727605] platform cc000000.interrupt-controller: deferred probe pending: platform: supplier a0000000.interrupt-controller not ready
-> 
-> Reviewed-by: E Shattow <e@freeshell.de>
-> Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-> ---
-> Changes in v3:
-> - Reword commit title to say M-APLIC/M-IMSIC and drop references to M Mode to avoid any confusion
-> - Link to v2: https://patch.msgid.link/20261119-mimsic_maplic_fixup-v2-1-e29e04bf1b76@oss.tenstorrent.com
-> 
-> Changes in v2:
-> - Rename riscv_aia_mmode_aplic_imsic_fixup to riscv_aia_mimsic_maplic_fixup
-> - Drop most references to OpenSBI/Linux in commit message and just use M-mode/s-mode software
-> - Link to v1: https://patch.msgid.link/20261118-mimsic_maplic_fixup-v1-1-52dea8f39779@oss.tenstorrent.com
-> ---
->  arch/riscv/lib/fdt_fixup.c | 86 ++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 86 insertions(+)
-> 
-> diff --git a/arch/riscv/lib/fdt_fixup.c b/arch/riscv/lib/fdt_fixup.c
-> index 6dfd1a2d5b8..49f5b3b5bb6 100644
-> --- a/arch/riscv/lib/fdt_fixup.c
-> +++ b/arch/riscv/lib/fdt_fixup.c
-> @@ -117,6 +117,85 @@ int riscv_board_reserved_mem_fixup(void *fdt)
->  	return 0;
->  }
->  
-> +/**
-> + * riscv_node_handles_mmode_external_interrupts() - Check if interrupt controller handles M-mode
-> + * external interrupts
-> + * @fdt: Pointer to the device tree
-> + * @offset: Offset of node in DT to check
-> + *
-> + * Return: true if controller handles M-mode external interrupts IRQ_M_EXT (11), else false
-> + */
-> +static bool riscv_node_handles_mmode_external_interrupts(void *fdt, int offset)
-> +{
-> +	int i, len;
-> +	const fdt32_t *interrupts_extended = fdt_getprop(fdt, offset, "interrupts-extended", &len);
-> +
-> +	/*
-> +	 * Each entry is <phandle irq>. The phandle points to a riscv,cpu-intc
-> +	 * node, whose DT binding sets #interrupt-cells = <1>, so each entry is
-> +	 * 2 cells.
-> +	 */
-> +	if (!interrupts_extended || !len || len % (2 * sizeof(u32)))
-> +		return false;
+Thanks Peter
 
-Please add a blank line after this if for readability.
-
-Isn't the !len check here redundant? With len = 0, the loop would never
-execute. I'm not sure whether it's better to remove it or not since it
-might make the purpose more clear. It depends on you.
-
-> +	for (i = 1; i < len / sizeof(u32); i += 2) {
-> +		if (fdt32_to_cpu(interrupts_extended[i]) == IRQ_M_EXT)
-> +			return true;
-> +	}
-
-Please and another blank line after this loop.
-
-> +	return false;
-> +}
-> +
-> +/**
-> + * riscv_aia_mimsic_maplic_fixup() - Disable M-APLIC and M-IMSIC nodes in DT
-> + * @fdt: Pointer to the device tree in which nodes are to be disabled
-> + *
-> + * On RISC-V AIA systems, M-mode software manages the M-APLIC and M-IMSIC.
-> + * If S-mode U-Boot loads a device tree from boot media, the DT nodes for these
-> + * could still be enabled, so fixup the DT to disable these nodes before passing
-> + * it to the next S-mode stage.
-> + *
-> + * Return: 0 on success or error otherwise.
-> + */
-> +static int riscv_aia_mimsic_maplic_fixup(void *fdt)
-> +{
-> +	int offset, err;
-> +
-> +	/* Disable M-IMSIC in APLIC-IMSIC configuration */
-> +	fdt_for_each_node_by_compatible(offset, fdt, -1, "riscv,imsics") {
-> +		if (riscv_node_handles_mmode_external_interrupts(fdt, offset)) {
-> +			err = fdt_status_disabled(fdt, offset);
-
-Should we use "reserved" instead of "disabled"? Quoting the devicetree
-specification,
-
-> "disabled"
->	Indicates that the device is not presently operational, but it
->	might become operational in the future (for example, something
->	is not plugged in, or switched off).
+On Fri, 20 Nov 2026 at 09:57, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> "reserved"
->	Indicates that the device is operational, but should not be
->	used. Typically this is used for devices that are controlled by
->	another software component, such as platform firmware.
-
-Another possible problem is that these loops overrides the status
-unconditionally, turning already "reserved" devices into "disabled".
-
-> +			if (err < 0)
-> +				return err;
-> +		}
-> +	}
-> +
-> +	/* Disable M-APLIC in APLIC only configuration */
-> +	fdt_for_each_node_by_compatible(offset, fdt, -1, "riscv,aplic") {
-> +		if (riscv_node_handles_mmode_external_interrupts(fdt, offset)) {
-> +			err = fdt_status_disabled(fdt, offset);
-> +			if (err < 0)
-> +				return err;
-> +		}
-> +	}
-
-It should be possible for an APLIC to deliver interrupts to both the HART
-and the IMSIC, and this branch seems to disable such an IMSIC, too.
-Please update the comment.
-
-> +	/* Disable M-APLIC in APLIC-IMSIC configuration */
-> +	fdt_for_each_node_by_compatible(offset, fdt, -1, "riscv,aplic") {
-> +		int len, imsic_offset;
-> +		const fdt32_t *msi_parent = fdt_getprop(fdt, offset, "msi-parent", &len);
-> +
-> +		if (msi_parent && len >= sizeof(fdt32_t)) {
-> +			imsic_offset = fdt_node_offset_by_phandle(fdt, fdt32_to_cpu(*msi_parent));
-> +			if (imsic_offset >= 0 &&
-> +			    riscv_node_handles_mmode_external_interrupts(fdt, imsic_offset)) {
-> +				err = fdt_status_disabled(fdt, offset);
-> +				if (err < 0)
-> +					return err;
-> +			}
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  #ifdef CONFIG_OF_BOARD_FIXUP
->  int board_fix_fdt(void *fdt)
->  {
-> @@ -165,5 +244,12 @@ int arch_fixup_fdt(void *blob)
->  	if (err < 0)
->  		return err;
->  
-> +	/* Disable M-IMSIC and M-APLIC nodes when we're not in M-mode */
-> +	if (!CONFIG_IS_ENABLED(RISCV_MMODE)) {
-> +		err = riscv_aia_mimsic_maplic_fixup(blob);
-> +		if (err < 0)
-> +			return err;
-> +	}
-> +
->  	return 0;
->  }
-> 
+> The device path of the loaded device-tree is printed after it has been
+> freed with efi_free_pool(). Print it before freeing it.
+>
+> Fixes: 5c1b5e6bc59a ("efi_loader: find distro device-path for media devices")
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 > ---
-> base-commit: 83b1ec64ede9998566e6a82b22848c20a33f4aff
-> change-id: 20261118-mimsic_maplic_fixup-051bd38d0985
-> 
-> Best regards,
-> --  
-> Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-> 
 
--- 
-Thanks,
-Yao Zi
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Meow-mrrp-mrow, I'm a cat.
+>  lib/efi_loader/efi_fdt.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
+> index bfaa9cfc207..5aeff62e76a 100644
+> --- a/lib/efi_loader/efi_fdt.c
+> +++ b/lib/efi_loader/efi_fdt.c
+> @@ -119,10 +119,10 @@ void efi_load_distro_fdt(efi_handle_t handle, void **fdt, efi_uintn_t *fdt_size)
+>                 if (!file)
+>                         break;
+>                 ret = efi_load_image_from_path(true, file, fdt, fdt_size);
+> -               efi_free_pool(file);
+> -               if (ret == EFI_SUCCESS) {
+> +               if (ret == EFI_SUCCESS)
+>                         log_debug("Fdt %pD loaded\n", file);
+> +               efi_free_pool(file);
+> +               if (ret == EFI_SUCCESS)
+>                         break;
+> -               }
+>         }
+>  }
+> --
+> 2.56.1
+>
