@@ -2,131 +2,134 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AB49606A339
-	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 13:21:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4822606A32A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 13:21:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jFXb9ib/;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=MKqO3xO2
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=v/QYQnfR;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=S+K054HZ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 44B22816DA;
-	Fri, 20 Nov 2026 13:21:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8BB0F81755;
+	Fri, 20 Nov 2026 13:21:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tJiBv9jiLWvA; Fri, 20 Nov 2026 13:21:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5C49B81703
+ id F_ZdnkvoH_66; Fri, 20 Nov 2026 13:21:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 268D081698
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795180890;
-	b=FNyal8od38ZPc+pWZ3HRbhcds25NT8pfEqaos4LG8yGVNQy01NYaG3NWewY2gRHWlCqZ
-	 o4Fikz/eggNUcJ8TMNypsVIduqYbf5NkUuK/w3HhI5RoiEfWaaikuK/M+dDEvEBGTx9JL
-	 ov0DZHlvTFqi+SHxRZmp1zXlRtjzTYktDv+ExiEObttJrbNPrYcoME7IZhZbeP9KGmFRK
-	 BS13dJfdHQ0zKPuKnWID3BDVQAXuefJQ02xdhKic9rBGVO+rC9aLeYZO6Y41EcLHAAwe+
-	 s7/CfG43QhzLlsMTeUPeUnHi6mw8+oxdoTSLvpMbfBKl0QZwKd0nEgso3NWAtP6Gv1A==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795180892;
+	b=GFC3TFZrX2t8tDdN/XTEYHxF3La5kVDHERjcSQM+XEHbv9gRHgE1FfhKXJ9a/MENqFDz
+	 P5VnjfGYxLdNen2xerjOOILDz4/Jx3SzCk9bNqkwqjzok0tO0JLsS51/9ITeGxy4edNNG
+	 mLzLtrw2a2N6Sf0v2eKNecWvtQMVHvG4QeWEMa18GdcxiBC7dND0Me1BOuwEGF4hB9LDX
+	 QuIPej4Nc5JQC+Up/o3aYb5i2cx6cBYxH7rGZhbBCOIgDdEQDlFZ6osEpi3KLf9i8AKtK
+	 MyDssOe/lZaMh97/kRSx6HoiJV5vBWdtgHFC5GUFxH8Sh3BlHm1H51gdBN6MGz4QLyg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795180890;
+	c=relaxed/relaxed; t=1795180892;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=qDBOSvmG6qD+G++wFzJopKi4w+smDdU/STB5H3PulqU=;
-	b=emVWsY7IUzVb17xTuFxHYH2zL22x/HfOHFz62WwjA+ArzGpAxGl2MbQaM1Sut8zQw63L
-	 MJCM+keH2F62zxHnjDh9ccX3/Q+IErtgdvQ5RMWCouArbop7XfJX2zWyBjBeAHKgjsQYi
-	 97Exy32AFbaFvUyHvj2Yap4hyjAzNRZM58aDfoGnOd1ovHJCXOj98l9K0PZJ2b32+zbCO
-	 /8hBxf80okIx23JpX3wUwJg3PU7FwQBLTdjfxgXJMbb4h3jjbMjeEQkItPiMa06SEXV3h
-	 /eMbbuvveyZvI9kAdJUBx3XyuuoMACK5Y4b9fYHQKrqB9UHu7Y9wC/Rblitu0zdHukw==
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=Vvdm2ae2VpuU/TihF/ilratCx9CqpnRIMp7GcQBndvg=;
+	b=I33XHmTsyZ4TjXsnFhYRtq/cF1svvh/B4Tl7FL+4zJdldnuCPKIlGk56Q19oRNE8iEOj
+	 AlpHSb4/HupLQdaRks165l6UF4feev6W4NQK3uDG+O35/8RqqlyA/BtfnrYrcG6bImwPZ
+	 nKwuradJ2gRy3wwpNqCn5HJ+DoOw7zqvT9/EczytnC3j6BcQpPE6dUSzq4W2Q0IOWsXVu
+	 6E1DOS7ND5bNdhNtvNeUFVN54Fv+/gCTbzT0H2Mhzc6wUeUHjwDHUwu5xICfMEjZ0B2zH
+	 HE/0ywihIYwVUGHONlf5ewBwlsdKRXp3HjmRAvUF4ZdbGch+1NouN4dEiJSzWH2AZJg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795180890;
-	bh=qDBOSvmG6qD+G++wFzJopKi4w+smDdU/STB5H3PulqU=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=jFXb9ib/elpkpOWGTNRDJXlwSMY68tJytshASoJeS81wNXwMtD5dh1Jb1FNMXZ5FG
-	 N5BhHkA89RmnbQPrI9UVen7xB+jn+tcYG8fmj+8ZHSaheNDbcLtJ7dsXfTtsOBDAxr
-	 eX0ChTYzcGRKX6wYrWXeDX/hb0ggeZaX6SpSaCjhMktOKwXIhigsnUJNMazMIu+lDX
-	 P/6MLKs1bniuE6pwsqsXmyIyHmeLLTyy9e1z+sfCnN8yXdlrM7ckbJD0KudpANs6k1
-	 li7fFc4Y3wOLBOPEXOgmbJ+NgmyKg6e4Y+rDDg4YTGfbC5HmN1QadPhpapRSyNDpAX
-	 dIC2D3INkyRbw==
+	d=lists.u-boot-project.org; s=default; t=1795180892;
+	bh=Vvdm2ae2VpuU/TihF/ilratCx9CqpnRIMp7GcQBndvg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=v/QYQnfRCF6i0hrpcm671az3ZyuzFZDwrBvtp1IIoSNDMkK5KJ1vB/TqiRwFxS0QP
+	 5OWIBYH/LxXLApcD7hhjRXNz7DvdcC+io6ckytEawvogxC4wGkrr7obOJGD0xS1fwC
+	 QlDmp4QTIifGk6qQ1CTHIKMAX/hroDYIT8c/GSgjL6LYMG5X9ePf8MOaAbDN7EEhOS
+	 uJgrCY/j1GiAiqWf/ObUwcfvUyZ4r7He1dXF4A6jAjzr+hkImnSdFYlwny6wYjgcID
+	 XnGqpN3ED5I2Zrdkun/Imj9RKrD0jPz39RlRz1X7wfSXcMtUOhhhqKzTizANVVzVTt
+	 ApsS515NRt0cA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5C49B81703;
-	Fri, 20 Nov 2026 13:21:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 268D081698;
+	Fri, 20 Nov 2026 13:21:32 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 34F2F70B
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:42 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E2ED81C9
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 24FF840A25
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:42 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D4F5140A25
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ts3lxcrypta8 for <u-boot@lists.u-boot-project.org>;
- Fri, 20 Nov 2026 11:10:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org F2C8F4016D
+ id chf8vYwDVihm for <u-boot@lists.u-boot-project.org>;
+ Fri, 20 Nov 2026 11:10:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org DCE254016D
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
  envelope-from=eichest@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=MKqO3xO2
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F2C8F4016D
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:40 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4bb666304fdso17423625e9.0
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 03:10:40 -0800 (PST)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=S+K054HZ
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DCE254016D
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 11:10:47 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4ac95761c85so5538685e9.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 03:10:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795173038; x=1795777838;
+ d=gmail.com; s=20260707; t=1795173046; x=1795777846;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=qDBOSvmG6qD+G++wFzJopKi4w+smDdU/STB5H3PulqU=;
- b=MKqO3xO2ZP6g+pwnMQjV3cq2PDUNZDbvNFlz7vV/G2jLX1vW/0icA9Pdr7+HK/X1g9
- Uynuj2D8UXredRaLWXzw1Q2ldjyesH7dOHYdp6uBzkROVk/5mG/XUMjnEsp81Favoxpv
- ueGQNPDYlUtdNHmdSI+1QmT7jB/d0rfk7JbkANiLsPOOvJHixLzCXJliRLeX18aPysEP
- /i+xwaMUR9YFaqdkb/lNAMbR9ZcWGdTn+SeyOopGMMs1xkjvj9hkV1EAe0ktVrYUdsqL
- RHjbr/aI254bzV+Doql2Goe7LRE/8Zo6ZmsvMMDtZ1X7A6AHPRbOegPoXUX1kK3zUGB1
- pqlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795173038; x=1795777838;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=qDBOSvmG6qD+G++wFzJopKi4w+smDdU/STB5H3PulqU=;
- b=D2opM8VKgFNN+mZ5xyXFmXVzkw2fz2Z3nCbdke3ZEoTGmyW5AWiJFZ2GrRCygxAROT
- Nk/VPBl6xbmCqyD54JPIx+Bx7uSJCQGsE97z8aqSxR3DnSvpvKWnZG140GL8I9FR5GY7
- 1n4jFFekKQUvwLY3jrBQOlnOtqa+8d0+ikK2blwA6kBLq4HwtjwJRO/5cG516ErNq0tp
- mHWgDRdouEeqItgeNTqY+1mBJ3xDTChYiRP7UwalI6CNLFJ9+EkRuO5YRk+c34Js+mPK
- f0UVqC9OavyH5ZqoeU20skvlJYmgw3WfaxD9tqz6HjGzRPPZ1FmYzwKyU9RIxls98RT2
- UgtQ==
-X-Gm-Message-State: APuU4Z+G6pMIReNSrye7ku9c0ZldvnqGlqkFujiWQyyqVU1QufUpg05Z
- 7R3g22n3ZmM1dNjk40nmGPhOYTSS3QuHbBDsMnJijL/oINUVJZRD5mb4
-X-Gm-Gg: AYBFou0Y+jGoTNtpJBKdiZiYbnKND7XKY6dyIVX3ZHOgGSj2BUGlKu5Y2HgMEhf5Vah
- d2ErWkAQYPzsi37rL0VfAeiy2pPyy6dimKXZ4xTMITU05/BIXwwcgx+IPF5cn9br9V5kt/OPF/O
- 6S6z4ULg/X3nTyA/iTN1rRiIJM5wvRuJOF3GhpHdZfkHhy1jBpU9UmH3t6InDkQ/D8hUPCGQCB1
- PnEZuPJP3VmrOUw+tYQb0Qy/6o/deJTnltWPTEaosO8q4GEwEaGiS7Q6lAWkfTPSKz42Zevzc1+
- dxuGo50i/vqDueS88FI0IPsk2hu/GzXqG1rjQNFFkJoGpcahfs276cJNlkS69K5z5lAEtTuYx/A
- 0x45UlyGniKUCHs0V8ODCZfl+UQUmLJnk71zwPSxxdnfVBF/9oESOtsRlvM5kAPCRRsGjwoVrps
- N5F/9wOI4/Nqs5FCH+a8ianWKDxNKPDyOK1hPIZiK9Fw/VRuIaWsf6l4OgxNmddAd22njeNu2bN
- rR6pyd0N4TDbCXI6oZ/3nZkwzfkj809k0pARtI4DPQR64m6uDlzY3qyuqnGjr40vvv1MTgof3hi
- 8vHOxmk8ZexDAEwa3dchs8k=
-X-Received: by 2002:a05:600d:600b:b0:4a2:18c4:61a5 with SMTP id
- 5b1f17b1804b1-4bb887fb6e7mr59259275e9.6.1795173038431; 
- Fri, 20 Nov 2026 03:10:38 -0800 (PST)
+ bh=Vvdm2ae2VpuU/TihF/ilratCx9CqpnRIMp7GcQBndvg=;
+ b=S+K054HZ/68U+OSvEEAHvUkGZWqDlErVYsn2mxCqe0EdoE68Hgpw3QWwg2AwNyc3Er
+ qU+ubmKsRgxZQsQyRgeA26XCJxi7o/m2mOX0v0wXUtlYlm2OfKp7S5jRfdcK6YlNcupq
+ 5j4TmNbifKdrzUUNqOMIS0GIqZniJ8V/t6BhEJoruGVArLipZo4IVPoYh9jbQdTnB4AF
+ x7NmmO0/SWhqP1RnI84zbnMGmbShjk3gv/rrVqkMAQYvpBNIskoC0S3NC5IJOylO/Uil
+ 4EFUjcHFV2C9Gs2KXLZkxiJV8UqWfbISyJUac+RkPyqhEclfW4F9uX2Kw+IvZUCkZIb+
+ ctzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795173046; x=1795777846;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Vvdm2ae2VpuU/TihF/ilratCx9CqpnRIMp7GcQBndvg=;
+ b=TrdhCCTsbzWmn6W4M26zFB+NHS8B99kVbpVkNC59pTvG5ceciEKu1pN5Db7jccZcVJ
+ QbH3MRIQTcMkEFZTeTmO8aP13yZ4ww5RkwesxmNeDdFmgbK4apteKFKMUcWUXjUGTc79
+ f9ZOHRbs5prZhJuls3+LOxZd/8LO8V/m8zL12eWuv7tzQTde+T5LDHoc9+dWr9RtAIrO
+ GgAVg2ZBMEyDGDj12GrpaSdFBILHE0bPHcPybKecnoLRLDzEhQmvYSUr6b1MiR5rtB4G
+ IOmJZDuEfNUyJdt7uWWynH58iQWfS9QmJhzRp0T4RCwhf65ED1a9gS8aKAhxlgWrOQmZ
+ O6bQ==
+X-Gm-Message-State: APuU4Z9nOd/84jIDCTLPDlj8UQZoYhzS/1EPgVc6zn8Ogv51uZNloJwU
+ W499GVWpUmTaiCMW1LSjKg31wv22pBmoKiAx/DaeT5q1Ip7jRwq0+uMv
+X-Gm-Gg: AYBFou1CyxnUjstPtIAMQBFbtO0iogz8vAdwOnQdeelmRUhMpBPGZbqcwZY/SYbx0Po
+ kICeHA4dyMI1/V21YcO325zRTR9lkGOYbBXmQLzbb/u0J/9N5oUunXqi9lkMxWaAGbSNB1ZVokq
+ Zp+pys7tawKGLPAhKfNqiQ6gIyIcL4joa5I7Bx9uaLnmJGLgC+V35JLAUciXRENIOuLbzk9lE9W
+ cXLzfReO4QHpY6on/at2nSdxJI5/lTrgGzAFxSS7+LaEgQ2Qq55puoArsIeMorJer97CcnoheVy
+ ThoUpaWFvFeEmieP0Yqxrs8IY3SKlZG+gaw2fqVhSUHxpl3Azh4GNExbkyPDurs+zk8ehva6AA2
+ /i1+rQ8oxUAAlZD0Rm2NlSjR9J3H+z3neTnXX+AGvAq3C1fHW9W3gRcPk66ENimUKNsujIPD2Fs
+ 3P4V1IsZH1bXgcjijYygEs+eLBmS7HokF2jT062GRyYKX6Ogv2Wk7R1eXNrCpQQkilqlWcUaXKe
+ 8V555heqZQX6kH42QeZCmjJPmYGBSJdK7p/76FWj6XSvMlmm0GvMhLZouohG4m/wmGf0z5VsWPF
+ heHuZZoNhRyBLt1WyFs/a0o=
+X-Received: by 2002:a05:600d:600b:b0:4a2:167a:c939 with SMTP id
+ 5b1f17b1804b1-4bb88815f1fmr59167075e9.21.1795173045569; 
+ Fri, 20 Nov 2026 03:10:45 -0800 (PST)
 Received: from eichest-laptop.toradex.int ([2a02:168:af72::cb4])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb884865a2sm79108005e9.3.2026.11.20.03.10.37
+ 5b1f17b1804b1-4bb884865a2sm79108005e9.3.2026.11.20.03.10.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Nov 2026 03:10:37 -0800 (PST)
+ Fri, 20 Nov 2026 03:10:45 -0800 (PST)
 From: Stefan Eichenberger <eichest@gmail.com>
 To: trini@konsulko.com, ilias.apalodimas@linaro.org, peng.fan@nxp.com,
  jh80.chung@samsung.com, tanmay.kathpalia@altera.com, sbabic@nabladev.com,
@@ -136,10 +139,12 @@ To: trini@konsulko.com, ilias.apalodimas@linaro.org, peng.fan@nxp.com,
  nora.schiffer@ew.tq-group.com, primoz.fiser@norik.com, jbx6244@gmail.com,
  aford173@gmail.com, cniedermaier@dh-electronics.com
 Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 0/7] colibri-imx6ull: fix the Ethernet PHY detection
-Date: Fri, 20 Nov 2026 12:10:06 +0100
-Message-ID: <20261120111037.110741-1-eichest@gmail.com>
+Subject: [PATCH v1 1/7] clk: imx: imx6ul: fix the enet clock gate register
+Date: Fri, 20 Nov 2026 12:10:07 +0100
+Message-ID: <20261120111037.110741-2-eichest@gmail.com>
 X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261120111037.110741-1-eichest@gmail.com>
+References: <20261120111037.110741-1-eichest@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -153,93 +158,56 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Since commit a5d990854f2c ("regulator: fixed: fix regulator-fixed-clock")
-the regulator-fixed-clock driver gets its clock in a probe hook, so it
-can no longer probe without CONFIG_CLK. On the Colibri iMX6ULL the
-Ethernet PHY supply is such a regulator. Its 150ms startup delay is
-skipped, and the first FEC probe does not find the PHY.
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-This series fixes the problem by moving the board to the clock framework
-(CONFIG_CLK_IMX6UL). The i.MX6UL clock driver could not yet drive the
-FEC, so most of the series makes the ENET clocks usable:
+IMX6UL_CLK_ENET was registered on CCGR1 bit 10, which is CG5, the uart3
+gate: enabling the FEC clock would have gated uart3 and left ENET alone.
+The ENET gate is CCM_CCGR0[CG6] on i.MX6ULL and CCM_CCGR3[CG2] on
+i.MX6UL, as the reference manuals and Linux have it.
 
-- Patch 1 fixes the ENET gate, which pointed at the uart3 gate. It is a
-  standalone fix and can be applied on its own.
-- Patches 2 and 3 fix the PLLv3 ENET PLL: wait for lock after power up,
-  and stop setting and clearing bit 13. That bit is an output gate, which
-  the SoC drivers already model as a separate clock. Patch 3 also affects
-  i.MX6Q/DL, where every PLL6 consumer goes through the pll6_enet gate
-  on that bit.
-- Patch 4 adds the ENET clock tree to the i.MX6UL driver: the PLL6
-  bypass, the reference dividers with their 125M gates, the GPR1
-  reference clock selectors, the PTP clock and the AHB gate.
+Fixes: 0f53197c3d6c ("clk: imx: add i.MX6UL clk driver")
+Tested-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+---
+ drivers/clk/imx/clk-imx6ul.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-The rest prepares and switches the board:
-
-- Patch 5 removes the static serial_mxc device. It duplicates the
-  device tree instance and cannot get its clocks once CCF is enabled.
-- Patch 6 moves the Colibri iMX6ULL device trees to OF_UPSTREAM.
-- Patch 7 enables the clock framework. With it, the hand-rolled FEC clock
-  setup is no longer needed. setup_gpmi_nand() has to go as well, because
-  it now overwrites the ENFC parent chosen by the CCM driver and breaks
-  NAND. SYS_MALLOC_F_LEN is raised for the pre-relocation CCM probe.
-
-A note on patch 4: U-Boot has no clock type for the IOMUXC GPR muxes, so
-the ENETn_CLK_SEL selectors are plain muxes on the GPR1 register, and the
-ENET2_TX_CLK direction bit stays in board code. A follow-up could add a
-syscon-based GPR mux clock like the one in Linux. That would also remove
-the remaining board code.
-
-On the Colibri iMX6ULL, Ethernet now finds the PHY on the first probe.
-
-The series was tested on the following modules:
-- Colibri iMX6ULL
-- Colibri iMX6ULL eMMC
-- Colibri iMX6
-- Apalis iMX6
-
-Francesco Dolcini (4):
-  clk: imx: imx6ul: fix the enet clock gate register
-  board: toradex: colibri-imx6ull: drop the static serial device
-  arm: dts: imx6ull-colibri: migrate to OF_UPSTREAM
-  board: toradex: colibri-imx6ull: enable the clock framework
-
-Stefan Eichenberger (3):
-  clk: imx: pllv3: wait for the ENET PLL to lock
-  clk: imx: pllv3: do not touch the ENET output gate
-  clk: imx: imx6ul: add the enet clock tree
-
- arch/arm/dts/Makefile                         |   2 -
- arch/arm/dts/imx6ull-colibri-emmc-eval-v3.dts |  17 -
- .../arm/dts/imx6ull-colibri-emmc-nonwifi.dtsi | 187 -----
- .../dts/imx6ull-colibri-eval-v3-u-boot.dtsi   |   6 +
- arch/arm/dts/imx6ull-colibri-eval-v3.dts      |  14 -
- arch/arm/dts/imx6ull-colibri-eval-v3.dtsi     | 121 ---
- arch/arm/dts/imx6ull-colibri-nonwifi.dtsi     | 161 ----
- arch/arm/dts/imx6ull-colibri.dtsi             | 748 ------------------
- arch/arm/mach-imx/mx6/Kconfig                 |   1 +
- board/toradex/colibri-imx6ull/MAINTAINERS     |   8 +-
- .../toradex/colibri-imx6ull/colibri-imx6ull.c |  45 +-
- configs/colibri-imx6ull-emmc_defconfig        |   4 +-
- configs/colibri-imx6ull_defconfig             |   4 +-
- drivers/clk/imx/clk-imx6ul.c                  |  81 +-
- drivers/clk/imx/clk-pllv3.c                   |  21 +-
- 15 files changed, 116 insertions(+), 1304 deletions(-)
- delete mode 100644 arch/arm/dts/imx6ull-colibri-emmc-eval-v3.dts
- delete mode 100644 arch/arm/dts/imx6ull-colibri-emmc-nonwifi.dtsi
- delete mode 100644 arch/arm/dts/imx6ull-colibri-eval-v3.dts
- delete mode 100644 arch/arm/dts/imx6ull-colibri-eval-v3.dtsi
- delete mode 100644 arch/arm/dts/imx6ull-colibri-nonwifi.dtsi
- delete mode 100644 arch/arm/dts/imx6ull-colibri.dtsi
-
+diff --git a/drivers/clk/imx/clk-imx6ul.c b/drivers/clk/imx/clk-imx6ul.c
+index 32fb949ffbc..a73fb40b8ac 100644
+--- a/drivers/clk/imx/clk-imx6ul.c
++++ b/drivers/clk/imx/clk-imx6ul.c
+@@ -9,6 +9,7 @@
+ #include <log.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx-regs.h>
++#include <asm/mach-imx/sys_proto.h>
+ #include <dt-bindings/clock/imx6ul-clock.h>
+ 
+ #include "clk.h"
+@@ -259,8 +260,12 @@ static int imx6ul_clk_probe(struct udevice *dev)
+ 	clk_dm(IMX6UL_CLK_PWM1,
+ 	       imx_clk_gate2(dev, "pwm1", "perclk", base + 0x78, 16));
+ 
+-	clk_dm(IMX6UL_CLK_ENET,
+-	       imx_clk_gate2(dev, "enet", "ipg", base + 0x6c, 10));
++	if (is_mx6ull())
++		clk_dm(IMX6UL_CLK_ENET,
++		       imx_clk_gate2(dev, "enet", "ipg", base + 0x68, 12));
++	else
++		clk_dm(IMX6UL_CLK_ENET,
++		       imx_clk_gate2(dev, "enet", "ipg", base + 0x74, 4));
+ 	clk_dm(IMX6UL_CLK_ENET_REF,
+ 	       imx_clk_fixed_factor(dev, "enet_ref", "pll6_enet", 1, 1));
+ 
 -- 
 2.56.1
 
