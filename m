@@ -2,125 +2,124 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C59D0606C966
-	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 18:13:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BFF8606C6EB
+	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 18:13:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0JfM5SMV;
-	dkim=pass (2048-bit key, unprotected) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=Xo3GCLmI
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ra6QD0NX;
+	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=XpI2WrR4
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 99B7860788;
-	Fri, 20 Nov 2026 18:13:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BC65560748;
+	Fri, 20 Nov 2026 18:13:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7Aw8EoLAG1Wl; Fri, 20 Nov 2026 18:13:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D535060748
+ id maSSpa6FttQS; Fri, 20 Nov 2026 18:13:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5473B60E71
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795198411;
-	b=SFriX9nVdks2RYsmoOJu7nlb/kOxebAuQixBmT3ppEMXm+toUPVDlQJxLeehO5meSvFP
-	 eUqml9YCIKZTutJ9im8I3p44UHGaKrAeNEAdpb1FsJS6BJV3xJjZareceWvuSLKKFNFnO
-	 G9YbunWZ5sF2SkSoXD+dpDhwn2Z269wyjsox+q4SLaiDu51peTjynlbui888Lm1XT6lGY
-	 57cI41gdZHiXX2+ypKCxYgR27AHKKHm8sKEyeZCNN0/tSg7EOEkvA9ve/WnA26R9DWS33
-	 cu3wen4lATmXSUOF2OSxzruJgx6wux6qwygf4SqIhodG33iUd182tsKGTiLyueZVguQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795198412;
+	b=Ut8MaA1I7yjaEWwBV2VRgSQo0GsacHPwpn1kQ2Q2qKwj/KHFdAUqP4m4juTCCbQtWk8w
+	 cqfFCI+cbhZoVgv8h+rPg67jplv47hhM1uS2Teabswc2YLA42iJWJLApLaEdIjlNg7le/
+	 J7WS2o/IzMt8iIEBMH/t+hbm+4wF31pspoKFtp8yMvK0pUlsbWBvdrly+exIF/T1d/8vN
+	 VB+fszYdctZ92uAMf+BcN+c3t0SlTs9rogSiymHEFCxq0QTjGiKKFZ+5X9CzswALCjqKN
+	 sRw3P1grB+9cJyJFUfSsBijpmqjX1uZL0GGbikLhx14pp4CxuLmURqLVxEJpjVj5Psw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795198411;
+	c=relaxed/relaxed; t=1795198412;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
 	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-Amp-Result:Received:Received:Received:From:Subject:Date:Message-ID:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:CC:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Amp-Result:Received:Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:
+	 References:In-Reply-To:To:CC:X-Mailer:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=UZ6Z5o6gxETINA/UfqBW8NYvCu4fPdTkaEuvXanOdmg=;
-	b=ZAhi1w8ZceCF+cIiXFiEVHgv33Ys2eV5theg4Za8mLa1qlu9PD56YxvfS+IsjNZl7Cik
-	 pfqBEzRviQb5VZgjqmGkz1oJ/9G2u54FRZzXD2P6fX9/7EBQ55WAwyGQZ1fkcvlo3GRjc
-	 EXyBjtV2OIYJMvtLvxBNF28RRzs72Gd7Mog6dHzy77WWeCLs+TIzDI3qhAhRWpdD3P3CP
-	 fU9U2/HvBxFnOBRckvgfzYrWOvd/tIPiM7bMcu4YizWU+Q8b3HUCiU0ldv317fpdA20RL
-	 i63f0Yn9dJukZ0b5jr8SZ60sgqroMvswlZ/2BfJWW5OdaO1SWET2P7lylmDzdfwU1sQ==
+	bh=EjHJTgRwq24LglMoQVT4PwKvn6ZmEt08zIsyBpYIAvs=;
+	b=k310SiX9m8TEF1p5yV5AscopNcDQnS5dxhIx+3CV7dZzO3gOOLaQwaWimCEbedGSLLzr
+	 Hv+USW2ZjzZfMaD+s1kla7WPtQjKp2gBYA7Qj40C4Ykv+19M0ezQslq4i0JCbVw9EZamr
+	 7pkPwf/ZFue1tLDZsdg7Mg07koeVtjD66AL3kNbJnS1xmcasvGk1dc/S8sE/ePoifq1lP
+	 wu0zPpEArrb9MVMMwVDQuYzBh8YKlPsYifuF+uIRtaSuDjeJI1e+ecumb19L0gDtluXk6
+	 2BI+nlTkg8uvF3lqH00t56TzEl5mYiCmBNeaF6tQbH1oh6l92zAflo1cVO0y7l18qog==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795198411;
-	bh=UZ6Z5o6gxETINA/UfqBW8NYvCu4fPdTkaEuvXanOdmg=;
-	h=From:Subject:Date:To:CC:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=0JfM5SMVETc0MtD0HwX5xx3s7BjFtzNUrbT8MsEtdu38roLtl2jpampATBSbwEEYj
-	 IOAPZFHB8PEyypXRqcerN8YGkYTr9ao1N+/aiuvdTKhBtct6N9+ltQtNsMNMhSnhKr
-	 sFN+YVqwJuYm5CuXBffIGIrqilScPLFFWnxIZcCzDLtL2v7Nw4Q5DIGxZvxbSYFpJI
-	 d5ftRsGyetDhc4zzV/fg5WW8Z9XRI6G0GtZIB9fxAjxxYsx/lei8WktIuOhnlK4pNs
-	 J7nXhmS+wkosd/GiyiqxvZt37KACLD/g9gYdzX41oWL09TjgSWtQ01mEfYIccy9uhN
-	 x2IeDW+3uH3sw==
+	d=lists.u-boot-project.org; s=default; t=1795198412;
+	bh=EjHJTgRwq24LglMoQVT4PwKvn6ZmEt08zIsyBpYIAvs=;
+	h=From:Date:Subject:References:In-Reply-To:To:CC:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ra6QD0NXPVJzYhVFrD51EljfM0B9KRcUap08aRloEg60FZ2XeKYaHxANFvLeEmjKx
+	 TlDiSn7Kwv05TgDVirEsi/PI+b7IYNsYThEmCYPz6BzudMTVsZubvVkZVfL8q0IRbx
+	 B1axl5wostxwtl1t6TViWWu3YyF4O6hLUGfiRjysmktaqLk1Q9p9uPrdCgPRi4DYD5
+	 uBZfal9h9UKRUveIzO7+3NDQOYHTIdK1l9yVnk7IM+Z7maSJ7PPqNXPYp4Ns13Q6ei
+	 aWMFE0gBzAb72LSaAk3ONUNX3oEf9LlrsjWHBcNXR3qsxPYN1JC4jPMWqZPp7k1JPi
+	 rg0a/2nITQj+Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D535060748;
-	Fri, 20 Nov 2026 18:13:30 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 97B44498
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5473B60E71;
+	Fri, 20 Nov 2026 18:13:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C3587498
  for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 18:13:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 88FDE40AAA
+ by smtp2.osuosl.org (Postfix) with ESMTP id B585E400A2
  for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 18:13:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fzXtdAy4MD-J for <u-boot@lists.u-boot-project.org>;
- Fri, 20 Nov 2026 18:13:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A9750400A2
+ id KVNOwvfA97tF for <u-boot@lists.u-boot-project.org>;
+ Fri, 20 Nov 2026 18:13:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D88D14022E
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=68.232.154.123
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.154.123;
+ arc=none smtp.remote-ip=68.232.153.233
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.153.233;
  helo=esa.microchip.iphmx.com;
  envelope-from=prvs=7779e6c3c=charles.perry@microchip.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=Xo3GCLmI
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com
+ header.a=rsa-sha256 header.s=mchp header.b=XpI2WrR4
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A9750400A2
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 18:13:26 +0000 (UTC)
+ [68.232.153.233])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D88D14022E
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 18:13:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1795198408; x=1826734408;
- h=from:subject:date:message-id:mime-version:
- content-transfer-encoding:to:cc;
- bh=UElFKAN9i4dKz1K8H8bYavg+U3lj8AkoyyMSTzrHxu4=;
- b=Xo3GCLmIEaVo18q5e9LhVjZdD2ShnQeSk9PXoMxIAGBUhJRKtegR64w0
- uMt66gjzYrrU5hURNt7Jr0aGOGeXnZwYlpxs2GIiGQPmKKv+iUnRFdqy9
- dXb+HdUea2K66DNlXa69sQN1rkeq39/Cz2Yw4Hm5/JePmCNpJNfBN6yXH
- RKYKee6r01aXJ9jxVAeptvkn8oZO9DtKQls/BoXnjhuqyOS/Rbcbpj6s2
- 8buEFEwzESBrE0p+T4BjMjd/LL0HIpCfAjTegIfaK7v1u5FS3GWqR3Wrv
- Mpc3elDqeLkCZPpgisVG6p+iLla6rQRsB4TD214Q58DkZ64pNrvFLSuvB g==;
-X-CSE-ConnectionGUID: 8nm+aKeJSma9GVHlIIo2mQ==
-X-CSE-MsgGUID: UCJjal82SIuv//MVhAbFuw==
-X-IronPort-AV: E=Sophos;i="6.27,223,1787036400"; d="scan'208";a="67070703"
+ t=1795198418; x=1826734418;
+ h=from:date:subject:mime-version:content-transfer-encoding:
+ message-id:references:in-reply-to:to:cc;
+ bh=td3utrN6xcCDaDD9A8LIEsjXmRx99VuMH19tp9C0JwQ=;
+ b=XpI2WrR4J4teOAFx1FfsGVpsXnA+Y5AbuNysDA0QikFWwjX+HxNvUQkJ
+ Q7bVXv3S88S7Hhlgs6RyDwTzdSohPXmdifgH8WHFvuVHK03HJt82arG/K
+ W3bcRG0w0rBpkdIdoPWZKUqMXCzG9mPzkd/Er3wPnB38MT5i8JKSigcQA
+ aPj329F+B5qckCxR/5bD8mMzUAPru5QXsq/hbjtzXZ5TNff7ZDDdVEpCI
+ ORgP3W6xRtUocGYfrMycD1QgohHbnQgfVwINXLne/A5xaFaZnyQZB7iW7
+ Ls1GEoxrFuXxb15YYxOBNsen+gI1J3Zelm4s8iJXoE84bJsFdEeYtYYbx w==;
+X-CSE-ConnectionGUID: 20xRresXR26Osz8IWxm7dQ==
+X-CSE-MsgGUID: mPL5L0vNTsqkB27KiJfi2Q==
+X-IronPort-AV: E=Sophos;i="6.27,223,1787036400"; d="scan'208";a="66837645"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 20 Nov 2026 11:13:25 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Nov 2026 11:13:36 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
+ chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Fri, 20 Nov 2026 11:13:24 -0700
+ 15.2.2562.56; Fri, 20 Nov 2026 11:13:26 -0700
 Received: from MON-LT-C78453.mchp-main.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58 via Frontend Transport; Fri, 20 Nov 2026 11:13:23 -0700
+ 15.1.2507.58 via Frontend Transport; Fri, 20 Nov 2026 11:13:25 -0700
 From: Charles Perry <charles.perry@microchip.com>
-Subject: [PATCH 0/6] Add support for PHYs on external MDIO bus to GEM
-Date: Fri, 20 Nov 2026 13:12:59 -0500
-Message-ID: <20261120-add-macb-support-for-dm-mdio-v1-0-d344297d5b44@microchip.com>
+Date: Fri, 20 Nov 2026 13:13:00 -0500
+Subject: [PATCH 1/6] net: macb: remove CONFIG_PHYLIB guards
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MwQqDMAwA0F+RnBewtVPxV8YO1cSZQ21JtyEU/
- 93i8V1egcwqnGFqCij/JUvcK8yjgWXz+4dRqBpsa3tjbIueCINfZsy/lKJ+cY2KFDCQRLTd6GZ
- ybvDDE2qRlFc57v71Ps8LsMl5nW4AAAA=
-X-Change-ID: 20261120-add-macb-support-for-dm-mdio-2384bd447a75
+Message-ID: <20261120-add-macb-support-for-dm-mdio-v1-1-d344297d5b44@microchip.com>
+References: <20261120-add-macb-support-for-dm-mdio-v1-0-d344297d5b44@microchip.com>
+In-Reply-To: <20261120-add-macb-support-for-dm-mdio-v1-0-d344297d5b44@microchip.com>
 To: <u-boot@lists.u-boot-project.org>
 CC: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini
  <trini@konsulko.com>, Nathan Whitehorn <nwhitehorn@pa.msu.edu>, Conor Dooley
@@ -140,57 +139,94 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello,
-
-The goal of this series is to make it possible to connect a PHY that is NOT
-connected to the internal MDIO bus of a GEM. This is a common case on
-PIC64-HPSC/HX as the GEM does not have the internal MDIO bus and rely on an
-external one.
-
-This doesn't work currently as the code calls macb_mdio_[read/write]
-directly with no regards to the phylib abstraction layer.
-
-Speaking of phylib, I've noticed that CONFIG_PHYLIB is always defined for
-configs using CONFIG_MACB since the former is selected by the later. Patch
-1 removes all the CONFIG_PHYLIB #ifdefs.
-
-I then remove most of the calls to macb_mdio_[read/write] in favor of
-the phylib equivalent with the exception of macb_phy_find() which I believe
-is necessary on some SAMA platforms that don't declare their PHY and just
-grab the first one.
-
-Finally, a call to dm_eth_phy_connect() is added if CONFIG_DM_MDIO is
-available that will grab a possibly external PHY. If that fails, the
-phy_connect() code path resume as before.
-
-I've tested this on PIC64-HPSC/HX where the GEM doesn't have the native
-MDIO for the CONFIG_DM_MDIO code path. I've also tested on various sama5,
-sama7 and sama9 boards for the native MDIO code path. Conor also tested on
-Polarfire.
+CONFIG_MACB select CONFIG_PHYLIB. It is therefore impossible to build
+macb.c without CONFIG_PHYLIB, making the #ifdef guards useless. Remove
+them.
 
 Signed-off-by: Charles Perry <charles.perry@microchip.com>
 ---
-Charles Perry (6):
-      net: macb: remove CONFIG_PHYLIB guards
-      net: macb: check the return status of phy_config()
-      net: macb: remove open coded phy_startup()
-      net: macb: parse the phylink status instead of reading status registers
-      net: macb: remove useless read in macb_phy_init()
-      net: macb: use dm_eth_phy_connect() if CONFIG_DM_MDIO is enabled
+ drivers/net/macb.c | 11 -----------
+ 1 file changed, 11 deletions(-)
 
- drivers/net/macb.c | 168 ++++++++++++++---------------------------------------
- 1 file changed, 44 insertions(+), 124 deletions(-)
----
-base-commit: c1958b5f6cce03956d309ce422b5d9f819955d4a
-change-id: 20261120-add-macb-support-for-dm-mdio-2384bd447a75
+diff --git a/drivers/net/macb.c b/drivers/net/macb.c
+index 06e08d1d87e8..fabfe72210fb 100644
+--- a/drivers/net/macb.c
++++ b/drivers/net/macb.c
+@@ -135,9 +135,7 @@ struct macb_device {
+ 	unsigned int    	speed;
+ 	unsigned short		phy_addr;
+ 	struct mii_dev		*bus;
+-#ifdef CONFIG_PHYLIB
+ 	struct phy_device	*phydev;
+-#endif
+ 
+ #ifdef CONFIG_CLK
+ 	unsigned long		pclk_rate;
+@@ -269,8 +267,6 @@ void __weak arch_get_mdio_control(const char *name)
+ 	return;
+ }
+ 
+-#if defined(CONFIG_CMD_MII) || defined(CONFIG_PHYLIB)
+-
+ int macb_miiphy_read(struct mii_dev *bus, int phy_adr, int devad, int reg)
+ {
+ 	u16 value = 0;
+@@ -294,7 +290,6 @@ int macb_miiphy_write(struct mii_dev *bus, int phy_adr, int devad, int reg,
+ 
+ 	return 0;
+ }
+-#endif
+ 
+ #define RX	1
+ #define TX	0
+@@ -712,7 +707,6 @@ static int macb_phy_init(struct udevice *dev, const char *name)
+ 			return -ENODEV;
+ 		}
+ 
+-#ifdef CONFIG_PHYLIB
+ 		if (macb->phy_addr == PHY_MAX_ADDR+2) {
+ 			/* Internal PCS fake PHY */
+ 			int id;
+@@ -731,7 +725,6 @@ static int macb_phy_init(struct udevice *dev, const char *name)
+ 		}
+ 
+ 		phy_config(macb->phydev);
+-#endif
+ 
+ 		status = macb_mdio_read(macb, macb->phy_addr, MII_BMSR);
+ 		if (!(status & BMSR_LSTATUS)) {
+@@ -1343,7 +1336,6 @@ static int macb_eth_probe(struct udevice *dev)
+ 
+ 	_macb_eth_initialize(macb);
+ 
+-#if defined(CONFIG_CMD_MII) || defined(CONFIG_PHYLIB)
+ 	macb->bus = mdio_alloc();
+ 	if (!macb->bus)
+ 		return -ENOMEM;
+@@ -1355,7 +1347,6 @@ static int macb_eth_probe(struct udevice *dev)
+ 	if (ret < 0)
+ 		return ret;
+ 	macb->bus = miiphy_get_dev_by_name(dev->name);
+-#endif
+ 
+ 	return 0;
+ }
+@@ -1364,9 +1355,7 @@ static int macb_eth_remove(struct udevice *dev)
+ {
+ 	struct macb_device *macb = dev_get_priv(dev);
+ 
+-#ifdef CONFIG_PHYLIB
+ 	free(macb->phydev);
+-#endif
+ 	mdio_unregister(macb->bus);
+ 	mdio_free(macb->bus);
+ 
 
-Best regards,
 -- 
-Thanks,
-Charles
+2.53.0
 
