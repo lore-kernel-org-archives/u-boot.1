@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 540D8606A531
-	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 05:58:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D674606A537
+	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 06:12:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0wbD/jyG;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NMfkdRJs
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=p3zYXm3o;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fFXbrRFR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9653040DBF;
-	Fri, 20 Nov 2026 05:58:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 58A00606D0;
+	Fri, 20 Nov 2026 06:12:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wUgywWC2p-O4; Fri, 20 Nov 2026 05:58:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CC9DD40DAD
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795154329;
-	b=fzkjPy3iDA9MbThCftB7pTn3QomdU/Q39WnQl+Re+59twhgy6D5M3GLH2ayxsXcEGJQq
-	 cujnNF3XhFF4KhBA+YmxdO6bh2foXTshVKQny2+L8DWe3OZn9FPVi5/o+bd3Oir4uMaMJ
-	 deZOxZLEPjXnXi1zutOX5sGWdguvevWEj/w0mtfrGOQFHTVyC4mAMJjIk6Hti/RMi+QAM
-	 WVLFiubDp9mT/JMKbvW85iSvFKlXeJkLVLrAIHXCsLnQrHTwPoCDAT0+pNzzygwC0FM8V
-	 rrMwik/qIsKfRiNSLcgC+0vT11Z+emy1qlWhF61N4p9k1pXQHJT2n5ySTd0VanaUfAg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id klbdBsJ9o6Lm; Fri, 20 Nov 2026 06:12:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A0EBD606D6
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795155147;
+	b=F83CYlwJ9nz/H0fr0zjSEnlWcZJ9LPBKc4NfW5R15739fJWPuqqJbzbr51k0zuY9GVLw
+	 0BegCMaE5WCYD2Xwoy/sqjOe2vaokwGMAFQn40UHyrrble/7Kgke3Sckm0BdMDKptx+YC
+	 w4ImOr4u8cRA82NR7gGrrNtHGaClgn7R3xnjKmjNhaB41NmDxWgpLvGhWxNMp56a4GLpl
+	 kgPjFe8MvyRHEtcT8XMXgALEUDvJiJAQcVfFwdWP4IwkFdh5hLUX9vf9Qv5wQXMw2sUAY
+	 +FystTeSR0GoPZAlwekL9gk6r7x9VuRiWZVWc+CL5CKLWd6ybFBkXEVtHz22+1ZT24g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795154329;
+	c=relaxed/relaxed; t=1795155147;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,42 +31,42 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=jaGYQmptKZ8ALPvdcdbe+BXxRbV1KOhVFZOyvjfOiyc=;
-	b=JUb9PNlrGvAPLZbYSUEEM0/9Tl7Al540kRiaEf9TWRwFeiGCVD8j2HNkasM9eSwYRwSt
-	 qP3uQXZpySvEDAus5s43QOHq4owA5CRTdJqRHjlwU7kMpUi4NGo8kdi/oXU3EYicZTBE4
-	 r29PUx1lhexHyPDg+AC6WDpkfYG7x0Cea87l7gme48GHPEyo0OiDECfBQUlocaUFWllBP
-	 jajwRnjM2Md4Va852eCjvFyBCZTTB3ApDD/ZO1MpDIRcNWcR/+40/VNxWVpwWnq/LLll+
-	 DH10VAPSoRAQo3X5FW5oFFzn2aIuX6hiuT7gegJMpudXg0ZR/v175Cbwz3p25hySVjA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=p1KsGlCEWwY/on3uaKodFeUKJekVJ24m0aGB0zl40+c=;
+	b=GQroWCjLcbpr2LC1oLC1yR7YrUS1WmceEXUTMODSdd4WiiDhVflbnom/EsFFKh69DCqJ
+	 nLfhseDOnc16YUgZqkB68eEm2EvvQTrg73+BoIm+Y91jcvaZEgQIk6joc2qi6D3LSh9wu
+	 CAIxbl10en/nXNQ8M3hGTq9o7cI/FHGbLO7+JJJiiEJVH/pi5i+WA6/uDOYjrARN9Wew3
+	 l/U2jckdJzYe5kcPPX3htwdiM+4DJ/SlQfeJRTTRin3gvF3jlJEwZJqQx4XommTznPnXq
+	 KU7GlH46DcHNrtWVauiPjdwAYJaNPUGtXgp1Hfzhyr7DnIYQi1k+8YP0oGyZugonzbg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795154329;
-	bh=jaGYQmptKZ8ALPvdcdbe+BXxRbV1KOhVFZOyvjfOiyc=;
+	d=lists.u-boot-project.org; s=default; t=1795155147;
+	bh=p1KsGlCEWwY/on3uaKodFeUKJekVJ24m0aGB0zl40+c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0wbD/jyGYVh92QD1m0sdqi6wn1iM3dFBalX1MXL57I11usrJjLqAr/CdS5JfUIpKn
-	 cz0WmtE9bCD4TBpSM5QzXrifNdo7BIyUu9/G+QA5EYpsug+J9rsXqrs+nx58oVENKW
-	 4GsvVWo0/EV/w5P3qjeQ3A3lrhG7iOaHGN18nB8f+bfqPc7xyeimDAeCmjF0V5i+D4
-	 MW32l8q64+7neboH7vd3mJp4zC1Y/vofvQtcg3vRhsRvd38/LTbwtiYpNEfJg4VuqG
-	 loS3EKtiq4pi2gi8A59Oa0elC8GAwaFQy5E1xWc0RfMv+XTAtIyhJ/VRlcIre8izpY
-	 H9GmInVP51jIQ==
+	b=p3zYXm3o9nTbP69v4mm/uqUKRjmoOxBB8cyMpbPRDU141uYu1nwZXsshG+cX64BKK
+	 aDOoIdMVlrWIVXffD+fwaSaK4ZYCnkruHHng7XRUiGA0s2pP1cmb9rH9lU7m55uiLK
+	 Pk9+UD61D9RBZIKlV5SOvQ4E1hY67PB8YcBvltlJwLcW5MV1s+JHyrTxaS0DCdDGZ8
+	 +liTlbPJG3FGYU9qPB3HD4A9911ET41g2vkn3RG2pS0ZsC4EvdTkZXUM4AnsS2vDL3
+	 urhjCl4rYsRWA9BGU7l68y+kqif2Jd02LbfqPLoVeu/axm48Wj3UTmfYsVuFLiQTnM
+	 v9uWHwSx7U3Hw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CC9DD40DAD;
-	Fri, 20 Nov 2026 05:58:48 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9416C1E7
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 05:58:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A0EBD606D6;
+	Fri, 20 Nov 2026 06:12:27 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id F1129260
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 06:12:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7A42740122
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 05:58:47 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D41ED40122
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 06:12:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iOfsZhhI5-cN for <u-boot@lists.u-boot-project.org>;
- Fri, 20 Nov 2026 05:58:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org BDB61400D6
+ id 9zE84Ckbde1a for <u-boot@lists.u-boot-project.org>;
+ Fri, 20 Nov 2026 06:12:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1D4A2400D6
 Authentication-Results: smtp2.osuosl.org; arc=none
  smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
@@ -74,45 +74,47 @@ Received-SPF: Pass (mailfrom) identity=mailfrom;
  envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=NMfkdRJs
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=fFXbrRFR
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BDB61400D6
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 05:58:45 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1D4A2400D6
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 06:12:24 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 1281C46B95;
- Fri, 20 Nov 2026 05:58:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6165C1F000F2;
- Fri, 20 Nov 2026 05:58:43 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B806640449;
+ Fri, 20 Nov 2026 06:12:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2759C1F000C4;
+ Fri, 20 Nov 2026 06:12:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1795154325;
- bh=jaGYQmptKZ8ALPvdcdbe+BXxRbV1KOhVFZOyvjfOiyc=;
+ s=k20260515; t=1795155143;
+ bh=p1KsGlCEWwY/on3uaKodFeUKJekVJ24m0aGB0zl40+c=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=NMfkdRJslLOr3IfKZwora8ZjukJ6TVIG3+aVaO8kw2Rl43IyUNPBGB55BmX72TYa/
- 3w1W4CXO7wSkm368jBj/EajeqJtfyyZQre/Mmnu5glV2Gs2WGO9QaA1zqk9H0wZbeG
- 5zXx/efbwKxbKM23lm07Ximv5BJwLWw66y3rnYhCnusaBoMOjQBj10zk8aAS9p7Bku
- Wova9z78xWzWpxclgrprltkItajI7fkLd36XYhJODblSTAbO+ZB8b0JXFSEtvZm711
- AQZAeGe824SePru2iZhPl5mO0dfpig5SYY5QrQJn8OIF1OGn24IsVw4ESFxySrmmNL
- JrJj3DoKp/wCA==
-Date: Fri, 20 Nov 2026 05:58:42 +0000
+ b=fFXbrRFRIapZ3kz7k/dh7F4MY8ujlH8FX/6CAVtJGx+lqRFL2KU1x2MxKEMQon+Qp
+ fCqBSin87NZWVUlyzl0oB3WCfBKjJyKsQbbuHN6kEFP0R7zTC0LAdw6sd9uUtUG7Sz
+ ypaxvVNOHbFMbL2LN9aiZI5x4asD7dzM8AUwILHqxkDZXL6goh6stsNQqG0KxiaDqy
+ SpnnNR1wDj8FofiYAoxyjps0nabGBbZ0zeX6g27af8Ij8f9N8e74V3ikVTUvkDr+pW
+ S2MKPT7WYxpMUrJd3Jj/svuFzJu82jhYoxJIWoJgVX7fBVeHZROLBuZWREXQkby3Ne
+ c8BGWZfZBbhsw==
+Date: Fri, 20 Nov 2026 06:12:21 +0000
 From: Yixun Lan <dlan@kernel.org>
 To: Anand Moon <linux.amoon@gmail.com>
 Cc: u-boot@lists.u-boot-project.org, Dave Klotz <DaveWK225@protonmail.com>,
  Eric Chung <eric.chung@riscstar.com>,
  Hung-Chun Tseng <alan.tseng.cs@gmail.com>,
- E Shattow <e@freeshell.de>, Tom Rini <trini@konsulko.com>,
- Johan Jonker <jbx6244@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>
-Subject: Re: [PATCH v1 4/6] gpio: spacemit: Add SPL support for K1 GPIO driver
-Message-ID: <20261120055842-GKE156369@kernel.org>
+ E Shattow <e@freeshell.de>, Huan Zhou <pericycle.cc@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Guodong Xu <guodong@riscstar.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, u-boot-spacemit@groups.io
+Subject: Re: [PATCH v1 5/6] pinctrl: spacemit: Add SPL support for K1 pinctrl
+ driver
+Message-ID: <20261120061221-GKF156369@kernel.org>
 References: <20261029134705.3767-1-linux.amoon@gmail.com>
- <20261029134705.3767-5-linux.amoon@gmail.com>
+ <20261029134705.3767-6-linux.amoon@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261029134705.3767-5-linux.amoon@gmail.com>
+In-Reply-To: <20261029134705.3767-6-linux.amoon@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,75 +127,64 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Anand,
 
-Can you split out patch 4, 5 and send a v2? I'd like to
- take them first..
+For the title, how about
+  pinctrl: spacemit: Add SPL support for early access
 
 On 19:16 Thu 29 Oct     , Anand Moon wrote:
-> Add SPL_SPACEMIT_GPIO to enable the SpacemiT K1 GPIO driver
-> during SPL initialization.
+> Add `SPL_PINCTRL_SPACEMIT_K1` to enable the SpacemiT K1
+> pinctrl driver during SPL initialization.
 > 
 ..
-> Depend on SPL_DM_GPIO and TARGET_SPACEMIT_K1, and select
-> SPACEMIT_GPIO to reuse the existing driver implementation.
+> Depend on `SPL_PINCTRL`, `SPL_DM`, and `PINCTRL_GENERIC`,
+> and select `PINCTRL_SPACEMIT_K1` to reuse the existing
+> driver implementation.
 > 
-I'd rather drop above explanation, it's quite obvious from
-reading the code..
+Redundant, drop it
 
-> This allows SPL to access GPIOs required for early board
-s/This allows/Allow/, use imperative mood
-> initialization.
+> This allows SPL to configure pin multiplexing for early
+> board initialization.
 > 
-Any specific user of the GPIO? Can you add more detail, I can
- think of reason that SdCard's Dectect pin will use gpio.. 
+This is ok, but better if able to add some more detail
 
 > Cc: Dave Klotz <DaveWK225@protonmail.com>
 > Cc: Eric Chung <eric.chung@riscstar.com>
 > Cc: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
 > Cc: E Shattow <e@freeshell.de>
 > Cc: Yixun Lan <dlan@kernel.org>
-Can you put CC list in cover letter? I'd rather not apply them..
-or possibly under line "---" if you want specific CC in single
-patch? and of course it works..
-
 > Signed-off-by: Anand Moon <linux.amoon@gmail.com>
 > ---
->  drivers/gpio/Kconfig | 7 +++++++
->  1 file changed, 7 insertions(+)
+>  drivers/pinctrl/spacemit/Kconfig | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 > 
-> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-> index 7f12e39dad8..3be6a9e54fa 100644
-> --- a/drivers/gpio/Kconfig
-> +++ b/drivers/gpio/Kconfig
-> @@ -457,6 +457,13 @@ config SPACEMIT_GPIO
->  	  arranged into a number of banks (different for each SoC type) each
->  	  with 32 GPIOs.
->  
-> +config SPL_SPACEMIT_GPIO
-> +	bool "Spacemit K1 GPIO driver in SPL"
-    just "SpacemiT GPIO driver in SPL", which also make it work for K3,
-so let's not only mention for K1..
+> diff --git a/drivers/pinctrl/spacemit/Kconfig b/drivers/pinctrl/spacemit/Kconfig
+> index 87cba336923..5770e4865d9 100644
+> --- a/drivers/pinctrl/spacemit/Kconfig
+> +++ b/drivers/pinctrl/spacemit/Kconfig
+> @@ -7,3 +7,11 @@ config PINCTRL_SPACEMIT_K1
+>  	  The driver is controlled by a device tree node which contains both
+>  	  the GPIO definitions and pin control functions for each available
+>  	  multiplex function.
+> +
+> +config SPL_PINCTRL_SPACEMIT_K1
+> +	bool "Spacemit K1 pinctrl driver in SPL"
+  similar,     s/Spacemit K1/SpacemiT/
+K3 reuse same config with K1, so other part looks good
 
-> +	 depends on SPL_DM_GPIO && TARGET_SPACEMIT_K1
-I'd also like to see it enabled in K3 platform, so how about
+> +	depends on SPL_PINCTRL && SPL_DM && PINCTRL_GENERIC
+can you check if able to combine this two? SPL_PINCTRL && PINCTRL_GENERIC
+as I see SPL_PINCTRL_GENERIC
 
-	 depends on SPL_DM_GPIO && (TARGET_SPACEMIT_K1 || TARGET_SPACEMIT_K3)
-or simply remove platform contraint..
-	 depends on SPL_DM_GPIO
-
-> +	 select SPACEMIT_GPIO
-> +	 help
-> +	   Enable the Spacemit K1 GPIO driver in SPL.
-> +	   This allows SPL to configure GPIOs during early board initialization.
->  
->  config SUNXI_GPIO
->  	bool "Allwinner GPIO driver"
+> +	select PINCTRL_SPACEMIT_K1
+> +	help
+> +	  Enable the Spacemit K1 pinctrl driver in SPL.
+> +	  This allows SPL to configure pinctrl during early board initialization.
 > -- 
 > 2.56.0
 > 
