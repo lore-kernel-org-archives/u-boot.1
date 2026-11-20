@@ -1,148 +1,168 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03CB5606A688
-	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 22:34:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0A38606A695
+	for <u-boot@archiver.kernel.org>; Fri, 20 Nov 2026 22:50:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vj6Dxn1T;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Q0bFqB8F
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ANNEXrcI;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=keiOHRlG
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B37B181750;
-	Fri, 20 Nov 2026 22:34:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 711AB60778;
+	Fri, 20 Nov 2026 22:50:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kyUgAAQu3Q27; Fri, 20 Nov 2026 22:34:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C21338133F
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795214063;
-	b=ZAxaY3SKlUzR/y5ZCeGrWcPlDOl4N3r9bYsKqq0vB1IJPU5Eo7ckVzQwmPQm73zUJiSh
-	 Sjg+8pCWuKN5xKmCaRmi6BBoTZrGQqqJ+GATsH0dkVMBWmb8G8Ga+8gQOWM+hCcjnc1x/
-	 XGbme1FesSFhr/eB8HMpRK/w553qAlxX/IeUD/P12r00e6rsYb3jK3eSM4wtrCa3LF5ON
-	 omK3rnM1U76ApXJtZpj4wjY27WfBrmhx+4fXN7fuXjxJH9WE/eRVV3nMnUhP0c2Czt3NX
-	 oP2g4rZCDt1F++4uy7jlJxcr1LeQr3F0t1mwecXl5ASGI1q18LrZZuwEfRXlllhHXPA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0zR_2tJLT9n7; Fri, 20 Nov 2026 22:50:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D026C60698
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795215004;
+	b=dPPtP6u99wCK3rLCFa5hQn2O0QEZQORdsWVQoA9XekRQ7b6zsOw/L/cX8zmpcbM23pbE
+	 cGL4P8d2pJCxccJY/B5J0E+X4v8zAE/8IQsScwim0U5nRc5U/T+/sJf+lw4XBzmtC0f/2
+	 xu0bZO+egRS38b34/StM6DIOVtY5B8lfJS340fj2KnLbt+iqtqadnTheiv7DwGzRn9pbq
+	 sF94SH47wXji9UKCjYhRa4Sv88sAJPQBTVcmXXgrZ42lm4+DMvxfDngUhBb/1Pj/SDnJL
+	 mlZWXIZuiGozYtH2orTUyGrbMdUvp8gIt+ENYRbq7l6tckHbZ0YIuTNxkpMl87dfefA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795214063;
+	c=relaxed/relaxed; t=1795215004;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=M3JebDv/H/a80Td2g+dDf+zq5ldxC/wVJG8tsisLTAQ=;
-	b=c51s0ndV48J/UjuUd85bemaCnkm5r+mlCiHH2z84sQCefVUzvc0XJuQ29quR24/35N7I
-	 exWbZXCqr1h0S1g9zKQGCwqDLz2F6ONhitS7tmm0KDl6t7/6GD1s1IVM5+rDdIQw+uUAN
-	 eDgUwdVQcFNKPW5QpAlEPQpAKHP61KOhzDgyev9w/h4X2r7VS+UeKhy58bXP4GN9aY1uY
-	 4u1SaRcdUMaBGY+p5puOEpbG8Io9IOgIqHLmWJyLjpSnybCTNCal8zomi8QzXJD24n9oN
-	 hgAYZuzNhJ3Opmz8bPxqY3/p94IPb09PoL9I5Ae8TJVldw5LHV9CSsnjPlsa9hAiWbw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Q0bFqB8F;
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=HI1zma7frLSQmO+5fGUUaUOPsXsH2FoZsPAxFKbOZqQ=;
+	b=Dm1Y9lzn0PSUe72ImoDQDMNa2XbjyAdNz5ZGzDXjDAtXFx2+pdB5sfUujgzNUx4ReNhW
+	 FeIphYxg4dbRNK1N9n3jhTd3f0QPScHvplIfpCprOB5et3dPSB5LodyKV52hPSTgncq2T
+	 wiNkTkm2K8V85b72dVoDF0Aqbj5cFZpws3j7jItEkRhERD9EmXUmCPyeAl/hnJ0vbBYlj
+	 DLXmGwA4lrUHkbTkT/vQMBh9P7e1em9bQugvRVeyLO0bIa6Ijz64jl2WtfGyorZ9+blZ6
+	 Dvtcs/8M0H1/98Na15AbvIY5OCo3LytA8VjP+uQ7+q7iGDwF4NuqfSHKugviQ+Y6/jg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=keiOHRlG;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795214063;
-	bh=M3JebDv/H/a80Td2g+dDf+zq5ldxC/wVJG8tsisLTAQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=vj6Dxn1TAprJz7sm7OAEUkbWe12ykqbbToA8BQpAD6yA1Z5LzRAyfmzWh7YcD/j6C
-	 S8CEn3+2d1Q2D1bQ8tv1mOJkPURnvW4tRF5kazNEFu6vBqVJTC7B5ODd2hnpRSNIh/
-	 DHorOjaAToIh/UJtLoG2Wgtg1A5lBWxcVztpH7w1Nbj5UwZ3V3/wS8H3IqEc1L08wa
-	 8MpvHWxbLwBPDmiC5q8KZqjqG6/fHVBlemeO4w7hITWgkJYTJUmjGTQzect1jN/5lq
-	 XNdyl89AkCDt9waQ9xNSUplh6yJifRZFpCGMvwvWIDeM6VNKQogFvC/6imhRHhuPpm
-	 9FLC2U4eGVWhQ==
+	d=lists.u-boot-project.org; s=default; t=1795215003;
+	bh=HI1zma7frLSQmO+5fGUUaUOPsXsH2FoZsPAxFKbOZqQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ANNEXrcI8nrj6wAL3bJ0CnqZ6jkFkAvTwB/5mY79HpfYPGtsMrTgsYuJlvEhoQnhZ
+	 9K0WUvAnQqBcBSIHgXrSJosov12zOX+vf+EcLSc7ykJHozpk3XuSmB+anT/ocIQfRD
+	 f4f/5lHZJmlz/R+ocT3W3VtsGG5KvBdcCrJyhIWS7BzzmzQCuFVI4g5LqzCCS7bYE9
+	 E7iaK8J44ujDMujnkLWcRXcgMbGlVZhiYA+KKUlqkXykO+Edhoyx2IkbSu/b6unMOi
+	 f8wvK9ZnEUm1d4Feu32xP+UTFhrXIcCLoFyj8PsPwd0Go61m8gy41SqVW40/BF+lTe
+	 a1JsSqaFcf6Fw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C21338133F;
-	Fri, 20 Nov 2026 22:34:23 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 04EA4465
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 22:34:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D026C60698;
+	Fri, 20 Nov 2026 22:50:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7E6EB9C1
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 22:50:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 021128133F
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 22:34:23 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6ED6F60698
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 22:50:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AdGfUg8oaubA for <u-boot@lists.u-boot-project.org>;
- Fri, 20 Nov 2026 22:34:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0EAD9811D3
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::2b"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YCPe_vGy-JzQ for <u-boot@lists.u-boot-project.org>;
+ Fri, 20 Nov 2026 22:50:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 08AA360618
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2b; helo=mail-oa1-x2b.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Q0bFqB8F
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0EAD9811D3
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 22:34:21 +0000 (UTC)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-486f013db83so532596fac.0
- for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 14:34:21 -0800 (PST)
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=keiOHRlG
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 08AA360618
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 22:50:00 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-862df509d48so1039514a34.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 20 Nov 2026 14:50:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795214060; x=1795818860;
+ d=konsulko.com; s=google; t=1795214999; x=1795819799;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=M3JebDv/H/a80Td2g+dDf+zq5ldxC/wVJG8tsisLTAQ=;
- b=Q0bFqB8Fd7RyR2ZWerA7USLf4kQg2toYveXeScITu05NTj/kL9XY1M2MdZR6mfCYeR
- Un2uQ/mHDsQllOSWoUdO69Gm0idYL3lFfT4Sew9j4CQbW5oFujE8E7qMIKmRYRWOpN2L
- YTcLE+bEJix4AVIfFamPLYP65WKwXpAT7hIHHI4sKGQdBjY5cyAyeGtCDKCPmQx7WJ5e
- 2r73QsJWeKJ/TAvGhkn/SMTvhe3RLI5S/7eiUHa9fGU48WzHdN2sv1eH6rcKcQSl6hsI
- RQVuBIYzgvZvqZooYFPKfIngvuCmwIyOhmOAkqf4rVR8sGNylnpRUswON/ILek4PbTTO
- yHxg==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=HI1zma7frLSQmO+5fGUUaUOPsXsH2FoZsPAxFKbOZqQ=;
+ b=keiOHRlG856AJIR4qGjYazj5c6IcY597CyiRlqYSpd6urh+7gDiEesFD35DxLLEi5y
+ WQMPOrch5zxw5ufvObkmw78e9+Ny1q6SfJCINPXAaQMH3AffcIB8wCS+74IL/Nej7UoK
+ pS9pVVLDBHsCqh4dq4h4Trlt7jN5GQAsKi3Dw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795214060; x=1795818860;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=M3JebDv/H/a80Td2g+dDf+zq5ldxC/wVJG8tsisLTAQ=;
- b=2hctnHZWuz7aZgGNMGM/XC+vXPtRsmKX5zRL/ja3UYFDb6OUiahif7uidMjhxdG5Zy
- SzNAUgiJb9xR9J6bgYaxOuFDo5GT4EmTPWI57Z9QklWgMB+o7EmToeLZtJ1Yaysj3vJc
- 3mVFobuvyp5P6TNY1fHZtkN5fx1ZI2iXqazz3ClLht8fFBAIz34DOQg+AzofRmYqCIKY
- QBmzdHodEUzK+KxwUeMPFsqU6HpxbpywmvZZWN1DaUEGa9YZQPTjroWw5npZAAZ/gEya
- dRY6zY0QtXeTh5HnI8msX7LFBs5LQjc4dkUPfbTBiHcuGOWrjH8PD6uBWMiKFXomouZG
- f9xw==
+ d=1e100.net; s=20260707; t=1795214999; x=1795819799;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=HI1zma7frLSQmO+5fGUUaUOPsXsH2FoZsPAxFKbOZqQ=;
+ b=Nwd6uzK8KoYLN8vMEdFZHLi6yy0lc5n+NGfyLzYcMxNk6hGc2AIEkiT5w9SusE0hhr
+ poU7Aq2ZD6RfLVTZQbljjntuNTf4mMqu38noBE2fmv33JvGTx8RZI8zXAB/psgsRDqGQ
+ cCadPQG/Lk6s0BoWNTCfisB8KLCjEUhVyDhvqs5FW1C31Ef5GG6Qd7DCiaY4YQJYXXWw
+ ip30yKIWB0FmM7QIw8xsrF4iPQzecPiJaz4aJdwWBUiHUEzBP1nF5t74a/jraHxeR82M
+ EAaAISg4w1RmYx1G7GwKkPVHMn01W03eNHfCUl8BSzDZQbbq+Fxv5NOE4rBiA8mkvpKw
+ kk5Q==
 X-Forwarded-Encrypted: i=1;
- AL+hErFA7meVoFa7xpyWeGsZzPYYcP8f2pRp7zB04svV7jN7sC/yie2iXECEXu30QVBdcWqvbBzsGrk=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+cZOhxluauaW7z/6a4bF+r7LnVFjHCA8zQONwTKcddrMg++Loa
- uZvOgEUdkThOEO9LHvj/s+GOq+7ATjWeQ/vLwdWh5qkr6BWenz44auufLO0U7CXwaY4=
-X-Gm-Gg: AZFdTZfJtbA6yTcRZwLWsEeOwoPoKZuWKU+4SXOJ38QKdpogbPzEGk1/2dXvciWPmR0
- toRSos0vKct/gC+oDEGJ/ClfT88bfPTuiaIsFfMml2qPtEqTJywY58kALe+xvLOv75BZSdneH1m
- KCXgjykqnUGsPA0prI5ecmMZPn+p54XiBy9RbN1WwFAQqxbp1i33k+UQx7P2yCXCwj5tNfkcs2V
- HVpUxwxyt+P7KdIqlrxn9YmdnEisa57VTGnCOOo6KGVf/QiwCBmbUFJlayHSEHmfy0cYyhfGcHH
- U0RpDG3M/PB0wP05dheEyNAscU20bp8LVx9tQIPqEf+QmAaTBHsOzp/bggYY56rIgEw2rIFO6Kf
- AxccZrObs2iSUkx3MWFNoiVMXAT1nPL3FjxOWceU81swaTr69Nd52FmzUsPgykPAHtBLpS/M5dT
- Z3QgvKfBWMzhh64uk4kxA+JybSaNB/h2rA9M86uTsQS4BmpOWyfGtPg61c7rMl1r73qOptIj7td
- W8e00MBjNo9cnR5VNkyEUyNshYHTkIDdZijTajE13BaNMVRf9IKS91URFSbKIAcX9yTVrkh4hgl
- Hdw5B+C2I6Rlktccmn0APqGcsLKQxQ==
-X-Received: by 2002:a05:6870:c34f:b0:4ad:5a7a:f7e5 with SMTP id
- 586e51a60fabf-4bc821920acmr4697259fac.18.1795214060147; 
- Fri, 20 Nov 2026 14:34:20 -0800 (PST)
-Received: from freyr.lan ([2600:8803:e7e4:500:d4f:b590:5bb3:988b])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4bc5b07d766sm3903911fac.2.2026.11.20.14.34.17
+ AL+hErGWMlGVyqvc8myWnxJwO0x1SPvxZpW821vr2haD8YH5LXFxNOg6Arg4rShxJCr/sqXv+kjCwnM=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z82VQ3KEHMIDwiLBGBwudum8A44JllavLqtp8uynPEG4kNHL6IJ
+ 8lZdyjrSEd83PmfPZehOlhC38r4u9i+OYXcxNHafcC44bED4ZXbUPmp0bKNhAIXGeXo=
+X-Gm-Gg: AYBFou3amZsDCsGMykJLXCk8ND9WanX08EObn6Pnr9X1fqXTVUG1u/7sw0cT9Ct8dYb
+ vqHlEQA8Bw6reKrcTtNwwHxnzejm717YREZX4JQnX8CPG94XtRtZGm1Tvsfum6ZEEyODzpvE/Cd
+ +UVQkNS5lBTO3a+zc+b2AlnMM6ZALPqmZ4SwaSmYh4/PGlIGV1q7S0yHIxUcLgopep+2KgiC6+N
+ Rouxc5S3je/SQBqV2G7a3aCz2wg9lGeJCzSghhaCVjoLM5bH256S+FsZCNEWIX4hH/cd3fulvvZ
+ QefiPpEpeGnJS8Ei2qrLpZgJm1N39hsjZmjzKAKqBF5ayJSYK2m/8zh8fPiIE5/jjtO/vxEt4F3
+ wxFmj6TN8HDX0fPjNNc7n7wfF31WyOQDBVq42odv9DGC+3xDIsQ7T/No2I+vo3wpEdpOQwDjPBc
+ HJ1vwoDDfekQSQqIHzi8U4wi6YmSboMzzw8PMACnozT4YoXWe+yvSbx0IIprWk0p97piX8T+RHB
+ s1VpSLYTjz9D0QDwkqd4fxHu+OEhJAQ7qDddG+up/SM+VWULaV0b4bA2itK18NSJMw5CkLnQGXq
+ O+H3aGWc1FuqW6OdUaqal3EO65zPc2P/TOrtQtrU5K4uuhoJvMcA4Y5raSV+Gtzl9/lK8SQsHk2
+ EG8ReOkOeDSPALDFiUvwsqcZ2x3FlylHUn6iseOyI6YRF9ZxjBoKfRk6ALqlaCpolpVMvTyl6TW
+ AU/qKDxfIjMg4JQevdLP40toMK8tzadAk=
+X-Received: by 2002:a05:6830:6413:b0:862:c617:3f42 with SMTP id
+ 46e09a7af769-86315633593mr3986932a34.9.1795214999294; 
+ Fri, 20 Nov 2026 14:49:59 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-863168bdaf7sm3175221a34.5.2026.11.20.14.49.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Nov 2026 14:34:18 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.u-boot-project.org,
- GSS_MTK_Uboot_upstream@mediatek.com,
- Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>
-Subject: [GIT PULL] Please pull mediatek-for-next-2026-11-20 into next
-Date: Fri, 20 Nov 2026 16:33:36 -0600
-Message-ID: <20261120223414.3914-1-dlechner@baylibre.com>
-X-Mailer: git-send-email 2.53.0
+ Fri, 20 Nov 2026 14:49:58 -0800 (PST)
+Date: Fri, 20 Nov 2026 16:49:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Eddie Kovsky <ekovsky@redhat.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Johannes Schneider <johannes.schneider@leica-geosystems.com>,
+ u-boot@lists.u-boot-project.org, Bastian <bst@pengutronix.de>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+Subject: Re: [PATCH v5 0/3] Add support for OpenSSL Provider API
+Message-ID: <20261120224956.GG3176972@bill-the-cat>
+References: <20261029201348.730274-1-ekovsky@redhat.com>
+ <f7b2f1f2-e8c6-47c1-8e47-795f6ade7618@cherry.de>
+ <auy1K4oe9E2Fr9xu@ekovsky-thinkpadx1carbongen9.rmtusco.csb>
+ <83adafeb-674b-4e2f-96c9-b8eb7694dc0a@cherry.de>
+ <avT2W0RNmRp9tSat@ekovsky-thinkpadx1carbongen9.rmtusco.csb>
+ <159ee406-e78f-4ae9-a1cc-0a0e7b7c72b2@cherry.de>
+ <awC1OVSjsbliQASr@ekovsky-thinkpadx1carbongen9.rmtusco.csb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QNT42XIH1zO/CMRJ"
+Content-Disposition: inline
+In-Reply-To: <awC1OVSjsbliQASr@ekovsky-thinkpadx1carbongen9.rmtusco.csb>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,98 +172,320 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The following changes since commit d22f61a39fb68bc697e67df45f2e3103378bc7cd:
 
-  Merge patch series "Prepare devicetrees from FIT configurations with fdt fit" (2026-11-20 11:47:13 -0600)
+--QNT42XIH1zO/CMRJ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-are available in the Git repository at:
+On Fri, Nov 20, 2026 at 02:01:45PM -0700, Eddie Kovsky wrote:
+> On 11/17/26, Quentin Schulz wrote:
+> > Hi Eddie,
+> >=20
+> > On 11/12/26 12:12 AM, Eddie Kovsky wrote:
+> > > On 11/11/26, Quentin Schulz wrote:
+> > > > Hi Eddie,
+> > > >=20
+> > > > On 11/5/26 5:56 PM, Eddie Kovsky wrote:
+> > > > > On 10/30/26, Quentin Schulz wrote:
+> > > > > > Hi Eddie,
+> > > > > >=20
+> > > > > > On 10/29/26 9:13 PM, Eddie Kovsky wrote:
+> > > > > > > The Engine API has been deprecated since the release of OpenS=
+SL 3.0. End
+> > > > > > > users have been advised to migrate to the new Provider interf=
+ace.
+> > > > > > > Several distributions have already removed support for engine=
+s, which is
+> > > > > > > preventing U-Boot from being compiled in those environments.
+> > > > > > >=20
+> > > > > > > This series adds support for the OpenSSL Provider API while c=
+ontinuing
+> > > > > > > to support the existing Engine API on distros shipping older =
+releases of
+> > > > > > > OpenSSL. Build dependencies for local development and CI are =
+also
+> > > > > > > updated, while the final patch adds support for using hardwar=
+e tokens
+> > > > > > > with the Provider API.
+> > > > > > >=20
+> > > > > > > The changes have been tested with the FIT signature verificat=
+ion vboot
+> > > > > > > tests on Fedora 44, Debian 13, and RHEL 8 with OpenSSL 1.1.1.=
+ All 37
+> > > > > > > tests pass with both the legacy Engine library installed and =
+with the
+> > > > > > > Provider API.
+> > > > > > >=20
+> > > > > >=20
+> > > > > > I'm NACKing this series quickly because we are having pressure =
+=66rom multiple
+> > > > > > projects and Tom would like to see this fixed ASAP, and this ve=
+rsion here
+> > > > > > should not be merged. From a cursory look a lot of feedback was=
+ ignored,
+> > > > > > possibly because I did too many rounds of reviews and it got di=
+fficult to
+> > > > > > follow. I'll therefore spend time next week to collect the revi=
+ews I made on
+> > > > > > v4 and that sill apply and post them condensed on this thread.
+> > > > > >=20
+> > > > > > Please, we just need to fix the build issue for 2027.01. We don=
+'t need
+> > > > > > providers in 2027.01, just the ability to build on OpenSSL 4 an=
+d on distros
+> > > > > > with OpenSSL3 with engines disabled, without breaking OpenSSL e=
+ngine support
+> > > > > > for other cases. If you get a patch to fix this, please send it=
+ whenever you
+> > > > > > can, I'll still collect the reviews from v4 and post it here. I=
+f you're not
+> > > > > > interested in doing that, lemme know and I'll take over this pa=
+rt and you
+> > > > > > can always test the patch(es) if you want to.
+> > > > > >=20
+> > > > > > Cheers,
+> > > > > > Quentin
+> > > > > >=20
+> > > > >=20
+> > > > > Hi Quentin
+> > > > >=20
+> > > > > I designed this change from the very beginning to maintain the ex=
+isting
+> > > > > code base and preserve backward compatibility for users of older =
+OpenSSL
+> > > > > releases who are still using the Engine API. We cannot add suppor=
+t for
+> > > > > OpenSSL 3 or later without moving to the Provider API because of =
+the way
+> > > > > the OpenSSL project has changed their interface.
+> > > > >=20
+> > > >=20
+> > > > That's not true, as already said in v4[1]. We currently support Ope=
+nSSL 3
+> > > > and engines, and we actually test this in CI. You can test locally =
+by
+> > > > running the following commands from your U-Boot git repo:
+> > > >=20
+> > > > podman run -it --rm --security-opt label=3Ddisable
+> > > > --userns=3Dkeep-id:uid=3D1001,gid=3D1001 -w $PWD -v $PWD:$PWD
+> > > > docker.io/trini/u-boot-gitlab-ci-runner:noble-20251013-23Jan2026
+> > > > python3 -m venv /tmp/venv;
+> > > > . /tmp/venv/bin/activate;
+> > > > pip install -r test/py/requirements.txt -r tools/binman/requirement=
+s.txt -r
+> > > > tools/buildman/requirements.txt -r tools/u_boot_pylib/requirements.=
+txt -r
+> > > > scripts/dtc/pylibfdt/requirements.txt;
+> > > > export UBOOT_TRAVIS_BUILD_DIR=3D/tmp/tools-only;
+> > > > export PYTHONPATH=3D"${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc/pylibfdt=
+";
+> > > > export PATH=3D"${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc:${PATH}";
+> > > > ./tools/buildman/buildman -T0 -o ${UBOOT_TRAVIS_BUILD_DIR} -w --boa=
+rd
+> > > > tools-only;
+> > > > export TOOLPATH=3D"--toolpath ${UBOOT_TRAVIS_BUILD_DIR}/tools --too=
+lpath
+> > > > /opt/coreboot";
+> > > > ./tools/binman/binman ${TOOLPATH} tool -f missing;
+> > > > for test in testFitSignEngineSimple testFitSignPKCS11Simple
+> > > > testFitSignPKCS11Object; do ./tools/binman/binman ${TOOLPATH} test =
+$test;
+> > > > done
+> > > >=20
+> > > > You'll see all engine tests pass.
+> > > >=20
+> > >=20
+> > > I assume you are referring to my second sentence "We cannot add suppo=
+rt for
+> > > OpenSSL 3 or later without moving to the Provider API ..." I can see =
+how
+> > > that wording could be confusing.
+> > >=20
+> > > OpenSSL 3 deprecated the Engine API but did not remove it. The Engine
+> > > code is still present but not callable in v3 because the header files
+> > > were removed to help prepare users to migrate to the new Provider API.
+> >=20
+> > The above is incorrect but has been discussed by Peter in a different t=
+hread
+> > so I won't reiterate here.
+> >=20
+> > > And OpenSSL 4, which is gaining more adoption, removes the Engine API
+> > > code entirely and only makes the Provider interface available.
+> > >=20
+> > > Some distros, like Fedora, added an optional package to put the header
+> > > files back alongside OpenSSL 3 so that projects (like U-Boot) which
+> > > hadn't migrated to the new API would still build using Engines. I don=
+'t
+> > > know what the base image of your container is or what release of Open=
+SSL
+> > > it's using, but it's likely doing something similar to keep the symbo=
+ls
+> >=20
+> > Once you know where to look, it's easy (I discovered this a few years a=
+go
+> > and I'm not sure many people know about it): https://hub.docker.com/lay=
+ers/trini/u-boot-gitlab-ci-runner/noble-20260113-23Jan2026/images/sha256-d5=
+a14e5c0350a602e7730c9b3d85369b01dc940cd906900074e706c6d2018f91
+> > lists the image layers and you can see 24.04 is used. You can also get =
+this
+> > information locally with:
+> >=20
+> > podman inspect
+> > docker.io/trini/u-boot-gitlab-ci-runner:noble-20251013-23Jan2026
+> >=20
+> > Fortunately, you don't even need to go that far, you can simply look ho=
+w Tom
+> > builds it, by looking at tools/docker/Dockerfile where you can see the =
+FROM
+> > points to ubuntu:noble-20251013 (aka Ubuntu 24.04).
+> >=20
+> > Running the container will happily tell you which version of OpenSSL is=
+ in
+> > there:
+> >=20
+> > $ podman run -it --rm --security-opt label=3Ddisable
+> > --userns=3Dkeep-id:uid=3D1001,gid=3D1001 -w $PWD -v $PWD:$PWD
+> > docker.io/trini/u-boot-gitlab-ci-runner:noble-20251013-23Jan2026 openssl
+> > version
+> > OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
+> >=20
+> > > available. But as it stands right now, U-Boot will not compile in
+> > > any environment that does not provide a bridge back to the Engine API.
+> > >=20
+> >=20
+> > That's not true, CI passes fine with the binman tests to check you can =
+sign
+> > FIT images with mkimage. See the logs I provided in my previous mail.
+> >=20
+> > > I've found that the fastest test of which API is available in a
+> > > particular environment is to (optionally) sprinkle some printfs
+> > > throughout the lib/rsa/rsa-sign.c and then build the tools target. Th=
+e build
+> > > will succeed if the headers are available, but quickly fail otherwise:
+> > >=20
+> > >      =E2=9D=AF make tools
+> > >      --->8
+> > >      In file included from tools/generated/lib/rsa/rsa-sign.c:1:
+> > >      ./tools/../lib/rsa/rsa-sign.c: In function =E2=80=98rsa_engine_g=
+et_pub_key=E2=80=99:
+> > >      ./tools/../lib/rsa/rsa-sign.c:115:9: warning: =E2=80=98ENGINE_ge=
+t_id=E2=80=99 is deprecated: ENGINE_get_id API symbol is removed. Define OP=
+ENSSL_ENGINE_STUBS to mask linker errors. [-Wdeprecated-declarations]
+> > >      115 |         engine_id =3D ENGINE_get_id(engine);
+> > >          |         ^~~~~~~~~
+> > >=20
+> > >      --->8
+> > >      /usr/bin/ld.bfd: tools/generated/lib/rsa/rsa-sign.o: in function=
+ `rsa_engine_init.constprop.0':
+> > >      rsa-sign.c:(.text+0x15): undefined reference to `ENGINE_load_bui=
+ltin_engines'
+> > >=20
+> > > To fix this build problem in an environment where the Engine API is n=
+ot
+> > > available (even if OpenSSL 3 is) we need to call the Provider API to
+> > > replace the equivalent functionality. There is not another fix to the
+> >=20
+> > The equivalent functionality would be to use the Provider API to call
+> > OpenSSL engines via org.openssl.engine: prefix, otherwise you need to u=
+se a
+> > Provider, and that is not equivalent functionality. We do not want to
+> > support OpenSSL engines via the Provider API so the Provider API should=
+ only
+> > be used for supporting providers, which we don't need to fix the build =
+issue
+> > against OpenSSL 4.x and OpenSSL 3.x on some distros (at least Fedora 44=
+).
+> >=20
+> > > build failure unless you want to make a declaration that U-Boot is
+> > > pinned to the Engine API as a build dependency.
+> > >=20
+> >=20
+> > These are the possible scenarios.
+> >=20
+> > - OpenSSL 1.x without actual engine support. Typically, LibreSSL suppor=
+t.
+> > I'm assuming this works but I have not tested it. I believe they (Libre=
+SSL)
+> > have stubs that do nothing (or fail) when calling the engine API but I'=
+m not
+> > sure. Considering OpenSSL 1.0.2 documentation mentions engine, I'm bett=
+ing
+> > the whole of OpenSSL 1.x supports engines.
+> > - OpenSSL 1.x supports the Engine API. Engine support currently works. =
+Must
+> > still work after your patch.
+> > - Vanilla OpenSSL 3.x without the hack Fedora 44 is doing. Engine suppo=
+rt
+> > currently works. Must still work after your patch.
+> > - Fedora's OpenSSL 3.x hack. Engine support removed (and I'll note again
+> > that technically it is *NOT* removed but rather hidden or made cumberso=
+me if
+> > you wil: they have just removed the ability to build engines locally by
+> > default, but you can very well use packaged engines in Fedora 44 without
+> > openssl-devel-engine). Build failure. Must build after your patch. Loss=
+ of
+> > ability to sign with a hardware token is fine, as it's already the curr=
+ent
+> > state. There's no need to support providers as that's totally unrelated=
+ to
+> > the build issue.
+> > - OpenSSL 4.x. Build failure. Must build after your patch. Inability to=
+ sign
+> > with a hardware token is fine, as it's never been supported with that
+> > version of OpenSSL. There's no need to support providers as that's tota=
+lly
+> > unrelated to the build issue.
+> >=20
+> > You only need to remove engine support for the last two scenarios, simp=
+ly
+> > because it's broken. We are not losing features or functionality, it ne=
+ver
+> > worked in the first place! However, you need to keep engine support for=
+ the
+> > two before that (and I don't know the state about the first one but peo=
+ple
+> > would have complained already if that was an issue since it's been a lo=
+ng
+> > long time (many more years than when Fedora 44 shipped their hack :) )).
+> > Provider API will be used for provider support, but we don't need this =
+now.
+> >=20
+> > Your patch is breaking scenario 3.
+> >=20
+>=20
+> This is an upstream API change (and not a Fedora specific issue) that is
+> effecting U-Boot users right now. That impact is only going to grow as
+> OpenSSL 4 sees wider adoption.
+>=20
+> But it has become clear to me that there is no version of this patch
+> that will actually satisfy the U-Boot community. Therefore I will not be
+> spending any more time working on it.
+>=20
 
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-next-2026-11-20
+I feel bad it's come to this Eddie, but I think Quentin has been clearly
+describing the problems with your approach, and not pointing it as a
+Fedora-specific issue.
 
-for you to fetch changes up to 80d7646f39e7b610a838bb5ec38f7f618387f92d:
+--=20
+Tom
 
-  doc: board: mediatek: document Genio 520 and 720 boot (2026-11-20 16:12:05 -0600)
+--QNT42XIH1zO/CMRJ
+Content-Type: application/pgp-signature; name="signature.asc"
 
-----------------------------------------------------------------
-* Drop unused fdivs_offs from MediaTek apmixed clock trees
-* Drop duplicate dt-bindings header from MT7986 clock driver
-* New SPL and U-Boot fastboot download agents for Genio 510 and Genio 700
-* Document the Genio download agents
-* Fix MT8189 reset_cpu() prototype and use phase-aware PSCI reset
-* New SPL boot support for Genio 520 and Genio 720
-* Document the Genio 520 and 720 boot chain
+-----BEGIN PGP SIGNATURE-----
 
-----------------------------------------------------------------
-Carlo Caione (2):
-      arm: mediatek: enable U-Boot fastboot DAs on Genio 510 and 700
-      doc: board: mediatek: document Genio download agents
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCawDOjAAKCRAr4qD1Cr/k
+Cq3/AQC+n9Am8D4rjkgKZPTYKQWa9drdWUmOzREfKalYWMRSRwD/WlsWm7BT/jRS
+fZ2r5uvppDFJSaNTzPt8CoOz3pm9bAw=
+=rD5O
+-----END PGP SIGNATURE-----
 
-David Lechner (7):
-      clk: mediatek: drop unused fdivs_offs from apmixed trees
-      arm: mediatek: mt8189: fix the reset_cpu() prototype
-      arm: mediatek: mt8189: use phase-aware PSCI reset
-      arm: dts: mediatek: prepare Genio 520 and 720 devices for SPL
-      configs: mt8189: enable eMMC FIT boot from SPL
-      arm: mediatek: build Genio 520 and 720 boot images with binman
-      doc: board: mediatek: document Genio 520 and 720 boot
-
-Julien Masson (1):
-      arm: mediatek: enable SPL fastboot DAs on Genio 510 and 700
-
-Lucien Jheng (1):
-      clk: mediatek: mt7986: drop duplicate dt-bindings header
-
- arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi      |   6 +
- arch/arm/dts/mt8370-genio-da-u-boot.dtsi           |  64 ++++++
- arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi      |   9 +
- arch/arm/dts/mt8371-genio-common-u-boot.dtsi       |  81 +++++++
- arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi      |   6 +
- arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi      |   9 +
- arch/arm/dts/mtk-genio-da-binman-u-boot.dtsi       |  14 ++
- arch/arm/dts/mtk-genio-da-fit-binman-u-boot.dtsi   |  62 ++++++
- .../dts/mtk-genio-loader-spl-binman-u-boot.dtsi    |   3 +-
- arch/arm/mach-mediatek/Kconfig                     |  69 +++++-
- arch/arm/mach-mediatek/Makefile                    |   1 +
- arch/arm/mach-mediatek/download_agent.c            |  85 ++++++++
- arch/arm/mach-mediatek/mt8189/init.c               |  14 +-
- arch/arm/mach-mediatek/spl.c                       |   3 +
- board/mediatek/MAINTAINERS                         |  15 +-
- common/spl/Kconfig                                 |   2 +-
- configs/mt8189.config                              |  34 +++
- configs/mt8370-genio-da-spl-fastboot.config        |  21 ++
- configs/mt8370-genio-da-uboot-fastboot.config      |  29 +++
- configs/mt8370-genio-da.config                     |  12 ++
- configs/mt8370_genio_510_evk_da_spl_defconfig      |   2 +
- configs/mt8370_genio_510_evk_da_uboot_defconfig    |   2 +
- configs/mt8390_genio_700_evk_da_spl_defconfig      |   2 +
- configs/mt8390_genio_700_evk_da_uboot_defconfig    |   2 +
- doc/board/mediatek/index.rst                       |   1 +
- doc/board/mediatek/mt8188-genio-evk.rst            | 135 ++++++++++++
- doc/board/mediatek/mt8189-genio-evk.rst            | 238 +++++++++++++++++++++
- drivers/clk/mediatek/clk-mt7981.c                  |   1 -
- drivers/clk/mediatek/clk-mt7986.c                  |   5 +-
- drivers/clk/mediatek/clk-mt7987.c                  |   1 -
- drivers/clk/mediatek/clk-mt7988.c                  |   1 -
- include/dt-bindings/clock/mt7986-clk.h             | 178 ---------------
- 32 files changed, 908 insertions(+), 199 deletions(-)
- create mode 100644 arch/arm/dts/mt8370-genio-da-u-boot.dtsi
- create mode 100644 arch/arm/dts/mtk-genio-da-binman-u-boot.dtsi
- create mode 100644 arch/arm/dts/mtk-genio-da-fit-binman-u-boot.dtsi
- create mode 100644 arch/arm/mach-mediatek/download_agent.c
- create mode 100644 configs/mt8370-genio-da-spl-fastboot.config
- create mode 100644 configs/mt8370-genio-da-uboot-fastboot.config
- create mode 100644 configs/mt8370-genio-da.config
- create mode 100644 configs/mt8370_genio_510_evk_da_spl_defconfig
- create mode 100644 configs/mt8370_genio_510_evk_da_uboot_defconfig
- create mode 100644 configs/mt8390_genio_700_evk_da_spl_defconfig
- create mode 100644 configs/mt8390_genio_700_evk_da_uboot_defconfig
- create mode 100644 doc/board/mediatek/mt8189-genio-evk.rst
- delete mode 100644 include/dt-bindings/clock/mt7986-clk.h
+--QNT42XIH1zO/CMRJ--
