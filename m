@@ -1,106 +1,106 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60A9B606A335
-	for <u-boot@archiver.kernel.org>; Sat, 21 Nov 2026 17:01:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 340BD606A32C
+	for <u-boot@archiver.kernel.org>; Sat, 21 Nov 2026 17:01:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pWKWLNvA;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=dDGUCm2g
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TTV70V3R;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=sVh3VdSS
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9FBC080F6D;
-	Sat, 21 Nov 2026 17:01:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B46FA606F7;
+	Sat, 21 Nov 2026 17:01:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UiiOciAVfb3B; Sat, 21 Nov 2026 17:01:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BA34780F56
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795280497;
-	b=ggBSqkbCwbjJYRYIMMnUAgkfmaFq6ou47sXFihNrMvREboFYo4umOOsnGXj1MS8T1WlS
-	 5suudt1XIaVyghfx3uMk6y82tqU+RumGGcqvSUU0KfWHiULR2Zu5giHCvbwOaQ/QteqT9
-	 f+MnDZZoOgR8CGIVZxCVUMcCy92rw+d45WBu6jermGBUNXuRcWuWsu4SQ5wJ6ZmZDG7i+
-	 2ghnV0C6Qq4WRDmaa3uTgPWRff6e+9UdjSe4nGIF+Nlgid9PGSN7nQV1+jJUXUx32jxFU
-	 nQCNp+T09OROvTFhpDKWOVAI0F5/Vg36rSU6sKwJUHsCioeMD8vEW3p7MJRiawf8I3A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3abLpbE2Fq23; Sat, 21 Nov 2026 17:01:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 965F1606ED
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795280499;
+	b=V96oKaSmXc+3f7usi6kTlwhOnM1RcLvLDM/65mIb1qqu7kxWtM4Yv6JDKhc+rQIK5nQZ
+	 7MXysw5veKKZdaqMtkKhLw8aUAp6X3CFJOmz+/3SAA7b0frKJ5+Cco0G1uZRXQuQs7UOu
+	 csfgZgvrFUcyK5Y+0zllOB/DL0+RIj0FpoLgCZTd1kaci3/pI9Ec0F7OQ+2SjysOqB3tS
+	 22yxapWhHGWFwu6+7c8W5TDRbFPwGv+g3ePYr2J7qHD5JLFNVm3uYcEhZVwTLIoMioOaT
+	 pBq8jZYNi6sdZWMOab3LtHv5L0fy9FMwDIau0MAz9KoMJHnY14i9FT75JH8CTZj862Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795280497;
+	c=relaxed/relaxed; t=1795280499;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:X-Mailman-Version:Precedence:
+	 X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=rwmPAehFejYoO9ukgNiwrhKZBsD6wxJ5e1FFPcpVJSM=;
-	b=DpMYLAgjrc9Px0UERx2yf9Vqs8NKeh3l1W/N8nicDFuznePZghZlQnaQdhd8zyFDPgxi
-	 EfEFn52gZ87wi9anuLKec4TXeWPJxWD0BcwCGPbKtm2QzEME+eVIaeO8Ujm5IiTJb23li
-	 zPxK9JsGSw7aQsKWDqPIP8IbGFZgAag+e3BAYqfYi7V6wck8B4USavKWeY5HwiZxvukpA
-	 gdIsCxCTU2Vjf/oUS0ZUdUvvgnRG48cWgou8QIrNJ2Lytkx4LyM4KQVUTO/7cmn4BSIVB
-	 AmXrO9X33abxXQHwiHP4o/Cg6cKxzD53iJpaOs2KENp2x9v+wA1Fv7HnMDHdqV0MT7A==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=dU5bVCo1XUHDgiNBx6QXLweAWgQU/FX4YObVBGPpAmU=;
+	b=nNOL8Fr5jxp75D45cORBBqsW6fx1mJXcBi5ld7C/Awydmqipiq720Phoa6aMf9Y4Jj98
+	 SWHh1a0GS7dcjlqELQ4/yrGbRCj1fIwr9yAi6Ve5OR23wGeNMfBSXLy/HZ/S3iImhfS1y
+	 PJfaolgYbbAienZyaftOwHOTafYpcybbzEX+2d8MB4searq5NuhuNW3dQoXk5851cq465
+	 72AJEjTWgEEQdGrxgOUfllrXJv83DzE4QuwpVRlSq3FIJEgpD+Qw6pNScqWd+vtDi2KdA
+	 mJMK/cUvR1zkDv5jOOz8Xv1a89ROdifgsAyzOIOZJADUfg6og56TKS0MHJ2fngRLifQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=mailbox.org;
+	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=sVh3VdSS;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795280497;
-	bh=rwmPAehFejYoO9ukgNiwrhKZBsD6wxJ5e1FFPcpVJSM=;
+	d=lists.u-boot-project.org; s=default; t=1795280499;
+	bh=dU5bVCo1XUHDgiNBx6QXLweAWgQU/FX4YObVBGPpAmU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pWKWLNvAKVBo80fe3z5YnoGBTF5GQSZtmvEC6ah/yg8kwpTxQuqTENLOETvX0Kz1U
-	 xUV8gI/xX3dmCFJlSKNR+a3ta3Zsnply5l5ZXRD16edPSuWkWdfc5xyyVMg4R1Dag7
-	 nhg8n+TIPHgFXu1UidCbUU5hNSTkbrfoHCPqKvxmqt3ugo1Df18i0qauCwIV1UyXNi
-	 8YG8MbCT8fzJ9Kz43ZvriN4+FlrKV4We+Xn4Vw7WKSKaDVGC8rgPQvo7VklHCDLuyf
-	 F2+7uuAXlGGSk3Q/QZ2OHt+J75vfHAMhloRghwoyuuNDjCc2eUeH+SjJqbAW1SoWDE
-	 WH7QI5E1gPZlA==
+	b=TTV70V3RIgXs7YKssS0hBvNHO7JnGwEo99s7saWd6HF8cO6/seV5YP/ecPH5XZT+F
+	 zYBsmP79Ppb0BNhJ92lCpn6u56UcWU8HStU+JxlUSlBI7+XhD0BhzmzPb0MIg5voCK
+	 06pbKnTeOKM29BV5KxQ0Ub0PKE/i3EK7geC2pvvVEir5XEV2d+X6lUoUQR/a0ip/ul
+	 vALDWLIY0WGuinieAUD/7rgu+zCiABAkDsfotgRfypKhshKKv7trAJyLu1IpCaNlC/
+	 TGX1jZDhC4IhdUe2g33jJra8HIA7UawjGq54z/+XUUCoSTHfuYT134AsuyrbgmCwqD
+	 X8rKJuJm2CxNQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BA34780F56;
-	Sat, 21 Nov 2026 17:01:37 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1DE9F260
- for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 17:01:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 965F1606ED;
+	Sat, 21 Nov 2026 17:01:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 41BA0759
+ for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 17:01:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0453A400B5
- for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 17:01:35 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 339756065A
+ for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 17:01:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rjriYy8hgGpP for <u-boot@lists.u-boot-project.org>;
- Sat, 21 Nov 2026 17:01:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E2A3E40012
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::102"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::102; helo=mout-p-102.mailbox.org;
- envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id M1g_ZQvYEkqp for <u-boot@lists.u-boot-project.org>;
+ Sat, 21 Nov 2026 17:01:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org ECAA66063E
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.172
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.172;
+ helo=mout-p-202.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=dDGUCm2g
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E2A3E40012
- for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 17:01:33 +0000 (UTC)
+ header.s=mail20150812 header.b=sVh3VdSS
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ECAA66063E
+ for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 17:01:34 +0000 (UTC)
 Received: from smtp202.mailbox.org (smtp202.mailbox.org
  [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jWz4p3VygzKmwr;
- Sat, 21 Nov 2026 18:01:30 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4jWz4q1k5jzMlGd;
+ Sat, 21 Nov 2026 18:01:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1795280490;
+ s=mail20150812; t=1795280491;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rwmPAehFejYoO9ukgNiwrhKZBsD6wxJ5e1FFPcpVJSM=;
- b=dDGUCm2gh/aHXB9a1gybFaqSpnkQAquZOOnWJ9z+r6yQ0KV4XGePZE4RjWO9xeCqJMkk1x
- fKmNiyrc2ao6FNqWrqZ83BKXvqbTe8hOlUweYHIChfT9NRmd4CWRYusuGJm5m9jS41dTiB
- O27v5eR24a5GiZygGlMNvthmwYg8qAc8qCXC+MEDCSuamefcSbc/N9G6Tamrex25R4PJHP
- bEONueS2nFinGlPp0aDbw8lGHA3HyZTx5HT1rtYJkHFLmdjGTx+fIMiJ7xV4Zbfjdw8fxS
- LPyf8FWP66qDTNe2w5l7N582IyF0USmX5/22PULuzF7/SWp9GwgE/xvaoEA7VQ==
+ bh=dU5bVCo1XUHDgiNBx6QXLweAWgQU/FX4YObVBGPpAmU=;
+ b=sVh3VdSSYVgE/rE5OkNoy+3otOB06gt18N1BrlHlhz6wZcx78sUBzNZjmIKeKu+x1VRmu+
+ DEag8k26kwy+K6cdiSxoCe7iEa9C+Bajs1EOQHrwgzVcMX16/l07fsljErHvfnEvoTOVN0
+ R8kJpC9Ha46m7kwj7DkiowrqjNR+OM7zL7seyqgbK99NEBydWOc3ezJO0Bfpz2b7Po0i3r
+ L5EWA/AXf/mUCwZu9tXOP7z+mOh+DqLebKGcFwF+7cGL5eY0sEpK+V56OKA5Cnd04VBg7I
+ 9z6aEJOwU9cM3LmJpaIJCF6yoR1MLIcuypVZTzU9/uqkkkK8GoP3fEFsyQsVrA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -108,17 +108,17 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  James Hilliard <james.hilliard1@gmail.com>,
  Jerome Forissier <jerome.forissier@arm.com>,
  Shahriyar Jalayeri <shahriyar@byteray.co.uk>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] net: nfs: Remove nfs_send() calls from nfs_pkt_recv()
-Date: Sat, 21 Nov 2026 18:01:15 +0100
-Message-ID: <20261121170127.942522-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/3] net: nfs: Introduce NFSv3 over TCP with LwIP
+Date: Sat, 21 Nov 2026 18:01:16 +0100
+Message-ID: <20261121170127.942522-3-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261121170127.942522-1-marek.vasut+renesas@mailbox.org>
 References: <20261121170127.942522-1-marek.vasut+renesas@mailbox.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ec575727b4828f946a5
-X-MBO-RS-META: rpqh1pe6nw9o7gsoksu78bnxboq1rzck
+X-MBO-RS-META: tbxgs5jyp5tg8pp9ntcwt1na1m87w11y
+X-MBO-RS-ID: cc3d0d8343d3965b8aa
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -135,20 +135,29 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The nfs_pkt_recv() should only update the NFS core state machine based
-on the received packet, not send any response, which is important for
-the NFS TCP implementation that cannot send response from LwIP .recv()
-callback. Introduce nfs_pkt_recv_nosend() function, which does not do
-nfs_send() and instead returns 1 in case a follow up packet should be
-sent, and returns 0 otherwise. Add nfs_pkt_recv() wrapper for use by the
-legacy network stack which invokes nfs_send() if nfs_pkt_recv_nosend()
-returns 1.
+Add support for NFS over TCP in addition to NFS over UDP which is
+long being disabled on most distributions. Introduce "nfsservertcp"
+environment variable which must be set to 1 to select NFS over TCP
+instead of NFS over UDP to avoid breaking existing users.
 
-The nfs_pkt_recv() STATE_LOOKUP_REQ state could invoke nfs_send() twice
-in case of protocol mismatch, introduce new STATE_UMOUNT_RETRY_REQ state
-and move into this state in case of protocol mismatch, then move the
-state machine forward as usual. The STATE_UMOUNT_RETRY_REQ decays back
-into STATE_UMOUNT_REQ unless a valid fallback protocol match is found.
+The implementation adds parallel set of functions for handling the
+TCP streams that are established with the server -- portmap at port
+111, NFS and data connection as determined from the portmap. Unlike
+the UDP, each TCP stream has its own struct nfs_conn_ctx associated
+with it to track its state.
+
+The UDP functions are retained with minimum changes. Due to the
+nature of the two protocols, it is not easily possible to merge the
+two sets of functions into a common one, although where viable, the
+common code is factored out. The TCP variant of the send and receive
+handlers adds and removes a fragment header respectively.
+
+The network handling loop in nfs_loop() is slightly adjusted to
+cater for the TCP, which has to perform nfs_send() in this loop
+once a response was received, else the NFS state machine falls
+apart. The UDP does nfs_send() in its .recv callback instead and
+only invokes nfs_send() in nfs_loop() once to get the state machine
+going the first time.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -159,224 +168,336 @@ Cc: Shahriyar Jalayeri <shahriyar@byteray.co.uk>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- net/nfs-common.c | 82 +++++++++++++++++++++++++-----------------------
- net/nfs-common.h |  2 ++
- 2 files changed, 44 insertions(+), 40 deletions(-)
+ net/lwip/nfs.c   | 218 +++++++++++++++++++++++++++++++++++++++++++----
+ net/nfs-common.c |   3 +-
+ 2 files changed, 205 insertions(+), 16 deletions(-)
 
-diff --git a/net/nfs-common.c b/net/nfs-common.c
-index bf8a42d9bc6..4b66536a3fd 100644
---- a/net/nfs-common.c
-+++ b/net/nfs-common.c
-@@ -431,6 +431,7 @@ void nfs_send(void)
- 	case STATE_MOUNT_REQ:
- 		nfs_mount_req(nfs_path);
- 		break;
-+	case STATE_UMOUNT_RETRY_REQ:
- 	case STATE_UMOUNT_REQ:
- 		nfs_umountall_req();
- 		break;
-@@ -773,132 +774,126 @@ static int nfs_read_reply(uchar *pkt, unsigned int len)
- 	return rlen;
+diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
+index b435403169a..7756c7852ec 100644
+--- a/net/lwip/nfs.c
++++ b/net/lwip/nfs.c
+@@ -10,22 +10,100 @@
+ #include <time.h>
+ #include <dm/device.h>
+ #include <linux/kconfig.h>
++#include <lwip/altcp.h>
++#include <lwip/priv/tcp_priv.h>
+ #include <lwip/timeouts.h>
+ #include <lwip/udp.h>
+ #include "../nfs-common.h"
+ 
+ static ulong timer_start;
+ 
++struct rpc_frag_t {
++	u32		frag;
++	struct rpc_t	pkt;
++};
++
++struct nfs_conn_ctx {
++	struct altcp_pcb	*pcb;
++	struct pbuf		*pb;
++	bool			connected;
++};
++
+ static struct nfs_ctx {
+-	ip_addr_t nfs_server;
+-	struct udp_pcb *pcb;
++	struct nfs_conn_ctx	conn_rpc;
++	struct nfs_conn_ctx	conn_nfs;
++	struct nfs_conn_ctx	conn_dat;
++	struct udp_pcb		*udp_pcb;
++	ip_addr_t		nfs_server;
++	bool			send_ok;
++	bool			transport_tcp;
+ } sess_ctx;
+ 
+ /**************************************************************************
+  * RPC_LOOKUP - Lookup RPC Port numbers
+  **************************************************************************
+  */
+-void rpc_req(int rpc_prog, int rpc_proc, uint32_t *data, int datalen)
++static err_t nfs_tcp_connected(void *arg, struct altcp_pcb *pcb, err_t err)
++{
++	struct nfs_conn_ctx *cctx = arg;
++	int ret;
++
++	cctx->connected = true;
++	ret = altcp_write(cctx->pcb, cctx->pb->payload, cctx->pb->len, TCP_WRITE_FLAG_COPY);
++	tcp_output(cctx->pcb);
++	pbuf_free(cctx->pb);
++	cctx->pb = NULL;
++
++	return ret;
++}
++
++void rpc_req_tcp(int rpc_prog, int rpc_proc, uint32_t *data, int datalen)
++{
++	struct nfs_conn_ctx *cctx;
++	struct rpc_frag_t *fb;
++	struct pbuf *pb;
++	int pktlen;
++	int sport;
++	err_t err;
++
++	pb = pbuf_alloc(PBUF_TRANSPORT, sizeof(struct rpc_frag_t), PBUF_RAM);
++	if (!pb) {
++		debug("Failed to allocate pbuf to build RPC packet\n");
++		return;
++	}
++
++	fb = (struct rpc_frag_t *)(pb->payload);
++
++	rpc_req_common(rpc_prog, rpc_proc, data, datalen,
++		       (uchar *)&fb->pkt, &pktlen, &sport);
++
++	/* Add fragment header */
++	fb->frag = htonl(0x80000000 | pktlen);
++	pktlen += 4;
++
++	pbuf_realloc(pb, (u16_t)pktlen);
++
++	if (rpc_prog == PROG_PORTMAP)
++		cctx = &sess_ctx.conn_rpc;
++	else if (rpc_prog == PROG_MOUNT)
++		cctx = &sess_ctx.conn_nfs;
++	else
++		cctx = &sess_ctx.conn_dat;
++
++	if (cctx->connected) {
++		err = altcp_write(cctx->pcb, pb->payload, pb->len, TCP_WRITE_FLAG_COPY);
++		tcp_output(cctx->pcb);
++		pbuf_free(pb);
++	} else {
++		err = altcp_connect(cctx->pcb, &sess_ctx.nfs_server, sport, nfs_tcp_connected);
++		if (err == ERR_OK)
++			cctx->pb = pb;
++	}
++
++	debug_cond((err != ERR_OK), "Failed to send TCP packet err = %d\n", err);
++}
++
++void rpc_req_udp(int rpc_prog, int rpc_proc, uint32_t *data, int datalen)
+ {
+ 	struct pbuf *pb;
+ 	int pktlen;
+@@ -43,18 +121,53 @@ void rpc_req(int rpc_prog, int rpc_proc, uint32_t *data, int datalen)
+ 
+ 	pbuf_realloc(pb, (u16_t)pktlen);
+ 
+-	err = udp_sendto(sess_ctx.pcb, pb, &sess_ctx.nfs_server, sport);
++	err = udp_sendto(sess_ctx.udp_pcb, pb, &sess_ctx.nfs_server, sport);
+ 	debug_cond((err != ERR_OK), "Failed to send UDP packet err = %d\n", err);
+ 	pbuf_free(pb);
  }
  
--void nfs_pkt_recv(uchar *pkt, unsigned int len)
-+int nfs_pkt_recv_nosend(uchar *pkt, unsigned int len)
++void rpc_req(int rpc_prog, int rpc_proc, uint32_t *data, int datalen)
++{
++	if (sess_ctx.transport_tcp)
++		rpc_req_tcp(rpc_prog, rpc_proc, data, datalen);
++	else
++		rpc_req_udp(rpc_prog, rpc_proc, data, datalen);
++}
++
+ void nfs_refresh_timeout(void)
  {
-+	int local_state = nfs_state;
- 	int rlen;
- 	int reply;
+ 	timer_start = get_timer(0);
+ }
  
-+	if (nfs_state == STATE_UMOUNT_RETRY_REQ)
-+		nfs_state = STATE_UMOUNT_REQ;
+-static void nfs_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
+-		     const ip_addr_t *addr, u16_t port)
++static err_t nfs_tcp_recv(void *arg, struct altcp_pcb *pcb, struct pbuf *p, err_t err)
++{
++	struct rpc_frag_t rpc_pkt_frag;
++	int plen, ret;
 +
- 	switch (nfs_state) {
- 	case STATE_PRCLOOKUP_PROG_MOUNT_REQ:
- 		if (rpc_lookup_reply(PROG_MOUNT, pkt, len) == -NFS_RPC_DROP)
--			return;
-+			return 0;
- 
- 		nfs_state = STATE_PRCLOOKUP_PROG_NFS_REQ;
--		nfs_send();
--		return;
-+		return 1;
- 
- 	case STATE_PRCLOOKUP_PROG_NFS_REQ:
- 		if (rpc_lookup_reply(PROG_NFS, pkt, len) == -NFS_RPC_DROP)
--			return;
-+			return 0;
- 
- 		nfs_state = STATE_MOUNT_REQ;
--		nfs_send();
--		return;
-+		return 1;
- 
- 	case STATE_MOUNT_REQ:
- 		reply = nfs_mount_reply(pkt, len);
- 		if (reply == -NFS_RPC_DROP)
--			return;
-+			return 0;
- 
- 		if (reply == -NFS_RPC_ERR) {
- 			puts("*** ERROR: Cannot mount\n");
- 			/* just to be sure... */
- 			nfs_state = STATE_UMOUNT_REQ;
--			nfs_send();
--			return;
-+			return 1;
- 		}
- 
- 		if (reply == -NFS_RPC_PROG_MISMATCH &&
- 		    choosen_nfs_version != NFS_UNKOWN) {
- 			nfs_state = STATE_MOUNT_REQ;
--			nfs_send();
--			return;
-+			return 1;
- 		}
- 
- 		nfs_state = STATE_LOOKUP_REQ;
--		nfs_send();
--		return;
-+		return 1;
- 
- 	case STATE_UMOUNT_REQ:
- 		reply = nfs_umountall_reply(pkt, len);
- 		if (reply == -NFS_RPC_DROP)
--			return;
-+			return 0;
- 
- 		if (reply == -NFS_RPC_ERR) {
- 			debug("*** ERROR: Cannot umount\n");
- 			net_set_state(NETLOOP_FAIL);
--			return;
-+			return 0;
-+		}
++	if (!p)
++		goto exit;
 +
-+		if (local_state == STATE_UMOUNT_RETRY_REQ) {
-+			nfs_state = STATE_PRCLOOKUP_PROG_MOUNT_REQ;
-+			return 1;
- 		}
++	if (p->tot_len > sizeof(rpc_pkt_frag))
++		goto exit;
++
++	plen = pbuf_copy_partial(p, &rpc_pkt_frag, sizeof(rpc_pkt_frag), 0);
++
++	ret = nfs_pkt_recv_nosend((unsigned char *)&rpc_pkt_frag.pkt, plen);
++	altcp_recved(pcb, plen);
++	if (ret)
++		sess_ctx.send_ok = true;
++
++	/* ACK last transmission here */
++	tcp_ack_now(pcb);
++	tcp_output(pcb);
++
++exit:
++	pbuf_free(p);
++	return ERR_OK;
++}
++
++static void nfs_udp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
++			 const ip_addr_t *addr, u16_t port)
+ {
+ 	struct nfs_ctx *ctx = arg;
+ 	int plen;
+@@ -73,18 +186,88 @@ exitfree:
+ 	pbuf_free(p);
+ }
  
- 		puts("\ndone\n");
- 		net_set_state(nfs_download_state);
--		return;
-+		return 0;
- 
- 	case STATE_LOOKUP_REQ:
- 		reply = nfs_lookup_reply(pkt, len);
- 		if (reply == -NFS_RPC_DROP)
--			return;
-+			return 0;
- 
- 		if (reply == -NFS_RPC_ERR) {
- 			puts("*** ERROR: File lookup fail\n");
- 			nfs_state = STATE_UMOUNT_REQ;
--			nfs_send();
--			return;
-+			return 1;
- 		}
- 
- 		if (reply == -NFS_RPC_PROG_MISMATCH &&
- 		    choosen_nfs_version != NFS_UNKOWN) {
- 			/* umount */
--			nfs_state = STATE_UMOUNT_REQ;
--			nfs_send();
--			/* And retry with another supported version */
--			nfs_state = STATE_PRCLOOKUP_PROG_MOUNT_REQ;
--			nfs_send();
--			return;
-+			nfs_state = STATE_UMOUNT_RETRY_REQ;
-+			return 1;
- 		}
- 
- 		nfs_state = STATE_READ_REQ;
- 		nfs_offset = 0;
- 		nfs_len = NFS_READ_SIZE;
--		nfs_send();
--		return;
-+		return 1;
- 
- 	case STATE_READLINK_REQ:
- 		reply = nfs_readlink_reply(pkt, len);
- 		if (reply == -NFS_RPC_DROP)
--			return;
-+			return 0;
- 
- 		if (reply == -NFS_RPC_ERR) {
- 			puts("*** ERROR: Symlink fail\n");
- 			nfs_state = STATE_UMOUNT_REQ;
--			nfs_send();
--			return;
-+			return 1;
- 		}
- 
- 		debug("Symlink --> %s\n", nfs_path);
- 		nfs_filename = nfs_basename(nfs_path);
- 		nfs_path     = nfs_dirname(nfs_path);
- 		nfs_state = STATE_MOUNT_REQ;
--		nfs_send();
--		return;
-+		return 1;
- 
- 	case STATE_READ_REQ:
- 		rlen = nfs_read_reply(pkt, len);
- 		if (rlen == -NFS_RPC_DROP)
--			return;
-+			return 0;
- 
- 		nfs_refresh_timeout();
- 		if (rlen > 0) {
- 			nfs_offset += rlen;
--			nfs_send();
--			return;
-+			return 1;
- 		}
- 
- 		if ((rlen == -NFSERR_ISDIR) || (rlen == -NFSERR_INVAL)) {
- 			/* symbolic link */
- 			nfs_state = STATE_READLINK_REQ;
--			nfs_send();
--			return;
-+			return 1;
- 		}
- 
- 		if (!rlen)
-@@ -906,7 +901,14 @@ void nfs_pkt_recv(uchar *pkt, unsigned int len)
- 		if (rlen < 0)
- 			debug("NFS READ error (%d)\n", rlen);
- 		nfs_state = STATE_UMOUNT_REQ;
--		nfs_send();
--		return;
-+		return 1;
- 	}
++static int nfs_tcp_init(struct nfs_ctx *ctx)
++{
++	/* RPC / portmap connection */
++	ctx->conn_rpc.connected = false;
++	ctx->conn_rpc.pcb = altcp_new();
++	if (!ctx->conn_rpc.pcb)
++		return ERR_MEM;
++
++	altcp_arg(ctx->conn_rpc.pcb, &ctx->conn_rpc);
++	altcp_recv(ctx->conn_rpc.pcb, nfs_tcp_recv);
++
++	/* NFS connection */
++	ctx->conn_nfs.connected = false;
++	ctx->conn_nfs.pcb = altcp_new();
++	if (!ctx->conn_nfs.pcb)
++		return ERR_MEM;
++
++	altcp_arg(ctx->conn_nfs.pcb, &ctx->conn_nfs);
++	altcp_recv(ctx->conn_nfs.pcb, nfs_tcp_recv);
++
++	/* Data connection */
++	ctx->conn_dat.connected = false;
++	ctx->conn_dat.pcb = altcp_new();
++	if (!ctx->conn_dat.pcb)
++		return ERR_MEM;
++
++	altcp_arg(ctx->conn_dat.pcb, &ctx->conn_dat);
++	altcp_recv(ctx->conn_dat.pcb, nfs_tcp_recv);
 +
 +	return 0;
 +}
 +
-+void nfs_pkt_recv(uchar *pkt, unsigned int len)
-+{
-+	if (nfs_pkt_recv_nosend(pkt, len))
-+		nfs_send();
+ static int nfs_udp_init(struct nfs_ctx *ctx)
+ {
+-	ctx->pcb = udp_new();
+-	if (!ctx->pcb)
++	ctx->udp_pcb = udp_new();
++	if (!ctx->udp_pcb)
+ 		return -ENOMEM;
+ 
+-	ctx->pcb->local_port = nfs_our_port;
+-	udp_recv(ctx->pcb, nfs_recv, ctx);
++	ctx->udp_pcb->local_port = nfs_our_port;
++	udp_recv(ctx->udp_pcb, nfs_udp_recv, ctx);
+ 
+ 	return 0;
  }
-diff --git a/net/nfs-common.h b/net/nfs-common.h
-index a19b98b7b1f..df8a40e2ef2 100644
---- a/net/nfs-common.h
-+++ b/net/nfs-common.h
-@@ -67,6 +67,7 @@ extern int nfs_state;
- #define STATE_LOOKUP_REQ		5
- #define STATE_READ_REQ			6
- #define STATE_READLINK_REQ		7
-+#define STATE_UMOUNT_RETRY_REQ		8
  
- /*
-  * Block size used for NFS read accesses.  A RPC reply packet (including  all
-@@ -108,6 +109,7 @@ char *nfs_dirname(char *path);
- void rpc_req_common(int rpc_prog, int rpc_proc, uint32_t *data, int datalen,
- 		    uchar *txbuff, int *pktlen, int *sport);
- void nfs_send(void);
-+int nfs_pkt_recv_nosend(uchar *pkt, unsigned int len);
- void nfs_pkt_recv(uchar *pkt, unsigned int len);
++static int nfs_init(struct nfs_ctx *ctx)
++{
++	sess_ctx.transport_tcp = (env_get_yesno("nfsservertcp") == 1);
++
++	if (sess_ctx.transport_tcp)
++		return nfs_tcp_init(ctx);
++	else
++		return nfs_udp_init(ctx);
++}
++
++static void nfs_tcp_deinit(struct nfs_conn_ctx *cctx)
++{
++	err_t ret;
++
++	if (!cctx->connected)
++		return;
++
++	cctx->connected = false;
++	ret = altcp_close(cctx->pcb);
++	if (ret != ERR_OK)
++		altcp_abort(cctx->pcb);
++	if (cctx->pb)
++		pbuf_free(cctx->pb);
++	cctx->pcb = false;
++}
++
++static void nfs_deinit(struct nfs_ctx *ctx)
++{
++	if (sess_ctx.transport_tcp) {
++		nfs_tcp_deinit(&ctx->conn_dat);
++		nfs_tcp_deinit(&ctx->conn_nfs);
++		nfs_tcp_deinit(&ctx->conn_rpc);
++	} else {
++		udp_remove(ctx->udp_pcb);
++		ctx->udp_pcb = NULL;
++	}
++}
++
+ static int nfs_timeout_check(void)
+ {
+ 	if (get_timer(timer_start) < nfs_timeout)
+@@ -92,7 +275,8 @@ static int nfs_timeout_check(void)
+ 	if (++nfs_timeout_count < NFS_RETRY_COUNT) {
+ 		puts("T ");
+ 		timer_start = get_timer(0);
+-		nfs_send();
++		if (!sess_ctx.transport_tcp)
++			nfs_send();
+ 		return 0;
+ 	}
  
- extern enum nfs_version choosen_nfs_version;
+@@ -133,7 +317,7 @@ static int nfs_loop(struct net_lwip_ctx *net, ulong addr, char *fname,
+ 	nfs_timeout_count = 0;
+ 	nfs_state = STATE_PRCLOOKUP_PROG_MOUNT_REQ;
+ 
+-	ret = nfs_udp_init(&sess_ctx);
++	ret = nfs_init(&sess_ctx);
+ 	if (ret < 0) {
+ 		debug("Failed to init network interface, aborting for error = %d\n", ret);
+ 		return ret;
+@@ -143,11 +327,16 @@ static int nfs_loop(struct net_lwip_ctx *net, ulong addr, char *fname,
+ 
+ 	ip_addr_set(&sess_ctx.nfs_server, &srvip);
+ 
+-	nfs_send();
++	sess_ctx.send_ok = true;
+ 
+ 	timer_start = get_timer(0);
+ 	do {
++		if (sess_ctx.send_ok) {
++			sess_ctx.send_ok = false;
++			nfs_send();
++		}
+ 		net_lwip_poll();
++
+ 		if (net_state != NETLOOP_CONTINUE)
+ 			break;
+ 		if (ctrlc()) {
+@@ -160,8 +349,7 @@ static int nfs_loop(struct net_lwip_ctx *net, ulong addr, char *fname,
+ 	} while (true);
+ 	debug("%s: Loop exit at %lu\n", __func__, get_timer(0));
+ 
+-	udp_remove(sess_ctx.pcb);
+-	sess_ctx.pcb = NULL;
++	nfs_deinit(&sess_ctx);
+ 
+ 	if (net_state == NETLOOP_SUCCESS) {
+ 		ret = 0;
+diff --git a/net/nfs-common.c b/net/nfs-common.c
+index 4b66536a3fd..5cfd2a58edd 100644
+--- a/net/nfs-common.c
++++ b/net/nfs-common.c
+@@ -36,6 +36,7 @@
+  * does not support NFSv3, we fall back to versions 2 or 1.
+  */
+ 
++#include <env.h>
+ #ifdef CONFIG_SYS_DIRECT_FLASH_NFS
+ #include <flash.h>
+ #endif
+@@ -244,7 +245,7 @@ static void rpc_lookup_req(int prog, int ver)
+ 	data[2] = 0; data[3] = 0;	/* auth verifier */
+ 	data[4] = htonl(prog);
+ 	data[5] = htonl(ver);
+-	data[6] = htonl(17);	/* IP_UDP */
++	data[6] = htonl((env_get_yesno("nfsservertcp") == 1) ? 6 : 17); /* 6:IP_TCP 17:IP_UDP */
+ 	data[7] = 0;
+ 	rpc_req(PROG_PORTMAP, PORTMAP_GETPORT, data, 8);
+ }
 -- 
 2.53.0
 
