@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60E0C606A337
-	for <u-boot@archiver.kernel.org>; Sat, 21 Nov 2026 13:15:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23A3A606A331
+	for <u-boot@archiver.kernel.org>; Sat, 21 Nov 2026 13:15:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rw3P5Iwh;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=tmWAAxm4
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AcYEwW+e;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=KEifISwX
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E463060ED4;
-	Sat, 21 Nov 2026 13:15:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AF0DC60EE1;
+	Sat, 21 Nov 2026 13:15:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mkfVqLWy1F1V; Sat, 21 Nov 2026 13:15:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 237426079F
+ id XfwaFmbN82RY; Sat, 21 Nov 2026 13:15:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4DE2F606DB
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795266881;
-	b=Uam9gJeeINR6HYU0jAsH2r4mBt/7npu2bkQGZqd4mfM/6+enE0uLUty41J8mkGmUHhGg
-	 u8feh3yP7vB0pWz5bIAdro6qy8BHs5ZYqpx9kO1c5NGXPdZE+rqrnbv+MgCxecEtr7qLK
-	 78DzqAkDyovPMD/OtISlh4L/ILTb57X/Gt3Mzh0L6MeiAAUQad8BIiNC5ylNJM+XsIWiq
-	 /y8saItXv8UPn5Ocbo9duZzk0jmSViwZz1+liw/Xd27AxrfBQfP17Nnqi9JmPjRl9XvjN
-	 t3HEs5jT8YFlM6AZaWRHXC5ajPOxyX9iEnI/xrAy/Qu6O05ucOYfbV64aNCzRU8fLyQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795266884;
+	b=pQIYEyjTLFSjwZkdW5UOx/vCIZrjYQoYNB5p1Zn+HpaR859v0GEdpg+G+QR/FFhi1XrP
+	 t/6j0idOCJFeHYDdhx2/glafZNk9KofcQG8IiL4tOM2WFnG0353eXo53hOM6whYWRtu4H
+	 29eAST8XQtFaYCOfQAN+vX9BAsVrqJOr2Hl1c8T1jDC0oShrWEHaObxx5uqNj5/ypYAup
+	 mcciT9LneIVivPto69eQc75STbn7KhMsl6ex/R2WCXCEW5ppIDm9nAVy4gIX6zi8n5akk
+	 GTGv/7Khontjs1892UIQ9miEDSaCaY9AB/ATpjDsyF0TqjZEm7WbJ5Cx0KZdKxcuT/g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795266881;
+	c=relaxed/relaxed; t=1795266884;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,105 +33,107 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=mV/HAN0pj7nbCIkSCc84l1FyEJ+iIVSntjtw5egmeXE=;
-	b=qDriIhz6xcvPDf0EyI3OO5MZVZ4dVVf7cGUwP8P5COuqLbzA0kI/X3BrP+Xp5Dhcw41Q
-	 PkjCIdc9Mo0jTLSbRcFAIvJDwqG9WuSg3Ow2d/DrYIQVOMgpO5GvSQLDelemHFE5uvpM3
-	 vFQ3Ce9sx30B91h1ng0Ze8jj0Wk10MtSf6FHu6lrbhiV+0Diq4u1xwZZi06Y/5dJ9uEF3
-	 EzGUPsa3PR502IeHK9IkHV3bHSIuR+W8rAoJqplxKRC7c8KlAOE8TIBE190U/I0Cd1kSY
-	 rJFezq2pH6+0UEN+YGIqkkiXM3wBt/fiyra8k+n+O5G74JL7dMm39BGbbPZ4nvo1TlQ==
+	bh=FdVQx4/ga62i3MFyfsnakke6hvdkKXfnbqNXpuaZe2s=;
+	b=MbuUF88pscLKltISetBCKWLEW8U+eDxABPCA9Ih5yqhfuwFT93A8HvksOCLlKuBKBXhT
+	 mR3poeRQ03JkySmomQO+mi/fIVNox9m3bDNIzyx3C5h+MHI2W7r4xQAk1mZNuCSMmvq/h
+	 xgnVApWjM1meVcprWs7hvUTFFmY6eRPISJPJkoARnxJd/fsxyBqRJTHw2/gdwEkmW3doL
+	 1K5is54hrep7xXmaX+kW3PDLBywMCRa9vLKfppWgVgDvO+Hc3Kq2uKbvxULibLuZbl+aB
+	 iZ7rpK4pjHc9sYTlrBobAdx88opWB5nym4cQuU0XN+ce6mnauQAESRKeYBCZmMfSKPw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=KEifISwX;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795266881;
-	bh=mV/HAN0pj7nbCIkSCc84l1FyEJ+iIVSntjtw5egmeXE=;
+	d=lists.u-boot-project.org; s=default; t=1795266884;
+	bh=FdVQx4/ga62i3MFyfsnakke6hvdkKXfnbqNXpuaZe2s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rw3P5IwhudX2r1tyXPhEvGpdxSxIekvpj4gPHk8RWYPI863qRuaOUxWTarA6pnt5R
-	 JvNj0akin+e6tdGWcEbGXg021m8ffX8rLw06j32Zsw7jHzpfHxNUIiewIhe9uFFC8q
-	 lmRV8R+9F6Nafn8GiMCMTWXvC0Wd3EuJNHdjybl8jFugyexai91+XoW5a/Wy1j2Q56
-	 iIgCCPlBU0EeTEtlBtcJ3V8tt6edXjapdG4gANLtHnd+GnQ8VifRWdv6QlzJe3vyE3
-	 z7Cka5rjy8KxkvQrQSQIO11PxRGG25x4f3P/8ashohaVCMfjZvUe3kled48go4MVxt
-	 dwQ16lQJ1QXzQ==
+	b=AcYEwW+eRVqTVAcyD8BDEkfvsEHTLk7gO8KFk601OORWOnUDbWfqBj5M1Bsh1PV9c
+	 lrQL6p5ws9zPCl7WOeQXw6xhvQfBya7DZtJwRMmoMj+bgq25arpsfzLM2OIwACqCau
+	 UJdXTobiieRqmGdkP9hzBRnApREF6oDF7TNqib2LFX6hmCB8tCRfVKfqPAiRzILWIa
+	 POqhn2Rc2a1cQ5FC95QSosYEkgUxGneNEDmSLci+g0jNMOpD77wsVw5W+kNmubwdNv
+	 PoRt1WQRyNnWvK287JjOnDuS1QvSK3aZ4+pfVmZjDZezLRl6g4jPQJiy0IPUHtzJM1
+	 Rg8QW8uupOHXg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 237426079F;
-	Sat, 21 Nov 2026 13:14:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 481A7A58
- for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 11:54:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4DE2F606DB;
+	Sat, 21 Nov 2026 13:14:44 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 47F3315D
+ for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 11:54:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2E509405D7
- for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 11:54:50 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2E45B60623
+ for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 11:54:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3i4RxYnEvAZg for <u-boot@lists.u-boot-project.org>;
- Sat, 21 Nov 2026 11:54:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3F28D40596
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::633"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oqCle083u2Oh for <u-boot@lists.u-boot-project.org>;
+ Sat, 21 Nov 2026 11:54:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4EE8A60621
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::635"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::633; helo=mail-ej1-x633.google.com;
+ client-ip=2a00:1450:4864:20::635; helo=mail-ej1-x635.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=tmWAAxm4
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3F28D40596
- for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 11:54:48 +0000 (UTC)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-c504707acfeso32950666b.1
- for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 03:54:48 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=KEifISwX
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4EE8A60621
+ for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 11:54:50 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-c50686daf9cso43133566b.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 21 Nov 2026 03:54:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795262087; x=1795866887;
+ d=linaro.org; s=google; t=1795262088; x=1795866888;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=mV/HAN0pj7nbCIkSCc84l1FyEJ+iIVSntjtw5egmeXE=;
- b=tmWAAxm4GlGSzNK2FQ27REsLC0cKdELudRYRlfWy9+GIOShWaL5cIlNitX3iP48/zh
- 1TEkxPuumywM3WeZcVWsBr18krNZmEUmckvoRDhWO+pufTrmqXe9BuF9kLeAx2QCJW+g
- 5Hy3Pt3qAFe/rJQVTaoQxFQ+/7JNz4kEF+yjtquPjiO4qJynqN+d0KRpRKlHovVzNrwi
- /FSaihXAugn6Jsm/M2xOL1EPlcP6IvJilQoxedmwjRzlx01AFWWG6TruHNJBpyB9mtIC
- zazmMWGM7MhVMvp8k+lOh+BcTvfUnhiUlJqDwZWH5oYE2oCXkrPF2D/GPVMqRLAi92+X
- R9sQ==
+ bh=FdVQx4/ga62i3MFyfsnakke6hvdkKXfnbqNXpuaZe2s=;
+ b=KEifISwXNLWlj9aKMfsivNQPq8ceYdCj3tKyF/6VAEHm3a7wIEo9oEZ+iGbyC9oQSh
+ tnhEWeK1Gy67tFB/0YsP3fYC/fDah9nb4qlebrMEZBJy+Zo3k1txYYqscOp5ORsGT5kX
+ mBduh/a4FlrJWxhn5lTO96p+E67zrve9s9S7Pue8zW84sJ1NmWHHZeA4WMaQpRY7xKY4
+ DJqlF64HH5wLjWMNJuCM67ZuSDijWvW8BEuwJwFcV68++Sj1WKS6l33WD0RLiAlR3VGc
+ DMmcvvP82YDAP37NgloK+C/ehsKaERVRwhhkx9Vq+qPtvLuNj1GeEc8f5CSj0ITv12hr
+ dVhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795262087; x=1795866887;
+ d=1e100.net; s=20260707; t=1795262088; x=1795866888;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=mV/HAN0pj7nbCIkSCc84l1FyEJ+iIVSntjtw5egmeXE=;
- b=26k23J2DEnoDO7/tbUBOmXJV3UYHh4+rwWCn/mMcm0PWDDckDabvcKN/oreACesWiV
- yPQtEPxhhBszgNieiM5xWOLideUwsTGqdAXFdzzTP2gNmXc3dHmjsometR3b9HG0XH7d
- OCIvEQyO2+xhGFoMxt2GTw17bEhPCzIF0WY0T0ELmXGm25hp+8PbyXywQvkjfkSzFCYm
- AHHtMeS/hG6/mCzvqfg4zBp6UodKiCeF5PXiD3m8V/IwzmfDyfFO0TJDEkxYNd4j3XlP
- 1iNbdOlwfCoAd5dU0eh8SKSrHzylQAGsYWfZrZ8uO3p8VcQryaQl8j/3PtbbLQNbVEqC
- ZDlQ==
-X-Gm-Message-State: APuU4Z+uMRgSxkalxrr4xOXtSqDflV4mZsrB93wdbGArGVt3QJaXPwme
- maNE5byZs3xiCqSaQAXg06xKCEmc+woW72axW8ooE9ABUMmFK7O1shwHgpCptXc2Bx1nqzJTzDa
- AtItW
-X-Gm-Gg: AZFdTZe07phbfLQWxnJcL/xh64f6bGhMEfxW+gWERHIPVwWiK8d0xW9sbO1XPGJErIH
- UhyPhT9/szP00UE6xPA+Kbm+kIPgMYsLfxC4iDDIMrBGfqXhZOZQdC9sG9he73wwKVHcGqup36Y
- YhyNIEPKJ5KpG6zCSP3Qkmyefrr7lEoh2N+YyO+11yJzoo4suvEMSdlw+Id7OruDhbRYIbOlzD1
- +Vuc4BYYNwyPWsLB80iDx89r628tB+jdGl6+ZYILApuUCzzYs9kvq2AIlzeYpyMLlpcjQVOkCGO
- C0LSaYBvlpB0+zTqUhiOonsM9V84YoGQAm9NgM/JLmFtHB5eCS2FhggqmTNE5hg0cAXdo9PsOqe
- MQCiCAETkoZVTY17AlUuy5gVnqGHY0XqjTDNC0W75rg9iNwG9xy894j6A+15srXFRuLNIhkyQY+
- UxoHEUWC5aqznCrksCUkitbrammW04HGSbY6/C1DUi7O3VdgGf5CbOAhjnmTlfcAhe4qzIwQzUf
- GqTwUv4pw0wKnrw1O0fzRYUS+FM9dbUTdplXdCert06j4jhii5SA0WC3O4e6qJYwaJcSmXd+BLc
- cW4mAdx3NdHMtaljGLWW9C+lPI+IZ3Qei0vYFYgVbAAhrvIrwGZYiXhZCtrwua4SkwVtNupYysf
- 0GvVicbIsM3TFf8dysrgmOfeVK//VaGo=
-X-Received: by 2002:a17:906:2b5b:b0:c29:4634:5c8f with SMTP id
- a640c23a62f3a-c513a284994mr484629566b.0.1795262087057; 
- Sat, 21 Nov 2026 03:54:47 -0800 (PST)
+ bh=FdVQx4/ga62i3MFyfsnakke6hvdkKXfnbqNXpuaZe2s=;
+ b=pEfoTsHGX6BcWpUjCAPuwRUh0/ZvXS34WNvfUnSNU1iUpQMDsM0y9NakZL60TezsoI
+ Ayxc0ikilX95+PaciIa70ipa1ZCAHcrZJRHneK7gb95jAa/FWKLFDil2/IffIfpAmN6m
+ g6MKvkeYaTbzfxW0AU++Tt8RI59aY3DVmoAa4iD5AHbw7/j7qTK/7FZYulG9HDhHY/XE
+ a4wVKE0AUWPd5WQ2w/mFthcEqPhiq40vgyT/ILVOYb79lJRQCO1k412Okp0nQAkDVToh
+ nlHMiq/M1TEMoPiktX7+exO6nN+nAw8ONA0oNeFvyXGy3j+2ikR3tysYUtXK634lSlvm
+ KwAA==
+X-Gm-Message-State: APuU4Z8yYSnrw1wXbKMAGDthXLC4aivUYFhIWAYYBrmUDSRYsSMZQJW7
+ nQ4HU9EQUEs6wGLcHGgi6UeM36lCz4D8oGFf4pv/O4AVrHquk+5P67alxt2iC+8QyYuFWnE19eR
+ qQCvG
+X-Gm-Gg: AZFdTZeclG1neyBpl65vgVmzjpUtk2d1ZQbYBfq+nzYgX2j/SISrTBqed9q8uWfzywl
+ ilfNblNMoifPXbER7lev18SGcYGViNVYvxeI5FWVKK/vUwFOxABPvh7jweZmHucRJ3j/MfSzCQ6
+ OUsMxBy7iaZVEvk7RQHudcsJnA2ynXbHbywH2lD66NuA48dyP4Gf+x987DOhb1fLsBTuT73Uvem
+ 0tpAMqsc9lN9GrwIFIMsgrVBeULLEDm2m2KrJ7rsH3TjzJmF2J+xHWbrH8dfucOAw+UiHBKHpeF
+ nhS7UPKtDwpynSEFK8BsKr7Qmq1uBFynM6Ry3k2V7XzWwkhaMrUAi6cCVfHkscfUUqs2tRI4ZzF
+ 27injmSBtKG+A10jGu378ltubGP4ms53v0YY+V4j0OoBFc7mDr+/SIpbuDemwslLSKezk6mnqLi
+ +skuzzTigm3dhOtqYFWvMDj9rqi9OeJIhSAoDFoGvfebqEh9cK2lolD9X/WjxDUGOujeJwAPpR3
+ 6jFeNlDfWsFvPQbn0Fia9nLKOypFpX8/AvNxbLeKIQXxqk3cE1QMI1rVgLgFlps/MoFzx4Ex9YA
+ GXLt7Z2kuDSkSEINxTAhBwS2tw9yzWCYL9H0NaoMv7SErp5KvHk03PU7cAL8iT5dzhX1b+40w81
+ WwLnvoGiTlQ8fhC2kf9qMMPDL0QkgEac=
+X-Received: by 2002:a17:906:6042:b0:c3f:98d4:dfda with SMTP id
+ a640c23a62f3a-c513a5f04b2mr528017466b.3.1795262088188; 
+ Sat, 21 Nov 2026 03:54:48 -0800 (PST)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c513a8678cdsm186595766b.0.2026.11.21.03.54.45
+ a640c23a62f3a-c513a8678cdsm186595766b.0.2026.11.21.03.54.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Nov 2026 03:54:46 -0800 (PST)
+ Sat, 21 Nov 2026 03:54:47 -0800 (PST)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -140,10 +142,10 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  sjg@chromium.org, Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org,
  love.kumar@amd.com, quentin.schulz@cherry.de, s-vadapalli@ti.com,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v12 15/31] usb: dwc3: gadget: flush and invalidate cache
- around transfers
-Date: Sat, 21 Nov 2026 12:53:19 +0100
-Message-ID: <20261121115335.548142-16-anders.roxell@linaro.org>
+Subject: [PATCH v12 16/31] usb: dwc3: core: flush the event buffer after
+ allocation
+Date: Sat, 21 Nov 2026 12:53:20 +0100
+Message-ID: <20261121115335.548142-17-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261121115335.548142-1-anders.roxell@linaro.org>
 References: <20261121115335.548142-1-anders.roxell@linaro.org>
@@ -167,61 +169,34 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Same problem as ep0, but for the normal endpoints. In U-Boot the trb
-pool and the request buffers are plain cached memory, so the controller
-and the CPU do not see the same data. The resync dropped the cache
-maintenance U-Boot had here.
+The event buffer is cached heap memory in U-Boot. Without a flush,
+dirty lines can be written back over events, and the driver reads
+garbage:
 
-Without it the controller reads a stale trb and no data moves. DFU still
-works because it goes over ep0, but ums does not. The device enumerates
-and usb-storage binds, but no disk shows up and the host gives up after
-20 seconds.
+  dwc3-generic-peripheral usb@488d0000: UNKNOWN IRQ type 1935630945
 
-Flush the whole trb ring when the endpoint is enabled, since
-StartTransfer makes the controller read the first trb right away. Flush
-the data buffer and the trb once the trb is set up, and invalidate the
-trb before reading it back. dma_unmap_single() already invalidates the
-request buffer on completion.
+The resync dropped the flush. Bring it back.
 
-Reported-by: Anshul Dalal <anshuld@ti.com>
+Tested on BeagleBoard-X15 with ums.
+
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/dwc3/gadget.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/usb/dwc3/core.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 13f34c41f95d..9bba1c16a088 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -947,6 +947,9 @@ static int __dwc3_gadget_ep_enable(struct dwc3_ep *dep, unsigned int action)
- 		trb_link->bph = upper_32_bits(dwc3_trb_dma_offset(dep, trb_st_hw));
- 		trb_link->ctrl |= DWC3_TRBCTL_LINK_TRB;
- 		trb_link->ctrl |= DWC3_TRB_CTRL_HWO;
-+
-+		dwc3_flush_cache((uintptr_t)dep->trb_pool,
-+				 sizeof(struct dwc3_trb) * DWC3_TRB_NUM);
- 	}
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index dda57c2b950c..85d380e67233 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -306,6 +306,8 @@ static struct dwc3_event_buffer *dwc3_alloc_one_event_buffer(struct dwc3 *dwc,
+ 	if (!evt->buf)
+ 		return ERR_PTR(-ENOMEM);
  
- 	/*
-@@ -1385,6 +1388,9 @@ static void dwc3_prepare_one_trb(struct dwc3_ep *dep,
- 	wmb();
- 	trb->ctrl |= DWC3_TRB_CTRL_HWO;
- 
-+	dwc3_flush_cache((uintptr_t)dma, trb_length);
-+	dwc3_flush_cache((uintptr_t)trb, sizeof(*trb));
++	dwc3_flush_cache((uintptr_t)evt->buf, evt->length);
 +
- 	dwc3_ep_inc_enq(dep);
+ 	return evt;
  }
  
-@@ -3155,6 +3161,8 @@ static int dwc3_gadget_ep_reclaim_completed_trb(struct dwc3_ep *dep,
- {
- 	unsigned int		count;
- 
-+	dwc3_invalidate_cache((uintptr_t)trb, sizeof(*trb));
-+
- 	dwc3_ep_inc_deq(dep);
- 
- 	req->num_trbs--;
 -- 
 2.53.0
 
