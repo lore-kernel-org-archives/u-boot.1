@@ -2,29 +2,29 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8B0B606A31A
-	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 23:54:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44222606A31A
+	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 23:54:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eqIuDZGu;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.a=rsa-sha256 header.s=default header.b=vu+u6YMc;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256 header.s=default header.b=YtXj3FqD
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tal5D4L6;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.a=rsa-sha256 header.s=default header.b=JVUkGeBd;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256 header.s=default header.b=ZZEIPr3n
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3501480D7D;
-	Sun, 22 Nov 2026 23:54:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ADA4880D85;
+	Sun, 22 Nov 2026 23:54:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id B51s5Rr-Np9V; Sun, 22 Nov 2026 23:54:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6C39680D35
+ id KQXSbIGSfkjI; Sun, 22 Nov 2026 23:54:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9B4C080D86
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795391668;
-	b=WbAKLDPLl4/gsGY7Ng1uYO8fRD76dUM6G5QOzWWPnR0vJ2kAKasrd9rIZCNMfH/QJZCM
-	 l4z50uZnhxCbJBvbi1jOcpI2HaOXB8qnynVx144k7X905gHw4oc9GeTc+o93XX+D6Af8N
-	 Ysxn1N4FHff5VGReIXdULVpwBs1IirpCmy9vAKYUKHVqhG1fYcga0+hmBX61kZRm8sMxZ
-	 v4gao8+Wg2iwWpPdiXuTHIMLTaknIYRfLPfdfc3RSH5OzmpEwSbWS3ZdmeGibnumjLx83
-	 I/YTj5Zlxi1irN4DDIPf+LclLQGBb1IBP3Ci4eskecvogTO8R+AHbkBksgJpXe/sYmQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795391671;
+	b=dFXPaC0VNbj+MIXUxBznJRnEbRbA5zAisajTA93bPnqsRIK0Rp6pgh3iLeC/wvw3bemN
+	 H5bpK0WztmLWeXlvO0K83uiwKN1VcXNqJUazco2Xu33+3cl9CXPZpnRZwWAVC4iewghMO
+	 G4slhC53sG2DVuG4YsgqCKHDGlGScjS580UnHne57taW5Ck4dK4P5AWWj/kkwA/66ZBJK
+	 SEMnZ62zHsf6jfeZGWCjffx5GFJnxipl03+/vVewxu5oKlinWIN4dge787txRysyDx4dc
+	 eKkjQYqb5Dy+uIaP5m7TUV5AUHV/14HAuv+yzGQllLgF95P9vj3TcwQQ8P8wqMjNtPQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795391668;
+	c=relaxed/relaxed; t=1795391671;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -37,92 +37,91 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 CFBL-Address:CFBL-Feedback-ID:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=NvhSS9QF/xdrUgz0Th6KpCY1BufPI+UOKbgV6DFms9I=;
-	b=rwWpYcb3MzK9UVZA6yAb+THsyUc1By56KVPIDgkcfj9Npkfq2R+/xmJzBT1zdFUJOjIp
-	 ezaBeVXJySxBLSHF2NjCCklbkHFuhhvO8G6JNoO94qIcViIjIblW71eV0V62tEu1W/agB
-	 a2RGSxR4l2v+4H7AknWFB4tayWl0hzRP3rZt4PXxJWPmRmJjlwHUHBZPWkF7NJ6m3MvnW
-	 YimKiqzHGeuoM0fXNpOs2hVS8TlX8e7wdFkX2OO/p3NMXreA6mH/wclQ2hQ2B+hPzLzpd
-	 4zLmSWYmnmMl/B/4gJ9hCJ3Ti4+rquFiAc3FdTQN+SccxPdw6WnCIxdp7LDSWy9+tLQ==
+	bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=;
+	b=stRoGutBC0nLpcPmcvcHk+lR0sPVucrunDm4wLwtXSkO4h4sZoCtavoX1gBpJ9fopsvt
+	 PGg5EQgq8RMuA124lhwZiW2eHuipmNCOspZANLUDrYIV2q/tFNblQB1jQ8e9QqpshB2KK
+	 dRWJetZVV9t4Ou7OnBP8bL29Gb9ZGb1RXtq3hFQAficaE0aCBBjDoEUcRpftCqZNtFTYR
+	 Smh0+gbrO68rTjfYy78AkuYB+HkUMMgmjeSH17Ji2TKOe6ixKETot4Ix9VOCUoOcdg9Y4
+	 2JX7OyQYJO4x0i5kEZRVQbC6uc+qjDmZa5OVM7QQGZ6U0RUKCdmsVUusnUfJ0nnJhxg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795391668;
-	bh=NvhSS9QF/xdrUgz0Th6KpCY1BufPI+UOKbgV6DFms9I=;
+	d=lists.u-boot-project.org; s=default; t=1795391671;
+	bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eqIuDZGu0T1o0FLR0R+EYk4pSZ3M7lAvL6q7AOtUinEdgNXB73nN3vPCV+UqNJubU
-	 lCbLy+1+aLSuBLbL9Vjpu80ZLF4Vr3wirQ9sASLfEIE0pmr43CsnDaOpObZ7I2trsw
-	 ip1p0qxRE1qiH3cIVjVQgnM81aiVtRlfI7LLRY7kgLT7kVzA0ZEIuqaUkrz4n/pwVa
-	 N40QBgpR+CV9FNDcM/w91YFQJ0RZpHSBNXV+LwLmSe7TcafANkSl36yZ3JzERzWmnI
-	 2wLTsP0SCzHkGGJE0xpfcW3++OeNQfJY3ZfOK2BOSiwuwUSz6OvmZXHdOjhqBWpTOM
-	 wyh87+8BZ+6Bw==
+	b=tal5D4L6udiUblZsc+K1aC9V8CmweayMoiAF6O4Z6cbh5aQNJ/gUgO04/1vMJif4y
+	 JJqyfgdg6X7nN/DZczPrOB+ccN23jHd8XpCz8eNgAJdS6wEjWJtKfwI+/gSJnAlRPR
+	 RuTSB89XoFXNaLmsODKRYH7gUMtyY3vISdmokDYdXQjkQ56CztW3VR3NQkbWeGK2DZ
+	 LjEkgbHs+GoTcI26ctqHR9LZ41iL9BqsnW5uF7Vh7rruYoMa+Lih56vmwf4x7Hn1Zx
+	 MIgsgREJQ1G7UxWJtw60FqGAGSbGY62t3K3Har3SDqjj9h55SG/qRvkXUOGTKJ+jvN
+	 cPCJNgonlMCow==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6C39680D35;
-	Sun, 22 Nov 2026 23:54:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E5575260
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9B4C080D86;
+	Sun, 22 Nov 2026 23:54:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6873D392
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D78ED400C7
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:20 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4F0974043C
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FdQrGids_QjK for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jykoP1Db52bS for <u-boot@lists.u-boot-project.org>;
  Sun, 22 Nov 2026 23:54:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 50F6D4006F
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=185.56.87.11
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.56.87.11;
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6675640352
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=185.56.87.13
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.56.87.13;
  helo=delivery.antispam.mailspamprotection.com;
  envelope-from=francesco@valla.it; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key, unprotected) header.d=antispam.mailspamprotection.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com
  header.i=@antispam.mailspamprotection.com header.a=rsa-sha256
- header.s=default header.b=vu+u6YMc; 
+ header.s=default header.b=JVUkGeBd; 
  dkim=pass (1024-bit key,
  unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256
- header.s=default header.b=YtXj3FqD
+ header.s=default header.b=ZZEIPr3n
 Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.11])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 50F6D4006F
+ (delivery.antispam.mailspamprotection.com [185.56.87.13])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6675640352
  for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
  :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
  :Date:From:Reply-To:List-Unsubscribe;
- bh=NvhSS9QF/xdrUgz0Th6KpCY1BufPI+UOKbgV6DFms9I=; b=vu+u6YMc1soEeUFCyKe87fwwRb
- nI2lKBVikQmxzx3sqMZM1K//CXfDWgoMyZFsHGKpYqqHJE6ZakU54ymfzMC5u3E9hm2aDdtv7HTrU
- pjxEKLKhjG/bpQnKsgU6MvgU/Lfn65Iu1xXAlJHX34xmAV70SD/iYvMGyIYAUFO7s27Y=;
+ bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=; b=JVUkGeBdqnie5Jg1lmvx54ToUN
+ kUFDovVDFqvz8PL4YJFCPwLtNkeAMod+87WlhtR03wr/drN2gHPI50cpgUOOuRMbBPRYT/ZnICo5R
+ EFRGkGYLJNykSNmhMR/kbdQzPf4xGDPD34xSqv+D7AT+HPn6EYxIKTcp0wglGxH6pKXo=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
  helo=esm19.siteground.biz)
- by instance-europe-west4-lgmz.prod.antispam.mailspamprotection.com with
+ by instance-europe-west4-h034.prod.antispam.mailspamprotection.com with
  esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.100.1)
- (envelope-from <francesco@valla.it>) id 1xVHNw-0000000AEQH-33If
+ (envelope-from <francesco@valla.it>) id 1xVHNx-00000009z3g-1Rau
  for u-boot@lists.u-boot-project.org; Sun, 22 Nov 2026 23:54:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
  s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
  list-subscribe:list-post:list-owner:list-archive;
- bh=NvhSS9QF/xdrUgz0Th6KpCY1BufPI+UOKbgV6DFms9I=; b=YtXj3FqDoPF73FXwM/7yU1SJIy
- V6kCLgBpPdmi8I4qrduUeusBE4zcgDIZYU8qHD93EGRurxSCMLsEKE7nqKvSQqscUeBfH9W2XqtfL
- 0pRX1srevXZ5fIiRPOQNUvRtTF71yr99GmIxbC7YznWikCiQXISJ7uuQovQnupRLZ/oI=;
+ bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=; b=ZZEIPr3nyfaWnS0uvUNJ+2OxTD
+ K5G2s/guVimC9ICqiUMwi0DfcDs0+d1nkcCpLz71kp0X8t7Sdm/Ha6Ly9VqSQSi59U6mhl0yrCHCX
+ qRF0EUAf2ocqdZhHPGy24xLF93WCHFl3/IjhrAZ2dacNjslsQ7F0TCCbGuRgWVpAmv40=;
 Received: from [79.28.115.6] (port=62562 helo=[192.168.178.175])
  by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.100.1) (envelope-from <francesco@valla.it>)
- id 1xVHNs-000000005H0-1cIk; Sun, 22 Nov 2026 23:54:12 +0000
+ id 1xVHNs-000000005H0-3hT5; Sun, 22 Nov 2026 23:54:12 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Mon, 23 Nov 2026 00:54:06 +0100
-Subject: [PATCH 3/6] arm: dts: k3-am67a-beagley-ai-u-boot: allow SPL
- ethernet boot
+Date: Mon, 23 Nov 2026 00:54:07 +0100
+Subject: [PATCH 4/6] configs: am67a_beagley_ai: add configs for Ethernet boot
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-am67a-ethernet-boot-v1-3-94520ed74c90@valla.it>
+Message-Id: <20261123-am67a-ethernet-boot-v1-4-94520ed74c90@valla.it>
 References: <20261123-am67a-ethernet-boot-v1-0-94520ed74c90@valla.it>
 In-Reply-To: <20261123-am67a-ethernet-boot-v1-0-94520ed74c90@valla.it>
 To: Andrew Davis <afd@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
@@ -132,12 +131,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Chintan Vankar <c-vankar@ti.com>, Anshul Dalal <anshuld@ti.com>, 
  Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=996; i=francesco@valla.it;
- h=from:subject:message-id; bh=+trH254pmAxCyA9LyLml4GfYAr9V6sxu5TeZZl2Xzyg=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDNnMDYtKGvxOFupyfC86vLTdXatAof7lhzOf2ypjp9m7t
- 4Z7rzPtKGVhEONikBVTZAlZd+Penrnm39I2MD6CmcPKBDKEgYtTACby/w3D//TS1VareuSEPwpz
- KwTruqVWmjesvmLi5PQ9yvTlnRxeBYb/JS47iv8uqY7U7mrasXBzhrrUn2xBofJ1f8y4Ni+fO/E
- SIwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1592; i=francesco@valla.it;
+ h=from:subject:message-id; bh=oZerNt1HvU2PxKB7QD1SyfIC62CKMrGD/ILs0Cxc5cw=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDNnMDYvmz36cctElca7bm40bP/m33wxVenJS+rWFppHB9
+ 5+PPEuFO0pZGMS4GGTFFFlC1t24t2eu+be0DYyPYOawMoEMYeDiFICJvPjE8D+R0XHlbuZdv+UC
+ 1v9kUdd/IyiWOzVcRuGMhIhV158DAumMDCdWfPD6kcc07WXPl3ytbI9LWssdUo9e02PYd7xhwdR
+ VE9gA
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse,
@@ -149,15 +148,15 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: 4dd15e647e2000e91cdb7e9f8f9445bd
-X-AntiAbuse: ID - 4dd15e647e2000e91cdb7e9f8f9445bd
+X-SGantispam-id: 05ea92cb38e387d55f1442a98930c672
+X-AntiAbuse: ID - 05ea92cb38e387d55f1442a98930c672
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1xVHNw-0000000AEQH-33If-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-lgmz.prod.antispam.mailspamprotection.com; 
+CFBL-Feedback-ID: 1xVHNx-00000009z3g-1Rau-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-h034.prod.antispam.mailspamprotection.com; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
  auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
@@ -179,59 +178,51 @@ X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Mark all nodes required for Ethernet boot in SPL with bootph-all.
+Add configurations suitable for Ethernet boot of the BeagleY-AI for
+both the R5F and A53 cores.
+
+As done for similar platforms (e.g.: AM62, AM68, AM69), keep them
+separated from the regular configurations to avoid increasing their
+sizes (in particular for the R5F, where space is limited).
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi | 35 ++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+ configs/am67a_beagley_ai_a53_ethboot_defconfig |  7 +++++++
+ configs/am67a_beagley_ai_r5_ethboot_defconfig  | 13 +++++++++++++
+ 2 files changed, 20 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
-index 0e810e7f492d..551e628ec20f 100644
---- a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
-@@ -57,6 +57,41 @@
- 	bootph-all;
- };
- 
-+&mdio_pins_default {
-+	bootph-all;
-+};
+diff --git a/configs/am67a_beagley_ai_a53_ethboot_defconfig b/configs/am67a_beagley_ai_a53_ethboot_defconfig
+new file mode 100644
+index 000000000000..5c2db954b5d6
+--- /dev/null
++++ b/configs/am67a_beagley_ai_a53_ethboot_defconfig
+@@ -0,0 +1,7 @@
++#include <configs/am67a_beagley_ai_a53_defconfig>
 +
-+&cpsw3g_mdio {
-+	bootph-all;
-+};
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_ETH=y
++CONFIG_SPL_NET=y
++CONFIG_SPL_NET_VCI_STRING="AM67A U-Boot A53 SPL"
++CONFIG_SPL_SYSCON=y
+diff --git a/configs/am67a_beagley_ai_r5_ethboot_defconfig b/configs/am67a_beagley_ai_r5_ethboot_defconfig
+new file mode 100644
+index 000000000000..044dbfd5ca02
+--- /dev/null
++++ b/configs/am67a_beagley_ai_r5_ethboot_defconfig
+@@ -0,0 +1,13 @@
++#include <configs/am67a_beagley_ai_r5_defconfig>
 +
-+&cpsw3g_phy0 {
-+	bootph-all;
-+};
-+
-+&rgmii1_pins_default {
-+	bootph-all;
-+};
-+
-+&phy_gmii_sel {
-+	bootph-all;
-+};
-+
-+&cpsw_mac_syscon {
-+	bootph-all;
-+};
-+
-+&cpsw3g {
-+	bootph-all;
-+	ethernet-ports {
-+		bootph-all;
-+	};
-+};
-+
-+&cpsw_port1 {
-+	bootph-all;
-+};
-+
- #if IS_ENABLED(CONFIG_TARGET_J722S_R5_BEAGLEY_AI)
- 
- &binman {
++# CONFIG_NO_NET is not set
++CONFIG_SPL_MMC=n
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_ETH=y
++CONFIG_NET=y
++CONFIG_SPL_NET=y
++CONFIG_SPL_NET_VCI_STRING="AM67A U-Boot R5 SPL"
++CONFIG_SPL_SYSCON=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_TI_AM65_CPSW_NUSS=y
 
 -- 
 2.56.1
