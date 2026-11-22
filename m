@@ -1,118 +1,235 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60403606A320
-	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 10:27:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D64A606A320
+	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 10:46:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mwpRwysQ;
-	dkim=pass (2048-bit key, unprotected) header.d=email.cz header.i=@email.cz header.a=rsa-sha256 header.s=szn1 header.b=sNRiIcjX
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=D1gcdtYH;
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=dCI5saK/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DD692406AB;
-	Sun, 22 Nov 2026 10:27:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 603E860626;
+	Sun, 22 Nov 2026 10:46:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zW5rhZA-U88q; Sun, 22 Nov 2026 10:27:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BB3C1406A2
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795343227;
-	b=KdsabcMp7wHZgAQ8uzdqd49+Ilolsqoyl+LnjY9DtEi27uOlzwpkOmXCdU16K1bv0A20
-	 HpzILdJXr1/sdQcolg6elN+WsLklheAoOrFUOcEmVirE/DnJHl87Mlr9N02X+10+DFWu+
-	 3RaLFVIA1D9T+l5HXS7o+M7jqt6+lK9bbgiooeRBqI9Y8yOasmoWI9AGGjeGooWOF3s12
-	 sqRNppAVFzub4dljcPN9OvdR7f1gR4M+RzIyH1VvbAYi93FlUklZY4hmh2UafTIlQ7JXi
-	 2+smnecwtQJtqOagfpachdwSNTQo40BT1YfptbBE5ytd2Xv766Z9nJYow5tGciD8ZdQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EPcWcxZCKWZF; Sun, 22 Nov 2026 10:46:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 859866061B
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795344383;
+	b=fMGenl6TIUJhIM3WmqQvnDiCFOnfxoUn/mCruQck/BGNeAVf1JMuGuNYrl+UkFcBrG6c
+	 6IHrsb2oBGZWUeLew9qomPAJOnadlE+VbdHKqGmZifhDk7essT3btZt9v3zctCXFBuaC8
+	 62L1k/dL+AV3p7HrJhK5wF4esDn4bovMqO9dIDniUzAu9LgrKm8ERmcaT6JqSTeFfStup
+	 Cs42gETy3NBJsR4hLmfwXj+/NDG4Lo8TEtpCC3fzo/f/qdnQq9AmgTv/+fJtwXbs2KAkp
+	 kad6r+Lolwz1dHsVEpw/POeLfGsfYTSzVkhbiYZhBzVwcxYpcXY+hyU0SsdS0By+mog==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795343227;
+	c=relaxed/relaxed; t=1795344383;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:From:To:Cc:Subject:Date:Message-Id:
-	 Mime-Version:X-Mailer:Content-Type:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=eH/nrO1CLFMwM2D2T4Ncpi5sb0plyCU8U3KU43U7bsM=;
-	b=DUkFGrqe3oiLjPDsFoqZ4TULk2fdGorzhtABFmuI6HdJtXT40SdKTFHTRAlEYusRVWQ9
-	 WkcQjjVohJThpMCs1n87kEUtEArdTF6IguSw/2xFB/CoxRehcSi1KqHaDYjyeV8IfevHr
-	 pIh2310VHM1kXi/bAIy1lxWHGg4Yo471aMmKYelMMBzHar5YB8+F7UpcFdlQTLKodlzjH
-	 1wlrUI9WNaarR5Kve9qDzn4iUrhOYtJsDax/WwjUFoWQKzE41qgFCrfCieAoLcxqBifq4
-	 O4Hp4vv1uqHStetuOKMsEQAOCBI0L3wwnhcX2DRg5FIww1bkQpfRHC7CdVVw40ENCBQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=email.cz;
-	dkim=pass header.d=email.cz header.i=@email.cz header.a=rsa-sha256 header.s=szn1 header.b=sNRiIcjX;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM2-Signature:Message-Instance:DKIM-Signature:X-UI-Sender-Class:
+	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Provags-ID:UI-OutboundReport:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=DXWjE4qsNaoe6PZWZ8W4oy2A4fYehzVHetbD+ZML454=;
+	b=ASdxSijtb3gzhCM+3H9YC5tBvMTummLjVlhoPRMu9W/+5ZZgUue16SQrewOdh4LqXmP9
+	 mKbG5xM6/VWDgGWwePPbbGlqujcP+JWSPCKQkO7h1nYa8IialQTZkyJrOy7UBWYFgznDQ
+	 ix/iCxgDwK0qDOaXFO0oiVCMsWu8Imp8J2HkGA93citHbIH4i0PZ1oP++aj71XeeLQ+6F
+	 rjdEGtGTtqaV2tF57iTlzYumj1ZA3DZkcD/rUOsTSq0mVj3gRAMm/zEB9D6lVVOvf8tBG
+	 hjEcEdynLsKqoHkIy8e7uMr8GDjIv5Q2LKd8P0rCUYZ+e+Xwrv58SDUbVZUE3jSYHsQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795343227;
-	bh=eH/nrO1CLFMwM2D2T4Ncpi5sb0plyCU8U3KU43U7bsM=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=mwpRwysQuD2+ph1U/mrTmWWRshH/gxuyUQsRaUF9nQgh221eZowiXep+XergfvmsY
-	 NqOERLM1a8fwwUqhwZKaaHbh8vUgxE46GIlsu0HJS8V6rJVwwxktVRm5qIxcl6j0Ef
-	 fmVkJhv/sVN4U+ueRy+/eOKr79l7ZgL9hznX40eYl5qVbXDXk30yhS5Lh8u/mq+/ji
-	 Y8RGs/sgDFTNWyh0N3+kMEzdUHAIghtPbYY3LhY3t8OU8cvAbgDd8zQYL5Sv2tQXNx
-	 yXHe0YPJWirNEHb4CVZa2A1VChJrY/+ZHFhXVmYh3VeiiVVPTrewrkE9DJ0r33jKH4
-	 E9SZCI9O0tmqQ==
+	d=lists.u-boot-project.org; s=default; t=1795344383;
+	bh=DXWjE4qsNaoe6PZWZ8W4oy2A4fYehzVHetbD+ZML454=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=D1gcdtYHGIQwNOLiENLDzg5wHSspxjWom5M8qBfF0ytCJ69jFWPNJlGdVyamScFkK
+	 NDWMNGg8GbimEmH9mZ1qknaVcuymxoyqWUUEGDmNb9XDnEtKmQj16/e1zfPRDayf0A
+	 EzGyQqbxZvzrW5sxUL5Q7Tqf2Xwn17ipWeZ0ja8bWUeAQR20JB2KaSAsZnGw0qSao2
+	 Ykfa1tAv3W9mB5m7C1ZlifYBFcHpX2vTnKQrYSWANtjWVR32awgKoBsoIQo0wXGFY4
+	 SKzimGe2/yX8O4g4867t3F8GTfkQIyKITwrGHwXd0jCE24s2WkbptvVXVpz6asltDY
+	 RNRxD9ywt4iLQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BB3C1406A2;
-	Sun, 22 Nov 2026 10:27:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 83896310
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 10:27:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 859866061B;
+	Sun, 22 Nov 2026 10:46:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 90B9822B
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 10:46:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 69116406A2
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 10:27:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 76518400D2
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 10:46:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M2cSP-VjhQIJ for <u-boot@lists.u-boot-project.org>;
- Sun, 22 Nov 2026 10:27:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BBE87406A0
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a02:598:64:8a00::1000:abe"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a02:598:64:8a00::1000:abe; helo=mxe-2-abe.seznam.cz;
- envelope-from=tomaspaukrt@email.cz; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=email.cz
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=email.cz header.i=@email.cz header.a=rsa-sha256
- header.s=szn1 header.b=sNRiIcjX
-Received: from mxe-2-abe.seznam.cz (mxe-2-abe.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:abe])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BBE87406A0
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 10:27:01 +0000 (UTC)
-Received: from email.seznam.cz by smtpc-mxe-fd4f7c85c-t5fgh
- (smtpc-mxe-fd4f7c85c-t5fgh [2a02:598:64:8a00::1000:abe])
- id 699bca10976f78ba69154408; Sun, 22 Nov 2026 11:26:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz; s=szn1;
- t=1795343208; bh=eH/nrO1CLFMwM2D2T4Ncpi5sb0plyCU8U3KU43U7bsM=;
- h=From:To:Cc:Subject:Date:Message-Id:Mime-Version:Content-Type:
- Content-Transfer-Encoding;
- b=sNRiIcjX3nY14KPdCLhK/VIEehK3Vy0v/V4Qket+e21j92bbyFRXSqbr3tIJPiTLj
- lov9vHw7NYWtWblv1EWWEWU2VEGPAH9NNeur+Smt3w13K+USXvyZa54qfVqJwwkDAR
- DXwpIhVrvETH3tVw4vSaQyF41ZP/Xzgez37F68PpsoVLK8RW3/dS8q5a0X/TFRGJjY
- nY3ns28cVrVFgFmv1EEylgcxtYDo6JgdP5SFNS+TIQHPqie6+O52kjiG44ag9IUkj/
- 39TUTauUHhvaPwCvVLt/SJn87Z8QVDCcHKYactklIwHU6h5dQx6TD+uPxXUFWwto0q
- QhoTQwDT9Erxg==
-Received: from 184-143.ktuo.cz (184-143.ktuo.cz [82.144.143.184])
- by email.seznam.cz (szn-email-ebox-5.1.34) with HTTP;
- Sun, 22 Nov 2026 11:26:30 +0100 (CET)
-From: "Tomas Paukrt" <tomaspaukrt@email.cz>
-To: <u-boot@lists.u-boot-project.org>
-Cc: "Tom Rini" <trini@konsulko.com>, "Gaurav Jain" <gaurav.jain@nxp.com>,
- "Peng Fan" <peng.fan@nxp.com>, "Heiko Schocher" <hs@nabladev.com>,
- "Johan Jonker" <jbx6244@gmail.com>,
- "Utkarsh Gupta" <utkarsh.gupta@nxp.com>, "Marek Vasut" <marex@denx.de>
-Subject: [PATCH] crypto: fsl: add DCP SHA1/SHA256 hardware acceleration 
-Date: Sun, 22 Nov 2026 11:26:30 +0100 (CET)
-Message-Id: <31O.Zrul.2S7BCX2NICx.1h0iDM@seznam.cz>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id baXNTOOHKB_l for <u-boot@lists.u-boot-project.org>;
+ Sun, 22 Nov 2026 10:46:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A51DD400BC
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=212.227.15.18
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.18;
+ helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de
+ header.a=rsa-sha256 header.s=s31663417 header.b=dCI5saK/
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A51DD400BC
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 10:46:19 +0000 (UTC)
+DKIM2-Signature: i=1; m=1; t=1795344377; mf=PHh5cHJvbi5nbHBrQGdteC5kZT4=;
+ rt=PHUtYm9vdEBsaXN0cy51LWJvb3QtcHJvamVjdC5vcmc+; d=gmx.de;
+ s=s31663417:rsa-sha256:ZKPIle6LrQJXy7kBXy1EUKBm3240
+ ftS+9EM0v7mWv9dj04mepCVYqSboNjjFBHWi2v5iOtFzTc0PbknkrRT0t8+GuCa8w82187Jx8yt
+ 2jM/Zxdkrlhr31g5Ci44aei2NCWlHf2Z0Peh2/dLBa56haeMOdjr5JI4Ez+Ypi5MWKSXIZTledu
+ J5Pq2Bub/O6prlvRDBwc/v2DcLRITX9mhAWjR35zrZSISgborpw4bQJhMTE9G+EjdJBxPkzOtH4
+ 6RsSofoB69gINS0JrlIiDUboH3LWCwEVUuCCRGrtcJdcu6bQAUZdSQ1hVLtj1tqZL6WHmlinkty
+ 9CKtzqt/NNEPbA==;
+Message-Instance: m=1; h=sha256: PB9AWsDEnElGuJ6kOuWqKfZT1XwznzOj/HOTK4tV8FA=:
+ axvN6mhxmaC2CmFOlT4/kuQ+rmWGqmZY7aRsRDoaxlM=, sha512:
+ SYupGN3wAW8fH4emDLBOdPgUi++bUsuWjIBkTd2hVGaTOkg7C9BevZ3kjRbRgSRSD1snbKUxtkehETyFf3w12w==:
+ RwzSUduRIyRXDmuC8AAwJw3kOONy289pZyBGYxeFqA/NDfbuOd47hakEL2c6eI5Fe5UrmMKSsW0Csts7XteShw==;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1795344376; x=1795949176; i=xypron.glpk@gmx.de;
+ bh=DXWjE4qsNaoe6PZWZ8W4oy2A4fYehzVHetbD+ZML454=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=dCI5saK/BmB5yRr0S+pbTwekyiuWSMIt+Gt4Pk5rS2mND7ntOs4WoIcBXHPW35DF
+ Gz04gAeWJDDjxlRTuupvJDSlP9qBIUcXCby123Xy6+MUFFcaDPHOd5oz6+E4ZcOeS
+ aFl6gh7Y5sQmBxikNqlBHlgRI1vs/yIEA0qqOlQKUq4dj4HGkvgifNnVw2+j9Woc6
+ sl+pZuUoPdSyLayt21x7cd8LFy1OudhYeW5ldDWLgIySlgAwou6X0v5GJVJRUkJzP
+ hTfPEwkdk5taNuilVL1YjZR1CUhWMNxnDp/pVJ52+/2EdaYgFv0PrAFHgnRxgfE+2
+ OQG+aWMTkt1hdBf7rg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mz9Un-1yPoEd0i4h-00vBgb; Sun, 22
+ Nov 2026 11:46:16 +0100
+Message-ID: <b87f8ce6-457d-44a4-bb27-0c38dee79a88@gmx.de>
+Date: Sun, 22 Nov 2026 11:46:13 +0100
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0 (szn-mime-2.2.22)
-X-Mailer: szn-email-ebox-5.1.34
-Content-Type: text/plain;
-	charset=utf-8
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] efi_loader: unload image if efi_run_image() fails
+ before starting it
+To: Yuho Choi <oss.patchbox@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ u-boot@lists.u-boot-project.org,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20261106051357.265179-1-oss.patchbox@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20261106051357.265179-1-oss.patchbox@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:b99xyVhXH6beb9k/JvQ+5U/IxK+YkBz/oF8XNi43DI2Sm7yJOlN
+ JxYwhDoocBFHYwQ1M/63C2cvK7E3IC5Rbs6jZb0qCM0TWcNXg1rUoxhvx1MjiKvoH2Jz9E/
+ J+ZQ73brwHLsIIljqZ6SltWEC995DwOgcr6WD8ojyTIzm1+Absypu2nzdqPmZNGrjBkVCoK
+ pgCLMH0CTpyC6Qx0CpOHA==
+UI-OutboundReport: notjunk:1;M01:P0:uP+tKs7J80w=;msJ7OMaDhYAmDC4Wvaeo8Un5hZh
+ 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
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -122,417 +239,95 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-14.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a driver for the hashing engine of the Data Co-Processor (DCP)
-found on i.MX6ULL and i.MX6SLL. It implements the same hw_sha1(),
-hw_sha256() and progressive hw_sha_*() interface as the CAAM driver,
-so the hash command and the FIT image hash checks use it.
+On 11/6/26 06:13, Yuho Choi wrote:
+> efi_run_image() returns without unloading the image in two cases where
+> the image has been loaded:
+>=20
+> - efi_load_image() returns EFI_SECURITY_VIOLATION when an image fails
+>    Secure Boot authentication. The image has still been loaded and a
+>    valid image handle is returned, and it is up to the caller to unload
+>    it.
+> - efi_env_set_load_options() fails after the image has been loaded.
+>=20
+> Each such attempt to run an image through 'bootefi', 'bootm' or an EFI
+> bootflow leaves the relocated image pages, the image handle and its
+> loaded image protocol behind.
+>=20
+> Unload the image on any error before do_bootefi_exec() is called. For
+> its other errors efi_load_image() either sets the handle to NULL or
+> fails before it creates one, so initialize the handle to NULL and only
+> unload when it is set.
+>=20
+> Fixes: 6b95b38c41a6 ("efi_loader: rework bootmgr/bootefi using load_imag=
+e API")
+> Fixes: 4540dabdcaca ("efi_loader: image_loader: support image authentica=
+tion")
+> Signed-off-by: Yuho Choi <oss.patchbox@gmail.com>
+> ---
+> Changes in v2:
+> - Unload the image on any error before it is started, not only on
+>    EFI_SECURITY_VIOLATION (Heinrich)
+> - Add a Fixes tag for the efi_env_set_load_options() path
+> - Reword the subject and the commit message accordingly
+>=20
+> Tested on sandbox only (LTO disabled, gdb). Forcing either a Secure
+> Boot authentication failure (efi_secure_boot set to true in
+> efi_load_image()) or an efi_set_load_options() failure for three
+> 'bootefi hello' runs left 8 handles in 'efidebug dh' without this
+> patch, 3 of them with a Loaded Image protocol; with it the count stays
+> at 5. A normal 'bootefi hello' still runs and gets its load options.
+> Not tested with enrolled keys or on hardware.
+>=20
+> do_bootefi_exec() also leaves the image loaded when efi_set_watchdog()
+> fails before efi_start_image(). That affects all of its callers, so I
+> will look at it separately.
+>=20
+>   lib/efi_loader/efi_bootbin.c | 10 ++++++++--
+>   1 file changed, 8 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> index 12db8f517c7..5bcb8c2540f 100644
+> --- a/lib/efi_loader/efi_bootbin.c
+> +++ b/lib/efi_loader/efi_bootbin.c
+> @@ -170,7 +170,7 @@ static efi_status_t efi_run_image(void *source_buffe=
+r, efi_uintn_t source_size,
+>   				  struct efi_device_path *dp_dev,
+>   				  struct efi_device_path *dp_img)
+>   {
+> -	efi_handle_t handle;
+> +	efi_handle_t handle =3D NULL;
+>   	struct efi_device_path *msg_path, *file_path;
+>   	efi_status_t ret;
+>   	u16 *load_options;
+> @@ -192,9 +192,15 @@ static efi_status_t efi_run_image(void *source_buff=
+er, efi_uintn_t source_size,
+>   	if (ret !=3D EFI_SUCCESS)
+>   		goto out;
+>  =20
+> -	ret =3D do_bootefi_exec(handle, load_options);
+> +	return do_bootefi_exec(handle, load_options);
+>  =20
+>   out:
+> +	/*
+> +	 * The image has not been started. efi_load_image() also returns a
+> +	 * handle for an image that fails authentication.
+> +	 */
+> +	if (handle && EFI_CALL(efi_unload_image(handle)) !=3D EFI_SUCCESS)
+> +		log_err("Unloading image failed\n");
 
-The driver is based on the mxs-dcp driver from Linux and works around
-these restrictions of the DCP:
-- All packets except the last one must be a multiple of 64 bytes long.
-  Whole blocks are hashed directly from the input buffer and the
-  remainder is buffered until more data arrives or the message ends.
-- A zero length message cannot be hashed, so a precomputed hash is
-  returned for it.
-- A channel error is only cleared by a soft reset, so the DCP is reset
-  before each hashing operation and after a failed packet.
+Thank you for the fix.
 
-The hash state is kept in the DCP, so only one progressive hashing
-operation can be in progress at a time.
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-SHA256 is about 5 times and SHA1 about 2.5 times faster than the
-software implementation.
+>  =20
+>   	return ret;
+>   }
 
-Tested on i.MX6ULL.
-
-Signed-off-by: Tomas Paukrt <tomaspaukrt@email.cz>
----
-The results were compared with the software implementation for all
-message lengths up to 300 bytes and for random messages of up to 40 MiB
-split into random chunks.
-
-The hash command and FIT image hashes were tested as well.
-
- drivers/crypto/fsl/Kconfig   |  10 ++
- drivers/crypto/fsl/Makefile  |   1 +
- drivers/crypto/fsl/dcp_sha.c | 320 +++++++++++++++++++++++++++++++++++
- 3 files changed, 331 insertions(+)
- create mode 100644 drivers/crypto/fsl/dcp_sha.c
-
-diff --git a/drivers/crypto/fsl/Kconfig b/drivers/crypto/fsl/Kconfig
-index 41de402c530..a9868245bb4 100644
---- a/drivers/crypto/fsl/Kconfig
-+++ b/drivers/crypto/fsl/Kconfig
-@@ -100,6 +100,16 @@ config FSL_DCP_RNG
- 	  and a Pseudo-Random Number Generator (PRNG) to achieve a true
- 	  randomness and cryptographic strength.
- 
-+config FSL_DCP_SHA
-+	bool "Enable DCP SHA1/SHA256 hardware acceleration"
-+	depends on MX6ULL || MX6SLL
-+	select SHA_HW_ACCEL
-+	imply SHA_PROG_HW_ACCEL
-+	help
-+	  Enable hardware acceleration of the SHA1 and SHA256 hashing
-+	  algorithms using the Data Co-Processor (DCP), including support
-+	  for progressive hashing.
-+
- config FSL_CAAM_RNG_SELF_TEST
- 	bool "Run the CAAM RNG self test on affected i.MX6 chips"
- 	depends on FSL_CAAM
-diff --git a/drivers/crypto/fsl/Makefile b/drivers/crypto/fsl/Makefile
-index 14b53db7844..1e2e73695eb 100644
---- a/drivers/crypto/fsl/Makefile
-+++ b/drivers/crypto/fsl/Makefile
-@@ -8,5 +8,6 @@ obj-$(CONFIG_CMD_BLOB)$(CONFIG_IMX_CAAM_DEK_ENCAP) +=3D fs=
-l_blob.o
- obj-$(CONFIG_RSA_FREESCALE_EXP) +=3D fsl_rsa.o
- obj-$(CONFIG_$(PHASE_)FSL_CAAM_RNG) +=3D rng.o
- obj-$(CONFIG_FSL_DCP_RNG) +=3D dcp_rng.o
-+obj-$(CONFIG_FSL_DCP_SHA) +=3D dcp_sha.o
- obj-$(CONFIG_FSL_MFGPROT) +=3D fsl_mfgprot.o
- obj-$(CONFIG_FSL_CAAM_RNG_SELF_TEST) +=3D rng_self_test.o
-diff --git a/drivers/crypto/fsl/dcp_sha.c b/drivers/crypto/fsl/dcp_sha.c=
-
-new file mode 100644
-index 00000000000..255e11dbeeb
---- /dev/null
-+++ b/drivers/crypto/fsl/dcp_sha.c
-@@ -0,0 +1,320 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * SHA1/SHA256 hardware acceleration using the DCP on i.MX
-+ *
-+ * Copyright (C) 2026 Tomas Paukrt
-+ *
-+ * Based on drivers/crypto/mxs-dcp.c from Linux
-+ * Copyright (C) 2013 Marek Vasut <marex@denx.de>
-+ *
-+ * Hardware restrictions handled by this driver:
-+ * - all packets except the last one must be a multiple of 64 bytes long=
-
-+ * - the hash of a zero length message cannot be computed
-+ * - a channel error is only cleared by a soft reset
-+ *
-+ * The hash state is kept in the DCP, so only one progressive hashing
-+ * operation can be in progress at a time.
-+ */
-+
-+#include <cpu_func.h>
-+#include <hw_sha.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <asm/io.h>
-+#include <asm/arch/imx-regs.h>
-+#include <asm/arch/sys_proto.h>
-+#include <linux/bitops.h>
-+#include <linux/errno.h>
-+#include <linux/iopoll.h>
-+#include <linux/kernel.h>
-+#include <linux/sizes.h>
-+#include <linux/string.h>
-+#include <u-boot/schedule.h>
-+#include <u-boot/sha1.h>
-+#include <u-boot/sha256.h>
-+
-+#define DCP_CTRL				0x000
-+#define DCP_CTRL_GATHER_RESIDUAL_WRITES		BIT(23)
-+#define DCP_CTRL_ENABLE_CONTEXT_CACHING		BIT(22)
-+
-+#define DCP_STAT				0x010
-+#define DCP_STAT_CLR				0x018
-+#define DCP_STAT_IRQ_CH0			BIT(0)
-+
-+#define DCP_CHANNELCTRL				0x020
-+#define DCP_CHANNELCTRL_ENABLE_CH0		BIT(0)
-+
-+#define DCP_CH0CMDPTR				0x100
-+#define DCP_CH0SEMA				0x110
-+#define DCP_CH0STAT				0x120
-+#define DCP_CH0STAT_CLR				0x128
-+#define DCP_CH0STAT_ERROR_MASK			0xff
-+
-+#define DCP_CONTROL0_INTERRUPT			BIT(0)
-+#define DCP_CONTROL0_DECR_SEMAPHORE		BIT(1)
-+#define DCP_CONTROL0_ENABLE_HASH		BIT(6)
-+#define DCP_CONTROL0_HASH_INIT			BIT(12)
-+#define DCP_CONTROL0_HASH_TERM			BIT(13)
-+
-+#define DCP_CONTROL1_HASH_SELECT_SHA1		(0 << 16)
-+#define DCP_CONTROL1_HASH_SELECT_SHA256		(2 << 16)
-+
-+#define DCP_SHA_BLOCK_SIZE			64
-+#define DCP_SHA_PAYLOAD_SIZE			64
-+#define DCP_MAX_PACKET_SIZE			SZ_1M
-+#define DCP_TIMEOUT_US				1000000
-+
-+#define DCP_REG(reg)				(DCP_BASE_ADDR + (reg))
-+
-+static const u8 sha1_null_hash[SHA1_SUM_LEN] =3D {
-+	0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d, 0x32, 0x55,
-+	0xbf, 0xef, 0x95, 0x60, 0x18, 0x90, 0xaf, 0xd8, 0x07, 0x09,
-+};
-+
-+static const u8 sha256_null_hash[SHA256_SUM_LEN] =3D {
-+	0xe3, 0xb0, 0xc4, 0x42, 0x98, 0xfc, 0x1c, 0x14,
-+	0x9a, 0xfb, 0xf4, 0xc8, 0x99, 0x6f, 0xb9, 0x24,
-+	0x27, 0xae, 0x41, 0xe4, 0x64, 0x9b, 0x93, 0x4c,
-+	0xa4, 0x95, 0x99, 0x1b, 0x78, 0x52, 0xb8, 0x55,
-+};
-+
-+struct dcp_dma_desc {
-+	u32 next_cmd_addr;
-+	u32 control0;
-+	u32 control1;
-+	u32 source;
-+	u32 destination;
-+	u32 size;
-+	u32 payload;
-+	u32 status;
-+};
-+
-+struct dcp_sha_ctx {
-+	/* written by the DCP, must not share cache lines with other data */
-+	u8 digest[DCP_SHA_PAYLOAD_SIZE] __aligned(ARCH_DMA_MINALIGN);
-+	/* read by the DCP */
-+	struct dcp_dma_desc desc __aligned(ARCH_DMA_MINALIGN);
-+	u8 buf[DCP_SHA_BLOCK_SIZE] __aligned(ARCH_DMA_MINALIGN);
-+	/* used by the CPU only */
-+	u32 algo;
-+	unsigned int fill;
-+	bool init;
-+	bool term;
-+} __aligned(ARCH_DMA_MINALIGN);
-+
-+static int dcp_hw_reset(void)
-+{
-+	if (mxs_reset_block((struct mxs_register_32 *)DCP_REG(DCP_CTRL))) {
-+		log_err("DCP reset failed\n");
-+		return -ETIMEDOUT;
-+	}
-+
-+	writel(DCP_CTRL_GATHER_RESIDUAL_WRITES |
-+	       DCP_CTRL_ENABLE_CONTEXT_CACHING, DCP_REG(DCP_CTRL));
-+	writel(DCP_CHANNELCTRL_ENABLE_CH0, DCP_REG(DCP_CHANNELCTRL));
-+
-+	return 0;
-+}
-+
-+static int dcp_sha_run(struct dcp_sha_ctx *ctx, const void *src, u32 size=
-)
-+{
-+	struct dcp_dma_desc *desc =3D &ctx->desc;
-+	u32 stat;
-+	int ret;
-+
-+	schedule();
-+
-+	desc->next_cmd_addr =3D 0;
-+	desc->control0 =3D DCP_CONTROL0_INTERRUPT | DCP_CONTROL0_DECR_SEMAPHORE =
-|
-+			 DCP_CONTROL0_ENABLE_HASH;
-+	desc->control1 =3D ctx->algo;
-+	desc->source =3D (u32)virt_to_phys((void *)src);
-+	desc->destination =3D 0;
-+	desc->size =3D size;
-+	desc->payload =3D 0;
-+	desc->status =3D 0;
-+
-+	if (ctx->init)
-+		desc->control0 |=3D DCP_CONTROL0_HASH_INIT;
-+
-+	if (ctx->term) {
-+		desc->control0 |=3D DCP_CONTROL0_HASH_TERM;
-+		desc->payload =3D (u32)virt_to_phys(ctx->digest);
-+	}
-+
-+	/* dirty cache lines must not overwrite the digest written by the DCP */=
-
-+	flush_dcache_range((ulong)ctx, (ulong)ctx + sizeof(*ctx));
-+	flush_dcache_range(ALIGN_DOWN((ulong)src, ARCH_DMA_MINALIGN),
-+			   ALIGN((ulong)src + size, ARCH_DMA_MINALIGN));
-+
-+	writel(DCP_STAT_IRQ_CH0, DCP_REG(DCP_STAT_CLR));
-+	writel(DCP_CH0STAT_ERROR_MASK, DCP_REG(DCP_CH0STAT_CLR));
-+	writel((u32)virt_to_phys(desc), DCP_REG(DCP_CH0CMDPTR));
-+	writel(1, DCP_REG(DCP_CH0SEMA));
-+
-+	ret =3D readl_poll_timeout(DCP_REG(DCP_STAT), stat,
-+				 stat & DCP_STAT_IRQ_CH0, DCP_TIMEOUT_US);
-+	if (!ret && (readl(DCP_REG(DCP_CH0STAT)) & DCP_CH0STAT_ERROR_MASK))
-+		ret =3D -EIO;
-+	if (ret) {
-+		log_err("DCP failed (%d)\n", ret);
-+		dcp_hw_reset();
-+		return ret;
-+	}
-+
-+	/* the digest could be speculatively cached during the transfer */
-+	if (ctx->term)
-+		invalidate_dcache_range((ulong)ctx->digest,
-+					(ulong)ctx->digest + sizeof(ctx->digest));
-+
-+	ctx->init =3D false;
-+
-+	return 0;
-+}
-+
-+int hw_sha_init(struct hash_algo *algo, void **ctxp)
-+{
-+	struct dcp_sha_ctx *ctx;
-+	u32 sel;
-+	int ret;
-+
-+	if (algo->digest_size =3D=3D SHA1_SUM_LEN)
-+		sel =3D DCP_CONTROL1_HASH_SELECT_SHA1;
-+	else if (algo->digest_size =3D=3D SHA256_SUM_LEN)
-+		sel =3D DCP_CONTROL1_HASH_SELECT_SHA256;
-+	else
-+		return -EINVAL;
-+
-+	ret =3D dcp_hw_reset();
-+	if (ret)
-+		return ret;
-+
-+	ctx =3D malloc_cache_aligned(sizeof(*ctx));
-+	if (!ctx)
-+		return -ENOMEM;
-+
-+	ctx->algo =3D sel;
-+	ctx->fill =3D 0;
-+	ctx->init =3D true;
-+	ctx->term =3D false;
-+
-+	*ctxp =3D ctx;
-+
-+	return 0;
-+}
-+
-+static int dcp_sha_update(struct hash_algo *algo, struct dcp_sha_ctx *ctx=
-,
-+			  const u8 *src, unsigned int size, int is_last)
-+{
-+	unsigned int len;
-+	int i, ret;
-+
-+	if (ctx->term)
-+		return -EINVAL;
-+
-+	while (size) {
-+		/* hash whole blocks directly and buffer the rest */
-+		if (!ctx->fill && size >=3D DCP_SHA_BLOCK_SIZE) {
-+			len =3D min_t(unsigned int, DCP_MAX_PACKET_SIZE,
-+				    ALIGN_DOWN(size, DCP_SHA_BLOCK_SIZE));
-+			ret =3D dcp_sha_run(ctx, src, len);
-+		} else {
-+			len =3D min(size, DCP_SHA_BLOCK_SIZE - ctx->fill);
-+			memcpy(ctx->buf + ctx->fill, src, len);
-+			ctx->fill +=3D len;
-+			ret =3D 0;
-+			if (ctx->fill =3D=3D DCP_SHA_BLOCK_SIZE) {
-+				ret =3D dcp_sha_run(ctx, ctx->buf, ctx->fill);
-+				ctx->fill =3D 0;
-+			}
-+		}
-+		if (ret)
-+			return ret;
-+		src +=3D len;
-+		size -=3D len;
-+	}
-+
-+	if (!is_last)
-+		return 0;
-+
-+	ctx->term =3D true;
-+
-+	/* the DCP cannot hash a zero length message */
-+	if (ctx->init && !ctx->fill) {
-+		memcpy(ctx->digest, ctx->algo =3D=3D DCP_CONTROL1_HASH_SELECT_SHA1 ?
-+		       sha1_null_hash : sha256_null_hash, algo->digest_size);
-+		return 0;
-+	}
-+
-+	ret =3D dcp_sha_run(ctx, ctx->buf, ctx->fill);
-+	if (ret)
-+		return ret;
-+
-+	/* the DCP stores the digest in reversed byte order */
-+	for (i =3D 0; i < algo->digest_size / 2; i++)
-+		swap(ctx->digest[i], ctx->digest[algo->digest_size - 1 - i]);
-+
-+	return 0;
-+}
-+
-+int hw_sha_update(struct hash_algo *algo, void *ctx, const void *buf,
-+		  unsigned int size, int is_last)
-+{
-+	int ret;
-+
-+	ret =3D dcp_sha_update(algo, ctx, buf, size, is_last);
-+	if (ret)
-+		free(ctx);
-+
-+	return ret;
-+}
-+
-+int hw_sha_finish(struct hash_algo *algo, void *ctxv, void *dest_buf,
-+		  int size)
-+{
-+	struct dcp_sha_ctx *ctx =3D ctxv;
-+	int ret =3D 0;
-+
-+	if (size < algo->digest_size)
-+		ret =3D -EINVAL;
-+	else if (!ctx->term)
-+		ret =3D dcp_sha_update(algo, ctx, NULL, 0, 1);
-+
-+	if (!ret)
-+		memcpy(dest_buf, ctx->digest, algo->digest_size);
-+
-+	free(ctx);
-+
-+	return ret;
-+}
-+
-+static void dcp_sha(int digest_size, const unsigned char *in,
-+		    unsigned int size, unsigned char *out)
-+{
-+	struct hash_algo algo =3D { .digest_size =3D digest_size };
-+	void *ctx;
-+	int ret;
-+
-+	ret =3D hw_sha_init(&algo, &ctx);
-+	if (!ret)
-+		ret =3D hw_sha_update(&algo, ctx, in, size, 1);
-+	if (!ret)
-+		ret =3D hw_sha_finish(&algo, ctx, out, digest_size);
-+
-+	/* return an invalid hash on failure */
-+	if (ret)
-+		memset(out, 0, digest_size);
-+}
-+
-+void hw_sha1(const unsigned char *in, unsigned int size, unsigned char *o=
-ut,
-+	     unsigned int chunk_size)
-+{
-+	dcp_sha(SHA1_SUM_LEN, in, size, out);
-+}
-+
-+void hw_sha256(const unsigned char *in, unsigned int size, unsigned char =
-*out,
-+	       unsigned int chunk_size)
-+{
-+	dcp_sha(SHA256_SUM_LEN, in, size, out);
-+}
--- 
-2.43.0
