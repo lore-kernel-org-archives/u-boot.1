@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 401B3606A31D
-	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 22:12:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0907606A31A
+	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 22:12:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZyuM+bDN;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.a=rsa-sha256 header.s=default header.b=yhYjf+rh;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256 header.s=default header.b=YI5e/IOG
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CHxuLGAS;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.a=rsa-sha256 header.s=default header.b=kbteCdpX;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256 header.s=default header.b=Nmn7myCc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 16B996063A;
-	Sun, 22 Nov 2026 22:12:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 76DB84061D;
+	Sun, 22 Nov 2026 22:12:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JbkOCCCUnq6Y; Sun, 22 Nov 2026 22:12:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0B6D66062C
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795385545;
-	b=fX/lIv87zqM7dbst3hHH/wLtuJ1k3R8eLf9GXzcG3vc+dkYMwNBOA2lH3kBgL/gVPQo4
-	 XZtFzP+gskFSzrsdG7lPQPVjC/Np35lA/eDW1Z3N6f/wPPk4ECgT7oRnsZ7NZQA8AORIa
-	 JpaFV6RXY+RJSw+QlAlMthtGlPXNRy7w32A9KFHBNDehRdMPpYa6f4+aSXRxb0uLbesGO
-	 WZXvhqHKkn5e0tndklAlpw7L54lOYqmyR61Ildi7CFf5+iTnuBtU12b831xwLl5oDzu59
-	 ghIpuPOdkixpLOjuA7UrcQjwwyCO3vN3HB7TeALgJurOTOat0vQP/cm3m7FIuYwRGKw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SNVaMvu_S-c9; Sun, 22 Nov 2026 22:12:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 98225405F4
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795385547;
+	b=UbcUgUlyHVc7knwQI7UOEyjMcSnDTLxg3r09u9H1o8yg5iOw9z0Su0/a3wxhBJRid9il
+	 fT1idrG44XGnz3keySaGFeCsGZ+QI4otY+jQCZqxo0mZXmOIiOT+PGmcBrXRYe43Iog+0
+	 SmUjVcO/fup2WXFV0jhQq3gbyU6TmEAAStNKMsAGsduTtcZklF0wAbn/xjdizvDgWa6Wq
+	 F9dGYhnU0JwRIb8zRBZtUYU5o0ScpApMCfPmttu/ylyk/WCfjVYgZ+rOFNEDFYYwbTqz9
+	 P3v1JSEcnHhseDILVkMuF7kfa5MuT0qdtSBNRHoZtvZkFlo5+Wq7zcc2IekqgIrw2Lw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795385545;
+	c=relaxed/relaxed; t=1795385547;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -37,92 +37,95 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 CFBL-Address:CFBL-Feedback-ID:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=yUCKVEF7/MgHIi4bafkHT0EAY49COSmHHhBP93kXOvg=;
-	b=Oo84vPLC7JbsWCFulzmUtXG6yEtZgzsr10cyYQ/01ytNqZZsHHgbywWhvn2LIKwG2jc+
-	 QHEpj5QZbgRz/v60isQrgS4QZTuIsgQWIJTnMUuqBXO32ryBnKhuyepjELHyu1jC/TMgj
-	 E8dcN07F1K/EjWkCKiHHsVAkg0DM/r7xaGvuHHbb7yX49FcMNrsQO1yKAMdq1Kl5qXWed
-	 B0vx6GJ4Ilo87c71aVFCooau75SCSFSxJdahqwQ0dgXy62ThljvcPf9WIaqEsen3Uej60
-	 YIKscwhUY9KzAuRcCxnMvSMEJMa6WhpFreRowcneg8n+nR/Csk6E3HU7JTFVYduJ9nA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=JOr7i+9cXsNtUgJFTQQKKdwBsJCwXPamFfxgEOB633E=;
+	b=gqBqri4EWAg9FVNPDHHrCxgC5ATvPjy2Z7xcrB6ep1oHgyy9b0yp2EnM+jDMsyMYTyKD
+	 Q4HCP/ekI4aHGbvuGCFwHmeZyWY3F1mUwIdH1Vxbg6IvFIFQG+vYLJa2qZFC3ckl+floA
+	 CqDzBBpiBYdfzB3IGzkeyUzen4SglBu2j4mMRMRfpRDvb5T0Y36vPhjFEF4zlz9S+yFtH
+	 wfEuiF2aWXq93TIBLHrSbQA+xP+uJAOfmYS0+GmzlidO3HNSzmDM7l4xSwrqgoFTes1bz
+	 gCIwzjfgGfCLOT5AR2gb0bkO46VDr+NSXf4v6i2wD9i7Jkvca5loMeiVL9bmyXO06kw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=valla.it;
+	dkim=pass header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.a=rsa-sha256 header.s=default header.b=kbteCdpX;
+	dkim=pass header.d=valla.it header.i=@valla.it header.a=rsa-sha256 header.s=default header.b=Nmn7myCc;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795385545;
-	bh=yUCKVEF7/MgHIi4bafkHT0EAY49COSmHHhBP93kXOvg=;
+	d=lists.u-boot-project.org; s=default; t=1795385547;
+	bh=JOr7i+9cXsNtUgJFTQQKKdwBsJCwXPamFfxgEOB633E=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZyuM+bDNLgrBCY3n0rTmvQ6XUchMYcFjU0xdWiV98WeRSjW6Ksk1y3ANbRd9RBmIo
-	 iRqXIpn8wYWfC2A0OUXTYW1TeT9RT9O/dtEdf+Jg8JZfr6Rt+oz6oX6KsUh7vAUZxv
-	 yh7rO6bfkKlLrr2VqYlcEuJyzX6r7cVk7JrKjYdzWE+lLAH8GlsC+zkRKEc3wFx6TH
-	 XUAUi2NDl7wS5afB4Qb+3sN4qxPueAJEWuwFnOXuwxm07bufMvPqi7uFo8e3x62lPF
-	 yQUFNpadvs2c8zC/UI4VV5LN+FYJE++bLOZLQ3EaWY5ARE98Wgxp0y6VTvHSyELRky
-	 ZsyUzz5+I28KA==
+	b=CHxuLGASCkMXbuhZ1ROCVRCTyqoSmh2JBefkh4Pe/6/m2jNSuV7iasw7Q8ZWtwZki
+	 ldS+LN2BmwwIQamtX9g1cdwoMXJNtOlLJHgi7oyo5Xgf3jEjidssFMRbzARqfQ4c9R
+	 f5nc3V3UnIrdHnQCfMGlYc065Qy/l1BljdqR1qVAx7OpkzZhTDgRFEot7MdZQswhS1
+	 W/6GJiNfr7E996CQ9RyfVyFNFEQDS4ajvb/VNy6jBJeq9sAqYgf6o+q6x7gcbfoQeW
+	 zca2v0y+kJhSBHRwfHXV/qwLyZ4KNSpgwKX7KSxwK5KtcbZtU9lydLWH01ftX77LRW
+	 AK1iuGmTMNfKQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0B6D66062C;
-	Sun, 22 Nov 2026 22:12:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id E7FF9371
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 22:12:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 98225405F4;
+	Sun, 22 Nov 2026 22:12:27 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B4817310
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 22:12:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D94F480C6F
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 22:12:20 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9AA94405E6
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 22:12:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9gRQYdI2yY9A for <u-boot@lists.u-boot-project.org>;
- Sun, 22 Nov 2026 22:12:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CA16D80C1C
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=185.56.87.6
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.56.87.6;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id h6nRYI-uIZOV for <u-boot@lists.u-boot-project.org>;
+ Sun, 22 Nov 2026 22:12:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 14186405EE
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=185.56.87.1
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.56.87.1;
  helo=delivery.antispam.mailspamprotection.com;
  envelope-from=francesco@valla.it; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key, unprotected) header.d=antispam.mailspamprotection.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com
  header.i=@antispam.mailspamprotection.com header.a=rsa-sha256
- header.s=default header.b=yhYjf+rh; 
+ header.s=default header.b=kbteCdpX; 
  dkim=pass (1024-bit key,
  unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256
- header.s=default header.b=YI5e/IOG
+ header.s=default header.b=Nmn7myCc
 Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.6])
- by smtp1.osuosl.org (Postfix) with ESMTPS id CA16D80C1C
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 22:12:17 +0000 (UTC)
+ (delivery.antispam.mailspamprotection.com [185.56.87.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 14186405EE
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 22:12:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
  :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
  :Date:From:Reply-To:List-Unsubscribe;
- bh=yUCKVEF7/MgHIi4bafkHT0EAY49COSmHHhBP93kXOvg=; b=yhYjf+rhvmc7cQnzGEu7xOes9G
- NDzZT8wt/L92lZtwdMA1gXtCtaFQN9voLBA4bX3RaNMhsGpDEk4CTAC8fEyjl8YpLG20l3RTQTSNS
- otMIdAdsvQjXwTERI3XKde1sXQ2jEYRCqzXnF4BpkjhoMSN2hli3Y1vTF4HVBtTYtXXw=;
+ bh=JOr7i+9cXsNtUgJFTQQKKdwBsJCwXPamFfxgEOB633E=; b=kbteCdpXOBqy4j6C0INqRg2ceI
+ cx+CBKbXnaLF0zYEtnTOuUKuvmzt8srs837NbFS6+ao5Rt0ZxH/Ma4pz3J/SkZNVmmjHetl9X68II
+ g5rpi4PqRxhQRvzQrKC/VY89j/10WV4JHPQal8dIX4qgMEwx4gXd/Grp31muoGIpYqMQ=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
  helo=esm19.siteground.biz)
- by instance-europe-west4-c9nw.prod.antispam.mailspamprotection.com with
+ by instance-europe-west4-4zq2.prod.antispam.mailspamprotection.com with
  esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.100.1)
- (envelope-from <francesco@valla.it>) id 1xVFnC-0000000A07n-2Cfn
- for u-boot@lists.u-boot-project.org; Sun, 22 Nov 2026 22:12:15 +0000
+ (envelope-from <francesco@valla.it>) id 1xVFnD-00000009kUE-3XDU
+ for u-boot@lists.u-boot-project.org; Sun, 22 Nov 2026 22:12:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
  s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
  list-subscribe:list-post:list-owner:list-archive;
- bh=yUCKVEF7/MgHIi4bafkHT0EAY49COSmHHhBP93kXOvg=; b=YI5e/IOGye3sl+CcJ+h7INxXbp
- av5ppbWQ9noDX7w8iQTm/Kg6RA6vXLYyd6CgOwlJF4299yF96YxO+NxSCT6LATOVfxKjWc/POpoU3
- gyHftc3p16C3/1JCrmN5+I0QEdkQYOKhRgRjpbLoVsCVP+yBlviWc7s/q/8f3IdoUopM=;
+ bh=JOr7i+9cXsNtUgJFTQQKKdwBsJCwXPamFfxgEOB633E=; b=Nmn7myCcPSivYrmYI34ANYKhDI
+ Ode/rGVjc1GiKKDLuOFrBCBlmWIXbjsu+QFtyJFbE23f/DwH6qiarwBOm3JcBNwV3OnKwwqS8ffIO
+ FChq3VlAFrDScsVQqeIRSkdbl7pC7eXjNf/S6fHCOfkNrurVd94SBoHobcWITWiKqmHw=;
 Received: from [79.28.115.6] (port=61029 helo=[192.168.178.175])
  by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.100.1) (envelope-from <francesco@valla.it>)
- id 1xVFmu-000000004nS-2hb8; Sun, 22 Nov 2026 22:11:56 +0000
+ id 1xVFmv-000000004nS-15qz; Sun, 22 Nov 2026 22:11:57 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Sun, 22 Nov 2026 23:11:36 +0100
-Subject: [PATCH 1/2] drivers: power: add SPL_ config options for TPS65219
- and its regulators
+Date: Sun, 22 Nov 2026 23:11:37 +0100
+Subject: [PATCH 2/2] arm: dts: k3-am625-beagleplay: drop bootph-all tags
+ for regulators
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261122-tsp65219-spl-configs-v1-1-20492ba3f1e9@valla.it>
+Message-Id: <20261122-tsp65219-spl-configs-v1-2-20492ba3f1e9@valla.it>
 References: <20261122-tsp65219-spl-configs-v1-0-20492ba3f1e9@valla.it>
 In-Reply-To: <20261122-tsp65219-spl-configs-v1-0-20492ba3f1e9@valla.it>
 To: "Kumar, Udit" <u-kumar1@ti.com>, Anshul Dalal <anshuld@ti.com>, 
@@ -136,12 +139,12 @@ Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
  Robert Nelson <robertcnelson@gmail.com>, 
  Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4209; i=francesco@valla.it;
- h=from:subject:message-id; bh=mSX1hTjjjYt3JdPfbrOp/K1kvzcTK4zz8jbimX6OJ4c=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDNnMGau52i54bnTV9pzpd6lVIytMKPNY7C/HKKGdMX6Ss
- l+jpDZ1lLIwiHExyIopsoSsu3Fvz1zzb2kbGB/BzGFlAhnCwMUpABP5HcDw361FhD1oI8OCZvMz
- 9Uvu63/xbuKfF9bDdFhUVFth+5m/MYwMuzf9+/CpepHURcm3My963Uz6c11KUOe0342F78Ien54
- szwoA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1140; i=francesco@valla.it;
+ h=from:subject:message-id; bh=NBZTiPMtnhwt3FAQ4h2qTlco5YJepEy2jUIoTaHpwUE=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDNnMGavXXus62ufwW3Rz8aT/SpO3NmcFPBHks9e9mhLPo
+ u9Q6mHRUcrCIMbFICumyBKy7sa9PXPNv6VtYHwEM4eVCWQIAxenAEwk7yEjw2azEuVvJdNc7Nd5
+ zTE+5LfvhowDi2GA8rboi+5KU07zWDMyLC1jbclvO2680eJVxosNfdFzczc39H6QjBRi8PapO6H
+ KBwA=
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse,
@@ -153,15 +156,15 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: d02efa3e4b0a8ce2355d4efbd82beebe
-X-AntiAbuse: ID - d02efa3e4b0a8ce2355d4efbd82beebe
+X-SGantispam-id: f838c5ecefdda4aaf0cb0863da2fefd0
+X-AntiAbuse: ID - f838c5ecefdda4aaf0cb0863da2fefd0
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1xVFnC-0000000A07n-2Cfn-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-c9nw.prod.antispam.mailspamprotection.com; 
+CFBL-Feedback-ID: 1xVFnD-00000009kUE-3XDU-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-4zq2.prod.antispam.mailspamprotection.com; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
  auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
@@ -183,96 +186,56 @@ X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The TPS65219 is a family of fixed-function PMICs for which the output
-configuration is determined by the part number. For this reason, usage
-during the SPL phase is unlikely.
+The bootph-all tags on the regulators provided by the TSP65219 PMIC were
+added to solve a boot hang caused by a change in the behavior of the
+underlying driver; now that the driver is no more compiled for the SPL
+they can safely be dropped.
 
-Add a SPL-specific option for the drivers of the TPS65219 itself and its
-regulators, to allow its exclusion during the SPL build. Since none of
-the supported platforms that have this PMIC onboard modifies its
-configuration during SPL, default it to N.
-
-This fixes boot hangs on the boards compiling this driver but that don't
-have the regulators sub-node marked as bootph-all; since commit
-607d45d1e3b3 ("power: pmic: tps65219: fail if regulators node is missing")
-this absence was leading to a silent boot failure.
-
-Tested on a BeagleY-AI; the PocketBeagle 2 has the same DT layout and
-the same configs, so it's affected as well.
-
-Fixes: 607d45d1e3b3 ("power: pmic: tps65219: fail if regulators node is missing")
+Link: https://lore.kernel.org/u-boot/20260813-beagleplay_boot_failure_fix-v1-1-01d73d735cbb@ti.com
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- drivers/power/pmic/Kconfig       | 7 +++++++
- drivers/power/pmic/Makefile      | 2 +-
- drivers/power/regulator/Kconfig  | 9 +++++++++
- drivers/power/regulator/Makefile | 2 +-
- 4 files changed, 18 insertions(+), 2 deletions(-)
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 28 ----------------------------
+ 1 file changed, 28 deletions(-)
 
-diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-index 95687d0bdfdd..25cde40eaaf3 100644
---- a/drivers/power/pmic/Kconfig
-+++ b/drivers/power/pmic/Kconfig
-@@ -440,6 +440,13 @@ config PMIC_TPS65219
- 	  The TPS65219 is a PMIC containing a bunch of SMPS & LDOs.
- 	  This driver binds the pmic children.
+diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+index 2a0b19173c08..d06cbd899c2a 100644
+--- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+@@ -229,34 +229,6 @@
+ 	bootph-all;
+ };
  
-+config SPL_PMIC_TPS65219
-+	bool "Enable driver for Texas Instruments TPS65219 PMIC in SPL"
-+	depends on SPL_DM_PMIC
-+	help
-+	  The TPS65219 is a PMIC containing a bunch of SMPS & LDOs.
-+	  This driver binds the pmic children in SPL.
-+
- config PMIC_RAA215300
- 	bool "Renesas RAA215300 PMIC driver"
- 	depends on DM_PMIC
-diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-index da9b810de90a..36b197c7e956 100644
---- a/drivers/power/pmic/Makefile
-+++ b/drivers/power/pmic/Makefile
-@@ -36,7 +36,7 @@ obj-$(CONFIG_$(PHASE_)PMIC_LP87565) += lp87565.o
- obj-$(CONFIG_PMIC_SPACEMIT_P1) += pmic_spacemit_p1.o
- obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
- obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
--obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
-+obj-$(CONFIG_$(PHASE_)PMIC_TPS65219) += tps65219.o
- obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
- obj-$(CONFIG_PMIC_RAA215300) += raa215300.o
- obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index dbd24415cb5a..752420a87569 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -545,6 +545,15 @@ config DM_REGULATOR_TPS65219
- 	  TPS65219 series of PMICs have 3 single phase BUCKs & 4 LDOs.
- 	  The driver implements get/set api for value and enable.
- 
-+config SPL_DM_REGULATOR_TPS65219
-+	bool "Enable driver for TPS65219 PMIC regulators in SPL"
-+	depends on SPL_DM_REGULATOR && SPL_PMIC_TPS65219
-+	help
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR TPS65219 and the family of TPS65219 PMICs.
-+	  TPS65219 series of PMICs have 3 single phase BUCKs & 4 LDOs.
-+	  The driver implements get/set api for value and enable.
-+
- config REGULATOR_RZG2L_USBPHY
- 	bool "Enable driver for RZ/G2L USB PHY VBUS supply"
- 	depends on DM_REGULATOR
-diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index bfe3349e3e5d..300a2c9d8cd1 100644
---- a/drivers/power/regulator/Makefile
-+++ b/drivers/power/regulator/Makefile
-@@ -47,7 +47,7 @@ obj-$(CONFIG_$(PHASE_)DM_REGULATOR_STPMIC1) += stpmic1.o
- obj-$(CONFIG_DM_REGULATOR_TPS65941) += tps65941_regulator.o
- obj-$(CONFIG_DM_REGULATOR_SCMI) += scmi_regulator.o
- obj-$(CONFIG_$(PHASE_)DM_REGULATOR_ANATOP) += anatop_regulator.o
--obj-$(CONFIG_DM_REGULATOR_TPS65219) += tps65219_regulator.o
-+obj-$(CONFIG_$(PHASE_)DM_REGULATOR_TPS65219) += tps65219_regulator.o
- obj-$(CONFIG_REGULATOR_RZG2L_USBPHY) += rzg2l-usbphy-regulator.o
- obj-$(CONFIG_$(PHASE_)DM_REGULATOR_CPCAP) += cpcap_regulator.o
- obj-$(CONFIG_DM_REGULATOR_MT6357) += mt6357_regulator.o
+-&buck1_reg {
+-	bootph-all;
+-};
+-
+-&buck2_reg {
+-	bootph-all;
+-};
+-
+-&buck3_reg {
+-	bootph-all;
+-};
+-
+-&ldo1_reg {
+-	bootph-all;
+-};
+-
+-&ldo2_reg {
+-	bootph-all;
+-};
+-
+-&ldo3_reg {
+-	bootph-all;
+-};
+-
+-&ldo4_reg {
+-	bootph-all;
+-};
+-
+ &cpsw_port2 {
+ 	status = "disabled";
+ };
 
 -- 
 2.56.1
