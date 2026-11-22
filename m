@@ -1,30 +1,30 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44222606A31A
-	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 23:54:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA0E1606A31A
+	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 23:54:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tal5D4L6;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.a=rsa-sha256 header.s=default header.b=JVUkGeBd;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256 header.s=default header.b=ZZEIPr3n
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0PvrPcrp;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.a=rsa-sha256 header.s=default header.b=pl1OPvif;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256 header.s=default header.b=ap8HwxVN
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ADA4880D85;
-	Sun, 22 Nov 2026 23:54:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 71DC2405BB;
+	Sun, 22 Nov 2026 23:54:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KQXSbIGSfkjI; Sun, 22 Nov 2026 23:54:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9B4C080D86
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795391671;
-	b=dFXPaC0VNbj+MIXUxBznJRnEbRbA5zAisajTA93bPnqsRIK0Rp6pgh3iLeC/wvw3bemN
-	 H5bpK0WztmLWeXlvO0K83uiwKN1VcXNqJUazco2Xu33+3cl9CXPZpnRZwWAVC4iewghMO
-	 G4slhC53sG2DVuG4YsgqCKHDGlGScjS580UnHne57taW5Ck4dK4P5AWWj/kkwA/66ZBJK
-	 SEMnZ62zHsf6jfeZGWCjffx5GFJnxipl03+/vVewxu5oKlinWIN4dge787txRysyDx4dc
-	 eKkjQYqb5Dy+uIaP5m7TUV5AUHV/14HAuv+yzGQllLgF95P9vj3TcwQQ8P8wqMjNtPQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JBVElmR8sz4c; Sun, 22 Nov 2026 23:54:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5EC7E40611
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795391673;
+	b=RHj8lz+hDE2rasvqDO+cYma++tUWgFpX+3kv3nL5XhgRZwOQxAzYAqUPCfc38lRkMCJi
+	 C0gJJ78DOg0IsboEuAoBiJpZ/mJ/pzPU89suPJZU6T4hTwk/kvu3Gpp6ccQb0woXHFfuG
+	 Zv83CGD5GrYC1HVOdqjyuN/WFJRYGJdElNMOlPAFsfclRt12U4aEBxYSuG5RlgW3eH+tR
+	 vkZ24t/lT7vNeyrg9XjnN1+n3ahiV4Cc/J8oTE9a0dJZbZo/p1CPRq4M47WT2/P3XFNNc
+	 FKfMbnuWdC646w8AA9SN/AZja05VgxPkWJv84ZAFF1dMUKfSmi/l58cfo/Pam5TduoA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795391671;
+	c=relaxed/relaxed; t=1795391673;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -37,91 +37,91 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 CFBL-Address:CFBL-Feedback-ID:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=;
-	b=stRoGutBC0nLpcPmcvcHk+lR0sPVucrunDm4wLwtXSkO4h4sZoCtavoX1gBpJ9fopsvt
-	 PGg5EQgq8RMuA124lhwZiW2eHuipmNCOspZANLUDrYIV2q/tFNblQB1jQ8e9QqpshB2KK
-	 dRWJetZVV9t4Ou7OnBP8bL29Gb9ZGb1RXtq3hFQAficaE0aCBBjDoEUcRpftCqZNtFTYR
-	 Smh0+gbrO68rTjfYy78AkuYB+HkUMMgmjeSH17Ji2TKOe6ixKETot4Ix9VOCUoOcdg9Y4
-	 2JX7OyQYJO4x0i5kEZRVQbC6uc+qjDmZa5OVM7QQGZ6U0RUKCdmsVUusnUfJ0nnJhxg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=JflXhJCl4R0GqvnuOGd3Hpkhzcs+rEuLAa1OzSs09DQ=;
+	b=sS5vvl0B5++yajftAS0PjezZ9EAxqMWKoU0Y0Cpjddo+pbQ9ahzG8D36llu8dsu04hOD
+	 PGiRGcSBc3K0maVctKWypCsMHUbNmPAPcCTaZKxPLNbgdAn3eQcCr2HhP5Okxioboa98W
+	 j26ydVtAH5uKA21ydWmQ0RjMS0L0PaRtNrp6RVBW0CIr87X5W9wOG1UmcrsQUuoF0frRw
+	 LHVs2fn1yNT1R5CrSAKhOyRirKCLbH1C3XlNTUsz0LS98TEfr7HKVkv8wjryadKdrDNeY
+	 sm2loRVH4Ktbzmj3TyhviRSFXXThhX78+KvGIFQpOHBHwcEgkyVXIfWXVIlq5CFEpUA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795391671;
-	bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=;
+	d=lists.u-boot-project.org; s=default; t=1795391673;
+	bh=JflXhJCl4R0GqvnuOGd3Hpkhzcs+rEuLAa1OzSs09DQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tal5D4L6udiUblZsc+K1aC9V8CmweayMoiAF6O4Z6cbh5aQNJ/gUgO04/1vMJif4y
-	 JJqyfgdg6X7nN/DZczPrOB+ccN23jHd8XpCz8eNgAJdS6wEjWJtKfwI+/gSJnAlRPR
-	 RuTSB89XoFXNaLmsODKRYH7gUMtyY3vISdmokDYdXQjkQ56CztW3VR3NQkbWeGK2DZ
-	 LjEkgbHs+GoTcI26ctqHR9LZ41iL9BqsnW5uF7Vh7rruYoMa+Lih56vmwf4x7Hn1Zx
-	 MIgsgREJQ1G7UxWJtw60FqGAGSbGY62t3K3Har3SDqjj9h55SG/qRvkXUOGTKJ+jvN
-	 cPCJNgonlMCow==
+	b=0PvrPcrponc4pB0wSYt3pb4kidgKkYeumdzDRZiQ64/BMfxX7KbeKTdh2/xdJTSYW
+	 lLvGxFM9UAWGpY5vvIFqifXA8sIgLYEZ2b8M4DEb6mpRsTnsMElYPsdzOM9kyFSVKc
+	 ZTjvwuw+bz0R9T9USrEXgRidY7fMq/vlb9slkttJRrjVCUA1B5Cj3T4gTH7yNjxXKP
+	 tJNC0MguzaJYTc/re+FRhtv90kxu4hO5LFNNj3laSX0fFgSVISdrlqMqunxuX8Luzf
+	 s58ka8g4L2OlWCJJPLCh10Ar1GkhV0xRfZR6C3uhb0uIgMYmpYmEeVuQvBHqRKy3V1
+	 AOWV/rOJnPAOg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9B4C080D86;
-	Sun, 22 Nov 2026 23:54:30 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6873D392
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5EC7E40611;
+	Sun, 22 Nov 2026 23:54:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C9CBB260
  for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4F0974043C
+ by smtp2.osuosl.org (Postfix) with ESMTP id BBD1F4006F
  for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jykoP1Db52bS for <u-boot@lists.u-boot-project.org>;
- Sun, 22 Nov 2026 23:54:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6675640352
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JM12dh3ASoCs for <u-boot@lists.u-boot-project.org>;
+ Sun, 22 Nov 2026 23:54:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 632CB40081
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=185.56.87.13
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.56.87.13;
  helo=delivery.antispam.mailspamprotection.com;
  envelope-from=francesco@valla.it; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com
  header.i=@antispam.mailspamprotection.com header.a=rsa-sha256
- header.s=default header.b=JVUkGeBd; 
+ header.s=default header.b=pl1OPvif; 
  dkim=pass (1024-bit key,
  unprotected) header.d=valla.it header.i=@valla.it header.a=rsa-sha256
- header.s=default header.b=ZZEIPr3n
+ header.s=default header.b=ap8HwxVN
 Received: from delivery.antispam.mailspamprotection.com
  (delivery.antispam.mailspamprotection.com [185.56.87.13])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6675640352
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 632CB40081
  for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 23:54:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
  :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
  :Date:From:Reply-To:List-Unsubscribe;
- bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=; b=JVUkGeBdqnie5Jg1lmvx54ToUN
- kUFDovVDFqvz8PL4YJFCPwLtNkeAMod+87WlhtR03wr/drN2gHPI50cpgUOOuRMbBPRYT/ZnICo5R
- EFRGkGYLJNykSNmhMR/kbdQzPf4xGDPD34xSqv+D7AT+HPn6EYxIKTcp0wglGxH6pKXo=;
+ bh=JflXhJCl4R0GqvnuOGd3Hpkhzcs+rEuLAa1OzSs09DQ=; b=pl1OPvift6XYkrjMa+7X7IVsR/
+ uAjF8t8p8VYFyAZACUIj39056u220snrztiwpea/REtf7GsJ7iOX19aXSuVqfo2fi+B1hR600KUq8
+ ym9lxGItiPPSfZNMRLesTKqPInsw7wfcJlCuL8PD3wTdD8igmkOgyd077snPdStuyw8E=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
  helo=esm19.siteground.biz)
- by instance-europe-west4-h034.prod.antispam.mailspamprotection.com with
+ by instance-europe-west4-lgmz.prod.antispam.mailspamprotection.com with
  esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.100.1)
- (envelope-from <francesco@valla.it>) id 1xVHNx-00000009z3g-1Rau
- for u-boot@lists.u-boot-project.org; Sun, 22 Nov 2026 23:54:17 +0000
+ (envelope-from <francesco@valla.it>) id 1xVHNx-0000000AEQY-2CkF
+ for u-boot@lists.u-boot-project.org; Sun, 22 Nov 2026 23:54:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
  s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
  list-subscribe:list-post:list-owner:list-archive;
- bh=Hf8bTiatGc1AuVRPVBOF0jmtTsOLsA1X+C+jmY3YRXI=; b=ZZEIPr3nyfaWnS0uvUNJ+2OxTD
- K5G2s/guVimC9ICqiUMwi0DfcDs0+d1nkcCpLz71kp0X8t7Sdm/Ha6Ly9VqSQSi59U6mhl0yrCHCX
- qRF0EUAf2ocqdZhHPGy24xLF93WCHFl3/IjhrAZ2dacNjslsQ7F0TCCbGuRgWVpAmv40=;
+ bh=JflXhJCl4R0GqvnuOGd3Hpkhzcs+rEuLAa1OzSs09DQ=; b=ap8HwxVN/74ckoLB33MulqbNVw
+ ACBUrVzkLV091C8d1JHukosjIqNjt1PBnMLVM4BvTeY+Grjn9ahJoNJcH7IdIG8w8B/iFWqBcNbpE
+ z/e2QsCsnVAUvg0Dy1Bye2w2oLWtM4kHeWwoTldbkXrePYkoCzmo81NQgJDI9kZKy0fk=;
 Received: from [79.28.115.6] (port=62562 helo=[192.168.178.175])
  by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.100.1) (envelope-from <francesco@valla.it>)
- id 1xVHNs-000000005H0-3hT5; Sun, 22 Nov 2026 23:54:12 +0000
+ id 1xVHNt-000000005H0-1Yuj; Sun, 22 Nov 2026 23:54:13 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Mon, 23 Nov 2026 00:54:07 +0100
-Subject: [PATCH 4/6] configs: am67a_beagley_ai: add configs for Ethernet boot
+Date: Mon, 23 Nov 2026 00:54:08 +0100
+Subject: [PATCH 5/6] doc: beagley-ai: document Ethernet boot
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-am67a-ethernet-boot-v1-4-94520ed74c90@valla.it>
+Message-Id: <20261123-am67a-ethernet-boot-v1-5-94520ed74c90@valla.it>
 References: <20261123-am67a-ethernet-boot-v1-0-94520ed74c90@valla.it>
 In-Reply-To: <20261123-am67a-ethernet-boot-v1-0-94520ed74c90@valla.it>
 To: Andrew Davis <afd@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
@@ -131,12 +131,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Chintan Vankar <c-vankar@ti.com>, Anshul Dalal <anshuld@ti.com>, 
  Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1592; i=francesco@valla.it;
- h=from:subject:message-id; bh=oZerNt1HvU2PxKB7QD1SyfIC62CKMrGD/ILs0Cxc5cw=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDNnMDYvmz36cctElca7bm40bP/m33wxVenJS+rWFppHB9
- 5+PPEuFO0pZGMS4GGTFFFlC1t24t2eu+be0DYyPYOawMoEMYeDiFICJvPjE8D+R0XHlbuZdv+UC
- 1v9kUdd/IyiWOzVcRuGMhIhV158DAumMDCdWfPD6kcc07WXPl3ytbI9LWssdUo9e02PYd7xhwdR
- VE9gA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2561; i=francesco@valla.it;
+ h=from:subject:message-id; bh=I09oK6aD9RO2Y/FB0itBAfYMaJR8PJvtfsPuE/12ecQ=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDNnMDYvcG8pL99lqhnMVSV6OVfsS8OJDlXjTwbV7L7j7T
+ nr1V02zo5SFQYyLQVZMkSVk3Y17e+aaf0vbwPgIZg4rE8gQBi5OAZjI1VpGhkfSmaH/zG0EZnhx
+ KSmfXFVQ3ukd7PXFsydS6frJqWUxfQz/yz6IdW/ed4VppdsV202V2Q27E5b/z9X/YdtU+a3LPGA
+ HEwA=
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse,
@@ -148,15 +148,15 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: 05ea92cb38e387d55f1442a98930c672
-X-AntiAbuse: ID - 05ea92cb38e387d55f1442a98930c672
+X-SGantispam-id: 962530a81e0c18395f7843caad904a79
+X-AntiAbuse: ID - 962530a81e0c18395f7843caad904a79
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1xVHNx-00000009z3g-1Rau-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-h034.prod.antispam.mailspamprotection.com; 
+CFBL-Feedback-ID: 1xVHNx-0000000AEQY-2CkF-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-lgmz.prod.antispam.mailspamprotection.com; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
  auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
@@ -173,56 +173,88 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add configurations suitable for Ethernet boot of the BeagleY-AI for
-both the R5F and A53 cores.
-
-As done for similar platforms (e.g.: AM62, AM68, AM69), keep them
-separated from the regular configurations to avoid increasing their
-sizes (in particular for the R5F, where space is limited).
+Add documentation and example DHCP configuration for Ethernet boot on
+the BeagleY-AI.
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- configs/am67a_beagley_ai_a53_ethboot_defconfig |  7 +++++++
- configs/am67a_beagley_ai_r5_ethboot_defconfig  | 13 +++++++++++++
- 2 files changed, 20 insertions(+)
+ doc/board/beagle/am67a_beagley_ai.rst | 58 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
 
-diff --git a/configs/am67a_beagley_ai_a53_ethboot_defconfig b/configs/am67a_beagley_ai_a53_ethboot_defconfig
-new file mode 100644
-index 000000000000..5c2db954b5d6
---- /dev/null
-+++ b/configs/am67a_beagley_ai_a53_ethboot_defconfig
-@@ -0,0 +1,7 @@
-+#include <configs/am67a_beagley_ai_a53_defconfig>
+diff --git a/doc/board/beagle/am67a_beagley_ai.rst b/doc/board/beagle/am67a_beagley_ai.rst
+index 3d2fc4a31950..5384b91ce74b 100644
+--- a/doc/board/beagle/am67a_beagley_ai.rst
++++ b/doc/board/beagle/am67a_beagley_ai.rst
+@@ -157,6 +157,64 @@ card prior to physically removing from SD card reader.
+   * `USB-SD-Mux <https://www.linux-automation.com/en/products/usb-sd-mux.html>`_
+   * `SD-Wire <https://wiki.tizen.org/SDWire>`_
+ 
++Ethernet based boot
++-------------------
 +
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_ETH=y
-+CONFIG_SPL_NET=y
-+CONFIG_SPL_NET_VCI_STRING="AM67A U-Boot A53 SPL"
-+CONFIG_SPL_SYSCON=y
-diff --git a/configs/am67a_beagley_ai_r5_ethboot_defconfig b/configs/am67a_beagley_ai_r5_ethboot_defconfig
-new file mode 100644
-index 000000000000..044dbfd5ca02
---- /dev/null
-+++ b/configs/am67a_beagley_ai_r5_ethboot_defconfig
-@@ -0,0 +1,13 @@
-+#include <configs/am67a_beagley_ai_r5_defconfig>
++If no SD card is inserted when the board is powered up, the ROM code tries to
++boot from Ethernet, using the Ethernet Port corresponding to CPSW3G's MAC
++Port 1.
 +
-+# CONFIG_NO_NET is not set
-+CONFIG_SPL_MMC=n
-+CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_ETH=y
-+CONFIG_NET=y
-+CONFIG_SPL_NET=y
-+CONFIG_SPL_NET_VCI_STRING="AM67A U-Boot R5 SPL"
-+CONFIG_SPL_SYSCON=y
-+CONFIG_PHY_TI_DP83867=y
-+CONFIG_TI_AM65_CPSW_NUSS=y
++Binaries for the Ethernet boot shall be built using the following config files:
++
++.. code-block::
++
++  am67a_beagley_ai_r5_ethboot_defconfig
++  am67a_beagley_ai_a53_ethboot_defconfig
++
++The DHCP server on the host PC needs to be configured such that VCI strings map
++to the right file:
++
++* "TI K3 Bootp Boot" maps to the file `tiboot3.bin`
++* "AM67A U-Boot R5 SPL" maps to the file `tispl.bin`
++* "AM67A U-Boot A53 SPL" maps to the file `u-boot.img`
++
++The aforementioned files shall be served by a TFTP server.
++
++An example configuration for isc-dhcp-server running on a host PC follows; it is
++assumed that the Ethernet interface exposed by the host PC is `enp1s0f0` and
++has fixed IP address `192.168.0.1` and that the TFTP server lives on the same
++host.
++
++* `/etc/dhcp/dhcpd.conf`:
++
++.. code-block::
++
++  subnet 192.168.0.0 netmask 255.255.255.0
++  {
++    range dynamic-bootp 192.168.0.2 192.168.0.5;
++    if substring (option vendor-class-identifier, 0, 16) = "TI K3 Bootp Boot"
++    {
++      filename "tiboot3.bin";
++    } elsif substring (option vendor-class-identifier, 0, 19) = "AM67A U-Boot R5 SPL"
++    {
++      filename "tispl.bin";
++    } elsif substring (option vendor-class-identifier, 0, 20) = "AM67A U-Boot A53 SPL"
++    {
++      filename "u-boot.img";
++    }
++    default-lease-time 60000;
++    max-lease-time 720000;
++    next-server 192.168.0.1;
++  }
++
++* `/etc/default/isc-dhcp-server`:
++
++.. code-block::
++
++  DHCPDv4_CONF=/etc/dhcp/dhcpd.conf
++  INTERFACESv4="enp1s0f0"
++  INTERFACESv6=""
++
+ LED patterns during boot
+ ------------------------
+ 
 
 -- 
 2.56.1
