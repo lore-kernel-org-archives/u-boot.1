@@ -1,156 +1,141 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1B11606A336
-	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 20:52:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C47C1606A32A
+	for <u-boot@archiver.kernel.org>; Sun, 22 Nov 2026 21:00:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=FmY4nGiV;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=D2Iu5TO3
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PRMCQcNw;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AknzWmNG
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8FD7A405E7;
-	Sun, 22 Nov 2026 20:52:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1842B80D48;
+	Sun, 22 Nov 2026 21:00:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mr62ESb1kM0M; Sun, 22 Nov 2026 20:52:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E21AB405E9
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795380737;
-	b=cdgKv8bD8rtEzJM0m9O9KPkt5rSieZd23WU6NIbDzKOqiLBOYNBorOVAPygyyArSj/dp
-	 RjoAmu7ZZs/NRh+vwdH+Ve/t0qF78ErJ43bD+Gt3fQgYzbCYOngXwYNY6uF2WBkcWkuTV
-	 PGU0mERs2ZiVrIjBG1DAPW8YNzDG4tpLlV5Q74xhHBl5jcv8fk6o5uMobNNJ52BKExYV6
-	 ASDYQQNlpE40hsk9HNErXzbtgg++B4b0P7O4F4yhsoL4FRqNm9MBdk5eLKNphUkgRntdC
-	 lNDP1sa5jDHO1bw1IkXqLkwmZGMFVkUIw1thknAZVLfDhDju++bsxsW+lgPPW11Hmrg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O0UpH39L18P3; Sun, 22 Nov 2026 21:00:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2B8B680CA3
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795381233;
+	b=jHYWaMs/duXk8bUTZD1Ju/96jL6jSRvCAbt3wy/5DacDKeh9Z0ZYCykFaNIJyiApq6y9
+	 J5jpg1Azjuad42g1vvk8b2cvUXl2QcpVtKZ3lzfmUAOL8qryvGSoEydjrvu1RbVizEUyZ
+	 lhg/M+bbMiGDU1UghAXgeApk7mc/5sk78Yz0aOP0HrLW/7Mld78WMeFDke/zzQHKmXCyY
+	 R+/lNFF4evn705OXOaQiqKCfVFbrZHgsFP46CDLzcT3/djkfJXHsfPfZtNhXm97mbFN33
+	 DDwMV5xI+wkHjAag33EFMDiRTNnXPC53uYhHHzZAdTeQ2x9r4EcOZni+hlNufJIo8ew==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795380737;
+	c=relaxed/relaxed; t=1795381233;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=Pu5L1lKt/X7s9hU6EjKBxr8X1GFycCc02arlx+E21ro=;
-	b=H1Z/Oef3ymiPgtzXiyrfj/bCLpqLYNTLsNGOdk0X7NkHhAYhZi7EY7/mprtkCrT4z0MI
-	 HhbGQA+rA9Pcs/26VSvz/zxYb0sQ++dfUa4PiFxUjlRf1QtzOnZMZnUgST1FhvfE/FUWJ
-	 /+69KmfxC+0WVklXIYNzF2Yt8Lpg9PPVs7O+NcPzzwnNFHmv2L0bYZduHXllZOt2EEO79
-	 251JYaTlGXQY5nZlKJXi6nxvyRR64VeS553SFQv+RwlZufgjj/EgOFChPj0nDLUv58giM
-	 3w7v7Wi3MtviTamiA7RmJMgqfSyCKoSIE6NxWP3HzECLUDLf/OZBqJVIVHD9tuxAn0A==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=D2Iu5TO3;
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
+	bh=t/wRZDs/GDNfC17wFWWRqtDp2PJZJLftEgPvlO7Ddk0=;
+	b=NB0lkJIOrLvPOoV6fFnfobyHRUfsJfxebek6Z7R/FvDJcG3N2DXBgHKmZhEt8xSpVJSS
+	 IUYcv/Tu6ycmb+t3Q3xvmvFYglz1Vv10ig5+OrIZCmO7xBO4FjglKNhaaS51I4AfKBHgc
+	 OYPthflsnajcNaR9dBCowdExmgafQWDo6zI5ap/wZ4E84jQ74mJRTdJrZVTVqccVnCGgE
+	 7SeqPRlWKcnrkANI4S/j1rhN9ZhCFYtKinv9Ptx/BWLJSqs0krzmOqregVDLqCHbaCeAq
+	 xhcQ94bmOMf8Wq3Hz5ojLB4u56Ito6WqTAP0oPun/gfGVw2z+51fQeGRpFbq9Pu9bVw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795380737;
-	bh=Pu5L1lKt/X7s9hU6EjKBxr8X1GFycCc02arlx+E21ro=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=FmY4nGiV3JBrvx2wPeP7UdWhzmNcltaHMhdTYdXVEySQ+vD8ttwFAaAMLgaKZs03s
-	 vJVeKphv/DQ9BrI7Sby1TCToWnFMHwVfHhJ0VqVAGsApuDW0yql0mhRHddK8NIGRMX
-	 0eck66fjQGfd0asrRtP52k4tmrMY2ggYFpVIwERMC/+JMlJIMkxEXWQWMeNFL5NonO
-	 gSTNJyQdzrD4j+Q8LewzoRlyGd7PK4KbSE1GlVba6Qw6R1b/fD1IZHPlfjdmod8QII
-	 3cmy2ON3xrsPDd8EM3B15oxqiLrFDT3X+ADYnfGoqZaDAjz9uCkS0iqYfXIRFWaXjU
-	 2AgykvmhV989Q==
+	d=lists.u-boot-project.org; s=default; t=1795381233;
+	bh=t/wRZDs/GDNfC17wFWWRqtDp2PJZJLftEgPvlO7Ddk0=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=PRMCQcNwduYL8B6eCN7cyIPNqUFrhU7j7TNE+4uu3tebH5qoVwm+G50TD5QTk3UAN
+	 yrEvwKAlzrl3R1mLeUGOOxweMacpvNemXG7xVNCSWmo94OC78AWNdxAStrWLQRJtPm
+	 LyL4eXbEKk6p57lJzIdlV5qNtOA1LMa+8pO4fE9GQb600DB6gVhRvJwBTFOm49fANx
+	 /wC6lW+/osA1Z6BAASIbtfqJLQ8iIeQU/dOp3RTSz1S8DXpdY2vzqi0tzzUP+TOUdM
+	 WBj7U/5iHGd+NePSz1HOaNo3Pm8n4yDur2OVpPyV1JP722XlSjCzVkD7yHE06OwvqH
+	 l9/+eTDRbnOEA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E21AB405E9;
-	Sun, 22 Nov 2026 20:52:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2B8B680CA3;
+	Sun, 22 Nov 2026 21:00:33 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id AFEBC499
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 20:52:15 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id A1212465
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 21:00:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 967F7405E9
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 20:52:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 873DF4058A
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 21:00:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8fUDk7WsObyU for <u-boot@lists.u-boot-project.org>;
- Sun, 22 Nov 2026 20:52:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C52B1405E7
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
- envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=D2Iu5TO3
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C52B1405E7
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 20:52:14 +0000 (UTC)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-48dfc0421d9so2580813f8f.1
- for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 12:52:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795380732; x=1795985532;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Pu5L1lKt/X7s9hU6EjKBxr8X1GFycCc02arlx+E21ro=;
- b=D2Iu5TO3jJefzc5Qfm/vT+DOW1fr+hZnzTIevHZGFaRr/7Brik8AYseW0olNBcrT3w
- d6bzEJWhhpFh69PhJ53ji+BMW1+8m7n8DhdxkYd/O2tznD+FPtQfZewe9lwgVosVugEU
- BQ7iKHt88uTRVwtctyFl2fyto0kLYoNqk7e/ygJ3tzIjqhqde2lfPp6YM5XNrJWsOT+6
- /x3WAgQ+o0QSANT/0W7dZmBBtGtt8ffGj0eKj/Kq6UwZfYTTQ5IwMG/+CzuekUieKjm5
- 5uI8wCEIoTVtUiRYEZoHrBxWSXrT1gIt2nLWNo//sn6FrPNmTxolyfDmRiOh+vDUGbOl
- vI8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795380732; x=1795985532;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Pu5L1lKt/X7s9hU6EjKBxr8X1GFycCc02arlx+E21ro=;
- b=mrQS/49fCJz1UJWloBqSwjZ5N1waMyrm1gaF/2W4kfuNhMgzFfaqFI3ayM8CTu2AXe
- yI83oqzFJffXAlAU/dZXHnGilacNfJznXJouFu8CuwDQ05b/wUZLQMsFwCrNuITT70vt
- U7TRQ54m4ESKFTT4365rdXi+lL8TPXjmBKPcAC1BnaTlHTSQvyZGT2QgbxpMWC5kKleP
- KLsuiUUhYJ1Q1ZFGLvlYGqPWCDiJ0YuQ38JoH4YrM5x+JU7K3lypUHfw/SE/PHsrz5CU
- 4UDGYeuIiv+cEJe0Zk839SXYRpJaEZ0zsYGVnKVKbE2m3DCimXf7sJIJ7KjyJmeUwlk1
- 5xag==
-X-Forwarded-Encrypted: i=1;
- AL+hErEL6hWjCU8vCsCOxQ+8kia825KB88yhndnn6WnoOcExUTj5yfDhMiBPMrWfBIOOqKtSUv6JsO4=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/8gHHnWXe4APOsR/y5o+3WLuqV2+95bUoxmuvmYeVvMGo8CPhe
- 9j+MbqmzQwWBPk7esOPFUtYKP5ryj6p2xcwjJIajyay9SgWNgJcE7p0Q
-X-Gm-Gg: AZFdTZdJyB3Tv1q9AutoY0vtPRMoqVXAPHnBY+B1PkTaD2xFlvFp8MnV9y2exO8B7V3
- Nrg2OvHlDr3XytTnpoSlz+5W8AHozotmZOzVaQ9Avpl+TGQXXLRY9Nv/x7RYCkzz6BUj0aH42Qw
- afvVygPRFXeNspEqj/I5RlReSX6t5IO9hNvRej3hEocK2N00e6+uCuaaG808VEOiTgDLmxZtLyE
- SQ1YJo/AQ47lUUxPn1c9CTETmEPTPDXa9NxUiAobIUPyQmIDgs9C503/WqFSyKXxgI0GBiQWuf/
- kQ4Am3HtEnfMxpcd0ot0JWDhRtXN5R4so34GCkQP+7yf6TIAQLXYAUBsjHYITzROV460R6H5dG0
- /YBYkfqFr+4XfkIu3/JNMSrf4GMP+PdfN6jmb5/kfiywvxCSMa92airvfRqkTQfu+hFECoE6809
- zqNoyIn43PEB3GDiUNIqWE+BJivYtCAMyvFZd8+SPp3lfarONxcfPx2M4u6eiSVY468DjkB9oKu
- jDse+nXMtNxxXHc27YfGACkA5M4NkjfJ9MEb2eBjjDtJvZ+90ESHgRrXP6icDtk5wEFTV/BpTaA
- 6Wcht188/zYUkScY0tMyRUcHJnGVXG726hw=
-X-Received: by 2002:a5d:5d0e:0:b0:48d:f831:2681 with SMTP id
- ffacd0b85a97d-4abb7d465a9mr19263596f8f.38.1795380732535; 
- Sun, 22 Nov 2026 12:52:12 -0800 (PST)
-Received: from deb05.proceq.com ([213.160.61.66])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab658e2d60sm18547573f8f.3.2026.11.22.12.52.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Nov 2026 12:52:12 -0800 (PST)
-From: Mehmet Fide <mehmet.fide@gmail.com>
-To: Francesco Dolcini <francesco@dolcini.it>,
- Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Fabio Estevam <festevam@gmail.com>, Stefan Agner <stefan@agner.ch>,
- Krzysztof Kozlowski <krzk@kernel.org>, u-boot@lists.u-boot-project.org,
- mehmet.fide@screeningeagle.com
-Subject: Re: [REGRESSION] [PATCH v9 1/9] fdtdec: match an alias to its stem
- only when the number follows it
-Date: Sun, 22 Nov 2026 21:52:10 +0100
-Message-ID: <20261122205210.748822-1-mehmet.fide@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261122195302.GA432275@francesco-nb>
-References: <20261122195302.GA432275@francesco-nb>
+ id 8f_NvgPURyGR for <u-boot@lists.u-boot-project.org>;
+ Sun, 22 Nov 2026 21:00:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2E5F740577
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org;
+ envelope-from=devnull+user890104.freemyipod.org@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=AknzWmNG
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2E5F740577
+ for <u-boot@lists.u-boot-project.org>; Sun, 22 Nov 2026 21:00:29 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 96F22601CF;
+ Sun, 22 Nov 2026 21:00:27 +0000 (UTC)
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.kernel.org (Postfix) with ESMTPS id 414CC1F000C4;
+ Sun, 22 Nov 2026 21:00:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1795381226;
+ bh=t/wRZDs/GDNfC17wFWWRqtDp2PJZJLftEgPvlO7Ddk0=;
+ h=From:Date:Subject:To:Cc:Reply-To;
+ b=AknzWmNGTxzfNgzdsbMTHfEGV1CP+/8ghk4+gzIe8j51vwS136QeqiY/bTpvKnXIy
+ 2mr2zCCsHI/K68uGliYxygDvwSqAIA18BiSGeXSHRswJZ6DsWi7XyKDFT33ggsIhPf
+ aNj297n+3bqN/+7yrtZh1VHMEAP59WO2ieQ2uNsHPtlTz3iEwyXZMGgdxI+QMy5t8Y
+ d9Oxpg1RZ1PhxtVZAytNePu8rZXVkqvmQ1ngGhO4mIlbMxNVoK8PH6M0bZtwBYELeA
+ lWwT6IBesINCocaCe3jx+fBbDUd5hIMtPt+xEdHk7InjYyaqVgJvbFI79xPOzHzFTL
+ CTmOqEcrkKPLg==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+ by lkml.kernel.org (Postfix) with ESMTP id CB9DE4C201;
+ Sun, 22 Nov 2026 21:00:22 +0000 (UTC)
+From: Vencislav Atanasov via B4 Relay
+ <devnull+user890104.freemyipod.org@kernel.org>
+Date: Sun, 22 Nov 2026 23:00:11 +0200
+Subject: [PATCH v2] doc: Add section about mail providers which modify
+ Message-ID
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261122-doc-msgid-v2-1-10c717d50d1f@freemyipod.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NywqDMBBFf0Vm3ZSMrQ+68j+Ki2gmOgWNJFYqk
+ n9vYrflrg4czj3Ak2Py8MgOcLSxZztHyC8Z9KOaBxKsI0Mu8xIRa6FtLyY/sBb6RoW6FygrVBD
+ 9xZHhz9l6tj/27+5F/ZoCyRjZr9bt59mGyfvX3VDEybruTCnRdFVjHNG082L11boB2hDCF1SuU
+ Oi5AAAA
+X-Change-ID: 20261118-doc-msgid-d3e5a451071a
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Vencislav Atanasov <user890104@freemyipod.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795381222; l=2176;
+ i=user890104@freemyipod.org; s=20261004; h=from:subject:message-id;
+ bh=fmz+T9rLiN6nMaBX6pIg1i9TxswslFkT3LQYtgKgKWg=;
+ b=01j2RROdROSZSOB7OlwOAvBgkobSvX/JUr1eYqxITXfqDgXWzXisXYEULN2jwEvClf4l7uLuV
+ tt3rscQB/JqDp7HkKKw1455sjM5f13wkX8CQMq1m9VjcFUS0zRSCrae
+X-Developer-Key: i=user890104@freemyipod.org; a=ed25519;
+ pk=klj5EgxMkX+YF0tPboUEB9kwBfthBgHWLhDOkwnmUus=
+X-Endpoint-Received: by B4 Relay for user890104@freemyipod.org/20261004
+ with auth_id=1558
+X-Original-From: Vencislav Atanasov <user890104@freemyipod.org>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -160,35 +145,68 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-4.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
-	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=no
+Reply-To: user890104@freemyipod.org
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Francesco,
+From: Vencislav Atanasov <user890104@freemyipod.org>
 
-On Sun, Nov 22, 2026 at 08:53:02PM +0100, Francesco Dolcini wrote:
-> ehci-mx6 takes the port number from the alias of the USB PHY node, but
-> looks it up with the "usb" stem:
->
-> 	ret = fdtdec_get_alias_seq(blob, dev->uclass->uc_drv->name,
-> 				   phy_off, &devnump);
->
-> The only aliases pointing to the PHY nodes are usbphy0/usbphy1, so this
-> worked only thanks to the prefix match you removed. Now it returns
-> -ENOENT and the EHCI probe fails.
+A short debugging session revealed that AWS SES completely replaces
+the Message-ID header, even though the API is called SendRawEmail.
 
-Right, I missed this caller. It is the only one that looks up the alias
-of another node by the uclass name. I sent your diff as a patch in reply
-to your mail, built for seven i.MX6 configurations. I have no i.MX6
-board to run it on; could you test it on yours?
+Signed-off-by: Vencislav Atanasov <user890104@freemyipod.org>
+---
+Changes in v2:
+- Reworded the paragraph
+- Used a different link to b4 docs
+- Link to v1: https://patch.msgid.link/20261118-doc-msgid-v1-1-1088bf601fb7@freemyipod.org
 
-Our CI has test rigs with a Verdin iMX8M Plus, a Verdin AM62 Solo, a
-Verdin AM62 Dual, a Colibri VF50 and a Colibri VF61. If you can send us
-a Colibri iMX6ULL with raw NAND and an Iris, I will add it to the CI, so
-that changes like this one are tested on i.MX6ULL too.
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ doc/develop/sending_patches.rst | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-Mehmet
+diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+index 99581dc0ba0..027e7be028a 100644
+--- a/doc/develop/sending_patches.rst
++++ b/doc/develop/sending_patches.rst
+@@ -184,6 +184,20 @@ General Patch Submission Rules
+   cases, you did something wrong if your patch exceeds this limit. Think again
+   if you should not split it into separate logical parts.
+ 
++* If sending patches through your mail server is broken, doesn't work at all or
++  is not possible, consider using `b4's web endpoint <b4-web-endpoint-link_>`_.
++  It will allow you to send patches without using your mail server. A notable
++  example is `Amazon Web Services' Simple E-mail Service (AWS SES)
++  <aws-ses-sendrawemail-message-id-link_>`_. It modifies the Message-ID header
++  and your individual patches don't point back to the cover letter and vice
++  versa.
++
++.. _aws-ses-sendrawemail-message-id-link:
++   https://docs.aws.amazon.com/ses/latest/APIReference/API_SendRawEmail.html#:~:text=Amazon%20SES%20automatically%20applies%20its%20own%20Message%2DID
++
++.. _b4-web-endpoint-link:
++   https://b4.docs.kernel.org/en/latest/contributor/send.html#authenticating-with-the-web-submission-endpoint
++
+ Attributing Code, Copyrights, Signing
+ -------------------------------------
+ 
+
+---
+base-commit: 2f83ef8a7dd4a409b534ea68cd13b17b686cc53c
+change-id: 20261118-doc-msgid-d3e5a451071a
+
+Best regards,
+--  
+Vencislav Atanasov <user890104@freemyipod.org>
+
+
