@@ -2,114 +2,133 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EA29606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 15:07:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B82F606A31E
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 15:07:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ad87TNZ7;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech header.a=rsa-sha256 header.s=zmail header.b=lTyjXBZr
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PiBCh6tY;
+	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=NXNE4Ht0;
+	dkim=pass (1024-bit key, unprotected) header.d=forwardemail.net header.i=@forwardemail.net header.a=rsa-sha256 header.s=default header.b=n7tueZyC
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D9672406A7;
-	Mon, 23 Nov 2026 15:06:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7292C406F7;
+	Mon, 23 Nov 2026 15:07:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 28H8D3yCFK-C; Mon, 23 Nov 2026 15:06:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 549F5406EF
+ id LETW8qDirwm3; Mon, 23 Nov 2026 15:07:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BFF414070F
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795446418;
-	b=CsFsy+nDIlNzd75QPX3Q2IYhinc9ITU5Spw1slArY5JzlY3nZqwEIdRXJuR87sqZkobv
-	 Oq5tMayZvFHiB75ZeQQjajGz9ThcnnAip1jLt6zgnr9ET8EjnCkBV9rLa0ZIGMi9ZBzP9
-	 BJ5kP9Dodb5g70IeDS6hdV7jRb6b2pf75rU8nu6XRaTYWMsGqvQ6+b3UiUzJNZYWiRITL
-	 2NeU0p1b2zbUtZNcxvJN6K/2P8XQvoTciGVWY+BuhV+xgUWtPHFgqzn8GotwOWaxgv+Sd
-	 U5D0vJfOp4oJfYm1Omg6+u4GfVTbJZJ6ViXltmtbdynt9YccyQzwaZp/bA8NSjDgVvg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795446429;
+	b=WRI22+g4MDjGorNVzr9UlBvI6f21wUrpw0RZrPHRsZ2gtvz3C3rIvAFSTPEiwTpqZJ28
+	 vx6BtPhIGhpGY87RQLW6WfVhurPS4XX665U+yHFYJarlBejU6Z135kRs62rRjjUEFkYcb
+	 1410FhDp4YmNal8fkwLO1HDtTJdmY6n9mAB3KHZsPbUlts4yDz0jwNzvHcUGynnHUaUD6
+	 y+7rAA3NeD7BYmsk09SualZ38tyX5cXW1DynQN/yO+WtkZBAYXSkKIf1ZhmCdzoxh0pfA
+	 7DDxyBp37UdVXVLOZIjEm8oCt66Kl3w0nGvpQBZ5p2pNSA1LaxSn9KGKLDIgEDQFzbw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795446418;
+	c=relaxed/relaxed; t=1795446429;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Mime-Version:Content-Transfer-Encoding:
-	 Content-Type:Date:Message-Id:Subject:From:To:Cc:X-Mailer:References:
-	 In-Reply-To:X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=YDTGJNgj1RqiXWdnvV4kBH/mDR5xCNY7lgCE1E70o/k=;
-	b=pHl7dTx6rqSUbINkEvF55+EbqwhrbJFBq3SxJS6jVAJT9UuMLQzsmPtTFxSQHlSd/+rS
-	 RXsJp55KXRUZg9GZJzaxlwklEHnyAxxg1wgwWf7IYz3hHUkYHBsV/fRicOnLySZ6EOAnT
-	 UVBwGgXv5/O4kMdvnuYZkwQYI+eqLOutd1Y4m13CWlHaVc3HIdwMEl9X8wpPxfAtED4Mj
-	 GPTdlY2dzcWq18ocRyVXh4ZhrSSBRCiHTddF1RX4Q+HAxk3wdX5iZwo2Kacht96UMahXp
-	 57DpTwALZneN6gs0CpyNR9Na/VB3n8/jHgwqaPEse4znEtllInvn+91sGnglxE8VRAQ==
+	 DKIM-Signature:DKIM-Signature:CFBL-Feedback-ID:CFBL-Address:
+	 X-Forward-Email-ID:X-Forward-Email-Sender:X-Forward-Email-Version:
+	 X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+	 X-Report-Abuse-To:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=EW1tMJMkLRIOfUQIzKURbXCtoOSa210BnHWBkxS07xA=;
+	b=KApTw7v6QrYGI/AuKimSB7tupGqRUjEC63Fwa3kLBjG6DYtbpYY9l9DY3DJsrRitD1AJ
+	 /Rpo0p+A+8ZrzDwoW73MedMDHxdyxTJLCZqqxxe68VA/XmqLuoXDBvyZGpFGYpLMgpGPA
+	 K8KzxfI1u+5YNHm3cLnOmu6hG5IEBtnDpSW9xi3DURgYalh1vHpFLpj5P+icr9qoVqd5C
+	 v0BjZ+HnF1NSqSICDXkSm1TYZqM6Ufa9mxd33E4MdT5hmF8maENV94hOs9M24V/Xa9vFr
+	 uMaXLan0W5Leq64/ZD7FM/lpIqglK3nqKx93bHw7pZEQhGsSvWTP8lOFcuhjbBt/4Sw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795446418;
-	bh=YDTGJNgj1RqiXWdnvV4kBH/mDR5xCNY7lgCE1E70o/k=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795446429;
+	bh=EW1tMJMkLRIOfUQIzKURbXCtoOSa210BnHWBkxS07xA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ad87TNZ72Ad5j7+s/c+wjNn3T2yeSLWW52vzPhJEo/Ny0yj6/f9sx2OXdcyejmTNd
-	 GfmzxYHMEcYicJZ55XoK8FmhpGt8QQqvFGvZ7xLOXUZh1sPu8egOdf7khsCyVIf9yg
-	 vcuKajzgbN8nLt0KmhFbRMNXETC8RrxroJCVTUo1oaTdjzVIVgUf4U7MXPx7XuGqEA
-	 pWRBZfcqD4teplCF96f5zHxHWVyhRgLgtUiD2w17lydP7qW/KWwBgbfW/5mbKaxQPs
-	 Q5ygKIAd45l+5vIGDsfbL/Vkw2TbZIRAHM/yb8dMK+bIZ46XzMHnPsINHa+io8dAoJ
-	 6r36bQ7t/9rkg==
+	b=PiBCh6tYq2VKsaE03FfKg97rxuOdGryx+JDVH4l7sdYJ4zIrETvoNSmJKfxdgljrn
+	 9a11UivArOUYg3Mz5JJXGksVpe4FIIUBBYWjPaBNuRcVbAkbUXWcpMyicuWDHHckb9
+	 4iyKQDoXdTTi2yi9kniYBL0MAwuoX/Me7SE6l4Nq30CcQdcmY8tPViyx3Trr/pDmFg
+	 YJj/DAds56WDIkK51VNeITDIhjCxMTAAq0wU9eEzUBPaEMcleJYRFSnldlhJflgJhk
+	 iFUtgNJjJ4gRWKbxn02sSm13DP84ITuIDeqEphfbPx1fzGkalYprlG54UX7EW4rPgZ
+	 PUz1MyBV7Ec6A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 549F5406EF;
-	Mon, 23 Nov 2026 15:06:58 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E3A84759
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 15:06:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BFF414070F;
+	Mon, 23 Nov 2026 15:07:09 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D72F01AB
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 15:07:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D53FD6071F
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 15:06:56 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C807D80DD6
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 15:07:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GBJX5i9jmmdK for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 15:06:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 37B9660712
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VY2oHXPCZksH for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 15:07:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1D9AF80DCB
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=eede=jn=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=lTyjXBZr
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 37B9660712
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 15:06:52 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=lTyjXBZrrxutKf+WIOuDO/LaFmaPToqxDg77rx/krffHRS+Hnn3bYrrgk+W1G+Edzb6ivIh4aGElzWRTjcujDM+dFeAFCxMLuetuYCClxZTpvyHX1kmerMQTMc0ZwzK+2UxtFdRHTiKSjR3quYPrrHei1UTl49hWMNqrdDVGdbo=;
- c=relaxed/relaxed; s=zmail; d=pigmoral.tech; v=1;
- bh=YDTGJNgj1RqiXWdnvV4kBH/mDR5xCNY7lgCE1E70o/k=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1795446299249875.2611112627795;
- Mon, 23 Nov 2026 07:04:59 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=NXNE4Ht0; 
+ dkim=pass (1024-bit key) header.d=forwardemail.net header.i=@forwardemail.net
+ header.a=rsa-sha256 header.s=default header.b=n7tueZyC
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1D9AF80DCB
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 15:07:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From: CFBL-Address: CFBL-Feedback-ID;
+ q=dns/txt; s=fe-e1b5cab7be; t=1795446424;
+ bh=EW1tMJMkLRIOfUQIzKURbXCtoOSa210BnHWBkxS07xA=;
+ b=NXNE4Ht0vbugrr9SJaP6seetPyEFgASoaeTioBYRpn/xUuti3HdjikffHSxNxMb8VgmaavjLg
+ gEnQLHYHuT3Z3GrC/SjnJ8Gsh+a03kibjSUWaRFUWUIi68TiQBerl3OchRN836/Gsxce8c7ZFdM
+ JEWML9jkQejfDEG3P3hZNdNudD+mloj91AEwLZMFFn92pNVjkusJpBnRWaSRIusi+/tg96gmOlw
+ 2QBk7TR10MamKCATxJbCa5AjjzmgF3AHGB4Tja9zxvQqNDh57bed5O8suMoBUagzRe5TsU7S1Ne
+ e/24bse65aPRGYiuqkaQgLkQ4zHH4NtIBbHKCsVBffMQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=forwardemail.net;
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From: CFBL-Address: CFBL-Feedback-ID;
+ q=dns/txt; s=default; t=1795446424;
+ bh=EW1tMJMkLRIOfUQIzKURbXCtoOSa210BnHWBkxS07xA=;
+ b=n7tueZyCwSJgnj0hBKvMyXwyWLobCK/AdoK80ONqtvKn6oLrYXKq5RXFik/ggIG+qjOY+C5Fe
+ O5ZPL6PE7KdLZd5hPCOuJQyzq2SxDqg83V/t3xvQJXgcirtOmI43mRnV5wBL+4/N2h5MNvdulir
+ elYuF4MfcLoqv9mECjBxt7o=
+CFBL-Feedback-ID: 6b04569731d91c9369aee18a:80e4feee3b419c95d0b2cce76a28ac68
+CFBL-Address: abuse@forwardemail.net; report=arf
+X-Forward-Email-ID: 6b04569731d91c9369aee18a
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.19.37
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Quentin Schulz <u-boot@0leil.net>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.u-boot-project.org,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 1/3] rockchip: spl: Fix use of ROCKCHIP_SPL_RESERVE_IRAM on
+ ARMv7
+Date: Mon, 23 Nov 2026 15:06:52 +0000
+Message-ID: <20261123150655.1397175-2-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261123150655.1397175-1-jonas@kwiboo.se>
+References: <20261123150655.1397175-1-jonas@kwiboo.se>
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 23 Nov 2026 23:04:45 +0800
-Message-Id: <DN2OL8QDSA3H.369TW8VSAPCVG@pigmoral.tech>
-Subject: Re: [PATCH v1 5/6] pinctrl: spacemit: Add SPL support for K1
- pinctrl driver
-From: "Junhui Liu" <junhui.liu@pigmoral.tech>
-To: "Anand Moon" <linux.amoon@gmail.com>, <u-boot@lists.u-boot-project.org>
-Cc: "Dave Klotz" <DaveWK225@protonmail.com>, "Eric Chung"
- <eric.chung@riscstar.com>, "Hung-Chun Tseng" <alan.tseng.cs@gmail.com>, "E
- Shattow" <e@freeshell.de>, "Yixun Lan" <dlan@kernel.org>, "Huan Zhou"
- <pericycle.cc@gmail.com>, "Tom Rini" <trini@konsulko.com>, "Guodong Xu"
- <guodong@riscstar.com>, "Raymond Mao" <raymond.mao@riscstar.com>,
- <u-boot-spacemit@groups.io>
-X-Mailer: aerc 0.22.0
-References: <20261029134705.3767-1-linux.amoon@gmail.com>
- <20261029134705.3767-6-linux.amoon@gmail.com>
-In-Reply-To: <20261029134705.3767-6-linux.amoon@gmail.com>
-X-ZohoMailClient: External
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -119,65 +138,65 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Anand,
+Traditionally the SPL image is loaded to start of DRAM on Rockchip
+platform. However, vendor OP-TEE or TF-A blobs for a few newer RK SoCs,
+i.e. RK3506 and RV1126B, are expected to be loaded at or close to start
+of DRAM, something that would overlap SPL.
 
-On Thu Oct 29, 2026 at 9:46 PM CST, Anand Moon wrote:
-> Add `SPL_PINCTRL_SPACEMIT_K1` to enable the SpacemiT K1
-> pinctrl driver during SPL initialization.
->
-> Depend on `SPL_PINCTRL`, `SPL_DM`, and `PINCTRL_GENERIC`,
-> and select `PINCTRL_SPACEMIT_K1` to reuse the existing
-> driver implementation.
->
-> This allows SPL to configure pin multiplexing for early
-> board initialization.
->
-> Cc: Dave Klotz <DaveWK225@protonmail.com>
-> Cc: Eric Chung <eric.chung@riscstar.com>
-> Cc: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-> Cc: E Shattow <e@freeshell.de>
-> Cc: Yixun Lan <dlan@kernel.org>
-> Signed-off-by: Anand Moon <linux.amoon@gmail.com>
-> ---
->  drivers/pinctrl/spacemit/Kconfig | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/drivers/pinctrl/spacemit/Kconfig b/drivers/pinctrl/spacemit/=
-Kconfig
-> index 87cba336923..5770e4865d9 100644
-> --- a/drivers/pinctrl/spacemit/Kconfig
-> +++ b/drivers/pinctrl/spacemit/Kconfig
-> @@ -7,3 +7,11 @@ config PINCTRL_SPACEMIT_K1
->  	  The driver is controlled by a device tree node which contains both
->  	  the GPIO definitions and pin control functions for each available
->  	  multiplex function.
-> +
-> +config SPL_PINCTRL_SPACEMIT_K1
-> +	bool "Spacemit K1 pinctrl driver in SPL"
-> +	depends on SPL_PINCTRL && SPL_DM && PINCTRL_GENERIC
-> +	select PINCTRL_SPACEMIT_K1
-> +	help
-> +	  Enable the Spacemit K1 pinctrl driver in SPL.
-> +	  This allows SPL to configure pinctrl during early board initializatio=
-n.
+The IDBlock v2 format used on these SoCs can instruct BootROM to load
+an image to a specific load address. However, mkimage currently lacks
+support to configure a non-default load address for the SPL image.
 
-I tried replacing the hardcoded pin configuration in i2c_early_init()
-in board/spacemit/k1/spl.c with the SPL pinctrl driver based on your
-series. SPL hangs during boot after this change.
+The Kconfig option ROCKCHIP_SPL_RESERVE_IRAM can be used to create
+enough free space at beginning of DRAM for OP-TEE/TF-A to safely be
+loaded without overwriting SPL. However, this is not working on ARMv7.
 
-While debugging, I found that CLK_AIB and CLK_AIB_BUS, which pinctrl
-requires, are not defined in SPL. It works fine after adding them.
+Users of ROCKCHIP_SPL_RESERVE_IRAM started to be removed with the commit
+5ce94c74a6b5 ("rockchip: rk3399: defconfig: no need to reserve IRAM for
+SPL") in v2020.01-rc2, and since the commit 49f8131e5594 ("rockchip:
+rk3399-gru: Use TPL with common bss and stack addresses") in
+v2025.04-rc1 there is no more users of this Kconfig option.
 
-Could you please also add the required clocks to the SPL clock driver?
+Move the .space statement prior to the _start label to fix use of the
+ROCKCHIP_SPL_RESERVE_IRAM Kconfig option on ARMv7.
 
---=20
-Best regards,
-Junhui Liu
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ arch/arm/include/asm/arch-rockchip/boot0.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/include/asm/arch-rockchip/boot0.h b/arch/arm/include/asm/arch-rockchip/boot0.h
+index edb2a31c3481..eaa49635d9de 100644
+--- a/arch/arm/include/asm/arch-rockchip/boot0.h
++++ b/arch/arm/include/asm/arch-rockchip/boot0.h
+@@ -44,6 +44,11 @@ entry_counter:
+ 	b reset
+ #endif
+ 
++#if !defined(CONFIG_TPL_BUILD) && defined(CONFIG_XPL_BUILD) && \
++	(CONFIG_ROCKCHIP_SPL_RESERVE_IRAM > 0)
++	.space CONFIG_ROCKCHIP_SPL_RESERVE_IRAM	/* space for TF-A/OP-TEE */
++#endif
++
+ #if !defined(CONFIG_ARM64)
+ 	/*
+ 	 * For armv7, the addr '_start' will used as vector start address
+@@ -53,8 +58,3 @@ entry_counter:
+ _start:
+ 	ARM_VECTORS
+ #endif
+-
+-#if !defined(CONFIG_TPL_BUILD) && defined(CONFIG_XPL_BUILD) && \
+-	(CONFIG_ROCKCHIP_SPL_RESERVE_IRAM > 0)
+-	.space CONFIG_ROCKCHIP_SPL_RESERVE_IRAM	/* space for the ATF data */
+-#endif
+-- 
+2.56.1
 
