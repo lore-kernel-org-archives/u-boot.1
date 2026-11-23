@@ -1,156 +1,143 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5DEF606A31E
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 11:09:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 326BB606A32E
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 11:26:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=R+0B/wCh;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=UYdtEATv
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pjGpO5Mx;
+	dkim=pass (2048-bit key, unprotected) header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256 header.s=MBO0001 header.b=I6VZJaWU
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8426D6073D;
-	Mon, 23 Nov 2026 11:09:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 10A2F80E2E;
+	Mon, 23 Nov 2026 11:26:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fwWviuBRENv6; Mon, 23 Nov 2026 11:09:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D66ED60651
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795432193;
-	b=gtULvyo9P6O0pAdu4n2qMgUYcRDFwFfb3TxgzItlBj7Qq0WCN0r+KTF16PsWfBQffX8n
-	 jprTUoIixfbGvlJ4rwH6nzO/BlEOppViW8NB137VoS6rHPLeyEU4UIhUI8vmMHrzPfWwT
-	 7v2yCmNybqkNhWK92C5F4kMQc7OHgGKMAIGoP+G7peH12DHsylLLSSkS3Gn+vmcExyT+5
-	 PMlpXJJ0PvfDyKYa1vHyNNwaodWdPbPMD3NaQhnexXI2G8K99S4+0un4aGS3u04RlpLbU
-	 w62SqqJpkawI+wDiWdbgoKyyfv8zLmKrGAQNgFlzWqRU06Z+a1kF25Cu7MMQ+cP8FlA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jvKI__HE-UC0; Mon, 23 Nov 2026 11:26:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3391480E23
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795433197;
+	b=WwJXozxx44NEOMMwXW+GWWN4pBgRCkB/YPhvYFdDCwxHVSh0fdFU63/sqjflyOW8vPB5
+	 /bDo5fFUKBRXUYAYHgGBDOhXI3pP+a6+fGd7knFjBVcgS0WEseBOfwbIMaWPBBGQeu0GZ
+	 wysdy/mGmGnJLMT6gWVCr/BlDQuJz8AnMV1Iay5Rwx/VJYUcVbKZnyApCQJFesM5jDSHm
+	 Tkx5DKk3GN+TnrLHSvETaLI00twpe+CkUxqSw6RnKTN5zzKCbQpi6dPLnh6grs4Lz11wB
+	 lJgKtCBD1gVErAgrC6+UdQLV9ju5kozlnJOD3+3u0PgYsna30b88PP1YyT4HIDex6Bw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795432193;
+	c=relaxed/relaxed; t=1795433197;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+xtgh51cw908pcWTK2etHv0QRwwrPIHVOuOm6EiUnyo=;
-	b=Y8Fv9168wCi2RJeeSnl4cWBlMhlpaQSQpdpUXBYRUYQvLVvG9FOwdr//8jl8LLbo8FSE
-	 RXIBfe3GTe6/yzziXJ0bUEhd1Cq+d4RCNmsITzs689h9xQcESH1KO2nzCkD+eVYJZF5Kq
-	 8V1jfdK0rUtUgqLGFdc3wPj7FoZxTxTgpjGPz7Crgk4stf6EgV21RzKjFzLLeisM29KNs
-	 xNE9G8GZdQx1/vz01A4VVy5dVONDcSk8B7NMmkgZQL+IlX8d9p5ufoWWU0/bSEMV3YOzk
-	 q8oZZ/YCb8OmQFfyL2g61WUkBfZ3JLpAl4Fl8MDd2npWi4rZ87NfJs+RGDZjKIhlBbA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Rspamd-Queue-Id:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=rs7UfBpWIxLC7Jr+xtU8Zaq8AwT4hRqE1Ff5cwCZBEc=;
+	b=W/ywPRRBrm5RYM35bHBfB5uzW8e8lHZWifL21lAhjnaZ2L/fhGdzoEq1HUdTTBPY3ZDi
+	 7Z2vhcuZdGg/AB8IHp5FpS2cNIp31H0I2G/POcbuNSMQ4S+QWLQ0vPR56IczRayzSm0m3
+	 TROgxILeIT4qCgoWJKqi+3glOzNfM6dzktHi7wfus18M+V+9QGeAgaaesyrlfSS6XFvVA
+	 AT2WCuTKHJb9SPNqC9oQIQU8Sxr33cw+GNkEWyMtatGbWQWdB1MKnnlGU9ElxmJG+LAuJ
+	 0pc3NSgPRXl/2J+0r7GN+CqR8ZqGYj5H9KiyaPyjAm0wHoFTksotANMhAPd62W2kaOA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=steffen.cc;
+	dkim=pass header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256 header.s=MBO0001 header.b=I6VZJaWU;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795432193;
-	bh=+xtgh51cw908pcWTK2etHv0QRwwrPIHVOuOm6EiUnyo=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=R+0B/wChGjuN8Rm89dsSAKYxgvpku3pbtag+jPKNILDuKLz65cAFaSmxyK+LbmsUG
-	 UNdBh1nwJqX6yHsnBHDoM11as5ZgklkICrbsY//u5Bu5hzNhrRN86V41YR2nL47mbI
-	 LujGlcKUcWdQISlK0JbN3dDjl+pW/NMU1b6v+vVVuMW2QTY7MfJEv56R/6K0oCTR9c
-	 WUBkoS8jSJ0E/NNNTH7IeLI6HS/CQt6IVckWX3xp03lPthc3v9BVfmV6uZMvIkPhrv
-	 A7x6Lzznjy7X6xRH2OzrM3+NvzgyYDXje6i0QkJxW6zxh1L2+8IdM4MStOkAaUvfHW
-	 dpjr3hNJNawrQ==
+	d=lists.u-boot-project.org; s=default; t=1795433197;
+	bh=rs7UfBpWIxLC7Jr+xtU8Zaq8AwT4hRqE1Ff5cwCZBEc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=pjGpO5MxmHphH6VJzfpK9BwjPoq75wQaCJFCRv/AJeBGTXEiaDARaFLh9L+f8zWGC
+	 xBRTnl/fRSG61gzlw0dezp99e3tJchX6e+Td0eYbB+LdLiJDHxtlcGVq3+2XB7k4Wh
+	 P2/27tUGqdCarAdQkbJFfXc7J5QfeAXbFXMHIu5CftZbiPwGQ0U27AVMc949Bo+5zq
+	 qXtIiy34Q1ZoSKvDVCpFBn+E9ESNpWKaiOQ5GiKbaDZZOm7V9u4uKeqjkLZcleoA4y
+	 Ig8th+LZfX35x6vY039XKi3tZUb4aLgHvhHz7JrGGs4EL0DNMz3ud6wutJ1YkrwSnu
+	 89IJhlOOtK4Ww==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D66ED60651;
-	Mon, 23 Nov 2026 11:09:52 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A3EEF260
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 11:09:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3391480E23;
+	Mon, 23 Nov 2026 11:26:37 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id CDA3C260
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 11:26:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9581B40585
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 11:09:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B353B80E24
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 11:26:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id joUZGbvIFt_U for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 11:09:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9EE314057B
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X5Li3ad8HyyI for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 11:26:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6B7DA80E23
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::103"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=UYdtEATv
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9EE314057B
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 11:09:49 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-492f0a1b685so2174808f8f.0
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 03:09:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795432188; x=1796036988;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=+xtgh51cw908pcWTK2etHv0QRwwrPIHVOuOm6EiUnyo=;
- b=UYdtEATvAKdKeF0dYBYKZAJfDzwjbtiM5gsky3MdKspTqtEdZM0zg/mn/62qHHHKnD
- Z+KCZ9thDdMM3SGUXhHYsrjQ+olZnfkm/S7HXs7+bLyZVnIyJDZkQKFslxTNf6LpqMXY
- REyEn6K0RADTe21o2JA+88mY5uCmh6+3nEv85HQ62WR1MFhz+OCGeO4be9kc0BFPBsvL
- YNQ6UN3QzI7HArNTvDnuxOr7o0bEgm2xyUCYzsFXTeDizkk8aIMbqYtNCiJ30XLtbE4O
- ml8mYu0PpdbsWJzJu03V7kKnI2GT/H08sW0t6czC5xOE2xAuG4AQspp2cPcxXVHkzh3B
- YnPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795432188; x=1796036988;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=+xtgh51cw908pcWTK2etHv0QRwwrPIHVOuOm6EiUnyo=;
- b=DsIXjG3uaBEHJ0b+/yKk5EIKCc/33Sb3fty5az8fwZ+tU/xUo+XT8wXkL17pyp/FHi
- 5YsDbxXcTjLCgzwiFyurI5zar4kI/NUkL8Wtw/Tz0SlQZsWXwTfLxvXgLZRUjax2SemZ
- IbjL6v8KjV/7YZziWfVDAbnT07FRZToRLxsNnVIniXDPSvDhgKO/wlEBpyfyCK0Y6FXK
- 6TBikGhYEcUbkTi1EagQVhuEEvCvKDIAyrGihD5lIt8AkyGIVC8TOV/U9rPT1IfXQAUW
- WtYPJDMPYmyoibyqbqnAj2pTPkL8h4Y3DFD7aBi/BXWUrBOCzHRdwH1e6sxH34eMGFOU
- 7xmQ==
-X-Forwarded-Encrypted: i=1;
- AL+hErGHK+pVHPRz9bSeSC7Ho8psLBvYQf13MJ5gNgfGVvy7igku6MhZcmbv3S0xg/s5miSzNRZD6x0=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9+9SryxTEjcOYVfmE3Jvy4DJOPwXJbJzGnccIKZAL0n9BCEz5p
- 6UQDS+lhyYYAsH7SuiC/I35U8QTXd0jQ1j5ErHUlbDvCmmQ3eQpFgnQp+vuacwBvqpE=
-X-Gm-Gg: AZFdTZcYvl0JdHaaNjFcmVIw79gsU2jXFFo1cnY0jCxiVIFnq0a/vM+74Tnigt6Ftjh
- 1t858MMmPR4+F35yEMQotI0yrHQUl/gHl1NavNdDyrm3VGePUL8TJL7LVWJ5Zwxv7FctJYulyu5
- U1WmMtuJq8Bgz158Vn3vVB8JUyKovKplelpZAjtrzSaOGdN9HyhXbUUw2qPA3Mxgj8239lp6JJI
- jgZYUFO11Fs0WNupDC7FQzLpZeQsXD4hX5gMvAshgcGMSr1M3aGXs0NaTFzY6jBPd/PTtex1jFF
- dOzvakRRRafhNIiW/6/1wLkO5QZWepYAgX9iEpDSSojpvfwe34qxK1nMxgMfPn8LDqYQw8w9fF/
- rXDOK7o7hayyOjouBjeCLSl6hyyHHBoCxhZjlV4dTrorFbkIof13gFulYTWptKl+8k8CM8/dk7v
- 9V7oRfnUVTDf1J0FqZYCFj6mRA2O3tp9wG93dsNxQEBav43K97nfUQFWw8M2pKRnkRuH6smFo0z
- xKYZTYEsaNRKLQdnNQcpO4nTWph0etmlmvHcL6q7zzfvyXkfZqg4cUPfsyv5HjSC5iJTbGezt77
- VSkHIm7a2JvOM4m6+kA4J0cXblvZfyIt3HXGIqMzrzxGyQm8JsVRmlxWSDpZrDX2vzd9vsueCKj
- mx+0fid3jXOmVqFoKCWI6jIkr10i2+4Xu0ztp70jM68r3I2M=
-X-Received: by 2002:a05:600c:1c1f:b0:4bb:6847:7943 with SMTP id
- 5b1f17b1804b1-4bb88814510mr279758635e9.26.1795432188119; 
- Mon, 23 Nov 2026 03:09:48 -0800 (PST)
-Received: from macbook.homenet.telecomitalia.it
- (host-95-246-144-141.retail.telecomitalia.it. [95.246.144.141])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb884ab091sm491677485e9.11.2026.11.23.03.09.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Nov 2026 03:09:47 -0800 (PST)
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 23 Nov 2026 12:09:40 +0100
-Subject: [PATCH] spl: mmc: restore partition lookup in dynamic mode
+ client-ip=2001:67c:2050:0:465::103; helo=mout-p-103.mailbox.org;
+ envelope-from=lists@steffen.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=steffen.cc
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256
+ header.s=MBO0001 header.b=I6VZJaWU
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6B7DA80E23
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 11:26:34 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4jY3YL4qRNzKmZ1;
+ Mon, 23 Nov 2026 12:26:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=steffen.cc; s=MBO0001; 
+ t=1795433190;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rs7UfBpWIxLC7Jr+xtU8Zaq8AwT4hRqE1Ff5cwCZBEc=;
+ b=I6VZJaWUjXd1r0p35Y8fNMGdj/Z4JYxDNLB4k9cCNRDt9F/KsC5ZjMmdxP2H6E0ald7Idc
+ Yqg3aMxE+E7Cn8l2q2QGEy7ISeYJpGxtSMoJR+QRFld2/UxVq1e7bKwXXBhYVda8Quqdcq
+ Uv3e4h20qsgdkwYSiYCDcSDd+wOwjzXsuW7Mcd1RqF4arMHmC7bwwcO4wguLCdWSbRX6pY
+ 91ovFDY8MAZaD1vhBAL22HQzWmfIAJ3R17po6cKBPu71ImXZvoS8tMQ5qeJ7l3A99oFhH3
+ Ej54zkraICf0VUoOMoNd0WmG4q2m40vBjuvFSuLkaPHkoRsv3phJMyGd4gUI2g==
+Authentication-Results: outgoing_mbo_mout; dkim=none;
+ spf=pass (outgoing_mbo_mout: domain of lists@steffen.cc designates
+ 2001:67c:2050:b231:465::2 as permitted sender) smtp.mailfrom=lists@steffen.cc
+From: Steffen Dirkwinkel <lists@steffen.cc>
+Date: Mon, 23 Nov 2026 12:26:22 +0100
+Subject: [PATCH v4 1/2] arm: mediatek: enable the caches in SPL
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-ccaione-upstream-spl-mmc-dynamic-get-info-v1-1-ed7cba0804c7@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAA/yXNUQrCMBCE4auUfXbBRCrFq4gPcTOtKyYNSSpK6
- d2N+vjBMP9KBVlR6NStlPHUonNsMLuO5ObiBFbfTHZvj8bYA4u4NgEvqdQMF7ikB4cg7N/RBRW
- eUFnjODNkGFzve8AKtb+UMerr1zpf/i7L9Q6p3wBt2wd9Fei1jQAAAA==
-X-Change-ID: 20261123-ccaione-upstream-spl-mmc-dynamic-get-info-ec88a5d5ee2c
-To: Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, 
+Message-Id: <20261123-std-upstream-mt8188-spl-caches-v4-1-521e424fd1ad@beckhoff.com>
+References: <20261123-std-upstream-mt8188-spl-caches-v4-0-521e424fd1ad@beckhoff.com>
+In-Reply-To: <20261123-std-upstream-mt8188-spl-caches-v4-0-521e424fd1ad@beckhoff.com>
+To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  u-boot@lists.u-boot-project.org
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Carlo Caione <ccaione@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
-X-Mailer: b4 0.16.0
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>, 
+ Carlo Caione <ccaione@baylibre.com>, 
+ Chris Chen <chris-qj.chen@mediatek.com>, 
+ Julien Masson <jmasson@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795433188; l=5347;
+ i=s.dirkwinkel@beckhoff.com; s=20260625; h=from:subject:message-id;
+ bh=+ZjTRbOYuUlhv1rTXa8fnQF1HrhS0YskGgRmTtQs12I=;
+ b=tFTVsIa/UOSKBEIpMpc2L3dQeFD7MWgZ7rZuHCi5mLP642XwOxQaszR/bA9rNSN1j5ldkdOf+
+ XGyMlIli3kXBbHh5NYehAegiMqBAMo+qr650IQ7iImkTb9zyTDTKa3Z
+X-Developer-Key: i=s.dirkwinkel@beckhoff.com; a=ed25519;
+ pk=5DcsaSpVtmm7nCi3Bnw5A4vbXI+sg3hBgt8e2A2U/gw=
+X-Rspamd-Queue-Id: 4jY3YL4qRNzKmZ1
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -163,39 +150,168 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The introduction of SPL_PARTITION_GET_INFO left dynamic MMC mode without
-partition lookup support. The partition drivers' get_info callbacks are
-NULL, so lookups fail with -ENOSYS and prevent booting, including the
-Genio 700 firmware A/B flow.
+From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
 
-Fixes: 8b5070034da4 ("part: introduce SPL_PARTITION_GET_INFO and select it from consumers")
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+Running through spl without the dcache is very slow, especially when
+hashing or checking signatures.
+
+Time from the SPL banner to entering BL31 on an MT8370 module loading a
+2.7 MB FIT with SHA-256 hashes from SPI NOR, two boots each:
+
+  FIT                    caches off            caches on
+  unsigned               848.3 / 848.6 ms      95.7 / 118.8 ms
+  RSA-3072 signature     1903.6 / 1903.0 ms    128.3 / 143.3 ms
+
+MTK_EARLY_TLB_SIZE is 32K, the largest get_page_table_size() of all
+MediaTek mem maps.
+
+The page tables are at MTK_EARLY_TLB_ADDR. On MT8188 the default is the
+last 32K of the first 2 MiB of DRAM. This is above the SPL image, BSS
+and stack, which end at 0x4013b800, and below the download agent FIT at
+0x41000000.
+
+U-Boot on ARMv8 can't run with the I-cache on and the D-cache off: with
+SPL_SYS_DCACHE_OFF the cache functions aren't built at all and with
+SPL_SYS_ICACHE_OFF the I-cache functions are empty. So calling
+cleanup_before_linux() only with SPL_MTK_EARLY_DCACHE is fine.
+rockchip spl.c does the same.
+
+Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+Reviewed-by: Carlo Caione <ccaione@baylibre.com>
+Tested-by: Carlo Caione <ccaione@baylibre.com>
 ---
- common/spl/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/include/asm/arch-mediatek/misc.h |  2 ++
+ arch/arm/mach-mediatek/Kconfig            | 17 +++++++++++++++++
+ arch/arm/mach-mediatek/Makefile           |  1 +
+ arch/arm/mach-mediatek/early_caches.c     | 21 +++++++++++++++++++++
+ arch/arm/mach-mediatek/spl.c              | 14 ++++++++++++++
+ 5 files changed, 55 insertions(+)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index ef70e96ad83..05a253c9528 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -593,6 +593,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC
- 	bool "MMC raw mode: by board-selected partition"
- 	select SPL_LOAD_BLOCK
- 	select SPL_PARTITIONS
-+	select SPL_PARTITION_GET_INFO
- 	help
- 	  Select the partition at runtime instead of using a fixed number.
- 	  The board must implement spl_mmc_boot_partition().
+diff --git a/arch/arm/include/asm/arch-mediatek/misc.h b/arch/arm/include/asm/arch-mediatek/misc.h
+index 2530e78a5f11..d21e09358f59 100644
+--- a/arch/arm/include/asm/arch-mediatek/misc.h
++++ b/arch/arm/include/asm/arch-mediatek/misc.h
+@@ -14,4 +14,6 @@
+ #define APHW_VER		0x08
+ #define APSW_VER		0x0c
+ 
++void mtk_early_enable_dcache(void);
++
+ #endif /* __MEDIATEK_MISC_H_ */
+diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
+index cdbcb6b3bc18..471622d22318 100644
+--- a/arch/arm/mach-mediatek/Kconfig
++++ b/arch/arm/mach-mediatek/Kconfig
+@@ -221,6 +221,23 @@ config MTK_BROM_HEADER_INFO
+ 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8366 || TARGET_MT8183 || TARGET_MT8189 || TARGET_MT8195
+ 	default "lk=1" if TARGET_MT7623
+ 
++config SPL_MTK_EARLY_DCACHE
++	bool "Enable caches in SPL"
++	depends on SPL && ARM64 && !SPL_SYS_DCACHE_OFF
++	default y if TARGET_MT8188
++	help
++	  Enable the MMU and caches in SPL and disable them before
++	  jumping to the next stage.
++
++config MTK_EARLY_TLB_ADDR
++	hex "Address of the early page tables"
++	depends on SPL_MTK_EARLY_DCACHE
++	default 0x401f8000 if TARGET_MT8188
++	help
++	  Address of the 32 KiB of page tables used while the early
++	  caches are on. Nothing else may use this memory during that
++	  time.
++
+ config SPL_MTK_FIRMWARE_AB
+ 	bool "MediaTek firmware A/B boot in SPL"
+ 	depends on TARGET_MT8188 && SPL_MMC && SPL_LOAD_FIT && SPL_BLK
+diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/Makefile
+index 4b1524e5e2f1..e797cc25de1c 100644
+--- a/arch/arm/mach-mediatek/Makefile
++++ b/arch/arm/mach-mediatek/Makefile
+@@ -6,6 +6,7 @@ obj-$(CONFIG_MTK_TZ_MOVABLE)	+= tzcfg.o
+ obj-$(CONFIG_XPL_BUILD)	+= spl.o
+ obj-$(CONFIG_$(PHASE_)MTK_FIRMWARE_AB) += spl_ab.o mtk_ab.o
+ obj-$(CONFIG_$(PHASE_)MTK_BROM_DOWNLOAD_AGENT_FASTBOOT) += download_agent.o
++obj-$(CONFIG_$(PHASE_)MTK_EARLY_DCACHE) += early_caches.o
+ 
+ obj-$(CONFIG_TARGET_MT7622) += mt7622/
+ obj-$(CONFIG_TARGET_MT7623) += mt7623/
+diff --git a/arch/arm/mach-mediatek/early_caches.c b/arch/arm/mach-mediatek/early_caches.c
+new file mode 100644
+index 000000000000..62705529c162
+--- /dev/null
++++ b/arch/arm/mach-mediatek/early_caches.c
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * MMU and caches before U-Boot sets up its final page tables
++ */
++
++#include <cpu_func.h>
++#include <asm/global_data.h>
++#include <asm/arch/misc.h>
++#include <linux/sizes.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++/* get_page_table_size() for the largest MediaTek mem_map */
++#define MTK_EARLY_TLB_SIZE	SZ_32K
++
++void mtk_early_enable_dcache(void)
++{
++	gd->arch.tlb_addr = CONFIG_MTK_EARLY_TLB_ADDR;
++	gd->arch.tlb_size = MTK_EARLY_TLB_SIZE;
++	dcache_enable();
++}
+diff --git a/arch/arm/mach-mediatek/spl.c b/arch/arm/mach-mediatek/spl.c
+index 95e2157b507d..68f5cfeeb49e 100644
+--- a/arch/arm/mach-mediatek/spl.c
++++ b/arch/arm/mach-mediatek/spl.c
+@@ -5,9 +5,11 @@
+  */
+ 
+ #include <clk.h>
++#include <cpu_func.h>
+ #include <hang.h>
+ #include <init.h>
+ #include <spl.h>
++#include <asm/arch/misc.h>
+ 
+ __weak int mtk_soc_early_init(void)
+ {
+@@ -18,6 +20,12 @@ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+ 
++	if (CONFIG_IS_ENABLED(MTK_EARLY_DCACHE)) {
++		/* SPL skips arch_cpu_init(), which enables the I-cache */
++		icache_enable();
++		mtk_early_enable_dcache();
++	}
++
+ 	ret = spl_early_init();
+ 	if (ret)
+ 		hang();
+@@ -31,6 +39,12 @@ void board_init_f(ulong dummy)
+ 		hang();
+ }
+ 
++void spl_board_prepare_for_boot(void)
++{
++	if (CONFIG_IS_ENABLED(MTK_EARLY_DCACHE))
++		cleanup_before_linux();
++}
++
+ u32 spl_boot_device(void)
+ {
+ 	if (IS_ENABLED(CONFIG_MTK_BROM_DOWNLOAD_AGENT_FASTBOOT))
 
----
-base-commit: 0b3875426f261150e6cf9ee14aacad9b76c07937
-change-id: 20261123-ccaione-upstream-spl-mmc-dynamic-get-info-ec88a5d5ee2c
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.56.1
 
