@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F590606A321
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 14:22:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB037606A31E
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 14:23:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=v09juz7p;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=aYEfcPQL
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=M6jEa9ag;
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=evo2icKw
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C2522406AB;
-	Mon, 23 Nov 2026 14:22:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9718C80DE1;
+	Mon, 23 Nov 2026 14:23:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V56vnZPEYzUO; Mon, 23 Nov 2026 14:22:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0DB4640635
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795443778;
-	b=otta1LOxKNUBTd71OlwFC+iuA16styQutPMC/Ii9MVy91J5+R2aQhRTVf/NgXl/3T4Pn
-	 QV0lebElq5hbDLB3UAwJfXhaXEup30p1aHANvd1hiXS8lZ8gQdb7nxhxJ90rpNdJsdAcE
-	 Itau9uVRuWSmaY0Iij6r3ZQB11uGAXi8xr5mcjVGq7SQb4zmPhUrEwpOtXU/0ICohB31Z
-	 vlbk7YT+AMNetFi1sVlNsEkZ9M+a2iqJJv8ciM/3zlqj9Cay3FDJKaNwDymOauOAM0/f+
-	 3WPbaTKONpXWI8d5oN8TSURXqC6BaGVwolvcbL4yJ7GqG5Az925yqD1iFIMHmYggpCw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aZk5NEVrd41X; Mon, 23 Nov 2026 14:23:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E7DF980D83
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795443785;
+	b=LaEmBLRt/r+DrVIV/cJ32L/wo/eQVPV6YxFwXDB4npnHHEyA8+FA9MG11Cgum6TFo06x
+	 7HwUfx1NL4HIbdK7RRgRCRYF2t1aSVjemaI09py6x4+RX/JtJD0Nx8gOxxZk5CRLNfNxY
+	 J8QSbGosUZlI0qeSCqbg3RE0TMC61c4vUMrDx9/tLzbjAED0FQS+XjLWCGQo+L3asIvNJ
+	 Jk3UcId0L8ZLzEL772+o6eSQECGeelTdsCdlyyJoQnpvWsglIQihJ9vnRhm/mlhajEl6b
+	 VvZWcKVdSU+hie6Eqnjunv50rezHr6P8fLvZMvrvfxRbsIrP7pqDb0QyXQOAO8np/tQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795443778;
+	c=relaxed/relaxed; t=1795443785;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,79 +32,80 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:To:Cc:X-Mailer:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=EpzA9/TYyRMGWw45j16V2o7n4dy6NQ/IvA9UHkmcDb8=;
-	b=K1sH4aW7dCjdWCSf2wZauqL9L+6pXeM2vzDA0V+LfWigCFWqeaLOqt6y5luZyTqy7zNt
-	 djWco9iIQHvQI/ptbxeQ/KSzvZ+ztz7DRln5zKr23cAhoDpFImfdqAp6u02ZJAirxbWZ9
-	 8D8k2Kpmn87faby8nTn5lMWJtmP8DmlLc3GMl4gDp0ALQW8q6vrQqvGDY6QGMhHFZtWiN
-	 HX7Y+IW/Nw7e/O8yc/PNUSVZtL0/2oLw9ulByXcMiEIS5r3PxDnJnEAhl6inqGriEBLtL
-	 kgvtg7t4ofux29KNWz8j1HjxOllvXBDSfWkQrcg9bobasjmcIVBKl2E2gx2jBq7xTwA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=ZV2tymiJlRNuOpKXKuSoKjAP5+cT4S6ADeenhANW0RQ=;
+	b=J1TBd++4HS8Z0tbX+Y7eFv4tI2sZZsmdDi8/ymAtdkpWxjFqyMeyjerDS/qZKEMX8MRz
+	 NqzFayxtcEXzZtxGJXLSt7CW4TVw34EmEO8PHuAIciMSzBW/pTDfqd35SzaPaL+FkFRu3
+	 YOXdj+yVh0PHAchde1MTu99xHF29ZmX0pAb2vibQD0sSkcjR906XQ2R17ordxeE74SUmy
+	 ps8H4IPzfiK3q1HUCCBS0kGLJ13n+ohIZUhcFhM5tLLxv4zvSCvZYzhtHPkCWSMdk5TnM
+	 OIJBtF0nNNcJruEq6WwQMBU9x+rhsNdt4KhGTPQnYOD1OLdzQ91VE4n9pEByh7TWelg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795443778;
-	bh=EpzA9/TYyRMGWw45j16V2o7n4dy6NQ/IvA9UHkmcDb8=;
+	d=lists.u-boot-project.org; s=default; t=1795443785;
+	bh=ZV2tymiJlRNuOpKXKuSoKjAP5+cT4S6ADeenhANW0RQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=v09juz7p9I2qJTYCRst0UjJKXiweU/ZXaoWRI6x5JGxBD4KRpnxKG/8Z0wU0w3Kek
-	 wiKXaxiGPn8IE4Von+WXOEXMQ73WQZ7/UUEFOEpHw1e1byvJuTvZg2X8bmqDoKCjoI
-	 ftvCfAceEnJpIwHs3sxgRkSxOjtTwJwmzrF5W+NAfNz5ZEJxqTfDwm9nASWXdj1j3t
-	 f3o7VyQ9e0Wt87PeFjm0gOkY+LEkEg0eem+T4iHBfmFP7iUVYi6KLT0T7tQh+Sh6Ch
-	 2dTl/8KpCzAj3hmg3aP/hHQzbcvXS0jLF4k5uYETkpZOYCYx/0BNGBoKQHM4sdIIY0
-	 0cLnXGq2yv1Ag==
+	b=M6jEa9agL3bEyJPBloUZSHqUdNGyp0AnXaqbWEUj41iQ1xky69+8fyUdnzVnDOz5L
+	 BrXiCwwyr/YM9EMY6OCa0vm7madN8uO00qtxRowMeAWD5kPB8cADUwuz98TuHRheIL
+	 BZnZEpF68emwuhDHQ7n5AO1aSe2UFWQJDc9i9ei7cYbaGNesSZ74PMSfWANcAOgheU
+	 57063A6gz5/mkwHs6hsuaEGgz9nHX2c4M0NQxsEI5es97BE0GMKMEF2YLLYgVCGgUJ
+	 T7wgBJe/niOBAH3yfcnbIxk9U7o49lOOPUtpT+c+VdMXH8IanCrLTplzpyhqmbt2yf
+	 bjMUs4LhLaPXw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0DB4640635;
-	Mon, 23 Nov 2026 14:22:58 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 430A4371
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:22:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E7DF980D83;
+	Mon, 23 Nov 2026 14:23:04 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 57F90759
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2585B60780
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:22:56 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3E6B640060
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rJDNfPxJILFI for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 14:22:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E2ADE6077B
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
- helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ix631ev0pqDQ for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 14:23:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 68D8E400BD
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
+ helo=smtpout-03.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=aYEfcPQL
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E2ADE6077B
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:22:52 +0000 (UTC)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
+ header.a=rsa-sha256 header.s=dkim header.b=evo2icKw
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 68D8E400BD
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:01 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id A2CCE1A179B;
- Mon, 23 Nov 2026 14:22:50 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 195C04E41601;
+ Mon, 23 Nov 2026 14:23:00 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 767C8601E1;
- Mon, 23 Nov 2026 14:22:50 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id DA2DF601E1;
+ Mon, 23 Nov 2026 14:22:59 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 99D5B11E6A51C; Mon, 23 Nov 2026 15:22:41 +0100 (CET)
+ with ESMTPSA id 1CE0411E6A3FC; Mon, 23 Nov 2026 15:22:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1795443764; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1795443773; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=EpzA9/TYyRMGWw45j16V2o7n4dy6NQ/IvA9UHkmcDb8=;
- b=aYEfcPQLZvJw4HzfDPLg365fZ6EEXhoyJ2mqtkJ/0xuvBQ5s/j9z7as6vFnuEgMSTstPFW
- xM02YtqQzJiOxTwHXqBkOdHUL3dYYCXVGk655UVcfoIvISdFyTSFSTefCMYWDNB8BWfx0F
- 4u1ny1qwIOs3LifBHmGjvu+JKCXnyoiiqJ3HVa4gCvD2yHAiYxNAIB/VMzOFojyB/Qr7VC
- R2boGaJ0DeRZJP7Jx4mYc12EG8rv05/KLlg/HZpX0x+GKfhoHWHcjSXwme71RhtcnxJoTP
- wHxFRAvpe4oXgfffW5g/7Vw1vXYepy45w6TRScxjuYms+EY6LVbKbSNEBmoouQ==
+ bh=ZV2tymiJlRNuOpKXKuSoKjAP5+cT4S6ADeenhANW0RQ=;
+ b=evo2icKwS3XP8ZxoKNNfHoFm7g/9gVeEG8zzpZ77zzVY28opstHKf2sghLpKC4Gbf4pszA
+ 30Y4gJsPnxrYpuvEbEGFcjp8MXb19wCpBOk4x4gHIFg2bRfQklt4vOBkApzcbOgwstZD8j
+ jj/qCyaG4loI+/ObWJ5sKT8cBHqObq9crRd4/qfxA63O/i2Hso/glr/TkMnCBktvQQQNLF
+ gBW7TXpyfkQfQx6G85f15/FZsNtuppFO0kLAMbfZoBdZdY61j9+y8T0+X5ksGqsroNRbqU
+ N4EOagzy18mfcdza03eSHiVYrfYMqp2Ia50+pnoxkgUgfafv4RJSo2Er+qqk0w==
 From: "Richard Genoud (Synaptics)" <richard.genoud@bootlin.com>
-Date: Mon, 23 Nov 2026 15:22:01 +0100
-Subject: [PATCH v2 2/8] arm: dts: sl2619: Introduce sl2619-rdk-u-boot.dtsi
+Date: Mon, 23 Nov 2026 15:22:02 +0100
+Subject: [PATCH v2 3/8] Kconfig: enlarge CONFIG_SYS_MALLOC_F_LEN for
+ ARCH_SYNAPTICS
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-sl2619_base-v2-2-9e3b28c77cda@bootlin.com>
+Message-Id: <20261123-sl2619_base-v2-3-9e3b28c77cda@bootlin.com>
 References: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
 In-Reply-To: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
 To: u-boot@lists.u-boot-project.org
@@ -147,44 +148,29 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Setup console before relocation
+There's not enough memory available at early stage because the console
+needs the clock driver which needs the system controller driver
 
-In order to setup the console before relocation, bootph-all is needed on
-sm_uart0 and on its clock provider sm_clk
+0x3400 bytes is a bare minimum, so bump it at 0x4000
 
 Signed-off-by: Richard Genoud (Synaptics) <richard.genoud@bootlin.com>
 ---
- MAINTAINERS                         | 1 +
- arch/arm/dts/sl2619-rdk-u-boot.dtsi | 9 +++++++++
- 2 files changed, 10 insertions(+)
+ Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 5f66db5d4608..279193e8239e 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -712,6 +712,7 @@ M:	Richard Genoud <richard.genoud@bootlin.com>
- M:	Terry Zhou <terryzhou05@gmail.com>
- S:	Maintained
- N:	synaptics
-+N:	sl261[x0-9]
- 
- ARM TEGRA
- M:	Thierry Reding <treding@nvidia.com>
-diff --git a/arch/arm/dts/sl2619-rdk-u-boot.dtsi b/arch/arm/dts/sl2619-rdk-u-boot.dtsi
-new file mode 100644
-index 000000000000..72e2adebde3e
---- /dev/null
-+++ b/arch/arm/dts/sl2619-rdk-u-boot.dtsi
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+&sm_uart0 {
-+	bootph-all;
-+};
-+
-+&sm_clk {
-+	bootph-all;
-+};
+diff --git a/Kconfig b/Kconfig
+index 8e91a3360a83..51e3052579f6 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -303,7 +303,7 @@ config SYS_MALLOC_F_LEN
+ 	default 0x1000 if ARCH_MESON || ARCH_BMIPS || ARCH_MTMIPS || X86
+ 	default 0x1800 if ARCH_TEGRA
+ 	default 0x4000 if SANDBOX || RISCV || ARCH_APPLE || ROCKCHIP_RK3368 || \
+-			  ROCKCHIP_RK3399
++			  ROCKCHIP_RK3399 || ARCH_SYNAPTICS
+ 	default 0x8000 if RCAR_GEN3
+ 	default 0x10000 if ARCH_IMX8 || ARCH_IMX8M
+ 	default 0x2000
 
 -- 
 2.55.0
