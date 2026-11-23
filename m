@@ -1,145 +1,160 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1780606A31E
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 22:38:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92391606A31E
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 23:03:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=r0BQ9pqT;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=E8GtI7rl
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UNGAjkDI;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Yhrk1tHk
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8FA2A4059B;
-	Mon, 23 Nov 2026 22:38:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C1B4580D48;
+	Mon, 23 Nov 2026 23:03:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iAadoZb8qiUr; Mon, 23 Nov 2026 22:38:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 828B0405A2
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795473492;
-	b=jNCbWCBZ0dcCOF6vO0HRfcEgI6V8xwC6Vt5uk+i7oyc7DoTqqZD/7tpU0DIF7mch+M0i
-	 cX2g+Cq5I1hqZeK0DR3Ll9cdsfzLT7te0z5t90GIARFlpaDiBKyoWc+hU7gp51M7NB9mR
-	 AHdf+GqcisRuwaNrwTJjtuwKYjYjOQneNuUF59D+mLqIIkuQGX0Jm4vW9mnX5OoYagfgz
-	 oU4Fpq89t82FyWmJnrzPn+Z2tFYIC5GIFYCPOT6Jzw6a2DOWR6N8v+JZYSqnm565HU+rS
-	 usxDWJ8clHTG4S1Sqd2pYdAHlPnzCwlSwC9/LHnncrUJSobCb5Mnaabe6elTZggPYvQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VVw_QT3CNn73; Mon, 23 Nov 2026 23:03:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DEAB980D3E
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795474985;
+	b=cZZ8hrPQkJTNZxBvo6qBlExK7GVJqYAZhcvzhs+NFA53xaD8lAVRF00bT+04LECMrbRJ
+	 vtgNZqPKZCrOW6Kck8GePmkIWzPLmgHjjrArEpdn+Rbkchh5dLAFvw5/76ojjeJSP14Q5
+	 UWmwn9T8wsf4h2HNSqeHtATbhC4eWEbIdiMIX0O6aQXwX1nFN++ybgXzo8RaTiz+lEVbO
+	 csMhaZZWhUw91KUepUbIunusaDOb2xKp+d+rTzlkov01DDziTaa78EKpIkxjAfulYBE28
+	 /4w/mdeWwjwjwCGcdeCJnwWhboK3L24eVnkeOaMw9ZI6gR1GspC2NHi2TtlgCwYFgsQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795473492;
+	c=relaxed/relaxed; t=1795474985;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:MIME-Version:
-	 Content-Type:Content-Disposition:X-Clacks-Overhead:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=FKWYZf/oZzdtMSB16KaXtr1uLaaIdNwOV5XxolDTM+E=;
-	b=tPkjFbBCnyGw2QPBoBwd+ZlQHOcEjUrq3V6nqqnfpQyKWR8J/mCbTRRxaaxizUe9i/NL
-	 3gFDYkdlETWto9jkaXWACHbQVHmFO37u//NCWGjLgWuIy/RDmphNZEzJVrN2HFjfRgYqt
-	 iBoMlMsklEGxgfPVCIKvjAbSZdDyuIxEcnhhTGT74JXCNxlcg+5qSttiR0C9wi6h88A6j
-	 7Drx4x1Hkjpfw8jYs4dm1uBzQSbyQMDWFShAN5wMRuJsAwg7ICSEfvqI+J+nOuQWzqtE9
-	 yF4eanLOemrmV4cNTeMCJTeth5idtL+dyWPjoyaFeJcnfgjfRRZH2lYBNL7MPj1oGDg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=x/NfMxODq876kOaDGiQbZEMCzVnfz8DxQ1gOx1T4BKU=;
+	b=LDs3W5R5F0o6DetVSj3s50tCeTAtuSea1UKf8kZyl+fw2Sj8zzOYM19TXbPu/fo6U9AP
+	 qo0Ibv6N3CLwd+/z1cBEFMN3aDtXeqY2Uo5kj7Y8lVQbiWG3++aWoJ1FsmEUyXenHb6Dk
+	 K9m5I3ZfiCH0zvySBAziW07e2sVI42INNUZar+1dVvojKhLz6z9YEIMvnN10XLbBX9ceY
+	 4yPAu3aLIW7zeNn7s+r3mp/jBQeU9FQ5BnJXyKcLuphxoHfDn3n5hBdPKPpEnIEN5Y/lF
+	 gPAPVtW+fF6zXS5KzNC1f1U5I1KCMXZUtCz+DeraYjtIBzjbbJ/4O6v3ys6Q6yWxIHw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Yhrk1tHk;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795473492;
-	bh=FKWYZf/oZzdtMSB16KaXtr1uLaaIdNwOV5XxolDTM+E=;
-	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1795474985;
+	bh=x/NfMxODq876kOaDGiQbZEMCzVnfz8DxQ1gOx1T4BKU=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=r0BQ9pqTNXsfVmRi90aEA6LrqrCY4WqNnbs3ybuTEoAxP8I7ttRjHTnVH1/pZ4EMw
-	 HdwoUr7RygWKpvasfE7N8AuYbEAcazu16cNiLABc89uC8ll+RMc3AMaEFswj0qvcmv
-	 8FqUOBn5LRVL2eopaIPfu3R3KrxI96NO4ddccP6WY8ZwnEOu4t9Fb5M8sBJ+29AwJP
-	 fzd5lAXewnqlzSOApOk1F/fQFyRZTueWPBmA+9EBhzzT3d3z5wfexlHUrW5wgrHQr/
-	 tzqEmX8PJ/qDlmPeQeQ9/ilaC4zn9ooBp5IRoNx1rDUn0R2CT3mJJFJ4Wnha9tLtzk
-	 1v/H0RMr1mk+Q==
+	b=UNGAjkDIaOW9kQ5+YTCqPDJhUkAYVjNzB8huJ2OEnxRu1cLLqqOq6WJx2VSZ2DzBn
+	 kXihEOq6gmqQvYgiecWua4FImW934u3SSA/Sx4Y6vRgb5Ss0GH5En15BtMh1TeYPsX
+	 tXJnYqdicdnKFysIPus4PMnMFoXkIW+ha1hDUE7P1HSrcL9ZA0BxtMJwxJ/21s1x87
+	 9Z77Q9R2XwE8dxxq1VK80bKtV8gQiZPxP0k12RWXYr2vJcFP8vTgGYtwNIi/c4qIQ5
+	 lzOYhzLrzyU0pU+vWKifpFl75u72Oqc5tss3V7IT2TTMKGHaFPWlPz3MNqJ/bWEzNG
+	 vPR6X4jxfOhYg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 828B0405A2;
-	Mon, 23 Nov 2026 22:38:12 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E6764D32
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:38:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DEAB980D3E;
+	Mon, 23 Nov 2026 23:03:04 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id CB9E4311
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 23:03:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C321A400E0
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:38:10 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B479480D2B
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 23:03:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PEXGofbZf1KX for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 22:38:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9D71240068
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::333"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id t5SyHVKczo2g for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 23:03:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B896580D1C
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c29"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=E8GtI7rl
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9D71240068
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:38:09 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-847ac7ccd85so2234237a34.3
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:38:09 -0800 (PST)
+ client-ip=2607:f8b0:4864:20::c29; helo=mail-oo1-xc29.google.com;
+ envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=Yhrk1tHk
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B896580D1C
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 23:03:01 +0000 (UTC)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-716c0217635so4704632eaf.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 15:03:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1795473488; x=1796078288;
+ d=gmail.com; s=20260707; t=1795474980; x=1796079780;
  darn=lists.u-boot-project.org; 
- h=content-disposition:content-type:mime-version:message-id:subject:cc
- :to:from:date:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=FKWYZf/oZzdtMSB16KaXtr1uLaaIdNwOV5XxolDTM+E=;
- b=E8GtI7rl23OJoJRKvB6qpmp8FaYxXS2OZQjBM2bLOo0c3cBWZ5kbPRzq64fqW4DliE
- e4/TTP0S4PVduU1twsYW9eqOFn9gq3lqOGHitdKlcDto6DRjKBasEl4tYRQShE5INnD1
- VmrkYJVVFev1R62k4SYy5bYP6UVxASH7uNEtk=
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=x/NfMxODq876kOaDGiQbZEMCzVnfz8DxQ1gOx1T4BKU=;
+ b=Yhrk1tHklXOCnS4urrIHKEwh5E4ZrxT9Vt5qeunM/DzXD5yqUPJvJ5YxwK44YqrAIV
+ dZpdNbzz69L3+YJyu3yNWzsjI4a8sj/UGnCqv3XoiNdFPsDwv+lkYf/SechuwVM6qnsV
+ yY68NBwxe3/TFAoQgVKXUHoXEx5OTforL61YtSZailmycUPwkd89m3XrgT2ofptEaQsr
+ CwXXFtY2aYSy0WM5iQrjE7aY7evzEKqe8Vt2FwdKr15zgsX5iGWfGyNuNuzA8aQEx0WA
+ BxrswcqVTqHT7sExjXPyx0z1AEabQ4NMmDJOoff/s8LjAdVz3JMyyIsWt4kCPBTGqCst
+ lPmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795473488; x=1796078288;
- h=content-disposition:content-type:mime-version:message-id:subject:cc
- :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=FKWYZf/oZzdtMSB16KaXtr1uLaaIdNwOV5XxolDTM+E=;
- b=W2DJhy5huIb8HwWrLnN5QbY4dW5IKJx8I5+w+xvo+uMO4xLVGWs16rJVUCyLa94L7/
- Zu4rbD+uK+eTk89zAW471rxT6L/1xZdILkyEYTqIm8/LX9mjziVMAP1dugqiuzGaxwGI
- TweIDlZ4C2wzbjnchoR2JXiJX97f7A0ooxS1dw7Rrpzquti5y8Zf7vJtR/CgLrTWNR40
- Vh6XopfftxBaksJI2QmoyX/JScCa8DKy1bZWY9N1BKYn5ddENsdd2Hi5Qke+mxPsKk4P
- KqMkmqebJz5W8fzC9uezpziNtMLoTeDmy3hZ4hNtscamYmOXPepfwAdFEMuLuzKAGjbg
- vetA==
-X-Gm-Message-State: APuU4Z8cIUWalAO9OqBUvHNnfiKnoUqFS3kMjZJMs54ODiRlDjjPVcMz
- cwXh6Pz0z2pDL5PflnXWYu3rNQf59+/sMlty1uXX6GkTGzsu0LwBQatt+NajF3x5Ly2SROHAHV7
- mHXoVq+kIlYao
-X-Gm-Gg: AZFdTZcPlnBCWOAhIj3xfqW7A56NoH64pD2xVkc/Q4T10drd52v4UOcDMSRl0riSKFC
- Dy9DQfHZUOU0ewS1pURyTvaWICCLr3jhXBhYhyHM2xhLgsF1P/ulvRcc6KHVqz7q9cUktH+nvLI
- FJasiyqgaf4ZvuKSWB9l7LpsMFQrkslLuS6Qlwf3/zSjhZBRi+s3xJ/LrYonsDQ3T5BhxKvdUsk
- Ra/1l5yRuVyJbhlGyVG3T/ntzus1ZXMQHkwyq1is1SlXluCDJrhD+BvvIeIiSsXGDn1yIVfzO4s
- S2oTO0XUcWn/ps5QlNo5p7kSp78oQhGX51PFw+1rphb1dyaQ6N3Q5rZCDRP92Q7Cqm88hyFFeBW
- XePqX7OP+MZMYkO5UM/R4ToqblaKeXHJXO2hucUKkXzRQKMLiPFGcnuWZx/b5h/w0XtER+FP+lp
- 1pKnELntEQIngAZonn7sbjn6gv0w9NCFfBejtaXiW6HUAiByqR7OzkihCOemLElLXfWHKtGtVku
- ESzOT/Ig9CK19VyBoUwz2TQkgL8OewidiolI2qUNq5Rvt7naetwslUuT8a7tLcuQ6Fef6UFAq2P
- mP6yOWMU1r1oRk0+oMvIFPPWE23r12bzA1A4Tg19A0lNtOn94qeOVcynQZgtcchreuo1p0emIJ7
- ixm+m5KI7F5CF5Z6UkWQh409duwMhASATnKvElcxEXVfMosRkmv7lK4TnjxR2LE2n42qKrw5jRK
- 8dajobpmK6FuUO4Q8OiifzmwfS6njf6Qo=
-X-Received: by 2002:a05:6830:2b2a:b0:834:b015:ae9e with SMTP id
- 46e09a7af769-86315928296mr15631533a34.12.1795473488313; 
- Mon, 23 Nov 2026 14:38:08 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-863168f6d33sm9283171a34.18.2026.11.23.14.38.07
+ d=1e100.net; s=20260707; t=1795474980; x=1796079780;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=x/NfMxODq876kOaDGiQbZEMCzVnfz8DxQ1gOx1T4BKU=;
+ b=Xqn/UnGG/Pwl8sEpsP8oHAo2tbGBD3ywgTHIQzFH7dhLe84Epbbjr+qetYCgWJeL4N
+ 4w3QcLC6tROS5kO48IeLopqu2o8Sojpo3wCckoNeLqznDgKVlGBazvj79t7evqcJtGsX
+ rE4GNACeTRdzTQOYfY2HUQKXwD8KpRiK+5URE6g5WCYsShBY2K4uY/iYBrr5GCCnBPae
+ Bsjx1SFh7dx465yJjbmG2Xjp9zB+X8usx5bBt/fASjv5MLP/PcTqaxzHZ4ZUG+/iMaVf
+ UmiTzNesB71K+Jend2n0F2eHL6DBM6KiHhJPfCt3l466SApIGnBRXAD8kUGjH5wNy1sy
+ +WlQ==
+X-Gm-Message-State: APuU4Z+6MMEpK/0oUdV7czJFvR141FwTqByBTsHK+uhr5Cr6F/LZAoSe
+ Bipj1nbNQF0HJrNb5qulmLOCGXIcBrDZhYOd4DlYmMP5+O6kDDzjpPhmPXVjqGJE
+X-Gm-Gg: AZFdTZft33w8/7Ipeu6Y52x2MH7Wub9Yj0nf78zBGJSUuhmGoTOeXoFQItA0QKdpC7s
+ MobvFNQfy65Wql9bWfUgHvZfo4MD+fEvFb5AH72fE5AOT/jYdG2YM4l2pGgUIJuJE/Fh2u9Y6mh
+ PdhQptzVRVqXu/GD4d9EP30CiGKoZ5ifs9gvcitermyJmfJz36c3UUeYsiP+8hAbHBwjKopwvcy
+ gDEsTWbduQgzsMmDFqNMGONGsIyw/jzGYet/pVx5fQvRXBgnxBbeyZkSCfHGEMFqUJS5202DUTU
+ IMMg+Va+kzvciMMNicXhK1JvFozHyra8C2gYNxCKJVWqcagRiSHaGdoAQ/3BOuym2vqhrFUYTWJ
+ bsks5oMVfW+rboMSTU2cXEwNMtoxJm+ryV6YPaD6AQK0/ftDBISMI90ZqTRP7HZoK5P8V4i/nuz
+ 5CbQ2Qpx7VphQkwhzv/fMzb7qQnYZ1Jbtr4ly6d5onZA5WmLjew6BwKETJDmKPN41gJlfEe/MYh
+ 2ppOJknWS3AGJCZhonS7PayF2/2jAAs3ttMQisKTGs/WIaZ4SAJF/NAVBJZ6ETDGgfc7uLceo4P
+ N0z7Ww430pdlLKzmbBFaR1miU7ppH0fJMIkD9yRhdeAVqKsv/fLPthOmfqGTxPOdO5AVfKsWJlL
+ y+CXUKJnscQUndTwwgNpkF0rKLh8ivruq1pZvz4ZwDGeZ4C6uOaAB7qVgJpYpYXzu29V51metBF
+ BkNbFyJbKxkRIUaMuyo8xF64+57KK0NlXlqWMS8mOzdOYdU90hvuc=
+X-Received: by 2002:a05:6820:820:b0:71b:42de:9787 with SMTP id
+ 006d021491bc7-71b42de9ef5mr7000125eaf.22.1795474980196; 
+ Mon, 23 Nov 2026 15:03:00 -0800 (PST)
+Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-71b6b680b66sm701616eaf.9.2026.11.23.15.02.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Nov 2026 14:38:07 -0800 (PST)
-Date: Mon, 23 Nov 2026 16:38:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Cc: u-boot@lists.u-boot-project.org,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20261123223805.GQ3176972@bill-the-cat>
+ Mon, 23 Nov 2026 15:02:59 -0800 (PST)
+From: James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH 0/2] net: lwip: serve Fastboot over UDP and TCP
+Date: Mon, 23 Nov 2026 16:02:55 -0700
+Message-Id: <20261123-submit-lwip-fastboot-v1-v1-0-34c1eff8b1f0@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qR8zq0vuYUH+vBvW"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDQAxA0atI1g2YKSj2KtKF0agR68hkagvi3
+ TvV5Vv8v4NJUDF4ZDsE2dTULwl0y6Adm2UQ1C4ZXO4KIndHe/NLI84fXbFvLLL3ETdCKjsquGS
+ uqIJUr0F6/Z7n+nk5pZO08b+D4/gBKw8R5nsAAAA=
+X-Change-ID: 20261123-submit-lwip-fastboot-v1-17d16b7bb919
+To: Jerome Forissier <jerome.forissier@arm.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut <marex@nabladev.com>, 
+ Michal Simek <michal.simek@amd.com>, Sam Day <me@samcday.com>, 
+ Carlo Caione <ccaione@baylibre.com>, 
+ Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>, 
+ Simon Glass <sjg@chromium.org>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ James Hilliard <james.hilliard1@gmail.com>
+X-Mailer: b4 0.17-dev
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,187 +164,48 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Allow hosts to use the fastboot command over Ethernet with the lwIP
+stack. Both transports use the existing command and download handlers.
 
---qR8zq0vuYUH+vBvW
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Share the UDP protocol engine with the legacy stack so both can restart
+an interrupted session and retry individual multiresponse reads. On TCP,
+parse length-prefixed frames across segment boundaries and stream
+downloads directly into the configured buffer.
 
-Here's the report from v2027.01-rc3. Looks like the AVB update
-introduced a few issues, or at least things to investigate. Thanks!
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+James Hilliard (2):
+      net: lwip: serve Fastboot over UDP
+      net: lwip: serve Fastboot over TCP
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Nov 23, 2026 at 4:33=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
-
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
-
-   - *New Defects Found:* 5
-   - 9 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 5 of 5 defect(s)
-
-Defect Details
-
-** CID 662464:       Memory - illegal accesses  (UNINIT)
-
-
-___________________________________________________________________________=
-__________________
-*** CID 662464:         Memory - illegal accesses  (UNINIT)
-/lib/libavb/avb_slot_verify.c: 450             in
-load_and_verify_hash_partition()
-444
-&slot_data->loaded_partitions[slot_data->num_loaded_partitions++];
-445         loaded_partition->digest =3D avb_calloc(digest_len);
-446         if (loaded_partition->digest =3D=3D NULL) {
-447           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-448           goto fail;
-449         }
->>>     CID 662464:         Memory - illegal accesses  (UNINIT)
->>>     Using uninitialized value "digest" when calling "avb_memcpy".
-450         avb_memcpy(loaded_partition->digest, digest, digest_len);
-451         loaded_partition->digest_size =3D digest_len;
-452         loaded_partition->digest_type =3D digest_type;
-453         loaded_partition->partition_name =3D avb_strdup(found);
-454         loaded_partition->data_size =3D image_size;
-455         loaded_partition->data =3D image_buf;
-
-** CID 662463:       Uninitialized variables  (UNINIT)
-/lib/libavb/avb_slot_verify.c: 452           in load_and_verify_hash_partit=
-ion()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 662463:         Uninitialized variables  (UNINIT)
-/lib/libavb/avb_slot_verify.c: 452             in
-load_and_verify_hash_partition()
-446         if (loaded_partition->digest =3D=3D NULL) {
-447           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-448           goto fail;
-449         }
-450         avb_memcpy(loaded_partition->digest, digest, digest_len);
-451         loaded_partition->digest_size =3D digest_len;
->>>     CID 662463:         Uninitialized variables  (UNINIT)
->>>     Using uninitialized value "digest_type".
-452         loaded_partition->digest_type =3D digest_type;
-453         loaded_partition->partition_name =3D avb_strdup(found);
-454         loaded_partition->data_size =3D image_size;
-455         loaded_partition->data =3D image_buf;
-456         loaded_partition->preloaded =3D image_preloaded;
-457         loaded_partition->verify_result =3D ret;
-
-** CID 662462:       Uninitialized variables  (UNINIT)
-
-
-___________________________________________________________________________=
-__________________
-*** CID 662462:         Uninitialized variables  (UNINIT)
-/lib/libavb/avb_slot_verify.c: 445             in
-load_and_verify_hash_partition()
-439           avb_error(part_name, ": Too many loaded partitions.\n");
-440           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-441           goto fail;
-442         }
-443         loaded_partition =3D
-444
-&slot_data->loaded_partitions[slot_data->num_loaded_partitions++];
->>>     CID 662462:         Uninitialized variables  (UNINIT)
->>>     Using uninitialized value "digest_len" when calling "avb_calloc".
-445         loaded_partition->digest =3D avb_calloc(digest_len);
-446         if (loaded_partition->digest =3D=3D NULL) {
-447           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-448           goto fail;
-449         }
-450         avb_memcpy(loaded_partition->digest, digest, digest_len);
-
-** CID 536494:       Integer handling issues  (INTEGER_OVERFLOW)
-/include/linux/log2.h: 72           in __rounddown_pow_of_two()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 536494:         Integer handling issues  (INTEGER_OVERFLOW)
-/include/linux/log2.h: 72             in __rounddown_pow_of_two()
-66      * __rounddown_pow_of_two() - round down to nearest power of two
-67      * @n: value to round down
-68      */
-69     static inline __attribute__((const))
-70     unsigned long __rounddown_pow_of_two(unsigned long n)
-71     {
->>>     CID 536494:         Integer handling issues  (INTEGER_OVERFLOW)
->>>     Expression "fls_long(n) - 1U", where "fls_long(n)" is known to be e=
-qual to 0, underflows the type of "fls_long(n) - 1U", which is type "unsign=
-ed int".
-72     	return 1UL << (fls_long(n) - 1);
-73     }
-74
-75     /**
-76      * ilog2 - log base 2 of 32-bit or a 64-bit unsigned value
-77      * @n: parameter
-
-** CID 243627:       Integer handling issues  (BAD_SHIFT)
-/include/linux/log2.h: 72           in __rounddown_pow_of_two()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 243627:         Integer handling issues  (BAD_SHIFT)
-/include/linux/log2.h: 72             in __rounddown_pow_of_two()
-66      * __rounddown_pow_of_two() - round down to nearest power of two
-67      * @n: value to round down
-68      */
-69     static inline __attribute__((const))
-70     unsigned long __rounddown_pow_of_two(unsigned long n)
-71     {
->>>     CID 243627:         Integer handling issues  (BAD_SHIFT)
->>>     In expression "1UL << fls_long(n) - 1U", left shifting by more than=
- 63 bits has undefined behavior.  The shift amount, "fls_long(n) - 1U", is =
-4294967295.
-72     	return 1UL << (fls_long(n) - 1);
-73     }
-74
-75     /**
-76      * ilog2 - log base 2 of 32-bit or a 64-bit unsigned value
-77      * @n: parameter
-
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+ MAINTAINERS                |   3 +
+ cmd/fastboot.c             |  24 ++--
+ doc/android/fastboot.rst   |   4 +
+ drivers/fastboot/Kconfig   |   7 +-
+ include/fastboot.h         |  16 +++
+ include/net/fastboot_tcp.h |   1 +
+ include/net/fastboot_udp.h |   7 ++
+ net/Makefile               |   1 +
+ net/fastboot-udp-common.c  | 176 ++++++++++++++++++++++++++
+ net/fastboot_udp.c         | 284 ++----------------------------------------
+ net/lwip/Makefile          |   2 +
+ net/lwip/fastboot_tcp.c    | 302 +++++++++++++++++++++++++++++++++++++++++++++
+ net/lwip/fastboot_udp.c    |  96 ++++++++++++++
+ 13 files changed, 634 insertions(+), 289 deletions(-)
+---
+base-commit: d778970a189b977c14f93961d7009f404d895b5b
+base-tree: https://git.u-boot-project.org/u-boot/custodians/u-boot-net.git for-next
+change-id: 20261123-submit-lwip-fastboot-v1-17d16b7bb919
 
 Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
 
-The Coverity Scan Admin Team
-
------ End forwarded message -----
-
---=20
-Tom
-
---qR8zq0vuYUH+vBvW
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCawTASQAKCRAr4qD1Cr/k
-CuR/AQCuM5NB0DTaNoyA/6OQ2lhscvjtcD0EuIh7DEsizAQyFQEAl+tKUmT4MlSD
-2rBzCuSCMK/8P4EIXWB/axm4TY7GWw4=
-=xv3R
------END PGP SIGNATURE-----
-
---qR8zq0vuYUH+vBvW--
