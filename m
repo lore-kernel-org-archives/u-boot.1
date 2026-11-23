@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84CD7606A338
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 14:23:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9316D606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 14:23:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jZkrZ8ti;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=xtP2rc7e
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Q+WRoSmr;
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=uAa8iTWA
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 63F2B40635;
-	Mon, 23 Nov 2026 14:23:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6991980A50;
+	Mon, 23 Nov 2026 14:23:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Vvi0CjdS-CV8; Mon, 23 Nov 2026 14:23:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 15A34406E1
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795443795;
-	b=QKtQRtUVGBsIqEr0TKnNrcfKWNtxaL8g9IX7VLuY/FsafYBGDia2gIVArRhgNJfi/1zW
-	 EJKQiJEgb+hpG4ILhEdI/MRxDYevjMCuQmzosKsv72qoYaFGEf6mJ5orzIOVhh4/wxqYC
-	 nK9rUALupe0cD77QesVbznRrZudJ5xK2r4qdRvOjdUFIKLYhii7dBZTTGCeia9IvjjVUu
-	 OaghgSpgyh3xG3ZYKmhwMfB9lR9oB/OqQTGX6SzJvNQ1LrGVrDzQk700eGHXAf3T7tY+t
-	 2Iu9Swt4VV5ns91G1pyewtreJUt4cpwyD4WeGPLHwJt/XPB9i+QMI5NqVSOt8e2YU6Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AIrAxewTsy1n; Mon, 23 Nov 2026 14:23:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8E08080A79
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795443800;
+	b=ZzJU4qgBAHICvD826jayl8IUDrio9fRVQWjhdrbGJmmna/GXP2mzrPanZc0fn1wiVr6F
+	 7+q3V938iwKuIVFCdnz29mhjYiQjR0S1OCJcUBIHCdjkfPsPhMDClYRLvsT5vydpvNBw1
+	 bKIJ4A6wfl3/heHNw/mEZm2JgHtbvrdHTMj6bDq4ZLyfAXyXweJrLIPmkuvxeEgiPcT+B
+	 HpFs4CYl+VFFNpObdv8YJ+knCMADZK2FLAQGqO1nfRQu+i5uB0DRDm4P62y4lxZdhUsI5
+	 GdhoEU+IxDGwUceJPCCk0+i9w73ZhSdKxgp3kuxmGv64z9qkj6YR9MJPgM75YeQLvkg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795443795;
+	c=relaxed/relaxed; t=1795443800;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,81 +32,80 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:To:Cc:X-Mailer:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=NcnnvGD/Kx2VhULsIhcMaqCTywcNG9QiBn2KNOG4pqU=;
-	b=gH9ZDH4AjMvr67A6/MteFc6vj4guQTbGJxAMCViq3SQaY4qaHi7Svp5fg1XjuyWUt1nd
-	 ml+ATmM6eKErP04rFlUhe5HklMKhkWYC3t8Cj/b88x3wq4tQGkJ8YlHSjY6Mxs6xzH0Jh
-	 hBitYRAnRGmzFMRZEwCga6VnhFskYB/Uo6BgcaaV+5F91xOr3p2OF0bMutZlOLjiO2MF0
-	 KG25qPQ2DUCOBEsVtzI3CZ0GMFvpgnnPms58PnaeKGYOV2BAUk/a07VMvppyGX4K8R7F6
-	 x8+c5EANALbM3l76DKw7zsYF3AP/e1sDccRjpnnQWl2Zntryz7oKAv1DIVIuJySLHhg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=fXUkfBnoaa+ZokV16uikt+RSXVHju4KESpLuvYduWUc=;
+	b=Hwo9yecUoScBpwgKe6ZqRTFADXU9Dn1gj/BVagJq6xpdhge1d7hIweDnLF7zxdpxyX20
+	 0hmOIt9tGA80TmjfRrvCy1Yn1uy2PLJP4FmEjou/6C4vdydLfAVYKVrhfzY+JjU7uWlB9
+	 P8YJ1Z7zl0PM9CkMZl2l7NlQWqjCDt0Q0m8fMJQom+94iAAYTSluZ0aGwNhEr+0XtEkv9
+	 gjf0sBXVQ4san/7lCDhqNpKSKyicBwYYsqD16jFQD+nZR15sHhRLT1FD4rEnOMx7Ep1pH
+	 hQyIedsgHjTIhADP8X+uTS+46srO0tcH8megHVJlGM3lP0mO9rosO2OaSSqOYXzvdyQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795443795;
-	bh=NcnnvGD/Kx2VhULsIhcMaqCTywcNG9QiBn2KNOG4pqU=;
+	d=lists.u-boot-project.org; s=default; t=1795443800;
+	bh=fXUkfBnoaa+ZokV16uikt+RSXVHju4KESpLuvYduWUc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jZkrZ8tiXQB5j/HRTsniyviapmqXJlQnkDBD1fsOFFmfzJj4x9N+MQLF5dJECb51j
-	 NxCKSVs67WFyrztsOoWBIfpqEm1CztLlr2yLu5BthnhpPoXOyAiP7gu004hDYsc2FN
-	 vURIiwaN4CIpfmnLcRWHF/QuOkADYm1lJnn2opOtkBqg0MTO2+3C+kUREjhSi3Ud7T
-	 UdeFOqvXCy8FZQ1QWt+u8VSexycWZG5tnZ388QKkbXS5hLWlIBy7Vlvjz1pgUd5lxP
-	 UdnhpVGvNB7AFgbP9rl9Fm8jl+5Hl2zZfN3e4yFmS1FKynlUbV6bWbVVJs1nBNfoiV
-	 xRDxxhGn11tpA==
+	b=Q+WRoSmrnD6odfAt7riIFP/pT1J1c6ge7OXB6+GzXFDSqBpZ065xDfFYLoyl8kGW2
+	 UVviWT+cJWr6+sbdjiQF7FLBgGEM3Q/giRdhSgvdnWPduf5CSc9foD2BTGH520pba3
+	 eJPyIJSEwyu4tzmgUkUzuLfhtBG1KrDNw+S2m3BCFtrJcKTz5JfzdykuHKkzJzKLlF
+	 TYvEpAvu1w3OCtprLGqCNIdAq0pJkjDU8EXLBdTKXsoQI+WKRmlnaE8dLP0TMQH4NR
+	 qliIDQtS/I0cgFMtDOuBvimQF+wP9D4raiI+JiXit0t22znUEjGGjGN/LHjzw/ijVg
+	 pQcqyg9iF3OgQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 15A34406E1;
-	Mon, 23 Nov 2026 14:23:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8E08080A79;
+	Mon, 23 Nov 2026 14:23:20 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D74CF371
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:13 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E1294260
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BD756400BD
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C6E914022A
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nWoHd3AHaHS2 for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 14:23:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 91F3540060
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=185.171.202.116
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
- helo=smtpout-04.galae.net; envelope-from=richard.genoud@bootlin.com;
+ id 6nGGzZaOsR1G for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 14:23:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 428A940060
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=xtP2rc7e
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 91F3540060
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:10 +0000 (UTC)
+ header.a=rsa-sha256 header.s=dkim header.b=uAa8iTWA
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 428A940060
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:15 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 1FEFEC69161;
- Mon, 23 Nov 2026 14:23:16 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id E94521A179D;
+ Mon, 23 Nov 2026 14:23:13 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 18CB2601E1;
- Mon, 23 Nov 2026 14:23:09 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id B4087601E1;
+ Mon, 23 Nov 2026 14:23:13 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3C65C11E6A528; Mon, 23 Nov 2026 15:23:03 +0100 (CET)
+ with ESMTPSA id 543D811E6A520; Mon, 23 Nov 2026 15:23:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1795443787; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1795443791; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=NcnnvGD/Kx2VhULsIhcMaqCTywcNG9QiBn2KNOG4pqU=;
- b=xtP2rc7evUkoURN2mGvNWBk39/6Oi8rdo/golgmQX4NGxN+gCYD8CBUZiMALYuLhHDVz3l
- Io2Cb2VbuXnDtSzZmZo7utuY8Reo2K1xc5NqKC3J9WZJaYbEMqF+7zVHOxu2Mgg20dukUq
- PB4mBFfDwurakgclvQdZGQqtZ2qLU3j+Xxm02Ecqgr1jAlCjVvI8Ga00fU1mf8CegX4xx4
- pPWF01lmhqRDoHylKcR7c4gYx5sueUOhgqPQDV+zfma8XL2zBjBNlgczZkZrnSHlmL1Ib5
- y8OpZKHtf29BbqKHLacrZAoBpNInWk0iahdmr+lZUxZsbjlbzlyTV9ndDnTU+A==
+ bh=fXUkfBnoaa+ZokV16uikt+RSXVHju4KESpLuvYduWUc=;
+ b=uAa8iTWAFxt471fpkAHZCu/riEhs4EA62HsUFauwVd3kRDJ39PCQSVv1YsPQZQrx5GI6sM
+ izA1oWbmF2LM5sFDO2jgAt6QmieU4hCb87qeGGf12ulcDqISOkJaEkTYCDQbh2I/7RnYW/
+ KvukCSnFCgO2nfbla63IvqszvB5dMhBXNo+R1sB+V9Z5LoXBtPmB8Dv1hGZwFnckewqgil
+ horcqG+WxuKujKgCjR+yqR0P/K9wXvMKN6bmCkZsQuerTO5RGadjXvRbP8GLiKB5dNNqji
+ xsvwnWgfR9ZXos1pI7KtQi23DYP6PgxcA7lSZCpupNkySfxf6WKO0/wVoKdmRQ==
 From: "Richard Genoud (Synaptics)" <richard.genoud@bootlin.com>
-Date: Mon, 23 Nov 2026 15:22:04 +0100
-Subject: [PATCH v2 5/8] clk: synaptics: add Synaptics sl2610 family clock
- drivers
+Date: Mon, 23 Nov 2026 15:22:05 +0100
+Subject: [PATCH v2 6/8] pinctrl: synaptics: Add sl2610 SoC family pinctrl
+ driver
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-sl2619_base-v2-5-9e3b28c77cda@bootlin.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261123-sl2619_base-v2-6-9e3b28c77cda@bootlin.com>
 References: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
 In-Reply-To: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
 To: u-boot@lists.u-boot-project.org
@@ -142,1124 +141,1074 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,UPPERCASE_50_75,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Introduce Synaptics sl2619 clock driver.
+Add support for Synaptics SL2610 SoCs family pin controller.
 
-The code is based on Linux driver by Jisheng Zhang:
-https://lore.kernel.org/lkml/20261115102401.3520-1-jszhang@kernel.org/
-It has been kept as close as possible to the original Linux code, thanks
-to U-Boot CCF.
+It uses Generic Pinctrl framework and is compatible with the Linux
+driver (same device tree).
+Pin muxing and pin configuration are supported.
 
-The main difference is for sl2610_soc_clks_probe, where we force_probe
-sl2610_aio_clk and sl2610_system_clk, to resolve dependencies.
+It supports:
+- bias-disable
+- bias-pull-up
+- bias-pull-down
+- drive-strength
+- input-enable/disable
+- input-schmitt-enable/disable
+- slew-rate
 
-NB: this driver has no compatible string because it is bound by the
+NB: for the pull up, a true/1 means strong pull-up and 0 means normal
+pull-up
+
+NB2: this driver has no compatible string because it is bound by the
 system controller driver
 
 Signed-off-by: Richard Genoud (Synaptics) <richard.genoud@bootlin.com>
 ---
- drivers/clk/Kconfig                   |   1 +
- drivers/clk/Makefile                  |   1 +
- drivers/clk/synaptics/Kconfig         |  12 +
- drivers/clk/synaptics/Makefile        |   1 +
- drivers/clk/synaptics/clk-sl2610.c    | 438 ++++++++++++++++++++++++++++++++++
- drivers/clk/synaptics/sl-clk.c        | 266 +++++++++++++++++++++
- drivers/clk/synaptics/sl-clk.h        |  29 +++
- drivers/clk/synaptics/sl-sysmgr-clk.c |  76 ++++++
- drivers/clk/synaptics/sl-sysmgr-clk.h |  44 ++++
- drivers/clk/synaptics/sl2610-pll.c    | 127 ++++++++++
- drivers/clk/synaptics/sl2610-pll.h    |  12 +
- 11 files changed, 1007 insertions(+)
+ drivers/pinctrl/Kconfig          |  11 +
+ drivers/pinctrl/Makefile         |   1 +
+ drivers/pinctrl/pinctrl-sl2610.c | 992 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 1004 insertions(+)
 
-diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-index 3f39b36949a6..d977727ab2a8 100644
---- a/drivers/clk/Kconfig
-+++ b/drivers/clk/Kconfig
-@@ -297,6 +297,7 @@ source "drivers/clk/spacemit/Kconfig"
- source "drivers/clk/starfive/Kconfig"
- source "drivers/clk/stm32/Kconfig"
- source "drivers/clk/sunxi/Kconfig"
-+source "drivers/clk/synaptics/Kconfig"
- source "drivers/clk/tegra/Kconfig"
- source "drivers/clk/ti/Kconfig"
- source "drivers/clk/thead/Kconfig"
-diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index 4b241a9240ac..d860e64fff53 100644
---- a/drivers/clk/Makefile
-+++ b/drivers/clk/Makefile
-@@ -48,6 +48,7 @@ obj-$(CONFIG_CLK_RENESAS) += renesas/
- obj-$(CONFIG_$(PHASE_)CLK_RS9_PCIE) += clk-renesas-pcie.o
- obj-$(CONFIG_$(PHASE_)CLK_SCMI) += clk_scmi.o
- obj-$(CONFIG_CLK_SIFIVE) += sifive/
-+obj-$(CONFIG_CLK_SL2610) += synaptics/
- obj-$(CONFIG_CLK_SOPHGO) += sophgo/
- obj-$(CONFIG_CLK_SPACEMIT) += spacemit/
- obj-$(CONFIG_CLK_SUNXI) += sunxi/
-diff --git a/drivers/clk/synaptics/Kconfig b/drivers/clk/synaptics/Kconfig
-new file mode 100644
-index 000000000000..295a126ccea5
---- /dev/null
-+++ b/drivers/clk/synaptics/Kconfig
-@@ -0,0 +1,12 @@
-+config CLK_SL2610
-+	bool "Synaptics SL2610 clock driver"
-+	depends on CLK && ARCH_SYNAPTICS
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index 04785a927fec..6781e34b44f6 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -319,6 +319,17 @@ config PINCTRL_SINGLE
+ 	  Depending on the platform make sure to also enable OF_TRANSLATE and
+ 	  eventually SPL_OF_TRANSLATE to get correct address translations.
+ 
++config PINCTRL_SL2610
++	bool "Synaptics SL2610 family pin-control and pin-mux driver"
++	depends on DM && PINCTRL_GENERIC && ARCH_SYNAPTICS
 +	select SOC_SL2610_SYSCON
-+	select CLK_CCF
-+	select CLK_AUTO_ID
++	select PINCONF
++	default y
 +	help
-+	  This enables support for clock driver for SL2610 Synaptics SoCs.
-+	  The driver handles clocks from soc, cpu, aio and system manager
-+	  domains.
-+	  The clock controller generates and supplies clocks to various
-+	  peripherals within the SoC.
-diff --git a/drivers/clk/synaptics/Makefile b/drivers/clk/synaptics/Makefile
++	  Support pin multiplexing control on Synaptics SL2610 family SoCs.
++	  The driver uses Generic Pinctrl framework and is compatible with the
++	  Linux driver, i.e. it uses the same device tree configuration.
++
+ config PINCTRL_STI
+ 	bool "STMicroelectronics STi pin-control and pin-mux driver"
+ 	depends on DM && ARCH_STI
+diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+index 23219626e392..0bbf0080c8bf 100644
+--- a/drivers/pinctrl/Makefile
++++ b/drivers/pinctrl/Makefile
+@@ -33,6 +33,7 @@ obj-$(CONFIG_$(PHASE_)PINCTRL_ROCKCHIP)	+= rockchip/
+ obj-$(CONFIG_PINCTRL_SANDBOX)		+= pinctrl-sandbox.o
+ obj-$(CONFIG_PINCTRL_SCMI)		+= pinctrl-scmi.o
+ obj-$(CONFIG_PINCTRL_SINGLE)		+= pinctrl-single.o
++obj-$(CONFIG_PINCTRL_SL2610)		+= pinctrl-sl2610.o
+ obj-$(CONFIG_$(PHASE_)PINCTRL_SPACEMIT_K1) += spacemit/
+ obj-$(CONFIG_PINCTRL_STARFIVE)		+= starfive/
+ obj-$(CONFIG_PINCTRL_STI)		+= pinctrl-sti.o
+diff --git a/drivers/pinctrl/pinctrl-sl2610.c b/drivers/pinctrl/pinctrl-sl2610.c
 new file mode 100644
-index 000000000000..e2c922166a90
+index 000000000000..7ade1a1853b2
 --- /dev/null
-+++ b/drivers/clk/synaptics/Makefile
-@@ -0,0 +1 @@
-+obj-y += clk-sl2610.o sl2610-pll.o sl-clk.o sl-sysmgr-clk.o
-diff --git a/drivers/clk/synaptics/clk-sl2610.c b/drivers/clk/synaptics/clk-sl2610.c
-new file mode 100644
-index 000000000000..19e3bf58bacb
---- /dev/null
-+++ b/drivers/clk/synaptics/clk-sl2610.c
-@@ -0,0 +1,438 @@
++++ b/drivers/pinctrl/pinctrl-sl2610.c
+@@ -0,0 +1,992 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2026 Synaptics Incorporated
 + *
-+ * Author: Richard Genoud <richard.genoud@bootlin.com>
++ * Richard Genoud <richard.genoud@bootlin.com>
 + *
-+ * From Linux: drivers/clk/berlin/sl2610-clks.c
-+ *    Copyright (C) 2025 Synaptics Incorporated
-+ *    Author: Jisheng Zhang <jszhang@kernel.org>
++ * Based on Linux Berlin/Synaptics drivers:
++ *  - drivers/pinctrl/berlin/berlin.c:
++ *    Copyright (C) 2014 Marvell Technology Group Ltd.
++ *    Antoine Ténart <antoine.tenart@free-electrons.com>
++ *
++ *  - pinctrl/berlin/pinctrl-sl2610.c:
++ *   Copyright (C) 2025 Synaptics Incorporated
++ *   Author: Jisheng Zhang <jszhang@kernel.org>
++ *
 + */
 +
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <clk-uclass.h>
-+#include <div64.h>
 +#include <dm.h>
-+#include <dm/device.h>
-+#include <dm/device-internal.h>
-+#include <dm/read.h>
-+#include <dm/uclass.h>
-+#include <dt-bindings/clock/syna,sl2610.h>
-+#include <linux/bitops.h>
-+#include <linux/clk-provider.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
-+#include <malloc.h>
-+
-+#include "sl2610-pll.h"
-+#include "sl-clk.h"
-+#include "sl-sysmgr-clk.h"
-+
-+#define REG_CLKENABLE		0x0420
-+
-+#define CLK_GATE_CTRL0		0x0600
-+
-+#define SYSPLL0_OFFSET		0x0200
-+#define SYSPLL1_OFFSET		0x0220
-+#define CPUPLL_OFFSET		0x2000
-+#define APLL0_OFFSET		0x0008
-+#define APLL1_OFFSET		0x0030
-+
-+enum {
-+	SYSPLL0_OUT, SYSPLL0_OUTF,
-+	SYSPLL1_OUT, SYSPLL1_OUTF,
-+	CPUPLL_OUT, CPUPLL_OUTF,
-+	APLL0_OUT, APLL0_OUTF,
-+	APLL1_OUT, APLL1_OUTF,
-+};
-+
-+static const char * const clk_names[] = {
-+	[SYSPLL0_OUT]		= "syspll0_out",
-+	[SYSPLL0_OUTF]		= "syspll0_outf",
-+	[SYSPLL1_OUT]		= "syspll1_out",
-+	[SYSPLL1_OUTF]		= "syspll1_outf",
-+	[CPUPLL_OUT]		= "cpupll_out",
-+	[CPUPLL_OUTF]		= "cpupll_outf",
-+	[APLL0_OUT]		= "apll0_out",
-+	[APLL0_OUTF]		= "apll0_outf",
-+	[APLL1_OUT]		= "apll1_out",
-+	[APLL1_OUTF]		= "apll1_outf",
-+};
-+
-+static const struct sl_gateclk_desc sl2610_gates[] = {
-+	{ "usb0coreclk",	"perifsysclk",	CLK_USB0CORE,		0 },
-+	{ "sdiosysclk",		"perifsysclk",	CLK_SDIOSYS,		1 },
-+	{ "emmcsysclk",		"perifsysclk",	CLK_EMMCSYS,		2 },
-+	{ "gpuaxiclk",		"hpcclk",	CLK_GPUAXI,		3 },
-+	{ "gethrgmiisysclk",	"perifsysclk",	CLK_GETHRGMIISYS,	4 },
-+	{ "sdio1sysclk",	"perifsysclk",	CLK_SDIO1SYS,		5 },
-+	{ "usb1coreclk",	"perifsysclk",	CLK_USB1CORE,		6 },
-+	{ "gethrgmii1sysclk",	"perifsysclk",	CLK_GETHRGMII1SYS,	7 },
-+	{ "usb0phyrefclk",	"perifsysclk",	CLK_USB0PHYREF,		8 },
-+	{ "usb1phyrefclk",	"perifsysclk",	CLK_USB1PHYREF,		9 },
-+	{ "apbuart0clk",	"apbcoreclk",	CLK_APBUART0,		10 },
-+	{ "apbuart1clk",	"apbcoreclk",	CLK_APBUART1,		11 },
-+	{ "apbuart2clk",	"apbcoreclk",	CLK_APBUART2,		12 },
-+	{ "apbuart3lck",	"apbcoreclk",	CLK_APBUART3,		13 },
-+	{ "apbi2c0clk",		"apbcoreclk",	CLK_APBI2C0,		14 },
-+	{ "apbi2c1lck",		"apbcoreclk",	CLK_APBI2C1,		15 },
-+	{ "apbspi0clk",		"apbcoreclk",	CLK_APBSPI0,		16 },
-+	{ "apbspi1clk",		"apbcoreclk",	CLK_APBSPI1,		17 },
-+	{ "apbspi2clk",		"apbcoreclk",	CLK_APBSPI2,		18 },
-+	{ "apbspi3clk",		"apbcoreclk",	CLK_APBSPI3,		19 },
-+	{ "apbgpioclk",		"apbcoreclk",	CLK_APBGPIO,		20 },
-+	{ "apbtimersclk",	"apbcoreclk",	CLK_APBTIMERS,		21 },
-+	{ "apbsyscntclk",	"apbcoreclk",	CLK_APBSYSCNT,		22 },
-+	{ "apbwdtclk",		"apbcoreclk",	CLK_APBWDT,		23 },
-+	{ "apbdmaclk",		"apbcoreclk",	CLK_APBDMA,		24 },
-+};
-+
-+static const struct sl_clk_desc sl2610_descs[] = {
-+	{ "cpufastrefclk",	CLK_CPUFASTREF,		0x440, CLK_IS_CRITICAL },
-+	{ "memfastrefclk",	CLK_MEMFASTREF,		0x444, CLK_IS_CRITICAL },
-+	{ "cfgclk",		CLK_CFG,		0x448, CLK_IS_CRITICAL },
-+	{ "sysclk",		CLK_SYS,		0x44c, CLK_IS_CRITICAL },
-+	{ "perifsysclk",	CLK_PERIFSYS,		0x450, CLK_IS_CRITICAL },
-+	{ "apbcoreclk",		CLK_APBCORE,		0x454, CLK_IS_CRITICAL },
-+	{ "apbserclk",		CLK_APBSER,		0x458, CLK_IS_CRITICAL },
-+	{ "atbclk",		CLK_ATB,		0x45c },
-+	{ "hpcclk",		CLK_HPC,		0x460, CLK_IS_CRITICAL },
-+	{ "emmcclk",		CLK_EMMC,		0x464 },
-+	{ "sd0clk",		CLK_SD0,		0x468 },
-+	{ "sd1clk",		CLK_SD1,		0x46c },
-+	{ "gethrgmiiclk",	CLK_GETHRGMII,		0x470 },
-+	{ "gethrgmii1clk",	CLK_GETHRGMII1,		0x474 },
-+	{ "ge0_ptp_refclk",	CLK_GE0_PTP_REF,	0x478 },
-+	{ "ge1_ptp_refclk",	CLK_GE1_PTP_REF,	0x47c },
-+	{ "usb2testclk",	CLK_USB2TEST,		0x480 },
-+	{ "usb2test480mg0clk",	CLK_USB2TEST480MG0,	0x484 },
-+	{ "usb2test480mg1clk",	CLK_USB2TEST480MG1,	0x488 },
-+	{ "usb2test480mg2clk",	CLK_USB2TEST480MG2,	0x48c },
-+	{ "usb2test100mg0clk",	CLK_USB2TEST100MG0,	0x490 },
-+	{ "usb2test100mg1clk",	CLK_USB2TEST100MG1,	0x494 },
-+	{ "usb2test100mg2clk",	CLK_USB2TEST100MG2,	0x498 },
-+	{ "usb2test100mg3clk",	CLK_USB2TEST100MG3,	0x49c },
-+	{ "periftest125mg0clk",	CLK_PERIFTEST125MG0,	0x4a0 },
-+	{ "periftest200mg0clk",	CLK_PERIFTEST200MG0,	0x4a4 },
-+	{ "periftest200mg1clk",	CLK_PERIFTEST200MG1,	0x4a8 },
-+	{ "gpuclk",		CLK_GPU,		0x4ac },
-+	{ "npuclk",		CLK_NPU,		0x4b0 },
-+	{ "aviosysclk",		CLK_AVIOSYS,		0x4b4, CLK_IS_CRITICAL },
-+	{ "aiosysclk",		CLK_AIOSYS,		0x4b8, CLK_IS_CRITICAL },
-+	{ "avio_lcdc2scanclk",	CLK_AVIO_LCDC2SCAN,	0x4bc },
-+	{ "avio_ipiclk",	CLK_AVIO_IPI,		0x4c0 },
-+	{ "avio_pclk",		CLK_AVIO_P,		0x4c4 },
-+	{ "avio_dphyrxtxescclk", CLK_AVIO_DPHYRXTXESC,	0x4c8 },
-+	{ "aviofpllclk",	CLK_AVIOFPLL,		0x4cc },
-+	{ "avio_rx_scanbyteclk", CLK_AVIO_RX_SCANBYTE,	0x4d0 },
-+	{ "avio_rx_scantestclk", CLK_AVIO_RX_SCANTEST,	0x4d4 },
-+};
-+
-+static const char * const default_parent_names[] = {
-+	"syspll0_out",
-+	"apll0_out",
-+	"syspll0_outf",
-+	"apll0_outf",
-+	"syspll1_out",
-+	"syspll1_outf",
-+};
-+
-+static const char * const ge_ptp_refclk_parent_names[] = {
-+	"osc",
-+	"apll0_outf",
-+	"syspll1_out",
-+	"syspll0_out",
-+	"clk_mcu_axi",
-+};
-+
-+static int sl2610_soc_clk_setup(struct udevice *dev)
-+{
-+	const char * const *parent_names;
-+	int num_parents;
-+	void __iomem *base;
-+	struct clk *clk;
-+	int n, ret;
-+	u32 id;
-+
-+	base = dev_read_addr_ptr(dev_get_parent(dev));
-+	if (!base)
-+		return -ENODEV;
-+
-+	/* sysplls */
-+	ret = sl2610_pll_register(dev, base + SYSPLL0_OFFSET,
-+				  clk_names[SYSPLL0_OUT], clk_names[SYSPLL0_OUTF]);
-+	if (ret)
-+		return ret;
-+	ret = sl2610_pll_register(dev, base + SYSPLL1_OFFSET,
-+				  clk_names[SYSPLL1_OUT], clk_names[SYSPLL1_OUTF]);
-+	if (ret)
-+		return ret;
-+
-+	/* normal clocks */
-+	for (n = 0; n < ARRAY_SIZE(sl2610_descs); n++) {
-+		const struct sl_clk_desc *cd = &sl2610_descs[n];
-+
-+		id = cd->id;
-+		if (id == CLK_GE0_PTP_REF || id == CLK_GE1_PTP_REF) {
-+			parent_names = ge_ptp_refclk_parent_names;
-+			num_parents = ARRAY_SIZE(ge_ptp_refclk_parent_names);
-+		} else {
-+			parent_names = default_parent_names;
-+			num_parents = ARRAY_SIZE(default_parent_names);
-+		}
-+		clk = sl_clk_register(dev, base + cd->offset, cd->name,
-+				      parent_names, num_parents, cd->flags);
-+		if (IS_ERR(clk))
-+			return PTR_ERR(clk);
-+
-+		dev_clk_dm(dev, id, clk);
-+	}
-+
-+	/* gate clocks */
-+	for (n = 0; n < ARRAY_SIZE(sl2610_gates); n++) {
-+		const struct sl_gateclk_desc *gd = &sl2610_gates[n];
-+
-+		clk = clk_register_gate(dev, gd->name, gd->parent_name,
-+					gd->flags, base + REG_CLKENABLE,
-+					gd->bit_idx, 0, NULL);
-+		if (IS_ERR(clk))
-+			return PTR_ERR(clk);
-+
-+		dev_clk_dm(dev, gd->id, clk);
-+	}
-+
-+	return 0;
-+}
-+
-+static int sl2610_cpu_clk_setup(struct udevice *dev)
-+{
-+	struct clk *clk;
-+	void __iomem *base;
-+	int ret;
-+
-+	base = dev_read_addr_ptr(dev_get_parent(dev));
-+	if (!base)
-+		return -ENODEV;
-+
-+	/* cpupll */
-+	ret = sl2610_pll_register(dev, base + CPUPLL_OFFSET,
-+				  clk_names[CPUPLL_OUT], clk_names[CPUPLL_OUTF]);
-+	if (ret)
-+		return ret;
-+
-+	/* TODO: support cpupll bypass */
-+	clk = clk_register_fixed_factor(dev, "cpu0", clk_names[CPUPLL_OUTF], 0, 1, 1);
-+	if (IS_ERR(clk))
-+		return PTR_ERR(clk);
-+	dev_clk_dm(dev, CLK_CPU0, clk);
-+
-+	clk = clk_register_fixed_factor(dev, "cpu1", clk_names[CPUPLL_OUTF], 0, 1, 1);
-+	if (IS_ERR(clk))
-+		return PTR_ERR(clk);
-+	dev_clk_dm(dev, CLK_CPU1, clk);
-+
-+	clk = clk_register_fixed_factor(dev, "dsu", clk_names[CPUPLL_OUT], 0, 1, 1);
-+	if (IS_ERR(clk))
-+		return PTR_ERR(clk);
-+	dev_clk_dm(dev, CLK_DSU, clk);
-+
-+	return 0;
-+}
-+
-+static int sl2610_aio_clk_setup(struct udevice *dev)
-+{
-+	void __iomem *base;
-+	int ret;
-+
-+	base = dev_read_addr_ptr(dev_get_parent(dev));
-+	if (!base)
-+		return -ENODEV;
-+
-+	ret = sl2610_pll_register(dev, base + APLL0_OFFSET,
-+				  clk_names[APLL0_OUT], clk_names[APLL0_OUTF]);
-+	if (ret)
-+		return ret;
-+	ret = sl2610_pll_register(dev, base + APLL1_OFFSET,
-+				  clk_names[APLL1_OUT], clk_names[APLL1_OUTF]);
-+	if (ret)
-+		return ret;
-+
-+	/* TODO aio clks */
-+
-+	return 0;
-+}
-+
-+static const struct sl_sysmgr_fixedclk_desc sl2610_sysmgr_fixeds[] = {
-+	{ "clk_mcu_ref",	CLK_MCU_REF,	25000000 },
-+	{ "clk_mcu_pll",	CLK_MCU_PLL,	400000000 },
-+	{ "clk_mcu_io_pll",	CLK_MCU_IO_PLL,	300000000 },
-+	{ "clk_mcu_apb",	CLK_MCU_APB,	100000000 },
-+	{ "clk_mcu_axi",	CLK_MCU_AXI,	200000000 },
-+};
-+
-+static const struct sl_sysmgr_gateclk_desc sl2610_sysmgr_gates[] = {
-+	{ "clk_cfg_uart0",	"clk_mcu_apb",	CLK_CFG_UART0,	0 },
-+	{ "clk_ser_uart0",	"clk_mcu_ref",	CLK_SER_UART0,	1 },
-+	{ "clk_cfg_uart1",	"clk_mcu_apb",	CLK_CFG_UART1,	2 },
-+	{ "clk_cfg_uart2",	"clk_mcu_apb",	CLK_CFG_UART2,	3 },
-+	{ "clk_cfg_uart3",	"clk_mcu_apb",	CLK_CFG_UART3,	4 },
-+	{ "clk_cfg_gpio",	"clk_mcu_apb",	CLK_CFG_GPIO,	5 },
-+	{ "clk_cfg_i2cm0",	"clk_mcu_apb",	CLK_CFG_I2CM0,	6 },
-+	{ "clk_cfg_i2cm1",	"clk_mcu_apb",	CLK_CFG_I2CM1,	7 },
-+	{ "clk_cfg_spim",	"clk_mcu_apb",	CLK_CFG_SPIM,	8 },
-+	{ "clk_cfg_spis",	"clk_mcu_apb",	CLK_CFG_SPIS,	9 },
-+	{ "clk_cfg_i3c",	"clk_mcu_apb",	CLK_CFG_I3C,	10 },
-+	{ "clk_cfg_xspi",	"clk_mcu_apb",	CLK_CFG_XSPI,	11 },
-+	{ "clk_axi_xspi",	"clk_mcu_axi",	CLK_AXI_XSPI,	12 },
-+	{ "clk_cfg_pvt",	"clk_mcu_apb",	CLK_CFG_PVT,	13 },
-+	{ "clk_cfg_adc",	"clk_mcu_apb",	CLK_CFG_ADC,	14 },
-+	{ "clk_cfg_pwm",	"clk_mcu_apb",	CLK_CFG_PWM,	15 },
-+	{ "clk_bus_can0",	"clk_mcu_axi",	CLK_BUS_CAN0,	16 },
-+	{ "clk_bus_can1",	"clk_mcu_axi",	CLK_BUS_CAN1,	17 },
-+	{ "clk_cfg_pdm",	"clk_mcu_apb",	CLK_CFG_PDM,	18 },
-+};
-+
-+static const struct sl_sysmgr_clk_desc sl2610_sysmgr_clks[] = {
-+	{ "clk_ser_uart1",	"clk_mcu_pll",	CLK_SER_UART1,	0x604,	4 },
-+	{ "clk_ser_uart2",	"clk_mcu_pll",	CLK_SER_UART2,	0x608,	4 },
-+	{ "clk_ser_uart3",	"clk_mcu_pll",	CLK_SER_UART3,	0x60c,	4 },
-+	{ "clk_deb_gpio",	"clk_mcu_pll",	CLK_DEB_GPIO,	0x610,	4 },
-+	{ "clk_ser_i2cm0",	"clk_mcu_pll",	CLK_SER_I2CM0,	0x614,	4 },
-+	{ "clk_ser_i2cm1",	"clk_mcu_pll",	CLK_SER_I2CM1,	0x618,	4 },
-+	{ "clk_ser_spim",	"clk_mcu_pll",	CLK_SER_SPIM,	0x61c,	4 },
-+	{ "clk_ser_spis",	"clk_mcu_pll",	CLK_SER_SPIS,	0x620,	4 },
-+	{ "clk_ser_i3c",	"clk_mcu_pll",	CLK_SER_I3C,	0x624,	4 },
-+	{ "clk_ser_xspi",	"clk_mcu_io_pll", CLK_SER_XSPI,	0x628,	4 },
-+	{ "clk_hs_pvt",		"clk_mcu_pll",	CLK_HS_PVT,	0x62c,	4 },
-+	{ "clk_core_adc",	"clk_mcu_pll",	CLK_CORE_ADC,	0x630,	8 },
-+	{ "clk_ser_pwm",	"clk_mcu_pll",	CLK_SER_PWM,	0x634,	4 },
-+	{ "clk_ser_can0",	"clk_mcu_pll",	CLK_SER_CAN0,	0x638,	4 },
-+	{ "clk_ser_can1",	"clk_mcu_pll",	CLK_SER_CAN1,	0x63c,	4 },
-+	{ "clk_ser_pdm",	"clk_mcu_pll",	CLK_SER_PDM,	0x640,	8 },
-+	{ "clk_ref_calib",	"clk_mcu_pll",	CLK_REF_CALIB,	0x644,	8 },
-+};
-+
-+static int sl2610_sysmgr_clk_setup(struct udevice *dev)
-+{
-+	return sl_sysmgr_clk_setup(dev, sl2610_sysmgr_fixeds, ARRAY_SIZE(sl2610_sysmgr_fixeds),
-+				   sl2610_sysmgr_gates, ARRAY_SIZE(sl2610_sysmgr_gates),
-+				   CLK_GATE_CTRL0,
-+				   sl2610_sysmgr_clks, ARRAY_SIZE(sl2610_sysmgr_clks));
-+}
-+
-+static int sl2610_clk_force_probe(const struct driver *drv)
-+{
-+	struct udevice *dev;
-+
-+	return uclass_get_device_by_driver(UCLASS_CLK, drv, &dev);
-+}
-+
-+static int sl2610_soc_clks_probe(struct udevice *dev)
-+{
-+	int ret;
-+
-+	/*
-+	 * parents clocks apll0_out, apll0_outf are from aio
-+	 * and clk_mcu_axi is from system.
-+	 */
-+	ret = sl2610_clk_force_probe(DM_DRIVER_GET(sl2610_aio_clk));
-+	if (ret)
-+		return ret;
-+
-+	ret = sl2610_clk_force_probe(DM_DRIVER_GET(sl2610_system_clk));
-+	if (ret)
-+		return ret;
-+
-+	ret = sl2610_soc_clk_setup(dev);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int sl2610_cpu_clks_probe(struct udevice *dev)
-+{
-+	int ret;
-+
-+	ret = sl2610_cpu_clk_setup(dev);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int sl2610_aio_clks_probe(struct udevice *dev)
-+{
-+	int ret;
-+
-+	ret = sl2610_aio_clk_setup(dev);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int sl2610_system_clks_probe(struct udevice *dev)
-+{
-+	int ret;
-+
-+	ret = sl2610_sysmgr_clk_setup(dev);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int sl2610_clk_of_xlate(struct clk *clock,
-+			       struct ofnode_phandle_args *args)
-+{
-+	if (args->args_count != 1) {
-+		debug("Invalid clock args_count (%d)\n", args->args_count);
-+		return -EINVAL;
-+	}
-+
-+	clock->id = CLK_ID(clock->dev, args->args[0]);
-+	clock->data = 0;
-+
-+	return 0;
-+}
-+
-+static const struct clk_ops sl2610_clk_ops = {
-+	.of_xlate = sl2610_clk_of_xlate,
-+	.set_rate = ccf_clk_set_rate,
-+	.get_rate = ccf_clk_get_rate,
-+	.set_parent = ccf_clk_set_parent,
-+	.enable = ccf_clk_enable,
-+	.disable = ccf_clk_disable,
-+};
-+
-+U_BOOT_DRIVER(sl2610_soc_clk) = {
-+	.name = "syna-sl2610-soc-clk",
-+	.id = UCLASS_CLK,
-+	.ops = &sl2610_clk_ops,
-+	.probe = sl2610_soc_clks_probe,
-+};
-+
-+U_BOOT_DRIVER(sl2610_cpu_clk) = {
-+	.name = "syna-sl2610-cpu-clk",
-+	.id = UCLASS_CLK,
-+	.ops = &sl2610_clk_ops,
-+	.probe = sl2610_cpu_clks_probe,
-+};
-+
-+U_BOOT_DRIVER(sl2610_aio_clk) = {
-+	.name = "syna-sl2610-aio-clk",
-+	.id = UCLASS_CLK,
-+	.ops = &sl2610_clk_ops,
-+	.probe = sl2610_aio_clks_probe,
-+};
-+
-+U_BOOT_DRIVER(sl2610_system_clk) = {
-+	.name = "syna-sl2610-system-clk",
-+	.id = UCLASS_CLK,
-+	.ops = &sl2610_clk_ops,
-+	.probe = sl2610_system_clks_probe,
-+};
-diff --git a/drivers/clk/synaptics/sl-clk.c b/drivers/clk/synaptics/sl-clk.c
-new file mode 100644
-index 000000000000..17ecb5bdba21
---- /dev/null
-+++ b/drivers/clk/synaptics/sl-clk.c
-@@ -0,0 +1,266 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 Synaptics Incorporated
-+ *
-+ * From Linux drivers/clk/berlin/sl-clk.c:
-+ *    Copyright (C) 2018 Synaptics Incorporated
-+ *    Copyright (c) 2015 Marvell Technology Group Ltd.
-+ *    Author: Jisheng Zhang <jszhang@kernel.org>
-+ */
-+
 +#include <dm/device_compat.h>
-+#include <dm/devres.h>
-+#include <dm/uclass.h>
-+
++#include <dm/pinctrl.h>
 +#include <linux/bitfield.h>
-+#include <linux/bitops.h>
-+#include <linux/bug.h>
-+#include <linux/clk-provider.h>
-+#include <linux/compat.h>
-+#include <linux/err.h>
-+#include <linux/io.h>
-+#include <linux/kernel.h>
-+#include <linux/string.h>
++#include <linux/pinctrl/pinctrl.h>
++#include <regmap.h>
++#include <soc/synaptics/sl2610-syscon.h>
++#include <syscon.h>
 +
-+#define SL_CLK_EN		BIT(0)
-+#define SL_CLK_PLL_SEL		GENMASK(3, 1)
-+#define SL_CLK_PLL_SWITCH	BIT(4)
-+#define SL_CLK_DIV_SWITCH	BIT(5)
-+#define SL_CLK_DIV3_SWITCH	BIT(6)
-+#define SL_CLK_DIV_SEL		GENMASK(9, 7)
-+#define SL_MAX_PARENTS	6
++#define SYNA_PINCFG_DS	GENMASK(3, 0)	/* Drive strength */
++#define SYNA_PINCFG_IE	BIT(4)		/* Input enable */
++#define SYNA_PINCFG_PE	BIT(5)		/* Pull enable */
++#define SYNA_PINCFG_PS	BIT(6)		/* Pull select (0:PD, 1:PU) */
++#define SYNA_PINCFG_SL	BIT(7)		/* Slew rate (0:slow 1:fast) */
++#define SYNA_PINCFG_SPU	BIT(8)		/* Strong pull-up */
++#define SYNA_PINCFG_ST	BIT(9)		/* Schmitt trigger */
 +
-+struct sl_clk {
-+	struct clk hw;
-+	void __iomem *reg;
-+	spinlock_t *lock;
-+	struct udevice *dev;
-+	unsigned int num_parents;
-+	const char *const *parent_names;
++struct syna_desc_function {
++	const char *name;
++	u8 muxval;
 +};
 +
-+#define to_sl_clk(_hw) container_of(_hw, struct sl_clk, hw)
++struct syna_desc_group {
++	const char *name;
++	u16 offset;
++	u8 bit_width;
++	u8 lsb;
++	u16 conf_offset;
++	const struct syna_desc_function *functions;
++};
 +
-+static const unsigned int sl_clk_values[] = { 1, 2, 3, 4, 6, 8, 12 };
++struct syna_pinctrl_desc {
++	const struct syna_desc_group *groups;
++	unsigned int ngroups;
++};
 +
-+static unsigned int sl_clk_value(u32 val)
-+{
-+	static const u8 div_table[] = { 0, 2, 4, 6, 8, 12, 0, 0 };
++struct syna_pinctrl {
++	struct regmap *regmap;
++	const struct syna_pinctrl_desc *desc;
++	const char **function_names;
++	u32 nfunctions;
++};
 +
-+	if (val & SL_CLK_DIV3_SWITCH)
-+		return 3;
-+	if (!(val & SL_CLK_DIV_SWITCH))
-+		return 1;
-+
-+	return div_table[FIELD_GET(SL_CLK_DIV_SEL, val)];
-+}
-+
-+static ulong sl_clk_get_rate(struct clk *hw)
-+{
-+	struct sl_clk *clk = to_sl_clk(hw);
-+	unsigned int divisor = sl_clk_value(readl_relaxed(clk->reg));
-+	unsigned long parent_rate = clk_get_parent_rate(&clk->hw);
-+
-+	if (WARN_ON_ONCE(!divisor))
-+		return 0;
-+
-+	return parent_rate / divisor;
-+}
-+
-+static unsigned int sl_clk_best(unsigned long parent_rate,
-+				unsigned long rate)
-+{
-+	unsigned long best_diff = ULONG_MAX;
-+	unsigned int best = 1, i;
-+
-+	for (i = 0; i < ARRAY_SIZE(sl_clk_values); i++) {
-+		unsigned long candidate = parent_rate / sl_clk_values[i];
-+		unsigned long diff = candidate > rate ? candidate - rate :
-+							     rate - candidate;
-+
-+		if (diff < best_diff) {
-+			best_diff = diff;
-+			best = sl_clk_values[i];
-+		}
++#define SYNA_PINCTRLCONF_GROUP(_name, _offset, _width, _lsb, _conf_offset, ...)	\
++	{								\
++		.name = _name,						\
++		.offset = _offset,					\
++		.bit_width = _width,					\
++		.lsb = _lsb,						\
++		.conf_offset = _conf_offset,				\
++		.functions = (const struct syna_desc_function[]){	\
++			__VA_ARGS__, { } },				\
 +	}
 +
-+	return best;
++#define SYNA_PINCTRL_FUNCTION(_muxval, _name)		\
++	{						\
++		.name = _name,				\
++		.muxval = _muxval,			\
++	}
++
++static const struct syna_desc_group sl2610_soc_pinctrl_groups[] = {
++	SYNA_PINCTRLCONF_GROUP("GPIO23", 0x8000, 0x3, 0x00, 0x8800,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO23 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw2"), /* SCL */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDC */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row0"),
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi3"), /* SS2n */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col3"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT4 */
++	SYNA_PINCTRLCONF_GROUP("GPIO24", 0x8000, 0x3, 0x03, 0x8804,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO24 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw2"), /* SDA */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDIO */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row1"),
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi3"), /* SS3n */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col2"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT5 */
++	SYNA_PINCTRLCONF_GROUP("GPIO25", 0x8000, 0x3, 0x06, 0x8808,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO25 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "uart5"), /* RXD */
++			       SYNA_PINCTRL_FUNCTION(0x2, "gpio_trig1"),
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row2"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* RXD */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col1"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT6 */
++	SYNA_PINCTRLCONF_GROUP("GPIO26", 0x8000, 0x3, 0x09, 0x880c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO26 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "uart5"), /* TXD */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* PTP_PPS_O */
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* TXD */
++			       SYNA_PINCTRL_FUNCTION(0x5, "usb2"), /* VBUS */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT7 */
++	SYNA_PINCTRLCONF_GROUP("GPIO27", 0x8000, 0x3, 0x0c, 0x8810,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO27 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw3"), /* SCL */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* TXD */
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1")), /* RTSn */
++	SYNA_PINCTRLCONF_GROUP("GPIO28", 0x8000, 0x3, 0x0f, 0x8814,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO28 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw3"), /* SDA */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* RXD */
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1")), /* CTSn */
++	SYNA_PINCTRLCONF_GROUP("GPIO29", 0x8000, 0x3, 0x12, 0x8818,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO29 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* DE */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row4"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* RXD */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col4"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDI */
++	SYNA_PINCTRLCONF_GROUP("GPIO30", 0x8000, 0x3, 0x15, 0x881c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO30 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* REn */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row5"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* TXD */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col5"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SCLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO31", 0x8000, 0x3, 0x18, 0x8820,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO31 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDC */
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS3n */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi3"), /* SS2n */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS2n */
++	SYNA_PINCTRLCONF_GROUP("GPIO32", 0x8000, 0x3, 0x1b, 0x8824,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO32 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDIO */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi3"), /* SS3n */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS3n */
++	SYNA_PINCTRLCONF_GROUP("GPIO33", 0x8004, 0x3, 0x00, 0x8828,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO33 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD0 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* TXD0 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "can0"), /* TX */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi3"), /* SS1n */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS1n */
++	SYNA_PINCTRLCONF_GROUP("GPIO34", 0x8004, 0x3, 0x03, 0x882c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO34 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD1 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* TXD1 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "can0")), /* RX */
++	SYNA_PINCTRLCONF_GROUP("GPIO35", 0x8004, 0x3, 0x06, 0x8830,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO35 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD2 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* TXD0 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col7"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart5"), /* RXD */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS0n */
++	SYNA_PINCTRLCONF_GROUP("GPIO36", 0x8004, 0x3, 0x09, 0x8834,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO36 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD3 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* TXD1 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart5"), /* TXD */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDO */
++	SYNA_PINCTRLCONF_GROUP("GPIO37", 0x8004, 0x3, 0x0c, 0x8838,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO37 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD0 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* RXD0 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "can1"), /* TX */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi5")), /* SDI */
++	SYNA_PINCTRLCONF_GROUP("GPIO38", 0x8004, 0x3, 0x0f, 0x883c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO38 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD1 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* RXD1 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "can1"), /* RX */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi5")), /* SDO */
++	SYNA_PINCTRLCONF_GROUP("GPIO39", 0x8004, 0x3, 0x12, 0x8840,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO39 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD2 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* RXD0 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row6"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart6"), /* RXD */
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS1n*/
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SS3n  */
++	SYNA_PINCTRLCONF_GROUP("GPIO40", 0x8004, 0x3, 0x15, 0x8844,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO40 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD3 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* RXD1 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row7"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart6"), /* TXD */
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS2n */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SS2n  */
++	SYNA_PINCTRLCONF_GROUP("GPIO41", 0x8004, 0x3, 0x18, 0x8848,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO41 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RXC */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* CRSDV */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi5")), /* SCLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO42", 0x8004, 0x3, 0x1b, 0x884c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO42 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TXC */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* CRSDV */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row8"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart7"), /* RXD */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SCLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO43", 0x8008, 0x3, 0x00, 0x8850,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO43 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TXCTL */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* TXEN */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SS0n */
++	SYNA_PINCTRLCONF_GROUP("GPIO44", 0x8008, 0x3, 0x03, 0x8854,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO44 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RXCTL */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* TXEN */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row9"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart7"), /* TXD */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SDI */
++	SYNA_PINCTRLCONF_GROUP("GPIO45", 0x8008, 0x3, 0x06, 0x8858,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO45 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* CLKOUT */
++			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1")), /* REFCLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO46", 0x8008, 0x3, 0x09, 0x885c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO46 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "sdio1"), /* CDn */
++			       SYNA_PINCTRL_FUNCTION(0x2, "sdio2"), /* CDn */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col0"),
++			       SYNA_PINCTRL_FUNCTION(0x5, "sm_uart1"), /* RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row9"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "dsi")), /* TE */
++	SYNA_PINCTRLCONF_GROUP("GPIO47", 0x8008, 0x3, 0x0c, 0x8860,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO47 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "sdio1"), /* WP */
++			       SYNA_PINCTRL_FUNCTION(0x2, "sdio2"), /* WP */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col1"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "rmii2"), /* REFCLK */
++			       SYNA_PINCTRL_FUNCTION(0x5, "sm_uart1"), /* CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row8")),
++	SYNA_PINCTRLCONF_GROUP("GPIO48", 0x8008, 0x3, 0x0f, 0x8864,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO48 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD0 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS0n */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS2n */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS3n */
++	SYNA_PINCTRLCONF_GROUP("GPIO49", 0x8008, 0x3, 0x12, 0x8868,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO49 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD1 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SDO */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS3n */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS2n */
++	SYNA_PINCTRLCONF_GROUP("GPIO50", 0x8008, 0x3, 0x15, 0x886c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO50 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD2 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SCLK */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS1n */
++	SYNA_PINCTRLCONF_GROUP("GPIO51", 0x8008, 0x3, 0x18, 0x8870,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO51 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD3 */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS0n */
++	SYNA_PINCTRLCONF_GROUP("GPIO52", 0x8008, 0x3, 0x1b, 0x8874,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO52 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD0 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS2n */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDO */
++	SYNA_PINCTRLCONF_GROUP("GPIO53", 0x800c, 0x3, 0x00, 0x8878,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO53 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD1 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS3n */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SCLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO54", 0x800c, 0x3, 0x03, 0x887c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO54 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD2 */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDI */
++	SYNA_PINCTRLCONF_GROUP("GPIO55", 0x800c, 0x3, 0x06, 0x8880,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO55 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD3 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SDI */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS1n */
++	SYNA_PINCTRLCONF_GROUP("GPIO56", 0x800c, 0x3, 0x09, 0x8884,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO56 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RXC */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS0n */
++	SYNA_PINCTRLCONF_GROUP("GPIO57", 0x800c, 0x3, 0x0c, 0x8888,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO57 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TXC */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDO */
++	SYNA_PINCTRLCONF_GROUP("GPIO58", 0x800c, 0x3, 0x0f, 0x888c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO58 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TXCTL */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SCLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO59", 0x800c, 0x3, 0x12, 0x8890,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO59 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RXCTL */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDI */
++	SYNA_PINCTRLCONF_GROUP("GPIO0", 0x800c, 0x3, 0x15, 0x8894,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO0 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* LRCK */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS0n */
++	SYNA_PINCTRLCONF_GROUP("GPIO1", 0x800c, 0x3, 0x18, 0x8898,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO1 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* BCLK */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SCLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO2", 0x800c, 0x3, 0x1b, 0x889c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO2*/
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* DO */
++			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* O */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDO */
++	SYNA_PINCTRLCONF_GROUP("GPIO3", 0x8010, 0x3, 0x00, 0x88a0,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO3 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* MCLK */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS1n */
++	SYNA_PINCTRLCONF_GROUP("GPIO4", 0x8010, 0x3, 0x03, 0x88a4,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO4 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* DI */
++			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* I */
++			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDI */
++	SYNA_PINCTRLCONF_GROUP("GPIO5", 0x8010, 0x3, 0x06, 0x88a8,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO5 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* LRCK */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* PIXCLK */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row0"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* I */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col7")),
++	SYNA_PINCTRLCONF_GROUP("GPIO6", 0x8010, 0x3, 0x09, 0x88ac,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO6 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* BCLK */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* HSYNC */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row1"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* O */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col6")),
++	SYNA_PINCTRLCONF_GROUP("GPIO7", 0x8010, 0x3, 0x0c, 0x88b0,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO7 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* DO */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row2"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* O */
++			       SYNA_PINCTRL_FUNCTION(0x5, "sm_pdm"), /* CLKIO */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col5")),
++	SYNA_PINCTRLCONF_GROUP("GPIO8", 0x8010, 0x3, 0x0f, 0x88b4,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO8 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* DI */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* VSYNC */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row3"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* I */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_col4")),
++	SYNA_PINCTRLCONF_GROUP("GPIO9", 0x8010, 0x3, 0x12, 0x88b8,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO9 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA0 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "pdm")), /* DI1 */
++	SYNA_PINCTRLCONF_GROUP("GPIO10", 0x8010, 0x3, 0x15, 0x88bc,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO10 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA1 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI2 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "dsi")), /* TE */
++	SYNA_PINCTRLCONF_GROUP("GPIO11", 0x8010, 0x3, 0x18, 0x88c0,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO11 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* MCLK */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA2 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_pdm"), /* CLKIO */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* CLK */
++	SYNA_PINCTRLCONF_GROUP("GPIO12", 0x8010, 0x3, 0x1b, 0x88c4,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO12 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* LRCK */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA3 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* WP */
++			       SYNA_PINCTRL_FUNCTION(0x4, "sdio1"), /* WP */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT0 */
++	SYNA_PINCTRLCONF_GROUP("GPIO13", 0x8014, 0x3, 0x00, 0x88c8,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO13 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* BCLK */
++			       SYNA_PINCTRL_FUNCTION(0x2, "pdm"), /* DI1 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "rgmii"), /* PTP_PPS_O */
++			       SYNA_PINCTRL_FUNCTION(0x4, "usb2"), /* VBUS */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT1 */
++	SYNA_PINCTRLCONF_GROUP("GPIO14", 0x8014, 0x3, 0x03, 0x88cc,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO14 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* DO */
++			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI3 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spdif"), /* O */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT2 */
++	SYNA_PINCTRLCONF_GROUP("GPIO15", 0x8014, 0x3, 0x06, 0x88d0,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO15 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* DI */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA4 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "sm_pdm"), /* DI0 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "spdif"), /* I */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT3 */
++	SYNA_PINCTRLCONF_GROUP("GPIO16", 0x8014, 0x3, 0x09, 0x88d4,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO16 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS0n */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2")), /* DAT3 */
++	SYNA_PINCTRLCONF_GROUP("GPIO17", 0x8014, 0x3, 0x0c, 0x88d8,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO17 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS1n */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA5 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* DAT2 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "dsi")), /* TE */
++	SYNA_PINCTRLCONF_GROUP("GPIO18", 0x8014, 0x3, 0x0f, 0x88dc,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO18 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS2n */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA6 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* DAT1 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI2 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "can1")), /* RX */
++	SYNA_PINCTRLCONF_GROUP("GPIO19", 0x8014, 0x3, 0x12, 0x88e0,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO19 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS3n */
++			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA7 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* DAT0 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI3 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "can1")), /* TX */
++	SYNA_PINCTRLCONF_GROUP("GPIO20", 0x8014, 0x3, 0x15, 0x88e4,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO20 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SDO */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2")), /* CMD */
++	SYNA_PINCTRLCONF_GROUP("GPIO21", 0x8014, 0x3, 0x18, 0x88e8,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO21 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SCLK */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* CLK */
++			       SYNA_PINCTRL_FUNCTION(0x5, "clkout")),
++	SYNA_PINCTRLCONF_GROUP("GPIO22", 0x8014, 0x3, 0x1b, 0x88ec,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO22 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SDI */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* CDn */
++			       SYNA_PINCTRL_FUNCTION(0x4, "sdio1")), /* CDn */
++};
++
++static const struct syna_desc_group sl2610_sysmgr_pinctrl_groups[] = {
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO31", 0xb00, 0x3, 0x00, 0xc00,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO31*/
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM0*/
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row7"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* SM PDM DI0 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x6, "can1")), /* SM CAN1 RX */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO32", 0xb00, 0x3, 0x03, 0xc04,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO32 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM1 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col0"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* SM PDM CLKIO */
++			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x6, "can1")), /* SM CAN1 TX */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO33", 0xb00, 0x3, 0x06, 0xc08,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO33 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM2 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "uart2"), /* SM UART2 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "key_row5"),
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart3_de")), /* SM UART3 DE */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO34", 0xb00, 0x3, 0x09, 0xc0c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO34 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM3 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "uart2"), /* SM UART2 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "key_row4"),
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart3_ren")), /* SM UART3 REn */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO35", 0xb00, 0x3, 0x0c, 0xc10,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO35 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM4 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x3, "uart3"), /* SM UART3 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "key_row3"),
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart0")), /* SM UART0 RTSn */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO36", 0xb00, 0x3, 0x0f, 0xc14,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO36 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM5 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x3, "uart3"), /* SM UART3 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "key_row2"),
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart0")), /* SM UART0 CTSn */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO37", 0xb00, 0x3, 0x12, 0xc18,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO37 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM6 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "tw0"), /* SM TW0 SCL */
++			       SYNA_PINCTRL_FUNCTION(0x4, "key_row6"),
++			       SYNA_PINCTRL_FUNCTION(0x5, "pdm")), /* SM PDM CLKIO */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO38", 0xb00, 0x3, 0x15, 0xc1c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO38 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM7 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "tw0"), /* SM TW0 SDA */
++			       SYNA_PINCTRL_FUNCTION(0x5, "pdm")), /* SM PDM DI0 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO3", 0xb00, 0x3, 0x18, 0xc20,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO3 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS0n */
++			       SYNA_PINCTRL_FUNCTION(0x2, "tw1"), /* SM TW1 SCL */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM8 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "i3c")), /* SM I3C MS SCL */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO4", 0xb00, 0x3, 0x1b, 0xc24,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO4 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS1n */
++			       SYNA_PINCTRL_FUNCTION(0x2, "tw1"), /* SM TW1 SDA */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM0 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "i3c")), /* SM I3C MS SDA */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO5", 0xb04, 0x3, 0x00, 0xc28,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO5 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS2n */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM1 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO6", 0xb04, 0x3, 0x03, 0xc2c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO6 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS3n */
++			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SSn */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM2 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO9", 0xb04, 0x3, 0x06, 0xc30,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO9 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SDO */
++			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SDO */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM3 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO10", 0xb04, 0x3, 0x09, 0xc34,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO10 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SCLK */
++			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SCLK */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM4 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO11", 0xb04, 0x3, 0x0c, 0xc38,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO11 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SDI */
++			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SDI */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM5 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO30", 0xb04, 0x3, 0x0f, 0xc44,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO30 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA7 */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col6"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "sm_clkout")),
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO29", 0xb04, 0x3, 0x12, 0xc48,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO29 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA6 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart3"), /* SM UART3 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col5"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row2"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "uart1")), /* SM UART1 CTSn */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO28", 0xb04, 0x3, 0x15, 0xc4c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO28 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA5 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart3"), /* SM UART3 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col4"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row3"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "uart1")), /* SM UART1 RTSn */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO27", 0xb04, 0x3, 0x18, 0xc50,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO27 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA4 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart2"), /* SM UART2 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col3"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "uart3_ren"), /* SM UART3 REn */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row4")),
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO26", 0xb04, 0x3, 0x1b, 0xc54,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO26 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI CS1n */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart2"), /* SM UART2 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col2"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x5, "uart3_de"), /* SM UART3 DE */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row5"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "sm_clkout")),
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO25", 0xb08, 0x3, 0x00, 0xc58,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO25 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DQS */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row6")),
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO24", 0xb08, 0x3, 0x03, 0xc5c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO24 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI CLKn */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO23", 0xb08, 0x3, 0x06, 0xc60,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO23 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI CLK */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO22", 0xb08, 0x3, 0x09, 0xc64,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO22 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA3 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO21", 0xb08, 0x3, 0x0c, 0xc68,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO21 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA2 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO20", 0xb08, 0x3, 0x0f, 0xc6c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO20 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA1 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO19", 0xb08, 0x3, 0x12, 0xc70,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO19 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA0 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO18", 0xb08, 0x3, 0x15, 0xc74,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO18 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI CS0n*/
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO17", 0xb08, 0x3, 0x18, 0xc78,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO17 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "uart1"), /* SM UART1 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 TX */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM8 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart0")), /* SM UART0 TXD */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO15", 0xb08, 0x3, 0x1b, 0xc7c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO15 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw1"), /* SM TW1 SDA */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM11 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "can0"), /* SM CAN0 TX */
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart1"), /* SM UART1 RTSn */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG OUT */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO14", 0xb0c, 0x3, 0x00, 0xc80,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO14 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw1"), /* SM TW1 SCL */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM10 */
++			       SYNA_PINCTRL_FUNCTION(0x4, "can0"), /* SM CAN0 RX */
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart1"), /* SM UART1 CTSn */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG OUT */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO16", 0xb0c, 0x3, 0x03, 0xc84,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO16 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "uart1"), /* SM UART1 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 RX */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM7 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO13", 0xb0c, 0x3, 0x06, 0xc88,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO13 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw0"), /* SM TW0 SDA */
++			       SYNA_PINCTRL_FUNCTION(0x2, "i3c"), /* SM I3C MS SDA */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sm_clkout"),
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG out */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO12", 0xb0c, 0x3, 0x09, 0xc8c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO12 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "tw0"), /* SM TW0 SCL */
++			       SYNA_PINCTRL_FUNCTION(0x2, "i3c"), /* SM I3C MS SCL */
++			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM6 */
++			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG CLK */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO8", 0xb0c, 0x3, 0x0c, 0xc90,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO8 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "uart0"), /* SM UART0 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 TX */
++			       SYNA_PINCTRL_FUNCTION(0x3, "sm_clkout"),
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart1")), /* SM UART1 TXD */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO7", 0xb0c, 0x3, 0x0f, 0xc94,
++			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO7 */
++			       SYNA_PINCTRL_FUNCTION(0x1, "uart0"), /* SM UART0 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 RX */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_row6"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "gpio_trig"), /* TRIG2 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "pwm"), /* SM PWM9 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "uart1")), /* SM UART1 RXD */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO2", 0xb0c, 0x3, 0x12, 0xc98,
++			       SYNA_PINCTRL_FUNCTION(0x0, "jtag"), /* TDO */
++			       SYNA_PINCTRL_FUNCTION(0x1, "gpio"), /* SM GPIO2 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "pdm"), /* SM PDM CLKIO */
++			       SYNA_PINCTRL_FUNCTION(0x3, "i2s2"), /* MCLK */
++			       SYNA_PINCTRL_FUNCTION(0x6, "pwm")), /* SM PWM11 */
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO1", 0xb0c, 0x3, 0x15, 0xc9c,
++			       SYNA_PINCTRL_FUNCTION(0x0, "jtag"), /* TDI */
++			       SYNA_PINCTRL_FUNCTION(0x1, "gpio"), /* SM GPIO1 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 RXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col1"),
++			       SYNA_PINCTRL_FUNCTION(0x4, "gpio_trig"), /* TRIG0 */
++			       SYNA_PINCTRL_FUNCTION(0x5, "pwm"), /* SM PWM9 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "key_row7")),
++	SYNA_PINCTRLCONF_GROUP("SM_GPIO0", 0xb0c, 0x3, 0x18, 0xca0,
++			       SYNA_PINCTRL_FUNCTION(0x0, "jtag"), /* TMS */
++			       SYNA_PINCTRL_FUNCTION(0x1, "gpio"), /* SM GPIO0 */
++			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 TXD */
++			       SYNA_PINCTRL_FUNCTION(0x3, "key_col0"),
++			       SYNA_PINCTRL_FUNCTION(0x5, "pdm"), /* SM PDM DI0 */
++			       SYNA_PINCTRL_FUNCTION(0x6, "pwm")), /* SM PWM10 */
++};
++
++static const struct syna_pinctrl_desc sl2610_soc_pinctrl_data = {
++	.groups = sl2610_soc_pinctrl_groups,
++	.ngroups = ARRAY_SIZE(sl2610_soc_pinctrl_groups),
++};
++
++static const struct syna_pinctrl_desc sl2610_sysmgr_pinctrl_data = {
++	.groups = sl2610_sysmgr_pinctrl_groups,
++	.ngroups = ARRAY_SIZE(sl2610_sysmgr_pinctrl_groups),
++};
++
++static int syna_pinctrl_get_groups_count(struct udevice *dev)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++
++	return pctrl->desc->ngroups;
 +}
 +
-+static ulong sl_clk_set_rate(struct clk *hw, unsigned long rate)
++static const char *syna_pinctrl_get_group_name(struct udevice *dev,
++					       unsigned int selector)
 +{
-+	struct sl_clk *clk = to_sl_clk(hw);
-+	unsigned long parent_rate = clk_get_parent_rate(&clk->hw);
-+	unsigned int divisor, select;
-+	unsigned long flags;
-+	u32 val;
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
 +
-+	divisor = sl_clk_best(parent_rate, rate);
-+	if (parent_rate / divisor != rate)
-+		return 0;
++	return pctrl->desc->groups[selector].name;
++}
 +
-+	spin_lock_irqsave(clk->lock, flags);
-+	val = readl_relaxed(clk->reg);
-+	val &= ~(SL_CLK_DIV3_SWITCH | SL_CLK_DIV_SWITCH | SL_CLK_DIV_SEL);
-+	if (divisor == 3) {
-+		val |= SL_CLK_DIV3_SWITCH;
-+	} else if (divisor != 1) {
-+		switch (divisor) {
-+		case 2:
-+			select = 1;
-+			break;
-+		case 4:
-+			select = 2;
-+			break;
-+		case 6:
-+			select = 3;
-+			break;
-+		case 8:
-+			select = 4;
-+			break;
-+		case 12:
-+			select = 5;
-+			break;
-+		default:
-+			spin_unlock_irqrestore(clk->lock, flags);
++static int syna_pinctrl_get_pins_count(struct udevice *dev)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++
++	return pctrl->desc->ngroups;
++}
++
++static const char *syna_pinctrl_get_pin_name(struct udevice *dev,
++					     unsigned int selector)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++
++	return pctrl->desc->groups[selector].name;
++}
++
++static int syna_pinctrl_get_pin_muxing(struct udevice *dev,
++				       unsigned int selector, char *buf,
++				       int size)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	const struct syna_desc_group *group = pctrl->desc->groups + selector;
++	const struct syna_desc_function *function = group->functions;
++	u32 mask = GENMASK(group->lsb + group->bit_width - 1, group->lsb);
++	u32 muxval;
++	int err;
++
++	err = regmap_read(pctrl->regmap, group->offset, &muxval);
++	if (err)
++		return err;
++
++	muxval = (muxval & mask) >> group->lsb;
++
++	while (function->name) {
++		if (function->muxval == muxval) {
++			snprintf(buf, size, "%s", function->name);
 +			return 0;
 +		}
-+		val |= SL_CLK_DIV_SWITCH |
-+			FIELD_PREP(SL_CLK_DIV_SEL, select);
++		function++;
 +	}
-+	writel_relaxed(val, clk->reg);
-+	spin_unlock_irqrestore(clk->lock, flags);
 +
-+	return parent_rate / divisor;
-+}
++	snprintf(buf, size, "unknown (0x%x)", muxval);
 +
-+static u8 sl_clk_get_parent(struct sl_clk *clk)
-+{
-+	u32 val = readl_relaxed(clk->reg);
-+	u8 selector;
-+	unsigned int index;
-+
-+	if (!(val & SL_CLK_PLL_SWITCH))
-+		return 0;
-+
-+	selector = FIELD_GET(SL_CLK_PLL_SEL, val);
-+	index = selector + 1;
-+	if (index < clk->num_parents)
-+		return index;
-+
-+	dev_warn(clk->dev, "%s: unsupported parent selector %u\n",
-+		 clk_hw_get_name(&clk->hw), selector);
 +	return 0;
 +}
 +
-+static int sl_clk_set_parent(struct clk *hw, struct clk *parent)
++static int syna_pinmux_get_functions_count(struct udevice *dev)
 +{
-+	struct sl_clk *clk = to_sl_clk(hw);
-+	unsigned long flags;
-+	u32 val;
-+	int index;
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
 +
-+	for (index = 0; index < clk->num_parents; index++)
-+		if (!strcmp(clk->parent_names[index], clk_hw_get_name(parent)))
-+			break;
++	return pctrl->nfunctions;
++}
 +
-+	if (index == clk->num_parents || index >= SL_MAX_PARENTS)
++static const char *syna_pinmux_get_function_name(struct udevice *dev,
++						 unsigned int selector)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++
++	return pctrl->function_names[selector];
++}
++
++static const struct pinconf_param syna_conf_params[] = {
++	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
++	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 1 },
++	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_DOWN, 1 },
++	{ "drive-strength", PIN_CONFIG_DRIVE_STRENGTH, 0 },
++	{ "input-disable", PIN_CONFIG_INPUT_ENABLE, 0 },
++	{ "input-enable", PIN_CONFIG_INPUT_ENABLE, 1 },
++	{ "input-schmitt-enable", PIN_CONFIG_INPUT_SCHMITT_ENABLE, 1 },
++	{ "input-schmitt-disable", PIN_CONFIG_INPUT_SCHMITT_ENABLE, 0 },
++	{ "slew-rate", PIN_CONFIG_SLEW_RATE, 0 },
++};
++
++static int syna_pinconf_group_set(struct udevice *dev,
++				  unsigned int group,
++				  unsigned int param, unsigned int arg)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	const struct syna_desc_group *group_desc = pctrl->desc->groups + group;
++	u32 mask = 0, val = 0;
++
++	switch (param) {
++	case PIN_CONFIG_BIAS_PULL_UP:
++		val |= SYNA_PINCFG_PS;
++		/*
++		 * 0: normal bias pull up
++		 * 1: strong bias pull up
++		 */
++		if (arg)
++			val |= SYNA_PINCFG_SPU;
++		fallthrough;
++	case PIN_CONFIG_BIAS_PULL_DOWN:
++		val |= SYNA_PINCFG_PE;
++		if (arg > 1 || (param == PIN_CONFIG_BIAS_PULL_DOWN && !arg))
++			return -EINVAL;
++		fallthrough;
++	case PIN_CONFIG_BIAS_DISABLE:
++		mask |= (SYNA_PINCFG_PE | SYNA_PINCFG_PS | SYNA_PINCFG_SPU);
++		break;
++	case PIN_CONFIG_DRIVE_STRENGTH:
++		mask |= SYNA_PINCFG_DS;
++		if (arg > FIELD_MAX(mask))
++			return -EINVAL;
++		val |= FIELD_PREP(mask, arg);
++		break;
++	case PIN_CONFIG_INPUT_ENABLE:
++		mask |= SYNA_PINCFG_IE;
++		if (arg)
++			val |= SYNA_PINCFG_IE;
++		break;
++	case PIN_CONFIG_INPUT_SCHMITT_ENABLE:
++		mask |= SYNA_PINCFG_ST;
++		if (arg)
++			val |= SYNA_PINCFG_ST;
++		break;
++	case PIN_CONFIG_SLEW_RATE:
++		mask |= SYNA_PINCFG_SL;
++		if (arg)
++			val |= SYNA_PINCFG_SL;
++		break;
++	default:
++		return -EOPNOTSUPP;
++	}
++
++	return regmap_update_bits(pctrl->regmap, group_desc->conf_offset, mask, val);
++}
++
++static const struct syna_desc_function *
++syna_pinctrl_find_function_by_name(const struct syna_desc_group *group,
++				   const char *fname)
++{
++	const struct syna_desc_function *function = group->functions;
++
++	while (function->name) {
++		if (!strcmp(function->name, fname))
++			return function;
++
++		function++;
++	}
++
++	return NULL;
++}
++
++static int syna_pinmux_group_set(struct udevice *dev, unsigned int group,
++				 unsigned int function)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	const struct syna_desc_group *group_desc = pctrl->desc->groups + group;
++	const char *fname = pctrl->function_names[function];
++	const struct syna_desc_function *function_desc;
++	u32 mask, val;
++
++	function_desc = syna_pinctrl_find_function_by_name(group_desc, fname);
++
++	if (!function_desc)
 +		return -EINVAL;
 +
-+	spin_lock_irqsave(clk->lock, flags);
-+	val = readl_relaxed(clk->reg);
-+	if (!index) {
-+		val &= ~SL_CLK_PLL_SWITCH;
-+	} else {
-+		val &= ~SL_CLK_PLL_SEL;
-+		val |= SL_CLK_PLL_SWITCH |
-+			FIELD_PREP(SL_CLK_PLL_SEL, index - 1);
-+	}
-+	writel_relaxed(val, clk->reg);
-+	spin_unlock_irqrestore(clk->lock, flags);
++	mask = GENMASK(group_desc->lsb + group_desc->bit_width - 1,
++		       group_desc->lsb);
++	val = function_desc->muxval << group_desc->lsb;
 +
-+	return 0;
++	return regmap_update_bits(pctrl->regmap, group_desc->offset, mask, val);
 +}
 +
-+static int sl_clk_enable(struct clk *hw)
-+{
-+	struct sl_clk *clk = to_sl_clk(hw);
-+	unsigned long flags;
-+	u32 val;
-+
-+	spin_lock_irqsave(clk->lock, flags);
-+	val = readl_relaxed(clk->reg);
-+	writel_relaxed(val | SL_CLK_EN, clk->reg);
-+	spin_unlock_irqrestore(clk->lock, flags);
-+
-+	return 0;
-+}
-+
-+static int sl_clk_disable(struct clk *hw)
-+{
-+	struct sl_clk *clk = to_sl_clk(hw);
-+	unsigned long flags;
-+	u32 val;
-+
-+	spin_lock_irqsave(clk->lock, flags);
-+	val = readl_relaxed(clk->reg);
-+	writel_relaxed(val & ~SL_CLK_EN, clk->reg);
-+	spin_unlock_irqrestore(clk->lock, flags);
-+
-+	return 0;
-+}
-+
-+static const struct clk_ops sl_clk_ops = {
-+	.get_rate = sl_clk_get_rate,
-+	.set_rate = sl_clk_set_rate,
-+	.set_parent = sl_clk_set_parent,
-+	.enable = sl_clk_enable,
-+	.disable = sl_clk_disable,
++static const struct pinctrl_ops syna_pinctrl_ops = {
++	.get_pins_count = syna_pinctrl_get_pins_count,
++	.get_pin_name = syna_pinctrl_get_pin_name,
++	.get_groups_count = syna_pinctrl_get_groups_count,
++	.get_group_name = syna_pinctrl_get_group_name,
++	.get_functions_count = syna_pinmux_get_functions_count,
++	.get_function_name = syna_pinmux_get_function_name,
++	.pinmux_group_set = syna_pinmux_group_set,
++	.pinconf_num_params = ARRAY_SIZE(syna_conf_params),
++	.pinconf_params = syna_conf_params,
++	.pinconf_group_set = syna_pinconf_group_set,
++	.set_state = pinctrl_generic_set_state,
++	.get_pin_muxing = syna_pinctrl_get_pin_muxing,
 +};
 +
-+struct clk *sl_clk_register(struct udevice *dev, void __iomem *reg,
-+			    const char *name, const char * const *parent_names,
-+			    unsigned int num_parents, unsigned long flags)
++static void syna_pinctrl_add_function(struct syna_pinctrl *pctrl,
++				      const char *name)
 +{
-+	struct sl_clk *clk;
-+	struct clk *hw;
-+	unsigned int i;
++	const char **fname = pctrl->function_names;
++
++	while (*fname) {
++		if (!strcmp(*fname, name))
++			/* name already exists */
++			return;
++		fname++;
++	}
++
++	*fname = name;
++
++	pctrl->nfunctions++;
++}
++
++static int syna_pinctrl_build_state(struct udevice *dev)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	const struct syna_desc_group *desc_group;
++	const struct syna_desc_function *desc_function;
++	const char **new_function_names;
++	int i, max_functions = 0;
 +	int ret;
 +
-+	if (!dev || !reg || !name || !parent_names || !num_parents ||
-+	    num_parents > SL_MAX_PARENTS)
-+		return ERR_PTR(-EINVAL);
++	pctrl->nfunctions = 0;
 +
-+	for (i = 0; i < num_parents; i++)
-+		if (!parent_names[i])
-+			return ERR_PTR(-EINVAL);
-+
-+	clk = devm_kzalloc(dev, sizeof(*clk), GFP_KERNEL);
-+	if (!clk)
-+		return ERR_PTR(-ENOMEM);
-+
-+	clk->dev = dev;
-+	clk->reg = reg;
-+	/* clk->lock is initialized here for Linux driver */
-+	clk->parent_names = parent_names;
-+	clk->num_parents = num_parents;
-+
-+	hw = &clk->hw;
-+	hw->flags = flags;
-+
-+	ret = clk_register(hw, "sl2610_sl_clk", name,
-+			   parent_names[sl_clk_get_parent(clk)]);
-+	if (ret) {
-+		kfree(clk);
-+		return ERR_PTR(ret);
++	/* compute the theoretical maximum number of functions */
++	for (i = 0; i < pctrl->desc->ngroups; i++) {
++		desc_group = pctrl->desc->groups + i;
++		max_functions += 1 << desc_group->bit_width;
 +	}
 +
-+	return hw;
-+}
-+
-+U_BOOT_DRIVER(sl2610_sl_clk) = {
-+	.name = "sl2610_sl_clk",
-+	.id = UCLASS_CLK,
-+	.ops = &sl_clk_ops,
-+};
-+
-diff --git a/drivers/clk/synaptics/sl-clk.h b/drivers/clk/synaptics/sl-clk.h
-new file mode 100644
-index 000000000000..f2cf99332c83
---- /dev/null
-+++ b/drivers/clk/synaptics/sl-clk.h
-@@ -0,0 +1,29 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef __SL_CLK_H
-+#define __SL_CLK_H
-+
-+#include <linux/compiler_types.h>
-+
-+struct clk;
-+struct udevice;
-+
-+struct sl_clk_desc {
-+	const char	*name;
-+	u32		id;
-+	u32		offset;
-+	unsigned long	flags;
-+};
-+
-+struct sl_gateclk_desc {
-+	const char	*name;
-+	const char	*parent_name;
-+	u32		id;
-+	u8		bit_idx;
-+	unsigned long	flags;
-+};
-+
-+struct clk *sl_clk_register(struct udevice *dev, void __iomem *reg,
-+			    const char *name, const char * const *parent_names,
-+			    unsigned int num_parents, unsigned long flags);
-+
-+#endif /* __SL_CLK_H */
-diff --git a/drivers/clk/synaptics/sl-sysmgr-clk.c b/drivers/clk/synaptics/sl-sysmgr-clk.c
-new file mode 100644
-index 000000000000..a2b6de7d1de8
---- /dev/null
-+++ b/drivers/clk/synaptics/sl-sysmgr-clk.c
-@@ -0,0 +1,76 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 Synaptics Incorporated
-+ *
-+ * From Linux: drivers/clk/berlin/sl-sysmgr-clk.c
-+ *    Copyright (C) 2026 Synaptics Incorporated
-+ *    Author: Jisheng Zhang <jszhang@kernel.org>
-+ *
-+ */
-+
-+#include <dm/device.h>
-+#include <dm/read.h>
-+
-+#include <linux/clk-provider.h>
-+
-+#include "sl-sysmgr-clk.h"
-+
-+#define SL_SYSMGR_DIV_SHIFT	2
-+
-+int sl_sysmgr_clk_setup(struct udevice *dev,
-+			const struct sl_sysmgr_fixedclk_desc *fdescs,
-+			int fclk_n,
-+			const struct sl_sysmgr_gateclk_desc *gdescs,
-+			int gclk_n,
-+			u32 gclk_offset,
-+			const struct sl_sysmgr_clk_desc *descs,
-+			int clk_n)
-+{
-+	void __iomem *base;
-+	struct udevice *parent;
-+	struct clk *clk;
-+	int i;
-+
-+	parent = dev_get_parent(dev);
-+	if (!parent)
-+		return -ENODEV;
-+
-+	base = dev_read_addr_ptr(parent);
-+	if (!base)
-+		return -ENODEV;
-+
-+	for (i = 0; i < fclk_n; i++) {
-+		clk = clk_register_fixed_rate(NULL, fdescs[i].name,
-+					      fdescs[i].rate);
-+		if (IS_ERR(clk))
-+			return PTR_ERR(clk);
-+
-+		dev_clk_dm(dev, fdescs[i].id, clk);
-+	}
-+
-+	for (i = 0; i < gclk_n; i++) {
-+		clk = clk_register_gate(dev, gdescs[i].name,
-+					gdescs[i].parent_name, 0,
-+					base + gclk_offset, gdescs[i].bit_idx,
-+					0, NULL);
-+		if (IS_ERR(clk))
-+			return PTR_ERR(clk);
-+
-+		dev_clk_dm(dev, gdescs[i].id, clk);
-+	}
-+
-+	for (i = 0; i < clk_n; i++) {
-+		clk = clk_register_divider(dev, descs[i].name,
-+					   descs[i].parent_name, 0,
-+					   base + descs[i].offset,
-+					   SL_SYSMGR_DIV_SHIFT,
-+					   descs[i].div_bits, 0);
-+		if (IS_ERR(clk))
-+			return PTR_ERR(clk);
-+
-+		dev_clk_dm(dev, descs[i].id, clk);
-+	}
-+
-+	return 0;
-+}
-+
-diff --git a/drivers/clk/synaptics/sl-sysmgr-clk.h b/drivers/clk/synaptics/sl-sysmgr-clk.h
-new file mode 100644
-index 000000000000..647e469bcc75
---- /dev/null
-+++ b/drivers/clk/synaptics/sl-sysmgr-clk.h
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * From Linux: drivers/clk/berlin/sl-sysmgr-clk.h
-+ *    Copyright (C) 2026 Synaptics Incorporated
-+ *    Author: Jisheng Zhang <jszhang@kernel.org>
-+ *
-+ */
-+
-+#ifndef __SL_SYSMGR_CLK_H
-+#define __SL_SYSMGR_CLK_H
-+
-+struct sl_sysmgr_clk_desc {
-+	const char	*name;
-+	const char	*parent_name;
-+	u32		id;
-+	u32		offset;
-+	u8		div_bits;
-+	/* TODO flags */
-+};
-+
-+struct sl_sysmgr_gateclk_desc {
-+	const char	*name;
-+	const char	*parent_name;
-+	u32		id;
-+	u8		bit_idx;
-+	/* TODO flags */
-+};
-+
-+struct sl_sysmgr_fixedclk_desc {
-+	const char	*name;
-+	u32		id;
-+	unsigned long	rate;
-+};
-+
-+int sl_sysmgr_clk_setup(struct udevice *dev,
-+			const struct sl_sysmgr_fixedclk_desc *fdescs,
-+			int fclk_n,
-+			const struct sl_sysmgr_gateclk_desc *gdescs,
-+			int gclk_n,
-+			u32 gclk_offset,
-+			const struct sl_sysmgr_clk_desc *descs,
-+			int clk_n);
-+
-+#endif
-diff --git a/drivers/clk/synaptics/sl2610-pll.c b/drivers/clk/synaptics/sl2610-pll.c
-new file mode 100644
-index 000000000000..1ee421faa540
---- /dev/null
-+++ b/drivers/clk/synaptics/sl2610-pll.c
-@@ -0,0 +1,127 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 Synaptics Incorporated
-+ *
-+ * Author: Richard Genoud <richard.genoud@bootlin.com>
-+ *
-+ * From Linux drivers/clk/berlin/sl2610-pll.c:
-+ *    Copyright (C) 2019-2021 Synaptics Incorporated
-+ *    Author: Jisheng Zhang <jszhang@kernel.org>
-+ */
-+
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <clk-uclass.h>
-+#include <div64.h>
-+#include <dm/device.h>
-+#include <dm/devres.h>
-+#include <linux/clk-provider.h>
-+#include <linux/kernel.h>
-+
-+#define FRAC_BITS		24
-+
-+#define CTRLC			0x08
-+#define DIVR_MASK		GENMASK(8, 0)
-+#define CTRLD			0x0c
-+#define DIVF_MASK		GENMASK(8, 0)
-+#define CTRLE			0x10
-+#define DIVFF_MASK		GENMASK(23, 0)
-+#define CTRLF			0x14
-+#define DIVQ_MASK		GENMASK(4, 0)
-+#define CTRLG			0x18
-+#define DIVQF_MASK		GENMASK(2, 0)
-+
-+struct sl2610_pll {
-+	void __iomem	*ctrl;
-+	struct clk	pllout;
-+	struct clk	plloutf;
-+};
-+
-+#define to_pllout(_clk)		container_of(_clk, struct sl2610_pll, pllout)
-+#define to_plloutf(_clk)	container_of(_clk, struct sl2610_pll, plloutf)
-+
-+static unsigned long sl2610_pll_recalc_rate(struct sl2610_pll *pll,
-+					    unsigned long parent_rate, bool fractional_output)
-+{
-+	u32 dm, dn, frac, dp;
-+	u64 rate;
-+
-+	dm = (readl_relaxed(pll->ctrl + CTRLC) & DIVR_MASK) + 1;
-+	dn = (readl_relaxed(pll->ctrl + CTRLD) & DIVF_MASK) + 1;
-+	frac = readl_relaxed(pll->ctrl + CTRLE) & DIVFF_MASK;
-+
-+	if (fractional_output)
-+		dp = (readl_relaxed(pll->ctrl + CTRLG) & DIVQF_MASK) + 1;
-+	else
-+		dp = ((readl_relaxed(pll->ctrl + CTRLF) & DIVQ_MASK) + 1) * 2;
-+
-+	rate = (u64)parent_rate * dn;
-+	rate += ((u64)parent_rate * frac + BIT_ULL(FRAC_BITS - 1)) >> FRAC_BITS;
-+	rate = DIV_ROUND_CLOSEST_ULL(rate * 4, (u64)dm * dp);
-+
-+	return rate;
-+}
-+
-+static unsigned long sl2610_pllout_recalc_rate(struct clk *clk)
-+{
-+	return sl2610_pll_recalc_rate(to_pllout(clk), clk_get_parent_rate(clk),
-+				      false);
-+}
-+
-+static unsigned long sl2610_plloutf_recalc_rate(struct clk *clk)
-+{
-+	return sl2610_pll_recalc_rate(to_plloutf(clk), clk_get_parent_rate(clk),
-+				      true);
-+}
-+
-+static const struct clk_ops sl2610_pllout_ops = {
-+	.get_rate = sl2610_pllout_recalc_rate,
-+};
-+
-+static const struct clk_ops sl2610_plloutf_ops = {
-+	.get_rate = sl2610_plloutf_recalc_rate,
-+};
-+
-+int sl2610_pll_register(struct udevice *dev, void __iomem *ctrl,
-+			const char *out, const char *outf)
-+{
-+	struct sl2610_pll *pll;
-+	struct clk clk;
-+	int ret;
-+
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret)
-+		return ret;
-+
-+	pll = devm_kzalloc(dev, sizeof(*pll), GFP_KERNEL);
-+	if (!pll)
++	/* allocate the function_names array, plus a sentinel */
++	pctrl->function_names = calloc(max_functions + 1,
++				       sizeof(*pctrl->function_names));
++	if (!pctrl->function_names)
 +		return -ENOMEM;
 +
-+	pll->ctrl = ctrl;
-+	pll->pllout.flags = CLK_GET_RATE_NOCACHE;
-+	pll->plloutf.flags = CLK_GET_RATE_NOCACHE;
++	/* register all functions */
++	for (i = 0; i < pctrl->desc->ngroups; i++) {
++		desc_group = pctrl->desc->groups + i;
++		desc_function = desc_group->functions;
 +
-+	ret = clk_register(&pll->pllout, "sl2610_pll_out", out,
-+			   clk.dev->name);
-+	if (ret)
-+		return ret;
++		while (desc_function->name) {
++			syna_pinctrl_add_function(pctrl, desc_function->name);
++			desc_function++;
++		}
++	}
 +
-+	ret = clk_register(&pll->plloutf, "sl2610_pll_outf", outf,
-+			   clk.dev->name);
-+	if (ret)
++	if (pctrl->nfunctions == 0) {
++		ret = -EINVAL;
++		goto error;
++	}
++
++	/*
++	 * reallocate the functions name pointer to the real value.
++	 * NB: there's no need for a sentinel now.
++	 */
++	new_function_names = realloc(pctrl->function_names,
++				     pctrl->nfunctions * sizeof(*pctrl->function_names));
++	if (!new_function_names) {
++		ret = -ENOMEM;
++		goto error;
++	}
++
++	pctrl->function_names = new_function_names;
++
++	return 0;
++error:
++	free(pctrl->function_names);
++	pctrl->function_names = NULL;
++	pctrl->nfunctions = 0;
++	return ret;
++}
++
++static int syna_pinctrl_probe_regmap(struct udevice *dev,
++				     const struct syna_pinctrl_desc *desc,
++				     struct regmap *regmap)
++{
++	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	int ret;
++
++	pctrl->desc = desc;
++	pctrl->regmap = regmap;
++
++	ret = syna_pinctrl_build_state(dev);
++	if (ret) {
++		dev_err(dev, "cannot build driver state: %d\n", ret);
 +		return ret;
++	}
 +
 +	return 0;
 +}
 +
-+U_BOOT_DRIVER(sl2610_pll_out) = {
-+	.name = "sl2610_pll_out",
-+	.id = UCLASS_CLK,
-+	.ops = &sl2610_pllout_ops,
++static int syna_pinctrl_probe(struct udevice *dev)
++{
++	struct regmap *regmap = syscon_node_to_regmap(dev_ofnode(dev->parent));
++	const struct syna_pinctrl_desc *desc;
++
++	if (IS_ERR(regmap))
++		return PTR_ERR(regmap);
++
++	switch (dev_get_driver_data(dev)) {
++	case SL2610_SYSCON_BLOCK_SOC:
++		desc = &sl2610_soc_pinctrl_data;
++		break;
++	case SL2610_SYSCON_BLOCK_MCU:
++		desc = &sl2610_sysmgr_pinctrl_data;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	return syna_pinctrl_probe_regmap(dev, desc, regmap);
++}
++
++U_BOOT_DRIVER(syna_pinctrl) = {
++	.name		= "syna-pinctrl",
++	.id		= UCLASS_PINCTRL,
++	.ops		= &syna_pinctrl_ops,
++	.probe		= syna_pinctrl_probe,
++	.priv_auto	= sizeof(struct syna_pinctrl),
 +};
-+
-+U_BOOT_DRIVER(sl2610_pll_outf) = {
-+	.name = "sl2610_pll_outf",
-+	.id = UCLASS_CLK,
-+	.ops = &sl2610_plloutf_ops,
-+};
-diff --git a/drivers/clk/synaptics/sl2610-pll.h b/drivers/clk/synaptics/sl2610-pll.h
-new file mode 100644
-index 000000000000..7ee1764b3b9f
---- /dev/null
-+++ b/drivers/clk/synaptics/sl2610-pll.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef __SL2610_PLL_H
-+#define __SL2610_PLL_H
-+
-+#include <linux/io.h>
-+
-+struct udevice;
-+
-+int sl2610_pll_register(struct udevice *dev, void __iomem *ctrl,
-+			const char *out, const char *outf);
-+
-+#endif /* __SL2610_PLL_H */
 
 -- 
 2.55.0
