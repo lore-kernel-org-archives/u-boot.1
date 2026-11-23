@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9316D606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 14:23:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A20A1606A31E
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 14:23:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Q+WRoSmr;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=uAa8iTWA
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZV0GxeMp;
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=WDhH4dRE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6991980A50;
-	Mon, 23 Nov 2026 14:23:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7FEE26079B;
+	Mon, 23 Nov 2026 14:23:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AIrAxewTsy1n; Mon, 23 Nov 2026 14:23:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8E08080A79
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795443800;
-	b=ZzJU4qgBAHICvD826jayl8IUDrio9fRVQWjhdrbGJmmna/GXP2mzrPanZc0fn1wiVr6F
-	 7+q3V938iwKuIVFCdnz29mhjYiQjR0S1OCJcUBIHCdjkfPsPhMDClYRLvsT5vydpvNBw1
-	 bKIJ4A6wfl3/heHNw/mEZm2JgHtbvrdHTMj6bDq4ZLyfAXyXweJrLIPmkuvxeEgiPcT+B
-	 HpFs4CYl+VFFNpObdv8YJ+knCMADZK2FLAQGqO1nfRQu+i5uB0DRDm4P62y4lxZdhUsI5
-	 GdhoEU+IxDGwUceJPCCk0+i9w73ZhSdKxgp3kuxmGv64z9qkj6YR9MJPgM75YeQLvkg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FKKzUya7jk_f; Mon, 23 Nov 2026 14:23:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 254C16078A
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795443803;
+	b=dXqEYuH9zhpxUhId7XdmGGjmOG2I5Lf1Y0Bgr2DIJmPiI3DlehPIizT4rxGuRxz/PyLy
+	 ny0RL4TktHmom0dub8zMNLk0cMwAwNwXx4BNRe9dotFChFefYoAnKZ1N4y4VXGP3iBuXH
+	 Gq4/UlxITxJ4WksuYSZUKJwvb0rh7rFbYQWtxFF98GOFY+3BDTVRLpYJCLlOwqo9HDiKZ
+	 6yNmVsY+1IBSv3TFk+yV4se0q0Q4yhnTyJmNPDdTrDwz92AB0IpUleEZegXfKUMkxsbQ9
+	 9/96/LKv4RWPn1VOoVHJ6mUctZ2al1eVliaHGaNH/1C0EO4erTbH42vO9t8VyJI567Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795443800;
+	c=relaxed/relaxed; t=1795443803;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,80 +32,79 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:To:Cc:X-Mailer:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=fXUkfBnoaa+ZokV16uikt+RSXVHju4KESpLuvYduWUc=;
-	b=Hwo9yecUoScBpwgKe6ZqRTFADXU9Dn1gj/BVagJq6xpdhge1d7hIweDnLF7zxdpxyX20
-	 0hmOIt9tGA80TmjfRrvCy1Yn1uy2PLJP4FmEjou/6C4vdydLfAVYKVrhfzY+JjU7uWlB9
-	 P8YJ1Z7zl0PM9CkMZl2l7NlQWqjCDt0Q0m8fMJQom+94iAAYTSluZ0aGwNhEr+0XtEkv9
-	 gjf0sBXVQ4san/7lCDhqNpKSKyicBwYYsqD16jFQD+nZR15sHhRLT1FD4rEnOMx7Ep1pH
-	 hQyIedsgHjTIhADP8X+uTS+46srO0tcH8megHVJlGM3lP0mO9rosO2OaSSqOYXzvdyQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=SfiofeSrrfZ77fzf6EIfT5gp6ax/ReWAfo5Xaye5bLE=;
+	b=dTqom9RZIfiJucki3Zxb428rr3MIFVMo7EvR/dacZP61wElMb7wAjuu18jQWnsZd6clp
+	 bQWkcarnzPhMrUTsGx9IriTaiDOx1cGDoRDoSk5LrCP7TEGsmZ8DZ6i+M9YSbnFE1zzwa
+	 Ua40I31xujacAwGnEPJQlrbmjdpCyrdPUnWrnYyhkYnu5cpvr0TkJY19Mwa/xsfIUW5bq
+	 L7Io+TYqZTm8SO+8YKWC/JIclrWh3TC3cHVBsyx+ZGdMN92hBN2F9E23atyZaaexxAmy/
+	 y0zUZOb7nWLS1KElOEPOm8deVSgCGk9v7x/emQG13t3fgAfZPzfEYDPkk5HlGX1G68Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795443800;
-	bh=fXUkfBnoaa+ZokV16uikt+RSXVHju4KESpLuvYduWUc=;
+	d=lists.u-boot-project.org; s=default; t=1795443803;
+	bh=SfiofeSrrfZ77fzf6EIfT5gp6ax/ReWAfo5Xaye5bLE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Q+WRoSmrnD6odfAt7riIFP/pT1J1c6ge7OXB6+GzXFDSqBpZ065xDfFYLoyl8kGW2
-	 UVviWT+cJWr6+sbdjiQF7FLBgGEM3Q/giRdhSgvdnWPduf5CSc9foD2BTGH520pba3
-	 eJPyIJSEwyu4tzmgUkUzuLfhtBG1KrDNw+S2m3BCFtrJcKTz5JfzdykuHKkzJzKLlF
-	 TYvEpAvu1w3OCtprLGqCNIdAq0pJkjDU8EXLBdTKXsoQI+WKRmlnaE8dLP0TMQH4NR
-	 qliIDQtS/I0cgFMtDOuBvimQF+wP9D4raiI+JiXit0t22znUEjGGjGN/LHjzw/ijVg
-	 pQcqyg9iF3OgQ==
+	b=ZV0GxeMpvSCfmX5oUgvFQkfcOozTnVATTq0FRj/xZRJETnATzD52jdJtf9BbU31MP
+	 hiFCCQXX5K7haCgzLvlvc531x0haFFdQlrmGC7kagn31p8sYBLGogRRyTGjc+X6+FB
+	 EJtjFivv3pHIQzJDRdaPmgc+faEbWvSU9aahNPW5pRQbJKsUp6m6mbVfZHfy6HdSKG
+	 DBM1sFGh1tWmD2slAPxaPeG6GvHnFzwoRZqcX/Myd1qad+PUCVW/yaUXAKDpOf/CiC
+	 gGcTZj4evixw55glDEumbiVANpp0ues2zDHr3Ed0YIk9B2xxmGQysAOTm1TWIu22Ve
+	 xvaJ7LJmRhJxw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8E08080A79;
-	Mon, 23 Nov 2026 14:23:20 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E1294260
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 254C16078A;
+	Mon, 23 Nov 2026 14:23:23 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9D25C759
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C6E914022A
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:18 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 83CF180B08
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6nGGzZaOsR1G for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 14:23:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 428A940060
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X1Z7p-IGeTf1 for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 14:23:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E4E29809CF
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
  helo=smtpout-02.galae.net; envelope-from=richard.genoud@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
- header.a=rsa-sha256 header.s=dkim header.b=uAa8iTWA
+ header.a=rsa-sha256 header.s=dkim header.b=WDhH4dRE
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 428A940060
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:15 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E4E29809CF
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:23:19 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id E94521A179D;
- Mon, 23 Nov 2026 14:23:13 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 0C8CD1A16D7;
+ Mon, 23 Nov 2026 14:23:18 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id B4087601E1;
- Mon, 23 Nov 2026 14:23:13 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D3776601E1;
+ Mon, 23 Nov 2026 14:23:17 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 543D811E6A520; Mon, 23 Nov 2026 15:23:07 +0100 (CET)
+ with ESMTPSA id 002E011E6A506; Mon, 23 Nov 2026 15:23:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1795443791; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1795443795; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=fXUkfBnoaa+ZokV16uikt+RSXVHju4KESpLuvYduWUc=;
- b=uAa8iTWAFxt471fpkAHZCu/riEhs4EA62HsUFauwVd3kRDJ39PCQSVv1YsPQZQrx5GI6sM
- izA1oWbmF2LM5sFDO2jgAt6QmieU4hCb87qeGGf12ulcDqISOkJaEkTYCDQbh2I/7RnYW/
- KvukCSnFCgO2nfbla63IvqszvB5dMhBXNo+R1sB+V9Z5LoXBtPmB8Dv1hGZwFnckewqgil
- horcqG+WxuKujKgCjR+yqR0P/K9wXvMKN6bmCkZsQuerTO5RGadjXvRbP8GLiKB5dNNqji
- xsvwnWgfR9ZXos1pI7KtQi23DYP6PgxcA7lSZCpupNkySfxf6WKO0/wVoKdmRQ==
+ bh=SfiofeSrrfZ77fzf6EIfT5gp6ax/ReWAfo5Xaye5bLE=;
+ b=WDhH4dREXVYz4nPYxhi2EmdRgBrPVlRicQ4+kPS3bIYldh8X2NjcyUCbJf9rn63pa+c1DY
+ 2nkaA3NinzHcTPOMHDEIehp8g/TtJAiIUbkMq/431YqcOw0y6pHPa1P15eKQfGHTALDcNd
+ qE1+NrmWYlm0ac0OaQ6SWTQ/b+mBJ4p/0IaMz19W4q0SRrENa0kYxANmsLh8AkyNv/Kzsj
+ g1Qkpk4JSgvfLe3p2Qo2Jfy/KKoU826k8OEA6vV0zH2tSIh2G5khO99tZUPV6hkSERByHs
+ 1Zg//Ja7B+PT5wr7i1sDC1fezwcborshdjATob7A9fLy49E46UZQocJeIY6Yvg==
 From: "Richard Genoud (Synaptics)" <richard.genoud@bootlin.com>
-Date: Mon, 23 Nov 2026 15:22:05 +0100
-Subject: [PATCH v2 6/8] pinctrl: synaptics: Add sl2610 SoC family pinctrl
- driver
+Date: Mon, 23 Nov 2026 15:22:06 +0100
+Subject: [PATCH v2 7/8] reset: synaptics: add sl2610 reset driver support
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261123-sl2619_base-v2-6-9e3b28c77cda@bootlin.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261123-sl2619_base-v2-7-9e3b28c77cda@bootlin.com>
 References: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
 In-Reply-To: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
 To: u-boot@lists.u-boot-project.org
@@ -141,1073 +140,361 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UPPERCASE_50_75,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add support for Synaptics SL2610 SoCs family pin controller.
+Introduce Synaptics sl2610 family reset driver.
 
-It uses Generic Pinctrl framework and is compatible with the Linux
-driver (same device tree).
-Pin muxing and pin configuration are supported.
+The code is based on Linux driver by Jisheng Zhang:
+https://lore.kernel.org/lkml/20261115102401.3520-1-jszhang@kernel.org/
 
-It supports:
-- bias-disable
-- bias-pull-up
-- bias-pull-down
-- drive-strength
-- input-enable/disable
-- input-schmitt-enable/disable
-- slew-rate
+There's two kind of reset bits here:
+- the so-called sticky bits that can be asserted and de-asserted, and
+  are active low.
+- the non-sticky bits (aka pulse bits) that generate a 640ns pulse and
+  are active high.
 
-NB: for the pull up, a true/1 means strong pull-up and 0 means normal
-pull-up
+rst_assert(), rst_deassert() and rst_reset() are implemented for sticky
+bits.
+But for pulse bits, rst_assert()/rst_deassert() don't fit, because we
+can't keep them asserted, nor de-assert them.
 
-NB2: this driver has no compatible string because it is bound by the
+So, only rst_assert() is implemented for pulse bits, and delay is
+ignored.
+
+NB: this driver has no compatible string because it is bound by the
 system controller driver
 
 Signed-off-by: Richard Genoud (Synaptics) <richard.genoud@bootlin.com>
 ---
- drivers/pinctrl/Kconfig          |  11 +
- drivers/pinctrl/Makefile         |   1 +
- drivers/pinctrl/pinctrl-sl2610.c | 992 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 1004 insertions(+)
+ drivers/reset/Kconfig        |   8 ++
+ drivers/reset/Makefile       |   1 +
+ drivers/reset/reset-sl2610.c | 283 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 292 insertions(+)
 
-diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-index 04785a927fec..6781e34b44f6 100644
---- a/drivers/pinctrl/Kconfig
-+++ b/drivers/pinctrl/Kconfig
-@@ -319,6 +319,17 @@ config PINCTRL_SINGLE
- 	  Depending on the platform make sure to also enable OF_TRANSLATE and
- 	  eventually SPL_OF_TRANSLATE to get correct address translations.
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index ad61ebf344a6..921453ca07a8 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -248,6 +248,14 @@ config RESET_SCMI
+ 	  devices exposed by a SCMI agent based on SCMI reset domain
+ 	  protocol communication with a SCMI server.
  
-+config PINCTRL_SL2610
-+	bool "Synaptics SL2610 family pin-control and pin-mux driver"
-+	depends on DM && PINCTRL_GENERIC && ARCH_SYNAPTICS
++config RESET_SL2610
++	bool "Synaptics SL2610 Reset Driver"
++	depends on DM_RESET && ARCH_SYNAPTICS
 +	select SOC_SL2610_SYSCON
-+	select PINCONF
-+	default y
 +	help
-+	  Support pin multiplexing control on Synaptics SL2610 family SoCs.
-+	  The driver uses Generic Pinctrl framework and is compatible with the
-+	  Linux driver, i.e. it uses the same device tree configuration.
++	  This enables the reset controller driver that can be found in
++	  Synaptics SL2610 product family.
 +
- config PINCTRL_STI
- 	bool "STMicroelectronics STi pin-control and pin-mux driver"
- 	depends on DM && ARCH_STI
-diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-index 23219626e392..0bbf0080c8bf 100644
---- a/drivers/pinctrl/Makefile
-+++ b/drivers/pinctrl/Makefile
-@@ -33,6 +33,7 @@ obj-$(CONFIG_$(PHASE_)PINCTRL_ROCKCHIP)	+= rockchip/
- obj-$(CONFIG_PINCTRL_SANDBOX)		+= pinctrl-sandbox.o
- obj-$(CONFIG_PINCTRL_SCMI)		+= pinctrl-scmi.o
- obj-$(CONFIG_PINCTRL_SINGLE)		+= pinctrl-single.o
-+obj-$(CONFIG_PINCTRL_SL2610)		+= pinctrl-sl2610.o
- obj-$(CONFIG_$(PHASE_)PINCTRL_SPACEMIT_K1) += spacemit/
- obj-$(CONFIG_PINCTRL_STARFIVE)		+= starfive/
- obj-$(CONFIG_PINCTRL_STI)		+= pinctrl-sti.o
-diff --git a/drivers/pinctrl/pinctrl-sl2610.c b/drivers/pinctrl/pinctrl-sl2610.c
+ config RESET_ZYNQMP
+ 	bool "Reset Driver for Xilinx ZynqMP & Versal SoC's"
+ 	depends on DM_RESET && ZYNQMP_FIRMWARE
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index 959aafe4d709..06aa541587df 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -29,6 +29,7 @@ obj-$(CONFIG_RESET_SUNXI) += reset-sunxi.o
+ obj-$(CONFIG_RESET_HISILICON) += reset-hisilicon.o
+ obj-$(CONFIG_RESET_IMX7) += reset-imx7.o
+ obj-$(CONFIG_RESET_SIFIVE) += reset-sifive.o
++obj-$(CONFIG_RESET_SL2610) += reset-sl2610.o
+ obj-$(CONFIG_RESET_SYSCON) += reset-syscon.o
+ obj-$(CONFIG_RESET_RASPBERRYPI) += reset-raspberrypi.o
+ obj-$(CONFIG_RESET_SCMI) += reset-scmi.o
+diff --git a/drivers/reset/reset-sl2610.c b/drivers/reset/reset-sl2610.c
 new file mode 100644
-index 000000000000..7ade1a1853b2
+index 000000000000..015a54d31635
 --- /dev/null
-+++ b/drivers/pinctrl/pinctrl-sl2610.c
-@@ -0,0 +1,992 @@
++++ b/drivers/reset/reset-sl2610.c
+@@ -0,0 +1,283 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
++ * Synaptics SL2610 reset driver
++ *
 + * Copyright (C) 2026 Synaptics Incorporated
++ * Author: Richard Genoud <richard.genoud@bootlin.com>
 + *
-+ * Richard Genoud <richard.genoud@bootlin.com>
++ * Based on Linux driver reset-sl2610.c:
++ *	Author: Jisheng Zhang <jszhang@kernel.org>
++ *	Copyright (C) 2026 Synaptics Incorporated
 + *
-+ * Based on Linux Berlin/Synaptics drivers:
-+ *  - drivers/pinctrl/berlin/berlin.c:
-+ *    Copyright (C) 2014 Marvell Technology Group Ltd.
-+ *    Antoine Ténart <antoine.tenart@free-electrons.com>
++ *  There's two kind of reset bits here:
++ *  - the so-called sticky bits that can be asserted and de-asserted, and
++ *    are active low.
++ *  - the non-sticky bits (aka pulse bits) that generate a 640ns pulse and
++ *    are active high.
 + *
-+ *  - pinctrl/berlin/pinctrl-sl2610.c:
-+ *   Copyright (C) 2025 Synaptics Incorporated
-+ *   Author: Jisheng Zhang <jszhang@kernel.org>
++ *  rst_assert(), rst_deassert() and rst_reset() are implemented for sticky
++ *  bits.
++ *  But for pulse bits, rst_assert()/rst_deassert() don't fit, because we
++ *  can't keep them asserted, or de-assert them.
++ *  So, only rst_assert() is implemented for pulse bits, and delay is
++ *  ignored.
 + *
 + */
 +
 +#include <dm.h>
 +#include <dm/device_compat.h>
-+#include <dm/pinctrl.h>
-+#include <linux/bitfield.h>
-+#include <linux/pinctrl/pinctrl.h>
-+#include <regmap.h>
++#include <dt-bindings/reset/syna,sl2610-reset.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <linux/regmap.h>
++#include <reset-uclass.h>
 +#include <soc/synaptics/sl2610-syscon.h>
 +#include <syscon.h>
 +
-+#define SYNA_PINCFG_DS	GENMASK(3, 0)	/* Drive strength */
-+#define SYNA_PINCFG_IE	BIT(4)		/* Input enable */
-+#define SYNA_PINCFG_PE	BIT(5)		/* Pull enable */
-+#define SYNA_PINCFG_PS	BIT(6)		/* Pull select (0:PD, 1:PU) */
-+#define SYNA_PINCFG_SL	BIT(7)		/* Slew rate (0:slow 1:fast) */
-+#define SYNA_PINCFG_SPU	BIT(8)		/* Strong pull-up */
-+#define SYNA_PINCFG_ST	BIT(9)		/* Schmitt trigger */
++/*
++ * sticky reset bits are active low, whereas
++ * non-sticky resets bits are active high.
++ */
 +
-+struct syna_desc_function {
-+	const char *name;
-+	u8 muxval;
++/* SL2610 ACPU subsystem */
++#define SL2610_GBL_PERIFRESET			0x350
++#define SL2610_GBL_PERIFSTICKYRESET		0x360
++#define SL2610_GBL_APBPERIFRESET		0x370
++#define SL2610_GBL_TOPSTICKYRESET		0x378
++#define SL2610_GBL_AVIOSTICKYRESET		0x37c
++
++/* SL2610 system subsystem */
++#define SL2610_SMGBL_STICKYRST0			0x400
++
++#define SL2610_RESET(id, reg, bit, sticky)[id] = { reg, BIT(bit), sticky }
++
++struct sl2610_reset_cfg {
++	u32 reg;
++	u32 bit;
++	bool sticky;
 +};
 +
-+struct syna_desc_group {
-+	const char *name;
-+	u16 offset;
-+	u8 bit_width;
-+	u8 lsb;
-+	u16 conf_offset;
-+	const struct syna_desc_function *functions;
++struct sl2610_reset_data {
++	const struct sl2610_reset_cfg *cfgs;
++	size_t num;
 +};
 +
-+struct syna_pinctrl_desc {
-+	const struct syna_desc_group *groups;
-+	unsigned int ngroups;
-+};
-+
-+struct syna_pinctrl {
++struct sl2610_reset_priv {
 +	struct regmap *regmap;
-+	const struct syna_pinctrl_desc *desc;
-+	const char **function_names;
-+	u32 nfunctions;
++	const struct sl2610_reset_data *data;
 +};
 +
-+#define SYNA_PINCTRLCONF_GROUP(_name, _offset, _width, _lsb, _conf_offset, ...)	\
-+	{								\
-+		.name = _name,						\
-+		.offset = _offset,					\
-+		.bit_width = _width,					\
-+		.lsb = _lsb,						\
-+		.conf_offset = _conf_offset,				\
-+		.functions = (const struct syna_desc_function[]){	\
-+			__VA_ARGS__, { } },				\
-+	}
-+
-+#define SYNA_PINCTRL_FUNCTION(_muxval, _name)		\
-+	{						\
-+		.name = _name,				\
-+		.muxval = _muxval,			\
-+	}
-+
-+static const struct syna_desc_group sl2610_soc_pinctrl_groups[] = {
-+	SYNA_PINCTRLCONF_GROUP("GPIO23", 0x8000, 0x3, 0x00, 0x8800,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO23 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw2"), /* SCL */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDC */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row0"),
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi3"), /* SS2n */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col3"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT4 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO24", 0x8000, 0x3, 0x03, 0x8804,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO24 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw2"), /* SDA */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDIO */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row1"),
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi3"), /* SS3n */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col2"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT5 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO25", 0x8000, 0x3, 0x06, 0x8808,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO25 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "uart5"), /* RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "gpio_trig1"),
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row2"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col1"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT6 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO26", 0x8000, 0x3, 0x09, 0x880c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO26 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "uart5"), /* TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* PTP_PPS_O */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "usb2"), /* VBUS */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT7 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO27", 0x8000, 0x3, 0x0c, 0x8810,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO27 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw3"), /* SCL */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1")), /* RTSn */
-+	SYNA_PINCTRLCONF_GROUP("GPIO28", 0x8000, 0x3, 0x0f, 0x8814,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO28 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw3"), /* SDA */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1")), /* CTSn */
-+	SYNA_PINCTRLCONF_GROUP("GPIO29", 0x8000, 0x3, 0x12, 0x8818,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO29 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* DE */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row4"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col4"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDI */
-+	SYNA_PINCTRLCONF_GROUP("GPIO30", 0x8000, 0x3, 0x15, 0x881c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO30 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart4"), /* REn */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row5"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_uart1"), /* TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col5"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SCLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO31", 0x8000, 0x3, 0x18, 0x8820,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO31 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDC */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS3n */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi3"), /* SS2n */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS2n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO32", 0x8000, 0x3, 0x1b, 0x8824,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO32 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rgmii"), /* MDIO */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi3"), /* SS3n */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS3n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO33", 0x8004, 0x3, 0x00, 0x8828,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO33 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* TXD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "can0"), /* TX */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi3"), /* SS1n */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS1n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO34", 0x8004, 0x3, 0x03, 0x882c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO34 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* TXD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "can0")), /* RX */
-+	SYNA_PINCTRLCONF_GROUP("GPIO35", 0x8004, 0x3, 0x06, 0x8830,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO35 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD2 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* TXD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col7"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart5"), /* RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS0n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO36", 0x8004, 0x3, 0x09, 0x8834,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO36 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TD3 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* TXD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart5"), /* TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDO */
-+	SYNA_PINCTRLCONF_GROUP("GPIO37", 0x8004, 0x3, 0x0c, 0x8838,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO37 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* RXD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "can1"), /* TX */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi5")), /* SDI */
-+	SYNA_PINCTRLCONF_GROUP("GPIO38", 0x8004, 0x3, 0x0f, 0x883c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO38 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* RXD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "can1"), /* RX */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi5")), /* SDO */
-+	SYNA_PINCTRLCONF_GROUP("GPIO39", 0x8004, 0x3, 0x12, 0x8840,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO39 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD2 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* RXD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row6"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart6"), /* RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS1n*/
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SS3n  */
-+	SYNA_PINCTRLCONF_GROUP("GPIO40", 0x8004, 0x3, 0x15, 0x8844,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO40 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RD3 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* RXD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row7"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart6"), /* TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS2n */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SS2n  */
-+	SYNA_PINCTRLCONF_GROUP("GPIO41", 0x8004, 0x3, 0x18, 0x8848,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO41 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RXC */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* CRSDV */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi5")), /* SCLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO42", 0x8004, 0x3, 0x1b, 0x884c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO42 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TXC */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* CRSDV */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row8"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart7"), /* RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SCLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO43", 0x8008, 0x3, 0x00, 0x8850,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO43 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* TXCTL */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1"), /* TXEN */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SS0n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO44", 0x8008, 0x3, 0x03, 0x8854,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO44 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* RXCTL */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii2"), /* TXEN */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row9"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart7"), /* TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4")), /* SDI */
-+	SYNA_PINCTRLCONF_GROUP("GPIO45", 0x8008, 0x3, 0x06, 0x8858,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO45 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii1"), /* CLKOUT */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "rmii1")), /* REFCLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO46", 0x8008, 0x3, 0x09, 0x885c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO46 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "sdio1"), /* CDn */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "sdio2"), /* CDn */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col0"),
-+			       SYNA_PINCTRL_FUNCTION(0x5, "sm_uart1"), /* RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row9"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dsi")), /* TE */
-+	SYNA_PINCTRLCONF_GROUP("GPIO47", 0x8008, 0x3, 0x0c, 0x8860,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO47 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "sdio1"), /* WP */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "sdio2"), /* WP */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col1"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "rmii2"), /* REFCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "sm_uart1"), /* CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row8")),
-+	SYNA_PINCTRLCONF_GROUP("GPIO48", 0x8008, 0x3, 0x0f, 0x8864,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO48 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SS0n */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS2n */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS3n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO49", 0x8008, 0x3, 0x12, 0x8868,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO49 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SDO */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS3n */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS2n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO50", 0x8008, 0x3, 0x15, 0x886c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO50 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD2 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS1n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO51", 0x8008, 0x3, 0x18, 0x8870,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO51 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TD3 */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS0n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO52", 0x8008, 0x3, 0x1b, 0x8874,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO52 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD0 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS2n */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDO */
-+	SYNA_PINCTRLCONF_GROUP("GPIO53", 0x800c, 0x3, 0x00, 0x8878,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO53 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD1 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spi4"), /* SS3n */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SCLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO54", 0x800c, 0x3, 0x03, 0x887c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO54 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD2 */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDI */
-+	SYNA_PINCTRLCONF_GROUP("GPIO55", 0x800c, 0x3, 0x06, 0x8880,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO55 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RD3 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "spi5"), /* SDI */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS1n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO56", 0x800c, 0x3, 0x09, 0x8884,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO56 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RXC */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SS0n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO57", 0x800c, 0x3, 0x0c, 0x8888,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO57 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TXC */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDO */
-+	SYNA_PINCTRLCONF_GROUP("GPIO58", 0x800c, 0x3, 0x0f, 0x888c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO58 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* TXCTL */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SCLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO59", 0x800c, 0x3, 0x12, 0x8890,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO59 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "rgmii2"), /* RXCTL */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi4")), /* SDI */
-+	SYNA_PINCTRLCONF_GROUP("GPIO0", 0x800c, 0x3, 0x15, 0x8894,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO0 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* LRCK */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS0n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO1", 0x800c, 0x3, 0x18, 0x8898,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO1 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* BCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SCLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO2", 0x800c, 0x3, 0x1b, 0x889c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO2*/
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* DO */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* O */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDO */
-+	SYNA_PINCTRLCONF_GROUP("GPIO3", 0x8010, 0x3, 0x00, 0x88a0,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO3 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* MCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SS1n */
-+	SYNA_PINCTRLCONF_GROUP("GPIO4", 0x8010, 0x3, 0x03, 0x88a4,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO4 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s1"), /* DI */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* I */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "spi3")), /* SDI */
-+	SYNA_PINCTRLCONF_GROUP("GPIO5", 0x8010, 0x3, 0x06, 0x88a8,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO5 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* LRCK */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* PIXCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row0"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* I */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col7")),
-+	SYNA_PINCTRLCONF_GROUP("GPIO6", 0x8010, 0x3, 0x09, 0x88ac,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO6 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* BCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* HSYNC */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row1"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* O */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col6")),
-+	SYNA_PINCTRLCONF_GROUP("GPIO7", 0x8010, 0x3, 0x0c, 0x88b0,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO7 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* DO */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row2"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* O */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "sm_pdm"), /* CLKIO */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col5")),
-+	SYNA_PINCTRLCONF_GROUP("GPIO8", 0x8010, 0x3, 0x0f, 0x88b4,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO8 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* DI */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* VSYNC */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row3"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "spdif"), /* I */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_col4")),
-+	SYNA_PINCTRLCONF_GROUP("GPIO9", 0x8010, 0x3, 0x12, 0x88b8,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO9 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA0 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "pdm")), /* DI1 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO10", 0x8010, 0x3, 0x15, 0x88bc,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO10 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA1 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI2 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "dsi")), /* TE */
-+	SYNA_PINCTRLCONF_GROUP("GPIO11", 0x8010, 0x3, 0x18, 0x88c0,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO11 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s2"), /* MCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA2 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_pdm"), /* CLKIO */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* CLK */
-+	SYNA_PINCTRLCONF_GROUP("GPIO12", 0x8010, 0x3, 0x1b, 0x88c4,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO12 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* LRCK */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA3 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* WP */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sdio1"), /* WP */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT0 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO13", 0x8014, 0x3, 0x00, 0x88c8,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO13 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* BCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "pdm"), /* DI1 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "rgmii"), /* PTP_PPS_O */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "usb2"), /* VBUS */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT1 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO14", 0x8014, 0x3, 0x03, 0x88cc,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO14 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* DO */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI3 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spdif"), /* O */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT2 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO15", 0x8014, 0x3, 0x06, 0x88d0,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO15 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "i2s3"), /* DI */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA4 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sm_pdm"), /* DI0 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "spdif"), /* I */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* OUT3 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO16", 0x8014, 0x3, 0x09, 0x88d4,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO16 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS0n */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2")), /* DAT3 */
-+	SYNA_PINCTRLCONF_GROUP("GPIO17", 0x8014, 0x3, 0x0c, 0x88d8,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO17 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS1n */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA5 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* DAT2 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "dsi")), /* TE */
-+	SYNA_PINCTRLCONF_GROUP("GPIO18", 0x8014, 0x3, 0x0f, 0x88dc,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO18 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS2n */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA6 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* DAT1 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI2 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "can1")), /* RX */
-+	SYNA_PINCTRLCONF_GROUP("GPIO19", 0x8014, 0x3, 0x12, 0x88e0,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO19 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SS3n */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "cam"), /* DATA7 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* DAT0 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* DI3 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "can1")), /* TX */
-+	SYNA_PINCTRLCONF_GROUP("GPIO20", 0x8014, 0x3, 0x15, 0x88e4,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO20 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SDO */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2")), /* CMD */
-+	SYNA_PINCTRLCONF_GROUP("GPIO21", 0x8014, 0x3, 0x18, 0x88e8,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO21 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* CLK */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "clkout")),
-+	SYNA_PINCTRLCONF_GROUP("GPIO22", 0x8014, 0x3, 0x1b, 0x88ec,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* GPIO22 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi2"), /* SDI */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sdio2"), /* CDn */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "sdio1")), /* CDn */
++static const struct sl2610_reset_cfg sl2610_reset_cfgs[] = {
++	SL2610_RESET(RST_SOC_SDIO0, SL2610_GBL_PERIFRESET, 2, false),
++	SL2610_RESET(RST_SOC_USB0, SL2610_GBL_PERIFRESET, 4, false),
++	SL2610_RESET(RST_SOC_EMMC, SL2610_GBL_PERIFRESET, 5, false),
++	SL2610_RESET(RST_SOC_GETH0, SL2610_GBL_PERIFRESET, 6, false),
++	SL2610_RESET(RST_SOC_SDIO1, SL2610_GBL_PERIFRESET, 7, false),
++	SL2610_RESET(RST_SOC_USB1, SL2610_GBL_PERIFRESET, 8, false),
++	SL2610_RESET(RST_SOC_GETH1, SL2610_GBL_PERIFRESET, 9, false),
++	SL2610_RESET(RST_SOC_USB0PHY, SL2610_GBL_PERIFSTICKYRESET, 0, true),
++	SL2610_RESET(RST_SOC_USB0CORE, SL2610_GBL_PERIFSTICKYRESET, 1, true),
++	SL2610_RESET(RST_SOC_USB0MAHB, SL2610_GBL_PERIFSTICKYRESET, 2, true),
++	SL2610_RESET(RST_SOC_USB1PHY, SL2610_GBL_PERIFSTICKYRESET, 3, true),
++	SL2610_RESET(RST_SOC_USB1CORE, SL2610_GBL_PERIFSTICKYRESET, 4, true),
++	SL2610_RESET(RST_SOC_USB1MAHB, SL2610_GBL_PERIFSTICKYRESET, 5, true),
++	SL2610_RESET(RST_SOC_UART0, SL2610_GBL_APBPERIFRESET, 0, false),
++	SL2610_RESET(RST_SOC_UART1, SL2610_GBL_APBPERIFRESET, 1, false),
++	SL2610_RESET(RST_SOC_UART2, SL2610_GBL_APBPERIFRESET, 2, false),
++	SL2610_RESET(RST_SOC_UART3, SL2610_GBL_APBPERIFRESET, 3, false),
++	SL2610_RESET(RST_SOC_I2C0, SL2610_GBL_APBPERIFRESET, 4, false),
++	SL2610_RESET(RST_SOC_I2C1, SL2610_GBL_APBPERIFRESET, 5, false),
++	SL2610_RESET(RST_SOC_SPI0, SL2610_GBL_APBPERIFRESET, 6, false),
++	SL2610_RESET(RST_SOC_SPI1, SL2610_GBL_APBPERIFRESET, 7, false),
++	SL2610_RESET(RST_SOC_SPI2, SL2610_GBL_APBPERIFRESET, 8, false),
++	SL2610_RESET(RST_SOC_SPI3, SL2610_GBL_APBPERIFRESET, 9, false),
++	SL2610_RESET(RST_SOC_APBTIMERS, SL2610_GBL_APBPERIFRESET, 10, false),
++	SL2610_RESET(RST_SOC_APBSYSCNT, SL2610_GBL_APBPERIFRESET, 11, false),
++	SL2610_RESET(RST_SOC_APBWDT, SL2610_GBL_APBPERIFRESET, 12, false),
++	SL2610_RESET(RST_SOC_APBGPIO, SL2610_GBL_APBPERIFRESET, 13, false),
++	SL2610_RESET(RST_SOC_APBDMA, SL2610_GBL_APBPERIFRESET, 14, false),
++	SL2610_RESET(RST_SOC_GPUCORE, SL2610_GBL_TOPSTICKYRESET, 0, true),
++	SL2610_RESET(RST_SOC_NPUCORE, SL2610_GBL_TOPSTICKYRESET, 1, true),
++	SL2610_RESET(RST_SOC_AVIOAIOG, SL2610_GBL_AVIOSTICKYRESET, 0, true),
++	SL2610_RESET(RST_SOC_AVIOVPPG, SL2610_GBL_AVIOSTICKYRESET, 1, true),
++	SL2610_RESET(RST_SOC_AVIOVIPG, SL2610_GBL_AVIOSTICKYRESET, 2, true),
 +};
 +
-+static const struct syna_desc_group sl2610_sysmgr_pinctrl_groups[] = {
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO31", 0xb00, 0x3, 0x00, 0xc00,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO31*/
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM0*/
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row7"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* SM PDM DI0 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "can1")), /* SM CAN1 RX */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO32", 0xb00, 0x3, 0x03, 0xc04,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO32 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM1 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col0"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "pdm"), /* SM PDM CLKIO */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "can1")), /* SM CAN1 TX */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO33", 0xb00, 0x3, 0x06, 0xc08,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO33 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM2 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "uart2"), /* SM UART2 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "key_row5"),
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart3_de")), /* SM UART3 DE */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO34", 0xb00, 0x3, 0x09, 0xc0c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO34 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM3 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "uart2"), /* SM UART2 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "key_row4"),
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart3_ren")), /* SM UART3 REn */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO35", 0xb00, 0x3, 0x0c, 0xc10,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO35 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM4 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "uart3"), /* SM UART3 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "key_row3"),
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart0")), /* SM UART0 RTSn */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO36", 0xb00, 0x3, 0x0f, 0xc14,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO36 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM5 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart1"), /* SM UART1 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "uart3"), /* SM UART3 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "key_row2"),
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart0")), /* SM UART0 CTSn */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO37", 0xb00, 0x3, 0x12, 0xc18,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO37 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM6 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "tw0"), /* SM TW0 SCL */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "key_row6"),
-+			       SYNA_PINCTRL_FUNCTION(0x5, "pdm")), /* SM PDM CLKIO */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO38", 0xb00, 0x3, 0x15, 0xc1c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO38 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "pwm"), /* SM PWM7 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "tw0"), /* SM TW0 SDA */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "pdm")), /* SM PDM DI0 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO3", 0xb00, 0x3, 0x18, 0xc20,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO3 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS0n */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "tw1"), /* SM TW1 SCL */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM8 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "i3c")), /* SM I3C MS SCL */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO4", 0xb00, 0x3, 0x1b, 0xc24,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO4 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS1n */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "tw1"), /* SM TW1 SDA */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM0 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "i3c")), /* SM I3C MS SDA */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO5", 0xb04, 0x3, 0x00, 0xc28,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO5 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS2n */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM1 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO6", 0xb04, 0x3, 0x03, 0xc2c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO6 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SS3n */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SSn */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM2 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO9", 0xb04, 0x3, 0x06, 0xc30,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO9 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SDO */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SDO */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM3 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO10", 0xb04, 0x3, 0x09, 0xc34,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO10 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM4 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO11", 0xb04, 0x3, 0x0c, 0xc38,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO11 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "spi1"), /* SM SPI1 SDI */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "spi1s"), /* SM SPI1S SDI */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM5 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO30", 0xb04, 0x3, 0x0f, 0xc44,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO30 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA7 */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col6"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "sm_clkout")),
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO29", 0xb04, 0x3, 0x12, 0xc48,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO29 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA6 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart3"), /* SM UART3 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col5"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row2"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "uart1")), /* SM UART1 CTSn */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO28", 0xb04, 0x3, 0x15, 0xc4c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO28 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA5 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart3"), /* SM UART3 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col4"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart2"), /* SM UART2 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "uart0"), /* SM UART0 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row3"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "uart1")), /* SM UART1 RTSn */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO27", 0xb04, 0x3, 0x18, 0xc50,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO27 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DATA4 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart2"), /* SM UART2 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col3"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "uart3_ren"), /* SM UART3 REn */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row4")),
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO26", 0xb04, 0x3, 0x1b, 0xc54,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO26 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI CS1n */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart2"), /* SM UART2 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col2"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "uart3"), /* SM UART3 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "uart3_de"), /* SM UART3 DE */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row5"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "sm_clkout")),
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO25", 0xb08, 0x3, 0x00, 0xc58,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO25 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi"), /* SM XSPI DQS */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row6")),
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO24", 0xb08, 0x3, 0x03, 0xc5c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO24 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI CLKn */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO23", 0xb08, 0x3, 0x06, 0xc60,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO23 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI CLK */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO22", 0xb08, 0x3, 0x09, 0xc64,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO22 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA3 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO21", 0xb08, 0x3, 0x0c, 0xc68,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO21 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA2 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO20", 0xb08, 0x3, 0x0f, 0xc6c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO20 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA1 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO19", 0xb08, 0x3, 0x12, 0xc70,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO19 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI DATA0 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO18", 0xb08, 0x3, 0x15, 0xc74,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO18 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "xspi")), /* SM XSPI CS0n*/
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO17", 0xb08, 0x3, 0x18, 0xc78,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO17 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "uart1"), /* SM UART1 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 TX */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM8 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart0")), /* SM UART0 TXD */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO15", 0xb08, 0x3, 0x1b, 0xc7c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO15 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw1"), /* SM TW1 SDA */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM11 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "can0"), /* SM CAN0 TX */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart1"), /* SM UART1 RTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG OUT */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO14", 0xb0c, 0x3, 0x00, 0xc80,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO14 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw1"), /* SM TW1 SCL */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM10 */
-+			       SYNA_PINCTRL_FUNCTION(0x4, "can0"), /* SM CAN0 RX */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart1"), /* SM UART1 CTSn */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG OUT */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO16", 0xb0c, 0x3, 0x03, 0xc84,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO16 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "uart1"), /* SM UART1 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 RX */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm")), /* SM PWM7 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO13", 0xb0c, 0x3, 0x06, 0xc88,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO13 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw0"), /* SM TW0 SDA */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "i3c"), /* SM I3C MS SDA */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sm_clkout"),
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG out */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO12", 0xb0c, 0x3, 0x09, 0xc8c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO12 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "tw0"), /* SM TW0 SCL */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "i3c"), /* SM I3C MS SCL */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "pwm"), /* SM PWM6 */
-+			       SYNA_PINCTRL_FUNCTION(0x7, "dbg")), /* DBG CLK */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO8", 0xb0c, 0x3, 0x0c, 0xc90,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO8 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "uart0"), /* SM UART0 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 TX */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "sm_clkout"),
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart1")), /* SM UART1 TXD */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO7", 0xb0c, 0x3, 0x0f, 0xc94,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "gpio"), /* SM GPIO7 */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "uart0"), /* SM UART0 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "can0"), /* SM CAN0 RX */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_row6"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "gpio_trig"), /* TRIG2 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "pwm"), /* SM PWM9 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "uart1")), /* SM UART1 RXD */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO2", 0xb0c, 0x3, 0x12, 0xc98,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "jtag"), /* TDO */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "gpio"), /* SM GPIO2 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "pdm"), /* SM PDM CLKIO */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "i2s2"), /* MCLK */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "pwm")), /* SM PWM11 */
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO1", 0xb0c, 0x3, 0x15, 0xc9c,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "jtag"), /* TDI */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "gpio"), /* SM GPIO1 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 RXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col1"),
-+			       SYNA_PINCTRL_FUNCTION(0x4, "gpio_trig"), /* TRIG0 */
-+			       SYNA_PINCTRL_FUNCTION(0x5, "pwm"), /* SM PWM9 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "key_row7")),
-+	SYNA_PINCTRLCONF_GROUP("SM_GPIO0", 0xb0c, 0x3, 0x18, 0xca0,
-+			       SYNA_PINCTRL_FUNCTION(0x0, "jtag"), /* TMS */
-+			       SYNA_PINCTRL_FUNCTION(0x1, "gpio"), /* SM GPIO0 */
-+			       SYNA_PINCTRL_FUNCTION(0x2, "uart0"), /* SM UART0 TXD */
-+			       SYNA_PINCTRL_FUNCTION(0x3, "key_col0"),
-+			       SYNA_PINCTRL_FUNCTION(0x5, "pdm"), /* SM PDM DI0 */
-+			       SYNA_PINCTRL_FUNCTION(0x6, "pwm")), /* SM PWM10 */
++static const struct sl2610_reset_cfg sl2610_system_reset_cfgs[] = {
++	SL2610_RESET(RST_SM_ADCCORE, SL2610_SMGBL_STICKYRST0, 0, true),
++	SL2610_RESET(RST_SM_ADCPRST, SL2610_SMGBL_STICKYRST0, 1, true),
++	SL2610_RESET(RST_SM_CAN0PRST, SL2610_SMGBL_STICKYRST0, 2, true),
++	SL2610_RESET(RST_SM_CAN0SRST, SL2610_SMGBL_STICKYRST0, 3, true),
++	SL2610_RESET(RST_SM_CAN1PRST, SL2610_SMGBL_STICKYRST0, 4, true),
++	SL2610_RESET(RST_SM_CAN1SRST, SL2610_SMGBL_STICKYRST0, 5, true),
++	SL2610_RESET(RST_SM_GPIOPRST, SL2610_SMGBL_STICKYRST0, 6, true),
++	SL2610_RESET(RST_SM_GPIOSRST, SL2610_SMGBL_STICKYRST0, 7, true),
++	SL2610_RESET(RST_SM_I2CM0PRST, SL2610_SMGBL_STICKYRST0, 8, true),
++	SL2610_RESET(RST_SM_I2CM0SRST, SL2610_SMGBL_STICKYRST0, 9, true),
++	SL2610_RESET(RST_SM_I2CM1PRST, SL2610_SMGBL_STICKYRST0, 10, true),
++	SL2610_RESET(RST_SM_I2CM1SRST, SL2610_SMGBL_STICKYRST0, 11, true),
++	SL2610_RESET(RST_SM_I3CPRST, SL2610_SMGBL_STICKYRST0, 12, true),
++	SL2610_RESET(RST_SM_I3CSRST, SL2610_SMGBL_STICKYRST0, 13, true),
++	SL2610_RESET(RST_SM_PDMPRST, SL2610_SMGBL_STICKYRST0, 14, true),
++	SL2610_RESET(RST_SM_PDMSRST, SL2610_SMGBL_STICKYRST0, 15, true),
++	SL2610_RESET(RST_SM_PVTHSRST, SL2610_SMGBL_STICKYRST0, 16, true),
++	SL2610_RESET(RST_SM_PVTPRST, SL2610_SMGBL_STICKYRST0, 17, true),
++	SL2610_RESET(RST_SM_PWMPERIRST, SL2610_SMGBL_STICKYRST0, 18, true),
++	SL2610_RESET(RST_SM_PWMPRST, SL2610_SMGBL_STICKYRST0, 19, true),
++	SL2610_RESET(RST_SM_SPIMPRST, SL2610_SMGBL_STICKYRST0, 20, true),
++	SL2610_RESET(RST_SM_SPIMSRST, SL2610_SMGBL_STICKYRST0, 21, true),
++	SL2610_RESET(RST_SM_SPISPRST, SL2610_SMGBL_STICKYRST0, 22, true),
++	SL2610_RESET(RST_SM_SPISSRST, SL2610_SMGBL_STICKYRST0, 23, true),
++	SL2610_RESET(RST_SM_UART0PRST, SL2610_SMGBL_STICKYRST0, 24, true),
++	SL2610_RESET(RST_SM_UART0SRST, SL2610_SMGBL_STICKYRST0, 25, true),
++	SL2610_RESET(RST_SM_UART1PRST, SL2610_SMGBL_STICKYRST0, 26, true),
++	SL2610_RESET(RST_SM_UART1SRST, SL2610_SMGBL_STICKYRST0, 27, true),
++	SL2610_RESET(RST_SM_UART2PRST, SL2610_SMGBL_STICKYRST0, 28, true),
++	SL2610_RESET(RST_SM_UART2SRST, SL2610_SMGBL_STICKYRST0, 29, true),
++	SL2610_RESET(RST_SM_UART3PRST, SL2610_SMGBL_STICKYRST0, 30, true),
++	SL2610_RESET(RST_SM_UART3SRST, SL2610_SMGBL_STICKYRST0, 31, true),
 +};
 +
-+static const struct syna_pinctrl_desc sl2610_soc_pinctrl_data = {
-+	.groups = sl2610_soc_pinctrl_groups,
-+	.ngroups = ARRAY_SIZE(sl2610_soc_pinctrl_groups),
++static const struct sl2610_reset_data sl2610_reset_data = {
++	.cfgs = sl2610_reset_cfgs,
++	.num = ARRAY_SIZE(sl2610_reset_cfgs),
 +};
 +
-+static const struct syna_pinctrl_desc sl2610_sysmgr_pinctrl_data = {
-+	.groups = sl2610_sysmgr_pinctrl_groups,
-+	.ngroups = ARRAY_SIZE(sl2610_sysmgr_pinctrl_groups),
++static const struct sl2610_reset_data sl2610_system_reset_data = {
++	.cfgs = sl2610_system_reset_cfgs,
++	.num = ARRAY_SIZE(sl2610_system_reset_cfgs),
 +};
 +
-+static int syna_pinctrl_get_groups_count(struct udevice *dev)
++static const
++struct sl2610_reset_cfg *sl2610_get_cfg(struct sl2610_reset_priv *priv,
++					unsigned long id)
 +{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	if (id >= priv->data->num)
++		return NULL;
 +
-+	return pctrl->desc->ngroups;
++	return &priv->data->cfgs[id];
 +}
 +
-+static const char *syna_pinctrl_get_group_name(struct udevice *dev,
-+					       unsigned int selector)
++static int sl2610_reset_assert(struct reset_ctl *rst)
 +{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	struct sl2610_reset_priv *priv = dev_get_priv(rst->dev);
++	const struct sl2610_reset_cfg *cfg = sl2610_get_cfg(priv, rst->id);
 +
-+	return pctrl->desc->groups[selector].name;
++	if (!cfg)
++		return -EINVAL;
++
++	/*
++	 * non-sticky bits are auto-deasserted, the reset is triggered for
++	 * 640ns, and deasserted.
++	 * So user should use rst_reset instead.
++	 */
++	if (!cfg->sticky)
++		return -EINVAL;
++
++	/* sticky reset bits are active low */
++	return regmap_clear_bits(priv->regmap, cfg->reg, cfg->bit);
 +}
 +
-+static int syna_pinctrl_get_pins_count(struct udevice *dev)
++static int sl2610_reset_deassert(struct reset_ctl *rst)
 +{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	struct sl2610_reset_priv *priv = dev_get_priv(rst->dev);
++	const struct sl2610_reset_cfg *cfg = sl2610_get_cfg(priv, rst->id);
 +
-+	return pctrl->desc->ngroups;
++	if (!cfg)
++		return -EINVAL;
++
++	if (!cfg->sticky)
++		return -EINVAL;
++
++	/* sticky reset bits are active low */
++	return regmap_set_bits(priv->regmap, cfg->reg, cfg->bit);
 +}
 +
-+static const char *syna_pinctrl_get_pin_name(struct udevice *dev,
-+					     unsigned int selector)
++static int sl2610_reset_reset(struct reset_ctl *rst, ulong delay_us)
 +{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
-+
-+	return pctrl->desc->groups[selector].name;
-+}
-+
-+static int syna_pinctrl_get_pin_muxing(struct udevice *dev,
-+				       unsigned int selector, char *buf,
-+				       int size)
-+{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
-+	const struct syna_desc_group *group = pctrl->desc->groups + selector;
-+	const struct syna_desc_function *function = group->functions;
-+	u32 mask = GENMASK(group->lsb + group->bit_width - 1, group->lsb);
-+	u32 muxval;
++	struct sl2610_reset_priv *priv = dev_get_priv(rst->dev);
++	const struct sl2610_reset_cfg *cfg = sl2610_get_cfg(priv, rst->id);
 +	int err;
 +
-+	err = regmap_read(pctrl->regmap, group->offset, &muxval);
++	if (!cfg)
++		return -EINVAL;
++
++	/*
++	 * We should not use regmap_set_bits() for pulse-bits since it would
++	 * reset again the devices behind every bits that where not cleared
++	 * from a previous reset.
++	 */
++	if (!cfg->sticky)
++		return regmap_write(priv->regmap, cfg->reg, cfg->bit);
++
++	/* sticky reset bits are active low */
++	err = regmap_clear_bits(priv->regmap, cfg->reg, cfg->bit);
 +	if (err)
 +		return err;
 +
-+	muxval = (muxval & mask) >> group->lsb;
++	udelay(delay_us);
 +
-+	while (function->name) {
-+		if (function->muxval == muxval) {
-+			snprintf(buf, size, "%s", function->name);
-+			return 0;
-+		}
-+		function++;
-+	}
-+
-+	snprintf(buf, size, "unknown (0x%x)", muxval);
-+
-+	return 0;
++	return regmap_set_bits(priv->regmap, cfg->reg, cfg->bit);
 +}
 +
-+static int syna_pinmux_get_functions_count(struct udevice *dev)
++static int sl2610_reset_status(struct reset_ctl *rst)
 +{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
++	struct sl2610_reset_priv *priv = dev_get_priv(rst->dev);
++	const struct sl2610_reset_cfg *cfg = sl2610_get_cfg(priv, rst->id);
++	u32 val;
++	int err;
 +
-+	return pctrl->nfunctions;
-+}
-+
-+static const char *syna_pinmux_get_function_name(struct udevice *dev,
-+						 unsigned int selector)
-+{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
-+
-+	return pctrl->function_names[selector];
-+}
-+
-+static const struct pinconf_param syna_conf_params[] = {
-+	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
-+	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 1 },
-+	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_DOWN, 1 },
-+	{ "drive-strength", PIN_CONFIG_DRIVE_STRENGTH, 0 },
-+	{ "input-disable", PIN_CONFIG_INPUT_ENABLE, 0 },
-+	{ "input-enable", PIN_CONFIG_INPUT_ENABLE, 1 },
-+	{ "input-schmitt-enable", PIN_CONFIG_INPUT_SCHMITT_ENABLE, 1 },
-+	{ "input-schmitt-disable", PIN_CONFIG_INPUT_SCHMITT_ENABLE, 0 },
-+	{ "slew-rate", PIN_CONFIG_SLEW_RATE, 0 },
-+};
-+
-+static int syna_pinconf_group_set(struct udevice *dev,
-+				  unsigned int group,
-+				  unsigned int param, unsigned int arg)
-+{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
-+	const struct syna_desc_group *group_desc = pctrl->desc->groups + group;
-+	u32 mask = 0, val = 0;
-+
-+	switch (param) {
-+	case PIN_CONFIG_BIAS_PULL_UP:
-+		val |= SYNA_PINCFG_PS;
-+		/*
-+		 * 0: normal bias pull up
-+		 * 1: strong bias pull up
-+		 */
-+		if (arg)
-+			val |= SYNA_PINCFG_SPU;
-+		fallthrough;
-+	case PIN_CONFIG_BIAS_PULL_DOWN:
-+		val |= SYNA_PINCFG_PE;
-+		if (arg > 1 || (param == PIN_CONFIG_BIAS_PULL_DOWN && !arg))
-+			return -EINVAL;
-+		fallthrough;
-+	case PIN_CONFIG_BIAS_DISABLE:
-+		mask |= (SYNA_PINCFG_PE | SYNA_PINCFG_PS | SYNA_PINCFG_SPU);
-+		break;
-+	case PIN_CONFIG_DRIVE_STRENGTH:
-+		mask |= SYNA_PINCFG_DS;
-+		if (arg > FIELD_MAX(mask))
-+			return -EINVAL;
-+		val |= FIELD_PREP(mask, arg);
-+		break;
-+	case PIN_CONFIG_INPUT_ENABLE:
-+		mask |= SYNA_PINCFG_IE;
-+		if (arg)
-+			val |= SYNA_PINCFG_IE;
-+		break;
-+	case PIN_CONFIG_INPUT_SCHMITT_ENABLE:
-+		mask |= SYNA_PINCFG_ST;
-+		if (arg)
-+			val |= SYNA_PINCFG_ST;
-+		break;
-+	case PIN_CONFIG_SLEW_RATE:
-+		mask |= SYNA_PINCFG_SL;
-+		if (arg)
-+			val |= SYNA_PINCFG_SL;
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+
-+	return regmap_update_bits(pctrl->regmap, group_desc->conf_offset, mask, val);
-+}
-+
-+static const struct syna_desc_function *
-+syna_pinctrl_find_function_by_name(const struct syna_desc_group *group,
-+				   const char *fname)
-+{
-+	const struct syna_desc_function *function = group->functions;
-+
-+	while (function->name) {
-+		if (!strcmp(function->name, fname))
-+			return function;
-+
-+		function++;
-+	}
-+
-+	return NULL;
-+}
-+
-+static int syna_pinmux_group_set(struct udevice *dev, unsigned int group,
-+				 unsigned int function)
-+{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
-+	const struct syna_desc_group *group_desc = pctrl->desc->groups + group;
-+	const char *fname = pctrl->function_names[function];
-+	const struct syna_desc_function *function_desc;
-+	u32 mask, val;
-+
-+	function_desc = syna_pinctrl_find_function_by_name(group_desc, fname);
-+
-+	if (!function_desc)
++	if (!cfg)
 +		return -EINVAL;
 +
-+	mask = GENMASK(group_desc->lsb + group_desc->bit_width - 1,
-+		       group_desc->lsb);
-+	val = function_desc->muxval << group_desc->lsb;
++	/* reset from non sticky bits is self-deasserting */
++	if (!cfg->sticky)
++		return 0;
 +
-+	return regmap_update_bits(pctrl->regmap, group_desc->offset, mask, val);
++	err = regmap_read(priv->regmap, cfg->reg, &val);
++	if (err)
++		return err;
++
++	/* sticky reset bits are active low */
++	return !(val & cfg->bit);
 +}
 +
-+static const struct pinctrl_ops syna_pinctrl_ops = {
-+	.get_pins_count = syna_pinctrl_get_pins_count,
-+	.get_pin_name = syna_pinctrl_get_pin_name,
-+	.get_groups_count = syna_pinctrl_get_groups_count,
-+	.get_group_name = syna_pinctrl_get_group_name,
-+	.get_functions_count = syna_pinmux_get_functions_count,
-+	.get_function_name = syna_pinmux_get_function_name,
-+	.pinmux_group_set = syna_pinmux_group_set,
-+	.pinconf_num_params = ARRAY_SIZE(syna_conf_params),
-+	.pinconf_params = syna_conf_params,
-+	.pinconf_group_set = syna_pinconf_group_set,
-+	.set_state = pinctrl_generic_set_state,
-+	.get_pin_muxing = syna_pinctrl_get_pin_muxing,
-+};
-+
-+static void syna_pinctrl_add_function(struct syna_pinctrl *pctrl,
-+				      const char *name)
++static int sl2610_reset_probe(struct udevice *dev)
 +{
-+	const char **fname = pctrl->function_names;
++	struct sl2610_reset_priv *priv = dev_get_priv(dev);
++	const struct sl2610_reset_data *data;
 +
-+	while (*fname) {
-+		if (!strcmp(*fname, name))
-+			/* name already exists */
-+			return;
-+		fname++;
-+	}
-+
-+	*fname = name;
-+
-+	pctrl->nfunctions++;
-+}
-+
-+static int syna_pinctrl_build_state(struct udevice *dev)
-+{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
-+	const struct syna_desc_group *desc_group;
-+	const struct syna_desc_function *desc_function;
-+	const char **new_function_names;
-+	int i, max_functions = 0;
-+	int ret;
-+
-+	pctrl->nfunctions = 0;
-+
-+	/* compute the theoretical maximum number of functions */
-+	for (i = 0; i < pctrl->desc->ngroups; i++) {
-+		desc_group = pctrl->desc->groups + i;
-+		max_functions += 1 << desc_group->bit_width;
-+	}
-+
-+	/* allocate the function_names array, plus a sentinel */
-+	pctrl->function_names = calloc(max_functions + 1,
-+				       sizeof(*pctrl->function_names));
-+	if (!pctrl->function_names)
-+		return -ENOMEM;
-+
-+	/* register all functions */
-+	for (i = 0; i < pctrl->desc->ngroups; i++) {
-+		desc_group = pctrl->desc->groups + i;
-+		desc_function = desc_group->functions;
-+
-+		while (desc_function->name) {
-+			syna_pinctrl_add_function(pctrl, desc_function->name);
-+			desc_function++;
-+		}
-+	}
-+
-+	if (pctrl->nfunctions == 0) {
-+		ret = -EINVAL;
-+		goto error;
-+	}
-+
-+	/*
-+	 * reallocate the functions name pointer to the real value.
-+	 * NB: there's no need for a sentinel now.
-+	 */
-+	new_function_names = realloc(pctrl->function_names,
-+				     pctrl->nfunctions * sizeof(*pctrl->function_names));
-+	if (!new_function_names) {
-+		ret = -ENOMEM;
-+		goto error;
-+	}
-+
-+	pctrl->function_names = new_function_names;
-+
-+	return 0;
-+error:
-+	free(pctrl->function_names);
-+	pctrl->function_names = NULL;
-+	pctrl->nfunctions = 0;
-+	return ret;
-+}
-+
-+static int syna_pinctrl_probe_regmap(struct udevice *dev,
-+				     const struct syna_pinctrl_desc *desc,
-+				     struct regmap *regmap)
-+{
-+	struct syna_pinctrl *pctrl = dev_get_priv(dev);
-+	int ret;
-+
-+	pctrl->desc = desc;
-+	pctrl->regmap = regmap;
-+
-+	ret = syna_pinctrl_build_state(dev);
-+	if (ret) {
-+		dev_err(dev, "cannot build driver state: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int syna_pinctrl_probe(struct udevice *dev)
-+{
-+	struct regmap *regmap = syscon_node_to_regmap(dev_ofnode(dev->parent));
-+	const struct syna_pinctrl_desc *desc;
-+
-+	if (IS_ERR(regmap))
-+		return PTR_ERR(regmap);
++	priv->regmap = syscon_node_to_regmap(dev_ofnode(dev->parent));
++	if (IS_ERR(priv->regmap))
++		return PTR_ERR(priv->regmap);
 +
 +	switch (dev_get_driver_data(dev)) {
 +	case SL2610_SYSCON_BLOCK_SOC:
-+		desc = &sl2610_soc_pinctrl_data;
++		data = &sl2610_reset_data;
 +		break;
 +	case SL2610_SYSCON_BLOCK_MCU:
-+		desc = &sl2610_sysmgr_pinctrl_data;
++		data = &sl2610_system_reset_data;
 +		break;
 +	default:
 +		return -EINVAL;
 +	}
 +
-+	return syna_pinctrl_probe_regmap(dev, desc, regmap);
++	priv->data = data;
++
++	return 0;
 +}
 +
-+U_BOOT_DRIVER(syna_pinctrl) = {
-+	.name		= "syna-pinctrl",
-+	.id		= UCLASS_PINCTRL,
-+	.ops		= &syna_pinctrl_ops,
-+	.probe		= syna_pinctrl_probe,
-+	.priv_auto	= sizeof(struct syna_pinctrl),
++static const struct reset_ops sl2610_reset_ops = {
++	.rst_assert = sl2610_reset_assert,
++	.rst_deassert = sl2610_reset_deassert,
++	.rst_reset = sl2610_reset_reset,
++	.rst_status = sl2610_reset_status,
++};
++
++U_BOOT_DRIVER(sl2610_reset) = {
++	.name		= "sl2610-reset",
++	.id		= UCLASS_RESET,
++	.probe		= sl2610_reset_probe,
++	.ops		= &sl2610_reset_ops,
++	.priv_auto	= sizeof(struct sl2610_reset_priv),
 +};
 
 -- 
