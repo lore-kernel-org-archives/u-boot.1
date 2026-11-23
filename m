@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD107606A32D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 18:19:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F955606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 18:19:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NQY7t7LG;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=ezBkqqkp
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DtQUQaWE;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=pM5LFAgv
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 84222406E5;
-	Mon, 23 Nov 2026 18:19:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7A997405D2;
+	Mon, 23 Nov 2026 18:19:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v7mcZUZSAOBc; Mon, 23 Nov 2026 18:19:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C80124071C
+ id YSbJbXcS6t0h; Mon, 23 Nov 2026 18:19:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BA905405DC
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795457954;
-	b=h//cjBIgImoEUY/dLtT1SBbItap18XXUMddswLsoKh9NE9WCd0oWfFlnSubtf+6Qv1ZW
-	 w/W54eGEMbueI/QqYyq8lqfwLULdPEc/1h+t/W9HRj9CeYKjA3DliiuE3ao6Pe6r27iCq
-	 7Nq0olozpoZWRLYVcffj8+h32SF/PCHTSfP+pi5DqoMOrUBd3SIzKn3vGR7W+Mf+ceMdw
-	 MXVtROvqfQGryU/5+pR94GL8Et7uuXuQdWA7LmplWG4p7cylw7KSdslDwjZK+fkfxt9Pi
-	 UANsWT+4/4DZj7H2R54gv3Qn7pC2H/MgYAo/NFJQkVO+qkmQh4SlrIrQifzTiAH0bwA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795457992;
+	b=RDyA0EsoohJZnCkLLfzBsKP7q9xOYDTw3PQA668242XlbxO12F+qD+BwXnX8ufBffGD+
+	 asqBFXd1dUG/HWj536kabMuBNNAQ/1+46ePEdfaSdjLKAxs9Ft/Qswj3u1IzmTeTHxtCb
+	 h+ePRPKvE9LQQ0DMKfnrrtDmyaxN/JkWM6w0H1aardfEVvDGebHN4PprH1tl0bUU4+rUD
+	 0wDDcu+DfWyjs8ZohvtZqd5aJ+zJ8e8Yqbd7H8IdIGmw1uEFwvp5HR6RfugAR8WdiXr2H
+	 edkqnx2kEBjQChsKPkwS9iJEoz0p/ofJyWXMaHf1IuGtZBoX9OHBHUHJk+NmWEGm/IA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795457954;
+	c=relaxed/relaxed; t=1795457992;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,84 +31,87 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=yxPwlWc+5gGWdABYsVepW0CLObmyZJo4iIs004BJFHU=;
-	b=Ilt0VOxs+XcZ0ppCfEIRXrzLgyIISnFp6Q3U6Y/2tNxX67uUR9Wr/QAXlf9x2nyLOqOG
-	 8NU9ln/gylvCnegfDcYNRk52w2zSr89baS89qPKJ6IDlkGVaXle8Q3cgBHdfEh6n5HUzp
-	 3n2rdD6b9lU51ey/LrZD81xbSl43GLnuutz0FCuewQ+fh2FJcOtwmrvaSGsnC8e+mHcD3
-	 0SLvYfZgSeTzw+8hvF+5HQ54Eb0o++M7//Yx/o9Yc9tTabol0MhteupSaAb3Ty2CcyiqZ
-	 3Z70LGd/PQwiw2qf9NCNSTYDOVgPyXgObH/xCpii03ulxpgrjg8OwnsL+1EnfwYapDg==
+	bh=X3Uwu2eo8XtCCZ6KYSk+jHXdcWHZc1VuSbGKCfkvGtk=;
+	b=eSQq/yFAjUmK+7j/+tUYcl2fjIN5DktNf90N+6ZOqyrNjE7GhGZMnfWYKpf4jRWjmdIY
+	 Fk2ZaUKiHsPElTELSdhdUsIuQW4UE/+t1PtU5fz4uj+MBk632vAbYK+G+QMvJGFdAvBAr
+	 H5/nFw+ej/arrVRS4xWub5KrCOzRDG+sqsdJ5fAGL4OK3WIdBpaYRkQRFUQpsOD/BXQl/
+	 YRgJKBB9dBpCyqFnONvAvwib5OFn1b/yNvhKDAChU8CIgauNVBcw9yBKGXo1+mGlnzDPx
+	 4JANGxd6wd9fUZNoCgn/y5JDyXCPVcLaX+hM0WBDroS6/iGyjr1I1BhojsCDkWpEDwg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795457953;
-	bh=yxPwlWc+5gGWdABYsVepW0CLObmyZJo4iIs004BJFHU=;
+	d=lists.u-boot-project.org; s=default; t=1795457992;
+	bh=X3Uwu2eo8XtCCZ6KYSk+jHXdcWHZc1VuSbGKCfkvGtk=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=NQY7t7LG0DzJpjVJQoR3Xx3uk6QWa8/RyqudEKhbVpA7Vxq6VEnfonpHeUWbPoUOI
-	 ZCfSzVCh8kA0V+X1QuMQ+cOIfdw2t1+rXZ2woPaTATTOwGmcwEkWBzkZFN5dp+vNk1
-	 YzzOmV6WL4OG4SBNXZhGdMshblnAE9jd/ZortOjJw/yWw5urM9Gxn4/oUsSpVoy0z8
-	 i+x4jqlkch/danwMz6nek0TCkHPhBLMcT+g7jN+NSju4ToRIWeNyPzuLTPzb/fpc9T
-	 zwTqiDS4RBzY3DiWepYz+5e1mc4ZoeI7pxIHeEocZRN79Z3zvNSrh06tnFPYn8r93K
-	 +HvM9RqHMBK2w==
+	b=DtQUQaWE97gHqBmCz76/ayL/Fzlm9Bq1q5WKIzVl3NVXPzC2SsZ00Pu1jOCS9xi2j
+	 aDVtX0FifUpOGv0j3UG8JdK68ZanD4D190HuTa6Zud29agertY+Jd9nQFFbLNkCUe+
+	 jayMqElAgOZQJFoiDG6pVIXeVmJKTg7Q0Oxlf3U/elxa38xDHS4p6ZLQKMy9O9vmhH
+	 0B1oupWxm1ukrrIUx/03GrEuTFbZ0Uldor9rG680uwXQnaamGu4u+xEMf38r+OJAot
+	 uS5pR+ij/c+7F1Tp+OeSfWq+ZKSxpP5OZVRPehc6+PegrajKKZl3uFaQE+3T/EiVeP
+	 RvvxVOmpRI+7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C80124071C;
-	Mon, 23 Nov 2026 18:19:13 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 45BDF3A8
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 18:19:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BA905405DC;
+	Mon, 23 Nov 2026 18:19:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 37612715
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 18:19:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 38116605F0
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 18:19:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 294CC605F0
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 18:19:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FWph6dUgdCFz for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 18:19:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 292D4605EC
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
- helo=mout-p-101.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
- receiver=<UNKNOWN> 
+ id XqaG-bbC5791 for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 18:19:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4056D605EC
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::101"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::101; helo=mout-p-101.mailbox.org;
+ envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=ezBkqqkp
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 292D4605EC
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 18:19:10 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=pM5LFAgv
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4056D605EC
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 18:19:49 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jYDjR56pjz8sxs;
- Mon, 23 Nov 2026 19:19:07 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jYDkC2KGHz8tyM;
+ Mon, 23 Nov 2026 19:19:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1795457947;
+ s=mail20150812; t=1795457987;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=yxPwlWc+5gGWdABYsVepW0CLObmyZJo4iIs004BJFHU=;
- b=ezBkqqkpeaDCAfcuY0wVrClW9SCFH7bbMke7p5K6F6IbYHoZDOUasHd1dEWh7Q/bMHnZhx
- KzpZ+ivlWTCxgTfvGw+1zdUHV/AiNcpXHb0KAySqQ5FcFvDxG/zE7r0cDe+aSaY/UBUOQz
- 1fe2eBuXwcc5mlR3ClAqMZiheK5lo/cy2RQpixmbG3J0Zi7jJEeeygXxDPak3XRIhaiRKM
- UajNCXZq7q0oGYoxLx1hE2LnQturADByRFvR/0T+cUw6YVGAdRSFm+lEJwTloIJXwP8UaZ
- hSYvnA107r8YMduR9EkGfZF3L9y0DBYYsApLdTVu8gixsTV4rerFYPkPthc9ng==
+ bh=X3Uwu2eo8XtCCZ6KYSk+jHXdcWHZc1VuSbGKCfkvGtk=;
+ b=pM5LFAgvXPY8dEUQpg8S8yLUfkwxlr/8HDF1Y1rTih004A60CNRXXwi+X7IWHSCHE3FwYd
+ QxPkchxKDu3eIHhLMeeQoQV8BGVUrWhQWz/mmVTh9coc2ipFKcqTfSBfeeAChJhElTiOvs
+ 6UsVNZf2XiJ+UYjuMFIdmLfpe7V67zEfVUnV59Z4wCa0iheSaG9tP90WpyW9ve/qVQm9i+
+ V4ZwM8xZ/TL8/TXaFylfdm3yN7xWrsVbirQxecuwmTlFChDapJSTDD6xoxrsc5ckCHPs53
+ Eg3vVDmpJCP/Or8zoWUchi5BVY+eu0k5+ld+0ZaCG/Nmn1pGM3VTLpRpJWpKxg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] power: domain: renesas-r8a78000: Add SDK SCP 4.40 map
-Date: Mon, 23 Nov 2026 19:18:58 +0100
-Message-ID: <20261123181906.168871-1-marek.vasut+renesas@mailbox.org>
+ Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] cmd: scmi: Add scmi impl subcommand
+Date: Mon, 23 Nov 2026 19:19:09 +0100
+Message-ID: <20261123181945.168890-1-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b7528db50bfeb387bc2
-X-MBO-RS-META: pm9t9ybpx6ho867u1gw96ftxu9sywdij
+X-MBO-RS-ID: 204906ebfa33a556203
+X-MBO-RS-META: 4fm5s3q4k5kqfqb83u3uye937bzeywsf
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -121,45 +124,90 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The SCMI IDs did not change between SDK SCP 4.32 and SDK SCP 4.40.
-Add SDK SCP 4.40 as supported version and reuse SDK SCP 4.32 remap
-table.
+Add "scmi impl" subcommand which stores the version of SCMI
+implementation in U-Boot environment variable. This can be
+used to script SCMI version specific quirks in U-Boot env
+or boot scripts.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Peng Fan <peng.fan@nxp.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/power/domain/renesas-r8a78000-power-domain.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ cmd/scmi.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
-diff --git a/drivers/power/domain/renesas-r8a78000-power-domain.c b/drivers/power/domain/renesas-r8a78000-power-domain.c
-index fa22a37f77f..d0e066ee5ad 100644
---- a/drivers/power/domain/renesas-r8a78000-power-domain.c
-+++ b/drivers/power/domain/renesas-r8a78000-power-domain.c
-@@ -169,6 +169,7 @@ struct rst_map_in {
- #define GEN5_SCMI_SDK_4_36		0x01100000
- #define GEN5_SCMI_SDK_4_37		0x01120000
- #define GEN5_SCMI_SDK_4_39		0x01140000
-+#define GEN5_SCMI_SDK_4_40		0x01150000
+diff --git a/cmd/scmi.c b/cmd/scmi.c
+index 72549745ffd..b3fc1cfd9d8 100644
+--- a/cmd/scmi.c
++++ b/cmd/scmi.c
+@@ -7,6 +7,7 @@
+  */
  
- static const struct rst_map_in gen5_rst_map_dt_sdk_4_28[] = {
- 	{ SCP_RESET_DOMAIN_ID_UFS0, 202 },
-@@ -226,7 +227,8 @@ static int gen5_reset_of_xlate(struct reset_ctl *reset_ctl,
- 		   priv->basever == GEN5_SCMI_SDK_4_32 ||
- 		   priv->basever == GEN5_SCMI_SDK_4_36 ||
- 		   priv->basever == GEN5_SCMI_SDK_4_37 ||
--		   priv->basever == GEN5_SCMI_SDK_4_39) {
-+		   priv->basever == GEN5_SCMI_SDK_4_39 ||
-+		   priv->basever == GEN5_SCMI_SDK_4_40) {
- 		map = gen5_rst_map_dt_sdk_4_31;
- 		map_size = ARRAY_SIZE(gen5_rst_map_dt_sdk_4_31);
- 	} else {
+ #include <command.h>
++#include <env.h>
+ #include <exports.h>
+ #include <scmi_agent.h>
+ #include <scmi_agent-uclass.h>
+@@ -425,6 +426,35 @@ static int do_scmi_info(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	return CMD_RET_SUCCESS;
+ }
+ 
++/**
++ * do_scmi_impl() - get the implementation version of SCMI
++ *
++ * @cmdtp:	Command table
++ * @flag:	Command flag
++ * @argc:	Number of arguments
++ * @argv:	Argument array
++ *
++ * Get the implementation version of SCMI and store it into environment variable.
++ *
++ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
++ */
++static int do_scmi_impl(struct cmd_tbl *cmdtp, int flag, int argc,
++			char * const argv[])
++{
++	struct udevice *agent;
++
++	if (argc != 2)
++		return CMD_RET_USAGE;
++
++	agent = get_agent();
++	if (!agent)
++		return CMD_RET_FAILURE;
++
++	env_set_hex(cmd_arg1(argc, argv), scmi_impl_version(agent));
++
++	return CMD_RET_SUCCESS;
++}
++
+ /**
+  * do_scmi_set_dev() - set access permission to device
+  *
+@@ -602,6 +632,8 @@ static int do_scmi_reset(struct cmd_tbl *cmdtp, int flag, int argc,
+ static struct cmd_tbl cmd_scmi_sub[] = {
+ 	U_BOOT_CMD_MKENT(info, CONFIG_SYS_MAXARGS, 1,
+ 			 do_scmi_info, "", ""),
++	U_BOOT_CMD_MKENT(impl, CONFIG_SYS_MAXARGS, 1,
++			 do_scmi_impl, "", ""),
+ 	U_BOOT_CMD_MKENT(perm_dev, CONFIG_SYS_MAXARGS, 1,
+ 			 do_scmi_set_dev, "", ""),
+ 	U_BOOT_CMD_MKENT(perm_proto, CONFIG_SYS_MAXARGS, 1,
+@@ -644,6 +676,7 @@ U_BOOT_LONGHELP(scmi,
+ 	" - SCMI utility\n"
+ 	" info [-v] - get the info of SCMI services\n"
+ 	"   - -v ... print verbose information\n"
++	" impl <varname> - store implementation version in variable\n"
+ 	" perm_dev <agent-id in hex> <device-id in hex> <flags in hex>\n"
+ 	"   - set access permission to device\n"
+ 	" perm_proto <agent-id in hex> <device-id in hex> <protocol-id in hex> <flags in hex>\n"
 -- 
 2.53.0
 
