@@ -2,29 +2,29 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B02F1606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 13:23:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E33C606A31F
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 13:23:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sFrASNd5;
-	dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=Jf6GG3Tr;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=Jf6GG3Tr
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ztxAAYwL;
+	dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=AZdX1D67;
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=AZdX1D67
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 81CF580D48;
-	Mon, 23 Nov 2026 13:23:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DF5AC80D82;
+	Mon, 23 Nov 2026 13:23:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tFb4aMS23Q62; Mon, 23 Nov 2026 13:23:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A2A1E80D52
+ id i7ebDZDJ2nVC; Mon, 23 Nov 2026 13:23:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B1C7080E4D
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795440230;
-	b=agaUW7IJmv6uqwt71qYpa4MwTW8qAHUYCFObU4lknpdwYzb/AZyQq5NNCPaC+O157vyG
-	 9voGHC+z/Ljb+jd89PJteYIAckYms4ig/V7Ws6qPYdO8JVB74ldEWkUTtJ6DA/arZsVj2
-	 eKDedZGz3wpMEo48V5BP+IqMjUOLKicc5ntRElW0ZHYCh65BJ9l5WhbHr5T9y5HcNFU20
-	 IYBpyWGLwka1XMaY8stSvhuq6vJbL+1EC76CF77VptiUP6fPPho6H7Ih0EbNDY+mOqciR
-	 ahCtUAZjURC7vxIx059XJZ8nxbEl/HuOwC32gMZDIG6RLUA6jOVw9k4C8+YgaZPhr+Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795440237;
+	b=I/Y33Zy/+f59Zqfs2pqAq4w2l6HPtfQEsDiMv2zd045NE4v9EdrmDUgPYkUjgu6JrCtW
+	 ECSlHuxu0oAKkHWjMUyYMBONi5ZHPf9kyAJVjALy8O0SKHkHr4r5LNtDfg0OrQ4LA/BEf
+	 aydoFpkr3Z1wbGGNAp8byIrUcKwrTuFoa8+vq/oq30h31DbFzD0LMja5rH3zNxNPWk7BS
+	 O0kgTPEUnw/Us9alikhyMW1yhEL3yzITaNOVbEf97IQVW7gzfRvVqoV9mFLTO+eQkV4Q+
+	 fWXphpAldeMNxto/PoJ+LsnB6J8GQjnljflvKxAOJZjAK24NbZqOxBbxo+R5QPshzFQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795440230;
+	c=relaxed/relaxed; t=1795440237;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -55,74 +55,74 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Xow2wP8xClXW+UhB3IFnaYRUrS5S8b5Kaud4zcegF7g=;
-	b=PJTLfZDRk3tY5SycaOXc092FqREO8lBRs40a7RkLwuzKvyWS5cf2Rd19qyb+e4AEMkw+
-	 omNhz2yq2BOGAmFCBNVHHH/hMS/v3rWR4ESdnHBjb969go6t4jfN0Kde31pUfDy5zmxZp
-	 0IdFfBHxXRO8XUHePekTL5k6UK0NbrPrmC4weZa9Xv/sLf6IkfEPcgUcMHiCLokvorj22
-	 d0gz46yiGLgG8DhI0L8xCRyDXvHLabPxJ2CFnR89liQPr1Cy9a+zNS/u0mWW3HMrM08Do
-	 GBWw3a1SZxQCtLzFV6b5xpjS/QnHANTvZdigiJIhiJbN6Sqsp/SQvbdbY7jj+r9c1ng==
+	bh=Z5oDqlPigxYL1TcoEtBzim0hpaz+i423qYSblMEbk0k=;
+	b=Wu5CuEYly7Sta+062Oo9OpDRjPOJ4HPlIhty5aUCTKlcj9HwQxWsCVHuDYTb1AtFoMJ5
+	 jdjMDOFh55QJCTljPcmC4b2QNsv16XdNsxNv+PIBhi2DTbuxQuBx8ZVrwQgyD3zZL0ASl
+	 PQndLkqD6BZ5b4eb4J95dBSQndLDREyUAcO2fMdqv9DfcKi8NvEjZBIepfiBTwgmX4BND
+	 xxKWd8DDy4aVNmfKZLVurlpq/j4Co9R6NtsTKgUu346baaqG1PA1d7OG23d7ioL1Vd/UF
+	 K61OZrj+mUx24NtVm0XeQJokDAxqOdcjeJ/oWnw+jWcf7EmrYL5bO/y5Qxo0K2qL4hw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795440230;
-	bh=Xow2wP8xClXW+UhB3IFnaYRUrS5S8b5Kaud4zcegF7g=;
+	d=lists.u-boot-project.org; s=default; t=1795440237;
+	bh=Z5oDqlPigxYL1TcoEtBzim0hpaz+i423qYSblMEbk0k=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sFrASNd5lU1U560CqoAsi8A38z681JtfxLuivDQ+GAzFZWNk82/h7X7Ex0u6Kfpyu
-	 33aw5PEQllrZvOvbFPMSindV8X970shJUUvTlFCj46NLM6gLx4aN0+pDBXce8E97ke
-	 RiarwHuqRY/oB6VZnYUyB4Twmuxa7K9j0EcE0uH304/2eWm9VY6MaqKZi5clsGsgjG
-	 HCP78wg2VWxJVN4mGH0kH7lGnfnKCMppX9JgiuHAmVMqsKHrVBiIV91EpCC12cGmvY
-	 ZD+FUqJ4sWOrR1QYHPWMnGhXcQCOV2RQXfJxSH/69oTg7lT8tgRu2QYFFtRPxm6hGf
-	 rpDVVy+m737tw==
+	b=ztxAAYwLVpx5+IFXpLHksCeDWKY2tAGwvZJ81IJ/KE9bzmwpzLOmL7WaAJqIzkYpb
+	 TBSxBN+8+DlhoiLw69YOnB+ankCNaMXXkpOdq6s98eV6VD+910hsmraNBE/SMx+C9D
+	 YXA6hMImStZ5BKLR8fftwPwjDk2M17btrge+1J+Sl4ex/pI1WDv6s0sJNDGk4JoaDf
+	 sQy03FbfQesod3NBUYbzSGT8RbEEIPa9qfch5zq3B9r/mKX+kPT3ueK91PhxkH7ahC
+	 /4Du2UI2exY4qu2lFmAB6BAg4HRXf7mTN1WvijOwlJkFLMhU/3r49XPH49Zk1bK+YR
+	 cT47bCbH0upCg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A2A1E80D52;
-	Mon, 23 Nov 2026 13:23:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 27FC7759
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 13:23:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B1C7080E4D;
+	Mon, 23 Nov 2026 13:23:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C4CF93A8
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 13:23:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1A17A40718
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 13:23:47 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id AA9FA40718
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 13:23:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yCgF6m8UlnoY for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 13:23:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A620340712
+ id lmwxQrmKlH3B for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 13:23:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4B54240712
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=2
- smtp.remote-ip="2a01:111:f403:c202::7"
+ smtp.remote-ip="2a01:111:f403:c200::5"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c202::7;
- helo=gvxpr05cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c200::5;
+ helo=duzpr83cu001.outbound.protection.outlook.com;
  envelope-from=jerome.forissier@arm.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=Jf6GG3Tr; 
+ header.a=rsa-sha256 header.s=selector1 header.b=AZdX1D67; 
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=selector1 header.b=Jf6GG3Tr
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A620340712
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 13:23:45 +0000 (UTC)
+ header.a=rsa-sha256 header.s=selector1 header.b=AZdX1D67
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4B54240712
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 13:23:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Xow2wP8xClXW+UhB3IFnaYRUrS5S8b5Kaud4zcegF7g=;
- b=Jf6GG3TridRcTvPx01e0af3sGtz0H/G9zA9ENhpByzBx/QXOy5OZUsUvYFj/KvzExA1cbop1G5UOdhMVEUV5EpQoowoKsqsJZdhSFMpl6d8yIwXpz5CNsUf9aVEPhR5f9YCeit1IP4m6FvFyXVGm9yYyg0Na1M5DSeuDn1C3zoc=
-Received: from AS4PR10CA0026.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5d8::20)
- by DB9PR08MB11242.eurprd08.prod.outlook.com (2603:10a6:10:5de::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.13; Mon, 23 Nov
- 2026 13:23:35 +0000
-Received: from AMS1EPF00000093.eurprd05.prod.outlook.com
- (2603:10a6:20b:5d8:cafe::ac) by AS4PR10CA0026.outlook.office365.com
- (2603:10a6:20b:5d8::20) with Microsoft SMTP Server (version=TLS1_3,
+ bh=Z5oDqlPigxYL1TcoEtBzim0hpaz+i423qYSblMEbk0k=;
+ b=AZdX1D674eVXdFRclyyA3H8PZV2wKoMyfUPHlhl45qnEN1WwI+PBfDkuVEM+AZ3sr5JZKimFiVKbNSKfKaD0iEEUryzME8NPvSMQX9apgcScbmltMM0BjpsjThRgdZgAVMYqE5VkrAxKqQWobHmGEPO4Q/fyYV8GrxZNzliEhL4=
+Received: from PA7P264CA0137.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:377::6)
+ by PA4PR08MB6303.eurprd08.prod.outlook.com (2603:10a6:102:e5::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.12; Mon, 23 Nov
+ 2026 13:23:45 +0000
+Received: from AM7PEPF00000053.EURPRD83.prod.outlook.com
+ (2603:10a6:102:377:cafe::3b) by PA7P264CA0137.outlook.office365.com
+ (2603:10a6:102:377::6) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.639.14 via Frontend Transport; Mon,
- 23 Nov 2026 13:23:34 +0000
+ 23 Nov 2026 13:23:45 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 4.158.2.129) smtp.mailfrom=arm.com;
  dkim=pass (signature was verified)
@@ -131,43 +131,44 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  4.158.2.129 as permitted sender) receiver=protection.outlook.com;
  client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS1EPF00000093.mail.protection.outlook.com (10.167.242.90) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.639.5
- via Frontend Transport; Mon, 23 Nov 2026 13:23:34 +0000
+ AM7PEPF00000053.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.662.0
+ via Frontend Transport; Mon, 23 Nov 2026 13:23:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Xow2wP8xClXW+UhB3IFnaYRUrS5S8b5Kaud4zcegF7g=;
- b=Jf6GG3TridRcTvPx01e0af3sGtz0H/G9zA9ENhpByzBx/QXOy5OZUsUvYFj/KvzExA1cbop1G5UOdhMVEUV5EpQoowoKsqsJZdhSFMpl6d8yIwXpz5CNsUf9aVEPhR5f9YCeit1IP4m6FvFyXVGm9yYyg0Na1M5DSeuDn1C3zoc=
+ bh=Z5oDqlPigxYL1TcoEtBzim0hpaz+i423qYSblMEbk0k=;
+ b=AZdX1D674eVXdFRclyyA3H8PZV2wKoMyfUPHlhl45qnEN1WwI+PBfDkuVEM+AZ3sr5JZKimFiVKbNSKfKaD0iEEUryzME8NPvSMQX9apgcScbmltMM0BjpsjThRgdZgAVMYqE5VkrAxKqQWobHmGEPO4Q/fyYV8GrxZNzliEhL4=
 Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
  signed) header.d=none;dmarc=none action=none header.from=arm.com;
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by DBBPR08MB10461.eurprd08.prod.outlook.com
- (2603:10a6:10:535::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.14; Mon, 23 Nov
- 2026 13:23:02 +0000
+ (2603:10a6:20b:740::16) by PR3PR08MB5596.eurprd08.prod.outlook.com
+ (2603:10a6:102:88::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.13; Mon, 23 Nov
+ 2026 13:23:08 +0000
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3%6]) with mapi id 15.21.0639.012; Mon, 23 Nov 2026
- 13:23:01 +0000
-Message-ID: <131a7cc0-6a08-4c83-b134-c3e9549e87aa@arm.com>
-Date: Mon, 23 Nov 2026 14:23:00 +0100
+ 13:23:08 +0000
+Message-ID: <feff6af6-a52e-4aac-ab2c-86401ec622a4@arm.com>
+Date: Mon, 23 Nov 2026 14:23:07 +0100
 User-Agent: Mozilla Thunderbird
 From: Jerome Forissier <jerome.forissier@arm.com>
-Subject: Re: [PATCH 0/3] net: lwip: add wake-on-LAN command support
+Subject: Re: [PATCH 00/19] net: lwip: enable IPv6 networking and boot clients
 To: James Hilliard <james.hilliard1@gmail.com>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Peter Robinson <pbrobinson@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Igor Velkov <iav@iav.lv>,
+ Naveen Kumar Chaudhary <naveen.osdev@gmail.com>,
+ David Lechner <dlechner@baylibre.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Mateusz Furdyna <mateusz.furdyna@nokia.com>,
- Shahriyar Jalayeri <shahriyar@byteray.co.uk>, Simon Glass
- <sjg@chromium.org>, Johan Jonker <jbx6244@gmail.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Mingtian Li <limingtian@email.szu.edu.cn>, nd@arm.com
-References: <20261109-submit-lwip-wol-v1-v1-0-d11961f7666f@gmail.com>
+ Shahriyar Jalayeri <shahriyar@byteray.co.uk>,
+ Johan Jonker <jbx6244@gmail.com>, Casey Connolly
+ <casey.connolly@linaro.org>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Murtaza Munaim <murtaza@saramena.us>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Drew Kluemke <ankluemk@microsoft.com>, nd@arm.com
+References: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20261109-submit-lwip-wol-v1-v1-0-d11961f7666f@gmail.com>
+In-Reply-To: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: LO4P123CA0128.GBRP123.PROD.OUTLOOK.COM
@@ -175,46 +176,46 @@ X-ClientProxiedBy: LO4P123CA0128.GBRP123.PROD.OUTLOOK.COM
  (2603:10a6:20b:740::16)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DBBPR08MB10461:EE_|AMS1EPF00000093:EE_|DB9PR08MB11242:EE_
-X-MS-Office365-Filtering-Correlation-Id: 602d8dbb-5ad7-46d7-51fd-08df4964f9d2
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|PR3PR08MB5596:EE_|AM7PEPF00000053:EE_|PA4PR08MB6303:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8601f87b-7678-48db-c2fd-08df4964ffce
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|1800799024|366016|376014|7416014|23010399003|261009223027099003|22082099003|18002099003|261021123027099003|261021121427099003|261022105027099003|261022115727099003|261026140227099003|261026121527099003|261028144727099003|56012099006|10067099003|261102130727099003|261102123227099003|11063799006;
-X-Microsoft-Antispam-Message-Info-Original: BQrk8HVblTBGZzjWBkNhow7Zzf2k5Jz6LRJZ6sCm87PtB+ozXigzqljkG3UPWG4wr6xGT7AC2zPy8HjbrqnsPiid+aYxoisng1SJiVPFtRq+H8dAjRb4hcrzFUitWtbLxyTKbp+wKJSmZSPAtHXJ3MjJ1etXz31pFtlcqZLtNIXDGLL16G+xWmERg/S0bF6lTekwatJV5PAPFdJQV5HolcRlqldnuBdw+qXwkpnz9fMdBn4GRcnK+73veQ1Q97dzB/tGuEB6OdMnBcRXFHjzRG4OCaxSJZpoyynAsrgPV7CrFhusqhH4zcMdZwv8qwpjsDTeBD3WQvZATB5fgymw329cMX/+SAKb0Dn+0Gpxtz5+Q8KBCn/JUXW/FwC3refe8/jo9ZkkgO9GGcVgbB55FEah9nG+QFBaiE0eDkOwmPzr5QgOtRJidGsF7AorsO6uAexcfgmEY5yCh0Wr7ooy97rt5yT/t5j5OO7khgLSu+DXkRIjk+QwzuZQvlr1vw21bp9jFBFkU0WmL0MnQ4enrvc40Hs4Vws5CyzWfOsBw6lXzo51x3XE1hYkc1q4KgnWkVxUBniw4u7bP53Vknd99DJkj2qvwqNJmGqs3vdASst7tg7+0KReiDV63JSOPg9j
+ ARA:13230040|1800799024|366016|376014|7416014|23010399003|6133799003|18002099003|22082099003|261009223027099003|3023799007|261021135927099003|261021123027099003|261021121427099003|261021133027099003|261021130227099003|261022105027099003|261026135527099003|261026140227099003|261026130827099003|261026121527099003|261102123227099003|261022113327099003|261022115727099003|261022075727099003|261028144727099003|56012099006|10067099003|11063799006;
+X-Microsoft-Antispam-Message-Info-Original: GHC+HBf+T50UOXux4g70TpWw7mokYYuu3uDMt0CueHXj96X+zv/h2dLFz/sSxe1dHnz+6tsU3uxF4bLkMqzkwC3vYs88cOHZ5L4a96uP7164Jg6+PGolOOj2N6zf0OzwyJsiMlIqpykdLTcTNvKBrvIiGl29VrLLpjyrSM1n6yGXtIAgdYkt3JG1j3u04mFvARril1azdKyiPGG/HELrkI882QpcopqbselO53kBLswCXd789epREeRn4q1io5ScB5svn7ByNfAcPUI4bHXPonSNFBp32phtJy38YDax3narJN+Eg+YjeiEj64LGeSx5LYzvO3LFCUfiy/vxQFocf/4K2+nVtrz2da3LTyfD9evbSOsdVcIKo2mNzVdxYqTjbuV3Pvshwot3kzZKHm9Zt8tw/4dsu+jvQrqZa7amccR64g0pYVEIw/OXbDxbsQAvrK479fBTRTCL6NnNL+81TgwHPwCvyr095Jl/7uib2L0ZuG7oFd0x2kbH+4e9UXiq+FhZ9MB2AtVR/dskTNhnw33GOWtGOPZ4z5G/bjb/DPqh0/GvLrE16pYAu5Vx1ciXdEi9aEaQXLC/Xjh8uAfTOkT2hDGzUV6AF8zBwSA3IFw4IW9FKtmKMOHOpVNb6VXk
 X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
  PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014)(23010399003)(261009223027099003)(22082099003)(18002099003)(261021123027099003)(261021121427099003)(261022105027099003)(261022115727099003)(261026140227099003)(261026121527099003)(261028144727099003)(56012099006)(10067099003)(261102130727099003)(261102123227099003)(11063799006);
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014)(23010399003)(6133799003)(18002099003)(22082099003)(261009223027099003)(3023799007)(261021135927099003)(261021123027099003)(261021121427099003)(261021133027099003)(261021130227099003)(261022105027099003)(261026135527099003)(261026140227099003)(261026130827099003)(261026121527099003)(261102123227099003)(261022113327099003)(261022115727099003)(261022075727099003)(261028144727099003)(56012099006)(10067099003)(11063799006);
  DIR:OUT; SFP:1101; 
-X-Exchange-RoutingPolicyChecked: Ry8GUGiD12FUnWiWjw3PHyyK8kZM0fxkc2x/Yd1+OqBrU5XEJQqzrnHDGb3duHULzeDhusGvsjKuVsmPKU/LHoFhTeYiecNn8xHSiMyRKiZdE8ycNVXDp50pc+4x9p7omXpnFNkWehBFxbzWMxwHi/NrsvJq5309tWlUuCpIFlskYfXyfNrTl5GGliMjIBN2rpoVP/3D/KusYCMALoRT/98ZUcbOAu+hbAun2H4gSVOBs21Fi6/S4fj5zJw83qVXirCfJE4GKdD0bxpJPSq89XDZeQRqnJvF9kVa8v4GOP/bVC53Sz/Yc37I3KOkES3gWJ/GCn0VlnmTerWzsCKsPg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB10461
+X-Exchange-RoutingPolicyChecked: HyxLKu5ey2GKHgTzqF6F8SHCBrnrB6CGoZfWEmFrLJuuFIv8Lh90wEjLluZYDm3ypnqVHcuGLXRfVIPilGmt8jez4feRGPvqYgwJgCQpkn1s6IKWbY1SYF4+EHpAzB6H/EJeU7AOV4T4mPcd5lvn6mlgzQaxSVn4WItAfyqOKM/QkVBcfc/vAjx/oe1DWNpOGI79/GJLVCnU1lNQYhJhqnBLdITtFfhbwFbAmVxxOLk1FxiLNR+ZSU/ueKSpxymTp4J+sNiSg8cWcLzWLSw/ScIfBOCAevJT7nn67NO+ccJ86zns10jWEzt2/geQ5mr3zlBNEvCyrOhm1ulD2R46qA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5596
 X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS1EPF00000093.eurprd05.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM7PEPF00000053.EURPRD83.prod.outlook.com
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: bda8b082-09b4-49e9-ae98-08df4964e5ef
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 488fe505-2f7b-4dae-dc96-08df4964ea4d
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|35042699022|7416014|36860700016|14060799003|23010399003|1800799024|82310400026|10067099003|11063799006|56012099006|261021123027099003|261021121427099003|261022105027099003|261009223027099003|261022115727099003|261102130727099003|261026140227099003|261026121527099003|261028144727099003|261102123227099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: cWFh2N3ALetRZTSk+QyE7sUXGPWfceza8jTOKt5Z1EkiZLsZL7DfCLosQwTh+4Dc3RTFIMZxcsTJq/MsKDp84MvdlfNPxSYHYUkHilHO4UWUrG3r5erwj1Z9SkAP0mYWQe8jvoTGSdFhCufGdSHTLZtnY8xRw/RBpeHHGD5R6JHccBwDSnKjvjqsqzChLE+0hp+gjEx2b6jEgqOLzjYsgzi2o3MxgbMPs7nV0VXyI6LhhJMQji/vDXsyN00H1t9pHUTG52DaQR/U+ziewHlbr+KLAgynfn1WEyXnJ7wlKP7uXOobdsg88AW0RmMNK86XhE1b5G5fyUK3MsDk/QVlsxLklvL5x7YbawHnjLISTuzj7IEDYtF4wOBTobfVd6OlvPNwVo4cCQJi+xA8g1BbCXVQOdHVH97QEzz0bKOHnBDSvH757tul+BoBFYYWNELAdpwll5QbOFNkPgYal0qkJUOzZ4lu1Mi+D1BSyK52fO0aEgKnOTsCuRL/5CshPjnJe6rXaYZtYRlEBAlt7Y7panvi6aYOREiWx3Bt0Z3QTnJKhtdn8dFy6sUJdxwkL1g2yWPXlcBmCgrSusq+jfB9xck/SVKgDxXvNpo8gXYvFXFf8aqrwxJSk99Fa0LxeLUHx6tAouGUC49stLEEAqChqvyuLxbWzuCM3uLXM3sJ9b0=
+ ARA:13230040|23010399003|36860700016|14060799003|35042699022|82310400026|1800799024|7416014|376014|261026121527099003|261026135527099003|261026130827099003|261026140227099003|261022075727099003|261022113327099003|261022105027099003|261022115727099003|261028144727099003|261021121427099003|261021135927099003|261021133027099003|261021130227099003|261021123027099003|261102123227099003|11063799006|56012099006|10067099003|261009223027099003|18002099003|22082099003|6133799003|13003099007|3023799007;
+X-Microsoft-Antispam-Message-Info: XcqUBw6SOhH+fCEKOgXvPdPqCkHdZMoQxv83CX+L0FG4NYWsoRTNh2LPA5sYv9P9x61kT9cqo4czwVCFnrUl1njVpk4HTN5gSnKhbZyrJpC7e72O/bkxR1uaA0raq1axUDqGt0kKR+CuePeKEbWl7H7UeVJBK1weNLFO2lQ5fz9FL5els41aulmxwcdQ2oqxFfZ0igCQBGyMi2XJs6TZssxpN1RXwXleE9PojTwaFx1linW46J7ry1zwnZ26OOkcAyZvg5atbnDWbIfubl7CPwIwrx2DG01TdcvGQe5L7rmuDEfc/qr6dk3jmGx+XOZiJ7iTZR3g1/MMkT2c2c0KMitntx6IAQ8rwBgGIbjRDUMjVoR2ZBeLExD/eri4Fzl2Z5sfN8MHGkQEdUDkLU6enWyRnLssp7WqWfBUMPckklCWhIILpklX7Rkq7vBEdqeZxd0WCrsI+g4tcnXbIH+1sxRrebJlcOIOm30pG5SzoveWYx1WeOFwtynerxeQEOv1LqZ0Pmc61f2tB/EqeHb9hnJJ95KOnY1IfunndNevh9PfXcpEuA90BFeiAX6gWhIdrfxWqhY1ERNMNO59cM1idGPrsN0G85iJiTt1Z+C4m/Dm8Iq76GtgQYRxBiw/d8O+CZrUDuORp5J+aDsrq7TXGMSKsV/HgX6UxhhWDTMz3AI=
 X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(35042699022)(7416014)(36860700016)(14060799003)(23010399003)(1800799024)(82310400026)(10067099003)(11063799006)(56012099006)(261021123027099003)(261021121427099003)(261022105027099003)(261009223027099003)(261022115727099003)(261102130727099003)(261026140227099003)(261026121527099003)(261028144727099003)(261102123227099003)(22082099003)(18002099003);
+ SFS:(13230040)(23010399003)(36860700016)(14060799003)(35042699022)(82310400026)(1800799024)(7416014)(376014)(261026121527099003)(261026135527099003)(261026130827099003)(261026140227099003)(261022075727099003)(261022113327099003)(261022105027099003)(261022115727099003)(261028144727099003)(261021121427099003)(261021135927099003)(261021133027099003)(261021130227099003)(261021123027099003)(261102123227099003)(11063799006)(56012099006)(10067099003)(261009223027099003)(18002099003)(22082099003)(6133799003)(13003099007)(3023799007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: oxko/DvSbjUSThjiJ1LslQyv0WhCMdtgUoAKNRW2w4fH5295BMA2fH+ZDKuUVqApWRFj7JQrJ7thUEkaY7NBOnNUuXs5HNdCDGGVlF1fW5/PnTdAjMWsBtfUpN0sMfUoMfprWXGnH68Fp0Z71fPqFT3/6y9srDExkbTy7AjajnjaFeGGA3Wh4RIt6NCX1bs64LJIbnVrL99CXRncXnCz4adajCXgJQXXh9Ov63LxLLdoHu3zfiKWg0IQbZhL8wgXVgxTpOMHCRpGWj6pBRyllnaGbloa+cgn1p/PNNyOusujsZ9AvKvgBHelZAZKwjVtkoI1r5FeOfmjznjkKierhiZi8HX7SYkviKdVCdJo5eGj5XV+Gq0PJD+Q9rFRK6HG3sGcdb9myPgeGNoT3g2fFDtHiJhJzkTeWhHCBFoGsS72FeXjuo8z94duAD2paO5W
+X-MS-Exchange-AntiSpam-MessageData-0: UBt6K5XoOyR/xjFc0eQ+iZcbeiiuUrj1D2cc5Odc7q8Kf96yu/OQCi7Owx0Kohm4PvZNJmwnfz+JJIOHBb7XYmBQaedyN8BW7hS5KFRIufvD01HZgCBONgoxBNuy6gIOF1anN1b9GZ+Fy5n2CM+owwOFzFM1T0hSHFvUzRk1oxWA+7ARUipGEXmXZWXHxE5LIni02TIAT3QU8U0WO4p9Dz8q+hfFa3AJgWpThbjnLNh46wy80PYMjkB2E0s2IlViV/ImM/njn5WIK7h0rdli/zXachdon1gPKYst7MmMHp64Qga7aop3o27BzEyX5F9NvTyW5KC4hLYWFstRU6YqnbNpc0+5dJR0RcHCJtFaVWi1QwaMS4BPfyqWMhrE063RVY6nPXxfeAjxe8PSpETBdt2TaL8vNdxeuwb+SQ2K82V2gTC38cNKg/f1Dmcuu2Wk
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2026 13:23:34.5826 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 602d8dbb-5ad7-46d7-51fd-08df4964f9d2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2026 13:23:44.6212 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8601f87b-7678-48db-c2fd-08df4964ffce
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
  Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000093.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM7PEPF00000053.EURPRD83.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB11242
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6303
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -227,60 +228,176 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> Make the existing wol command available with lwIP. It waits for an
-> Ethernet magic packet or an unfragmented IPv4 UDP magic packet on port
-> 0, 7 or 9, including when the interface has no configured IP address.
+> Enable IPv6 alongside IPv4 in the lwIP network stack. Configure link-local
+> or static addresses on the selected Ethernet interface, perform duplicate
+> address detection, and learn prefixes and routes through router discovery
+> and SLAAC. Static addresses support explicit prefix lengths. DHCPv6
+> supplies addresses, DNS and TFTP or HTTP(S) boot URLs, and renews or
+> rebinds leases while networking is active.
 >
-> Share magic-packet validation and Ethernet password export with the
-> legacy stack. The lwIP listener uses the shared network runtime and
-> leaves other clients active when the wait completes or is cancelled.
+> Extend ping, TFTP clients and server, HTTP/HTTPS, NFS, SNTP and netconsole
+> to IPv6. Resolve hostnames in the active network context, including AAAA
+> lookups over IPv6 and DNS servers advertised by routers. Preserve the
+> original hostname for HTTP requests and TLS certificate verification.
+>
+> Clients share the network runtime with IPv4 and persistent users. Transfers
+> wait for a usable source address and route; lwIP resolves neighbors as
+> packets are sent. Teardown releases learned addresses, routes and DNS
+> state. Finite learned lifetimes include gaps in network polling. DHCPv6
+> retains lease age across commands and rejects expired or withdrawn
+> addresses. IPv6 NFS discovers UDP services through RPCBIND.
+>
+> Preparatory changes make address users dual-stack-safe, keep sandbox raw
+> traffic on the selected interface, map CA certificate buffers, preserve
+> the scheme and authority of wget URLs, and handle TFTP headers split
+> across receive buffers after IPv6 reassembly. The series also propagates
+> IPv6 port-unreachable errors to active TFTP transfers and adds sandbox
+> protocol tests.
+>
+> Based on U-Boot main at 8ea02c99391d.
 >
 > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> ---
-> James Hilliard (3):
->       net: wol: share magic-packet validation between network stacks
->       net: lwip: support the wol command
->       test: net: exercise lwIP wake-on-LAN reception
 >
->  cmd/Kconfig                |  11 +-
->  cmd/wol.c                  |  20 +--
->  {net => include/net}/wol.h |  27 ++--
->  net/Makefile               |   1 +
->  net/lwip/Makefile          |   1 +
->  net/lwip/net-lwip.c        |   4 +
->  net/lwip/wol.c             | 129 +++++++++++++++++++
->  net/net.c                  |   2 +-
->  net/wol-common.c           |  46 +++++++
->  net/wol.c                  |  51 ++------
->  test/dm/Makefile           |   4 +
->  test/dm/lwip_wol.c         | 301 +++++++++++++++++++++++++++++++++++++++++++++
->  test/dm/wol.c              |  91 ++++++++++++++
->  13 files changed, 618 insertions(+), 70 deletions(-)
 > ---
-> base-commit: 1ed1749575f28b406c241218eb6a200574574a25
-> change-id: 20260928-submit-lwip-wol-v1-2deb541b7456
+> James Hilliard (19):
+>       net: lwip: handle TFTP headers spanning receive buffers
+>       net: sandbox: bind raw packets to the selected interface
+>       cmd: wget: map CA certificate buffers before copying
+>       net: lwip: recognize wget URL schemes only at the beginning
+>       net: lwip: prepare address users for dual-stack builds
+>       net: lwip: configure IPv6 on the shared network interface
+>       net: lwip: add the ping6 command
+>       net: lwip: support IPv6 TFTP clients
+>       net: lwip: resolve hostnames on IPv6 networks
+>       net: lwip: support IPv6 TFTP listeners and server names
+>       net: lwip: report IPv6 TFTP port-unreachable errors
+>       net: lwip: support IPv6 NFS and SNTP servers
+>       net: lwip: support IPv6 HTTP and HTTPS transfers
+>       net: lwip: support IPv6 netconsole peers
+>       net: lwip: acquire and maintain DHCPv6 boot configuration
+>       net: lwip: load DHCPv6 HTTP and HTTPS boot URLs
+>       test: net: exercise lwIP IPv6 addressing and DNS
+>       test: net: exercise lwIP IPv6 application transfers
+>       test: net: exercise lwIP DHCPv6 lease and boot lifecycles
+>
+>  arch/sandbox/cpu/eth-raw-os.c                     |   12 +-
+>  cmd/Kconfig                                       |   25 +-
+>  cmd/lwip/Makefile                                 |    4 +-
+>  cmd/lwip/dns.c                                    |    4 +-
+>  cmd/lwip/nfs.c                                    |    5 +-
+>  cmd/lwip/ping.c                                   |  127 +-
+>  cmd/lwip/sntp.c                                   |   38 +-
+>  cmd/lwip/tftp.c                                   |    8 +-
+>  cmd/lwip/tftpput.c                                |    8 +-
+>  cmd/lwip/tftpsrv.c                                |    4 +-
+>  cmd/lwip/wget.c                                   |   17 +-
+>  drivers/net/netconsole-lwip.c                     |   86 +-
+>  drivers/net/netconsole.c                          |   18 +-
+>  drivers/net/netconsole.h                          |    8 +
+>  include/net-lwip.h                                |   28 +-
+>  lib/lwip/lwip/src/apps/http/http_client.c         |   27 +-
+>  lib/lwip/lwip/src/apps/tftp/tftp.c                |   12 +-
+>  lib/lwip/lwip/src/core/dns.c                      |   28 +-
+>  lib/lwip/lwip/src/core/ipv6/icmp6.c               |    9 +
+>  lib/lwip/lwip/src/core/ipv6/ip6.c                 |   14 +-
+>  lib/lwip/lwip/src/core/ipv6/nd6.c                 |  339 ++-
+>  lib/lwip/lwip/src/include/lwip/apps/http_client.h |    3 +
+>  lib/lwip/lwip/src/include/lwip/ip6_addr.h         |    2 +-
+>  lib/lwip/lwip/src/include/lwip/nd6.h              |    4 +
+>  lib/lwip/u-boot/lwip-hooks.h                      |   41 +
+>  lib/lwip/u-boot/lwipopts.h                        |   12 +-
+>  net/Kconfig                                       |    4 +-
+>  net/lwip/Makefile                                 |    1 +
+>  net/lwip/dhcp6.c                                  |  999 +++++++
+>  net/lwip/dns.c                                    |  245 +-
+>  net/lwip/icmp_unreach.c                           |   33 +
+>  net/lwip/net-lwip.c                               |  487 +++-
+>  net/lwip/nfs.c                                    |   48 +-
+>  net/lwip/tftp.c                                   |  167 +-
+>  net/lwip/wget.c                                   |   84 +-
+>  net/nfs-common.c                                  |   73 +-
+>  net/nfs-common.h                                  |    2 +
+>  test/dm/Makefile                                  |    3 +
+>  test/dm/eth.c                                     |    4 +-
+>  test/dm/lwip.c                                    |   49 +
+>  test/dm/lwip_dhcp_policy.c                        |    2 +-
+>  test/dm/lwip_ipv6.c                               | 3098 +++++++++++++++++++++
+>  42 files changed, 5690 insertions(+), 492 deletions(-)
+> ---
+> base-commit: 8ea02c99391d2d922810065206721ead2863f075
+> change-id: 20261109-submit-lwip-ipv6-v1-22dd73c3b448
 >
 > Best regards,
 > --  
 > James Hilliard <james.hilliard1@gmail.com>
 
-Applied to u-boot-net branch for-next [1], thanks!
+Applied to u-boot-net branch for-next [1] with local modifications, thanks!
 
 [1] https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/commits/for-next
 
-[1/3] net: wol: share magic-packet validation between network stacks
-      commit: 35e6dac3cc546fb27aa8d29c6454a815636e49ae
+[1/19] net: lwip: handle TFTP headers spanning receive buffers
+      commit: 240e055c56cf43951322fd9f79917a8973ff5f4c
 
-[2/3] net: lwip: support the wol command
-      commit: b9189ba6ea9cb320b4c60bf8f16b7a3e059c9a26
+[2/19] net: sandbox: bind raw packets to the selected interface
+      commit: 09de86137571800a9c3d3ea80c69354430e69b2d
 
-[3/3] test: net: exercise lwIP wake-on-LAN reception
-      commit: ae80d30f747f03c04210428052371fbfacafc8ce
+[3/19] cmd: wget: map CA certificate buffers before copying
+      commit: aab55c414ca817eb99ddc2a591dc76cd90bfbe84
+
+[4/19] net: lwip: recognize wget URL schemes only at the beginning
+      commit: 22f984624a9fa12fe77493032af40012d5a5946d
+
+[5/19] net: lwip: prepare address users for dual-stack builds
+      commit: f786c3ff090fdd73739c7dbab1c6e907d9fe66a0
+
+[6/19] net: lwip: configure IPv6 on the shared network interface
+      commit: 490bff404029f0f564339a0180c8a8b4d7cfec3f
+      Note: Applied with local modifications.
+
+[7/19] net: lwip: add the ping6 command
+      commit: f012fcc19d36d0bfed92fb9e956eb1e7c05b1a05
+
+[8/19] net: lwip: support IPv6 TFTP clients
+      commit: 1b3ca749faabbc39584ff1e60f230ac82372f69e
+
+[9/19] net: lwip: resolve hostnames on IPv6 networks
+      commit: e86ac5b465b41af5c90850a9297fee6fa52e64b6
+
+[10/19] net: lwip: support IPv6 TFTP listeners and server names
+      commit: f9f7ede5bf75c1f1637c0fe4f45fec7e9e8fceb1
+
+[11/19] net: lwip: report IPv6 TFTP port-unreachable errors
+      commit: 2d75b12aa39f1b58e0c899bc8b22792897e8304c
+
+[12/19] net: lwip: support IPv6 NFS and SNTP servers
+      commit: 770ef78185500d4a22eee9f34ecccbe5bb7237a0
+
+[13/19] net: lwip: support IPv6 HTTP and HTTPS transfers
+      commit: c681d28e0c2d450b8e0d536fdcfd9a1d84ff314b
+      Note: Applied with local modifications.
+
+[14/19] net: lwip: support IPv6 netconsole peers
+      commit: d44ad525d6092470af0dfb90f59032639fc0703d
+
+[15/19] net: lwip: acquire and maintain DHCPv6 boot configuration
+      commit: c55528ddd21afe66e272028fd62b9e7774dc90aa
+
+[16/19] net: lwip: load DHCPv6 HTTP and HTTPS boot URLs
+      commit: 3ad96df729add78bba959d1bbf5d2545e008b982
+
+[17/19] test: net: exercise lwIP IPv6 addressing and DNS
+      commit: 6310b6b1078da426f0790c14afd018be9410fa13
+
+[18/19] test: net: exercise lwIP IPv6 application transfers
+      commit: 133fc59726ade843ea7540594d5a3efee1f13887
+
+[19/19] test: net: exercise lwIP DHCPv6 lease and boot lifecycles
+      commit: 7fc6b6670d16f0893a1e450051fa6781bc5fa19b
 
 Best regards,
 -- 
