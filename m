@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB0A8606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 04:03:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7D1A606A32C
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 04:03:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=E5POsCXs;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G5gNmCGY
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NdjFIIe6;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IZlmueD6
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 829A74065C;
-	Mon, 23 Nov 2026 04:03:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 954244066C;
+	Mon, 23 Nov 2026 04:03:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cIjg4r7sgMJ1; Mon, 23 Nov 2026 04:03:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1B86A40650
+ id TYvTLTr5HgU4; Mon, 23 Nov 2026 04:03:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AE2774064E
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795406623;
-	b=Dyu8xVLuqoWaZy346HUqbvd9uDudYbkAYLR6il6iuqBDYiNguoEwwmJDquHxX6uvVm7p
-	 wFye8EmtqFAXXCjvwenVZWJw8iBuZK6SWTn/GSh9CtQ/zt6mu2O1rM7KNnBw8uQUKrn1J
-	 KI9iwPomzjuyfgbslN1XIg4La1+2Sg7jCoWMrhNSmKmVn/1aWCQFR+g07kaWg3Ex6UcM+
-	 R47zHD/c7t/au5cAQ5DrEGbRSH1Y0AIh0/ghPcmynu0qLfSLEs4/9uusN5yhkt3JYHTcC
-	 9Fcjw9LK5vhz9ie4cfTIjPwjCbEndD2XrpDXB/W+Hzm/e+q5GfrjOizy59rrx8cd1nA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795406627;
+	b=SQ9nNtSqJ/euFyy40jPuKVczELfW97vY3ozWLrWK1/+QPSx4xRL1P8b1l9FzrHjkx/N+
+	 6D9XzttCkoUItPxFGMXhmyIQiiizezD1pLRg78CKosj6BGSAQhLdIRPz7SpaPUaEnPNBU
+	 CH3N6pFHtEMF2gIAnyDr9aTBSl2OGYb1gumVBV61vBs2JvjtfVW2504G2FcW26sUK81k9
+	 y5cEhkR7NFxHmIp8/LNN+91LoKSHXVZSo3vmdTmOZVX3qXUAm3UrFF+UMT3YQVtdJ4Ai5
+	 bXmgRXhfp5xYx3st+4OHDQ6AdoBDnU3J6YafvYgqWzY6nltOE7XUnJPVNX3+RtWo13w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795406623;
+	c=relaxed/relaxed; t=1795406627;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,86 +33,86 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Original-From:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=+0NmZVtrPprMz8To8hY3apum/cyYHW4BP9y0WfN7i/k=;
-	b=ZAMtDS7aNJHCMutxEON0qKm1mrGTpfZYsMX9mbajvZcRAMAEltoNn9/9jX33HnduTNU3
-	 2JXw2LmkNASHzfRDlPrFbeiKyXhftVPNE4CWUJLNF8gmHKyyUeCiwkGoejhO6Rmmpv4F6
-	 wKouzh7GVW/K8jZPIvK2gpq3YIdA2U3uih9sIklbkaygV75Ch8TxiKvj9eHy9YSUBIOI6
-	 +t5OIt7sp5ZVC+BpyzysH6HbyVAhBdLeNPyKEQKMkUIbqjZkHuZwrYiydgQgFC6sklnux
-	 HSUv6/smKJ49dGkNmyXd8u8tZ4kzCJHuFCykSajGbHUAU8HVKOgaQSoaZObLUTXVCrw==
+	bh=fm0GoPo+DXqsfnyoB3UkqZXhEH3+j6hA5JdrTbyoChI=;
+	b=k2az+/NV2Q66p1FrqtVm5LKLlWB06mjpmtHsRgnD8HlSWReSSArvnGgDV4+za6aQbT7b
+	 SOnmlS5LWIdENz6Ze98ZhiiG+oE5oiCgJQ8ZdDblCdVfQdwvs7Xa2Hfq1J008NzKuK1Jh
+	 EdzhTZ6ihA9oQ2/MTNDSLPqEE3KyEBxgDewCSsGKamy6i945ZUdTYGIpCpbhSwWQcPWb0
+	 LnIjs6i5ch9fO7HcVw+CNR5CeaVQLr+Kn6h72OqpyeZOmpZk8A8pbKj3TLnX5aYpcxpBL
+	 ykgWjKrtU6lmTuiddxMzRxGvIuVWfm+iSIXdLcPO+WUtf522JPQLDz0yU2i12LkJQjw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795406623;
-	bh=+0NmZVtrPprMz8To8hY3apum/cyYHW4BP9y0WfN7i/k=;
+	d=lists.u-boot-project.org; s=default; t=1795406627;
+	bh=fm0GoPo+DXqsfnyoB3UkqZXhEH3+j6hA5JdrTbyoChI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=E5POsCXsFLbUHnCTGkrWPidyLJksumLMBZ88QUyNGRmuTQjSOJ0PVYaiDr/x6YQOo
-	 8n/BwBRyg+WVYyGuVt2350NbtYh2dxMPrFr3F0AeQ2KCfyQLag9/O8MWpqRBtAMOav
-	 CE/RYFJUeZMlh73n66EafJdjfQaIWS8HlmgqHYlByKfJ5T5EnYY64Qy2ksuOryZl6o
-	 KuC1URh7sFCLzY6N1ZiVA65qjenDdr23Fokc4Se43wb0Yxiimd7ZTHvNJMCZXUvPid
-	 uGwX1rTfJg+sFrO3aZBfUFga5SPgDrRvu1eDET2zG+0vlCcL4p4a0mrpo/xQdd0Z90
-	 /wwRRsFAhXZPQ==
+	b=NdjFIIe6nnMEBdACCQ6TaHwqS9PTIBX3QfhgxieUuJUtwsn9OVGYng0LS5hy+Cskd
+	 SiQcOm+WLAsQcBPRgh2eH4wFBSFB/Niowbj+27iy38KmhsJcIPGYL7Rz7+oLNTFom3
+	 kRNQEaw9ZY1SuYHiF90xnmj/EXiZe6h9gEmm1Oe0mg0Y+Fj8/Dul0FQa1Tr/h4VNqb
+	 7tgo0pqPeUaDGqzTO6nOqTRu9+FcD7BxixfwvOqg0UouegsOBgJdu9VqXhfysUXAnn
+	 D3bd7vVoXWBiPs54owHNeggNV/8x78iBsUKAGf5Uz9kJi/hXbM/lG73C747V3uO12q
+	 2vxrZg7y14K7g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1B86A40650;
-	Mon, 23 Nov 2026 04:03:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AE2774064E;
+	Mon, 23 Nov 2026 04:03:47 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5759C392
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 04:03:40 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D8406DA6
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 04:03:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 35EAD606AE
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 04:03:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A9ABB6069D
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 04:03:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4m9lfciYxFeQ for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 04:03:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C12B76068D
+ id XPAF3THfgfE8 for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 04:03:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B855C60697
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
  envelope-from=devnull+iav.iav.lv@kernel.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=G5gNmCGY
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C12B76068D
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 04:03:38 +0000 (UTC)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=IZlmueD6
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B855C60697
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 04:03:42 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id F1D3644462;
- Mon, 23 Nov 2026 04:03:37 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 6E40D60D3B;
+ Mon, 23 Nov 2026 04:03:41 +0000 (UTC)
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 183571F000D1;
- Mon, 23 Nov 2026 04:03:23 +0000 (UTC)
+ by smtp.kernel.org (Postfix) with ESMTPS id 8370C1F000E0;
+ Mon, 23 Nov 2026 04:03:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1795406617;
- bh=+0NmZVtrPprMz8To8hY3apum/cyYHW4BP9y0WfN7i/k=;
+ s=k20260515; t=1795406620;
+ bh=fm0GoPo+DXqsfnyoB3UkqZXhEH3+j6hA5JdrTbyoChI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=G5gNmCGYxmnPsVzH5Omi7TjdUaENe+NS8KkVPqjoEt/uOosGM8i0vMmf7K+MZculr
- lM+aEV76TAx3C2ExK4iijplqE0/LdO97HN+pozAyrq+vuf/FOke0oAkAnJsRMmjlR8
- gour5d5W3vFD1zicastps8COZTZ+H5P0PO5DO3c0Ts2IAtMRqCbBlF14US2Mo2SMt/
- o/tOzKXaFW6uUhuP6TLhXu3idfmnCr/pn5dBW/3wz+jgN1Opl1UkljZoSocBT6i3OA
- OYB9VMAlqmZbERDdkRKHF9/d1jyXdM7v+9ta4EQ6nNSjQg9PzXgPvaoaOx5oOPkbYq
- 0p1nUXKZyeheQ==
+ b=IZlmueD6X2i/Lvn1O7+lhg+ijGH+dbAXVVI9AL0FSDTJqTAwqj1TGnxNoYJt8XXgg
+ Q22BRVRl4cYnDFYcUJUpfX41XlvEf9FFgrJUqDec7cYvDno7URN9lBKa79Iwh6Z7u0
+ gijc1XxqoP/OVyunn5ggNaGsjXZI34nNl6iuJ6eL6biSd7TLzS31PWqNiOFvHu0TVL
+ f30a/0rD+kg7JQw+UfsDSmuP3QQdj6BqQySmGhXOAqcoBd28PnZLt96gYmhZAgGqeg
+ kQWhknJypqd3GbY+neMKcSh16PCgaiKMlwZMFN2yQ6OAkFdYyFaeGPlN0adaJPKvIL
+ yX/7XuT98z/8w==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id 9E7DD4C32D;
+ by lkml.kernel.org (Postfix) with ESMTP id BC2AD4C331;
  Mon, 23 Nov 2026 04:03:22 +0000 (UTC)
 From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
-Date: Mon, 23 Nov 2026 04:03:19 +0000
-Subject: [PATCH v2 4/8] net: lwip: count the HTTP content length in 64 bits
+Date: Mon, 23 Nov 2026 04:03:20 +0000
+Subject: [PATCH v2 5/8] net: lwip: find Content-Length whatever its case
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261123-b4-wget-blk-r4-v2-4-073d800a5aaa@iav.lv>
+Message-Id: <20261123-b4-wget-blk-r4-v2-5-073d800a5aaa@iav.lv>
 References: <20261123-b4-wget-blk-r4-v2-0-073d800a5aaa@iav.lv>
 In-Reply-To: <20261123-b4-wget-blk-r4-v2-0-073d800a5aaa@iav.lv>
 To: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
@@ -121,13 +121,13 @@ Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Adriano Cordova <adrianox@gmail.com>, u-boot@lists.u-boot-project.org, 
  Igor Velkov <iav@iav.lv>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8918; i=iav@iav.lv;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3980; i=iav@iav.lv;
  h=from:subject:message-id;
- bh=5CTUJBOcYauqHQ1uWGo/mVkfDBDMCrBXuZBD782x8tQ=;
- b=owGbwMvMwCVmNH1q96v4SmbG02pJDNnMu9lqNwS8Oj6zctHiJVq5Kjk5Rx347mS+LnlY4sq4c
- P7GW2k7O0pZGMS4GGTFFFkmHNK4lbHk6l9/D/MHMHNYmUCGMHBxCsBE7jxm+MXkevpxvJHspev2
- uy//mLlht5aYqM7aS7N+NC+QruHjWM7CyHDqaP2jS+2H/gW67hOQ3FEfJ7PL6d2/O7FLI9cV7Jh
- wdT8fAA==
+ bh=Z3h3Kvm50eRr8NesbrJTlyqNQpuFDH8M8H2KGyD8ZYM=;
+ b=owGbwMvMwCVmNH1q96v4SmbG02pJDNnMu9l7i9p+G9Z5v3FsOHFUVvxYRP/5NV9OPra5/nh+z
+ 8TaFXWhHaUsDGJcDLJiiiwTDmncylhy9a+/h/kDmDmsTCBDGLg4BWAiqnsYGS6ueL50fe/T7prG
+ TD+W+CVHqz3Cui/ZMRwUOPX2YqUcgxojw7aNxRNFznmkuJ073PWk9ut187NH1BSX2a/ddup131n
+ nWVwA
 X-Developer-Key: i=iav@iav.lv; a=openpgp;
  fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
 X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
@@ -153,221 +153,94 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Igor Velkov <iav@iav.lv>
 
-The HTTP client reads Content-Length with atoi(), here (int)dectoul(),
-and keeps the length and the count of received bytes in u32_t. A length
-of 2 GiB or more reads as unknown, or, from 4 GiB on, as its low 32
-bits when those are below 2 GiB. With an unknown length a download that
-the server cuts short ends with HTTPC_RESULT_OK instead of
-HTTPC_RESULT_ERR_CONTENT_LEN, and from 4 GiB on the count of received
-bytes wraps. Disk images for boards easily exceed 2 GiB now.
+The HTTP client looks for the exact string "Content-Length: " in the
+reply. RFC 9110 (5.1) says "Field names are case-insensitive", and in
+the field-line rule of RFC 9112 (5) the whitespace after the colon is
+optional. A reply with "content-length: 3000000" or
+"CONTENT-LENGTH:3000000" reads as one without a length: wget does not
+check that the file fits, and a download that the server cuts short
+ends with HTTPC_RESULT_OK.
 
-Parse the length, of up to 15 digits, into a 64-bit number, keep both
-values in u64_t and pass them to the callbacks as u64_t;
-HTTPC_CONTENT_LEN_INVALID becomes the largest u64_t. The callbacks of
-wget and of the lwIP test change with the callback types.
-
-wget scales its hash marks to the length, so an unknown length, now
-the largest u64_t, would leave the bar empty until the end. With the
-length unknown, wget prints a mark every 10 received blocks and a new
-line every 65 marks, as the legacy wget does per packet.
+Find the header line by its name without regard to case, and skip
+spaces and tabs before the value. The search runs from the start of a
+line and stops at the end of the headers: the old one also matched the
+string inside another header name, such as X-Foo-Content-Length, or in
+the body.
 
 Signed-off-by: Igor Velkov <iav@iav.lv>
 ---
- lib/lwip/lwip/src/apps/http/http_client.c         | 24 +++++++++++++----------
- lib/lwip/lwip/src/include/lwip/apps/http_client.h |  6 +++---
- net/lwip/wget.c                                   | 22 +++++++++++++++++----
- test/dm/lwip.c                                    |  2 +-
- 4 files changed, 36 insertions(+), 18 deletions(-)
+ lib/lwip/lwip/src/apps/http/http_client.c | 42 ++++++++++++++++++++++++++++---
+ 1 file changed, 38 insertions(+), 4 deletions(-)
 
 diff --git a/lib/lwip/lwip/src/apps/http/http_client.c b/lib/lwip/lwip/src/apps/http/http_client.c
-index 06533c55c22..29afa8bf655 100644
+index 29afa8bf655..7914b7cc5aa 100644
 --- a/lib/lwip/lwip/src/apps/http/http_client.c
 +++ b/lib/lwip/lwip/src/apps/http/http_client.c
-@@ -141,8 +141,8 @@ typedef struct _httpc_state
-   altcp_recv_fn recv_fn;
-   const httpc_connection_t *conn_settings;
-   void* callback_arg;
--  u32_t rx_content_len;
--  u32_t hdr_content_len;
-+  u64_t rx_content_len;
-+  u64_t hdr_content_len;
-   httpc_parse_state_t parse_state;
- #if LWIP_DNS
-   u8_t dns_pending;
-@@ -296,7 +296,7 @@ http_parse_response_status(struct pbuf *p, u16_t *http_version, u16_t *http_stat
+@@ -294,6 +294,40 @@ http_parse_response_status(struct pbuf *p, u16_t *http_version, u16_t *http_stat
+   return ERR_VAL;
+ }
  
++/** Find a header line by its name and return the offset of its value, or
++ * 0xFFFF. A field name is case-insensitive (RFC 9110, 5.1) and whitespace
++ * before the value is optional (RFC 9112, 5). 'name' is in lower case, 'end'
++ * is the offset of the end of the headers. */
++static u16_t
++http_find_header(struct pbuf *p, const char *name, u16_t end)
++{
++  u16_t name_len = (u16_t)strlen(name);
++  /* the first line is the status line */
++  u16_t pos = pbuf_memfind(p, "\r\n", 2, 0);
++
++  while (pos < end) {
++    u16_t i;
++    char c;
++
++    pos = (u16_t)(pos + 2);
++    for (i = 0; i < name_len; i++) {
++      c = (char)pbuf_get_at(p, (u16_t)(pos + i));
++      if (lwip_tolower(c) != name[i]) {
++        break;
++      }
++    }
++    if ((i == name_len) && (pbuf_get_at(p, (u16_t)(pos + i)) == ':')) {
++      pos = (u16_t)(pos + name_len + 1);
++      while ((pbuf_get_at(p, pos) == ' ') || (pbuf_get_at(p, pos) == '\t')) {
++        pos++;
++      }
++      return pos;
++    }
++    pos = pbuf_memfind(p, "\r\n", 2, pos);
++  }
++  return 0xFFFF;
++}
++
  /** Wait for all headers to be received, return its length and content-length (if available) */
  static err_t
--http_wait_headers(struct pbuf *p, u32_t *content_length, u16_t *total_header_len)
-+http_wait_headers(struct pbuf *p, u64_t *content_length, u16_t *total_header_len)
- {
+ http_wait_headers(struct pbuf *p, u64_t *content_length, u16_t *total_header_len)
+@@ -301,19 +335,19 @@ http_wait_headers(struct pbuf *p, u64_t *content_length, u16_t *total_header_len
    u16_t end1 = pbuf_memfind(p, "\r\n\r\n", 4, 0);
    if (end1 < (0xFFFF - 2)) {
-@@ -314,11 +314,15 @@ http_wait_headers(struct pbuf *p, u32_t *content_length, u16_t *total_header_len
-         u16_t content_len_num_len = (u16_t)(content_len_line_end - content_len_hdr - 16);
+     /* all headers received */
+-    /* check if we have a content length (@todo: case insensitive?) */
++    /* check if we have a content length */
+     u16_t content_len_hdr;
+     *content_length = HTTPC_CONTENT_LEN_INVALID;
+     *total_header_len = end1 + 4;
+ 
+-    content_len_hdr = pbuf_memfind(p, "Content-Length: ", 16, 0);
++    content_len_hdr = http_find_header(p, "content-length", end1);
+     if (content_len_hdr != 0xFFFF) {
+       u16_t content_len_line_end = pbuf_memfind(p, "\r\n", 2, content_len_hdr);
+       if (content_len_line_end != 0xFFFF) {
+         char content_len_num[16];
+-        u16_t content_len_num_len = (u16_t)(content_len_line_end - content_len_hdr - 16);
++        u16_t content_len_num_len = (u16_t)(content_len_line_end - content_len_hdr);
          if (content_len_num_len < sizeof(content_len_num)) {
-           if (pbuf_copy_partial(p, content_len_num, content_len_num_len, content_len_hdr + 16) == content_len_num_len) {
--            int len;
--            content_len_num[content_len_num_len] = 0;
--            len = atoi(content_len_num);
--            if ((len >= 0) && ((u32_t)len < HTTPC_CONTENT_LEN_INVALID)) {
--              *content_length = (u32_t)len;
-+            u64_t len = 0;
-+            u16_t i;
-+            /* at most 15 digits fit in content_len_num: no overflow */
-+            for (i = 0; (i < content_len_num_len) &&
-+                 (content_len_num[i] >= '0') && (content_len_num[i] <= '9'); i++) {
-+              len = len * 10 + (u64_t)(content_len_num[i] - '0');
-+            }
-+            if (i > 0) {
-+              *content_length = len;
-             }
-           }
-         }
-@@ -777,7 +781,7 @@ typedef struct _httpc_filestate
-   void *callback_arg;
- } httpc_filestate_t;
- 
--static void httpc_fs_result(void *arg, httpc_result_t httpc_result, u32_t rx_content_len,
-+static void httpc_fs_result(void *arg, httpc_result_t httpc_result, u64_t rx_content_len,
-   u32_t srv_res, err_t err);
- 
- /** Initialize http client state for download to file system */
-@@ -837,7 +841,7 @@ httpc_fs_free(httpc_filestate_t *filestate)
- 
- /** Connection closed (success or error) */
- static void
--httpc_fs_result(void *arg, httpc_result_t httpc_result, u32_t rx_content_len,
-+httpc_fs_result(void *arg, httpc_result_t httpc_result, u64_t rx_content_len,
-                 u32_t srv_res, err_t err)
- {
-   httpc_filestate_t *filestate = (httpc_filestate_t *)arg;
-diff --git a/lib/lwip/lwip/src/include/lwip/apps/http_client.h b/lib/lwip/lwip/src/include/lwip/apps/http_client.h
-index 322e51cc852..79bb090d9d3 100644
---- a/lib/lwip/lwip/src/include/lwip/apps/http_client.h
-+++ b/lib/lwip/lwip/src/include/lwip/apps/http_client.h
-@@ -72,7 +72,7 @@ extern "C" {
-  * Content length that the headers callback gets when the client read none
-  * from the reply
-  */
--#define HTTPC_CONTENT_LEN_INVALID 0xFFFFFFFF
-+#define HTTPC_CONTENT_LEN_INVALID 0xFFFFFFFFFFFFFFFFULL
- 
- /**
-  * @ingroup httpc
-@@ -114,7 +114,7 @@ typedef struct _httpc_state httpc_state_t;
-  * @param err an error returned by internal lwip functions, can help to specify
-  *            the source of the error but must not necessarily be != ERR_OK
-  */
--typedef void (*httpc_result_fn)(void *arg, httpc_result_t httpc_result, u32_t rx_content_len, u32_t srv_res, err_t err);
-+typedef void (*httpc_result_fn)(void *arg, httpc_result_t httpc_result, u64_t rx_content_len, u32_t srv_res, err_t err);
- 
- /**
-  * @ingroup httpc
-@@ -128,7 +128,7 @@ typedef void (*httpc_result_fn)(void *arg, httpc_result_t httpc_result, u32_t rx
-  *                    (HTTPC_CONTENT_LEN_INVALID if not received)
-  * @return if != ERR_OK is returned, the connection is aborted
-  */
--typedef err_t (*httpc_headers_done_fn)(httpc_state_t *connection, void *arg, struct pbuf *hdr, u16_t hdr_len, u32_t content_len);
-+typedef err_t (*httpc_headers_done_fn)(httpc_state_t *connection, void *arg, struct pbuf *hdr, u16_t hdr_len, u64_t content_len);
- 
- typedef struct _httpc_connection {
-   ip_addr_t proxy_addr;
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index 54c8bc612fd..cb31dfd0190 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -21,6 +21,7 @@
- #define SERVER_NAME_SIZE 254
- #define HTTP_PORT_DEFAULT 80
- #define HTTPS_PORT_DEFAULT 443
-+#define HASHES_PER_LINE 65
- 
- enum done_state {
- 	NOT_DONE = 0,
-@@ -39,6 +40,7 @@ struct wget_ctx {
- 	ulong start_time;
- 	u64 content_len;
- 	ulong hash_count;
-+	ulong blocks;
- 	enum done_state done;
- 	bool aborted;
- };
-@@ -183,6 +185,16 @@ static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
- 	if (wget_info->silent)
- 		return 0;
- 
-+	if (ctx->content_len == HTTPC_CONTENT_LEN_INVALID) {
-+		/* no length to scale to: a mark every 10 blocks */
-+		if (++ctx->blocks % 10)
-+			return 0;
-+		putc('#');
-+		if (++ctx->hash_count % HASHES_PER_LINE == 0)
-+			putc('\n');
-+		return 0;
-+	}
-+
- 	pos = min(ctx->size, ctx->content_len);
- 
- 	while (ctx->content_len &&
-@@ -222,7 +234,7 @@ out:
- }
- 
- static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
--			    u32_t rx_content_len, u32_t srv_res, err_t err)
-+			    u64_t rx_content_len, u32_t srv_res, err_t err)
- {
- 	struct wget_ctx *ctx = arg;
- 	ulong elapsed;
-@@ -250,7 +262,8 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 	}
- 
- 	/* Print hash marks for the last packet received */
--	if (!wget_info->silent) {
-+	if (!wget_info->silent &&
-+	    ctx->content_len != HTTPC_CONTENT_LEN_INVALID) {
- 		while (ctx->hash_count < 49) {
- 			putc('#');
- 			ctx->hash_count++;
-@@ -261,7 +274,7 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 	if (!elapsed)
- 		elapsed = 1;
- 	if (!wget_info->silent) {
--		printf("\n%u bytes transferred in %lu ms (", rx_content_len,
-+		printf("\n%llu bytes transferred in %lu ms (", rx_content_len,
- 		       elapsed);
- 		print_size(div_u64(rx_content_len, elapsed) * 1000, "/s)\n");
- 		printf("Bytes transferred = %llu (%llx hex)\n", ctx->size,
-@@ -282,7 +295,7 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- }
- 
- static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct pbuf *hdr,
--				   u16_t hdr_len, u32_t content_len)
-+				   u16_t hdr_len, u64_t content_len)
- {
- 	struct wget_ctx *ctx = arg;
- 
-@@ -424,6 +437,7 @@ int wget_do_request(ulong dst_addr, char *uri)
- 	ctx.start_time = 0;
- 	ctx.content_len = 0;
- 	ctx.hash_count = 0;
-+	ctx.blocks = 0;
- 	ctx.aborted = false;
- 
- 	ret = parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https);
-diff --git a/test/dm/lwip.c b/test/dm/lwip.c
-index 4dd4a562434..acece5a65af 100644
---- a/test/dm/lwip.c
-+++ b/test/dm/lwip.c
-@@ -60,7 +60,7 @@ struct lwip_test_http_ctx {
- };
- 
- static void lwip_test_http_result(void *arg, httpc_result_t result,
--				  u32_t rx_content_len, u32_t server_response,
-+				  u64_t rx_content_len, u32_t server_response,
- 				  err_t err)
- {
- 	struct lwip_test_http_ctx *ctx = arg;
+-          if (pbuf_copy_partial(p, content_len_num, content_len_num_len, content_len_hdr + 16) == content_len_num_len) {
++          if (pbuf_copy_partial(p, content_len_num, content_len_num_len, content_len_hdr) == content_len_num_len) {
+             u64_t len = 0;
+             u16_t i;
+             /* at most 15 digits fit in content_len_num: no overflow */
 
 -- 
 2.43.0
