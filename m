@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75EDF606A330
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 22:21:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3763E606A330
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 22:29:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=dGa0KSIQ;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=m8NDJTRJ
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pE1k/Skh;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=U3SNXx9r
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A666D80C71;
-	Mon, 23 Nov 2026 22:21:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0982F4048D;
+	Mon, 23 Nov 2026 22:29:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Zaa6hhNwUu_M; Mon, 23 Nov 2026 22:21:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B85EA80BDB
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795472514;
-	b=sxbaMHthjP82Gq7p1HDFzeeD26SJDRTCi3dPp9YknNTKXwIPtijNyWLgXfjXYC/IO9Sl
-	 N/RP7kM0HXeo7JbyxaNKZ9W1W5Mr3kPMFgpIjkx/rNt1NWr9qVn+xDj5PFJvCjNzl1Myy
-	 64zq2t/pmwh3SPopeyOMDJLK9eWbkOZbqRixP/PPuYOKmNxDAkCKrkvcGsy5lDS/ErGt6
-	 1x7+vUeqnXvGFOtw6EnqzKHK37aZ+ev8AHqFAbJ5Hf4cf2ncBiDKkfCuiWadKVS3E1WNL
-	 KyGsegSBA/EsDaSW5Eku5wzojQa/KsIYfPupKYkShH/6a0byAdfSOtJ6mPn/yHxGlzg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aq4YIIujUqoa; Mon, 23 Nov 2026 22:29:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 29ADB404DE
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795472993;
+	b=LVjwC/Hy7KzeHsCausWke6Pw0GRty/X8iIGLWtVWPPN8KLWsVrCFClasQqXmYSWuHjaJ
+	 ib3uidF5Ia4T5gniBmkpzg6YtdSQ589vrWrizdKGJSafJaillyewfEiKRSmqaokYFKmCy
+	 NKDiOodF2+Id4bR7zmpcwNa74dMR2VlOW+DnpF14/hQzm17lNidB7hpBUeAhzFaJzDNaZ
+	 183s+NXCnADFweny9ZMeNkwMuJB3hhYgd8wssO37AOS9VyCDxFucwDu/x/S+aFeCJvMxP
+	 JWZANEoq5zJpmW/Kq3u1yofzL/t/uienre6meZoA9Mahv1uUSnkj+kPq0o/Y5Xg2HiA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795472514;
+	c=relaxed/relaxed; t=1795472993;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,121 +33,122 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=qyuHeV+FP9GupXn26bjIL1viOX5asMNeubDQ2Q0XK54=;
-	b=cI3o75rXj7wzlo1hRqdDtScu6PxSGGnZVziqwhxLhH4KmfoMhvmCl8ArSgNjbbOXhqcG
-	 qvkqo2RWWs0xHHdffg0wMAA0NYSAYsNii9bXfXny1FjOUOQAxI4oAIsMQBFWfN+uASBew
-	 iRtftaDOPDpLxbmEW4cmI3yZ1b4JmrRyvFmJ/LjmXEuWTRuxEeX1I3AezB1fWxBi/p8QN
-	 Mcg2s9vQVsiarE6RYuS469QUCIe2NUFXxYCKoNxBAkZBynmaft37vAyzBmmV7ig5mr+8V
-	 +dbiMXzTkZPU7aiWBYhcWMpb7xnNlxOhkk6Nu5U8y0mMQGAvLkldxjESb4ft59Ww1Cg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=cNmZoClD7menIO+IIKmgXvdnX3akSVC2Tf9JcfLm6lk=;
+	b=TisaguRuVPJ25ipsvRRoKvdXFAPgIjedYJ0XJtVlslenPm5KtYdmLmQ8iD7LuFlnF7ie
+	 xWiq+uW3cxZnwoIDxY+mW8VAlXNY3P49hECofTEVbkAmxQgWWqq9xcjKpuWpDKhDHaBre
+	 EFDJg+Ar6qjkN2eDusw0kyDHGyq/p6EfM1qyFyONrNresKpD1rnQX/kH4trPFX8hTimqh
+	 a6b6KD/QeAQArdgmdHLHTzE97kBFfWdWDQIBg/jFQ4D3Monn+uxjQhSIMlGJG37A00n1N
+	 Du46MsNg9e9DJn6Cb33AjOSjsifsYZH1MQP5p6x9JWlYQuheinC0hMlLjQ6p1oQwm3A==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795472514;
-	bh=qyuHeV+FP9GupXn26bjIL1viOX5asMNeubDQ2Q0XK54=;
+	d=lists.u-boot-project.org; s=default; t=1795472993;
+	bh=cNmZoClD7menIO+IIKmgXvdnX3akSVC2Tf9JcfLm6lk=;
 	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=dGa0KSIQ/PdEkfrEFSH7UXRJ53C6GHF3Mf9cLAK8hLJmb99DMqRNEFfHYY1qK1TBX
-	 tGZalSyVP94GQFVMenPzzfxTgxsZ85iCszD7kMA4nUyDpi+gA1pS4mtM5x8cvMVD5A
-	 moHYUtzdMfYF6J3myr/AnkbfeRYpxULz6CpVWPRWX2njtIuiZGiUxcvhwOOxXiG+aS
-	 FLitU3eQYXMx8T6XfJZ5EIwCwbMWhfy3qUTI2O5j9zPGmFQnTiEi2jyK1mD1fIfjl+
-	 e/58Ls4Fg9WCRNtWg6jwLWCJJla3MsEAEh2p/MDwH7yegbfoXob4k4mslyfEUSC+96
-	 eDBtRg7JDMCsg==
+	b=pE1k/SkhHq1UtZTUwoOXXrc92gHGl5+yqV4mX9F3n8ntK86C/d7rNAg4oX1CT9Uty
+	 T05V7gGlsW8e1FYWsKivcp72K7vmKMv0lw67h8TbGADg/t+iUIdWsD9hakP4Aww9K1
+	 yS/1g92Ae4tYgFWcujRzKFVRAO51piQKot73O4rfuw8GO5GW4C4IAxiWUNydiEUm/e
+	 0BABAg+61hBEk1KMY8w+0taVfY0XcXHHJvjjp8qclxLYp4Jg60gIQGnsPXl3DrEqv9
+	 vsqT2PhydQSgfuoSLVOJs6NYArlwP2DR8BVg3UQTSeO9yCh02z6he2W0qPuPqdeirC
+	 NPFc2X87D+m6w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B85EA80BDB;
-	Mon, 23 Nov 2026 22:21:54 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 44E5A310
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:21:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 29ADB404DE;
+	Mon, 23 Nov 2026 22:29:53 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 76DD7499
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:29:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 36726605EF
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:21:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5F4EA80BDD
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:29:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nc7_hrmWCKJU for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 22:21:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 34D72605E9
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c33"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MBewMmHhzFs9 for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 22:29:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 83DC480BD4
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::229"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c33; helo=mail-oo1-xc33.google.com;
+ client-ip=2607:f8b0:4864:20::229; helo=mail-oi1-x229.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=m8NDJTRJ
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 34D72605E9
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:21:51 +0000 (UTC)
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-716d052dc23so1717935eaf.1
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:21:51 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=U3SNXx9r
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 83DC480BD4
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 22:29:49 +0000 (UTC)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-4e4a4d77e5bso3215724b6e.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 14:29:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795472510; x=1796077310;
+ d=gmail.com; s=20260707; t=1795472988; x=1796077788;
  darn=lists.u-boot-project.org; 
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=qyuHeV+FP9GupXn26bjIL1viOX5asMNeubDQ2Q0XK54=;
- b=m8NDJTRJOrtT7EIFvYA+GtiBADxLWZzWJ4OQGJk1M23u9sM1Rj0pa/XFjoPg31fkTP
- 29I7vwU5tpLYZQdnyf6Sid3jKPQiXd24zvWtihXSdIbSW7O8P9or2oZAh5M55MqU3SLc
- nBM6Ahw42X3X/IXOU+iVeH4qzty21JNHGaMC7SaklR8iHh2DrItPNA5r9JveZRjtwddg
- mkNEvDzzY1pG6j0wGOnFqnBD8zHZPiyHuFFHPmQrGfmD/G3pZeNKzzL+FVroGukSew6a
- wFRi5gZgUXCxMyzP/Y1VQ2F62JyTxHakzTEL9oykO5TRPac+fFEL9qBMVTrj/wHRVirP
- yrRQ==
+ bh=cNmZoClD7menIO+IIKmgXvdnX3akSVC2Tf9JcfLm6lk=;
+ b=U3SNXx9rG6JfXflM8VOK/Uzgr4uQXVI4u8ncx8+0XJPqCmFVU1921dO2CfF7vjKAh9
+ oIfmepmQjA14c/bXd25psK9BMYlC5GuEeT6KfMy/y2i/QFQJvY/1dHa2J8VPs2DdfVRX
+ hQdiAwwkM08S7XbglmKczzNYLRHk+docNnDG1QDnFd9kGcFcuOkSwTQFpeSF6rFQDil7
+ LGD8blZvdBg6VI0yss/ArtlRoHzBqmdKIwRs+689F7FbvDEe/qdlTn7bATcCogN3ryQQ
+ HMt5N2EPut5l13IqDlApKmOoyxfiigKNCmyb21yoq0jJhVmGablxBQ86RqATsbzu81K2
+ njGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795472510; x=1796077310;
+ d=1e100.net; s=20260707; t=1795472988; x=1796077788;
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=qyuHeV+FP9GupXn26bjIL1viOX5asMNeubDQ2Q0XK54=;
- b=u78TqP8cpYEnY5gpeb/CLbocnxUTmurdiiOdqjWwFoSMdLrx9z+t1XwnyiK3bQJHHa
- WBH9JxFSev+rvDQ76mAWxnsORlvAANYQx+GQF8uuRiS+aHsMRV870JBOOkt04XweZCQr
- TXhYyMnBPYCquFxKtpYxFjL/rafbBFpaXwOzsW31tB/oSQFbojrcF+S4ohDWj0MYa1Mj
- aVkCKT8RYqPaEXippLGGidySLPcGFFh12pF7bf5exZ5QPQMoPNoakkYE9usi3yDRuenl
- SObxgGE7B1cQjr4Z6xwk53TxIKWORsvzEQF4B4nKNhFnDQc7GAqsQ22PhPuZqBgcGXj/
- /+Fg==
-X-Gm-Message-State: APuU4Z/NlmVDHxNF4rwIxg93pFkNqi//IGF2NVPVlkMwS7axr9g2x4oC
- jbKFUCAj9Cr0XTCVnAv9OOUALkPIGrIt3dtqUtvwT+TIwjJsE8J0cpvX
-X-Gm-Gg: AZFdTZf5iepmmNTPZtOStDmUKXMWYmbmS3suF8R7Fum4jzFu8iub1PftCDPxU+Uc6D6
- c/3vgL/Wq0o2t6ThPg4VYFPwrRWdzTNnpFzlRreZZG26VbN1w78k3xKz+pcI9HiNXMg30PCDN1l
- MVnpOmsQrlOj5JNU0vh8BoIShFzqQQ1k9NROB8lZIFtyyugmro84MaN+dbKLzODyVkth2SvKEHg
- 0zzF4KusNs9nKN9lsfTEg2zM+s2otP2ZneD+e8CGxEWhmp7DK2RyDXSadfxiLbZjO2yLhdrcQzC
- lphtEq08PBBSFT49kzR6thiYB0PLXUOMNU6S49tVeGqBncInI3V8eWDl6OfvmXwJQ87OPgF9fsG
- hVTpI1+U50vlksw8jbthJPE7F1EYNou/7Asbjxn+iH1nHZ0/frGC5cFgR47TsIM5qNMe8RcHit6
- zJUAb9Vn7Gu9wSdT9ocRdOg2p8HOJkZgjOEQR9WMFW6h368cqODF+imerdCOw0LoKeGWMdoK8c+
- euJqgv78H2gNgqCvw20d/fwJRhRLjzEj0z+O7iAcZfjS1yacfIlBBeWR8ONSAQMXLimMXB4h9qD
- dw6BiT98wWgcrTzCzCXJe7GfzWlhFhUNVasL4bkUNQJuyQ4/lvMkBb5OGIKC1jLfPlnyAT235/R
- U5z0ZpNHauaSF2FFcO0/FcY7CCi6St4x12b9qAd8vyLUnYTPQ15NIVitEls5txLeNU9773l6dN/
- MGf6yScevDmxbvZbv2hYCAufO694o9ntslLEj0VuIbCi5ClUnQbqcN
-X-Received: by 2002:a05:6820:709b:20b0:71a:f209:f038 with SMTP id
- 006d021491bc7-71b3957b875mr7008169eaf.74.1795472510535; 
- Mon, 23 Nov 2026 14:21:50 -0800 (PST)
+ bh=cNmZoClD7menIO+IIKmgXvdnX3akSVC2Tf9JcfLm6lk=;
+ b=sUQiqJLt0JNs39dmq9VZpSgerqTlOianT2PcsOSRzRtcBJ0IF9EyzpjQUKH65Z3u9e
+ tKNHMGqzoAr/kMC5oAperr8jocPUwQiKMkMNRCx5I//rhTi2JnJ4WoTEk+XDIqkJeb0r
+ hHcsPeH3jGauYDFUhLMmdhW4q5A2999trbSswtszWm5eGQuoMrehjJYoxMzTXuw4IvPa
+ eLDVJ8FK7DLI/9ZBvehQEcfGlxnSlXqkBrxdPe0XEyQjiBS/CrDLZ1uGe08E8b+HMEGi
+ b4u5zxI+rb9w1a+PhWv8dmM6JLkN/zfIA9gQ5xU7m2bdu5r+NZkQhHa8kVAdCwhm7IZI
+ imGg==
+X-Gm-Message-State: APuU4Z9EV+FguT7BBI0bTkPVVhXoMPl0JJ8TfNPf5qvY1OaoRD3EykBb
+ pqP7bOmTJQAUxegRs9NFqEr2ipv4jVQfsljTTvVAZ8xNZQzxg+BGppEt
+X-Gm-Gg: AZFdTZeDu9YRQgxqDQyHTp40ZFrQf9P3FHMdSTYnszLMFONdFaBKzA8uol7w0hiV2c9
+ lQCyv1cNMREy/LTtAkf74IpBmYZPEv90RoKBCpuPd5dgqW2a31IceDrCPa3YtbeExtnMxHk7oaQ
+ c+LuaTU7AwT87QBf4muYjN1M5TmGG17qap786tZYZmy4Xndt4w8StRGJGlR4oEHpG+QO6DmdP28
+ PAABB7nimS9RgfGLp55ORCkJWY5rJxBhv0L7vY3toCpsIOmVtSIhPvtPKBr+66eY9URuJxrhOKB
+ mv5Pkc9ja+hJR2EfBtjqX6cg+0UFnk+pwb3T7cPGpNoVzw7sgH39ZRtOlBKeYyGNM5dO9oolFpR
+ WuTZAse0WmTs//hwiKEoEpBHu8cMaxoqE4NIC//Ck7MM6GHKZ9ESs57YfomrzUydThLEE32EBpK
+ tj5/m9oDlWVqBwUiINuOQzrHWS2QHPOb8QCtRwB4GE1fwVM/guhvryM+t9SpYZnj1alKCz7a34F
+ 4hObhUOYjwD34kAirt43RueSpsYrIsfXQjQRfQuMa/lpyktXGghsvEN8xF3n3H2b3LNmZNrB+SO
+ dUfic7tI1vzPFvOvSKuw0iRq9wo9m9KzlHrEbsdiLZjoXt7h1OrkP5bNDmWbgbEf9fyu9yUzxdy
+ V7yYW/XDfGG33iifK1ZPeknow5WOhNIzzZWCEhQ9hqvEnWBBnT1x6izuWG0yHoiKDbheB3BysQm
+ Qv4yYFT1bWhxso8Xfmlca/6hex8t1HnG4/XSQtM7W9tnWP1H/8Pxw=
+X-Received: by 2002:a05:6808:250f:b0:564:57c3:2b28 with SMTP id
+ 5614622812f47-57a095fcf70mr9773069b6e.8.1795472988256; 
+ Mon, 23 Nov 2026 14:29:48 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4bc5f7ae7dcsm11533802fac.8.2026.11.23.14.21.49
+ 5614622812f47-57a31929223sm10266254b6e.1.2026.11.23.14.29.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Nov 2026 14:21:50 -0800 (PST)
+ Mon, 23 Nov 2026 14:29:47 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 23 Nov 2026 15:21:47 -0700
-Subject: [PATCH] net: make default address settings available with lwIP
+Date: Mon, 23 Nov 2026 15:29:44 -0700
+Subject: [PATCH] cmd: wget: honor autostart after a lwIP download
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-submit-lwip-net-env-defaults-v1-v1-1-db2e3436c5c3@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNQQ6CMBBG4auQWTsJbQNBr2JcjPCjY7CStlQSw
- t2tunyb720UERSRTtVGAVmjvnwJc6iov4u/gXUoTba2rTHWcVyuT008vXVmj8TwmQeMskwpcjb
- sXC1t03VyhFBR5oBR19/hfPl3IR7o05elff8A8bIFVoMAAAA=
-X-Change-ID: 20261123-submit-lwip-net-env-defaults-v1-330a6588a9ea
+Message-Id: <20261123-submit-lwip-wget-autostart-v1-v1-1-eb4959d4e4d7@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQ6CMAwA0F8hPduEDRzirxAPAwrUKJC1gAnh3
+ 5l6fJe3g1BgErgnOwRaWXgaI8wlgWbwY0/IbTTY1DpjbIay1G9WfG0849aTol90EvVBcTVYd9e
+ SXHlzRZ5BPOZAHX9+f/X4OwZPavSbwnGc7iVMMYEAAAA=
+X-Change-ID: 20261123-submit-lwip-wget-autostart-v1-bf59e6986743
 To: u-boot@lists.u-boot-project.org
 Cc: Jerome Forissier <jerome.forissier@arm.com>, 
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- James Hilliard <james.hilliard1@gmail.com>
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Naveen Kumar Chaudhary <naveen.osdev@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 X-Mailer: b4 0.17-dev
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -166,65 +167,133 @@ X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Switching a board to lwIP drops its configured ipaddr, netmask,
-gatewayip, serverip and rootpath from the default environment.
-include/env_default.h already emits these variables for either stack,
-but Kconfig hides the corresponding options behind NET_LEGACY.
+With autostart=yes, the lwIP wget command returns to the prompt after
+loading an image. The legacy command passes a successful nonempty
+download to bootm_maybe_autostart().
 
-Keep these options under NET so board configurations can supply the
-same defaults with either stack.
+Call the same helper from the lwIP command with image_load_addr set to
+the download destination. Propagate the boot result to the caller.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- net/Kconfig | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ cmd/lwip/wget.c           |  5 ++++-
+ doc/usage/environment.rst |  1 +
+ test/dm/lwip_ipv6.c       | 42 ++++++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 45 insertions(+), 3 deletions(-)
 
-diff --git a/net/Kconfig b/net/Kconfig
-index 6d6672b9662..61e47838dbd 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -175,17 +175,15 @@ config BOOTP_MAX_ROOT_PATH_LEN
- 	help
- 	  Maximum root path size, including the terminating NUL byte.
+diff --git a/cmd/lwip/wget.c b/cmd/lwip/wget.c
+index c29b30ebe59..64f2362dd08 100644
+--- a/cmd/lwip/wget.c
++++ b/cmd/lwip/wget.c
+@@ -228,6 +228,9 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
  
--if NET_LEGACY
--
- config USE_GATEWAYIP
--	bool "Set a default 'gateway' value in the environment"
-+	bool "Set a default 'gatewayip' value in the environment"
- 	help
- 	  Defines a default value for the IP address of the default router
- 	  where packets to other networks are sent to.  (Environment variable
- 	  "gatewayip")
+ 	if (wget_do_request(dst_addr, nurl))
+ 		return CMD_RET_FAILURE;
++	if (!wget_info->file_size)
++		return CMD_RET_SUCCESS;
  
- config GATEWAYIP
--	string "Value of the default 'gateway' value in the environment"
-+	string "Value of the default 'gatewayip' value in the environment"
- 	depends on USE_GATEWAYIP
+-	return CMD_RET_SUCCESS;
++	image_load_addr = dst_addr;
++	return bootm_maybe_autostart(cmdtp, argv[0]);
+ }
+diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+index 80498853336..d64e78cf041 100644
+--- a/doc/usage/environment.rst
++++ b/doc/usage/environment.rst
+@@ -139,6 +139,7 @@ autostart
+     * scsiboot - boot from SCSI device
+     * tftpboot - boot image via network using TFTP protocol
+     * usbboot - boot from USB device
++    * wget - boot an image downloaded over HTTP or HTTPS
  
- config USE_IPADDR
-@@ -222,13 +220,15 @@ config USE_SERVERIP
- 	bool "Set a default 'serverip' value in the environment"
- 	help
- 	  Defines a default value for the IP address of a TFTP server to
--	  contact when using the "tftboot" command.  (Environment variable
-+	  contact when using the "tftpboot" command.  (Environment variable
- 	  "serverip")
- 
- config SERVERIP
- 	string "Value of the default 'serverip' value in the environment"
- 	depends on USE_SERVERIP
- 
-+if NET_LEGACY
+     If the environment variable autostart is not set to a value starting with
+     1, y, Y, t, or T, an image passed to the "bootm" command will be copied to
+diff --git a/test/dm/lwip_ipv6.c b/test/dm/lwip_ipv6.c
+index bd68ac0e356..741a6c1eaf8 100644
+--- a/test/dm/lwip_ipv6.c
++++ b/test/dm/lwip_ipv6.c
+@@ -87,6 +87,7 @@ struct ip6_test {
+ 	bool console_no_reply;
+ 	const char *http_host;
+ 	const char *http_target;
++	bool empty_http;
+ 	const char *boot_url;
+ 	const char *renew_boot_url;
+ 	const char *lease_dns;
+@@ -615,6 +616,8 @@ static int ip6_test_http_reply(struct udevice *dev, struct ip6_hdr *ip)
+ 	struct ip6_test *test = ((struct eth_sandbox_priv *)dev_get_priv(dev))->priv;
+ 	static const char response[] = "HTTP/1.1 200 OK\r\nContent-Length: 9\r\n"
+ 				       "Connection: close\r\n\r\nipv6-http";
++	static const char empty[] = "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n"
++				    "Connection: close\r\n\r\n";
+ 	u8 *tcp = (void *)(ip + 1), packet[20 + sizeof(response)] = {};
+ 	ip6_addr_t src, dst;
+ 	unsigned int header = (tcp[12] >> 4) * 4, len = IP6H_PLEN(ip), size = 20;
+@@ -633,6 +636,9 @@ static int ip6_test_http_reply(struct udevice *dev, struct ip6_hdr *ip)
+ 		put_unaligned_be32(seq + 1, packet + 8);
+ 		packet[13] = 0x12;
+ 	} else if (len > header) {
++		const char *reply = test->empty_http ? empty : response;
++		size_t reply_len = strlen(reply);
 +
- config PROT_TCP
- 	bool "TCP stack"
- 	help
+ 		if (!test->http_host ||
+ 		    !strnstr((char *)tcp + header, test->http_host, len - header) ||
+ 		    (test->http_target &&
+@@ -642,8 +648,8 @@ static int ip6_test_http_reply(struct udevice *dev, struct ip6_hdr *ip)
+ 		put_unaligned_be32(1001, packet + 4);
+ 		put_unaligned_be32(seq + len - header, packet + 8);
+ 		packet[13] = 0x19;
+-		memcpy(packet + 20, response, sizeof(response) - 1);
+-		size += sizeof(response) - 1;
++		memcpy(packet + 20, reply, reply_len);
++		size += reply_len;
+ 	} else {
+ 		return 0;
+ 	}
+@@ -1272,6 +1278,38 @@ static int dm_test_lwip_ip6_http_scheme(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_lwip_ip6_http_scheme, UTF_SCAN_FDT | UTF_CONSOLE);
+ 
++static int ip6_test_wget_autostart(struct unit_test_state *uts, struct ip6_test *test)
++{
++	const char *cmd = "wget 2100000 http://[fe80::2]:8080/ipv6.bin";
++	struct wget_http_info info = { .method = WGET_HTTP_METHOD_GET };
++
++	test->http_host = "Host: [fe80::2]:8080\r\n";
++	ut_assertok(env_set("autostart", "yes"));
++	image_load_addr = 0x2000000;
++	/* Internal clients fetch the same file without trying to boot it. */
++	ut_assertok(wget_request(0x2100000, "http://[fe80::2]:8080/ipv6.bin", &info));
++	ut_asserteq(0x2000000, image_load_addr);
++	ut_asserteq(CMD_RET_FAILURE, run_command(cmd, 0));
++	ut_assert_skip_to_line("Automatic boot of image at addr 0x02100000 ...");
++	ut_asserteq(0x2100000, image_load_addr);
++	image_load_addr = 0x2000000;
++	test->empty_http = true;
++	ut_assertok(run_command(cmd, 0));
++	ut_asserteq(0x2000000, image_load_addr);
++	ut_asserteq(3, test->http_requests);
++	return 0;
++}
++
++static int dm_test_lwip_ip6_wget_autostart(struct unit_test_state *uts)
++{
++	if (!CONFIG_IS_ENABLED(CMD_WGET) || !CONFIG_IS_ENABLED(CMD_BOOTM))
++		return -EAGAIN;
++
++	return ip6_test_run(uts, ip6_test_wget_autostart);
++}
++
++DM_TEST(dm_test_lwip_ip6_wget_autostart, UTF_SCAN_FDT | UTF_CONSOLE);
++
+ #if CONFIG_IS_ENABLED(WGET_CACERT) || CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
+ static int ip6_test_https_run(struct unit_test_state *uts,
+ 			      int (*check)(struct unit_test_state *, struct ip6_test *))
 
 ---
 base-commit: d778970a189b977c14f93961d7009f404d895b5b
 base-tree: https://git.u-boot-project.org/u-boot/custodians/u-boot-net.git for-next
-change-id: 20261123-submit-lwip-net-env-defaults-v1-330a6588a9ea
+change-id: 20261123-submit-lwip-wget-autostart-v1-bf59e6986743
 
 Best regards,
 --  
