@@ -1,148 +1,209 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E398A606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 08:22:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16467606A331
+	for <u-boot@archiver.kernel.org>; Mon, 23 Nov 2026 08:47:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mLMhA03Y;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=giGyHrHu
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=03K7Puv+;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gZ9Nl4Xd;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AlXywLPy
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 40E6640660;
-	Mon, 23 Nov 2026 08:22:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7401A80D85;
+	Mon, 23 Nov 2026 08:47:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rBhT9yCkQi6E; Mon, 23 Nov 2026 08:22:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6FCC840654
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795422134;
-	b=EpsmQHGpkFbLCrkdVKB1vkF7pWb7e3RzKee29f59hPu+hmhJEcLIrGBfxxZy44Ihv98d
-	 lLkrrr1nB/jp+uYmgZsgW+42M9E575DgIC/Y+76kymhAq51MvnYqZnbjtlPIlMlUt7OQz
-	 dKK9SHlx95HCPNtYdSWAaxuZ9I/80d5AkQtrwbZdmLO9BoGQ81BHfLJuqW3gtwCxMFH3R
-	 wQnu2/THy/8IAf4slT8wq0CDerf+o++Cqw+tXtl2ptawHKGL3HdK6GxOTVPCCGCjLCEY9
-	 3bgkcBeR5c8cqeD7QKFFDhMMpTBkq06S6pQ1CUsjO6RdNXg/8M4BwzOdW2wISgX/2YQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FdDcu1xgXYgX; Mon, 23 Nov 2026 08:47:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7A68980D7B
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795423671;
+	b=ArpEK+a8zDqo1fpcsjckyQAHdNELAL/lz7WdXaSGprfRerQ/SZrJMVpJBbCsD343KOhK
+	 2xceKT7GmOg7/4gqbNOXOz9RnuyCXFVq2ROk0SjjRV1e82pKe9fNYWcG7FGUfrScvWxaO
+	 9WzbOSX7sUrjc8GMJOCUrTXsC1eWJFPi447WJwuOZRytuUwVEmrm2/uKkXTOSmyHiEfaV
+	 yWYT2F+Zlqhn1LzVj0a3zzLXxOuQC9iJ1ma4i1pLFg0UopwEApazgdb5/GPphhdmMfzQ8
+	 ay1+ABo6ovXqyr7mer8nV/Gg8nwVY8DwhwrggEOdruHj77rxyWfQZesbRGo6AzI14cQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795422134;
+	c=relaxed/relaxed; t=1795423671;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=YjAFRJpaKRfR+JLbpXw7XfDziKOIzGwcRawCzZjHhFw=;
-	b=El66uS+fr1Ovo04oczomW3KZcaprVvu+McMO4+6jJe23omU94Cm8wJKrw2CwjbjZmWQK
-	 SdQhBAbV5Yge4H04IByUY1FlGE6EFE1gIIAUUVadKoNu9WbwIdsjgsyvm4eOP4b3MO8uT
-	 aDQsIFzh9uB6D7Ei0v9qmXeQrYt4ebjpfHyq3IbOrk3nWC3KBh0r3YiOJNos3Z/PViM6I
-	 H3egNwi81lqGq8HRSkRpPZBT9czPNz9yzFgOFTPBEVKF2rHLl2d5yXGiga1/CBuie5mNu
-	 Q5OOAiMF4bU3dn+qSQeiFhywTwtYMD8JFKhvM5HUwrqVPnxXE2gWq5Yuvmzw0H+ZupA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=DpduOjuTKOs+fFRn4PHeDbEwF1YKu/YYY9s4yWXcJTw=;
+	b=mcpblRKPno4asN7+F4fGhKLVqdiD9n0P2Cj/Tss8JonFeu5Lb3ZjEpYC8zcPzMBMz447
+	 /je/UOTj1wrPecktC9kD/aV519PZNYxaQv5hJnsZ9WX2dnfRBQ+E3HXoT5RJ0bcTzPYGq
+	 sud6QbE02usjyuIrmQM/uBp+Rzxz7rKd11RaeNRH8u2tOJbOTa6EqA5CTHefWlROLJ2up
+	 A3cjqA5u8IJBctpQNagrLC//L+dF1hKgrjpJgjI3WRVMvirvvT/UxcXFY0PqsNUPwGurH
+	 dSN0XDRe2xO8PP+XLdRECEHtZ3N7HPWPucCMl5rqJCkr+hEpr18KYEohz5s4ajaE6nQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795422134;
-	bh=YjAFRJpaKRfR+JLbpXw7XfDziKOIzGwcRawCzZjHhFw=;
+	d=lists.u-boot-project.org; s=default; t=1795423671;
+	bh=DpduOjuTKOs+fFRn4PHeDbEwF1YKu/YYY9s4yWXcJTw=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mLMhA03Y0aTIqvcKQrVpeDdHJYB/SJawZque0kqFKZTZjEMrqGcspsSO4Vb+dhlM/
-	 1YyklKeNtXf3ULq1PCrXlVdJpSlyOOZszItVgFkoY6LqfauFfzV/enWSO1HoBVVx+R
-	 1QglgJATrBGXT7As1lo18eZ27tB9FjIJsKBjw5kP1E/SWTBIzt1Nory6Ny7tynmAIn
-	 dZOVD+Vcyem5iAdr+Lt34p3x4eohv0nShnij2EvoXdRG8hHgVcQH4934M1uk9heJG7
-	 YEP2hOwmIzKyo+Lcn9stDXQTnRaY23cnDjbjRVqPo6iBYjhPM69dO/mI7if5DVn0nV
-	 1+EwBWd+HMe8w==
+	b=03K7Puv+zcqBG7FA2vE44+iCOPpdsgUWQLivTDC5+wD5Hi8psBnzkVty2I0GexLwe
+	 8ccGzWM6L+ZVYPtvYXZaBTWKsdgmLq2Ey8WEK+/32hSsllDE7N1IteN8h7NpPmZgWK
+	 QDkSupJ664alMdQ7l/UMZSbY6q7m446A+Q0uqNPwwi5s215YhzveuX0BtOuv5flitR
+	 vR3X8mz02v4tD+UdSm8TAeT0ImugqsQk2IXzOehR1cUlUJ3Nl8nR/FtBDP2C5+1p/p
+	 qrmaorV3S547E44+41klTfXwQSZTlyWVGVhH4+nOqvAhWygg72kT/rUUqIcUracIpk
+	 S2eBPo9+vDc/g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6FCC840654;
-	Mon, 23 Nov 2026 08:22:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7A68980D7B;
+	Mon, 23 Nov 2026 08:47:51 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 52CC522B
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:22:13 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E3202499
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:47:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 451BF40063
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:22:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D498540063
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:47:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yWskN1WnANbE for <u-boot@lists.u-boot-project.org>;
- Mon, 23 Nov 2026 08:22:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5714B4005D
+ id f93re8cwryDI for <u-boot@lists.u-boot-project.org>;
+ Mon, 23 Nov 2026 08:47:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 488784005D
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1133"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+ smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=giGyHrHu
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5714B4005D
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:22:11 +0000 (UTC)
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-8b4c685c751so24722437b3.1
- for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 00:22:11 -0800 (PST)
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=gZ9Nl4Xd; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=AlXywLPy
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 488784005D
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:47:47 +0000 (UTC)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6AN6998x1011264
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:47:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ DpduOjuTKOs+fFRn4PHeDbEwF1YKu/YYY9s4yWXcJTw=; b=gZ9Nl4Xdx1y8JNzo
+ 4hayXMJVELodxtyx7cOlDBhUEnrNvgGkgC/VnxkQL2bdPPjfpPNl3N42HDoudl8a
+ ux5BQZO/9X1i3viB81vB7APXnbwkaddvsVX5kpg0q4BO/7YETIQgv38obkvaHaPM
+ SQRKchW3uKq6+4odLjBDhhsHHtIlDBXdT0b8/UJxT6F3vdvbtY4wmmwMZ5bHFaRH
+ +u0VH8Dk6OgnCZbvEkhqJklOqwoAnXiA5siqXB+YH7U8NJeENwyPvGbthSAEi2cG
+ jw1U4lqO7SJK2ec2pAYYyqWsLsy5Jee9Au2pHnHaMhMYIH1A7hJPcfTevRsR8c8P
+ x+bA+w==
+Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com
+ [209.85.128.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4fyh0hea-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 08:47:46 +0000 (GMT)
+Received: by mail-yw1-f198.google.com with SMTP id
+ 00721157ae682-8b4fc2d32caso43208147b3.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 23 Nov 2026 00:47:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795422130; x=1796026930;
+ d=oss.qualcomm.com; s=google; t=1795423665; x=1796028465;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=YjAFRJpaKRfR+JLbpXw7XfDziKOIzGwcRawCzZjHhFw=;
- b=giGyHrHu1K2mYLSwHPA5ckGmDxtSXhM5KcfHFFhwkIAPHkwR5HlR35d7TE6sSD5a1p
- 9lRkOoSrFmGhPcDrHX1YgFnmAARjFvBAYeZnY/W+fE4ru+Ffk8ZXpL24/pQGV4wxl0q6
- 9FMXw+xpguGG6BzsyWiFc3IuDR19TznQ/3l9idfLI3YDAhmgkfFgehzuEsFWmzYKyhgn
- JKGNtVLRf4uO3p7D2rSrsedh1qivGxrOGCd0fNBXkq6+brRifShbnzCMIZxRL9JNU7f6
- SQMqmKy4dygQzhmATcwCvFu6yclhnJ55Srq25vOpTgF4KVCU3I2qZd4onI57I/1Hix7I
- Xw6g==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=DpduOjuTKOs+fFRn4PHeDbEwF1YKu/YYY9s4yWXcJTw=;
+ b=AlXywLPylNyvXJaMTwSnvbS3DPyoU2QJCnHFgCYpY5HBbcu7uipBjl4jNjHP6or5qi
+ SvHjgNeyvN1F2h/5piJuNKPZtfOlkg3FLakvszynLi4ZcvuaE3iGvzpj3PKRG0fuKi2s
+ t+rLCmVdscCasELnQUE7On4N7tl3olrnOTj+RV9CnrRnvx5DuEaFWUSh3M/DBQixj7QK
+ 4CQOXuLwGCrER5IAo9LqGfu+oS06gnR7oH3PZas8nTb3yhGTtKQRimCwOkPEg6Sk1MCC
+ SdbnnaxJJP3hGlBIpe/nOPHAPLtAUqUER7d8lQ1sx+4W6bxCzAv8twgujb5yXxpjnlQ3
+ r8BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795422130; x=1796026930;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=YjAFRJpaKRfR+JLbpXw7XfDziKOIzGwcRawCzZjHhFw=;
- b=KM9J8TfddX0eyMo4kz+j3o4Dz4Mvl6eahjZY3pITPZ8R5tCQyWxkLITRvhL+xeFaTR
- On5H7CN5zLM6dx3+QKy7hSHZPFcLVkzLCDOUOTAE+0OmjJkjiBe42b4KO7qvIxxVMbVF
- 68KspzyvFcwMYSmMffytdNBeHo1X8gM39WZvbBkbPAWM2D33wYEEC60BqCqIN/XuyIsn
- Qs90VZFvcUABYYykUYgIzKV5Olvc48HDfuw8gTOAlcyFH0lFXNSkuJOsiR8jJ+RB/+Pk
- 6g8ra9ea05KaL3s4E344YklGBFE1EdTtJsSoP2a+71jZV3+qYcaOdb8nq1XGN31VGdjv
- hJvg==
+ d=1e100.net; s=20260707; t=1795423665; x=1796028465;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=DpduOjuTKOs+fFRn4PHeDbEwF1YKu/YYY9s4yWXcJTw=;
+ b=pMjN15BBYKHkJ+Dw5oHJw7bOQn+KTZksdr6WLjJ79XAVJP0IFbyaDgpgIe17aE5Cb9
+ Qnq/7FLN8y3MUYjrvsEd/t9mT/vnrIn65Y7ixiu4rjtpAbwzV6WKgOFMZYliqtWBxbbQ
+ 3gKWJeLybqimu+O+JESXQ/QGujf7x7u+mTc0L14UwfsylirH7+fwxUI1jPwMgsyjBe94
+ v2kinB/zlCxLDoUqF5Tr/e2/leMDmflDlAsju9kphMo1wYKHO4R2yI/0p22rRGhWGPb1
+ hJ2RRw3cCsV1apoEANEnE9lQEUtB88oqDqEp3IZZahzq7CUCgWQIMoMNjfnF+QGMUA/A
+ 3pXQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErHDutXfl/t+hY6e7gjEQe+ObXTjvUKMcT0odCH5T59Y8RFFVksRTb2PyueO/M9VYRBfShJOxKA=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9f85NDiJWTWH5knJ0POC+3qKZCxwLBRT1NmjtYxaM2GcFG6huK
- JEeIfR4jFUaAoZlRRxAEPeR9TAPVy1HQjrTf3Pbb8d3u7M25rCDtXNgNXYvKghy77OCiDQWZE3E
- pwK0X6xAhLaIOSn4lV6WEY7pSoM+hRqUIS8JXu+caIQ==
-X-Gm-Gg: AZFdTZdd/IqfCKjqXmP1ZviHxv0kXzwP3zcJIkg+xqEX7jWCHHDnHoAd5oE0qkEX9Jw
- Hl8wf0LLMZrcPuCPRbVRbfftp6Lo9PmYy6k5N6MbTVzxVM/WBz+VzD54ZruQou+vHq57fg4d3S7
- Yf32frApLBecjX4VMCtSI9ZyEesCtxIEZUtEQ7nwa2lCB5haUnrFjPdL802TEroY2mz0Znsfczf
- TgWbMJ8x1r0KVsHjofg/75yioyJQkhN8ubFq53UCPMenGJuUnDKQp6ILJ/plAKPTou0x/7GsSgm
- 5hZkESHba5DMrnGN6hhX/TZlTO/awthGD79B/ZIh2cqsjMQJcTFEmaL7f7uZq60KYoUCqd59lO6
- fgtIOqsTrXNynPMZ01vHUKe2HK7yyMs0zZXEqau6OQSpLDhB1WH8YPnn89/R0aUmW5r42jFdlZY
- S7u9yb7m4lsa1pc/HR9qEEEKeRRx8+9xEkaVmBDp3Sy/8MzwZJ+JRr48dZ2U0NShb9fVAoxbPxy
- WK56sCwu9TcY1WvHqDTsSvEiVgU0x8ieAkxa/8Vw5WGR15mhmjiLEWQ2yjMeSwcJA7hkJYIJdPl
- nEMUl2BIk3022zTAr5sc7JN1vpqwLWged8Zq01zpfSeAeP+TYq67strHzPgIjDmvriW+Ra2EdUt
- 1EF9kWoB5uPapOF0B0qKZG7TXY9NBgw721mLFlDjM3t0AHGq9k1sy6KJ6gdjST/h09A86ayHd7T
- si0JPzVjuPY2XVBwLw9D0wN5tjZsKjNflON7sUho/CUbgVyJ9xlwkzq91UIN6tBM2Wmpy/5Ak=
-X-Received: by 2002:a05:690c:e18:b0:8b4:f333:d5d2 with SMTP id
- 00721157ae682-8b5204d7da7mr33091127b3.74.1795422129934; Mon, 23 Nov 2026
- 00:22:09 -0800 (PST)
+ AL+hErHwz406fK1QZFEdjj1XAZx/gzFZwxnyTEfspSBPxPUygYIc7ZjKQl/EG+6hKaCy3X0jlOAMqP8=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/7U33iJyOu+lIyBQVaVjGGDt3E/MMF3x0TzTfr8ERMiEzn8/73
+ Xx4sST/y/qcPUToECXReYtF5DIaJCG0BfC2xXjunu9ddfXUBdlaThfeAtJFVMw4WamSSF2DgiVY
+ JQp0zGzOK1JR/TcbK7kkDxRiKujUlgdh3coKSOTO1MkKzPLm/A7Km2LG5gStqGNS9V0dCqvCQJh
+ VBs+aGCHxN2Vc08dcczQuttcB55NfQqOIliJu4FQKsZZ+YMA==
+X-Gm-Gg: AZFdTZe9i4qZEPNf5mWEt7YHhD/lNsl6l4Bbu59hb5TrqenTR7Sfsdtdb+D4tiZaChl
+ iM+HlKmsBRj3tsnmzhDG5LfQ6PURWi5eT8jBwRHdcvLSQsfc2Odjxo2sx4KIt5iKzASFHkQX4Zx
+ 0MMNMij3zKMPOVzrX2Q5hsJ3Z3qln0TtLBEQ0XI4+yXgJ2LHYRgW7icXU=
+X-Received: by 2002:a05:690c:630f:b0:8b4:dfc2:be60 with SMTP id
+ 00721157ae682-8b520528bc4mr37248917b3.107.1795423664781; 
+ Mon, 23 Nov 2026 00:47:44 -0800 (PST)
+X-Received: by 2002:a05:690c:630f:b0:8b4:dfc2:be60 with SMTP id
+ 00721157ae682-8b520528bc4mr37248777b3.107.1795423664285; Mon, 23 Nov 2026
+ 00:47:44 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261106051357.265179-1-oss.patchbox@gmail.com>
-In-Reply-To: <20261106051357.265179-1-oss.patchbox@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 23 Nov 2026 10:21:32 +0200
-X-Gm-Features: Aa3M54qBqxMZiSxEfz-R7JNvrp4dLoQ8351O_V304DIaGZvQr7AOn-9CI_8inqg
-Message-ID: <CAC_iWjJBNXo55krjo0bmpYCUShfksyPswBBsGsEvD1g3OK4Ghw@mail.gmail.com>
-Subject: Re: [PATCH v2] efi_loader: unload image if efi_run_image() fails
- before starting it
-To: Yuho Choi <oss.patchbox@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.u-boot-project.org
+References: <20261030-msm-sdhci-wait-send-cmd-v1-1-6ef678db1585@oss.qualcomm.com>
+ <awCou-Ra_Rldo9N5@linaro.org>
+In-Reply-To: <awCou-Ra_Rldo9N5@linaro.org>
+From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 09:47:32 +0100
+X-Gm-Features: Aa3M54pEcKHHen5Ag8LlSwN3EWBKKuVcg7_bCLZOHW7NBk-Kim0cXv0I4llTjQA
+Message-ID: <CAPzfCAZik7_3hBzyMuZ76JG2WjOGTaaRLSec21HLYHWEDk_TEA@mail.gmail.com>
+Subject: Re: [PATCH] mmc: msm_sdhci: drop SDHCI_QUIRK_WAIT_SEND_CMD
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=NM1AaE6g c=1 sm=1 tr=0 ts=6b03fdb2 cx=c_pps
+ a=g1v0Z557R90hA0UpD/5Yag==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=yx91gb_oNiZeI1HMLzn7:22 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=7dGBj0FaR_FGNNHQhq4A:9 a=QEXdDO2ut3YA:10 a=MFSWADHSvvjO3QEy5MdX:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDAzNCBTYWx0ZWRfXxm8DlE7jbZC0
+ 3/L3jl5MDwA8KpQE9d5I2zKJArUgnqbYcn66zYEZpeqqDGNR9Beozx3KBHswAa9NMMHQ7Y4Qkve
+ z2LblfzcVtgjCpN2d7wMiDabKwLh7Wo=
+X-Proofpoint-ORIG-GUID: aIF0cz0ZuS5ntRzEQ5GTasmMGiViOqJE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDAzNCBTYWx0ZWRfX5cNNTt6QZHHA
+ 43AWgji15ocPmoh1mwPqfiQ80R7+FYuV2GhWk9+KNI4rPQUbesdtlD6IsY+6aiuhwipEY/hY9Dd
+ xHl1G3xGhMStM50P5vzfVLgEdhe8Vamk3t5ss3gtrbL6CglpTa5oUzeMuihUEBjiEXyGQLIt2Y9
+ eaDhlZnnj3IDZbI9O92jR09/IWKMfy2vhBt/plVkrFGij5T6qxfNBQHTVaR5R7gvuRaWsDr+2SA
+ iJUL+X3DUK0Q6p2mBOOBp4aP61HX9H71KBYsJYdqVSb3WLPnS24xU//VTKIiSRNEfqfvP6q0QRD
+ KSXgTdXCj31vqVuswFuA73PEiMIZEX7gEExTRG6EwMDllHuDbKcFjI9ZZwyN3ZR2d01fEhgfZkK
+ OjEP0eKvkS7rhvoZx9pZb6eRhyeyjUkWYfoZiYWqtGe06wtHdv8zpbA5BF7p7f6BbbE//hE5v8o
+ QBBUOsxpGzSPnkfYzCw==
+X-Proofpoint-GUID: aIF0cz0ZuS5ntRzEQ5GTasmMGiViOqJE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-23_01,2026-11-22_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
+ adultscore=0 impostorscore=0 phishscore=0 malwarescore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230034
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -159,83 +220,162 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, 6 Nov 2026 at 07:14, Yuho Choi <oss.patchbox@gmail.com> wrote:
->
-> efi_run_image() returns without unloading the image in two cases where
-> the image has been loaded:
->
-> - efi_load_image() returns EFI_SECURITY_VIOLATION when an image fails
->   Secure Boot authentication. The image has still been loaded and a
->   valid image handle is returned, and it is up to the caller to unload
->   it.
-> - efi_env_set_load_options() fails after the image has been loaded.
->
-> Each such attempt to run an image through 'bootefi', 'bootm' or an EFI
-> bootflow leaves the relocated image pages, the image handle and its
-> loaded image protocol behind.
->
-> Unload the image on any error before do_bootefi_exec() is called. For
-> its other errors efi_load_image() either sets the handle to NULL or
-> fails before it creates one, so initialize the handle to NULL and only
-> unload when it is set.
->
-> Fixes: 6b95b38c41a6 ("efi_loader: rework bootmgr/bootefi using load_image API")
-> Fixes: 4540dabdcaca ("efi_loader: image_loader: support image authentication")
-> Signed-off-by: Yuho Choi <oss.patchbox@gmail.com>
-> ---
+Hi Stephan,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Changes in v2:
-> - Unload the image on any error before it is started, not only on
->   EFI_SECURITY_VIOLATION (Heinrich)
-> - Add a Fixes tag for the efi_env_set_load_options() path
-> - Reword the subject and the commit message accordingly
+On Fri, Nov 20, 2026 at 9:08=E2=80=AFPM Stephan Gerhold
+<stephan.gerhold@linaro.org> wrote:
 >
-> Tested on sandbox only (LTO disabled, gdb). Forcing either a Secure
-> Boot authentication failure (efi_secure_boot set to true in
-> efi_load_image()) or an efi_set_load_options() failure for three
-> 'bootefi hello' runs left 8 handles in 'efidebug dh' without this
-> patch, 3 of them with a Loaded Image protocol; with it the count stays
-> at 5. A normal 'bootefi hello' still runs and gets its load options.
-> Not tested with enrolled keys or on hardware.
+> On Fri, Oct 30, 2026 at 02:57:00PM +0100, Igor Opaniuk wrote:
+> > SDHCI_QUIRK_WAIT_SEND_CMD makes sdhci_send_command() sleep for 1 ms
+> > after every command. msm_sdhci has set it since the driver was added
+> > for APQ8016, back when it only did PIO; the commit gives no reason for
+> > it, and the Linux sdhci-msm driver has no such delay.
+> >
+> > The delay is invisible for large reads but dominates small ones. A
+> > multi-block read is CMD18 followed by CMD12, so every read pays 2 ms
+> > on top of the transfer. With the eMMC in HS400 a 128 KiB read takes
+> > about 0.4 ms, so USB mass storage, which reads in 128 KiB (FSG_BUFLEN)
+> > chunks, spent most of its time in udelay(). On the Arduino UNO Q,
+> > reading 1 GiB from "ums 0 mmc 0" on a USB 3 host
+> > (dd if=3D/dev/sdX of=3D/dev/null bs=3D4M count=3D256):
+> >
+> >                      host throughput   time in eMMC reads (10.6k reads)
+> >   with the quirk     46 MB/s           26.8 s (~2.5 ms per read)
+> >   without            201 MB/s           4.5 s (~0.4 ms per read)
+> >
+> > A single 128 MiB "mmc read" runs at 255.6 MiB/s either way.
+> >
+> > Drop the quirk and keep SDHCI_QUIRK_BROKEN_R1B.
+> >
+> > Tested on the Arduino UNO Q (QRB2210, qcom,sdhci-msm-v5, ADMA):
+> > - on main (eMMC in DDR52): 128 MiB "mmc read" at 75 MiB/s as before,
+> >   the CRC32 of the first 128 MiB read in U-Boot matches the one Linux
+> >   computes from the same blocks, and Linux boots from the eMMC;
+> > - with the "qcom: Enable HS200/HS400 eMMC modes" series and the
+> >   mass_storage SuperSpeed descriptor patch applied (eMMC in HS400):
+> >   the ums numbers above, same CRC32 check and Linux boot.
+> > Not tested on v4 controllers or on the boards that use the driver in
+> > PIO mode (qcom_dragonboard410c, qcom_dragonboard820c, hmibsc).
+> >
+> > Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+> > ---
+> > Drop the 1 ms delay msm_sdhci adds after every SD command. It costs
+> > 2 ms per multi-block read, which capped ums on an Arduino UNO Q at
+> > 46 MB/s; without it the same read runs at 201 MB/s.
+> >
+> > Testing on APQ8016/APQ8096 (PIO mode) would be welcome.
 >
-> do_bootefi_exec() also leaves the image loaded when efi_set_watchdog()
-> fails before efi_start_image(). That affects all of its callers, so I
-> will look at it separately.
+> Please Cc the board maintainers (me, for DB410c/APQ8016) if you are
+> looking for feedback for these boards. I found this patch on the mailing
+> list only by coincidence.
+
+Sorry about that (I relied too much on get_maintaners script),
+and thanks a lot for testing on three boards anyway. v2 has you and
+the other board maintainers on Cc.
+
 >
->  lib/efi_loader/efi_bootbin.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
+> The fact that APQ8016/APQ8096 use PIO instead of ADMA is a relic from
+> before ADMA support was introduced. ADMA works just fine in my tests on
+> these boards and makes no difference for the following test results.
 >
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index 12db8f517c7..5bcb8c2540f 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -170,7 +170,7 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
->                                   struct efi_device_path *dp_dev,
->                                   struct efi_device_path *dp_img)
->  {
-> -       efi_handle_t handle;
-> +       efi_handle_t handle = NULL;
->         struct efi_device_path *msg_path, *file_path;
->         efi_status_t ret;
->         u16 *load_options;
-> @@ -192,9 +192,15 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
->         if (ret != EFI_SUCCESS)
->                 goto out;
+> This patch works for the eMMC, but it seems to break SD card detection
+> on all QC boards I tested.
 >
-> -       ret = do_bootefi_exec(handle, load_options);
-> +       return do_bootefi_exec(handle, load_options);
+> DB410c (APQ8016):
+>  - eMMC: works
+>  - SD: broken, CMD55 response CRC error
 >
->  out:
-> +       /*
-> +        * The image has not been started. efi_load_image() also returns a
-> +        * handle for an image that fails authentication.
-> +        */
-> +       if (handle && EFI_CALL(efi_unload_image(handle)) != EFI_SUCCESS)
-> +               log_err("Unloading image failed\n");
+> DB820c (APQ8096):
+>  - eMMC: N/A
+>  - SD: broken, CMD55 response CRC error
 >
->         return ret;
->  }
-> --
-> 2.43.0
+> RB3Gen2 (QCS6490):
+>  - eMMC: N/A
+>  - SD: broken, CMD55 response CRC error
 >
+> The symptom is that the SD card is simply silently not detected at all,
+> I added some more logging to find the CMD55 response CRC error. AFAICT
+> (without investigating in detail), the following happens:
+>
+>  1. In drivers/mmc/mmc.c sd_send_op_cond() U-Boot sends MMC_CMD_APP_CMD
+>     (CMD55), followed by SD_CMD_APP_SEND_OP_COND (ACMD41).
+>  2. The first CMD55 and ACMD41 succeed, cmd.response[0] is 0x00ff8000
+>     so BIT(31) (OCR_BUSY) isn't set yet so it polls again with the same
+>     commands after 1ms.
+>  3. The second CMD55 fails immediately (too early to come from the SD
+>     card with a CRC error).
+>
+> The CRC error seems to origin from the previous ACMD41. With
+> SDHCI_QUIRK_WAIT_SEND_CMD we wait long enough after sending the previous
+> command to clear the CRC error before the next command sees it.
+>
+> There different options to fix this:
+>  - A retry of CMD55 in case of an error seems to work.
+>  - Maybe we could check and clear unhandled errors in
+>    sdhci_send_command() before sending another command.
+>
+> This extra diff that implements a retry works for example:
+>
+> --- a/drivers/mmc/mmc.c
+> +++ b/drivers/mmc/mmc.c
+> @@ -674,7 +674,8 @@
+>                 cmd.resp_type =3D MMC_RSP_R1;
+>                 cmd.cmdarg =3D 0;
+>
+> -               err =3D mmc_send_cmd(mmc, &cmd, NULL);
+> +               err =3D mmc_send_cmd_quirks(mmc, &cmd, NULL,
+> +                                         MMC_QUIRK_RETRY_APP_CMD, 3);
+>
+>                 if (err)
+>                         return err;
+>
+> The real question though is why we are reliably getting this CRC error.
+> It might be worth to investigate that further. I would expect you can
+> reproduce this on any QC board with a SD card if you want to test this
+> further.
+
+I looked into it. The UNO Q has no SD slot, but the same thing happens
+on its eMMC, only hidden -  on every mmc rescan the first CMD2 after
+the last CMD1 fails on the first status read with INT_STATUS
+0x00028000 and then passes on the MMC_QUIRK_RETRY_SEND_CID retry. So
+the common factor is a CRC-checked command that follows an R3 response
+(CMD1 here, ACMD41 in your case).
+
+With a status trace in sdhci_send_command() (card clock 188 kHz):
+
+1. INT_STATUS reads 0 right before the failing command, even 10 ms after
+  the R3 response, so clearing unhandled errors before the next command
+  would not see anything;
+2. Waiting before that command does not help (50 us to 10 ms, all fail);
+3. Delaying the final status clear of the R3 command itself does: 8 us
+  still fails 6/6, 12 us and more pass 6/6.
+
+So the R3 response seems to leave a latent CRC error that only a status
+clear a few SD clock cycles after completion removes, and the clear
+done right at completion comes too early. That is what
+SDHCI_QUIRK_WAIT_SEND_CMD was hiding with its 1 ms.
+
+In v2 I'll add a patch that waits 16 SD clock periods before the final stat=
+us
+clear when the response carries no CRC (CMD1 and ACMD41 only). With it
+the CMD2 passes 50/50 here and is sent only once.
+
+Unfortuantely I cannot test the SD case now. Could you try v2 on one of you=
+r
+boards? It does not include your CMD55 retry you shared, and if the delay
+does not cover SD, I will add the retry you mentioned in v3.
+
+>
+> SDHCI_QUIRK_BROKEN_R1B on the other hand made no difference in my
+> testing, I think we could drop that one (Linux does not seem to do this
+> either).
+
+I would do that as a separate patch if you don't mind once I have run an er=
+ase
+test here, since R1b commands then wait for the data-end interrupt.
+>
+> Thanks,
+> Stephan
+
+Best regards,
+Igor
