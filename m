@@ -1,199 +1,208 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D3B3606A31E
-	for <u-boot@archiver.kernel.org>; Tue, 24 Nov 2026 09:31:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 657A0606A31E
+	for <u-boot@archiver.kernel.org>; Tue, 24 Nov 2026 09:37:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sF3bEueK;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RUQVQhHT;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cWJhIaUn
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Amf2zh+E;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=n7AaLVQK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E2873405ED;
-	Tue, 24 Nov 2026 09:31:52 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QWJo8ZhxBP0g; Tue, 24 Nov 2026 09:31:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BBB314066F
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795512711;
-	b=TObSBt5LhfLux402saRYnK7ddojTg3E3ZAKkbwPvMA5ZYfdbn+RlAYS8Ifub6ki37gFG
-	 H3iSATSbduu8cH/A7TJRxZk0bJN+75nT/1vnETV7Y2lCM4fIe0ZqTkDJyId69OpS8NvDA
-	 OIuvwTxiA7sqfhKE0tW4hS7jMkGOnsNBhP4LVZOx0HCYzOOLEPF0LIZ+cAXwni/S7cj+1
-	 zWez3XR5ngusNp3cE9PNcGf5xxp6yN6mLj5ux1tolJHxerWL5EFyi6g1skkXJBTsXpgzz
-	 8nuEFBF6pb9/fmwbvRUtQA42AA3aHtYp3JF/ARxsYxg6FtXmaUtwSn7Tx0nLNJVOO+Q==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795512711;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=kLH1LFXpkIe4MF3ustcq0MoVxS+czaT+8KHgXhqP/Ik=;
-	b=rBh3Xf7k8OPYE09auoV/GZtXA0SndJljo9NoGmXbWnTtaTTocVspPaVCUQvN0SvZgD/J
-	 GLBPxJy6nPryKYM+B8HQvuZbg2qMvv3dCmh8L2Qv4TjKCCZFFiTfcB/pA0EwIdNQGR3o/
-	 QAUDe6VsYVwiKtG9L2J6rdi4CHGsnoT/s5wpz01fMbzvc99rUZtWG+eF+spudYLeUWEw5
-	 MUAsDzauclGIn5SOih9bCkhdzpLkXW0pCFxlyM2F1Py7MppwlJIAFKJ9T1YfaqJ/8P2TS
-	 pdIhMowH7zhMTHwx6CoSxN4+LBbEMVPbCLrae/9xgTLF7icfpKbAqpiI93eCetH2jZg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795512711;
-	bh=kLH1LFXpkIe4MF3ustcq0MoVxS+czaT+8KHgXhqP/Ik=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=sF3bEueKXbWnbPbRWxlc6IHeEKQJ2XC3h5IzvUK0RkaZqPPWJ5AKU0MTuScpDBNhb
-	 3orRtsIdMAJ/4c5/actIB23nBrxPnFqk75oGbnC1NFmKkn9nwt1RvhMljSIOcpUPDO
-	 B/ZznA+Vzu1/YsGJZ9o92et4zzca9u1yb4TdDZT7Al8EyIB+gE+wTloe4Ie4/MiG0X
-	 7F0IRv9NYb7+Lx5vHE+XCN1/7m5fj6IapAE//fIey/5MMeFRc6gC96Ng4gIJLg7B6n
-	 Lzv2RlDY+C98Bc7zMOKK2t3mWulDNwZGgV8sgc1Fx2yEB/OgwpeExez4uNUrLngxRu
-	 z3VKPMxDBwqNg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BBB314066F;
-	Tue, 24 Nov 2026 09:31:51 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id EF2C5715
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:31:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E38FC605F7
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:31:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D1765607DA;
+	Tue, 24 Nov 2026 09:37:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Rpr6YghSZ1yD for <u-boot@lists.u-boot-project.org>;
- Tue, 24 Nov 2026 09:31:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 61087605E9
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=RUQVQhHT; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=cWJhIaUn
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 61087605E9
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:31:47 +0000 (UTC)
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AO87jgP901980
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:31:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- kLH1LFXpkIe4MF3ustcq0MoVxS+czaT+8KHgXhqP/Ik=; b=RUQVQhHTfvMs1V6d
- awlEmqoRlZlI3i4V/fTcC2OEgqU2tvJdmUubMhSfMsAjfMef30lytnDb/BeJ7KJP
- T14uMRJEn74K4XXrdZZQG3ckmZ2DO/mM299LVnY4J+thNc816c03xEcYdhYTfnJY
- VkMpjUHkMPdvXXGdQqUDpaIFwnN8xIWTzWgVxv4pw0taXvOLzfJfXpcl7lJN9g/H
- UTfhZNl4z4DND27JDZ/Ax7VmVpkZKTF1W0CvUUFT+M10k60Qu/pSAJLTymmc4l8T
- 0C+b/swwr3gToojNMgFeoqDSzVVj6NGc6QvXluF9vMul25GA/dOzGIDXBZ2my+xO
- kz4hVg==
-Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
- [209.85.128.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4w6stgq7-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:31:47 +0000 (GMT)
-Received: by mail-yw1-f200.google.com with SMTP id
- 00721157ae682-8b51464f007so56475157b3.0
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 01:31:46 -0800 (PST)
+ id q9-uSR7Is54I; Tue, 24 Nov 2026 09:37:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3B3BC607C3
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795513057;
+	b=hwZOE4T869JIzPsNUiEY3rlDgAUznq6bPjGYvk7wva/Gpuw4rjjqpHpoIKGgeFnFz9Vc
+	 9/tXdV1StMXII4hznJKlBkd3FV+x3IMsrhN4E9+Y5LGt9MtFGnv2cCl7bvIlMJKnms6Sx
+	 KisXsYi9jhNWUeo0mRAnRhS5JGHiPEGXBL8snqtXVHqSCMhESjXPhHyTs6N5NdaS+y8hJ
+	 O64UxXGYC+rcnfMoJKN0wXC2uY+IFIMpKdnepQH+RKF1ZIFdqCqR8kA/dtZbW+RpUQnmA
+	 USp0412eloHMPby9fL58WMyHVYwav4JthqLbTMiCGAdpoQ+5nP2e/RwoPhcdKMqUC6g==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795513057;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:
+	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=b7IC1hsl+ADZG/76mT/T3NyL3GNUf9lgvmhwMzCDiL4=;
+	b=AGsHaUrchZ8J9n4kjkojkMHSbSG+TNcmgysEWmL8x1mr7pgFh90g3TpZmYqocd/FyCN7
+	 BzAsVpMk7ZfyPaE0HSDW5uAilmGF6VA1lAFMyNGMEgGZn/kcPYRnnHEIa8el6HJVAbn9Y
+	 djp5FlFBG0ORhIsT2ihQkzh9yY1bl1cY4BfwMhj29K/4L4I7BRzbErFpTtCiPdHB3xzy+
+	 Iproelm8dnXYw8c8oR/7WSDNcR5SC/72TL3kQibkWjb0pj9l3jE1aQEcPEiS6lAnreKES
+	 fROt345XzdIJmHt7ev1HtdsEMTj9DzajF620yKUx4qO4LfFsqTA6/R10Tib0np1qjyg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=cherry.de;
+	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=n7AaLVQK;
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795512706; x=1796117506;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=kLH1LFXpkIe4MF3ustcq0MoVxS+czaT+8KHgXhqP/Ik=;
- b=cWJhIaUnMewaT9Dl7wMaqTeEzMYI/hbUXXhvbsHmrfHdEAqro1DkzSlxm500H4U+ep
- 1mKR99bFvOWsWe43qPxp8aST8eekry6tJq2HW44e/xr6zJqC5XZpEhXp0NgQ+c+51CqY
- ZwjX9v86WtycvpMKJVst39bhgLRo0ZhWg8/XvlyTBFLBd2Q3q2ZVCFrmSjdcImmwNXNj
- pmfPV/JkCP2wh4ThSWRvbTm6xjrNOXERqJDFZxSYyGYzz/kH/VTxtNPpIVwXM0dzV+TH
- 9Xt+Thfd5B4erw1dKcjoR6R6eD7BWwZkBJR/xbbKZ+MzRayCm0l8CuZLBwbt+0BZwZpc
- UfuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795512706; x=1796117506;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=kLH1LFXpkIe4MF3ustcq0MoVxS+czaT+8KHgXhqP/Ik=;
- b=ENGyejTdMMd+DyGD1WiaGkZgsb+o6kBSPglYWQaz4rqTNbp7vJAvCHgFDJm5JqdlpR
- 4cWFA8HkpPvBzWznW58/2Zket3vZnaMGHFfL9YyN0uzxZ8hjjOxNlJ1ogseipf4QRdzL
- vH2nXDWPVc0MLqKNeARxxoByu9m8DCkmUy8w+bqnv8Cmzattf6BmkcCxM0SdKd0/p4TB
- DrEzs8Iq+rdUUahrX4E7dExH1BmqAEcPtWJzJtHH1So6QCBV9ol6XShk7IjfZMpTQA1I
- XsG7W0XEHiHSDe3xA/ByTKdjxznHmQhyUezaby1BXoeA37cBVW693RMM+kRoExxwWYvv
- 81kQ==
-X-Gm-Message-State: APuU4Z/Of8LIUviMU9tzmqgsCmhzxYZ0SC/RwG5s4hLQU4RLztTEGySE
- EA1o13879YzwpVXhaVU8iS2OI18wFx+xn7PA+C1Z7/oLE99rqbESyx/xouPS8FlaXGamAuqwz6M
- 5pro18f3cWf1s+g5Euz3C+BdlJrejIs698NCiUH1oDssvvm+CKMn1taZI/nYk03LRNurGV2X4uh
- 2XOXjlOd9017HQR9JfTWsCp7iJ4Q8IJw4CvQWG/EQtAAoXNw==
-X-Gm-Gg: AZFdTZcNSHvuhPJ8DDehXaTf2Gd4fB/Q/QqNs7OY/6UDT5Mn37tEXmPAIjNvNk8prtN
- u2PyDN5xbFk4maRGWACeUKn9/7cO2PaDYKZFtNmQTNKwPB/VdBWNGPOryX4bZlke8ZWjgbhatU2
- jdRgU6Qz7kkphhq8BhL+f3GsBV36e2ewplzZpZ14dskZyMsxlY7Vzj3y8=
-X-Received: by 2002:a05:690c:442:b0:8b3:392:dc1c with SMTP id
- 00721157ae682-8b5204ab299mr51578797b3.36.1795512706029; 
- Tue, 24 Nov 2026 01:31:46 -0800 (PST)
-X-Received: by 2002:a05:690c:442:b0:8b3:392:dc1c with SMTP id
- 00721157ae682-8b5204ab299mr51578747b3.36.1795512705549; Tue, 24 Nov 2026
- 01:31:45 -0800 (PST)
+	d=lists.u-boot-project.org; s=default; t=1795513057;
+	bh=b7IC1hsl+ADZG/76mT/T3NyL3GNUf9lgvmhwMzCDiL4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Amf2zh+EWPH11A/ty6DXWlKOcW5/bhkVHTkGk7/y6vEYvRm4Jc+4mO7v45eXpqexC
+	 yIk/xAcqD3VVUZ9ltdpOn3aJ4cDb2DRwHiJc0vK8E+pA6uyVbuwVvUtFL8e5PpAA2V
+	 LfcNDOGESBrBnKtMA/sgjqjF/Yu0ZmcGU5WkptQmBmuQyWcsg0raemT9anVfm06xl3
+	 1WkaodaeBD3ccgGWTZshJrSYh536NF3dbVmG7RaUcPb8dSKnypqYSDPGhAPfCC4Win
+	 pmorglNUIZPc7Ct79L+SbKMBO13nj/scDoXbKJ8feJcNS64IfVeTvXa3Q8vWdxHa8l
+	 ORed9+cPWEtnA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3B3BC607C3;
+	Tue, 24 Nov 2026 09:37:37 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8E0FFFBB
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:37:35 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8B304607B8
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:37:35 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zKM9AtK7pLD7 for <u-boot@lists.u-boot-project.org>;
+ Tue, 24 Nov 2026 09:37:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 96123605F3
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c202::7"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=n7AaLVQK
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 96123605F3
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:37:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=b7IC1hsl+ADZG/76mT/T3NyL3GNUf9lgvmhwMzCDiL4=;
+ b=n7AaLVQKP4TGGtPsR1g6jRh32/+Ge9mLssQueZNuP1VpYJSZMz9jMUz5mWmo///rrcb2GiVyBPfmKPws1tFph5Xa9GAFBUdICudIs1EwK+V31x2EftfW7+f2PCVgH0dDTykn0h3NG7qM/E3FOh0e80tWsjEA/1YbRCTS6BE+3uQ=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by AM9PR04MB8524.eurprd04.prod.outlook.com (2603:10a6:20b:433::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.14; Tue, 24 Nov
+ 2026 09:37:26 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0639.012; Tue, 24 Nov 2026
+ 09:37:26 +0000
+Message-ID: <16a39440-4ff5-4977-b74e-3e453d83629b@cherry.de>
+Date: Tue, 24 Nov 2026 10:37:24 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] ram: rockchip: raise error when configuration is
+ unsupported
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
+References: <20261116-ddr-multi-v3-0-fe9fb30a3169@gmail.com>
+ <20261116-ddr-multi-v3-3-fe9fb30a3169@gmail.com>
+ <4b4b6b1d-9676-4b02-a10b-506d3169800f@cherry.de>
+ <CAC928Haq+ic8E622GsxdoOxFyXn9BHvNKxWTkV2ZsYFvA4HC+w@mail.gmail.com>
+ <a7390f3e-f6f1-4617-b7a4-df253673abe3@cherry.de>
+ <CAC928HZjdBO1W7_X_+VKHh0fxoBoQahW9nRBfdf4PYMNAmompA@mail.gmail.com>
+ <95ab24b7-5cfd-4ac6-8a63-f6fe820e1dff@cherry.de>
+ <CAC928HZD3q-Yr8XnPHuc2XDsxtw27dtwjGC3KiQ0KziaBmyznA@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAC928HZD3q-Yr8XnPHuc2XDsxtw27dtwjGC3KiQ0KziaBmyznA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: VIZP296CA0024.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:2a8::12) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261123223805.GQ3176972@bill-the-cat>
-In-Reply-To: <20261123223805.GQ3176972@bill-the-cat>
-From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Tue, 24 Nov 2026 10:31:34 +0100
-X-Gm-Features: Aa3M54rSzI0KAfGeRJqLPtpYy1vXnbPUM92EXGYANqzTmjxyhZEA3FwFrcxW0c4
-Message-ID: <CAPzfCAbS0nULr+fVHd52LdYY2CrBYV3wWkM-g+Le+pp7pWnx0A@mail.gmail.com>
-Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: B-eMIsLg-gdYWagBplgOy3Qpq-NAAdNG
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDAzNiBTYWx0ZWRfXzVhujWf+sCKv
- ydsMibC8r4pXgsX1GaJBJu0oG85WhKd8UsEU+AvPwWGSmw49v8cdkpAUEeT3L1IzRiOjDza6WlQ
- RGA8sz2TwPWhOFsWDgZrflhJ67n9WMQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDAzNiBTYWx0ZWRfXxgBqUNqBnLhr
- 8iuwfnW6KXS2aEC1cc2jrnjHx2F4P7MEAFM3+Gkmcf0anPlzbHFRMttI8YNH43CAoN5wRKfJqQB
- eK4wXeX1q8CxWSRWvmNa0bRxTB7lAVo9pK82Q0qaWkkQnUcl/Zqn6fGkF7tM3p2j3GhiKBPrUGG
- 7jG3Vw+A/lVyzHqj3Eu1VxzfOZZSNMT0GLwPU6vf+z7dsrf2ol8F0JNNqH4tRKf05NQoZevgC7X
- G5jSrMIFLOv1d97uQTgbRMf6BTUx5A2VXY1JhOWz3qq1cXCmqwf5qqbEZIq9mA32xqtrmt6edGi
- Fcthgkd+ws4y+P8GGdFux3Owhxj7qynNMOZzCdvWBYIb3Y8wItDhSPuQAOOv6a7Rv0BDEMiLhcb
- LmRadhevJ0TSM1IANmKVU9d12VdA0MhDiOkG1Dbr78kSS4xVSRC+mZGw2yk3W8CW4JulzGFquPH
- X64g8ka1yem505CulNA==
-X-Proofpoint-ORIG-GUID: B-eMIsLg-gdYWagBplgOy3Qpq-NAAdNG
-X-Authority-Analysis: v=2.4 cv=V8DoQuni c=1 sm=1 tr=0 ts=6b055983 cx=c_pps
- a=NMvoxGxYzVyQPkMeJjVPKg==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=6xGJIMmgAAAA:8 a=k-42gJp3AAAA:8 a=pGLkceISAAAA:8
- a=AJ0-sOwo9pNA1uiMy5UA:9 a=QEXdDO2ut3YA:10 a=kLokIza1BN8a-hAJ3hfR:22
- a=aWz6Jz32kaLdCzdWRG-w:22 a=uCSXFHLys93vLW5PjgO_:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_01,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 spamscore=0 impostorscore=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 phishscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611240036
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AM9PR04MB8524:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9c281944-65c8-43ee-3b5c-08df4a0e8c82
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|366016|10070799003|23010399003|261028144727099003|10067099003|4143699003|5023799004|11063799006|56012099006|261021121427099003|261021123027099003|261021130227099003|261022105027099003|261022113327099003|261021133027099003|261009223027099003|261022115727099003|261021135927099003|261022075727099003|261026135527099003|261026140227099003|261026121527099003|261102123227099003|261026130827099003|18002099003|22082099003|6133799003|4133799003|3023799007;
+X-Microsoft-Antispam-Message-Info: 1z3iWNtBkVz4bepQUPXD2FxIQGshQ5J+jzpNYUJzBrsR3bO4m9Cq0LXYTiGsWpO/4/jzabrWTLH3rqGDALso9lGkPIckk+oD1HFT2nsbiUs+JcBzu2pQd/UmbVpkky2E7sCcHx4PP6Pa0VE90FKYiob1aVUlT5RbBxngu8hh0l0YohAmUVJ8pwgFm/ljSTCeYj6IpHwzvLpaee4WwEDJ0uLNesJqkp3E4P6v0wp9CGzpv4S/SBtyUMif6y0IQ3Vvfn2QMTHcB/bPj4NguxvSwdczAX4vk5OpIC6onbWsZhx45YKZMD86rp1HUlTKB/zCNYYXg6hL2UzBIn1QCDD33MmDeQ6RutY6QPsGvbFWpbj7AE3DMxzS+s9royPXKdOjNLSPULivatzPpOwyL/BFnwu2yrFtYvJWrvDF9oVmek+3o45zpmRfhA0/Zofsj+RvC2C2hzg5NsjS7oOQM7bpRFT2K3cGa5lS9w7iga1F54hBrn4sS2Ge7e9XBGsQsXR1TTe4pE6liifuw+7K6ozixDc9lqEbyzceKuw8MiXp/P9v+uhBIU+3yG8Ftbyczkuq0kcJNOTGz/M4PW/6Oyv8Rm7LYOtKQNqTVSorsfeuEJRQbtMJ3BFQiQ9Z7H53DYKaS0S1imE7irhMn0m/5BoxkBQBg7j2VCj2cnn0N1z9jQ8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(10070799003)(23010399003)(261028144727099003)(10067099003)(4143699003)(5023799004)(11063799006)(56012099006)(261021121427099003)(261021123027099003)(261021130227099003)(261022105027099003)(261022113327099003)(261021133027099003)(261009223027099003)(261022115727099003)(261021135927099003)(261022075727099003)(261026135527099003)(261026140227099003)(261026121527099003)(261102123227099003)(261026130827099003)(18002099003)(22082099003)(6133799003)(4133799003)(3023799007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?emlGNUI1QWw2MWN3ZnlQQzB2dHRnalFCcVB1dWVtb2VNRzh6RFpJcFVhQitE?=
+ =?utf-8?B?YVFjN1RUeHVhWlNjNUk3SWJ0K0hLMjBGdWtTbkdDd3FaRS9RS2l0REtOVW9y?=
+ =?utf-8?B?UURiNmkrb3FkOFl0N081K24yZkhWT1cwRFA0dE9xVWVUWlA0SWRWdk01MVA4?=
+ =?utf-8?B?Z2tjbjZtdVFMcDlIV2h0N1JRVlJNd0pnMkQwUW1IV1MrMzVlTDMyVERSb25v?=
+ =?utf-8?B?c3BhL0EzQm9kY2NrQTFSeEtvRmVMenhGK2tKOXhPRkc0Mzg1Wm9hRW84b0cz?=
+ =?utf-8?B?Z2JLVlQ2SVVQRHM2OWxBMTU2VG1Bei9QcGFOVnNuenlRbnNwUXRUR0xtU1Iy?=
+ =?utf-8?B?VkErUysvdTB4Q1B0Nm9oc1hFZnc3MHlVY0NEdWUzb01QWnhQWkZ1MVY3aXBp?=
+ =?utf-8?B?UmI2VWtzVlo0MEdsdmtNZ3B2alhWWG1ISnNYUUxBZGpjY05raTdtZlhia1p6?=
+ =?utf-8?B?clJVTHd4Y3J1YnpJMGpobnRmenJMbGZNTVZSSUhITnVrTWJ3SkhVWWRubmc4?=
+ =?utf-8?B?S2ZNdHFvZ3RxSDcvbnZRNnhGSTlUUEo0Y3hMVkI1cjVmcUdOWmE2eUN6aG9K?=
+ =?utf-8?B?aTZ4RUJ0c0lnRzlnY0ltUzMrM2tJN1RyMDdaaFZwUlNqdDJuMzdpajBLNVYz?=
+ =?utf-8?B?Umt2TUp6SHFtbldUT2tVZlVQQ0VObWpxQVhEYlJHOG5XamZySml5MWY3OUlG?=
+ =?utf-8?B?ZjhOckNGbGc5eGtYYlYzSEVXbkNmVUQ0V21CNnlpYnhPV2VBSG1HSmNkVWs4?=
+ =?utf-8?B?SFpkVXcvc1JUa3Q0amRNbnJUVGdCV21iT3grbmFOWDdBQ1F5NWgzeGFGK3Ex?=
+ =?utf-8?B?WkRSc1ZPa3FWYkgybU1yWlRleHZoVzRHQWQ4OFU4VVlSMjVscS9HcGpJRUVx?=
+ =?utf-8?B?ZnVCTDFvTjVEZzR5aWVaREpUSmVXRUF4ZXdpemdXVGw0c2svRUpMUC82MHpJ?=
+ =?utf-8?B?Vi9hclpuWUQ5VzhOKytuTEJJV21Ock1GY2xwYXhOWk5pb2xiU00zVEQxZ0JZ?=
+ =?utf-8?B?N0pNenBHZkJCaDJiQTE4REZlZXhlUEdTT2hYYm15aHRjdGtIMnI3andqdUJF?=
+ =?utf-8?B?NThxaGp1ekI0aFU2RWp1ZmhnVFFqV2FWYlhOZGUvbVZzWm56NXBkNHR3Umlt?=
+ =?utf-8?B?ZjhobDJCUUk5REFtN3BQYWNXcWErMmhEWEx6MEZIdnNlRUkzMjhNbnM3Y1B2?=
+ =?utf-8?B?dnBEMTdSY3JleGpPV3dsdDlvcDBYdUNxUFdQUHUyUnQyd1BSSER5bGdKa3NN?=
+ =?utf-8?B?RG5TZzhOMVA2NWhrVHRuRnJNWGVxRW5xam9zTVp0dElwTng0dm9qTnVQa0pI?=
+ =?utf-8?B?YmdubE42NmNVMkRENWdQT1FaUFhSMDNTM0M3cCtuaXNKM1lKZVBhenM1M3kz?=
+ =?utf-8?B?YTI2WlE4QWxmTGZWMmxRZjhTdmZkaXNSZEdHeTVPL2FicWk5eERrU0pIL2dP?=
+ =?utf-8?B?MjlFN0VRSzQvWWlGNUxYQlZJK25ZNllQUjU2NHUzYUs5MDFvQ2xWd21zK1Nj?=
+ =?utf-8?B?RkRpbkxLMGpxQ1Q3L1BTeGVBMEpVMFhzWE5JQ0dLd1h6S2lQekFDaEh6TXkx?=
+ =?utf-8?B?WWpHS0FPdFptNmFZU2kvODVrNS9XMlpwc0xYU2lna3JXSnR4WGIzUGZTKzNL?=
+ =?utf-8?B?dXJlYU0xb3BXRGNZSmZIcG9ZZ0xYTjRBUk5YQ2tiYWtJZDZ1amNTbFhhZkRQ?=
+ =?utf-8?B?emJjbTN0Nkg0eGhSazhZNFdhR2NvS3hTMW1oK2ZvUnlhRkRLL0taaDdHUkha?=
+ =?utf-8?B?K0xISUJ5aDF1Uld0WEU2eDR5VDRUUWd0c3k5UklMemJMaktCWnFoNGNROHIv?=
+ =?utf-8?B?S2NiNUdkQUx5cy83dlNaWXd5YkJnUWh4bkNVNEM4eEVjd0wxUGo4MFJnOFVO?=
+ =?utf-8?B?K1RUY2xVNHBGeG94blphZ3ZHbEd3MVJubTlBUnhGQ0YrQXFEQytnREgxTTc5?=
+ =?utf-8?B?d1NmaXdzbGNwb0VvM0pjc1BaTmVCUWNBV3V1bExsOVVDSGpyR1BFcDBucStn?=
+ =?utf-8?B?YW8xek1TN3ZMSTRNTDN1c2xZcmpRVTZFL3dISnY0WnJsdE40NWprMGNIWlR1?=
+ =?utf-8?B?Qmk1K0Z4UmI3UHhNS3lRUGhmbCtGOWo0bXU3U1BlR2V0QkVNWTZvNUkzNUpB?=
+ =?utf-8?B?ZFNVNEQzWkRaendhY0lHVEF1MmpBaXZRWTRUMVZsNVd0Qy9Hem9rYXBKbnFW?=
+ =?utf-8?B?YjNTTks4WmpBdlM1MU44Q0ZDWGtwNVI1b0FhZlIyTERzWEVxdk1FcXR5ZjFt?=
+ =?utf-8?B?MlpFL3dOWlNwaDBSd1lMWjF1K1FuZjVkaGxPNUlSbTNEUkQ1OEtvSk0vWkJZ?=
+ =?utf-8?B?Y2hHY3VCZkJxYVBKNy9yNzBxQlMvSVczYzhMTTV3YzU0OWM1M2hDV0NnZGxV?=
+ =?utf-8?Q?fb8J1Ez77lZbBRop2FjJ20jbyxQ5/crcSRfK9UXC3BE7m?=
+X-MS-Exchange-AntiSpam-MessageData-1: FIuKjRIGdFPyzWi9N1ZHMdKt6JJI2lEGn4g=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c281944-65c8-43ee-3b5c-08df4a0e8c82
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2026 09:37:26.2799 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: loEpU2wGDqFdQ2244E44SlvSzL9X26z/uCio5M/sep3vjIAY1RrxBwsC3CBpNYenVBmk2yxOJre2SmPxkxz3dIyK0QV6Wge2eZrbopHBg40=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8524
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -203,194 +212,292 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Tom,
+Hi Massimo,
 
-On Mon, Nov 23, 2026 at 11:38=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> Here's the report from v2027.01-rc3. Looks like the AVB update
-> introduced a few issues, or at least things to investigate. Thanks!
->
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Nov 23, 2026 at 4:33=E2=80=AFPM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
->
->
-> Hi,
->
-> Please find the latest report on new defect(s) introduced to *Das U-Boot*
-> found with Coverity Scan.
->
->    - *New Defects Found:* 5
->    - 9 defect(s), reported by Coverity Scan earlier, were marked fixed in
->    the recent build analyzed by Coverity Scan.
->    - *Defects Shown:* Showing 5 of 5 defect(s)
->
-> Defect Details
->
-> ** CID 662464:       Memory - illegal accesses  (UNINIT)
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 662464:         Memory - illegal accesses  (UNINIT)
-> /lib/libavb/avb_slot_verify.c: 450             in
-> load_and_verify_hash_partition()
-> 444
-> &slot_data->loaded_partitions[slot_data->num_loaded_partitions++];
-> 445         loaded_partition->digest =3D avb_calloc(digest_len);
-> 446         if (loaded_partition->digest =3D=3D NULL) {
-> 447           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-> 448           goto fail;
-> 449         }
-> >>>     CID 662464:         Memory - illegal accesses  (UNINIT)
-> >>>     Using uninitialized value "digest" when calling "avb_memcpy".
-> 450         avb_memcpy(loaded_partition->digest, digest, digest_len);
-> 451         loaded_partition->digest_size =3D digest_len;
-> 452         loaded_partition->digest_type =3D digest_type;
-> 453         loaded_partition->partition_name =3D avb_strdup(found);
-> 454         loaded_partition->data_size =3D image_size;
-> 455         loaded_partition->data =3D image_buf;
->
-> ** CID 662463:       Uninitialized variables  (UNINIT)
-> /lib/libavb/avb_slot_verify.c: 452           in load_and_verify_hash_part=
-ition()
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 662463:         Uninitialized variables  (UNINIT)
-> /lib/libavb/avb_slot_verify.c: 452             in
-> load_and_verify_hash_partition()
-> 446         if (loaded_partition->digest =3D=3D NULL) {
-> 447           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-> 448           goto fail;
-> 449         }
-> 450         avb_memcpy(loaded_partition->digest, digest, digest_len);
-> 451         loaded_partition->digest_size =3D digest_len;
-> >>>     CID 662463:         Uninitialized variables  (UNINIT)
-> >>>     Using uninitialized value "digest_type".
-> 452         loaded_partition->digest_type =3D digest_type;
-> 453         loaded_partition->partition_name =3D avb_strdup(found);
-> 454         loaded_partition->data_size =3D image_size;
-> 455         loaded_partition->data =3D image_buf;
-> 456         loaded_partition->preloaded =3D image_preloaded;
-> 457         loaded_partition->verify_result =3D ret;
->
-> ** CID 662462:       Uninitialized variables  (UNINIT)
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 662462:         Uninitialized variables  (UNINIT)
-> /lib/libavb/avb_slot_verify.c: 445             in
-> load_and_verify_hash_partition()
-> 439           avb_error(part_name, ": Too many loaded partitions.\n");
-> 440           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-> 441           goto fail;
-> 442         }
-> 443         loaded_partition =3D
-> 444
-> &slot_data->loaded_partitions[slot_data->num_loaded_partitions++];
-> >>>     CID 662462:         Uninitialized variables  (UNINIT)
-> >>>     Using uninitialized value "digest_len" when calling "avb_calloc".
-> 445         loaded_partition->digest =3D avb_calloc(digest_len);
-> 446         if (loaded_partition->digest =3D=3D NULL) {
-> 447           ret =3D AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
-> 448           goto fail;
-> 449         }
-> 450         avb_memcpy(loaded_partition->digest, digest, digest_len);
->
-> ** CID 536494:       Integer handling issues  (INTEGER_OVERFLOW)
-> /include/linux/log2.h: 72           in __rounddown_pow_of_two()
->
->
+On 11/23/26 6:35 PM, Massimo Pegorer wrote:
+> Hi Quentin,
+> 
+> Il giorno lun 23 nov 2026 alle ore 10:56 Quentin Schulz ha scritto:
+>> Hi Massimo,
+>>
+>> On 11/20/26 8:53 PM, Massimo Pegorer wrote:
+>>> Hi Quentin,
+>>>
+>>> Il giorno gio 19 nov 2026 alle ore 16:14 Quentin Schulz ha scritto:
+>>>> Hi Massimo,
+>>>>
+>>>> On 11/19/26 2:23 PM, Massimo Pegorer wrote:
+>>>>> Hi Quentin,
+>>>>>
+>>>>> Il giorno mar 17 nov 2026 alle ore 17:40 Quentin Schulz
+>>>>> <quentin.schulz@cherry.de> ha scritto:
+>>>>>>
+>>>>>> Hi Massimo,
+>>>>>>
+>>>>>> On 11/16/26 7:39 PM, Massimo Pegorer wrote:
+>>>>>>> The PX30 and RV1126 sdram drivers support more sdram types but only
+>>>>>>> one type at a time, really. The type to support is selected through
+>>>>>>> RAM_ROCKCHIP_XXX configuration options: raise a compile-time error if
+>>>>>>> more than one of these options is selected, instead of relying on a
+>>>>>>> debatable and embedded priority order to choose the one to support
+>>>>>>> among the selected.
+>>>>>>>
+>>>>>>
+>>>>>> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+>>>>>>
+>>>>>> If we add ROCKCHIP_RK3399 to the depends of
+>>>>>> RAM_ROCKCHIP_LPDDR3/RAM_ROCKCHIP_DDR3 and RAM_ROCKCHIP_LPDDR4, I think
+>>>>>> we should add a similar check in the rk3399 driver to refuse to build if
+>>>>>> there's LPDDR4 and either of RAM_ROCKCHIP_LPDDR3/RAM_ROCKCHIP_DDR3
+>>>>>> enabled. What do you think?
+>>>>>
+>>>>> Unfortunately I did not come to a clean solution for the RK3399 sdram driver
+>>>>> "singularity". At least, not enough clear for my taste. So I left untouched,
+>>>>> open to discussion.
+>>>>>
+>>>>> Let's suppose we also have ROCKCHIP_RK3399 in the dependencies of
+>>>>> RAM_ROCKCHIP_LPDDR3 and RAM_ROCKCHIP_DDR3, something like:
+>>>>>
+>>>>> config RAM_ROCKCHIP_DDR3
+>>>>>            depends on ROCKCHIP_PX30 || ROCKCHIP_RK3399 || ROCKCHIP_RV1126
+>>>>>
+>>>>> config RAM_ROCKCHIP_LPDDR3
+>>>>>            depends on ROCKCHIP_PX30 || ROCKCHIP_RK3399
+>>>>>
+>>>>> Some compile-time checks in the source code can easily be added to raise an
+>>>>> error if LPDDR4 is selected but it is not the only one, or if none is selected.
+>>>>>
+>>>>> The point that annoys me is that, in RK3399's case, the two options
+>>>>> RAM_ROCKCHIP_DDR3 and RAM_ROCKCHIP_LPDDR3 are the same thing, in the end.
+>>>>> If it would be possible to have their values coordinated, I would be happy,
+>>>>> but I do not think it is. Using the Kconfig 'select' statement will force
+>>>>> one to be true when the other is selected. But unfortunately, this does not
+>>>>> work when unselecting options. So, if one is selected but the other is not,
+>>>>> what should we do in this case: raise an error, or silently ignore it since
+>>>>> it does not affect the build?
+>>>>>
+>>>>
+>>>> I think it's fine if we have DDR3/LPDDR3 selected but will use
+>>>> LPDDR3/DDR3 based on Device Tree. We can make them really mean something
+>>>> by gating LPDDR3-/DDR3-specific code, but I'm not sure it's that worth
+>>>> it right now. Something worth investigating if we need to shed some
+>>>> bytes in TPL/SPL.
+>>>>
+>>>>> An alternative could be to use an RK3399-specific config option, something
+>>>>> like RAM_ROCKCHIP_DDR3_LPDDR3 but... ...it's quite disgusting.
+>>>>>
+>>>>
+>>>> Nope, don't want to go this route :)
+>>>>
+>>>> Another option is to make the RK3399 driver capable of handling
+>>>> LPDDR3/DDR3 AND LPDDR4 at the same time (no autodetection of the
+>>>> populated DRAM type, still read the type from Device Tree), then it
+>>>
+>>> This (driver capable of handling all types at the same time) seems to me
+>>> the most reasonable due to the fact that, indeed, the SDRAM type and
+>>> parameters are read from the Device Tree.
+>>>
+>>>> becomes less of a headache. You can have LPDDR3/DDR3, and/or LPDDR4, and
+>>>> it gets easier in the Kconfig symbols.
+>>>>
+>>>> I quickly came up with (didn't test aside building):
+>>>>
+>>>> """
+>>>> diff --git a/drivers/ram/rockchip/sdram_rk3399.c
+>>>> b/drivers/ram/rockchip/sdram_rk3399.c
+>>>> index 6fa8f268770d..22d196f1bec7 100644
+>>>> --- a/drivers/ram/rockchip/sdram_rk3399.c
+>>>> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+>>>> @@ -1632,7 +1632,7 @@ static void set_ddr_stride(struct
+>>>> rk3399_pmusgrf_regs *pmusgrf, u32 stride)
+>>>>           rk_clrsetreg(&pmusgrf->soc_con4, 0x1f << 10, stride << 10);
+>>>>     }
+>>>>
+>>>> -#if !defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
+>>>> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR3) ||
+>>>> defined(CONFIG_RAM_ROCKCHIP_DDR3)
+>>>>     static int data_training_first(struct dram_info *dram, u32 channel, u8
+>>>> rank,
+>>>>                                  struct rk3399_sdram_params *params)
+>>>>     {
+>>>> @@ -1723,7 +1723,9 @@ void modify_param(const struct chan_info *chan,
+>>>>           clrsetbits_le32(&denali_pi_params[76], 0x1 << 24, 0x1 << 24);
+>>>>           clrsetbits_le32(&denali_pi_params[77], 0x1, 0x1);
+>>>>     }
+>>>> -#else
+>>>> +#endif
+>>>> +
+>>>> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
+>>>>
+>>>>     struct rk3399_sdram_params dfs_cfgs_lpddr4[] = {
+>>>>     #include "sdram-rk3399-lpddr4-400.inc"
+>>>> @@ -2964,9 +2966,11 @@ static int sdram_init(struct dram_info *dram,
+>>>>           }
+>>>>
+>>>>     #if defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
+>>>> -       /* LPDDR4 needs to be trained at 400MHz */
+>>>> -       lpddr4_set_rate(dram, params, 0);
+>>>> -       params->base.ddr_freq = dfs_cfgs_lpddr4[0].base.ddr_freq / MHz;
+>>>> +       if (dramtype == LPDDR4) {
+>>>> +               /* LPDDR4 needs to be trained at 400MHz */
+>>>> +               lpddr4_set_rate(dram, params, 0);
+>>>> +               params->base.ddr_freq = dfs_cfgs_lpddr4[0].base.ddr_freq / MHz;
+>>>> +       }
+>>>>     #endif
+>>>>
+>>>>           params->base.num_channels = 0;
+>>>> @@ -3067,19 +3071,23 @@ static int conv_of_plat(struct udevice *dev)
+>>>>     }
+>>>>     #endif
+>>>>
+>>>> -static const struct sdram_rk3399_ops rk3399_ops = {
+>>>> -#if !defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
+>>>> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR3) ||
+>>>> defined(CONFIG_RAM_ROCKCHIP_DDR3)
+>>>> +static const struct sdram_rk3399_ops rk3399_lpddr3_ddr3_ops = {
+>>>>           .data_training_first = data_training_first,
+>>>>           .set_rate_index = switch_to_phy_index1,
+>>>>           .modify_param = modify_param,
+>>>>           .get_phy_index_params = get_phy_index_params,
+>>>> -#else
+>>>> +};
+>>>> +#endif
+>>>> +
+>>>> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
+>>>> +static const struct sdram_rk3399_ops rk3399_lpddr4_ops = {
+>>>>           .data_training_first = lpddr4_mr_detect,
+>>>>           .set_rate_index = lpddr4_set_rate,
+>>>>           .modify_param = lpddr4_modify_param,
+>>>>           .get_phy_index_params = lpddr4_get_phy_index_params,
+>>>> -#endif
+>>>>     };
+>>>> +#endif
+>>>>
+>>>>     static int rk3399_dmc_init(struct udevice *dev)
+>>>>     {
+>>>> @@ -3098,7 +3106,21 @@ static int rk3399_dmc_init(struct udevice *dev)
+>>>>                   return ret;
+>>>>     #endif
+>>>>
+>>>> -       priv->ops = &rk3399_ops;
+>>>> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
+>>>> +       if (params->base.dramtype == LPDDR4)
+>>>> +               priv->ops = &rk3399_lpddr4_ops;
+>>>> +#endif
+>>>> +#if defined(CONFIG_RAM_ROCKCHIP_LPDDR3) ||
+>>>> defined(CONFIG_RAM_ROCKCHIP_DDR3)
+>>>> +       if (params->base.dramtype == LPDDR3 || params->base.dramtype == DDR3)
+>>>> +               priv->ops = &rk3399_lpddr3_ddr3_ops;
+>>>> +#endif
+>>>> +
+>>>> +       if (priv->ops == NULL) {
+>>>> +               printf("no ops found for requested dramtype (%d)\n",
+>>>> +                      params->base.dramtype);
+>>>> +               return -EINVAL;
+>>>> +       }
+>>>> +
+>>>>           priv->cic = syscon_get_first_range(ROCKCHIP_SYSCON_CIC);
+>>>>           priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+>>>>           priv->pmu = syscon_get_first_range(ROCKCHIP_SYSCON_PMU);
+>>>> """
+>>>>
+>>>> Of course, we need to update the existing defconfigs to reflect that
+>>>> change as !LPDDR4 used to mean LPDDR3/DDR3 but not anymore. An
+>>>> intermediary step could be to have DDR3/LPDDR3 default y if !LPDDR4 so
+>>>> we avoid changing the defconfigs with the driver patch, and then remove
+>>>> the default y in a follow-up commit by making the rk3399 defconfigs
+>>>> enable the appropriate one (easy to find based on the Device Tree they
+>>>> include).
+>>>>
+>>>> Finally, with the above diff, you can technically build the RK3399
+>>>> driver without any of LPDDR3/DDR3/DDR4 enabled, which can be remediated
+>>>> by an ifdef check at the top like you've done for PX30/RV1126, just that
+>>>> we *want* to check that their sum is NOT 0, anything else would be fine.
+>>>>
+>>>> What do you think?
+>>>
+>>> I look at the RK3399 driver code and at its repository history to provide a
+>>> well-founded answer and... honestly, it seems to me a mess. The driver was
+>>> born to support all SDRAM types at the same time. Then the LPDDR4 config
+>>> option was added by commit b6cf08949d4 because "Supporting LPDDR4 code support
+>>> in RK3399 would increases the size of SPL/TPL", and the related ifdeffery
+>>> followed. But a lot of LPDDR4 code was already there, and has been left in the
+>>
+>> RK3399 started with only SPL supported. Then TPL support got added but
+>> only for some boards, c.f. RK3399 Puma switched to TPL in commit
+>> 2169e29c5a1b ("rockchip: puma-rk3399: migrate to TPL"), "only" four
+>> years ago. SO I think the size argument was reasonable for SPL as it
+>> probably was already quite big, even for RK3399.
+>>
+>>> common area, instead of being reorganized properly. Seems everybody added on
+>>> top, instead of looking to redesign the driver.
+>>>
+>>
+>> That's usually what people do. Doing bigger reworks are not very fun,
+>> and take longer to be reviewed (and sometimes are outright rejected).
+> 
+> Really? That seems to mean I am quite an "unusual people". I find big reworks
+> much more funnier than adding a few lines on top of chaos: I need to spend a
+> lot of reasoning and testing to make the simplest thing work well on top of
+> chaos. And I will have to spend all of that once again, if I will need to add
+> a few more lines just a few months later.
+> 
 
-Thanks for forwarding the report. I think the three AVB warnings
-(662462, 662463,
-and 662464) are false positives. The early success path for an
-unrequested partition
-leaves image_buf NULL, and partition-load failures and unsupported
-hash algorithms
-skip the copy.
+Maybe I'm generalizing too much? There's only so much of your free time 
+you can spend everyday, or if it's your day job, there's likely pressure 
+to do things quickly (or do many things), so I think it's natural to go 
+towards the cheapest available option.
 
-So every path that reaches the copy has already initialized digest, digest_=
-len,
-and digest_type, including when verification errors are allowed.
+>>
+>>> What happens if the driver is built for LPDDR4 only and the value of dramtype
+>>> read from Device Tree is DDR3 or LPDDR3? Or vice versa? The simplest thing I
+>>> would expect is for the driver to print an error and stop. It doesn't. Instead,
+>>> it goes on, without happy ending I suppose.
+>>>
+>>
+>> Yeah, it likely will try to init the DRAM with completely misconfigured
+>> DRAM controller.
+>>
+>>> Another example: looking here and there I came across the gstride_type variable
+>>> in the calculate_stride() function: is it there something magic I cannot
+>>> understand? I see a local variable initialized and then used for comparisons,
+>>> which are all necessarily false.
+>>>
+>>
+>> Yup, and downstream also has the same issue, c.f.
+>> https://github.com/rockchip-linux/u-boot/blob/next-dev/drivers/ram/rockchip/sdram_rk3399.c
+>>
+>>> In the end, I wouldn't touch it. But if you prefer, I can integrate in this
+>>> series the changes you suggested above, adding the defaults y if !LPDDR4 and
+>>> the check for NOT 0.
+>>>
+>>
+>> There's probably a lot of cleanup we can do. I'm suspecting the removal
+>> of gstride_type won't do anything to the size of the TPL/SPL as I would
+>> hope the compiler identifies those always-true and always-false
+>> if-blocks and removes the if check, or the block entirely. It would help
+>> with readability though.
+>>
+>> Up to you, I can also simply send a series with this done myself and you
+>> can rebase your changes on top. What do you prefer?
+> 
+> I prefer to merge your suggestions in my series, not to fragment topic in
+> more pieces and to limit patches management effort. A v4 will follow. I will
+> add a signed off tag with your name too: correct? Thanks.
+> 
 
-I did spot a pre-existing issue in the same AVB block (no check for
-avb_strdup(found)) though,
-will send a patch soon.
+Suggested-by or Co-developed-by would work too I guess. Signed-off-by, 
+the order matters, so I think I'd need to be mentioned before you 
+(assuming you will be the author of the patch). I don't care too much, 
+but I'm not sure what'd be proper for someone who would :)
 
-Thanks,
-Igor
-
-
-> _________________________________________________________________________=
-____________________
-> *** CID 536494:         Integer handling issues  (INTEGER_OVERFLOW)
-> /include/linux/log2.h: 72             in __rounddown_pow_of_two()
-> 66      * __rounddown_pow_of_two() - round down to nearest power of two
-> 67      * @n: value to round down
-> 68      */
-> 69     static inline __attribute__((const))
-> 70     unsigned long __rounddown_pow_of_two(unsigned long n)
-> 71     {
-> >>>     CID 536494:         Integer handling issues  (INTEGER_OVERFLOW)
-> >>>     Expression "fls_long(n) - 1U", where "fls_long(n)" is known to be=
- equal to 0, underflows the type of "fls_long(n) - 1U", which is type "unsi=
-gned int".
-> 72      return 1UL << (fls_long(n) - 1);
-> 73     }
-> 74
-> 75     /**
-> 76      * ilog2 - log base 2 of 32-bit or a 64-bit unsigned value
-> 77      * @n: parameter
->
-> ** CID 243627:       Integer handling issues  (BAD_SHIFT)
-> /include/linux/log2.h: 72           in __rounddown_pow_of_two()
->
->
-> _________________________________________________________________________=
-____________________
-> *** CID 243627:         Integer handling issues  (BAD_SHIFT)
-> /include/linux/log2.h: 72             in __rounddown_pow_of_two()
-> 66      * __rounddown_pow_of_two() - round down to nearest power of two
-> 67      * @n: value to round down
-> 68      */
-> 69     static inline __attribute__((const))
-> 70     unsigned long __rounddown_pow_of_two(unsigned long n)
-> 71     {
-> >>>     CID 243627:         Integer handling issues  (BAD_SHIFT)
-> >>>     In expression "1UL << fls_long(n) - 1U", left shifting by more th=
-an 63 bits has undefined behavior.  The shift amount, "fls_long(n) - 1U", i=
-s 4294967295.
-> 72      return 1UL << (fls_long(n) - 1);
-> 73     }
-> 74
-> 75     /**
-> 76      * ilog2 - log base 2 of 32-bit or a 64-bit unsigned value
-> 77      * @n: parameter
->
->
->
-> View Defects in Coverity Scan
-> <https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
->
-> Best regards,
->
-> The Coverity Scan Admin Team
->
-> ----- End forwarded message -----
->
-> --
-> Tom
+Cheers,
+Quentin
