@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E42F606A31E
-	for <u-boot@archiver.kernel.org>; Tue, 24 Nov 2026 09:02:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE1DA606A31E
+	for <u-boot@archiver.kernel.org>; Tue, 24 Nov 2026 09:02:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DAgagyoy;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=elJoKzj7;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DIGPzgIR
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=getfKgHU;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=K+Yr9S8A;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=X41/YAgb
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E0BE2605ED;
-	Tue, 24 Nov 2026 09:02:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 999DF406A4;
+	Tue, 24 Nov 2026 09:02:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id K_uz6fRWZYY8; Tue, 24 Nov 2026 09:02:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 40F84605F7
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795510965;
-	b=OHGyGElqTTegeB/Ej+iuN4hbRWZ5QSuwwVqqSjoayJWrUVQ2DbKUKd8PdDos872LUJ6z
-	 wSEjypW/3tUXlHSaDgJdq8BdGadiSaBcSl9glGyE2cAjTzc0evj+FQDbIiDiplZsJc4TU
-	 5ciD5mnlSOWgTO2ZoRFCIXjJwff5tKNiKDXj5godl1EkXixphbsmeLFM3k6h/QOscskgZ
-	 cKQZ/VoZUMjcDOMudkA/OjplFWm1eZIAMUxv25CmuzzwqPBACBFofxdckVY3HUw1bOvPG
-	 p+Y0334oi0shy1HWmxbvsBibx4kOvP/SgieMoeVYCwIpxIsGpc7254NZzi0PuR6YycQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YZLDBtTk8iqT; Tue, 24 Nov 2026 09:02:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E438540779
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795510977;
+	b=klGDKGv/IebzlPFvjucMw803PJRLoNf39ZXWiMe+iLyVPKZa7zOb+3QkdKkHVZ+q+C4I
+	 jtSSCf8wgWp7iHdJNt4WpmEY+AMF667s4hDfClr4ur4yrBQWFHHP3HEc/OZWMNhQi6PmI
+	 jubxQc09ymBHTYSLPCo/1tf7SRdOB6YXyGF77EtrfnzSwlF7sCRZ2QyKScQ6UAUuyBn8/
+	 ZaudBt1dnQ+hgtJMiTA0Tgf4GC2Y8G0NybRDQxR539wvuIfNbEFgzB3eP9qSbTntd8FKW
+	 CZ+dKiEcf4p8B4SaBd1MGruC0kJRru7+beY2HbbzoYEtUIc8u8hQYzIp768MDT4zSPg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795510965;
+	c=relaxed/relaxed; t=1795510977;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,133 +32,139 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:X-Google-Original-From:To:
 	 Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=I5lhZgtYMPem6FCv7EgNtbWNP5Sebfg7Rmre7CpcOI0=;
-	b=Rx/ghULv/rK0VV492ZD4+9btnxSuTBWhMLE5FaCznTbOo5Rtxs3gVRzp1zL3N5wn5EA9
-	 c9DITBKVkY75EzUM4Ce4NcTFyn0MpJOATOxGItS8Fq9XUhoWRIAcSjxaJAuPtnMhGzbC4
-	 q7/lklOQpi8hAnOEATmHP6FW+nQL51+eEVEp98OLpU0WOedoizijq0NUd+IXD+oNtHXJF
-	 r84vuOkvLh3swkOlwjkbNvUOj35AzVoFWaEu288m4zLPC9Qo98eN/fMowzC9kn8UdHXgk
-	 Cth6R5onXpaoT7T7HN7Z54iMwIURLNwyPQJHqfKPj7mtLqSBemRWldennrbW067B93w==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=+Jdy+EtbuwD6jydVZLFewbZYBGfJLw7dw/kUpn7neDg=;
+	b=NlB05OxQWkOe2Bxu6iFtuCWHMB3teTtQzqSVQUoSB1iPKqAc8PA1TeAK6pjrbj9UEgHG
+	 ecqT0mK42jV27QchZVrzvdFW22tGtvXhlHkQyjYTWQlXhU6fDxtAhLxfMSKvyIpYzPQlK
+	 2X0ATaQlSQ1r5kkMNQg4f0cGwNTBqTE5XwXma60FyJg2+UoDMyt04Jvu8S9jhy3o0SU1s
+	 Xc5h0nMNm1mnqnV3BSoZ5jRQdWJ/RoQtPz9vQVji8LxqymZYi2hTzJeWdKf2hLcI+rpz5
+	 PxX5sv6VDWZJj+++8aZPYUXrXF2Tdee+ks6lYyo37PNyIuT2d9ezY23ev+F6Ag9kEUg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=K+Yr9S8A;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="X41/YAgb";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795510965;
-	bh=I5lhZgtYMPem6FCv7EgNtbWNP5Sebfg7Rmre7CpcOI0=;
+	d=lists.u-boot-project.org; s=default; t=1795510977;
+	bh=+Jdy+EtbuwD6jydVZLFewbZYBGfJLw7dw/kUpn7neDg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DAgagyoyEylGQ+b7gI3vdyo5tCm+y4MCxqecYKMloZgAk4Dv338wujcfnJ63c8Mnr
-	 ytLmRfU+ArKHfyHOnBFwpbPNHK5bgSn025KbIYn2dHcZB35Ev9KDaI5M7iKvlzFQII
-	 dH4XOn/KNr5ruNE+HH4lwEsI70I6UQv1e+nNUihw+fCl/ioCpbD76F+/BElacZ6+GZ
-	 jTsk6wVMqYdTO6CXHJV2/qvvIxtHAzIQRCkDCTvtPCPEXoIORa/AmC4a7H7oGtY6pv
-	 /BFRHsNDRr7l6yQ9P8dfXOmht8MTn0c7FEXh/3amq1QrWpfm1TqoiLkNgmDRWIlCRl
-	 43MT3CSQMpfAg==
+	b=getfKgHUpKrpn/ZzKDW5dIqc600nYgR3ay3AKo9rpx/0PViNvG+fedpRYk7XpKdgt
+	 O55FsNiOORaiWjkI6qm6ehsNU0/o4w4ZUWGb8gTcAAXKpjpb3WfMOSUBIbf6+HFpkn
+	 vREBywaqXu+B187fJWa5/3L9pUIaGbPpI5RsuKmj5G9XgcTcpoG7dXiKwhlViv/Nhv
+	 yevmo1YtPf7YwLGVNr3q2KrJID+SFSZNx0mkRdVUejdf1yAExZB3+kybvdvhVm7ddb
+	 K7cJ/+Cn9ZRo0JFRMLOhAZYZXhzFNT1Mo8gNsFYIY8blUb9tSN6FlG88MbI/LCgv7W
+	 K/QJRvdbGd++w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 40F84605F7;
-	Tue, 24 Nov 2026 09:02:45 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6D7BE1AB
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E438540779;
+	Tue, 24 Nov 2026 09:02:56 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE49F715
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 53EF1400AE
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:43 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C468A40790
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KvOAWrDmSOM8 for <u-boot@lists.u-boot-project.org>;
- Tue, 24 Nov 2026 09:02:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C867440068
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vukSfK6uOc2V for <u-boot@lists.u-boot-project.org>;
+ Tue, 24 Nov 2026 09:02:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EA51640779
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com;
  envelope-from=manikanta.mylavarapu@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=elJoKzj7; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=DIGPzgIR
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=K+Yr9S8A; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=X41/YAgb
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C867440068
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:42 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id EA51640779
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:52 +0000 (UTC)
 Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AO86Enp3701099
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:42 GMT
+ 6AO8IA8k3701261
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=I5lhZgtYMPe
- m6FCv7EgNtbWNP5Sebfg7Rmre7CpcOI0=; b=elJoKzj7Qaj+5ekVChJI0+Z182D
- aAl7MW+4v4GJgs4LDq1KmdRLfu1xCNlwDkSYgnddJE6AcpKThIxb2aUoJ6Rn51fl
- FXhR20CE+kYc91kx8Fg1TpHTser+BopP5w8dirYezuI3vdR3xeO2ctOCtrLpxSiG
- wWMV+lMOSCPP5fo2R9QDZpkaP8jI6cjKrm8ayEOrSrlMRdx+8A3vWPDOQB6uErQk
- JgETtMm71lhGiEd/+bY/6GE3GrfyCdKtjuQmTH9yZzNuYKuiyzmbZpw029lYsVkc
- gKx2AIHB+wgk02RXu0jMbs9LutDd4NNidBq47acB5+UR/v7Ck1OLlEnd6hQ==
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ +Jdy+EtbuwD6jydVZLFewbZYBGfJLw7dw/kUpn7neDg=; b=K+Yr9S8ANm7NYIWW
+ pOX1x68zhh5ixyYKoMSY6v4cvd5ICDlnllFI8rGpuWWp/TnFFiANQvOh/bCbCVFG
+ hCOAPzlji5jNgjpUgsjRwNb5mO8JYWHjHOn2Sw58atPkuW2U5nepPYtoDHdXHwma
+ 3V1anlPymssnyazvUBXfoJ+pIKqTqpQGZsgt/zoG9tTBEDKLx6JNgGGzdac62fHD
+ xLhl2criW2Eyo/9k7haWpzFXfN4li5fj5C/QmKGjoJsDdTEpAAJCEAVJVL6p/fA9
+ XfTbbYN1fe8XAOUcpVBYEZM3GFeHDdKghBR1cCS4rYUVKgJhA34643QhUSdjxBMz
+ Ya5/zw==
 Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
  [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j50ky1nfr-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j50ky1ngt-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:42 +0000 (GMT)
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 09:02:51 +0000 (GMT)
 Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-386ad819860so1659903eec.0
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 01:02:42 -0800 (PST)
+ 5a478bee46e88-33713e5e6daso7643972eec.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 01:02:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795510961; x=1796115761;
+ d=oss.qualcomm.com; s=google; t=1795510971; x=1796115771;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=I5lhZgtYMPem6FCv7EgNtbWNP5Sebfg7Rmre7CpcOI0=;
- b=DIGPzgIRGT5gtro6g3/FO4SXhRPNK/o5KKX5GrbPJ8qlZcLT4UuJeVLZ9JXLEeRE1B
- /8ja7IY/gnNs0MsgqFTFug8no/8TnEI8MZEtCF5D50yjjcVJ2628L0AnmNNmo/uqA5Cc
- GRPegOqS/qYyJQdl4/BzMCkso0QisbhHeyYbfh1eN8BJXSExAmZpxeuCLFoeZaqYxJck
- WBHb6diX14GY25ckcUN000sy9NwEcye3pUvoUOlKOygMw0NL+btsH4nO0dn3v7SxmLJk
- CffAEN2U+huO1hn71K/v5LYpqIEH+otp+i9dbomcivVqSf6vvr+981p3lGAIeTU9A6j3
- fQ/g==
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=+Jdy+EtbuwD6jydVZLFewbZYBGfJLw7dw/kUpn7neDg=;
+ b=X41/YAgbnjNUg3Lty5KCmuwO2EMrHJo0QcsjPt/i2YFCctaVy1I9BzLdyH8wYzLR7+
+ M8vcvvbjZlYb3WndjscQ6KC9Zl+Ho9Jb/Y3A4dZLlMQNu0/DvrJEWJA242O1CgxCd6Yx
+ ZX1bXLtY+6sXcWb5BLs50y9K7E0KpNXE4fdoaNzkYpnX0W43eO2H3XSiYmvDxROCcJoW
+ veu+kGPvJJAO8kvEB/7lW7fwf4CWpmw+WpWicrapvUnTjDXJ+S5pDHAou6Dy/br3bDbk
+ qQxCmnpxXyOGezoCJXuXnjC3xxhflM8w2EaISq0wcp3tDvinVPrIJgCEq9UhigkHsCeg
+ fY/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795510961; x=1796115761;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=I5lhZgtYMPem6FCv7EgNtbWNP5Sebfg7Rmre7CpcOI0=;
- b=ARbLQnfXhMsu4PP9bMI1S23TbHJ/oQAga+bHRGpt56VdY/jYBB3JHA4hBTFEKCmzPc
- ZG+Tc7xWw5uO1S5ciyLtpwPgTpHpJdvzBaltsq4THyTC6MLwlP16A2gpVcz5t9J59oRL
- xX3s2CdZbV3UdW1fTvrc8GYgm/8R2IIWULOCOV9uYx4wPUM6mz8ILnj90KvJdnuibpgY
- n6wYhu3mmjLxIDkTmpEQd3CBfVi3A+EthObSKNcqtxXJrEwnkKoF9q3g2LM95BOLHbXs
- q6kXAQgs4cudIWd2k6afbAjIgrJ0Ka/QQC2Sk1/p4BV4rKh0iOX4K2wj20eUMLS6sJai
- lsfA==
+ d=1e100.net; s=20260707; t=1795510971; x=1796115771;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=+Jdy+EtbuwD6jydVZLFewbZYBGfJLw7dw/kUpn7neDg=;
+ b=MSehjX0Vlo7TWRV/tva7U10hw4vLUaLZHIH7tnfqB5mbWsvuAaipJj5qxXosAU0nLy
+ +f7lSDAE0sEF5avTzTHM82zb8d8ihad0LbM5q5Fv/YeChpwhUMm2Sgh5a5pCMmxoaB/x
+ xoiGT9Cklyqm3dwtcnjNqVav7qNGs0G7gBPrvWg9XXklyHcVJ82PD6p2rtdxyVyg3P64
+ U7cupdkP6lY5pji5x0OxAd+iK3kSe0SixsQovdqzVWLziruuSbrgk41Yu+S0KvvVKXtL
+ OduMRmAlgluMNYstIj23TnEVdxTEz3sS+x4o3qGrkoKLKyv2yTNZNWLlASvhfF9FEKe2
+ Ur4A==
 X-Forwarded-Encrypted: i=1;
- AL+hErEgxkFni7vydEd3wl39rnSZsUBZYIggIkWdix8bQAYDAkXvRWKycImoYIhBF8rhUoSAbYLanKA=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+ErzD+N2tuKbQNivneq8YsAfGj01Xw8L2SWzlenlQKX686iYwY
- d0upzUZ6YhSsQci6Nwr4Uleh23OU7SxC55dqblsBs+Hez4JnpWiJzQA6woz8BZ6/PLIAuTfgsYf
- /Z0dzBS9qQeiZ4HDyC/SmDOQtVApGpvfKDlkteAX3AVTHpBMQAHdVzKxG8nRgg8lVGh2xPrM=
-X-Gm-Gg: AZFdTZfUV0clTibG9w6vcukGCRCgxLkv6L6DElz/+sO0SuUWkrmGyfkM5ZpTIIW9/4v
- vScKGg3IWh+kFT7gIrlSCcHGffZxUIiX5Em0lUbUBJhpoZZiLISpKe1wG5xqRqhhO5VoKtL78Z2
- g9GKwN4Kq7fx2irG6O1toow/4AJQnOcb4cJw/PZgxwt4IzkjUaNtvsytWeA2x0LSAykdZmIoCVj
- hbPeQIwWo0rAF8nm36Cj3K2f4yzAXHODytpTNZU8HJOIywavnzurj3sdxJ80danO4qG1+QqFiyE
- zeVowna7qgVZSPouZibkxAHu/zumtsyNS5WIewBh5zqiQ3sD/Q5LzwNIa6/He1PQD2YLTdwmTBf
- /xVEyeTeCRyQAOH1nM2piJzyVEkBoYgDmHOQ91+VY04AwKFIOotcNKMmdj/DS6iDtNMYdTKrlLH
- 6E
-X-Received: by 2002:a05:7301:a23:b0:386:9ad5:6641 with SMTP id
- 5a478bee46e88-3869ad56b0emr11308649eec.32.1795510961139; 
- Tue, 24 Nov 2026 01:02:41 -0800 (PST)
-X-Received: by 2002:a05:7301:a23:b0:386:9ad5:6641 with SMTP id
- 5a478bee46e88-3869ad56b0emr11308627eec.32.1795510960663; 
- Tue, 24 Nov 2026 01:02:40 -0800 (PST)
+ AL+hErEViXol9nx0Fboodj1YCwyLbVjKxACGZa3xz+uXkuTXddmyhDVeRDEYotYoLa6T7JA+VpZw8gk=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8u6rD2crETVtf14wQoIknILJ0mp++OtrTrAGMTyg+wsynVXN05
+ pK7CYgQsMmIxKUNdpTYJ2OI6uULTx7681n4G6mbkZQmvL5b+gqQDRlWqeB8j//MyIAOSxJ/cQDB
+ Y1LpeEa87pkfpF2Z9NLb+CnUWNc25on/J/3lShALWSCIGJdsHddrHKTej4ubVVTU70cffBrs=
+X-Gm-Gg: AZFdTZcxPXinypYbIMaEgjqnA0LSBr9yypJhAQy5kiXRiN+L4p62Vp6Wg41/fTaODvU
+ 6f/GgIwLpiER4gwtNdcVAdjJqeXILVyjHtY7mZTwp1H27sH4wAT48+qjaKZtpPy3e/r2IVNc3K8
+ LDQI5DZU+bBzESnljeBnY4zkD7kLE3OPl1dAHNw0Wbocq0FDYR+2y2gRoVBf9dvoq9ALlb6uDDt
+ et9DC1dkBBZlTTg5NPpAbKkVlt6X4dG3HKeZPpVMCPawYaJpHF3hkBV32+H/2gHn0kaB65UtAYk
+ 2cu5rQFLVwavLniAALOtSh3LocqmFWgF4B8pwmoInyNmNst/4lNydO51fVkx+3kfVVfxR3wBtxx
+ ju81ZAAkiPIU50B5OzLWxumCSI5iFJuzT11cL41qqzL2CCcclqXQYrcXes/vo5BqOBsG3zb9rRC
+ Tj
+X-Received: by 2002:a05:7300:8816:b0:381:5fe2:8008 with SMTP id
+ 5a478bee46e88-38571b071d3mr14536919eec.39.1795510970629; 
+ Tue, 24 Nov 2026 01:02:50 -0800 (PST)
+X-Received: by 2002:a05:7300:8816:b0:381:5fe2:8008 with SMTP id
+ 5a478bee46e88-38571b071d3mr14536890eec.39.1795510970030; 
+ Tue, 24 Nov 2026 01:02:50 -0800 (PST)
 Received: from hu-mmanikan-hyd.qualcomm.com ([202.46.22.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-38566fdce48sm46429154eec.14.2026.11.24.01.02.33
+ 5a478bee46e88-38566fdce48sm46429154eec.14.2026.11.24.01.02.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 01:02:40 -0800 (PST)
+ Tue, 24 Nov 2026 01:02:49 -0800 (PST)
 From: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
 X-Google-Original-From: Manikanta Mylavarapu <mmanikan@qti.qualcomm.com>
 To: trini@konsulko.com, lukma@nabladev.com, jerome.forissier@arm.com,
@@ -171,33 +177,35 @@ To: trini@konsulko.com, lukma@nabladev.com, jerome.forissier@arm.com,
  dlan@kernel.org, anshuld@ti.com, u-boot@lists.u-boot-project.org,
  u-boot-qcom@groups.io
 Cc: kelam@qti.qualcomm.com, gpotnuru@qti.qualcomm.com
-Subject: [PATCH v3 2/5] net: dwc_eth_qos: support 2.5Gbps link speed
-Date: Tue, 24 Nov 2026 14:32:07 +0530
-Message-Id: <20261124090210.2560500-3-mmanikan@qti.qualcomm.com>
+Subject: [PATCH v3 3/5] phy: qcom: add SA8775P DWMAC SGMII SerDes driver
+Date: Tue, 24 Nov 2026 14:32:08 +0530
+Message-Id: <20261124090210.2560500-4-mmanikan@qti.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261124090210.2560500-1-mmanikan@qti.qualcomm.com>
 References: <20261124090210.2560500-1-mmanikan@qti.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=Y+ptIReN c=1 sm=1 tr=0 ts=6b0552b2 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=Y+ptIReN c=1 sm=1 tr=0 ts=6b0552bb cx=c_pps
  a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=9u_b7VjEs_DDEDrxvuoA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: lk5Xv8I5_xkG7w5E_8-Ucd32wTQ5kGLL
-X-Proofpoint-ORIG-GUID: lk5Xv8I5_xkG7w5E_8-Ucd32wTQ5kGLL
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDAzNCBTYWx0ZWRfX8b539T3KHzZG
- BBj9gKZg6wf5nN7QyeZ1mpraUulY0FzSjTxxAWOdIba1of2y33Hua4Peo4m7dnpNOMl/TCcfD2t
- g5otsOsEWrGdhAoNtybMLt0Bcf+6kEQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDAzNCBTYWx0ZWRfX+m3XzPo6Z4tV
- ceCh1dDw0iIFv+kLNiVIPDauhOl02d3qOi9whcSXOkxdf8GVsPD0sVms+sKPrLJOuVD2S+cmSFG
- 1Hm14KNBl2iSfB9gFI97tIbwaNiodVUshtOEB9Kb3zLk3nJf51ZH3GwywkRCxj+tkP6GX28Sq0S
- 7DT29bFnWLILB1pnYtLIivu/XQArnYlmJx6mbiT6ix6+vX1npmvUvIihUnVHKF00G2QFaL6LgaC
- 1JOyFO54lkQ0y8vTcdF20UFDJ7dINl4wDIpRmWaqeJmjh1qH18u+QAQgEWouYd115w/TbDo9svh
- MMtNB15dMKJXONiwzMPS81/xFt4KMK5P0xT7iM+rzSNRrEgUx3GMSyhYB0cBQN8u8nToccbuTzh
- VDvAjGK3Oj4a66CNhesKe8RjjYIAMH1/ddCqy2yVlLP3NB23+1sW+AByE5TIxPZcpgvaiIG7dfx
- cwFhd63Iem/UYgiQ+vw==
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=504pF03LXijlR9FUMDYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-GUID: ggIRXqVZY-7xuIJWdFUqE0zztzshUZyS
+X-Proofpoint-ORIG-GUID: ggIRXqVZY-7xuIJWdFUqE0zztzshUZyS
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDAzNCBTYWx0ZWRfX+sQ53OKd2Z7Y
+ M/np6yS506rV+OKMXLGXvIqy84WbwBTKH8OW9f8VX/PXqOkwEAUikJvEGeh7XpWANOEBOgVi57z
+ Qy2HaQlXGKSHw7xb86jsxc2IeP2J+Fc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDAzNCBTYWx0ZWRfXz6uXM+u5jf6h
+ Mshue9d8jYO+igUkRVFit7L+cJ18poWfZSXfOjkLcCI7BCPSS7ygrEBW+/qo4Mh42Zhy8u1NuJI
+ GCQe3U5cttdOAhQwJeb2h5iV+DZf5ZUsF32oDfomIlIj9Rzn8HkBTo/NVN0a4j0ApMgvDpbvILM
+ tc2q+RMp4EH6gneVFxGdgab+tl9hWbRIAP56snSKk7TiHa/f/hGYFh7hKZSQJ5vHexpuJH6SWnB
+ AsjTdJjqOF3xn/68z2hP9APAqccqBOBSBdQYa8VoSMS3vuk7pXCy8fAWm0QHWsk2BBwpt18h1iw
+ sLtxMtuHbqDVsP9+Z59saA4Xb7KIgdCLQfkpn50ZUE0QSR/t4ygVMR1IfJeSJZUs7HqKp8sfChw
+ phmREijlYZsitpucQNwYRR8hCC+QT/dynnl85iArGCUcpeqflHRHvgHuRb2DqLFp6htEsoaMMlp
+ +QIyXhi4+kRzNZhrKnA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-24_01,2026-11-23_01,2025-10-01_01
@@ -224,32 +232,581 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
 
-The MAC port-select and fast-Ethernet speed bits use the GMII encoding
-for both 1Gbps and 2.5Gbps operation.
+SA8775P integrates a QMP SerDes between the DWMAC controller and the
+external Ethernet PHY.
 
-Handle SPEED_2500 in the generic link-adjustment path and leave the
-platform callback responsible for configuring its clocks, wrapper and
-SerDes.
+Add a generic PHY driver with calibration sequences for SGMII,
+1000BASE-X and 2500BASE-X. Manage the vdda-0p9 supply and sgmi_ref clock
+in the PHY power lifecycle, poll the SerDes ready indications and allow
+the active interface mode to be changed through generic_phy_set_mode().
 
 Signed-off-by: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
 ---
 Changes in v3:
-- Let SPEED_2500 fall through to the SPEED_1000 GMII handling.
+- No code changes.
 
- drivers/net/dwc_eth_qos.c | 1 +
- 1 file changed, 1 insertion(+)
+ configs/qcom_qcs9100_defconfig            |   1 +
+ drivers/phy/qcom/Kconfig                  |   8 +
+ drivers/phy/qcom/Makefile                 |   1 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-sgmii.h |  21 +
+ drivers/phy/qcom/phy-qcom-sgmii-eth.c     | 486 ++++++++++++++++++++++
+ 5 files changed, 517 insertions(+)
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-sgmii.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-sgmii-eth.c
 
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 6f158202124..09c6c2e30e5 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -557,6 +557,7 @@ static int eqos_adjust_link(struct udevice *dev)
- 	}
+diff --git a/configs/qcom_qcs9100_defconfig b/configs/qcom_qcs9100_defconfig
+index 342f128726d..a47a7829c98 100644
+--- a/configs/qcom_qcs9100_defconfig
++++ b/configs/qcom_qcs9100_defconfig
+@@ -16,4 +16,5 @@ CONFIG_ENV_SCSI_PART_UUID="71cb9cd0-acf1-b6cb-ad91-be9572fe11a9"
+ # CONFIG_ENV_IS_DEFAULT is not set
+ # CONFIG_ENV_IS_NOWHERE is not set
  
- 	switch (eqos->phy->speed) {
-+	case SPEED_2500:
- 	case SPEED_1000:
- 		en_calibration = true;
- 		ret = eqos_set_gmii_speed(dev);
++CONFIG_PHY_QCOM_SGMII_ETH=y
+ CONFIG_WATCHDOG_AUTOSTART=y
+diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
+index 1fdadaccb12..05897b26ddf 100644
+--- a/drivers/phy/qcom/Kconfig
++++ b/drivers/phy/qcom/Kconfig
+@@ -70,3 +70,11 @@ config PHY_QCOM_USB_SS
+ 	help
+ 	  Enable this to support the Super-Speed USB transceiver on various
+ 	  Qualcomm chipsets.
++
++config PHY_QCOM_SGMII_ETH
++	bool "Qualcomm DWMAC SGMII SerDes/PHY driver"
++	depends on PHY && ARCH_SNAPDRAGON
++	help
++	  Enable this to support the internal SerDes/SGMII PHY used by the
++	  Synopsys DWMAC/DWC_ETH_QOS Ethernet controller on Qualcomm
++	  SA8775P (Lemans).
+diff --git a/drivers/phy/qcom/Makefile b/drivers/phy/qcom/Makefile
+index 714013dc572..664f113fd9b 100644
+--- a/drivers/phy/qcom/Makefile
++++ b/drivers/phy/qcom/Makefile
+@@ -8,3 +8,4 @@ obj-$(CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2) += phy-qcom-snps-femto-v2.o
+ obj-$(CONFIG_PHY_QCOM_SNPS_EUSB2) += phy-qcom-snps-eusb2.o
+ obj-$(CONFIG_PHY_QCOM_USB_HS_28NM) += phy-qcom-usb-hs-28nm.o
+ obj-$(CONFIG_PHY_QCOM_USB_SS) += phy-qcom-usb-ss.o
++obj-$(CONFIG_PHY_QCOM_SGMII_ETH) += phy-qcom-sgmii-eth.o
+diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-sgmii.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-sgmii.h
+new file mode 100644
+index 00000000000..d033ec0d768
+--- /dev/null
++++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-sgmii.h
+@@ -0,0 +1,21 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (c) 2023, Linaro Limited
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef QCOM_PHY_QMP_PCS_SGMII_H_
++#define QCOM_PHY_QMP_PCS_SGMII_H_
++
++#define QPHY_PCS_PHY_START				0x000
++#define QPHY_PCS_POWER_DOWN_CONTROL			0x004
++#define QPHY_PCS_SW_RESET				0x008
++#define QPHY_PCS_LINE_RESET_TIME			0x00c
++#define QPHY_PCS_TX_LARGE_AMP_DRV_LVL			0x020
++#define QPHY_PCS_TX_SMALL_AMP_DRV_LVL			0x028
++#define QPHY_PCS_PCS_READY_STATUS			0x094
++#define QPHY_PCS_TX_MID_TERM_CTRL1			0x0d8
++#define QPHY_PCS_TX_MID_TERM_CTRL2			0x0dc
++#define QPHY_PCS_SGMII_MISC_CTRL8			0x118
++
++#endif
+diff --git a/drivers/phy/qcom/phy-qcom-sgmii-eth.c b/drivers/phy/qcom/phy-qcom-sgmii-eth.c
+new file mode 100644
+index 00000000000..92b0e8ce818
+--- /dev/null
++++ b/drivers/phy/qcom/phy-qcom-sgmii-eth.c
+@@ -0,0 +1,486 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Qualcomm SA8775P DWMAC SGMII SerDes PHY driver
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <generic-phy.h>
++#include <phy.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <clk.h>
++#include <power/regulator.h>
++#include <asm/io.h>
++
++#include "phy-qcom-qmp-pcs-sgmii.h"
++#include "phy-qcom-qmp-qserdes-com-v5.h"
++#include "phy-qcom-qmp-qserdes-txrx-v5.h"
++
++/* QSERDES sub-block offsets from the SerDes MMIO base. */
++#define QSERDES_COM_BASE		0x000	/* PLL / COM block */
++#define QSERDES_TX_BASE			0x400	/* TX lane */
++#define QSERDES_RX_BASE			0x600	/* RX lane */
++#define QSERDES_PCS_BASE		0xc00	/* PCS block */
++
++#define QSERDES_COM_C_READY			BIT(0)
++#define QSERDES_PCS_READY			BIT(0)
++#define QSERDES_PCS_SGMIIPHY_READY		BIT(7)
++#define QSERDES_COM_C_PLL_LOCKED		BIT(1)
++
++#define PLL_POLL_RETRIES			500
++#define PLL_POLL_SLEEP_US			1500
++
++struct qcom_sgmii_eth_priv {
++	void __iomem	*base;
++	struct udevice	*vdda_0p9;
++	struct clk	 clk;
++	phy_interface_t	 interface;
++	bool		 powered;
++};
++
++static inline void serdes_writel(struct qcom_sgmii_eth_priv *priv,
++				 u32 val, u32 offset)
++{
++	writel(val, priv->base + offset);
++}
++
++static inline u32 serdes_readl(struct qcom_sgmii_eth_priv *priv, u32 offset)
++{
++	return readl(priv->base + offset);
++}
++
++/* Program the 1.25-Gbps SGMII/1000BASE-X table. */
++static void qcom_sgmii_eth_init_1g(struct qcom_sgmii_eth_priv *priv)
++{
++	/* PCS: assert SW_RESET, enable POWER_DOWN_CONTROL */
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_SW_RESET);
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_POWER_DOWN_CONTROL);
++
++	/* COM (PLL) registers — mode0 = 1G */
++	serdes_writel(priv, 0x0F, QSERDES_COM_BASE + QSERDES_V5_COM_PLL_IVCO);
++	serdes_writel(priv, 0x06, QSERDES_COM_BASE + QSERDES_V5_COM_CP_CTRL_MODE0);
++	serdes_writel(priv, 0x16, QSERDES_COM_BASE + QSERDES_V5_COM_PLL_RCTRL_MODE0);
++	serdes_writel(priv, 0x36, QSERDES_COM_BASE + QSERDES_V5_COM_PLL_CCTRL_MODE0);
++	serdes_writel(priv, 0x1A, QSERDES_COM_BASE + QSERDES_V5_COM_SYSCLK_EN_SEL);
++	serdes_writel(priv, 0x0A, QSERDES_COM_BASE + QSERDES_V5_COM_LOCK_CMP1_MODE0);
++	serdes_writel(priv, 0x1A, QSERDES_COM_BASE + QSERDES_V5_COM_LOCK_CMP2_MODE0);
++	serdes_writel(priv, 0x82, QSERDES_COM_BASE + QSERDES_V5_COM_DEC_START_MODE0);
++	serdes_writel(priv, 0x55, QSERDES_COM_BASE + QSERDES_V5_COM_DIV_FRAC_START1_MODE0);
++	serdes_writel(priv, 0x55, QSERDES_COM_BASE + QSERDES_V5_COM_DIV_FRAC_START2_MODE0);
++	serdes_writel(priv, 0x03, QSERDES_COM_BASE + QSERDES_V5_COM_DIV_FRAC_START3_MODE0);
++	serdes_writel(priv, 0x24, QSERDES_COM_BASE + QSERDES_V5_COM_VCO_TUNE1_MODE0);
++	serdes_writel(priv, 0x02, QSERDES_COM_BASE + QSERDES_V5_COM_VCO_TUNE2_MODE0);
++	serdes_writel(priv, 0x00, QSERDES_COM_BASE + QSERDES_V5_COM_VCO_TUNE_INITVAL2);
++	serdes_writel(priv, 0x04, QSERDES_COM_BASE + QSERDES_V5_COM_HSCLK_SEL);
++	serdes_writel(priv, 0x00, QSERDES_COM_BASE + QSERDES_V5_COM_HSCLK_HS_SWITCH_SEL);
++	serdes_writel(priv, 0x0A, QSERDES_COM_BASE + QSERDES_V5_COM_CORECLK_DIV_MODE0);
++	serdes_writel(priv, 0x00, QSERDES_COM_BASE + QSERDES_V5_COM_CORE_CLK_EN);
++	serdes_writel(priv, 0xB9, QSERDES_COM_BASE + QSERDES_V5_COM_BIN_VCOCAL_CMP_CODE1_MODE0);
++	serdes_writel(priv, 0x1E, QSERDES_COM_BASE + QSERDES_V5_COM_BIN_VCOCAL_CMP_CODE2_MODE0);
++	serdes_writel(priv, 0x11, QSERDES_COM_BASE + QSERDES_V5_COM_BIN_VCOCAL_HSCLK_SEL);
++
++	/* TX lane registers */
++	serdes_writel(priv, 0x05, QSERDES_TX_BASE + QSERDES_V5_TX_TX_BAND);
++	serdes_writel(priv, 0x0A, QSERDES_TX_BASE + QSERDES_V5_TX_SLEW_CNTL);
++	serdes_writel(priv, 0x09, QSERDES_TX_BASE + QSERDES_V5_TX_RES_CODE_LANE_OFFSET_TX);
++	serdes_writel(priv, 0x09, QSERDES_TX_BASE + QSERDES_V5_TX_RES_CODE_LANE_OFFSET_RX);
++	serdes_writel(priv, 0x05, QSERDES_TX_BASE + QSERDES_V5_TX_LANE_MODE_1);
++	serdes_writel(priv, 0x00, QSERDES_TX_BASE + QSERDES_V5_TX_LANE_MODE_3);
++	serdes_writel(priv, 0x12, QSERDES_TX_BASE + QSERDES_V5_TX_RCV_DETECT_LVL_2);
++	serdes_writel(priv, 0x0C, QSERDES_TX_BASE + QSERDES_V5_TX_TRAN_DRVR_EMP_EN);
++
++	/* RX lane registers */
++	serdes_writel(priv, 0x0A, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FO_GAIN);
++	serdes_writel(priv, 0x06, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_SO_GAIN);
++	serdes_writel(priv, 0x0A, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FASTLOCK_FO_GAIN);
++	serdes_writel(priv, 0x7F, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_SO_SATURATION_AND_ENABLE);
++	serdes_writel(priv, 0x00, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FASTLOCK_COUNT_LOW);
++	serdes_writel(priv, 0x01, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FASTLOCK_COUNT_HIGH);
++	serdes_writel(priv, 0x81, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_PI_CONTROLS);
++	serdes_writel(priv, 0x80, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_PI_CTRL2);
++	serdes_writel(priv, 0x04, QSERDES_RX_BASE + QSERDES_V5_RX_RX_TERM_BW);
++	serdes_writel(priv, 0x08, QSERDES_RX_BASE + QSERDES_V5_RX_VGA_CAL_CNTRL2);
++	serdes_writel(priv, 0x0F, QSERDES_RX_BASE + QSERDES_V5_RX_GM_CAL);
++	serdes_writel(priv, 0x04, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL1);
++	serdes_writel(priv, 0x00, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL2);
++	serdes_writel(priv, 0x4A, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL3);
++	serdes_writel(priv, 0x0A, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL4);
++	serdes_writel(priv, 0x80, QSERDES_RX_BASE + QSERDES_V5_RX_RX_IDAC_TSETTLE_LOW);
++	serdes_writel(priv, 0x01, QSERDES_RX_BASE + QSERDES_V5_RX_RX_IDAC_TSETTLE_HIGH);
++	serdes_writel(priv, 0x20, QSERDES_RX_BASE + QSERDES_V5_RX_RX_IDAC_MEASURE_TIME);
++	serdes_writel(priv, 0x17, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1);
++	serdes_writel(priv, 0x00, QSERDES_RX_BASE + QSERDES_V5_RX_RX_OFFSET_ADAPTOR_CNTRL2);
++	serdes_writel(priv, 0x0F, QSERDES_RX_BASE + QSERDES_V5_RX_SIGDET_CNTRL);
++	serdes_writel(priv, 0x1E, QSERDES_RX_BASE + QSERDES_V5_RX_SIGDET_DEGLITCH_CNTRL);
++	serdes_writel(priv, 0x05, QSERDES_RX_BASE + QSERDES_V5_RX_RX_BAND);
++	serdes_writel(priv, 0xE0, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_LOW);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH2);
++	serdes_writel(priv, 0x09, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH3);
++	serdes_writel(priv, 0xB1, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH4);
++	serdes_writel(priv, 0xE0, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_LOW);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH2);
++	serdes_writel(priv, 0x09, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH3);
++	serdes_writel(priv, 0xB1, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH4);
++	serdes_writel(priv, 0xE0, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_LOW);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH2);
++	serdes_writel(priv, 0x3B, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH3);
++	serdes_writel(priv, 0xB7, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH4);
++	serdes_writel(priv, 0x0C, QSERDES_RX_BASE + QSERDES_V5_RX_DCC_CTRL1);
++
++	/* PCS final registers — release SW_RESET, start PHY */
++	serdes_writel(priv, 0x0C, QSERDES_PCS_BASE + QPHY_PCS_LINE_RESET_TIME);
++	serdes_writel(priv, 0x1F, QSERDES_PCS_BASE + QPHY_PCS_TX_LARGE_AMP_DRV_LVL);
++	serdes_writel(priv, 0x03, QSERDES_PCS_BASE + QPHY_PCS_TX_SMALL_AMP_DRV_LVL);
++	serdes_writel(priv, 0x83, QSERDES_PCS_BASE + QPHY_PCS_TX_MID_TERM_CTRL1);
++	serdes_writel(priv, 0x08, QSERDES_PCS_BASE + QPHY_PCS_TX_MID_TERM_CTRL2);
++	serdes_writel(priv, 0x0C, QSERDES_PCS_BASE + QPHY_PCS_SGMII_MISC_CTRL8);  /* 1G: 0x0C */
++	serdes_writel(priv, 0x00, QSERDES_PCS_BASE + QPHY_PCS_SW_RESET);
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_PHY_START);
++}
++
++/* Program the 3.125-Gbps 2500BASE-X table. */
++static void qcom_sgmii_eth_init_2p5g(struct qcom_sgmii_eth_priv *priv)
++{
++	/* PCS: assert SW_RESET, enable POWER_DOWN_CONTROL */
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_SW_RESET);
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_POWER_DOWN_CONTROL);
++
++	/* COM (PLL) registers — mode0 = 2.5G */
++	serdes_writel(priv, 0x0F, QSERDES_COM_BASE + QSERDES_V5_COM_PLL_IVCO);
++	serdes_writel(priv, 0x06, QSERDES_COM_BASE + QSERDES_V5_COM_CP_CTRL_MODE0);
++	serdes_writel(priv, 0x16, QSERDES_COM_BASE + QSERDES_V5_COM_PLL_RCTRL_MODE0);
++	serdes_writel(priv, 0x36, QSERDES_COM_BASE + QSERDES_V5_COM_PLL_CCTRL_MODE0);
++	serdes_writel(priv, 0x1A, QSERDES_COM_BASE + QSERDES_V5_COM_SYSCLK_EN_SEL);
++	serdes_writel(priv, 0x1A, QSERDES_COM_BASE + QSERDES_V5_COM_LOCK_CMP1_MODE0); /* differs */
++	serdes_writel(priv, 0x41, QSERDES_COM_BASE + QSERDES_V5_COM_LOCK_CMP2_MODE0); /* differs */
++	serdes_writel(priv, 0x7A, QSERDES_COM_BASE + QSERDES_V5_COM_DEC_START_MODE0); /* differs */
++	serdes_writel(priv, 0x00,
++		      QSERDES_COM_BASE + QSERDES_V5_COM_DIV_FRAC_START1_MODE0); /* differs */
++	serdes_writel(priv, 0x20,
++		      QSERDES_COM_BASE + QSERDES_V5_COM_DIV_FRAC_START2_MODE0); /* differs */
++	serdes_writel(priv, 0x01,
++		      QSERDES_COM_BASE + QSERDES_V5_COM_DIV_FRAC_START3_MODE0); /* differs */
++	serdes_writel(priv, 0xA1, QSERDES_COM_BASE + QSERDES_V5_COM_VCO_TUNE1_MODE0); /* differs */
++	serdes_writel(priv, 0x02, QSERDES_COM_BASE + QSERDES_V5_COM_VCO_TUNE2_MODE0);
++	serdes_writel(priv, 0x00, QSERDES_COM_BASE + QSERDES_V5_COM_VCO_TUNE_INITVAL2);
++	serdes_writel(priv, 0x03, QSERDES_COM_BASE + QSERDES_V5_COM_HSCLK_SEL);       /* differs */
++	serdes_writel(priv, 0x00, QSERDES_COM_BASE + QSERDES_V5_COM_HSCLK_HS_SWITCH_SEL);
++	serdes_writel(priv, 0x05,
++		      QSERDES_COM_BASE + QSERDES_V5_COM_CORECLK_DIV_MODE0); /* differs */
++	serdes_writel(priv, 0x00, QSERDES_COM_BASE + QSERDES_V5_COM_CORE_CLK_EN);
++	serdes_writel(priv, 0xCD,
++		      QSERDES_COM_BASE + QSERDES_V5_COM_BIN_VCOCAL_CMP_CODE1_MODE0); /* differs */
++	serdes_writel(priv, 0x1C,
++		      QSERDES_COM_BASE + QSERDES_V5_COM_BIN_VCOCAL_CMP_CODE2_MODE0); /* differs */
++	serdes_writel(priv, 0x11, QSERDES_COM_BASE + QSERDES_V5_COM_BIN_VCOCAL_HSCLK_SEL);
++
++	/* TX lane registers */
++	serdes_writel(priv, 0x04, QSERDES_TX_BASE + QSERDES_V5_TX_TX_BAND);           /* differs */
++	serdes_writel(priv, 0x0A, QSERDES_TX_BASE + QSERDES_V5_TX_SLEW_CNTL);
++	serdes_writel(priv, 0x09, QSERDES_TX_BASE + QSERDES_V5_TX_RES_CODE_LANE_OFFSET_TX);
++	serdes_writel(priv, 0x02,
++		      QSERDES_TX_BASE + QSERDES_V5_TX_RES_CODE_LANE_OFFSET_RX); /* differs */
++	serdes_writel(priv, 0x05, QSERDES_TX_BASE + QSERDES_V5_TX_LANE_MODE_1);
++	serdes_writel(priv, 0x00, QSERDES_TX_BASE + QSERDES_V5_TX_LANE_MODE_3);
++	serdes_writel(priv, 0x12, QSERDES_TX_BASE + QSERDES_V5_TX_RCV_DETECT_LVL_2);
++	serdes_writel(priv, 0x0C, QSERDES_TX_BASE + QSERDES_V5_TX_TRAN_DRVR_EMP_EN);
++
++	/* RX lane registers */
++	serdes_writel(priv, 0x0A, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FO_GAIN);
++	serdes_writel(priv, 0x06, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_SO_GAIN);
++	serdes_writel(priv, 0x0A, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FASTLOCK_FO_GAIN);
++	serdes_writel(priv, 0x7F, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_SO_SATURATION_AND_ENABLE);
++	serdes_writel(priv, 0x00, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FASTLOCK_COUNT_LOW);
++	serdes_writel(priv, 0x01, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_FASTLOCK_COUNT_HIGH);
++	serdes_writel(priv, 0x81, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_PI_CONTROLS);
++	serdes_writel(priv, 0x80, QSERDES_RX_BASE + QSERDES_V5_RX_UCDR_PI_CTRL2);
++	serdes_writel(priv, 0x00, QSERDES_RX_BASE + QSERDES_V5_RX_RX_TERM_BW);        /* differs */
++	serdes_writel(priv, 0x08, QSERDES_RX_BASE + QSERDES_V5_RX_VGA_CAL_CNTRL2);
++	serdes_writel(priv, 0x0F, QSERDES_RX_BASE + QSERDES_V5_RX_GM_CAL);
++	serdes_writel(priv, 0x04, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL1);
++	serdes_writel(priv, 0x00, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL2);
++	serdes_writel(priv, 0x4A, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL3);
++	serdes_writel(priv, 0x0A, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQU_ADAPTOR_CNTRL4);
++	serdes_writel(priv, 0x80, QSERDES_RX_BASE + QSERDES_V5_RX_RX_IDAC_TSETTLE_LOW);
++	serdes_writel(priv, 0x01, QSERDES_RX_BASE + QSERDES_V5_RX_RX_IDAC_TSETTLE_HIGH);
++	serdes_writel(priv, 0x20, QSERDES_RX_BASE + QSERDES_V5_RX_RX_IDAC_MEASURE_TIME);
++	serdes_writel(priv, 0x17, QSERDES_RX_BASE + QSERDES_V5_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1);
++	serdes_writel(priv, 0x00, QSERDES_RX_BASE + QSERDES_V5_RX_RX_OFFSET_ADAPTOR_CNTRL2);
++	serdes_writel(priv, 0x0F, QSERDES_RX_BASE + QSERDES_V5_RX_SIGDET_CNTRL);
++	serdes_writel(priv, 0x1E, QSERDES_RX_BASE + QSERDES_V5_RX_SIGDET_DEGLITCH_CNTRL);
++	serdes_writel(priv, 0x18, QSERDES_RX_BASE + QSERDES_V5_RX_RX_BAND);           /* differs */
++	serdes_writel(priv, 0x18, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_LOW);    /* differs */
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH2);
++	serdes_writel(priv, 0x0C, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH3);  /* differs */
++	serdes_writel(priv, 0xB8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_00_HIGH4);  /* differs */
++	serdes_writel(priv, 0xE0, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_LOW);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH2);
++	serdes_writel(priv, 0x09, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH3);
++	serdes_writel(priv, 0xB1, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_01_HIGH4);
++	serdes_writel(priv, 0xE0, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_LOW);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH);
++	serdes_writel(priv, 0xC8, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH2);
++	serdes_writel(priv, 0x3B, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH3);
++	serdes_writel(priv, 0xB7, QSERDES_RX_BASE + QSERDES_V5_RX_RX_MODE_10_HIGH4);
++	serdes_writel(priv, 0x0C, QSERDES_RX_BASE + QSERDES_V5_RX_DCC_CTRL1);
++
++	/* PCS final registers — release SW_RESET, start PHY */
++	serdes_writel(priv, 0x0C, QSERDES_PCS_BASE + QPHY_PCS_LINE_RESET_TIME);
++	serdes_writel(priv, 0x1F, QSERDES_PCS_BASE + QPHY_PCS_TX_LARGE_AMP_DRV_LVL);
++	serdes_writel(priv, 0x03, QSERDES_PCS_BASE + QPHY_PCS_TX_SMALL_AMP_DRV_LVL);
++	serdes_writel(priv, 0x83, QSERDES_PCS_BASE + QPHY_PCS_TX_MID_TERM_CTRL1);
++	serdes_writel(priv, 0x08, QSERDES_PCS_BASE + QPHY_PCS_TX_MID_TERM_CTRL2);
++	serdes_writel(priv, 0x8C, QSERDES_PCS_BASE + QPHY_PCS_SGMII_MISC_CTRL8);  /* 2.5G: 0x8C */
++	serdes_writel(priv, 0x00, QSERDES_PCS_BASE + QPHY_PCS_SW_RESET);
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_PHY_START);
++}
++
++static int qcom_sgmii_eth_pll_poll(struct udevice *dev,
++				   struct qcom_sgmii_eth_priv *priv,
++				   u32 offset, u32 bit,
++				   const char *name)
++{
++	int i;
++
++	for (i = 0; i < PLL_POLL_RETRIES; i++) {
++		if (serdes_readl(priv, offset) & bit)
++			return 0;
++		udelay(PLL_POLL_SLEEP_US);
++	}
++	dev_err(dev, "SerDes PLL poll timed out waiting for %s\n", name);
++	return -ETIMEDOUT;
++}
++
++static int qcom_sgmii_eth_pll_wait(struct udevice *dev,
++				   struct qcom_sgmii_eth_priv *priv)
++{
++	int ret;
++
++	/* Poll 1: COM C_READY — PLL output clock is ready */
++	ret = qcom_sgmii_eth_pll_poll(dev, priv,
++				      QSERDES_COM_BASE + QSERDES_V5_COM_C_READY_STATUS,
++				      QSERDES_COM_C_READY,
++				      "COM_C_READY");
++	if (ret)
++		return ret;
++
++	/* Poll 2: PCS_READY — PCS block has completed reset */
++	ret = qcom_sgmii_eth_pll_poll(dev, priv,
++				      QSERDES_PCS_BASE + QPHY_PCS_PCS_READY_STATUS,
++				      QSERDES_PCS_READY,
++				      "PCS_READY");
++	if (ret)
++		return ret;
++
++	/* Poll 3: SGMIIPHY_READY — SGMII PHY is operational */
++	ret = qcom_sgmii_eth_pll_poll(dev, priv,
++				      QSERDES_PCS_BASE + QPHY_PCS_PCS_READY_STATUS,
++				      QSERDES_PCS_SGMIIPHY_READY,
++				      "SGMIIPHY_READY");
++	if (ret)
++		return ret;
++
++	/* Poll 4: PLL locked — VCO has locked to target frequency */
++	ret = qcom_sgmii_eth_pll_poll(dev, priv,
++				      QSERDES_COM_BASE + QSERDES_V5_COM_CMN_STATUS,
++				      QSERDES_COM_C_PLL_LOCKED,
++				      "PLL_LOCKED");
++	return ret;
++}
++
++static int qcom_sgmii_eth_probe(struct udevice *dev)
++{
++	struct qcom_sgmii_eth_priv *priv = dev_get_priv(dev);
++	fdt_addr_t base;
++	int ret;
++
++	/* Map SerDes register base from DT "reg" property */
++	base = dev_read_addr(dev);
++	if (base == FDT_ADDR_T_NONE) {
++		dev_err(dev, "Missing 'reg' property for SerDes node\n");
++		return -EINVAL;
++	}
++	priv->base = (void __iomem *)(uintptr_t)base;
++
++	ret = clk_get_by_name(dev, "sgmi_ref", &priv->clk);
++	if (ret) {
++		dev_err(dev, "clk_get_by_name(sgmi_ref) failed: %d\n", ret);
++		return ret;
++	}
++
++	ret = device_get_supply_regulator(dev, "vdda-0p9-supply", &priv->vdda_0p9);
++	if (ret) {
++		dev_err(dev, "device_get_supply_regulator(vdda-0p9) failed: %d\n", ret);
++		return ret;
++	}
++
++	priv->interface = PHY_INTERFACE_MODE_SGMII;
++	priv->powered = false;
++
++	return 0;
++}
++
++static int qcom_sgmii_eth_calibrate(struct udevice *dev,
++				    struct qcom_sgmii_eth_priv *priv,
++				    phy_interface_t interface)
++{
++	switch (interface) {
++	case PHY_INTERFACE_MODE_SGMII:
++	case PHY_INTERFACE_MODE_1000BASEX:
++		qcom_sgmii_eth_init_1g(priv);
++		break;
++	case PHY_INTERFACE_MODE_2500BASEX:
++		qcom_sgmii_eth_init_2p5g(priv);
++		break;
++	default:
++		dev_err(dev, "unsupported Ethernet interface: %d\n", interface);
++		return -EOPNOTSUPP;
++	}
++
++	return qcom_sgmii_eth_pll_wait(dev, priv);
++}
++
++/* Enable local supplies and calibrate after generic phy-supply is enabled. */
++static int qcom_sgmii_eth_power_on(struct phy *phy)
++{
++	struct udevice *dev = phy->dev;
++	struct qcom_sgmii_eth_priv *priv = dev_get_priv(dev);
++	int cleanup_ret;
++	int ret;
++
++	ret = regulator_set_enable(priv->vdda_0p9, true);
++	if (ret) {
++		dev_err(dev, "regulator_set_enable(vdda-0p9) failed: %d\n", ret);
++		return ret;
++	}
++
++	ret = clk_enable(&priv->clk);
++	if (ret) {
++		dev_err(dev, "clk_enable(sgmi_ref) failed: %d\n", ret);
++		cleanup_ret = regulator_set_enable(priv->vdda_0p9, false);
++		if (cleanup_ret)
++			dev_err(dev, "failed to disable vdda-0p9: %d\n",
++				cleanup_ret);
++		return ret;
++	}
++
++	ret = qcom_sgmii_eth_calibrate(dev, priv, priv->interface);
++	if (ret) {
++		cleanup_ret = clk_disable(&priv->clk);
++		if (cleanup_ret)
++			dev_err(dev, "failed to disable sgmi_ref: %d\n",
++				cleanup_ret);
++
++		cleanup_ret = regulator_set_enable(priv->vdda_0p9, false);
++		if (cleanup_ret)
++			dev_err(dev, "failed to disable vdda-0p9: %d\n",
++				cleanup_ret);
++		return ret;
++	}
++
++	priv->powered = true;
++
++	return 0;
++}
++
++/*
++ * SGMII and 1000BASE-X use the 1.25-Gbps SerDes table. 2500BASE-X uses
++ * the 3.125-Gbps table. If the PHY is already powered, changing mode also
++ * recalibrates the hardware and verifies PLL lock before caching the mode.
++ */
++static int qcom_sgmii_eth_set_mode(struct phy *phy, enum phy_mode mode,
++				   int submode)
++{
++	struct udevice *dev = phy->dev;
++	struct qcom_sgmii_eth_priv *priv = dev_get_priv(dev);
++	phy_interface_t interface = submode;
++	int ret;
++
++	if (mode != PHY_MODE_ETHERNET)
++		return -EOPNOTSUPP;
++
++	switch (interface) {
++	case PHY_INTERFACE_MODE_SGMII:
++	case PHY_INTERFACE_MODE_1000BASEX:
++	case PHY_INTERFACE_MODE_2500BASEX:
++		break;
++	default:
++		return -EOPNOTSUPP;
++	}
++
++	if (interface == priv->interface)
++		return 0;
++
++	if (!priv->powered) {
++		priv->interface = interface;
++		return 0;
++	}
++
++	ret = qcom_sgmii_eth_calibrate(dev, priv, interface);
++	if (ret)
++		return ret;
++
++	priv->interface = interface;
++
++	return 0;
++}
++
++static int qcom_sgmii_eth_power_off(struct phy *phy)
++{
++	struct udevice *dev = phy->dev;
++	struct qcom_sgmii_eth_priv *priv = dev_get_priv(dev);
++	int first_err = 0;
++	int ret;
++
++	serdes_writel(priv, 0x08, QSERDES_PCS_BASE + QPHY_PCS_TX_MID_TERM_CTRL2);
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_SW_RESET);
++	udelay(100);
++	serdes_writel(priv, 0x00, QSERDES_PCS_BASE + QPHY_PCS_SW_RESET);
++	serdes_writel(priv, 0x01, QSERDES_PCS_BASE + QPHY_PCS_PHY_START);
++
++	ret = clk_disable(&priv->clk);
++	if (ret) {
++		dev_err(dev, "failed to disable sgmi_ref: %d\n", ret);
++		first_err = ret;
++	}
++
++	ret = regulator_set_enable(priv->vdda_0p9, false);
++	if (ret) {
++		dev_err(dev, "failed to disable vdda-0p9: %d\n", ret);
++		if (!first_err)
++			first_err = ret;
++	}
++
++	if (!first_err)
++		priv->powered = false;
++
++	return first_err;
++}
++
++static const struct phy_ops qcom_sgmii_eth_ops = {
++	.power_on	= qcom_sgmii_eth_power_on,
++	.power_off	= qcom_sgmii_eth_power_off,
++	.set_mode	= qcom_sgmii_eth_set_mode,
++};
++
++static const struct udevice_id qcom_sgmii_eth_ids[] = {
++	{ .compatible = "qcom,sa8775p-dwmac-sgmii-phy" },
++	{ }
++};
++
++U_BOOT_DRIVER(qcom_sgmii_eth) = {
++	.name		= "qcom_sgmii_eth",
++	.id		= UCLASS_PHY,
++	.of_match	= qcom_sgmii_eth_ids,
++	.probe		= qcom_sgmii_eth_probe,
++	.ops		= &qcom_sgmii_eth_ops,
++	.priv_auto	= sizeof(struct qcom_sgmii_eth_priv),
++};
 -- 
 2.34.1
