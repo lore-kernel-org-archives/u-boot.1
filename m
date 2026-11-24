@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9728606A31E
-	for <u-boot@archiver.kernel.org>; Tue, 24 Nov 2026 18:30:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4279606A31E
+	for <u-boot@archiver.kernel.org>; Tue, 24 Nov 2026 18:34:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=l6+adaBe;
-	dkim=pass (1024-bit key) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=FWS6liGv
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UjM811kZ;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=plaCZxYf
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6A53980E13;
-	Tue, 24 Nov 2026 18:30:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 760126069B;
+	Tue, 24 Nov 2026 18:34:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yTzzsIkCBAyn; Tue, 24 Nov 2026 18:30:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8750D80E04
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795545038;
-	b=S1dA9xQyoAqR0Yw2aaq2+vvMCyyLWBhY7TeFbzpeLM09Iet+3kM6z363WU2f0Ybmd7T3
-	 cmXCYDXfCfCaSvrVIkgwExLcHo0R9nmuGZA+RhF9xRlqh1B8Auv+puz9ulxu20qQHTXja
-	 p/iS2qYHzxw5/+1FrEbsmHUce57JhrE7CfCUlwIpLRg3KtmU2M+/rgg3/cpAecgGNTdJq
-	 LtQ3SLflN1tzQ8do7mvuJC3gSbhWVrJ+yP9R5Y7XYNKIluEpPWqB+VDOsO1VgeEw9Atgd
-	 D+HUIyGZzRDR0rawI0QgzmB2LevYQ/YykLhFnNpu5gL+IWCPoN8oOXoaltbN6SG6sCw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Fsw8RZ8vsacP; Tue, 24 Nov 2026 18:34:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A071260749
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795545276;
+	b=Wi1epRwB339tmYlpnYTntric2vM+sByWEf5evEEfLzNJ0fClSLakw2Wx1NZrrDUA/J8M
+	 4Y8h1iBunmW2lr/xGOzynpgHFgn9+785sT+TB+eFATjKLllLj4UlaI+f/EoVfYnH87LPP
+	 1T0oe/ZLyhyD5+A7bIL0yzZ9INNK+73JFbA71vCulwniz4PsisRrwxhvzy/I7wi8yflZ9
+	 0/m6iMQ7Z4teGmJRd+avql4F+m2JsTODwFfp3+xz5/AiayhsB+mdmzyVuCmBOJCdAAcTl
+	 EfnBGXV4oCjmC/SV6Qhw+m6XG3C1zhl8j/h6vTK+RCzaYh4ECxeqGLdxpyRl/nLxPjA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795545038;
+	c=relaxed/relaxed; t=1795545276;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,106 +33,106 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=H9W0PYwlhbPcfcK0xh+GfKaQoRpqYERpsde5B+ayOSg=;
-	b=JigMljt65Bz7OtMvU/u6FjiBCsBrrbY2coSSv8bXbhBkKWV9lW+p7001lZDxSOaYHg7Q
-	 +vNZwdmwbY5iEZJU81iLkqZ1h2Jt+YQ/LufiGSVwEPRI/EnCTCWnWKQFKuPQAIXZWq8Vg
-	 27VIr5DjUuscxhYya65BqLMIwKJ8+XC5LreBEzq7rpHN/smf7C2/ORhBn6UyBNznW2p8A
-	 9UXPwsxiPWh80lhuw/oiBEs4XxSHazp5GxJZem9FLpkipIwI9lUudUtU28I+EDRY/YPre
-	 8EchUv+LIeYIrSwo76wPakp8vJ3hMaTGHsetBFvGGEG2ksaBb9zJQ9vCJ0rus+VlcAw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=oUONfv0s39/dHYvObzOYeCoj5V/yNf0NNQ4CALS/feQ=;
+	b=p0CeSWOUdBwPDA90bEzXZ1bOQYbv/wT7BLYKRL0DOnJ1BMBlVwZxpkCcYCaFWOC0UQ6p
+	 RRB30CrDz4YvAOrXVk8tABT000CYmnM5umR4lXHEqzK2hQly4xoc8bNP/GgOjQBeV4oST
+	 GjR6Z6fViwQSBTWTO3/OYTgL9EZxmrYQfRbRnBlhGaABAcXhDb4BuwhCEdGUmTjjSIlCO
+	 DEo/d916yh98ZHXS4oJfnwEU5NJr5u/TNOgJ5mp+VxjcTL2QXE9JHL7c9x43P9uQ8LVx1
+	 +XzInkawtjEOzktYjbB1yKim4NJMsIwztAM/+6D/fMYRudNGs7Kpv+AyYsKJI0OwMWw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	dmarc=pass header.from=konsulko.com;
-	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=FWS6liGv;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=plaCZxYf;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795545038;
-	bh=H9W0PYwlhbPcfcK0xh+GfKaQoRpqYERpsde5B+ayOSg=;
+	d=lists.u-boot-project.org; s=default; t=1795545276;
+	bh=oUONfv0s39/dHYvObzOYeCoj5V/yNf0NNQ4CALS/feQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=l6+adaBetgqGZwdygzJh8X4uP5kmq97gLhwy5AZRgfcWQBtMBnOogi/eKAw701eFU
-	 eCQWsgFGhxwraIi7jW1zECf9FptZxanVY3j4qWHhQKl25NSqrltYMqFKpgrweW7YGs
-	 NZbU1TlqwFx7JN43kQbyP0EvDCT0xLipFBjSj690KRZ+2FGz6QUDdGpxmQjGb5IzAW
-	 H8S9s8gIui1kX0KiEuz9ER4QvhzyfV4D/o0nY12f1zVAqefWSRJiEZvx/ih9ZmCEk7
-	 5ssryg8TLOC2pmlzyHgBDpqhFpVt5PkRREZP9GPyC02W+f0xzWSH//U470XktfpTGd
-	 9SPQW+Hj+tbUg==
+	b=UjM811kZ4XX6eAo78Mic3afbYgbbpzkf/4xLFHIyd8bxDnl/iSfBvtDnp/urGcSWu
+	 F6dyZKq+Zw6mSHmQEBK1TDhvYLWIcq46RsgGWkrdISXl5NS+TF4jQ1xqmwXAzoFYp9
+	 SfPjmrXCLiSqJsppav1yfM5yJ0icD4yrl6b7kDxbUg0gBS/hmiwzA4cukHtwNfUWDK
+	 7osfxdzLFd3f4SMYgHfWrmwLOIUgaMCvv0B+JouEr46PbncUV7aytJoHRH6qIm6pfl
+	 X7a2xNuP2om4VuyaTupa22judQFaZpANoB9W73LyMgKd4DTu2F9FsaW3cZxuMG9dfE
+	 mzRxuiw5Kg/yA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8750D80E04;
-	Tue, 24 Nov 2026 18:30:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id C56C42DF
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 18:30:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A071260749;
+	Tue, 24 Nov 2026 18:34:36 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 056AC2F5
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 18:34:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AC13580E04
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 18:30:37 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E030060749
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 18:34:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w0Rdq80obQTO for <u-boot@lists.u-boot-project.org>;
- Tue, 24 Nov 2026 18:30:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A697A80DF9
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c30"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4MeNZZAcFgvt for <u-boot@lists.u-boot-project.org>;
+ Tue, 24 Nov 2026 18:34:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EA7FC6069B
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c30; helo=mail-oo1-xc30.google.com;
+ client-ip=2607:f8b0:4864:20::22b; helo=mail-oi1-x22b.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=FWS6liGv
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A697A80DF9
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 18:30:35 +0000 (UTC)
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-703be215729so2120913eaf.1
- for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 10:30:35 -0800 (PST)
+ header.s=google header.b=plaCZxYf
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id EA7FC6069B
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 18:34:34 +0000 (UTC)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-57728d87699so1953954b6e.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 10:34:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1795545035; x=1796149835;
+ d=konsulko.com; s=google; t=1795545273; x=1796150073;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=H9W0PYwlhbPcfcK0xh+GfKaQoRpqYERpsde5B+ayOSg=;
- b=FWS6liGveQ7w9cpsdakLvqdLJrhyJQT241xQtrwqmuAbzEYv7uSMKXD9x/obKadTq+
- OSZBq8DslfRdoZ7lZ+mN1pH/02wyxhacs08vVR01uSN70UonozoNI7EkfWdIoaQ5GuR1
- 6Ea6I4EVhr++2FqTJGAWvY1e0+2ire7DMg73E=
+ bh=oUONfv0s39/dHYvObzOYeCoj5V/yNf0NNQ4CALS/feQ=;
+ b=plaCZxYfaRxbq+GlOjSYkFe8tLWzyIjqGaXN+uJKcPu4TYgQyIEuu51B8sPTYRXebL
+ GPPgxoNGNoel8gWobhLOBB4cZ9e3y6ilTPUiWXB/jNg0M2lDfx1OhWs26BopuFhWSDnv
+ sxSnphwoHB/nSgK2PqhJc6D1IzdIHWrchEv+Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795545035; x=1796149835;
+ d=1e100.net; s=20260707; t=1795545273; x=1796150073;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=H9W0PYwlhbPcfcK0xh+GfKaQoRpqYERpsde5B+ayOSg=;
- b=uAj2HxHOzcGirlr4FMVjbkhilUAUvUxfSi9XOMI+9PynwOHrM98gxX8H93DpLqLNMe
- qO/APdFc/Ud5yn1mJJ+IqF5yIUKNPRs91ontQEjfhOC5td8rOguuzOin3BX1uzBOejHK
- VaXZqJnhUR5frdbpA0Llek+VscRgWf0dcMVrkf7MqsIdYRWHu0tJ+OrCPpz5fi2QbSJ8
- Il7oQhsb1nak7lelYd6u6SXkBu1bHUdiJYqWBkD5PVHHzsrSV3dhcc0IempkFjr4kxzo
- gjoggteYFi/omEtoIlkTZoICzGEQwq+iQEK1PbIRmLXSolqyKVD9o2kMWBjaO/LlK4t8
- PqPA==
-X-Gm-Message-State: APuU4Z8LPycxjneq10do8tehCja6tccA4++bZOGBm26rxDoYJKfO7m3c
- Klhrh+BXslQ9x8OfTJbzlJeLKCjx0VtjcAx2D/mp5Tx0nQlB+dZlWvBEuHRAj/1oDdU=
-X-Gm-Gg: AZFdTZcwa8k+E3IVRR3/g4vvaPbTGMf5o2exmU8hb9PvGT2qsVLJGcrrZyn4KzS2BVV
- xi1H/YteuDokLF4EhRFBAm5N6Vryc2oWxn+DnPaN7EXWJWEEqOzNXqmoF6hix3mdGM/enZGf5f+
- GcTLoG/Iw8In5truMPXboSBYstRQ4ueP+PmG43SYuefiNgfJQNDQhlquRXocAPGM092RXfqrch8
- KxWtRBeRK10RQMWdP2qCn74kZog9A+TkIdnim1iSG99qHr/4Q5GzL9VzhWU2hO+jieNCEyavlIH
- CGr3nGzqWo3tfvs6dXkTUbo2wwZAYcXTO0lOXpLN2v1w2CbcbAP8MK3KYfVxzwIFaC+YONAzHtg
- jy6HZ7Hr5CGYEoiipgaa8+VHFqeJbRVGC5Kz/+3sZiC1vIq/KutqXLI/XgkbzjuQOYYLbU+PPze
- Ex026WMWZDksO3bUB6ay2dFLiTaDbuF9NMsH0YxW9u+lCztvWO2LRcwqMXV8eB6N5lUB12wPoEc
- LWaKG0ZTeVdUjhU3kHq59NQd1z/y0vU6sPlruD5p4W/5gLg/AMeSBDH6BoBf3nrcKQA2HL0rDx3
- 2AMTAA+BOPQS6X3OrQ84srsDDPy/0hYNdgdpGs9xLe5qM7rSHURtx+52J4tGLs4JV5pIMI6e1d5
- 5b6SzYJWE57DjRAJLassMR5nAIvMAdE4846hL5XLhE+dnWkWkk3TUtCCGSsV0+WNTj12KsAuDh4
- Sa0Y84ZRaOq0RX+KQxNkwc9PkVnrfhDtHMHhbuIxKZC2cXTZek1II/
-X-Received: by 2002:a05:6820:55ca:20b0:71a:f042:196c with SMTP id
- 006d021491bc7-71b394fcf85mr9162721eaf.52.1795545034913; 
- Tue, 24 Nov 2026 10:30:34 -0800 (PST)
+ bh=oUONfv0s39/dHYvObzOYeCoj5V/yNf0NNQ4CALS/feQ=;
+ b=UHv6OW0tj64pfvIf3pZ2kEUoXZSyofvSXNWZ/dy4Fntdq1pMwAscOmy+KFkDhk59Uv
+ dO0UE3cc2940QN8e9K3hJpXgpuKkk8CZqjF4wzaeHu/RMVwfMSwAi3PYr6Gi/ca5JWOH
+ JXKjPGo7ilnTdJ07M5tvDwKjmHiNidcn7Jv4DjkC9Imyvd4Z5vPbQrAH1mtiS84MEEYJ
+ x3Rs003RxQrEr3oXNLzFPA550scH/ot6GLaYbQ3g2rcmDq15V7ZL6LWHBSrknmfexvnt
+ PXINUYFr5YV/G6hWv1dduV16CjCZ13C3q87/fSYRrrQLJkZzEThjTEPJWPaUOhuuoZmS
+ MYKQ==
+X-Gm-Message-State: APuU4Z9T5iylP4h2GOo5kbP/LH69R3l9MdE9FacyxQv+sb94dmHZGSWG
+ rXIa7+C1UC4OYn6nUM6PC1wMbAfi1k90rBfaQah4TjmWS3IGm+daCSgART8tVi3tOgE=
+X-Gm-Gg: AZFdTZfBqYd1k2/60j3OElMdCyKUlAqjM+xIz3OHT3KO+QFauVb/75lXQdVn+UOQtTM
+ gX6rbdlJP0LmQrLe23nR5blnHOM6X/5eCXFBmWyhj8VWpgU4NR04n7HBlwcEwJwAImIZso1LjpD
+ 6lRSxsGMSgIlEKxK4ftY1qC80+c6whaCPxNOZ0x3c2EjU5OloxH3a8H+midi0n7jHmP4Zjw8zKG
+ XggDvjIg4MB96RY80QlRhs2vMAavrQ6H7fXZgsq6q7Dg2djm3TLLJ/KhxdhjmwfzsGivT9yUKsp
+ +u9004xQRCYs0EBS6NUkQewVzaFuPieJA+GGsdlc+6Bo3p4qKxTD46mCBAKr93A+ADRCZG28cfE
+ PoA3qfmUvRNcVGvk/tQ2BCcOxC8IBoKLI99Swi06xMt8Ua8Ds8Homczr9C5NeeVcnlZt4CcmdjL
+ 8u4Z5DvD1mR+qQqszr8A84DvkhhqfJQjJeZ5cEpfUZ7ay6KuJDCbHe2xQQbiuYiwKw1T+b2E5DN
+ sSxf1nJP87xnmlLP++oemklGESOdVFP32/XoHT4H0mzTr1gh2qXYtUu2sXaK8UpaRk/mZdRcI+4
+ VwqBm52tgrbMCIhYtuzvmTK+X0iqhgUDIiO0fhu97nzG3O7jcJ8poMgpqFqUkZcgZ65S2a5v8Yj
+ qOedlIR5lHLb+krEGmIOSswq9sOtHXhL2c4Abav6SVEtdTDFJNMpCZcnhlykTpU4+Dnag1O3rIL
+ NEsXtfZgGkuccHm93isJzeBeyWpxYH8mM=
+X-Received: by 2002:a05:6808:2224:b0:572:d0fb:ae56 with SMTP id
+ 5614622812f47-57a0ab2d70fmr17313051b6e.34.1795545273514; 
+ Tue, 24 Nov 2026 10:34:33 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-863607d0f48sm1822683a34.7.2026.11.24.10.30.32
+ 5614622812f47-57a3485e3ecsm11412840b6e.9.2026.11.24.10.34.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 10:30:34 -0800 (PST)
-Date: Tue, 24 Nov 2026 12:30:30 -0600
+ Tue, 24 Nov 2026 10:34:32 -0800 (PST)
+Date: Tue, 24 Nov 2026 12:34:29 -0600
 From: Tom Rini <trini@konsulko.com>
 To: "Richard Genoud (Synaptics)" <richard.genoud@bootlin.com>
 Cc: u-boot@lists.u-boot-project.org,
@@ -157,17 +157,17 @@ Cc: u-boot@lists.u-boot-project.org,
  Guodong Xu <guodong@riscstar.com>, Yixun Lan <dlan@kernel.org>,
  Jisheng Zhang <jszhang@kernel.org>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Subject: Re: [PATCH v2 4/8] soc: synaptics: add sl2610 system controller
- support
-Message-ID: <20261124183030.GW3176972@bill-the-cat>
+Subject: Re: [PATCH v2 5/8] clk: synaptics: add Synaptics sl2610 family clock
+ drivers
+Message-ID: <20261124183429.GX3176972@bill-the-cat>
 References: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
- <20261123-sl2619_base-v2-4-9e3b28c77cda@bootlin.com>
+ <20261123-sl2619_base-v2-5-9e3b28c77cda@bootlin.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gyp979c1eRnWbSbr"
+ protocol="application/pgp-signature"; boundary="5vN9Z32OMTlRVcpT"
 Content-Disposition: inline
-In-Reply-To: <20261123-sl2619_base-v2-4-9e3b28c77cda@bootlin.com>
+In-Reply-To: <20261123-sl2619_base-v2-5-9e3b28c77cda@bootlin.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -186,70 +186,55 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
---gyp979c1eRnWbSbr
+--5vN9Z32OMTlRVcpT
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 23, 2026 at 03:22:03PM +0100, Richard Genoud (Synaptics) wrote:
+On Mon, Nov 23, 2026 at 03:22:04PM +0100, Richard Genoud (Synaptics) wrote:
 
-> Introduce Synaptics sl2610 family system controller driver.
+> Introduce Synaptics sl2619 clock driver.
 >=20
 > The code is based on Linux driver by Jisheng Zhang:
 > https://lore.kernel.org/lkml/20261115102401.3520-1-jszhang@kernel.org/
+> It has been kept as close as possible to the original Linux code, thanks
+> to U-Boot CCF.
 >=20
-> Creates and binds the clock, reset and pin controller platform devices
-> implemented by each SL2610 system control block.
-> The platform device driver gets the block id (muc, soc, avio or cpu) as
-> argument to select the appropriate private data.
+> The main difference is for sl2610_soc_clks_probe, where we force_probe
+> sl2610_aio_clk and sl2610_system_clk, to resolve dependencies.
+>=20
+> NB: this driver has no compatible string because it is bound by the
+> system controller driver
 >=20
 > Signed-off-by: Richard Genoud (Synaptics) <richard.genoud@bootlin.com>
-> ---
->  drivers/soc/Kconfig                   |   1 +
->  drivers/soc/Makefile                  |   1 +
->  drivers/soc/synaptics/Kconfig         |  11 ++++
->  drivers/soc/synaptics/Makefile        |   2 +
->  drivers/soc/synaptics/sl2610-syscon.c | 118 ++++++++++++++++++++++++++++=
-++++++
->  include/soc/synaptics/sl2610-syscon.h |  23 +++++++
->  6 files changed, 156 insertions(+)
->=20
-> diff --git a/drivers/soc/Kconfig b/drivers/soc/Kconfig
-> index 8ef408d9ba1b..0d5990cdc381 100644
-> --- a/drivers/soc/Kconfig
-> +++ b/drivers/soc/Kconfig
-> @@ -50,6 +50,7 @@ config SOC_XILINX_VERSAL_NET
-> =20
->  source "drivers/soc/qcom/Kconfig"
->  source "drivers/soc/samsung/Kconfig"
-> +source "drivers/soc/synaptics/Kconfig"
->  source "drivers/soc/ti/Kconfig"
-> =20
->  endmenu
-> diff --git a/drivers/soc/Makefile b/drivers/soc/Makefile
-> index 00e6a5ac8e2b..de28c93160d5 100644
-> --- a/drivers/soc/Makefile
-> +++ b/drivers/soc/Makefile
-> @@ -5,6 +5,7 @@
->  obj-$(CONFIG_SOC_AMD_VERSAL2) +=3D soc_amd_versal2.o
->  obj-$(CONFIG_SOC_QCOM) +=3D qcom/
->  obj-$(CONFIG_SOC_SAMSUNG) +=3D samsung/
-> +obj-$(CONFIG_SYNAPTICS_SL2619) +=3D synaptics/
+[snip]
+> diff --git a/drivers/clk/synaptics/Kconfig b/drivers/clk/synaptics/Kconfig
+> new file mode 100644
+> index 000000000000..295a126ccea5
+> --- /dev/null
+> +++ b/drivers/clk/synaptics/Kconfig
+> @@ -0,0 +1,12 @@
+> +config CLK_SL2610
+> +	bool "Synaptics SL2610 clock driver"
+> +	depends on CLK && ARCH_SYNAPTICS
+> +	select SOC_SL2610_SYSCON
 
-This should be key'd off of SOC_SL2610_SYSCON instead.
+This option depends on SYSCON so you can get invalid configs here. I
+think you need to add select SYSCON here, if it's required rather than
+optional.
 
 --=20
 Tom
 
---gyp979c1eRnWbSbr
+--5vN9Z32OMTlRVcpT
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCawXXxgAKCRAr4qD1Cr/k
-CrVUAPsHRUJqhWjZgIwhc6NzSQyP7TYR/3Iv/1uqCz3p5a58pAD/VnXUQHRLUAtD
-FE+mTw1fO9+ZXkiMtCc9x0Vw8yB40AU=
-=6Ul1
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCawXYtQAKCRAr4qD1Cr/k
+CgGbAPwNDOX8foOaaLeoL0tduO4H5k5aSX0o86pTV62drsJkKAEAmlkMP2CgD5pk
+/voRuhKVn/Bjgae6pVAejUeiHyiv9AM=
+=RSvS
 -----END PGP SIGNATURE-----
 
---gyp979c1eRnWbSbr--
+--5vN9Z32OMTlRVcpT--
