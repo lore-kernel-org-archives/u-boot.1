@@ -2,123 +2,114 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2646A606A31E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 23:15:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0784E606A31E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 23:53:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IV/BvrA7;
-	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=cEHEjs5T
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eIUKBC3U;
+	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=ftfrTtuC
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0107C608CB;
-	Wed, 25 Nov 2026 23:15:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0E049606D9;
+	Wed, 25 Nov 2026 23:53:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ETUXdbCScDxJ; Wed, 25 Nov 2026 23:15:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8917B608CE
+ id TcRdBJSKDx7X; Wed, 25 Nov 2026 23:53:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 122B0606DA
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795648540;
-	b=Q0xzVlJMX4PCYUyJvKRQYx1tWF8MqPFjiHsIIhnr4XjW2U6q3kDAcRIhfn96pdbJLB4A
-	 dQ8curwZ2MQVkpaCmhV+No7JceMOsoiH7is7v9Fl7OQPnduedxPrl+9SOcr7NzVaOnjkd
-	 dhu8Tk7YkztuqHJclzAIS2fdIrLPdGkGEXNM4rJxkVtF0o3iCK7eHQH+uYFUiHPnJSdtK
-	 KdULBsJu/a9D7K/pf4lW6pzXqTttCAkXuxzFWoR29k1Aqz5/Z5bYG4C01c8lF02NHxrVE
-	 MMf5K78gQR0rxl5bcTFlxGahVPMPgQu8kUT6FeztG2fSVwfe6/b4WPpgf5Aw42U7tPA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795650780;
+	b=PuXjcFx99iHJezm3pG0YMsB8erxdERl6NCvpEazU8rgT0/onkxKpgm928fv5f6ryAOUm
+	 zXUqOd9cIWMb6tH9Pfa1ASDB0kZAplvRyqhebgEA8L5d4bwSzArQM9mBJoO6JPxAdFFYN
+	 imYVsRdvdf8DdcJ1ciJMbF7w2ys8lMHxw0LmW4k2raNKZenK5l34kZqQzt3g6Cm5PgLBg
+	 VrPFWsDy/bYZ3qSkG9JOvwrjOFiO7pZ2H7FjKtLNF9dV9++eh3edjuZHoSnF3Ufufhek/
+	 H5DUMp3QiAVaRT5AW5G+EuQRNXzKjtCVJCL+JryvnSuXy3bhTs/V44USaLSysIrUPLw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795648540;
+	c=relaxed/relaxed; t=1795650780;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-GPT-Reason:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:From:
+	 Subject:To:References:Content-Language:In-Reply-To:Content-Type:
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=PjVFsAOSXdIiFmFfsDHyLJQq71cTcg+bca4MumSA2ss=;
-	b=c3f42zfhw2pt3418P0izBOJx4p/kq21lRdyIkc1gLQzx3X634Jqv8dbWiMv0Hj99aI4I
-	 vv76slz+diEF6/XyAezCjTekFj3sBsk13tYnjsmZQQ2ezUZEWrG+9hymP9RGptYvhnx4s
-	 57zvkKBm0WWdsiw0D0VkeUTKvqloDCHQCV3KUlJVvpUYySbErtjWYNyfjEkpmHbwI32TW
-	 OSpxEGUBYZqQ4lbiBm8mZX6DaRtwH8rGpsANCy00983TrIx1XHI6pPC270Ge8rjGLm96J
-	 u725VoaV9EhVqBi/Cz5liPACwCteDVNA6i44tEhNxuFvtVtNslOmYsgI2P7f6gf7n7w==
+	bh=8r1z27oqGBA29QfVIvN2IsueY3lSwRDuutkuswtphmg=;
+	b=Pc/n85e74+xa9d4XF5OXofvrT2W+wVB/OzsSLYHye7qTo4Nz6/RojwXQSYJlUvvZgN5p
+	 jk4W6GhH0A3uJ1nJfbe9bK3ByBjxmvjyBkr8auceXyyr/zOWo4kgpQY4MVlqu3QSnSJpR
+	 0MgL1161hWBUlFn5g+UT41ieHJChwI7exboL3PZw6wgOSKbyoKpbidXeOLO4di07yeI10
+	 sRQTXZPrxfsnlJ0h5gLcJTw51bj3/DURZ0fdLXWHR8cWxIEo8KE2/2F8eolvUtzdNIRit
+	 9WKSR6+caTGtwfLNFX4QSr9an//RljVjsERp0S0/shwl5oU+DZp2VcKPriV/fPtonRw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795648540;
-	bh=PjVFsAOSXdIiFmFfsDHyLJQq71cTcg+bca4MumSA2ss=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795650780;
+	bh=8r1z27oqGBA29QfVIvN2IsueY3lSwRDuutkuswtphmg=;
+	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IV/BvrA7FWysAe2Du/wiXt5Pjl4vSzy6lumtgPsXqLkVwWollR42KhvLBy+7KD7iz
-	 pn06eNno0rMQ4zoeQykg9qmXTPAlyuTjsiiZe0k+dw57RImq1Lyk/kksWmE3e8QNMC
-	 mpG60YMoj1MkMf5fFj011itjwrJK+05uZTJMLzK150/g4zO3vhAr99hF7t1yk5hNry
-	 gyb8OF29A8PYF1DkV9vmTdtpQbg7LnaLIylADWU17cZS5KMGuSJ69InPHgRdNUTxTl
-	 jCs67Nbmuvgs3JCGT5c69GbGEg/NKjVaIptQHIDCHfWSXIdqLiCtVOb24NtvG7YyLl
-	 S4tXZGv8Ezqng==
+	b=eIUKBC3U9Wwk4yEXAl1a9zOTEZlgFvrZpwqaycsP1o+EzAsyj2oRzdOcxy8IpAt6p
+	 ahL1uPNAotULGpi0c/CaqBJ0yg4mqfkNW66LNOUwaoSwWulC4FI76YwpUZVVfchB2n
+	 xVvWKTs+WdjBwo2fh06SHgkugWubCOXiQ0SRQJVAICJj10nSPVVfwnN5X95BF2tH6w
+	 GWyT5d8lWUfVNi4c24CvjeTSGArtFa/aWuI9/ufZdfiYBuQ4GjL6p+CwywY3KLiXl2
+	 GrTbaNrdebMK8H3ZMbYYWvK3C/xNaNBBLiUEJPtd+WqymDth27Txf/WvkT/K37eKD9
+	 6AOpP5InmlKOg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8917B608CE;
-	Wed, 25 Nov 2026 23:15:40 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2C60E260
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 122B0606DA;
+	Wed, 25 Nov 2026 23:53:00 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BF352371
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:52:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EE72C405C8
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:38 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B0BA84004D
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:52:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id S8JReObzMpHe for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 23:15:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2CA2D40635
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=119.15.109.137
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=119.15.109.137;
- helo=www.nmnhosting.com; envelope-from=alastair@d-silva.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=d-silva.org
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org
- header.a=rsa-sha256 header.s=2025a header.b=cEHEjs5T
-Received: from www.nmnhosting.com (watt.d-silva.org [119.15.109.137])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2CA2D40635
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:36 +0000 (UTC)
-Received: from Hawking.lan (hawking.lan [10.0.1.4])
- by www.nmnhosting.com (Postfix) with ESMTP id 62C4741024;
- Thu, 26 Nov 2026 10:15:28 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=d-silva.org; s=2025a; 
- t=1795648528;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PjVFsAOSXdIiFmFfsDHyLJQq71cTcg+bca4MumSA2ss=;
- b=cEHEjs5TgH4tAPYUIoGvFy1SqzBvaix2NpaAa0EXtB8dWdBQObcWD1Nt0U1VEc19kMC2wc
- 67Ze9vg8gNsIm1tbNde6oj+todYrZV8fGmOnuMOf1vZ58UB9OqOz110frNqF9+bDLPzNN7
- vVcc2WUDzfsLWF2poUkePmMweCKPT94Au8J+zpp2/L7euIjuDMRH2TTY8lgMvlQwDxFaSX
- 6h4x9HmNSSZA+Tqf6ArebNxz7Co4rur7z7KNZU4zjKNSXt94WKZCiNAaA44M+X7lICZN8e
- M4X5HBwU4X+7RYn8A9b9X3EwYGyi9vhHHVaWiTpC/s8rOHmkPvguWfqgNcD8MA==
-X-GPT-Reason: This is a legitimate personal/professional technical
- communication. The mailbox (alastair@d-silva.org) directly matches
- the sender's identity (alastair@d-silva.org), and the content is
- a highly specific technical patch documentation for a hardware
- platform (Allwinner A733). There are no signs of phishing, urgency,
- or unsolicited marketing; the subject line, body content, and professional
- "Signed-off-by" footer are consistent with a standard Linux kernel
- or firmware development workflow.
-From: Alastair D'Silva <alastair@d-silva.org>
-To: u-boot@lists.u-boot-project.org
-Cc: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Alastair D'Silva <alastair@d-silva.org>
-Subject: [PATCH 7/7] doc: sunxi: Document Allwinner A733 LPDDR5 PMU
- architecture
-Date: Thu, 26 Nov 2026 10:14:41 +1100
-Message-ID: <20261125231442.1266343-8-alastair@d-silva.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261125231442.1266343-1-alastair@d-silva.org>
-References: <20261125231442.1266343-1-alastair@d-silva.org>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SIKRCOrfWteS for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 23:52:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 94FEA40024
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=ftfrTtuC
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 94FEA40024
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:52:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1795650770;
+ bh=8r1z27oqGBA29QfVIvN2IsueY3lSwRDuutkuswtphmg=;
+ h=Date:From:Subject:To:References:In-Reply-To:From;
+ b=ftfrTtuC2aDIYeJMABXB5ieqi8TvYPc0S7+VZKGQyOnASbZCT+2+JnLqyvfurc4j1
+ 48mt0r0ZNAyHNSm7h289gmDy5ppQOihJgO/2+KHal0lEWM48is/3dipsrWBQ7hPvdr
+ LdYAPjq5iG55mIWVDVtAOqWd6lM8lgZgCPT0PiuVVcCYvKNCDuizERE42QOKL1Jwix
+ EV1cIXmZ3DrU+t21MizufP/LJ47k09+IWWUsNKqvEhwXbfLCO3o5bCVaNpT8B3LLkA
+ 6DRA2gCWBGEFzoa0x3kv+Fb7MbsTY6Qnpngb7LjU3g40ZTYhpPQqu9JEIkDPqQ4r7o
+ LqqB4d3nfdh0A==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id DCED5B22050A
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 00:52:49 +0100 (CET)
+Message-ID: <0bdd7822-46ea-4e1c-8ce5-a0975ee8cd96@freeshell.de>
+Date: Wed, 25 Nov 2026 15:52:40 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: E Shattow <e@freeshell.de>
+Subject: Re: [DNM v1 0/7] Guide to build reduced SpacemiT K3 vendor BSP
+ (continued)
+To: u-boot@lists.u-boot-project.org
+References: <20261029001555.1890775-1-e@freeshell.de>
+ <20261029003327.1890979-1-e@freeshell.de>
+Content-Language: en-US
+In-Reply-To: <20261029003327.1890979-1-e@freeshell.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,405 +119,237 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add documentation for the Allwinner A733 LPDDR5 PHY Management Unit
-(PMU), covering its clean-room two-team specification and C
-reimplementation provenance, hardware architecture, 4-phase Synopsys
-mailbox handshake, failure diagnostics, ARCv2 toolchain / PMU_FW /
-BINMAN_ALLOW_MISSING Kbuild integration, and SRAM A2 .init.rodata
-layout, and update the general sunxi board guide with A523/A733 TF-A
-platform targets.
+Update as of November 2026,
 
-Assisted-by: LLM
-Signed-off-by: Alastair D'Silva <alastair@d-silva.org>
----
- MAINTAINERS                      |   6 +
- doc/board/allwinner/a733-pmu.rst | 302 +++++++++++++++++++++++++++++++
- doc/board/allwinner/index.rst    |   1 +
- doc/board/allwinner/sunxi.rst    |  14 +-
- 4 files changed, 318 insertions(+), 5 deletions(-)
- create mode 100644 doc/board/allwinner/a733-pmu.rst
+On 10/28/26 17:33, E Shattow wrote:
+> Do Not Merge
+> 
+> Informational purpose only, to aid mainline development of SpacemiT K3
+> support.
+> 
+> ...continued from https://lore.kernel.org/u-boot/20261029001555.1890775-1-e@freeshell.de/
+> 
+> What is known to be working from mainline?
+> - mkimage to post-process SPL into spl/u-boot-spl-mkimage.bin
+> - FIT U-Boot main app u-boot.itb
+> - dependency on OpenSBI
+> 
+> What do we need from the vendor BSP?
+> - SPL
+> 
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 9fc6614e519..6431cf21486 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -707,6 +707,12 @@ F:	drivers/pinctrl/sunxi/
- F:	drivers/video/sunxi/
- F:	tools/sunxi*
- 
-+ARM SUNXI A733 PMU
-+M:	Alastair D'Silva <alastair@d-silva.org>
-+S:	Maintained
-+F:	arch/arm/mach-sunxi/pmu/
-+F:	doc/board/allwinner/a733-pmu.rst
-+
- ARM TEGRA
- M:	Thierry Reding <treding@nvidia.com>
- M:	Svyatoslav Ryhel <clamor95@gmail.com>
-diff --git a/doc/board/allwinner/a733-pmu.rst b/doc/board/allwinner/a733-pmu.rst
-new file mode 100644
-index 00000000000..f7b4c604675
---- /dev/null
-+++ b/doc/board/allwinner/a733-pmu.rst
-@@ -0,0 +1,302 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
-+
-+Allwinner A733 LPDDR5 PHY Management Unit (PMU)
-+===============================================
-+
-+Introduction
-+------------
-+The Allwinner A733 (sun60iw2) SoC introduces a redesigned memory subsystem
-+differing substantially from earlier sunxi SoCs (such as the H6, H616, and A523).
-+While earlier generations performed DRAM delay line calibration directly on the
-+main ARM core, the A733 pairs a Synopsys DesignWare uMCTL2 controller with a
-+Synopsys DDR PHY containing an integrated 32-bit ARC EM4 microcontroller,
-+termed the PHY Management Unit (PMU).
-+
-+U-Boot provides a clean-room freestanding C training firmware implementation
-+(``arch/arm/mach-sunxi/pmu/``) that is compiled from source during the SPL
-+build (or optionally supplied via ``PMU_FW``) and loaded into the ARC EM4 PMU
-+at boot.
-+
-+Clean-Room Specification & Reimplementation Provenance
-+------------------------------------------------------
-+The ARC EM4 LPDDR5 training firmware in ``arch/arm/mach-sunxi/pmu/`` is an
-+original clean-room C implementation authored under ``GPL-2.0+`` using a strict
-+two-team clean-room process:
-+
-+1. **Specification Phase**: Hardware behavior, PHY register apertures, the DCCM
-+   message block ABI (``struct pmu_message_block``), the 4-phase Synopsys
-+   mailbox handshake, and the stage-by-stage LPDDR5 training state machine were
-+   documented as hardware/protocol specifications without transferring vendor
-+   source or machine code.
-+2. **Independent Implementation Phase**: The 7 freestanding C translation units
-+   and headers in ``arch/arm/mach-sunxi/pmu/`` were written independently from
-+   those functional specifications and the JEDEC JESD209-5 LPDDR5 standard, and
-+   validated against physical Allwinner A733 hardware.
-+
-+Background & Theory of Operation
-+--------------------------------
-+
-+Why High-Speed LPDDR5 Requires Training
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+On the A733 at 3600 MT/s (1800 MHz WCK), each individual data bit (DQ) is valid
-+for only ~278 picoseconds (the unit interval or "data eye").
-+
-+Because copper PCB traces have slightly different physical lengths, and silicon
-+transistors inside the SoC and DRAM vary with manufacturing process, operating
-+voltage, and temperature (PVT), signals arrive at slightly different times.
-+If the memory controller sampled data with fixed delays, electrical noise and
-+clock skew would corrupt reads and writes immediately.
-+
-+DRAM training electronically calibrates:
-+
-+* **Timing Deskew**: Adjusting per-bit programmable Local Clock Delay Lines
-+  (LCDLs) so all bits (DQ0..DQ7, DM) and byte strobes (DQS/DQSN) arrive aligned
-+  within the sampling window.
-+* **Vref Voltage Centering**: Adjusting internal DAC reference voltages to place
-+  the logic 0/1 decision threshold at the vertical center of the eye.
-+* **Command/Address (CA) Training**: Synchronizing command lines with the memory
-+  clock via Command Bus Training (CBT) and Low-Power CA (LPCA) training.
-+* **ZQ Impedance Calibration**: Matching output driver (Ron) and on-die termination
-+  (ODT) impedance against an external 240-ohm precision calibration resistor to
-+  suppress transmission line reflections.
-+
-+Role of the Integrated ARC PMU Core
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+Performing microsecond-precision analog delay line sweeps from the host ARM CPU
-+would require millions of slow cross-domain APB bus round-trips. Instead, the
-+PHY integrates a dedicated 32-bit ARC EM4 RISC core (the PMU) with direct
-+access to the PHY CSR bus, allowing it to sweep timing and voltage envelopes,
-+evaluate BIST patterns, and commit calibrated delays autonomously.
-+
-+Hardware Architecture
-+---------------------
-+The memory subsystem consists of:
-+
-+* **Synopsys DesignWare uMCTL2**: Dual-channel memory controller managing queuing,
-+  scheduling, refresh, low-power states, and AXI port arbitration.
-+* **Synopsys DesignWare DDR PHY**: High-speed physical layer interface supporting
-+  LPDDR5/LPDDR5X and LPDDR4X across two independent 16-bit channels.
-+* **ARC EM4 PMU Core**: Embedded 32-bit RISC core with Harvard architecture:
-+
-+  - **IMEM (Instruction Memory / ICCM)**: 64 KiB tightly coupled SRAM.
-+  - **DMEM (Data Memory / DCCM)**: 64 KiB tightly coupled SRAM.
-+  - **APB Master & Slave Interfaces**: Multiplexed PHY CSR bus shared between
-+    the host ARM CPU (when ``PMU_REG_APB_MUX == 0``) and the ARC EM4 core
-+    (when ``PMU_REG_APB_MUX == 1``).
-+
-+PHY Silicon Architecture & Slices
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+Inside the Synopsys DesignWare DDR PHY on the Allwinner A733:
-+
-+* **DBYTE Slices (Data Byte Slices 0..3)**:
-+  Each DBYTE slice manages one 8-bit byte lane (DQ0..DQ7, DMI, and differential
-+  strobe WCK/RDQS). Across the two 16-bit channels there are 4 DBYTE slices:
-+
-+  - **Slice 0**: Channel 0 Byte Lane 0 (DQ0..DQ7)
-+  - **Slice 1**: Channel 0 Byte Lane 1 (DQ8..DQ15)
-+  - **Slice 2**: Channel 1 Byte Lane 0 (DQ0..DQ7)
-+  - **Slice 3**: Channel 1 Byte Lane 1 (DQ8..DQ15)
-+
-+* **AC Slices (Address/Command Slices 0..1)**:
-+  Manage differential clocks (CK_t/CK_c), chip selects, and Command/Address
-+  (CA0..CA6) lines for each channel.
-+* **PUB (PHY Utility Block)**:
-+  Central control block housing master PLL configuration, clock gating, PMU
-+  mailboxes, analog bias generators, and the host APB mux.
-+* **LCDL (Local Clock Delay Line)**:
-+  Tapped analog delay lines at each pin driver and receiver compensating for
-+  PCB trace skew and PVT variation.
-+
-+Memory Map & Addressing
-+-----------------------
-+
-+PMU Microsequencer Register Offsets (PUB)
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+All PUB register accesses over the host APB interface are 16-bit wide
-+(``readw`` / ``writew``) relative to ``SUNXI_DRAM_PHY_CTRL_BASE``
-+(``0x0aaa0000``):
-+
-+===========================  ==================  ========================================
-+Register Name                Offset              Description
-+===========================  ==================  ========================================
-+``PMU_REG_APB_MUX``          ``0x0000``          0 = Host ARM owns APB; 1 = PMU ARC owns
-+``PMU_REG_POLL_STAT``        ``0x0008``          ``UctShadowRegs`` bit 0: 0 = msg pending
-+``PMU_REG_HANDOFF_0``        ``0x0060``          Handshake status 0
-+``PMU_REG_HANDOFF_1``        ``0x0062``          ``DctWriteProt`` (0 = ack, 1 = release)
-+``PMU_REG_STATUS_LO``        ``0x0064``          ``UctWriteOnlyShadow`` (status [15:0])
-+``PMU_REG_MAILBOX_INT``      ``0x0066``          ``UctDatWriteOnlyShadow`` / init trigger
-+``PMU_REG_STATUS_HI``        ``0x0068``          Status [31:16]
-+``PMU_REG_RESET``            ``0x0132``          ``MicroReset`` (bit 0: stall, bit 3: rst)
-+===========================  ==================  ========================================
-+
-+Related System Controllers:
-+
-+* **CCU Base (0x02002000)**:
-+
-+  - ``PLL_DDR_CTRL_REG`` (``0x02002020``): DRAM subsystem PLL control, programmed
-+    from ``CONFIG_DRAM_CLK`` in ``dram_sun60i_a733.c``.
-+  - ``MBUS_CLK_REG`` (``0x02002580``): MBUS clock control.
-+  - ``DRAM0_CLK_REG`` (``0x02002c00``): DRAM0 module clock control.
-+  - ``DRAM0_BGR_REG`` (``0x02002c0c``): DRAM0 bus gating and reset.
-+
-+* **STBY_PRCM Base (0x07010000)**:
-+
-+  - ``VCC_DRAM_ISO_REG`` (``0x07010250``): DRAM power domain isolation release.
-+  - ``CH0_DMC_CLK_REG`` (``0x07010310``): DMC clock and reset pulse control.
-+
-+* **CPUCFG Base (0x08000000)**:
-+
-+  - ``SUNXI_CPU_DA_DDR_CTRL_REG`` (``0x08000200``): CPU Direct Access DDR path
-+    mux, set to ``1`` (AXI2HIF) early in ``boot0.h`` and ``rmr_switch.S`` prior
-+    to the AArch32-to-AArch64 warm reset.
-+
-+Address Mapping from Host ARM Core
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+The host ARM CPU accesses the DDR PHY and PMU SRAMs over the internal APB
-+interconnect:
-+
-+=======================  ==================  ========================================
-+Region                   ARM Physical Base   ARC EM4 Local Address
-+=======================  ==================  ========================================
-+PMU IMEM (ICCM, 64 KiB)  ``0x0a9a0000``      ``0x00000000`` (vector table and code)
-+PMU DMEM (DCCM, 64 KiB)  ``0x0a9b0000``      ``0x80000000`` (message block & state)
-+PHY Control Registers    ``0x0aaa0000``      Internal CSR bus via APB master
-+uMCTL2 Channel 0         ``0x0a110000``      N/A (Host ARM only)
-+uMCTL2 Channel 1         ``0x0a510000``      N/A (Host ARM only)
-+=======================  ==================  ========================================
-+
-+Training Sequence & Firmware State Machine
-+------------------------------------------
-+
-+Training Sequence Flags (SequenceCtrl)
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+The host specifies the requested calibration stages via ``sequence_ctrl``
-+(offset ``0x10`` in ``struct pmu_message_block``):
-+
-+===========================  ======  ====================================================
-+Flag Name                    Bit     Description
-+===========================  ======  ====================================================
-+``PMU_SEQ_DEV_INIT``         Bit 0   Device init, PLL lock, CBT entry, ZQ calibration
-+``PMU_SEQ_STAGE_VREF``       Bit 1   Receiver Vref voltage centering sweep
-+``PMU_SEQ_STAGE_DCD``        Bit 2   Duty cycle distortion (DCD) correction
-+``PMU_SEQ_STAGE_DQS``        Bit 3   Read/Write DQS strobe timing centering
-+``PMU_SEQ_BIST_SEARCH_WIN``  Bit 4   BIST test pattern search window setup
-+``PMU_SEQ_SEARCH_WIN``       Bit 6   High-resolution 2D eye margin search
-+``PMU_SEQ_ZQ_CAL``           Bit 7   Standalone ZQ pad impedance calibration
-+``PMU_SEQ_DESKEW_SWEEP``     Bit 8   Per-bit DQ deskew delay line tuning
-+``PMU_SEQ_MARGIN_STEP``      Bit 9   Margin envelope boundary evaluation
-+``PMU_SEQ_LANE_WIN_SWEEP``   Bit 10  Lane window sweep & cross-lane matrix scan
-+``PMU_SEQ_LPCA_INIT``        Bit 12  Low-Power Command/Address (LPCA) training
-+===========================  ======  ====================================================
-+
-+SPL invokes ``PMU_SEQ_FULL_TRAIN`` (``0x125f``: bits 0, 1, 2, 3, 4, 6, 9, 12)
-+during cold boot. ``sunxi_dram_init()`` first attempts dual-rank training
-+(``rank_mask = 0x03``); if unpopulated Rank 1 causes training to fail on a
-+single-rank SKU, SPL pulses the DMC reset and automatically retries single-rank
-+training (``rank_mask = 0x01``).
-+
-+Execution & 4-Phase Mailbox Handshake
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+1. **Firmware & Message Block Loading**:
-+   ``mctl_phy_init()`` invokes ``mctl_pmu_load_sram()`` to set
-+   ``PMU_REG_APB_MUX = 0`` (host owns APB) and write all 32,768 16-bit
-+   halfwords (64 KiB) of IMEM (``0x0a9a0000``), applies pre-DMEM PHY
-+   configuration (``dram_phy_pre_dmem_regs``), loads DMEM (``0x0a9b0000``)
-+   with ``struct pmu_message_block`` (deriving ``dram_rate_mts`` from
-+   ``CONFIG_DRAM_CLK``), and programs the CA/DQ pin swizzle via
-+   ``mctl_phy_load_pin_swizzle()`` (when ``CONFIG_DRAM_SUN60I_A733_PIN_SWIZZLE=y``)
-+   while initializing SRAM parity bits across the full 64 KiB apertures.
-+2. **ARC Reset Release**:
-+   ``mctl_pmu_run_training()`` switches ``PMU_REG_APB_MUX = 1`` (PMU owns APB),
-+   sequences ``PMU_REG_RESET`` through ``0x0009 -> 0x0001 -> 0x0001 -> 0x0000``
-+   (asserting ``ResetToMicro`` + ``StallToMicro``, clearing ``ResetToMicro``,
-+   then releasing ``StallToMicro``), sets ``PMU_REG_HANDOFF_1 = 1`` and
-+   ``PMU_REG_MAILBOX_INT = 1``, and waits for ``PMU_REG_POLL_STAT`` bit 0 to
-+   rise to ``1``.
-+3. **4-Phase Synopsys Mailbox Loop**:
-+   Whenever the ARC core posts a streaming or terminal mailbox message, it
-+   writes the status word and clears ``UctWriteProt`` so ``PMU_REG_POLL_STAT``
-+   bit 0 drops to ``0``:
-+
-+   - Host reads ``status`` from ``PMU_REG_STATUS_LO`` and ``PMU_REG_STATUS_HI``.
-+   - Host writes ``0x0000`` to ``PMU_REG_HANDOFF_1`` (``DctWriteProt = 0``) to
-+     acknowledge receipt.
-+   - Host polls ``PMU_REG_POLL_STAT`` until the ARC core sets ``UctWriteProt = 1``
-+     (bit 0 returns to ``1``).
-+   - Host writes ``0x0001`` to ``PMU_REG_HANDOFF_1`` (``DctWriteProt = 1``) to
-+     re-arm the mailbox.
-+   - If ``status == PMU_STATUS_SUCCESS`` (``0x00000007``),
-+     ``mctl_pmu_run_training()`` stalls the ARC core (``PMU_REG_RESET = 1``)
-+     and ``mctl_phy_init()`` reclaims APB ownership (``PMU_REG_APB_MUX = 0``)
-+     immediately upon return.
-+   - If ``status == PMU_STATUS_FATAL_ERROR`` (``0x000000ff``), host stalls the
-+     ARC core (``PMU_REG_RESET = 1``), reclaims APB ownership
-+     (``PMU_REG_APB_MUX = 0``), logs diagnostics via ``mctl_pmu_log_error()``
-+     (when ``log_err`` is true, i.e., not a speculative dual-rank probe), and
-+     aborts the current rank attempt.
-+   - Intermediate messages (such as ``0x08`` streaming traces when
-+     ``post_threshold != 0xff``) are logged via ``debug()`` and the loop
-+     continues until terminal status.
-+
-+Diagnostics & Telemetry
-+-----------------------
-+* **Failure Diagnostics (``mctl_pmu_log_error``)**:
-+  On a fatal assertion or timeout, SPL stalls the ARC core
-+  (``PMU_REG_RESET = 1``), switches the APB mux back to host ARM access
-+  (``PMU_REG_APB_MUX = 0``), and reads both ``train_mode`` (DMEM offset
-+  ``0x14``) and ``assert_code`` (DMEM offset ``0x0c``) before printing an
-+  error diagnostic.
-+* **Trained Slice Inspection (``mctl_phy_dump_slices``)**:
-+  After successful training, SPL logs calibrated delay registers across DBYTE
-+  slices 0..3 via ``debug()`` while host APB access is active.
-+
-+Build System, Toolchain & SRAM Layout
-+-------------------------------------
-+The PMU firmware source resides in ``arch/arm/mach-sunxi/pmu/``:
-+
-+* ``pmu_primitives.c``: Reset vector, MMIO helpers, delays, and runtime primitives.
-+* ``pmu_clock.c``: PHY PLL control, bounded clock-gate handoff, and ratio math.
-+* ``pmu_telemetry.c``: 4-phase host mailbox IPC and diagnostic trace dispatch.
-+* ``pmu_cbt.c``: Command Bus Training (CBT) and LPCA calibration routines.
-+* ``pmu_deskew.c``: DBYTE & AC slice LCDL delay sweeps and BIST engines.
-+* ``pmu_eye.c``: 1D/2D eye margin search and Vref/delay centroid calculation.
-+* ``pmu_train.c``: Top-level firmware entry and ``sequence_ctrl`` state machine.
-+* ``pmu_fw.h``, ``dwc_ddrphy_pmu_regs.h``, ``sunxi_pmu_abi.h``, ``pmu.ld``:
-+  Internal prototypes, PHY register definitions, host/ARC ABI, and linker script.
-+* ``build_pmu_fw.py``: Standalone builder and C header generator.
-+
-+Kbuild Variables & Toolchain Resolution
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+During SPL builds with ``CONFIG_DRAM_SUN60I_A733_PMU=y`` (automatically enabled
-+when the companion ``CONFIG_DRAM_SUN60I_A733`` SoC DRAM driver is selected),
-+``arch/arm/mach-sunxi/Makefile`` generates
-+``spl/arch/arm/mach-sunxi/dram_sun60i_a733_pmu_fw.h`` in the build tree via
-+``$(call if_changed,pmu_fw)``:
-+
-+* **In-tree source build (default)**: ``build_pmu_fw.py`` locates an ARCv2 GCC
-+  toolchain via ``ARC_CROSS_COMPILE``, ``~/.buildman`` ``[toolchain]`` /
-+  ``[toolchain-prefix]`` entries, standard ``buildman-toolchains`` /
-+  ``/opt/gcc-*-nolibc/arc-linux/bin/`` paths, or ``arc-linux-gnu-`` /
-+  ``arc-linux-`` / ``arc-elf32-`` prefixes on ``PATH``.
-+* **Pre-built firmware override (``PMU_FW``)**: Passing
-+  ``make PMU_FW=/path/to/pmu_fw.bin`` wraps an existing raw ARC PMU binary
-+  directly without invoking an ARC cross-compiler.
-+* **Missing-blob CI fallback (``BINMAN_ALLOW_MISSING=1``)**: When building on a
-+  host without an ARCv2 compiler and ``BINMAN_ALLOW_MISSING=1`` (or
-+  ``ALLOW_MISSING=1``) is set, ``build_pmu_fw.py`` emits a zero-filled stub
-+  marked with ``SUN60I_A733_PMU_FW_MISSING`` so ``arm64`` compile-test CI
-+  completes cleanly without errors; booting such a stub image prints a clear
-+  runtime error in the companion SPL DRAM driver.
-+
-+Disposable ``.init.rodata`` & SRAM A2 Layout
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+In the companion A733 core bringup series, SPL runs in SRAM A2 starting at
-+``0x00047000`` while Trusted Firmware-A ``BL31`` loads at
-+``CONFIG_SUNXI_BL31_BASE`` (``0x00058000``). ``MACH_SUN60I_A733`` enables
-+``CONFIG_SPL_DISPOSABLE_INIT_RODATA``, placing the ~52 KiB
-+``sun60i_a733_pmu_imem`` array and one-time PHY register tables into
-+``.init.rodata`` *after* ``_image_binary_end``. ``CONFIG_SPL_ACTIVE_MAX_SIZE``
-+(``0x10fa0``) enforces at link time that persistent SPL code, rodata, and data
-+remain below ``0x00058000``, allowing ``BL31`` to safely reclaim the
-+``.init.rodata`` tail once ``sunxi_dram_init()`` has finished training DRAM.
-diff --git a/doc/board/allwinner/index.rst b/doc/board/allwinner/index.rst
-index 7352ccd5c0a..6e89552f3d3 100644
---- a/doc/board/allwinner/index.rst
-+++ b/doc/board/allwinner/index.rst
-@@ -7,3 +7,4 @@ Allwinner (sunxi) boards
-    :maxdepth: 2
- 
-    sunxi
-+   a733-pmu
-diff --git a/doc/board/allwinner/sunxi.rst b/doc/board/allwinner/sunxi.rst
-index 5c2406d3959..b6389490b26 100644
---- a/doc/board/allwinner/sunxi.rst
-+++ b/doc/board/allwinner/sunxi.rst
-@@ -35,9 +35,9 @@ For more details, and alternative boot locations or installations, see below.
- 
- Building Arm Trusted Firmware (TF-A)
- ------------------------------------
--Boards using a 64-bit Soc (A64, H5, H6, H616, R329) require the BL31 stage of
--the `Arm Trusted Firmware-A`_ firmware. This provides the reference
--implementation of secure software for Armv8-A, offering PSCI and SMCCC
-+Boards using a 64-bit SoC (A64, H5, H6, H616, R329, A523, A733) require the
-+BL31 stage of the `Arm Trusted Firmware-A`_ firmware. This provides the
-+reference implementation of secure software for Armv8-A, offering PSCI and SMCCC
- services. Allwinner support is fully mainlined. To build bl31.bin::
- 
-   $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-@@ -46,7 +46,8 @@ services. Allwinner support is fully mainlined. To build bl31.bin::
-   $ export BL31=$(pwd)/build/sun50i_a64/debug/bl31.bin
- 
- The target platform (``PLAT=``) for A64 and H5 SoCs is sun50i_a64, for the H6
--sun50i_h6, for the H616 sun50i_h616, and for the R329 sun50i_r329. Use::
-+sun50i_h6, for the H616 sun50i_h616, for the R329 sun50i_r329, for the A523
-+sun55i_a523, and for the A733 sun60i_a733 (pending upstream TF-A support). Use::
- 
-   $ find plat/allwinner -name platform.mk
- 
-@@ -97,7 +98,10 @@ build command line::
- 
-     $ make BL31=/src/tf-a.git/build/sun50i_h616/debug/bl31.bin
- 
--The same applies to the (optional) SCP firmware.
-+The same applies to the (optional) SCP firmware. Boards based on the Allwinner
-+A733 additionally compile the LPDDR5 PHY Management Unit (PMU) firmware during
-+the SPL build using an ARCv2 GCC cross-compiler (``ARC_CROSS_COMPILE``) or an
-+external ``PMU_FW`` binary; see :doc:`a733-pmu` for details.
- 
- The file containing everything you need is called ``u-boot-sunxi-with-spl.bin``,
- you will find it in the root folder of your U-Boot (build) tree. Except for
--- 
-2.53.0
+> (Optional) Additional hardware used?
+> - K3 Pico-ITX BootROM UART SPL loader mode selected by pull-up via
+>   FPC-36P reverse cable and adapter to header pins (2.54mm pitch
+>   DuPont connector).
 
+Also an JST GH1.25 4P cable and breakout board accommodates a power
+indicator LED and momentary switch. Long-press (~3 seconds) of the
+switch begins a flashing power indicator LED sequence and after some
+delay (~4 seconds) the power turns off. Short-press of the switch turns
+on power when it was off previously. This can be useful to instrument
+the power on/off sequence and set boot modes for automated board
+testing, without soldering to the reset and boot mode button connections
+directly.
+
+OpenCD debug access for K3 Pico-ITX to K3 SoC is connected via five
+solder points on the opposite face of PCB and near the same position
+where the FPC-36P connector is populated. This is documented at:
+
+https://github.com/spacemit-com/docs-chip/blob/main/en/key_stone/k3/k3_hw/static/pico-jtag-debug.png
+
+Signal layout ordering:
+- TRST_N (near "do not dispose in trash" silkscreen iconography)
+- TDO
+- TMS
+- TDI
+- TCK (near FPC-36P pin 18 on opposite face of PCB)
+
+OpenCD debug access for K3 CoM260 to K3 SoC is connected via an adapter
+for the micro SD card slot.
+
+> 
+> The assumption in this guide is root user in a fresh Debian 13
+> Trixie build environment on amd64 architecture build host.
+> 
+> dpkg --add-architecture riscv64
+> apt install -y bison ca-certificates flex gcc-riscv64-linux-gnu git \
+>   libgnutls28-dev libpython3-dev libssl-dev python3-setuptools swig \
+>   curl
+> export CROSS_COMPILE=riscv64-linux-gnu-
+> 
+> git clone https://github.com/riscv-software-src/opensbi.git \
+>   opensbi.git
+
+> git -C opensbi.git checkout d28bc6f89837 # origin/master
+> # v6 "platform: generic: spacemit: add K3 platform support"
+> # https://patchwork.ozlabs.org/project/opensbi/list/?series=530305
+> curl https://patchwork.ozlabs.org/series/530305/mbox/ \
+>   | git -C opensbi.git am
+> make -C opensbi.git O=../opensbi clean
+> make -C opensbi.git O=../opensbi PLATFORM=generic
+
+This was since merged in mainline OpenSBI for the next
+tag after v1.9 release.
+
+> 
+> git clone https://git.u-boot-project.org/u-boot/u-boot.git u-boot.git
+> git -C u-boot.git remote add -f spacemit-com \
+>   https://github.com/spacemit-com/uboot-2022.10.git
+> 
+
+> git -C u-boot.git checkout 03e45557e1f3 # origin/main
+> # v1 "Spacemit K3 enable Linux boot"
+> # https://patchwork.ozlabs.org/project/uboot/list/?series=530384
+> curl https://patchwork.ozlabs.org/series/530384/mbox/ \
+>   | git -C u-boot.git am
+> make -C u-boot.git O=../u-boot spacemit_k3_defconfig
+> fw_dynbin=$(realpath opensbi/platform/generic/firmware/fw_dynamic.bin)
+> make -C u-boot.git O=../u-boot OPENSBI=$fw_dynbin
+
+This was since merged in mainline U-Boot for v2026.10-rc6 release candidate.
+
+> 
+> git -C u-boot.git checkout k3-br-v1.0.10 # spacemit-com/k3-br-v1.0.y
+> # v1 "Guide to build reduced SpacemiT K3 vendor BSP"
+> # https://patchwork.ozlabs.org/project/uboot/list/?series=530447
+> curl https://patchwork.ozlabs.org/series/530447/mbox/ \
+>   | git -C u-boot.git am
+> mki=$(realpath u-boot/tools/mkimage)
+> make -C u-boot.git O=../bsp-spi \
+>   spacemit_k3_uart_spi_defconfig
+> make -C u-boot.git O=../bsp-spi MKIMAGE=$mki \
+>   spl/u-boot-spl-mkimage.bin
+> make -C u-boot.git O=../bsp-nospi \
+>   spacemit_k3_uart_nospi_defconfig
+> make -C u-boot.git O=../bsp-nospi MKIMAGE=$mki \
+>   spl/u-boot-spl-mkimage.bin
+> 
+> tar -czf reduced-spacemit-k3-vendor-bsp.tar.gz \
+>   --transform 's~^~reduced-spacemit-k3-vendor-bsp/~' \
+>   bsp-nospi/spl/u-boot-spl-mkimage.bin \
+>   bsp-spi/spl/u-boot-spl-mkimage.bin \
+>   u-boot/u-boot.itb
+> 
+> ### K3 Pico-ITX BootROM UART SPL loader
+> Connect USB selection bias-pulldown pin 10 high to VCC1V8 pin 1 or
+> pin 2 for UART selection and pin 11 high to VCC1V8 selects BootROM
+> USB/UART download mode; pin 11 low is normal operation from selected
+> NOR/UFS/MMC/NAND secondary boot after SD card. If you do not have a
+> flat flex cable then it is possible with a sharp probe and steady
+> hands to do so, the easiest method apparently being to connect the
+> physically large VCC1V8 leg of the EEPROM part to probe FPC-36P pin 10
+> and depress the Firmware DownLoad button held for a moment while
+> pressing the reset or powering up the board. The reason for wanting to
+> activate BootROM UART mode is to avoid the use of Fastboot USB, and to
+> isolate any peripheral configuration that may have been acted upon by
+> BootROM which may be different between the available BootROM SPL
+> loader modes.
+
+This is confirmed in use that BootROM SPL loader fastboot-compatible
+mode does setup of clocks that are not touched by the BootROM SPL loader
+UART mode, see the detail about "bsp-spi" following...
+
+> 
+> Visual reference:
+> https://web.archive.org/web/20261025124009/https://freeshell.de/e/riscv64/K3PicoITX-explainer_boot_resistors-20261017draft.webp
+> 
+> Connect for fastboot transfers the K3 Pico-ITX USB-C OTG port (not the
+> corner USB-C power input/display port) using USB-C to USB-A cable and
+> then to any USB-A port on the fastboot and serial terminal host.
+> 
+> Connect a serial UART cable, note the board TXD is adjacent to the PCB
+> board edge and opposite of that is GND with board RXD in the middle;
+> swap adapter TXD and adapter RXD as appropriate.
+> 
+> The vanilla vendor BSP assumes use of fastboot USB in FSBL.bin SPL for
+> main.itb loading. If the vanilla vendor BSP main.itb runs with pin 10
+> low (the board default) then it again attempts to load an SPL and this
+> can be escaped to a hush prompt by fastboot host 'fastboot continue'.
+> 
+> The UART variants of vendor BSP are patched to assume that u-boot.itb
+> is loaded over serial UART in YMODEM protocol. If activated the
+> BootROM UART loader assumes loading an SPL over serial UART in XMODEM
+> protocol. Using the 'tio' serial terminal software the keybind
+> sequences are (Control-t,x,0) for XMODEM and (Control-t,y) for YMODEM.
+> If you initiate a transfer and question-mark characters '?' appear
+> then the transfer has not synchronized correctly, so abort sending and
+> then re-try sending the transfer until you will see '.' progress marks
+> appear. The reduction in build config options for "bsp-spi" deletes
+> support for USB from SPL. The "bsp-nospi" has nearly all options
+> removed leaving only YMODEM loading, DRAM initialization, and
+> dependency of EEPROM TLV access for DRAM id.
+
+With mainline U-Boot v2027.01-rc3 the FSL QSPI driver now does clock
+enablement (commit 7030b5d8bdf1 "spi: fsl_qspi: Add optional clock
+support"). As this was previously, "bsp-spi" was working for 'sf probe'
+and SPI NOR data operations in mainline U-Boot main app u-boot.itb *if*
+BootROM SPL loader fastboot-compatible mode does its clock setup prior
+to loading "bsp-spi". The 'sf probe' detection and SPI NOR data
+operations failed if this was instead preceded by BootROM SPL loader
+UART mode, which, apparently does not touch the necessary clocks. The
+FSL SPI NOR driver in mainline U-Boot main app now works for 'sf probe'
+after both SPL of "bsp-spi" or "bsp-nospi". Neither of these has an
+effect on SPI NOR detection or access from subsequent Linux kernel use.
+
+OzLabs Patchwork service is severely impacted by "A.I." data scraper bot
+traffic and so 'curl' requests to it may timeout or fail to produce
+valid output for input to 'git am'. Substituting for "curl ... | git am
+..." with the use of 'b4' is recommended.
+
+The revised "Guide to build reduced SpacemiT K3 vendor BSP (continued)"
+build steps are now:
+
+dpkg --add-architecture riscv64
+apt install -y bison ca-certificates flex gcc-riscv64-linux-gnu git \
+  libgnutls28-dev libpython3-dev libssl-dev python3-setuptools swig \
+  b4
+export CROSS_COMPILE=riscv64-linux-gnu-
+
+git clone https://github.com/riscv-software-src/opensbi.git \
+  opensbi.git
+git -C opensbi.git checkout origin/master # or any tag after v1.9
+make -C opensbi.git O=../opensbi clean
+make -C opensbi.git O=../opensbi PLATFORM=generic
+
+git clone https://git.u-boot-project.org/u-boot/u-boot.git u-boot.git
+git -C u-boot.git remote add -f spacemit-com \
+  https://github.com/spacemit-com/uboot-2022.10.git
+
+git -C u-boot.git checkout origin/main # v2027.01-rc3 or later
+make -C u-boot.git O=../u-boot spacemit_k3_defconfig
+fw_dynbin=$(realpath opensbi/platform/generic/firmware/fw_dynamic.bin)
+make -C u-boot.git O=../u-boot OPENSBI=$fw_dynbin
+
+git -C u-boot.git checkout spacemit-com/k3-br-v1.0.y
+# v1 "Guide to build reduced SpacemiT K3 vendor BSP"
+pushd u-boot.git
+b4 shazam -v1 \
+  https://lore.kernel.org/u-boot/20261029001555.1890775-1-e@freeshell.de
+popd
+mki=$(realpath u-boot/tools/mkimage)
+make -C u-boot.git O=../bsp-spi \
+  spacemit_k3_uart_spi_defconfig
+make -C u-boot.git O=../bsp-spi MKIMAGE=$mki \
+  spl/u-boot-spl-mkimage.bin
+make -C u-boot.git O=../bsp-nospi \
+  spacemit_k3_uart_nospi_defconfig
+make -C u-boot.git O=../bsp-nospi MKIMAGE=$mki \
+  spl/u-boot-spl-mkimage.bin
+
+tar -czf reduced-spacemit-k3-vendor-bsp.tar.gz \
+  --transform 's~^~reduced-spacemit-k3-vendor-bsp/~' \
+  bsp-nospi/spl/u-boot-spl-mkimage.bin \
+  bsp-spi/spl/u-boot-spl-mkimage.bin \
+  u-boot/u-boot.itb
+
+[...]
+
+-E
