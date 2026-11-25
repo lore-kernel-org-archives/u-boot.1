@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DD9F606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AAA0606A327
 	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 21:35:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=g7POKBMK;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=FBFwH0dM
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TK7W+th9;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=Byoc025u
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AC9BA80C10;
-	Wed, 25 Nov 2026 21:35:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EAADF608AB;
+	Wed, 25 Nov 2026 21:35:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id e3_Q6VSpEhEY; Wed, 25 Nov 2026 21:35:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4119080DF9
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795642532;
-	b=UXyGBP4Zd6aqPBT63qAudAABEdtoZf8idB5wynWxk5BxbC5+Uym37K4Z26hKlMVYGV92
-	 Om8gSpxN/joh/KjaFsEowzgGZnCQAb0WMhzd/Nfaw0ueg+RbgTNPuk9j3KEnR7sjFcNfd
-	 bRG4kJH2xXsCgtJnvVbn/3UgI6y3qShUJ0+oyaZhDnJd8JnxpU4Y22hob2BB2IFDTacv0
-	 Q1EzKyH7rzi9jfBwpsKzDaIvw/0SkBVq1eGaSdYoN/WODQrRhIGorb+1PlOP+njA/e/fV
-	 iM1pUXGjnaP3Jab/iAbj88GoQLemBOfbvJr59BvM6o+p06X7nAIrwiBvc/er0ZgFl5A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 121HG8zD3YHC; Wed, 25 Nov 2026 21:35:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DC41F60740
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795642535;
+	b=nkAYyJ8qBT9L/6896rFPlDr07dxCGGWi62dZ5NVC9clOx5eNdi2NPOzlICkvxPNecCB1
+	 MBob1E1sfDqXbLxrKpxigudjF/meJ+aBPmHpICZdV7ojggSb866vb2OF0sUSFZ6lc09t0
+	 jU6DaZsO2hheXkdceZ0s1TU0RdeO16YLACxwoVHkRMjHLzbIyAdVy/466rap9HlUF6vuC
+	 cEAPVr8YzL2j/nXMZPHiWqVvO0cRCu5vZg1/sXpGP1oOcyb/dBD9F7xl4BgDPdYxAW5jt
+	 chZ9BJsuTIcFkdhY7zIJ7jfwZpTpllmmGCq0g/Koc6Kp52YJe4TcHoyILW8CWakekxA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795642532;
+	c=relaxed/relaxed; t=1795642535;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -46,79 +46,77 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=QZhNvqcXzXhaXthYYuzyW2KSn6o4HLO05lIFXjV99Pc=;
-	b=WMBczpVd9xpsbFXjkEJG2X1rXIXlQh9u9vPnrAp8eTWEuvSJygF5BaDwS4HsG5cLxZ1k
-	 gxIuo1xYP1i6wlhym2B6Blp0FQjNkL2MJbf+x+WIwg6rZWiDQ4i8JYCAEiWN0+nMMJdlN
-	 hPcP94ucoJyDvVPFeL9TyRp5oEAdSHDN570IHpnVdmAPT3pDodVisdl5AAAnSZb6eSshf
-	 95BmeLhzcLic2WV3lfKdhSXDtd1orao5ez+zqgT3z6suYU+LHJE+gXpPUraydFAxzFk0f
-	 xwQqUSWqxunF/f6a/VTlV6vaLXbHLMsnLRrgC0Xp8ypKvCbiqB2jRBquyZ+EvdppAjg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=cherry.de;
-	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=FBFwH0dM;
+	bh=y3jJE7kADKTjDQBPrCCUavm7I67gzOdI1r8kxHQINO0=;
+	b=thZjREpGjypoCLsbxn31pAxGU5DzfZe1UQn6mvM4w0++mucQ6IzMq6As9oHDKkO2dZAZ
+	 IsXdGNltW7dPlS9HhfXslNkoe9Myd91+HJntj54A53PQtt38Z5YVuNm3u/BYM/4jYPoim
+	 rWDSMZDObIa0ItpjqeRSq4vLDIRnAM9ZcCEbPznNUIJDVwgZBAgYlzVl1OhWs04V46YfB
+	 WJKoP4dsV/TMIs7tzf/NFY+bWY6tT2b3rXZFfZNUUcUhWj2QrP11Xcd2i7Jsl/WVNZAzT
+	 jcMZzvb7aXzY2SEvjwzo/f/9dLfwdqQDDbNcQuzKiA0pul7qCAy7rSzCFbF7AJJXLbw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795642532;
-	bh=QZhNvqcXzXhaXthYYuzyW2KSn6o4HLO05lIFXjV99Pc=;
+	d=lists.u-boot-project.org; s=default; t=1795642535;
+	bh=y3jJE7kADKTjDQBPrCCUavm7I67gzOdI1r8kxHQINO0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=g7POKBMKZQfNr3DC87G+YSaEFEgvhUnDdcX6opL70xcO9/FpdJaiXSB2MYRXQwSVT
-	 qJJ7AXEmUumCk7RkJR8SF1Rfu70DOQBB8b9r6BfvWdVBsfgnNkbMInS3htXOC/085W
-	 ZPX3s1yBAcRl7v41cmzDN/jNWFSGnMW5jPNYwl1fDLuFMBbUC1G4XxTBxGk1ZNNpu2
-	 0ifZzNt/9p4+/50+kScNUO06cmSp3SHX/8hKfKn2mrDBIyIhPEsb+I4+IU0TFYvtSr
-	 NTUjxFfAWHDpFpE2BumW2O+h9Z2obd97QNUTRk2CS3giMN9JjOBpbzb8Rw9d5hTVCZ
-	 lfh8q1VwFUq/g==
+	b=TK7W+th9xPHZkjBf2NpCNkuwP3Q3AEKLQNIZmdPZXVRxtXtrZBn38/DSc87Qpzem1
+	 3oWM+NehYHms5qRfxryNbhs3/0inBOZLsgUGYVwR9qYU3cRcRUH/FjKdwx8mOfoVXW
+	 9yDQcKABYgN3NQ+/nQpBRvkW9cNykoeUi+P5OFtc7odeoomgnq6ndwkT7Zk9jxtKt0
+	 eO8Wgz15YjnO7JqnpfF14Xav3DuZgUVX6RbyH1FaGTFCBZbnTuyySRYvc08WxLxw9k
+	 0+eGrxRW75Yz9P+xNkciOf0F4JO8uK2GfHbn8nrVwKvp8H+dyojXb6oB4a0hUru+M2
+	 G1GCoS7sAnHBg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4119080DF9;
-	Wed, 25 Nov 2026 21:35:32 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0B75A1C9
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 18:31:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DC41F60740;
+	Wed, 25 Nov 2026 21:35:34 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 52DD9325
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 19:19:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id F18CA80DF9
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 18:31:29 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3955B400CB
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 19:19:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZiilFVp6Xw3w for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 18:31:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C4C5580DA4
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c201::6"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FRL0rjBXpRtY for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 19:19:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7B7CA40050
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c20f::7"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::6;
- helo=am0pr02cu008.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c20f::7;
+ helo=osppr02cu001.outbound.protection.outlook.com;
  envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=FBFwH0dM
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C4C5580DA4
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 18:31:28 +0000 (UTC)
+ header.s=selector1 header.b=Byoc025u
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7B7CA40050
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 19:19:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QZhNvqcXzXhaXthYYuzyW2KSn6o4HLO05lIFXjV99Pc=;
- b=FBFwH0dMZjtHsBIptgmkAprhDEKXIeLtnUwF5kG0//IKHbwr4iNrhHvVP+w2YXUichRLxImbJGbsVjMFFU0mZAnI4BMVwe43DPsAQjudltewM7GHma+1mi623cFS0Vawmr3JxPdMUNO3Uo3Hplm1QGhMIaNbWb99ZD4PUvQtc6Y=
+ bh=y3jJE7kADKTjDQBPrCCUavm7I67gzOdI1r8kxHQINO0=;
+ b=Byoc025u/ac3sASPFzdEahTJvE7bUMN9ssm7ZiXWlFINEYi7hKVgO1YW2vWzZ5dLaetE6xybH6aON3VTLkZSURzczrnJrwiJ9/+myxqZrFftrb/ThHiP5v9EGIsOfXbldZHkgIMBGTB2TrOgD/Eg15M0yKuLWopjAtQePn4w7EY=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by AM9PR04MB8177.eurprd04.prod.outlook.com (2603:10a6:20b:3b7::23)
+ by DU4PR04MB10647.eurprd04.prod.outlook.com (2603:10a6:10:589::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Wed, 25 Nov
- 2026 18:31:23 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.5; Wed, 25 Nov
+ 2026 19:19:03 +0000
 Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
  ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
  ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0639.012; Wed, 25 Nov 2026
- 18:31:22 +0000
-Message-ID: <078c6f74-f5d1-4d22-93d7-88e16dc388d3@cherry.de>
-Date: Wed, 25 Nov 2026 19:31:20 +0100
+ 19:19:03 +0000
+Message-ID: <743f0f71-899a-4996-b3c7-836de657e397@cherry.de>
+Date: Wed, 25 Nov 2026 20:19:01 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 06/23] lib: Track whether a phase has a decompressor
+Subject: Re: [PATCH v3 07/23] spl: fit: Decompress any supported algorithm
 To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org,
  Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>,
@@ -145,79 +143,79 @@ Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Mehmet Fide <mehmet.fide@screeningeagle.com>
 References: <20261020-spl-fit-compression-v3-0-6647aa23ade5@flipper.net>
- <20261020-spl-fit-compression-v3-6-6647aa23ade5@flipper.net>
+ <20261020-spl-fit-compression-v3-7-6647aa23ade5@flipper.net>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20261020-spl-fit-compression-v3-6-6647aa23ade5@flipper.net>
+In-Reply-To: <20261020-spl-fit-compression-v3-7-6647aa23ade5@flipper.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VE1PR08CA0025.eurprd08.prod.outlook.com
- (2603:10a6:803:104::18) To PA3PR04MB11153.eurprd04.prod.outlook.com
+X-ClientProxiedBy: VIVP296CA0051.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:353::12) To PA3PR04MB11153.eurprd04.prod.outlook.com
  (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AM9PR04MB8177:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8a33af13-1959-4a15-4651-08df4b224e42
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|DU4PR04MB10647:EE_
+X-MS-Office365-Filtering-Correlation-Id: c46ec460-7b73-4974-d480-08df4b28f764
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|23010399003|7416014|376014|5023799004|11063799006|10067099003|56012099006|261026121527099003|261026140227099003|261022105027099003|261022115727099003|261022075727099003|261021121427099003|261102123227099003|261028144727099003|261009223027099003|22082099003|18002099003|4143699003|41080700001;
-X-Microsoft-Antispam-Message-Info: 9JmWVq71CMXRe6i+Xksaif/nnjmbgty9QiRg5fyQ4Eeeqp2MFHA7DSLj7NHHHRTARMFhUIZPAtrrGU0tEmWkgHPGh0TpFveWE4b0ZkhpvRskPvDLmxN/nVaMY0DzxYTkZdUSZ3mMGKnpxyFVp5gqRad+lVHNlnVYB4ic1z+Oj+czpFK5EsZH6BTkPiqCjlAY6UYlQhr0zrh7rS70j5xeVPZlNofR7pP4SydUqbzzZnYBZYEU7mjcECKjN59p/G1J1ll2fl0VJtQPMRBUJEe2LtIqdY2ZnWrr+1N6FGA9N+4Dppm7+TvQAEkPEF3GLIePKjUB4R+d1J+gRmS6azjnrIFKA6pBOxAWV/xnpkXvY07wxLUPWNqDasH6JW1lJ0OisseYcU7s9AMct8t69anGbRmEhb0O8MZRpLi319Yvk/0RiRXjxKtHBA68QSZWwI+yvlMLgf187DhGo9ARWBuOrh546nsPtv637/Uf+oXusnkS157wLPhDztXpK/sLgDJ5r3M85pEAx45Fm44V8QG1CdBg1ibH6Rxlxa5XXZoRWmwYfGemGkaLXW+EtHQmZrsmUZdqTZPmhmLmDptBMheUZzElUkmJN/wuAR8WpzdM+YWzkIzaXY0qZCkF6sFL7MgJUMSOeX7vYZSLyc26yjoZJoKigV9+NTHSi8V6QS53CJ59P/8+AL9wCfiJAxvgSoSHix8ccgJfdBNlBK4iTHjMUw==
+ ARA:13230040|7416014|376014|1800799024|366016|23010399003|4143699003|18002099003|261009223027099003|22082099003|3023799007|10067099003|5023799004|56012099006|11063799006|261026140227099003|261102123227099003|261022075727099003|261022115727099003|261022105027099003|261021123027099003|261026121527099003|261028144727099003|261021121427099003|41080700001;
+X-Microsoft-Antispam-Message-Info: SR8YKmDhsLzc3qXal5yiljtFbPCNNLmuPaB84Ofd8mLsYh0nkCmR94XOvb0rPXjqnfqqesqh0BWo2aPuy1gD41PjhcpSDdZdLizwCns80ks6ZwZyjtgUluYuA3gdGYLsR0hViVoOe+NpEJeoer0474dc3JamBbtgvm+vWTKMM6cEvRjumX4i1W5d4QXYjYRoN3ys2zmFAJuNPuHXK//UeJrinkIeZWhLwG5GmMW1q7TSGKNkI8rsHpkcQ8oj0ugeMGBE5ucNUEkuUxY0+IxM8bSfEe4F/e6gLb8xDGPe/rka4UhC+/PDuoIgPwiUm75/tQwdAO8yEngxixYth+w69X4BrXbS0ILrV8KBfDIfMnSkwyPyq1jmqvA2iH/FNfdv7Zkq9ufcJ3xsofefhek67k/QP8UFtZtu3KJ8IRZfI6Pini4vadiZrkyq9GOVCNTUpbY26sjVnaBLDIthmQncvoC7tA2j8Pr+/BkqmRr3g10D4pF+yZcBJRa2KAOCvyHTSlcePJozmBtKMx3Xpeem2IjvdinmebfZw6ZgXPQi0n9QFoGfLIQLhJMfmx91g3fOofCMPY2jUM3neZyUCeGGJ0Z0qcg4Qr2s0dHBX/UomGA9q327P1R6UCSIo7UTg5gnYDVqJk19BzoJCKv98TXLfbFHFzb2h6zr/Zd+itWJbZ+RFEk/0oUpjggNkRAAtL789oPSAvvttf299xrVaUbyCQMxEfqsj6UOKuJUXsLijms=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(23010399003)(7416014)(376014)(5023799004)(11063799006)(10067099003)(56012099006)(261026121527099003)(261026140227099003)(261022105027099003)(261022115727099003)(261022075727099003)(261021121427099003)(261102123227099003)(261028144727099003)(261009223027099003)(22082099003)(18002099003)(4143699003)(41080700001);
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016)(23010399003)(4143699003)(18002099003)(261009223027099003)(22082099003)(3023799007)(10067099003)(5023799004)(56012099006)(11063799006)(261026140227099003)(261102123227099003)(261022075727099003)(261022115727099003)(261022105027099003)(261021123027099003)(261026121527099003)(261028144727099003)(261021121427099003)(41080700001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eVlCc1orODU2Nnd1VHkxRFNvOTA4WXNlOUFwSFlNak1IYXhZSVAzdjUvU2pO?=
- =?utf-8?B?K1BIc1B2YWtWK1lYRXJoa0V3NGNoUjFpQzB1cFNZaHVTN1E0OE51S3pPSUk0?=
- =?utf-8?B?cDFnNFMzbzkvTzZhZ3oybmI4NVRQdi91N3FJZHdmTHhybXVNQ1FJTHpnQXRJ?=
- =?utf-8?B?RGg1ak5QUUtOMDFRc2orV3hwZm1Mb2RLYW1vWG8wMkxrVFlsMGwrVjY4YUdy?=
- =?utf-8?B?Z2NUNzdIcGl3NjdqM1lUbUJiL2ova3FDdzN3V0R1RDVwMzRCUUNwSFpjZEJo?=
- =?utf-8?B?NXJCKzNSRzF5NlV6OTZmVFpqTFNLVml1bXk0eHpSVnhvc0pDdFJMVElrblRK?=
- =?utf-8?B?UG92QVBCQks5UldjNFlJYWtjYkY4U3BTQUVJNmRJU2xiUS8xRnBodUJVUGJx?=
- =?utf-8?B?enRUMHg0bFIxZnhCZmozOTNUN2R6NFFlWDhMM3ZmNCtOUUNDdTlxOFdqZGJQ?=
- =?utf-8?B?dEhubTVnUzYzeUYrNGNxZVlrYTdIY2wwaVlLdUMrVFF0cm5SS3dvQTRVV0NI?=
- =?utf-8?B?cjExNy9lMXI4NkxBUlBpSTJNZmFzcTlrdi91ZVp3MjQ0M21TWDl3Uis5UXBH?=
- =?utf-8?B?RmtwSDlXWHZlc0tkdW0wbjZBRzhXcWtNaUdwOU05UWY3OGNYNUFFKy9YbHRl?=
- =?utf-8?B?Yk45WEVtTmZseXBzaHZPUmllVlZqbTd4VXIzWTBkdnJKbm5vb3hUWUNuTzJH?=
- =?utf-8?B?bVZHd2hOVkRJVElkNjJsNzFFUkVsbktrRXVaaEdoYjdHVm9pc0N4SjlERERs?=
- =?utf-8?B?MUlZZGF1WU9UZHhhRXpsTVVpN2FMWGNCUmNXV00xYzR6WXlhNGNFenpGWXBW?=
- =?utf-8?B?eGJYMTB1S1NjQ2orQS9PNFdRemNVemQ1bjdTTnRQWGZaSmdkUSsvby91QW8r?=
- =?utf-8?B?U1gvZW1BS256dERzcTUwTUZNWjE2b0xtZGprU3ArSjlqQlp6aW4yeWl1azdv?=
- =?utf-8?B?dGpBYVFocEtqcHlZRU9SeEVEa2R6SnlWNk5Eb2JTcU9jWHFTN1ExQ1NGRjZo?=
- =?utf-8?B?TTFMaGdVUzhaYXZxd1N1L01qYTFhZEI0eTczWFAxKzZlendWMm9GSUpkeXB2?=
- =?utf-8?B?elhMek9FTlp4NGluakFwMStTUWh0dWQwOUNKNHhHZ2p3WWpMWFFZNS9zK2ZV?=
- =?utf-8?B?MnFzWFpidzltTlJLOGJPRHVxRkFxSE5JRHNOa2hHQkg3bG1pWjhuUnVhc0NX?=
- =?utf-8?B?SGFHa1JYeUxZbVB6S1k5b1A3anZjdGNxSW1tTVlOZ3orL0IrOVVqVUovT01S?=
- =?utf-8?B?NDhtT1Q2OHhUMm9WdEpQYnRhcWp3ZUkwbE1wY1FlY0VKSDRNZHBERDd3ME9G?=
- =?utf-8?B?ZC9oRGxEd3BPMVRlcnpRcU1ISjBHdHhIK3BTNktNY3JxVTFxcjFqSHRVd09t?=
- =?utf-8?B?aDRTZkdTbEtnREpGQTdKT0RDZ2wwUkRVSGQvUVAvZ1ZuTlh5RDdVTFVEalpi?=
- =?utf-8?B?Y1NLZEdYekNuUys0T2NUSEZUSFJrUThwbEVoSkoxQjVhUys0M1ZtN2gxYTli?=
- =?utf-8?B?SWhGMmw4TlRBVkEvaHRhc2tJaUNhRk9uWVR4Y0x1WkJRc1RTaldaNWJIRkJp?=
- =?utf-8?B?ZWlvay9ybFo5ZER2R3h1d0NKU2t3Qm5rcHF1bSszM0pvcGVVYzk1bm1tTERK?=
- =?utf-8?B?eUNrYlY3UC9QRko5aU90cnFaRTRZcUFVV0hIbHh3MHo1QTlWNkNKenlrQTVO?=
- =?utf-8?B?dVRtN3hNM3U5TXUyV3FQUG5pNlhtUFk3Nis3ODhBMldwQXNneDlhbWNUMEhs?=
- =?utf-8?B?SFZwUHBFMXdrK0YyRURZUnp2VTQwZ0ZjY3JHUkhWaDNyMEw1ZXFWUzZnOWxn?=
- =?utf-8?B?aG9tZkdMYnF6aDVXb2IrT3k4Z0F5RkpoY2FUOTZrZ2o2MVdGU2ZwU0lwLzdk?=
- =?utf-8?B?bEFRSmp3UHVMdTc5d3BpeTU1NDdlSUZIMWdqSFVBY3dScHJnY1hCTlJaMnEx?=
- =?utf-8?B?MmhmeGpwQnpBYnZqZndzRlUxU2FBRFJQUnVZc2hNcjc5UFlPWWVvVktzZENZ?=
- =?utf-8?B?aTJBVU9tWkZXZ3B1bWRiV2RlWDhESHNxNlI4MjhLY3BOeG1DV0xqR0tyd2Vh?=
- =?utf-8?B?THJaSzBERGh1WlZMeVRVc0lacWY0ck8wcmlQeXUrU2Y4U0dFcDExb3VLdk4w?=
- =?utf-8?B?eVBnTEFqVVhzaCsyZjQ5QjhXUnpXdW16UkNKWjd1VmpLVFo2QnV6MkJ3N0Vz?=
- =?utf-8?B?N21nUTZXYklLU3ZqYzVPODhzM2hLeEl4Q1BQSzVwMWdYN3FOaFZCejVLeFo1?=
- =?utf-8?B?QmJHSXlTbCtBQWxOVXpEaGpSaGRRMFRraDU4WFMrUklMcEIzTi9aSVkwbTZ5?=
- =?utf-8?B?eFRpaDh0TlpQZ0hLcHRxWit3RmRGeEN0cUVibTZxWUE5M2E1Y2Z0UT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aEpKOVlFS3dacyt0TU9sRXpIL2dCek1pUEtpazhpdHhzd29HNStrTVlmTWhR?=
+ =?utf-8?B?ZVNsdjRGb0NqcExxRzdWT1FzRXZRUEVxYVp4WUpjK29PRERlSzNoVFgwRFlT?=
+ =?utf-8?B?RnJoa2cxaXRqdDkvK2hjcTFaTVFaZkExMmdrZEZlMlN3NDFFYUtsN21RUndC?=
+ =?utf-8?B?NHordWtsa0wyRk50RVlaQ2wyTDdpQUhOVWtKTXB1NEFJcVlCR3dmbHhHOUF1?=
+ =?utf-8?B?d0ZwSkhJODEwOTk1MWdRaFBYWnM0bjlXYVM0aDkweHdtWjA4b3dwME5zbm96?=
+ =?utf-8?B?MWowZ25hWTd3Z3ZXRnlMMFBEUjRON2U0amdOU0ZEc0J2ajBLSjZUeWxoTjFi?=
+ =?utf-8?B?OE0vdFY5Szc5OGVmL1Z3OW01NmhWWGpYSFBWZjRjckpzVzVqT1Q4dlhKVTNW?=
+ =?utf-8?B?VFRFS29xMWFaTXhEdWhsYlNCWG9QN1A1ejcvRzhUN3BTVzRZSlpPVTNyRGY2?=
+ =?utf-8?B?dmE2SzJncm5xL3d2YTE1NHp1bHZmamRZTCtDeUdaZWk0dmQ1OGVNQXY1OGMw?=
+ =?utf-8?B?Y2JjTk1kL3NYaTRIQnpSYk9hbW45RnEyOFMvVHdHbmtUTEkyTEwyb254YlhI?=
+ =?utf-8?B?WTA2Y2IvbDJEbWdVdUMvYU9uUTl4Q2xyTU5oeWU3OEhTRjE3cE1sU1dBZVNL?=
+ =?utf-8?B?UU90TEtFT3E0VjJhcXJiYnB0amVSZEx3ZXJkbzhlQlVWYzFpTW5tTmprbDdU?=
+ =?utf-8?B?dTZVbnRvd29Cd2t1bGNPbXVRbHJPUHhRajBBT2F5cmFmenZpR1RNd1pUVk5m?=
+ =?utf-8?B?MHY0UVJ2UnlrekM2UWtZNVlUWFlZYnNYSEVtejV3SUk5Q1FITHlEZi9vUVdH?=
+ =?utf-8?B?cjJqb2dESjNXOHpEYzBoYVQzcUM1Qjg1VEFwdmFUbXZIUlVWWlVSb1JsWWpQ?=
+ =?utf-8?B?Q3ROT21HQ2R5dHFaWmVIN3ZVaVZPM05CeHNMZ0RGUkp3bFhIdktZVDczdk83?=
+ =?utf-8?B?Z3Q2QktEYVJkRmNoS3lNVnptTGU4TkRjQWRnTUQ5ekZ2WXZsOVQrWWNHbTNz?=
+ =?utf-8?B?NGJBSCsyREZPanE4T1drcExnSndYZTUvYUtyZEx6N3NOOGRnUkE5WjVPVlJV?=
+ =?utf-8?B?THpKaGxzajEvajRXQjVOYTNBZXRQQVo1YjdLa29ITEw0cExVckE4TU5QejRS?=
+ =?utf-8?B?NGUzMFJxMi9vNFd2TURxYlJONDhzTEZkN1F0cFdVV3hrN3ozc3RJbnVwZDZF?=
+ =?utf-8?B?SGpFVDlFaXNUY1pWVEhoMUhvaHJoTXRKVzFiU3lMUGxCWlgzdzJYbjdrS2NX?=
+ =?utf-8?B?aVBVby9lQlRENkpvTjM4aTU5a3BqZWpJWlFpelV6RU9RUkhkZGpsUlBHVHJK?=
+ =?utf-8?B?UWpCMkpFNzVyWENZc2FSRHNyc3FZWlJreHcxS3ZaazV0S25tYkVjUWJ5N3dL?=
+ =?utf-8?B?R1JITS9FM1drUTJZcUhpaE9zbi9LaldydWFhTHdOTlgvYksxRnFIaWJLd3Ji?=
+ =?utf-8?B?R1dKWFVQNTdDbzlKUHdMSFJkSE1HS09XUXVrQmdnUlRrZ1cybEEvNTdZenEz?=
+ =?utf-8?B?cFZvUmNGdTMwUWZ3WTJYQis3eTVMcmdZZEtyOTBVaHRwR2dqZUdLaGlGMWw4?=
+ =?utf-8?B?Tlp5dTVzenBLUzAvWkdFdHNXdFhtbDVERHNXMDFFMUdaMks4WEdhMFZkUHh3?=
+ =?utf-8?B?b0ZwY1Y4T29nUUVKaFp6b2ltcmYrQjlQek8zL0xvNGRheHhPUEVaL2xpdGIz?=
+ =?utf-8?B?Tk1aZllSZ2dyc2Q0bVFIWWd0RTkxYVczN0JTY0JDV3lxcDVobC9wWVhmZngy?=
+ =?utf-8?B?aXJkV0Z6TmNKdjhsbExXMUZwY1pMbXlpRWxGckQrMFVKQ3kyV3c3aHRCTFJF?=
+ =?utf-8?B?c1k0SlA4d1AwWHIrVnF3Yk1DS0RUMUU2bE95eWRmbzJPWGc1YzNNQVEveEFS?=
+ =?utf-8?B?cnV3OGJ6bzFROTdBMVA0YWV1b1RXczBpcUw0TmNiN1MwREEvK3BzNklQUThy?=
+ =?utf-8?B?Zk53SGlSaG1vUVFKQ0x1ZGplU3Z2Y245NnZuSUdWQk5tem1LNWVia1JUZlFy?=
+ =?utf-8?B?aDNLWXQzaWlxbkRXSDR1M2JYbEM3NURtTzFvVEZsZjRUY29VSzNKZUxkN2xv?=
+ =?utf-8?B?aG1VTnRZbmUxK3hYNU1LWmdPMitCeVhwY3dtWlBrd1RSUnZsOUVKeDdHZW9s?=
+ =?utf-8?B?UkVSL0pvMjVmMk4yVENWYlYrSVFkSEd3YnFTaCt2UFBWalhoaSt4UjFmMGNR?=
+ =?utf-8?B?ZnV2UlMxeVIrVldSVExseUVKckoyOUFzNzZ0Q0w4Mkx1VWFNMkZPNk0xdFVy?=
+ =?utf-8?B?RThCaTJoNWNUQUJUalNLNElIYTh5cFgrWTFWVWdSOWFUUWF4ZWlCTTF6THIv?=
+ =?utf-8?B?QXVoUEl4OHlTT3VINExQL0praGo4bDY3Z0RVczdFT1NIbU5ZQ3FtZz09?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a33af13-1959-4a15-4651-08df4b224e42
+X-MS-Exchange-CrossTenant-Network-Message-Id: c46ec460-7b73-4974-d480-08df4b28f764
 X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 18:31:22.7631 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 19:19:03.3740 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tLhtIh2R3U7IjmyLfku1BVfrpUw0eOcqlUkjNVLYMCCJUx2B+JarlDLSpiFoA7VEKwdqEt4QYdYaRq4NDJ5uRW1IqMWPlstvsOJROnm074M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8177
+X-MS-Exchange-CrossTenant-UserPrincipalName: s/eZmxzwhXdW/ek5Fb5fv2pPZRNUGuHlWQw3qJ+aF6HqQGYEj13xa26cjXsyDRp6nQdr2JMkfHbyuNDO7hFj6GvZPP+1sUd/rkeBQts2PJU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10647
 X-Mailman-Approved-At: Wed, 25 Nov 2026 21:35:28 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -228,84 +226,198 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Alexey,
 
 On 10/20/26 6:40 PM, Alexey Charkov wrote:
-> spl_decompression_enabled() names the two algorithms SPL happened to
-> support, so every algorithm added to image_decomp() requires editing the
-> header. It also asks about CONFIG_SPL_* from a header included in every
-> phase, so a VPL build with VPL_LZMA reads SPL_LZMA and answers about the
-> wrong phase.
+> load_simple_fit() open-codes gzip and lzma in two places, so a FIT built
+> with any of the other algorithms image_decomp() implements for SPL (lzo,
+> lz4 or zstd) is silently copied to its load address without decompression
+> and jumped into, causing a hang with nothing on the console to aid
+> debugging.
 > 
-> Add a hidden per-phase symbol selected by any of the compression
-> algorithms and ask about that instead, which also matches how
-> image_decomp() gates its own cases.
+> Call image_decomp() instead, which can handle all compression algorithms
+> enabled in the config, and will abort on an unknown one instead of trying
+> to silently jump into it. Bound its output by the max_size the caller
+> passes rather than by SYS_BOOTM_LEN, so that a compressed overlay can no
+> longer run past the end of its buffer.
 > 
-> SPL_BZIP2 is out of scope: lib/bzip2 has no phase-aware build rule.
+> Read the compression regardless of whether the phase has a decompressor,
+> so that an unsupported compressed image can fail loudly instead of having
+> SPL jump straight into its compressed data and hang. With no decompression
+> support enabled for the phase, a short-circuit path is taken to avoid
+> linking image_decomp() and the table of algorithms (up to 1.2KB total).
 > 
 
-issue: simply remove SPL_BZIP2 instead or adapt the code so it does 
-something
+issue: please split into separate commits
 
-The symbols is simply unused today as it stands, so I would recommend to 
-simply remove SPL_BZIP2 to avoid misleading users into thinking we 
-support it in SPL, we don't. Then you don't need to justify why you 
-don't edit SPL_BZIP2. In a separate patch please (prior to this one).
+I could identify:
+- switch to map_sysmem on max_size instead of size for both lzma and gzip,
+- change lzma to use load_addr instead of CONFIG_SYS_LOAD_ADDR,
+- migrate SPL_GZIP code to use image_decomp() (SPL_GZIP and SPL_LZMA 
+blocks calling image_decomp() can then be merged into one block in the 
+same or follow-up patch)
+- fail hard on unsupported image_comp (by merging with SPL_GZIP/SPL_LZMA 
+block for example),
+- add support for more compression types (switch to image_comp != 
+IH_COMP_NONE checks + spl_fit_decompress() abstraction)
 
-[...]
+What do you think?
 
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 5f4698f0795c..365776e05d80 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-[...]
-> @@ -1087,10 +1096,35 @@ config TPL_ZLIB
->   	help
->   	  This enables compression lib for TPL
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> ---
+>   common/spl/spl_fit.c | 78 ++++++++++++++++++++++++++++++++--------------------
+>   1 file changed, 48 insertions(+), 30 deletions(-)
+> 
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> index 8dabd819998b..50c4b269f700 100644
+> --- a/common/spl/spl_fit.c
+> +++ b/common/spl/spl_fit.c
+> @@ -6,7 +6,6 @@
 >   
-> +config SPL_DECOMPRESSION
+>   #include <errno.h>
+>   #include <fpga.h>
+> -#include <gzip.h>
+>   #include <image.h>
+>   #include <log.h>
+>   #include <memalign.h>
+> @@ -235,9 +234,10 @@ static void fit_fill_image_info(const void *fit, int node,
+>    * @fit:	FIT to read from
+>    * @noffset:	Offset of the image node
+>    *
+> - * With SPL_FIT_IMAGE_TINY, only tell apart the algorithms this phase can
+> - * decompress, as spl_fit_image_get_os() does for OS types. This saves the
+> - * table of every algorithm, and the strings which come with it.
+> + * With SPL_FIT_IMAGE_TINY, or without any decompressor in the phase, only
+> + * tell apart the algorithms this phase can decompress, as
+> + * spl_fit_image_get_os() does for OS types. This saves the table of every
+> + * algorithm, and the strings which come with it.
+>    *
+>    * Return: the compression (IH_COMP_...). An image without the property
+>    * counts as uncompressed, as it always has in SPL. A name not recognised
+> @@ -248,7 +248,8 @@ static u8 spl_fit_image_get_comp(const void *fit, int noffset)
+>   	const char *name;
+>   	u8 comp;
+>   
+> -	if (!CONFIG_IS_ENABLED(FIT_IMAGE_TINY)) {
+> +	if (CONFIG_IS_ENABLED(DECOMPRESSION) &&
+> +	    !CONFIG_IS_ENABLED(FIT_IMAGE_TINY)) {
 
-question: should we add a depends on SPL?
+suggestion (non-blocking): keep same order as in spl_fit_image_get_os()
 
-Just to be extra sure a non-SPL stage cannot enable it by mistake? (same 
-question for other xPL_DECOMPRESSION symbols)
+That is, FIT_IMAGE_TINY check first, then DECOMPRESSION, so it's easier 
+to compare (and keep in sync) both.
 
-> +	bool
-> +	help
-> +	  Selected by every decompression algorithm available to SPL except
-> +	  SPL_BZIP2, whose library has no phase-aware build rule. Code which
-> +	  hands a buffer to image_decomp() without caring which algorithm
-> +	  produced it should depend on this, rather than list each algorithm
-> +	  in turn.
+>   		if (fit_image_get_comp(fit, noffset, &comp))
+>   			return IH_COMP_NONE;
+>   		return comp;
+> @@ -271,6 +272,38 @@ static u8 spl_fit_image_get_comp(const void *fit, int noffset)
+>   	return -1;
+>   }
+>   
+> +/**
+> + * spl_fit_decompress() - Decompress an image to its load address
+> + * @comp:	Compression of the image (IH_COMP_...)
+> + * @src:	Compressed data
+> + * @length:	Length of the compressed data, updated to that of the output
+> + * @load_addr:	Address to decompress to
+> + * @max_size:	Most the output may take up
+> + *
+> + * Return: 0 if OK, -ENOSYS if the phase has no decompressor, or another -ve
+> + * error
+> + */
+> +static int spl_fit_decompress(u8 comp, void *src, size_t *length,
+> +			      ulong load_addr, ulong max_size)
+> +{
+> +	void *load_ptr = map_sysmem(load_addr, max_size);
+> +	ulong load_end;
 > +
+> +	if (!CONFIG_IS_ENABLED(DECOMPRESSION)) {
+> +		log_debug("No decompressor for compression %d\n", comp);
 
-question: is this sentence really relevant?
+suggestion (non-blocking): remove " for compression"
 
-This is what we currently do with your patch, but there's virtually no 
-limit in scope for this variable. It just tells you whether at least one 
-compression algorithm is supported, what we do with this information 
-depends on the context.
+Save a few bytes by using:
 
-> +	  Only the xPL phases have this symbol, so it is meant for xPL code:
-> +	  CONFIG_IS_ENABLED(DECOMPRESSION) is always false in U-Boot proper.
+No %s decompressor\n, comp
+
+or
+
+Cannot decompress %s\n, comp
+
+> +		return -ENOSYS;
+> +	}
 > +
+> +	if (image_decomp(comp, load_addr, 0, -1, load_ptr, src, *length,
+> +			 max_size, &load_end)) {
+> +		log_err("Uncompressing error\n");
+> +		return -EIO;
+> +	}
+> +	*length = load_end - load_addr;
+> +
+> +	return 0;
+> +}
+> +
+>   /**
+>    * load_simple_fit(): load the image described in a certain FIT node
+>    * @info:	points to information about the device to load data from
+> @@ -301,7 +334,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+>   	ulong load_addr;
+>   	void *load_ptr;
+>   	void *src;
+> -	u8 image_comp = -1;
+> +	u8 image_comp;
+>   	const void *data;
+>   	const void *fit = ctx->fit;
+>   	bool external_data = false;
+> @@ -325,10 +358,8 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+>   		}
+>   	}
+>   
+> -	if (CONFIG_IS_ENABLED(DECOMPRESSION)) {
+> -		image_comp = spl_fit_image_get_comp(fit, node);
+> -		debug("%s ", genimg_get_comp_name(image_comp));
+> -	}
+> +	image_comp = spl_fit_image_get_comp(fit, node);
+> +	debug("%s ", genimg_get_comp_name(image_comp));
+>   
 
-nitpick: unnecessary info
+issue: I agree with Simon on returning early
 
-This is a symbol for SPL, we don't care about U-Boot proper in there, 
-just remove the sentence. I understand why you wanted to mention it, but 
-its place is rather in the commit log where you'd explain that we don't 
-have a CONFIG_DECOMPRESSION symbol (for what reason(s)? maybe it costs 
-less to simply have it and have the decompressors in proper also select 
-it such that CONFIG_IS_ENABLED(DECOMPRESSION) is reporting properly in 
-every phase?)
+The spl_fit_decompress function is run too late for unsupported 
+compression algorithms. There's no need to load an image in memory if we 
+already know we cannot do anything with it. The least amount of things 
+we do with unsupported images the better we are I believe. Let's just 
+exit early (separate patch, justifying why).
+
+>   	if (fit_image_get_load(fit, node, &load_addr)) {
+>   		if (!image_info->load_addr) {
+> @@ -397,8 +428,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+>   		}
+>   		read_offset = fit_offset + aligned_offset;
+>   
+> -		if (CONFIG_IS_ENABLED(DECOMPRESSION) &&
+> -		    (image_comp == IH_COMP_GZIP || image_comp == IH_COMP_LZMA))
+> +		if (image_comp != IH_COMP_NONE)
+
+issue: this is a change in behavior
+
+(you can ignore this one with the precedent issue fixed)
+
+Unsupported image_comp (-1) will now enter the first if block instead of 
+the second. Whether it matters, I don't know but it should be 
+highlighted and justified in the commit log.
+
+>   			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
+>   		else
+>   			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);[...]
 
 Cheers,
 Quentin
