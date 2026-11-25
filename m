@@ -1,156 +1,152 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 282B4606A321
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 12:43:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 763EA606A33B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 13:18:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PCiskPxH;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NqW+qUAw
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=W2NlrQ6O;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tjRGgMsh
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 02A9B60892;
-	Wed, 25 Nov 2026 12:43:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2AAEB4059B;
+	Wed, 25 Nov 2026 13:18:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Of-kj5owPL3x; Wed, 25 Nov 2026 12:43:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 24AAA6089D
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795610601;
-	b=tJyD0CLQsAkV26HtQm07Iwg4+Y1n4BlWVSS+kjLDkv8wsRipgWo88YwNDrh5xIa96vwK
-	 K0LbQyQh+JHM94z7iF/LAlYdhyTtp2w1FrECgpcvuQe1VT19vHOz7nmAB9EyvF9Z6R807
-	 +QwxplmuF6k8ofXG3+xWTrI3wAGXqPSlCw5scD8YClNmNEOEQhtzRGAYIHgib0RvoljTo
-	 RRTcIVmwTnEXsiEcyKB8cXg24ugSk2OUY/OJz0qzhQFUvXV7c4SxHwJ1fvZSN1p7I99Js
-	 x7TkDl7SiTBbuTPYhjPr2VdKIxmlGlW/rhg0HMK1xQNWQ47YF6hwb9HuUfpRU9YAlpQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CzaBxUjJbdHn; Wed, 25 Nov 2026 13:18:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B980240812
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795612695;
+	b=MM9+EvCOVxZgtydW38uALasy920T+mcKvhF7K29taqlaUdxcckWkp2mQYIUIN5oHww6M
+	 eWjlP3MnD32ZyisaPvQIyPKuw4ZStQknOwru8iTKUavUNZR4q9xj5NQzW5LNDxttzTSxi
+	 6t0Ii6PhcfjPFDEaNgXAxdiVuaP0uKKttOawDZYMHwF+L3tb5UM9tlPtY8laxq2fYWi03
+	 YFlHjHkl9j2xfCL3pzLZLWAXJVGSy8NwGQ+jx55AwsJye8VFjTL42QiAGMmqTcyRCy3yd
+	 +/wUHrqxVziBPywlLDDrGnqvCAbZowkEqqlKvx11Exy3TAeDqotCOefURLZHLGvnZgg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795610601;
+	c=relaxed/relaxed; t=1795612695;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=d6fCVOF7hMI1+IVsik436SzmOa7YOc3Bgu6cq9sqNMI=;
-	b=AvDAVeK1SMjHMj9pnXHEzr6nGy6JNMWpqq20WBPW1LMbWVPUK0xBl2d0LJ1I+U1cUtWX
-	 l+hn6SJ1Hqf4V44gXQhF2mSL0tpvhWO/pxDLdYGIBBWmZN6SoC0YsOzE17GytBpgTgtbD
-	 9Bvg5+d2hHkdqTqvOBLW41UkMqu7elK0LheeP10tlrYPrLXK6h6OBuSUJ3NpJQcDxjNAs
-	 Rb3Z22hLf7sFZWyKyyHR0b6YzxLJdgOBN7AhKjtH0yCq6ufu+r7HLP5vg9r9ZxG1lkvl8
-	 sJ0cScHGZ+vl1iQJAOn7Im2Tuh5DB498f1tdoMg3nRIyzFTWV0G7UEijxHXL5EUDPJw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=EJ6/6P8JFrSsAQW9qIHu9MBfejhzjAhDoiowQosfmkE=;
+	b=Le0QxRfKepk/MCTeUeKB/IuPK/GfHZxcQKFkRrlIX664ZIoJOiZYgq2DbMKIfE1i8XtC
+	 Yu/f6YBtFIBBRRFGeSlPbMeUoh1mfF1NrDIhWRnfCWGtEM4rjr/5GL1j1SBcA7EzEuhpZ
+	 2EWh6M9z71ihmISjEG5XifWl74GtcWg1AJx7M2hqv4azOYlwyqhae+Q6mSPW0heRBlYU+
+	 MyB1jo8XjVCpUFsoSni4RS0YtATd+aJmONPohfXIuVCzc4KdLAVC2nV74qNjC75r7/3jh
+	 a5Gox2+UINMdPLYb4gfZwr39yIwe2xrTWLlXOYmgVZk1HoNmh0aAAkNSj4NiDTvxGQA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tjRGgMsh;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795610601;
-	bh=d6fCVOF7hMI1+IVsik436SzmOa7YOc3Bgu6cq9sqNMI=;
+	d=lists.u-boot-project.org; s=default; t=1795612695;
+	bh=EJ6/6P8JFrSsAQW9qIHu9MBfejhzjAhDoiowQosfmkE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PCiskPxHdcRsJryf8HTtbb8ijm1IfLPMyWAVAt5OM7bp3EGRLSsbdQYlLwyvn7ZMY
-	 ZnvgSy1oCsibHRZLmnTfY9aO6ED97Fk1RH9ZgTwrd+Ym9OspNS8CCkk3EL8NawCr3H
-	 3Rcyr6c86ztnBH7Ukc3A7My15FgGQcac0k5Rf1IXp7IhMxXmyOCr4WbgWzkLAuux3c
-	 OElN6ilQt64xO9B+mXxqhjjQIyapF7aZoY4AE9CnNNAU8DJ4a3XQUq32tENDr7/lB0
-	 F59z8NZE9WBtlIPynkzIlaqPMkurMLrN4FRE7D4GxcwO8wKB/2Pg+XUGcHgYVoMsgo
-	 7uCNAoBTecF8Q==
+	b=W2NlrQ6Og6Ee7a0RGimldj9s0MMKzH1IwSzoAH8gdImWdv7eBuan+BznDCFeeSy1K
+	 +aKZvtjtGMaxy+SN5gMy5FvdAOU5G5bgDge9qODti3J7QqCOk65AA1ptagGpnuRl7e
+	 YJ7HYFeMGk9rCyR8leFBqmdnnOtVBVa9rielM5l/wOL+pJsZ0x26O9yTnXwePtNY+r
+	 FCBU1leKwtGAog5cjNsAb8rKjL2wsPfSmcmIBv3G+1Q+Tr9fq3S/UQQP3gmvAI5N3R
+	 NF+DzLeuahgkHV+dxlVOx/HiDh0ifkDspmR8/qKcnPKPoL8hcXJy9fbFdFgYL1Y0UL
+	 +wAcaNMqALvlg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 24AAA6089D;
-	Wed, 25 Nov 2026 12:43:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 6162C325
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 12:43:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B980240812;
+	Wed, 25 Nov 2026 13:18:14 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2CFF6325
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 11:13:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5346B80BB9
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 12:43:12 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1EF59405B7
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 11:13:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ALNgICkmq5-u for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 12:43:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 39B2080851
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iDI9_EuwmZ89 for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 11:13:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 293A9405B6
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::435"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
- envelope-from=pepe.schlehofer@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ client-ip=2607:f8b0:4864:20::435; helo=mail-pf1-x435.google.com;
+ envelope-from=ssunkkan@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=NqW+qUAw
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 39B2080851
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 12:43:10 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4b79502c27aso56454465e9.1
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 04:43:10 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=tjRGgMsh
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 293A9405B6
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 11:13:41 +0000 (UTC)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-89d6bd67045so2611241b3a.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 03:13:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795610589; x=1796215389;
+ d=gmail.com; s=20260707; t=1795605221; x=1796210021;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=d6fCVOF7hMI1+IVsik436SzmOa7YOc3Bgu6cq9sqNMI=;
- b=NqW+qUAwkeWC9U8jAihEf1zwvGP2iDktXa+ZtQy+akhl6UpdALj4jbjbJMvWLtVLhd
- lv6UBOEdXjIRvpS3KhussYvWW/pH1/UMPfqXFNekjiVRvyEpP/2TtRyXnXKc+DBnbzsB
- m+Yme09LJSotPH58dud+ggdD6+7o7s9YLd4Mp5Tn3hUcd3ouxYcjBPuZTXYKLtl/vHID
- /jvU4Gll5sj+hUxRgmPYMj3hd/ctqL5PXZMALf7zazkMNnejmkqo3Ko2BzpgROgcJ0ne
- OiLXOZrAWML+8Tnkrzx3uGiB2D0EoabTGlsoGiY38Tu/PI/9hOvonuS/PHTaBQhpcFom
- h2uA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=EJ6/6P8JFrSsAQW9qIHu9MBfejhzjAhDoiowQosfmkE=;
+ b=tjRGgMshcYsD2SPKYmqlzBhq3AZO9U+Zl4AtBLkI7Q2VsQAydC23mXBIvW4+JPplp4
+ MSxFkJBft21TZ13xgHxQAHg4x7T2vjD1Q7xSR/vrQ4ilwr9ba4Ie3fjab9YWX6cxO4fW
+ uF3eO03Dff+HBz18FRocF9CLaaXktESUNdPqpjG20rIscNE6a1wPB6gQ8NTEWRu5kJtv
+ 7bwbzD9PxSSL+hoLe1pfSf8px81ypG+kx6klm+eLpwBmKTpoq+gU/LXGIQMtLZPj/bSS
+ IpKLofs+N4Vx+r/nR2Ovt0sM2FR7tcRwJBfPRXXXDrjKbAAoDGyHaTdzChls7mmBpm5M
+ oN/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795610589; x=1796215389;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=d6fCVOF7hMI1+IVsik436SzmOa7YOc3Bgu6cq9sqNMI=;
- b=GzdnD6jrlkOBDYohSPnfge9bDhIozIIe7+P561Xq8ZAEpJWnDXDoSwBJrqQNreN0UN
- s5GwtlnCLvj41lj+lBJj3xiZm3+KYiAYstteRnsPybV5U0SquJB2zkR8pWv8SOqlRJ2y
- ODvjUZv1M71CtCCEkHMvtwTrUNJX/QrfMXzOHERUwCOyCGSnplqVX+iVy0b9DuRrzDkt
- gZJojgLLo8RrEsMQ1Ut1UKDxgV7xSAw1IUvw/O+fu1aNPxQk7LDIb2xdInOmA6LSQgyh
- RZxrg8Xl1Z1IdSQDECfX3zg+7wfgxndWGLswo8eMLVXRsdRrIRqubIAokaJY9Pa40lh3
- TqPQ==
-X-Gm-Message-State: APuU4Z+qn5WOE1ikjz6gPekOpZklS3Mar10EO+2WQv1TI6+boBuxUXJg
- mXSBx/9NR9rTj3hcLUi/4Z2UdeB8Baa5Vzbx0NTLU/316fLxKh/3bnB1dgcXTtsi
-X-Gm-Gg: AZFdTZecFdW0IYUMRtGYOa4H2uytL9dWWqxh/h2ogYJKkWn69F2JMKdzEB/7w03jpzZ
- lravxSOkDbUORKjENNfS1U9MiLulqJvSbCbI/oGfLsSJBBXIdcFX4EUWUNbcL39Urm8Z82v4/Zy
- jkVNXYOxF5BBXxzbN65Ts8cba6KFgw8YwdqZ7j2A2vSv1gejXL+Sm1yv5DbcGwRy5uOAY4Wt+gN
- IrCu9MIaGikxcol9Lr01CpUSAFk5jwznZNbWiKYoc0LyllKGC1dShLvijBli+rkLcF5/FG0/DHH
- JDLKlfzWyT+jk79JVRhJi0dLxzacG9d522wdCBIVp4054EmFm50suHzvOQAg2wlrwgV89fOiG+4
- 4RwYrfKqnu+faJZVtay71YdBl73Rw+JS9sH/aoPHktX4zFhqNH0Apot54DG70XTpr0TvgT2Rog5
- Cnje76gp4ql3QnVGd0TP3+oRzUaQLderBy+a9/wC1fPWsnBR8rB2l2rutU+BcCPFZpUVvIqN75U
- Lg8lYKk+Ugf/F0n9XU/4ASHwZP3MUWpdEKcr+9+vcHrRlJ59MZhHEREuqeuj9BSoQ7G0hV4R2oa
- qb6NQCBlfsPnZlS0IwCnEVflkZvny0Pof/e8dLZMpnLge3P515uAk09/0UK2dd352/PEZZDMuvF
- G/YQNpNdUAdaAy1lcQDOpWfelKtW1mvq3nNZIiD3heP7z4YVq4vfINBk+0IUTnzcqY9mlOzGBG6
- DinIy0xDpJZ9fkJB54cHEqo+UyDuSPAeLL8qhLASdvafSn8ZtE2w2RHg==
-X-Received: by 2002:a05:600c:848d:b0:4a4:3a2d:15da with SMTP id
- 5b1f17b1804b1-4bb88812026mr337511905e9.15.1795610588798; 
- Wed, 25 Nov 2026 04:43:08 -0800 (PST)
-Received: from localhost.localdomain
- (dynamic-2a00-1028-8388-a84e-7575-e1e3-dbaf-96fb.ipv6.o2.cz.
- [2a00:1028:8388:a84e:7575:e1e3:dbaf:96fb])
+ d=1e100.net; s=20260707; t=1795605221; x=1796210021;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=EJ6/6P8JFrSsAQW9qIHu9MBfejhzjAhDoiowQosfmkE=;
+ b=loqMlfgT1RDep8Ana+1UtMMSDmJ+AkIO3SxM135qSCz6fEWLSwXMsTr9GF5naoikB7
+ y74gHp1cRITSyFrb5Ut55qdlX1B6bOrD7CSTBxunj72BeTTbUCbbznYIrxbWhf8tAYUV
+ UR9BbC1LUIs4ZkIN0ZhkZQAGNy6L08gpAVhlFaK9wshCJMqlsA2419R6Oeb26W5oIc3Y
+ z8MRffxKb730ykiMmUUulLhd6LiigX5n0CS0NiB7v/pNv+YuRUtFCqbpR/EVSZJcmMk5
+ mEAWG0qv0zzSG8+xvL/vtdHT++0ki7GokSYCuBsDsdjragziE5GuOQHnbBxLSzA/b8jc
+ gqnA==
+X-Gm-Message-State: APuU4Z/qBnSpXwxxOFPUs/RIrjUbJgRKycBMyC/jISYFvw51VRDPtfiI
+ SyoQNFubn/0yANX2RNWExYPVLWpOV8UzUDJRxt2GUXnXNSwSsMe6nVqY6YdIPaYu
+X-Gm-Gg: AZFdTZeyHOZt7qA6m3Nz7wTG+CMrd8uoQqbcf68IePOEfio3RBUqXz0otVjUhxAdZX8
+ wznt9GUbdUgJIKFs/2d99ZleurrbkdkEM6YLIjceO9WxFE+QDT/KURPJkgKHHAtIQMGFAFl0O8N
+ wMj+JFP9qJaN4BhHuT74DKFtPUNmqIxxLfR5gvImpEMDHqzXZxViilbXXKl6spYF9T0/n8aR3Nx
+ COX/xHCntRa/EpgxS8fF0ubFnCZnlkTUnxv+w8fhWHglJSZGXzIL2wEcg2FvJ7kUDOWME3wWewK
+ zp1ywndtlrSIvQMdjippioS9pCvYyQ7Qw1cgelOWVAxRAcPFmdKFjjDR28VDKuKpxB6DB4onKnl
+ PlsWH3R7W0/FQ4J9ADl8+L2hDaU9eKRoWcm4z3X0JHE38OPt6mEV6d0EbLUp7FaKm4FP7oCcxyP
+ l7RCXyoDKSfbum4ThC6iZ3LswCHFiwL4JF7p21LjA4Ji7g+LxC1w6O080aitYVA1Q8qqcXDWPbU
+ xQXJ90HlPa6fYXE5TDKDZPzfG4lCphnxKmsDHxl2PV3U8m3ua0Ey1bgeptZGTt9MnC61TGesD1D
+ 0ANq8qyUuZaRml6NLgtTYeg=
+X-Received: by 2002:a05:6a00:2e2a:b0:891:e380:3d03 with SMTP id
+ d2e1a72fcca58-8c7ddfaf314mr12818938b3a.28.1795605220523; 
+ Wed, 25 Nov 2026 03:13:40 -0800 (PST)
+Received: from Sun ([240e:3a2:dcf:f2e0:899d:6e37:7d6d:4dce])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb88442995sm536486045e9.2.2026.11.25.04.43.07
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 25 Nov 2026 04:43:08 -0800 (PST)
-From: Josef Schlehofer <pepe.schlehofer@gmail.com>
+ d2e1a72fcca58-8cb6640429fsm5841883b3a.38.2026.11.25.03.13.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Nov 2026 03:13:40 -0800 (PST)
+From: Ssunk <ssunkkan@gmail.com>
 To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- Bradley Morgan <bradley.morgan@linux.dev>, linux-btrfs@vger.kernel.org,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Qu Wenruo <wqu@suse.com>
-Subject: [PATCH 6/6] fs: btrfs: Avoid the remaining 64-bit divisions
-Date: Wed, 25 Nov 2026 13:42:59 +0100
-Message-ID: <20261125124259.95636-7-pepe.schlehofer@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20261125124259.95636-1-pepe.schlehofer@gmail.com>
-References: <20261125124259.95636-1-pepe.schlehofer@gmail.com>
+Cc: vigneshr@ti.com, takahiro.kuwano@infineon.com, trini@konsulko.com,
+ vjardin@free.fr, Jacky_guo@xmcwh.com, hs@nabladev.com,
+ Ssunk <ssunkkan@gmail.com>
+Subject: [PATCH v2] mtd: spi-nor: Update XM25QU512C to XM25QU512D
+Date: Wed, 25 Nov 2026 19:13:32 +0800
+Message-ID: <20261125111332.1820-1-ssunkkan@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.4
+In-Reply-To: <20261124123624.471-1-ssunkkan@gmail.com>
+References: <20261124123624.471-1-ssunkkan@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 25 Nov 2026 13:18:12 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -164,153 +160,57 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 32-bit PowerPC, GCC turns the u64 divisions in btrfs_stripe_length()
-and in the RAID5/6 code of __btrfs_map_block() into calls to
-__udivdi3(), which U-Boot's private libgcc does not provide.
-calc_stripe_length() has the same divisions.
+The XM25QU512C has been discontinued by XMC and replaced by
+XM25QU512D. Both parts share the same JEDEC ID (0x204120)
+and are compatible with the existing SPI NOR configuration.
 
-U-Boot never runs these divisions. btrfs_stripe_length() and
-calc_stripe_length() have no caller, and the RAID5/6 divisions sit in
-the branch that fills a raid map, which needs a raid_map_ret. Both
-callers of btrfs_map_block() set it to NULL. Builds of turris_1x_nor
-and turris_1x_sdcard still link that branch, and with it __udivdi3().
+Update the flash name to reflect the part currently in
+production.
 
-Use div_u64(). Its divisors fit into 32 bits: num_stripes is a u32 or
-an int and stripe_len is an int. full_stripe_len is the product of two
-ints, so declare it as a u32.
-
-linux/math64.h pulls in linux/log2.h, whose is_power_of_2() conflicts
-with the copy in compat.h, which returns int instead of bool. Include
-linux/log2.h in compat.h and drop the copy.
-
-Suggested-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
-Signed-off-by: Josef Schlehofer <pepe.schlehofer@gmail.com>
-Cc: Marek Behún <kabel@kernel.org>
-Cc: Qu Wenruo <wqu@suse.com>
-Cc: Tom Rini <trini@konsulko.com>
+Signed-off-by: Ssunk <ssunkkan@gmail.com>
 ---
- fs/btrfs/compat.h  |  6 +-----
- fs/btrfs/volumes.c | 19 +++++++++++--------
- fs/btrfs/volumes.h |  9 +++++----
- 3 files changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/fs/btrfs/compat.h b/fs/btrfs/compat.h
-index e6784884835..f973f3f1185 100644
---- a/fs/btrfs/compat.h
-+++ b/fs/btrfs/compat.h
-@@ -4,6 +4,7 @@
- #define __BTRFS_COMPAT_H__
+Notes (patch-notes):
+    Reference PCN document for the replacement:
+    https://drive.google.com/file/d/1RR90EaWHKFVZMQrqLorMjc4brIkE0TM7/view?usp=sharing
+    
+    The latest XM25QU512D datasheet (Rev1.6, dated 2026/11/23)
+    confirms support for 4-byte Quad Input Page Program (34h)
+    on page 63 and in the SFDP 4-Byte Address Instruction Table
+    on page 87.
+    
+    The datasheet currently available on XMC's website is an older
+    revision. XMC will publish the updated revision in a future
+    quarterly update.
+    
+    Current public datasheet:
+    https://www.xmcwh.com/uploads/976/XM25QU512D_Ver1.0.pdf
+    
+    Changes in v2:
+    - Rebase onto the next branch as requested by Tom Rini.
+    - Update the flash name in xmc.c following the SPI NOR
+      manufacturer driver refactoring.
+
+ drivers/mtd/spi/xmc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/mtd/spi/xmc.c b/drivers/mtd/spi/xmc.c
+index dbf11a4c5d3..ec98e3fb388 100644
+--- a/drivers/mtd/spi/xmc.c
++++ b/drivers/mtd/spi/xmc.c
+@@ -17,7 +17,7 @@ static const struct flash_info xmc_nor_parts[] = {
+ 	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QH512D", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+-	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
++	{ INFO("XM25QU512D", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ };
  
- #include <linux/errno.h>
-+#include <linux/log2.h>
- #include <fs_internal.h>
- #include <u-boot/uuid.h>
- 
-@@ -74,9 +75,4 @@ static inline void uuid_unparse(const u8 *uuid, char *out)
- 	return uuid_bin_to_str((unsigned char *)uuid, out, 0);
- }
- 
--static inline int is_power_of_2(unsigned long n)
--{
--	return (n != 0 && ((n & (n - 1)) == 0));
--}
--
- #endif
-diff --git a/fs/btrfs/volumes.c b/fs/btrfs/volumes.c
-index 71b0b55b9c6..fcb20a761f5 100644
---- a/fs/btrfs/volumes.c
-+++ b/fs/btrfs/volumes.c
-@@ -2,6 +2,7 @@
- #include <stdlib.h>
- #include <errno.h>
- #include <fs_internal.h>
-+#include <linux/math64.h>
- #include "ctree.h"
- #include "disk-io.h"
- #include "volumes.h"
-@@ -825,17 +826,17 @@ u64 btrfs_stripe_length(struct btrfs_fs_info *fs_info,
- 		stripe_len = chunk_len;
- 		break;
- 	case BTRFS_BLOCK_GROUP_RAID0:
--		stripe_len = chunk_len / num_stripes;
-+		stripe_len = div_u64(chunk_len, num_stripes);
- 		break;
- 	case BTRFS_BLOCK_GROUP_RAID5:
--		stripe_len = chunk_len / (num_stripes - 1);
-+		stripe_len = div_u64(chunk_len, num_stripes - 1);
- 		break;
- 	case BTRFS_BLOCK_GROUP_RAID6:
--		stripe_len = chunk_len / (num_stripes - 2);
-+		stripe_len = div_u64(chunk_len, num_stripes - 2);
- 		break;
- 	case BTRFS_BLOCK_GROUP_RAID10:
--		stripe_len = chunk_len / (num_stripes /
--				btrfs_chunk_sub_stripes(leaf, chunk));
-+		stripe_len = div_u64(chunk_len, num_stripes /
-+				     btrfs_chunk_sub_stripes(leaf, chunk));
- 		break;
- 	default:
- 		/* Invalid chunk profile found */
-@@ -1085,17 +1086,19 @@ again:
- 			int rot;
- 			u64 tmp;
- 			u64 raid56_full_stripe_start;
--			u64 full_stripe_len = nr_data_stripes(map) * map->stripe_len;
-+			u32 full_stripe_len = nr_data_stripes(map) * map->stripe_len;
- 
- 			/*
- 			 * align the start of our data stripe in the logical
- 			 * address space
- 			 */
--			raid56_full_stripe_start = offset / full_stripe_len;
-+			raid56_full_stripe_start = div_u64(offset,
-+							   full_stripe_len);
- 			raid56_full_stripe_start *= full_stripe_len;
- 
- 			/* get the data stripe number */
--			stripe_nr = raid56_full_stripe_start / map->stripe_len;
-+			stripe_nr = div_u64(raid56_full_stripe_start,
-+					    map->stripe_len);
- 			stripe_nr = stripe_nr / nr_data_stripes(map);
- 
- 			/* Work out the disk rotation on this stripe-set */
-diff --git a/fs/btrfs/volumes.h b/fs/btrfs/volumes.h
-index 9d1a07ae789..d66547c6c10 100644
---- a/fs/btrfs/volumes.h
-+++ b/fs/btrfs/volumes.h
-@@ -4,6 +4,7 @@
- #define __BTRFS_VOLUMES_H__
- 
- #include <fs_internal.h>
-+#include <linux/math64.h>
- #include "ctree.h"
- 
- #define BTRFS_STRIPE_LEN	SZ_64K
-@@ -138,16 +139,16 @@ static inline u64 calc_stripe_length(u64 type, u64 length, int num_stripes)
- 
- 	if (type & BTRFS_BLOCK_GROUP_RAID0) {
- 		stripe_size = length;
--		stripe_size /= num_stripes;
-+		stripe_size = div_u64(stripe_size, num_stripes);
- 	} else if (type & BTRFS_BLOCK_GROUP_RAID10) {
- 		stripe_size = length * 2;
--		stripe_size /= num_stripes;
-+		stripe_size = div_u64(stripe_size, num_stripes);
- 	} else if (type & BTRFS_BLOCK_GROUP_RAID5) {
- 		stripe_size = length;
--		stripe_size /= (num_stripes - 1);
-+		stripe_size = div_u64(stripe_size, num_stripes - 1);
- 	} else if (type & BTRFS_BLOCK_GROUP_RAID6) {
- 		stripe_size = length;
--		stripe_size /= (num_stripes - 2);
-+		stripe_size = div_u64(stripe_size, num_stripes - 2);
- 	} else {
- 		stripe_size = length;
- 	}
 -- 
-2.54.0 (Apple Git-157)
+2.55.0.windows.4
 
