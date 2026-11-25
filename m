@@ -1,196 +1,125 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD3C9606A321
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 14:02:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97A52606A321
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 14:28:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0U/9rZvb;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=bYSRcgoh
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vCd/sfJu;
+	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=EnEptxXG
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4F7B7607D2;
-	Wed, 25 Nov 2026 14:02:47 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vsrhmmQ_dii7; Wed, 25 Nov 2026 14:02:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4BECE6076D
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795615366;
-	b=V2rqiMqsx+u2e035wZ4IrthabgMBf5VLDZZ6SW+tZmeYA3aHcxbcmxVxPVwuckF8+srP
-	 I54jjmcMJQm1ghO8hWevXl9aKLA7Ee0Or07e8dsF1+dZ6Kap19lTsVfHM94RtL3S03WHJ
-	 k+FcPD4OvjQ6cF4Dy2ZdyeEgDorT6GO7l5IGKlnMWngQh5NoCICHHp4Dmg81Ok/B9JIet
-	 s8sh2eJtFoV9DhjcKFkT35oBR7ItKb7Rvev+QLhlHn6xfQoZghaGyMZbDVLICeZmRtusn
-	 cht0oeCI5TEeYCwXjr+m3RFLeU25yXHGjHDCpAxf3lpN/E+MElUh3ElhMAj/IjvvpzQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795615366;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=A80JlFe6Lyw4nY0OhbQ/Smmo5n/+e9iK+uFbrFlAI60=;
-	b=QuV1HPCoVScm2HVigRXVX5TTiAF7AEncTLbCEuQgNOwFGcYE3JPio8gr6H2wnq3DDrWV
-	 HbVLMqw0uVmu0m72y5J+924NT3Dgy9w9gWcpxJH8YtXi92epEYTMnzXgqRyo7ZK2nbQlk
-	 Dm50iQRrcP1kTpaWsa534hCHOzaz2RebSAF8s0DjeeZ2NXWSuxYf5+JfvpUM41zod9qQ5
-	 +0alz2RWj/tnI+LgwfyFPYkrxYfW3tbuOLU5I8BWsiuWeVBf7OX+Ibr1srFOh+4uwXVxO
-	 SOuYB35cl2F4DxY7e5HBzPlhXW85WgoLZvmO0eGFnWFwYsdyNrXtun94bFr2Qc1ubwA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795615366;
-	bh=A80JlFe6Lyw4nY0OhbQ/Smmo5n/+e9iK+uFbrFlAI60=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0U/9rZvbgkVGJh9vlLUDYzvRfOLkMPfvYRH36PB3EJwNHgodXfFNVk0VGex413dIk
-	 Qu5wD9PK6H3PlmsWgJeVzE8AfLx9ult5e7hZqfwmca2EoVajxLw1tdBG4tsGxSNfE3
-	 +Tn/PqUojEIg4+qR63V5W7gmxUlHoLX0miKkoOqZu7XVlnkw6+VoiPXdpOWGKoDGSZ
-	 VZscRMrGqM4I2W85hGItMurWcSXsCU/CNYy8Cu0iPRvwLA6pW9HD6ImE4TrtRip5fn
-	 kc8OXM76oyD9JIc+KVdGrSOFhrmOnVELfMS+CgPmxcBT0cSelbyekujH/64Dk6PT/l
-	 doa3pc3f0LxBw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4BECE6076D;
-	Wed, 25 Nov 2026 14:02:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 860281C9
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 14:02:44 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6C3B680D3E
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 14:02:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CA60C80E31;
+	Wed, 25 Nov 2026 14:28:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FGg51fYjx5vm for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 14:02:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 58D2580CBA
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c202::7"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c202::7;
- helo=gvxpr05cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=bYSRcgoh
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 58D2580CBA
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 14:02:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A80JlFe6Lyw4nY0OhbQ/Smmo5n/+e9iK+uFbrFlAI60=;
- b=bYSRcgohV+iNP19j0uzYSO/QewSlMZzfSeqg5VxpdaNUU6NNmtuvUVXQdybRmLQCFuA3dYTvRW0VZ77p+UrlRhMTn/9vt+SN7R1snHOxdYHr2ERFRAbrlBE/EoviZxeUNpnIlbF7+CiSyQFfJcNjuUKoZXwF4J959ia7pjNyCPQ=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by VI0PR04MB12687.eurprd04.prod.outlook.com (2603:10a6:800:346::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.14; Wed, 25 Nov
- 2026 14:02:35 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0639.012; Wed, 25 Nov 2026
- 14:02:35 +0000
-Message-ID: <9f765c10-3e60-4253-8f68-67ed973bde62@cherry.de>
-Date: Wed, 25 Nov 2026 15:02:34 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] Dockerfile: Be more polite in two git clones
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-References: <20261125134317.2479815-1-trini@konsulko.com>
- <20261125134317.2479815-3-trini@konsulko.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20261125134317.2479815-3-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIVP296CA0003.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:357::7) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
+ id W6npXbqaAfHv; Wed, 25 Nov 2026 14:28:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 17B6F80E36
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795616884;
+	b=Y6X4jsjTrIdZ+TuIaOagbTV9Li8rfqyM6xjzDExz4l493WBrKZGlLO0p6mFp4Ui45ATs
+	 ofIj7hrosGXDDsWqsinYcZmelv1NQnuXoItqGOYxySC3NWTrKC8U9u+JsnOFQCrtKVmf2
+	 9rU0n4uqp7ZPJG9UefFrwjNhZWuSI7sUqzfOzlk4JrAydRYV8Kx39goOGoAwMLa6gF0bO
+	 bbqi1x374cxOfeDOz06DhmPPKtDoRKpzJku+pwDd71xoFo913ALBtFZ0BfHWI3a5HeDWL
+	 d6/1j0LULjJUxYW+riwdQwnzYqYjCQ4fDNiQ1yMv4n3uEMSV5QgZGXOjY8T6Mlzwxbw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795616884;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=XYdn6i7glIgRUUU/EUPN+JbwJwbTjXrrL9cIeKOvUas=;
+	b=JzYFIaDYJnCGk9pPEo6mbQrc2INoY1xAgc4ZV+OZE9EG7sx+hhBj9SOTboG9pa5eu8wi
+	 pnzkkqEiaDON4NXPF6O9rEsKAoQ3rHWvwFWyVIuyhNKnZCwd6k8HHO6v/IpcZyy16kxbJ
+	 vteHos24m9tVvphUV6D7H4IpIHannvfVt0hIY8x1dhOViRoeB9Qkb14yLxakl7lvDs7rY
+	 64IFA7LocyWh3rg8qDRjUsXsz5J3C5entqxMlYlE6DY8n9rRUIYs1VBn6NNvzxbce2/RD
+	 ARhxsBjyqjGCYpoUD7qtyZxu2xH3Bzp1SQaDBIJPzLCCK0k9F5aZCGTdshfn2pIx6ZQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1795616884;
+	bh=XYdn6i7glIgRUUU/EUPN+JbwJwbTjXrrL9cIeKOvUas=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vCd/sfJuWONVunb+RlMj05Ci9wMGO4t2sPOeEKk5Wg2XJT0+jQAIKA8neqO+JyD9S
+	 01jYsf1N7xwdnSTomvaZUpmx1+QhnEgbRwLU1c5JKZIxWKdlNqFQ7oEpBBlvRICTHN
+	 xfCa1prqrSPMPSDSq6rZ3HAxmqFoODTP4c6yUTiMxr2Ov3406PDxoG8p7Ihvp2ykMg
+	 p6SDisywaHn/w3WRTQFbGSZMwTGNA0LIeI5NjW2Ren1MmaoWqhPzYZI8wykLc7fnKA
+	 n0NVFXgyoGwbgnMG1vzHZco4+yAFociCvXYjzpTw/T4NzXx/EtlVvaQvrjH6ejeKkT
+	 fekXWsVRIXW5w==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 17B6F80E36;
+	Wed, 25 Nov 2026 14:28:04 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0317343
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 14:28:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0068F40568
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 14:28:03 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kmQ-FW95agYm for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 14:28:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3C13C4055A
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=116.202.128.144
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=EnEptxXG
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3C13C4055A
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 14:27:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1795616825;
+ bh=XYdn6i7glIgRUUU/EUPN+JbwJwbTjXrrL9cIeKOvUas=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=EnEptxXGTVqLv6GwsD5O//4wnbmdlEcipMpYlJvuFGmyLgPHzE/m8OQ754oUBTBGN
+ M9if1O5gZx05i+IicLaFNRoUjT7gvtO2t6k8MW8EIchQ6ucfoIH2O/5Cr1XasD1/vS
+ C9cQ+z01+9y1NzHOG261G27qAoe/Mmx1JL/maZKiqkjkey6J/cDdAppX19Gh7tIHKU
+ 6MOOpsjGdto1oSPpgyrDY2QsAsav+aShVm7BAqecua7LgEcCul6UJgrX/Qh77gghbJ
+ o3y5rKwFEMmZWgRf0K9K7cRFw8Pj5eIiZaiYMHuPDka4KV1CmAdt+lxP33LcF2GO+/
+ 2iFLKk8HSFY2A==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 585AFB22053D;
+ Wed, 25 Nov 2026 15:27:02 +0100 (CET)
+Message-ID: <243508ce-c342-489f-99b6-11996824e20a@freeshell.de>
+Date: Wed, 25 Nov 2026 06:26:55 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|VI0PR04MB12687:EE_
-X-MS-Office365-Filtering-Correlation-Id: 346b4822-943b-4e81-9515-08df4afcc15d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|23010399003|4143699003|261028144727099003|10067099003|261026135527099003|261102123227099003|261022105027099003|56012099006|261026130827099003|11063799006|261021121427099003|261021123027099003|261009223027099003|261021133027099003|261022115727099003|261021130227099003|261021135927099003|261022075727099003|261026140227099003|261026121527099003|261022113327099003|6133799003|18002099003|22082099003|13003099007;
-X-Microsoft-Antispam-Message-Info: vLAEaECGIB7o5KWOqq6vFvw7DAtsR0xaP5Kf5oQIadB0dbmZf2TTI+kYnPpDA3tLSkXamdcsUoYUX13oQ4ohfHv3T2bZx/07EL5RZGtaA7w1uda1GMVioK9ZtxoTKwjx6DoAU6u0DlWvXF970T8G/gNqAEQmea69QLhPVCWqS7z6PnkOX8L4UC3jFsM2tt/rtvymP9FExuykeLvE4XpLke7H/YAdUqUEvndlYpedRBwmVydrntgdRmmOWIm0nQtWcHdCZPll0TWfSp4VwW0FbDy8Hs5S7AIzcXm3Y8xt0H4BedY/nswciSuCq3Ur4MpWiDXqryp+uhghv2C9qFWxsieCoCnyDgfjPVr+RWRWhNP25gutBzLnclzX4POD6HYvO4wwSlLPXnsFu4xN0FPhaY211ekMDQW+ShQdHp77WF2oBp2OkvtrRph+BkBcr0gQtzcAhZ5WY9lobCtMzZgcF+ZnKJZieP0dOy9LBJ5Xezgd33BhB23TaE4KDnBqlayXYQFRt0Yp6CKfvRUCQMc1u7jArH+a93f6jzsmOKipNXdHr0GlARzu6h4hiHBtfAxJuz7CSdMCDCEeBB1jMPprqJ5WeFpyVu6JTscpGCiDvCQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(4143699003)(261028144727099003)(10067099003)(261026135527099003)(261102123227099003)(261022105027099003)(56012099006)(261026130827099003)(11063799006)(261021121427099003)(261021123027099003)(261009223027099003)(261021133027099003)(261022115727099003)(261021130227099003)(261021135927099003)(261022075727099003)(261026140227099003)(261026121527099003)(261022113327099003)(6133799003)(18002099003)(22082099003)(13003099007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NmVTNVpUNS82R3BSeVAzWDNUNTRUd3Vmc0dUVGxIWUdzTnlYT04xQmJSV29O?=
- =?utf-8?B?T01yRktDSjg2ejhGdEpSZURIbE5FcmZxbENMRUY1YzVOcVB6S0FENlBsUHM1?=
- =?utf-8?B?NVhkTWU4VkxpMUk1bkNJYUhDZm02aWt0VTU0WUpUNitXL25KRTdTd29QeUhV?=
- =?utf-8?B?SmtGek5JNEk3bnZNMUUwTFJnSHBPTUhMYUtEeEJncHRBODVMeWNRL3hUNzFn?=
- =?utf-8?B?OHVTVmJyaUh3NmlzQU1WL3VadzBnUm8wNC9zN0s5d3VOcnhsbFAzWWFwbkZn?=
- =?utf-8?B?ajU4MU9vUUJmV1dpdFk1WG1aK0FYVUtVamx0VUFvTzcvazdRZ2krU0Y0T1FB?=
- =?utf-8?B?bkRZVS9Yb1hCcGxvemVTOWNGVk9kTjZKaHdhOTMvV0JGZTFMT0p0UUtUaEsr?=
- =?utf-8?B?OUtOdWN3RjBCMkhjNlN4ZTJZcVhQajZObEFPVDcxQmRCTmZBMTJLNGNaL05a?=
- =?utf-8?B?czJ5MHREQytCbUdqUSt1UXF3TmRsd2VnU0pvMUhWWGZQb2ovbkVUYXhIZ0pL?=
- =?utf-8?B?N1RzU0dEYTlPTUo5eDM1bUpFVkZPaXo5c3pSbU5yWkVlRXJ6VnJDWXUyazFv?=
- =?utf-8?B?QXhsRWdaRk5kZ1I4cUJvTWZZSHBqRHNXOG4zQnR1S1Q3b244L2RKZHdlN0Ex?=
- =?utf-8?B?RVA0TUtZWnlMNm9peXc1WlBWc0pGODl1TnFNck9OL1RVOG9GUE9vdVFMOVMv?=
- =?utf-8?B?ZEZTTGlESlhuOGQxOTd1OFN3OXZhN0x5eXBuV05Td0h4WDZDQXhkK05QbXhp?=
- =?utf-8?B?UnVLaUJrbTRTYzJMYVVQdmJWTVhXVFk4OFlwLzR3bGVKeWFCMFNibFkybVdz?=
- =?utf-8?B?UmpvblMvM2JNbUwvTWFRS0tQOGxBc3dnN3d3WTFGdlgvbWJKQVA1Mk40c0pU?=
- =?utf-8?B?SW0vbmRmSDVyeVdZNzVLalp4SjBWMCtsVm1uendnVkxCOENjeWl2MEphaDQv?=
- =?utf-8?B?ZFlqTDFTRW01blZXVlpGMWpvT1FZNEU2RTNWN2xURTNhZVpEbTBYVW4xd0Y4?=
- =?utf-8?B?OUxoZkZCU2pLVm1pU2dvODFybTYzb3Rka2NNRThvTjRKd2R6ejMxaitUelpM?=
- =?utf-8?B?S1BhTVc2THIvbUZvdDM2NkRRejU0TGxLSEVUckJScHZIQlRYQ21iblFhY1px?=
- =?utf-8?B?L2ZzaFhZaEpZZTFqUWFsdWhCN2dFZENwdmRydDRWc2RkeXFNMEt0Tk1IZ0sv?=
- =?utf-8?B?ZG45aXdUZko3a00xV2VQY2NoQTZXU3lqVjJ6clNYdTV3cUVHeXI4djJZZCtj?=
- =?utf-8?B?SHJRdzNqbHFMRFE0bmc5SXAzT2hzUTRGVWVyckhHR3pzaXBFSVB5SFdYblpC?=
- =?utf-8?B?NDlvZlBBSndXRXpCTHdFQXNBTkp4SkhYUXJUZzN3TlZoQ3hyN2ptcExOWXlQ?=
- =?utf-8?B?cUtRVUQxNWZNeXk1S3luZlJtSXNtQWdSMkovd3R2QVlzRWlaTmdOOTkvazRG?=
- =?utf-8?B?a3NCZkxrWUZhdnMrM3lXS3lWb1ZHTGp1d3d2d3FLc3F2MzRTOE5zMVI2T250?=
- =?utf-8?B?aFlaN2xnREJ4dFRia2JVeVJaRnZTaUVBMUN0QmhNL2EvMk92NjZ1UnFYS1Fr?=
- =?utf-8?B?NENnWlpmdi9RR09QYUNGT2V6YVBZQWpOTVJKeVJOMmdYa3A3MmRRT0V0SWZO?=
- =?utf-8?B?SGRJMjBUMlI1ZU84VjhjbDZCYksxMVUwNklHR01KR1cxSDd0OS82eVBaOHBr?=
- =?utf-8?B?WjZSOVVNRk1vTTcwdmo1TTN3OUI5Um1IK2tCa3BGLzNFMHV5c09sNzFiS1hL?=
- =?utf-8?B?ZklVUVljeWRjOEdzVWdUeGhxNkJ4eEJpRWhRc1k0RmRPcXJyb3NMVTBBMHJU?=
- =?utf-8?B?cFpEeXBFcHdKbGtna2hPYThzODIyVzlCek14SVNSOU9CTnh2Y3NWZE0xSUVL?=
- =?utf-8?B?cUVzbkxwcE5CcUR0MzhoV0x5MkhxckQ3aG1jbFJzeTJJU0szR3g4dWhnRE1q?=
- =?utf-8?B?dU1xOWhIWjYyamt5S1hUS1pKVmFKSzZENk0rR1pMNHMweTlCbzRIYndQSkJI?=
- =?utf-8?B?MllHMUY5ZElNMjA4Ly9URHl0L3QyUzFDakxuWGR4OXlZeG1DNmhjeUVHenZ0?=
- =?utf-8?B?d2hqTExTWVJQK1NNN2Q5UVBobStmcHhMbk12N2VEVmI2dzNuUzlOQlU5cjVR?=
- =?utf-8?B?WVlOWTRCMFFoN0k1b00xK2hXTDYrZ0htUTd6eUMxT1laMXRWV0ErNTh6Vmla?=
- =?utf-8?B?cnRTMGFmWXU1bGk5NFJ1WWVCaXlEYmFMdXhkZjY4QVRQYTdlK0kza0pXRWFM?=
- =?utf-8?B?KzFFWmMzME45OU96SjJmaVcvZmdYTzdmSUxpMjU4c1Q1TnBHejdnbW9ONHMy?=
- =?utf-8?B?MUtkbG9ldVQ0dU5PR0h1TWhvK242MXhmVFpLeU52dUx6cGZLYlhmdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 346b4822-943b-4e81-9515-08df4afcc15d
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 14:02:35.0116 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: y20bTC8kkHx+CHHiHntVqJAxMaY0PawQI9JfmKqNOAEF6OejebhYZkdJfij7FhuCicOg4N1Qk4kaMlBgwDqTDxmg34Ff0CqdI3EjOWhx50k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB12687
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] board: sophgo: Add Milk-V Duo S documentation
+To: =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
+ <jpaulo.silvagoncalves@gmail.com>, u-boot@lists.u-boot-project.org,
+ Yao Zi <me@ziyao.cc>
+Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Gui-Dong Han <hanguidong02@gmail.com>, Joshua Milas <josh.milas@gmail.com>,
+ Chen Wang <chen.wang@linux.dev>, Inochi Amaoto <inochiama@gmail.com>,
+ Lukasz Majewski <lukma@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
+ Hiago De Franco <hfranco@baylibre.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, Michal Simek <michal.simek@amd.com>,
+ Yixun Lan <dlan@kernel.org>, Andrei Lalaev <andrey.lalaev@gmail.com>,
+ Zhuxu Ran <zhuxu_ran@zohomail.com>
+References: <20261125-upstream-v1-milk-duo-s-v3-0-9ed94b63cbbe@gmail.com>
+ <20261125-upstream-v1-milk-duo-s-v3-3-9ed94b63cbbe@gmail.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20261125-upstream-v1-milk-duo-s-v3-3-9ed94b63cbbe@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -203,70 +132,220 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Tom,
-
-On 11/25/26 2:39 PM, Tom Rini wrote:
-> When cloning grub and qemu, stick to grabbing only the tag that we
-> intend to build. This both saves time and their bandwidth, which in turn
-> makes our build more robust.
+On 11/25/26 04:20, João Paulo Gonçalves wrote:
+> Add documentation for the Milk-V Duo S board, describing how to build
+> U-Boot, the boot flow (FSBL, OpenSBI and U-Boot) and how to generate
+> the fip.bin image.
 > 
-
-suggestion: use tarballs instead?
-
-https://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz (or 
-https://mirrors.kernel.org/gnu/grub/grub-2.14.tar.xz) for GNU grub for 
-example.
-
-https://download.qemu.org/qemu-10.1.2.tar.xz for QEMU for example.
-
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Milk-V builds the Sophgo FSBL as part of its SDK, with the T-Head
+> toolchain and the Sophgo U-Boot fork, which does not support a standard
+> GCC toolchain or a mainline u-boot.bin. The FSBL build steps are therefore
+> based on the community-maintained meta-riscv layer, which provides the
+> board memory map and the FSBL patches needed for both.
+> 
+> Signed-off-by: João Paulo Gonçalves <jpaulo.silvagoncalves@gmail.com>
 > ---
->   tools/docker/Dockerfile | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
+>  board/sophgo/milkv_duo_s/MAINTAINERS |   1 +
+>  doc/board/sophgo/index.rst           |   1 +
+>  doc/board/sophgo/milkv_duo_s.rst     | 142 +++++++++++++++++++++++++++++++++++
+>  3 files changed, 144 insertions(+)
 > 
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index ab001a4d34df..d5f1f6d697fc 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -155,9 +155,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
->   
->   # Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit, and LoongArch
->   # 64-bit
-> -RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
-> +RUN git clone --depth 1 -b grub-2.14 \
-> +	https://gitlab.freedesktop.org/gnu-grub/grub.git /tmp/grub && \
->   	cd /tmp/grub && \
-> -	git checkout grub-2.14 && \
->   	git config --global user.name "GitLab CI Runner" && \
->   	git config --global user.email trini@konsulko.com && \
->   	GNULIB_URL=https://https.git.savannah.gnu.org/git/gnulib.git ./bootstrap && \
-> @@ -241,9 +241,9 @@ RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
->   	grub-core normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd && \
->   	rm -rf /tmp/grub
->   
-> -RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
-> +RUN git clone --depth 1 -b v10.1.2 \
-> +	https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
->   	cd /tmp/qemu && \
-> -	git checkout v10.1.2 && \
->   	# config user.name and user.email to make 'git am' happy
->   	git config user.name u-boot && \
->   	git config user.email u-boot@denx.de && \
-> @@ -397,4 +397,4 @@ RUN /bin/echo -e "\n[toolchain-alias]\nsh = sh2" >> ~/.buildman
->   RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
->   
->   # Add mkbootimg tool
-> -RUN git clone https://android.googlesource.com/platform/system/tools/mkbootimg /home/uboot/mkbootimg
-> +RUN git clone --depth 1 https://android.googlesource.com/platform/system/tools/mkbootimg /home/uboot/mkbootimg
+> diff --git a/board/sophgo/milkv_duo_s/MAINTAINERS b/board/sophgo/milkv_duo_s/MAINTAINERS
+> index 435d4827fdea..86533c03fd9a 100644
+> --- a/board/sophgo/milkv_duo_s/MAINTAINERS
+> +++ b/board/sophgo/milkv_duo_s/MAINTAINERS
+> @@ -4,4 +4,5 @@ M:	Hiago De Franco <hfranco@baylibre.com>
+>  S:	Maintained
+>  F:	board/sophgo/milkv_duo_s/
+>  F:	configs/milkv_duo_s_defconfig
+> +F:	doc/board/sophgo/milkv_duo_s.rst
+>  F:	include/configs/milkv_duo_s.h
+> diff --git a/doc/board/sophgo/index.rst b/doc/board/sophgo/index.rst
+> index 19c9a19b1d4b..61aceafceea3 100644
+> --- a/doc/board/sophgo/index.rst
+> +++ b/doc/board/sophgo/index.rst
+> @@ -7,4 +7,5 @@ Sophgo
+>  
+>     milkv_duo
+>     milkv_duo_256m
+> +   milkv_duo_s
+>     licheerv_nano
+> diff --git a/doc/board/sophgo/milkv_duo_s.rst b/doc/board/sophgo/milkv_duo_s.rst
+> new file mode 100644
+> index 000000000000..e4c201de2c4c
+> --- /dev/null
+> +++ b/doc/board/sophgo/milkv_duo_s.rst
+> @@ -0,0 +1,142 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +Milk-V Duo S
+> +============
+> +
+> +SG2000 RISC-V SoC
+> +-----------------
+> +The SG2000 is a high-performance, low-power 64-bit RISC-V/ARM SoC from Sophgo.
+> +
+> +Mainline support
+> +----------------
+> +Support for the following drivers is already enabled:
+> +
+> +1. ns16550 UART Driver.
+> +2. Synopsys DesignWare MSHC Driver.
+> +3. Synopsys DesignWare Ethernet Controller.
+> +
+> +Building U-Boot
+> +~~~~~~~~~~~~~~~
+> +1. Add the RISC-V toolchain to your PATH.
+> +2. Set up the cross-compilation environment variable:
+> +
+> +.. code-block:: console
+> +
+> +   export CROSS_COMPILE=<riscv64 toolchain prefix>
+> +   cd <U-Boot-dir>
+> +   make milkv_duo_s_defconfig
+> +   make
+> +
+> +This will generate u-boot.bin.
+> +
+> +Boot flow
+> +~~~~~~~~~
+> +The board boots from a FIP image, fip.bin, which contains the following
+> +binaries:
+> +
+> +- FSBL (First Stage Boot Loader): the Sophgo (SoC vendor) bootloader [1]. It
+> +  serves the same purpose as U-Boot SPL, but U-Boot does not support SPL for
+> +  this SoC yet, so the Sophgo FSBL is required.
+> +- OpenSBI (fw_dynamic.bin), built with the board devicetree.
+> +- U-Boot (u-boot.bin).
+> +
+> +The boot flow is:
+> +
+> +1. The boot ROM loads fip.bin from the FAT partition of the SD card and runs
+> +   the FSBL.
+> +2. The FSBL initializes the clocks and DRAM, starts the coprocessor firmware
+> +   on the C906L if present, and loads OpenSBI and U-Boot into DRAM.
+> +3. The FSBL jumps to OpenSBI, which runs in M-mode.
+> +4. OpenSBI starts U-Boot in S-mode.
+> +
+> +The fip.bin image is generated by the FSBL build, using the fiptool.py script
+> +from the FSBL source code.
+> +
+> +Booting
+> +~~~~~~~
+> +To run u-boot.bin on top of the FSBL, follow these steps:
+> +
+> +1. Generate a compatible u-boot.bin using U-Boot with the Milk-V Duo S
+> +   default configuration.
+> +
+> +2. Use mainline OpenSBI v1.5+ (v1.5 is the first release supporting the SG2000
+> +   [2]). Use FW_FDT_PATH to point to the sg2000-milkv-duo-s.dtb device tree
+> +   file while compiling fw_dynamic. Example:
+> +
+> +.. code-block:: console
+> +
+> +   cd <OpenSBI-dir>
+> +   make PLATFORM=generic FW_FDT_PATH=<U-Boot-dir>/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dtb
+> +
 
-question: is mkbootimg even used?
+I think FW_FDT_PATH is not usually specified for fully-relocatable
+generic platform build of opensbi to use in U-Boot. The text "Use
+FW_FDT_PATH to point to the sg2000-milkv-duo-s.dtb device tree file
+while compiling fw_dynamic" explains what it does, but not why this is
+needed?
 
-I don't see any actual code running the command, only documentation.
+> +This will generate build/platform/generic/firmware/fw_dynamic.bin.
+> +
 
-Cheers,
-Quentin
+Yes, if I understand correctly then U-Boot main app is build with some
+dtb which is passed on to OpenSBI M-Mode which provides a lever for
+S-Mode and run U-Boot Main app;  is that not how it works for this SoC here?
+
+> +3. Build the FSBL [1] and generate fip.bin. Milk-V (the board vendor) builds
+> +   the Sophgo FSBL as part of its SDK [4], together with the T-Head toolchain
+> +   and the Sophgo U-Boot fork. That build does not support a standard GCC
+> +   toolchain or a mainline u-boot.bin. The steps below are therefore based on
+> +   the community-maintained meta-riscv layer [3], which provides the board
+> +   memory map and patches the FSBL to compile with a standard GCC toolchain and
+> +   pack a mainline u-boot.bin.
+> +
+> +   Mainline U-Boot lacks the 32-byte loader header of the Sophgo U-Boot fork,
+> +   so fiptool.py prepends one, loaded at LOADER_2ND_BASE. LOADER_2ND_BASE must
+> +   therefore be CONFIG_TEXT_BASE - 0x20 (0x80200000).
+> +
+> +   The FSBL also needs the board memory map header, cvi_board_memmap.h,
+> +   generated from memmap.py with mmap_conv.py. Example:
+> +
+> +.. code-block:: console
+> +
+> +   git clone https://github.com/riscv/meta-riscv.git
+> +   git clone -b sg200x-dev https://github.com/sophgo/fsbl.git
+> +   cd fsbl
+> +   git am ../meta-riscv/recipes-bsp/milkv-duo-fsbl/milkv-duo-fsbl/*.patch
+> +   python3 ../meta-riscv/recipes-bsp/milkv-duo-fsbl/milkv-duo-fsbl/mmap_conv.py \
+> +       --type h \
+> +       ../meta-riscv/recipes-bsp/milkv-duo-fsbl/milkv-duo-fsbl/milkv-duos/memmap.py \
+> +       plat/cv181x/include/cvi_board_memmap.h
+> +   make CROSS_COMPILE=<riscv64 toolchain prefix> \
+> +       ARCH=riscv BOOT_CPU=riscv CHIP_ARCH=cv181x DDR_CFG=ddr3_1866_x16 \
+> +       LDFLAGS=--no-warn-rwx-segments \
+> +       MONITOR_PATH=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin \
+> +       LOADER_2ND_PATH=<U-Boot-dir>/u-boot.bin \
+> +       LOADER_2ND_BASE=0x80200000
+> +
+> +This will generate build/cv181x/fip.bin.
+> +
+> +4. Place the generated fip.bin file into the FAT partition of the SD card.
+> +
+> +5. Set the board's boot core selection switch to the RV (RISC-V) position.
+> +
+> +6. Insert the SD card into the board and power it on.
+> +
+> +The board will automatically execute the FSBL from the fip.bin file.
+> +Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
+> +U-Boot.
+> +
+> +[1]: https://github.com/sophgo/fsbl
+> +
+> +[2]: https://github.com/riscv-software-src/opensbi/releases/tag/v1.5
+> +
+> +[3]: https://github.com/riscv/meta-riscv/tree/master/recipes-bsp/milkv-duo-fsbl
+> +
+> +[4]: https://github.com/milkv-duo/duo-buildroot-sdk-v2
+> +
+
+The above build guide is clear and easy to follow, nice effort with this
+as documentation :-)
+
+> +Sample boot log from Milk-V Duo S board
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +.. code-block:: none
+> +
+> +  U-Boot 2027.01-rc2 (Nov 25 2026 - 09:07:47 -0300) milkv_duo_s
+> +
+> +  DRAM:  512 MiB
+> +  Core:  30 devices, 14 uclasses, devicetree: separate
+> +  MMC:   mmc@4310000: 0, mmc@4320000: 2, mmc@4300000: 1
+> +  Loading Environment from nowhere... OK
+> +  In:    serial@4140000
+> +  Out:   serial@4140000
+> +  Err:   serial@4140000
+> +  Net:
+> +  Warning: ethernet@4070000 (eth0) using random MAC address - 4e:bb:60:96:fc:e1
+> +  eth0: ethernet@4070000
+> +  Hit any key to stop autoboot: 0
+> +  milkv_duo_s#
+> 
+
+Looks good, I'm not sure about passing one specific dtb to OpenSBI build
+because I am not familiar with why this is needed. If you want to add
+more contextual information about what is S-Mode or M-mode and the order
+of the software chain (which thing is loading some other target, and
+again, and again) I don't think most users will care but it might be
+clearer to do so for technical users.
+
+-E
