@@ -1,195 +1,196 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1229606A334
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 13:44:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EDDD606A31E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 13:56:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ia1+4sMC;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mkT1z9Zd
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m9rgYNxH;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=EcgCyHkn
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9D176407AD;
-	Wed, 25 Nov 2026 13:44:11 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 23ADD606A0;
+	Wed, 25 Nov 2026 13:56:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bw0Sp2Sb0NQ8; Wed, 25 Nov 2026 13:44:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 95DE4405B0
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795614250;
-	b=VnEd1z6fZx6FHYTnC2Oqf3f887Xc10zt1N3wi4TFcaInCOGY+5RI3Q2BEOfxw3LTTmD4
-	 6oGDrhY31qSPDd7wXvwN2kLaVYKh3uYnznczP/S45e91skxhGjEHdVzZWmK/EgE59i79l
-	 0iKiwfLXKnkGrNOEtZomj8wblAYZNTh+m5E6aI9X1GEcbs9LO/GkS0cCjFarMKCyXDLA+
-	 3GsNGOZhsPpmF4RXFKK+fUoYHpw/OCd77PI9wYqBCAqFp1gGbM8B4lGZKFWueuwwxAPcp
-	 XU1A8m9+mEgswi7neBmZBeu+L5tCVoTKscodOSIPB7MhTDIacyJrtCmXLooD+hYFKog==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 801g4PdkA_TU; Wed, 25 Nov 2026 13:56:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 748C9606F0
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795614974;
+	b=nVGVbblGyqSiONwMYzDwPuIN7y6djpfXFbbwyaDvZJ+i6rKZAzZA01XmDdt9tFDUHOSp
+	 VJP/FJVnH9O58fb+hwQ3nThCDDMaaRVWmF4fC55fcvi17UlZbJMNvyoQ0Rnx0c98zUhXA
+	 MKFHTCHXAFBVa32pY1a+IIJvPsalR2HuPKIPIgPQiReCHvwU46FpJRUhJMzZTuo8QySsJ
+	 dnLScAK31fvZp2vvxQiLEar72q3sn236WwHNRR8dzzdcEOgbiFX95o9GKWYbMnmZSGEr9
+	 LKUkPTjLtsMoJ6WVn4xFpXlXaQOkt4beZcVjnWAGpMq+gznqroF/x59Uh9/Z05jq0KA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795614250;
+	c=relaxed/relaxed; t=1795614974;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:From:Subject:To:Cc:References:
-	 Content-Language:Autocrypt:Organization:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Reply-To:Errors-To;
-	bh=OGuwM83Jm7GQwIks6V1UETLLkesfDRrEla6kmFhmy+0=;
-	b=E5rgTpY8zM2g8xSyhjPVruwVq60dbqqg4sUzPR7/JM5MFjDBS2QPYuDLMzVB9SRy2O/s
-	 ld41euRBh0+kJU3BEpvuWxYueIeulBGTYRU2HE6/1iyBw0wdTIxsILXKEYOdjlehbCySr
-	 v2kkMH2tElTPq2EIRfa8b98f/r7bcdrm44MQmP0HuMDSI1f8c8UNi/eeseqqdr8rVzQlW
-	 skk+1/7Uc2jUoWKGEDyfq+yq7hoDfXhmBDhv8GBJpALKH7TpBOZGyeDlgCXV67YhatfSL
-	 MUyamXl5zFWC6rKbQLl2UF4oZpjmOmyxMMJzVHD/WT//scrmfBxMGUCDW7n6nx/YRzA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=PAj3grjWPBbEwhr+reWHKOgtv0UMvxvByIs7ne2P8sk=;
+	b=sohaDYJPoQ6TKIGSle16VAVSmMsksOjfwz0w8OVnRmWtorvoe90nLawLu7o5pGnRdgRi
+	 3uQ+zSoH6/s/IxSivVfk5IV2O1TIz/pg1r6lOYnQLXBGZzr4qY9RYNKgSzZk+XqpbstBT
+	 B9PBv0CNwQt/qGhGJUCql9e0STwNmi1zBzfOqjyExOs7gVyixE9qy9rdoNpGaAfdrDxwc
+	 bo2iZ3x2+uv37m8IR8e4Rufn9fh9hhqESaBekIy06ow8b0vS64ZRtPKnZ9sjZ9xM2utvo
+	 6IILLsKH/QmEtd+1oYOYT5AKDwddqqT/kQHtTyM0spkbP4w46mgmi5LJkmfFiqvo7Ag==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795614250;
-	bh=OGuwM83Jm7GQwIks6V1UETLLkesfDRrEla6kmFhmy+0=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795614974;
+	bh=PAj3grjWPBbEwhr+reWHKOgtv0UMvxvByIs7ne2P8sk=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=Ia1+4sMCE8iLE4zF8YB6G5MF61TsryrB2i4d4IbqtkqulFTWDHi/hMwiEDK4KEphT
-	 chrvM1VxAWphn458QKqAhWqDA2KGe9yv2onqNVXMfn+7weeEwaMqFsoIX6UYZ4Txwo
-	 4Sb1HSzs3rF6AsG80LQHlqIkQKNeRaHjSIWFOYzRH4yV+lMBHE3yRgMxViQzOpAJ0e
-	 Yz8Z27iPZnoJ6/TNDRLgrHFQTplkYnpDADEb9bIjChn6Cblo0oe/xfwqYrM/0HhfZl
-	 aH9ti/IzVlo6QCaU2MFMtK9wH2NslE0IxXIZ1+96WFtlodXkYu/L+QcYf+jsUQcZYn
-	 Te0bmdptmb++A==
+	 From;
+	b=m9rgYNxHb03eJoHm71FwKuQBCzVk4gT1Kt/suNoycrdTycpQkwfkr7JUT51L7nIK5
+	 ZJDyMxthsPta0hJ0akVvZhhQz66DtVW1Py1m8Wq39scYPDtfdGbaTTR/12yBiFbz2d
+	 5fCrQfFHxW3CUiXPB4GPQ8UpDAW4VDuTeitE9w0IK9A39zMOMArQ/Su6t+XZI+msqU
+	 6CRLUlTnO0QsdoKqcPEZt0Eoknq3Yt7q96LCNOi1vROlwcsi+E5mdvOO3adwTfrKGA
+	 rnyIhylXeCAEokqgSYuD7ZkEfHRE1kHDBXgItHLdjMY3N19eh2ZrO5qXjziAEUhc6u
+	 0MeOxpYYOmbTw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 95DE4405B0;
-	Wed, 25 Nov 2026 13:44:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 748C9606F0;
+	Wed, 25 Nov 2026 13:56:14 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id D704822B
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 13:44:09 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 66DAC22B
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 13:56:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id BCCA680AED
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 13:44:09 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 58CB680CD9
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 13:56:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h9Egc8euiEyy for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 13:44:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4960A80AEA
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42f"
+ id G7uKQCByL7Ye for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 13:56:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2AF6E80CE8
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c201::6"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42f; helo=mail-wr1-x42f.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=mkT1z9Zd
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4960A80AEA
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 13:44:07 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-490f38e9688so4073431f8f.0
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 05:44:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795614246; x=1796219046;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=OGuwM83Jm7GQwIks6V1UETLLkesfDRrEla6kmFhmy+0=;
- b=mkT1z9Zdp0+4YJp3i5cmk6nRCXSlFcC6s/LdQa5KEACdjqCI7sOcSaNdPk90A+7y7/
- ptU+rlyuCUYoVEdi06jPFYv7didfT307i3lwqrjJTgEazSCmsTkmsYKXxYqr6PyCWrdf
- UFjQHjbm1+uVoAfdbhJ/DH0uwkmGNmD7cVZ0EVqsznnTQTPXVBXb7i0DVh9866OUHGZJ
- Q2sq5ZYf3mWz7CMbuIfw8mrByN3F/YNVl7856eZ6ck13/Ah+dm3gBXHYxCgXh/4HE0wc
- d6iv7EuIjAjUe6Y0UsumP8bkMyRM5G9JnH+RC+ego8FJRpdloBA6VtsRWA5eo7tcLSgR
- 6CWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795614246; x=1796219046;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=OGuwM83Jm7GQwIks6V1UETLLkesfDRrEla6kmFhmy+0=;
- b=CElJAEYGXeAg5LSLorsfrZWRZZytNJd+sySdww+fXwM3NGucWysZnEfl6WKlw2AK9u
- KO8j3CHMYdQJLiKLO4WAnptggEMJw91rz9CcGpdgsfdWvYVMYBAJjBSK0B7dm8jNZela
- oStflXwAwMusbuRcU+FYiDgm9LjyRJxveYKVOD58+XqLWoXGH4k0NvLwBfVWgbrF3nit
- RtVpKqwnWmGnwfQGM1rO8MVGoSVf8Q1N7ArbAJ4UkYKOKtHqViHJDIuenl9BbW3PwuHh
- 3uDHbfgQIAyYSMJW5F0B11DmL9yOy5fQ5OVWibZSGqOgTjzjNhpgOBaeTQNfcYdbIr8h
- 5FtA==
-X-Forwarded-Encrypted: i=1;
- AL+hErEYuXc5fDDnYWQEAgwunbY+83VmfJipBGZwPHD6mJtgqIugRMLXWvmzc9Fb1DO/WPUP9miY+wo=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/wfglejI2BhKDFkd1Z/TBjopARODnRXLDaNH2l/yQvy87IeUZ1
- 841lbfynPMt2Lgg+JyQ1AWdEbhB80kUDHpaAi0EBuMPeE+E4r/her/6HJkeHe/+bs4I=
-X-Gm-Gg: AZFdTZfHYPMFCcQQVlebogwxQP3gA1WbpI9zkNioWJdmg+RVqQ7xc3rtNcisfqwezdE
- sZOvYz6p6IM8IGZkGBm6pvn4yVXVBdT+WnrbbiBls43/07P1VGsng3HbBcIIDpb6zuA5gxQ1Lbe
- ISns1Ivfpf+EiCMfs3vrU/kR8btE4/3j93xbbYqdDHwfmFdj4Fz/JT4lKAVyzstb5DI9KZkA+om
- rR6nLEl7xpD2LG5775cdUnz4qWV70fsu537vhUqo+KFtLDmXc56QvhTAGuhiqwK5Ya89ztcL0if
- YP1o/sx1ofwF6SYrDLmj9BcAU8XUA1qA3d81npJGD3Cmt/fINVgMkup/TXzLFE0G0V7zguzwmZ2
- xFx6Yq3Ct4jX2v/8UpN65TEhBWCbQ8HMuFyY7QSLmeandRHdr8Y+4O7QlHHj0E7TaHKWb5z9Di5
- 36vDoCp2GAyS3OQ0P420VaPF+AwC7sJGrJXOXaFSEGzcq1QzzZmDeYjNQei1rqFAfQ4xjtJwmtY
- 9F+24VO6JazClllBOirosm9YCNTe4UCNl4rOhIROMbbrxYPctd/00kkii+262sZWBY3mSafXciJ
- AvMAiFXDb9X1iBbC5cHiMXJq8njLC0ppl1sjLmnpuZV5GsoroinaIYgIqvqYu2UZdgTHkSA+Ig2
- UEiRXoYWvlA==
-X-Received: by 2002:a05:6000:27c9:10b0:4a9:9a59:c7a6 with SMTP id
- ffacd0b85a97d-4abb2ece9d6mr26543901f8f.16.1795614245314; 
- Wed, 25 Nov 2026 05:44:05 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:106d:1080:beb2:e1f9:ff58:397e?
- ([2a01:e0a:106d:1080:beb2:e1f9:ff58:397e])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab658e2e6dsm33837557f8f.6.2026.11.25.05.44.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Nov 2026 05:44:04 -0800 (PST)
-Message-ID: <4cd7aba3-cada-4a6c-b2a6-a11fe4a65352@linaro.org>
-Date: Wed, 25 Nov 2026 14:44:03 +0100
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
+ client-ip=2a01:111:f403:c201::6;
+ helo=am0pr02cu008.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=EcgCyHkn
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2AF6E80CE8
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 13:56:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PAj3grjWPBbEwhr+reWHKOgtv0UMvxvByIs7ne2P8sk=;
+ b=EcgCyHknWWsehvQy2aLjK7l8WftqM5h2sOCWSqvi2MZer9jG8Rqq6K4gaN5NSxOyCoLGap2R+h7c4xzkek3tjUxEKKEtPS3LVXv1itPl0mF1shwq/67/wnLeOBFYYDso5GzdlzJ4j6jxy64hKb7u8ZbIpHsjYpoa7FQZUV6c0vE=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by AS5PR04MB10041.eurprd04.prod.outlook.com (2603:10a6:20b:67c::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Wed, 25 Nov
+ 2026 13:56:01 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0639.012; Wed, 25 Nov 2026
+ 13:56:01 +0000
+Message-ID: <a75c9fe7-d630-47e0-b3c7-a2f2c892b108@cherry.de>
+Date: Wed, 25 Nov 2026 14:55:59 +0100
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/9] interconnect: qcom: Add SM8350 interconnect driver
-To: u-boot-qcom@groups.io, Sumit Garg <sumit.garg@kernel.org>,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@nabladev.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Biswapriyo Nath <nathbappai@gmail.com>,
- Vitalii Skorkin <nikroks@mainlining.org>,
- Erikas Bitovtas <xerikasxx@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
- Petr Hodina <petr.hodina@protonmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Federico Amedeo Izzo <federico@izzo.pro>,
- Michael Srba <Michael.Srba@seznam.cz>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Demeter Barna <me@fromdisposition.org>, David Heidelberg <david@ixit.cz>
-References: <20261114-sm8350-support-v1-0-414271f59474@fromdisposition.org>
- <20261114-sm8350-support-v1-3-414271f59474@fromdisposition.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20261114-sm8350-support-v1-3-414271f59474@fromdisposition.org>
+Subject: Re: [PATCH 1/3] Dockerfile: Make downloading toolchains more robust
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+References: <20261125134317.2479815-1-trini@konsulko.com>
+ <20261125134317.2479815-2-trini@konsulko.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20261125134317.2479815-2-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIVP296CA0003.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:357::7) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AS5PR04MB10041:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7908e93-726c-467b-6e33-08df4afbd6ae
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|23010399003|10067099003|11063799006|4143699003|56012099006|261021121427099003|261021130227099003|261021123027099003|261021133027099003|261021135927099003|261009223027099003|261102123227099003|261022115727099003|261022105027099003|261022113327099003|261022075727099003|261026121527099003|261026140227099003|261026130827099003|261028144727099003|261026135527099003|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: 8Uz8jS4/MaFjpr5rebH2oFSSH+Ayb4QA6ud+u8CLz8CsHloknSEBMEzjn8w1vYIVeBmsOAVeSrSUGPUrL/S8qDjHhNIuRIf/38BzyeRq0uSt/IAQEFlDJLc1wIwomh6fIMZw9p8N+2IZxPLKw+5hY8N/tueob7h+TX7nHu8BTNBKhOYHn/d+X5eUBmYJITz5IbA7bfJr8VV89fViGPcC7WbK4yrp95ca+rQj853DDO8Y+ZUAIkVhmLm14e52GrNMEhj+k1giRgsk4b+GylsOUHfcKO6XHpfLy6OMaeHZU0eVfgu2IX06NLTDgq2jYFYmoX2BuBgkz0WHhWdMh/gfvBeWizxRjjzLzr3EAxEAvcUNyZhhYFV3pdbjkSTkbt0FYu0+2qhvbki8yz/83ZKPTtpNa/j8wM8NgBP410m4yLhyIJzwEN61t5fykiip3Uw9eTkg8MYYZkDItch1kawORaBegFD7REnLHscj7gFkRErT8PXVfNLJntKe/0HJqdo3qEUsi9XjYEpsLg0eZJIOYwTjzocIYyJWyoTf1nQgpgEqvUaCOjiifCc3WURTykiPAwL5y2+mcxQCcoF18zTGLidXY4OBUyn7t49p6ZlmLGfRozYINW74NbD8ykh0F8px9RD36pF7F50LqS7ljhh1bWX0jOkjF0YLn56eFn+ov9U=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(10067099003)(11063799006)(4143699003)(56012099006)(261021121427099003)(261021130227099003)(261021123027099003)(261021133027099003)(261021135927099003)(261009223027099003)(261102123227099003)(261022115727099003)(261022105027099003)(261022113327099003)(261022075727099003)(261026121527099003)(261026140227099003)(261026130827099003)(261028144727099003)(261026135527099003)(22082099003)(18002099003)(6133799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YXFoVW84a3NOKzJhaHlKeVE0eTcvb1VxWC9UbGNDNHJBQU5HR3FOTlFyODVF?=
+ =?utf-8?B?Z25jeDdEV2IrNFpaaktoTnBUZm1MUzc0QnZaNlhnYjhyb0JCZ296eGdvd2xC?=
+ =?utf-8?B?SFdDOEUvaUNVYzBkb3RMUytwT1NMQzdKMmpUTXdDL3NLWm43L3Z2SXJLYjNk?=
+ =?utf-8?B?V3pmNGJ0MnQzWHd2RXUzT3V3TnV3OFZ4cmFWQ3daMHkzcVZTTXFOelBaVXpX?=
+ =?utf-8?B?dCt6dUxZdnhKTEM5UmNvOVFoMzVJM1ZzdmpYUFNWL2VSZFBLWVlzRDNJbjBI?=
+ =?utf-8?B?SFd5WUk3WWY3QkJZQWVUTnpTYmRKNDh4RTU0NjJNMWpFL01iZmk2ejluMU85?=
+ =?utf-8?B?YlpkMHlpdGt2YTdKVGpPWmQ3cEMxdy9XZ1FyRUVQU1pBc25WUXBYZTVtRE9V?=
+ =?utf-8?B?SnFQRmFJYWJLdnU4YVJqQUtoLzlGTGtFbFZhZTJvTUZxVHJ1aTk5ZW9OaUlZ?=
+ =?utf-8?B?TGQ3dHFITzNndUE2Z003RW9rdHRXM0lNT21jYkFKYVZhbnZPR0YvaFM5WE5z?=
+ =?utf-8?B?RFNjWHVtc2tRc3lkZWJ0NzRMRStkWlJGZkN6QlBFVnh6QUxHR2x4alp2RDl3?=
+ =?utf-8?B?MDZLMzlyWW4vSnRaOEo1UHNFUXdZbVliSXBPcHkwdmxIc2pBQ3JTWGdadlNt?=
+ =?utf-8?B?MUNyNDBFc2hqMlZQQSttSW1oSEk5dm5UekNyTWtCSTVBbjZZbFE5bVNzbjJh?=
+ =?utf-8?B?WEZ1RXFQNEt5UkJ3ZmFqZjJNazZDNWVVNFc1NnpkSEJDRUhuRWNPeTIrZk84?=
+ =?utf-8?B?UEhTd2NTUldNRk5mT2svQzRUbkFic1B3KzlEZjgvUXR0cVVtWVRBNjdKckJx?=
+ =?utf-8?B?NGlpcml1Qk0wQlJjSXpDTzg2eGdvcXd1QmIrWGQ2c3YyZW1LUGlsbHd6aE9T?=
+ =?utf-8?B?WXQ2N0wrZXFEU2x1TzR0RHV3bXladjFIcVY0QjlUcjUwYUlibTdsSVpTZ21V?=
+ =?utf-8?B?MWs2blBScWhrYVhWdGhiMkh0Y0VEOEJOTWxKYjlWZlNIdGNCTE9HYzRva0FO?=
+ =?utf-8?B?NC9ZVmZzS200WjRMc2RkdlBEUGNaOWE3bnBtemRBRW9qd1JnZjZ5OGNNR0tl?=
+ =?utf-8?B?MFRBSWR6eldDVlIzQ3pCRDVBMkZGWUZ3ek43WHFWQ29tYUFWY1FGSWZhb0hO?=
+ =?utf-8?B?dldhTEdDRXJBb09COHJxenNUMFpLQU90QmlpdUVxdXNiRU9POFd1bU93Z2Vo?=
+ =?utf-8?B?VWxRWVVkZjB3dHBSNjlPK3o3RzBEajFERm14T2VuUGlOejhiTmU0YWlpcHQ5?=
+ =?utf-8?B?SmRqcE5BQXNGWkFSZS9lRHVYcVZUZjRuaVMvU1ZPY2JXKzBjZURMTlRGVG96?=
+ =?utf-8?B?OUZFdHcrZGhUbXJCR2NRdXA5M0RBcjFZS0RaOFVpMi9HZFBZU2dKV2V3L1RJ?=
+ =?utf-8?B?dnkyLy9ZaVRleFA5L3dVMngxbjlic3drbGRhMUQ5dkwyQlQxRkMzbWtGSUg0?=
+ =?utf-8?B?Y3hEQW1EcXgyckZQVEhJdUplZTlwMDl0VEF0TWhpRUtWTkhXdnNDU2luRnlV?=
+ =?utf-8?B?d1JDNTZCeVBWTHNjN2NGazB5dm9GaXVEU3JDQVZBNVIwaDN3ZEoyZ0tmdHkr?=
+ =?utf-8?B?MmZ3NW9mSEYveXBRdXlQM1h0Z2ZnZmpqT2VKWmt6VkpwNTVPeitoWUVldUo3?=
+ =?utf-8?B?SE40czd2SW44UFdiQloxVWliNmltcm9jQ1pJVlJnQ1p3emFHV0dSZDZrdko2?=
+ =?utf-8?B?QXdrV0NRTjZibGpDbE1VcGc3Y1JoMFVCWUV1ZkdSVWY5ZUJmcVlqKzNqUU0v?=
+ =?utf-8?B?eTJSV3puSVFNNjE0S0VWbWhVYXJGZ0FnTy9MRCtMNVUwVDV0THpBZW1MSHJY?=
+ =?utf-8?B?alRBRHZCU1BNL29HU09TVDJYVkl5THlQNS9aNkVqR0xWQnlLbkh0ZFVmRzZu?=
+ =?utf-8?B?M0MzajlhS0MrTGxaWEtLTkJFTDdmSUFhdzFERmtza1ZHS25vRkJwTzZPUUlk?=
+ =?utf-8?B?aStEQWZ3ZFRPR0NRMW9ZSGo0bGYyY2pUbW1lT3Z0cXk0VWkxMDZuZ3BoYmtK?=
+ =?utf-8?B?RjUycnlTOGp4S1pxRC9VWjN2Mk9JZXdOSDdBdzUwM2hXVlkvK2wzdklXQlZG?=
+ =?utf-8?B?V1RDVldTREliS0czeW51emZCSUJwNVZVY1g2L0dqT1RIQkJNZ0dFb1FJMThZ?=
+ =?utf-8?B?Q2pSL1RMQmVpYy9QSmRpVjJhQWlJU2FWdFU0OFNmWC90c2J6ZEhNNVJML1Bn?=
+ =?utf-8?B?ZTcyaDdNSTExOGNTUGhlaWE1QXdqM3RBeC8xK0ZVdzhmVkVmTGdWQi9iWE9Z?=
+ =?utf-8?B?NnFHT3JCaHNnMTFrcU9VS2hjZ2lLZTR6NWQvb3NyOWk2SEZXN091cnZWZlFk?=
+ =?utf-8?B?bE9PdkxxTU84WFl1YUY0OXBBYlE4NWw2eFp1NUc1Q21FaEJIVHFFQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7908e93-726c-467b-6e33-08df4afbd6ae
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 13:56:01.0833 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dF1deGZKRyOfHJ2WMQOOSg+P4PauE1zg6mHOvEBDbcD75LL7yzHxQcYmwxNC/7ZPNZugpJfNNK+jtcK4pbnbPYOkwRxqOy8+wwsCd+V9atU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB10041
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -199,371 +200,50 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/25/26 13:52, Demeter Barna via B4 Relay via u-boot-qcom wrote:
-> From: Demeter Barna <me@fromdisposition.org>
+Hi Tom,
+
+On 11/25/26 2:39 PM, Tom Rini wrote:
+> Currently, if we fail to download the toolchain our loop doesn't exit
+> and we continue the container build, with an incomplete set of tools.
+> Fix this by making the loop 'exit 1' specifically if there's an error,
+
+question: Are you sure this works?
+
+We don't have set -o pipefail so anything but the last piped command 
+failing will happily return success. I'm assuming that tar will 
+eventually fail on an empty or incomplete tarball so maybe that's 
+enough, but that's a footgun :)
+
+Cheers,
+Quentin
+
+> and pass --retry-connrefused to wget so that it will retry most
+> failures.
 > 
-> Add the interconnect (NoC) driver for SM8350 with the nodes of the two
-> UFS paths, the only ones U-Boot requests, as the QCS8300 driver has
-> them.
-> 
-> Taken from Linux's drivers/interconnect/qcom/sm8350.c (tag v7.4-rc1).
-> 
-> Signed-off-by: Demeter Barna <me@fromdisposition.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->   drivers/interconnect/qcom/Kconfig  |   7 +
->   drivers/interconnect/qcom/Makefile |   1 +
->   drivers/interconnect/qcom/sm8350.c | 271 +++++++++++++++++++++++++++++++++++++
->   drivers/interconnect/qcom/sm8350.h |  25 ++++
->   4 files changed, 304 insertions(+)
+>   tools/docker/Dockerfile | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/interconnect/qcom/Kconfig b/drivers/interconnect/qcom/Kconfig
-> index 4123a1d224..6a030a7891 100644
-> --- a/drivers/interconnect/qcom/Kconfig
-> +++ b/drivers/interconnect/qcom/Kconfig
-> @@ -17,6 +17,13 @@ config INTERCONNECT_QCOM_QCS8300
->   	help
->   	  Enable support for the interconnect driver for the QCS8300 SoC.
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index e666714f0490..ab001a4d34df 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -44,7 +44,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then HOSTARCH=x86_64; else HOSTARC
+>   	\
+>   	) | while read url; do \
+>   		# Read the URL and unpack it into /opt
+> -		wget -O - $url | tar -C /opt -xJ; \
+> +		wget --retry-connrefused -O - $url | tar -C /opt -xJ || exit 1; \
+>   	done
 >   
-> +config INTERCONNECT_QCOM_SM8350
-> +	bool "Enable interconnect support for SM8350 SoC"
-> +	depends on INTERCONNECT_QCOM_RPMH
-> +	help
-> +	  Enable support for the interconnect driver for the SM8350 SoC.
-> +	  It has the nodes of the UFS paths.
-> +
->   config INTERCONNECT_QCOM_SM8650
->   	bool "Enable interconnect support for SM8650 SoC"
->   	depends on INTERCONNECT_QCOM_RPMH
-> diff --git a/drivers/interconnect/qcom/Makefile b/drivers/interconnect/qcom/Makefile
-> index ac6b8cee19..c4b38d13a0 100644
-> --- a/drivers/interconnect/qcom/Makefile
-> +++ b/drivers/interconnect/qcom/Makefile
-> @@ -6,4 +6,5 @@
->   obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_RPMH) += icc-rpmh.o bcm-voter.o
->   obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_QCS8300) += qcs8300.o
->   obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_SC7280) += sc7280.o
-> +obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_SM8350) += sm8350.o
->   obj-$(CONFIG_$(PHASE_)INTERCONNECT_QCOM_SM8650) += sm8650.o
-> diff --git a/drivers/interconnect/qcom/sm8350.c b/drivers/interconnect/qcom/sm8350.c
-> new file mode 100644
-> index 0000000000..71423c9b22
-> --- /dev/null
-> +++ b/drivers/interconnect/qcom/sm8350.c
-> @@ -0,0 +1,271 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) 2019-2020, The Linux Foundation. All rights reserved.
-> + * Copyright (c) 2021, Linaro Limited
-> + */
-> +
-> +#include <dm.h>
-> +#include <interconnect-uclass.h>
-> +#include <dt-bindings/interconnect/qcom,sm8350.h>
-> +
-> +#include "icc-rpmh.h"
-> +#include "sm8350.h"
-> +
-> +static struct qcom_icc_node xm_ufs_mem = {
-> +	.name = "xm_ufs_mem",
-> +	.id = SM8350_MASTER_UFS_MEM,
-> +	.channels = 1,
-> +	.buswidth = 8,
-> +	.num_links = 1,
-> +	.links = { SM8350_SLAVE_A1NOC_SNOC },
-> +};
-> +
-> +static struct qcom_icc_node qnm_gemnoc_cnoc = {
-> +	.name = "qnm_gemnoc_cnoc",
-> +	.id = SM8350_MASTER_GEM_NOC_CNOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { SM8350_SLAVE_UFS_MEM_CFG },
-> +};
-> +
-> +static struct qcom_icc_node chm_apps = {
-> +	.name = "chm_apps",
-> +	.id = SM8350_MASTER_APPSS_PROC,
-> +	.channels = 2,
-> +	.buswidth = 32,
-> +	.num_links = 1,
-> +	.links = { SM8350_SLAVE_GEM_NOC_CNOC },
-> +};
-> +
-> +static struct qcom_icc_node qnm_snoc_sf = {
-> +	.name = "qnm_snoc_sf",
-> +	.id = SM8350_MASTER_SNOC_SF_MEM_NOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { SM8350_SLAVE_LLCC },
-> +};
-> +
-> +static struct qcom_icc_node llcc_mc = {
-> +	.name = "llcc_mc",
-> +	.id = SM8350_MASTER_LLCC,
-> +	.channels = 4,
-> +	.buswidth = 4,
-> +	.num_links = 1,
-> +	.links = { SM8350_SLAVE_EBI1 },
-> +};
-> +
-> +static struct qcom_icc_node qnm_aggre1_noc = {
-> +	.name = "qnm_aggre1_noc",
-> +	.id = SM8350_MASTER_A1NOC_SNOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { SM8350_SLAVE_SNOC_GEM_NOC_SF },
-> +};
-> +
-> +static struct qcom_icc_node qns_a1noc_snoc = {
-> +	.name = "qns_a1noc_snoc",
-> +	.id = SM8350_SLAVE_A1NOC_SNOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { SM8350_MASTER_A1NOC_SNOC },
-> +};
-> +
-> +static struct qcom_icc_node qhs_ufs_mem_cfg = {
-> +	.name = "qhs_ufs_mem_cfg",
-> +	.id = SM8350_SLAVE_UFS_MEM_CFG,
-> +	.channels = 1,
-> +	.buswidth = 4,
-> +	.num_links = 0,
-> +};
-> +
-> +static struct qcom_icc_node qns_gem_noc_cnoc = {
-> +	.name = "qns_gem_noc_cnoc",
-> +	.id = SM8350_SLAVE_GEM_NOC_CNOC,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { SM8350_MASTER_GEM_NOC_CNOC },
-> +};
-> +
-> +static struct qcom_icc_node qns_llcc = {
-> +	.name = "qns_llcc",
-> +	.id = SM8350_SLAVE_LLCC,
-> +	.channels = 4,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { SM8350_MASTER_LLCC },
-> +};
-> +
-> +static struct qcom_icc_node ebi = {
-> +	.name = "ebi",
-> +	.id = SM8350_SLAVE_EBI1,
-> +	.channels = 4,
-> +	.buswidth = 4,
-> +	.num_links = 0,
-> +};
-> +
-> +static struct qcom_icc_node qns_gemnoc_sf = {
-> +	.name = "qns_gemnoc_sf",
-> +	.id = SM8350_SLAVE_SNOC_GEM_NOC_SF,
-> +	.channels = 1,
-> +	.buswidth = 16,
-> +	.num_links = 1,
-> +	.links = { SM8350_MASTER_SNOC_SF_MEM_NOC },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_acv = {
-> +	.name = "ACV",
-> +	.enable_mask = BIT(3),
-> +	.num_nodes = 1,
-> +	.nodes = { &ebi },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_cn0 = {
-> +	.name = "CN0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &qnm_gemnoc_cnoc },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_cn1 = {
-> +	.name = "CN1",
-> +	.num_nodes = 1,
-> +	.nodes = { &qhs_ufs_mem_cfg },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_mc0 = {
-> +	.name = "MC0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &ebi },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sh0 = {
-> +	.name = "SH0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &qns_llcc },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sh4 = {
-> +	.name = "SH4",
-> +	.num_nodes = 1,
-> +	.nodes = { &chm_apps },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sn0 = {
-> +	.name = "SN0",
-> +	.keepalive = true,
-> +	.num_nodes = 1,
-> +	.nodes = { &qns_gemnoc_sf },
-> +};
-> +
-> +static struct qcom_icc_bcm bcm_sn7 = {
-> +	.name = "SN7",
-> +	.num_nodes = 1,
-> +	.nodes = { &qnm_aggre1_noc },
-> +};
-> +
-> +static struct qcom_icc_node * const aggre1_noc_nodes[] = {
-> +	[MASTER_UFS_MEM] = &xm_ufs_mem,
-> +	[SLAVE_A1NOC_SNOC] = &qns_a1noc_snoc,
-> +};
-> +
-> +static const struct qcom_icc_desc sm8350_aggre1_noc = {
-> +	.nodes = aggre1_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(aggre1_noc_nodes),
-> +};
-> +
-> +static struct qcom_icc_bcm * const config_noc_bcms[] = {
-> +	&bcm_cn0,
-> +	&bcm_cn1,
-> +};
-> +
-> +static struct qcom_icc_node * const config_noc_nodes[] = {
-> +	[MASTER_GEM_NOC_CNOC] = &qnm_gemnoc_cnoc,
-> +	[SLAVE_UFS_MEM_CFG] = &qhs_ufs_mem_cfg,
-> +};
-> +
-> +static const struct qcom_icc_desc sm8350_config_noc = {
-> +	.nodes = config_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(config_noc_nodes),
-> +	.bcms = config_noc_bcms,
-> +	.num_bcms = ARRAY_SIZE(config_noc_bcms),
-> +};
-> +
-> +static struct qcom_icc_bcm * const gem_noc_bcms[] = {
-> +	&bcm_sh0,
-> +	&bcm_sh4,
-> +};
-> +
-> +static struct qcom_icc_node * const gem_noc_nodes[] = {
-> +	[MASTER_APPSS_PROC] = &chm_apps,
-> +	[MASTER_SNOC_SF_MEM_NOC] = &qnm_snoc_sf,
-> +	[SLAVE_GEM_NOC_CNOC] = &qns_gem_noc_cnoc,
-> +	[SLAVE_LLCC] = &qns_llcc,
-> +};
-> +
-> +static const struct qcom_icc_desc sm8350_gem_noc = {
-> +	.nodes = gem_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(gem_noc_nodes),
-> +	.bcms = gem_noc_bcms,
-> +	.num_bcms = ARRAY_SIZE(gem_noc_bcms),
-> +};
-> +
-> +static struct qcom_icc_bcm * const mc_virt_bcms[] = {
-> +	&bcm_acv,
-> +	&bcm_mc0,
-> +};
-> +
-> +static struct qcom_icc_node * const mc_virt_nodes[] = {
-> +	[MASTER_LLCC] = &llcc_mc,
-> +	[SLAVE_EBI1] = &ebi,
-> +};
-> +
-> +static const struct qcom_icc_desc sm8350_mc_virt = {
-> +	.nodes = mc_virt_nodes,
-> +	.num_nodes = ARRAY_SIZE(mc_virt_nodes),
-> +	.bcms = mc_virt_bcms,
-> +	.num_bcms = ARRAY_SIZE(mc_virt_bcms),
-> +};
-> +
-> +static struct qcom_icc_bcm * const system_noc_bcms[] = {
-> +	&bcm_sn0,
-> +	&bcm_sn7,
-> +};
-> +
-> +static struct qcom_icc_node * const system_noc_nodes[] = {
-> +	[MASTER_A1NOC_SNOC] = &qnm_aggre1_noc,
-> +	[SLAVE_SNOC_GEM_NOC_SF] = &qns_gemnoc_sf,
-> +};
-> +
-> +static const struct qcom_icc_desc sm8350_system_noc = {
-> +	.nodes = system_noc_nodes,
-> +	.num_nodes = ARRAY_SIZE(system_noc_nodes),
-> +	.bcms = system_noc_bcms,
-> +	.num_bcms = ARRAY_SIZE(system_noc_bcms),
-> +};
-> +
-> +static const struct udevice_id qnoc_of_match[] = {
-> +	{ .compatible = "qcom,sm8350-aggre1-noc", .data = (ulong)&sm8350_aggre1_noc },
-> +	{ .compatible = "qcom,sm8350-config-noc", .data = (ulong)&sm8350_config_noc },
-> +	{ .compatible = "qcom,sm8350-gem-noc", .data = (ulong)&sm8350_gem_noc },
-> +	{ .compatible = "qcom,sm8350-mc-virt", .data = (ulong)&sm8350_mc_virt },
-> +	{ .compatible = "qcom,sm8350-system-noc", .data = (ulong)&sm8350_system_noc },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(qnoc_sm8350) = {
-> +	.name = "qnoc-sm8350",
-> +	.id = UCLASS_INTERCONNECT,
-> +	.of_match = qnoc_of_match,
-> +	.probe = qcom_icc_rpmh_probe,
-> +	.bind = qcom_icc_rpmh_bind,
-> +	.unbind = qcom_icc_rpmh_unbind,
-> +	.ops = &qcom_icc_rpmh_ops,
-> +	.plat_auto = sizeof(struct qcom_icc_provider),
-> +};
-> diff --git a/drivers/interconnect/qcom/sm8350.h b/drivers/interconnect/qcom/sm8350.h
-> new file mode 100644
-> index 0000000000..580b139185
-> --- /dev/null
-> +++ b/drivers/interconnect/qcom/sm8350.h
-> @@ -0,0 +1,25 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * SM8350 interconnect IDs
-> + *
-> + * Copyright (c) 2019-2020, The Linux Foundation. All rights reserved.
-> + * Copyright (c) 2021, Linaro Limited
-> + */
-> +
-> +#ifndef __DRIVERS_INTERCONNECT_QCOM_SM8350_H
-> +#define __DRIVERS_INTERCONNECT_QCOM_SM8350_H
-> +
-> +#define SM8350_MASTER_UFS_MEM		0
-> +#define SM8350_MASTER_GEM_NOC_CNOC	1
-> +#define SM8350_MASTER_APPSS_PROC	2
-> +#define SM8350_MASTER_SNOC_SF_MEM_NOC	3
-> +#define SM8350_MASTER_LLCC		4
-> +#define SM8350_MASTER_A1NOC_SNOC	5
-> +#define SM8350_SLAVE_A1NOC_SNOC		6
-> +#define SM8350_SLAVE_UFS_MEM_CFG	7
-> +#define SM8350_SLAVE_GEM_NOC_CNOC	8
-> +#define SM8350_SLAVE_LLCC		9
-> +#define SM8350_SLAVE_EBI1		10
-> +#define SM8350_SLAVE_SNOC_GEM_NOC_SF	11
-> +
-> +#endif
-> 
+>   # Manually install other toolchains
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-
-Thanks,
-Neil
