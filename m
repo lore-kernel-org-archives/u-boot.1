@@ -2,164 +2,150 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 768C9606A321
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 09:52:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B611606A31E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 09:55:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=j0g0zNUQ;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=IE9y5MDH
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XsH6VcG3;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DKIlQDWq
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BB7C080E37;
-	Wed, 25 Nov 2026 09:52:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D692F80E5F;
+	Wed, 25 Nov 2026 09:55:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0ekL7zce4C7u; Wed, 25 Nov 2026 09:52:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9B43480E5F
+ id teZlYeEgkzWY; Wed, 25 Nov 2026 09:55:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9FE8B80C71
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795600334;
-	b=Uw3+WF9ZxTzZjH1b8JApS4EX7wn1mbJrwXu31h0oLrlNUuSL6WMHwdccfFtnmBTEfdQX
-	 85XS/Xjb2f0wTjT6mBatwVAO0CszbTAQCSW79u8ciB5EJL0ycKBoOE1YOmuTdgjcmouKi
-	 KhQcEraJi00SQ+F2Dura+CKoHrI+sHGKr/1Yj+2dSNAaVcqCKV7RqEnXOWVZryn5LYP6k
-	 5pbiM/AySWozLns1u0M/velPDDo3q42uBEFG/6+56YuIi08I9/NpvP8vM74EF9Aw6HHTE
-	 2pxlSoRbbnYjEEkxwXxxHBzfG15dumz0/YoCPD8Fa0qETgZWU9c9aKHJB+n8I2Y2FHQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795600544;
+	b=RIiX4KXfoIxN0dGoknx72cyPPbR24jjMOPwLgi+wE/y2ceuL+OWNhDyzEon5UDZ28D1g
+	 ZZI8xWJy4cMiA7RDFKIvd7mp2mCudQnaeOGWh5ycXzNh0Bdur2L92beduCiq5j2UvxDny
+	 Me5noCS3azywvhiW2hC7Vhk2yP7rsrGfTqbTMpQw4SzMY2m4t8VcUwW+9JtP+RvLSK6OR
+	 AV26wfFIO9GnzX6OxyBrEHeWdSPJhnv4OwtLwAmdYeVwd/SfRbayIjM2btYdMlhxToujo
+	 JG3XcyjN1PLqYW7KmUmRhLQqWUa1Mazc0OQBtZklozde8KJ5vnTcEBV33rnT/tGVZUw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795600334;
+	c=relaxed/relaxed; t=1795600544;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
-	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=UAdit6IM9bVBCs2Kdib1zvLVlRPqUZCCGKO462Yd8Xk=;
-	b=cazKDJVaFfmB15LzU4YaDsxu+bT6zkH6xnWxakFSUbLsyatOr1IMGF8P8rbI4tyHRPQ+
-	 UN7cwFYAMZexTZ9E+BBO4U6w3XHx4AbKQ4vRHXFdJA/IQb4qP6k3ib6hvwUkjh78TUHwk
-	 I0v/HcqUSl4extq0aXQknVe+YIaUvUguIycSAs7q5MAXvRIyyIv9vqMJeF2m5wyuKyp6X
-	 43xyfy4YrBJZnSl6nuFhjI9cglmflBN5hxk1TXyWm1iqwEvVTtDo9SHj0LEL1sBJX+Xyp
-	 0o7ubvpaiLoMM3CMB4SgK7NTtkp+OSQOEfcAHFqJ9ROjVVznJ9a1O30SzCu1TOhPk8Q==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=jLMRwZutY1+vHRGRksj2akuJAJDqxRSu6H1jbqFGckQ=;
+	b=oJuti8CsHZR+H1J6KGwL0jVHxQeLYFH5yS9ldCk/o+vsuyZIoOITspZa8DN7x4Pq4gWH
+	 GwkX2Sif2SqgCHBt0SrdtGBVUw87mm9T07nGdHsiiDu/gDnzGhbxJkapoVUcyrUQ6rG4B
+	 sle/eG+fhT414NcA0zXNpkQ3hN+24JDNlOg66wsYea8d3qNYYGeQ1/hwF1YMg2RlMIHWw
+	 2b8p0U77fskQQDtnqoi0YrG+ecXWuU2aLSWe1NxZkArFWUvRzmVUgLTcUaGrwMXprSCl1
+	 9HFSkFHt8mwJMp9gcICEzTpfVYuOA+FPkrl1WcXriQ74HoU5xWrgEm2pNVa2pFODIYw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795600334;
-	bh=UAdit6IM9bVBCs2Kdib1zvLVlRPqUZCCGKO462Yd8Xk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=j0g0zNUQnAXdUnMYD8nSU6BE33zTT8HruXsTzEZQ8IvTbQlz8/n8zC40VuT512u/C
-	 T6CYVX86UxwPLM0TsNFfGDcrjGbtldP+Xuf1B1xdFTTVrz1h5aHwWQncLDni5/GHWY
-	 nvd9qqIl0h/2bpUdyHT5d3bW2IOzPXzlDYN4MKK4wv1RmXrIluQuWZIoVicPHGjCBN
-	 e2dpQjQ6mpoLxqLBttduJoJGJ9sro33Lq0h9CCosZylP5X+92CTF88Hs1V1ACEoCvE
-	 TiyWGIIGB0gTAuOJSQ1N1nihTWfOx6ANI/ajWxLDnmkSd1A2gnfAcyBM9qRJX0JAM4
-	 TnKNj+UuR6nhg==
+	d=lists.u-boot-project.org; s=default; t=1795600544;
+	bh=jLMRwZutY1+vHRGRksj2akuJAJDqxRSu6H1jbqFGckQ=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=XsH6VcG39GvEwf9s9G29X4+Jsdm9TgoiIJJ/UljlyWKR0PPU4AuW9/qO2kRoVYnDU
+	 9XeUdai/rCqcykfDBbTbiTjau8MzvOTdMDTrFC5dtTysjyjiiAVcGxYONYw4eeA8HX
+	 WajPaaOf4rSrv2vl4n1I3U8RCI2zQdDbSVHUqXP01PjX+KzkBz+N6qcyTy2qtMt7jG
+	 AMfJAELPOvzm7xOBBeucHPpFNaiFQz0CAmpTr6kqc7Z6KvXp6DdXXHBnaGbq5KdMX0
+	 N6RJi9v+9CtTWJ/dDF3XLdxZAVFrffOd6GuZGslpX/Z/EFPj5eepo0l4o5ksOovhXS
+	 dkCRJzIGw4yUg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9B43480E5F;
-	Wed, 25 Nov 2026 09:52:14 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B0C2D2DF
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:52:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9FE8B80C71;
+	Wed, 25 Nov 2026 09:55:44 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 308B92DF
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:55:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 94AFE4066F
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:52:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1667540199
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:55:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zX9UW67LNy0q for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 09:52:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8787D4066C
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::436"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TP2zapm3Yc99 for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 09:55:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9DD7240180
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::436; helo=mail-wr1-x436.google.com;
- envelope-from=jpanis@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=IE9y5MDH
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8787D4066C
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:52:10 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-4ac08f4a0b2so3904716f8f.3
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 01:52:10 -0800 (PST)
+ client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
+ envelope-from=pepe.schlehofer@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=DKIlQDWq
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9DD7240180
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:55:41 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-4a357b1c649so3205522f8f.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 01:55:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795600328; x=1796205128;
+ d=gmail.com; s=20260707; t=1795600539; x=1796205339;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=UAdit6IM9bVBCs2Kdib1zvLVlRPqUZCCGKO462Yd8Xk=;
- b=IE9y5MDHwKCGsA0UhWTdJdatJDIkUlzAO0tMK2e4VeYSDQwIffb53zMzkzgAhhzYCL
- cFfRfIq5xOGFzMqpl+uwRhg/2L1rKa8IJUFMQTf1QCb8vQhtE2fAz1DXV7W9giCBTyxv
- uOcdNt77+DcY1G6saDoqbwL/Qk6d9jy8LJw84xlYfZ33Cl16fn1eDHtENWFTq0xq4J/s
- UTbL0jweKuKO8KBc/AGFSspk3J6Wv+IeMfLbSkIeL/0kag9bbvNAotE3uu3Ka506GeEe
- 7CHfua2rg9SrmiW5bfYdh2UJK5IwJw2Y4T+DaThPmBGKChKrhH5ogEzev7CqKhTRMUh9
- K/RA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=jLMRwZutY1+vHRGRksj2akuJAJDqxRSu6H1jbqFGckQ=;
+ b=DKIlQDWquhavujvrNTj2KtHdTSDH48eY48mEUIrzi2oToUUoG58JkKsXyqX6cDNdHZ
+ nI5qyy12bAr7fPgfHr7so2HUHBVDJ8nsT3NIy8aDzhQ9/id0wwo+BSWxBvz863Kubpcw
+ lTRmcQBtsklgqs7hpycdzemObsIKQ+hzhgb7R/FDpWAM9W/Bi4mAL7hskFbIXnFscR89
+ xTtVn/fwRHxl8G1Lx7cB7BvSyREx/1ago3ovUhx9p5QMIrIWOfKxHKejGr1vGFC2TvQw
+ jTslQSOCdTL8D9FN005xvzt2ye7sjpZyTB74YIk5GI/csQY++jeWXgGN6PIPoaODiT8/
+ R04w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795600328; x=1796205128;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1795600539; x=1796205339;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=UAdit6IM9bVBCs2Kdib1zvLVlRPqUZCCGKO462Yd8Xk=;
- b=ttsGY8maif9oF56/JV2f86vQ1LU3JZmJazpzbIk0cV9U0eRTsZjfkJWtxUXL0EUrzT
- 5zXhD0O8FOz21MsqfqcDnNvR9vhFD996dUUA0fA0u20PS/5S/qoVHk6Cx7/s5ykXXc0/
- ISvDDs2AsIoMT0TpSnsrbhHZezIsKr3rxA5Vk6ZQ7S9laQFxVR2cLRwKNwDcOWvr0Xk5
- 2qeMv0PyO08PvUg4uOJ1vT5gPkxy7g9TZMM7qVXMPpv+jOR87RhIpJSNFUdB8xsd2Pzz
- /HYmjL3uRmsPFEEfp12nPl+3/ZjmxKHY+cR1OpYLd5Au/ZFhvlyHN2do1ez7eKA2eK36
- Dfqw==
+ bh=jLMRwZutY1+vHRGRksj2akuJAJDqxRSu6H1jbqFGckQ=;
+ b=Dmo3hD9O6fCK+y3CUVKSrnYgT+8U4WWqAeZ73L9MYxolPA55N3qT6JupuCNHuPF2cH
+ qZZUDuJKYWjJQkrMXcaTpmEbPPRiVyuyx7n/pqYUFImj70RAwRs0PMpQzX2jqBBSwoLg
+ 8ro3mAoRAwrS5yj1HXWoXnQ8fkDPZKrr6uSNDjR98P7DlA7QZtEHqat+9VVqjRtrWIL3
+ 6amm4gJszWOFMCNKfUZaoGqnO9mwDzMGmwqJjEFKjv3Wbhrxeh9lebgxxmP0Ynsev5RC
+ y9y+bd7PsYSovU8AarbV4LMC78tmbwRmu2wVPUZ7DibZH5ybACT7Ued8Ps1Zn2uw8tO9
+ iMSQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErFWFe8qme3SjevIVXb8bR/dNszvUXGPp7x1MWgpo7JBb4rPpxuDXP0i63qWycmm+p2NGjlD1OM=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9SWy97XC2jQZvuVtuCuwoTnOUGsCoj2Tm44gyH31zfESV0oO7x
- hcA5h+vqkjKSc0r7QaFvWKtncbX5n7nYoJpiEBwYVZNEIDxrSHZIgypFO+UrDVFQ+ZHzn9KDOqh
- /+2As
-X-Gm-Gg: AZFdTZcJt3r5BEcF/V3Ti4miqJASpAbiKXunP/JDy0q09b9jkPmy1n7o6TV/Y7Ls3BA
- qXweKUqQO6lg7Yyc6jXC/q8lowRYiG/EUkTheeA70bA6F2ukKgFp+v9F/KN4IdsltDwnY4CLb8o
- PvPMHf7DPKQsOWoRL3ZIBOOtj/LMxkPBZVoaSgmw3aozB2EL6GpKHm/t5qazQibMJybXlSXVWYM
- SRBgtnX3eNbLpoEcWORp/3I5mRvG6rH3ptLaugqfkxN+S9xDoBvadKRvcuKkfnBlspwHYzF8OTa
- 4s+NagCpHf6DdkAYBmET+tFvw/YonZ/ZRPD5x7YaBc8mkynjyIZEEQFmhdoLbKZyz5M8fsyfSPX
- P8P1oiZ0G/wHX3iRkbINhIaA99SkxWc0eFMj2dVYTjR8TYnssoB9XALDf3/ljeWlm2tzKTFtK06
- NUyZbYptthZNy6WwnQAhrXt8FduTdCZHIhNStyy7iKB6WUAsoKP2O9lc2YFdm0/JH6s0tlXhg5R
- rb81kTMnADuG27jHOIGfwqwn+oLBBcPWsqfKoOBdRuPvlKy93OW96FnZtOePyLh0onFd7FXTyG3
- G18C0GGG/W0z9N9/Tqw93nsxCVFc2Ly10QboGkG5MbNjOBJnbMug/SHM3hKGrWhA/OGk6JOVk/8
- orap0GbbwRmyWSUF2Ur98hAmzIr7nTA60SSzIUXHo/f78Xz2HRKDraJSvKOA2drI=
-X-Received: by 2002:a05:6000:4b17:b0:48e:7508:bc20 with SMTP id
- ffacd0b85a97d-4abaa9769c4mr34450950f8f.2.1795600328282; 
- Wed, 25 Nov 2026 01:52:08 -0800 (PST)
-Received: from ?IPV6:2a02:842a:aa82:f701:cd04:e538:7ddd:cfa8?
- (2a02-842a-aa82-f701-cd04-e538-7ddd-cfa8.rev.sfr.net.
- [2a02:842a:aa82:f701:cd04:e538:7ddd:cfa8])
+ AL+hErEnmyCJ8Uj0KI4CYnpolMqPOPVjX08QdO+e6Bdl0X4hfvn+Vx7w9ohTVxfwtytHVL5KDRDNLbw=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8oLBGXrjub5CHAADaCBKT6OZurZaws2j8zxZUqfDn/ptbw3wve
+ rfGbaOyj8wlgFe5Mr6JZygs79e6axAkw8RSTFWoV2zU6HHYNZbCFPkxO
+X-Gm-Gg: AZFdTZf87fwRyBjxLlaFteXnJsdybQDYOgjkIgboOq19RDuFElz6DVybKsndcMtZDMZ
+ OWo6/d+EF++SIYC28fbo6wBZ/AYARLJ4qwkFYr9IDIUhaPTKgLYKheIOpMTnqEA6f1qEMf+XFcu
+ KtkzjNYsQ96Wyx5qgJItpucnNGYEHSEmSw02lLh3kWAXLKSSmvGDv28xGisavJBqbya2YAhC4m7
+ L6VG4hiMiSSQe9yGsMzRejfp29OA/Uw3nY2E9c/oqe8sqhZTlqW/MxBZXwqSl2vmDI8e7ljDadp
+ SyEy7UFdgX1Y3USqvmNFb9e+xmPIdWzJo1cxz00OoS/1WOdhu3GKmy2aNDr17sxF1k8VV4DueaJ
+ DC18gqy19l/G/Ue6Ao31E7iGhE5JnQlAWdwsgmLrK3Ny1KzvEZWgHFH2ZTIetI5B4oF6e8iLHtP
+ Lnsmn7eiycUZOCp/la03tw62CO0XFvPAcPXjNWX4icW8N6Z/7z9TclBrn/I1EoKgse4irvRPC4K
+ Y6uwBd7qTNUmvK2a7wpXIPUCvDOsAi30c8MqNscB7W8cRRw/jhN2LyzYfBDiPmuWQWyfZxc/qwp
+ 4jmygW3QZlgIeJsBOOeaW0pd1rqQhzuSvpfy/8OtClfbZBwsX5NTNWRjEJnY4jAOvPgxZqXzvWA
+ vfS+m0PofnGfdKz8TCWZprZHGAowDydl1NjiIfOOLe+PbSlQVvHRf4qpLW0mWscqDq+nA5tjyU7
+ Q9UD2n0yVL3eoZu5N7tMO+yK6Z+bnqtvwqlXo1AychAUbv2Z11xwnBU+u0cGaoo2HhsJK+UtUpG
+ FQ=
+X-Received: by 2002:a05:600c:a55:b0:49f:ce78:356d with SMTP id
+ 5b1f17b1804b1-4bb88827db0mr368386665e9.30.1795600539001; 
+ Wed, 25 Nov 2026 01:55:39 -0800 (PST)
+Received: from localhost.localdomain
+ (dynamic-2a00-1028-8388-a84e-c5bc-f938-520e-21e2.ipv6.o2.cz.
+ [2a00:1028:8388:a84e:c5bc:f938:520e:21e2])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab658e2c8csm34138645f8f.2.2026.11.25.01.52.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Nov 2026 01:52:07 -0800 (PST)
-Message-ID: <dd138c18-c37d-4ecb-ab97-069d335c5174@baylibre.com>
-Date: Wed, 25 Nov 2026 10:52:06 +0100
+ ffacd0b85a97d-4ab6ae2dd55sm32235573f8f.30.2026.11.25.01.55.38
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 25 Nov 2026 01:55:38 -0800 (PST)
+From: Josef Schlehofer <pepe.schlehofer@gmail.com>
+To: Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH] fs/squashfs: Fix reading on big-endian systems
+Date: Wed, 25 Nov 2026 10:55:37 +0100
+Message-ID: <20261125095537.37979-1-pepe.schlehofer@gmail.com>
+X-Mailer: git-send-email 2.54.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] arm: dts: am43xx: Switch to OF_UPSTREAM
-To: Judith Mendez <jm@ti.com>,
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>, "Andrew F. Davis" <afd@ti.com>,
- Nikita Kiryanov <nikita@compulab.co.il>, Peng Fan <peng.fan@nxp.com>,
- David Lechner <dlechner@baylibre.com>, Johan Jonker <jbx6244@gmail.com>,
- "Francis, Sebin" <sebin.francis@ti.com>
-References: <20261104-v2026-10-next-topic-am45-ofupstream-am4-of-upstream-v2-0-6091edbb51fa@baylibre.com>
- <1921fbd4-94f4-45d0-b708-d327fe6631f0@ti.com>
- <d8cc5a71-8293-4efd-bec8-900c8aa8ee56@baylibre.com>
- <6449f1bd-4796-438e-bb4a-76c8f854a01a@ti.com>
-Content-Language: en-US
-From: Julien Panis <jpanis@baylibre.com>
-In-Reply-To: <6449f1bd-4796-438e-bb4a-76c8f854a01a@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -170,124 +156,301 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Judith,
+Squashfs stores its metadata in little-endian byte order. U-Boot reads
+the headers of the inode and directory table blocks, the directory
+headers and entries, the fragment table entries and the data block
+sizes in host byte order, so on a big-endian system it cannot list a
+directory or read a file.
 
-On 11/17/26 22:25, Judith Mendez wrote:
-> Hi Julien,
->
-> On 11/17/26 3:23 AM, Julien Panis wrote:
->> Hi Judith,
->>
->> On 11/17/26 00:28, Judith Mendez wrote:
->>> Hi Markus, Julien,
->>>
->>> On 11/4/26 3:47 AM, Markus Schneider-Pargmann (TI) wrote:
->>>> Hi,
->>>>
->>>> this series does the final changes to switch on OF_UPSTREAM on am43xx.
->>>> Mainly it adds some -u-boot.dtsi files to define tick-timer and other
->>>> necessary pieces. It changes the defconfigs and removes the old
->>>> devicetrees.
->>>>
->>>> This series does not have any dependencies that are not merged.
->>>>
->>>> It was tested on am437x industrial EVM with mmc. Help testing is
->>>> appreciated.
->>>
->>>
->>> I was able to test SD boot on am437 EVM and AM437 SK boards and I see
->>> the following:
->>>
->>>
->>> EVM: https://gist.github.com/jmenti/9c494e63186ad0ddc87aacc974f47336
->>> SK: https://gist.github.com/jmenti/a5d5ca0804f6c0f94e640d5fe0b76030
->>>
->>> With signature:
->>>
->>> Retrieving file: /extlinux/../am437x-gp-evm.dtb
->>> Card did not respond to voltage select! : -110
->>> Cannot persist EFI variables without system partition
->>> Booting <NULL>
->>>
->>> and it pauses boot here for a while.
->>>
->>> Is this expected or are we missing some configuration for SD card boot?
->>>
->>> Figured id ask before testing uart +  nfs and am437 IDK board.
->>>
->>> ~ Judith
->>
->> Thank you for testing on these boards.
->>
->> The error is not expected. I do not observe this on IDK.
->>
->> Looks like the second controller (mmc3) was disabled in the old local EVM DT :
->> ```
->> &mmc3 {
->>      /* disable MMC3 as SDIO is not supported in U-Boot */
->>      status = "disabled";
->>      [...]
->> ```
->> The old SK DT never enabled mmc3 at all.
->>
->> In this v2 series, upstream DT sets status = "okay" for mmc3 in both `am437x-gp-evm.dts:870`
->> and `am437x-sk-evm.dts:690`.
->>
->> Do you observe the same issue if you disable mmc3 instead ? You can add these lines
->> to `arch/arm/dts/am437x-gp-evm-u-boot.dtsi` and `arch/arm/dts/am437x-sk- evm-u-boot.dtsi` :
->> ```
->> &mmc3 {
->>          /* SDIO WiFi module, not supported in U-Boot */
->>          status = "disabled";
->> };
->> ```
->
-> It seems like:
->
-> Cannot persist EFI variables without system partition
-> Booting <NULL>
->
-> already existing in main branch, the only issue that was introduced was:
->
-> Card did not respond to voltage select! : -110
->
-> which is fixed by disabling MMC2. But we cannot completely disable MMC2
-> in Linux DT, so perhaps in u-boot.dtsi or maybe there is a better fix
-> for this in u-boot env?
->
-> Here are the three tests I ran this time:
->
-> 1. AM437 EVM SD boot test on main:
-> https://gist.github.com/jmenti/109212c3d186fcdc1225ac5010038844
-> 2. AM437 EVM SD boot test on main with of_upstream patches:
-> https://gist.github.com/jmenti/7f0eb8fb45ee110c1f522cbbded96212
-> 3. AM437 EVM SD boot test on main with of_upstream patches & MMC2 disable:
-> https://gist.github.com/jmenti/0f3c59d6fd41b9b810e6ecc908237827
->
-> I also wonder what introduced this issue:
->
-> "Booting <NULL>"
->
-> Do you know?
->
-> ~ Judith
+Convert them to host byte order where they are used, as is already done
+for the super block and the inodes, and mark the on-disk fields as
+little-endian.
 
-IMO we should disable MMC2 in the board u-boot overrides
-(`am437x-gp-evm-u-boot.dtsi` and `am437x-sk- evm-u-boot.dtsi`).
-I am going to send a v3.
+Fixes: c51006130370 ("fs/squashfs: new filesystem")
+Signed-off-by: Josef Schlehofer <pepe.schlehofer@gmail.com>
+---
+Tested on qemu-ppce500 and qemu_arm with a gzip and an uncompressed
+image holding a directory of 600 entries, small files in a fragment
+block, a sparse file, a hard link and a symlink. ls, size and load now
+match the host on both. Before, they all failed on qemu-ppce500. On
+qemu_arm the code generated for fs/squashfs does not change.
 
-If "Cannot persist EFI variables without system partition" and
-"Booting <NULL>" already existed in main branch, then these
-messages are not related to OF_UPSTREAM switching.
-I don't know what introduced these issues, but I think it should
-be addressed in another series, as it seems to be a different topic.
+ fs/squashfs/sqfs.c            | 53 ++++++++++++++++++++---------------
+ fs/squashfs/sqfs_filesystem.h | 28 +++++++++---------
+ fs/squashfs/sqfs_inode.c      |  2 +-
+ 3 files changed, 45 insertions(+), 38 deletions(-)
 
-Julien
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 2092e3c1c71..49430f7edfb 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -249,7 +249,7 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 	}
+ 
+ 	*e = entries[offset];
+-	ret = SQFS_COMPRESSED_BLOCK(e->size);
++	ret = SQFS_COMPRESSED_BLOCK(le32_to_cpu(e->size));
+ 
+ out:
+ 	free(entries);
+@@ -557,7 +557,7 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 	/* Initialize squashfs_dir_stream members */
+ 	dirs->table += SQFS_DIR_HEADER_SIZE;
+ 	dirs->size = get_unaligned_le16(&dir->file_size) - SQFS_DIR_HEADER_SIZE;
+-	dirs->entry_count = dirs->dir_header->count + 1;
++	dirs->entry_count = le32_to_cpu(dirs->dir_header->count) + 1;
+ 
+ 	/* No path given -> root directory */
+ 	if (!strcmp(token_list[0], "/")) {
+@@ -588,8 +588,8 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 		}
+ 
+ 		/* Redefine inode as the found token */
+-		new_inode_number = dirs->entry->inode_offset +
+-			dirs->dir_header->inode_number;
++		new_inode_number = (s16)le16_to_cpu(dirs->entry->inode_offset) +
++			le32_to_cpu(dirs->dir_header->inode_number);
+ 
+ 		/* Get reference to inode in the inode table */
+ 		table = sqfs_find_inode(dirs->inode_table,
+@@ -696,7 +696,7 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 
+ 		dirs->table += SQFS_DIR_HEADER_SIZE;
+ 		dirs->size = get_unaligned_le16(&dir->file_size);
+-		dirs->entry_count = dirs->dir_header->count + 1;
++		dirs->entry_count = le32_to_cpu(dirs->dir_header->count) + 1;
+ 		dirs->size -= SQFS_DIR_HEADER_SIZE;
+ 		free(dirs->entry);
+ 		dirs->entry = NULL;
+@@ -1065,7 +1065,7 @@ static int sqfs_opendir_nest(const char *filename, struct fs_dir_stream **dirsp)
+ 
+ 	/* Setup directory header */
+ 	memcpy(dirs->dir_header, dirs->table, SQFS_DIR_HEADER_SIZE);
+-	dirs->entry_count = dirs->dir_header->count + 1;
++	dirs->entry_count = le32_to_cpu(dirs->dir_header->count) + 1;
+ 	dirs->size -= SQFS_DIR_HEADER_SIZE;
+ 
+ 	/* Setup entry */
+@@ -1135,7 +1135,7 @@ static int sqfs_readdir_nest(struct fs_dir_stream *fs_dirs, struct fs_dirent **d
+ 			/* Read follow-up (emitted) dir. header */
+ 			memcpy(dirs->dir_header, dirs->table,
+ 			       SQFS_DIR_HEADER_SIZE);
+-			dirs->entry_count = dirs->dir_header->count + 1;
++			dirs->entry_count = le32_to_cpu(dirs->dir_header->count) + 1;
+ 			ret = sqfs_read_entry(&dirs->entry, dirs->table +
+ 					      SQFS_DIR_HEADER_SIZE);
+ 			if (ret)
+@@ -1149,7 +1149,8 @@ static int sqfs_readdir_nest(struct fs_dir_stream *fs_dirs, struct fs_dirent **d
+ 			return -SQFS_STOP_READDIR;
+ 	}
+ 
+-	i_number = dirs->dir_header->inode_number + dirs->entry->inode_offset;
++	i_number = le32_to_cpu(dirs->dir_header->inode_number) +
++		(s16)le16_to_cpu(dirs->entry->inode_offset);
+ 	ipos = sqfs_find_inode(dirs->inode_table, dirs->inode_table_size,
+ 			       i_number, sblk->inodes, sblk->block_size);
+ 	if (!ipos)
+@@ -1158,7 +1159,7 @@ static int sqfs_readdir_nest(struct fs_dir_stream *fs_dirs, struct fs_dirent **d
+ 	base = (struct squashfs_base_inode *)ipos;
+ 
+ 	/* Set entry type and size */
+-	switch (dirs->entry->type) {
++	switch (le16_to_cpu(dirs->entry->type)) {
+ 	case SQFS_DIR_TYPE:
+ 	case SQFS_LDIR_TYPE:
+ 		dent->type = FS_DT_DIR;
+@@ -1198,11 +1199,12 @@ static int sqfs_readdir_nest(struct fs_dir_stream *fs_dirs, struct fs_dirent **d
+ 	}
+ 
+ 	/* Set entry name (capped at FS_DIRENT_NAME_LEN which is a U-Boot limitation) */
+-	name_size = min_t(u16, dirs->entry->name_size + 1, FS_DIRENT_NAME_LEN - 1);
++	name_size = min_t(u16, le16_to_cpu(dirs->entry->name_size) + 1,
++			  FS_DIRENT_NAME_LEN - 1);
+ 	strncpy(dent->name, dirs->entry->name, name_size);
+ 	dent->name[name_size] = '\0';
+ 
+-	offset = dirs->entry->name_size + 1 + SQFS_ENTRY_BASE_LENGTH;
++	offset = le16_to_cpu(dirs->entry->name_size) + 1 + SQFS_ENTRY_BASE_LENGTH;
+ 	dirs->entry_count--;
+ 
+ 	/* Decrement size to be read */
+@@ -1401,7 +1403,8 @@ static int sqfs_get_regfile_info(struct squashfs_reg_inode *reg,
+ 		if (ret < 0)
+ 			return -EINVAL;
+ 		finfo->comp = ret;
+-		if (fentry->size < 1 || fentry->start == 0x7FFFFFFF)
++		if (le32_to_cpu(fentry->size) < 1 ||
++		    le64_to_cpu(fentry->start) == 0x7FFFFFFF)
+ 			return -EINVAL;
+ 	} else {
+ 		datablk_count = DIV_ROUND_UP(finfo->size, le32_to_cpu(blksz));
+@@ -1439,7 +1442,8 @@ static int sqfs_get_lregfile_info(struct squashfs_lreg_inode *lreg,
+ 		if (ret < 0)
+ 			return -EINVAL;
+ 		finfo->comp = ret;
+-		if (fentry->size < 1 || fentry->start == 0x7FFFFFFF)
++		if (le32_to_cpu(fentry->size) < 1 ||
++		    le64_to_cpu(fentry->start) == 0x7FFFFFFF)
+ 			return -EINVAL;
+ 	} else {
+ 		datablk_count = DIV_ROUND_UP(finfo->size, le32_to_cpu(blksz));
+@@ -1512,7 +1516,8 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
+ 		goto out;
+ 	}
+ 
+-	i_number = dirs->dir_header->inode_number + dirs->entry->inode_offset;
++	i_number = le32_to_cpu(dirs->dir_header->inode_number) +
++		(s16)le16_to_cpu(dirs->entry->inode_offset);
+ 	ipos = sqfs_find_inode(dirs->inode_table, dirs->inode_table_size,
+ 			       i_number, sblk->inodes, sblk->block_size);
+ 	if (!ipos) {
+@@ -1609,13 +1614,13 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
+ 		char *data_buffer;
+ 
+ 		start = lldiv(data_offset, ctxt.cur_dev->blksz);
+-		table_size = SQFS_BLOCK_SIZE(finfo.blk_sizes[j]);
++		table_size = SQFS_BLOCK_SIZE(le32_to_cpu(finfo.blk_sizes[j]));
+ 		table_offset = data_offset - (start * ctxt.cur_dev->blksz);
+ 		n_blks = DIV_ROUND_UP(table_size + table_offset,
+ 				      ctxt.cur_dev->blksz);
+ 
+ 		/* Don't load any data for sparse blocks */
+-		if (finfo.blk_sizes[j] == 0) {
++		if (le32_to_cpu(finfo.blk_sizes[j]) == 0) {
+ 			n_blks = 0;
+ 			table_offset = 0;
+ 			data_buffer = NULL;
+@@ -1643,14 +1648,14 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
+ 		}
+ 
+ 		/* Load the data */
+-		if (finfo.blk_sizes[j] == 0) {
++		if (le32_to_cpu(finfo.blk_sizes[j]) == 0) {
+ 			/* This is a sparse block */
+ 			sparse_size = get_unaligned_le32(&sblk->block_size);
+ 			if ((*actread + sparse_size) > len)
+ 				sparse_size = len - *actread;
+ 			memset(buf + *actread, 0, sparse_size);
+ 			*actread += sparse_size;
+-		} else if (SQFS_COMPRESSED_BLOCK(finfo.blk_sizes[j])) {
++		} else if (SQFS_COMPRESSED_BLOCK(le32_to_cpu(finfo.blk_sizes[j]))) {
+ 			dest_len = get_unaligned_le32(&sblk->block_size);
+ 			ret = sqfs_decompress(&ctxt, datablock, &dest_len,
+ 					      data, table_size);
+@@ -1682,9 +1687,10 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
+ 		goto out;
+ 	}
+ 
+-	start = lldiv(frag_entry.start, ctxt.cur_dev->blksz);
+-	table_size = SQFS_BLOCK_SIZE(frag_entry.size);
+-	table_offset = frag_entry.start - (start * ctxt.cur_dev->blksz);
++	start = lldiv(le64_to_cpu(frag_entry.start), ctxt.cur_dev->blksz);
++	table_size = SQFS_BLOCK_SIZE(le32_to_cpu(frag_entry.size));
++	table_offset = le64_to_cpu(frag_entry.start) -
++		(start * ctxt.cur_dev->blksz);
+ 	n_blks = DIV_ROUND_UP(table_size + table_offset, ctxt.cur_dev->blksz);
+ 
+ 	if (__builtin_mul_overflow(n_blks, ctxt.cur_dev->blksz, &buf_size)) {
+@@ -1714,7 +1720,7 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
+ 
+ 		ret = sqfs_decompress(&ctxt, fragment_block, &dest_len,
+ 				      (void *)fragment  + table_offset,
+-				      frag_entry.size);
++				      le32_to_cpu(frag_entry.size));
+ 		if (ret) {
+ 			free(fragment_block);
+ 			goto out;
+@@ -1818,7 +1824,8 @@ static int sqfs_size_nest(const char *filename, loff_t *size)
+ 		goto free_strings;
+ 	}
+ 
+-	i_number = dirs->dir_header->inode_number + dirs->entry->inode_offset;
++	i_number = le32_to_cpu(dirs->dir_header->inode_number) +
++		(s16)le16_to_cpu(dirs->entry->inode_offset);
+ 	ipos = sqfs_find_inode(dirs->inode_table, dirs->inode_table_size,
+ 			       i_number, sblk->inodes, sblk->block_size);
+ 
+diff --git a/fs/squashfs/sqfs_filesystem.h b/fs/squashfs/sqfs_filesystem.h
+index 6c97b2c3a9c..1f9960f5abd 100644
+--- a/fs/squashfs/sqfs_filesystem.h
++++ b/fs/squashfs/sqfs_filesystem.h
+@@ -81,9 +81,9 @@ struct squashfs_ctxt {
+ };
+ 
+ struct squashfs_directory_index {
+-	u32 index;
+-	u32 start;
+-	u32 size;
++	__le32 index;
++	__le32 start;
++	__le32 size;
+ 	char name[0];
+ };
+ 
+@@ -228,23 +228,23 @@ union squashfs_inode {
+ };
+ 
+ struct squashfs_directory_entry {
+-	u16 offset;
+-	s16 inode_offset;
+-	u16 type;
+-	u16 name_size;
++	__le16 offset;
++	__le16 inode_offset;
++	__le16 type;
++	__le16 name_size;
+ 	char name[0];
+ };
+ 
+ struct squashfs_directory_header {
+-	u32 count;
+-	u32 start;
+-	u32 inode_number;
++	__le32 count;
++	__le32 start;
++	__le32 inode_number;
+ };
+ 
+ struct squashfs_fragment_block_entry {
+-	u64 start;
+-	u32 size;
+-	u32 _unused;
++	__le64 start;
++	__le32 size;
++	__le32 _unused;
+ };
+ 
+ struct squashfs_dir_stream {
+@@ -284,7 +284,7 @@ struct squashfs_file_info {
+ 	/* File size in bytes (uncompressed) */
+ 	size_t size;
+ 	/* Reference to list of data blocks's sizes */
+-	u32 *blk_sizes;
++	__le32 *blk_sizes;
+ 	/* Offset into the fragment block */
+ 	u32 offset;
+ 	/* Offset in which the data blocks begin */
+diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
+index 20085f8912b..4cb9205efb5 100644
+--- a/fs/squashfs/sqfs_inode.c
++++ b/fs/squashfs/sqfs_inode.c
+@@ -227,7 +227,7 @@ int sqfs_read_metablock(unsigned char *file_mapping, int offset,
+ 		return -EFAULT;
+ 	data = file_mapping + offset;
+ 
+-	header = get_unaligned((u16 *)data);
++	header = get_unaligned_le16(data);
+ 	if (!header)
+ 		return -EINVAL;
+ 
+-- 
+2.54.0 (Apple Git-157)
 
