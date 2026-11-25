@@ -2,118 +2,149 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32941606A321
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 17:24:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0483606A332
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 17:54:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bVeBgC81;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=lT6cFdRw
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VhSveJtq;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cx2VsuKH
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 069B080E71;
-	Wed, 25 Nov 2026 17:24:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9BD9F80DF9;
+	Wed, 25 Nov 2026 17:54:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mf1lXbRi0s6u; Wed, 25 Nov 2026 17:24:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5E5D580DF8
+ id GdOMWqPckdYf; Wed, 25 Nov 2026 17:54:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C987680BD6
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795627470;
-	b=cp5WQhvuRY5p6vJ2KuKKSRQKIi+eLSe2d1tdrJA5wgS06M3yJF2XYcPweRrTLQr960tl
-	 UUz/247p28Edf2Kpy34w79gk0WWeEgxndWxpjeCnap7TSTD++y5V1lsgavDCDP9/+BQ3n
-	 AP0+5Aey6uT3gJ26Es4c8Z1OiwkQlHKOr5fN1W3F5iNhWS1b7gEKKoQDTNBgDioQCDAKi
-	 /N2NimQYlTh1mPDidzsTQJv+7ZzK2W69GrDyUTEQsXnadQWBt7nbQJ3V/5os5TlXIIbaR
-	 HkKzP00lLtG36VJE1oYl4E7bUoM/0cn0JVhhCB/hQufnLG4NodYg2tQQvR/PyGtSokw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795629255;
+	b=YzrsOIRf/E5e+snRJb2/77kaw35Ev5e1qMEKTaipBRDNyJkBKh+/cZN/KjkiLf+W+QdQ
+	 NRYeOEj2nesEljvFg0I9OfZ8CDu/SJUvIEe8Ic2B9hFQWeCuzaWL8cJsAYSTC88PftAok
+	 Lj47kKUq3hnkMtpqxc4PWGNqEQxIQRBDg6X+uN/wXz9aoXxFLsQwSl+/KguZqQt9WkkX3
+	 qXe15ptGf1F5ipSQnPn4CQCDcZI35V5XSwNwH0ybh8Zz3idVu8GXk4ytIikJFrxyA5Bpo
+	 2HwQo0R6Ddg+//cMCqrvosQ8HBIMjQzozn8l2VwKdzhGWvFqM+GrlnGSXL9HERlE9xg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795627470;
+	c=relaxed/relaxed; t=1795629255;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=O9f+9BRPSH1ZUbOTy3ROb6913PwlhHXYGB3IDiExeEE=;
-	b=bkahIl8zRC/W/n5FVqr7+FPuK5nN+PIB2viL/+ZrsOWpGaU4b9E/VwygJx6cXxYbZ4z4
-	 ll/Y01c700jZZS0BYr8d8ceIAaOEaArwe3N9t1QTLswfLYEyg6fyErUVQa7DrlPaItekS
-	 uA0mrKAay6uZblmdh0UxTMdj47xyZVB3/n4e5sO87Bfb7tq50LGvByIrOKSUgbkEvZWQa
-	 LzeRw+6/DomXoCMdfI4k2Oo3fiOrrgt++IpDVGodVwoULb4Y2w6UMSqoN7CkFpUCDJeWE
-	 xKqmY4UORTAE+xTDLcuBOajnXK4Ii4pexmb1fWSJv92vWeDI3zyuJX6uBfvKD/iSW9Q==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
+	b=kYp/gFroYjpnBvPTKkogAUam/+6JDRn3r1f/QiFXRS0lGxp69YGdmT5D6Ymr0RT5f1Hh
+	 EzftJXCARpm6+myznavkb8SVLY+W86RDUvOYtTbbR8qd1W6FDAaFN/pXnVgo02FFBpKCc
+	 1JTEl3U4rxy/B/yvzHmLg25rDkaam8w2kI54nCqo98oHkY1GwtmGhmoMHVJJ4zFYA4uYM
+	 LqMzvPw+DVtLVgGnYzLzUSlBxBeR+Y8yBlOQEWlXdJBOHQZMkiHBjUxQqEW24dENrRNVD
+	 UrXhH+OJTdBsVvUz26+4adaJwahrxhLV1Fm5qaRvjnpudahogJaAZc19+4qhaCvFpLw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=ziyao.cc;
-	dkim=pass header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=lT6cFdRw;
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cx2VsuKH;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795627470;
-	bh=O9f+9BRPSH1ZUbOTy3ROb6913PwlhHXYGB3IDiExeEE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795629254;
+	bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bVeBgC81AF9g3+wXVpeQOxYCcgvW7f6xE/06T4N7e6KV6YrJGY8f56Vf8o2c/fRAv
-	 l66rTucF2ri6KKuPiU8nkNScckNCklBJtGkromdNZ1IlUnxUYDBrZ6hK2UTUFlOmkM
-	 efNDPMLFUP7JSgHPWTkPgcTS8uYYrFn9oYtU9/Sku/5VAbM3FAlznljHvvOKVlRdO+
-	 caNXHGfFsHj4fxWi1k3allhIOIW37LBvk+EtP+0+WEargdhJYcAXpv51EBD1YeMYQ8
-	 3CbE/UGuApYWtf3HG/BsZSnuI1vCvwhQv54h49LSYmM4+HqsD99SxvTRWm15PyA4K1
-	 tXLXifWFjholg==
+	b=VhSveJtqV95/7te7aQjmstFDlfrRvnlvKCoxY0gzozr7ohL3AUsYCD/UMETjqF+zA
+	 UZjiJpmt1gKBtsnvbRch4K/FQlr1m4qwjbWcFmcFRyJzr5l4YtMQZQfDGElRmAoyUu
+	 0itvySFaznuWN8MixgNq7QL4RHCirdMZXQp0DKH5gjWTNWbxQcb904u2oYqZFW78/w
+	 beb6zLa0P3VtoNGnVAvQmAxzT0Rs271wMOVWauiFcX90ucyViyAyBGX2Jja/lwJ0Il
+	 ibEX8ZfJd7b1I1WmmzbvG6u87WVy5QMWzSrDsby+V2KLQ+4h9D/2ajX4IwS6+OdRbj
+	 8Hf2b6jdWFHyg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5E5D580DF8;
-	Wed, 25 Nov 2026 17:24:30 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7710043
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:24:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C987680BD6;
+	Wed, 25 Nov 2026 17:54:14 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 670501C9
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:54:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 68A6C80DF8
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:24:28 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4C9CF80BD6
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:54:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SUs6_5JFSPnS for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 17:24:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8260780C38
+ id J_XD2bwQOkdK for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 17:54:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5744C809C0
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.182.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=lT6cFdRw
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8260780C38
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:24:27 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=lT6cFdRwnmnEanYvljmVl2SXlQhWDrDgRYLaEaJ4vjmlgMTdoNMN4bTdC0fMdrocfHEvcsUq5T4NnvgykV8CInHvMqCyeviq78phDpFnczT89CQO+ahmhuGFqxG/Q1MmRXd/zquHfTpB/wtRCzrOVfQjMP0DoG+6h+yGpwitRHk=;
- c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=O9f+9BRPSH1ZUbOTy3ROb6913PwlhHXYGB3IDiExeEE=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1795627436281516.3769754542882;
- Wed, 25 Nov 2026 09:23:56 -0800 (PST)
-Date: Wed, 25 Nov 2026 17:23:47 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Indrek Kruusa <indrek.kruusa@gmail.com>,
- Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>
-Cc: Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>,
- Han Gao <gaohan@iscas.ac.cn>, Kongyang Liu <seashell11234455@gmail.com>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Samuel Holland <samuel@sholland.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Hiago De Franco <hfranco@baylibre.com>, E Shattow <e@freeshell.de>,
- Yixun Lan <dlan@kernel.org>, Raymond Mao <raymond.mao@riscstar.com>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH 0/4] riscv: consolidate the T-Head C9xx cache operations
- and CSRs
-Message-ID: <awcZoxsOHvBdex9_@pie>
-References: <20261124195237.692679-1-indrek.kruusa@gmail.com>
+ smtp.remote-ip="2607:f8b0:4864:20::f2a"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::f2a; helo=mail-qv1-xf2a.google.com;
+ envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=cx2VsuKH
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5744C809C0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:54:12 +0000 (UTC)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-921367ef6b3so43067626d6.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:54:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1795629251; x=1796234051;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
+ b=cx2VsuKHNaQKdc/dcgt1Gwah0qUqS8wph/ePJkRrf1uuje5piyadRnc6KutYT9l0X5
+ smKIkF1V2beGRA95WrLCM9tGS+T8toYtuBPUPP+9QixGmscWAIfGd8LyAPYkHa/eRF/T
+ N+Ohh8qy1ZS4jn9hLhagw6ys4yWOLuV6YjdOmXhXtetk5aK/f4Py0MxE9E392ZZ2/9qg
+ +VIMaoJekwKhhoV4f1cGLVUldk8jPXvQjxfShiw7ZjbkDDbfZ+mv/TWUxy4+LtsamKRB
+ 0gu9AOubUmCtXCsaJDFkyVibeMyIpKHv1hwOts1b4trMI6lB3WXRtbGNkOMk0h7xAkDS
+ uYeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795629251; x=1796234051;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
+ b=wonJ7qcgtR2AdFhfBqRCNXDpwaYvqRx5QNM2YMSbx5Wm20vYUDwtgihJwHZgkXgQAO
+ 9nuzTjT5rAeHYWlm9zH8LeZ3Ej80Jkk/ASqmhu9foBunjAKX1Tg3l3ZseYNBs4l12OB7
+ p5Wp6rXv6DWdJu9eJXLdiLetFaQZxy8uTJ5BvyttT1CX1dIxc9+ICY1SIxNe2aoOFJb2
+ CIIwLjeGuJeTwRg3SvnHh6ddzWnSIi82MXrr8ZdfVnmXrmbLv9OHWQHyOFSQpToLBqju
+ Ve9nS/920BeYhd4EiM+6BFDx5Izy/4BIkpFpdFLmQ2yWfdcq1ruWA6JK1Jk/K1kbTzir
+ gOoA==
+X-Forwarded-Encrypted: i=1;
+ AL+hErG86xwg4FKJV3aC/pDfH1HnqvOd65Jm+LiyCt71aUqFKKqW2OJL6wj9sC7oSz/Ay9Yt7P8PVfM=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/1vUH0bsK8YVC2R4SKZ4R+Wx9C8VlfuDWqbXvZYcfr5kZtkGSX
+ OQgqLkfF2FlEhPBcODBz4Mwybzy/ucK2xOLYj2GFjLb/QBB3GK79fEP68UsbOVS0H23T/l+Dk9V
+ iqGqmKyh4uy4xE5tMA0D9RWNfBz80dAk=
+X-Gm-Gg: AZFdTZcEMF5hWTds5CGbtizGtgIHhiRePI4mpXIKd7R5mtUtSzk+r1q0Ety7W96JYMV
+ 48nuHYeRWkLuDoA3frbk83XHr7S3GWnVQGrrsVzpErQTSU/GaSLujK2TKo0NRK/XTNa8NnbYQ+x
+ Ii32nxLdx5+AAVIgWmN8Ib0lfQpdl6z5jS5v6Izl8ns9YiOWku16JSFwMjF2MC4DTJUuMouuSPJ
+ MhfxCzH2EPXNDCUmlrYkT8eI3U97/Xl+R4fjUgbEUHpb5uu676OE0ZZRvNfV2A0SFChdJ6WKwgk
+ Hz26BKLf9TIcGd370RuWc2XcjPYGbx+p6u3g2JLsp8YLa0T+LLPIvHMSLbOcaIiAjqHrCACuXWX
+ T4+GznXUlaUNjH88HYEcYsM8wTk8VBtdyRfQhPM9R7e9QU6Fgb0jTEVb+c21On4hS0JIHT4TZ3L
+ HrQjOQf+EjLqSChZwBeOUeOBxKPElY75iqJhEMacvmqNdXwAX2oA8xt0+/3wvcY/r8ZnY/A1y3S
+ 1+gJBgE/CdV7mJxjhjgmv0vggliHjnK0VjAs4bcmhbHLybFCTwcYH+a
+X-Received: by 2002:a05:6214:2b8a:b0:921:656a:9e29 with SMTP id
+ 6a1803df08f44-921656a9e5dmr135069256d6.54.1795629250825; Wed, 25 Nov 2026
+ 09:54:10 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261124195237.692679-1-indrek.kruusa@gmail.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/295.600.19
-X-ZohoMailClient: External
+References: <20261123-submit-lwip-wget-httpdstp-v1-v1-1-e1759174ab9a@gmail.com>
+ <55dd0a77-5315-416f-bbe8-e952a03d874f@mailbox.org>
+ <CADvTj4p9LJ+kwDSZ2fyw-P3fLEewbxN587dvF2OrpKQdY=k3Yg@mail.gmail.com>
+In-Reply-To: <CADvTj4p9LJ+kwDSZ2fyw-P3fLEewbxN587dvF2OrpKQdY=k3Yg@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 25 Nov 2026 17:53:58 +0000
+X-Gm-Features: Aa3M54pAu3Er_hNhSW8-3lHVzbBhVWQVLTuKixYAYnAcXYalZYHdKAcy9_nG5Ts
+Message-ID: <CALeDE9M-r=p9TNEZEw4-4Ju-rKR3_wJx0ok_dgy4ykqGAADzyg@mail.gmail.com>
+Subject: Re: [PATCH] cmd: wget: honor httpdstp for legacy arguments with lwIP
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.u-boot-project.org, 
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Naveen Kumar Chaudhary <naveen.osdev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/alternative; boundary="000000000000a4d35206611d83e3"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -123,39 +154,91 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-4.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Nov 24, 2026 at 09:52:33PM +0200, Indrek Kruusa wrote:
-> This series consolidates the vendor-specific cache operations of the
-> T-Head C9xx cores and the machine-mode CSRs those ports use, and
-> implements the whole-cache operations.  It is a prerequisite for the
-> upcoming Allwinner D1/D1s support.  However, no definitions have been
-> added yet that only D1 would use.
-> 
-> The series adds arch/riscv/include/asm/thead_csr.h, with the CSR numbers
-> and bitfields the T-Head ports use today.  It also adds
-> arch/riscv/lib/thead_cache.c: the renamed thead_cmo.c, with the enable and
-> disable functions taken from arch/riscv/cpu/th1520/cache.c, which is
-> removed.
+--000000000000a4d35206611d83e3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This isn't what I'd expect. I'd prefer to have separate thead_cmo.c and
-thead_cache.c, and also separate Kconfig options, where the earlier
-defines operations based on XTheadCMO, and the latter implements
-machine-mode-only cache management operations through CSR.
+On Tue, 24 Nov 2026 at 10:00, James Hilliard <james.hilliard1@gmail.com>
+wrote:
 
-A strong reason to separate them is that Xuantie cores with these cache
-CSRs available might not use XTheadCMO, iirc Xuantie C908 is such an
-example.
+> On Mon, Nov 23, 2026 at 4:37=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.=
+org>
+> wrote:
+> >
+> > On 11/23/26 11:13 PM, James Hilliard wrote:
+> > > The ADI boot scripts set httpdstp to 8000 and use wget to fetch
+> > > ${serverip}:/fitImage. With lwIP, wget still connects to port 80
+> > > because it omits the configured port when building the URL.
+> > >
+> > > Use httpdstp as the default port for [host:]path. Preserve a port
+> > > already present in the configured server address. Pass HTTP and HTTPS
+> > > arguments unchanged to the URL parser so an unsupported spelling is n=
+ot
+> > > reinterpreted as an HTTP request to a different host.
+> > >
+> > > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> > Do we actually want to keep perpetuating this legacy behavior or do we
+> > want to leave this behind and not complicate new code ?
+>
+> Not sure, I figure maybe try and get feature parity first and then clean
+> up unnecessary code afterwards to simplify migration to lwip.
+>
 
-[...]
+Personally I find the cleanup rarely happens and in 10 years time it'll
+still be there.
 
--- 
-Thanks,
-Yao Zi
+I think now is the right time to move, how long has the code actually been
+there in the legacy case, we haven't supported HTTP for that long.
 
-Meow-mrrp-mrow, I'm a cat.
+--000000000000a4d35206611d83e3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, 24 Nov =
+2026 at 10:00, James Hilliard &lt;<a href=3D"mailto:james.hilliard1@gmail.c=
+om">james.hilliard1@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"=
+gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
+4,204,204);padding-left:1ex">On Mon, Nov 23, 2026 at 4:37=E2=80=AFPM Marek =
+Vasut &lt;<a href=3D"mailto:marek.vasut@mailbox.org" target=3D"_blank">mare=
+k.vasut@mailbox.org</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On 11/23/26 11:13 PM, James Hilliard wrote:<br>
+&gt; &gt; The ADI boot scripts set httpdstp to 8000 and use wget to fetch<b=
+r>
+&gt; &gt; ${serverip}:/fitImage. With lwIP, wget still connects to port 80<=
+br>
+&gt; &gt; because it omits the configured port when building the URL.<br>
+&gt; &gt;<br>
+&gt; &gt; Use httpdstp as the default port for [host:]path. Preserve a port=
+<br>
+&gt; &gt; already present in the configured server address. Pass HTTP and H=
+TTPS<br>
+&gt; &gt; arguments unchanged to the URL parser so an unsupported spelling =
+is not<br>
+&gt; &gt; reinterpreted as an HTTP request to a different host.<br>
+&gt; &gt;<br>
+&gt; &gt; Signed-off-by: James Hilliard &lt;<a href=3D"mailto:james.hilliar=
+d1@gmail.com" target=3D"_blank">james.hilliard1@gmail.com</a>&gt;<br>
+&gt; Do we actually want to keep perpetuating this legacy behavior or do we=
+<br>
+&gt; want to leave this behind and not complicate new code ?<br>
+<br>
+Not sure, I figure maybe try and get feature parity first and then clean<br=
+>
+up unnecessary code afterwards to simplify migration to lwip.<br></blockquo=
+te><div><br></div><div>Personally I find the cleanup rarely happens and in =
+10 years time it&#39;ll still be there.</div><div><br></div><div>I think no=
+w is the right time to move, how long has the code actually been there in t=
+he legacy case, we haven&#39;t supported HTTP for that long.=C2=A0</div></d=
+iv></div>
+
+--000000000000a4d35206611d83e3--
