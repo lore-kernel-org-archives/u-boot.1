@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87CBC606A32A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 16:50:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BCBE606A321
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 16:50:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=T2r6QiVg;
-	dkim=pass (2048-bit key, unprotected) header.d=phytec.de header.i=@phytec.de header.a=rsa-sha256 header.s=selector2 header.b=g/xhGcgW
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=e3nwVPNC;
+	dkim=pass (2048-bit key, unprotected) header.d=phytec.de header.i=@phytec.de header.a=rsa-sha256 header.s=selector2 header.b=VLY9tOS7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 611AE80E5E;
-	Wed, 25 Nov 2026 16:50:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E623140812;
+	Wed, 25 Nov 2026 16:50:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aloBlOKGsgyI; Wed, 25 Nov 2026 16:50:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9521680E36
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795625439;
-	b=b1ELqdjZQyCz1PUrlaxZUD9JXHNOHkF0D73cN7l+20SPCp1sbe2WpyEVpZv8XNPiZ1B2
-	 UJo7CtD0DmSThLBromDwzLwExK7+p+R6YPfl9ykqi/+jyztYyzrBmwf5t0HyD+qlpiDa3
-	 eInt5aYQkfjO5NJUG+N5rsCVCPg9Ttlvn25vUK/7XoHhCGdc1Sk0R6VW+JVGcUezbJM5T
-	 15i7i5Aikh9XYzQgFg0UIMEU36lEWStXYySA8+GKey4J56xtIc0j0CcXtsIruZifmTwqX
-	 LwtkIV7BKjVe4kSke1iB94/Pql6WLh+Svp3QmKAiz2GycPiCd2JTFZz/1pJv+Nwdm4Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BjjV0w5CHrM8; Wed, 25 Nov 2026 16:50:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2E7A74057E
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795625452;
+	b=F3mZ3Bha9NHw05aM6cYcEKz2Yua8hjVTJ6vrNgLkEQPVfM2US9by+Ad6VXo1tFfAAUn3
+	 km19Dwf0swbnmzAD0nYXIAcAD+v1QBnW/t4pH/0zAuPjtPzvahPcXwTNwTn55HGVDiKN4
+	 4MtLFdkd1pDu/9MZLrU2MZ3nGlF3H/bVjy+842wjPoVHMiPtqLJ7fhcFXxCTUScVLfQ5j
+	 V/Luwf0hNDe6eR3Vvu6GAEKEm0/yGJY3o8kFgxpsmtZd8U3JDufUHgAdS09tSP49sELaH
+	 bxTKwRKPozBlaDikHaDCLLvGJcB2gJtIvijiseDvGgIHzqjFa3DCVKh8XTX3/R6SoOw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795625439;
+	c=relaxed/relaxed; t=1795625452;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,78 +45,78 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=pUBnHYZwJ/dzsI+n3f9xx/7ZV9SOAa23BdmRcftsozc=;
-	b=EBQn38Lf2awL0C2gXF3oJM63p4QJv5zrLd/gnLEM98tA8oXwzzisquN6VUS3u9v6I2dQ
-	 kiP5Usa3D4qum84CGnwK9PcrBazlFQB/okAi9buTTxFxBfR00+WIVD17B47VP2G9vXIjQ
-	 1y05RTZGgAdqL05pjNe4n3mfL4H4uCRh9RnsJiV8CNk4wEnxAEdSQU6gK86tNLhXfa6px
-	 DLV+iTOkt8Vw9ay1tu4C1ecckDwjRu1r7auyrOC4he7LdZYwfZzORKC7Iewo2h9D0w7Jc
-	 1aW2F0BztFvLzJwTlnc/O9K+xQoiDAqGa1qGuPJTDVWvcLcAt3gXQyNSCb5n1oAK+7g==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=04ePscJOSuwqS0oiENXQj3ayPNp4QtK30OI9fO5k7zc=;
+	b=P61sbvhvLUYjhBqj8g+DNrjNetWcxJmsA1YcI/Wz9THlVFAedgNJzGk8UY+sMahUcJIg
+	 cz3TdSn31FtMAT/HLXEgPUXVpaV/b5FkbPjIH6xpE58SvlZCioZUlS/WxOpPV+VlPZGmm
+	 taPwn2E+5gyAGuieUjwzTX9gTLMk6uSO149ZA4rsVv7DaoFuXol2FJ0Q6yMEM8nWmp6dp
+	 nbWaOUBb49x+OW++rZl7tfH1QBmB+eMhWJ1rDzjdiRD5x8LSJulKfyPE1AhaY7Kw6ya93
+	 q3RIkRImqhjCVyhoqNipYEdRzm03SF9GzvN9TE2PMXjfB2lSbGMiv442FBoyVJqRxEg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795625439;
-	bh=pUBnHYZwJ/dzsI+n3f9xx/7ZV9SOAa23BdmRcftsozc=;
+	d=lists.u-boot-project.org; s=default; t=1795625452;
+	bh=04ePscJOSuwqS0oiENXQj3ayPNp4QtK30OI9fO5k7zc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=T2r6QiVgt6RyWTYbl6Fw3V+0WGaBolxbVYaMTQ6sPTwJvj7WxvrKfwNpcEPkCSIBN
-	 R9ath0oPJcQNjnKcqvjZFkR+ZNsAiTpPcQMzcYuTriMQUAye+MuLJ5Uh1u7QaEMUNN
-	 PwhSDouPu16VeynQo9gNUaJB0rgoNrck3Xbd/TVl+9rbP8rTdBui8Jjyt4/COAtg2g
-	 lVQ/gOpXLhmGCPyYnb9w8rvqECRfQgHy+241cH9pJDEudcFgqUIS3BaJ9bgtpin2pz
-	 rBg2RsazNQUAh3NVKSA170HK6HB7zy6w60cYAHu2JkAT+4rpBoA1e2xavpGVSrw4Ap
-	 z2ZOfXQvPu2jA==
+	b=e3nwVPNCCcFha3zIIEfoFq/SQWCxyvtCxc0AhaR8bOb9iLjYlGsBtgCzrIUZMWfkA
+	 16K7itocuoavi8dTpJY1CXkzIgOD9GkJEod5bgwp5r8Q1+pBJJDx6pRaxyQhEQQZyK
+	 PNexPYLD3QAXuUe/dkem5Edk+KdoBvEcRPWpeMfJxPNQyXqMXLvco7YK65+y/FkRWR
+	 VaWG5QnVb5i86BSb/+QV5w5z5+Jyx9sMi7ZEzRnL00dFxDJkqPeDkJF7Cz9RlB7ZuU
+	 umTsI4Qi45lAXNg3792YSrw9Udi9+ly/+1nmIOtaFeHBhTpax9A1qmXyV+TvH6yzXl
+	 uRyJIthDFUnnA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9521680E36;
-	Wed, 25 Nov 2026 16:50:39 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id C7F241C9
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:50:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2E7A74057E;
+	Wed, 25 Nov 2026 16:50:52 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3AC9B26D
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:50:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B8B43407FE
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:50:38 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3806980E36
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:50:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dD8QwhwLebzN for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 16:50:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CFDE24050C
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L19ElaRrXRIn for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 16:50:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6BBC380E31
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a01:111:f403:c200::3"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c200::3;
  helo=du2pr03cu002.outbound.protection.outlook.com;
  envelope-from=b.hahn@phytec.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=phytec.de header.i=@phytec.de header.a=rsa-sha256
- header.s=selector2 header.b=g/xhGcgW
+ header.s=selector2 header.b=VLY9tOS7
 Received: from DU2PR03CU002.outbound.protection.outlook.com
  (mail-northeuropeazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::3])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CFDE24050C
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:50:37 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6BBC380E31
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:50:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pUBnHYZwJ/dzsI+n3f9xx/7ZV9SOAa23BdmRcftsozc=;
- b=g/xhGcgWKQKU6LTpS/4wroz/eZJGtHbHxH10oZx+tuo2zaydOfhQnH2bTsOcLythk+EuHmQ2JEM8Mkk3VPbQGauYWjFl6RKinpvGBgxIZIA1SCqS8yZe+/f1nvH6PxXNscpNZh0ts7Cs3PdBgprqxkwSJum8tCX/v6KaQ1NuVytIvrtptMMQMaA2zH5NH1ByYzKfkiN1hy1uswaFNC7cFkKLNzUrVDyNibq2d4Eo1wR+CqV7nrQVTUhqLQOIozdCQ/RcbFDA26Xt9Cz+wLiVwfdOmqXpTXCrolsyflRs7/lKzkn5A6A4+Fg5SfGpCVLbKqwPvTShYRTtmyRAldRytg==
+ bh=04ePscJOSuwqS0oiENXQj3ayPNp4QtK30OI9fO5k7zc=;
+ b=VLY9tOS7nw0WG2kDteHOAd7yMOQw0eJwSgJnw2kIC4+5mr0Uwc71NtxIxgLfEypvocpiNyrXjUNxNDRXc8uKEPxVIJb68oouzx1nmVkRXyoqRH8uqDypoeESqHNbinen5ui9tq/xEGXf60pgg6YocamhchLFoKhhkSnqa09cI8DCLEp+8/nrBiww0J7M2JbJppEpfSXzn87QCFuFUbbfAkvXIqW6wlxLG3HTv+MRReCaDHLA6St0dBLXG4tQKk41/zGNLtqOQp307SoDP2MUwCIYswk4Kj2+JnWgQ4cnmdzNnMqLDx7iT4N3hDQVgUHe72RnqU1m/88CWYxuk21/vA==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=phytec.de;
 Received: from VI1P195MB0623.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:159::10)
  by AS8P195MB2096.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:56d::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Wed, 25 Nov
- 2026 16:50:28 +0000
+ 2026 16:50:45 +0000
 Received: from VI1P195MB0623.EURP195.PROD.OUTLOOK.COM
  ([fe80::2f8:67bc:a785:6894]) by VI1P195MB0623.EURP195.PROD.OUTLOOK.COM
  ([fe80::2f8:67bc:a785:6894%7]) with mapi id 15.21.0662.004; Wed, 25 Nov 2026
- 16:50:28 +0000
-Message-ID: <413d5576-b844-4432-88dd-e86cf80db28b@phytec.de>
-Date: Wed, 25 Nov 2026 17:50:25 +0100
+ 16:50:45 +0000
+Message-ID: <49c9c222-3d36-4ea5-80e4-2bb036d6ac55@phytec.de>
+Date: Wed, 25 Nov 2026 17:50:43 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] configs: phycore-imx8mm: Add support for loading via
- UUU tool
+Subject: Re: [Upstream] [PATCH 3/4] board: phycore-imx8mm: Start fastboot when
+ booted through USB
 To: Thorsten Schmelzer <t.schmelzer@phytec.de>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, upstream@lists.phytec.de,
  u-boot@lists.u-boot-project.org
@@ -127,78 +127,78 @@ Cc: Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Benedikt Spranger <b.spranger@linutronix.de>,
  INgo Rah <ingo.rah@linutronix.de>
 References: <20261119-wip-t-schmelzer-phytec-de-usb-uuu-support-imx8mm-v1-0-dd6db9e5edfd@phytec.de>
- <20261119-wip-t-schmelzer-phytec-de-usb-uuu-support-imx8mm-v1-2-dd6db9e5edfd@phytec.de>
+ <20261119-wip-t-schmelzer-phytec-de-usb-uuu-support-imx8mm-v1-3-dd6db9e5edfd@phytec.de>
 Content-Language: en-US
 From: Benjamin Hahn <B.Hahn@phytec.de>
-In-Reply-To: <20261119-wip-t-schmelzer-phytec-de-usb-uuu-support-imx8mm-v1-2-dd6db9e5edfd@phytec.de>
+In-Reply-To: <20261119-wip-t-schmelzer-phytec-de-usb-uuu-support-imx8mm-v1-3-dd6db9e5edfd@phytec.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0177.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a0::14) To VI1P195MB0623.EURP195.PROD.OUTLOOK.COM
+X-ClientProxiedBy: FR0P281CA0099.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a9::17) To VI1P195MB0623.EURP195.PROD.OUTLOOK.COM
  (2603:10a6:800:159::10)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: VI1P195MB0623:EE_|AS8P195MB2096:EE_
-X-MS-Office365-Filtering-Correlation-Id: fc338168-afc1-404e-1d2a-08df4b143556
+X-MS-Office365-Filtering-Correlation-Id: e6cd2e62-cbe9-44c5-e188-08df4b143fe0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|7416014|376014|1800799024|366016|18002099003|22082099003|56012099006|4143699003|11063799006|261009223027099003|261102123227099003|261021121427099003|261021123027099003|10067099003|261022115727099003|261022075727099003|261026121527099003|3023799007|6133799003;
-X-Microsoft-Antispam-Message-Info: 2fdSeY38GHmp7lcygQOLbivc9ivwVWnU+NBX0Mo0Ln5NooqHi+nxaLKFyzkoWNgOR/j3XmbtsjixylfObyJ/YEgt6coxfp/t1aBO+X6/Oz0DNIq+xcZxQ59Xs2TdbepfxIwFOBjrafJbyBzlSlaylmq7ONxAR/TZwvauqhDuGcBEN5DQ685YManV+sOrOpSDkCIShbWZTmYm5whSfv19+vLi2FgEfa0el3vlNMpW5bdN+xHACM16r2s87d6cBeMKAY9JG/yh5MkIx2SlrmIpTR9qRJsmntbF1yLzUXvGhZkLN6/awclHtpASbMUA0HAtzrxSeoA/0kRTFOB4w1B3JqDshiiiWmqnNJGdF3nbNvd5RIGB0n/7h2QQQ3HTwP4bEbyC+Mc6YSRHsfUgUvV1cpllNaQQHAgXeYkkcb5A3cUb2KCUHsLuJDPTiLkHJB6OnFAT3XgJaY8mW8A61c3sKc9m8QhXEkgDpSQA8kH3bu5383Xo4YNtclfI/mej1PUcl//qPbos0lykXdBaLAFrECqnf9g/miK9YJG86BKnwwTmy25TuwMC4A/uJas20hp2HD2bH/06hCpV/OMC0nWYBmfAZmBTticZeqOIIiQFfdBpTABy9Cf5xOVVc+yRWYQn3rQSLtF3N0f/bNseg2rHY6X7TCfMykbaGtG+/blYxOg=
+ ARA:13230040|23010399003|7416014|376014|1800799024|366016|18002099003|22082099003|56012099006|4143699003|11063799006|5023799004|261009223027099003|261102123227099003|261021121427099003|10067099003;
+X-Microsoft-Antispam-Message-Info: 7stWcJmTGJnZ2cr1iwCQeM0LtjfvHjo3Q3kG7VoZicnFWXIndOdyhY1wadIfUH2vniJI6BgDFKtK8ZlbQXkmW7f/+zfSk/RGZFFnm9+VOXZ63seEeMDcksEOweMUJ/qKgwLYZhQ9T4R4BZRfzUWbw5F3IemcTjfoQ0t0ug8OhkrW5XI1uYoBXSi5vOx6AL+vgMjIe5rCLVS1fzh2Xga3vc00/BwmFEXjYWfAEhOOShudmiEMIwtibu6d4ijO66W4PcdZ8Vp1M+TgfbDQ7DSrSdcoBVSG2dlSGVGOWZo/r+gIM12ZnF37WbHqYWXCjNg69uRNotgg2a7P0lyRskMl0+3ijTU0j4QE+QULmHtXp6K327S7mcKRpPskjNNAGl27kzEM+PuRotLfjZ0tP0wyjrJfI2PHVjwfHfm3h1KH0f6DZW+r4p6zynOsSJ/imA6wCSnQrfVK7rNBw8Jrsz8Ird2UmMp/7hIJaonEvt2jCcRrIj96DBrZAZ+EszMzEnDonIFp2Kn9b4iyJbMvgzSSjWa4hXo+a3kqrEpWtxV5DWE3pA1TfDxJwGzmLmY6NMs8/U5FnYkvlUy1eAJvsw8aFkni8jZqVkhoYRr4ksxxyJGPWs565pvWac0rfPB6XO8QFFFjrfOswRtZl0Q0yTWTs0OcPW5mRADFwA2X5cRBMRQ=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:VI1P195MB0623.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(7416014)(376014)(1800799024)(366016)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006)(261009223027099003)(261102123227099003)(261021121427099003)(261021123027099003)(10067099003)(261022115727099003)(261022075727099003)(261026121527099003)(3023799007)(6133799003);
+ SFS:(13230040)(23010399003)(7416014)(376014)(1800799024)(366016)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006)(5023799004)(261009223027099003)(261102123227099003)(261021121427099003)(10067099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VjFqSkZXWTNQNXphQXZQVVVHWmZRSFk4UklZem85dW8vS1JCaFV2c2UrcCty?=
- =?utf-8?B?T3N5cExkeW1zd29wOXEyOVR3ZmxhMkVDTnpvVW5UcStTaXN5TTFYdFVTQUlZ?=
- =?utf-8?B?RWdhdlJHNG1kVGU3RWNSVWd5UHlQdkhNTXVsUFZuU2tBVGgzRTdJSm04WGs4?=
- =?utf-8?B?UGV2VTNPblB5L1dtd1AwQVJqWDFHTklkbWoxUXZyOW5LM0lScVErQ1p4UnFX?=
- =?utf-8?B?MEFtaXpQZll4T09mRWlUdlUvVk55OW42bGJhcTdNRmNZSlNXL254Y3V3eWhz?=
- =?utf-8?B?Z2RHQUMybXlYZWJzdlRncmlucUVHTmx2YXVwQ0hoNXFEY1RITWNSK2VNOU45?=
- =?utf-8?B?RHFRQmdmQ0x4Sng2YjFDNC95WVV4VEdiUGdnMFRXOE10RUx6cFJVTXlFanZT?=
- =?utf-8?B?cTBlR2tvM09TeEtQQjkvQ0xyVHVkby9namN2TnZCa2xBWEJGZmE2bVorYm5M?=
- =?utf-8?B?cmlmVTdoeUdHV21JNVBIWjBsTmc5UWhKUmkydUpaclBqUndkbVJIMXZlUkNp?=
- =?utf-8?B?UTNKWVRQUjRxdm5XZitnK3EwY203bEh2S0w5OXdPbDVrOHQ0K3RVWVJVMTla?=
- =?utf-8?B?RFRhaUV4Vm44NC9HKzREODdJMUhSNXpubWh4dFpvOHdpNkdJUnhSejJ5cmwy?=
- =?utf-8?B?eWFXQU96VU9aZCtSdGNmWlhmN29adEdVV1BPZWVlKzZsSE1LU2g5SzhKTFRV?=
- =?utf-8?B?SG5hWkR5SWdoWU1EVXN1TXM5aEtnbWx6bWgwOHVQcEJ2VUZqRzNjWUJocytQ?=
- =?utf-8?B?QWhDZW9sTDhPb1NiMWNUL3UvdkM3VUlmb1poQVlkRnBORmYzd3p2eU9PekYr?=
- =?utf-8?B?NThiZnNHeFJqeGZyWkVYdDBzMDRBMTVvSmpXK01PZHpmcjBHWDg0NUwydklT?=
- =?utf-8?B?SmtsbDBFNHVtaFhaUlpGVkltRGNJQnNqellqanlmYjVIcmlXeUg2eHhWaWpP?=
- =?utf-8?B?cWZZRWVJRTRwWmo4eW1SOFM5cEhhOTF3d0Qxc2VRVXZVcVFpMVJjbjFBc1Yz?=
- =?utf-8?B?RDFLYzlXd0lGdDJJS3N1SWxIZS9MdFJ2ZWlHSFF3WE5zZUpOd3hPd21GMGpm?=
- =?utf-8?B?Tnh3elFjR2dlcllueWVTTEtlNnFYSjQ2UHdFU2xBNjBuZlcvYUs5NkIxdHRq?=
- =?utf-8?B?eUc2TnY4bjR0MzdOaHpBMGlrYWdwbGZBbmRaUC9IUXEzV3ZUZURSWlRUVlk1?=
- =?utf-8?B?cEVDNGFtVmVDOWRqNFpaMGJaZDVNa1dHSTdwT3BNVU5mRDVXRW9GVHJJYXdv?=
- =?utf-8?B?aGhkMzErQzR6NUMvVkhOampuZndrUFlPTjhuUHh4RG5hVytXdWFjTXV6RkNF?=
- =?utf-8?B?ZSsrZG11Zjc2RGYvVFllSkM5ZUIyWkM3NFEvS2tSVk8yZ3BqRUdXZTJkWUo2?=
- =?utf-8?B?NmZBUmFkRWdoUEFHT29VRlJOWHNxeTVwdnp5WE5WSjhnVU84ZllFMHE3VVN4?=
- =?utf-8?B?ZVFtSmp1bEhoRmdCU3BNWDQyZE9lQzY5Uk5YSnBWMkNUVGpvZGtOS01FYmVs?=
- =?utf-8?B?bWlqZVZkMkVSM0p2NHpEQmpadnlpL3pKcndiVkhQM1FrT2NTTW1kR1ZtSkdo?=
- =?utf-8?B?MlczMnF5bElmNHBpaUdVcUFDWlJUMWZ2N2E3WFA3NFpPYm9NMDZIQWx5NU5R?=
- =?utf-8?B?RS9YdE01elZOUUxkZWtNeTA5dHF4cGRuTDhtcXdKcjhyZ2JCLzBZYXh2eEU2?=
- =?utf-8?B?bFRXQkFXZC83S0dRVUhJVTNyZk5uOWl1d1BzU3ptQUk4TjRhMnc4WWxpMXJt?=
- =?utf-8?B?NEcvNDVIZGovb3FxYmxIUDdBd3g1aXEyRG83NUJXMVlYWmtKUE9ESkhMUzBx?=
- =?utf-8?B?ZThMQmF5NGRRODVzZWRzTTJhUkRCVEJMTjQxZTR5UHpyWXVyeCtwZUROVkVJ?=
- =?utf-8?B?YW45eFhlV2xmWGduZkkzOC8xRGhiMmtualdJWDd3K0ZCbFhjK0VVb0RzeHRw?=
- =?utf-8?B?OVFndEhRL0ZJcHllSXgzbEs5aHl4a2RyUlZhbkFLeVJUVHd6cnRRVFF3aTI5?=
- =?utf-8?B?MkY3bjgydERrWml2aDhNa1JraWFZamtiemsxRUtUSmhvaU4xUkg5WnhmaWJx?=
- =?utf-8?B?OE9hSDE5YTJWeHpDQll6STllQzRDYnN4a2J1b3Z4NVd0cHdoMnNyYWJEOXJQ?=
- =?utf-8?B?d2ZFa3ZRT25xcEM2eTJKeTRtMmdpMWw5RzM4a2RLN1RnY1dkOEZiYzR0bEZQ?=
- =?utf-8?B?cGgzNkhmK0NsUk94bVdMRWdIZmVORXFGRml0RkdKc0JhSE1sd3V3VzRHS3d0?=
- =?utf-8?B?aGxvRWYzSVVPTTFUVWtTOXhna0wyV05HVDRhSGk2Z2tYdEFvNGR0bWV4LzFF?=
- =?utf-8?Q?Fb3lyKAEN32+XPeoAD?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dktaK05xaS96M0NwTjVIRGw5RUR2cVo4dFNyV1hwS0c3VStUOUFJTDlTQXMv?=
+ =?utf-8?B?c0MvaWpSN3pqRVVraFZSZW9lMm1yM0owMjlqQWF2VkNBVUJqK3VuTG9zbXJB?=
+ =?utf-8?B?NkVpMVh6eVdjaW9BekJqN1UrSlVoaG54YjY0NE1ON1djWTJ3Z1FiYVR0V29Y?=
+ =?utf-8?B?UnZUclJzcVlxNG41QjN4dW9pZnRlUUJZV2dBOXN1cTBEdDd4U0gybVZDcVE1?=
+ =?utf-8?B?OWVtV0hWaGU1clozL1ZQY2JpUWw0T3J1bTJtc0NRY2NyeUYxRytnSnpwdHJD?=
+ =?utf-8?B?NDkxSm0vcEpBalZweFlpcWlXa2RXemp4ZlcrYzVaYmROOXFzd1lYekp1cG5x?=
+ =?utf-8?B?TWNqblBFcXJUeitpRnBpeHhoaUh5WWgwS1ZrNlVvMmVxVFR1cUNIUjlvT1NV?=
+ =?utf-8?B?cUpFcFhyQytkaVRZLzVvVFZQRitKRHJjb2NZRHFxUkVtVnJIQXVMcjFmRlVH?=
+ =?utf-8?B?bC9oV21qZjJCME1DZEpGOU4vS3llZ292aGdzWVpXbUoxaExqVFVuQ0txZStt?=
+ =?utf-8?B?QVlvR3UxeWFwMmowR3hlaXJpbWJLd0toV2hVa1RDQURFM3dkcmJnd1l4Ymdt?=
+ =?utf-8?B?Qmw0UWhTMUhMeE1KbTZTV01yNllLc2wraDkxMEZzbHZYeFBiZlZDVG8zQXhG?=
+ =?utf-8?B?bXBPanN6OEp6VlZkZDkwOTUrK0VIMGUxWVh2NWQ1c2R5U0tHLzBwNHovRitQ?=
+ =?utf-8?B?SFpISUZwcWFLdEVlemN3OGUrVGdGZmR4MGxsblMzcUNaN2laU1hmYTJCY0Zh?=
+ =?utf-8?B?QW9wRk5zVG5FRER4SVMvcVo5WmN6Y0pIV3FDWE9Jblc1Qm5BVVR1S1RrdmNQ?=
+ =?utf-8?B?UWhpMERuWDBhV1pyYjZtU1FzM0FucHdwMHZpU1pEMUVyUk1tT2xZK1Vra05l?=
+ =?utf-8?B?YThxK25wS0xpWGlQNC95cUtKREo1MUo0WXNOd2Q2YU9wRzV2aCtpWHlsQUJ2?=
+ =?utf-8?B?a2ZNb0dWWWhEcmFPcTZtc1N6NnJ5UmJPTmpycU9TczRhT3V0MUdZQ3QwUGpE?=
+ =?utf-8?B?dlBFakxzSlUrejF2emZvaUhlSHUvS0JLTTJxZEYybDFLZTZzdjBhQnFTRSs0?=
+ =?utf-8?B?MEJDN0YvS0JjVW9vYWhJTlN4OEIrNDIrR0lkMmxxeFV3SEJibjZsb3FYc2Nk?=
+ =?utf-8?B?SE5VNEhRdld5WnFTR0trdGhQWFF2Z1o4Y2Q0aVp0TVc1QUg1eUIreEFEd3lP?=
+ =?utf-8?B?MkxUZlVtSHNDRlNwQ2xvMWc5dmxQc2lIbXE3QTF4YU1OYjZ1WllRSWJiV05y?=
+ =?utf-8?B?cU85ckluQlRYTkVlMjI3THY2TytxQ0d5d1FyOVJPSEhudGROblQ2VzFBR3dq?=
+ =?utf-8?B?d0ZoR1dqNkNBdEhYenB3TGMreEwxNHNxU0p5aDc1aWxOaGpwSTgxQlFsNXMv?=
+ =?utf-8?B?RWM2NmFocjBNdmh5L0E5c3lEZWZQT1l4ZzdmOXZLemdMQ005eEtsWjdrUUJp?=
+ =?utf-8?B?WjBKRFJ6MFJXdVM1Y0E0UWRXTjNJaDlDN1lRSFFlUUtFTkVLZUQvRkhuL3pX?=
+ =?utf-8?B?S0wycjZaVGNFWEdhaHZLVFFsTkc4cUowNlFlenErdXNlaXY4OWh2VU13YTRa?=
+ =?utf-8?B?T2kvZDJ2RTUwY0J1VjloeWZCdE5YRXY0R3gwU0ppbE1aUjdVdUQwNEhNWWVr?=
+ =?utf-8?B?ZWFwb1lVRkR2Y3c0THBOelVVcGJoQ2U1akw2Z3FITjZKMC9IaFBJS20wMCtw?=
+ =?utf-8?B?UnVVQVZWcHJ5SzZsNnRKUDlyQjhyeGpMak9HWVRZUS9TRWNCT3lpdnNxdlV0?=
+ =?utf-8?B?RUdhdW1jbXo4aGdKMXhlVGVGT1hDZkRnM3U2VU4zUlF3QnZ5RDdFMEpqOGJC?=
+ =?utf-8?B?aTJEMHNvNXRwV3pVekR6a1NLQU0xODZrY3k0N1lFblB4NWpYOUVoSDk5OVNG?=
+ =?utf-8?B?VmVTWUxRTlZPOGdjSExqUjI2UzlOR3VEdytUVFpoVFdwWkRpOGFMbDZTQzF3?=
+ =?utf-8?B?UzRpbkthRXBteDlrTHhRK3NkL0poQ3pZNUlaaFUvNVVWWENrclZDTm9LM2Y3?=
+ =?utf-8?B?RUlOeFNHL1lCUWpYNXJoaU5RSjNrQW1zeTRNWGFXek9TYUk3TEg3NnpyMWpw?=
+ =?utf-8?B?aWwxZm9mYTE1TTN6Z1FLNjhGQjR5SXVKNEJzVXl3UTlDdjBFamVweGpzeU1W?=
+ =?utf-8?B?dFFyVm1HenNFNWhQdStmMnZkYmNtK1RLYndhWlFLK1drYUJFcEF4SlBGMmQw?=
+ =?utf-8?B?UWRQVnV2MmpQbkhIT2I0UkorT3lWbEgwVjMrY2g4aTNWb2tnRTdYWTc1eHlj?=
+ =?utf-8?B?UWlwdk9vUEl4RWZGc253TVVETzYzNm5PU0ozNVo3cFE1T3hmUk42VkNCcUhI?=
+ =?utf-8?Q?VRlRHwprTGknF+b0mr?=
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc338168-afc1-404e-1d2a-08df4b143556
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6cd2e62-cbe9-44c5-e188-08df4b143fe0
 X-MS-Exchange-CrossTenant-AuthSource: VI1P195MB0623.EURP195.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 16:50:27.7450 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 16:50:45.4397 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: h339h1Enac8YWKKSl3NUgi2HVwz8mzO3p90uIsnly9FouJ0mLPRhDRWuxP5RwpTiYNyQcAdMdRZs5AQ6nuwhLg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: KZT/9XCJmpUqeLlKmtpQzlbyydtNtb5y2PELkQHq1/bCAqYpxa+T0sYqwmaYdzay+Vr1vSMhnv3N4S5Jq97lTQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB2096
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -209,94 +209,41 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UPPERCASE_50_75,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Am 19.11.26 um 15:12 schrieb Thorsten Schmelzer:
-> Enable all options, which are required to load and run u-boot through
-> the USB serial download mode and to do basic flash operations with the
-> NXP UUU tool. This includes:
+> In order to support the complete flow for flashing with the UUU tool,
+> fastboot has to be enabled, when booting through USB has been detected.
 >
-> - generic USB support for imx8mm
-> - USB gadget support including gadget configuration
-> - SDP protocol support
-> - fastboot support including fastboot configuration
-> - fastboot UUU support
+> Modify the bootcmd in board_late_init if USB_BOOT is detected as boot
+> device.
 >
 > Signed-off-by: Thorsten Schmelzer <t.schmelzer@phytec.de>
 Reviewed-by: Benjamin Hahn <B.Hahn@phytec.de>
 > ---
->   configs/phycore-imx8mm_defconfig | 28 ++++++++++++++++++++++++++++
->   1 file changed, 28 insertions(+)
+>   board/phytec/phycore_imx8mm/phycore-imx8mm.c | 5 +++++
+>   1 file changed, 5 insertions(+)
 >
-> diff --git a/configs/phycore-imx8mm_defconfig b/configs/phycore-imx8mm_defconfig
-> index 2be57246addd..7d4f6005dbaa 100644
-> --- a/configs/phycore-imx8mm_defconfig
-> +++ b/configs/phycore-imx8mm_defconfig
-> @@ -29,6 +29,7 @@ CONFIG_SPL_HAVE_INIT_STACK=y
->   CONFIG_SPL=y
->   CONFIG_ENV_OFFSET_REDUND=0x3E0000
->   CONFIG_PCI=y
-> +# CONFIG_ANDROID_BOOT_IMAGE is not set
->   CONFIG_FIT=y
->   CONFIG_FIT_EXTERNAL_OFFSET=0x3000
->   CONFIG_SPL_LOAD_FIT=y
-> @@ -58,6 +59,7 @@ CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
->   CONFIG_SYS_EEPROM_SIZE=4096
->   CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
->   CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
-> +# CONFIG_CMD_BIND is not set
->   CONFIG_CMD_CLK=y
->   CONFIG_CMD_FUSE=y
->   CONFIG_CMD_GPIO=y
-> @@ -65,6 +67,9 @@ CONFIG_CMD_I2C=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_PCI=y
->   CONFIG_CMD_SF_TEST=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_USB_SDP=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   CONFIG_CMD_CACHE=y
->   CONFIG_CMD_REGULATOR=y
->   CONFIG_CMD_EXT4_WRITE=y
-> @@ -82,6 +87,17 @@ CONFIG_CLK_COMPOSITE_CCF=y
->   CONFIG_SPL_CLK_IMX8MM=y
->   CONFIG_CLK_IMX8MM=y
->   CONFIG_FSL_CAAM=y
-> +CONFIG_USB_FUNCTION_FASTBOOT=y
-> +CONFIG_FASTBOOT_BUF_ADDR=0x44200000
-> +CONFIG_FASTBOOT_BUF_SIZE=0x13000000
-> +CONFIG_FASTBOOT_FLASH=y
-> +CONFIG_FASTBOOT_UUU_SUPPORT=y
-> +CONFIG_FASTBOOT_FLASH_MMC_DEV=2
-> +CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
-> +CONFIG_FASTBOOT_MMC_BOOT1_NAME="mmc2boot0"
-> +CONFIG_FASTBOOT_MMC_BOOT2_NAME="mmc2boot1"
-> +CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
-> +CONFIG_FASTBOOT_MMC_USER_NAME="mmc2"
->   CONFIG_MXC_GPIO=y
->   CONFIG_DM_I2C=y
->   CONFIG_I2C_EEPROM=y
-> @@ -131,4 +147,16 @@ CONFIG_SYSRESET_PSCI=y
->   CONFIG_SYSRESET_WATCHDOG=y
->   CONFIG_TEE=y
->   CONFIG_OPTEE=y
-> +CONFIG_USB=y
-> +CONFIG_SPL_USB_HOST=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_MXC_USB_OTG_HACTIVE=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_SPL_USB_GADGET=y
-> +CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
-> +CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-> +CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-> +CONFIG_CI_UDC=y
-> +CONFIG_SDP_LOADADDR=0x40400000
-> +CONFIG_SPL_USB_SDP_SUPPORT=y
->   CONFIG_IMX_WATCHDOG=y
+> diff --git a/board/phytec/phycore_imx8mm/phycore-imx8mm.c b/board/phytec/phycore_imx8mm/phycore-imx8mm.c
+> index 25e51dce7396..6e1e88a0a47e 100644
+> --- a/board/phytec/phycore_imx8mm/phycore-imx8mm.c
+> +++ b/board/phytec/phycore_imx8mm/phycore-imx8mm.c
+> @@ -45,6 +45,11 @@ int board_late_init(void)
+>   	case MMC3_BOOT:
+>   		env_set_ulong("mmcdev", 2);
+>   		break;
+> +	case USB_BOOT:
+> +		printf("Detect USB boot. Will enter fastboot mode!\n");
+> +		if (!strcmp(env_get("bootcmd"), env_get_default("bootcmd")))
+> +			env_set("bootcmd", "fastboot 0; bootflow scan -lb;");
+> +		break;
+>   	default:
+>   		break;
+>   	}
 >
