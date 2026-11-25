@@ -1,142 +1,115 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 014A2606A32A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 22:34:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 127E2606A31E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 23:14:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Gtg2JOGY;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fbIi5uLS
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=I60x85KS;
+	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=JuxFJzV7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4FC9C80CCA;
-	Wed, 25 Nov 2026 22:34:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B0BEC605C7;
+	Wed, 25 Nov 2026 23:14:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CwA1K9bRqthR; Wed, 25 Nov 2026 22:34:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 55DC080CB6
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795646091;
-	b=TbER/3ebjs9vycP0RNSQ+pdXbR1OKqTaIiVgHyhd5KltVpZMPzd9WcZB4pESAuf1LHWv
-	 ASqses5F1TDg+wsRETHHk2LYxL8oZ9oI2l63f44TI8nx5M/jOOszuWPpKfrffC+LbG7LI
-	 b6wZOJxepA+tr8WzbYYIfXW8Y8zD/4MuwqwKvlvHiwp2GSLUFqczkH71VFHV2DuXBrlWv
-	 8xqQNAoTjtwd/9pyZglK7AvlaGeTuBNkcIdes6zzhtGm/5z97Zfcyuo7XqrsDQzcCLBvi
-	 A4Tf2j0gG06uF3cGUlNsgF3QuP9gvZzU2Rs0IhQ7rAv7WPEiYkKxP/Y5s+S9ZX5lHnQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id O4mbd_GxoplM; Wed, 25 Nov 2026 23:14:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 075426069A
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795648497;
+	b=ddtYwsUiguL8CbOkxDwUba9+RprHFtFOEPxW1H6otqLh0sQkxigxnAar4hn+qC8jYlE7
+	 +ZGcHO3goDvAIoB4BsJymfUoVePesZyeRlSpS/vq5FojzVdPaIxXxpxwiVgYTp/N4AzXx
+	 Ij2HX4Qw2/ImQM60C0vGpBO51jvzMPfv9301botk1naa0xiFC8HIkJnY/gPJnCeQXlurn
+	 64BLR0f8xSxf9t0mgCwjfdGV+G/AAimlg2nAVT21sCeMN+Uyx6a9DITsox6mhjI7C4nym
+	 rsi9MJcaI8C5GsmHT6cW2u7p5m7Ocuj1qM9Pjuo5h6TdukfDNa80IOjpXAp4EsKtnaQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795646091;
+	c=relaxed/relaxed; t=1795648497;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=yfrrvMRn17ljA4Z2BsXLQoJbXuGYWI5MpP2XtJur0ow=;
-	b=rF4bX2HZ6NjQ+X40WX/EOJpDu1ko0W/ufU/CWdOVZrzxn9w25zNgveZBJt6dqTUddWGe
-	 IMwv9ByNGIBO4B4Pa7rZm65GB6eLSQpMmhUYiycd6MV8Lq3zGcLL7Egz6dJpzXw6ArlRC
-	 ZQKQaxnVEmNSOttgGcv9unV5R1+yLbpP9wppp3Pw4SMvHiua860xvhtFbnoUeJZl1w95N
-	 whbYBfCk1OWjaIM8EepaaXtfD7usryX0P9iuCroqRk8VvZsck2t19CKR7JgM7ezG3c+Td
-	 lZyei2zskne+wFuXOqjzIzU9+YSA/TZDgqpWCCTFU8rOFvehI8YPE46CDK1YGtEJ/mw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fbIi5uLS;
+	 DKIM-Signature:X-GPT-Reason:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=qz7qKD1LmmPVUGJwGgNkWk/2AeIOTsBR+zOsHZP2MMQ=;
+	b=cFwUV6rNkceCujgoW3dzKywid5QKpmlmf9UYyPamDBIkZVO16+zZUtSmLGxiTxkUBo/k
+	 /XpNzjAit4jQd43EH+Lh4+BPuJpxZD5dSBQJyi/O4b3THMbffw/eVWYhCgfMmyNb/6Qym
+	 9rMH+Vc9EW7ftYG/5iCcUHiLrIBGED70q/SZnZEAfd/Y+BTmIb/0TAFpYaIYfe/yIU+Vs
+	 h3IC9PVvB+Yd1ArspBFGTL4RlEXGJ9x/D/pBRccNRB4HUmDuHxE/3XiNBA5OIf6bDYB+j
+	 gWz+YG6BeI/nFaOapcP3U2cAWVDiRM5Dw/2aA8BcytbJXxKXHkYpJDhpHWdx2lnkK8w==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=d-silva.org;
+	dkim=pass header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=JuxFJzV7;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795646091;
-	bh=yfrrvMRn17ljA4Z2BsXLQoJbXuGYWI5MpP2XtJur0ow=;
+	d=lists.u-boot-project.org; s=default; t=1795648497;
+	bh=qz7qKD1LmmPVUGJwGgNkWk/2AeIOTsBR+zOsHZP2MMQ=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=Gtg2JOGYXdLkIDrvHs4HHmfHAZAjunVfkWD+og+5lEdort/fCaM3iY4kbuEw+Isp9
-	 CeQjgeWV9f0ejpJc9Y+MkSEfQ4YmCFtUzGa4RafHy3wqf+ix3b2MQSyo4Qyhm3TUwn
-	 2+HMxRPiGXebqQJDcmZHg+4Ix4RK1/Vj6u4PVBzs/3g8yuysAYDoDuBqG+NxPoxW6I
-	 d/Fi1SEI75ULNTehIR0E2VB5y5k0oEa1Uom7FN559cmf5dSUvCpMBB3hYweUuejfdA
-	 Kyd6Mw8+HjR2GifnvTtb2biRHeGpcgLhGK5qFhFUpTwER6fJK/NDR/OvSaH5omwXXQ
-	 7UAN4S1CrfOfQ==
+	b=I60x85KStAV/8k6N+uwZJxnMeqM1Ue4jz427AvvvzpnvK0TNmfA2SMizZSqb4HTui
+	 DKOJ2NzzwTYhlW6r8CIu9ORaiU86zh/Z4pM8hjeaZcgJt+084++alV26fH2kVI1L36
+	 CDYwPiqHHokbq1HfMqBn4UFCGp00L1lUCPjXyu+q4fl97VgWX1OBaybp7QxHrOLxBM
+	 AEPGAoH2Tr2oDch/rGGsCyEx+48wr5BY6ckyxL70PfL44xCDAsPCKdmLpBdUjqrX66
+	 p6sK006nVlPeRVwaD4yjcze//iMbwalojEDpJ0Ch/C+n53inzoL5jZLJkrdK/D79Sq
+	 HZkDX9upjAggA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 55DC080CB6;
-	Wed, 25 Nov 2026 22:34:51 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2E85932D
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:34:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 075426069A;
+	Wed, 25 Nov 2026 23:14:57 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C949F26D
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:14:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2094F80CB6
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:34:50 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id AF8D96069A
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:14:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JpkOWnfeRG2B for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 22:34:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3914F80B88
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::36"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::36; helo=mail-oa1-x36.google.com;
- envelope-from=macroalpha82@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=fbIi5uLS
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3914F80B88
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:34:48 +0000 (UTC)
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-4a77dcc4ca0so3364907fac.2
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 14:34:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795646088; x=1796250888;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=yfrrvMRn17ljA4Z2BsXLQoJbXuGYWI5MpP2XtJur0ow=;
- b=fbIi5uLSIXjPKk2NthaWTESA0Kr5H8xwDkhaIi0UHJH8HqAYVl2QUDxBuFx1Q+aYIN
- Mbq7G59Z4zVa46OAODooPPGnyK5vxomdxVaXNaDOF2/isMtaow8u73UJvTE63TcLaPw7
- wppAtLC2/amugSmtaDLo2IiHA8qrk6gVFV61hvDrXS3AnXU1x4dycfb7b4ebFvvLf+b8
- zjjjsOZgnZlOS36pLW+3l5oRB9yYDYwwrmoaJ5h+4HEc7rNSxYiDAafHC+u5VOruuyMB
- 06R4L9q2C63w2GBxhuvkcy47ANE2AVJ+Qu4kjfMVWv9CZyx3D3EIfWha634Yrh/7ZQ2Q
- +kCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795646088; x=1796250888;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=yfrrvMRn17ljA4Z2BsXLQoJbXuGYWI5MpP2XtJur0ow=;
- b=iuNmnNMTpH0gJ5pJOYEPm/NlTYCn5aVzRCVsnJ0Zi8NJ35uQ7pcsePUOUheScV36Ly
- x6jFvaupGZIhQdeQzigz+2m+nXr62R+gFtO8UHzlZta/0XAS8gilEnIOhhC2f9Xr3eWw
- CUIGGYavS8JKSegpgxxFC+xHQLzoJswOUYC9EbIaps1vT/UlVepSV7TJqaZ8GkKdaHdw
- Cjb2ChSTWOiLlRQWO1Wo5UJxCEF1jccCX1uWA8+VWS5BAhXuQFPC6di7qjGjEX55pDim
- mcQMrzd0LuzBMJTjRcxQILcpGDmaBMt8OIcNoJbm2c4CCIxM2PAzmKTMKYb6OTP9uda+
- 4R2Q==
-X-Gm-Message-State: APuU4Z97pBh0/XjW0CQd7VZSvb7zMUY2D37QvDxXdCNDQ1RP5OU9Bkq2
- Ynbw6FfMw8OLLxoURay6J9T6nukqsVivWucMeOF1WgHQiiDEPFANm+5VPCIBWg==
-X-Gm-Gg: AZFdTZdELGr3+mqk/LqhlwnKW8DdKuqdQFENOgcvh8Pf7MEF2rRE37YTF0pm6ZEX/gu
- 3UHMVXwjg0ONF2Evbty0EP/MNxOMtvyjCPQ5tgWzpRmAuqZES6ozwlrDITEUCTFGE+qr9bCMwMY
- 3iHYGAOVsMd1r1w5aqZeGaNlGiBFRbKGBEqjleMEOVrehnihtV2xhalA87MoNm7e5niF4qYaWP2
- FjTVZ9iZoA/C9iBb9iBgjK37m5Ienwla/40OVqCiod9GH0EYdczC/uqnE6MLe4yOis3YnXEsYzM
- XurRYoO/QLXlDsMsEKCwcWtPWH1C6hox6ORCsrimxc1cm9G8HS5raTAAleTpzX0AnjVjKung0yC
- EsxT5KBX6CAKbpWJaF03GxH36E5lJFQzvwoTWilCm6qtwQmrK94ZjstYkcw45ZSdyulMgiJQhgU
- K6SceoMh2htRZwS48fwCa2xu09es+Kb8WvEqMkjZj3/WLk32NxOxJAB0MT6tNrnYQlIGHrFj4fw
- UKMAwJ1xJK07Tv7w7n2HAgGsu/Obv2r9zefJSKSRp8uiKDpRuKyaiCT9alT7zz0OwH2b1d/ikXz
- hdsfTTKA7HzC4oZl9GfWDF1tQ4aWpA==
-X-Received: by 2002:a05:6870:1b08:b0:4a6:f6e2:690 with SMTP id
- 586e51a60fabf-4bc80ec7089mr16970572fac.22.1795646087821; 
- Wed, 25 Nov 2026 14:34:47 -0800 (PST)
-Received: from neuromancer ([75.28.21.198]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4bc60497300sm18335121fac.11.2026.11.25.14.34.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 14:34:47 -0800 (PST)
-From: Chris Morgan <macroalpha82@gmail.com>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Men3yCxD3YrV for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 23:14:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A2C8E605C7
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=119.15.109.137
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=119.15.109.137;
+ helo=www.nmnhosting.com; envelope-from=alastair@d-silva.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=d-silva.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256
+ header.s=2025a header.b=JuxFJzV7
+Received: from www.nmnhosting.com (watt.d-silva.org [119.15.109.137])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A2C8E605C7
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:14:51 +0000 (UTC)
+Received: from Hawking.lan (hawking.lan [10.0.1.4])
+ by www.nmnhosting.com (Postfix) with ESMTP id 24DBF41024;
+ Thu, 26 Nov 2026 10:14:42 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=d-silva.org; s=2025a; 
+ t=1795648482;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=qz7qKD1LmmPVUGJwGgNkWk/2AeIOTsBR+zOsHZP2MMQ=;
+ b=JuxFJzV7uBkLiyOc3tJstOiIDIjr5mDHdoU5YSoVGUhNmSErDHBCa/iYWGJPGkGRUom9UL
+ O0MV99Nrgq5V1X1TlqaPXwQcHs+Gmdqo/vYGBKRgEXjRXVqusPmx5OjK7WwnFK4xRTHHZC
+ IBc67fRZaDox2z14r6b9aTymftNkhSkPN1GQHrr2c+f2BrpVKd4fQjZyTzcl2NY4ZDNblD
+ DD84MIZh7mE3yTV+5iVoyZdicCnDzkDBKssMgvk1hNdAmcCBsBu9RnreoVTnINyBW75n3B
+ SJAPDPyahhfDEF6nM73bVY+UTcYbO7KzyvMNX/qpFjmk0jwJ4NrtFTi6tDzVRQ==
+X-GPT-Reason: This is a legitimate technical communication, specifically
+ a Linux kernel patch submission. The content is highly specific
+ to embedded systems engineering (Allwinner A733 LPDDR5 DRAM firmware),
+ matches the sender's identity (alastair@d-silva.org), and contains
+ no marketing, phishing, or malicious indicators. The technical depth,
+ including Kbuild rules, specific SoC registers, and file change
+ diffs, confirms it is a standard developer workflow message.
+From: Alastair D'Silva <alastair@d-silva.org>
 To: u-boot@lists.u-boot-project.org
-Cc: trini@konsulko.com, u-boot@0leil.net, peng.fan@nxp.com,
- jh80.chung@samsung.com, clamor95@gmail.com, zhangqing@rock-chips.com,
- kever.yang@rock-chips.com, power.xu@rock-chips.com,
- Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH v2] power: pmic: rk8xx: Don't set RK817_POWER_EN_SAVE bits
-Date: Wed, 25 Nov 2026 16:34:44 -0600
-Message-ID: <20261125223444.603529-1-macroalpha82@gmail.com>
+Cc: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alastair D'Silva <alastair@d-silva.org>
+Subject: [PATCH 0/7] sunxi: dram: a733: Add clean-room LPDDR5 ARC PMU firmware
+Date: Thu, 26 Nov 2026 10:14:34 +1100
+Message-ID: <20261125231442.1266343-1-alastair@d-silva.org>
 X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
@@ -150,75 +123,78 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Chris Morgan <macromorgan@hotmail.com>
+Add the open-source, clean-room GPL-2.0+ ARC EM4 DDR PHY Management Unit
+(PMU) training firmware for the Allwinner A733 (sun60iw2p1) LPDDR5 DRAM
+subsystem.
 
-Don't set the RK817_POWER_EN_SAVE0 or RK817_POWER_EN_SAVE1 bits, unless
-the device-tree property of "not-save-power-en" is present and set to 0.
+Goal:
+- Replace the opaque vendor Synopsys PMU binary with auditable,
+  reproducible C firmware built during SPL compilation.
+- Expose a standalone Kconfig option (CONFIG_DRAM_SUN60I_A733_PMU) and
+  Kbuild rule that generates spl/arch/arm/mach-sunxi/dram_sun60i_a733_pmu_fw.h
+  without requiring the A733 SoC/board series.
 
-Per a discussion on the mailing list these registers are used by the
-BSP kernel to save the regulator state at early power-on so that
-late shutdown can ensure the regulators stay at this state to prevent
-a possible overvolt situation. However, these registers are not used by
-mainline Linux and actively setting them in U-boot interferes with
-their function for BSP kernels, causing systems to hang when
-regulators are enabled or disabled incorrectly. [1]
+Build and fallback modes:
+- In-tree build: locates an ARCv2 GCC toolchain via ARC_CROSS_COMPILE,
+  ~/.buildman, or PATH (arc-linux-gnu-, arc-linux-, arc-elf32-).
+- Prebuilt override: PMU_FW=/path/to/pmu.bin wraps an external ICCM binary.
+- CI fallback: BINMAN_ALLOW_MISSING=1 emits a stub header marked with
+  SUN60I_A733_PMU_FW_MISSING.
 
-By skipping this behavior except when the BSP only parameter is
-present and set to 0, we can preserve the registers function without
-creating additional problems.
+Tested on:
+- Xunlong Orange Pi 4 Pro (6 GiB LPDDR5 at 3600 MT/s) via sunxi-fel with
+  the companion A733 core bringup series stacked on top ("DRAM: 6144 MiB").
+- Standalone SPL build (orangepi_zero3_defconfig + CONFIG_DRAM_SUN60I_A733_PMU=y).
 
-[1] https://gist.github.com/fr0z3n-cs/047b24a6fd430e816fe02a877ad7ab8c
+Alastair D'Silva (7):
+  sunxi: dram: a733: Add ARC PMU register, ABI, and build definitions
+  sunxi: dram: a733: Add ARC PMU primitives, clock, telemetry, and CBT
+  sunxi: dram: a733: Add ARC PMU deskew and BIST training firmware
+  sunxi: dram: a733: Add ARC PMU 1D/2D eye training firmware
+  sunxi: dram: a733: Add ARC PMU training state machine
+  sunxi: dram: a733: Wire ARC PMU firmware into Kbuild
+  doc: sunxi: Document Allwinner A733 LPDDR5 PMU architecture
 
-Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
----
- drivers/power/pmic/rk8xx.c | 26 +++++++++++++++++---------
- 1 file changed, 17 insertions(+), 9 deletions(-)
+ MAINTAINERS                                   |    6 +
+ arch/arm/mach-sunxi/Kconfig                   |    9 +
+ arch/arm/mach-sunxi/Makefile                  |   33 +
+ arch/arm/mach-sunxi/pmu/build_pmu_fw.py       |  261 +
+ arch/arm/mach-sunxi/pmu/dwc_ddrphy_pmu_regs.h |  463 ++
+ arch/arm/mach-sunxi/pmu/pmu.ld                |   38 +
+ arch/arm/mach-sunxi/pmu/pmu_cbt.c             |  417 ++
+ arch/arm/mach-sunxi/pmu/pmu_clock.c           |  938 ++++
+ arch/arm/mach-sunxi/pmu/pmu_deskew.c          | 4895 +++++++++++++++++
+ arch/arm/mach-sunxi/pmu/pmu_eye.c             | 3224 +++++++++++
+ arch/arm/mach-sunxi/pmu/pmu_fw.h              |  553 ++
+ arch/arm/mach-sunxi/pmu/pmu_primitives.c      |  531 ++
+ arch/arm/mach-sunxi/pmu/pmu_telemetry.c       |  619 +++
+ arch/arm/mach-sunxi/pmu/pmu_train.c           | 2748 +++++++++
+ arch/arm/mach-sunxi/pmu/sunxi_pmu_abi.h       |  251 +
+ doc/board/allwinner/a733-pmu.rst              |  302 +
+ doc/board/allwinner/index.rst                 |    1 +
+ doc/board/allwinner/sunxi.rst                 |   14 +-
+ 18 files changed, 15298 insertions(+), 5 deletions(-)
+ create mode 100755 arch/arm/mach-sunxi/pmu/build_pmu_fw.py
+ create mode 100644 arch/arm/mach-sunxi/pmu/dwc_ddrphy_pmu_regs.h
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu.ld
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_cbt.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_clock.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_deskew.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_eye.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_fw.h
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_primitives.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_telemetry.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_train.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/sunxi_pmu_abi.h
+ create mode 100644 doc/board/allwinner/a733-pmu.rst
 
-diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
-index 95b71d2fe49..614d749d5ff 100644
---- a/drivers/power/pmic/rk8xx.c
-+++ b/drivers/power/pmic/rk8xx.c
-@@ -293,15 +293,23 @@ static int rk8xx_probe(struct udevice *dev)
- 		off_source = RK817_OFF_SOURCE;
- 		init_data = rk817_init_reg;
- 		init_data_num = ARRAY_SIZE(rk817_init_reg);
--		power_en0 = pmic_reg_read(dev, RK817_POWER_EN0);
--		power_en1 = pmic_reg_read(dev, RK817_POWER_EN1);
--		power_en2 = pmic_reg_read(dev, RK817_POWER_EN2);
--		power_en3 = pmic_reg_read(dev, RK817_POWER_EN3);
--
--		value = (power_en0 & 0x0f) | ((power_en1 & 0x0f) << 4);
--		pmic_reg_write(dev, RK817_POWER_EN_SAVE0, value);
--		value = (power_en2 & 0x0f) | ((power_en3 & 0x0f) << 4);
--		pmic_reg_write(dev, RK817_POWER_EN_SAVE1, value);
-+		/*
-+		 * If the BSP only attribute of "not-save-power-en" is present
-+		 * and if it is 0, only then would we save the register values
-+		 * for use by the BSP kernel for use on shutdown. If the value
-+		 * is not present or not 0, we skip this.
-+		 */
-+		if (!dev_read_u32_default(dev, "not-save-power-en", 1)) {
-+			power_en0 = pmic_reg_read(dev, RK817_POWER_EN0);
-+			power_en1 = pmic_reg_read(dev, RK817_POWER_EN1);
-+			power_en2 = pmic_reg_read(dev, RK817_POWER_EN2);
-+			power_en3 = pmic_reg_read(dev, RK817_POWER_EN3);
-+
-+			value = (power_en0 & 0x0f) | ((power_en1 & 0x0f) << 4);
-+			pmic_reg_write(dev, RK817_POWER_EN_SAVE0, value);
-+			value = (power_en2 & 0x0f) | ((power_en3 & 0x0f) << 4);
-+			pmic_reg_write(dev, RK817_POWER_EN_SAVE1, value);
-+		}
- 		break;
- 	case RK806_ID: {
- 		u32 rst_fun = 2;
 -- 
 2.53.0
 
