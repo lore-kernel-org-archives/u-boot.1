@@ -2,138 +2,147 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE7EF606A337
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 08:36:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0426606A688
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 08:53:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZuENEcx5;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=oAoqnRsx
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vPZw4Qgt;
+	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=KJvua3Sv
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A466880D3E;
-	Wed, 25 Nov 2026 08:36:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 46CA180AE6;
+	Wed, 25 Nov 2026 08:53:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cgpcPfbpLEFz; Wed, 25 Nov 2026 08:36:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0D77280D6F
+ id HDhApPhI7CvB; Wed, 25 Nov 2026 08:53:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8059880AC6
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795595761;
-	b=K+8lTYIeYnoQqYvbU+Ffy5KQN8OYI07aHNFpbU9GVJ4FLZPB3ZT/Ov478e/BTQ6TkEHl
-	 n3NxZDvwh9wfaxIzgj1YXb8LoD+7+2uGPY7AZ4OMConPT7ccYbXrvQ32yvOSbSZjvY+37
-	 pTvoXqhSZQtoa5NCbqE17oe7XCoHLLitAIfOBwfgv1WcoQN7iuowSHiXrJNlrH6IppCBQ
-	 LEDNWckvG8Mpvvi4T/UqSwjI7mst3OOHqJqZjRwrXZY2JQQ4Zy9opSK7dCQ3gtDkXBuAA
-	 5fHmNe84kS4199i8pxeyHAeeXYR/RpFq/P1t4alr2twtolcLZqzw1VAJynFR2f6XPmQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795596802;
+	b=Zogtgr6mff8kEF1vshPWl5A4HXj9ISDU8/ye55eSm+wcnqsnwuYglCXBMnF3LVmB6DT1
+	 WQju/1zosfUFBJE1DWin7gj/sUS+o0lsX9TzBAZm5z8KyOQmIGi+v5Xvb4D7EW8JmIbjU
+	 Et5xzFkMWusBBAtUrxzsiGOOWDlzvpzLG9szeV6HP+PYD1IT644FbPKvIWJVa8EubwAAN
+	 zBWhX+wkfFcUR1DnlavoxUELV6ezWZzrAxZSbmJGAEHyfGy+UbGA9nPdPEVarOo+63zHV
+	 KCf9loQPogmdBqcq2E12b7UznfBZnJnuXz7p/9V0IjcY5io4E3WqRxss3/0sqmtrOUA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795595761;
+	c=relaxed/relaxed; t=1795596802;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:From:Content-Language:
-	 Organization:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=EqQET5CHiN7WzTbN+xAB6XRGI+MQ9Z9exhHpEPPAm1Q=;
-	b=Clsf5WGNGJ8eToJrjHEtNobt9fgSPBvVR1P0PPDPYIEjHxgMytZOiTAqAflWJTkjJBEw
-	 dI7gaO4bUd/TFz70c8adL9rCLEjURkSaK+qSylIBAsYaziH4mIr0OQeruzaiQjhfvB/SA
-	 5QXTb1Lf8o0wuZfmJoh8nVAr1jjzSmffypGYV93MaTIDXdMrH+mR6KY9K30pt2uUuNpLf
-	 UmZKVssdTRXKW+X3i+rd4Ord8yqWdKzgNVUY83Zxe+rFwZGyVPSHMEGsLxBCnAzrb8dxu
-	 fiHJX0Yt0ZJJrEi2UWq4HavcJwnWL28M4HtR+EFBqpiyEzTPPDe80vBAuLtOSZ6W0Fg==
+	bh=XJ0HzaFmRyELTpJGgAG3x06aGsEPDOsaN/mKeUwnRPM=;
+	b=JAsytPQJliyahnrplKh9gvxHK6o3mlQjsZmAV+0/14b/ao2L2hDXh3fpgyHPYKPd24xO
+	 slbf+zyEu6DDkU3yzdWBNeEPPafYmfkuI5z2ypIoXGUpalgnBdFUcD7WbD0o15Mw8xmm3
+	 liykevLf1XdpVcy4l7foYlgr2bGoc95OLiXLz3RKmbb9BpCIkDDsys6RxSsqgKqQtXWA5
+	 WOMnR2WcSv4XB/LgcH94vk6VWMp0OqHuTff4WjxRZFSfg6G9sieOFSqgOZNnuXUJmN3v8
+	 onu16pkaAFh2hvDabEtWuuUbWng2iXELfHRvsbf5JURytylEZQyRYIlJSB6wGgDczcA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795595761;
-	bh=EqQET5CHiN7WzTbN+xAB6XRGI+MQ9Z9exhHpEPPAm1Q=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795596802;
+	bh=XJ0HzaFmRyELTpJGgAG3x06aGsEPDOsaN/mKeUwnRPM=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZuENEcx5CxAZiGCjevf0wCxs7P9IDO4CFjeaU1H+5Vtsrkj01bERmHD8JQLToAG1l
-	 2Txp3Vgt4V1E5PtVOpAazZoroKAc6lUi+wLpythFxkc2HFoX2WqdeMfhCM19PV8f4Y
-	 0a9O88vxHaaH5WUgjaIZKjh/cwsTq1tnLVaSN3onZdgJHoW5NlrNlkn08D/3J6frFA
-	 T1QHdslRY0533uXIOO4cuhl21lqpv9GH7v0cThj1B77WOw7VISxEe8GS7S8791YZS7
-	 I1tod9G+arbORZXN8f2Zo7uDqRXiAerA4OAyKbHVFZAO0PHsjsNNVNiLc7lrhaHd0T
-	 h7Qw4POCU8Ayw==
+	b=vPZw4Qgt+hJcerhPtuYzJ4ZaCUc5weCOughYLfLKrSEjgsKaYNz4acn5+s/WdMZLt
+	 nJ/7RqkTiC3W+EMiV62Nk9NvwsdXBDq5L7ySlnOEqYQox2NQKfyAaRVjeaNDfinED8
+	 zKCCJPsCDsehE3MTO6234DRbHMtKjjldHd2wYPjvIojkCd0kDjytR8Q5ITyfK863b3
+	 Vk5MSyLcyoeT9Izu6Vtaf1/IwHzH+Pm29mwahxOnjvPtov7eEs0v+3/C3QRaRg+gI3
+	 rPKNhfj6r+bj4w9Q1xT/NdHWwGMvWez6iVm3KWVCCVtxiYh2VZscw5URaNUEyT7AE9
+	 F9bwLUBMLxkTQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0D77280D6F;
-	Wed, 25 Nov 2026 08:36:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 98CC92F5
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 08:35:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8059880AC6;
+	Wed, 25 Nov 2026 08:53:22 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9A3E02F5
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 08:53:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7EA0140122
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 08:35:59 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8051340643
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 08:53:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CxXgQWJi_4Ea for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 08:35:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3CBAF40064
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
- helo=smtpout-03.galae.net; envelope-from=richard.genoud@bootlin.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=oAoqnRsx
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3CBAF40064
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 08:35:57 +0000 (UTC)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 629CF4E41772;
- Wed, 25 Nov 2026 08:35:54 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 2B89460480;
- Wed, 25 Nov 2026 08:35:54 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 38E4A11E69B7A; Wed, 25 Nov 2026 09:35:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1795595752; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=EqQET5CHiN7WzTbN+xAB6XRGI+MQ9Z9exhHpEPPAm1Q=;
- b=oAoqnRsxThSY++PiU41a5wXNbWZYGt4/5KFFqymJQfGNAapssspSi4RdvgFEG6W7YmilR6
- eHk1NYtQ/X5E3jDVEmx9D1/q1rEK2IP9670dBouTMoiNDxY4nJqTgAGXbTo8Qu/berKnND
- Qx3L0VWeMN9BsNlltwJXmjOfKCGQYm3WhHV+IKqRLyn8g7kvnGRIvuqUJHzw6W3oI5Ao4i
- 5XmA65XWgNAYH3qWHBAIGwArSFRJoyH81i/p3ab/SWt8pz9MQN1fxpSQ6FZ5W6MUScHVjS
- Vw6b1YMM2+vpKIPtAyc4519xJoy3X4Bkh/N7tV4PyO4b0voNcMD4rSY3tyobng==
-Message-ID: <924974b0-9626-45a4-80c4-db80c321597d@bootlin.com>
-Date: Wed, 25 Nov 2026 09:35:44 +0100
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 46b14eetuRxG for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 08:53:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 58AD7405CF
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1129"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::1129; helo=mail-yw1-x1129.google.com;
+ envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com
+ header.a=rsa-sha256 header.s=google header.b=KJvua3Sv
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 58AD7405CF
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 08:53:19 +0000 (UTC)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-8b4f4095a7aso47254967b3.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 00:53:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1795596798; x=1796201598;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=XJ0HzaFmRyELTpJGgAG3x06aGsEPDOsaN/mKeUwnRPM=;
+ b=KJvua3SvfIBHGAdjCa9zetbJmRtvN5tM+R+o3LoGM85GASzlkk+APOUrGOp/SlbSFJ
+ erKI3l63wSwa3R5ZY9p/ui8amwCa14wayLfbrV7jsX92CZrnXhM+sGEphw+ZJQKiVeLY
+ ZR4cFVgb//VYdsHvf8o6w32acAWKxLqbRfKSc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795596798; x=1796201598;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=XJ0HzaFmRyELTpJGgAG3x06aGsEPDOsaN/mKeUwnRPM=;
+ b=hfRboOooqWnd3fFcyl4ANgNmy/kxxala8iUQotckB70E1QcKSYT6VPiC66oE3+gNzs
+ xyLb/FXDWm6tuhhuOveGMY/mD1y1JzuxICvFMmiGZ864CHJIPMKBroSVkVe9th7rExAn
+ T+jlWXr9ylSudNUMR02YrKiASD0mXw/vnydhL1fklLUmG/yEDHozz3a+otVgVf4f3roK
+ CFERAo2140Th7th8NkYIwYcYF62dJRZkxzlyVjAA6B19/09HlqBeEUYMXH1dOpbRPVfu
+ 0n7w6i8/llGU3U7fkY6g9hjslbwrC7tdrWHEC+kO/ztG8E8TS1XRlBv/Trk5lL04kM97
+ Lgdw==
+X-Gm-Message-State: APuU4Z+c9J2IPmp9zb4EHfTCfEcoqnn2fHE+XPXY3YY+Q0AWfV6l90uN
+ EYK71+/zWffTp/FbYG8aMcz390+ThZ7GKkc/FDzMMLamYxb0HhEg57S454AVmokdTiIk3t7mSpE
+ EWbpkRyUP4WKj5yhiMhvtXSp1quotyq1+yfDpuiAcqw==
+X-Gm-Gg: AZFdTZcUX3/WcRNajv4JUy869Npz+y4HIRDEIrtJwaH6JAzUIjitcU4CXUZ4aiC1xM1
+ bOC7n5wp9wyV/tdvaqa/80p71j4UPgGB9GsRr01m4i492zEBgMJAoEagHjgrbuxjs49qanPQVkN
+ Yuii8yLuPa8jK+IIsA3/R6Wi0bnBSLjgh27JlR0kiHgKjPTGTnqg1C5K4R1/7E2wM2qxSiZwJ3m
+ mumIJHLGbu0U+SQ0DenP40WO4KljyLzgmvYF3p+sFzWJiyVM1lDFXqt1+L24KMjfO+ZC36kdOcq
+ Sgjn77TigOfnWuVordnrYAPiS7yDbOPWX5sKfw9yZ2GoZOZGSAk6NXmRnAbyl8haCcG+5bAU+UJ
+ WKVBeH3vW+sGNgp0u7WhjFJY/r3SWLg+i6/6T5Hg3enDCf51Csv+LkC7kWK20gWMWDQ==
+X-Received: by 2002:a05:690c:2a90:b0:8b4:cc58:78d6 with SMTP id
+ 00721157ae682-8b52046e501mr74541477b3.19.1795596797950; Wed, 25 Nov 2026
+ 00:53:17 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 8/8] configs: sl2619: enable basic drivers and commands
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Terry Zhou <terryzhou05@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>, Johan Jonker
- <jbx6244@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Michal Simek <michal.simek@amd.com>, Linus Walleij <linusw@kernel.org>,
- Michael Srba <Michael.Srba@seznam.cz>,
- Chris Packham <judge.packham@gmail.com>, Adam Ford <aford173@gmail.com>,
- Marek Vasut <marex@nabladev.com>, Lukasz Majewski <lukma@nabladev.com>,
- Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>,
- Junhui Liu <junhui.liu@pigmoral.tech>, Peng Fan <peng.fan@nxp.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Billy Tsai <billy_tsai@aspeedtech.com>, David Lechner
- <dlechner@baylibre.com>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Torsten Duwe <duwe@suse.de>,
- Ryan Chen <ryan_chen@aspeedtech.com>, Yixun Lan <dlan@kernel.org>,
- Jisheng Zhang <jszhang@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-References: <20261123-sl2619_base-v2-0-9e3b28c77cda@bootlin.com>
- <20261123-sl2619_base-v2-8-9e3b28c77cda@bootlin.com>
- <20261124183602.GY3176972@bill-the-cat>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <20261124183602.GY3176972@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20261121123451.2471185-3-dario.binacchi@amarulasolutions.com>
+ <20261125003129.18729-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20261125003129.18729-1-peng.fan@oss.nxp.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Wed, 25 Nov 2026 09:53:06 +0100
+X-Gm-Features: Aa3M54p1b8GYRxVvUlJKOEBK6J_mV9eGnTHIBJqEtSFHXRA3wLfpbim3h54l5n0
+Message-ID: <CABGWkvqiZcO0u736+_UR0VG939m68-hoe8MUpy496_cC5npNpQ@mail.gmail.com>
+Subject: Re: [PATCH v2 02/25] clk: imx8mn: register the main_axi, noc and gic
+ clocks as critical
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.u-boot-project.org, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Heiko Schocher <hs@nabladev.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Fabio Estevam <festevam@gmail.com>, Lukasz Majewski <lukma@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -143,40 +152,92 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Le 24/11/2026 à 19:36, Tom Rini a écrit :
-> On Mon, Nov 23, 2026 at 03:22:07PM +0100, Richard Genoud (Synaptics) wrote:
-> 
->> Enable working drivers for Synaptics sl2619 RDK board:
->> - system controller
->> - clock controller
->> - reset controller
->> - pin controller
->> - i2c controller
->>
->> And commands:
->> - dm
->> - clk
->> - i2c
->>
->> Signed-off-by: Richard Genoud (Synaptics) <richard.genoud@bootlin.com>
->> ---
->>   configs/synaptics_sl2619_defconfig | 11 ++++++++++-
->>   1 file changed, 10 insertions(+), 1 deletion(-)
-> 
-> Things should be re-ordered so that the defconfig is added as complete
-> at the end. And related, the SYSCON note I made in my last email applies
-> to the other drivers using it too, to be clear, I just hadn't gotten
-> there yet. Thanks!
-> 
-Ok, I'll merge all the defconfig changes here (and add the missing 
-SYSCON to the reset/pinctrl/clk)
+Hi Peng,
 
-Thanks!
+On Wed, Nov 25, 2026 at 1:34=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
+m> wrote:
+>
+> On Sat, 21 Nov 2026 13:33:52 +0100 Dario Binacchi <dario.binacchi@amarula=
+solutions.com> wrote:
+>
+> > From: Michael Trimarchi <michael@amarulasolutions.com>
+> >
+> > The main_axi, noc and gic clocks feed the system interconnect and the
+> > interrupt controller, and must never be gated. Register them as
+> > critical, as Linux does, so that their parent PLLs are kept running.
+> >
+> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > ---
+> >
+> > Changes in v2:
+> > - Reword subject and commit message to describe the change
+> > - Fix the coding style of the new clocks
+> >
+> >  drivers/clk/imx/clk-imx8mn.c | 25 +++++++++++++++++++++++++
+> >  1 file changed, 25 insertions(+)
+> >
+> > diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.=
+c
+> > index 2dfa860bf375..56d44192e35e 100644
+> > --- a/drivers/clk/imx/clk-imx8mn.c
+> > +++ b/drivers/clk/imx/clk-imx8mn.c
+> > @@ -29,10 +29,19 @@ static const char * const imx8mn_a53_sels[] =3D {"o=
+sc_24m", "arm_pll_out", "sys_pl
+> >                                              "sys_pll2_1000m", "sys_pll=
+1_800m", "sys_pll1_400m",
+> >                                              "audio_pll1_out", "sys_pll=
+3_out", };
+> >
+> > +static const char * const imx8mn_noc_sels[] =3D {"osc_24m", "sys_pll1_=
+800m", "sys_pll3_out",
+> > +                                            "sys_pll2_1000m", "sys_pll=
+2_500m", "audio_pll1_out",
+> > +                                            "video_pll_out", "audio_pl=
+l2_out", };
+> > +
+>
+> sys_pll1/2 are fixed clock. I not see the point of switching mux for noc/=
+gic/axi to other parents.
+
+The patch doesn't switch their parents, they stay as the SPL left them.
+The parent names are only what the composite clock needs to be
+registered, the same as in Linux.
+
+The point is the enable count. The rate of sys_pll1/2 is fixed, but
+they are gated by clk_disable() like any other clock. On this board
+main_axi and gic run from sys_pll2 and noc from sys_pll3, but since
+they are not registered nothing accounts for them. When the display
+clocks are reparented to video_pll, the last registered user of
+sys_pll2 goes away, the PLL is turned off and the system hangs.
+Registering the three clocks as critical, together with patch 01,
+keeps their PLLs enabled, as in Linux.
+
+Thanks and regards,
+Dario
+
+>
+> Regards
+> Peng
+
+
+
+
+--
+Dario Binacchi
+Senior Embedded Software Engineer
+M. +39 328 0625246
+dario.binacchi@amarulasolutions.com
+=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=
+=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
+Amarula Solutions SRL
+ Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
+info@amarulasolutions.com
+www.amarulasolutions.com
