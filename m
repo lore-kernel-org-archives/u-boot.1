@@ -1,208 +1,150 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4345606A321
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 07:28:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B546606A329
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 07:41:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UIoZIIyD;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=cALLueSo
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zG8bsT+w;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=E0J705AM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A11A48087B;
-	Wed, 25 Nov 2026 07:28:57 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id G52WsOaH_497; Wed, 25 Nov 2026 07:28:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org ED1818097A
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795591737;
-	b=eSKL5q25IIKQNh6Ms6uGDgBPxakC+rdaLwCRx0eN7W0T0aj86Tx3I89bdW3PVX8ERc55
-	 CYwOouGn7ZAVo3iO7vE01Ab0jByRkBryhTwd+7XyeGxV4lJouxICN9/zX/k5MuH5ygWNS
-	 cLH1So2c/Dwplyuf45V8Z2gsBmzRAXHOiFIs8fq2MJuR/uGXKRFRZkCO2XXJFHyRuYy4N
-	 Tjt8id8MzdnyDUAhgieprfzhjZg3O9kswDKVeUIDTzFyghBZc2+PtfLImP4fCgJTiyjCt
-	 gvWnJR9NUdTMi6HCDBX+vyCYviX5QQ6qTlnEyDP1FnLgS39snQCSKKCkjHeb8CRVltQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795591737;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-LD-Processed:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Xfw/L6s1w7bNP09/ZOf3zh4v4jNb7x1BOPMczP1zrgQ=;
-	b=RPG51cmiyOXV1Q9icvM7o3RKdB9N6ZRAaoUM/3PxmK5eWpBYz+CyODqzYLQHBknEaDeS
-	 WFahMM1edb3TXVzEMdVR04LwMfPZvLGlWEW1+IBgXtI70SjlsYBGb7p7hCMxHeDuWph9j
-	 +E58qa6aMMelZIX4WdjuLJNagqZa/NTNb9DdSBIKTZdMmK7MjAgomyOLNynSetUUbL2q5
-	 JSgqsht03YEm0ObYfdyGsz4z13s4JM7dAlkYYBGrmx20H/ful7AO8dA8BRfvBnQccW8NE
-	 r9plvz/jdu1pP09c03Rjk9ckoqP7EdVi2Z4zAih63kPDkwtauBL0wAreAeUBK4JoIew==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795591737;
-	bh=Xfw/L6s1w7bNP09/ZOf3zh4v4jNb7x1BOPMczP1zrgQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=UIoZIIyDbSTDyj4bjSAvj0Ae22YFeMRJAtuPEeC/EraWNj/IDcDkKhGbAg/uKpL5p
-	 4hO1qv2aZuzxp6BWAgXZDFrjK34LCYLXWq7jqikyN+OJ4a4kdk570Efso709dsLKa/
-	 JSCJwpB7KzwtNHGKnJPQGoyzKr37TQXGFuVJH0hAy6lMZjLQwyHlDLZJLuzmNFlb+s
-	 JRrPMi4C62nHW0z00I3fizpfJxnJn8L8d2pVJt8ILWvFgvnH9srb9VO2yF+qpPpzNG
-	 GmXoRSJadoWZVaRelSnq/YD2R9ug5fLlLa0OS+DfQLGukFYSgvOZlvgqxVJ75Lkmht
-	 +AcoEtUq0jMNQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ED1818097A;
-	Wed, 25 Nov 2026 07:28:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 414CA10B
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 07:28:56 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3279B40603
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 07:28:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3FFF84061D;
+	Wed, 25 Nov 2026 07:41:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LWWe5bz7tzPu for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 07:28:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 798504033D
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c200::5"
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::5;
- helo=duzpr83cu001.outbound.protection.outlook.com;
- envelope-from=peng.fan@oss.nxp.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=fail (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com
- header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-NXP1-onmicrosoft-com header.b=cALLueSo
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 798504033D
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 07:28:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Xfw/L6s1w7bNP09/ZOf3zh4v4jNb7x1BOPMczP1zrgQ=;
- b=cALLueSoeK3UhKa4E0jKmgzO1AsToruKuEpw/aRDMVZga8kuo3LSeyj3MlqIWRmC/Lh7IiN12S11Ngp8EtpPAkt0DIpxRnOmQhHhnTQuPN6UvrzABzR9atCP6yG69Ck8y68y1nAdLbdSNff6BNqdv7KSs6l3KtGTkBCu4Cqn5rFYheq2dUjUti2VAt6ZzmzToE8EQHdxehkIQ2cvQJVD143S6L6/8mvBkint7KPfMD6G5kWOW/XgsVMPFfHU2EQNAT4uXZfGjiUQrD8qc8UmnY5SaZ4zUa+XktkadQ71jEvgicsdkUNdJCOPOlkpllPL7TNZp4lQ3kywybJYOLOeHQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by PA4PR04MB9389.eurprd04.prod.outlook.com (2603:10a6:102:2a8::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.5; Wed, 25 Nov
- 2026 07:28:50 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%5]) with mapi id 15.21.0639.012; Wed, 25 Nov 2026
- 07:28:50 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, Fabio Estevam <festevam@gmail.com>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
- dl-uboot-imx <uboot-imx@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- krzysztof <krzysztof@kd-solutions.pl>, Joy Zou <joy.zou@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
- Joseph Guo <qijian.guo@nxp.com>, Johan Jonker <jbx6244@gmail.com>,
- Vincent Jardin <vjardin@free.fr>
-Subject: =?UTF-8?q?Re=3A=20=E5=9B=9E=E5=A4=8D=3A=20=5BEXT=5D=20Re=3A=20=5BPATCH=20v2=202/3=5D=20arm=3A=20dts=3A=20imx91-9x9-qsb=3A=20add=20U-Boot=20specific=20dtsi?=
-Date: Wed, 25 Nov 2026 15:25:50 +0800
-Message-ID: <20261125072552.27318-1-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <AS8PR04MB8721F0020B024C6608C35ACAE2452@AS8PR04MB8721.eurprd04.prod.outlook.com>
-References: 
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI2PR02CA0012.apcprd02.prod.outlook.com
- (2603:1096:4:194::7) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+ id UE_ZqiyP9x5b; Wed, 25 Nov 2026 07:41:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2EA6B40609
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795592492;
+	b=oB8Fi/+1Droxz/9wD5GAAtpcDV2OSdPClPpx/MjkKrqTmMlx3ss74nhOXuSLr5hcYtBT
+	 NxzUuvHgUanwbQpZlnORdP7e2z11Qq7qtrL4KOJ+bYiX/TMvZzhgC3dSrf7H9j+IWXZ3f
+	 qEjfUlokH//J2XwWz32OWuiY0T2MZKhZOXsLl7fgigPkIrbebBZl/h9y4rwk7opm2AwoM
+	 JA+pfnXKCFZRA/0KvvVNYcE4w4Kw/eO5O10K+Zv47qabaa6l0ybVMFQ98E/SqzZClXlP3
+	 u7RDPWCyTNnpy3Q47D9X4eP1Dx1jOh3SRy+nhhOLpHHIx9+8ZvPSvy9/veDQjiyp6zw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795592492;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=XZ0dczyBMZodesqv5ktDGd38P8NmYbmWyySqlnSW/0c=;
+	b=PF0nbBtG9MxZ+TanKvlFXpKckX3SwOFTGUDwpjn89q44TStT7TTPazEfPvz2RBRZwdUR
+	 Zf4V23NbyE0A3njQIjnFHIgzM4sFn4ozL1tMXpIKGa8Uwk1JZ1lR9GlwoST54hVyVcKqH
+	 Aqsix28OazbeZ2r7IXZkxQQlg4jiZEZOosN1BRSQagc0vJsiwJZgLR8zWazdv117PxjpT
+	 tMspOtGqqnZ+rhiHAs6zAkcg4qzzjGuyeFvjFazX1HOrtFzSjuAQzIKVyyC6/30qtgNKY
+	 ITNsgbkk5dfc3xo9wE5QMU7EI2vIe6+pBd/3w8zULz+eZ+5PWPpLW54od8W3P9pVTMA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1795592492;
+	bh=XZ0dczyBMZodesqv5ktDGd38P8NmYbmWyySqlnSW/0c=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=zG8bsT+wCP5tsIFOoWs1K4EbNz/gBjBYTCoDtvkkAGNnXKUiJJWDkU8xsulrgz907
+	 Snz0/sIQHx5RTpeWrB0MRpwbuDzYFRMBDnsGLAWetp9vOsjUCtw6wv3XDOBJeLIXGy
+	 jTcKgdQE+cqPb7jUnkdzImRNWjep6A9gGrQcMkVRkyHhS5x2Kl9pUmOpMq7S0fZoFt
+	 cqUQz4RPtO2b2GmUgCtxMXoobKhiBNe9WP34EwTrKUZ7OzpG8HsRwr+gcXcmytNgbg
+	 zosFDed3MFyK7bsImuh3+N/kfDjlFEmOxqK/LZ2h+HXGaCbeexiSoETW2iQf2FCYpd
+	 aZ+B/Zfc6oF5Q==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2EA6B40609;
+	Wed, 25 Nov 2026 07:41:32 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5942910B
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 07:41:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3F1AB80CB0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 07:41:31 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T1c7ciEh05yc for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 07:41:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CB31480C9A
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::435"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=E0J705AM
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CB31480C9A
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 07:41:28 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-492f0a1b685so3715878f8f.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 24 Nov 2026 23:41:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1795592487; x=1796197287;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=XZ0dczyBMZodesqv5ktDGd38P8NmYbmWyySqlnSW/0c=;
+ b=E0J705AMRKfPJ97WbVfcyxPJllsSEArr4Yib5IBJhAA353UvOyljCDFRH9w8DfHDcv
+ SLp0YqWU6xzld6KyUt2imLHOme/91MVIARRJiNnL8Xh1DCihFxcODFnrnGV1Tuwi7MPZ
+ gwytH2W2XsNsqDuQaDh/giRNGvTQxF7PK2896r1Alm1vNYXTD5VTGjcZI0dtb++ydR2N
+ xhVOdp52o3P6+VESf/3Jud3eIAJ9XOyWEHVUib3PGgVOztREJA25IN9olZWiUR7EZYLR
+ 58Fexta/qvrr+Rvm8VKV+CsAZOl0lHGWBCb3fHsqbT13E32W5XPw8FRebgZbKIPHBsZw
+ lNkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795592487; x=1796197287;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=XZ0dczyBMZodesqv5ktDGd38P8NmYbmWyySqlnSW/0c=;
+ b=OFN6yr717YjeIIh4u8Xu0Ma9wRfqvK/0LJiRzRwRPoGx/27Y5G6YisU+ggcZAo9UcV
+ /6S4sevuKPAuULFDOFJ9bQEQosvQCsuLdJ1O4Kwdk7qOw8XLde5u2Epq9XhnEFBYzMJ4
+ +3H3VqVbmXKBZSdnlwQmnCSbqZJcNrXTebeOVMtuvnFd2gMAULwz/gsKnevu9BoPUzWk
+ nVyQXkGPT/T1BSXrUWIiMSiRX+ntASOKn9WjIvnVxkRwv2alLKBtAPQErS+rgVZIQFXR
+ 1MstRZkDW6t384D9I0qFxHQYIwYaXIqZCRqQDIAoeBaveTLxNEVg3UxraSLkVwyyWn83
+ qcNg==
+X-Forwarded-Encrypted: i=1;
+ AL+hErFFeFJgjkaYJA2MyzP0MLnXBUBj6WUON2FR7D7yWVHxsC+fXBVuFVsKUayaKq/tZ/xBd8oOwq0=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/ZiofZnJK6wATAhjeUwTiYgqctKcFWSS6qjakokAQFVNE6LaZA
+ 2ysNQstNZiB4pf301vQFNlCfAOBLhf5uKWOq3o+kdOM8XcNVyXQy0iN777NUdYSSXCc=
+X-Gm-Gg: AZFdTZe9ArfK9PaoSPVPKnOv9FpqMfj0CFouAytrRuJYPGKzVRgvytOSKQsY9d3w9kS
+ q/fbb5HR4SC0q2fVfRRSsdaabJ43lzH0lEkD5rJRBQX2tPqmkwiPyAfO1bVRYaMPB622304BBb6
+ cNDsFvSKdurXyC5RUZ4hZx53aGAKx+oDrcEKXmc03zWBUEaY/gJk3uOcGOi0Q0cFWOJ7//aAjvO
+ jadcBfH82kGvo3t49iD7NIqix6MDZb3GGu8cE37x32TfJVW9UTK7MYQhcFXcf1W84K2MGSdCHwG
+ LL7INQcA2v0r6GuEkzmb9sJFwjzUZI0gZpKGpl+yzBPnlzuLD+RDmlOEYeW9fwyF0vBp351fN8Y
+ A0ePzk2uYkttW1CgnVv7EYUMtkpAw1PaUxVdMk+hITS8yL3qEORk9jrshPct0zxUegwZyYwcOGs
+ FZ4AfPS5tKlgCOrDCPnZBK+DbIQKTNSMiROiLmdy5eVtisdq4cJchv7DfZmJ+SQx+KUaZ9L7BtL
+ d9cLcP/jWWKFV5CmH2LTnS3zYUK++4qJteC/yTUDBlYt/t+19o4YOmFL+hyVfOYWWXpDNugWK/J
+ /5fB8EyMHvxelske3rzh4ajvrixXekqAt5CHQSn0DVmBLrEgcPki1bCiXQJJtREQQd23nx4NARv
+ DaWpcHL7jxxUG/VLLW9yuxJuiJ18cZLkQawy9oFiW3cyw2UeduQmRYxZ/KN3oS5+CUwzACzunjq
+ 2WeZYCGnmlrwljkCt37tlN+1aQ7LQq25BlYLGVjee6V1MpvNq5pTSuOKxjJ1x5Gok4l+hxz9jwp
+ +XGC5HR/2GBR1Kq14j3sHeOIyI9vgcIsZRh+l4CB5f8HWWnmFuwonza/OLow6MNb5oz9wNIQCli
+ Zk+Mec7NbAfFCK0diwPaR5AYzKppIGP+8aOClkMwHcjqRckGJ/rrN5m0y3+cxTw1npgSLQrNlZs
+ oX77NVOz0mTaQkMqi/PomcBmqmYO+pY5tIE9ZzoZT0E9nfFfS8xQqRSRSQeVeahHP
+X-Received: by 2002:a05:600c:1548:b0:4a3:59c9:a756 with SMTP id
+ 5b1f17b1804b1-4bb88800013mr369678375e9.6.1795592486667; 
+ Tue, 24 Nov 2026 23:41:26 -0800 (PST)
+Received: from hades ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab6baa397asm33296675f8f.48.2026.11.24.23.41.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Nov 2026 23:41:25 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: trini@konsulko.com,
+	richard.henderson@linaro.org
+Cc: casey.connolly@linaro.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH 1/2] arm64: relocate: convert relocate_code to C
+Date: Wed, 25 Nov 2026 09:41:19 +0200
+Message-ID: <20261125074122.1965495-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|PA4PR04MB9389:EE_
-X-MS-Office365-Filtering-Correlation-Id: 55f34a48-8da6-4ced-09da-08df4ac5c02b
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|23010399003|1800799024|19092799006|56012099006|10067099003|11063799006|261022105027099003|261028144727099003|261026140227099003|18002099003|22082099003|41080700001;
-X-Microsoft-Antispam-Message-Info: 4+cjjJyeZj5H/ez4VG2X331ToKGqT1xh6pn4DTiEmY+O1cJ+/Y1RniWv9p400TDql2yY6qQgjlZuxBLT6Ru842SRxiZd0qsuWiERQaz7X78kG56ppGMhTjA5tF02610I7LBBDS5Edk7arAnjgTMTY+8yFDSSLOXOVXt0a0Y5wI2AZXx8jQGE0PNp4k58tfy1lViLq++L2i0rGHakmmUMuWENfKqPIHdD9Mg7BzMwauk51NIAIHKdmgVbNQ2LD09T8WqV7DEsgoKYy7xoa8t9gNwot+ldS2zSlKhb48iYJTwRQ7gSjC3NpWOcFQtS5h2xxj0v6ehjbX/YR7osa1YPwfrk2co6RibpDN3BODEYHqNOqxe+dVBfUvq6K/YUVbvsRatPThUNMHClv7FNPINz9T9bqaVUIBBWPE6X7YnEnNM0MrhUCOULjpdfMj9Fi6at4IJdgbsN+wiiP0pv/XzXNbpzzxZEe8VReyGTUlSbTE6CDGkpOjz/3+ONuiupvDzvJ0f+rrPSvR+8F8GvyoJKDyCVN4tmRBETw7Q1nbdmbJZDf+N2Dq1qXKCShXSA0F2RihezrJubQAfmpl+aCFggaw0HnoRJiiXxw2XAH+t1hTYXELaFxXRBWPi8VfKiWOGRaTf5PATnUCxhr8SfoAHiLDU47Dh68C+crVKnxHwGWCEFvaLGjWjRCQIwm3WMz+6nNz91aTeJvkdeE4e9oPbFissfAe5l2QFOjHycM6KYXc8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(19092799006)(56012099006)(10067099003)(11063799006)(261022105027099003)(261028144727099003)(261026140227099003)(18002099003)(22082099003)(41080700001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Yko1cEZkYlhZME1meUZKR2wyb3dLYWtrRnFrYTc3N05GQVJjc1pMNThOWTg1?=
- =?utf-8?B?MGJFcWgvMlU0bEV1U3A5bkxMVEdGdEdCUlh0RUJWeXBuTzBuWG9hK21zUXVv?=
- =?utf-8?B?QXp3NjZXRS9hLzFkK09LcXhiVmV1dU9HbjJYbmE1aFhRU0dXTnU5OUNPb05a?=
- =?utf-8?B?YklqV3F1UTRvZzVnRnBDTlJheFNGZjJHaFAwMFJLVkprc2FnSzhlU2JPZ2RH?=
- =?utf-8?B?bFBUbmppWC9qVnBoRE9JYkYyUEdrblUzK0dYd3FycEtEaHhRVkJMUGxNYmtN?=
- =?utf-8?B?VXhHak9EcW9lNVFaaDdIdDhhcm9wM0RHUXJhUHdxSTAwbjVYYlM1Y3M2R21G?=
- =?utf-8?B?RzNRWkFZSzFpcXpKQnJSc0hSNFFyZ3lReENZVndNbTNJQWcxdEhKUFpCNjJQ?=
- =?utf-8?B?V2wxTDZNNWFFS0hOYldybXkyaXpvS1cyNk84OFFqNFMxZ1ZFdnlaM1B3UFYr?=
- =?utf-8?B?b1Y2ZTZQMlpSSDR3ZWhoWm5EbUR3UFNDdTF0UmVoTTlzY3E4elgya0NVZ2VE?=
- =?utf-8?B?YlV4TFVFN0dqTmhWb0J4Zm9LKzJ2ZmhseUowa1B5TXVBRVVXbytQMW44Z0I1?=
- =?utf-8?B?YTVNL2IxK2VKTXdxdHIzazFhd2JJTi83QmNFMjZRbWE4Umppd1Z4NUdFUFl3?=
- =?utf-8?B?UWRkUW5pb2ZnaTV6MU9rNUI0ekZHbzhibDluTG1kdXlmMGJSeUtqcjd4c0Zi?=
- =?utf-8?B?cjBtZ1ZIQWVXbXJheXh2MW4yL25yWFpYYjcrd2cyaHh0WURsYXN3KzhrbHho?=
- =?utf-8?B?MFU2UGlTWlAyeDlEMlFFUURGVkplUGxiOFc5Rk9qc2JCTEdmeDJwbThUS2xC?=
- =?utf-8?B?Z1VCc0JPZ3ByZ2lYLzNZM2pTSnBaYmJtOWg3U0p0SDdEUEFvYVYyKzZ5N2pz?=
- =?utf-8?B?K1haYTA0NU5aL0pCQ3NjdlVhdzY2Ky9lT3VETFFLV1dHSDEvM25ObmtZNThn?=
- =?utf-8?B?WWlIQktBK2lid2pVREE0NldQOFA2QnJtWVlTR0lTQm9xYWNVNU00WERodVAw?=
- =?utf-8?B?UkdqVVVXbHQreXEyWVVrTmdsbWJxOU53QXh0RSsyRE5PQ2VDOUtMTFRwSUpG?=
- =?utf-8?B?SXBlVUpxRnp5UGExOE9oUUJyODRVRFg0bEtCSG8xdm5iZ0FlbWZvaE83a01K?=
- =?utf-8?B?azR2ZkNnYTFodCtodG5oRlUzMUk0U1FqaXhEWFNwS1lnd3Q1NWlxeDhrUUgr?=
- =?utf-8?B?bDRqMjh4RnVNZE9nbkNROTZ5bDR5WFJoa29lRVNBUHpPaWN5VW8yNW5EVUZT?=
- =?utf-8?B?aWxJV2cwTm1KV0NVamtmUG9XSVZpejB2cnJpdklubGQrS2J4bzJMUHptbzly?=
- =?utf-8?B?UE5MZGpMRVR4YUR3ZHVGR1dpQkUrSUVFNUxXZWxkbW5SbUJqc2VhckJrQXM0?=
- =?utf-8?B?aW1neWkzOG1hd2xtQWxLcUx2b1pOeXFyTGdwTnZnUnNsL2UzQVJ5bHNIbEVa?=
- =?utf-8?B?YklnejlGM1UydkVvdjV4SDZwRnpkeVA4Ty9UN0dncXYwclV6U1VUclFQa09k?=
- =?utf-8?B?TXRPRWlaVlN4cHloZHlVWTFrYjM5ZVNLVGhPWEdnaTg2cDRtZHFwMVRXS21L?=
- =?utf-8?B?dkJpVjR3WTZtTmhldTlZd2lhd3o2dmFhL0JHSkpFT0k1a1BzQy9Db25Rc0ZN?=
- =?utf-8?B?YlRKY1NCczFFNTUvYndhbC9IaE9ZQWpzVzNEb0JmZXYvN3phSmZNMUkzMmJC?=
- =?utf-8?B?aExHOUVPY043WGQyRWNiYUgyTzJhR2krdU4rbVIxSUlXTHZyaXFucUhUb1FC?=
- =?utf-8?B?bEMya3E1K2poL3FpdjFrbnc0TkVjbUJXbWhCSGJHd1VKQktDTmdsWlVjQmpI?=
- =?utf-8?B?cTdZejdQNnRQalljL2RjK0twMXZidk9LUTdlYnAxOVlUeE5uMlFFY2JNWGs3?=
- =?utf-8?B?RktMTWhTdWtFWWR6VjZ3K1ZNcjBrRndwU2h0MklvY2J2Y3B1VUd4ajRiUFA0?=
- =?utf-8?B?MjhzVDJOcHVxL2trUmNZTTlKVVhFSncvZjVOUnV5UklKcU9oNW16T21wdFNF?=
- =?utf-8?B?bGtIdnBxelRSRHN3WlZ4ZXZZcGZFajFtbGsxa0RhbjM5Qzcxckd0SEtvcE9s?=
- =?utf-8?B?U28veEU0Q0o0ZkU1RWM2Umc4MGwzVWNZWUtxcDdDekpRM0hVYjlIblVHRE9l?=
- =?utf-8?B?MXJYbmNZTTBieWR1MGVabW9Uc3E1OENkR3ZWeUpVWWl1Y09yK21VOTVUU0hp?=
- =?utf-8?B?eGw0a09ZOG9KcUxUbUdyK01uM1ZYRk4xZ2VVKzZKYXJvSFBDVkVYK090bkEw?=
- =?utf-8?B?a2NXU1BpYndKbmJWeXdST0hJSnZDeWRBSGlxZFp3NE5DNE1wRE04VUVHVWZo?=
- =?utf-8?B?ZmNYLzkzQjNBUlplcU84eko4OThYdmErNG5pSHpUUVRpOXM2aDhiYVZHYmVK?=
- =?utf-8?Q?Z2JK6aKeWqhSpOVPJ1AYNO5etKax3J3GIBOBO?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 55f34a48-8da6-4ced-09da-08df4ac5c02b
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 07:28:50.4125 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JbZOcxg+eDbUFCuuGWSPVHygMrxQeIY5tjouAyq3RiXytawstvKoR6FzNuh9WwsyzlyNIKJ7Zbnd3Wvull66QyCS9pU0+TQjzSt7HuJe81I3vt6uGe+erf3kZg1vc1xq
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9389
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -212,19 +154,223 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, 23 Nov 2026 09:21:37 +0000 "Alice Guo (OSS)" <alice.guo@oss.nxp.com> wrote:
+relocate_code() on arm64 is called from _main with sp and gd already
+pointing at the relocated area and lr pointing to the relocated copy of
+relocation_return. By that time pie_fixup has already run, if
+POSITION_INDEPENDENT is enabled, the image is fixed up and plain C works
+fine, like the rest of board_init_f(). So let's convert it to C which is
+much easier to read and maintain.
 
-> 
-> NXP Confidential
+While at it change the behaviour and order of cache maintenance.
+Invalidate the I-cache after the D-cache clean instead of before
+and add a 'dsb' between 'ic iallu' and the 'isb', which is the
+architecturally required sequence.
 
-Update your mail client to remove this.
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/arm/lib/relocate_64.S | 96 --------------------------------------
+ arch/arm/lib/relocate_64.c | 82 ++++++++++++++++++++++++++++++++
+ 2 files changed, 82 insertions(+), 96 deletions(-)
+ delete mode 100644 arch/arm/lib/relocate_64.S
+ create mode 100644 arch/arm/lib/relocate_64.c
 
-Regards
-Peng
+diff --git a/arch/arm/lib/relocate_64.S b/arch/arm/lib/relocate_64.S
+deleted file mode 100644
+index 495a5f03ba76..000000000000
+--- a/arch/arm/lib/relocate_64.S
++++ /dev/null
+@@ -1,96 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * relocate - common relocation function for AArch64 U-Boot
+- *
+- * (C) Copyright 2013
+- * Albert ARIBAUD <albert.u.boot@aribaud.net>
+- * David Feng <fenghua@phytium.com.cn>
+- */
+-
+-#include <asm-offsets.h>
+-#include <config.h>
+-#include <elf.h>
+-#include <linux/linkage.h>
+-#include <asm/macro.h>
+-
+-/*
+- * void relocate_code(addr_moni)
+- *
+- * This function relocates the monitor code.
+- * x0 holds the destination address.
+- */
+-ENTRY(relocate_code)
+-	stp	x29, x30, [sp, #-32]!	/* create a stack frame */
+-	mov	x29, sp
+-	str	x0, [sp, #16]
+-	/*
+-	 * Copy u-boot from flash to RAM
+-	 */
+-	adrp	x1, __image_copy_start		/* x1 <- address bits [31:12] */
+-	add	x1, x1, :lo12:__image_copy_start/* x1 <- address bits [11:00] */
+-	subs	x9, x0, x1			/* x9 <- Run to copy offset */
+-	b.eq	relocate_done			/* skip relocation */
+-	/*
+-	 * Don't ldr x1, __image_copy_start here, since if the code is already
+-	 * running at an address other than it was linked to, that instruction
+-	 * will load the relocated value of __image_copy_start. To
+-	 * correctly apply relocations, we need to know the linked value.
+-	 *
+-	 * Linked &__image_copy_start, which we know was at
+-	 * CONFIG_TEXT_BASE, which is stored in _TEXT_BASE, as a non-
+-	 * relocated value, since it isn't a symbol reference.
+-	 */
+-	ldr	x1, _TEXT_BASE		/* x1 <- Linked &__image_copy_start */
+-	subs	x9, x0, x1		/* x9 <- Link to copy offset */
+-
+-	adrp	x1, __image_copy_start		/* x1 <- address bits [31:12] */
+-	add	x1, x1, :lo12:__image_copy_start/* x1 <- address bits [11:00] */
+-	adrp	x2, __image_copy_end		/* x2 <- address bits [31:12] */
+-	add	x2, x2, :lo12:__image_copy_end	/* x2 <- address bits [11:00] */
+-copy_loop:
+-	ldp	x10, x11, [x1], #16	/* copy from source address [x1] */
+-	stp	x10, x11, [x0], #16	/* copy to   target address [x0] */
+-	cmp	x1, x2			/* until source end address [x2] */
+-	b.lo	copy_loop
+-	str	x0, [sp, #24]
+-
+-	/*
+-	 * Fix .rela.dyn relocations
+-	 */
+-	adrp	x2, __rel_dyn_start		/* x2 <- address bits [31:12] */
+-	add	x2, x2, :lo12:__rel_dyn_start	/* x2 <- address bits [11:00] */
+-	adrp	x3, __rel_dyn_end		/* x3 <- address bits [31:12] */
+-	add	x3, x3, :lo12:__rel_dyn_end	/* x3 <- address bits [11:00] */
+-fixloop:
+-	ldp	x0, x1, [x2], #16	/* (x0,x1) <- (SRC location, fixup) */
+-	ldr	x4, [x2], #8		/* x4 <- addend */
+-	and	x1, x1, #0xffffffff
+-	cmp	x1, #R_AARCH64_RELATIVE
+-	bne	fixnext
+-
+-	/* relative fix: store addend plus offset at dest location */
+-	add	x0, x0, x9
+-	add	x4, x4, x9
+-	str	x4, [x0]
+-fixnext:
+-	cmp	x2, x3
+-	b.lo	fixloop
+-
+-relocate_done:
+-	switch_el x1, 3f, 2f, 1f
+-	bl	hang
+-3:	mrs	x0, sctlr_el3
+-	b	0f
+-2:	mrs	x0, sctlr_el2
+-	b	0f
+-1:	mrs	x0, sctlr_el1
+-0:	tbz	w0, #2, 5f	/* skip flushing cache if disabled */
+-	tbz	w0, #12, 4f	/* skip invalidating i-cache if disabled */
+-	ic	iallu		/* i-cache invalidate all */
+-	isb	sy
+-4:	ldp	x0, x1, [sp, #16]
+-	bl	__asm_flush_dcache_range
+-	bl     __asm_flush_l3_dcache
+-5:	ldp	x29, x30, [sp],#32
+-	ret
+-ENDPROC(relocate_code)
+diff --git a/arch/arm/lib/relocate_64.c b/arch/arm/lib/relocate_64.c
+new file mode 100644
+index 000000000000..6f7a50f2264e
+--- /dev/null
++++ b/arch/arm/lib/relocate_64.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * relocate - common relocation function for AArch64
++ *
++ * Adapted from the original asm from:
++ * Albert ARIBAUD <albert.u.boot@aribaud.net>
++ * David Feng <fenghua@phytium.com.cn>
++ *
++ * Copyright (c) 2026, Ilias Apalodimas <ilias.apalodimas@linaro.org>
++ */
++
++#include <elf.h>
++#include <init.h>
++#include <linux/compiler.h>
++#include <linux/string.h>
++#include <linux/types.h>
++#include <asm/sections.h>
++#include <asm/system.h>
++
++/**
++ * relocate_code() - copy U-Boot to its final location and fix it up
++ *
++ * @dest: destination address, gd->relocaddr
++ *
++ * This is entered from _main in crt0_64.S with sp and gd already
++ * pointing to the relocated area and with lr pointing to the relocated
++ * copy of relocation_return, so returning from here continues execution
++ * in the new image.
++ *
++ * Constraints for this function, since it runs from the old image and
++ * before BSS is usable:
++ * - It must not touch BSS. On arm64 .bss overlays .rela.dyn
++ * - It must not rely on anything that needs relocating in the destination.
++ *   Symbol addresses are generated PC-relative (adrp/add, -fno-pic), so they
++ *   resolve to the runtime location of the currently executing image, which
++ *   is already correct, either because we run at CONFIG_TEXT_BASE or because
++ *   pie_fixup has fixed up the running image in place.
++ * - It must not be instrumented.
++ */
++void notrace relocate_code(ulong dest)
++{
++	u64 src = (u64)__image_copy_start;
++	u64 size = (u64)__image_copy_end - src;
++	const Elf64_Rela *rela = (const Elf64_Rela *)__rel_dyn_start;
++	const Elf64_Rela *rela_end = (const Elf64_Rela *)__rel_dyn_end;
++	u64 sctlr;
++	u64 offset;
++
++	if (src == dest)
++		return;
++	memcpy((void *)dest, (void *)src, size);
++	/*
++	 * r_offset and r_addend are link-time values, so the offset to apply
++	 * is link-to-copy
++	 */
++	offset = dest - CONFIG_TEXT_BASE;
++
++	/*
++	 * We have a makefile check that aborts if reloc entries are not
++	 * R_AARCH64_RELATIVE.
++	 */
++	for (; rela < rela_end; rela++) {
++		if (ELF64_R_TYPE(rela->r_info) != R_AARCH64_RELATIVE)
++			continue;
++		*(u64 *)(rela->r_offset + offset) = rela->r_addend + offset;
++	}
++
++	sctlr = get_sctlr();
++	if (sctlr & CR_C) {
++		__asm_flush_dcache_range(dest, dest + size);
++		__asm_flush_l3_dcache();
++	} else {
++		/* Non-cacheable stores need to complete before we fetch new code */
++		asm volatile("dsb sy" : : : "memory");
++	}
++
++	if (sctlr & CR_I)
++		asm volatile("ic iallu\n\tdsb nsh\n\tisb" : : : "memory");
++
++	/* Always discard anything already fetched/prefetched */
++	asm volatile("isb" : : : "memory");
++}
+--
+2.53.0
+
