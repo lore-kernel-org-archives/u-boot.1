@@ -2,119 +2,198 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9475C606A323
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 16:58:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E99C606A323
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 17:07:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uREFhTbs;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=fO+JeL/S
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bOSsfQpw;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=Gk+8kWQd
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DF59B40842;
-	Wed, 25 Nov 2026 16:58:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 246A840471;
+	Wed, 25 Nov 2026 17:07:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XsK0iW2U4BL0; Wed, 25 Nov 2026 16:58:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B82F64081A
+ id ImFQFhhZJoBt; Wed, 25 Nov 2026 17:07:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7A1234052D
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795625926;
-	b=cQiMBvLUE3+QpMmCoH7qTudrvl1l5ST2qUk89ushs5O5KLYklWaN1LiDzdcVJkENoQWx
-	 ANgs6KmPHC1noLyRw5UiwOqUX1JSsZErP6aL1bP7S/VaVo5VwnI/89oio/Ve4ZkgG/mUC
-	 8akseIliLnhWU+S+Jcj5Ut06YdsNG6UH8mOJcecHzV7ZVMpGJoPJaksGmxyJiOWYPTVVO
-	 4k+iofv+xbEzwy0PD2aW75Mn1/nwZ8Dos8QyxrJssu80MBmaYnYIMq9VYBYg9xGqqKzzp
-	 9LEIuXNP0cKI7CMwXOO3RA+35Slgv00DcbNVVzpPxR3ENALFtK97pIYi1jRUqccLAKw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795626430;
+	b=G8qnES34PH0nKII/Nz+wJlAAtgBoSpmUorNHiv1QPvrpU0uRrwmZ8APAFzB15zP9U2df
+	 G9eSSvcvsH8L0728r2QifaHEPMd2TvjypmWaMEJz7rNPO6PaMm2bwZM75vBntsFJIL5Bj
+	 cdFD5v4nRHotYvFm6gpc67kLPQ0fnbJgEudRg/yh4vasP11kBCfXz2nQvF83xEwbUTu3T
+	 cVHnYIGX5YLWA2mYLlXt0FgiUUttqoKO92ak8S1UxqkLVJSSS80+Q9LZE4vX1eYee5oZC
+	 VpUAAKIlEBSkrgAraV+pSR0Q528Dn/MzfBQnGEb2h2KBWn4zmb7RObPS+7GBhKCzoQg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795625926;
+	c=relaxed/relaxed; t=1795626430;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-Zoho-Virus-Status:
-	 X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=GjHE3BihO956ygdT9VR6AURuh8PpmV2SJIIZ6AuNPMQ=;
-	b=D+Ltco7Q+WhO+uTu31onhO5n8ivf2/mZdQQ3CwbONaDPLIk7a798fgaCPkeoD32CQG3r
-	 Ur4PSOK6Ald0DIAY3JkwVR5YDj/awc6ZOBKj2M5KuSdjRxUyScwDqcC0YalInsPESPQW+
-	 5PBslNdU7LnV8UNfUfTahckxN9V7bEo5RnVUTQGFasNJTp3COXVjecHuU80av0uuozGEG
-	 bB+ommJIhaFIgMUz/oCvNctRftT0O7DMDQa29JVnQ/AwQbv4ZfXunugQsITjVQI3Lg0vh
-	 3UH+w4/fkxCzmdW38lFec6yjk9w7BRETaGfz6nHwM0f4srlikjF5219UHjtp/Aj+FFQ==
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=lSvArlBf+gQSKG3bfvpdQX8tvTAXGfOAkplg+7aV8Ys=;
+	b=LOK/3WR+ekV4tpLqebTqJaBv0FLZNErSdz3akpoovlTr4YbSrH89k4UB+MS1qUZjbEHh
+	 QlFcTgWYz1XrWKNbT45h4vWLCh5U4xnCHRrduS1u5cL1vlFooPhWK3+EBcSNNagfdBA8d
+	 lLmIBSJfvcyQ9Q6vbPTrkX+IYsQdVSGFN5HXIE5UeSXF4jL92RdtCVHrPFfRO0i11K0re
+	 H/o08QfHcVCEccxLLgBXHLYbmzwVX0GXqEfTyBcYXXUle1mhCzApbDQ34b3jQZV4two2T
+	 QDs65s5WHyT6E/3qnzlV6KNnREHrMHIFRAX+iYQkeOwJ7uBdedYDAzpwwab9LBTMsLA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=cherry.de;
+	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=Gk+8kWQd;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795625926;
-	bh=GjHE3BihO956ygdT9VR6AURuh8PpmV2SJIIZ6AuNPMQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795626430;
+	bh=lSvArlBf+gQSKG3bfvpdQX8tvTAXGfOAkplg+7aV8Ys=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uREFhTbsvOdhtnPDI7u2KSXkvPX8QDtKoAkNIEG0+mStGd2HSv2SJo8v02PUcEsN8
-	 7YMCnM1H1EBC7En2LG379oBDZ2mgo9c/hlSl2vX3H5dA/z6NaNbvifGh5BNQItlKEv
-	 p8p0SJoTSOc6IZbL7ocbhb3o0sk0ouColf4LDEKrYrYTeS36SmdtC9RDR48Hq/pLm5
-	 aIxAVJ34rb8qMVDIuAjvqf9S3mq/fz1pB+UZLBZIp8T4J94w1xwhjt7nAwontci2k/
-	 gNIMZ4syj/Nob41kvNmWeEFeniNHakbDqrLld2JzVDBfja+7Lujnkl0ZQ14D+LdNFF
-	 wRGORcIeibNZA==
+	b=bOSsfQpwhpXE0/jnZoizOGp13yGMbnqFEKByHsSFS1uc16KqpGXIeAe3tpQzkpVg2
+	 sWzsk9p7VhEAt04ejpHGlPPBXKH4qrCwBpQBZ0TDVMYP+mM6TJOr6V33Y+MjsRw9Wp
+	 GeGEef8U3K/1QJK50XFZlN427JBKadNRUQeicYjAEDjfNXf67f4kGax0ToWahY1m9G
+	 XCHNLz2LALglLy1Mj26ZobQ2tki44AGE9FQEESDBeZq8x43qY29rnN531lig9ioZwu
+	 Er7VBXr5ehrt4FRqwvPnAfGHwa/HMEmrLj48L1VoEjBC5a2gKgTYCTEF6NMoVx56Ko
+	 zA1qkQnvPVmcw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B82F64081A;
-	Wed, 25 Nov 2026 16:58:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7978F1C9
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:58:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7A1234052D;
+	Wed, 25 Nov 2026 17:07:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3319A22B
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:07:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5C7C640116
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:58:45 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 248684052D
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:07:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BwzILHbCwMNB for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 16:58:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2BA5340111
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=fO+JeL/S
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2BA5340111
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 16:58:43 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=fO+JeL/SkOrTk+Y6IMFM7kRmQqazDDp5Kjs56CK1NvU8aDF2qoWQIsjJuLZcVpWS/Z4VqYBnyZ4LTYno9yAJzYXULfY7kqSyOl++lWfwMWy+V2Vm7S9fBqLTFz3/hwDfGpIz/+QnxKAq7bR9/mA3kaqS4oGTVJf0TDI1c/2fDNk=;
- c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=GjHE3BihO956ygdT9VR6AURuh8PpmV2SJIIZ6AuNPMQ=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1795625897393937.0350466573833;
- Wed, 25 Nov 2026 08:58:17 -0800 (PST)
-Date: Wed, 25 Nov 2026 16:58:11 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Anup Patel <anup@brainfault.org>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Cc: Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org,
- Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
- Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>,
- Troy Mitchell <troy.mitchell@linux.spacemit.com>
-Subject: Re: [PATCH v3] riscv: Disable M-IMSIC and M-APLIC nodes in DT passed
- to next stage in S mode
-Message-ID: <awcToyC5PCkhpPnI@pie>
-References: <20261119-mimsic_maplic_fixup-v3-1-e028e28fb958@oss.tenstorrent.com>
- <awAlGMMg-6tcb1N7@pie>
- <CAEev2e9SdqXvipxXGXFjLqe77RA=LsbGSY8AFnL9VbbYAC0ZJQ@mail.gmail.com>
- <awB-PvfuEDIu_t0l@pie>
- <CAEev2e-SFv-CLxBYZ6CfPPs__BggKc3AsH5PnhNF9uXo_FccXQ@mail.gmail.com>
- <CAAhSdy2faWHx401xHTKQm7xARJt9XiK_fHbzq7LOP_uY2MdnLQ@mail.gmail.com>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AOSlUGoqsI2s for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 17:07:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0720240471
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c20f::7"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c20f::7;
+ helo=osppr02cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=Gk+8kWQd
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0720240471
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:07:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lSvArlBf+gQSKG3bfvpdQX8tvTAXGfOAkplg+7aV8Ys=;
+ b=Gk+8kWQdupaf12g9X087XmLndYKY+9f6GfF9R40wp6qcwQe0qGrR1yR16cTeLJLa6vRMg0CHA4gxBT0w9ss1blI+OPcfUUDPokcTqWBVZTGd1VevWc0Y79Y34Vf7kTPoPYPF6FWQlsWCxVXOiTkSaZ0WVe22P/fdlT+bQEv4Do0=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by AM0PR04MB12098.eurprd04.prod.outlook.com (2603:10a6:20b:743::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Wed, 25 Nov
+ 2026 17:07:04 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0639.012; Wed, 25 Nov 2026
+ 17:07:03 +0000
+Message-ID: <ddbf51b3-7b66-490f-ba99-88209bced490@cherry.de>
+Date: Wed, 25 Nov 2026 18:07:02 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] arm64: relocate: convert relocate_code to C
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com,
+ richard.henderson@linaro.org
+Cc: casey.connolly@linaro.org, u-boot@lists.u-boot-project.org
+References: <20261125074122.1965495-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20261125074122.1965495-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI4PEPF0000012A.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:808:1::8bb) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAAhSdy2faWHx401xHTKQm7xARJt9XiK_fHbzq7LOP_uY2MdnLQ@mail.gmail.com>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/295.600.19
-X-ZohoMailClient: External
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AM0PR04MB12098:EE_
+X-MS-Office365-Filtering-Correlation-Id: c0a67785-e5dc-4642-9142-08df4b168705
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|23010399003|366016|22082099003|18002099003|11063799006|56012099006|10067099003|261102123227099003|261028144727099003|261026140227099003|261022115727099003|261022075727099003|261022105027099003|261021121427099003;
+X-Microsoft-Antispam-Message-Info: S7M44ymd7bdgZkozQJbIjWZGASdSWyvVz1t0p9adtaIEYH7ocwaAFKePfILsJqyZ9LJg5cxz2lR0lTr1DUzHINCuwwGdWr7KUCitcHgUK2tC7XGN5CvaiVrLhZ2BA17ppcg1X9jg519vgtKD6x5qSHcYirqz5AjpVaNs3Y49mugeu3df3EtBq9yvRUAjmItzlS1/OOEa4f2Ip70p0tWExf96KdLvIIOzsOwhs3/Joo4+KaprxXQ59rIkXLQJIqh1RVlj1L9egnrQG1UXtSSrN2FCVPVYjgkfV4qd6uOSlW2cU2ckkT9bzR+fUSDWbdIV1yeYCk3uYhbFHpP8IQJ1KWT5DatVYL12kD1NvCVdMEAaI3QO5X1SEtNMWcsfaYLFz8s5/blIDgds+9ORMDE/zeBH3wgyMrFxdcT/t4ru6l20OSWvlUOFBy8tO83/5xe2YBserU3U+GjpHcjnE68CUb+GkWNIyA2gWG9v6GBRq02hA5R09c8JmhWgjzKjISEWc3yUgOKrE5MGi/yPGCuMkG9c1HLufVxCp8v0u95rHVhaGb7fJ9KmemYjJB5bgtyeJEOMzyYSdV/v4eAh21NZ9sl4zBZ2SZtK6e44iNsLL5IzXc7vW0XFHmS+RXkpa3d8ue5CxXWyWrNnj/B/xnG9Wwd67QZ0UsVCdjHcvZ+5/I8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(22082099003)(18002099003)(11063799006)(56012099006)(10067099003)(261102123227099003)(261028144727099003)(261026140227099003)(261022115727099003)(261022075727099003)(261022105027099003)(261021121427099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SmR2Ync3L1YyNTFlNVo4UTU2dFZKekZwamZYbEFTekkrbjlzOUt2MjVrZW9a?=
+ =?utf-8?B?OU15Y05PeWx0MDhVT2RNUlN5QWlRMUZ4d3YwUE95YlArVEorUkd0NmVNM0o4?=
+ =?utf-8?B?TzdxNjBuNU5VSlMxWkkxWDBxdVFqa3ZxNWZ1SDg4L2c5M29oYXNQQUFrQ1NQ?=
+ =?utf-8?B?dUFKQWNTVTMwS1lpNk9QMm5jQXZ6UkplNE1HTnBZcFNkakVQZGJ6VGdpZDRE?=
+ =?utf-8?B?WEZQL3V4dk8zTUsxZWJNbUhKTlZSSVR0eW5kNWJxbXhyd0FVcE5QbkVOY1dM?=
+ =?utf-8?B?aFJrQm9jUUtETTVZZ29Tc2N2dnBQVVB6encxaW9SZDNTMy9rQy85STN6d0RZ?=
+ =?utf-8?B?WlE0QWxrV1JDVFBxRUp3NXhhYVdWTG4rRnRxZGxmOFAweE5pMGNNTVNuaHd4?=
+ =?utf-8?B?NGc2akYzcWg1cDBtUmt4WmhYUzRacmJqa1FqdXZkdjlpVWI1WlVRYytWT3c4?=
+ =?utf-8?B?c1hGSlRpOVVNQzFjZHg1eDdqRnRqOU5pUXdFZ3h6alVYNFNCZ0IwY2t2RkpV?=
+ =?utf-8?B?SE1waDljNEtMMWlBWFJNUW5FVy9vNzNJd0MzMCthNWFOWVRhWHJhUDlJc0gw?=
+ =?utf-8?B?QzZvSUpmeG00RiszaVpGQWlpa2xvS3RFajAxQTdDaC9oUXZpNDQzcGJEeGNl?=
+ =?utf-8?B?Sk9BYTdYNWwxN2JxODNGUmRvQXRTK2JrV1RKK0hIR3VlSTVyeEV2cW5SZ1Nx?=
+ =?utf-8?B?YkluTVpCK09rK2xoR0wxMzdrSEpsUmJNeDhFaVMzNkdKemxQMm1YYjRpREVW?=
+ =?utf-8?B?bkhUUHJURWF6TTRqYmdYMWk4Rko5RnZpNmV1aE56amR3VTZSelJkelZ5cEZ4?=
+ =?utf-8?B?cWZITkJtNEQ2RXg0NG5Mc2pPdWRjWXAxOFNUVUJGczMxc2tSRkcydjZ6WVFE?=
+ =?utf-8?B?Sk1vcmJBMjMwdXJpTVNyZGxKNWNjeGN0V1V2Q09EWnRadjQ0bSs4ekVoQ2tB?=
+ =?utf-8?B?cmdCeUZham9MNmVIeUNraVVTcjFtT255WUxxOWg3OS9ienNGaXVicHBGRzJH?=
+ =?utf-8?B?ODFyVW13ZXY4d1N1VG9xVlpZTWFtS0N1RE5IVm00RWpyY1kxMG14SWh3ajVW?=
+ =?utf-8?B?anpjTlVKQVYrMkwrRmhkSTAwKzhIQ2I3clcrVDFlRzRROXhxSFg2WVJBTEZD?=
+ =?utf-8?B?VlBqQS9oZkx2MTJLdDFhR1dhQ3FWcm1KeElHMzRNdlhjZlVYNzQ1M2t1VDY4?=
+ =?utf-8?B?Qy9QSEJaMCtnc25TazY0SHRvdnhhL0NOT1U2NUdxUHE3N1NUemRtZTYyV2c4?=
+ =?utf-8?B?NGVHN2VrL0VSc0JNcnpQWlZFL1NMVzNLZ25CNGhsSEVONzd6M1RRT1hocUxs?=
+ =?utf-8?B?TWNXWlF0YldOa1FkOEp2TDZORXVGMXhyVndDWitiVGxSUXdmVUgxaXJYeGdM?=
+ =?utf-8?B?Qk9tZ2VYd2NkV21ZTmJ1NytMcmRUeEI3L0JLMzZOSlIrV0xTM0dKYkF0a29h?=
+ =?utf-8?B?S0JUK0w5cWFjUysyejJ3VSswZFFtQk82YXZpM0N1TzZhWXVyc2U5bXVuMU96?=
+ =?utf-8?B?eXVqL0t0SzEvOGZLZXpNOEJBYWRvVWNiVHFMSlo2WURhb0FPWEd5Ky94MjE5?=
+ =?utf-8?B?ait3UzlBYTExbFIrUmd5U1UvYUV6djUxNU1DRGh1VnBiaTJPWEp0TUVUQW5D?=
+ =?utf-8?B?Y3J1WDBNRDJSb3Nld1VjenZCK3JVdm5kOUdTK1J3bHg1TzVDQThXQnBLTGtS?=
+ =?utf-8?B?ZlZ1dzZCR1drSW5qUHJLTElxcTU0VFNYN003QlpBeWhiOEFYeCt3RE5JQ3Ey?=
+ =?utf-8?B?VExacUVQZ1luM2ljaTcwWFNPQzBHUmI5OGg1VEdRang1b1BZTmRrWlFQczZ0?=
+ =?utf-8?B?ckRKUkFNOU9kblhFYUN3aVBGWGs4a2Z1YkUrN1JLSlI1S0xPUVQ5LytkS1o3?=
+ =?utf-8?B?YTJNUTRHbUVDN2RHbzU2ZDlzekNFOWNoVWo2dnhFZ2orYk5PZTN4TityUDBZ?=
+ =?utf-8?B?NWRzQVQvMzF1WWJtdk83Qld0V1pQcVpuSDBxeWdRMHVweSs5cmF0dWgyb3JI?=
+ =?utf-8?B?RzhxSTYrWUhNRzYzVE8yZ09PaFJYSVJiTHFGaGlDQ2luN2RvY2dScVpYOXli?=
+ =?utf-8?B?bDErNTRIUVlVVllrS2VMTDhGWUxlZ1NYNWtOeHMrblZwYVBpQUczYW1QSHhM?=
+ =?utf-8?B?YVlQQjNhN2x4OFNDTWNnbndqVzVkaUlJcjBhNFRURzA5NWlkaUF3a3RHbDE4?=
+ =?utf-8?B?ajdHTDg2bWVqS3dqYXRSMFRPYlREUDlURlBrK3JIV1hpQlZQN0EyRUFhVlJR?=
+ =?utf-8?B?TWFqOGRuWnl1Y1Z6c0Q1VWlqRHhmaTMrZjBDZk1oOEhmY3daYjIrVzR4M01T?=
+ =?utf-8?B?OWdteFhNaVgvUGNjSzhvREY1ekFHd2NRZENCS0ExVUFGdURZdDBTQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c0a67785-e5dc-4642-9142-08df4b168705
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2026 17:07:03.8733 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: B4H0QBCpE3VRmFWcuxfZIAqyTFTn+f33dtLzLshDnbyfD9/xBy+bX46lSQc6F7Y1ir4zG7hYem78miLUGjpAM0xa9CgDGWjKExvaN6OLBao=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB12098
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -124,151 +203,34 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Nov 25, 2026 at 08:47:40PM +0530, Anup Patel wrote:
-> On Fri, Nov 20, 2026 at 10:54 PM Anirudh Srinivasan
-> <asrinivasan@oss.tenstorrent.com> wrote:
-> >
-> > Hi Yao,
-> >
-> > +Anup to this thread
-> >
-> > On Fri, Nov 20, 2026 at 11:07 AM Yao Zi <me@ziyao.cc> wrote:
-> > >
-> > > On Fri, Nov 20, 2026 at 10:09:49AM -0600, Anirudh Srinivasan wrote:
-> > > > Hi Yao,
-> > > >
-> > > > On Fri, Nov 20, 2026 at 4:47 AM Yao Zi <me@ziyao.cc> wrote:
-> > > > >
-> > > > > On Thu, Nov 19, 2026 at 09:47:07AM -0600, Anirudh Srinivasan wrote:
-> > > > > > When U-Boot is running in S mode, the DT passed to the next S mode stage
-> > > > > > can either be the bundled in DT U-Boot and the previous M mode stage
-> > > > > > use, or be loaded by U-Boot from some boot media. In the former case,
-> > > > > > the M mode stage can fix up the DT to disable the M-IMSIC and M-APLIC
-> > > > > > nodes on an AIA system (for example, OpenSBI does this fixup). These
-> > > > > > controllers are to be managed by M-mode software, so this is done to
-> > > > > > prevent S mode software from trying to probe them.
-> > > > > >
-> > > > > > This fixup doesn't happen in the latter case because U-Boot loads a
-> > > > > > fresh DT from boot media. Add a fdt fixup to do this similar to OpenSBI.
-> > > > > > This gets rid of prints like this during linux boots.
-> > > > > >
-> > > > > > [    0.000000] riscv-imsic: interrupt-controller@a0000000: no parent irqs available
-> > > > > > [    0.000000] riscv-imsic: interrupt-controller@a0000000: failed to setup state (error -22)
-> > > > > > [    0.000000] OF: of_irq_init: Failed to init /soc/interrupt-controller@a0000000 ((____ptrval____)), parent (____ptrval____)
-> > > > > >
-> > > > > > [   10.727605] platform cc000000.interrupt-controller: deferred probe pending: platform: supplier a0000000.interrupt-controller not ready
-> > > > > >
-> > > > > > Reviewed-by: E Shattow <e@freeshell.de>
-> > > > > > Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-> > > > > > ---
-> > > > > > Changes in v3:
-> > > > > > - Reword commit title to say M-APLIC/M-IMSIC and drop references to M Mode to avoid any confusion
-> > > > > > - Link to v2: https://patch.msgid.link/20261119-mimsic_maplic_fixup-v2-1-e29e04bf1b76@oss.tenstorrent.com
-> > > > > >
-> > > > > > Changes in v2:
-> > > > > > - Rename riscv_aia_mmode_aplic_imsic_fixup to riscv_aia_mimsic_maplic_fixup
-> > > > > > - Drop most references to OpenSBI/Linux in commit message and just use M-mode/s-mode software
-> > > > > > - Link to v1: https://patch.msgid.link/20261118-mimsic_maplic_fixup-v1-1-52dea8f39779@oss.tenstorrent.com
-> > > > > > ---
-> > > > > >  arch/riscv/lib/fdt_fixup.c | 86 ++++++++++++++++++++++++++++++++++++++++++++++
-> > > > > >  1 file changed, 86 insertions(+)
-> > >
-> > > ...
-> > >
-> > > > > > + * riscv_aia_mimsic_maplic_fixup() - Disable M-APLIC and M-IMSIC nodes in DT
-> > > > > > + * @fdt: Pointer to the device tree in which nodes are to be disabled
-> > > > > > + *
-> > > > > > + * On RISC-V AIA systems, M-mode software manages the M-APLIC and M-IMSIC.
-> > > > > > + * If S-mode U-Boot loads a device tree from boot media, the DT nodes for these
-> > > > > > + * could still be enabled, so fixup the DT to disable these nodes before passing
-> > > > > > + * it to the next S-mode stage.
-> > > > > > + *
-> > > > > > + * Return: 0 on success or error otherwise.
-> > > > > > + */
-> > > > > > +static int riscv_aia_mimsic_maplic_fixup(void *fdt)
-> > > > > > +{
-> > > > > > +     int offset, err;
-> > > > > > +
-> > > > > > +     /* Disable M-IMSIC in APLIC-IMSIC configuration */
-> > > > > > +     fdt_for_each_node_by_compatible(offset, fdt, -1, "riscv,imsics") {
-> > > > > > +             if (riscv_node_handles_mmode_external_interrupts(fdt, offset)) {
-> > > > > > +                     err = fdt_status_disabled(fdt, offset);
-> > > > >
-> > > > > Should we use "reserved" instead of "disabled"? Quoting the devicetree
-> > > > > specification,
-> > > > >
-> > > > > > "disabled"
-> > > > > >       Indicates that the device is not presently operational, but it
-> > > > > >       might become operational in the future (for example, something
-> > > > > >       is not plugged in, or switched off).
-> > > > > >
-> > > > > > "reserved"
-> > > > > >       Indicates that the device is operational, but should not be
-> > > > > >       used. Typically this is used for devices that are controlled by
-> > > > > >       another software component, such as platform firmware.
-> > > > >
-> > > > > Another possible problem is that these loops overrides the status
-> > > > > unconditionally, turning already "reserved" devices into "disabled".
-> > > >
-> > > > I don't think we should be using reserved here. OpenSBI sets the node
-> > > > to disabled, so we should be doing the same thing.
-> > > >
-> > > > I'll add a check to see if the node is enabled and disable it only then.
-> > >
-> > > I think this is probably an OpenSBI defect, please try raising this to
-> > > OpenSBI upstream.
-> >
-> > Hello Anup, I've added you to this thread as you had added the code to
-> > OpenSBI that marks M-APLIC and M-IMSIC nodes as disabled. This current
-> > patch does the same for a DT that U-boot loads from boot media (hence
-> > is missing the fixup OpenSBI does) and passes to linux.
-> >
-> > Do think these nodes should be marked as "reserved" instead? It seems
-> > that "reserved" is to be used for devices controlled by different a sw
-> > component, which seems to line up with what's happening here.
+Hi Ilias,
+
+On 11/25/26 8:41 AM, Ilias Apalodimas wrote:
+> relocate_code() on arm64 is called from _main with sp and gd already
+> pointing at the relocated area and lr pointing to the relocated copy of
+> relocation_return. By that time pie_fixup has already run, if
+> POSITION_INDEPENDENT is enabled, the image is fixed up and plain C works
+> fine, like the rest of board_init_f(). So let's convert it to C which is
+> much easier to read and maintain.
 > 
-> The next stage after OpenSBI is S-mode so that's why OpenSBI disables
-> M-APLIC and M-IMSIC DT nodes because S-mode access to these
-> devices is blocked (or disabled). For DRAM where OpenSBI runs, the
-> situation is different because typically we have on DT node for covering
-> all DRAM banks so disabling this DT node does not make sense. Due
-> to this, OpenSBI marks portion of DRAM as reserved where OpenSBI
-> runs from.
+> While at it change the behaviour and order of cache maintenance.
+> Invalidate the I-cache after the D-cache clean instead of before
+> and add a 'dsb' between 'ic iallu' and the 'isb', which is the
+> architecturally required sequence.
 > 
-> To summarize:
-> 1) Disable the DT nodes of devices which are not accessible in S-mode
-> 2) Reserve the portion of DRAM which is not accessible in S-mode
 
-I think you might misunderstand the things which we're talking about.
-"Marked as reserved" here means change values of their status property
-to "reserved", which has nothing to do with reserved-memory nodes.
+suggestion: can you please make those separate commits?
 
-"reserved" is defined to be a possible choice of status property in the
-devicetree specification[1], and represents
+That should help us if we ever need to bisect this change. If it was 
+only in the conversion from ASM to C, or if it's related to the cache 
+changes?
 
-> > > > > > "reserved"
-> > > > > >       Indicates that the device is operational, but should not be
-> > > > > >       used. Typically this is used for devices that are controlled by
-> > > > > >       another software component, such as platform firmware.
-
-> Regards,
-> Anup
-> 
-> Regards,
-> Anup
-
--- 
-Thanks,
-Yao Zi
-
-Meow-mrrp-mrow, I'm a cat.
-
-[1]: Page 14 of https://github.com/devicetree-org/devicetree-specification/releases/download/v0.4/devicetree-specification-v0.4.pdf
+Thanks!
+Quentin
