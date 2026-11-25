@@ -2,149 +2,150 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0483606A332
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 17:54:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7ED08606A339
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 18:12:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VhSveJtq;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cx2VsuKH
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=idV5UKZC;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=j5hjPFN3
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9BD9F80DF9;
-	Wed, 25 Nov 2026 17:54:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B173C80CB9;
+	Wed, 25 Nov 2026 18:12:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GdOMWqPckdYf; Wed, 25 Nov 2026 17:54:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C987680BD6
+ id R2vEZnnTY9zG; Wed, 25 Nov 2026 18:12:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 16E6580DF7
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795629255;
-	b=YzrsOIRf/E5e+snRJb2/77kaw35Ev5e1qMEKTaipBRDNyJkBKh+/cZN/KjkiLf+W+QdQ
-	 NRYeOEj2nesEljvFg0I9OfZ8CDu/SJUvIEe8Ic2B9hFQWeCuzaWL8cJsAYSTC88PftAok
-	 Lj47kKUq3hnkMtpqxc4PWGNqEQxIQRBDg6X+uN/wXz9aoXxFLsQwSl+/KguZqQt9WkkX3
-	 qXe15ptGf1F5ipSQnPn4CQCDcZI35V5XSwNwH0ybh8Zz3idVu8GXk4ytIikJFrxyA5Bpo
-	 2HwQo0R6Ddg+//cMCqrvosQ8HBIMjQzozn8l2VwKdzhGWvFqM+GrlnGSXL9HERlE9xg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795630368;
+	b=av0C+IBlIrTh9Uo/ZAzMuiiKYpLrmEpghAtx0Tjacni6gipO+UN4xuwOfF6eSbys9vEX
+	 uwTR8hdJC73gwSWICnV9Psor1KaQC7AK4H03fk8rJ+s2VgN1oNshbGNwzn0n71t0P4+SH
+	 oEpkhrwuaiRoVw2Jd7ywnNyzp0rCoGuxxosRAvoludQEXps7ZM5NahXNsfGp4sIJiaocq
+	 C/fe+672LDahfrce+7pRM3bafI//tvWq1zrq5XfWuH2REiaKY3Jr784bP2GlE9pc0P5Pu
+	 dl2v1L6B+7ueQp75kx2T/KiXm4U+jb12L2cCWMRpyppobt3DT6MpBRnpPGjr7Rpl0eg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795629255;
+	c=relaxed/relaxed; t=1795630368;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
 	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
-	b=kYp/gFroYjpnBvPTKkogAUam/+6JDRn3r1f/QiFXRS0lGxp69YGdmT5D6Ymr0RT5f1Hh
-	 EzftJXCARpm6+myznavkb8SVLY+W86RDUvOYtTbbR8qd1W6FDAaFN/pXnVgo02FFBpKCc
-	 1JTEl3U4rxy/B/yvzHmLg25rDkaam8w2kI54nCqo98oHkY1GwtmGhmoMHVJJ4zFYA4uYM
-	 LqMzvPw+DVtLVgGnYzLzUSlBxBeR+Y8yBlOQEWlXdJBOHQZMkiHBjUxQqEW24dENrRNVD
-	 UrXhH+OJTdBsVvUz26+4adaJwahrxhLV1Fm5qaRvjnpudahogJaAZc19+4qhaCvFpLw==
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=2YKWEz0MAzHFVKMOl3XQ/Gzc08tRuYM+nHG8EOvJi+U=;
+	b=KgtHwQe/dlBwgCRNyPp/4LtOJCIdOFG+wGrZjD3Qkd/3WHqqUOSZd6xVmelw+j6Su44m
+	 qS5L37P0GHLotN4bonb83RzUXFj1vwsBCbPB28zHI8z3t/MVK8vB9+hudHK39HgKxQ767
+	 ba8+9FolITecOWEWWG6BjN58ss2pr+XKGvINyoy1iQ5oqcRPGxkSzSGlpSQZtLcNTfjnG
+	 uyo2zWG3OZwq7jwdQWRySO9DpwleGZ2Tz39UKcZaGV0DePpNUCmG37mxepsD07FW8fCmU
+	 oazOgg1Eeg+Is7YWB6QCKdXgYyu03NeHHT7XsGd+0YRWavFnpSytgaF5VK1IHelDmEQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cx2VsuKH;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795629254;
-	bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
+	d=lists.u-boot-project.org; s=default; t=1795630368;
+	bh=2YKWEz0MAzHFVKMOl3XQ/Gzc08tRuYM+nHG8EOvJi+U=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VhSveJtqV95/7te7aQjmstFDlfrRvnlvKCoxY0gzozr7ohL3AUsYCD/UMETjqF+zA
-	 UZjiJpmt1gKBtsnvbRch4K/FQlr1m4qwjbWcFmcFRyJzr5l4YtMQZQfDGElRmAoyUu
-	 0itvySFaznuWN8MixgNq7QL4RHCirdMZXQp0DKH5gjWTNWbxQcb904u2oYqZFW78/w
-	 beb6zLa0P3VtoNGnVAvQmAxzT0Rs271wMOVWauiFcX90ucyViyAyBGX2Jja/lwJ0Il
-	 ibEX8ZfJd7b1I1WmmzbvG6u87WVy5QMWzSrDsby+V2KLQ+4h9D/2ajX4IwS6+OdRbj
-	 8Hf2b6jdWFHyg==
+	b=idV5UKZC8e4t8Hnw1khV0Z9JTv97xGtQ7YQA7o4X5g3EezSoQsjUB/AgbbpmofJ90
+	 bToMjDKV7ykbpoWISbvC7II31KjyK6ZCeiIVNVnrSHMxtdtU8d8lULP/Zk1t9I22vK
+	 BSI/lYaJjZNWGOSO2EOnVaVRoSOZrXE3hp6ugk3zUsQV4j+GogkGnVZuCn4dUxWZdM
+	 pe9JVPSrnvZYlcIalihqd77ozSUPICq01MJEU37Ybvs0F4M28XTu3kpEQvwxXk0E0o
+	 8460n08ceBvZuWsuEwMQZfcCjkJ4exm/YTqynb+2WJ2CugFqVzy8j1searb8RS3iE/
+	 8/Hq5102ZGGzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C987680BD6;
-	Wed, 25 Nov 2026 17:54:14 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 670501C9
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:54:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 16E6580DF7;
+	Wed, 25 Nov 2026 18:12:48 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BCFC543
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 18:12:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4C9CF80BD6
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:54:13 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A34C6400CB
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 18:12:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id J_XD2bwQOkdK for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 17:54:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5744C809C0
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::f2a"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gHIw9ugrmX2J for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 18:12:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 8E83240050
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::230"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f2a; helo=mail-qv1-xf2a.google.com;
- envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ client-ip=2a00:1450:4864:20::230; helo=mail-lj1-x230.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=cx2VsuKH
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5744C809C0
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 17:54:12 +0000 (UTC)
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-921367ef6b3so43067626d6.0
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 09:54:12 -0800 (PST)
+ header.s=20260707 header.b=j5hjPFN3
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8E83240050
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 18:12:45 +0000 (UTC)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-3ae85add4ceso43327601fa.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 10:12:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795629251; x=1796234051;
+ d=gmail.com; s=20260707; t=1795630363; x=1796235163;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
- b=cx2VsuKHNaQKdc/dcgt1Gwah0qUqS8wph/ePJkRrf1uuje5piyadRnc6KutYT9l0X5
- smKIkF1V2beGRA95WrLCM9tGS+T8toYtuBPUPP+9QixGmscWAIfGd8LyAPYkHa/eRF/T
- N+Ohh8qy1ZS4jn9hLhagw6ys4yWOLuV6YjdOmXhXtetk5aK/f4Py0MxE9E392ZZ2/9qg
- +VIMaoJekwKhhoV4f1cGLVUldk8jPXvQjxfShiw7ZjbkDDbfZ+mv/TWUxy4+LtsamKRB
- 0gu9AOubUmCtXCsaJDFkyVibeMyIpKHv1hwOts1b4trMI6lB3WXRtbGNkOMk0h7xAkDS
- uYeg==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=2YKWEz0MAzHFVKMOl3XQ/Gzc08tRuYM+nHG8EOvJi+U=;
+ b=j5hjPFN3SHGKv/dnOYYvfsO0kgAPUoKVpQj6WZkgzcjVbmiXWZPgbtEA/zhIVB/6a8
+ Wf++b0sdEoYCsHzB0zZEDFSxNoqUj+NEa7BGM9jwt7cgVOxk2kHko8PxSX3NJ6XPnMYP
+ NoaEttV+t799u/Qhsv8zAHI+vNO7kXA43bVAYPXhrPe4ah+f96LHXLBpkv/43AhAMWnB
+ h+ojKioqLhw1PKVud6K8+cmT1HX+t7DanX0pHmd+RPlY4gubNeJb1284QRHWcM3FLhxE
+ TfxQkyvpMCyl33/B6Z6+InRZGH5bbZo6kGDPpxLmCXUZw7Anq2RyLM6gBZ/N86F1bW3H
+ ayrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795629251; x=1796234051;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=RGkG3dWLlm4fcpE/sJvHksdJNKhDjFwKtyvGuWcq6n0=;
- b=wonJ7qcgtR2AdFhfBqRCNXDpwaYvqRx5QNM2YMSbx5Wm20vYUDwtgihJwHZgkXgQAO
- 9nuzTjT5rAeHYWlm9zH8LeZ3Ej80Jkk/ASqmhu9foBunjAKX1Tg3l3ZseYNBs4l12OB7
- p5Wp6rXv6DWdJu9eJXLdiLetFaQZxy8uTJ5BvyttT1CX1dIxc9+ICY1SIxNe2aoOFJb2
- CIIwLjeGuJeTwRg3SvnHh6ddzWnSIi82MXrr8ZdfVnmXrmbLv9OHWQHyOFSQpToLBqju
- Ve9nS/920BeYhd4EiM+6BFDx5Izy/4BIkpFpdFLmQ2yWfdcq1ruWA6JK1Jk/K1kbTzir
- gOoA==
+ d=1e100.net; s=20260707; t=1795630363; x=1796235163;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=2YKWEz0MAzHFVKMOl3XQ/Gzc08tRuYM+nHG8EOvJi+U=;
+ b=0RCqLj0wNRUa4jxwucIbiXHgpNUXAN78P/w9Mxt0CPyJE4IhA4cY41I2i5/qXskttz
+ Aq/VNF1AwmhgcuNdXCzn6VrUXutuUn0C5AdMA0Ib0rW6CEgESZTBLoxeujtcZIadsoFG
+ LLp5OvlvWiJvhTSikg9jJXGsgvc+pG0bJllZ0mn2+BvSS/+1592+ZUagKz3uPixr/GJU
+ cCfCRPm35oFMBBKRYTGXtfJyngZ4sUx2eHmgQtXepvxhaUbGh8Xr0j0auwcDCC3KPjQt
+ aicQPYmrA+JEE2iGuiPEYs3nQCr7gxczSEhfnUbf0CXTIA0IDjBRf32NCJ5s0EhRKSUj
+ CCBQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErG86xwg4FKJV3aC/pDfH1HnqvOd65Jm+LiyCt71aUqFKKqW2OJL6wj9sC7oSz/Ay9Yt7P8PVfM=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/1vUH0bsK8YVC2R4SKZ4R+Wx9C8VlfuDWqbXvZYcfr5kZtkGSX
- OQgqLkfF2FlEhPBcODBz4Mwybzy/ucK2xOLYj2GFjLb/QBB3GK79fEP68UsbOVS0H23T/l+Dk9V
- iqGqmKyh4uy4xE5tMA0D9RWNfBz80dAk=
-X-Gm-Gg: AZFdTZcEMF5hWTds5CGbtizGtgIHhiRePI4mpXIKd7R5mtUtSzk+r1q0Ety7W96JYMV
- 48nuHYeRWkLuDoA3frbk83XHr7S3GWnVQGrrsVzpErQTSU/GaSLujK2TKo0NRK/XTNa8NnbYQ+x
- Ii32nxLdx5+AAVIgWmN8Ib0lfQpdl6z5jS5v6Izl8ns9YiOWku16JSFwMjF2MC4DTJUuMouuSPJ
- MhfxCzH2EPXNDCUmlrYkT8eI3U97/Xl+R4fjUgbEUHpb5uu676OE0ZZRvNfV2A0SFChdJ6WKwgk
- Hz26BKLf9TIcGd370RuWc2XcjPYGbx+p6u3g2JLsp8YLa0T+LLPIvHMSLbOcaIiAjqHrCACuXWX
- T4+GznXUlaUNjH88HYEcYsM8wTk8VBtdyRfQhPM9R7e9QU6Fgb0jTEVb+c21On4hS0JIHT4TZ3L
- HrQjOQf+EjLqSChZwBeOUeOBxKPElY75iqJhEMacvmqNdXwAX2oA8xt0+/3wvcY/r8ZnY/A1y3S
- 1+gJBgE/CdV7mJxjhjgmv0vggliHjnK0VjAs4bcmhbHLybFCTwcYH+a
-X-Received: by 2002:a05:6214:2b8a:b0:921:656a:9e29 with SMTP id
- 6a1803df08f44-921656a9e5dmr135069256d6.54.1795629250825; Wed, 25 Nov 2026
- 09:54:10 -0800 (PST)
+ AL+hErFDEXnsocQ+/9rAu0VxUu3WLv3wvTUwGxQhfHh9ESp6x8HGKN6n57pXytZX3Zmcjgie3YpNB5w=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9OVHGO9E8MSQNGztlECC0bHFbQPYoQjCi+1QnrvQEDZBoVFt6Y
+ kbf3ikMBGtj7DRl5dFXVqzkN2sPxGQt5uCYmSvDpE9u1cUh8T1me1CMikjtTvZW2h/EKJsj+pOD
+ maVHKMBBnRCMIA6PJcD3qVN3dPv2JDRI=
+X-Gm-Gg: AZFdTZeXt2pikUTTeF0KJw8/0wQWuZUo14AFddn6NGTDe+U42gipOMLfjV4BKoVX8KZ
+ wHMyC21Weocv90FECVBVvg5rHLQTlutzfmkn04nKaASd9O6rjkDwzDIVZWXzHzf8OrEiifecsB9
+ NsHa/Vvi0OFujMGxRjJEuGhdIB+SFZNw7xOAi1FIC03aYDV3u71RBCieZNxSSGvynFj6WY1uJOj
+ hI/YkqpLsyjN+ssMrQyINMEUBZGTxBsZVklIRyZ5aCZKTXMBdEoyTHNRA2opby23QfrdNIPTYxl
+ jKi47EBnfPE2SePxh4UwMjkC7mDLL1Q9n++WJOPMDPPvJc4ruesB+JjBckqZ9ZclzaMmb69DM31
+ m7hctjh4b8CZ7GLLOpTtfxhYxTGGDP123IANzIbwrHPvCp8VFCI2YU6z6Bd8YwvTJ3+a9R9AygX
+ 82Oq/WYVegZ6YaFO1FKNhlg00LGQ==
+X-Received: by 2002:a05:651c:a0ca:20b0:3ac:dda0:efdc with SMTP id
+ 38308e7fff4ca-3af935b15edmr16712361fa.16.1795630362617; Wed, 25 Nov 2026
+ 10:12:42 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261123-submit-lwip-wget-httpdstp-v1-v1-1-e1759174ab9a@gmail.com>
- <55dd0a77-5315-416f-bbe8-e952a03d874f@mailbox.org>
- <CADvTj4p9LJ+kwDSZ2fyw-P3fLEewbxN587dvF2OrpKQdY=k3Yg@mail.gmail.com>
-In-Reply-To: <CADvTj4p9LJ+kwDSZ2fyw-P3fLEewbxN587dvF2OrpKQdY=k3Yg@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 25 Nov 2026 17:53:58 +0000
-X-Gm-Features: Aa3M54pAu3Er_hNhSW8-3lHVzbBhVWQVLTuKixYAYnAcXYalZYHdKAcy9_nG5Ts
-Message-ID: <CALeDE9M-r=p9TNEZEw4-4Ju-rKR3_wJx0ok_dgy4ykqGAADzyg@mail.gmail.com>
-Subject: Re: [PATCH] cmd: wget: honor httpdstp for legacy arguments with lwIP
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.u-boot-project.org, 
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Naveen Kumar Chaudhary <naveen.osdev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/alternative; boundary="000000000000a4d35206611d83e3"
+References: <cover.1794391398.git.nora.schiffer@ew.tq-group.com>
+ <afa440adc4fd913db84f3f36e2fb0d9e2c3ba953.1794391398.git.nora.schiffer@ew.tq-group.com>
+In-Reply-To: <afa440adc4fd913db84f3f36e2fb0d9e2c3ba953.1794391398.git.nora.schiffer@ew.tq-group.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 25 Nov 2026 15:12:31 -0300
+X-Gm-Features: Aa3M54rFBh0SvFgnyCTaFrgBEQmnZT0VMKzA2Fu1ZMeUT5bgMfvKyZ57SzB8dSI
+Message-ID: <CAOMZO5BnAEnnKv2g9GEMKP85WKAMTpbr0rT=2qSn8uzb72Vn_g@mail.gmail.com>
+Subject: Re: [PATCH v2 3/7] power: domain: rename imx8m-power-domain to
+ imx-gpcv2-power-domain
+To: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Cc: Stefano Babic <sbabic@nabladev.com>, Marek Vasut <marex@nabladev.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
+ u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -154,91 +155,49 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-4.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---000000000000a4d35206611d83e3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Nora,
 
-On Tue, 24 Nov 2026 at 10:00, James Hilliard <james.hilliard1@gmail.com>
-wrote:
+On Wed, Nov 11, 2026 at 7:13=E2=80=AFAM Nora Schiffer
+<nora.schiffer@ew.tq-group.com> wrote:
 
-> On Mon, Nov 23, 2026 at 4:37=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.=
-org>
-> wrote:
-> >
-> > On 11/23/26 11:13 PM, James Hilliard wrote:
-> > > The ADI boot scripts set httpdstp to 8000 and use wget to fetch
-> > > ${serverip}:/fitImage. With lwIP, wget still connects to port 80
-> > > because it omits the configured port when building the URL.
-> > >
-> > > Use httpdstp as the default port for [host:]path. Preserve a port
-> > > already present in the configured server address. Pass HTTP and HTTPS
-> > > arguments unchanged to the URL parser so an unsupported spelling is n=
-ot
-> > > reinterpreted as an HTTP request to a different host.
-> > >
-> > > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> > Do we actually want to keep perpetuating this legacy behavior or do we
-> > want to leave this behind and not complicate new code ?
+> --- a/configs/imx8m_data_modul.config
+> +++ b/configs/imx8m_data_modul.config
+> @@ -116,7 +116,7 @@ CONFIG_GPIO_HOG=3Dy
+>  CONFIG_HASH_VERIFY=3Dy
+>  CONFIG_HUSH_PARSER=3Dy
+>  CONFIG_I2C_EEPROM=3Dy
+> -CONFIG_IMX8M_POWER_DOMAIN=3Dy
+> +CONFIG_IMX_GPCV2_POWER_DOMAIN=3Dy
+
+I don't think renaming the Kconfig symbol adds any value.
+
+Please keep the original name.
+
+> +config IMX_GPCV2_POWER_DOMAIN
+> +       bool "Enable i.MX8M power domain driver"
+> +       depends on POWER_DOMAIN && ARCH_IMX8M
+> +       select CLK
+> +       help
+> +         Enable support for manipulating NXP i.MX8M on-SoC power domains=
+.
+
+This help text is better indeed. I suggest only changing the help text.
+
+> --- a/drivers/power/domain/imx8m-power-domain.c
+> +++ b/drivers/power/domain/imx-gpcv2-power-domain.c
+> @@ -137,7 +137,7 @@ struct imx_pgc_domain_data {
+>         const struct imx_pgc_regs *pgc_regs;
+>  };
 >
-> Not sure, I figure maybe try and get feature parity first and then clean
-> up unnecessary code afterwards to simplify migration to lwip.
->
+> -struct imx8m_power_domain_plat {
+> +struct imx_gpcv2_power_domain_plat {
 
-Personally I find the cleanup rarely happens and in 10 years time it'll
-still be there.
-
-I think now is the right time to move, how long has the code actually been
-there in the legacy case, we haven't supported HTTP for that long.
-
---000000000000a4d35206611d83e3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, 24 Nov =
-2026 at 10:00, James Hilliard &lt;<a href=3D"mailto:james.hilliard1@gmail.c=
-om">james.hilliard1@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">On Mon, Nov 23, 2026 at 4:37=E2=80=AFPM Marek =
-Vasut &lt;<a href=3D"mailto:marek.vasut@mailbox.org" target=3D"_blank">mare=
-k.vasut@mailbox.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt; On 11/23/26 11:13 PM, James Hilliard wrote:<br>
-&gt; &gt; The ADI boot scripts set httpdstp to 8000 and use wget to fetch<b=
-r>
-&gt; &gt; ${serverip}:/fitImage. With lwIP, wget still connects to port 80<=
-br>
-&gt; &gt; because it omits the configured port when building the URL.<br>
-&gt; &gt;<br>
-&gt; &gt; Use httpdstp as the default port for [host:]path. Preserve a port=
-<br>
-&gt; &gt; already present in the configured server address. Pass HTTP and H=
-TTPS<br>
-&gt; &gt; arguments unchanged to the URL parser so an unsupported spelling =
-is not<br>
-&gt; &gt; reinterpreted as an HTTP request to a different host.<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: James Hilliard &lt;<a href=3D"mailto:james.hilliar=
-d1@gmail.com" target=3D"_blank">james.hilliard1@gmail.com</a>&gt;<br>
-&gt; Do we actually want to keep perpetuating this legacy behavior or do we=
-<br>
-&gt; want to leave this behind and not complicate new code ?<br>
-<br>
-Not sure, I figure maybe try and get feature parity first and then clean<br=
->
-up unnecessary code afterwards to simplify migration to lwip.<br></blockquo=
-te><div><br></div><div>Personally I find the cleanup rarely happens and in =
-10 years time it&#39;ll still be there.</div><div><br></div><div>I think no=
-w is the right time to move, how long has the code actually been there in t=
-he legacy case, we haven&#39;t supported HTTP for that long.=C2=A0</div></d=
-iv></div>
-
---000000000000a4d35206611d83e3--
+Please keep all the original function/struct names in this file.
