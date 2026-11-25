@@ -2,161 +2,116 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8355606A31E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 11:44:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5945606A31E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 12:04:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uuGvnzMh;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=MOEt1TdM
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sv7rvxuD;
+	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=Icc15gCh
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 842896064E;
-	Wed, 25 Nov 2026 11:44:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A04756089E;
+	Wed, 25 Nov 2026 12:04:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OiMeH6x7mwlH; Wed, 25 Nov 2026 11:44:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AAA7460687
+ id RIG-sC2IMTjI; Wed, 25 Nov 2026 12:04:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8886C6088B
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795607058;
-	b=fZ1CxGfrG/Wk+hn+T+6dOYH43zJi9ZQLYxodTPGUlfQbKGySssMQyRdYh22MKMPerdkr
-	 PkucuF2yOz9ivQ98Nw8GpkTeeTD5mTJo+q6E1jlBPLoJ+TV849AkWWwqJEvQUIUKhwTh0
-	 SGtYyiXJEXTccnBd92oC7009RW9A6P3IhU0XPZrq3iJiaAr5P9UKraOnjM0MISl0n+ilT
-	 Je7QslcRwNrZYBSKQ5OeawIj52Oz422Txl1jwxavWi6erEai2uUDC9sGAKPBA6w/rUiL6
-	 RKa/D7Q3flOl/zNk6XGoRUDn5arRRLSEueTMsRvY7IfXV67JIOsfvBf11Lqt2wv+PJQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795608280;
+	b=F8aq1zc/tGS2r/UcBiPu4b4PjViQOv/smKGeXTZV50a8I6tRagbtFYS27Zdo9AU14YXk
+	 KVnUFfSIuYpvEzwruuI4hQO4MoD6uTSLBobiqHYRysSWYgwUrVR5lnsxPMGWSrAc8dRKP
+	 LRo1j/8rVIqI0v+q/DmnoQA+/mJpQMtkFefSofGRfapDDSBlbNVMdVfFyr0Mty2aP3XG3
+	 d0ras/r5UNEhrRAXHf2536IxOs2C9RzunvJmcg545LSUk32NCCnqWGXFzvJDPhZl61c/H
+	 8MzoLBL7pp7EtB1CLYMEB9Ge1RQzZIW4coxCOkrhkwQVwiZVYnz1EieXYhiPIaO7KHA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795607058;
+	c=relaxed/relaxed; t=1795608280;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=zq2x25je+Fr7FcY12Sny/JIqd9UwIzd/SpSWk8woSiE=;
-	b=VK2I3WhBVjAASUSBle72FFd9ATSn+N+pAbaO6xM2b3NPJWNQ6BqRU3gH7N8tHs20+IJG
-	 QETJUltlP5UNyHbFe2hnMr7vA2/AQAiXwBBgwW0mbmIlaAaA6YntuhzHjCVg/+yhGhWSk
-	 oMqbhPySdlgPWHR8cVEokLLpbp+wBSdPJp5PM9EIhFiRrZK/eeqfWXBLXSnbOEqDSXIw8
-	 uvprFSdtNM00xs3OtTzpDIeytAv5XUenq7Ad231wnmzi05z7N1E3L0MQAx7D1sh62UMJX
-	 ZggDKjqgqZw1kTxEbH6TbpUR+fdlbkgSGZs92SZQBr6SCqSF7NycFLKFk1VGyGLvteg==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=E2VdUNw5MBUtfHIL5c74U8dpfe2CQUrWSzsfVGvsioY=;
+	b=b+ycNmoAscLhctw6LMm1+EvH0ea1cALwJhw8kvPfqg6t8sQMlf3NRbj6zQkzcFr6IkEm
+	 +8AxEqw7ZER9Oz5gJ2MaKt9swz5Pf0K7zGb5+hb/TeE31Jj/rmKRPbQMnxwOVmzbvE8WY
+	 v8UAHfnYFp+/BAKYRwZdvFUiwPjBDIhpsxAvDTHC/utrRx64+yinENc2AaZAnDNw2P+MV
+	 y8c5J2S5JWgB602u7rtqLQQPT78i5LvGiBeg7RgpJbw3I0bHp7zf1plK8rmUQZFM3C/Ly
+	 1OiEsGq2rhk2tik9wUiAD9iY5XHKxmHTBKukrqjbn6axm98x7z8qX9skChJQM5ljjDQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795607058;
-	bh=zq2x25je+Fr7FcY12Sny/JIqd9UwIzd/SpSWk8woSiE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795608280;
+	bh=E2VdUNw5MBUtfHIL5c74U8dpfe2CQUrWSzsfVGvsioY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uuGvnzMhmpW4+7pxmQfOkynpdNSiSs4XEoLo8QaIvs18v0Hm+OArwoq1FNlfMfp3t
-	 LvgEHy/iP25TIp3evORmuk0nclBgHVhNyZoC7HqiGg/QRROXbq0atrevazdfLR6l32
-	 hLKR3vKABVSAPIyPUih2i10sj5Yd8f6N4XwBBLdnyCD6Tm4UKt5vswsabceHGlqp8V
-	 EWOhCea2Zb35SkDSXBG/GQPyR3x+CUiL9BhFrWfXzdF/oFAcDoBfdmoIT01uxk6/nb
-	 z4cIuK2IuHs/si8I67hyeBbVmkyIyQsG7I+UsQnMdGR+FE/dyn2ISOl1Gs/32xF7o8
-	 GTrp/WVCXt4fA==
+	b=sv7rvxuDq2YmcGz1uYC55nsbLL5Qt0mbR1nOCNUaSLJf5IwQVfk6iIQ6/VIdDVRz9
+	 BiEUZTWq726mJo9l9sBiAsmDYx9Q7HQsQ9RU/NL/nKcjQ0VPZ6knUaM1fETt0M0+za
+	 UubzmjSuIi6zG06za4o/Z2hCBD3u6u1427uPr7XzYPBJjDiT7gxklQamgzL2fk3ows
+	 che9E21KDnPusJkdXI0WfDUTNUi9HV3RUNmd0qUnxF1055bwgGm2HGFnrnrDD9733G
+	 Ool43rH6s/yiEAODFO+s3uGuxGqniN44lpYqNcSgd7pqTKf7WEc1BV2Cp2Tc5JeY5v
+	 OZysGXq86eJdg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AAA7460687;
-	Wed, 25 Nov 2026 11:44:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3604A26D
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 11:44:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8886C6088B;
+	Wed, 25 Nov 2026 12:04:40 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6BC51260
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 12:04:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 27002406A4
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 11:44:17 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 690D680C26
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 12:04:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qShik5mcoh7X for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 11:44:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 044084065B
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=MOEt1TdM
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 044084065B
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 11:44:14 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4bb5b8ef642so50392745e9.1
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 03:44:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1795607053; x=1796211853;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=zq2x25je+Fr7FcY12Sny/JIqd9UwIzd/SpSWk8woSiE=;
- b=MOEt1TdMlNEIKUI9R1ipj//WphdWTQqBnNrvqT02fIjti04BVBgC4pyeOZrlATa06T
- vnSubzfvy+eq4sVrUN3YlujpzcYVEhvX7ayh90fvJOm6DH1ZPwvPuIG5xAWapR0Tcc8M
- 1E0PfGzkbE9cfpW0da61sOA0NumVxltQfkgiVMM+1ZUBwaXKhBXYx2F9BeoBvolLuQoG
- YplzLeAE+Vh0WB7dAoo1wz5foygB2ZNMSa/XE58ZWTdA32ynMgXSw5oGLm5PybdX3ITY
- wKdDHIT/k/xqvoYQOrWDHQeyvkxB188RcDBp10v6JK5IqM7kFga7zZ/9w5cvxe3Tbt5O
- Xlcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795607053; x=1796211853;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=zq2x25je+Fr7FcY12Sny/JIqd9UwIzd/SpSWk8woSiE=;
- b=GPM/oGWE6rmhPtYV9p3X+1uPbxgkctOEDSYacLRZ61vF6kXc6xKK7L0L8cAaJLgDcw
- MVxFmfDOPmwSCCC6QRIycJqszySaw5/pYRO4z295ioF881R/6RfxcYMV48q4UdQAlyEA
- RrDd39Hacd4WsNC2asqhTz7e4IJEQy8n9WUsBt+A7cgFmlKidVj97ludwzmzFKEE5lgO
- 5OaY10ji1vfMWNLwCKxP2U/mxcyF3CBO0W1GQgEJUGJwa9h3RsBlGzsO4GwACa2zz4ej
- uLx/2nEPXgKLC0pY9OC8Mx1ywa3EUxmf64rLzKRcfxINZvLRVjHu6B+kbQh/e+73XqWU
- 7/Gw==
-X-Gm-Message-State: APuU4Z9qmymo30iYJxvGbq12a/+Vu9LStSars++JHKfVikfzDzHkknEs
- pdOyx9PRetiasGFyfQ2ho4FV2mz9UFkdMDC1BBSSKGmF7Yb1yn/rzBB2OHBj7Fq93nM=
-X-Gm-Gg: AZFdTZcbRrbgwrLY1bC+R8fMfXjq7w/aSQF+PIPseWGc0p5BemeEScpsn1JhFxRCSi8
- AKEjgc0U2UF9ep0o1BA60xtsOjbYeqrqUqUwDluwHEh4gkXmDtsB8i4nZNBGmd78KBuu7BNGchR
- R9ysTpHvntUrqOiuewC+/Dr6fQ/rFdF4T3VlwA1IMEATV0xQRfeOKGvbVfLUHmQ65AJogfDSXAH
- B+wS5CgBr95iKKuc7JONqyOXo0G/zNFWQV4xvk7WZXpyyQHDlahaUkc9jmWK9BLrglj2pLGKX+/
- Ie/oRHFbfdvoh5c0bn9Y7qN2QdAvubzMd/bsRNnC1OTcq4yC9juDgFjz04Ossoc1Cs2wV8K++G/
- zWre9lhnPgNbD8OpLoDJZTyk9AP+1tr4LUOFdkNNU5UYE3RuewmSR79SH6s12ZKIm7+i/jTXViL
- dEZfK7yDpcoNlohRLxxzZAZ9CIGK0QC7ts+FteA9ODV+YmgxahB8AIKovIcxogkvpomLUb7835x
- CFt7qPACkDkmx0L+B77+7WeS/f2PimCcXrjHwWG2DyxiVDfQxDcaspF+A3RMbIM3h+FYAl322+y
- JnU9GGwvTMxQx6UWOJ5WuytSEgIDOtCs1tUvh8K3HhGE0YpB+K0nHKMggFIZloTC/nAcppI15YN
- BtLRULd/10iAX
-X-Received: by 2002:a05:600c:4e0b:b0:4bb:6f45:2a79 with SMTP id
- 5b1f17b1804b1-4bb88817920mr381438395e9.22.1795607053162; 
- Wed, 25 Nov 2026 03:44:13 -0800 (PST)
-Received: from macbook (host-95-246-144-141.retail.telecomitalia.it.
- [95.246.144.141]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb884b7515sm705429405e9.13.2026.11.25.03.44.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 03:44:12 -0800 (PST)
-Date: Wed, 25 Nov 2026 12:44:08 +0100
-From: Carlo Caione <ccaione@baylibre.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Johan Jonker <jbx6244@gmail.com>, 
- Casey Connolly <casey.connolly@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
- Petr Hodina <petr.hodina@protonmail.com>, Michael Srba <Michael.Srba@seznam.cz>,
- Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <u-boot@0leil.net>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- David Lechner <dlechner@baylibre.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alexey Charkov <alchark@flipper.net>, Peng Fan <peng.fan@nxp.com>, 
- Daniel Golle <daniel@makrotopia.org>
-Subject: Re: [PATCH v4 7/9] part: introduce SPL_PARTITION_GET_INFO and select
- it from consumers
-Message-ID: <awbJTusr9OUDHk1l@macbook>
-References: <20261019-spl_ufs-v4-0-61432d0b258c@oss.qualcomm.com>
- <20261019-spl_ufs-v4-7-61432d0b258c@oss.qualcomm.com>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ab820jKlgIiG for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 12:04:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D7ACF80C17
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=Icc15gCh
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D7ACF80C17
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 12:04:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1795608251;
+ bh=E2VdUNw5MBUtfHIL5c74U8dpfe2CQUrWSzsfVGvsioY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Icc15gCho2TdLyYKm2yjKMQihbJ1cJrq/pggdaMK2J82kBURJ9+1fANrk35NTxJXl
+ 0Deu1o82YD4jPVUEfNXrWNxILPgnurxDMqvYsuR9koReNJj7Ns4NNILWtPpyc2J/hs
+ lX33fBE1qHkHm6Ve/6LJDZTecsXFlCv6DFSNAAUhdjsihPHy5+y6vBrr+K5n82lf4K
+ 96rbjp0BUigH3d5HgEgeGdGz/Wyt615tG/PSQ9tRFHdjmdX39bks04LN+KArLSaPKC
+ 8g5bCkQga8y/5/z5kQrDe1wF0M4GAi9yPniBNrRGfOMrLf7S/iUBfQIgd2AIc5TmUo
+ AfhVGS4aw36QA==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 97749B221864;
+ Wed, 25 Nov 2026 13:04:10 +0100 (CET)
+Message-ID: <54f05b84-2733-4c04-aa34-1e2340a79d0d@freeshell.de>
+Date: Wed, 25 Nov 2026 04:04:03 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261019-spl_ufs-v4-7-61432d0b258c@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] spi: fsl_qspi: Add optional clock support
+To: Yixun Lan <dlan@kernel.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
+ Raymond Mao <raymond.mao@riscstar.com>
+References: <20261120-05-fsl-qspi-clock-v1-1-bacea4ebd54b@kernel.org>
+ <03d87c74-de4b-4335-85d2-869ad8d83a31@freeshell.de>
+ <20261122003813-GKB203137@kernel.org>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20261122003813-GKB203137@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -166,94 +121,220 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Oct 19, 2026 at 16:19:02 +0100, Balaji Selvanathan wrote:
-> part_get_info_ptr() in include/part.h resolves the .get_info partition
-> driver hook to a real function or NULL in SPL, depending on a list of
-> defined() checks for the SPL features that need partition lookups.
+On 11/21/26 16:38, Yixun Lan wrote:
+> Hi E Shattow, 
 > 
-> Add an SPL_PARTITION_GET_INFO bool symbol in disk/Kconfig and have each
-> consumer (EXT4, FAT, SquashFS, MMC raw-mode partition and partition
-> type, and UFS raw-mode partition) select it. Replace the list of checks
-> in part.h with a single check on CONFIG_SPL_PARTITION_GET_INFO, so a
-> new SPL boot method only needs to select the symbol to get partition
-> lookup support.
+> On 14:14 Sat 21 Nov     , E Shattow wrote:
+>> Hi Yixun,
+>>
+>> On 11/20/26 06:43, Yixun Lan wrote:
+>>> The clock required by QSPI controller may not be enabled by default,
+>>> So explicitly get and enable the clocks described by the DT node, due
+>>> to keep compatibility reason, keep the clock optional for platforms if
+>>> there is no clock framework support or no clocks property provided.
+>>>
+>>> Signed-off-by: Yixun Lan <dlan@kernel.org>
+>>> ---
+>>> While testing in SpacemiT K3 Platform, we found the QSPI clock need to
+>>> be explicitly enabled if boot from USB fastboot mode. While there is no
+>>
+>> I observe that BootROM SPL Loader "USB" mode allows an vendor SPL with
+>> SPI and clocks support enabled (and otherwise reduced options; as
+>> "bsp-spi"[1]) to then load (via UART) u-boot.itb where mainline u-boot
+>> main app "sf probe" is successful.
+>>
+>> This same vendor SPL and mainline u-boot main app "sf probe" action does
+>> fail if it was instead loaded from BootROM SPL Loader "UART" mode. I
+>> regard the "UART" mode as a baseline for testing since it apparently is
+>> doing the least in terms of peripheral setup. The software must do this
+>> setup and not depend on features of any previous peripheral setup by
+>> BootROM SPL Loader.
+>>
+>> Either mode "USB" or "UART" results in probe failure from mainline
+>> u-boot main app if the vendor SPL is build without SPI and clocks
+>> support (as "bsp-nospi"[1]). From this I conclude there is a difference
+>> in handling setup between BootROM SPL Loader "UART" and "USB" modes in
+>> this way that can be tested for.
+>>
+>> I did not yet test "SPI" mode because I assume if BootROM SPL Loader can
+>> access the peripheral then it will also work for SPL software to access
+>> the same.
+>>
+>> 1: Guide to build reduced SpacemiT K3 vendor BSP:
+>> https://lore.kernel.org/u-boot/20261029001555.1890775-1-e@freeshell.de/
+>>
+>> To be clear my above reply remarks are while *not* applying this "spi:
+>> fls_qspi: Add optional clock support" patch to mainline u-boot. I think
+>> it is interesting that "USB" mode does allow successful "sf probe" in my
+>> testing and that in your description it was not successful.
+>>
+> The test environment is different, I'm testing "USB" mode without vendor SPL
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v4:
-> - Replace the ad-hoc part.h OR-chain check with a proper
->   SPL_PARTITION_GET_INFO Kconfig symbol selected by consumers
-> - Drop Varadarajan's Reviewed-by as the approach changed
-> ---
->  common/spl/Kconfig | 6 ++++++
->  disk/Kconfig       | 8 ++++++++
->  include/part.h     | 4 +---
->  3 files changed, 15 insertions(+), 3 deletions(-)
+>>> problem in booting from SPI nor flash mode which the clock already
+>>> enabled by BROM code.
+> Yes, that's right
 > 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index a32c5fd11e6..adeb2ccc7a7 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -575,12 +575,14 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
->  config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
->  	bool "MMC raw mode: by partition"
->  	select SPL_LOAD_BLOCK
-> +	select SPL_PARTITION_GET_INFO
->  	help
->  	  Use a partition for loading U-Boot when using MMC/SD in raw mode.
->  
->  config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
->  	bool "MMC raw mode: by partition type"
->  	select SPL_LOAD_BLOCK
-> +	select SPL_PARTITION_GET_INFO
->  	depends on DOS_PARTITION
->  	help
->  	  Use partition type for specifying U-Boot partition on MMC/SD in
-> @@ -771,6 +773,7 @@ config SPL_ETH
->  config SPL_FS_EXT4
->  	bool "Support EXT filesystems"
->  	select SPL_CRC16 if EXT4_WRITE
-> +	select SPL_PARTITION_GET_INFO
->  	help
->  	  Enable support for EXT2/3/4 filesystems with SPL. This permits
->  	  U-Boot (or Linux in Falcon mode) to be loaded from an EXT
-> @@ -780,6 +783,7 @@ config SPL_FS_EXT4
->  config SPL_FS_SQUASHFS
->  	bool "Support SquashFS filesystems"
->  	select FS_SQUASHFS
-> +	select SPL_PARTITION_GET_INFO
->  	help
->  	  Enable support for SquashFS filesystems with SPL. This permits
->  	  U-Boot (or Linux in Falcon mode) to be loaded from a SquashFS
-> @@ -789,6 +793,7 @@ config SPL_FS_SQUASHFS
->  config SPL_FS_FAT
->  	bool "Support FAT filesystems"
->  	select FS_FAT
-> +	select SPL_PARTITION_GET_INFO
->  	help
->  	  Enable support for FAT and VFAT filesystems with SPL. This
->  	  permits U-Boot (or Linux in Falcon mode) to be loaded from a FAT
-> @@ -1674,6 +1679,7 @@ config SPL_UFS_RAW_U_BOOT_USE_SECTOR
->  config SPL_UFS_RAW_U_BOOT_USE_PARTITION
->  	bool "UFS raw mode: by partition"
->  	select SPL_LIBDISK_SUPPORT
-> +	select SPL_PARTITION_GET_INFO
->  	help
->  	  Use a partition for loading U-Boot when using UFS in raw mode.
->  	  You can specify either a partition name or partition number.
+>>>
+>>> In order to not break other platforms, try to set the clock optional,
+>>> so it won't abort if there is no clock framework support, or no clock
+>>> device tree property.
+>>
+>> The compatible "spacemit,k1-spi" is in the SpacemiT K3 SoC dtsi include:
+>>
+> It's spacemit,k1-qspi (s/spi/qspi/) which SPI NOR connect to..
+> 
 
+Oh! I make this mistake twice now "spi != qspi". My apologies, sorry
+about this I am confused.
 
-SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_DYNAMIC also needs to select
-SPL_PARTITION_GET_INFO.
+>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/riscv/boot/dts/spacemit/k3.dtsi
+>>
+>> Matched from driver wrapper:
+>>
+>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/spi/spi-spacemit-k1.c
+>>
+>> Where it then appears the clock setup is branched to from k1_spi_probe()
+>> function.
+>>
+>> In all situations I have tested I do observe that Linux kernel probes
+>> SPI NOR flash on SpacemiT K3 Pico-ITX board properly with FSL SPI driver
+>> and the wrapper driver matching "spacemit,k1-spi" compatible. That seems
+>> to me properly vetted as being correct because it always works even if
+>> no setup was done by SPL or u-boot main app.
+>>
+> ..
+>> There are some updates to the FSL SPI driver itself that should be
+>> sync'd from the Linux FSL SPI driver, and then I observe one improvement
+>> to u-boot FSL SPI driver which should probably be sent upstream to Linux.
+>>
+> I'm not aware of this, feel free to send patches or link?
+> 
 
-Cheers,
+I think it was just a single flash I.C. part ID that is added to U-Boot
+but was not contributed to Linux kernel, and then also something
+probably specific to logic about how u-boot handles device drivers.
+There's some "q->selected = plat->max_hz" adjacent logic that is
+different, too. I have not much of an understanding on the topic of how
+this hardware works. My suggestion is simply that if we're adding the
+clocks (which are, yes, apparently correct) we should probably make an
+attempt at updating the driver in whole to sync with Linux.
 
---
-Carlo Caione 
+>> I guess that it is preferable to sync with the Linux driver(s) for less
+>> maintenance troubles. Does this patch break the DM model the way it is
+>> now? What do the other maintainers think?
+>>
+> I don't think it break DM model..
+> 
+>>> ---
+>>>  drivers/spi/fsl_qspi.c | 25 +++++++++++++++++++++++++
+>>>  1 file changed, 25 insertions(+)
+>>>
+>>> diff --git a/drivers/spi/fsl_qspi.c b/drivers/spi/fsl_qspi.c
+>>> index 5692510a558..454dfaf1814 100644
+>>> --- a/drivers/spi/fsl_qspi.c
+>>> +++ b/drivers/spi/fsl_qspi.c
+>>> @@ -23,6 +23,7 @@
+>>>   * Transition to spi-mem in spi-fsl-qspi.c
+>>>   */
+>>>  
+>>> +#include <clk.h>
+>>>  #include <dm.h>
+>>>  #include <dm/device_compat.h>
+>>>  #include <log.h>
+>>> @@ -716,6 +717,29 @@ static int fsl_qspi_adjust_op_size(struct spi_slave *slave,
+>>>  	return 0;
+>>>  }
+>>>  
+>>> +static int fsl_qspi_clock_setup(struct fsl_qspi *q)
+>>> +{
+>>> +	struct clk_bulk clks;
+>>> +	int ret;
+>>> +
+>>> +	ret = clk_get_bulk(q->dev, &clks);
+>>> +
+>>> +	/* Ignore if no DT clock property or no clock framework support */
+>>> +	if (ret == -ENOENT || ret == -ENOSYS)
+>>> +		return 0;
+>>> +
+>>> +	if (ret) {
+>>> +		dev_err(q->dev, "Failed to get clocks: %d\n", ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	ret = clk_enable_bulk(&clks);
+>>> +	if (ret)
+>>> +		dev_err(q->dev, "Failed to enable clocks: %d\n", ret);
+>>> +
+>>> +	return ret;
+>>> +}
+>>> +
+>>>  static int fsl_qspi_default_setup(struct fsl_qspi *q)
+>>>  {
+>>>  	void __iomem *base = q->iobase;
+>>> @@ -829,6 +853,7 @@ static int fsl_qspi_probe(struct udevice *bus)
+>>>  	dm_bus->max_hz = fdtdec_get_int(blob, node, "spi-max-frequency",
+>>>  					66000000);
+>>>  
+>>> +	fsl_qspi_clock_setup(q);
+>>>  	fsl_qspi_default_setup(q);
+>>>  
+>>>  	return 0;
+>>>
+>>> ---
+>>> base-commit: c1958b5f6cce03956d309ce422b5d9f819955d4a
+>>> change-id: 20261120-05-fsl-qspi-clock-e3df6b72ab8a
+>>>
+>>> Best regards,
+>>> --  
+>>> Yixun Lan <dlan@kernel.org>
+>>>
+>>
+>> With this patch on mainline u-boot main branch from today and the
+>> intermediary "bsp-spi"[1] or "bsp-nospi"[1] reduced vendor SPL
+>> previously mentioned, on Sipeed K3 Pico-ITX 32G board as BootROM SPL
+>> Loader "UART" mode:
+>>
+>> => sf probe
+>> SF:    Detected w25q64dw with page size 256 Bytes, erase size 4 KiB,
+>> total 8 MiB
+>>
+>> => sf erase 0 800000
+>> SF: 8388608 bytes @ 0x0 Erased: OK
+>>
+>> It works as-is, but I think it probably should not work unless matching
+>> a compatible. Obviously there are valid concerns for SpacemiT K3 SPL
+>> environment being memory-constrained, but what I'm testing is S-mode
+>> u-boot main app and this does not seem like the correct approach. Do I
+>> not understand correctly the driver model?
+>>
+> what do you mean by "not work unless matching a compatible", is
+> "spacemit,k1-qspi" of fsl_qspi.c the one?  I see no problem of
+> your testing, such like U-Boot S-mode and "sf" commands
+> 
+
+Oh I definitely confused SPI with Quad-SPI, so unless there is a need
+for SPI in U-Boot with SpacemiT K1/K3 SoC it is not valid what I
+suggested about "SPI" driver for k1.
+
+Also I confirm that the compatible (spacemit,k3-qspi NOT
+spacemit,k3-spi) is matched correctly when present and "sf probe" fails
+as expected when absent. I had this mixed up wrong even though I did
+read the two drivers, and somehow I mistakenly thought the fsl spi
+driver wrapper for k1 was responsible for clocks as some kind of callout
+from the qspi driver, and I was unsure what is the use of having clock
+enablement in two places for what ends up being the same driver.
+Actually it looks correct when reading again the "qspi" driver there is
+a clock enablement that was missing from u-boot port of the driver.
+
+Thanks Yixun!
+
+-E
+
