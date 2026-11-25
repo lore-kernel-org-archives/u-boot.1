@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E2FC606A323
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 23:15:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80C71606A323
+	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 23:15:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=C8Rl+8Fy;
-	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=H+pGtJYv
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XHrJbDdR;
+	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=oWfaf5hc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D8F30608AC;
-	Wed, 25 Nov 2026 23:15:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5A2C480A80;
+	Wed, 25 Nov 2026 23:15:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zDcUZRkFvfHe; Wed, 25 Nov 2026 23:15:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DDD4260755
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795648503;
-	b=dgTdfQIvJZ2wXFKk21x2v4/UeojM0kf5VKMTuq5RX2zz0TMG5kpuXFBgYlNq2214vMEe
-	 1cOiwxP543nzTxu6EYDcWXMEV4incQ6v9SSnwIkTX9XoAJBdW0yLwnGbEPjNOEAMT8IzR
-	 f6mL+geZQ1w7q6OfW9+em6kaV7iP0njxYLlsw+3HATVKQoNUDJbFjXWj4wvmTnrVMFnsc
-	 LihytqSUEtCLKkeVjdKfj6o8+/vwRcfyeYpEWyalFHlUvB9H0GC6rA166v/R6dCJgif5c
-	 ipCur3uP8MFZtCc4gpjlWfNeCHeGtBB2V6750Qvet/AjK+mMPkwyQCgDZsfzoRQLOvQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WCYgYkP9Tvdp; Wed, 25 Nov 2026 23:15:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9AAF080AE8
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795648508;
+	b=PgqgSN/3j1JWs11Hu6YJqmG3rO3+zzmspbDCd9l1zTroSlch3L0HpTAOHzx8gIqdXgJm
+	 x9Sg0FcxsTLvc342XlmXp6725+AyqVhk0lhDYcEwwvn4wRm8RbpvBRvUzqbn+42EccmZz
+	 ihItRG057zzU7TmISSqq9keGdgo3aa5ZgxzGbqKu042sRm8iAS2T+av/8wJg/TBg1/DJL
+	 ZPm5vPHc5Hp2TyECkBeqIKq4lizyhFfTx9btvA+1hO7YXn17p9Ff97Dgrpp6/IftZiPFg
+	 3STE387uYHizsDpZ6ZT9ohCA+ezDv/FGusQjQ2EvThb/uMzePPfntjye1xc93aw4NNw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795648503;
+	c=relaxed/relaxed; t=1795648508;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,89 +32,88 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=GUUcOC87LYq/3koi13ooO7y8jwJbo8OR3qBq7/36Oq4=;
-	b=C4E9NEfPnHOQiMbOKQAshbNOprnkjR7tuWYxc2uSupSYLqpB+O6rS+JcAQ2NMcnCE4/2
-	 WWpHml4Bpiyng/JfE5yszkqMUwiYxhqGgYwRWIHzDA+Qgm1zjb9FywmH2fXgfK1SYa2YH
-	 PL31YKVgjetPVjw3xtywNcgyEbxyCCKfyQ+b/JDDI4YcMDRsI43rycwoLQcAoltUl59Z9
-	 WA72hk+TLVXyTrKCrYtxNeFsROnJeN3eTVV0BagG645rbQ5hKqLGldEKykYQ3dPekWY0u
-	 yvylPiaVREQUcf0p8rhZ2u5VE9jUOp2p0Cx1LoHT3Jh+uuO3crtb8Vt9q1Vgs5/PKCg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=d-silva.org;
-	dkim=pass header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=H+pGtJYv;
+	bh=gnSvbQHAlEfKTL0xC3Ws/dvMUq9Bd8b8EonEY/g8I7c=;
+	b=m080YgDHDQjcfb/k7rC+ORZ7LOsZ3E8qNl9AWxjJJ/+4TYahdPydbC1BeHitYjq0g2oS
+	 cDoXvNu8BkP4K82zQFVngR+qrjqTshANYIzJdG+KSWzrc+9eqaIyoKk2Jvw2xSciEAUCQ
+	 O6D+chH8pb/Gbev87JnKVbk2IM235E6VKhuLdVZIUMTY45ZCFC3kljqDK9dw03lXzYrX5
+	 wMc1ihhZS3TzLaG5EkKzC/9xjckvfk8BsbvOCR6V+7Zciu9M14x4cgoZUDs1gZXBAPYNG
+	 ZcxPY9U5FNo6wS0/b/aLKSvbJVAMOTCeRJ2g1EMs0q/ZntB057PUkeHzbSfCWYT7gMw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795648503;
-	bh=GUUcOC87LYq/3koi13ooO7y8jwJbo8OR3qBq7/36Oq4=;
+	d=lists.u-boot-project.org; s=default; t=1795648508;
+	bh=gnSvbQHAlEfKTL0xC3Ws/dvMUq9Bd8b8EonEY/g8I7c=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=C8Rl+8Fy/BD5JPck3t1wZIHkXfPFpeaUNd09oPGLkg28JaSVq0FX6IPaOmhe856KV
-	 QXegpMIo+oNzD5y4N+2Q9S0gElzv4j3tNNY1637CalSBu5qpBUS7cD7nMIuViFEurb
-	 8yIPDDChdhuXX5BAutEQsWqHCynahtwrQSPl0yDFSgwn2qVes1deQ8X9g6kxacClR7
-	 tb4B8yU+E6xCrunIEszS+in92yXQbn7XLJrB5xD9ZCRsiWgsxb0Z1/E34ERvd1cgKc
-	 ubUBlki7iEHrqWy0lC7j5EeXdYsqicd7GfcWnlT3FerphEcpGTjclcILcCOhtZ0MoI
-	 FxobZjxQoDuuA==
+	b=XHrJbDdRAJu7VPEejqUOqqwhudva+KnBm5GitmrjK4PeiPrdYvBf4ahq6+2hza696
+	 bnL/VuGo7Vka3wGJx7s7Ug3oElBgA2nRakdgF4WdxV8V1bilDMgI49bWeqfveCD5Tk
+	 b1WNQMXB0O1s1qHn9yUUlRjZIRX2yhGfbiJIPsqpSoihRoRpns4CHNRRfBx08Exzns
+	 Kb5s/tbHV8RHvMmKe3UP3w5iWcNeWnGzTETDxHG3uN6CImD1HAs8pPDRpSFnxbSG36
+	 8nEvxz1yT0wuN+K6o3Ydek6NBtkuO5tKmBY1qD0VwZAy3bXS2m4UStgr6uqo0lN9Q5
+	 p7ZuhVmGnWUDg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DDD4260755;
-	Wed, 25 Nov 2026 23:15:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5F48E371
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9AAF080AE8;
+	Wed, 25 Nov 2026 23:15:08 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A4AD222B
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 512726069A
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:01 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A0B5B4057A
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZMy7seGAd9su for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 23:14:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1612F60755
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1GdpHEyt-9VX for <u-boot@lists.u-boot-project.org>;
+ Wed, 25 Nov 2026 23:15:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C795D405BA
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=119.15.109.137
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=119.15.109.137;
  helo=www.nmnhosting.com; envelope-from=alastair@d-silva.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=d-silva.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org
- header.a=rsa-sha256 header.s=2025a header.b=H+pGtJYv
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256
+ header.s=2025a header.b=oWfaf5hc
 Received: from www.nmnhosting.com (watt.d-silva.org [119.15.109.137])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1612F60755
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:14:57 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C795D405BA
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:15:03 +0000 (UTC)
 Received: from Hawking.lan (hawking.lan [10.0.1.4])
- by www.nmnhosting.com (Postfix) with ESMTP id 2CA8A4C95F;
- Thu, 26 Nov 2026 10:14:49 +1100 (AEDT)
+ by www.nmnhosting.com (Postfix) with ESMTP id 5698E41024;
+ Thu, 26 Nov 2026 10:14:55 +1100 (AEDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=d-silva.org; s=2025a; 
- t=1795648489;
+ t=1795648495;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GUUcOC87LYq/3koi13ooO7y8jwJbo8OR3qBq7/36Oq4=;
- b=H+pGtJYv8WBAWwBVX203VRZ7rLjcnFwlDLSKbYhmh7/hv9p8cWe6Nz1PkplL5n01eo/hNV
- mAYaidcuYKyoe3dVmhb/yH8aTQCZ4drsvpgNMqWLuAD1TXj2V2SIkyERju2PtSvTRXtcOW
- kl2HSIIcWee0ujt4v+M7uucxGWF2eGK5p3cfhsNP813Q/m1xo/n9Hu1INivUg/JMZfb1Pi
- XOHTVHMbrJKRwWV5+LffjcPp4G+BB1eZOzaF8hxEkFL1LzE3oPWJfO4C7TJyzFWZfJVpF9
- oMMNSn9gbIHeGq0dLBlgi+IwEHAn9KF5zqwtWzVoVLXlGohmo/ESmDNgMHSL0Q==
-X-GPT-Reason: legitimate; the email is a technical software patch
- submission (Linux kernel style) that perfectly aligns with the
- recipient's domain (alastair@d-silva.org) and sender identity
- (alastair@d-silva.org); the content is highly specific technical
- documentation regarding ARC PMU registers and firmware builds
- with no marketing, urgency, or phishing indicators; authentication
- is implicitly supported by the consistency between the From domain
- and the mailbox purpose.
+ bh=gnSvbQHAlEfKTL0xC3Ws/dvMUq9Bd8b8EonEY/g8I7c=;
+ b=oWfaf5hc6pEqWGfduHHbEMdzojwrtdzEUMGmp3Ycgcuq0W0bRUwKpt2LJpLJ3JvAuEKp7s
+ Ik1S6jwPDB1P4UK9QprE9VSRCDCoOuL12Q2ts9Q1AybB9KmVarwJ+CdulNj2ejjYQOoEiA
+ X//eQX2oT3pkZZx1XObn9OChmyEiFX+2EoDuToG0BGwPUxykrj4tj9VZPyjYjaVaHVD875
+ tcxOaLfU0hm9r8qyg7FN6F4trbPgTQFR49GD5voVwihVZr1FywO+M+0jcdJRbMsuXxavS8
+ sjnnf6ZxX2DwMnuFiVZwEP7t9msau4xvqnpJlSbsvJ+1KQy1w2BfNRXae4k19Q==
+X-GPT-Reason: The email is classified as legitimate personal/technical
+ correspondence. The sender (alastair@d-silva.org) perfectly matches
+ the intended recipient mailbox (alastair@d-silva.org), and the
+ content is a technical software patch related to hardware firmware
+ (Allwinner A733 DDR PHY), which is consistent with a professional
+ or personal technical workflow. There are no phishing indicators,
+ no urgency/scare tactics, no suspicious URLs, and the "Assisted-by: LLM" note
+ confirms a standard modern development practice rather than a
+ scam.
 From: Alastair D'Silva <alastair@d-silva.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alastair D'Silva <alastair@d-silva.org>
-Subject: [PATCH 1/7] sunxi: dram: a733: Add ARC PMU register, ABI,
- and build definitions
-Date: Thu, 26 Nov 2026 10:14:35 +1100
-Message-ID: <20261125231442.1266343-2-alastair@d-silva.org>
+Subject: [PATCH 2/7] sunxi: dram: a733: Add ARC PMU primitives, clock,
+ telemetry, and CBT
+Date: Thu, 26 Nov 2026 10:14:36 +1100
+Message-ID: <20261125231442.1266343-3-alastair@d-silva.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261125231442.1266343-1-alastair@d-silva.org>
 References: <20261125231442.1266343-1-alastair@d-silva.org>
@@ -137,1635 +136,2556 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add the shared host/ARC ABI header, DesignWare LPDDR5 DDR PHY CSR and
-DCCM offsets, internal firmware prototypes, ICCM execute-only linker
-script, and single-pass ELF build helper for the Allwinner A733 DDR PHY
-ARC EM4 microsequencer firmware.
+Add the freestanding memory/division helpers, ARC auxiliary RTC delay
+and PHY PLL clock-gate helpers, Synopsys mailbox IPC and panic handlers,
+and JEDEC LPDDR5 Command Bus Training (CBT) routines for the Allwinner
+A733 DDR PHY ARC EM4 firmware.
 
-The firmware in arch/arm/mach-sunxi/pmu/ is an original GPL-2.0+ C
-implementation written under a strict two-team clean-room methodology:
-an analysis team documented hardware register addresses, DCCM mailbox
-protocol layouts, and JEDEC LPDDR5 training state transitions as
-functional specifications without sharing code or control-flow idioms,
-and an isolated implementation team wrote this C codebase solely from
-those specifications and JEDEC JESD209-5.
-
-build_pmu_fw.py locates an ARC toolchain via ARC_CROSS_COMPILE, PATH,
-or ~/.buildman, supports --pmu-fw for externally built ICCM binaries,
-and supports --allow-missing (wired to BINMAN_ALLOW_MISSING) so CI
-builders without arc-*-gcc emit a non-functional stub cleanly.
+Written from clean-room hardware register and JEDEC JESD209-5 protocol
+specifications (see doc/board/allwinner/a733-pmu.rst).
 
 Assisted-by: LLM
 Signed-off-by: Alastair D'Silva <alastair@d-silva.org>
 ---
- arch/arm/mach-sunxi/pmu/build_pmu_fw.py       | 261 +++++++++
- arch/arm/mach-sunxi/pmu/dwc_ddrphy_pmu_regs.h | 463 +++++++++++++++
- arch/arm/mach-sunxi/pmu/pmu.ld                |  38 ++
- arch/arm/mach-sunxi/pmu/pmu_fw.h              | 553 ++++++++++++++++++
- arch/arm/mach-sunxi/pmu/sunxi_pmu_abi.h       | 251 ++++++++
- 5 files changed, 1566 insertions(+)
- create mode 100755 arch/arm/mach-sunxi/pmu/build_pmu_fw.py
- create mode 100644 arch/arm/mach-sunxi/pmu/dwc_ddrphy_pmu_regs.h
- create mode 100644 arch/arm/mach-sunxi/pmu/pmu.ld
- create mode 100644 arch/arm/mach-sunxi/pmu/pmu_fw.h
- create mode 100644 arch/arm/mach-sunxi/pmu/sunxi_pmu_abi.h
+ arch/arm/mach-sunxi/pmu/pmu_cbt.c        | 417 ++++++++++
+ arch/arm/mach-sunxi/pmu/pmu_clock.c      | 938 +++++++++++++++++++++++
+ arch/arm/mach-sunxi/pmu/pmu_primitives.c | 531 +++++++++++++
+ arch/arm/mach-sunxi/pmu/pmu_telemetry.c  | 619 +++++++++++++++
+ 4 files changed, 2505 insertions(+)
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_cbt.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_clock.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_primitives.c
+ create mode 100644 arch/arm/mach-sunxi/pmu/pmu_telemetry.c
 
-diff --git a/arch/arm/mach-sunxi/pmu/build_pmu_fw.py b/arch/arm/mach-sunxi/pmu/build_pmu_fw.py
-new file mode 100755
-index 00000000000..691e591a287
---- /dev/null
-+++ b/arch/arm/mach-sunxi/pmu/build_pmu_fw.py
-@@ -0,0 +1,261 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
-+"""
-+Single-pass ELF builder for Allwinner A733 LPDDR5 ARC EM4 PMU Firmware.
-+"""
-+
-+import argparse
-+import configparser
-+import glob
-+import os
-+import shutil
-+import struct
-+import subprocess
-+import sys
-+import tempfile
-+
-+DEFAULT_SOURCES = (
-+    "pmu_primitives.c",
-+    "pmu_clock.c",
-+    "pmu_telemetry.c",
-+    "pmu_cbt.c",
-+    "pmu_deskew.c",
-+    "pmu_eye.c",
-+    "pmu_train.c",
-+)
-+
-+
-+def resolve_arc_toolchain(preferred_prefix, explicit=False):
-+    """Locate an ARC GCC toolchain prefix across PATH and U-Boot CI locations."""
-+    if preferred_prefix:
-+        if shutil.which(f"{preferred_prefix}gcc") and shutil.which(f"{preferred_prefix}objcopy"):
-+            return preferred_prefix
-+        if explicit:
-+            raise RuntimeError(
-+                f"Explicitly requested ARC toolchain '{preferred_prefix}gcc' not found"
-+            )
-+
-+    candidates = [
-+        "arc-linux-gnu-",
-+        "arc-linux-",
-+        "arc-elf32-",
-+    ]
-+    bman_cfg = os.path.expanduser("~/.buildman")
-+    if os.path.isfile(bman_cfg):
-+        cfg = configparser.ConfigParser()
-+        try:
-+            cfg.read(bman_cfg)
-+            if cfg.has_option("toolchain-prefix", "arc"):
-+                candidates.append(os.path.expanduser(cfg.get("toolchain-prefix", "arc")))
-+            if cfg.has_section("toolchain"):
-+                for _, root in cfg.items("toolchain"):
-+                    root = os.path.expanduser(root)
-+                    for pat in ("bin/arc-*-gcc", "*/bin/arc-*-gcc"):
-+                        candidates.extend(sorted(glob.glob(os.path.join(root, pat)), reverse=True))
-+        except configparser.Error:
-+            pass
-+
-+    for pattern in (
-+        "/opt/gcc-*-nolibc/arc-linux/bin/arc-linux-",
-+        os.path.expanduser("~/.buildman-toolchains/gcc-*-nolibc/arc-linux/bin/arc-linux-"),
-+    ):
-+        candidates.extend(sorted(glob.glob(pattern), reverse=True))
-+
-+    for prefix in candidates:
-+        if prefix.endswith("gcc"):
-+            prefix = prefix[:-3]
-+        if shutil.which(f"{prefix}gcc") and shutil.which(f"{prefix}objcopy"):
-+            return prefix
-+
-+    return None
-+
-+
-+def write_header(output_h_path, hwords, missing=False):
-+    """Atomically emit the C header containing the PMU ICCM image or missing stub."""
-+    out_dir = os.path.dirname(output_h_path)
-+    os.makedirs(out_dir, exist_ok=True)
-+    tmp_name = None
-+    try:
-+        with tempfile.NamedTemporaryFile("w", dir=out_dir, delete=False, prefix=".pmu_fw_tmp_") as f:
-+            tmp_name = f.name
-+            f.write("/* SPDX-License-Identifier: GPL-2.0+ */\n")
-+            f.write("/*\n")
-+            if missing:
-+                f.write(" * Auto-generated stub ARC EM4 PMU Firmware Header (missing toolchain).\n")
-+            else:
-+                f.write(
-+                    f" * Auto-generated ARC EM4 PMU Firmware Header "
-+                    f"({len(hwords) * 2} bytes / {len(hwords)} halfwords).\n"
-+                )
-+            f.write(" */\n\n")
-+            f.write("#ifndef __DRAM_SUN60I_A733_PMU_FW_H__\n")
-+            f.write("#define __DRAM_SUN60I_A733_PMU_FW_H__\n\n")
-+            f.write("#include <linux/compiler_attributes.h>\n")
-+            f.write("#include <linux/types.h>\n\n")
-+            if missing:
-+                f.write("#define SUN60I_A733_PMU_FW_MISSING 1\n\n")
-+                f.write(
-+                    "static const u16 __section(\".init.rodata\") "
-+                    "sun60i_a733_pmu_imem[1] = { 0 };\n\n"
-+                )
-+            else:
-+                f.write(
-+                    f"static const u16 __section(\".init.rodata\") "
-+                    f"sun60i_a733_pmu_imem[{len(hwords)}] = {{\n"
-+                )
-+                for i in range(0, len(hwords), 8):
-+                    hex_str = ", ".join(f"0x{x:04x}" for x in hwords[i:i + 8])
-+                    f.write(f"\t{hex_str},\n")
-+                f.write("};\n\n")
-+            f.write("#endif /* __DRAM_SUN60I_A733_PMU_FW_H__ */\n")
-+        os.replace(tmp_name, output_h_path)
-+    except BaseException:
-+        if tmp_name and os.path.exists(tmp_name):
-+            os.unlink(tmp_name)
-+        raise
-+
-+
-+def main():
-+    pmu_dir_default = os.path.abspath(os.path.dirname(__file__))
-+    repo_root = os.path.abspath(os.path.join(pmu_dir_default, "..", "..", "..", ".."))
-+    default_out = os.path.join(repo_root, "arch/arm/mach-sunxi/dram_sun60i_a733_pmu_fw.h")
-+
-+    parser = argparse.ArgumentParser(
-+        description="Build Allwinner A733 LPDDR5 ARC EM4 PMU firmware."
-+    )
-+    parser.add_argument("--cross-compile", default=None, help="ARC toolchain prefix")
-+    parser.add_argument("--pmu-fw", default="", help="Prebuilt raw PMU ICCM binary path")
-+    parser.add_argument("--allow-missing", action="store_true",
-+                        help="Emit a non-functional stub header if ARC toolchain is absent")
-+    parser.add_argument("--src-dir", default=pmu_dir_default, help="PMU firmware source directory")
-+    parser.add_argument("--ld-script", default="", help="Linker script path")
-+    parser.add_argument("--out", default=default_out, help="Output C header path")
-+    parser.add_argument("sources", nargs="*", help="Explicit C source files to compile")
-+    args = parser.parse_args()
-+
-+    src_dir = os.path.abspath(args.src_dir)
-+    ld_script = os.path.abspath(args.ld_script) if args.ld_script else os.path.join(src_dir, "pmu.ld")
-+    output_h_path = os.path.abspath(args.out)
-+
-+    try:
-+        if args.pmu_fw:
-+            with open(args.pmu_fw, "rb") as bf:
-+                raw = bf.read()
-+            if not raw:
-+                raise ValueError(f"PMU firmware '{args.pmu_fw}' is empty")
-+            if len(raw) > 0x10000:
-+                raise ValueError(
-+                    f"PMU firmware '{args.pmu_fw}' exceeds 64 KiB ICCM limit ({len(raw)} bytes)"
-+                )
-+        else:
-+            explicit_cc = args.cross_compile is not None
-+            prefix = resolve_arc_toolchain(args.cross_compile or "", explicit=explicit_cc)
-+            if prefix is None:
-+                if args.allow_missing:
-+                    print(
-+                        "Image 'spl/u-boot-spl.bin' is missing ARC cross-compiler; "
-+                        "using non-functional stub PMU firmware",
-+                        file=sys.stderr,
-+                    )
-+                    write_header(output_h_path, [], missing=True)
-+                    return 0
-+                print(
-+                    "Error: ARC toolchain not found (install arc-linux-gnu-gcc, pass PMU_FW=, "
-+                    "or build with BINMAN_ALLOW_MISSING=1)",
-+                    file=sys.stderr,
-+                )
-+                return 1
-+
-+            gcc = f"{prefix}gcc"
-+            objcopy = f"{prefix}objcopy"
-+            c_files = (
-+                [os.path.abspath(p) for p in args.sources]
-+                if args.sources
-+                else [os.path.join(src_dir, name) for name in DEFAULT_SOURCES]
-+            )
-+
-+            cflags = [
-+                "-mcpu=em4",
-+                "-mrf16",
-+                "-mcode-density",
-+                "-mbranch-index",
-+                "-mcode-density-frame",
-+                "-mdiv-rem",
-+                "-mbarrel-shifter",
-+                "-mmpy-option=mpy",
-+                "-fno-branch-count-reg",
-+                "-EL",
-+                "-Os",
-+                "-ffreestanding",
-+                "-fno-caller-saves",
-+                "-fno-ipa-ra",
-+                "-ffixed-r26",
-+                "-ffixed-r27",
-+                "-fno-strict-aliasing",
-+                "-fno-jump-tables",
-+                "-fno-tree-switch-conversion",
-+                "-fno-pic",
-+                "-fno-pie",
-+                "-fno-stack-protector",
-+                "-fno-builtin",
-+                "-ffunction-sections",
-+                "-fdata-sections",
-+                "-std=gnu11",
-+                "-Wall",
-+                "-Wextra",
-+                f"-I{src_dir}",
-+            ]
-+
-+            with tempfile.TemporaryDirectory(prefix="pmu_fw_") as tmpdir:
-+                objs = []
-+                for src_path in c_files:
-+                    base = os.path.splitext(os.path.basename(src_path))[0]
-+                    obj_path = os.path.join(tmpdir, f"{base}.o")
-+                    subprocess.check_call([gcc, *cflags, "-c", src_path, "-o", obj_path])
-+                    objs.append(obj_path)
-+
-+                elf_path = os.path.join(tmpdir, "pmu.elf")
-+                bin_path = os.path.join(tmpdir, "pmu.bin")
-+                ld_cmd = [
-+                    gcc,
-+                    "-mcpu=em4",
-+                    "-mrf16",
-+                    "-mcode-density",
-+                    "-mdiv-rem",
-+                    "-mbarrel-shifter",
-+                    "-mmpy-option=mpy",
-+                    "-EL",
-+                    "-Os",
-+                    "-nostdlib",
-+                    "-no-pie",
-+                    f"-Wl,-L,{src_dir}",
-+                    f"-Wl,-T,{ld_script}",
-+                    "-Wl,--gc-sections",
-+                    "-Wl,--build-id=none",
-+                    *objs,
-+                    "-o",
-+                    elf_path,
-+                ]
-+                subprocess.check_call(ld_cmd)
-+                subprocess.check_call([objcopy, "-O", "binary", elf_path, bin_path])
-+
-+                with open(bin_path, "rb") as bf:
-+                    raw = bf.read()
-+
-+        if len(raw) % 2 != 0:
-+            raw += b"\x00"
-+
-+        hwords = list(struct.unpack(f"<{len(raw) // 2}H", raw))
-+        while hwords and hwords[-1] == 0:
-+            hwords.pop()
-+
-+        write_header(output_h_path, hwords, missing=False)
-+    except (OSError, RuntimeError, ValueError, subprocess.CalledProcessError) as exc:
-+        print(f"Error: {exc}", file=sys.stderr)
-+        return 1
-+    return 0
-+
-+
-+if __name__ == "__main__":
-+    sys.exit(main())
-diff --git a/arch/arm/mach-sunxi/pmu/dwc_ddrphy_pmu_regs.h b/arch/arm/mach-sunxi/pmu/dwc_ddrphy_pmu_regs.h
+diff --git a/arch/arm/mach-sunxi/pmu/pmu_cbt.c b/arch/arm/mach-sunxi/pmu/pmu_cbt.c
 new file mode 100644
-index 00000000000..119fbc9c644
+index 00000000000..6c97ad8532e
 --- /dev/null
-+++ b/arch/arm/mach-sunxi/pmu/dwc_ddrphy_pmu_regs.h
-@@ -0,0 +1,463 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/arm/mach-sunxi/pmu/pmu_cbt.c
+@@ -0,0 +1,417 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
 + *
-+ * Synopsys DesignWare DDR PHY PMU Microcontroller Register & Memory Definitions
-+ * Target Architecture: Synopsys ARC EM4 (ARCv2 ISA)
-+ * SoC: Allwinner A733 (Sun60i) / LPDDR4 & LPDDR5 PHY
-+ *
-+ * =============================================================================
-+ * PHY SILICON ARCHITECTURE & TERMINOLOGY EXPLAINED
-+ * =============================================================================
-+ *
-+ * Inside the Synopsys DesignWare DDR PHY Type 9 silicon on Allwinner A733:
-+ *
-+ * 1. DBYTE Slices (Data Byte Slices 0..3):
-+ *    Each DBYTE slice manages the physical analog signals for one 8-bit byte lane
-+ *    (DQ0..DQ7, Data Mask DM, and differential Data Strobe DQS/DQSN).
-+ *    Because the A733 uses dual 16-bit channels (Ch0 = 16-bit, Ch1 = 16-bit),
-+ *    there are 4 DBYTE slices in total:
-+ *      - Slice 0: Ch0 Byte Lane 0 (DQ0..DQ7)
-+ *      - Slice 1: Ch0 Byte Lane 1 (DQ8..DQ15)
-+ *      - Slice 2: Ch1 Byte Lane 0 (DQ0..DQ7)
-+ *      - Slice 3: Ch1 Byte Lane 1 (DQ8..DQ15)
-+ *
-+ * 2. AC Slices (Address/Command Slices 0..1):
-+ *    Manage the clock (CK/CKN) and Command/Address (CA0..CA6) signals sent to the
-+ *    LPDDR5 memory chips for each channel.
-+ *
-+ * 3. PUB (PHY Utility Block):
-+ *    The central control core containing master PLL configuration, clock gating,
-+ *    PMU execution mailboxes, analog bias generators, and host CPU APB interface.
-+ *
-+ * 4. LCDL (Local Clock Delay Line):
-+ *    Analog tapped delay lines consisting of coarse stages and fine vernier stages.
-+ *    Adjusting LCDL delay taps shifts signal transitions by picoseconds, enabling
-+ *    the PMU to place sampling clock edges precisely in the center of the data eye.
-+ *
-+ * 5. CBT (Command Bus Training):
-+ *    A JEDEC-standard training mode where the memory controller transmits command
-+ *    patterns to the DRAM, and the DRAM returns feedback on the DQ lines. This allows
-+ *    the PHY to align the CA signals to the memory clock with picosecond accuracy.
-+ *
-+ * 6. ZQ Calibration:
-+ *    Calibrates transmitter output impedance (Ron) and receiver on-die termination
-+ *    (ODT) against an external precision resistor to prevent transmission line
-+ *    signal reflections.
-+ * =============================================================================
++ * Allwinner A733 Synopsys DDR PHY PMU Command Bus Training (CBT) Helpers
 + */
 +
-+#ifndef _DWC_DDRPHY_PMU_REGS_H
-+#define _DWC_DDRPHY_PMU_REGS_H
++#include "pmu_fw.h"
 +
-+#include "sunxi_pmu_abi.h"
-+
-+/* ========================================================================== */
-+
-+/* ========================================================================== */
-+/* ARC PMU DCCM Addresses (0x80000000 Base)                                   */
-+/* ========================================================================== */
-+
-+#define PMU_DMEM_BASE			0x80000000UL
-+#define PMU_DMEM_CLK_GATE_FLAG		0x80000001UL /* Byte: Clock gate / broadcast flag */
-+#define PMU_DMEM_PSTATE_FLAGS		0x80000004UL /* Byte: PState / channel status flags */
-+#define PMU_DMEM_CAL_MODE_FLAG_ADDR	0x80000005UL /* Byte: Calibration parameter */
-+#define PMU_DMEM_DRAM_FREQ_MHZ		0x80000006UL /* Half: Operating DRAM data rate (MT/s) */
-+#define PMU_DMEM_PLL_RATIO		0x80000008UL /* Byte: WCK:CK ratio (4 = 4:1, 2 = 2:1) */
-+#define PMU_DMEM_ASSERT_CODE		0x8000000cUL /* Word: Fatal assertion / panic code */
-+#define PMU_DMEM_SIGNED_STEP		0x8000000eUL /* SByte: Signed AC timing step */
-+#define PMU_DMEM_SEQ_CTRL		0x80000010UL /* Half: Training sequence control mask */
-+#define PMU_DMEM_POST_THRESH		0x80000012UL /* Byte: Post mailbox threshold */
-+#define PMU_DMEM_TRAIN_MODE_ADDR	0x80000014UL /* Half: Active training stage mode */
-+#define PMU_DMEM_ANALOG_CFG		0x80000015UL /* Byte: Analog cfg flag */
-+#define PMU_DMEM_RX_CLK_EN		0x80000019UL /* Byte: Receiver clock enable flag */
-+#define PMU_DMEM_CAL_STEP_CONFIG	0x8000001aUL /* Half: Calibration step configuration */
-+#define PMU_DMEM_DESKEW_LIM		0x8000001cUL /* Byte: Dual-rank deskew cfg */
-+#define PMU_DMEM_CH0_DQ_WIDTH		0x80000024UL /* Byte: Total DQ bit width Ch0 */
-+#define PMU_DMEM_CH0_ANALOG_EN		0x80000025UL /* Byte: Ch0 analog power enable */
-+#define PMU_DMEM_CH0_DESKEW_COARSE	0x80000026UL /* Base: Ch0 coarse deskew diff */
-+#define PMU_DMEM_ACTIVE_SLICE_CNT	0x80000028UL /* Byte: Active DBYTE slice cnt */
-+#define PMU_DMEM_CH0_DESKEW_CROSS	0x8000002cUL /* Base: Ch0 cross deskew diff */
-+#define PMU_DMEM_CH0_DESKEW_FINE	0x80000030UL /* Base: Ch0 fine deskew diff */
-+#define PMU_DMEM_CH1_DQ_WIDTH		0x8000003fUL /* Byte: Total DQ bit width Ch1 */
-+#define PMU_DMEM_CH1_ACTIVE_FLAG	0x80000040UL /* Byte: Ch1 active enable flag */
-+#define PMU_DMEM_SLICE_PROFILE		0x8000005aUL /* Base: 29-entry slice profile */
-+#define PMU_DMEM_MR3_ADDR		0x80000062UL /* Byte: Signed Vref training mode flags */
-+#define PMU_DMEM_MR13_ADDR		0x80000072UL /* Byte: Vref DAC control configuration */
-+#define PMU_DMEM_MR20_ADDR		0x8000008eUL /* Byte: JEDEC MR20 RDQS mode byte */
-+#define PMU_DMEM_MR22_ADDR		0x80000096UL /* Byte: DRAM training config byte */
-+#define PMU_DMEM_CAL_OVERRIDE		0x800000ceUL /* Byte: Eye margin override */
-+#define PMU_DMEM_WCK_PHASE		0x800000d2UL /* Base: WCK align phase codes */
-+#define PMU_DMEM_TEST_PAT		0x800000e4UL /* Half: Custom CBT test pattern */
-+#define PMU_DMEM_DESKEW_OFFSET		0x800000e6UL /* Byte: Deskew offset override */
-+#define PMU_DMEM_VREF_OVR_CTRL_ADDR	0x800000e7UL /* Byte: Vref DAC override control flags */
-+#define PMU_DMEM_PLL_GATE_CH0_ADDR	0x800000e8UL /* Base: Per-rank shadow base */
-+#define PMU_DMEM_PLL_GATE_CH1_ADDR	0x800000eaUL /* Half: Ch1 shadow base */
-+#define PMU_DMEM_PLL_SEQ_EN_ADDR	0x800000f2UL /* Half: PLL param seq enable */
-+#define PMU_DMEM_AC_PROFILE_EN_ADDR	0x800000f4UL /* Byte: AC slice profile en */
-+#define PMU_DMEM_LANE_ERR_MASK		0x80000101UL /* Byte: Per-lane deskew error status mask */
-+#define PMU_DMEM_TRAIN_FEAT_MASK_ADDR	0x80000102UL /* Byte: Eye sweep op17 param */
-+#define PMU_DMEM_CA_VREF_RANK1_ADDR	0x80000103UL /* Byte: CA Vref state Rank 1 */
-+#define PMU_DMEM_CA_VREF_RANK0_ADDR	0x80000104UL /* Byte: CA Vref state Rank 0 */
-+#define PMU_DMEM_SHADOW_INIT_IDX_ADDR	0x80000108UL /* Half: Initial shadow idx */
-+#define PMU_DMEM_SHADOW_PHASE_CNT_ADDR	0x8000010aUL /* Half: Phase shadow count */
-+#define PMU_DMEM_SHADOW_MID_IDX_ADDR	0x8000010cUL /* Half: Midpoint shadow idx */
-+#define PMU_DMEM_SHADOW_FINAL_CNT_ADDR	0x8000010eUL /* Half: Final shadow count */
-+#define PMU_DMEM_GATE_DESC		0x80000118UL /* Base: Gate eye margin desc */
-+#define PMU_DMEM_RFIFO_BAK		0x80000130UL /* Base: 7-halfword RFIFO backup */
-+#define PMU_DMEM_CBT_LANE_LIM		0x80000403UL /* Byte: CBT strobe/lane limit */
-+#define PMU_DMEM_MARGIN_STAT		0x80000405UL /* Byte: Stage 10 margin status byte */
-+#define PMU_DMEM_STAGE_RANK_IDX_ADDR	0x80000406UL /* Byte: Stage active rank idx */
-+#define PMU_DMEM_STAGE_SLICE_IDX_ADDR	0x80000407UL /* Byte: Stage active slice idx */
-+#define PMU_DMEM_STAGE_LANE_IDX_ADDR	0x80000408UL /* Byte: Stage active lane idx */
-+#define PMU_DMEM_COST_WEIGHT_2		0x80000410UL /* Half: Eye overflow weight */
-+#define PMU_DMEM_SHADOW_TRACE_PTR	0x80000418UL /* Word: Shadow trace buffer ptr */
-+#define PMU_DMEM_STEP_CFG_RAW		0x8000001aUL /* Half: Raw step config register */
-+#define PMU_DMEM_ACTIVE_CH_OFFSET	0x8000041cUL /* Word: Active channel CSR offset */
-+#define PMU_DMEM_COST_WEIGHT_1		0x80000422UL /* Half: Eye deviation weight */
-+#define PMU_DMEM_CAL_SAVE_CFG_ADDR	0x8000042aUL /* Half: Saved cal status word */
-+#define PMU_DMEM_DBYTE_DLY_SAVE		0x80000430UL /* Base: Saved DBYTE delay array */
-+#define PMU_DMEM_CAL_TABLE		0x8000043cUL /* Half: 2D calibration parameter table */
-+#define PMU_DMEM_AC_PROFILE_DLY_ADDR	0x80000444UL /* Base: AC profile step cfg A */
-+#define PMU_DMEM_AC_PROFILE_CFG_ADDR	0x80000448UL /* Base: AC profile step cfg B */
-+#define PMU_DMEM_CBT_STATE		0x8000045aUL /* Byte: CBT state latch */
-+#define PMU_DMEM_CBT_CONFIG		0x8000046aUL /* Byte: CBT configuration value */
-+#define PMU_DMEM_CAL_CMD_TABLE		0x8000046cUL /* Base: Shadow cal cmd tbl */
-+#define PMU_DMEM_NORM_STEP_STRIDE	0x8000047cUL /* Half: Normalized step stride */
-+#define PMU_DMEM_CAL_SEQ_MAP		0x80000480UL /* Base: 21-byte cal seq idx map */
-+#define PMU_DMEM_CAL_STRUCT_ADDR	0x800009a4UL /* Base: 54B cal struct base */
-+#define PMU_DMEM_CH_MASK		0x800009b8UL /* Byte: Active channel mask */
-+#define PMU_DMEM_AC_CAL_ACTIVE		0x80000a7cUL /* Byte: AC calibration active flag */
-+#define PMU_DMEM_AC_SIGNED_STEP		0x80000a7dUL /* Byte: AC signed step offset */
-+#define PMU_DMEM_DQ_PIN_MAP_BASE	0x80000a7eUL /* Base: DBYTE DQ pin swizzle table */
-+#define PMU_DMEM_SLICE_CNT_LIMIT	0x80000b20UL /* Base: Slice cnt limit array */
-+#define PMU_DMEM_SLICE_IMP_CFG		0x80000b24UL /* Base: Sec rank slice map */
-+#define PMU_DMEM_TIMING_LIM		0x80000b64UL /* Byte: Gate timing limit */
-+#define PMU_DMEM_ACTIVE_RANK		0x80000b67UL /* Byte: Active rank / byte index */
-+#define PMU_DMEM_CH_RANGE		0x80000b68UL /* Base: Active ch [min, max] */
-+#define PMU_DMEM_CH_ACTIVE_RANGE	0x80000b6aUL /* Base: Primary ch [min, max] */
-+#define PMU_DMEM_DESKEW_DIR		0x80000b6bUL /* Byte: Active deskew sweep direction */
-+#define PMU_DMEM_CH_SEC_RANGE		0x80000b6cUL /* Base: Secondary ch [min, max] */
-+#define PMU_DMEM_DESKEW_STAT_TBL	0x80000b6eUL /* Base: Deskew lane stat tbl */
-+#define PMU_DMEM_ARCHIVED_CAL_STAT_ADDR	0x80000b7eUL /* Half: Archived cal status */
-+#define PMU_DMEM_EYE_SWEEP_STAT		0x80000b82UL /* Base: Eye sweep status arr */
-+#define PMU_DMEM_LANE_STATUS		0x80000b97UL /* Byte: Latched slice lane status */
-+#define PMU_DMEM_ACTIVE_SLICE_MASK	0x80000b98UL /* Byte: Active slice bitmask */
-+#define PMU_DMEM_DBYTE_BACKUP		0x80000ba0UL /* Base: DBYTE delay register backup buffer */
-+#define PMU_DMEM_EYE_BACKUP		0x80000bc0UL /* Base: 2D eye table backup buffer */
-+#define PMU_DMEM_ALT_TRACKER		0x80000d70UL
-+#define PMU_DMEM_CAL_TRACKER		0x80000d9cUL /* Base: Calibration marker scratchpad state */
-+#define PMU_DMEM_EYE_CLEAR_BUF		0x80000dacUL /* Base: Eye scratchpad buffer */
-+#define PMU_DMEM_AC_TIMING_TBL		0x80000dc8UL /* Base: Primary AC timing tbl */
-+#define PMU_DMEM_LANE_PARAM_TBL_ADDR	0x80000e48UL /* Base: Per-lane parameter tbl */
-+#define PMU_DMEM_LANE_STEP_TBL_ADDR	0x80000e4aUL /* Base: Per-lane signed step tbl */
-+#define PMU_DMEM_AC_TIMING_DESC		0x80003708UL /* Base: Sec AC timing desc tbl */
-+#define PMU_DMEM_CAL_TAP_STAT		0x8000378bUL /* Base: Calibrated tap status tbl */
-+#define PMU_DMEM_CBT_COEFF_A_ADDR	0x80006098UL /* Base: 10-lane CBT coeff tbl A */
-+#define PMU_DMEM_CBT_COEFF_B_ADDR	0x80006138UL /* Base: 10-lane CBT coeff tbl B */
-+#define PMU_DMEM_CBT_LANE_FLAGS_ADDR	0x800061d8UL /* Base: 10-lane CBT byte flags */
-+#define PMU_DMEM_CBT_BASE_TBL_ADDR	0x80006228UL /* Base: 10-lane CBT base tbl */
-+#define PMU_DMEM_CBT_INIT_STAT_ADDR	0x80006278UL /* Base: 10-lane CBT init stat tbl */
-+#define PMU_DMEM_CBT_TRACK_STAT_ADDR	0x800062c8UL /* Base: 10-lane CBT track stat tbl */
-+#define PMU_DMEM_RX_SCAN_MATRIX		0x80008000UL /* Base: 3.5 KiB RX gate scan scratch */
-+#define PMU_DMEM_CBT_DELAY_ARR		0x8000e798UL /* Base: CBT per-slice delay arr */
-+#define PMU_DMEM_DELAY_TAP_LUT		0x8000e7b8UL /* Base: Pad delay tap LUT */
-+#define PMU_DMEM_DELAY_TAP_SUB1		0x8000e7c4UL
-+
-+/* ========================================================================== */
-+/* ARC PMU DCCM Relative Byte Offsets                                         */
-+/* ========================================================================== */
-+
-+#define PMU_DMEM_DRAM_FREQ_OFF		0x06 /* Half: Clock in MHz offset */
-+#define PMU_DMEM_DRAM_TYPE_FLAGS	0x0009
-+#define PMU_DMEM_DRAM_CFG_FLAGS		0x0a /* Half: DRAM config bitmask */
-+#define PMU_DMEM_CAL_SELECT_FLAGS	0x0b /* Byte: Calibration selector flags */
-+#define PMU_DMEM_CAL_MISC_FLAGS		0x000d
-+#define PMU_DMEM_TRAIN_MODE_HI		0x000f
-+#define PMU_DMEM_SEQUENCE_CTRL		0x0010
-+#define PMU_DMEM_TRAIN_MODE		0x0014
-+#define PMU_DMEM_CAL_CTRL_HI		0x0017
-+#define PMU_DMEM_CAL_MODE_EXT		0x0018
-+#define PMU_DMEM_CAL_DISABLE		0x0019
-+#define PMU_DMEM_CAL_MODE		0x001b
-+#define PMU_DMEM_LANE_MASK		0x1c /* Byte: Lane active mask */
-+#define PMU_DMEM_CH0_CTRL_LO		0x0020
-+#define PMU_DMEM_CH0_CTRL_HI		0x0021
-+#define PMU_DMEM_CH0_RANK_EN		0x0025
-+#define PMU_DMEM_CH0_RANK_CFG		0x0032
-+#define PMU_DMEM_SEARCH_WIN_COARSE	0x0037
-+#define PMU_DMEM_SEARCH_WIN_FINE	0x0039
-+#define PMU_DMEM_CH1_RANK_EN		0x0040
-+#define PMU_DMEM_CH1_RANK_CFG		0x004d
-+#define PMU_DMEM_LANE_SWEEP_CTRL	0x0059U
-+#define PMU_DMEM_SLICE_PROFILE_TABLE	0x005aUL
-+#define PMU_DMEM_VREF_FLAG_SIGNED	0x0062
-+#define PMU_DMEM_VREF_DAC_CTRL		0x0072
-+#define PMU_DMEM_MR19_OFF		0x8a /* Byte: DRAM protocol status offset */
-+#define PMU_DMEM_TRAIN_PARAM_CTRL	0x0096
-+#define PMU_DMEM_CAL_OVERRIDE_FLAG	0x00ce
-+#define PMU_DMEM_WCK_TAP_C0R0		0x00d1U
-+#define PMU_DMEM_WCK_TAP_C1R0		0x00d6U
-+#define PMU_DMEM_WCK_TAP_C0R1		0x00dbU
-+#define PMU_DMEM_WCK_TAP_C1R1		0x00e0U
-+#define PMU_DMEM_BIST_PATTERN_LO	0x00e4
-+#define PMU_DMEM_BIST_PATTERN_HI	0x00e5
-+#define PMU_DMEM_DESKEW_OFFSET_OVERRIDE	0x00e6
-+#define PMU_DMEM_TRAIN_STATUS		0x00e7
-+#define PMU_DMEM_DQ_SWAP_BASE		0x0100
-+#define PMU_DMEM_TRAIN_FEATURE_MASK	0x0102
-+#define PMU_DMEM_DIFF_TAP_PAIR		0x0105
-+#define PMU_DMEM_CAL_STEP		0x0106
-+#define PMU_DMEM_SEARCH_WINDOW_BIAS_LO	0x0110
-+#define PMU_DMEM_SEARCH_WINDOW_BIAS_HI	0x0111
-+#define PMU_DMEM_HIGH_FREQ_FLAG		0x0401
-+#define PMU_DMEM_CAL_ACTIVE_FLAG	0x0402
-+#define PMU_DMEM_FREQ_MODE		0x0403
-+#define PMU_DMEM_METRIC_TABLE_ENTRIES	0x0409
-+#define PMU_DMEM_ACTIVE_CSR_OFFSET	0x041c
-+#define PMU_DMEM_METRIC_COEFF_X		0x0420
-+#define PMU_DMEM_METRIC_COEFF_Y		0x0422
-+#define PMU_DMEM_ITER_COUNT		0x0428
-+#define PMU_DMEM_2D_STEP_CTRL		0x0438
-+#define PMU_DMEM_2D_STEP_PARAM		0x043a
-+#define PMU_DMEM_CAL_STRIDE		0x047c
-+#define PMU_DMEM_DESKEW_TARGET_DELAY	0x047e
-+#define PMU_DMEM_CAL_STRUCT_BASE	0x09a4UL
-+#define PMU_DMEM_AC_STEP_FLAG		0x0a7c
-+#define PMU_DMEM_RANK_SLICE_COUNTS	0x0b20
-+#define PMU_DMEM_RANK_SLICE_MAP		0x0b44
-+#define PMU_DMEM_SEARCH_WINDOW_STEPS	0x0b64
-+#define PMU_DMEM_SEARCH_WINDOW_SCALE	0x0b65
-+#define PMU_DMEM_CAL_BYTE		0x0b67
-+#define PMU_DMEM_SLICE_START		0x0b68
-+#define PMU_DMEM_SLICE_END		0x0b69
-+#define PMU_DMEM_RANK0_SLICE_START	0x0b6a
-+#define PMU_DMEM_RANK_BOUNDARY		0x0b6b
-+#define PMU_DMEM_RANK1_SLICE_START	0x0b6c
-+#define PMU_DMEM_RANK1_SLICE_END	0x0b6d
-+#define PMU_DMEM_DELAY_CAL_RESULTS	0x0b70
-+#define PMU_DMEM_DESKEW_SWAP		0x0b72U
-+#define PMU_DMEM_DESKEW_NORM		0x0b76U
-+#define PMU_DMEM_BEST_TAP_ARR		0x0b7aU
-+#define PMU_DMEM_LANE_ACTIVE_FLAGS	0x0b96
-+#define PMU_DMEM_ACTIVE_SLICE_MASK_CAL	0x0b98
-+#define PMU_DMEM_EYE_SAMPLE_BUF		0x0dc8
-+#define PMU_DMEM_SWEEP_SAMPLE_BUF	0x6318
-+#define PMU_DMEM_SWEEP_BLINK_OFF	0x6594U
-+#define PMU_DMEM_CBT_DELAY_ARR_OFF	0xe798U
-+
-+/* ========================================================================== */
-+/* Calibration Descriptor & Step Tracker Geometry                             */
-+/* ========================================================================== */
-+
-+#define PMU_SLICE_DESC_SIZE		54U
-+#define PMU_SLICE_DESC_COUNT		4U
-+#define PMU_SLICE_DESC_TOTAL_BYTES	(PMU_SLICE_DESC_COUNT * PMU_SLICE_DESC_SIZE)
-+#define PMU_SLICE_DESC_MR1_OFF		0x01U
-+#define PMU_SLICE_DESC_MR2_OFF		0x02U
-+#define PMU_SLICE_DESC_MR3_OFF		0x03U
-+#define PMU_SLICE_DESC_MR16_OFF		0x10U
-+#define PMU_SLICE_DESC_MR41_OFF		0x29U
-+#define PMU_TRACKER_SLOTS_BYTES		32U
-+
-+/* ========================================================================== */
-+/* Synopsys DDR PHY Internal APB CSRs (0x90000000 Base)                       */
-+/* ========================================================================== */
-+
-+#define PHY_DBYTE_SLICE_STRIDE		0x2000UL
-+#define PHY_REG_PUB_BASE		0x90000000UL /* Half: PHY APB base aperture */
-+#define PHY_REG_AC_COARSE_TIMING	0x90000020UL /* Half: PHY AC coarse timing reg */
-+#define PHY_REG_AC_FINE_TIMING		0x90000024UL /* Half: PHY AC timing register */
-+#define PHY_REG_STROBE_CAL_EN		0x90000148UL /* Half: Strobe cal mode enable */
-+#define PHY_REG_STREAM_ALT_BASE		0x9001e000UL /* Half: Alt APB stream base */
-+#define PHY_REG_DBYTE_BASE		0x90020000UL /* Base address for DBYTE slice CSRs */
-+#define PHY_REG_OP_MODE			0x90020012UL /* Channel-indexed PHY operating mode */
-+#define PHY_REG_DBYTE_XCVR_GATE		0x9002001eUL /* Half: DBYTE xcvr gate ctrl */
-+#define PHY_REG_DBYTE_DELAY_CNT		0x90020028UL
-+#define PHY_REG_DBYTE_ANALOG		0x90020054UL /* Half: DBYTE analog delay tap */
-+#define PHY_REG_DBYTE_EYE_DELAY		0x9002009cUL /* Half: DBYTE eye sweep delay */
-+#define PHY_REG_DBYTE_COARSE_STEP	0x900200e4UL /* Half: DBYTE coarse step reg */
-+#define PHY_REG_DBYTE_DQ_SWIZZLE_BASE	0x90020100UL /* Half: DBYTE Slice 0 delay register base */
-+#define PHY_REG_DBYTE_GATE_STAT		0x9002011aUL /* Half: DBYTE sample status */
-+#define PHY_REG_DBYTE_WCK_DLY		0x90020146UL /* Half: DBYTE WCK delay reg */
-+#define PHY_REG_DBYTE_COARSE		0x90020154UL /* Half: DBYTE coarse gate delay */
-+#define PHY_REG_DBYTE_EYE_CTRL		0x90020158UL /* Half: DBYTE eye sweep ctrl */
-+#define PHY_REG_DBYTE_DQ_DLY0		0x90020160UL /* Half: DBYTE DQ delay 0 reg */
-+#define PHY_REG_DBYTE_SAMPLE_RDY	0x9002016aUL /* Half: DBYTE sample ready reg */
-+#define PHY_REG_DBYTE_LCDL_STAT		0x9002016eUL /* Half: DBYTE LCDL gate status */
-+#define PHY_REG_DBYTE_CAL_TRIG		0x90020176UL /* DBYTE calibration strobe sequence */
-+#define PHY_REG_DBYTE_PERIOD		0x900201aaUL /* Half: DBYTE period meas reg */
-+#define PHY_REG_DBYTE_PLL_TIER		0x900201b2UL /* Half: DBYTE PLL rate tier cfg */
-+#define PHY_REG_DBYTE_PLL_LOCK		0x900201c0UL /* Half: DBYTE PLL lock status */
-+#define PHY_REG_DBYTE_UPPER_GATE	0x90021f6aUL /* Half: DBYTE gate control reg */
-+#define PHY_REG_DBYTE_BCAST_BASE	0x9003e000UL
-+#define PHY_REG_DBYTE_BCAST_PULSE	0x9003e002UL /* Half: DBYTE bcast win valid */
-+#define PHY_REG_DBYTE_BCAST_GATE	0x9003e00aUL /* Half: DBYTE bcast pulse ctrl */
-+#define PHY_REG_DBYTE_BCAST_MODE	0x9003e012UL /* Half: DBYTE bcast mode reg */
-+#define PHY_REG_DBYTE_BCAST_VREF	0x9003e014UL /* Half: DBYTE bcast Vref ctrl */
-+#define PHY_REG_DBYTE_BCAST_WIDTH	0x9003e016UL /* Half: DBYTE bcast pulse width */
-+#define PHY_REG_DBYTE_BCAST_XCVR_GATE	0x9003e01eUL /* Half: DBYTE bcast gate ctrl */
-+#define PHY_REG_DBYTE_BCAST_TX_CTRL	0x9003e02cUL /* Half: DBYTE bcast ctrl */
-+#define PHY_REG_DBYTE_BCAST_PWR_GATE	0x9003e034UL /* Half: DBYTE bcast power gate */
-+#define PHY_REG_DBYTE_BCAST_STROBE	0x9003e080UL
-+#define PHY_REG_DBYTE_BCAST_CBT		0x9003e144UL
-+#define PHY_REG_DBYTE_BCAST_RX_EN	0x9003e14eUL
-+#define PHY_REG_DBYTE_BCAST_EYE		0x9003e158UL
-+#define PHY_REG_DBYTE_BCAST_DQ_DLY0	0x9003e160UL
-+#define PHY_REG_DBYTE_BCAST_DQ_DLY1	0x9003e162UL
-+#define PHY_REG_DBYTE_BCAST_DQ_DLY2	0x9003e166UL
-+#define PHY_REG_DBYTE_BCAST_DQ_DLY3	0x9003e168UL
-+#define PHY_REG_DBYTE_BCAST_SAMPLE_RDY	0x9003e16aUL
-+#define PHY_REG_DBYTE_BCAST_DQS_DLY0	0x9003e172UL
-+#define PHY_REG_DBYTE_BCAST_DQS_DLY1	0x9003e174UL
-+#define PHY_REG_DBYTE_BCAST_TRIG	0x9003e176UL /* Half: DBYTE bcast gate commit */
-+#define PHY_REG_DBYTE_BCAST_LANE	0x9003e17cUL
-+#define PHY_REG_DBYTE_BCAST_WCK		0x9003e1b2UL
-+#define PHY_REG_DBYTE_UPPER_SAMPLE_A	0x9003f16aUL /* Half: Upper DBYTE sample A */
-+#define PHY_REG_DBYTE_UPPER_DLY0	0x9003fe20UL /* Half: DBYTE upper delay 0 */
-+#define PHY_REG_DBYTE_UPPER_DLY1	0x9003fe22UL /* Half: DBYTE upper delay 1 */
-+#define PHY_REG_DBYTE_UPPER_DLY2	0x9003fe24UL /* Half: DBYTE upper delay 2 */
-+#define PHY_REG_DBYTE_UPPER_DLY3	0x9003fe26UL /* Half: DBYTE upper delay 3 */
-+#define PHY_REG_DBYTE_UPPER_COARSE	0x9003ff54UL
-+#define PHY_REG_DBYTE_UPPER_SAMPLE_B	0x9003ff6aUL /* Half: Upper DBYTE sample B */
-+#define PHY_REG_DBYTE_UPPER_BCAST	0x9003ff7cUL
-+#define PHY_REG_MASTER_BASE		0x90040000UL
-+#define PHY_REG_CAL_STAT_CTRL0		0x90040008UL /* Half: PHY cal status ctrl A */
-+#define PHY_REG_CAL_STAT_CTRL1		0x9004000cUL /* Half: PHY cal status ctrl */
-+#define PHY_REG_MASTER_CFG		0x9004000eUL /* Master PUB configuration */
-+#define PHY_REG_SLICE_STAT		0x90040018UL /* Slice / lane status register */
-+#define PHY_REG_MASTER_DELAY		0x9004001aUL /* Half: Master profile delay */
-+#define PHY_REG_CAL_STAT_CTRL2		0x90040022UL /* Half: PHY cal status ctrl */
-+#define PHY_REG_PUB_ACK			0x9004002aUL /* Half: PUB status ack reg */
-+#define PHY_REG_MASTER_PWR_GATE		0x90040034UL /* Half: Master power gate ctrl */
-+#define PHY_REG_CLK_GATE		0x90040040UL /* Master PHY clock gate enable */
-+#define PHY_REG_CLK_GATE_STAT		0x90040042UL /* Master clock gate acknowledge */
-+#define PHY_REG_DESKEW_DLY0		0x90040044UL /* Deskew delay tap 0 */
-+#define PHY_REG_DESKEW_DLY1		0x90040046UL /* Deskew delay tap 1 */
-+#define PHY_REG_TIMER_DUMMY		0x90040048UL /* Half: Dummy APB turnaround read register */
-+#define PHY_REG_CLK_TIMING_CTRL		0x9004004eUL /* Clock timing control */
-+#define PHY_REG_PAD_CAL_CTRL		0x90040050UL /* Half: Master pad cal ctrl */
-+#define PHY_REG_VREF_TRIM_CFG		0x90040054UL
-+#define PHY_REG_CA_VREF_DAC		0x90040058UL /* Half: CA Vref DAC ctrl A */
-+#define PHY_REG_PLL_CLK_CTRL		0x90040062UL /* Master PLL & clock control */
-+#define PHY_REG_VREF_CTRL		0x90040082UL /* Receiver Vref control */
-+#define PHY_REG_VREF_STAT		0x90040084UL /* Half: Gate settle timing reg */
-+#define PHY_REG_DRAM_TYPE_CFG		0x90040088UL
-+#define PHY_REG_GATE_STAT		0x90040092UL /* Half: Gate pulse status reg */
-+#define PHY_REG_ZQ_STAT			0x90040094UL /* Half: ZQ telemetry status 0 */
-+#define PHY_REG_PHY_STATUS		0x900400c0UL /* Master PHY status & receiver clock */
-+#define PHY_REG_MASTER_CAL_CTRL		0x900400dcUL
-+#define PHY_REG_CH0_ANALOG_PWR		0x900400e4UL /* Ch0 analog power configuration */
-+#define PHY_REG_CH1_ANALOG_PWR		0x900400e6UL /* Ch1 analog power configuration */
-+#define PHY_REG_RESET_TRIGGER		0x900400f2UL /* Soft reset pulse toggle */
-+#define PHY_REG_GATE_MASK		0x900400f4UL
-+#define PHY_REG_GATE_CTRL		0x900400fcUL
-+#define PHY_REG_CH0_RANK_CFG		0x90040100UL
-+#define PHY_REG_CH1_RANK_CFG		0x90040102UL
-+#define PHY_REG_RFIFO_CFG		0x90040110UL /* Half: RFIFO cfg base */
-+#define PHY_REG_RFIFO_SUPPRESS		0x90040116UL /* Half: RFIFO suppress ctrl */
-+#define PHY_REG_MASTER_INIT_CTRL	0x90040120UL /* Half: Master init ctrl */
-+#define PHY_REG_CBT_CTRL		0x90040144UL /* CBT control register */
-+#define PHY_REG_CAL_TRIG		0x90040146UL /* Calibration strobe trigger */
-+#define PHY_REG_CAL_STAT		0x90040148UL /* Calibration status & configuration */
-+#define PHY_REG_MASTER_COARSE_CFG	0x90040154UL /* Half: Master coarse gate cfg */
-+#define PHY_REG_CBT_STAT0		0x90040180UL /* Half: CBT status reg */
-+#define PHY_REG_CBT_STAT1		0x90040182UL /* Half: CBT status reg */
-+#define PHY_REG_CBT_STAT2		0x90040184UL /* Half: CBT status reg */
-+#define PHY_REG_AC_PLL_CTRL		0x900401c0UL
-+#define PHY_REG_CBT_PLL			0x900401f0UL /* CBT PLL control register */
-+#define PHY_REG_CMD_DISPATCH		0x90040238UL /* Command dispatch strobe */
-+#define PHY_REG_CLK_PHASE_BASE		0x90040600UL
-+#define PHY_REG_CLK_PHASE_DELAY		0x90040628UL
-+#define PHY_REG_PUB_SEC_BASE		0x9005e000UL
-+#define PHY_REG_SEC_CLK_GATE		0x9005e0a4UL /* Secondary clock gate toggle */
-+#define PHY_REG_SEC_CAL_CTRL		0x9005e0b2UL
-+#define PHY_REG_SEC_PUB_CTRL0		0x9005e0eeUL /* Half: Sec PUB ctrl */
-+#define PHY_REG_PUB_CAL_STROBE		0x9005e140UL /* Secondary calibration strobe */
-+#define PHY_REG_SEC_PUB_CTRL1		0x9005e14aUL /* Half: Sec PUB ctrl */
-+#define PHY_REG_AC_BASE			0x90060000UL /* Half: AC slice profile base */
-+#define PHY_AC_PIN_DELAY_BASE		0x90060002UL /* AC pin delay base */
-+#define PHY_AC_BASE_OFFSET_CTRL		0x90060004UL /* AC base offset control */
-+#define PHY_REG_AC_SLICE_CFG		0x9006005cUL
-+#define PHY_AC_SWIZZLE_S0_BASE		0x90060120UL /* AC slice 0 pin swizzle base */
-+#define PHY_REG_AC_PLL_LOCK		0x9006017eUL /* Half: AC PLL lock status B */
-+#define PHY_AC_MASTER_DESKEW0		0x90061002UL /* AC master deskew 0 */
-+#define PHY_AC_MASTER_DESKEW1		0x90061202UL /* AC master deskew 1 */
-+#define PHY_AC_GATE_CTRL_RESET		0x90061e02UL /* AC gate control reset */
-+#define PHY_AC_SWIZZLE_S1_BASE		0x90062120UL /* AC slice 1 pin swizzle base */
-+#define PHY_AC_PROFILE_LANE_BASE	0x9007e002UL /* AC profile lane base */
-+#define PHY_AC_PROFILE_MASTER_CTRL	0x9007e004UL /* AC profile master control */
-+#define PHY_REG_PLL_STATUS		0x9007e034UL /* PLL lock status */
-+#define PHY_REG_AC_DRIVE_CFG0		0x9007e05cUL
-+#define PHY_REG_AC_DRIVE_CFG1		0x9007e066UL
-+#define PHY_REG_AC_DRIVE_CFG2		0x9007e068UL
-+#define PHY_REG_AC_DRIVE_CFG3		0x9007e080UL
-+#define PHY_REG_AC_DRIVE_CFG4		0x9007e082UL
-+#define PHY_REG_AC_DRIVE_CFG5		0x9007e084UL
-+#define PHY_REG_AC_DRIVE_CFG6		0x9007e086UL
-+#define PHY_REG_AC_BCAST_GATE		0x9007e108UL
-+#define PHY_REG_CSR_RESULT_STREAM	0x90082000UL /* Half: PHY CSR result stream */
-+#define PHY_REG_BIST_PLL_CFG		0x900e0022UL /* Half: AC ctrl read source */
-+#define PHY_REG_DESKEW_QUAD_TAP		0x900e0048UL /* Half: Deskew quad-tap base */
-+#define PHY_REG_AC_PAT_CTRL		0x900e00c0UL
-+#define PHY_REG_PLL_CFG			0x900e00c2UL /* Master PLL configuration parameter 0 */
-+#define PHY_REG_AC_TX_EN_BCAST		0x900e00caUL /* AC transmitter broadcast enable */
-+#define PHY_REG_AC_BCAST		0x900fe022UL /* Half: AC bcast write target */
-+#define PHY_REG_BIST_CTRL_MODE		0x900fe0c0UL /* Half: AC bcast test pattern A */
-+#define PHY_REG_AC_BCAST_PAT_DATA	0x900fe0caUL /* Half: AC bcast test pattern B */
-+#define PHY_REG_AC_BCAST_PAT_CFG	0x900fe1acUL /* Half: AC bcast pattern ctrl B */
-+#define PHY_REG_AC_BCAST_PAT_CTRL	0x900fe1aeUL /* Half: AC bcast pattern ctrl */
-+#define PHY_REG_BIST_PAT_CTRL0		0x900ffe4cUL
-+#define PHY_REG_BIST_PAT_CTRL1		0x900ffe4eUL
-+#define PHY_REG_CSR_SCRATCH_BASE	0x90120052UL /* Half: PUB CSR scratchpad */
-+#define PHY_REG_CAL_LATCH_STREAM	0x90121000UL
-+#define PHY_REG_CAL_RESTORE_TRIG	0x9013e050UL
-+#define PHY_REG_SHADOW_TRACK_BASE	0x90140000UL /* Half: Shadow track aperture */
-+#define PHY_REG_MAILBOX_STAT		0x90180008UL /* Mailbox status */
-+#define PHY_REG_MAILBOX_STREAM		0x90180064UL /* Mailbox stream low */
-+#define PHY_REG_MAILBOX_TRIG		0x90180066UL /* Mailbox interrupt trigger */
-+#define PHY_REG_PUB_CFG			0x90180100UL
-+#define PHY_REG_PUB_CTL			0x901801dcUL /* PUB control */
-+#define PHY_REG_SHADOW_CNT		0x9018021eUL /* Half: Shadow stream count reg */
-+
-+/* ========================================================================== */
-+/* ARC EM4 Auxiliary Timer Registers                                          */
-+/* ========================================================================== */
-+
-+#define PMU_AUX_RTC_CTRL		0x103 /* AUX 259: RTC control / enable register */
-+#define PMU_AUX_RTC_LOW			0x104 /* AUX 260: RTC low 32-bit counter */
-+#define PMU_AUX_RTC_HIGH		0x105 /* AUX 261: RTC high 32-bit counter */
-+
-+/* ========================================================================== */
-+/* PMU Firmware Identifiers & Assertion Error Codes                           */
-+/* ========================================================================== */
-+
-+#define PMU_FW_VERSION_ID		0x230bU
-+#define PHY_CSR_SCRATCH_MAGIC_LO	0x55aaU
-+#define PHY_CSR_SCRATCH_MAGIC_HI	0xaa55U
-+#define PMU_ERR_PLL_LOCK_TIMEOUT	0x00240000UL
-+#define PMU_ERR_CLK_GATE_TIMEOUT	0x00250000UL
-+#define PMU_ERR_ZQ_CAL_LOW_FREQ		0x00430000UL
-+#define PMU_ERR_ZQ_CAL_HIGH_FREQ	0x00470000UL
-+#define PMU_ERR_EYE_RANK_LIMIT_1	0x00920001UL
-+#define PMU_ERR_EYE_RANK_MODE_INVALID	0x00930001UL
-+#define PMU_ERR_RANK_BOUNDS_BASE	0x009d0003UL
-+#define PMU_ERR_EYE_STEP_ALIGN_MISMATCH	0x00a40003UL
-+#define PMU_ERR_DESKEW_SAMPLE_CHECK	0x01160000UL
-+#define PMU_ERR_RX_FIFO_SCAN_OVERFLOW	0x011c0000UL
-+#define PMU_ERR_LPCA_CLK_GATE_PRECOND	0x01280000UL
-+#define PMU_ERR_AC_STEP_COORD_ADJUST	0x019f0003UL
-+#define PMU_ERR_BIST_PATTERN_IDX_INVALID	0x01a40001UL
-+#define PMU_ERR_BIST_VALIDATION_MODE	0x01a50000UL
-+#define PMU_ERR_BIST_CMD_MODE_INVALID	0x01a80001UL
-+#define PMU_ERR_EYE_SLICE_REG_SOURCE	0x01ab0000UL
-+#define PMU_ERR_EYE_WINDOW_TOO_NARROW	0x01b10006UL
-+#define PMU_ERR_EYE_SWEEP_CONVERGENCE	0x01f60000UL
-+#define PMU_ERR_CMD_SUBCODE_INVALID	0x02190001UL
-+#define PMU_ERR_CSR_BUS_ACCESS_FAULT	0x02240000UL
-+#define PMU_ERR_WCK_EYE_ZERO_WIDTH	0x022e0003UL
-+#define PMU_ERR_VREF_STEP_DIR_INVALID	0x02350000UL
-+#define PMU_ERR_BIST_PATTERN_MODE_RANGE	0x027e0001UL
-+#define PMU_ERR_COARSE_DELAY_OVERFLOW	0x02a80000UL
-+
-+#endif /* _DWC_DDRPHY_PMU_REGS_H */
-diff --git a/arch/arm/mach-sunxi/pmu/pmu.ld b/arch/arm/mach-sunxi/pmu/pmu.ld
-new file mode 100644
-index 00000000000..79ff0f8c0c4
---- /dev/null
-+++ b/arch/arm/mach-sunxi/pmu/pmu.ld
-@@ -0,0 +1,38 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
++/**
++ * pmu_cal_rank_offset_get() - Compute JEDEC CBT read latency entry for rank and channel
++ * @rank: Active DRAM rank index (0 or 1)
++ * @channel: Active DRAM channel index (0 or 1)
 + *
-+ * Linker script for Allwinner A733 LPDDR5 ARC EM4 PMU Firmware
++ * Extracts the 4-bit MR2[3:0] RL index from byte +2 of the 54-byte per-slice
++ * descriptor at DCCM 0x800009a4 + (@rank * 2 + @channel) * 54 and computes the
++ * corresponding JEDEC read latency (doubled when pmu_cbt_config_get() == 2).
++ *
++ * Return: 8-bit CBT read latency entry for @rank and @channel.
 + */
-+
-+OUTPUT_FORMAT("elf32-littlearc", "elf32-littlearc", "elf32-littlearc")
-+OUTPUT_ARCH(arc)
-+ENTRY(pmu_vector_table)
-+
-+SECTIONS
++u8 pmu_cal_rank_offset_get(u32 rank, u32 channel)
 +{
-+	.vectors 0x00000000 : {
-+		KEEP(*(.vectors))
-+	} = 0xe078
++	u32 slice_idx = (rank << 1) + channel;
++	u32 desc_addr = PMU_DMEM_CAL_STRUCT_ADDR +
++			slice_idx * PMU_SLICE_DESC_SIZE;
++	u32 idx = dmem_read8(desc_addr + PMU_SLICE_DESC_MR2_OFF) & 0x0fU;
++	u32 rl;
 +
-+	.text 0x00000080 : {
-+		KEEP(*(.text.pmu_start))
-+		KEEP(*(.text.pmu_default_exception_handler))
-+		*(.text .text.*)
-+	} = 0xe078
++	if (idx >= 12U)
++		return 0U;
 +
-+	.rodata : { *(.rodata*) }
-+	.data   : { *(.data*) *(.sdata*) }
-+	.bss    : { *(.bss*) *(.sbss*) *(COMMON) }
++	rl = idx + 3U + (idx >= 4U) + (idx >= 7U) + (idx >= 9U);
++	if (pmu_cbt_config_get() == 2U)
++		return (idx < 6U) ? (u8)(rl << 1) : 0U;
 +
-+	/DISCARD/ : {
-+		*(.comment)
-+		*(.note*)
-+		*(.eh_frame*)
-+		*(.ARC.attributes)
++	return (u8)rl;
++}
++
++/**
++ * pmu_cal_cbt_desc_unpack() - Unpack CBT step multiplier from slice descriptor
++ * @rank: Active DRAM rank index (0 or 1)
++ * @channel: Active DRAM channel index (0 or 1)
++ *
++ * Return: 8 or 4 when DCCM 0x80000008 == 2 (else 4 or 2) based on bit 4 of
++ *         descriptor byte +3 at 0x800009a4 + (@rank * 2 + @channel) * 54.
++ */
++u32 pmu_cal_cbt_desc_unpack(u32 rank, u32 channel)
++{
++	u32 slice_idx = (rank << 1) + channel;
++	u8 byte_val = dmem_read8(PMU_DMEM_CAL_STRUCT_ADDR +
++				 slice_idx * PMU_SLICE_DESC_SIZE +
++				 PMU_SLICE_DESC_MR3_OFF);
++	u32 res = (byte_val & 0x10U) ? 2U : 4U;
++
++	if (dmem_read8(PMU_DMEM_PLL_RATIO) == 2U)
++		res <<= 1;
++
++	return res;
++}
++
++/**
++ * pmu_cal_search_win_max_calc() - Scan slice registers and update master delay table
++ * @channel: Target DRAM channel index (0 or 1)
++ * @rank: Target DRAM rank index (0 or 1)
++ * @dir: Direction step selector (0 adds +4 offset, non-zero adds 0)
++ */
++void pmu_cal_search_win_max_calc(u32 channel, u32 rank, u32 dir)
++{
++	u8 slice_start;
++	u8 slice_end;
++	s32 max_val = -1;
++	u32 addr;
++	s32 i;
++	u8 pll_ratio;
++	u32 shift;
++	s32 v;
++
++	if (rank == 1U && dmem_read8(PMU_DMEM_CH1_ACTIVE_FLAG) == 0U) {
++		__volatile__ u16 *tbl = pmu_sdata()->master_dly_tbl[channel];
++
++		tbl[1] = tbl[0];
++		return;
++	}
++
++	slice_start = dmem_read8((rank != 0U) ? PMU_DMEM_RANK1_SLICE_START :
++						PMU_DMEM_RANK0_SLICE_START);
++	slice_end = dmem_read8((rank != 0U) ? PMU_DMEM_RANK1_SLICE_END :
++					      PMU_DMEM_RANK_BOUNDARY);
++	addr = PHY_REG_DBYTE_BASE |
++	       (((pmu_sdata()->active_csr_offset |
++		  (channel + (((dir == 0U) ? 1U : 0U) << 2) + 0x20U) |
++		  ((u32)slice_start << 12)) << 1));
++
++	for (i = (s32)slice_end + 1 - (s32)slice_start; i > 0; i--) {
++		s16 val = (s16)phy_read16(addr);
++
++		if ((s32)val > max_val)
++			max_val = (s32)val;
++		addr += PHY_DBYTE_SLICE_STRIDE;
++	}
++
++	pll_ratio = dmem_read8(PMU_DMEM_PLL_RATIO);
++	shift = 511U >> (pll_ratio == 2U);
++
++	v = (max_val >> ((pll_ratio >> 1) + 7U)) +
++	    (s8)dmem_read8(PMU_DMEM_SEARCH_WINDOW_BIAS_LO) +
++	    (((u32)max_val & shift) != 0U ? 1 : 0) + 2;
++	pmu_sdata()->master_dly_tbl[channel][rank] = (u16)v;
++}
++
++/**
++ * pmu_phy_reg_offset_diff_adjust() - Program CA Vref DAC and trim registers for rank
++ * @rank: Target rank index (0 or non-zero)
++ */
++void pmu_phy_reg_offset_diff_adjust(u32 rank)
++{
++	__volatile__ u16 *apb =
++		(__volatile__ u16 *)(PHY_REG_CA_VREF_DAC +
++				     (pmu_sdata()->active_csr_offset << 1));
++	u8 ca_vref_r1 = dmem_read8(PMU_DMEM_CA_VREF_RANK1_ADDR);
++	u8 ca_vref_r0 = dmem_read8(PMU_DMEM_CA_VREF_RANK0_ADDR);
++	u8 val = (rank == 0U) ? ca_vref_r0 : ca_vref_r1;
++	s32 diff;
++	u16 ca_reg_a, ca_reg_b, ca_reg_c;
++	u16 ca_reg_val;
++
++	apb[0] = (apb[0] & 0x3f00U) | val;
++	apb[1] = (apb[1] & 0x3f00U) | val;
++	apb[4] = (apb[4] & 0x3f00U) | val;
++
++	diff = (s32)ca_vref_r1 - (s32)ca_vref_r0;
++	if (rank == 0U)
++		diff = -diff;
++
++	ca_reg_a = apb[13];
++	ca_reg_val = (u16)((ca_reg_a & 0x3f00U) | (((ca_reg_a & 0x3fU) + diff) & 0x3fU));
++	apb[13] = ca_reg_val;
++	apb[14] = ca_reg_val;
++
++	ca_reg_b = apb[15];
++	apb[15] = (u16)((ca_reg_b & 0x3f00U) | (((ca_reg_b & 0x3fU) + diff) & 0x3fU));
++
++	ca_reg_c = apb[16];
++	apb[16] = (u16)((ca_reg_c & 0x3f00U) | (((ca_reg_c & 0x3fU) + diff) & 0x3fU));
++}
++
++/**
++ * pmu_dmem_reg_stream_unpack() - Clear CBT/deskew status CSRs and pulse reset
++ * @cfg_desc: Pointer to CBT configuration descriptor (32-bit offset at +0x18)
++ */
++void pmu_dmem_reg_stream_unpack(const void *cfg_desc)
++{
++	__volatile__ u16 *apb = (__volatile__ u16 *)PHY_REG_RESET_TRIGGER;
++	__volatile__ u16 *bcast_base = (__volatile__ u16 *)PHY_REG_DBYTE_BCAST_BASE;
++	const u8 *desc = (const u8 *)cfg_desc;
++	u32 rank_cfg_off = *(const u32 *)(desc + 0x18U);
++	u32 zero = 0U;
++	u16 val;
++
++	phy_write16(PHY_REG_DBYTE_UPPER_SAMPLE_B, (u16)zero);
++	bcast_base[176] = (u16)zero;
++	bcast_base[177] = (u16)zero;
++	apb[71] = (u16)zero;
++	apb[0] = (u16)zero;
++	bcast_base[rank_cfg_off] = (u16)zero;
++
++	val = phy_read16(PHY_REG_BIST_PLL_CFG);
++	phy_write16(PHY_REG_AC_BCAST, val & (u16)~0x0010U);
++
++	pmu_phy_cal_trig_pulse();
++	if (pmu_sdata()->freq_mode <= 1U)
++		pmu_phy_soft_reset_pulse();
++}
++
++/**
++ * pmu_cbt_delay_offset_lookup() - Compute JEDEC CBT write latency offset for rank and channel
++ * @rank: Active DRAM rank index (0 or 1)
++ * @channel: Active DRAM channel index (0 or 1)
++ *
++ * Extracts the 4-bit MR1[7:4] clock-frequency index and MR3[5] write-latency
++ * set selector from the 54-byte per-slice descriptor at DCCM 0x800009a4 and
++ * computes the corresponding JEDEC WL Set A or Set B delay entry.
++ *
++ * Return: 8-bit CBT write latency offset for @rank and @channel.
++ */
++u32 pmu_cbt_delay_offset_lookup(u32 rank, u32 channel)
++{
++	u32 slice_idx = (rank << 1) + channel;
++	u32 desc_addr = PMU_DMEM_CAL_STRUCT_ADDR +
++			slice_idx * PMU_SLICE_DESC_SIZE;
++	u32 idx = (u32)(dmem_read8(desc_addr + PMU_SLICE_DESC_MR1_OFF) >> 4);
++	u32 wl;
++
++	if (idx >= 12U)
++		return 0U;
++
++	if (dmem_read8(desc_addr + PMU_SLICE_DESC_MR3_OFF) & 0x20U)
++		wl = idx + 2U + (idx >= 4U) + (idx >= 7U) + (idx >= 9U);
++	else
++		wl = ((idx * 11U + 2U) >> 4) + 2U;
++
++	if (pmu_cbt_config_get() == 2U)
++		return (idx < 6U) ? (wl << 1) : 0U;
++
++	return wl;
++}
++
++/**
++ * pmu_cbt_cal_pulse_seq() - Execute 6-step CBT calibration pulse sequence
++ * @pulse_cmd: Pulse command flags for intermediate phases
++ */
++noinline void pmu_cbt_cal_pulse_seq(u32 pulse_cmd)
++{
++	u32 zero = 0U;
++
++	pmu_cal_sequence_pulse_send(0x41U << 19, 7U, 4U, 0U, zero, zero, zero);
++	pmu_cbt_cal_active_set();
++	pmu_cal_sequence_pulse_send(pulse_cmd, 7U, 4U, 0U, zero, zero, zero);
++	pmu_cbt_cal_active_clear();
++	pmu_cal_sequence_pulse_send(pulse_cmd, 7U, 4U, 0U, zero, zero, zero);
++	pmu_cal_sequence_pulse_send(0x80U | (1U << 19), 7U, 4U, 0U,
++				    zero, zero, zero);
++}
++
++/**
++ * pmu_cbt_timing_pulse_coordinator() - Coordinate 4-channel CBT timing pulse sweep
++ * @cal_mode: Calibration mode halfword forwarded to pmu_cal_window_params_dispatch()
++ * @phase_sel: Phase pattern selector (0 for primary masks, non-zero for alternate)
++ */
++void pmu_cbt_timing_pulse_coordinator(u16 cal_mode, u32 phase_sel)
++{
++	u32 zero = 0U;
++	__volatile__ u16 *out_tbl =
++		(__volatile__ u16 *)PMU_DMEM_DELAY_TAP_LUT;
++	__volatile__ u16 *out_sub1 =
++		(__volatile__ u16 *)PMU_DMEM_DELAY_TAP_SUB1;
++	u32 mask_word;
++	u32 phase;
++
++	out_tbl[0] = 100U;
++
++	for (phase = 0U; phase < 4U; phase++) {
++		u32 pulse_mask;
++		u16 step;
++		u16 marker;
++
++		if (phase_sel == 0U) {
++			if (phase == 0U)
++				pulse_mask = 0x7f00U;
++			else if (phase == 1U)
++				pulse_mask = 0x7f0000U;
++			else if (phase == 2U)
++				pulse_mask = 0x7f007f7fUL;
++			else
++				pulse_mask = 0x7f7f007fUL;
++		} else {
++			if (phase == 0U)
++				pulse_mask = 0x7fU;
++			else if (phase == 1U)
++				pulse_mask = 0x7f000000UL;
++			else if (phase == 2U)
++				pulse_mask = 0x7f007f7fUL;
++			else
++				pulse_mask = 0x007f7f7fUL;
++		}
++
++		mask_word = pulse_mask;
++		step = out_tbl[phase];
++		pmu_cal_marker_pair_set((u16)(step << 2));
++
++		pmu_cal_sequence_pulse_send(0x41UL << 19, 7U, 8U, 0U,
++					    zero, zero, zero);
++		pmu_cal_pad_timing_delay_set(0U, 4U, 1U);
++
++		pmu_cal_window_params_dispatch((const u8 *)&mask_word, 2U, cal_mode);
++
++		pmu_cal_pad_timing_delay_set(0U, 20U, 1U);
++		pmu_cal_sequence_pulse_send(1UL << 18, 7U, 4U, 0U,
++					    zero, zero, zero);
++		pmu_cal_sequence_pulse_send((1UL << 19) | 0x80UL, 7U, 8U, 0U,
++					    zero, zero, zero);
++
++		marker = pmu_cal_stride_get();
++		out_tbl[phase + 1U] = marker;
++		out_sub1[phase] = (u16)(marker - 1U);
 +	}
 +}
 +
-+ASSERT(SIZEOF(.rodata) == 0 && SIZEOF(.data) == 0 && SIZEOF(.bss) == 0,
-+       "ARC ICCM is execute-only; .rodata/.data/.bss sections are forbidden")
-+ASSERT(. <= 0x00010000, "PMU firmware exceeds 64 KiB ICCM")
-diff --git a/arch/arm/mach-sunxi/pmu/pmu_fw.h b/arch/arm/mach-sunxi/pmu/pmu_fw.h
++/**
++ * pmu_cbt_strobe_pulse_train() - Generate CBT strobe pulse train
++ * @pulse_cmd: Slice / pulse command selector
++ * @is_stage2: Non-zero for stage 2 short sequence, 0 for full repeat sequence
++ */
++void pmu_cbt_strobe_pulse_train(u32 pulse_cmd, u32 is_stage2)
++{
++	u32 zero = 0U;
++	u8 pll_ratio = dmem_read8(PMU_DMEM_PLL_RATIO);
++	u32 repeat_cnt;
++	u32 i;
++
++	pmu_cal_strobe_pulse_init();
++	pmu_cal_sequence_pulse_send(0U, 7U, 4U, 0U, zero, zero, zero);
++	pmu_cbt_cal_active_set();
++
++	repeat_cnt = (pll_ratio == 2U) ? 4U : 2U;
++
++	if (is_stage2 != 0U)
++		pmu_cal_sequence_pulse_send(0U, 7U, 2U, 0U, zero, zero, 4U);
++
++	pmu_cal_sequence_pulse_send(0x200000U, 5U, 0U, 256U, zero,
++				    pulse_cmd, zero);
++
++	if (is_stage2 == 0U) {
++		pmu_cal_sequence_pulse_send(0x1000004U, 0x2bU, repeat_cnt, 0U,
++					    zero, pulse_cmd, zero);
++		pmu_cal_sequence_pulse_send(0x1000004U, 0x2bU, repeat_cnt, 0U,
++					    zero, pulse_cmd, zero);
++	}
++
++	pmu_cal_sequence_pulse_send(0x1040000U, 0x2bU, repeat_cnt, 0U, zero,
++				    pulse_cmd, zero);
++	pmu_cal_sequence_pulse_send(0U, 7U, 10U, 0U, zero, zero, zero);
++
++	for (i = 0U; i < 2U; i++) {
++		pmu_cal_sequence_pulse_send(1U << (15U + i), 7U, 0U, 0U,
++					    zero, zero, zero);
++		pmu_cal_sequence_pulse_send(1U << (16U + i), 7U, 0U, 0U,
++					    zero, zero, zero);
++		if (i == 0U)
++			pmu_cbt_cal_active_clear();
++	}
++
++	pmu_cal_sequence_pulse_send(0x80U | (1U << 19), 7U, 4U, 0U,
++				    zero, zero, zero);
++}
++
++/**
++ * pmu_cbt_deskew_pulse_train() - Generate CBT deskew pulse train
++ * @pulse_cmd: Slice / pulse command selector
++ * @is_alternate: Non-zero to add 1 to second repeat count
++ */
++void pmu_cbt_deskew_pulse_train(u32 pulse_cmd, u32 is_alternate)
++{
++	u32 zero = 0U;
++	u8 pll_ratio = dmem_read8(PMU_DMEM_PLL_RATIO);
++	u32 repeat_cnt;
++	u32 second_cnt;
++
++	pmu_cal_strobe_pulse_init();
++	pmu_cal_sequence_pulse_send(0U, 7U, 0U, 0U, zero, zero, zero);
++	pmu_cal_sequence_pulse_send(0x480000U, 5U, 0U, 512U, zero,
++				    pulse_cmd, zero);
++	pmu_cbt_cal_active_set();
++
++	repeat_cnt = (pll_ratio == 2U) ? 5U : 2U;
++	second_cnt = (is_alternate != 0U) ? (repeat_cnt + 1U) : repeat_cnt;
++
++	pmu_cal_sequence_pulse_send(0x0cU, 0x2bU, repeat_cnt, 0U, zero,
++				    pulse_cmd, zero);
++	pmu_cal_sequence_pulse_send(0x0cU, 0x2bU, second_cnt, 0U, zero,
++				    pulse_cmd, zero);
++	pmu_cal_sequence_pulse_send(0x40000U, 0x2bU, repeat_cnt, 2U, zero,
++				    pulse_cmd, zero);
++	pmu_cal_sequence_pulse_send(0x0cU, 0x2bU, repeat_cnt, 2U, zero,
++				    pulse_cmd, zero);
++
++	pmu_cal_sequence_pulse_send(0U, 7U, 4U, 0U, zero, zero, 10U);
++	pmu_cal_sequence_pulse_send(1U << 15, 7U, 4U, 0U, zero, zero, zero);
++	pmu_cal_sequence_pulse_send(0U, 7U, 8U, 0U, zero, zero, zero);
++	pmu_cbt_cal_active_clear();
++	pmu_cal_sequence_pulse_send(0U, 7U, 4U, 0U, zero, zero, zero);
++
++	pmu_cal_sequence_pulse_send(0U, 5U, 4U, 896U, zero, pulse_cmd, zero);
++	pmu_cal_sequence_pulse_send((1U << 19) | 0x80U, 7U, 0U, 0U, zero,
++				    pulse_cmd, zero);
++}
++
++/**
++ * pmu_cbt_3phase_pulse_dispatch() - Dispatch 3-phase CBT calibration pulse sequence
++ * @cal_mode: Target calibration mode / rank selector
++ * @step_table: Base pointer to calibration step table
++ * @step_idx: Step index within @step_table
++ * @flags: Control bitmask (bit 0 skips profile program, bit 1 skips AC setup)
++ */
++void pmu_cbt_3phase_pulse_dispatch(u32 cal_mode, const u8 *step_table,
++				   u32 step_idx, u32 flags)
++{
++	u8 val = step_table[step_idx];
++	u32 is_final_step = (step_idx == 16U) ? 1U : 0U;
++	u32 p2 = ((step_idx - 14U) < 2U) ? 0x20U : (is_final_step ? 4U : 6U);
++	u32 is_final_ovr = 0U;
++
++	pmu_cal_strobe_pulse_init();
++	if ((flags & 2U) == 0U) {
++		pmu_ac_lane_profile_setup();
++		pmu_cal_pad_timing_delay_set(0U, 5U, 1U);
++	}
++
++	pmu_dbyte_cal_step_latch(step_idx, val, cal_mode);
++	pmu_cal_sequence_pulse_send(0U, 7U, p2, 0U, 0U, is_final_step, 0U);
++
++	if (is_final_step != 0U && (val & 0x20U) != 0U) {
++		u32 arg = (dmem_read8(PMU_DMEM_CBT_LANE_LIM) == 0U) ?
++			  (1U << 19) : 0U;
++
++		pmu_cbt_cal_pulse_seq(arg);
++		is_final_ovr = 1U;
++	}
++
++	pmu_cbt_3phase_pulse_seq();
++	pmu_cal_slice_step_diff_latch(0U, is_final_ovr ^ 1U);
++	if (is_final_ovr != 0U)
++		pmu_delay_us(0x1388U, 0x14U);
++	if ((flags & 1U) == 0U)
++		pmu_phy_profile_param_program();
++}
++
+diff --git a/arch/arm/mach-sunxi/pmu/pmu_clock.c b/arch/arm/mach-sunxi/pmu/pmu_clock.c
 new file mode 100644
-index 00000000000..e71955bdf5c
+index 00000000000..0ba564bb10b
 --- /dev/null
-+++ b/arch/arm/mach-sunxi/pmu/pmu_fw.h
-@@ -0,0 +1,553 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/arm/mach-sunxi/pmu/pmu_clock.c
+@@ -0,0 +1,938 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
 + *
-+ * Common declarations and external symbol prototypes for standalone
-+ * Allwinner A733 DDR PHY PMU firmware modules.
++ * Allwinner A733 Synopsys DDR PHY PMU Hardware Timer, PLL & Broadcast Helpers
 + */
 +
-+#ifndef _SUNXI_PMU_FW_H
-+#define _SUNXI_PMU_FW_H
++#include "pmu_fw.h"
 +
-+#include "dwc_ddrphy_pmu_regs.h"
-+
-+/*
-+ * ARC EM4 global architectural state registers pinned across all translation
-+ * units via -ffixed-r26 and -ffixed-r27:
-+ *   r26 (gp) = 0x80000400 (struct pmu_sdata base in DCCM)
-+ *   r27 (fp) = reserved by firmware startup so GCC never clobbers r27
-+ */
++static inline void pmu_phy_clk_gate_clear(void);
++static void pmu_phy_pll_lock_poll(u32 timeout);
++static void pmu_profile_param_stride_cfg(u32 mode);
++static inline void pmu_phy_clk_gate_set(void);
 +
 +/**
-+ * dmem_ptr() - Convert a DCCM byte offset into an ARC DMEM pointer
-+ * @offset: Byte offset within DCCM (or full 0x8000xxxx address)
++ * pmu_freq_ratio_mult() - Compute scaled DRAM frequency ratio multiplier
++ * @mult: Multiplier factor applied to DRAM frequency
 + *
-+ * Return: Pointer to the target DCCM address.
++ * Return: (((u32)freq * @mult) / ((u32)type * 2000U)) + 1U.
 + */
-+static inline void *dmem_ptr(u32 offset)
++u32 pmu_freq_ratio_mult(u32 mult)
 +{
-+	return (void *)(uintptr_t)(PMU_DMEM_BASE | offset);
++	u32 freq = dmem_read16(PMU_DMEM_DRAM_FREQ_OFF);
++	u32 type = dmem_read8(PMU_DMEM_DRAM_FREQ_OFF + 2U);
++
++	if (type == 0U)
++		type = 2U;
++
++	return ((freq * mult) / (type * 2000U)) + 1U;
 +}
 +
 +/**
-+ * dmem_read8() - Read an unsigned 8-bit byte from DCCM
-+ * @offset: Byte offset within DCCM (or full 0x8000xxxx address)
++ * pmu_phy_pll_lock_init() - Initialize CBT PLL lock and control registers
 + *
-+ * Return: 8-bit value read from DCCM.
++ * Sets bit 0 of PHY register 0x90040144 into 0x900401f0, executes 4-tick and
++ * 31-tick hardware timer delays, and writes 0x0001 to 0x90040144.
 + */
-+static inline u8 dmem_read8(u32 offset)
++void pmu_phy_pll_lock_init(void)
 +{
-+	return *(__volatile__ u8 *)dmem_ptr(offset);
++	u16 val = *(__volatile__ u16 *)PHY_REG_CBT_CTRL;
++
++	*(__volatile__ u16 *)PHY_REG_CBT_PLL = val | 0x0001U;
++	pmu_hw_timer_delay(4U);
++	pmu_hw_timer_delay(31U);
++	*(__volatile__ u16 *)PHY_REG_CBT_CTRL = 0x0001U;
 +}
 +
 +/**
-+ * dmem_read16() - Read an unsigned 16-bit halfword from DCCM
-+ * @offset: Byte-aligned halfword offset within DCCM
++ * pmu_phy_dbyte_broadcast_enable() - Enable DBYTE broadcast mode after PLL lock
 + *
-+ * Return: 16-bit value read from DCCM.
++ * Executes 31-tick and 4-tick hardware timer delays, clears PHY register
++ * 0x900401f0 to 0, and sets bit 1 of PHY register 0x90040144.
 + */
-+static inline u16 dmem_read16(u32 offset)
++void pmu_phy_dbyte_broadcast_enable(void)
 +{
-+	return *(__volatile__ u16 *)dmem_ptr(offset);
++	u16 val;
++
++	pmu_hw_timer_delay(31U);
++	pmu_hw_timer_delay(4U);
++	*(__volatile__ u16 *)PHY_REG_CBT_PLL = 0x0000U;
++	val = *(__volatile__ u16 *)PHY_REG_CBT_CTRL;
++	*(__volatile__ u16 *)PHY_REG_CBT_CTRL = val | 0x0002U;
 +}
 +
 +/**
-+ * dmem_read32() - Read an unsigned 32-bit word from DCCM
-+ * @offset: Word-aligned offset within DCCM
++ * pmu_hw_timer_delay() - Execute rollover-safe ARC auxiliary RTC delay
++ * @count: Requested raw delay count
 + *
-+ * Return: 32-bit value read from DCCM.
++ * Scales @count by the shift factor in DCCM 0x80000404, ensures the ARC
++ * auxiliary RTC counter (0x104/0x105) is enabled, performs a fast APB dummy
++ * read turnaround when ticks < 16, or spins across the 64-bit counter with
++ * 32-bit rollover handling when ticks >= 16.
 + */
-+static inline u32 dmem_read32(u32 offset)
++noinline void pmu_hw_timer_delay(u32 count)
 +{
-+	return *(__volatile__ u32 *)dmem_ptr(offset);
++	u32 s = pmu_sdata()->timer_shift & 31U;
++	u32 ticks = (count == 0U) ? 0U : ((count + 1U) >> s);
++	u32 start_lo;
++	u32 start_hi;
++	u32 headroom;
++
++	if ((__builtin_arc_lr(PMU_AUX_RTC_CTRL) & 1U) == 0U) {
++		u32 two = 2U;
++		u32 one = 1U;
++
++		__builtin_arc_sr(two, PMU_AUX_RTC_CTRL);
++		__builtin_arc_sr(one, PMU_AUX_RTC_CTRL);
++	}
++
++	if (ticks < 16U) {
++		(void)*(__volatile__ u16 *)PHY_REG_TIMER_DUMMY;
++		return;
++	}
++
++	start_lo = __builtin_arc_lr(PMU_AUX_RTC_LOW);
++	start_hi = __builtin_arc_lr(PMU_AUX_RTC_HIGH);
++	headroom = ~start_lo;
++
++	if (headroom < ticks) {
++		u32 rem = ticks - headroom;
++
++		while (__builtin_arc_lr(PMU_AUX_RTC_LOW) >= start_lo)
++			;
++		while (__builtin_arc_lr(PMU_AUX_RTC_LOW) < rem)
++			;
++	} else {
++		u32 target = start_lo + ticks;
++
++		while (__builtin_arc_lr(PMU_AUX_RTC_LOW) < target &&
++		       __builtin_arc_lr(PMU_AUX_RTC_HIGH) == start_hi)
++			;
++	}
 +}
 +
 +/**
-+ * dmem_write8() - Write an unsigned 8-bit byte to DCCM
-+ * @offset: Byte offset within DCCM (or full 0x8000xxxx address)
-+ * @val: 8-bit value to write
++ * pmu_delay_us() - Convert microsecond/unit delay into timer ticks and wait
++ * @count: Delay duration count
++ * @unit: Delay unit selector passed to pmu_freq_delay_step_calc()
 + */
-+static inline void dmem_write8(u32 offset, u8 val)
++void pmu_delay_us(u32 count, u32 unit)
 +{
-+	*(__volatile__ u8 *)dmem_ptr(offset) = val;
++	pmu_hw_timer_delay(pmu_freq_delay_step_calc(count, unit));
 +}
 +
 +/**
-+ * dmem_write16() - Write an unsigned 16-bit halfword to DCCM
-+ * @offset: Halfword-aligned offset within DCCM
-+ * @val: 16-bit value to write
++ * pmu_cal_strobe_pulse_init() - Reset PHY strobe registers and DCCM 0x458 markers
++ * Return: Always 0.
 + */
-+static inline void dmem_write16(u32 offset, u16 val)
++u32 pmu_cal_strobe_pulse_init(void)
 +{
-+	*(__volatile__ u16 *)dmem_ptr(offset) = val;
++	pmu_phy_deskew_dly0_set(0U);
++	pmu_phy_deskew_dly1_set(0U);
++	pmu_cal_marker_pair_set(0U);
++	pmu_cal_marker_clear();
++	return 0U;
 +}
 +
 +/**
-+ * dmem_write32() - Write an unsigned 32-bit word to DCCM
-+ * @offset: Word-aligned offset within DCCM
-+ * @val: 32-bit value to write
++ * pmu_phy_pll_lock_poll() - Poll PHY clock gate status 0x90040042 with timeout
++ * @timeout: Maximum poll iterations before raising assertion 0x00240000
 + */
-+static inline void dmem_write32(u32 offset, u32 val)
++static noinline void pmu_phy_pll_lock_poll(u32 timeout)
 +{
-+	*(__volatile__ u32 *)dmem_ptr(offset) = val;
++	u32 locked = 0U;
++	u32 i;
++
++	for (i = 0U; i < timeout; i++) {
++		if (*(__volatile__ u16 *)PHY_REG_CLK_GATE_STAT != 0U) {
++			locked = 1U;
++			break;
++		}
++	}
++
++	if (!locked)
++		pmu_assert_or_halt(0U, PMU_ERR_PLL_LOCK_TIMEOUT);
 +}
 +
 +/**
-+ * phy_read16() - Read a 16-bit DDR PHY CSR register in ARC MMIO space
-+ * @addr: ARC PHY register address (0x9000xxxx)
++ * pmu_cal_slice_step_diff_latch() - Latch slice step difference and timing strobe
++ * @timing: 16-bit timing parameter written to PHY 0x9004004e
++ * @wait_ack: Non-zero to poll PHY 0x90040042 (timeout 25000) and clear 0x90040040
++ */
++void pmu_cal_slice_step_diff_latch(u32 timing, u32 wait_ack)
++{
++	pmu_phy_clk_timing_set((u16)(timing));
++	pmu_hw_timer_delay(6U);
++	pmu_phy_deskew_dly1_set((u16)(pmu_cal_stride_get()) - 1U);
++	pmu_phy_clk_gate_set();
++	if (wait_ack != 0U) {
++		pmu_phy_pll_lock_poll(25000U);
++		pmu_phy_clk_gate_clear();
++	}
++}
++
++/**
++ * pmu_cal_slice_timing_latch() - Latch slice timing value and strobe PHY 0x90040040
++ * @timing: 16-bit timing parameter written to PHY 0x9004004e
++ * @wait_ack: Non-zero to poll PHY 0x90040042 (timeout 25000) and clear 0x90040040
++ */
++void pmu_cal_slice_timing_latch(u32 timing, u32 wait_ack)
++{
++	pmu_phy_clk_timing_set((u16)(timing));
++	pmu_hw_timer_delay(6U);
++	pmu_phy_clk_gate_set();
++	if (wait_ack != 0U) {
++		pmu_phy_pll_lock_poll(25000U);
++		pmu_phy_clk_gate_clear();
++	}
++}
++
++/**
++ * pmu_cal_delay_line_accum_dispatch() - Compute frequency-scaled delay with floor
++ * @count: Raw delay duration count passed to pmu_freq_delay_step_calc()
++ * @limit: Minimum step floor returned when computed ticks are smaller
 + *
-+ * Return: 16-bit CSR value.
++ * Return: max(pmu_freq_delay_step_calc(@count, 0), @limit).
 + */
-+static inline u16 phy_read16(u32 addr)
++u32 pmu_cal_delay_line_accum_dispatch(u32 count, u32 limit)
 +{
-+	return *(__volatile__ u16 *)(uintptr_t)addr;
++	u32 ticks = pmu_freq_delay_step_calc(count, 0U);
++
++	return (ticks < limit) ? limit : ticks;
 +}
 +
 +/**
-+ * phy_write16() - Write a 16-bit DDR PHY CSR register in ARC MMIO space
-+ * @addr: ARC PHY register address (0x9000xxxx)
-+ * @val: 16-bit CSR value to write
-+ */
-+static inline void phy_write16(u32 addr, u16 val)
-+{
-+	*(__volatile__ u16 *)(uintptr_t)addr = val;
-+}
-+
-+/**
-+ * struct pmu_sdata - PMU small-data (.sdata) state block at DCCM 0x80000400
-+ * @cbt_dly_init: Clamped CBT delay line initial offset (0x400)
-+ * @high_freq_flag: High-frequency operating mode flag (0x401)
-+ * @cal_active_flag: Active calibration stage flag (0x402)
-+ * @freq_mode: Frequency mode / CBT lane limit code (0x403)
-+ * @timer_shift: Hardware timer prescaler shift factor (0x404)
-+ * @stage_step_mode: Stage 10 margin status / step mode (0x405)
-+ * @stage_rank_idx: Active calibration rank index (0x406)
-+ * @stage_slice_idx: Active calibration slice index & flags (0x407)
-+ * @stage_lane_idx: Active calibration lane index & mode (0x408)
-+ * @metric_tbl_entries: Calibration metric table entry count (0x409)
-+ * @rsvd0: Alignment padding halfword (0x40a)
-+ * @active_slice_cnt: Active DBYTE slice count (0x40c)
-+ * @active_ch_cnt: Active channel count / quadratic cost weight W (0x410)
-+ * @rsvd1: Reserved word (0x414)
-+ * @shadow_trace_ptr: Shadow trace buffer pointer (0x418)
-+ * @active_csr_offset: Active channel PHY CSR address offset (0x41c)
-+ * @fw_version_id: Firmware version ID / quadratic cost weight X (0x420)
-+ * @num_ranks: Active rank count / quadratic cost weight Y (0x422)
-+ * @rsvd_424: Reserved alignment word (0x424)
-+ * @iter_count: Calibration stage iteration counter (0x428)
-+ * @cal_save_cfg: Saved hardware calibration configuration mask (0x42a)
-+ * @dbyte_slice_cnt: Active DBYTE slice limit (0x42c)
-+ * @rsvd2: Alignment padding bytes (0x42d..0x42f)
-+ * @rfifo_dly: Per-slice RFIFO delay parameters across 4 slices (0x430..0x437)
-+ * @step_2d_ctrl: 2D eye sweep step control (0x438)
-+ * @step_2d_param: 2D eye sweep step parameter (0x43a)
-+ * @rsvd3: Alignment padding byte (0x43b)
-+ * @master_dly_tbl: Master delay table [channel][rank] (0x43c..0x443)
-+ * @ac_profile_dly: AC profile delay halfwords (0x444..0x447)
-+ * @ac_profile_cfg: AC profile step configuration bytes (0x448..0x453)
-+ * @saved_cal_stat: Saved calibration status word (0x454)
-+ * @cal_marker_a: Calibration step marker A (0x458)
-+ * @cbt_state: CBT state latch (0x45a)
-+ * @cbt_step_ext: CBT step extension flag (0x45b)
-+ * @cbt_cal_active: CBT calibration active flag (0x45c)
-+ * @rsvd4: Alignment padding byte (0x45d)
-+ * @cal_marker_b: Calibration step marker B (0x45e)
-+ * @active_slice_mask: Active slice bitmask (0x460)
-+ * @tracker_popcnt_acc: Tracker popcount accumulator (0x464)
-+ * @ch_range_lim: Channel active range limit (0x468)
-+ * @step_mode_ovr: Channel step mode override (0x469)
-+ * @cbt_config: CBT configuration value (0x46a)
-+ * @cbt_step_stat: CBT step status flag (0x46b)
-+ * @cal_cmd_tbl: Shadow calibration command table [0..3] (0x46c..0x46f)
-+ * @active_slice_idx: Active slice index (byte 0 is cal_cmd_tbl[4]) (0x470)
-+ * @slice_timing_desc: Per-rank/slice timing descriptor bytes (0x474..0x47b)
-+ * @cal_stride: Normalized power-of-2 step stride (0x47c)
-+ * @deskew_target_dly: Pad timing / deskew target delay (0x47e)
-+ * @cal_seq_map: 21-byte calibration sequence index map (0x480..0x494)
-+ * @rsvd5: Alignment padding to 0x4c0 (0x495..0x4bf)
-+ * @rank_ch_tap_tbl: Per-rank/channel tap table (0x4c0..0x4c3)
-+ * @best_tap: Best WCK read-gate tap per channel and rank (0x4c4..0x4c7)
-+ */
-+struct pmu_sdata {
-+	u8 cbt_dly_init;
-+	u8 high_freq_flag;
-+	u8 cal_active_flag;
-+	u8 freq_mode;
-+	u8 timer_shift;
-+	u8 stage_step_mode;
-+	u8 stage_rank_idx;
-+	u8 stage_slice_idx;
-+	u8 stage_lane_idx;
-+	u8 metric_tbl_entries;
-+	u16 rsvd0;
-+	u32 active_slice_cnt;
-+	u32 active_ch_cnt;
-+	u32 rsvd1;
-+	u32 shadow_trace_ptr;
-+	u32 active_csr_offset;
-+	u16 fw_version_id;
-+	u16 num_ranks;
-+	u32 rsvd_424;
-+	u16 iter_count;
-+	u16 cal_save_cfg;
-+	u8 dbyte_slice_cnt;
-+	u8 rsvd2[3];
-+	u16 rfifo_dly[4];
-+	u16 step_2d_ctrl;
-+	u8 step_2d_param;
-+	u8 rsvd3;
-+	u16 master_dly_tbl[2][2];
-+	u16 ac_profile_dly[2];
-+	u8 ac_profile_cfg[12];
-+	u32 saved_cal_stat;
-+	u16 cal_marker_a;
-+	u8 cbt_state;
-+	u8 cbt_step_ext;
-+	u8 cbt_cal_active;
-+	u8 rsvd4;
-+	u16 cal_marker_b;
-+	u32 active_slice_mask;
-+	s32 tracker_popcnt_acc;
-+	u8 ch_range_lim;
-+	u8 step_mode_ovr;
-+	u8 cbt_config;
-+	u8 cbt_step_stat;
-+	u8 cal_cmd_tbl[4];
-+	u32 active_slice_idx;
-+	u8 slice_timing_desc[8];
-+	u16 cal_stride;
-+	u16 deskew_target_dly;
-+	u8 cal_seq_map[21];
-+	u8 rsvd5[43];
-+	u8 rank_ch_tap_tbl[2][2];
-+	u8 best_tap[2][2];
-+};
-+
-+/**
-+ * struct pmu_cal_tracker - Multi-channel calibration step tracker (0x80000d9c)
-+ * @slot0: Primary 8-halfword channel 0 command slot (0x00..0x0f)
-+ * @slot1: Secondary 8-halfword channel 1 command slot (0x10..0x1f)
-+ * @slot1_mode: Channel 1 step mode control halfword (0x20)
-+ * @repeat_cnt: Step repeat count minus one (0x22)
-+ * @slot0_mode: Channel 0 step mode control halfword (0x24)
-+ * @ext_flag: Step extension flag halfword (0x26)
-+ * @commit_flag: Pending step commit flag halfword (0x28)
-+ * @rsvd0: Alignment padding halfword (0x2a)
-+ */
-+struct pmu_cal_tracker {
-+	u16 slot0[8];
-+	u16 slot1[8];
-+	u16 slot1_mode;
-+	u16 repeat_cnt;
-+	u16 slot0_mode;
-+	u16 ext_flag;
-+	u16 commit_flag;
-+	u16 rsvd0;
-+};
-+
-+/**
-+ * pmu_sdata() - Access the PMU small-data (.sdata) structure via r26 (gp)
++ * pmu_freq_delay_step_calc() - Convert delay duration and unit into timer steps
++ * @count: Requested delay duration
++ * @unit: Calibration delay unit multiplier
 + *
-+ * Return: Volatile pointer to struct pmu_sdata at DCCM 0x80000400.
-+ */
-+#define PMU_SDATA_BASE		0x80000400UL
-+
-+static inline __volatile__ struct pmu_sdata *pmu_sdata(void)
-+{
-+	return (__volatile__ struct pmu_sdata *)PMU_SDATA_BASE;
-+}
-+
-+_Static_assert(sizeof(struct pmu_sdata) == 0xc8,
-+	       "struct pmu_sdata size mismatch");
-+_Static_assert(offsetof(struct pmu_sdata, cbt_dly_init) == 0x00,
-+	       "cbt_dly_init offset mismatch");
-+_Static_assert(offsetof(struct pmu_sdata, active_ch_cnt) == 0x10,
-+	       "active_ch_cnt offset mismatch");
-+_Static_assert(offsetof(struct pmu_sdata, shadow_trace_ptr) == 0x18,
-+	       "shadow_trace_ptr offset mismatch");
-+_Static_assert(offsetof(struct pmu_sdata, active_csr_offset) == 0x1c,
-+	       "active_csr_offset offset mismatch");
-+_Static_assert(offsetof(struct pmu_sdata, fw_version_id) == 0x20,
-+	       "fw_version_id offset mismatch");
-+_Static_assert(offsetof(struct pmu_sdata, num_ranks) == 0x22,
-+	       "num_ranks offset mismatch");
-+_Static_assert(offsetof(struct pmu_sdata, best_tap) == 0xc4,
-+	       "best_tap offset mismatch");
-+
-+/**
-+ * pmu_tracker() - Access the primary calibration step tracker in DCCM
++ * Scales @count by DRAM frequency (DCCM 0x80000006) and rounding bias
++ * (DCCM 0x80000008), using overflow-safe division for @count > 200000, and
++ * enforces the minimum calibration delay floor from DCCM 0x80000a7c/0x80000b64.
 + *
-+ * Return: Volatile pointer to struct pmu_cal_tracker at DCCM 0x80000d9c.
++ * Return: Computed timer step count.
 + */
-+static inline __volatile__ struct pmu_cal_tracker *pmu_tracker(void)
++noinline u32 pmu_freq_delay_step_calc(u32 count, u32 unit)
 +{
-+	return (__volatile__ struct pmu_cal_tracker *)PMU_DMEM_CAL_TRACKER;
++	u32 f = dmem_read16(PMU_DMEM_DRAM_FREQ_MHZ);
++	u32 t = dmem_read8(PMU_DMEM_PLL_RATIO);
++	u32 cycles;
++	u32 cycle_delay;
++	u32 cal_delay;
++
++	if (t == 0U)
++		t = 2U;
++
++	if (count > 200000U)
++		cycles = (count / 100000U) * f;
++	else
++		cycles = (count * f) / 100000U;
++	cycles /= 20U;
++
++	cycle_delay = (cycles + t + 1U) / t;
++	cal_delay = unit + 1U;
++	if (dmem_read8(PMU_DMEM_AC_CAL_ACTIVE) != 0U &&
++	    (dmem_read8(PMU_DMEM_CLK_GATE_FLAG) & 8U) == 0U) {
++		u32 w_steps = dmem_read8(PMU_DMEM_SEARCH_WINDOW_STEPS);
++
++		if (w_steps != 0U)
++			cal_delay = w_steps * unit *
++				    dmem_read8(PMU_DMEM_SEARCH_WINDOW_SCALE);
++	}
++
++	return (cal_delay < cycle_delay) ? cycle_delay : cal_delay;
 +}
 +
 +/**
-+ * struct pmu_cal_bist_cmd_ctx - BIST command strobe context block
-+ * @ctrl0: Primary command control word 0
-+ * @ctrl1: Secondary command control word 1
-+ * @ctrl2: Tertiary command control word 2
-+ * @strobe_cmd_a: Strobe command pattern word C
-+ * @strobe_cmd_b: Strobe command pattern word 10
-+ * @stride_minus_1: Loop stride count minus one
-+ * @rsvd0: Alignment padding halfword
-+ * @csr_offset: Target PHY CSR channel/slice address offset
-+ * @slice_delays: Per-slice 16-bit delay values across 4 slices
++ * pmu_clk_gate_handoff() - Hand off PHY PLL clock gate and wait 5000 units
++ *
++ * Clears PHY register 0x90040062, spins until PHY status register 0x90040042 is
++ * non-zero, clears PHY clock gate register 0x90040040, and delays 5000 units.
 + */
-+struct pmu_cal_bist_cmd_ctx {
-+	u32 ctrl0;
-+	u32 ctrl1;
-+	u32 ctrl2;
-+	u32 strobe_cmd_a;
-+	u32 strobe_cmd_b;
-+	u16 stride_minus_1;
-+	u16 rsvd0;
-+	u32 csr_offset;
-+	u16 slice_delays[4];
-+};
++void pmu_clk_gate_handoff(void)
++{
++	u32 timeout = 100000U;
 +
-+/* Cross-Module PMU Firmware Function Prototypes */
-+void *memcpy(void *dest, const void *src, size_t n);
-+void *memset(void *s, int c, size_t n);
-+void pmu_ac_lane_profile_setup(void);
-+void pmu_adjust_step_limit(u8 *pair, u32 flag);
-+void pmu_assert_or_halt(u32 cond, u32 assert_code);
-+u32 pmu_bist_pattern_bit_get(u32 shift, u32 mask);
-+void pmu_cal_bist_cmd_strobe_dispatch(uintptr_t ctx_addr,
-+				      u32 pattern_mode, u32 cmd_mode, u32 target_mask,
-+				uintptr_t slice_flags_addr, u32 status_idx, u32 setup_flags);
-+void pmu_cal_bist_pattern_setup(u32 pattern_idx, u32 slice_or_lane,
-+				u32 enable_deskew_reset, u32 validation_mode);
-+void pmu_cal_bist_search_win_setup(u32 stage);
-+u32 pmu_cal_cbt_desc_unpack(u32 rank, u32 channel);
-+void pmu_cal_channel_rank_bounds_verify(u32 err_id);
-+u32 pmu_cal_channel_rank_config_get(u32 rank, u16 *out_cfg,
-+				    u8 *out_mode_sel, u8 *out_num_slices);
-+void pmu_cal_dbyte_bcast_pulse_width_clear(const u8 *cfg);
-+void pmu_cal_dbyte_delay_backup_all_ch(void);
-+void pmu_cal_dbyte_deskew_fine_tune(u32 mode);
-+void pmu_cal_dbyte_gate_mask_clear(void);
-+void pmu_cal_dbyte_pattern_loop_exec(u32 reg_offset,
-+				     u16 pattern_mode, void *dest_buf, void *scratch_buf,
-+				u32 bound_start, u32 bound_end, u32 flags);
-+s16 pmu_cal_dbyte_rx_fifo_reset_poll(u32 channel, u32 mode_sel,
-+				     u32 enable_scan, void *unused_buf);
-+void pmu_cal_dbyte_sample_ready_poll_all(u32 flags);
-+u32 pmu_cal_delay_line_accum_dispatch(u32 count, u32 limit);
-+void pmu_cal_delay_line_init(void);
-+void pmu_cal_deskew_quad_tap_set(u32 ch, u16 tap0, u16 tap1,
-+				 u16 tap2, u16 tap3);
-+u32 pmu_cal_eye_margin_quadratic_cost_calc(u32 val, u32 target,
-+					   u32 min_bound, u32 max_bound, u8 *out_overflow);
-+u32 pmu_cal_eye_margin_sample_latch(u32 mask, u32 lane);
-+void pmu_cal_eye_param_block_init(u16 *param_block, u32 p1, u32 p2,
-+				  u32 p3);
-+void pmu_cal_eye_table_restore(u8 *dest, u32 offset);
-+void pmu_cal_eye_table_save(const u8 *src, u32 offset);
-+void pmu_cal_gate_eye_master_trigger(void);
-+void pmu_cal_lane_deskew_sweep_exec(u32 channel);
-+u32 pmu_cal_lane_error_status_check(u32 lane, u32 phase);
-+void pmu_cal_lane_mask_and_all(u32 base, u32 offset, u32 mask);
-+void pmu_cal_lane_mask_or_all(u32 base, u32 offset, u32 mask);
-+void pmu_cal_lane_window_margin_eval(u32 mode);
-+void pmu_cal_lane_window_sweep_coordinator(u32 ch_mask, u32 wide_range);
-+void pmu_cal_lcdl_coarse_fine_pair_pack(u32 ch_idx, u32 threshold,
-+					u32 limit, const u8 *pair_a,
-+					const u8 *pair_b, const u8 *pair_c,
-+					const u8 *pair_d, void *table_base);
-+void pmu_cal_margin_dir_get(void);
-+void pmu_cal_margin_matrix_scan_eval(u32 channel, u32 rank,
-+				     u32 slice, u32 mode, u32 flag, u32 step);
-+u16 pmu_cal_marker_status_update(void);
-+u16 pmu_cal_marker_verify(void);
-+void pmu_cal_marker_verify_and_buffer_clear(u32 flags);
-+void pmu_cal_marker_win_step_prog(u32 marker0, u32 marker1,
-+				  u32 win_param, u32 win_mode);
-+void pmu_cal_multi_lane_deskew_sweep(u32 type, u32 ch_mask,
-+				     u32 lane_mask);
-+void pmu_cal_multi_rank_step_commit(u32 rank_mode, u32 steps_table,
-+				    u32 eval_error_mask, u32 skip_mask_low, u32 skip_mask_high,
-+				u32 pulse_coarse_pre, u32 check_settle_flags);
-+void pmu_cal_multi_rank_timing_step(u32 rank_mode, u32 steps_table,
-+				    u32 eval_error_mask, u32 skip_mask_low, u32 skip_mask_high,
-+				u32 check_settle_flags);
-+void pmu_cal_pad_impedance_lock(void);
++	phy_write16(PHY_REG_PLL_CLK_CTRL, 0x0000U);
++	while (phy_read16(PHY_REG_CLK_GATE_STAT) == 0U) {
++		if (--timeout == 0U)
++			pmu_assert_or_halt(0U, PMU_ERR_CLK_GATE_TIMEOUT);
++		pmu_delay_us(1U, 0U);
++	}
++	phy_write16(PHY_REG_CLK_GATE, 0x0000U);
++	pmu_delay_us(5000U, 0U);
++}
++
++/**
++ * pmu_phy_analog_cfg_mode_set() - Program channel analog receiver bias registers
++ * @mode: Channel mode selector (0: Ch0 only, 1: Ch1 only, >=2: both Ch0 and Ch1)
++ */
++void pmu_phy_analog_cfg_mode_set(u32 mode)
++{
++	u8 m = (u8)mode;
++	u16 v0 = (m != 1U) ? dmem_read8(PMU_DMEM_CH0_ANALOG_EN) : 0U;
++	u16 v1 = (m != 0U) ? dmem_read8(PMU_DMEM_CH1_ACTIVE_FLAG) : 0U;
++
++	phy_write16(PHY_REG_CH0_ANALOG_PWR, v0);
++	phy_write16(PHY_REG_CH1_ANALOG_PWR, v1);
++}
++
++/**
++ * pmu_cal_pll_lock_settle_spin() - Interrogate AC and DBYTE PLL lock status
++ * @out_dbyte_pll: Output pointer receiving DBYTE PLL lock mask (0x900201c0 & 0x01ff)
++ * @out_ac_pll: Output pointer receiving AC PLL lock mask (0x9006017e & 0x01ff)
++ */
++void pmu_cal_pll_lock_settle_spin(u16 *out_dbyte_pll, u16 *out_ac_pll)
++{
++	__volatile__ u16 *p1 = (__volatile__ u16 *)PHY_REG_AC_PLL_CTRL;
++	__volatile__ u16 *p2;
++	u32 v0;
++	u32 v4;
++	u32 saved;
++
++	v0 = p1[3];
++	v4 = p1[5];
++	saved = (v4 << 16) | v0;
++	p1[5] = (u16)(v4 & ~0x001fU);
++	p1[3] = (u16)(v0 | 0x0800U);
++	p1[3] = (u16)(v0 | 0x0c00U);
++	pmu_hw_timer_delay(10U);
++	p2 = (__volatile__ u16 *)PHY_REG_AC_PLL_CTRL;
++	p2[3] = (u16)(saved | 0x0800U);
++	*out_ac_pll = *(__volatile__ const u16 *)PHY_REG_AC_PLL_LOCK &
++		      0x01ffU;
++	*out_dbyte_pll = *(__volatile__ const u16 *)PHY_REG_DBYTE_PLL_LOCK &
++			 0x01ffU;
++	p2[3] = (u16)saved;
++	p2[5] = (u16)(saved >> 16);
++}
++
++/**
++ * pmu_cal_seq_table_timed_replay() - Replay 6-byte [addr, data] sequence records
++ * @seq_table: Pointer to array of 6-byte [u32 addr, u16 data] sequence records
++ * @total_bytes: Total byte length of @seq_table (divided by 6 for record count)
++ */
++void pmu_cal_seq_table_timed_replay(const void *seq_table, u32 total_bytes)
++{
++	const u8 *ptr = (const u8 *)seq_table;
++	u32 count = total_bytes / 6U;
++	u32 i;
++
++	for (i = 0U; i < count; i++) {
++		u32 addr = (u32)ptr[0] | ((u32)ptr[1] << 8) |
++			   ((u32)ptr[2] << 16) | ((u32)ptr[3] << 24);
++		u16 data = (u16)((u16)ptr[4] | ((u16)ptr[5] << 8));
++
++		ptr += 6U;
++		if (addr == 0xffffffffUL)
++			pmu_hw_timer_delay(data);
++		else
++			*(__volatile__ u16 *)(PHY_REG_PUB_BASE |
++					      (addr << 1)) = data;
++	}
++}
++
++/**
++ * pmu_phy_pll_cfg_quad_write_stream() - Write 4 PLL words and append shadow trace
++ * @reg_offset: Register offset shifted left by 1 into 0x90140000
++ * @p0: First 16-bit parameter word
++ * @p1: Second 16-bit parameter word
++ * @p2: Third parameter word (low 16 bits written to +4, bits [18:16] to tag)
++ * @flags: Control flags shifted left by 3 into the 4th tag halfword
++ */
++void pmu_phy_pll_cfg_quad_write_stream(u32 reg_offset, u16 p0, u16 p1, u32 p2,
++				       u32 flags)
++{
++	__volatile__ u16 *reg =
++		(__volatile__ u16 *)(PHY_REG_SHADOW_TRACK_BASE |
++				     (reg_offset << 1));
++	u16 *trace = (u16 *)(*(__volatile__ u32 *)PMU_DMEM_SHADOW_TRACE_PTR);
++	u16 tag = (u16)(((flags & 0xffU) << 3) | ((p2 >> 16) & 0x07U));
++
++	reg[0] = p0;
++	reg[1] = p1;
++	reg[2] = (u16)p2;
++	reg[3] = tag;
++
++	trace[0] = p0;
++	trace[1] = p1;
++	trace[2] = (u16)p2;
++	trace[3] = tag;
++	*(__volatile__ u32 *)PMU_DMEM_SHADOW_TRACE_PTR = (u32)(trace + 4);
++}
++
++/**
++ * pmu_phy_clk_phase_toggle_pulse() - Toggle PHY clock phase and settle PLL aligners
++ *
++ * Pulses the master PHY clock phase and clear strobes around 0x90040606, delays
++ * for phase stabilization, and restores the original 8-bit configuration.
++ */
++void pmu_phy_clk_phase_toggle_pulse(void)
++{
++	__volatile__ u16 *p = (__volatile__ u16 *)PHY_REG_CLK_PHASE_BASE;
++	u16 orig;
++
++	orig = p[3];
++	p[16] = 1U;
++	p[3] = (orig & 0x00efU) | 0x0010U;
++	p[16] = 0U;
++	p[13] = 1U;
++	p[13] = 0U;
++	p[17] = 1U;
++	pmu_delay_us(0x07bfa480UL, 0U);
++	p[17] = 0U;
++	p[32] = 0U;
++	p[32] = 1U;
++	p[32] = 0U;
++	p[3] = (u8)orig;
++}
++
++/**
++ * pmu_cal_pad_timing_delay_set() - Stream pad timing delay halfword frames
++ * @bypass_min_clamp: Non-zero to force val = step regardless of @steps
++ * @steps: Target delay steps
++ * @use_fixed_unit: Non-zero for unit step 1, 0 for (DCCM 0x8000045a << 1)
++ */
 +void pmu_cal_pad_timing_delay_set(u32 bypass_min_clamp, u32 steps,
-+				  u32 use_fixed_unit);
-+void pmu_cal_pad_timing_step_settle(void);
-+u32 pmu_cal_pad_voltage_dac_set(u32 val, u32 mode);
-+void pmu_cal_param_unpack(u32 val, u8 *out);
-+void pmu_cal_phase_detector_edge_align(void);
-+void pmu_cal_pll_lock_settle_spin(u16 *out_dbyte_pll, u16 *out_ac_pll);
-+void pmu_cal_pulse_burst_send(u32 burst_type, u32 count, u32 slice);
-+void pmu_cal_pulse_seq_coordinator(u32 ch_idx, u32 rank, u32 param1, u32 flags);
-+void pmu_cal_rank_deskew_matrix_commit(u32 channel, u32 rank, void *buf);
-+u32 pmu_cal_rank_margin_window_check(u32 tap_ptr, u32 channel,
-+				     u32 slice_mask);
-+u8 pmu_cal_rank_offset_get(u32 rank, u32 channel);
-+void pmu_cal_rank_param_commit(u32 freq_pt, u32 mode_cfg, u32 step_lim,
-+			       u32 type);
-+void pmu_cal_rank_rx_en_delay_commit(u32 channel, u16 rank_flags,
-+				     u32 cal_stage_mode, u32 stage);
-+void pmu_cal_rx_dqs_delay_center(void);
-+void pmu_cal_search_win_init(u32 base);
-+void pmu_cal_search_win_max_calc(u32 channel, u32 rank, u32 dir);
-+void pmu_cal_seq_table_timed_replay(const void *seq_table,
-+				    u32 total_bytes);
-+u32 pmu_cal_sequence_pulse_send(u32 cmd_flags, u32 pulse_type,
-+				u32 phase_id, u32 param_code, u32 tap_idx, u32 slice_mask,
-+				u32 extra);
-+void pmu_cal_slice_deskew_result_commit(u32 channel, void *buf,
-+					u32 flags);
-+u32 pmu_cal_slice_mask_eval(void *table_buf);
-+void pmu_cal_slice_step_diff_commit(u32 slice_idx, u16 *out_buf,
-+				    u32 cal_mode);
-+void pmu_cal_slice_step_diff_latch(u32 timing, u32 wait_ack);
-+void pmu_cal_slice_step_eval_sweep(void *results_buf, u32 sweep_mode,
-+				   u32 cal_mode, u32 channel_rank, u32 unused,
-+				   u32 timing_val, u32 overflow_flag,
-+				   const u16 *slice_delay_lut, u32 bound_flag,
-+				   u32 remap_flag, const void *sweep_ctx);
-+void pmu_cal_slice_timing_latch(u32 timing, u32 wait_ack);
-+void pmu_cal_delay_accum_dispatch(u32 dram_type, u32 count,
-+				  void *slice_base);
-+u16 pmu_cal_stride_get(void);
-+u32 pmu_cal_strobe_pulse_init(void);
-+void pmu_cal_struct_mask_remap(void);
-+void pmu_cal_timing_margin_envelope_scan(u32 channel, u32 rank, void *buf);
-+void pmu_cal_timing_table_matrix_init(u8 *buf);
-+u32 pmu_cal_tracker_csr_commit(__volatile__ void *tracker);
-+void pmu_cal_tracker_reset_and_apb_zero(const void *buf, u32 len);
-+u32 pmu_cal_tracker_step_advance(u32 marker, u32 count, u32 mode);
-+void pmu_cal_training_flags_gate_update(u8 *descriptor);
-+void pmu_cal_vref_dac_step_adjust(u32 stage_step);
-+void pmu_cal_vref_search_center_update(void);
-+void pmu_cal_vref_trim_cfg_latch(void);
-+void pmu_cal_wck_ck_align_pulse_send(u32 ch, u32 rank);
-+void pmu_cal_win_bounds_clear(void);
-+u32 pmu_cal_window_params_dispatch(const u8 *params_buf,
-+				   u16 base_val, u32 mode_flags);
-+void pmu_cbt_3phase_pulse_dispatch(u32 cal_mode,
-+				   const u8 *step_table, u32 step_idx, u32 flags);
-+void pmu_cbt_3phase_pulse_seq(void);
-+void pmu_cbt_cal_pulse_seq(u32 pulse_cmd);
-+u32 pmu_cbt_delay_offset_lookup(u32 rank, u32 channel);
-+void pmu_cbt_deskew_pulse_train(u32 pulse_cmd, u32 is_alternate);
-+void pmu_cbt_strobe_pulse_train(u32 pulse_cmd, u32 is_stage2);
-+void pmu_cbt_timing_pulse_coordinator(u16 cal_mode, u32 phase_sel);
-+u32 pmu_channel_rank_avail_check(u32 channel, u32 rank);
-+void pmu_channel_timing_deskew_reset(u32 dly_ac0, u32 dly_ac1,
-+				     u32 dly_ac2, u32 dly_ac3, u32 target_slice);
-+u32 pmu_stage_slice_flag_check(void);
-+u32 pmu_check_freq_lt_3200(void);
-+u32 pmu_check_stage(u32 val);
-+void pmu_cal_marker_clear(void);
-+void pmu_clk_gate_handoff(void);
-+void pmu_clk_ratio_pulse_trigger(void);
-+void pmu_cmd_code_map_log(u32 cmd_code, u32 sub_code);
-+void pmu_dbyte_cal_step_latch(u32 fine_val, u32 coarse_val,
-+			      u32 ch_flags);
-+void pmu_dbyte_cal_strobe_pulse_seq(u32 mode, u32 val, u32 step);
-+u32 pmu_dbyte_coarse_step_mask_sweep(u32 ch_idx, u32 step_val, u32 flag);
-+void pmu_dbyte_deskew_phase_sample(u32 ch_base, u32 *out_mask,
-+				   u32 sel_mask);
-+void pmu_dbyte_dq_deskew_regs_save_and_ramp(u8 *out_a, u8 *out_b,
-+					    u8 *out_c, u32 flag, u32 extra);
-+void pmu_dbyte_lane_error_mask_calc(u32 mode, u32 slice_or_rank);
-+void pmu_dbyte_rx_en_slice_pulse_eval(u32 mode, u32 slice_mask);
-+void pmu_default_exception_handler(void);
-+void pmu_delay_us(u32 count, u32 unit);
-+u32 pmu_dly_line_repack(u32 val);
-+u32 pmu_dly_reg_offset_select(u32 rank, u32 unused, u32 direction);
-+void pmu_dmem_reg_stream_unpack(const void *cfg_desc);
-+u8 pmu_dmem_training_flags_eval(void);
-+u32 pmu_dram_cfg_bit13_check(u32 rank, u32 flag);
-+void pmu_eye_centroid_avg_calc(const u16 *base_delays,
-+			       u16 *out_left, u16 *out_right, u16 *out_width);
-+void pmu_eye_margin_step_align(u8 *margin_cur, u8 *margin_target,
-+			       u32 step_size);
-+u32 pmu_eye_margin_window_search(u8 *samples, u32 reserved_arg);
-+void pmu_cbt_cal_active_clear(void);
-+void pmu_cbt_cal_active_set(void);
-+void pmu_cbt_step_stat_set(void);
-+u32 pmu_freq_delay_step_calc(u32 count, u32 unit);
-+u32 pmu_freq_ratio_mult(u32 mult);
-+u32 pmu_freq_scaled_timing_step_calc(void);
-+u8 pmu_cbt_config_get(void);
-+u8 pmu_cal_mode_flag_get(void);
-+u32 pmu_lane_mask_bit_get(u32 word_idx, u32 bit_shift);
-+u16 pmu_phy_cal_stat_read(void);
-+u32 pmu_mr22_bit4_check(void);
-+void pmu_hw_timer_delay(u32 count);
-+u32 pmu_is_lpddr4(void);
-+u32 pmu_is_lpddr5(void);
-+void pmu_mailbox_post_cmd_dispatch(u32 cmd);
-+int pmu_main_wrapper(void);
-+u8 pmu_map_mask(u8 val, u32 index);
-+s32 pmu_math_freq_scale_div(s32 val);
-+s8 pmu_midpoint_deviation_calc(u32 val);
-+void pmu_multiphase_pulse_seq_repeat(u32 phase_cmd, u32 param_val,
-+				     u32 slice, u32 count);
-+void pmu_multirank_slice_cal_dispatch(void *table_ptr,
-+				      u32 eval_error_mask, u32 skip_mask_low, s32 skip_mask_high,
-+				u32 ch_enable_mask, u32 check_settle_flags);
-+u16 pmu_phy_ac_lane_timing_delay_set(u32 lane);
-+void pmu_phy_analog_cfg_mode_set(u32 mode);
-+void pmu_phy_cal_strobe_latch_setup(void);
-+void pmu_phy_clk_gate_sync_pulse(void);
-+void pmu_phy_clk_phase_toggle_pulse(void);
-+void pmu_phy_dbyte_broadcast_enable(void);
-+void pmu_phy_dbyte_cfg_unpack(void);
-+u16 pmu_phy_delay_bound_margin_log(u32 slice);
-+void pmu_phy_lcdl_delay_read(u16 *out_arr, u32 flag, u32 mode);
-+void pmu_phy_mode_cfg_dispatch(u32 mode);
-+void pmu_phy_pll_cfg_quad_write_stream(u32 reg_offset, u16 p0,
-+				       u16 p1, u32 p2, u32 flags);
-+void pmu_phy_pll_clock_divider_align(void);
-+void pmu_phy_pll_lock_init(void);
-+void pmu_phy_profile_param_program(void);
-+u32 pmu_phy_query_operating_mode(void);
-+void pmu_phy_dbyte_cal_trig_pulse(u32 slice, u32 bit_idx);
-+void pmu_phy_reg_buffer_stream(void *buf, u32 count, u32 is_save);
-+void pmu_phy_reg_offset_diff_adjust(u32 rank);
-+void pmu_pll_clk_gate_cfg(void);
-+void pmu_pll_lock_freq_tier_cfg(void);
-+void pmu_pll_quad_param_tuple_stream(const u16 *param_array,
-+				     u16 *out_ctr, u16 *base_ptr);
-+void pmu_post_cmd_conditional_dispatch(u32 val);
-+void pmu_phy_sec_cal_strobe_pulse(void);
-+void pmu_phy_cal_trig_pulse(void);
-+void pmu_phy_soft_reset_pulse(void);
-+u16 pmu_rank_margin_channel_accum(u32 rank, u32 start_slice,
-+				  u32 end_slice, u32 flags, u32 swap_mode);
-+void pmu_rank_mask_multiparam_dispatch(u32 channel, u32 rank,
-+				       u32 shadow_update);
-+void pmu_rank_shadow_status_sample(void);
-+void pmu_rank_slice_margin_eval(void);
-+int pmu_sample_margin_center_eval(const u8 *samples,
-+				  u8 *out_margins, u8 *out_mode);
-+void pmu_cal_marker_pair_set(u16 val);
-+void pmu_cbt_config_set(u8 val);
-+void pmu_phy_deskew_dly0_set(u16 val);
-+void pmu_phy_deskew_dly1_set(u16 val);
-+void pmu_phy_clk_timing_set(u16 val);
-+void pmu_slice_delay_step_program(u32 reg_base_off,
-+				  const s16 *step_deltas, u32 format_mode, u32 shift_sel,
-+				u32 stride_flag, u32 single_lane_flag);
-+void pmu_slice_deskew_pulse_seq(u32 enable);
-+void pmu_slice_lcdl_delay_collect(u32 param, void *out_buf, u32 count);
-+void pmu_slice_metric_scan_and_program(void);
-+void pmu_slice_lane_status_save(void);
-+void pmu_start(void);
-+u32 pmu_unpack_6(const u8 *p);
-+u32 pmu_unpack_7(const u8 *p);
-+void pmu_unpack_byte_pair(u32 val, u8 *out);
-+__section(".vectors") void pmu_vector_table(void);
-+void pmu_vref_signed_direction_pulse_dispatch(u32 slice_target,
-+					      u32 vref_step);
-+u32 pmu_window_centroid_calc(void *table_buf);
-+void pmu_phy_pll_cfg_quad_write(u16 v0);
++				  u32 use_fixed_unit)
++{
++	u16 marker_val = pmu_sdata()->cal_marker_a;
++	u16 buf[8];
++	u32 step = (use_fixed_unit == 0U) ?
++		   (u32)((u8)(pmu_sdata()->cbt_state << 1)) : 1U;
++	u32 val, div;
 +
-+#endif /* _SUNXI_PMU_FW_H */
-diff --git a/arch/arm/mach-sunxi/pmu/sunxi_pmu_abi.h b/arch/arm/mach-sunxi/pmu/sunxi_pmu_abi.h
++	if (step == 0U)
++		step = 1U;
++	val = (bypass_min_clamp == 0U && steps > step) ? steps : step;
++	div = val / step;
++	u32 count;
++	u16 v3 = 0U;
++	u16 v7 = 0U;
++
++	if (val != div * step)
++		div++;
++	count = (div - 1U) & 0xffffU;
++
++	memset(buf, 0, sizeof(buf));
++	if ((marker_val & 0x7U) == 4U) {
++		memset((void *)pmu_tracker()->slot1, 0,
++		       sizeof(pmu_tracker()->slot1));
++		pmu_cal_marker_status_update();
++		pmu_sdata()->cal_marker_a = marker_val + 4U;
++	}
++
++	while (count > 255U) {
++		u16 s0 = 0x1fU << 10;
++
++		buf[3] = (u16)(s0 - 0x100U);
++		buf[7] = s0;
++		pmu_cal_tracker_reset_and_apb_zero(buf, 8U);
++		count -= 255U;
++	}
++
++	if (count != 0U) {
++		v3 = (u16)(((count << 12) & 0x7000U) | 0x0b00U);
++		v7 = (u16)((count << 7) & 0x7c00U);
++	}
++	buf[3] = v3;
++	buf[7] = v7;
++
++	pmu_cal_tracker_reset_and_apb_zero(buf, 8U);
++}
++
++/**
++ * pmu_pll_quad_param_tuple_stream() - Stream 2x2 PLL quad parameter tuples
++ * @param_array: Input 8-halfword parameter array
++ * @out_ctr: In/out trace counter incremented per streamed tuple
++ * @base_ptr: In/out base register index incremented per outer iteration
++ */
++void pmu_pll_quad_param_tuple_stream(const u16 *param_array, u16 *out_ctr,
++				     u16 *base_ptr)
++{
++	u32 iter;
++
++	for (iter = 0U; iter < 4U; iter++) {
++		if ((dmem_read32(PMU_DMEM_PLL_GATE_CH0_ADDR) |
++		     dmem_read16(PMU_DMEM_PLL_SEQ_EN_ADDR)) != 0U) {
++			u32 target = ((u32)(*base_ptr) << 1) +
++				     (iter & 1U) + 0x20800UL;
++
++			pmu_phy_pll_cfg_quad_write_stream((u32)(*out_ctr) << 2,
++							  param_array[0],
++							  param_array[1],
++							  target & 0x7ffffUL,
++							  3U);
++			*out_ctr += 1U;
++		}
++		param_array += 2;
++		if ((iter & 1U) != 0U)
++			*base_ptr += 1U;
++	}
++}
++
++/**
++ * pmu_phy_mode_cfg_dispatch() - Configure PHY analog bias and channel bounds for mode
++ * @mode: Channel/rank dispatch mode (1 = Ch0, 2 = Ch1, else broadcast)
++ */
++void pmu_phy_mode_cfg_dispatch(u32 mode)
++{
++	__volatile__ u16 *apb = (__volatile__ u16 *)PHY_REG_CH0_ANALOG_PWR;
++	u8 m = (u8)mode;
++	u16 v0 = dmem_read8(PMU_DMEM_CH0_ANALOG_EN);
++	u16 v1 = dmem_read8(PMU_DMEM_CH1_ACTIVE_FLAG);
++
++	if (m == 2U)
++		v0 = 0U;
++	if (m == 1U)
++		v1 = 0U;
++	apb[0] = v0;
++	apb[1] = v1;
++	apb[12] = 0U;
++
++	if (m == 2U) {
++		dmem_write16(PMU_DMEM_CH_RANGE,
++			     dmem_read16(PMU_DMEM_CH_SEC_RANGE));
++		apb[8] = 0x000fU;
++	} else if (m == 1U) {
++		dmem_write16(PMU_DMEM_CH_RANGE,
++			     dmem_read16(PMU_DMEM_CH_ACTIVE_RANGE));
++		apb[8] = 0x00f0U;
++	} else {
++		apb[8] &= ~0x0011U;
++		dmem_write8(PMU_DMEM_SLICE_START,
++			    dmem_read8(PMU_DMEM_RANK0_SLICE_START));
++		dmem_write8(PMU_DMEM_SLICE_END,
++			    dmem_read8(PMU_DMEM_RANK1_SLICE_END));
++		apb[8] = 0U;
++	}
++
++	pmu_profile_param_stride_cfg(mode);
++}
++
++/**
++ * pmu_clk_ratio_pulse_trigger() - Trigger frequency-scaled 2000-step pad timing delay
++ */
++void pmu_clk_ratio_pulse_trigger(void)
++{
++	u32 scaled = pmu_freq_ratio_mult(2000U);
++
++	pmu_cal_pad_timing_delay_set(0U, (u16)scaled, 0U);
++}
++
++/**
++ * pmu_phy_pll_clock_divider_align() - Compute DBYTE slice bounds and active slice mask
++ */
++void pmu_phy_pll_clock_divider_align(void)
++{
++	u8 dq0 = dmem_read8(PMU_DMEM_CH0_DQ_WIDTH);
++	u8 dq1 = dmem_read8(PMU_DMEM_CH1_DQ_WIDTH);
++	u8 rank1_en = dmem_read8(PMU_DMEM_CH1_ACTIVE_FLAG);
++	u8 d1c = dmem_read8(PMU_DMEM_DESKEW_LIM);
++	u8 num_slices0 = (u8)((dq0 + 7U) >> 3);
++	u8 end_slice0 = num_slices0 - 1U;
++	u8 start_slice1 = num_slices0;
++	u8 end_slice1;
++	u8 mask;
++	int i;
++	u32 rank, ch;
++
++	dmem_write8(PMU_DMEM_RANK0_SLICE_START, 0U);
++	dmem_write8(PMU_DMEM_RANK_BOUNDARY, end_slice0);
++
++	if (rank1_en != 0U) {
++		start_slice1 = (u8)(pmu_sdata()->active_slice_cnt >> 1);
++		num_slices0 = (u8)(((dq1 + 7U) >> 3) + start_slice1);
++		end_slice1 = num_slices0 - 1U;
++	} else {
++		end_slice1 = end_slice0;
++	}
++	dmem_write8(PMU_DMEM_RANK1_SLICE_START, start_slice1);
++	dmem_write8(PMU_DMEM_RANK1_SLICE_END, end_slice1);
++
++	mask = dmem_read8(PMU_DMEM_ACTIVE_SLICE_MASK);
++	for (i = 0; i <= (int)end_slice0; i++)
++		mask |= (u8)(1U << i);
++	dmem_write8(PMU_DMEM_ACTIVE_SLICE_MASK, mask);
++
++	if (end_slice1 >= start_slice1) {
++		for (i = (int)start_slice1; i <= (int)end_slice1; i++)
++			mask |= (u8)(1U << i);
++		dmem_write8(PMU_DMEM_ACTIVE_SLICE_MASK, mask);
++	}
++
++	for (rank = 0U; rank < 2U; rank++) {
++		for (ch = 0U; ch < 2U; ch++) {
++			u8 dq = (ch == 0U) ? dq0 : dq1;
++			u8 shift = (u8)(ch * 2U);
++			u8 slice_cnt = ((d1c >> shift) & (1U << rank)) ?
++				       (u8)((dq + 7U) >> 3) :
++				       (u8)((dq + 15U) >> 4);
++
++			dmem_write8(PMU_DMEM_SLICE_CNT_LIMIT +
++				    ch * 2U + rank, slice_cnt);
++		}
++	}
++}
++
++/**
++ * pmu_profile_param_stride_cfg() - Broadcast profile delay across slices and pulse strobe
++ * @mode: Channel/rank mode selector (3 = max across channels, else offset)
++ */
++static void pmu_profile_param_stride_cfg(u32 mode)
++{
++	u8 byte_idx;
++	u32 val;
++	u32 csr_ch_off;
++	u32 count;
++	u32 i;
++	u32 reg;
++	__volatile__ u16 *strobe;
++
++	if (dmem_read16(PMU_DMEM_SEQ_CTRL) == 1U)
++		return;
++
++	byte_idx = dmem_read8(PMU_DMEM_ACTIVE_RANK);
++	if (mode == 3U) {
++		const u16 *tbl = (const u16 *)
++			dmem_ptr(PMU_DMEM_CAL_TABLE + byte_idx * 4U);
++
++		val = tbl[0];
++		if (dmem_read8(PMU_DMEM_CH1_ACTIVE_FLAG) != 0U && tbl[1] > val)
++			val = tbl[1];
++	} else {
++		u32 offset = (mode & ~1U) + byte_idx * 4U;
++
++		val = dmem_read8(PMU_DMEM_CAL_TABLE + offset);
++	}
++
++	csr_ch_off = pmu_sdata()->active_csr_offset << 1;
++	val = (u16)(s8)val;
++	*(__volatile__ u16 *)(PHY_REG_MASTER_DELAY | csr_ch_off) = (u16)val;
++
++	count = pmu_sdata()->active_slice_cnt;
++	reg = PHY_REG_DBYTE_BASE | csr_ch_off;
++	for (i = 0U; i <= count; i++, reg += PHY_DBYTE_SLICE_STRIDE)
++		*(__volatile__ u16 *)reg = (u16)val;
++
++	strobe = (__volatile__ u16 *)PHY_REG_PUB_CAL_STROBE;
++	*strobe = 1U;
++	pmu_hw_timer_delay(0x20U);
++	*strobe = 0U;
++}
++
++/**
++ * pmu_cal_tracker_csr_commit() - Commit multi-channel calibration step tracker to CSR stream
++ * @tracker: Pointer to 22-halfword calibration step tracker structure
++ *
++ * Return: Updated 16-bit calibration marker from 0x8000045e.
++ */
++u32 pmu_cal_tracker_csr_commit(__volatile__ void *tracker)
++{
++	__volatile__ u16 *t = (__volatile__ u16 *)tracker;
++	u8 mask = (u8)pmu_sdata()->active_slice_mask;
++	u32 popcount = 0U;
++	u16 marker_val;
++	u8 step_ext_val;
++	u8 ch_range_val;
++	u16 has_step_ext;
++	u16 sample[8];
++	u32 base;
++	u32 i;
++
++	while (mask != 0U) {
++		mask &= (u8)(mask - 1U);
++		popcount++;
++	}
++
++	marker_val = pmu_sdata()->cal_marker_b;
++	step_ext_val = pmu_sdata()->cbt_step_ext;
++	ch_range_val = pmu_sdata()->ch_range_lim;
++	has_step_ext = (step_ext_val != 0U) ? 1U : 0U;
++
++	t[19] = has_step_ext;
++
++	sample[0] = (t[3] & 0x7fU) | ((t[4] & 0x7fU) << 7) | (t[5] << 14);
++	sample[1] = (t[6] & 0x0fU) | (t[7] << 4);
++	sample[2] = (t[7] >> 12) & 1U;
++	sample[3] = (u16)((u8)(t[2] << 7)) |
++		    ((t[0] << 4) & 0x10U) |
++		    ((t[1] << 5) & 0x60U) |
++		    ((t[18] << 8) & 0x300U) |
++		    ((t[20] << 11) & 0x800U) |
++		    (has_step_ext << 10) |
++		    ((t[17] << 12) & 0x7000U);
++
++	sample[4] = (t[11] & 0x7fU) | ((t[12] & 0x7fU) << 7) | (t[13] << 14);
++	sample[5] = (t[14] & 0x0fU) | (t[15] << 4);
++	sample[6] = (t[15] >> 12) & 1U;
++	sample[7] = (u16)((u8)(t[10] << 7)) |
++		    ((t[8] << 4) & 0x10U) |
++		    ((t[9] << 5) & 0x60U) |
++		    ((t[16] << 8) & 0x300U) |
++		    ((t[17] << 7) & 0x7c00U);
++
++	if (ch_range_val != 0U) {
++		s32 sum;
++
++		if (ch_range_val != 1U)
++			return (u32)marker_val;
++
++		sum = (s8)popcount + pmu_sdata()->tracker_popcnt_acc;
++		if (sum < 8) {
++			*(__volatile__ u8 *)&pmu_sdata()->active_slice_mask = 0U;
++			pmu_sdata()->tracker_popcnt_acc = sum % 8;
++			return (u32)marker_val;
++		}
++	}
++
++	base = PHY_REG_CSR_RESULT_STREAM | ((u32)marker_val << 1);
++	for (i = 0U; i < 8U; i++)
++		*(__volatile__ u16 *)(base + (i * 2U)) = sample[i];
++
++	marker_val += 8U;
++	pmu_sdata()->cal_marker_b = marker_val;
++
++	if ((t[18] & 3U) != 0U)
++		pmu_sdata()->step_mode_ovr = (u8)(1U & ~t[18]);
++
++	if (ch_range_val == 1U) {
++		s32 sum;
++
++		pmu_tracker()->slot1_mode = 0U;
++		sum = (s8)popcount + pmu_sdata()->tracker_popcnt_acc;
++		*(__volatile__ u8 *)&pmu_sdata()->active_slice_mask = 0U;
++		pmu_sdata()->tracker_popcnt_acc = sum % 8;
++	}
++
++	return (u32)marker_val;
++}
++
++/**
++ * pmu_pll_clk_gate_cfg() - Program PLL clock timing and PUB transceiver gates
++ */
++void pmu_pll_clk_gate_cfg(void)
++{
++	u32 csr_sh1 = pmu_sdata()->active_csr_offset << 1;
++	u16 val0 = *(__volatile__ const u16 *)(csr_sh1 | PHY_REG_DBYTE_XCVR_GATE);
++	__volatile__ u16 *phy_base = (__volatile__ u16 *)PHY_REG_MASTER_BASE;
++	u8 cal_mode_flag;
++
++	*(__volatile__ u16 *)(csr_sh1 | PHY_REG_DBYTE_BCAST_XCVR_GATE) =
++		(val0 & 0xff78U) | 6U;
++
++	phy_base[0x00c2 >> 1] = 1U;
++
++	cal_mode_flag = *(__volatile__ const u8 *)PMU_DMEM_CAL_MODE_FLAG_ADDR;
++	if (cal_mode_flag != 0U) {
++		pmu_delay_us(0U, 4U);
++		phy_base[0x00c2 >> 1] = 0U;
++		phy_base[0x01c2 >> 1] = 1U;
++		phy_base[0x01c0 >> 1] = 1U;
++		phy_base[0x0620 >> 1] = 0U;
++		pmu_delay_us(0x989680U, 0U);
++		phy_base[0x0186 >> 1] = 0U;
++		phy_base[0x0400 >> 1] = 0x33U;
++		phy_base[0x0144 >> 1] = 0U;
++		pmu_hw_timer_delay(0x20U);
++		phy_base[0x00f0 >> 1] = 1U;
++		phy_base[0x0144 >> 1] = 2U;
++		pmu_hw_timer_delay(1024U);
++	} else {
++		pmu_hw_timer_delay(4U);
++		phy_base[0x0092 >> 1] = 496U;
++		phy_base[0x00c2 >> 1] = 0U;
++		phy_base[0x01c2 >> 1] = 0U;
++		phy_base[0x0620 >> 1] = 0U;
++		phy_base[0x01c0 >> 1] = 0U;
++		phy_base[0x0186 >> 1] = 0U;
++		pmu_delay_us(0xf4240U, 0U);
++		phy_base[0x01c4 >> 1] = 3U;
++		pmu_delay_us(0xf4240U >> 1, 0U);
++		phy_base[0x01c4 >> 1] = 2U;
++		pmu_delay_us(0x989680U, 0U);
++		phy_base[0x01c4 >> 1] = 0U;
++		phy_base[0x00f0 >> 1] = 1U;
++		phy_base[0x0400 >> 1] = 0x33U;
++		phy_base[0x0144 >> 1] = 0U;
++		pmu_hw_timer_delay(6U);
++		phy_base[0x00f0 >> 1] = 2U;
++		pmu_delay_us(0U, 0x2710U);
++		phy_base[0x0144 >> 1] = 2U;
++	}
++
++	phy_base[0x00f0 >> 1] = 0U;
++	phy_base[0x0144 >> 1] = 0U;
++	pmu_delay_us(0U, 0x20U);
++	phy_base[0x0400 >> 1] = 0U;
++	phy_base[0x01f0 >> 1] = 0U;
++	phy_base[0x0144 >> 1] = 2U;
++}
++
++/**
++ * pmu_channel_rank_avail_check() - Dispatch mode configuration for active channel
++ * @channel: Target channel index (0 = Ch0, 1 = Ch1, >1 = broadcast)
++ * @rank: Rank bit index to test in Ch0 (0x80000025) or Ch1 (0x80000040)
++ *
++ * Return: 1 if dispatched (mode 1, 2, or 3), or 0 if rank bit is inactive.
++ */
++u32 pmu_channel_rank_avail_check(u32 channel, u32 rank)
++{
++	u32 mode = 3U;
++
++	if (channel <= 1U) {
++		u8 flags = (channel == 0U) ?
++			   dmem_read8(PMU_DMEM_CH0_ANALOG_EN) :
++			   dmem_read8(PMU_DMEM_CH1_ACTIVE_FLAG);
++
++		if (((flags >> rank) & 1U) == 0U)
++			return 0U;
++		mode = channel + 1U;
++	}
++
++	pmu_phy_mode_cfg_dispatch(mode);
++	return 1U;
++}
++
++/**
++ * pmu_phy_clk_gate_clear() - Clear PHY control register 0x90040040 to 0
++ */
++static inline void pmu_phy_clk_gate_clear(void)
++{
++	*(__volatile__ u16 *)PHY_REG_CLK_GATE = 0;
++}
++
++/**
++ * pmu_phy_cal_stat_read() - Read 16-bit value from PHY register 0x90040148
++ *
++ * Return: 16-bit register value at 0x90040148.
++ */
++u16 pmu_phy_cal_stat_read(void)
++{
++	return *(__volatile__ u16 *)PHY_REG_CAL_STAT;
++}
++
++/**
++ * pmu_phy_dbyte_cal_trig_pulse() - Execute 5-step strobe pulse on PHY reg 0x176
++ * @slice: Target DBYTE slice index (0..3)
++ * @bit_idx: Lane bit index (0..8, or 15 for all 9 lanes 0x1ff)
++ *
++ * Sequences 0 -> mask -> (mask | 0x200) -> mask -> 0 on the slice's PHY
++ * register at 0x90020176 + (slice << 13).
++ */
++void pmu_phy_dbyte_cal_trig_pulse(u32 slice, u32 bit_idx)
++{
++	__volatile__ u16 *reg =
++		(__volatile__ u16 *)(PHY_REG_DBYTE_CAL_TRIG + (slice << 13));
++	u32 mask = (bit_idx == 15) ? 511U : (1U << bit_idx);
++	u32 strobe = mask | (1U << 9);
++	u16 zero = 0;
++
++	*reg = zero;
++	*reg = (u16)mask;
++	*reg = (u16)strobe;
++	*reg = (u16)mask;
++	*reg = zero;
++}
++
++/**
++ * pmu_phy_sec_cal_strobe_pulse() - Pulse PHY register 0x9005e140 high for 32 timer ticks
++ */
++void pmu_phy_sec_cal_strobe_pulse(void)
++{
++	*(__volatile__ u16 *)PHY_REG_PUB_CAL_STROBE = 1;
++	pmu_hw_timer_delay(32);
++	*(__volatile__ u16 *)PHY_REG_PUB_CAL_STROBE = 0;
++}
++
++/**
++ * pmu_phy_cal_trig_pulse() - Pulse PHY register 0x90040146 high for 32 timer ticks
++ */
++void pmu_phy_cal_trig_pulse(void)
++{
++	*(__volatile__ u16 *)PHY_REG_CAL_TRIG = 1;
++	pmu_hw_timer_delay(32);
++	*(__volatile__ u16 *)PHY_REG_CAL_TRIG = 0;
++}
++
++/**
++ * pmu_phy_soft_reset_pulse() - Toggle PHY register 0x900400f2 high then low
++ */
++void pmu_phy_soft_reset_pulse(void)
++{
++	__volatile__ u16 *p = (__volatile__ u16 *)PHY_REG_RESET_TRIGGER;
++
++	*p = 1;
++	*p = 0;
++}
++
++/**
++ * pmu_phy_clk_gate_set() - Set PHY control register 0x90040040 to 1
++ */
++static inline void pmu_phy_clk_gate_set(void)
++{
++	*(__volatile__ u16 *)PHY_REG_CLK_GATE = 1;
++}
++
++/**
++ * pmu_phy_deskew_dly0_set() - Write 16-bit value to channel-indexed PHY reg 0x90040044
++ * @val: Halfword value to write
++ */
++void pmu_phy_deskew_dly0_set(u16 val)
++{
++	u32 ch_offset = pmu_sdata()->active_csr_offset;
++
++	*(__volatile__ u16 *)(PHY_REG_DESKEW_DLY0 + (ch_offset << 1)) = val;
++}
++
++/**
++ * pmu_phy_deskew_dly1_set() - Write 16-bit value to channel-indexed PHY reg 0x90040046
++ * @val: Halfword value to write
++ */
++void pmu_phy_deskew_dly1_set(u16 val)
++{
++	u32 ch_offset = pmu_sdata()->active_csr_offset;
++
++	*(__volatile__ u16 *)(PHY_REG_DESKEW_DLY1 + (ch_offset << 1)) = val;
++}
++
++/**
++ * pmu_phy_clk_timing_set() - Write 16-bit value to PHY register 0x9004004e
++ * @val: Halfword value to write
++ */
++void pmu_phy_clk_timing_set(u16 val)
++{
++	*(__volatile__ u16 *)PHY_REG_CLK_TIMING_CTRL = val;
++}
++
++/**
++ * pmu_phy_clk_gate_sync_pulse() - Conditionally pulse PHY clock gate reg 0x9005e0a4
++ *
++ * When bit 0 of DCCM 0x80000001 is set, asserts PHY register 0x9005e0a4 to 1,
++ * waits 10 hardware timer ticks, and clears it back to 0.
++ */
++void pmu_phy_clk_gate_sync_pulse(void)
++{
++	u8 flag = *(__volatile__ u8 *)PMU_DMEM_CLK_GATE_FLAG;
++
++	if ((flag & 1) != 0) {
++		*(__volatile__ u16 *)PHY_REG_SEC_CLK_GATE = 1;
++		pmu_hw_timer_delay(10);
++		*(__volatile__ u16 *)PHY_REG_SEC_CLK_GATE = 0;
++	}
++}
++
++/**
++ * pmu_phy_pll_cfg_quad_write() - Broadcast halfword mask to PHY 0x900e00c2..0x900e00c8
++ * @v0: Halfword mask written to 0x900e00c2, 0x900e00c4, 0x900e00c6, and 0x900e00c8
++ */
++void pmu_phy_pll_cfg_quad_write(u16 v0)
++{
++	__volatile__ u16 *p = (__volatile__ u16 *)PHY_REG_PLL_CFG;
++
++	p[0] = v0;
++	p[1] = v0;
++	p[2] = v0;
++	p[3] = v0;
++}
+diff --git a/arch/arm/mach-sunxi/pmu/pmu_primitives.c b/arch/arm/mach-sunxi/pmu/pmu_primitives.c
 new file mode 100644
-index 00000000000..0625a6f46dd
+index 00000000000..23277c7f7d3
 --- /dev/null
-+++ b/arch/arm/mach-sunxi/pmu/sunxi_pmu_abi.h
-@@ -0,0 +1,251 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/arm/mach-sunxi/pmu/pmu_primitives.c
+@@ -0,0 +1,531 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
 + *
-+ * Synopsys DesignWare DDR PHY PMU Firmware & SPL Hardware ABI Definitions
-+ * SoC: Allwinner A733 (Sun60i) / LPDDR5 PHY (Type 9)
-+ *
-+ * For detailed architecture, clean-room specification provenance, and memory
-+ * map alignment, see doc/board/allwinner/a733-pmu.rst.
++ * Allwinner A733 Synopsys DDR PHY PMU Foundation Memory Primitives
 + */
 +
-+#ifndef _SUNXI_PMU_ABI_H_
-+#define _SUNXI_PMU_ABI_H_
-+
-+#if defined(__KERNEL__) || defined(__UBOOT__)
-+#include <linux/types.h>
-+#include <linux/bitops.h>
-+#include <linux/compiler_attributes.h>
-+#else
-+#include <stdint.h>
-+#include <stdbool.h>
-+#include <stddef.h>
-+
-+#ifndef __packed
-+#define __packed		__attribute__((__packed__))
-+#endif
-+#ifndef __aligned
-+#define __aligned(x)		__attribute__((__aligned__(x)))
-+#endif
-+#ifndef __always_inline
-+#define __always_inline		inline __attribute__((__always_inline__))
-+#endif
-+#ifndef noinline
-+#define noinline		__attribute__((__noinline__))
-+#endif
-+#ifndef __section
-+#define __section(s)		__attribute__((__section__(s)))
-+#endif
-+
-+#ifndef BIT
-+#define BIT(nr)			(1UL << (nr))
-+#endif
-+
-+#ifndef _PMU_TYPES_DEFINED_
-+#define _PMU_TYPES_DEFINED_
-+typedef unsigned char      u8;
-+typedef unsigned short     u16;
-+typedef unsigned int       u32;
-+typedef unsigned long long u64;
-+typedef signed char        s8;
-+typedef signed short       s16;
-+typedef signed int         s32;
-+typedef signed long long   s64;
-+#endif
-+#endif
-+
-+/*
-+ * Memory Map Base Addresses: Host ARM Physical vs ARC EM4 Microsequencer
-+ */
-+#define SUNXI_DRAM_PHY_CTRL_BASE    0x0aaa0000UL    /* PHY CSRs (APB Slave interface) */
-+#define SUNXI_DRAM_PHY_IMEM_BASE    0x0a9a0000UL    /* ARC ICCM: Instruction Memory (64 KB) */
-+#define SUNXI_DRAM_PHY_DMEM_BASE    0x0a9b0000UL    /* ARC DCCM: Data Memory (64 KB) */
-+
-+/*
-+ * PMU Control & Mailbox Register Offsets (relative to SUNXI_DRAM_PHY_CTRL_BASE / 0x0aaa0000)
-+ * Note: The PHY APB slave interface is strictly 16-bit. All host accesses
-+ *       must use 16-bit readw / writew operations.
-+ */
-+#define PMU_REG_APB_MUX             0x0000  /* 0 = Host ARM owns APB, 1 = PMU ARC owns APB */
-+#define PMU_REG_POLL_STAT           0x0008  /* Bit 0: 1 = PMU busy, 0 = msg pending / complete */
-+#define PMU_REG_HANDOFF_0           0x0060  /* Handshake handoff 0 */
-+#define PMU_REG_HANDOFF_1           0x0062  /* Handshake handoff 1 (write 1 to trigger, 0 to ack) */
-+#define PMU_REG_STATUS_LO           0x0064  /* PMU status low 16 bits */
-+#define PMU_REG_MAILBOX_INT         0x0066  /* Mailbox interrupt pulse / trigger */
-+#define PMU_REG_STATUS_HI           0x0068  /* PMU status high 16 bits */
-+#define PMU_REG_RESET               0x0132  /* MicroReset (0=run, bit 0=stall, bit 3=reset) */
-+
-+/*
-+ * PMU Return Status Codes (read from PMU_REG_STATUS_LO | (PMU_REG_STATUS_HI << 16))
-+ */
-+#define PMU_STATUS_SUCCESS          0x00000007U /* Training completed successfully */
-+#define PMU_STATUS_FATAL_ERROR      0x000000ffU /* Training failed assertion / aborted */
-+
-+/*
-+ * PMU SequenceCtrl Flags (DMEM offset 0x10)
-+ * Selects which calibration and training stages the PMU microsequencer executes.
-+ */
-+#define PMU_SEQ_DEV_INIT            BIT(0)  /* Bit 0:  Device init, PLL lock, CBT entry, ZQ cal */
-+#define PMU_SEQ_STAGE_VREF          BIT(1)  /* Bit 1:  Receiver Vref voltage centering */
-+#define PMU_SEQ_STAGE_DCD           BIT(2)  /* Bit 2:  Duty cycle distortion correction */
-+#define PMU_SEQ_STAGE_DQS           BIT(3)  /* Bit 3:  Read/Write DQS strobe timing centering */
-+#define PMU_SEQ_BIST_SEARCH_WIN     BIT(4)  /* Bit 4:  BIST test pattern search window setup */
-+#define PMU_SEQ_SEARCH_WIN          BIT(6)  /* Bit 6:  High-resolution 2D eye margin search */
-+#define PMU_SEQ_ZQ_CAL              BIT(7)  /* Bit 7:  ZQ pad output impedance & ODT calibration */
-+#define PMU_SEQ_DESKEW_SWEEP        BIT(8)  /* Bit 8:  Per-bit DQ deskew delay line tuning */
-+#define PMU_SEQ_MARGIN_STEP         BIT(9)  /* Bit 9:  Margin envelope boundary evaluation */
-+#define PMU_SEQ_LANE_WIN_SWEEP      BIT(10) /* Bit 10: Lane window sweep & cross-lane matrix scan */
-+#define PMU_SEQ_LPCA_INIT           BIT(12) /* Bit 12: Low-Power Command/Address training & init */
-+
-+/*
-+ * Operating Mode:
-+ * - FULL_TRAIN: Complete multi-stage LPDDR5 calibration sweep.
-+ */
-+#define PMU_SEQ_FULL_TRAIN          (PMU_SEQ_DEV_INIT | PMU_SEQ_STAGE_VREF | \
-+				     PMU_SEQ_STAGE_DCD | PMU_SEQ_STAGE_DQS | \
-+				     PMU_SEQ_BIST_SEARCH_WIN | PMU_SEQ_SEARCH_WIN | \
-+				     PMU_SEQ_MARGIN_STEP | PMU_SEQ_LPCA_INIT)	/* 0x125f */
++#include "pmu_fw.h"
 +
 +/**
-+ * struct pmu_message_block - Host-to-PMU parameter handshake mailbox
-+ * @msg_misc: Miscellaneous control and debug flags
-+ * @cfg_flags: Hardware configuration flags
-+ * @rsvd0: Reserved padding at offset 0x02
-+ * @pstate_flags: Power-state flags and channel offset (0x04)
-+ * @rsvd1: Reserved padding at offset 0x05
-+ * @dram_rate_mts: DRAM data rate in MT/s (3600 for 1800 MHz WCK)
-+ * @pll_ratio: WCK:CK frequency ratio (0x08: 4 = 4:1, 2 = 2:1)
-+ * @rsvd2: Reserved padding at offset 0x09
-+ * @dfi_freq_ratio: DFI frequency divider ratio (0x0a)
-+ * @assert_code: PMU 32-bit assert error code (overwritten on fatal error, 0x0c)
-+ * @rsvd_0c: Reserved runtime byte at offset 0x0c
-+ * @cal_misc_flags: Runtime calibration miscellaneous flags (0x0d)
-+ * @ac_signed_step: Runtime signed AC timing step (0x0e)
-+ * @train_mode_hi: Runtime upper training mode flags (0x0f)
-+ * @sequence_ctrl: Training stage bitmask (PMU_SEQ_*)
-+ * @post_threshold: Telemetry log filter threshold (0xff = disabled)
-+ * @rsvd3: Reserved padding at offset 0x13
-+ * @train_mode: Training mode / calibration state (0x14)
-+ * @cal_ctrl: Calibration control flags (0x16)
-+ * @rsvd4: Reserved padding at offsets 0x18..0x23
-+ * @ch0_dq_width: Channel 0 total DQ bit width (16)
-+ * @ch0_rank_en: Channel 0 active rank bitmask (0x03 = dual-rank)
-+ * @rsvd5: Reserved padding at offsets 0x26..0x3e
-+ * @ch1_dq_width: Channel 1 total DQ bit width (16)
-+ * @ch1_rank_en: Channel 1 active rank bitmask (0x03 = dual-rank)
-+ * @rsvd6: Reserved padding at offsets 0x41..0x59
-+ * @mr1: Per-slice JEDEC MR1 values (clock and WL set config)
-+ * @mr2: Per-slice JEDEC MR2 values (RL and nWR config)
-+ * @mr3: Per-slice JEDEC MR3 values (PDDS, DBI, and bank org)
-+ * @mr10: Per-slice JEDEC MR10 values (RDQS preamble/postamble)
-+ * @mr11: Per-slice JEDEC MR11 values (CA and DQ ODT)
-+ * @mr12: Per-slice JEDEC MR12 values (CA Vref)
-+ * @mr13: Per-slice JEDEC MR13 values
-+ * @mr14: Per-slice JEDEC MR14 values (DQ[7:0] Vref)
-+ * @mr15: Per-slice JEDEC MR15 values (DQ[15:8] Vref)
-+ * @mr16: Per-slice JEDEC MR16 values (FSP-WR/OP and CBT)
-+ * @mr17: Per-slice JEDEC MR17 values (CK/CA ODT)
-+ * @mr18: Per-slice JEDEC MR18 values (WCK ODT and CK-to-WCK sync)
-+ * @mr19: Per-slice JEDEC MR19 values (DVFSC and WCK2DQ osc)
-+ * @mr20: Per-slice JEDEC MR20 values (RDQS mode)
-+ * @mr21: Per-slice JEDEC MR21 values
-+ * @mr22: Per-slice JEDEC MR22 values
-+ * @mr24: Per-slice JEDEC MR24 values (DFE)
-+ * @mr25: Per-slice JEDEC MR25 values
-+ * @mr26: Per-slice JEDEC MR26 values
-+ * @mr27: Per-slice JEDEC MR27 values
-+ * @mr28: Per-slice JEDEC MR28 values (ZQ reset/stop/interval)
-+ * @mr30: Per-slice JEDEC MR30 values (DCA)
-+ * @mr31: Per-slice JEDEC MR31 values
-+ * @mr32: Per-slice JEDEC MR32 values
-+ * @mr33: Per-slice JEDEC MR33 values
-+ * @mr34: Per-slice JEDEC MR34 values
-+ * @mr37: Per-slice JEDEC MR37 values (WCK2DQI interval)
-+ * @mr40: Per-slice JEDEC MR40 values (WCK2DQO interval)
-+ * @mr41: Per-slice JEDEC MR41 values (NT-ODT and PPRE)
-+ * @rsvd7: Reserved padding at offsets 0xce..0xe7
-+ * @pll_gate_ch: Per-channel PLL clock gate thresholds (0xe8..0xeb)
-+ * @rsvd8: Reserved padding at offsets 0xec..0xff
-+ * @dq_swap_en: Per-bit DQ pin swizzle enable flag (0x100)
-+ * @lane_err_mask: Per-lane deskew error status mask (0x101)
-+ * @train_feature_mask: Training feature override bitmask (0x102)
-+ * @ca_vref_rank1: Initial CA Vref DAC setting for Rank 1 (0x103)
-+ * @ca_vref_rank0: Initial CA Vref DAC setting for Rank 0 (0x104)
-+ * @diff_tap_pair: Differential tap pair offset (0x105)
++ * memset() - Fill memory region with a constant byte value
++ * @s: Pointer to destination memory block
++ * @c: Byte value to replicate across @n bytes
++ * @n: Number of bytes to set
 + *
-+ * Placed at the base of PMU DCCM (0x80000000 in ARC address space,
-+ * 0x0a9b0000 in host physical address space). Written by U-Boot SPL
-+ * prior to triggering PMU training execution.
++ * Aligns the destination pointer to a 4-byte boundary using byte stores, fills
++ * 32-bit words using the replicated pattern (u8)@c * 0x01010101UL, and writes
++ * any trailing bytes.
++ *
++ * Return: Original destination pointer @s.
 + */
-+struct pmu_message_block {
-+	u8  msg_misc;           /* 0x000 */
-+	u8  cfg_flags;          /* 0x001 */
-+	u16 rsvd0;              /* 0x002 */
-+	u8  pstate_flags;       /* 0x004 */
-+	u8  rsvd1;              /* 0x005 */
-+	u16 dram_rate_mts;      /* 0x006 */
-+	u8  pll_ratio;          /* 0x008 */
-+	u8  rsvd2;              /* 0x009 */
-+	u16 dfi_freq_ratio;     /* 0x00a */
-+	union {
-+		u32 assert_code;        /* 0x00c */
-+		struct __packed {
-+			u8 rsvd_0c;        /* 0x00c */
-+			u8 cal_misc_flags; /* 0x00d */
-+			s8 ac_signed_step; /* 0x00e */
-+			u8 train_mode_hi;  /* 0x00f */
-+		};
-+	};
-+	u16 sequence_ctrl;      /* 0x010 */
-+	u8  post_threshold;     /* 0x012 */
-+	u8  rsvd3;        /* 0x013 */
-+	u16 train_mode;         /* 0x014 */
-+	u16 cal_ctrl;        /* 0x016 */
-+	u8  rsvd4[12];    /* 0x018..0x023 */
-+	u8  ch0_dq_width;       /* 0x024 */
-+	u8  ch0_rank_en;        /* 0x025 */
-+	u8  rsvd5[25];    /* 0x026..0x03e */
-+	u8  ch1_dq_width;       /* 0x03f */
-+	u8  ch1_rank_en;        /* 0x040 */
-+	u8  rsvd6[25];    /* 0x041..0x059 */
-+	u8  mr1[4];             /* 0x05a */
-+	u8  mr2[4];             /* 0x05e */
-+	u8  mr3[4];             /* 0x062 */
-+	u8  mr10[4];            /* 0x066 */
-+	u8  mr11[4];            /* 0x06a */
-+	u8  mr12[4];            /* 0x06e */
-+	u8  mr13[4];            /* 0x072 */
-+	u8  mr14[4];            /* 0x076 */
-+	u8  mr15[4];            /* 0x07a */
-+	u8  mr16[4];            /* 0x07e */
-+	u8  mr17[4];            /* 0x082 */
-+	u8  mr18[4];            /* 0x086 */
-+	u8  mr19[4];            /* 0x08a */
-+	u8  mr20[4];            /* 0x08e */
-+	u8  mr21[4];            /* 0x092 */
-+	u8  mr22[4];            /* 0x096 */
-+	u8  mr24[4];            /* 0x09a */
-+	u8  mr25[4];            /* 0x09e */
-+	u8  mr26[4];            /* 0x0a2 */
-+	u8  mr27[4];            /* 0x0a6 */
-+	u8  mr28[4];            /* 0x0aa */
-+	u8  mr30[4];            /* 0x0ae */
-+	u8  mr31[4];            /* 0x0b2 */
-+	u8  mr32[4];            /* 0x0b6 */
-+	u8  mr33[4];            /* 0x0ba */
-+	u8  mr34[4];            /* 0x0be */
-+	u8  mr37[4];            /* 0x0c2 */
-+	u8  mr40[4];            /* 0x0c6 */
-+	u8  mr41[4];            /* 0x0ca */
-+	u8  rsvd7[26];    /* 0x0ce..0x0e7 */
-+	u16 pll_gate_ch[2];     /* 0x0e8..0x0eb */
-+	u8  rsvd8[20];    /* 0x0ec..0x0ff */
-+	u8  dq_swap_en;         /* 0x100 */
-+	u8  lane_err_mask;      /* 0x101 */
-+	u8  train_feature_mask; /* 0x102 */
-+	u8  ca_vref_rank1;      /* 0x103 */
-+	u8  ca_vref_rank0;      /* 0x104 */
-+	u8  diff_tap_pair;      /* 0x105 */
-+} __packed __aligned(2);
++void *memset(void *s, int c, size_t n)
++{
++	u8 *p = (u8 *)s;
++	u8 val = (u8)c;
++	u32 pat = (u32)val * 0x01010101UL;
 +
-+#endif /* _SUNXI_PMU_ABI_H_ */
++	while (n > 0 && ((uintptr_t)p & 3U) != 0U) {
++		*p++ = val;
++		n--;
++	}
++
++	while (n >= 4U) {
++		*(u32 *)p = pat;
++		p += 4;
++		n -= 4U;
++	}
++
++	while (n > 0) {
++		*p++ = val;
++		n--;
++	}
++
++	return s;
++}
++
++/**
++ * memcpy() - Copy memory region from source to destination
++ * @dest: Destination buffer pointer
++ * @src: Source buffer pointer
++ * @n: Number of bytes to copy
++ *
++ * Copies 32-bit words when both @dest and @src are 4-byte aligned, followed by
++ * any trailing bytes; otherwise copies byte-by-byte.
++ *
++ * Return: Original destination pointer @dest.
++ */
++void *memcpy(void *dest, const void *src, size_t n)
++{
++	u8 *d = (u8 *)dest;
++	const u8 *s = (const u8 *)src;
++
++	if ((((uintptr_t)d | (uintptr_t)s) & 3U) == 0U) {
++		while (n >= 4U) {
++			*(u32 *)d = *(const u32 *)s;
++			d += 4;
++			s += 4;
++			n -= 4U;
++		}
++	}
++
++	while (n > 0) {
++		*d++ = *s++;
++		n--;
++	}
++
++	return dest;
++}
++
++/**
++ * pmu_cal_tracker_step_advance() - Advance calibration step tracker across step count
++ * @marker: Initial 16-bit calibration marker
++ * @count: Number of step iterations to advance
++ * @mode: Step mode selector (1 for fast multi-step mode, 0 for single-step)
++ *
++ * Return: Updated 16-bit calibration marker.
++ */
++u32 pmu_cal_tracker_step_advance(u32 marker, u32 count, u32 mode)
++{
++	__volatile__ struct pmu_cal_tracker *trk = pmu_tracker();
++	__volatile__ u32 *slot0 = (__volatile__ u32 *)(uintptr_t)trk->slot0;
++	__volatile__ u32 *slot1 = (__volatile__ u32 *)(uintptr_t)trk->slot1;
++
++	while ((u16)count != 0U) {
++		if (count >= 4U && mode == 1U) {
++			if ((marker & 7U) != 0U) {
++				count--;
++				slot1[0] = 0U;
++				slot1[1] = 0U;
++				slot1[2] = 0U;
++				slot1[3] = 0U;
++				marker = pmu_cal_marker_status_update();
++				mode = 1U;
++			} else {
++				memset((void *)trk->slot0, 0,
++				       PMU_TRACKER_SLOTS_BYTES);
++				if (count >= 513U) {
++					count -= 512U;
++					trk->repeat_cnt = 0x00ffU;
++					trk->slot0_mode = 0x0003U;
++					marker = pmu_cal_marker_status_update();
++					mode = 1U;
++				} else {
++					u32 half_cnt = (count >> 1) - 1U;
++
++					trk->repeat_cnt = (u16)half_cnt;
++					if ((count >> 1) == 0U) {
++						trk->slot0_mode = 0U;
++						marker = pmu_cal_marker_status_update();
++						goto reset_slot_next;
++					}
++					trk->slot0_mode = 0x0003U;
++					return (u16)(marker + 8U);
++				}
++			}
++		} else {
++			mode = 0U;
++			if ((marker & 7U) != 0U) {
++				slot1[0] = 0U;
++				slot1[1] = 0U;
++				slot1[2] = 0U;
++				slot1[3] = 0U;
++				if (count == 1U)
++					return (u16)(marker + 4U);
++				marker = pmu_cal_marker_status_update();
++				if (count == 2U)
++					goto reset_slot_next;
++				count--;
++			} else {
++				memset((void *)trk->slot0, 0,
++				       PMU_TRACKER_SLOTS_BYTES);
++				if (count == 1U)
++					goto reset_slot_next;
++				if (count == 2U)
++					return (u16)(marker + 8U);
++				marker = pmu_cal_marker_status_update();
++				count -= 2U;
++			}
++		}
++	}
++
++	return pmu_sdata()->cal_marker_a;
++
++reset_slot_next:
++	slot0[0] = 0U;
++	slot0[1] = 0U;
++	slot0[2] = 0U;
++	slot0[3] = 0U;
++	return (u16)(marker + 4U);
++}
++
++/**
++ * pmu_default_exception_handler() - Dump ARC exception state to DCCM and halt
++ */
++__attribute__((naked))
++void pmu_default_exception_handler(void)
++{
++	__asm__ __volatile__("mov     r2, 0x80000000\n\t"
++			     "mov     r3, 0x1234dead\n\t"
++			     "st      r3, [r2]\n\t"
++			     "add_s   r2, r2, 4\n\t"
++			     "lr      r3, [0x400]\n\t"
++			     "st      r3, [r2]\n\t"
++			     "add_s   r2, r2, 4\n\t"
++			     "lr      r3, [0x403]\n\t"
++			     "st      r3, [r2]\n\t"
++			     "add_s   r2, r2, 4\n\t"
++			     "st      r0, [r2]\n\t"
++			     "add_s   r2, r2, 4\n\t"
++			     "st      r1, [r2]\n\t"
++			     "add_s   r2, r2, 4\n\t"
++			     "st      sp, [r2]\n\t"
++			     "add_s   r2, r2, 4\n\t"
++			     "st      fp, [r2]\n\t"
++			     "add_s   r2, r2, 4\n\t"
++			     "mov     r3, 0xabcddead\n\t"
++			     "st      r3, [r2]\n\t"
++			     "flag    1\n\t"
++			     "nop_s\n\t");
++}
++
++/**
++ * pmu_start() - ARC EM4 CRT0 reset entry point
++ *
++ * Clears core registers, initializes the stack pointer (0x80010000) and
++ * small-data global pointer (0x80000400), invokes pmu_main_wrapper(),
++ * and halts the processor upon return.
++ */
++__attribute__((naked))
++void pmu_start(void)
++{
++	__asm__ __volatile__("mov_s   r0, 0\n\t"
++			     "mov_s   r1, 0\n\t"
++			     "mov_s   r2, 0\n\t"
++			     "mov_s   r3, 0\n\t"
++			     "mov_s   r10, 0\n\t"
++			     "mov_s   r11, 0\n\t"
++			     "mov_s   r12, 0\n\t"
++			     "mov_s   r13, 0\n\t"
++			     "mov_s   r14, 0\n\t"
++			     "mov_s   r15, 0\n\t"
++			     "mov_s   gp, 0\n\t"
++			     "mov_s   fp, 0\n\t"
++			     "mov_s   sp, 0\n\t"
++			     "mov     ilink, 0\n\t"
++			     "mov     r30, 0\n\t"
++			     "mov_s   blink, 0\n\t"
++			     "mov_s   sp, 0x80010000\n\t"
++			     "mov_s   gp, 0x80000400\n\t"
++			     "mov_s   fp, 0\n\t"
++			     "jl      pmu_main_wrapper\n\t"
++			     "1:\n\t"
++			     "flag    1\n\t"
++			     "nop_s\n\t"
++			     "b_s     1b\n\t");
++}
++
++/**
++ * pmu_vector_table() - ARC EM4 interrupt and exception vector table
++ */
++__attribute__((naked))
++void pmu_vector_table(void)
++{
++	__asm__ __volatile__(".word pmu_start\n\t"
++			     ".rept 15\n\t"
++			     ".word pmu_default_exception_handler\n\t"
++			     ".endr\n\t"
++			     ".rept 4\n\t"
++			     ".word 1f\n\t"
++			     ".endr\n\t"
++			     "1:\n\t"
++			     "nop\n\t"
++			     "nop\n\t"
++			     "nop\n\t"
++			     "nop\n\t"
++			     "rtie\n\t");
++}
++
++/**
++ * pmu_cal_struct_mask_remap() - Remap calibration struct shadow masks
++ */
++void pmu_cal_struct_mask_remap(void)
++{
++	u32 base =
++		(PMU_DMEM_BASE | PMU_DMEM_CAL_STRUCT_BASE);
++
++	pmu_cal_eye_table_save((void *)(uintptr_t)(base), PMU_SLICE_DESC_MR16_OFF);
++	pmu_cal_lane_mask_or_all(base, PMU_SLICE_DESC_MR16_OFF, 0x41U);
++	pmu_cal_lane_mask_and_all(base, PMU_SLICE_DESC_MR16_OFF, 0xf3U);
++	pmu_cal_eye_table_save((void *)(uintptr_t)(base), PMU_SLICE_DESC_MR41_OFF);
++	pmu_cal_lane_mask_and_all(base, PMU_SLICE_DESC_MR41_OFF, 0x1fU);
++	pmu_multirank_slice_cal_dispatch((void *)(uintptr_t)base, 0U,
++					 0xfffeffffUL, (u32)-513, 0xffU, 0U);
++	pmu_delay_us(20000U, 0U);
++	pmu_cal_eye_table_restore((u8 *)(uintptr_t)base, PMU_SLICE_DESC_MR41_OFF);
++}
++
++/**
++ * pmu_adjust_step_limit() - Adjust coarse/fine step limit byte pair
++ * @pair: Two-byte array holding [0] coarse count and [1] fine tap offset
++ * @flag: Parity selector (non-zero adjusts odd counts; zero adjusts non-zero even counts)
++ *
++ * Decrements @pair[0] by 1 and adds 64 fine taps to @pair[1] when @pair[0]
++ * matches the parity condition selected by @flag.
++ */
++void pmu_adjust_step_limit(u8 *pair, u32 flag)
++{
++	u32 count = pair[0];
++
++	if (flag ? (count & 1U) : (count != 0U && !(count & 1U))) {
++		pair[0] = (u8)(count - 1U);
++		pair[1] = (u8)(pair[1] + 64U);
++	}
++}
++
++/**
++ * pmu_bist_pattern_bit_get() - Extract 1-bit truth value from 0xe4 lookup constant
++ * @shift: Left shift applied to @mask before indexing
++ * @mask: Input mask value
++ *
++ * Return: 1-bit lookup result ((0xe4 >> ((mask << shift) & 6)) & 1).
++ */
++u32 pmu_bist_pattern_bit_get(u32 shift, u32 mask)
++{
++	u32 lut;
++
++	mask = (mask << shift) & 6U;
++	lut = 0xe4U;
++	return (lut >> mask) & 1U;
++}
++
++struct map_pair {
++	u8 match;
++	u8 bit;
++};
++
++struct map_entry {
++	u8 base_mask;
++	u8 count;
++	struct map_pair pairs[8];
++};
++
++/**
++ * pmu_map_mask() - Remap bitmask through DCCM lookup table at 0x80000a7e
++ * @val: Input bitmask byte
++ * @index: Table entry index (0..N)
++ *
++ * Return: Remapped 8-bit mask combining base_mask and matched bit pairs.
++ */
++u8 pmu_map_mask(u8 val, u32 index)
++{
++	const struct map_entry *table =
++		(const struct map_entry *)PMU_DMEM_DQ_PIN_MAP_BASE;
++	const struct map_entry *entry = &table[index];
++	u8 result = entry->base_mask & val;
++	u32 i;
++
++	for (i = 0; i < entry->count; i++) {
++		if (val & entry->pairs[i].match)
++			result |= (1U << entry->pairs[i].bit);
++	}
++	return result;
++}
++
++/**
++ * pmu_math_freq_scale_div() - Divide signed value by scaled frequency factor
++ * @val: Signed dividend
++ *
++ * Divides @val by (dmem[0x80000008] << 7), rounding positive values toward
++ * +infinity and negative values toward 0.
++ *
++ * Return: Scaled signed quotient.
++ */
++s32 pmu_math_freq_scale_div(s32 val)
++{
++	u32 pll_ratio = dmem_read8(PMU_DMEM_PLL_RATIO);
++	u32 divisor;
++	u32 pos;
++
++	if (pll_ratio == 0U)
++		pll_ratio = 2U;
++	divisor = pll_ratio << 7;
++
++	if (val >= 1) {
++		u32 num = (u32)(val - 1);
++
++		return (s32)((num + divisor) / divisor);
++	}
++
++	pos = (u32)(-val);
++	return -(s32)(pos / divisor);
++}
++
++/**
++ * pmu_unpack_6() - Combine coarse and 6-bit fine delay pair into linear tap value
++ * @p: Two-byte array holding [0] coarse step and [1] 6-bit fine offset
++ *
++ * Return: Combined linear delay value ((p[0] << 6) + p[1]).
++ */
++u32 pmu_unpack_6(const u8 *p)
++{
++	return ((u32)p[0] << 6) + p[1];
++}
++
++/**
++ * pmu_unpack_7() - Combine coarse and 7-bit fine delay pair into linear tap value
++ * @p: Two-byte array holding [0] coarse step and [1] 7-bit fine offset
++ *
++ * Return: Combined linear delay value ((p[0] << 7) + p[1]).
++ */
++u32 pmu_unpack_7(const u8 *p)
++{
++	return ((u32)p[0] << 7) + p[1];
++}
++
++/**
++ * pmu_unpack_byte_pair() - Split packed delay value into coarse/fine byte pair
++ * @val: Packed delay value
++ * @out: Two-byte output buffer receiving [0] (val >> 6) and [1] (val & 0x3f)
++ */
++void pmu_unpack_byte_pair(u32 val, u8 *out)
++{
++	out[1] = (u8)(val & 0x3fU);
++	out[0] = (u8)(val >> 6);
++}
++
++/**
++ * pmu_cal_param_unpack() - Unpack fine and rounded coarse delay fields into byte pair
++ * @val: Packed 10-bit delay line parameter
++ * @out: Two-byte output array receiving [0] rounded coarse delay and [1] 6-bit fine delay
++ */
++void pmu_cal_param_unpack(u32 val, u8 *out)
++{
++	u32 c = val >> 6;
++	u32 f = val & 0x3fU;
++
++	out[1] = (u8)f;
++	out[0] = (u8)(((c >> 1) & 0x07U) + (c & 0x01U));
++}
++
++/**
++ * pmu_dly_line_repack() - Repack fine and shifted coarse delay fields
++ * @val: Input delay value
++ *
++ * Return: Recombined delay tap ((val & 0x3f) + (val & 0x40) + ((val >> 1) & 0x1c0)).
++ */
++u32 pmu_dly_line_repack(u32 val)
++{
++	return (val & 0x3fU) + (val & 0x40U) + ((val >> 1) & 0x1c0U);
++}
++
++/**
++ * pmu_midpoint_deviation_calc() - Compute signed LCDL tap deviation from nominal midpoint
++ * @val: Input LCDL tap value
++ *
++ * Return: (s8)(64 - val) when @val < 65, or (s8)((val << 2) + 48) when @val >= 65.
++ */
++s8 pmu_midpoint_deviation_calc(u32 val)
++{
++	u32 c = 64U;
++
++	if (val <= c)
++		return (s8)(c - val);
++
++	return (s8)((val << 2) + 48U);
++}
++
++/**
++ * pmu_cal_lane_mask_and_all() - Bitwise-AND byte across all 4 slice descriptors
++ * @base: Base DCCM address of the 4-slice (4 x 54-byte) descriptor table
++ * @offset: Byte offset within each 54-byte slice descriptor
++ * @mask: 8-bit mask applied via bitwise AND to each slice byte
++ */
++void pmu_cal_lane_mask_and_all(u32 base, u32 offset, u32 mask)
++{
++	__volatile__ u8 *p = (__volatile__ u8 *)(base + offset);
++	u32 i;
++
++	for (i = 0U; i < PMU_SLICE_DESC_TOTAL_BYTES; i += PMU_SLICE_DESC_SIZE)
++		p[i] &= (u8)mask;
++}
++
++/**
++ * pmu_cal_lane_mask_or_all() - Bitwise-OR byte across all 4 slice descriptors
++ * @base: Base DCCM address of the 4-slice (4 x 54-byte) descriptor table
++ * @offset: Byte offset within each 54-byte slice descriptor
++ * @mask: 8-bit mask applied via bitwise OR to each slice byte
++ */
++void pmu_cal_lane_mask_or_all(u32 base, u32 offset, u32 mask)
++{
++	__volatile__ u8 *p = (__volatile__ u8 *)(base + offset);
++	u32 i;
++
++	for (i = 0U; i < PMU_SLICE_DESC_TOTAL_BYTES; i += PMU_SLICE_DESC_SIZE)
++		p[i] |= (u8)mask;
++}
++
++/**
++ * pmu_cal_lcdl_coarse_fine_pair_pack() - Pack coarse/fine LCDL delay pairs into table
++ * @ch_idx: Channel index
++ * @threshold: Channel threshold value
++ * @limit: Channel limit value
++ * @pair_a: Primary coarse/fine pair A
++ * @pair_b: Primary coarse/fine pair B
++ * @pair_c: Secondary coarse/fine pair C
++ * @pair_d: Secondary coarse/fine pair D
++ * @table_base: Base pointer of destination LCDL delay table
++ */
++void pmu_cal_lcdl_coarse_fine_pair_pack(u32 ch_idx, u32 threshold, u32 limit,
++					const u8 *pair_a, const u8 *pair_b,
++					const u8 *pair_c, const u8 *pair_d,
++					void *table_base)
++{
++	u8 *entry = (u8 *)table_base + (ch_idx << 2);
++	bool use_sec = (u8)limit > (u8)threshold;
++	const u8 *pa = use_sec ? pair_c : pair_a;
++	const u8 *pb = use_sec ? pair_d : pair_b;
++	const u8 *src = entry + (use_sec ? 0x02U : 0x12U);
++	u16 h_a = *(const u16 *)src;
++	u16 h_b = *(const u16 *)(src + 8U);
++
++	*(u16 *)(entry + 0x22U) = h_a;
++	*(u16 *)(entry + 0x2aU) = h_b;
++	*(u16 *)(entry + 0x20U) = (u16)(((u16)pa[0] << 7) + pa[1]);
++	*(u16 *)(entry + 0x28U) = (u16)(((u16)pb[0] << 7) + pb[1]);
++}
++
++/**
++ * pmu_cal_eye_margin_quadratic_cost_calc() - Compute weighted quadratic eye-centering cost
++ * @val: Packed eye sample word (low byte: center offset, high byte: magnitude)
++ * @target: Signed 8-bit target center offset
++ * @min_bound: Minimum valid magnitude bound
++ * @max_bound: Maximum valid magnitude bound
++ * @out_overflow: Output pointer receiving 0x3f on violation or abs(delta) in-bounds
++ *
++ * Return: Weighted quadratic cost ((delta^2 * w1) + (overflow^2 * w2)).
++ */
++u32 pmu_cal_eye_margin_quadratic_cost_calc(u32 val, u32 target, u32 min_bound,
++					   u32 max_bound, u8 *out_overflow)
++{
++	s32 delta = (s32)((s8)val) - (s32)((s8)target);
++	u32 mag = (u16)val >> 8;
++	u32 min_b = (u8)min_bound;
++	u32 max_b = (u8)max_bound;
++	s32 over;
++	u8 out = 0x3fU;
++
++	if (delta < 0)
++		delta = -delta;
++	over = (s32)(min_b - mag);
++	if (over <= 0) {
++		over = (s32)(mag - max_b);
++		if (over <= 0) {
++			over = 0;
++			out = (u8)delta;
++		}
++	}
++	*out_overflow = out;
++	return (u32)(u16)(delta * delta) * dmem_read16(PMU_DMEM_COST_WEIGHT_1) +
++	       (u32)(u16)(over * over) * dmem_read16(PMU_DMEM_COST_WEIGHT_2);
++}
+diff --git a/arch/arm/mach-sunxi/pmu/pmu_telemetry.c b/arch/arm/mach-sunxi/pmu/pmu_telemetry.c
+new file mode 100644
+index 00000000000..ea47e991fcf
+--- /dev/null
++++ b/arch/arm/mach-sunxi/pmu/pmu_telemetry.c
+@@ -0,0 +1,619 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
++ *
++ * Allwinner A733 Synopsys DDR PHY PMU Mailbox POST IPC & Assertion Handlers
++ */
++
++#include "pmu_fw.h"
++
++static void pmu_mailbox_post_exec_wait(void);
++
++/**
++ * pmu_mailbox_post_cmd_dispatch() - Dispatch 16-bit POST command to PHY mailbox
++ * @cmd: Command code to transmit (pulses 0x90040238 for terminal codes 0xff or 7)
++ */
++noinline void pmu_mailbox_post_cmd_dispatch(u32 cmd)
++{
++	if (cmd == 255U || cmd == 7U) {
++		phy_write16(PHY_REG_CMD_DISPATCH,
++			    (cmd == 255U) ? 0x0004U : 0x0001U);
++		phy_write16(PHY_REG_CMD_DISPATCH, 0x0000U);
++	}
++
++	phy_write16(PHY_REG_MAILBOX_STREAM, (u16)cmd);
++	phy_write16(PHY_REG_MAILBOX_STREAM + 2U, 0x0000U);
++	pmu_mailbox_post_exec_wait();
++}
++
++/**
++ * pmu_mailbox_post_exec_wait() - Handshake PHY mailbox interrupt and busy status
++ *
++ * Waits for bit 0 of PHY register 0x90180008 to clear, triggers the mailbox
++ * interrupt at 0x90180066 with 1, and waits for bit 0 of 0x90180008 to assert.
++ */
++static noinline void pmu_mailbox_post_exec_wait(void)
++{
++	while ((phy_read16(PHY_REG_MAILBOX_STAT) & 1U) != 0U)
++		;
++	phy_write16(PHY_REG_MAILBOX_TRIG, 0x0001U);
++	while ((phy_read16(PHY_REG_MAILBOX_STAT) & 1U) == 0U)
++		;
++}
++
++/**
++ * pmu_assert_or_halt() - Validate condition or record panic code and halt PMU
++ * @cond: Condition value (non-zero continues execution; zero triggers fatal halt)
++ * @assert_code: 32-bit diagnostic code recorded at DCCM 0x8000000c on failure
++ */
++void pmu_assert_or_halt(u32 cond, u32 assert_code)
++{
++	if (cond != 0U)
++		return;
++
++	*(__volatile__ u32 *)PMU_DMEM_ASSERT_CODE = assert_code;
++	*(__volatile__ u8 *)PMU_DMEM_PSTATE_FLAGS |= 0x02U;
++	pmu_mailbox_post_cmd_dispatch(255U);
++	__builtin_arc_sr(0U, PMU_AUX_RTC_CTRL);
++	__builtin_arc_flag(1);
++	for (;;)
++		;
++}
++
++/**
++ * pmu_ac_lane_profile_setup() - Program AC lane profile registers and gate settle delay
++ */
++void pmu_ac_lane_profile_setup(void)
++{
++	const u8 *ac_desc = (const u8 *)PMU_DMEM_AC_PROFILE_EN_ADDR;
++	u16 saved_gate_mask;
++	u16 saved_gate_ctrl;
++	u8 cal_status;
++	s32 delay_diff;
++
++	saved_gate_mask = phy_read16(PHY_REG_GATE_MASK);
++	saved_gate_ctrl = phy_read16(PHY_REG_GATE_CTRL);
++
++	phy_write16(PHY_REG_GATE_CTRL, 0U);
++	phy_write16(PHY_REG_GATE_MASK, 0x00ffU);
++
++	cal_status = *(const u8 *)PMU_DMEM_TIMING_LIM;
++	phy_write16(PHY_REG_VREF_STAT, (u16)cal_status | 0x0100U);
++
++	delay_diff = (s32)(*(const u8 *)PMU_DMEM_LANE_STATUS + cal_status) - 2;
++
++	if (ac_desc[0] != 0U) {
++		const u16 *ac_words = (const u16 *)(ac_desc + 4);
++		u32 csr_off = pmu_sdata()->active_csr_offset << 1;
++
++		phy_write16(PHY_REG_AC_DRIVE_CFG5 + csr_off, ac_words[0]);
++		phy_write16(PHY_REG_AC_DRIVE_CFG6 + csr_off, ac_words[1]);
++		phy_write16(PHY_REG_AC_DRIVE_CFG3 + csr_off, ac_words[2]);
++		phy_write16(PHY_REG_AC_DRIVE_CFG4 + csr_off, ac_words[3]);
++		phy_write16(PHY_REG_AC_DRIVE_CFG0 + csr_off, ac_desc[3]);
++		phy_write16(PHY_REG_AC_DRIVE_CFG1 + csr_off, ac_desc[1]);
++		phy_write16(PHY_REG_AC_DRIVE_CFG2 + csr_off, ac_desc[2]);
++	}
++
++	if (delay_diff < 0)
++		delay_diff += (s32)((u32)cal_status *
++				    *(const u8 *)PMU_DMEM_PLL_RATIO);
++
++	phy_write16(PHY_REG_DRAM_TYPE_CFG, (u16)delay_diff);
++	pmu_delay_us(11000U, 0U);
++
++	phy_write16(PHY_REG_GATE_MASK, saved_gate_mask);
++	phy_write16(PHY_REG_GATE_CTRL, saved_gate_ctrl);
++
++	*(__volatile__ u8 *)PMU_DMEM_AC_SIGNED_STEP =
++		(u8)(((cal_status >> 1) & ~1U) - 1U);
++}
++
++/**
++ * pmu_cmd_code_map_log() - Map command/subcode to CBT lane limit code and log
++ * @cmd_code: Primary command code
++ * @sub_code: Sub-command selector (0 selects @cmd_code mapping)
++ */
++void pmu_cmd_code_map_log(u32 cmd_code, u32 sub_code)
++{
++	u8 map_code = 9U;
++
++	if (sub_code == 0U) {
++		u32 masked = cmd_code & 0x0fffU;
++
++		if (masked >= 257U && masked <= 261U)
++			map_code = (u8)(masked - 255U);
++		else if (masked == 272U)
++			map_code = 7U;
++		else if (masked == 512U)
++			map_code = 8U;
++	} else if (sub_code == 1U) {
++		map_code = 0U;
++	} else if (sub_code == 2U) {
++		map_code = 1U;
++	} else if (sub_code == 4U || sub_code == 17U) {
++		map_code = 2U;
++	} else if (sub_code == 18U) {
++		map_code = 3U;
++	} else if (sub_code == 8U || sub_code == 19U) {
++		map_code = 4U;
++	} else if (sub_code == 20U) {
++		map_code = 5U;
++	} else if (sub_code == 21U) {
++		map_code = 6U;
++	} else if (sub_code == 26U) {
++		map_code = 7U;
++	} else if (sub_code == 0x20U) {
++		map_code = 8U;
++	} else {
++		pmu_assert_or_halt(0U, PMU_ERR_CMD_SUBCODE_INVALID);
++		map_code = pmu_sdata()->freq_mode;
++	}
++
++	pmu_sdata()->freq_mode = map_code;
++}
++
++/**
++ * pmu_slice_metric_scan_and_program() - Scan slice metrics and program DBYTE delay CSRs
++ */
++void pmu_slice_metric_scan_and_program(void)
++{
++	u8 start_slice;
++	u8 end_slice;
++	u16 num_ranks;
++	u32 ch_offset;
++	u32 slice;
++
++	start_slice = dmem_read8(PMU_DMEM_SLICE_START);
++	end_slice = dmem_read8(PMU_DMEM_SLICE_END);
++	num_ranks = pmu_sdata()->num_ranks;
++	ch_offset = pmu_sdata()->active_csr_offset;
++
++	for (slice = start_slice; slice <= end_slice; slice++) {
++		const __volatile__ u16 *slice_metrics =
++			(const __volatile__ u16 *)(PMU_DMEM_CBT_DELAY_ARR +
++						   (slice << 3));
++		u16 max_val = slice_metrics[0];
++		u16 min_val = max_val;
++		u32 k;
++		u32 midpoint;
++		u32 diff;
++		u16 reg_val_lo;
++		u16 reg_val_hi;
++		u32 slice_base;
++		u32 bank;
++
++		for (k = 0U; k < num_ranks; k++) {
++			u16 val = slice_metrics[k];
++
++			if (val > max_val)
++				max_val = val;
++			if (val < min_val)
++				min_val = val;
++		}
++
++		midpoint = (max_val + min_val) >> 1;
++		diff = 12U - midpoint;
++
++		reg_val_lo = (u16)((diff << 4) | midpoint);
++		reg_val_hi = (u16)(diff | (midpoint << 4));
++		slice_base = PHY_REG_DBYTE_BASE |
++			     (((slice << 12) | ch_offset) << 1);
++
++		for (bank = 0U; bank < 2U; bank++) {
++			u32 reg_low = (bank != 0U) ? 0x5eU : 0x62U;
++			u32 reg_high = reg_low + 2U;
++			u16 w1 = (*(__volatile__ const u16 *)
++				  (PHY_REG_DBYTE_BASE +
++				   ((reg_low | ch_offset) << 1)) & 768U) |
++				 reg_val_lo;
++			u16 w2 = (*(__volatile__ const u16 *)
++				  (PHY_REG_DBYTE_BASE +
++				   ((reg_high | ch_offset) << 1)) & 768U) |
++				 reg_val_hi;
++			u32 a1 = slice_base + (reg_low << 1);
++			u32 a2 = slice_base + (reg_high << 1);
++
++			*(__volatile__ u16 *)a1 = w1;
++			*(__volatile__ u16 *)(a1 + 2U) = w1;
++			*(__volatile__ u16 *)a2 = w2;
++			*(__volatile__ u16 *)(a2 + 2U) = w2;
++		}
++	}
++}
++
++/**
++ * pmu_mr22_bit4_check() - Query bit 4 of training configuration byte 0x96
++ *
++ * Return: 1 if bit 4 of DCCM 0x80000096 is set, 0 otherwise.
++ */
++u32 pmu_mr22_bit4_check(void)
++{
++	return (*(__volatile__ u8 *)PMU_DMEM_MR22_ADDR >> 4) & 1;
++}
++
++/**
++ * pmu_stage_slice_flag_check() - Extract 2-bit mode field gated by DCCM 0x407 bit 6
++ *
++ * Return: Bits [4:3] of halfword at DCCM 0x80000408 if bit 6 of DCCM 0x80000407
++ *         is set, or 0 otherwise.
++ */
++u32 pmu_stage_slice_flag_check(void)
++{
++	u32 flag = pmu_sdata()->stage_slice_idx;
++
++	if (!(flag & 0x40U))
++		return 0;
++
++	return (pmu_sdata()->stage_lane_idx >> 3) & 3U;
++}
++
++/**
++ * pmu_check_freq_lt_3200() - Check whether DRAM data rate is below 3200 MT/s
++ *
++ * Return: 1 if halfword at DCCM 0x80000006 is less than 3200, 0 otherwise.
++ */
++u32 pmu_check_freq_lt_3200(void)
++{
++	return dmem_read16(PMU_DMEM_DRAM_FREQ_OFF) < 3200U;
++}
++
++/**
++ * pmu_is_lpddr4() - Check if DRAM protocol configuration is set to LPDDR4
++ *
++ * Return: 1 if bits [1:0] of DCCM 0x8000008a equal 1, 0 otherwise.
++ */
++u32 pmu_is_lpddr4(void)
++{
++	return (dmem_read8(PMU_DMEM_MR19_OFF) & 3U) == 1U;
++}
++
++/**
++ * pmu_is_lpddr5() - Check if DRAM protocol mode bits [1:0] at 0x8e are zero
++ *
++ * Return: 1 if bits [1:0] of DCCM 0x8000008e equal 0, 0 otherwise.
++ */
++u32 pmu_is_lpddr5(void)
++{
++	return (dmem_read8(PMU_DMEM_MR20_ADDR) & 3U) == 0U;
++}
++
++/**
++ * pmu_check_stage() - Check whether stage index belongs to {0, 6, 14, 40}
++ * @val: Calibration stage index to test
++ *
++ * Return: 1 if @val is 0, 6, 14, or 40; 0 otherwise.
++ */
++u32 pmu_check_stage(u32 val)
++{
++	if (val <= 14)
++		return (0x4041U >> val) & 1;
++	return val == 40;
++}
++
++/**
++ * pmu_cal_marker_clear() - Clear 16-bit calibration state halfword at DCCM 0x80000458
++ */
++void pmu_cal_marker_clear(void)
++{
++	pmu_sdata()->cal_marker_a = 0;
++}
++
++/**
++ * pmu_cbt_cal_active_clear() - Clear byte flag at DCCM 0x8000045c to 0
++ */
++void pmu_cbt_cal_active_clear(void)
++{
++	pmu_sdata()->cbt_cal_active = 0;
++}
++
++/**
++ * pmu_cbt_cal_active_set() - Set byte flag at DCCM 0x8000045c to 1
++ */
++void pmu_cbt_cal_active_set(void)
++{
++	pmu_sdata()->cbt_cal_active = 1;
++}
++
++/**
++ * pmu_cbt_step_stat_set() - Set byte flag at DCCM 0x8000046b to 1
++ */
++void pmu_cbt_step_stat_set(void)
++{
++	pmu_sdata()->cbt_step_stat = 1;
++}
++
++/**
++ * pmu_cbt_config_get() - Read calibration status byte from DCCM 0x8000046a
++ *
++ * Return: 8-bit value stored at DCCM 0x8000046a.
++ */
++u8 pmu_cbt_config_get(void)
++{
++	return pmu_sdata()->cbt_config;
++}
++
++/**
++ * pmu_cal_mode_flag_get() - Read configuration byte from DCCM 0x80000005
++ *
++ * Return: 8-bit value stored at DCCM 0x80000005.
++ */
++u8 pmu_cal_mode_flag_get(void)
++{
++	return *(__volatile__ u8 *)PMU_DMEM_CAL_MODE_FLAG_ADDR;
++}
++
++/**
++ * pmu_lane_mask_bit_get() - Extract bit from DCCM 0x8000001c status byte
++ * @word_idx: 2-bit pair index (multiplied by 2)
++ * @bit_shift: Additional bit offset within the pair
++ *
++ * Return: Extracted bit ((dmem[0x1c] >> ((word_idx << 1) + bit_shift)) & 1).
++ */
++u32 pmu_lane_mask_bit_get(u32 word_idx, u32 bit_shift)
++{
++	u32 val = dmem_read8(PMU_DMEM_LANE_MASK);
++	u32 shift = (word_idx << 1) + bit_shift;
++
++	return (val >> shift) & 1U;
++}
++
++/**
++ * pmu_phy_query_operating_mode() - Query normalized PHY operating mode
++ *
++ * Return: Operating mode index (0..4) derived from PHY register 0x90020012.
++ *
++ * Reads the channel-adjusted PHY operating mode register at 0x90020012 and
++ * maps raw mode bits [2:0] into the normalized PMU operating mode code.
++ */
++u32 pmu_phy_query_operating_mode(void)
++{
++	u32 ch_offset = *(__volatile__ u32 *)PMU_DMEM_ACTIVE_CH_OFFSET;
++	u16 val = *(__volatile__ u16 *)(PHY_REG_OP_MODE | (ch_offset << 1));
++	u32 mode = val & 7;
++
++	if (mode <= 1)
++		return mode;
++
++	return ((val & 6) >> 1) + 1;
++}
++
++/**
++ * pmu_cal_marker_pair_set() - Write 16-bit value to DCCM 0x80000458 and 0x8000045e
++ * @val: Halfword value to store at both offsets
++ */
++void pmu_cal_marker_pair_set(u16 val)
++{
++	pmu_sdata()->cal_marker_a = val;
++	pmu_sdata()->cal_marker_b = val;
++}
++
++/**
++ * pmu_cbt_config_set() - Set DCCM 0x8000045a flag to 1 and store byte at 0x8000046a
++ * @val: Byte value to write to DCCM 0x8000046a
++ */
++void pmu_cbt_config_set(u8 val)
++{
++	pmu_sdata()->cbt_state = 1;
++	pmu_sdata()->cbt_config = val;
++}
++
++/**
++ * pmu_post_cmd_conditional_dispatch() - Conditionally dispatch post-command and sync clock gate
++ * @val: Command code to pass to pmu_mailbox_post_cmd_dispatch()
++ *
++ * Dispatches @val to pmu_mailbox_post_cmd_dispatch() when DCCM 0x80000012 is
++ * at most 0xc8, then pulses the PHY clock gate synchronizer.
++ */
++void pmu_post_cmd_conditional_dispatch(u32 val)
++{
++	u8 threshold = *(__volatile__ u8 *)PMU_DMEM_POST_THRESH;
++
++	if (threshold <= 0xc8)
++		pmu_mailbox_post_cmd_dispatch(val);
++
++	pmu_phy_clk_gate_sync_pulse();
++}
++
++/**
++ * pmu_cal_stride_get() - Read calibration step stride from DCCM 0x80000458
++ *
++ * Return: 16-bit halfword at DCCM 0x80000458 logically shifted right by 2 bits.
++ */
++u16 pmu_cal_stride_get(void)
++{
++	return pmu_sdata()->cal_marker_a >> 2;
++}
++
++/**
++ * pmu_cal_marker_verify() - Compare calibration markers A and B and dispatch fallback
++ *
++ * Return: 0 if halfwords at DCCM 0x80000458 and 0x8000045e match, or the result
++ *         of pmu_cal_marker_status_update() when they differ.
++ */
++u16 pmu_cal_marker_verify(void)
++{
++	u32 marker_a;
++	u32 marker_b;
++	u32 diff;
++
++	marker_a = pmu_sdata()->cal_marker_a;
++	marker_b = pmu_sdata()->cal_marker_b;
++	diff = marker_a ^ marker_b;
++	if (diff == 0U)
++		return (u16)diff;
++
++	return pmu_cal_marker_status_update();
++}
++
++/**
++ * pmu_dram_cfg_bit13_check() - Query bit 13 of DRAM config flags at DCCM 0x0a
++ * @rank: Rank index (returns 0 if equal to 4)
++ * @flag: Secondary gating flag (returns 0 if non-zero)
++ *
++ * Return: Bit 13 of DCCM 0x8000000a when @rank != 4 and @flag == 0, else 0.
++ */
++u32 pmu_dram_cfg_bit13_check(u32 rank, u32 flag)
++{
++	u16 cfg;
++
++	if (rank == 4U || flag != 0U)
++		return 0U;
++
++	cfg = *(__volatile__ u16 *)(PMU_DMEM_BASE + PMU_DMEM_DRAM_CFG_FLAGS);
++	return (u32)((cfg >> 13) & 1U);
++}
++
++/**
++ * pmu_dmem_training_flags_eval() - Assemble 5-bit composite Vref/training mode byte
++ *
++ * Return: 5-bit composite flag byte combining DCCM 0x62, 0x72, and 0x96.
++ */
++u8 pmu_dmem_training_flags_eval(void)
++{
++	u32 mr3_val = dmem_read8(PMU_DMEM_MR3_ADDR);
++	u32 mr13_val = dmem_read8(PMU_DMEM_MR13_ADDR);
++	u32 mr22_val = dmem_read8(PMU_DMEM_MR22_ADDR);
++	u32 res = (mr3_val >> 7) | ((mr3_val >> 5) & 2U);
++
++	if (mr22_val & 0x40U)
++		res |= 4U;
++	if (mr22_val & 0x10U)
++		res |= 8U;
++	if (!(mr13_val & 0x20U))
++		res |= 16U;
++
++	return (u8)res;
++}
++
++/**
++ * pmu_cal_marker_status_update() - Recompute calibration marker A and clear tracker
++ *
++ * Return: Updated 16-bit calibration marker written to DCCM 0x80000458.
++ *
++ * Sets DCCM 0x80000dc4 to 1 when 0x80000dbe is non-zero, invokes
++ * (u16)pmu_cal_tracker_csr_commit(0x80000d9c) to compute the updated marker stored at
++ * DCCM 0x80000458, zeroes the 32-byte tracker block at 0x80000d9c, and clears
++ * the four trailing status halfwords at 0x80000dbe..0x80000dc4.
++ */
++u16 pmu_cal_marker_status_update(void)
++{
++	__volatile__ struct pmu_cal_tracker *trk = pmu_tracker();
++	u16 zero = 0U;
++	u16 marker;
++
++	if (trk->repeat_cnt != 0U)
++		trk->commit_flag = 1U;
++
++	marker = (u16)pmu_cal_tracker_csr_commit(trk);
++	pmu_sdata()->cal_marker_a = marker;
++	memset((void *)trk->slot0, 0, PMU_TRACKER_SLOTS_BYTES);
++	trk->commit_flag = zero;
++	trk->ext_flag = zero;
++	trk->slot0_mode = zero;
++	trk->repeat_cnt = zero;
++	return marker;
++}
++
++/**
++ * pmu_cal_pad_voltage_dac_set() - Evaluate Vref DAC polarity and override state
++ * @val: Input step/direction indicator (tested for non-zero byte value)
++ * @mode: Vref domain selector ((@mode & ~1) == 2 selects bit 7 of DCCM 0x62, else bit 6)
++ *
++ * Return: 1 or 0 from DCCM 0x800000e7 override bits [1:0] when active, or
++ *         ((u8)@val != 0) masked by the selected polarity bit of DCCM 0x80000062.
++ */
++u32 pmu_cal_pad_voltage_dac_set(u32 val, u32 mode)
++{
++	u32 ctrl = dmem_read8(PMU_DMEM_VREF_OVR_CTRL_ADDR);
++	u32 dir;
++	u32 bit;
++
++	if (ctrl & 3U)
++		return ctrl & 1U;
++
++	dir = dmem_read8(PMU_DMEM_MR3_ADDR);
++	bit = ((mode & ~1U) == 2U) ? (dir >> 7) : ((dir >> 6) & 1U);
++	return ((u8)val != 0U) & bit;
++}
++
++/**
++ * pmu_cal_channel_rank_config_get() - Interrogate channel and rank configuration
++ * @rank: Logical rank/slice index (0..1 for channel 0, 2..3 for channel 1)
++ * @out_cfg: Output pointer receiving the 16-bit rank polarity bit (0 or 1)
++ * @out_mode_sel: Output pointer receiving the 1-hot rank bitmask (1 << bit)
++ * @out_num_slices: Output pointer receiving the active channel mode (1 or 2)
++ *
++ * Return: 0 if the requested rank is enabled in the channel mask (updating
++ *         *@out_num_slices), or 1 if disabled.
++ */
++u32 pmu_cal_channel_rank_config_get(u32 rank, u16 *out_cfg, u8 *out_mode_sel,
++				    u8 *out_num_slices)
++{
++	u32 idx = (u16)rank;
++	u32 is_ch1 = (idx >= 2U);
++	u32 base = is_ch1 ? PMU_DMEM_CH1_ACTIVE_FLAG :
++			    PMU_DMEM_CH0_ANALOG_EN;
++	const __volatile__ u8 *cfg_base =
++		(const __volatile__ u8 *)dmem_ptr(base);
++	u32 bit = (cfg_base[13] ^ idx) & 1U;
++	u8 mask = (u8)(1U << bit);
++
++	*out_cfg = (u16)bit;
++	*out_mode_sel = mask;
++	if ((cfg_base[0] & mask) == 0U)
++		return 1U;
++
++	*out_num_slices = (u8)(is_ch1 + 1U);
++	return 0U;
++}
++
++/**
++ * pmu_cal_channel_rank_bounds_verify() - Dispatch fatal assertion for status 1..7
++ * @err_id: Error status code (1..7)
++ */
++void pmu_cal_channel_rank_bounds_verify(u32 err_id)
++{
++	u32 idx = (err_id & 0xffU) - 1U;
++
++	if (idx < 7U)
++		pmu_assert_or_halt(0U, PMU_ERR_RANK_BOUNDS_BASE + (idx << 16));
++}
++
++/**
++ * pmu_dbyte_dq_deskew_regs_save_and_ramp() - Extract and clamp gate eye margin descriptors
++ * @out_a: Output pointer for primary margin descriptor byte
++ * @out_b: Output pointer for secondary margin descriptor byte
++ * @out_c: Output pointer for tertiary margin descriptor byte
++ * @flag: Mode/rank flag selector
++ * @extra: Secondary offset selector
++ */
++void pmu_dbyte_dq_deskew_regs_save_and_ramp(u8 *out_a, u8 *out_b, u8 *out_c,
++					    u32 flag, u32 extra)
++{
++	u32 f8 = (u8)flag;
++	u32 e8 = (u8)extra;
++	u32 offset = (f8 == 4U) ? 4U :
++		     (((e8 == 0U) ? 2U : 0U) + (((f8 >> 1) == 1U) ? 1U : 0U));
++	const u8 *desc = (const u8 *)dmem_ptr(PMU_DMEM_GATE_DESC + offset);
++	u8 c = desc[10];
++
++	if (c == 0U)
++		return;
++
++	*out_a = desc[0];
++	*out_b = desc[5];
++	*out_c = c;
++
++	if (f8 != 4U && e8 == 0U) {
++		if ((dmem_read16(PMU_DMEM_DRAM_CFG_FLAGS) & 0x2000U) != 0U) {
++			u32 sum = (u32)(*out_b) + (u32)(*out_a);
++			u32 lim = 127U;
++
++			if (sum > lim)
++				sum = lim;
++			*out_b = (u8)sum;
++			*out_a = 0U;
++		}
++	}
++}
 -- 
 2.53.0
 
