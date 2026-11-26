@@ -1,149 +1,148 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4135606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7D64606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SSKBvBeX;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b9KBlBRc
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QoddwGdo;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Ns8HsMgW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6ED1760A77;
-	Thu, 26 Nov 2026 13:33:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B47F9810E7;
+	Thu, 26 Nov 2026 13:33:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eBwQXf3sGO95; Thu, 26 Nov 2026 13:33:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4A40360A59
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700001;
-	b=EcHQ5ZuUvgrKC0SqlVgdNNviCS6hzo3gEah1//W5NmZXwiRLdrV979FWn8zpCt7GcNO/
-	 +Hcv1f2TDFpd2t1CexY5yuIUs5EsqUJP2ZoY8dhT19zZDvMMedo2hW/FitvuNxL0dA39f
-	 +tnhwsHFB8CRfoUXWvLf7aWm9+RurzAKNag9zd7nUSv1iwwPQPMdP//rnzxJWdmZQEItv
-	 ijKf7+DxE/nTlzvxrpF9yxCWYK5kIk9RKkNE2hNjMXcX67sdJEgdL+X75lDmu1/cojv73
-	 +gcqPA7vx0jlrT/XQIpj8sWgYlDsf9y9yDgHuMgtdhcvmJUXUbEuKcCh9v8YvDks9LA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fRTKBLzTb0wb; Thu, 26 Nov 2026 13:33:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DB7BB810E8
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700003;
+	b=q1mF5xEOfVgrub003magkfyKtJlXyCrlp/6qT0GWDvbfRzb8yLVKtWvpm31ExuS0kwzu
+	 al0kkEK3ItZ4d41XDK8oj9T5EkcHZpOuODmJQTDL3F9AtI9vJW4gaKSbBtbnQYcPeud3t
+	 RT3PasXk6GFSRH9j/pcR4Qn5qKjU4DnocAIXL8OWJnElqM7xrZOCvhWcQpBfGrzTNDWQC
+	 +MXfAKSMdoqAkRjHk41llVXMo/znRIzqsyr8Za6daUkIOLoVRW9dlH4QfoWWP4piGDnzm
+	 7uHGI6M1NQULfXD/mkxswkN0OPuZ+sRFEmGl7pDjQgSR9AkmGlzBs/Dvs43LoK2+X5A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795700001;
+	c=relaxed/relaxed; t=1795700003;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ydy+kQdZpER5Fzk+4gbmu2/UH/+roujiMe61zWawb8s=;
-	b=QQQ8hMjqSF5j8hKcK0i8KbDBuUpG3y80fMsxfir3x8v75Q4Wnwkrbia/rZQCwkKgNefH
-	 Wr+Ep0OtG6X3Vfqx3fZuZv+J5h6AD2gIixx5/oKMzzsLXY2bvglGfCazPovWOa5y4pl/w
-	 a2vVMT5E6Tp8+pmWtUwm+wr8Hujgpw9O6WZAZv2vnUDIXy/OL6QY8uGXo5bqpdLQNLN/c
-	 jDuQ6dT04yqLOb/rDv3mdhmceTZVptKq7LsdEx6hS9Rkg+1EAHS0d9Yn+g9e6a3YeY/7r
-	 GvtPE8OCepQ9x8FhthXOd1pEXHMADGwNb3+reb5fq9AMY1a00xS8RlqZo7pskeRollA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
+	b=MhExeN218aPedDlZmWDc0XHGAcZs/bvfO1M/qCCvFRhtKh8OV9CWrm+AqbdMHle+n2KJ
+	 FSOCUSPNe+jVKSYiYc9+E/X2ZXwCMB+mkpU/yrJFZHI7fXIvgWAnb5mm7A70JpWo4qaiS
+	 NLBRnEfw384Iw2gOgdpmLpUZZf7nRXM0W44jmbhePx3z1x0bBPXZPzEJWND/FYxKWF8JA
+	 B4OQ9mDHWV/T1fpSEbVvG2MD3BQjjrld/voGHNZHhEv1ap6NoyKt+/f86LfKaSojHpfMw
+	 Xpuhmu+rvejqx1pT/9k024gm8vdQvbz5uS+DJeVnuF2+vD/lgpAohB75cpCFZzRHJHA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795700001;
-	bh=ydy+kQdZpER5Fzk+4gbmu2/UH/+roujiMe61zWawb8s=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=SSKBvBeXgO9KdqX4Itb1MIOHiF896DhFyUSiuROIr20EQ+lLxRIsGgfryRcMqmJu+
-	 g+Np0zVeFilYDiyK2ZlPm2tu+k3oGVia/3NpH/s/vmISHYZN+vliDc7me7t72/6S9R
-	 deYqU+xqtsVR/WhAMqNIc3p42VmWQ7f+ydsaxgjLhCdFTyFxhIDy0p/kzc6j61h41P
-	 s17CIGGJOZJb5KL+eDeKUHoKZPPgrnC5cUhMg5zz+NRk32muKPVocMKk3fsgti450a
-	 vWq3BBz3KAKAecTiziRQWWt3ZrCrsNB4QYjU+Fq53kk7dyh7eFN3jG4uQn+vV+Di1F
-	 ePlRlgN8Cb7wQ==
+	d=lists.u-boot-project.org; s=default; t=1795700003;
+	bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=QoddwGdo6pMBsFHr4tp+djQv/fMKgCcjcnxrgRmIRo1XvsixUxzjN6vVCzM3nThkz
+	 F5ww+gMOmsLj9U1yf+YMnk7hiiENXfB4G7KLXny8XoD8qh+u06vc5tG+q3XwM6qPBn
+	 SSdlCztamz5iZWHNCwGIjRehNKAYQKFBl//qZ8djWH8u524c0nf5gIyzFRLriNkfZ1
+	 xXYBWFQlU5vJaDcjVC5mScPmuSALacc1lFjZrcw4tXCq3tZvA1auG2WCjBqdp08xAV
+	 Q2xNJpOg3OIYZgQ3PwY1zD2R8808XZSiVmnLWZLbzH2S15t2SKOx0kLiMMyO2PSWkk
+	 uXW7GP39YkHlw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4A40360A59;
-	Thu, 26 Nov 2026 13:33:21 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 84E89371
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DB7BB810E8;
+	Thu, 26 Nov 2026 13:33:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 185D232D
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 765124079A
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 078E640492
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6x5n49QbFSwJ for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 06:53:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6FEA0405C8
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32e"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Q2pfVW8ilfaY for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 06:53:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2703C40490
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c32"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
+ client-ip=2607:f8b0:4864:20::c32; helo=mail-oo1-xc32.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=b9KBlBRc
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6FEA0405C8
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:08 +0000 (UTC)
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-862a5b64755so3772544a34.2
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:08 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=Ns8HsMgW
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2703C40490
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:10 +0000 (UTC)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-71b30ed75a1so3846161eaf.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795675988; x=1796280788;
+ d=gmail.com; s=20260707; t=1795675990; x=1796280790;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=ydy+kQdZpER5Fzk+4gbmu2/UH/+roujiMe61zWawb8s=;
- b=b9KBlBRcDoYAtmDjj4O+pZZGXtfy6zNiZP8sI1a2Yxs6TioDXCESfDhgfAZNSCZVDB
- apTIza2ipd8UR5Xpv+HRE0cM1XkWSVLDq88e8Iihv/Lp4qE983zpESHy6ZLljk+6yCgb
- wlW6hdZJBw6gKCpnZ9zTJrWmJ3Gp6ArKOPjAzmSWiE3jujbJ9y76N5JVfBaXnQUB+qYB
- d7vB8bT4pAfFndS0EjeK0n3MW1ZQPMdF5GF9FRmsxYUX/JMHyL9DOIIl/a0gJpqPS2ki
- zS4O3DiVY7cLqrSsK/39HBq6Xm9xycYisZWhgJZQ/B7W6M/9ep8HcHJSnAFfTVXaDp9x
- 4Lrw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
+ b=Ns8HsMgWCBJMOJmATEj7SV+TYfH1vRzud1KhRTEYASz/A3tt/NHVP5foBEhxIx105I
+ UH/IugU8UpbRnGGgTSQvgS1cNt7tdOXg7V9LeFEITUIIw/G9EVMMFCDbzFc6MxOXiRV4
+ z/LsoWK76OFVaDXDpoQp7hD2z3TTETWLTsVXTVIZoSE/JOIyKemBKwtElwt937TM9arp
+ WUTrg5PtkgEbj2gtTbCiL4CVAiJ3tvpAQKFIlX5BZFBAcfgeYIlH21YjC5xv0huDYnTl
+ 0El97hxC52F0wh5WMEeXDpii2moV5YPdrZCdn0pJpZtxulgyCo+be7bCSUPoykCvy2kB
+ fTIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795675988; x=1796280788;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=ydy+kQdZpER5Fzk+4gbmu2/UH/+roujiMe61zWawb8s=;
- b=ryQPJnzNpQzFqxDdUQU+JR34l0q2b/r+7TkohrbEx2M3MEm82rQ3vQQJU8hE2yg4Kp
- wLobD6zOEJB4L344pRrSlerd8PblKmAJEk7KH/NPYqugqn5bNtEDVedVNEjD92A/boZA
- /gAqEopZlJ9LtmAD1i7oo7MO+J0g5bvBnfP9jW0rhzxnbRW0hrZKNnAcPXgWaeLJTBKl
- DK4qep3eGujn/LGB5DPOrkLkrAfqhi4KswKPmzpfkiod0wj7JhEVvBax0SCwdgiThf0M
- tpDdco77Gvc+huI2uT4G4sGe7f0+5eNR1Xhv5/QCY7hY7qUcaF16fsXSyb/iyeLPkXdV
- su9w==
-X-Gm-Message-State: APuU4Z/O5i3vIXtcW90gUlDslld5I2NlFUjBa4nTGkKBRLIG88dzzK18
- EYw6VDrmA4sa68wbeIokLUG499UGsDNllPFzcjFF1zcO48ddrp+AHZs3
-X-Gm-Gg: AZFdTZd7KQfrPaiwRRD25AxNH/j/6z+D9XZS89uvweqwJ61TCrW2ZVivrogdKKX7KcJ
- N/zfaemnqOiNkyQSnhmzd0tMngdp4KNfe6QZNw1pJPIP4AyA3mJfzqHx/wsvonZEAiyU7ez+MKU
- AjsDMj7P89Jhe+BAZ28MalGCNzFCsVmBvlVU7PzT2WPuyp/z8UDOqT2VSHqGvZ+1hzv63FT1O9V
- PVQkoc55TuPYrJQI8h22ur3eCLAxykVT22mHjiqGbiihVzeDe9CyiXL24RkI9Fskp3/fZfS1hk/
- mA+Et5KA9VOR2FSdxk+FL26YogEYT8DcmqNbw3+eGjUVAR7LGvvY3ED2m09ulL1m/gdd+EItszR
- PzMA96gNWuC5qyaM8JPAuLL6x5GkaII1vaR/mwG+9q5S+57LgpwMWwpoHWcHR+mmiNHILJLbqDl
- xTPjakWpULy3LDZlThVYq1qiX6Tb+Q93Yiq1vRMhDNppYM6aB1Uaifw/l6zP1ROnPfKJHpPhj5z
- 0PTLUvscN+tRTOvlpOHphaXLhkZQJvaWtuDjgQAoQXY5dRXy1tq4lF8hJuL4GyFffLOicffIiQf
- f/k1R1h3AHqw9xCAAS5eqGXaA9LqpMAX6FVNuAzY2w75VRq+umX+NWuueUREkogsyhbWlbLhl1P
- xSp194IUPL+5W2Xqck3lnTNN1Fg9TEPR0Eb4B7JBWbWqbo26fg+zTliIWtynt6JYpDhr6fF0umS
- As2x3fGwS17QFEtXUHq20ExB8RMvYeF5PHi9UGuM/XcBlLPHhmUUU=
-X-Received: by 2002:a05:6830:25c2:b0:82f:5471:4dd7 with SMTP id
- 46e09a7af769-863159c9683mr22453014a34.30.1795675988003; 
- Wed, 25 Nov 2026 22:53:08 -0800 (PST)
+ d=1e100.net; s=20260707; t=1795675990; x=1796280790;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
+ b=2lGyndmEjmhby4Az+7LiclxkodOU33PR6r62pBOJfrd49XE7LAHCb43pY2PJ2Zy0e5
+ WoI8rUhlDGE9CZu4EyUNjIQmyWsZpyBM2MVmg3Oo8ZEofTz4X3sIXRehy3erRBgLEXhc
+ FV84ZEgsFrUHl99XnxTIPUKjPJ3C1SuANZyTi318nOmcFT0GfzGFuCokwvOa7rVujvT5
+ WbdQjPu2jAf8TDP1aEwb4OvVmGSm+l+HnYA1QhBP1uhaS8FSnBm++IJe+8OvyyUWFz5E
+ At7vP085O2fGSjOV0XQbFeNynURTEnhmjQ/lpMhbQFuOPMi3ZQgBoyRc4UHO4wMMRVid
+ 5ldA==
+X-Gm-Message-State: APuU4Z+LLO7ZQmqHChxnEDJISaWY4slM2B6cfnjS2Y+AjucUReRK6Om3
+ mROknf4SVKoh59HAcKPoPZKX85sCsYcheI8TrYTZcJuPwcN7ZuvCNT62
+X-Gm-Gg: AZFdTZehaQPtqwFTYCS0NEt0rA5zEgRdnEIzSiqGetB+zW3KopeWnFrP4U8W0k8fc/5
+ /1/FHnHKjJ2xrComNs/77caw989Ti/Lr+DuJvb7COtYZA63ZcknUPIw8+gzBYUtZBlzNVJkq0ly
+ f8V5b4lGm1Byy7pyG8BngIbbKC9vASSYyocUc5jI+0tCvP57R1V/TkR+KQ2HYrX83NpYXN05raX
+ VBs6dNegWNJ3OOuy3SoE/6/VLLDPx7P1Rls324yHEIY0NuYISLFo/gt0zpOWIwPzNeaKj5/u9s9
+ nCsoLfxnDN5fwxl1MvVwCyrFnZMyOALI3y1mlNY9HWElKE6qe4SdQLKda5zQ2BZQpIkkAvZqxp2
+ 1kxJ/lwXAEoJCQcVh+WOIMXfo51/fdVHzqVnD7vxPjAqWrT6272NKNlqEgFWyjoxZf2Ay8Dg5Ke
+ ilGvbDu9RW0hwB3fUGAHLDEi3pIgybFxQKWQFNR7cP7DABMrsYj0YsSZmfc0dNiNXuKAD46N0FA
+ 4MLi4KBux/JDDxgSsTUhGs+YAjp82Ja0LExWA37pnRmitkNhHR8nUprwDlUCF0JPgz+msV0u9UO
+ OruXrFtUOfRy3+OTKODTNu/lXy+ZRJ2gwWySMDTu8gfWrhHfr8I53sfzmbC5UJxlbXYW+A5aK+E
+ raf3X6FuWtUh4YD0+FV4SCZduPZAEOzVVL798uAL2cWhSMJlqPXX7kaXiAZXx0EodHRG2Em5dnC
+ JearIZkRTL2SGWwcwElYh9AW3Om013xm1mXey0uJTrcv902mLx1wA=
+X-Received: by 2002:a05:6820:4088:b0:71a:e62f:62ee with SMTP id
+ 006d021491bc7-71b39404b5amr15390168eaf.23.1795675989929; 
+ Wed, 25 Nov 2026 22:53:09 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.06
+ 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 22:53:07 -0800 (PST)
+ Wed, 25 Nov 2026 22:53:09 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Subject: [PATCH 00/19] net: lwip: bring up Ethernet links and load network
- boot images
-Date: Wed, 25 Nov 2026 23:52:49 -0700
-Message-Id: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
+Date: Wed, 25 Nov 2026 23:52:50 -0700
+Subject: [PATCH 01/19] env: invalidate caches after bulk imports
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6DIBBA0auYWXcSwUYbr9J0oTjoWAsGUEyMd
- y/q8i3+38GTY/JQZzs4WtmzNQnikYEaGtMTcpcMMpelELJAv7Q/DjhFntFQiNZ9sbU24Crwleu
- q0JVuyqeEdJgdad6u+/tzO+UjqXAu4Tj+OZkwZX8AAAA=
-X-Change-ID: 20261123-submit-lwip-network-boot-v1-80f73f7fa642
+Message-Id: <20261125-submit-lwip-network-boot-v1-v1-1-63df291d9392@gmail.com>
+References: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
+In-Reply-To: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
  Heiko Stuebner <heiko@sntech.de>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
@@ -184,105 +183,139 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Boards booting over Ethernet need a working link and an address before
-they can fetch an image. Add IPv4 link-local addressing and reverse ARP,
-honor the configured VLAN, and let boot scripts obtain the Ethernet
-address used to reach the boot server. CDP can supply the VLAN settings;
-on NC-SI ports, bring up the sideband channel before starting an IP
-client. Both management protocols receive their frames before ordinary
-VLAN filtering.
+After himport_r() replaces environment entries, env_get_id() must change
+so cached consumers reread them. Otherwise eth_set_current() can retain an
+ethact pointer from before the import, leaving network device selection
+based on a value that no longer matches the environment.
 
-For NFS boot, use a reserved source port, restart a timed-out download
-according to netretry, and honor autostart after a nonempty download.
-SPL uses BOOTP or DHCP followed by TFTP and loads the image using the
-received file length.
+Advance the ID after bulk imports and default resets, including imports
+that fail after partially updating the environment. This makes consumers
+refresh against the resulting environment.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
-James Hilliard (19):
-      env: invalidate caches after bulk imports
-      net: lwip: support the IPv4 linklocal command
-      net: lwip: apply the configured Ethernet VLAN
-      net: lwip: export the Ethernet address used to reach serverip
-      net: cdp: decode advertisements from the complete Ethernet frame
-      net: cdp: calculate checksums from network-order bytes
-      net: lwip: discover VLAN settings with CDP
-      net: lwip: bind NFS requests to a reserved UDP port
-      net: lwip: honor autostart after an NFS download
-      net: lwip: restart NFS after an RPC timeout
-      net: lwip: support network boot with reverse ARP
-      boot: pxe: allow boot without the DHCP command
-      spl: use the known file length for raw U-Boot images
-      spl: fit: read the exact size of an embedded FIT
-      spl: net: bound reads to the downloaded file
-      spl: net: load a boot image with lwIP
-      net: ncsi: check the selected interface before probing
-      net: ncsi: track the outstanding management command
-      net: lwip: configure NC-SI before starting network clients
+ board/sunxi/board.c |  1 +
+ cmd/nvedit.c        |  7 +++++--
+ env/common.c        | 25 +++++++++++++++++--------
+ 3 files changed, 23 insertions(+), 10 deletions(-)
 
- board/sunxi/board.c          |   1 +
- boot/bootmeth_pxe.c          |   8 +-
- cmd/Kconfig                  |   8 +-
- cmd/lwip/Makefile            |   2 +
- cmd/lwip/linklocal.c         |  71 +++++++++
- cmd/lwip/ncsi.c              |  23 +++
- cmd/lwip/ping.c              |   2 +-
- cmd/nvedit.c                 |   7 +-
- common/spl/Kconfig           |  10 +-
- common/spl/spl.c             |  49 +++---
- common/spl/spl_fit.c         |   9 +-
- common/spl/spl_nand.c        |   3 +-
- common/spl/spl_net.c         |  23 ++-
- drivers/net/phy/Kconfig      |   2 +-
- drivers/net/phy/ncsi.c       | 302 +++++++++++++++++++++--------------
- env/common.c                 |  25 ++-
- include/net-lwip.h           |   2 +
- include/net/ncsi.h           |   5 +-
- include/spl.h                |  20 ++-
- include/spl_load.h           |   2 +-
- lib/Makefile                 |   2 +-
- lib/lwip/u-boot/lwip-hooks.h |  10 ++
- lib/lwip/u-boot/lwipopts.h   |  19 +--
- net/Kconfig                  |   8 +-
- net/Makefile                 |   4 +-
- net/cdp.c                    | 311 ++++++++++++++----------------------
- net/cdp.h                    |  17 +-
- net/lwip/Makefile            |   7 +
- net/lwip/cdp.c               |  98 ++++++++++++
- net/lwip/dhcp.c              |  71 ++++-----
- net/lwip/net-lwip.c          | 188 ++++++++++++++++++++--
- net/lwip/nfs.c               |  77 ++++++---
- net/lwip/rarp.c              | 181 +++++++++++++++++++++
- net/lwip/wol.c               |   7 +
- net/net.c                    |  79 ++++-----
- net/nfs-common.c             |   5 +
- net/nfs-common.h             |   1 +
- test/dm/Makefile             |   9 ++
- test/dm/eth.c                |  81 ++++++++++
- test/dm/lwip.c               | 233 +++++++++++++++++++++++++++
- test/dm/lwip_cdp.c           | 117 ++++++++++++++
- test/dm/lwip_dhcp.c          |  23 ++-
- test/dm/lwip_ipv6.c          | 116 +++++++++++++-
- test/dm/lwip_rarp.c          | 139 ++++++++++++++++
- test/dm/lwip_test.h          |  42 +++++
- test/dm/ncsi.c               | 369 +++++++++++++++++++++++++++++++++++++++++++
- test/image/spl_load.c        | 113 +++++++++++++
- test/image/spl_load_net.c    |  43 ++++-
- 48 files changed, 2444 insertions(+), 500 deletions(-)
----
-base-commit: d778970a189b977c14f93961d7009f404d895b5b
-base-tree: https://git.u-boot-project.org/u-boot/custodians/u-boot-net.git for-next
-change-id: 20261123-submit-lwip-network-boot-v1-80f73f7fa642
+diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+index 3d1afec7c66..fb55dc7eb8b 100644
+--- a/board/sunxi/board.c
++++ b/board/sunxi/board.c
+@@ -742,6 +742,7 @@ static void parse_spl_header(const uint32_t spl_addr)
+ 		 */
+ 		himport_r(&env_htab, (char *)(uintptr_t)spl->fel_script_address,
+ 			  spl->fel_uEnv_length, '\n', H_NOCLEAR, 0, 0, NULL);
++		env_inc_id();
+ 		return;
+ 	}
+ 	/* otherwise assume .scr format (mkimage-type script) */
+diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+index 636bddee1be..22db0c38ff1 100644
+--- a/cmd/nvedit.c
++++ b/cmd/nvedit.c
+@@ -775,6 +775,7 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 	int	del = 0;
+ 	int	crlf_is_lf = 0;
+ 	int	wl = 0;
++	int ret;
+ 	size_t	size;
+ 
+ 	cmd = *argv;
+@@ -869,8 +870,10 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 		ptr = (char *)ep->data;
+ 	}
+ 
+-	if (!himport_r(&env_htab, ptr, size, sep, del ? 0 : H_NOCLEAR,
+-		       crlf_is_lf, wl ? argc - 2 : 0, wl ? &argv[2] : NULL)) {
++	ret = himport_r(&env_htab, ptr, size, sep, del ? 0 : H_NOCLEAR,
++			crlf_is_lf, wl ? argc - 2 : 0, wl ? &argv[2] : NULL);
++	env_inc_id();
++	if (!ret) {
+ 		pr_err("## Error: Environment import failed: errno = %d\n",
+ 		       errno);
+ 		return 1;
+diff --git a/env/common.c b/env/common.c
+index b2adbe93dbe..f217d67032b 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -387,6 +387,8 @@ static int env_update_fdt_addr_from_bloblist(void)
+ 
+ void env_set_default(const char *s, int flags)
+ {
++	int ret;
++
+ 	if (s) {
+ 		if ((flags & H_INTERACTIVE) == 0) {
+ 			printf("*** Warning - %s, "
+@@ -399,9 +401,10 @@ void env_set_default(const char *s, int flags)
+ 	}
+ 
+ 	flags |= H_DEFAULT;
+-	if (himport_r(&env_htab, default_environment,
+-			sizeof(default_environment), '\0', flags, 0,
+-			0, NULL) == 0) {
++	ret = himport_r(&env_htab, default_environment,
++			sizeof(default_environment), '\0', flags, 0, 0, NULL);
++	env_inc_id();
++	if (!ret) {
+ 		pr_err("## Error: Environment import failed: errno = %d\n",
+ 		       errno);
+ 		return;
+@@ -418,6 +421,8 @@ void env_set_default(const char *s, int flags)
+ /* [re]set individual variables to their value in the default environment */
+ int env_set_default_vars(int nvars, char * const vars[], int flags)
+ {
++	int ret;
++
+ 	/*
+ 	 * Special use-case: import from default environment
+ 	 * (and use \0 as a separator)
+@@ -431,9 +436,10 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
+ 		flags |= H_NOCLEAR;
+ 
+ 	flags |= H_DEFAULT;
+-	return himport_r(&env_htab, default_environment,
+-				sizeof(default_environment), '\0',
+-				flags, 0, nvars, vars);
++	ret = himport_r(&env_htab, default_environment,
++			sizeof(default_environment), '\0', flags, 0, nvars, vars);
++	env_inc_id();
++	return ret;
+ }
+ 
+ /*
+@@ -443,6 +449,7 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
+ int env_import(const char *buf, int check, int flags)
+ {
+ 	env_t *ep = (env_t *)buf;
++	int ret;
+ 
+ 	if (check) {
+ 		uint32_t crc;
+@@ -455,8 +462,10 @@ int env_import(const char *buf, int check, int flags)
+ 		}
+ 	}
+ 
+-	if (himport_r(&env_htab, (char *)ep->data, ENV_SIZE, '\0', flags, 0,
+-			0, NULL)) {
++	ret = himport_r(&env_htab, (char *)ep->data, ENV_SIZE, '\0', flags, 0,
++			0, NULL);
++	env_inc_id();
++	if (ret) {
+ 		gd->flags |= GD_FLG_ENV_READY;
+ 
+ 		/* This has to be done after GD_FLG_ENV_READY is set */
 
-Best regards,
---  
-James Hilliard <james.hilliard1@gmail.com>
+-- 
+2.53.0
 
