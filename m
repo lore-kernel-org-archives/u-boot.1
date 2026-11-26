@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7D64606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7494606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QoddwGdo;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Ns8HsMgW
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kIq2mTvR;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=A5iFe3Dy
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B47F9810E7;
-	Thu, 26 Nov 2026 13:33:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C4933409E5;
+	Thu, 26 Nov 2026 13:33:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fRTKBLzTb0wb; Thu, 26 Nov 2026 13:33:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DB7BB810E8
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700003;
-	b=q1mF5xEOfVgrub003magkfyKtJlXyCrlp/6qT0GWDvbfRzb8yLVKtWvpm31ExuS0kwzu
-	 al0kkEK3ItZ4d41XDK8oj9T5EkcHZpOuODmJQTDL3F9AtI9vJW4gaKSbBtbnQYcPeud3t
-	 RT3PasXk6GFSRH9j/pcR4Qn5qKjU4DnocAIXL8OWJnElqM7xrZOCvhWcQpBfGrzTNDWQC
-	 +MXfAKSMdoqAkRjHk41llVXMo/znRIzqsyr8Za6daUkIOLoVRW9dlH4QfoWWP4piGDnzm
-	 7uHGI6M1NQULfXD/mkxswkN0OPuZ+sRFEmGl7pDjQgSR9AkmGlzBs/Dvs43LoK2+X5A==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id u7or_EoVq4Vc; Thu, 26 Nov 2026 13:33:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 88FA8409E0
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700004;
+	b=OBE55V4II8WF9x4F9bz0MoC3ST6/sT31WUnV6b7erpp309XpUHyPXZQAj1zHCDLpKftJ
+	 mOSAkkqc9OADgTzWnyIWLjc8/LgLuuaELLaLinH5zdShjIBK9QJurkfQh0qDhSNLqPlvU
+	 jA7qWnTynuDdmC0Do76xQpq1PtHBGKzp6C6WBXWqmGuV9F9BEoSrSL9keNygdIaL8nuGy
+	 ZbpQqOLZA/WsWvHhdU65OqO8Ir0W5UeCNTtuV3kpXGzaHMn1XsRCd0dAcvGnf7rMZU+m+
+	 Bc840vNboPS/vo3zjrYzw5Y9r3I5OuS0GF8MqbyInu7xJY/Itbeoeb6fBdXhfA2K4YQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795700003;
+	c=relaxed/relaxed; t=1795700004;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,114 +33,116 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
-	b=MhExeN218aPedDlZmWDc0XHGAcZs/bvfO1M/qCCvFRhtKh8OV9CWrm+AqbdMHle+n2KJ
-	 FSOCUSPNe+jVKSYiYc9+E/X2ZXwCMB+mkpU/yrJFZHI7fXIvgWAnb5mm7A70JpWo4qaiS
-	 NLBRnEfw384Iw2gOgdpmLpUZZf7nRXM0W44jmbhePx3z1x0bBPXZPzEJWND/FYxKWF8JA
-	 B4OQ9mDHWV/T1fpSEbVvG2MD3BQjjrld/voGHNZHhEv1ap6NoyKt+/f86LfKaSojHpfMw
-	 Xpuhmu+rvejqx1pT/9k024gm8vdQvbz5uS+DJeVnuF2+vD/lgpAohB75cpCFZzRHJHA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
+	b=HczAq67d7wIkIDpxIaNP7CeMrx2mn/wW5K+HrC2pQ7Iu5f6xESm8zgJqP2kHRUpOwace
+	 mT2O0cl5Nuw8yJ7UFOAIzJd3dri7rRlBwnqYddyXpOgtO2UDgLUszI5XetdzuBBiTAihT
+	 qkc2blJ68wAvzC4ACn0kTj6ebhbpTh/bKVJUUskMO/59M4CuFXdv5iOsZ3Cj02OYKIW5X
+	 AZtVazLk/jHQs7RTiAjXlbi8vUFsWg2wEFdSrD+R92zgpIgzhsJ47jfqYZgympKHKQjAy
+	 Cg8rQc3f6HxydSjkq8Qj/Lkg0fXc31SUFt49ArNMAv+09qA49o9PuyUl3FX74GUU11Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=A5iFe3Dy;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795700003;
-	bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
+	d=lists.u-boot-project.org; s=default; t=1795700004;
+	bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=QoddwGdo6pMBsFHr4tp+djQv/fMKgCcjcnxrgRmIRo1XvsixUxzjN6vVCzM3nThkz
-	 F5ww+gMOmsLj9U1yf+YMnk7hiiENXfB4G7KLXny8XoD8qh+u06vc5tG+q3XwM6qPBn
-	 SSdlCztamz5iZWHNCwGIjRehNKAYQKFBl//qZ8djWH8u524c0nf5gIyzFRLriNkfZ1
-	 xXYBWFQlU5vJaDcjVC5mScPmuSALacc1lFjZrcw4tXCq3tZvA1auG2WCjBqdp08xAV
-	 Q2xNJpOg3OIYZgQ3PwY1zD2R8808XZSiVmnLWZLbzH2S15t2SKOx0kLiMMyO2PSWkk
-	 uXW7GP39YkHlw==
+	b=kIq2mTvR/BUnMQ4JATO4xqZF8iGwQmjFJ/WJSoz9VL3E3gY+sJjh0x9bTGFyjXNxe
+	 MKGbdi7Qvo9ysC4duJ13pL7uFP8RPuCzhX5cFllMeYhVahUml+zXHxiVekxgHs7r60
+	 rg4AKh5Wy8IB6u6kmasmK6Tza/ZQ+3FIleLCk5vKE7w4RLn5eko9RpHUKWcg3aOolv
+	 zLxCBTyNR/d4vdaeyLPBaEW4OdUUvkGplvZAfc+3rGotFtJoBS+vWJ6FmuYmLPMmwu
+	 V0ftvFFtyY2/derGXWuV1BrltNCe/rjlTjl2gfF3fDhXfAADtIypcfZoMmhzuG3+wY
+	 vqo5OMfjB4g1w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DB7BB810E8;
-	Thu, 26 Nov 2026 13:33:22 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 185D232D
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 88FA8409E0;
+	Thu, 26 Nov 2026 13:33:24 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6FF2732D
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 078E640492
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:13 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 561214079A
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Q2pfVW8ilfaY for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 06:53:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2703C40490
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c32"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HJkSbnXCsBli for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 06:53:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 69F24405C8
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c31"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c32; helo=mail-oo1-xc32.google.com;
+ client-ip=2607:f8b0:4864:20::c31; helo=mail-oo1-xc31.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=Ns8HsMgW
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2703C40490
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:10 +0000 (UTC)
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-71b30ed75a1so3846161eaf.0
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:10 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=A5iFe3Dy
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 69F24405C8
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:12 +0000 (UTC)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-71ac9e15640so4221028eaf.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795675990; x=1796280790;
+ d=gmail.com; s=20260707; t=1795675992; x=1796280792;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
- b=Ns8HsMgWCBJMOJmATEj7SV+TYfH1vRzud1KhRTEYASz/A3tt/NHVP5foBEhxIx105I
- UH/IugU8UpbRnGGgTSQvgS1cNt7tdOXg7V9LeFEITUIIw/G9EVMMFCDbzFc6MxOXiRV4
- z/LsoWK76OFVaDXDpoQp7hD2z3TTETWLTsVXTVIZoSE/JOIyKemBKwtElwt937TM9arp
- WUTrg5PtkgEbj2gtTbCiL4CVAiJ3tvpAQKFIlX5BZFBAcfgeYIlH21YjC5xv0huDYnTl
- 0El97hxC52F0wh5WMEeXDpii2moV5YPdrZCdn0pJpZtxulgyCo+be7bCSUPoykCvy2kB
- fTIA==
+ bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
+ b=A5iFe3DypsBjySkjIoa42YO0mieMwwd3g+1zQfgBq/+dIrkdYAyoWF8R0xF4SYFv58
+ i6oyQjghV9exVQMj0BtALLcAuST7DmXp/+OMYgSNKNhOgWd98OwKin1Gj3hlHOlAlwBv
+ OStNoxbOyGv8FWHjxtvOrGkVinpITh+JCW7DGbip6cqSTj0oF3h1meUW8BaL6GRvuzgH
+ qmXk6Hl6LnbbHOPvAjg+B+aJheBohNjM34LGZITgOPx7F1qMQJOm+Jy7gcqqi6Bvf/7w
+ BzHOZcNE4YuI4ajNkQtsFKXdfdtCxlKi5X3WdrjJxhAiDp5LdT2umkuid8YaT/I2TAkR
+ +AEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795675990; x=1796280790;
+ d=1e100.net; s=20260707; t=1795675992; x=1796280792;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=3ZKK8YexbAZq454DZN7VvtxkLTs9J6oN649Wpoq9LZE=;
- b=2lGyndmEjmhby4Az+7LiclxkodOU33PR6r62pBOJfrd49XE7LAHCb43pY2PJ2Zy0e5
- WoI8rUhlDGE9CZu4EyUNjIQmyWsZpyBM2MVmg3Oo8ZEofTz4X3sIXRehy3erRBgLEXhc
- FV84ZEgsFrUHl99XnxTIPUKjPJ3C1SuANZyTi318nOmcFT0GfzGFuCokwvOa7rVujvT5
- WbdQjPu2jAf8TDP1aEwb4OvVmGSm+l+HnYA1QhBP1uhaS8FSnBm++IJe+8OvyyUWFz5E
- At7vP085O2fGSjOV0XQbFeNynURTEnhmjQ/lpMhbQFuOPMi3ZQgBoyRc4UHO4wMMRVid
- 5ldA==
-X-Gm-Message-State: APuU4Z+LLO7ZQmqHChxnEDJISaWY4slM2B6cfnjS2Y+AjucUReRK6Om3
- mROknf4SVKoh59HAcKPoPZKX85sCsYcheI8TrYTZcJuPwcN7ZuvCNT62
-X-Gm-Gg: AZFdTZehaQPtqwFTYCS0NEt0rA5zEgRdnEIzSiqGetB+zW3KopeWnFrP4U8W0k8fc/5
- /1/FHnHKjJ2xrComNs/77caw989Ti/Lr+DuJvb7COtYZA63ZcknUPIw8+gzBYUtZBlzNVJkq0ly
- f8V5b4lGm1Byy7pyG8BngIbbKC9vASSYyocUc5jI+0tCvP57R1V/TkR+KQ2HYrX83NpYXN05raX
- VBs6dNegWNJ3OOuy3SoE/6/VLLDPx7P1Rls324yHEIY0NuYISLFo/gt0zpOWIwPzNeaKj5/u9s9
- nCsoLfxnDN5fwxl1MvVwCyrFnZMyOALI3y1mlNY9HWElKE6qe4SdQLKda5zQ2BZQpIkkAvZqxp2
- 1kxJ/lwXAEoJCQcVh+WOIMXfo51/fdVHzqVnD7vxPjAqWrT6272NKNlqEgFWyjoxZf2Ay8Dg5Ke
- ilGvbDu9RW0hwB3fUGAHLDEi3pIgybFxQKWQFNR7cP7DABMrsYj0YsSZmfc0dNiNXuKAD46N0FA
- 4MLi4KBux/JDDxgSsTUhGs+YAjp82Ja0LExWA37pnRmitkNhHR8nUprwDlUCF0JPgz+msV0u9UO
- OruXrFtUOfRy3+OTKODTNu/lXy+ZRJ2gwWySMDTu8gfWrhHfr8I53sfzmbC5UJxlbXYW+A5aK+E
- raf3X6FuWtUh4YD0+FV4SCZduPZAEOzVVL798uAL2cWhSMJlqPXX7kaXiAZXx0EodHRG2Em5dnC
- JearIZkRTL2SGWwcwElYh9AW3Om013xm1mXey0uJTrcv902mLx1wA=
-X-Received: by 2002:a05:6820:4088:b0:71a:e62f:62ee with SMTP id
- 006d021491bc7-71b39404b5amr15390168eaf.23.1795675989929; 
- Wed, 25 Nov 2026 22:53:09 -0800 (PST)
+ bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
+ b=V+B9ZJrhxxCvRDZCybM+xQTviZBs3c2GVzt7hVjME9FJ9mGnodEAEwIfdKQI9jm61p
+ BLyrXDR8bQMnKkUhRqsQmN92QgtrTktUvsSy+Cr9l0bQ9kgXwC1DQkOO1+nLAU2E0pnV
+ XkbHqthZ2lqtDWopAjUJe8uBHQPK+/Fo42DD52UZ75V+ppzgMilaRaeHoyzNzfSgD28c
+ wkQZFQo58H/z+G9dw1lvnlIfmy9EBZ5ABtdlMiy/a8cNb23+S5U/WjF5Er9IWjtJqR6e
+ j/R8yitwEsSunfgnTjjVQErO7VAvwmXns6EzbpuubGJRlnPw7D6T82QO4qBcg8Mct3Ve
+ Hamg==
+X-Gm-Message-State: APuU4Z8ceOh+F7IBVXbzvH59AROr7hkASlgRMCoK5AX3PRX4c4ZNA58v
+ vAhrN67kCA0EzF5wy9UBs2huoKdERRsZCjBvCmlKRV4jtbIcGnQ/BAdQ
+X-Gm-Gg: AZFdTZdA0KhC4Yxmm+sIQi4YU1fGZzscC6iib/Kq7lzUoq5ZQORwBcE4O0IviZLpQQQ
+ eIxQ4Z2zfZdmrj/mpVrvhPgxtsiDv+lHwBaGuvl9BnyuTvue6zcUxCTyOd3gi0ZOol+A3d98/7C
+ Unbv0lLmFAdJ7v3cimgYK6UgtK7UmkrvbRi/YvgNTI3sPZ90VOgPjD8k77kOVRFzuPhwVROo4KO
+ dqBmhZk2jM0SBWg32sM5xT+7Ton9OJuBlPOyItSgo60ftZi4MbabAR6+8BXmS2IXcXvaRLDPoHa
+ +Sz73diChb5Em/asjycm0Ll3X9lo1t9usTnPLePd9fCaPJ1PoM0XCjrJplj0ndYTTHLHVXQ/p7S
+ QRbf/Fyh0SprfsGNV9BAj6TE4bA3LhbkicwO2mgydY6O+jHoJNl6R3VkTvidLi1bcGAxZveGw5K
+ XyUcUtv7DvViSPf+0OA/LhjreaRca1stFJP+rDiGJsc9vGzg+8kR7OinEPETECRyqhzFtmw2QZB
+ GLJNPmGEJMuZ3xgRTAs5eQPyROO+pRHZ7RgCYfjAi+7vcqh6OJ/SfCoAlHRkdUKqczTA4GTmX/Y
+ LhHUCkAXnJ3A9njAYrPBpYC5lZyk75fUQIqqRiR+B/4pnjtvjqYpV8gnfITq3KRoKvqKW/2H4hG
+ 1H1/k+TCSrbgHAi6HmlfeqayvhlnnIiIzG0GIvZw7d9NMX/beu4m2vhW0sTqRF0GimBOffYoDSG
+ D93REwwobzfEHglNdefGmUJSfHmCfXTEZ/o2B0KnEvANn13cr96GA=
+X-Received: by 2002:a05:6820:83c5:10b0:6f8:2346:cd8e with SMTP id
+ 006d021491bc7-71b395b82d5mr11648832eaf.80.1795675991833; 
+ Wed, 25 Nov 2026 22:53:11 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.08
+ 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 22:53:09 -0800 (PST)
+ Wed, 25 Nov 2026 22:53:11 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 25 Nov 2026 23:52:50 -0700
-Subject: [PATCH 01/19] env: invalidate caches after bulk imports
+Date: Wed, 25 Nov 2026 23:52:51 -0700
+Subject: [PATCH 02/19] net: lwip: support the IPv4 linklocal command
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-submit-lwip-network-boot-v1-v1-1-63df291d9392@gmail.com>
+Message-Id: <20261125-submit-lwip-network-boot-v1-v1-2-63df291d9392@gmail.com>
 References: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 In-Reply-To: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -191,130 +193,260 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-After himport_r() replaces environment entries, env_get_id() must change
-so cached consumers reread them. Otherwise eth_set_current() can retain an
-ethact pointer from before the import, leaving network device selection
-based on a value that no longer matches the environment.
-
-Advance the ID after bulk imports and default resets, including imports
-that fail after partially updating the environment. This makes consumers
-refresh against the resulting environment.
+Allow boards without a DHCP server to acquire an IPv4 link-local address.
+Use the lwIP AutoIP client to probe the saved address and choose another
+one if a peer already owns it. Export the resulting address and subnet
+on the selected interface, and detach the client before releasing the
+shared runtime.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- board/sunxi/board.c |  1 +
- cmd/nvedit.c        |  7 +++++--
- env/common.c        | 25 +++++++++++++++++--------
- 3 files changed, 23 insertions(+), 10 deletions(-)
+ cmd/Kconfig                |  4 +--
+ cmd/lwip/Makefile          |  1 +
+ cmd/lwip/linklocal.c       | 71 ++++++++++++++++++++++++++++++++++++++++++++++
+ lib/lwip/u-boot/lwipopts.h |  2 +-
+ test/dm/lwip.c             | 48 +++++++++++++++++++++++++++++++
+ test/dm/lwip_test.h        | 42 +++++++++++++++++++++++++++
+ 6 files changed, 165 insertions(+), 3 deletions(-)
 
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 3d1afec7c66..fb55dc7eb8b 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -742,6 +742,7 @@ static void parse_spl_header(const uint32_t spl_addr)
- 		 */
- 		himport_r(&env_htab, (char *)(uintptr_t)spl->fel_script_address,
- 			  spl->fel_uEnv_length, '\n', H_NOCLEAR, 0, 0, NULL);
-+		env_inc_id();
- 		return;
- 	}
- 	/* otherwise assume .scr format (mkimage-type script) */
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index 636bddee1be..22db0c38ff1 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -775,6 +775,7 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
- 	int	del = 0;
- 	int	crlf_is_lf = 0;
- 	int	wl = 0;
-+	int ret;
- 	size_t	size;
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index b44ec644b87..5c31fb00013 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2200,6 +2200,8 @@ config CMD_CDP
+ 	  and to retrieve configuration data including the VLAN id using the
+ 	  proprietary Cisco Discovery Protocol (CDP).
  
- 	cmd = *argv;
-@@ -869,8 +870,10 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
- 		ptr = (char *)ep->data;
- 	}
- 
--	if (!himport_r(&env_htab, ptr, size, sep, del ? 0 : H_NOCLEAR,
--		       crlf_is_lf, wl ? argc - 2 : 0, wl ? &argv[2] : NULL)) {
-+	ret = himport_r(&env_htab, ptr, size, sep, del ? 0 : H_NOCLEAR,
-+			crlf_is_lf, wl ? argc - 2 : 0, wl ? &argv[2] : NULL);
-+	env_inc_id();
-+	if (!ret) {
- 		pr_err("## Error: Environment import failed: errno = %d\n",
- 		       errno);
- 		return 1;
-diff --git a/env/common.c b/env/common.c
-index b2adbe93dbe..f217d67032b 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -387,6 +387,8 @@ static int env_update_fdt_addr_from_bloblist(void)
- 
- void env_set_default(const char *s, int flags)
- {
-+	int ret;
++endif  # if NET_LEGACY
 +
- 	if (s) {
- 		if ((flags & H_INTERACTIVE) == 0) {
- 			printf("*** Warning - %s, "
-@@ -399,9 +401,10 @@ void env_set_default(const char *s, int flags)
- 	}
+ config CMD_LINK_LOCAL
+ 	bool "linklocal"
+ 	depends on (LIB_RAND || LIB_HW_RAND)
+@@ -2214,8 +2216,6 @@ config CMD_NCSI
+ 	  Normally this happens automatically before other network
+ 	  operations.
  
- 	flags |= H_DEFAULT;
--	if (himport_r(&env_htab, default_environment,
--			sizeof(default_environment), '\0', flags, 0,
--			0, NULL) == 0) {
-+	ret = himport_r(&env_htab, default_environment,
-+			sizeof(default_environment), '\0', flags, 0, 0, NULL);
-+	env_inc_id();
-+	if (!ret) {
- 		pr_err("## Error: Environment import failed: errno = %d\n",
- 		       errno);
- 		return;
-@@ -418,6 +421,8 @@ void env_set_default(const char *s, int flags)
- /* [re]set individual variables to their value in the default environment */
- int env_set_default_vars(int nvars, char * const vars[], int flags)
- {
-+	int ret;
+-endif  # if NET_LEGACY
+-
+ config IPV6_ROUTER_DISCOVERY
+ 	bool "Do IPv6 router discovery"
+ 	depends on IPV6
+diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+index 606c3693d2b..90ad4d21e6f 100644
+--- a/cmd/lwip/Makefile
++++ b/cmd/lwip/Makefile
+@@ -1,6 +1,7 @@
+ obj-$(CONFIG_CMD_BOOTP) += bootp.o
+ obj-$(CONFIG_CMD_DHCP) += dhcp.o
+ obj-$(CONFIG_CMD_DNS) += dns.o
++obj-$(CONFIG_CMD_LINK_LOCAL) += linklocal.o
+ obj-$(CONFIG_CMD_NFS) += nfs.o
+ ifneq ($(filter y,$(CONFIG_CMD_PING) $(CONFIG_CMD_PING6)),)
+ obj-y += ping.o
+diff --git a/cmd/lwip/linklocal.c b/cmd/lwip/linklocal.c
+new file mode 100644
+index 00000000000..a2df1379276
+--- /dev/null
++++ b/cmd/lwip/linklocal.c
+@@ -0,0 +1,71 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
- 	/*
- 	 * Special use-case: import from default environment
- 	 * (and use \0 as a separator)
-@@ -431,9 +436,10 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
- 		flags |= H_NOCLEAR;
- 
- 	flags |= H_DEFAULT;
--	return himport_r(&env_htab, default_environment,
--				sizeof(default_environment), '\0',
--				flags, 0, nvars, vars);
-+	ret = himport_r(&env_htab, default_environment,
-+			sizeof(default_environment), '\0', flags, 0, nvars, vars);
-+	env_inc_id();
++#include <command.h>
++#include <console.h>
++#include <dm/device.h>
++#include <env.h>
++#include <net.h>
++#include <lwip/autoip.h>
++#include <lwip/prot/autoip.h>
++
++static int set_addr_env(const char *name, int seq, const ip4_addr_t *addr)
++{
++	char key[sizeof("gatewayip99")];
++
++	if (seq) {
++		snprintf(key, sizeof(key), "%s%d", name, seq);
++		name = key;
++	}
++
++	return env_set(name, ip4addr_ntoa(addr));
++}
++
++static int do_linklocal(struct cmd_tbl *cmdtp, int flag, int argc,
++			char *const argv[])
++{
++	struct net_lwip_ctx net = {};
++	struct autoip client;
++	const char *saved;
++	ip4_addr_t addr;
++	int seq, ret = CMD_RET_FAILURE;
++
++	if (net_lwip_start(&net, NET_LWIP_ADDR_NONE))
++		return CMD_RET_FAILURE;
++	seq = dev_seq(net.dev);
++	if (seq < 0 || seq > 99)
++		goto out;
++
++	autoip_set_struct(net.netif, &client);
++	saved = env_get("llipaddr");
++	if (saved && ip4addr_aton(saved, &addr) &&
++	    ntohl(addr.addr) >= AUTOIP_RANGE_START &&
++	    ntohl(addr.addr) <= AUTOIP_RANGE_END)
++		client.llipaddr = addr;
++	if (autoip_start(net.netif) != ERR_OK)
++		goto detach;
++
++	while (!autoip_supplied_address(net.netif)) {
++		if (ctrlc() || net_lwip_poll() < 0)
++			goto stop;
++	}
++
++	if (set_addr_env("netmask", seq, netif_ip4_netmask(net.netif)) ||
++	    set_addr_env("gatewayip", seq, netif_ip4_gw(net.netif)) ||
++	    set_addr_env("ipaddr", seq, &client.llipaddr) ||
++	    env_set("llipaddr", ip4addr_ntoa(&client.llipaddr)))
++		goto stop;
++	if (!seq)
++		net_ip.s_addr = client.llipaddr.addr;
++	ret = CMD_RET_SUCCESS;
++stop:
++	autoip_stop(net.netif);
++	acd_remove(net.netif, &client.acd);
++detach:
++	autoip_remove_struct(net.netif);
++out:
++	net_lwip_stop(&net);
 +	return ret;
- }
++}
++
++U_BOOT_CMD(linklocal, 1, 1, do_linklocal,
++	   "acquire a network IP address using the link-local protocol", "");
+diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+index 2c07bdd545c..b1f9d9cdb62 100644
+--- a/lib/lwip/u-boot/lwipopts.h
++++ b/lib/lwip/u-boot/lwipopts.h
+@@ -205,7 +205,7 @@
+ 	UBOOT_DHCP_TIMEOFFSET UBOOT_DHCP_PXE_CONFIG 67
+ #endif /* defined(CONFIG_CMD_BOOTP) || defined(CONFIG_CMD_DHCP) */
  
- /*
-@@ -443,6 +449,7 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
- int env_import(const char *buf, int check, int flags)
- {
- 	env_t *ep = (env_t *)buf;
+-#define LWIP_AUTOIP                     0
++#define LWIP_AUTOIP                     CONFIG_IS_ENABLED(CMD_LINK_LOCAL)
+ 
+ #define LWIP_SNMP                       0
+ 
+diff --git a/test/dm/lwip.c b/test/dm/lwip.c
+index f5932a0ef97..78c074a7723 100644
+--- a/test/dm/lwip.c
++++ b/test/dm/lwip.c
+@@ -15,6 +15,7 @@
+ #include <dm/test.h>
+ #include <linux/kconfig.h>
+ #include <test/ut.h>
++#include "lwip_test.h"
+ 
+ #if CONFIG_IS_ENABLED(PROT_DNS_LWIP)
+ #include <lwip/dns.h>
+@@ -42,6 +43,53 @@ struct lwip_test_recv_ctx {
+ 	int nested_poll_ret;
+ };
+ 
++#if CONFIG_IS_ENABLED(CMD_LINK_LOCAL)
++static bool reject_lladdr;
++
++static int linklocal_tx(struct udevice *dev, void *packet, unsigned int len)
++{
++	if (reject_lladdr && !sandbox_eth_arp_req_to_reply(dev, packet, len))
++		reject_lladdr = false;
++
++	return 0;
++}
++
++static int linklocal_check(struct unit_test_state *uts)
++{
++	ut_assertok(env_set("ethact", "eth@10002000"));
++	ut_assertok(env_set("llipaddr", "169.254.7.8"));
++	ut_assertok(run_command("linklocal", 0));
++	ut_asserteq_str("169.254.7.8", env_get("ipaddr"));
++	ut_asserteq_str("255.255.0.0", env_get("netmask"));
++	ut_asserteq_str("0.0.0.0", env_get("gatewayip"));
++
++	reject_lladdr = true;
++	ut_assertok(run_command("linklocal", 0));
++	ut_assert(!reject_lladdr);
++	ut_assert(!strncmp(env_get("ipaddr"), "169.254.", 8));
++	ut_assert(strcmp(env_get("ipaddr"), "169.254.7.8"));
++	ut_asserteq_str(env_get("ipaddr"), env_get("llipaddr"));
++	return 0;
++}
++
++static int dm_test_lwip_linklocal(struct unit_test_state *uts)
++{
++	const char *const vars[] = { "ethact", "llipaddr", "ipaddr", "netmask",
++				     "gatewayip" };
++	struct in_addr old_ip = net_ip;
 +	int ret;
- 
- 	if (check) {
- 		uint32_t crc;
-@@ -455,8 +462,10 @@ int env_import(const char *buf, int check, int flags)
- 		}
- 	}
- 
--	if (himport_r(&env_htab, (char *)ep->data, ENV_SIZE, '\0', flags, 0,
--			0, NULL)) {
-+	ret = himport_r(&env_htab, (char *)ep->data, ENV_SIZE, '\0', flags, 0,
-+			0, NULL);
-+	env_inc_id();
-+	if (ret) {
- 		gd->flags |= GD_FLG_ENV_READY;
- 
- 		/* This has to be done after GD_FLG_ENV_READY is set */
++
++	sandbox_eth_set_tx_handler(0, linklocal_tx);
++	reject_lladdr = false;
++	ret = lwip_test_with_env(uts, vars, ARRAY_SIZE(vars), linklocal_check);
++	sandbox_eth_set_tx_handler(0, NULL);
++	net_ip = old_ip;
++	return ret;
++}
++
++DM_TEST(dm_test_lwip_linklocal, UTF_SCAN_FDT);
++#endif
++
+ static int dm_test_lwip_decimal(struct unit_test_state *uts)
+ {
+ 	static const char *const invalid[] = {
+diff --git a/test/dm/lwip_test.h b/test/dm/lwip_test.h
+new file mode 100644
+index 00000000000..3f435b59421
+--- /dev/null
++++ b/test/dm/lwip_test.h
+@@ -0,0 +1,42 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++#ifndef __DM_LWIP_TEST_H
++#define __DM_LWIP_TEST_H
++
++#include <env.h>
++#include <malloc.h>
++
++#include <test/ut.h>
++
++/* Preserve the caller's network settings even when a test assertion fails. */
++static inline int lwip_test_with_env(struct unit_test_state *uts,
++				     const char *const *names, size_t count,
++				     int (*run)(struct unit_test_state *))
++{
++	char **saved;
++	size_t i;
++	int ret = -ENOMEM;
++
++	saved = calloc(count, sizeof(*saved));
++	ut_assertnonnull(saved);
++	for (i = 0; i < count; i++) {
++		const char *value = env_get(names[i]);
++
++		if (value) {
++			saved[i] = strdup(value);
++			if (!saved[i])
++				goto out;
++		}
++	}
++	ret = run(uts);
++	for (i = 0; i < count; i++)
++		if (env_set(names[i], saved[i]))
++			ret = -EINVAL;
++out:
++	while (i)
++		free(saved[--i]);
++	free(saved);
++	ut_assertok(ret);
++	return 0;
++}
++
++#endif
 
 -- 
 2.53.0
