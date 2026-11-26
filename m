@@ -1,115 +1,192 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0784E606A31E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Nov 2026 23:53:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A91E606A321
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 02:13:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eIUKBC3U;
-	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=ftfrTtuC
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KRWXLUch;
+	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tVi7OOHe
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0E049606D9;
-	Wed, 25 Nov 2026 23:53:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B146040643;
+	Thu, 26 Nov 2026 02:13:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TcRdBJSKDx7X; Wed, 25 Nov 2026 23:53:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 122B0606DA
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795650780;
-	b=PuXjcFx99iHJezm3pG0YMsB8erxdERl6NCvpEazU8rgT0/onkxKpgm928fv5f6ryAOUm
-	 zXUqOd9cIWMb6tH9Pfa1ASDB0kZAplvRyqhebgEA8L5d4bwSzArQM9mBJoO6JPxAdFFYN
-	 imYVsRdvdf8DdcJ1ciJMbF7w2ys8lMHxw0LmW4k2raNKZenK5l34kZqQzt3g6Cm5PgLBg
-	 VrPFWsDy/bYZ3qSkG9JOvwrjOFiO7pZ2H7FjKtLNF9dV9++eh3edjuZHoSnF3Ufufhek/
-	 H5DUMp3QiAVaRT5AW5G+EuQRNXzKjtCVJCL+JryvnSuXy3bhTs/V44USaLSysIrUPLw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hGs9FOdwKydm; Thu, 26 Nov 2026 02:13:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 065854052C
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795659238;
+	b=pZZWDYl4xzYToVwlELkdmBgBpqydCHL8oYDnD4Z36MvVENiH2VZlmBVosckzEIpPggYN
+	 doQWQf3sIbZtizCHXyjUPcoF67xBnHWxt7/nM5kNchR9yjL1ktciZPrrUA17fqcGuiPVM
+	 bIGu5rxErtKsfGqa0gD9a+RPiexKyk3ythBHBL3fKfOrwQQF42h1OjsM6fy8Newdj7pFG
+	 rpJ+juooWq8iFCYmy+L9FniTdn5SAXqO3hVZTveFk60iQIsh1702r+Kj84QZ4IH0O3x+i
+	 XM968k/sDtZoDtUhlaGbTGHWFGVPKsh2xwEnIrQZ8pru+bceEyMO7L+gFIEk4Q5rEbQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795650780;
+	c=relaxed/relaxed; t=1795659238;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:From:
-	 Subject:To:References:Content-Language:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=8r1z27oqGBA29QfVIvN2IsueY3lSwRDuutkuswtphmg=;
-	b=Pc/n85e74+xa9d4XF5OXofvrT2W+wVB/OzsSLYHye7qTo4Nz6/RojwXQSYJlUvvZgN5p
-	 jk4W6GhH0A3uJ1nJfbe9bK3ByBjxmvjyBkr8auceXyyr/zOWo4kgpQY4MVlqu3QSnSJpR
-	 0MgL1161hWBUlFn5g+UT41ieHJChwI7exboL3PZw6wgOSKbyoKpbidXeOLO4di07yeI10
-	 sRQTXZPrxfsnlJ0h5gLcJTw51bj3/DURZ0fdLXWHR8cWxIEo8KE2/2F8eolvUtzdNIRit
-	 9WKSR6+caTGtwfLNFX4QSr9an//RljVjsERp0S0/shwl5oU+DZp2VcKPriV/fPtonRw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 DKIM-Signature:Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:Content-Transfer-Encoding:
+	 Content-Type:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=sDFgoZjmagiN4P323zOSpMhB2iy4M8CsmqtWA563jjw=;
+	b=FyrzRSaPUnA8UlEMKYiXVINpVhkzJbaffv2ifHbUGby5BMqqmMIOyb8ArHvZwWv8EtSl
+	 XMpz2/k01qs/RlgWycMvnfbvnFUb2H8i95HFXdgdigrgj+0rmtYPFDXPCgmQUItxLKr6H
+	 v3rkhiXNH6PWAXU7GEg+GdJklkuRaCoj7thjrCGqEMiY9T4SCnHGvOY4uiR5dePHTLZgT
+	 aHTmsrTJR4X01efT7YgTPLFBQ6oQVAL/fFawehIiCHyEgwzTrV72WqU284yaxlu7MVcXy
+	 9LbYwHfRItA/aPlYMy+UI34SVLrrR276EvenzF/8pJl1CQ24NvlkwQ+iCE39dEk3SyQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795650780;
-	bh=8r1z27oqGBA29QfVIvN2IsueY3lSwRDuutkuswtphmg=;
-	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795659238;
+	bh=sDFgoZjmagiN4P323zOSpMhB2iy4M8CsmqtWA563jjw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eIUKBC3U9Wwk4yEXAl1a9zOTEZlgFvrZpwqaycsP1o+EzAsyj2oRzdOcxy8IpAt6p
-	 ahL1uPNAotULGpi0c/CaqBJ0yg4mqfkNW66LNOUwaoSwWulC4FI76YwpUZVVfchB2n
-	 xVvWKTs+WdjBwo2fh06SHgkugWubCOXiQ0SRQJVAICJj10nSPVVfwnN5X95BF2tH6w
-	 GWyT5d8lWUfVNi4c24CvjeTSGArtFa/aWuI9/ufZdfiYBuQ4GjL6p+CwywY3KLiXl2
-	 GrTbaNrdebMK8H3ZMbYYWvK3C/xNaNBBLiUEJPtd+WqymDth27Txf/WvkT/K37eKD9
-	 6AOpP5InmlKOg==
+	b=KRWXLUch2OD1QHJWOcnRvkbY22V/AqjVzsRSduRVYBZy4DdmeESdM8Z/ZmVzaBnwJ
+	 2ISe/nPCYbYexW0I6sZ0drpCf59ubGGE2fgWQ4vC1sOHSWNlBuMNClELyff4l9celd
+	 ikGpSP4ksKj9+a/hKNlT4uG4s94+LQb65UnpuS6TAl0NqyHcUpo9fbH5GyWHeEV5LD
+	 IfYTezUfqGTNDuN0BzxTVScbghrwDXQUszq/6is7alpRYVTyEQ1wqSxKmgwE6os5fL
+	 9FVt3Lti+kpITjyYTZWZczGzsSCDjMGTydLp55tXeRUTfMxVqtM2+3C5H+gEoWUlSk
+	 62Yw8Vy0x4VwA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 122B0606DA;
-	Wed, 25 Nov 2026 23:53:00 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id BF352371
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:52:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 065854052C;
+	Thu, 26 Nov 2026 02:13:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 477EE260
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:13:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B0BA84004D
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:52:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2D085605DB
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:13:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SIKRCOrfWteS for <u-boot@lists.u-boot-project.org>;
- Wed, 25 Nov 2026 23:52:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 94FEA40024
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
- helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=ftfrTtuC
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 94FEA40024
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 23:52:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1795650770;
- bh=8r1z27oqGBA29QfVIvN2IsueY3lSwRDuutkuswtphmg=;
- h=Date:From:Subject:To:References:In-Reply-To:From;
- b=ftfrTtuC2aDIYeJMABXB5ieqi8TvYPc0S7+VZKGQyOnASbZCT+2+JnLqyvfurc4j1
- 48mt0r0ZNAyHNSm7h289gmDy5ppQOihJgO/2+KHal0lEWM48is/3dipsrWBQ7hPvdr
- LdYAPjq5iG55mIWVDVtAOqWd6lM8lgZgCPT0PiuVVcCYvKNCDuizERE42QOKL1Jwix
- EV1cIXmZ3DrU+t21MizufP/LJ47k09+IWWUsNKqvEhwXbfLCO3o5bCVaNpT8B3LLkA
- 6DRA2gCWBGEFzoa0x3kv+Fb7MbsTY6Qnpngb7LjU3g40ZTYhpPQqu9JEIkDPqQ4r7o
- LqqB4d3nfdh0A==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id DCED5B22050A
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 00:52:49 +0100 (CET)
-Message-ID: <0bdd7822-46ea-4e1c-8ce5-a0975ee8cd96@freeshell.de>
-Date: Wed, 25 Nov 2026 15:52:40 -0800
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UFYKJe6nzJbg for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 02:13:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CF2C7606D9
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c202::7"
+Received-SPF: Permerror (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
+ envelope-from=peng.fan@oss.nxp.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=fail (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
+ header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tVi7OOHe
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CF2C7606D9
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:13:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sDFgoZjmagiN4P323zOSpMhB2iy4M8CsmqtWA563jjw=;
+ b=tVi7OOHeXfKEuUpPYpcaAinbwbgXldeyZzVbXmrnra/lY1qU44OMgPAWaQ2UYasqSrt5X6tqn3+OR/g9LjtsY69FbZDbzatrCg4qu0otazFLrZ4Zq28pJEEvAR8pYX3AIH/Gjiq0c/wCvhGJ2G5g2k8IObzYXgGowjBF/qPJaf/9ch2vnjVaj1Se0v0QHeU6ibtmYLZBF3pRE+Viqaw1KW9VWg5+aKwWApfpyO47mfEzCCNQAPomijhQ5f4Gz1lj7EGCR2zPuCJfQcbUm2RIqcWB40MHGlACV15bMxCl7WY5clnzI4YgyEhi/7uIHShM005Dpo+nzwNg0VX7IvXROw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
+ by AMBPR04MB12312.eurprd04.prod.outlook.com (2603:10a6:20b:723::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Thu, 26 Nov
+ 2026 02:13:50 +0000
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9%5]) with mapi id 15.21.0639.012; Thu, 26 Nov 2026
+ 02:13:50 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+To: Josef Schlehofer <pepe.schlehofer@gmail.com>
+Cc: Peng Fan <peng.fan@oss.nxp.com>, u-boot@lists.u-boot-project.org,
+ Tom Rini <trini@konsulko.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ Bradley Morgan <bradley.morgan@linux.dev>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Subject: Re: [PATCH 3/6] mmc: Use div_u64() in mmc_berase()
+Date: Thu, 26 Nov 2026 10:10:51 +0800
+Message-ID: <20261126021051.40183-1-peng.fan@oss.nxp.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20261125124259.95636-4-pepe.schlehofer@gmail.com>
+References: 
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI3PR02CA0010.apcprd02.prod.outlook.com
+ (2603:1096:4:295::19) To AM8PR04MB7874.eurprd04.prod.outlook.com
+ (2603:10a6:20b:24d::9)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: E Shattow <e@freeshell.de>
-Subject: Re: [DNM v1 0/7] Guide to build reduced SpacemiT K3 vendor BSP
- (continued)
-To: u-boot@lists.u-boot-project.org
-References: <20261029001555.1890775-1-e@freeshell.de>
- <20261029003327.1890979-1-e@freeshell.de>
-Content-Language: en-US
-In-Reply-To: <20261029003327.1890979-1-e@freeshell.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|AMBPR04MB12312:EE_
+X-MS-Office365-Filtering-Correlation-Id: 13ff4cf7-4da9-4be3-417f-08df4b62e962
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|19092799006|23010399003|1800799024|376014|261026140227099003|261022105027099003|10067099003|261026121527099003|261028144727099003|22082099003|18002099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: M4xnm7QXn/ZptQpjCDB0hZ+jdxa7LazjcbNPqpZJig1hnF/QZALd+k+RRW6YWdOXVtFJwcrHIX9MncW1rt/opIkzZQmZtxC4sOkL1WsDIcoZ8kymV2W3HOMvf8l0ebO6qhiSzwpJ9Vr9rvidCqU74wCypye7ikM64vesxpgPU+VJfq7DzVk/QG4VQSyxqSrlAaneWuGS0g4fqcqAf713C8Id2AjsiR4d5Q4teai+UEAnB5mNvbuLQtNPjI7VEzXVXCJiiL1O1QlG+td2clC0u96KcgjCWRcdEW0rFcEUtKhHZyGyWTFd5fNnehCr9xXRdKa9DWA3dnlBUHZIcldzC1yWG8pn8jN3I4boZ01iHfmLdbqqHREH0H4cZSldaOQVP+/VSW7YOkCZ9cMTzfeXfvPeJVE23XBYlsHA9JJGT1gtFj6Pi1dhW0anEc2pJ/+Ju/CtpyWp6qT5zuQszxXc3ixLCwS0AcdhgtwF7ZKP2/8ioHi7IpNOrZuxLfV0ftqbx34DTJzr8mBJAIHkMo9clp4e9ZE/uSNAMJtHQ4LIsBOHGUfjK4T8zHQaCqtmFz2RQLY4rOv7XcDqMm4huOtISqV5BmKCJmBX4L7ePSoHckfSXAi9qELRAwxFoiylH8+sQ6Jv8hYEUIYeM5CT+1SeiAZFA4J8P9PHHJ80O8OQEeg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(19092799006)(23010399003)(1800799024)(376014)(261026140227099003)(261022105027099003)(10067099003)(261026121527099003)(261028144727099003)(22082099003)(18002099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?439THnu+c79P52hDdV+6+qq+WiIfQ4UcdUQKr80Uq9zsjFdKhqY8gI1Uqqhj?=
+ =?us-ascii?Q?qGwWSrmwEUVS8oM1V7S1b5X0wC2476Bvxp7Xg8FoIE4sx5RnSmVA1HGNeLas?=
+ =?us-ascii?Q?QdeTvGo3jZiNOopsQE7D6LkYKQdhFrPSc9VfbvhaAb24BR8hg1aM3K2Kl3u+?=
+ =?us-ascii?Q?GMGWyJwhDUtjCV0BydRInZIThxwYTTWBqaYW4XEq4mPTrwl6Nhzw33EKG71G?=
+ =?us-ascii?Q?cv87WbNiemJm4V1P1N/mTAF/UNwi1pg5DjMGOw33VHybw8B3mXnZOUD6gBKq?=
+ =?us-ascii?Q?bwI/TOkAOEDvsd8tsJKgf8uUvtlYFvVsfxy6MDXopjcTgYldAxs8lr4C3D6i?=
+ =?us-ascii?Q?il5hAYRQolrPOgxR1i27jwqWs6fZ4hzF+uqzF15P6w9ynb79lEiOqJ/I7D2m?=
+ =?us-ascii?Q?jxBjgZ9ilEZ7LmAQE0YaI7JSC9cyfzuOpa8FMo2+T3bIQthOM/j7guIcFGz/?=
+ =?us-ascii?Q?UEa1k85EURe9EJsEbiQbsALa5vjoinHDz0Z904RJ1Wpwt9EWYs8fQ/VMwdiy?=
+ =?us-ascii?Q?xnc6/d5o1Prn3idkEzzTMDfIufeEILgUfGT+K9gKLDsmMBt4dlggu2CvbYq+?=
+ =?us-ascii?Q?UGqB80nSlas7Dkv/RAzDqbqaMds6GGvdgLRk8/0uaqfZ4Bc4byZ8DT8wxU+H?=
+ =?us-ascii?Q?9YQB/jBRVRZbKD6V6wxT7kBLiZB0oDoClp+CmJ7AWiVlNhpnmCRFKV9vIIMz?=
+ =?us-ascii?Q?lk4+SYmkRA4GUF9E6vazT9rt8xugQoJ3QRpTRAPec84JqNOlikFAiNZHDDit?=
+ =?us-ascii?Q?5QHBC9rwT95Y2pklcQKjLaVDWL03pBEIuGbPzPfjhmaMpl7Avikgp8sMFfob?=
+ =?us-ascii?Q?UITRlx8hrOsva9cogqiST9zb7fDxDheHZfIn8mlVXa/yV196errERLT31w8z?=
+ =?us-ascii?Q?cWmZKXFs9SjN8sDuRB3wMR8i+5kAVADibQT564oLzH3A7pRxzWLei+UNCEiw?=
+ =?us-ascii?Q?DO3TeYnCBBhD+BW0nSCcbcCZvFvEBlQ1DulgrqeD2HsQbucvXIYgf/VvD+z1?=
+ =?us-ascii?Q?O5Oekhsin2uO55SNR7rsxuv+T4O1hwUVDD776mQCJPM0l6y0rghBho/2ZJSD?=
+ =?us-ascii?Q?WcVCxNgaCekth21r2DpgwddyVLcMEfIPpZSWyXcE7irX8+Xo024FiLIXQzDw?=
+ =?us-ascii?Q?w6q+menKXcl2CsZdR0lvxV20Wm/JRe4irMkT+hnThIUJMEL9JBi207AGELNN?=
+ =?us-ascii?Q?STQHnWqRjwG7WWMEyzEcYhG2Ptu9OfgVjfzNAZr0Crmlsb9oXfsQFbddMTBe?=
+ =?us-ascii?Q?iIm+p55YShPx6HboQ1HSO/WPgV8NQ4wnCIFo2FVB4lihYptSizgj+1GzgAkk?=
+ =?us-ascii?Q?AQYTLXEJNodAatG1Fo3dkgN/A8Pbp4T7+qQFmLUKeN0dapxoGdTVLNH63v0D?=
+ =?us-ascii?Q?2ltHIf1LAAvvBqQXKNFhblDy5mXb/jvSttI5hkLWcviZT++TL4Lx/EpnnN1y?=
+ =?us-ascii?Q?5mb+X3WYDHnyQMSu4HtCkfnfqZOaD1N9CeXEPIW+Yk1G0NDFrpunLJeVY1q8?=
+ =?us-ascii?Q?mAiZFvKPM9IsIlVE6/i4kptPGNbuXrPXYaXfrVyhfknx6HSEk304kBtBOHi3?=
+ =?us-ascii?Q?c6cYOJiZ8f9YCTDlJH17Z5z3WQbKSoTx8iQ07awiRgkddogbVaGWWgZaJnVx?=
+ =?us-ascii?Q?feNLKfkHFh5oc7Yh2MLWQ78EJ+yrJTuxLZkOVvKngVDuvYb7qZzgtSIikSVi?=
+ =?us-ascii?Q?eKuorXurr920eFatV4d2y/9bB1cUF4mYZP0CoZPVxQmRHN1e/hRNolKinb/m?=
+ =?us-ascii?Q?6GVB9KMVWUxFtIvXblcsERTkCekvJm+8wOPhcq2EZj+1GviQJWQp?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13ff4cf7-4da9-4be3-417f-08df4b62e962
+X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 02:13:50.6181 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zoGTHxULRBpavSKEuOvOhL2//lmwChSGDad4ellnKghGkiWyk/oVbF7SNOyqHEeqp0ZUk1eMfSguXRcegCzG7m04NCUBfGzqEfQgZ7TKzFeRPBMymHo4HBcsVqvRPDEn
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR04MB12312
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -119,237 +196,22 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,T_SPF_PERMERROR,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Update as of November 2026,
+On Wed, 25 Nov 2026 13:42:56 +0100 Josef Schlehofer <pepe.schlehofer@gmail.com> wrote:
 
-On 10/28/26 17:33, E Shattow wrote:
-> Do Not Merge
+> With CONFIG_SYS_64BIT_LBA, GCC turns the lbaint_t division in
+> mmc_berase() into a call to __udivdi3() on 32-bit PowerPC, which
+> U-Boot's private libgcc does not provide.
 > 
-> Informational purpose only, to aid mainline development of SpacemiT K3
-> support.
+> Use div_u64(), as the remainders above already use div_u64_rem().
 > 
-> ...continued from https://lore.kernel.org/u-boot/20261029001555.1890775-1-e@freeshell.de/
-> 
-> What is known to be working from mainline?
-> - mkimage to post-process SPL into spl/u-boot-spl-mkimage.bin
-> - FIT U-Boot main app u-boot.itb
-> - dependency on OpenSBI
-> 
-> What do we need from the vendor BSP?
-> - SPL
-> 
+> Suggested-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
+> Signed-off-by: Josef Schlehofer <pepe.schlehofer@gmail.com>
 
-> (Optional) Additional hardware used?
-> - K3 Pico-ITX BootROM UART SPL loader mode selected by pull-up via
->   FPC-36P reverse cable and adapter to header pins (2.54mm pitch
->   DuPont connector).
-
-Also an JST GH1.25 4P cable and breakout board accommodates a power
-indicator LED and momentary switch. Long-press (~3 seconds) of the
-switch begins a flashing power indicator LED sequence and after some
-delay (~4 seconds) the power turns off. Short-press of the switch turns
-on power when it was off previously. This can be useful to instrument
-the power on/off sequence and set boot modes for automated board
-testing, without soldering to the reset and boot mode button connections
-directly.
-
-OpenCD debug access for K3 Pico-ITX to K3 SoC is connected via five
-solder points on the opposite face of PCB and near the same position
-where the FPC-36P connector is populated. This is documented at:
-
-https://github.com/spacemit-com/docs-chip/blob/main/en/key_stone/k3/k3_hw/static/pico-jtag-debug.png
-
-Signal layout ordering:
-- TRST_N (near "do not dispose in trash" silkscreen iconography)
-- TDO
-- TMS
-- TDI
-- TCK (near FPC-36P pin 18 on opposite face of PCB)
-
-OpenCD debug access for K3 CoM260 to K3 SoC is connected via an adapter
-for the micro SD card slot.
-
-> 
-> The assumption in this guide is root user in a fresh Debian 13
-> Trixie build environment on amd64 architecture build host.
-> 
-> dpkg --add-architecture riscv64
-> apt install -y bison ca-certificates flex gcc-riscv64-linux-gnu git \
->   libgnutls28-dev libpython3-dev libssl-dev python3-setuptools swig \
->   curl
-> export CROSS_COMPILE=riscv64-linux-gnu-
-> 
-> git clone https://github.com/riscv-software-src/opensbi.git \
->   opensbi.git
-
-> git -C opensbi.git checkout d28bc6f89837 # origin/master
-> # v6 "platform: generic: spacemit: add K3 platform support"
-> # https://patchwork.ozlabs.org/project/opensbi/list/?series=530305
-> curl https://patchwork.ozlabs.org/series/530305/mbox/ \
->   | git -C opensbi.git am
-> make -C opensbi.git O=../opensbi clean
-> make -C opensbi.git O=../opensbi PLATFORM=generic
-
-This was since merged in mainline OpenSBI for the next
-tag after v1.9 release.
-
-> 
-> git clone https://git.u-boot-project.org/u-boot/u-boot.git u-boot.git
-> git -C u-boot.git remote add -f spacemit-com \
->   https://github.com/spacemit-com/uboot-2022.10.git
-> 
-
-> git -C u-boot.git checkout 03e45557e1f3 # origin/main
-> # v1 "Spacemit K3 enable Linux boot"
-> # https://patchwork.ozlabs.org/project/uboot/list/?series=530384
-> curl https://patchwork.ozlabs.org/series/530384/mbox/ \
->   | git -C u-boot.git am
-> make -C u-boot.git O=../u-boot spacemit_k3_defconfig
-> fw_dynbin=$(realpath opensbi/platform/generic/firmware/fw_dynamic.bin)
-> make -C u-boot.git O=../u-boot OPENSBI=$fw_dynbin
-
-This was since merged in mainline U-Boot for v2026.10-rc6 release candidate.
-
-> 
-> git -C u-boot.git checkout k3-br-v1.0.10 # spacemit-com/k3-br-v1.0.y
-> # v1 "Guide to build reduced SpacemiT K3 vendor BSP"
-> # https://patchwork.ozlabs.org/project/uboot/list/?series=530447
-> curl https://patchwork.ozlabs.org/series/530447/mbox/ \
->   | git -C u-boot.git am
-> mki=$(realpath u-boot/tools/mkimage)
-> make -C u-boot.git O=../bsp-spi \
->   spacemit_k3_uart_spi_defconfig
-> make -C u-boot.git O=../bsp-spi MKIMAGE=$mki \
->   spl/u-boot-spl-mkimage.bin
-> make -C u-boot.git O=../bsp-nospi \
->   spacemit_k3_uart_nospi_defconfig
-> make -C u-boot.git O=../bsp-nospi MKIMAGE=$mki \
->   spl/u-boot-spl-mkimage.bin
-> 
-> tar -czf reduced-spacemit-k3-vendor-bsp.tar.gz \
->   --transform 's~^~reduced-spacemit-k3-vendor-bsp/~' \
->   bsp-nospi/spl/u-boot-spl-mkimage.bin \
->   bsp-spi/spl/u-boot-spl-mkimage.bin \
->   u-boot/u-boot.itb
-> 
-> ### K3 Pico-ITX BootROM UART SPL loader
-> Connect USB selection bias-pulldown pin 10 high to VCC1V8 pin 1 or
-> pin 2 for UART selection and pin 11 high to VCC1V8 selects BootROM
-> USB/UART download mode; pin 11 low is normal operation from selected
-> NOR/UFS/MMC/NAND secondary boot after SD card. If you do not have a
-> flat flex cable then it is possible with a sharp probe and steady
-> hands to do so, the easiest method apparently being to connect the
-> physically large VCC1V8 leg of the EEPROM part to probe FPC-36P pin 10
-> and depress the Firmware DownLoad button held for a moment while
-> pressing the reset or powering up the board. The reason for wanting to
-> activate BootROM UART mode is to avoid the use of Fastboot USB, and to
-> isolate any peripheral configuration that may have been acted upon by
-> BootROM which may be different between the available BootROM SPL
-> loader modes.
-
-This is confirmed in use that BootROM SPL loader fastboot-compatible
-mode does setup of clocks that are not touched by the BootROM SPL loader
-UART mode, see the detail about "bsp-spi" following...
-
-> 
-> Visual reference:
-> https://web.archive.org/web/20261025124009/https://freeshell.de/e/riscv64/K3PicoITX-explainer_boot_resistors-20261017draft.webp
-> 
-> Connect for fastboot transfers the K3 Pico-ITX USB-C OTG port (not the
-> corner USB-C power input/display port) using USB-C to USB-A cable and
-> then to any USB-A port on the fastboot and serial terminal host.
-> 
-> Connect a serial UART cable, note the board TXD is adjacent to the PCB
-> board edge and opposite of that is GND with board RXD in the middle;
-> swap adapter TXD and adapter RXD as appropriate.
-> 
-> The vanilla vendor BSP assumes use of fastboot USB in FSBL.bin SPL for
-> main.itb loading. If the vanilla vendor BSP main.itb runs with pin 10
-> low (the board default) then it again attempts to load an SPL and this
-> can be escaped to a hush prompt by fastboot host 'fastboot continue'.
-> 
-> The UART variants of vendor BSP are patched to assume that u-boot.itb
-> is loaded over serial UART in YMODEM protocol. If activated the
-> BootROM UART loader assumes loading an SPL over serial UART in XMODEM
-> protocol. Using the 'tio' serial terminal software the keybind
-> sequences are (Control-t,x,0) for XMODEM and (Control-t,y) for YMODEM.
-> If you initiate a transfer and question-mark characters '?' appear
-> then the transfer has not synchronized correctly, so abort sending and
-> then re-try sending the transfer until you will see '.' progress marks
-> appear. The reduction in build config options for "bsp-spi" deletes
-> support for USB from SPL. The "bsp-nospi" has nearly all options
-> removed leaving only YMODEM loading, DRAM initialization, and
-> dependency of EEPROM TLV access for DRAM id.
-
-With mainline U-Boot v2027.01-rc3 the FSL QSPI driver now does clock
-enablement (commit 7030b5d8bdf1 "spi: fsl_qspi: Add optional clock
-support"). As this was previously, "bsp-spi" was working for 'sf probe'
-and SPI NOR data operations in mainline U-Boot main app u-boot.itb *if*
-BootROM SPL loader fastboot-compatible mode does its clock setup prior
-to loading "bsp-spi". The 'sf probe' detection and SPI NOR data
-operations failed if this was instead preceded by BootROM SPL loader
-UART mode, which, apparently does not touch the necessary clocks. The
-FSL SPI NOR driver in mainline U-Boot main app now works for 'sf probe'
-after both SPL of "bsp-spi" or "bsp-nospi". Neither of these has an
-effect on SPI NOR detection or access from subsequent Linux kernel use.
-
-OzLabs Patchwork service is severely impacted by "A.I." data scraper bot
-traffic and so 'curl' requests to it may timeout or fail to produce
-valid output for input to 'git am'. Substituting for "curl ... | git am
-..." with the use of 'b4' is recommended.
-
-The revised "Guide to build reduced SpacemiT K3 vendor BSP (continued)"
-build steps are now:
-
-dpkg --add-architecture riscv64
-apt install -y bison ca-certificates flex gcc-riscv64-linux-gnu git \
-  libgnutls28-dev libpython3-dev libssl-dev python3-setuptools swig \
-  b4
-export CROSS_COMPILE=riscv64-linux-gnu-
-
-git clone https://github.com/riscv-software-src/opensbi.git \
-  opensbi.git
-git -C opensbi.git checkout origin/master # or any tag after v1.9
-make -C opensbi.git O=../opensbi clean
-make -C opensbi.git O=../opensbi PLATFORM=generic
-
-git clone https://git.u-boot-project.org/u-boot/u-boot.git u-boot.git
-git -C u-boot.git remote add -f spacemit-com \
-  https://github.com/spacemit-com/uboot-2022.10.git
-
-git -C u-boot.git checkout origin/main # v2027.01-rc3 or later
-make -C u-boot.git O=../u-boot spacemit_k3_defconfig
-fw_dynbin=$(realpath opensbi/platform/generic/firmware/fw_dynamic.bin)
-make -C u-boot.git O=../u-boot OPENSBI=$fw_dynbin
-
-git -C u-boot.git checkout spacemit-com/k3-br-v1.0.y
-# v1 "Guide to build reduced SpacemiT K3 vendor BSP"
-pushd u-boot.git
-b4 shazam -v1 \
-  https://lore.kernel.org/u-boot/20261029001555.1890775-1-e@freeshell.de
-popd
-mki=$(realpath u-boot/tools/mkimage)
-make -C u-boot.git O=../bsp-spi \
-  spacemit_k3_uart_spi_defconfig
-make -C u-boot.git O=../bsp-spi MKIMAGE=$mki \
-  spl/u-boot-spl-mkimage.bin
-make -C u-boot.git O=../bsp-nospi \
-  spacemit_k3_uart_nospi_defconfig
-make -C u-boot.git O=../bsp-nospi MKIMAGE=$mki \
-  spl/u-boot-spl-mkimage.bin
-
-tar -czf reduced-spacemit-k3-vendor-bsp.tar.gz \
-  --transform 's~^~reduced-spacemit-k3-vendor-bsp/~' \
-  bsp-nospi/spl/u-boot-spl-mkimage.bin \
-  bsp-spi/spl/u-boot-spl-mkimage.bin \
-  u-boot/u-boot.itb
-
-[...]
-
--E
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
