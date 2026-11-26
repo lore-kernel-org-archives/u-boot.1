@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84E2C606A33B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 14:31:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4564E606A336
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 14:31:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ws7LHtC4;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TBntRHKe;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NdvMaElg
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=drL/0+O8;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=B4Vz9bBn;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AldCQOHK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2B4E960AAF;
-	Thu, 26 Nov 2026 14:31:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 17D8581175;
+	Thu, 26 Nov 2026 14:31:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kNLHpvyN-DVS; Thu, 26 Nov 2026 14:31:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4B5F160A7F
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795703470;
-	b=XFsYUVOsSGgUIbhmkLzr6K4RUmFSrz6FtD6zJ9CBQvCFPOXnfBhfkYAYq//eQabj5W1j
-	 PQnX4tkbP4Q56QzgLp/Nv1hU1SjmbxJT3SNAsoih5xfBswmLp5YGzHzhD78gMXCuGOTJV
-	 uz7/Or6NdPwVhv7+8Jm0gOnJVQpD93d6Te/wK6r2EUDgXcBaRIg2eDAVEwwFcgh9mvd2S
-	 HFmOyFy66kcuayYLfnbe8SK2hUiMQV5i0lxVH8TZR+kA264y+7E/PRyJ6AfI2//gSpadA
-	 tPMDbwmkpHPazR+oKyA4stEUUaTuX3X8Dfcdja2gGcnHClsuyOXa9TlNSvNNdRQ+vkQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 48726FHq6t0A; Thu, 26 Nov 2026 14:31:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6553A81176
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795703472;
+	b=S/UZOoX/0kYM2ZsicjD3ZKNbVoTy3Szl43krtXMYvDa3BwYX8gCpBPVevsR192eXXcgV
+	 DER8xrrdno1JYhnreIRDkb01VufupKcvqFjJC6qQm/RjHkaSN46oSBv/8IDdwVKntt8Iq
+	 GWoq0roo2VymqhXheohK65PbEsR+mv7ks46Pkouw7NDqbctV/EOfhHOTDXJK4y45KK2Bt
+	 hSNESvHq2ABF1xawWa3mU8lvp+Z/Tw/94svXqVYUmNGk7z5T17JDaJUHscqKS3+LX05LR
+	 FH6OMhA0E9Kvo20PEpDHGxdK6znfzMc+Yj5KBDU24v1MI6Ypa+POPi/sF0I/Ro6ICiQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795703470;
+	c=relaxed/relaxed; t=1795703472;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,145 +32,143 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
-	b=p+dC/75rnAhjA+k+mADipKD5BhMJ8npi2oTEXUz+V5sNWzDZrfsQQ5V60P/b7oyzzSmG
-	 8zPGvyA2ShTc4Wj2V49bMjmyEPG30Nx611bWX88/oDK/8c3j6Q6AloMjlVrg/acmRMYOU
-	 vWDJVIMtmSOHIx4S3wxA9e5yol3tyL3AttuVx8Z/lIDnzzbYaGZtfuYhxyb0OI5aWTS+o
-	 e5mzEHZMp09LpXbMaPeL2ghJVVpMftQHujIdrH8OWHquRX3sWi3MV7G1pMCAlFHDzE1bm
-	 ttct+XPwwG/5wLe/VylJ4OSqAVTMbp2Ehri5YSkjh39wExv/uSqtK0UogsRLIicTgxA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
+	b=sjjM3+Z19fZbk5X8Q9JApqSVmf+vpO2YXY4O9ZYKoy0EsoDdn7J6tk/vF90w5mEBQV5+
+	 67j1FVns/GxpbxbsmKy2X1XxRxBqfnfbbeRRwoxwzZ41Ivijm9CPnbwLUrQ0jZsmAlLUb
+	 KuMUONwqAk/+HzPqStXzzBXxeiBry9yZPf2nWc1aM9MP183nOi6yWIiPazw3ATSwpbCWh
+	 S9VZp+DrUBdzwgiKSguSJt5nhLK6tCqpXv4zZg8n4wqjQdaPRFj3ewL09BKJp1Y2q0Slf
+	 VTYbhU48sxdZtCvM7oT+WliaYlb88DzCbpNnO7s+CVYVUpJumoai15u6ya/FjWSDW+g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795703470;
-	bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
+	d=lists.u-boot-project.org; s=default; t=1795703472;
+	bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ws7LHtC4baZbZrAJenzJIPu94jgiIj719CvKsM3N4vvu4qe031MhlHJ164rQS2uEP
-	 RV7r7zNs8AOUe1S/BsWz+zS47ui374Sa9W0g3obC89qXxCgRSE3mynluL/ZaHadgcL
-	 iKubUY+M8jzp6UGWwXr4OUaDADH09QvpSONMcPHYyeCcOr8iQvUeGZ5EkB3kzcpi3e
-	 J9LrM53whtqOD4AyIzB5uDJ6QFq5SWR+5knt3plPblqbPDbifQJX73PWvyYGpB8975
-	 7q2PDl97g3qCYChpfl2PuH79A+QWQBKBDBvAwb6NZW4h3uH45Y9BN/0jyqm6a27xkX
-	 TaUgfY2gLmA9g==
+	b=drL/0+O87MFV/PvMk7MjfFncYlMZ1X9OgqITt78/lExZYYLLEdfeN+ERYzNaLhT2h
+	 y1bVjsCu9didZCowSxfOVOvyGtuJu0DzaLNVO/+pMmEUD/DBw+KNOGpKFCndm5A67T
+	 hJXN95gVtv0Jdt9Wj+Nwlw0Iq05v1xMHsNIqIY4XdzrDvUOSzeMZflYP70I+147KtI
+	 p7EqGtzT9FnT1r+lXqlLqt1IJlZYVa1ZJBYNpJ0wRxvJEHynxLHheK+1+own5iAMWF
+	 Hl1ZtL9E/z2mo8fCTDnB9/eIM3VX9I2cwcMB5dZppXR/hdThIthvLV9zzn/RxC6Nvf
+	 BnjJRsafz4nkg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4B5F160A7F;
-	Thu, 26 Nov 2026 14:31:10 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A63B0325
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6553A81176;
+	Thu, 26 Nov 2026 14:31:12 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B459B371
  for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 97BEE4087A
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9A1DB404A4
  for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3fkPDiJA9vBn for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 14:31:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5E8694085C
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UOTHc0hnPx18 for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B086440111
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
  helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=TBntRHKe; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=NdvMaElg
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=B4Vz9bBn; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=AldCQOHK
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5E8694085C
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:03 +0000 (UTC)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B086440111
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:05 +0000 (UTC)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AQBVnb9633206
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:03 GMT
+ 6AQEV22H3170951
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=; b=TBntRHKeHkPoEIJQ
- zqp5FyLnCHF7iVVAntuqeFKj1phcUVkA+sY3ndulFJZHVbDkgudkpM8xJ1F9adT7
- y5/KnhhAPBR6VQ91XuzpEMbzDIlYAfmDsRjbPlMtbVDERqOm/XaBE8u/iTIr/LqH
- LXGkLqkfJ5JvSf7LKUWzTFg3+ui22ntlcGO0VsuTXWwrV6UBA8yaOq/3TnYbyUtm
- jqdvvVo5KHPsax6eqML3R1D2sYJdQGW3S9rOVf7uf2CYZe/0feOmRgW0KPhlC9Up
- KgnnF8AGVDPdZV2DghHzyV5BwqNGhcb2gMZr5DWM0v5L7AQC7x1YKGyh72AXJ0gE
- hTSHeg==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com
- [209.85.222.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6gne1dy0-1
+ aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=; b=B4Vz9bBnUZI5syxE
+ MhR1v3HL+wUAiw1EXaIygRRNIRnetUjLt+SWM/R9lvvVfgXC+gX3QLGlxmQgcXVh
+ sqfPurhTzJUXMgNI+1zPNPNf8SQ0b8vOKY7/YY6/WFezG6Ehb1K/wPZ8ThQSbBzz
+ VrnVJHZt+jLrnkJhpHIfMqXZpIlGjnqbF/ncd73oeqtlUH+bWyC6hs73m/CpBrD1
+ TNrgszQacswrHuBLguLV3lc8zSSIFly2YpwpyatGKyFUz/4Sd1Pni/afq8psSLTS
+ Ll1sLVXmOO0XY2fVmedwK065yGHk4VqA5yCWPl3tsrJ8i96Zt7GgkHr0HNsuks/q
+ XRRSXw==
+Received: from mail-oi1-f199.google.com (mail-oi1-f199.google.com
+ [209.85.167.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j66qfba75-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:02 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id
- a1e0cc1a2514c-990aa76e3daso1307970241.1
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:31:02 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:04 +0000 (GMT)
+Received: by mail-oi1-f199.google.com with SMTP id
+ 5614622812f47-4ea2c058e67so7561310b6e.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:31:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795703462; x=1796308262;
+ d=oss.qualcomm.com; s=google; t=1795703464; x=1796308264;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
- b=NdvMaElgw2pvR54EL4aQu7j5X0xIQpuy7kshHGYtSV2v2zmRE1ttxtgPIb60v+ImDP
- 2WdshzZ/KSsqNEeZFJi6syVDOq9r58oK8BPCrAPKUYwtWXb1yPngrYP+oyDHRMnNCUBY
- 9uudgQkTkZFr8ApM291w+Yd9WhTXOm5K2gv+COewOFQEXnFLUrHJPARCiNOigxXj5aK6
- V1FS9ljrkHH6j1udFYuCbZV8470wbWaFwn2Hawr36RiWSr9gHHMuQA6V1bHDG5h6/ZEg
- g2NafG5h/o/tRew/7m2hA5/vAatNOqrOTrdxycAVnWnZTEBKRkUn+j8LJ9SESgQF4pJ2
- dl7w==
+ bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
+ b=AldCQOHKo4coENY6zgQPcWpirCDkvqsDOV6EgFtuk0vww6yIeTZc1nuM9VnxIrRVsy
+ hD5DWNXEIlr2HCuRTGOOmfllcbJsJL1AxedTaxFEsiZTveNEXR7w6bm82+JhfzzGQm4n
+ wulou3olHBuh3M9+3HlaTM4VzkVGOk9igXIIyR45e7W2wA6tlQ4/wU1sag0JOmFatrs1
+ 6bspScKslL45MK8l8l1lM/2MmmOXWI5/XQKPXEf4zXtU0xx2qtjedTjSiIYzvWF+84rS
+ Dmqtvs3jqo9TmTP8Rs9UIvzgKNpCimXK6WuqQ09LYJj9aulq6vZAqhSn2nP2DQMaCHc/
+ Ygjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795703462; x=1796308262;
+ d=1e100.net; s=20260707; t=1795703464; x=1796308264;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
- b=oGbTKjoL7wzGcRa4Zvg+rCIOr6cmbTVnmFoaERS1xwLV4RoLMYtnt+85/NVej4WKiC
- 8DrR+P4oaPnUBrOs4YyHstEuvphrwmZCDa2/z0+jULXaJrpPO0WGNz5/W/fxb4JwzCgr
- Z6DqCgiMSjuI6dq4hykltPrfHEztG3VQl5XP7cehHXNZL5wm373/xzXFg/Chh1raAJ6c
- CkYA1nOQXT2E99C/P7f/NO81MDmV2dq7EjKAhbyxQn7WSz5nBC30XwciQREh8CoubNZC
- tcMN/24brCYGIlVD2KTgfGHbJr4rdLIEGbnxzFSgL5v79g/3h5WZMD9Ob/nToQoLZXPI
- 9EvA==
+ bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
+ b=zCsLw3eHRypNnmrg9rgQBh3AAzghRM5sFamM2Zd7l2+U+ojEY3NWz8cqTZfq7xt6nG
+ pSBp7gFFXTZMQaWlfxe3xazhOxg4aQwZwbZvD1iXze2njvFllDuesERzWnrNRiMUc1kp
+ CXpeR16filJCd8IvZggSFDFK+yh6DU5L8BHbALn0efExr98hBAwHmE0ZW4xx4r5VS/zU
+ ewJEI16Kgk7QRnlqmnBMdsHpPQMnIYqU2hJd88OIzIixOAvVfvGHGqqJIZLnIglChHCe
+ +VIspsT3LNZA47m+k8Tr/dJdED/8Z3NmtQKG+kbwnjyTE82CpS5iaDxnx4UqwYpSISh4
+ cxVg==
 X-Forwarded-Encrypted: i=1;
- AL+hErHNpACgcKZ9WyVpq1P3EW2yJzcX36KIHrjxSG8/iHWqBRJVWzLsSX3quq8xvpK7tIioiQyyi8k=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9eIfJJaoC/DumRbN7XK6RsJCFHr+lO4oZUhZKrP+u7pklqqjec
- QVOwYNET/NkPA5P5OXbqoyH/NYrPSFO8cPyQmk2OS7aIrKI1aY0ruZ4qdHgyUd+v+kM2kWW1AJX
- uIMiU1LQ5g/m25lXnUobWktadD/jW5TZz42qbX6UwTuXB07HYNtUe0VppLv1B/1B4pZtywRs=
-X-Gm-Gg: AZFdTZepAesf8o7F2o3LoXLswYfkuIU9BqMPN/pBJWaOXsw0dvi9Q2lcc2XrdtdXGOw
- eu5uNs4h1IyyJxB7UjvVvQyE+x9DnVyf/Wh4T4mTgsXJbP2gHBxuitCarb9KtxwU1hxPIEAJm2t
- eS2nWuDVQioJyYtJFjwU7BQ7oTHIY4Jg7qcNn0uajBkOFNDTcMAiyxmfmcHeGOp648ouwJWPhwp
- 0+JWuSXMWk5TRfBJuU8BfVrKdV16CyetDYAXSoDcTeSXMTJLmydhtEZshh5TTiMRC/MFC80FHDk
- jjoQ+wk5TDsd9T3xBSxap58W8btL0JjrW91D8+EXXMMu/Hu4Oy9ByGonc6fIHvPT5UZFIEvQhce
- 2HMESy8M3Iy2iKMrS6PE+2uJCUzm8Yoj8jxUTsgzLONKBnxq79n3/rZc/K7vYfaMxfyiMTPiasC
- MbU3zWlCaSQJ2P
-X-Received: by 2002:a67:e713:0:b0:7cc:1192:563c with SMTP id
- ada2fe7eead31-7d7395edf5emr11030653137.25.1795703462074; 
- Thu, 26 Nov 2026 06:31:02 -0800 (PST)
-X-Received: by 2002:a67:e713:0:b0:7cc:1192:563c with SMTP id
- ada2fe7eead31-7d7395edf5emr11030615137.25.1795703461504; 
- Thu, 26 Nov 2026 06:31:01 -0800 (PST)
+ AL+hErF+FivUMzg3zkW+jZTqOnDImDn1O0/F3udiq7vXfResKbUeEh1lScw6ZoLwtgF4Yg715nXlv3A=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+gHCdmwrG8Dv3Yg0duYLXkv80Rar0mr7pd44ExBXpWO47ygOd/
+ HfJbE28ep1uzj7sgWtC9wbsFQWouDSEMMNaB/zoKWjekH2IgXqVsn6xL1O91Ng92eZgHCl/qgSs
+ 8zlxmqX4U7FvICmJA6ijRdeS5Ev+8bPhQa7HQcyoqqBYgSj6s/vheIS1EXuK290GewGDzykg=
+X-Gm-Gg: AZFdTZed+7AP/iwNF9Kt+vkyfCnl2iDj33v2OSzV8EgwkWYCKn/E7CBnv+nNpZKYl/9
+ UOQlpvFeU9G8g+QArLrQK79Mgp+lrHFhA44+V+c2lcCuoChTGXJWA00wO3tv7OBaawRXKS5W2Xk
+ /6z0eOhI+tVSGekg13NqDnqnBJFzuCGJYK1I9KIWOQ8t2FXz8ulgnZu7IAeRtjqs2w7If+OHeV0
+ DuQusSOEl6eP/SLdcRi37N5tlaR/oKSEnVAL8JgUtJnOJdMNhxwvog2nD9ahWfqBBFKl2I+Zg/2
+ OMjxrY2LosRddPD71zimXZ/1bEb/AIq7XWRtML1jLCk2/GpDcoK6qxs1NUZwohEZbFPvHkQhuBV
+ UuZXF6PTff56JOtIyO1OYzn5Ddjtl5lgkw1vbu5CsGGQAevw+KTEI3cvINtno3nmXYR6EdvE79v
+ I7TFopXT1KCXod
+X-Received: by 2002:a05:6808:f13:b0:4e9:df3c:c45c with SMTP id
+ 5614622812f47-57a09c0f808mr20852323b6e.19.1795703463894; 
+ Thu, 26 Nov 2026 06:31:03 -0800 (PST)
+X-Received: by 2002:a05:6808:f13:b0:4e9:df3c:c45c with SMTP id
+ 5614622812f47-57a09c0f808mr20852267b6e.19.1795703463342; 
+ Thu, 26 Nov 2026 06:31:03 -0800 (PST)
 Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c513b03723bsm753575366b.87.2026.11.26.06.30.59
+ a640c23a62f3a-c513b03723bsm753575366b.87.2026.11.26.06.31.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Nov 2026 06:31:00 -0800 (PST)
+ Thu, 26 Nov 2026 06:31:02 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Thu, 26 Nov 2026 15:30:57 +0100
-Subject: [PATCH v3 1/2] mmc: sdhci: delay the status clear after a response
- without CRC
+Date: Thu, 26 Nov 2026 15:30:58 +0100
+Subject: [PATCH v3 2/2] mmc: msm_sdhci: drop SDHCI_QUIRK_WAIT_SEND_CMD
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261126-msm-sdhci-wait-send-cmd-v3-1-cf38d2d321b8@oss.qualcomm.com>
+Message-Id: <20261126-msm-sdhci-wait-send-cmd-v3-2-cf38d2d321b8@oss.qualcomm.com>
 References: <20261126-msm-sdhci-wait-send-cmd-v3-0-cf38d2d321b8@oss.qualcomm.com>
 In-Reply-To: <20261126-msm-sdhci-wait-send-cmd-v3-0-cf38d2d321b8@oss.qualcomm.com>
 To: Sumit Garg <sumit.garg@kernel.org>, Peng Fan <peng.fan@nxp.com>,
@@ -187,31 +185,31 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Authority-Analysis: v=2.4 cv=XpVvqlF9 c=1 sm=1 tr=0 ts=6b0842a6 cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
+X-Proofpoint-ORIG-GUID: ErPtrngGw-ZM2pZbfS5RmIZMDpaxz6yz
+X-Proofpoint-GUID: ErPtrngGw-ZM2pZbfS5RmIZMDpaxz6yz
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfXzO6vFjDrV2Cg
+ Sol9Ne7OACxxKo35grIE+3RBUpjmqxsb/F0vzsdB5wOd+MHj09qgfro5aq3kk1UJr/OB1vGOqT2
+ cBTwxlcK/4irSJF4hPa/F5W+jrcYgUE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfXzgcTK/bHsbHq
+ NEdNs9x2g5hw71VVcfYv1tKMzLhc6ZOTITRDuZyFKp+7LCx1u8I7HA56rj8IvsnbkSfRY0Ocaoz
+ Jb9HSZ07C8sDZG0zoGseAFKfAfbThXPnTHPQUAE/BPvO3g4m91FoA5th5LTwIE0C2+Qzcwt3i2F
+ m3rMBTeDXNTH6THjaCbvlflc0xCHR+8uFJ13gkeAfvFbF9rT0A+CRXWuIhoMmZaKSLg3wnktlcp
+ NZQ6inT89P9RdfSAx+UU5re42mXca5i8ph2UUj4cIBku/LTg2nzmDBLplWaW+P44ukwNh1JJNqR
+ iGmb+92inr2j759+zcVte4DLkT0I39Qqirk3ZybSZNnLduqtWnQovwUsAlH55s3l2zAkTh4imDW
+ ZGKs2k+fgjyo8NwkWiuW1Mgb9sL911eszyH5AU4cBFBrymBozffCG2FZ5HfWxeWWFeaRQ03sfVt
+ VQrSD67uq77kz6gPvjw==
+X-Authority-Analysis: v=2.4 cv=Q5VHcI2a c=1 sm=1 tr=0 ts=6b0842a8 cx=c_pps
+ a=yymyAM/LQ7lj/HqAiIiKTw==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=2diJqn6QHJFZazVFkGMA:9 a=QEXdDO2ut3YA:10
- a=TOPH6uDL9cOC6tEoww4z:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX82w+B2UfTxl2
- fd5T0l1ixBjEH54/fqBtdHyB2Adoob15ojlFrZJCLJgLMEaP/7P5D5Q6k3W3fxOneFNPP32NGRO
- TSw9dSZIfagz3XpBb9LmMETObkBP7rPAPBAYpdkZUsbZk5vSz8YA4UCQKr1IS/fyX43+7nhjbud
- F1YW49b9pVLBuphfJNng81kGJZsrXHccSRu1czrk13FC7LtCN/73VXXT2GFoD0pYwsOEds+AxTM
- 5xOrmM4KspG6Yv+Dcd4DIIqcNofIlZnrB2f/7i8sE5UI5gd00/y+hrNMgOZwwTEIwPo0FIsd0Rl
- PVzozsc1s2PmREkcFq5djN7GTwxYMpiCGH7b0RXjGHIFENNnLIVMnZ3RY8KzlGaYw2nQ628tgSR
- BQPJc+PKL7eVUaQyvEklO7VVQHsh9sAObS33Z2uJXFfO87r3Clxnj0IbdyatCAV0l5oc6S8+xbA
- ogHwv0TYwu3UxQoymeA==
-X-Proofpoint-GUID: LFk63MezpTkv81KZrX15a6BaDl4PFCS9
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX8deuKcmvvEKF
- n9trW4FlbzxgDIqIJ9zOJaMUNQQa75J4QB6TEr+J3Fq+8roMFTKwfSOF+Gxrca/FFJPtXsvwlJy
- N1jSWps0GK6iU8R2TY1m7xOcmpRoprw=
-X-Proofpoint-ORIG-GUID: LFk63MezpTkv81KZrX15a6BaDl4PFCS9
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=T-8G4zspr1_uoGV1AJYA:9 a=QEXdDO2ut3YA:10
+ a=efpaJB4zofY2dbm2aIRb:22 a=cvBusfyB2V15izCimMoJ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-26_03,2026-11-26_01,2025-10-01_01
+ definitions=2026-11-26_03,2026-11-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 priorityscore=1501 lowpriorityscore=0 malwarescore=0
- spamscore=0 impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015
+ impostorscore=0 lowpriorityscore=0 spamscore=0 adultscore=0 bulkscore=0
+ priorityscore=1501 suspectscore=0 malwarescore=0 clxscore=1015 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260056
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -226,74 +224,49 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The issue was observer on Qualcomm SDHCI controllers, where the
-first CRC-checked command after an R3 response (CMD1, ACMD41)
-fails at once with a command CRC error:
+SDHCI_QUIRK_WAIT_SEND_CMD makes sdhci_send_command() sleep for 1 ms
+after most commands (R1b commands without data return earlier because
+of SDHCI_QUIRK_BROKEN_R1B). The Linux sdhci-msm driver has no such
+delay.
 
-- SD: the CMD55 after the first ACMD41 fails, the card is not detected;
-- eMMC: the CMD2 after the last CMD1 fails and only passes on the
-  MMC_QUIRK_RETRY_SEND_CID retry.
+This delay postponed the final status clear, which is what removed the
+stale CRC error left by an R3 response.
 
-The R3 response leaves a latent CRC error in the controller. It does
-not show in the interrupt status and does not go away with time. It is
-removed only by a status clear issued a few SD clock cycles after the
-command has completed, and the clear in sdhci_send_command() comes
-earlier than that.
+The previous patch does that for the affected commands only,
+so the quirk is no longer needed.
 
-msm_sdhci hides the problem with SDHCI_QUIRK_WAIT_SEND_CMD, which
-delays that clear by 1 ms for every command.
+The quirk is costly: a multi-block read is CMD18 + CMD12, so every read
+pays 2 ms, while a 128 KiB read from an eMMC in HS400 takes about
+0.4 ms. USB mass storage reads in 128 KiB chunks; on the Arduino UNO Q:
 
-Wait 16 SD clock periods before the final status clear of a command
-whose response carries no CRC. Only CMD1 and ACMD41 are affected.
+Test results:
+                     ums read, 1 GiB
+  with the quirk     46 MB/s
+  without            201 MB/s
 
-Tested on the Arduino UNO Q (QRB2210, eMMC, identification clock
-188 kHz), with a status trace in sdhci_send_command() and without
-SDHCI_QUIRK_WAIT_SEND_CMD. First CMD2 of "mmc rescan":
-
-  Without this patch                                 CMD2 result
-    as is                                            fails   6/6
-    50 us .. 10 ms wait before the CMD2              fails   3/3 each
-    final clear of the CMD1 delayed by 1 .. 8 us     fails   6/6 each
-    final clear of the CMD1 delayed by 12 .. 32 us   passes  6/6 each
-
-  With this patch (85 us at this clock)
-    as is                                            passes  30/30
-    1 ms wait before the CMD2                        passes  10/10
-    10 ms wait before the CMD2                       passes  10/10
-
-Reported-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 Tested-by: Stephan Gerhold <stephan.gerhold@linaro.org> # DB410c eMMC/SD
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
- drivers/mmc/sdhci.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/mmc/msm_sdhci.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
-index 97de02c262c..76acbca405b 100644
---- a/drivers/mmc/sdhci.c
-+++ b/drivers/mmc/sdhci.c
-@@ -343,8 +343,17 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
- 	if (!ret && data)
- 		ret = sdhci_transfer_data(host, data);
+diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+index 9cc11a5e269..ab217393a54 100644
+--- a/drivers/mmc/msm_sdhci.c
++++ b/drivers/mmc/msm_sdhci.c
+@@ -198,7 +198,7 @@ static int msm_sdc_probe(struct udevice *dev)
+ 		udelay(200);
+ 	}
  
-+	/*
-+	 * A response without CRC (R3) can leave a latent CRC error in the
-+	 * controller (seen on Qualcomm SDHCI) that fails the next CRC-checked
-+	 * command. Clearing the status a few SD clock periods after the
-+	 * command removes it; SDHCI_QUIRK_WAIT_SEND_CMD already waits longer.
-+	 */
- 	if (host->quirks & SDHCI_QUIRK_WAIT_SEND_CMD)
- 		udelay(1000);
-+	else if (!ret && (cmd->resp_type & MMC_RSP_PRESENT) &&
-+		 !(cmd->resp_type & MMC_RSP_CRC) && mmc->clock)
-+		udelay(DIV_ROUND_UP(16 * 1000000U, mmc->clock));
+-	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD | SDHCI_QUIRK_BROKEN_R1B;
++	host->quirks = SDHCI_QUIRK_BROKEN_R1B;
  
- 	stat = sdhci_readl(host, SDHCI_INT_STATUS);
- 	sdhci_writel(host, SDHCI_INT_ALL_MASK, SDHCI_INT_STATUS);
+ 	host->max_clk = 0;
+ 
 
 -- 
 2.53.0
