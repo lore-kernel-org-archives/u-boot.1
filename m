@@ -1,149 +1,119 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED6C5606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 17:04:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1EBC606A31E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 17:11:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CLRI5CyT;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=wiKi+/zH
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BdJ1PKKC;
+	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=Q4nviia7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C200581107;
-	Thu, 26 Nov 2026 17:04:05 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HUWJZBWdC3Jp; Thu, 26 Nov 2026 17:04:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 03A428115C
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795712645;
-	b=AvSios6IIJXxN3yyngQazH20QJl+RWMVskTdtsrc2ILipYHNXlXhSW7U2I/q83FhPlAs
-	 eGt6OF+mNN/4vjr+FgA6JozDtJQd428Q0QbDcOiGGE2AssMVCKcXbGhGMbH2Rz2e2EcxW
-	 1AH7+AmXVm3a9uX11UpVnuhTTojgKj8S7KUSNch+mAxbsLTmPJXcRnErr5Z7ttTWsMGqM
-	 rmJTxPpupEYRv0wPECAXBzt2LJejQl/xbbjDAXLRvyTOmddvENUEWQj3hWVix0bjb74bd
-	 rm5b4kAjrM2c3Uji1tz0neM7EAQS9NGZkqtRJ0uP+AwXOWwViWPMtiW27Jx8TQLk6IA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795712645;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=56T6K37mJ0FhTzV+qrGrwqDg3midEFRQqbGk9DtQsWA=;
-	b=ILptt/QLmCGaXgnmJifjb+PxkGJ6Tz9smEmrEzEVVx4Way68Z7/BdzKn33N5Gy49wOfu
-	 BIAN1uLJzJMt0llVB9JCcepIruBHmCB4LZk20gcCyx2w6xG1Q1DBu3rLXvRDOE7lBhnIi
-	 yj6z/DAhleQsbGA9w/dC/bR91tqNm9BbIWpTm+uMxHm8rq+YJ9/ZvLvUg2x5cvJZllZL7
-	 PJ7HVIDvb/A6xCOD88vXM+2aYUILGNLuuKgmL1qm/e/+CzrEavlPMKwZSB01nPY7LBtaH
-	 HPFVefrWms3seRHv1OoqXoXEHNEoHGwpWW12N7v69eeQk6vuwKCatH+WJR/n+flLgcA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795712645;
-	bh=56T6K37mJ0FhTzV+qrGrwqDg3midEFRQqbGk9DtQsWA=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=CLRI5CyTKx0sib0XnjA8ROTo3kr5BnOkVIRkVsI8ZAHZXDK1vMvlx0LX9OvJRvg8Q
-	 ufy0b/ydspzTjY1DCY4zsEXpSzaxGFgTkuKs6SMPV0WUpmTAsT5Ha4mVky4FuutXqv
-	 y1p5FLSjqm6WS/im053+owayit7ptxdot7PimIilUr/qR9ZzRbx5Iuxle90/1Fn8LN
-	 OMsy3PkGU4hU7DgheGOB0xhqJiS2F/1ln//9BV7QZrFkNJ2fQQ6WaLGCW/WpQ7GKhs
-	 oxeTrPhxJD+QUjpjOdsRYYxpdLMhf6LsHS8weuBNEaKCWrptI6g44OX/pkN0HZ6rqb
-	 meo7S4eyf/ezw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 03A428115C;
-	Thu, 26 Nov 2026 17:04:05 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 860E622B
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:04:03 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 77DCB60A8C
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:04:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B4A2A60A55;
+	Thu, 26 Nov 2026 17:11:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UNZKavBgOD9C for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 17:04:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5299960A6E
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::b132"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b132; helo=mail-yx1-xb132.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=wiKi+/zH
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5299960A6E
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:04:01 +0000 (UTC)
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-675617e81f9so8239542d50.3
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 09:04:01 -0800 (PST)
+ id 0_T8xjJcJM7v; Thu, 26 Nov 2026 17:11:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 64B6A60A77
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795713063;
+	b=VI1QOWqmMPMAN78q24+MUwFEEXPZj8c/Wmetrp3I0W7Qt6B4vDWDPmGOWVs8fwAMtsEW
+	 dlFac+9iwECiHmFSeqvV2XR6/e9nLP++sMQMQBlQ4lPutrRjTvDKXlx8NmLjvJn8w+uRg
+	 POB0bBq9n0X5W8lBtjDDgASx5bZMhGYbq4zduLKKef/65r+UqYZgmJncvCAAhXeDqhzI+
+	 Ue0D/GZx+oQtlY3icjFTuyKTR7Unn2PYTuXsSaruP8YTSespytsONvbB43sa7IhAZTjG2
+	 6OlUygw6RVfNYOHoB785u7mjWjR9Ysio7azoquqFxGQn1VyKy4Xshfv5BLGrlCzGA/g==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795713063;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=4fcp0d5lM/3tV5zrNldM2DA3NX5OumR8W7xN9Pw4deI=;
+	b=YIgH5K0ceFVNBhW9TO1jLZxTNa1XVXqxdJDP+zYy5AW3SVn6lbGjX7w8gfVchQJLhi5C
+	 gixboaC0EGQldAI+4pDIh6zY2Px9uce1VH3/ceGb+hdJifQCI8ZEjTKTjvC4ZQyHJRWVz
+	 taChMT3aiQWb13akZICjhkvNc/UmguIAXhH9yqn7ZA/0ZByzuWzZ3HSapMH1diefCQ6dX
+	 QQuOKWXf7oy/nu4dN2Ix0TKTT5k7Okdkvcobm1AqCCQ3y7VkAqaqmSa4lXTgAXv/aGvyS
+	 bA0MbcgjKK0I5ZksSWj/vv0dBuStssTPkO87+UkdVpBz4+SyEWaNtPZFudzVN5zGCQw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795712640; x=1796317440;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=56T6K37mJ0FhTzV+qrGrwqDg3midEFRQqbGk9DtQsWA=;
- b=wiKi+/zHgtpQnXRQO0lZPrElXggPKwk1wV0oz0N212d4VfoIztWfYyvzGNkmQhK9Bv
- fP9bLKJAnrCBqzCcOyqWZFfeIB65cr167GDlfA0TKhcNtcIJl3qxMX/y51H5SVHjrQqu
- YL3VFpQFdUtkYzrWmycVMWnkI47q3KIbCZWJXp0TkeiapFSUNtrkvzVVc4cxVyf2fuiO
- yBLqJTg92orfqU1nrUzBU1aqEU2pscrXfP2fWU9jDycWALUPBtKBiLzD03YV/yVqiwvG
- Bh8m38/hcg6+7KSpJ5Vgw3jJvBeFj6I6bE75hNYgvAOo29RJjoQvRAFHbt0a6ovcIRfB
- 0QPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795712640; x=1796317440;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=56T6K37mJ0FhTzV+qrGrwqDg3midEFRQqbGk9DtQsWA=;
- b=mcceplsvi4TBinWIih9MAubh/TCaWM+b5lG+QRaVyM6OTGBHXbSX0iS3cLYwJ9uWS8
- JY/EvhTLw+0bu6230CYQVV82O+SF0tVI0XUgGGS+b3GeN8Aus0stF/wcU/HVEUgs6HxV
- E0MZ80WHdMKGc+0vFoQihCoy2ilyNVzTmh0KNxOeteQhQVAEuZOSO2ASXb4B3Te+uyOk
- /oxOc2nZ8RWYiGst1rRMZBWpSsOulxToWSRZfq+S+GDfn1wgkSepr4WYnHeDWc5xCFv4
- t8hrFf8kbdl47OP3R2X0oIIw166kMAYsvxfJ6zb1DtZgS1b0UxPDLT5GhNfvy4NrPnlH
- Q/2A==
-X-Forwarded-Encrypted: i=1;
- AL+hErGkpVo6bMwgHfDc0XRXwmPqyOEpuWYX6UPehAoPruuAffFJ9VqcPLnAhhqgs+lwEglAdGUnJSw=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9iT1OWmBpOBo/2Mw+IUMLoRHcitDglS3a0SSQYNKrM7vJKN3JT
- 5ic+VQRXZ+D2HxvAtcqfdx9cRd2BYXWuEEDj6b4nTHW51v0b+3lroHgXgEaL2BJWWa1GtbY2MKC
- ejW7cMt5Wq1NkdQLN5hdUOjx/ew0vRkaedtKuBd1sq0QmJCSBDINDUJA=
-X-Gm-Gg: AZFdTZeoE7kQZ/h0UJurS+V5Xak620o4DaPEeDlnvgRlNfXNIWDB2IOkJE8XIrQM7RI
- rPvU5OMiX75T+t720NBhv0ZjhE0tokWLsb7YFEOS4nHhrIZGsL/lQXYXt5ahjagFZBVZrFN8Tst
- GDnnOSgaeWmugBHSjKDlJ6pt4chwPKDEQ6XeEwNTk2kbDGyUx8Rfw+5lWnNn/5UP9n+asaSOFlu
- npdsJfReERR0Q68rwyXuamQwje4obvlaXVLftedtiOjywZU72mQu40ClXSDUL0WVRgJ2l0c7P4G
- U2XSGTaHtAoP4FBh2xd3mhHJhqSRH6qznGtbK7F+tNTiEMj73dCC4VT28PiBpI72ZSWrlBsl5Cy
- GD47bYBwgicJlmOtcTqlQ0FIXcYaKmukjZeI2N62xTtpEDk7e5kdBkZVKkr0jBBNk2LR5nYPNuL
- lbmiwlElAzIWlrzyowP5LAEQcgkaoUk6IhTjanS9y45wcGGEdTTOBWMKhUmREU/tVDAiRQc+Df9
- RIZQNQ+sPaoK1GG2mRr91Tmsu26BGh78ozf864xCoaYUpgVcsB4xpbHmQdoFix+bGeEzkCiCS8K
- xoH3rI6R73IrS+BFQG861bg3C5rcrKs7+07ISWJA2ebunokPWl2BDLWTPPVsQ6EF5gmP7JAuf+B
- Rp4FYDQKmSNSGBrOm4Tle3dZxtXvZKgaY6rR9l4ybJKr4yYA1yDDhcwdkg1WZuhri8naTM81eh3
- aZA8tJY2QKbKnqrS7dcnSWV0WskPJ8gxRqoa0dwDFOg/QaCzCNQPMelJKLo53x0j0wz9ZmPO8=
-X-Received: by 2002:a05:690e:b85:b0:67d:ad09:ba96 with SMTP id
- 956f58d0204a3-67dfa20ba4dmr8242708d50.19.1795712640452; Thu, 26 Nov 2026
- 09:04:00 -0800 (PST)
+	d=lists.u-boot-project.org; s=default; t=1795713063;
+	bh=4fcp0d5lM/3tV5zrNldM2DA3NX5OumR8W7xN9Pw4deI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=BdJ1PKKCLTjhm9KhBzxlxkVCX56+AeIonjLK7Teu6w69bJ2T2OS7wWi0ln9xn9LBm
+	 doJ8tZC6gB3oKyDbkY/DkqAJvHzr18SD0yP4JpZxX6o7gpzzyMbldqF1WFqYPic0SX
+	 z1secyZ6fAGKAnkluXq/MLG9qa1KiLjDUZZN1mj//NMhjAHkIOk2eeNA61teXvGiRT
+	 657nbXYrwl0WO51R0t/nsCKFp57tt9zgEV0bxt+X2Lv3W3EKp2Z8uYqXO4nhlC+GMy
+	 QizRvTjqBOodfvCim+vz9oA87mnHxwuau+HnV+MDIQKx12+pLhOFfJVTuJMyzmWUbS
+	 reRyQa74LYjIA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 64B6A60A77;
+	Thu, 26 Nov 2026 17:11:03 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6BD3E311
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:11:02 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 50A794053D
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:11:02 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BW3GaU7GTidH for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 17:11:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org F2B9E400E6
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=84.16.66.174
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.174;
+ helo=smtp-42ae.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=Q4nviia7
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [84.16.66.174])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id F2B9E400E6
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:10:58 +0000 (UTC)
+Received: from smtp-4-0001 (smtp-4-0001.mail.infomaniak.ch [10.7.10.108])
+ by smtp-3-3000 (Postfix) with ESMTPS id 4jb33M6PmDzfrc;
+ Thu, 26 Nov 2026 18:10:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1795713055;
+ bh=4fcp0d5lM/3tV5zrNldM2DA3NX5OumR8W7xN9Pw4deI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Q4nviia7PF8UaUl1e6H524u/plz6hHBL07//zS//05jCLcWDTe/vEkU1hOlEpK0m2
+ ihWS+PDI51OGi8LHNwyfoyk2KmQhSF/R3kJr8MR2HsFDxxg56CHB8oTXC47Qb8A/xN
+ 6fot189EQbTx1Nb2PuYzCIUubVQ38xVGU52W2Nh61/udKDUvy4n9rhZB03NKC5GysY
+ JapO2f2dWKxzim/Vxsn+oKAxCg0R1G7N+MiS6qxm8hz9uuUL9XjcgLIJEaoXdFaW32
+ gH41bmvJamGNeyC9hYRQN563BF8sWEsf62eOV3s8N30pvPa/7AfUDw1+/CVGeYX/49
+ 4JfBN98U66JsA==
+Received: from unknown by smtp-4-0001 (Postfix) with ESMTPA id 4jb33K5s5tzB36; 
+ Thu, 26 Nov 2026 18:10:53 +0100 (CET)
+Message-ID: <1a9f27ab-d1d3-4454-8852-f6a9ae171e83@0leil.net>
+Date: Thu, 26 Nov 2026 18:10:53 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261125074122.1965495-1-ilias.apalodimas@linaro.org>
- <ef34ded1-ade9-4c79-8f4a-4eb7e817a68b@linaro.org>
- <CAC_iWjJGSR+K2x1yn8Jxs5FLfrJTknH85s4MOsYMwKF-O8iUJw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJGSR+K2x1yn8Jxs5FLfrJTknH85s4MOsYMwKF-O8iUJw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 26 Nov 2026 19:03:23 +0200
-X-Gm-Features: Aa3M54r5XL62wdXjasG_VXlpsTtZCNxUQZFQqDi21wf3pS936D54OsqPpLuxdDo
-Message-ID: <CAC_iWjLUMwZcV9-g5OFAWanzzzMWGZFZmzARDPyQOWdET6yMYQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] arm64: relocate: convert relocate_code to C
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, 
- u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: rock-4c-plus: Configure IO domains in SPL
+To: Shigeaki Asai <asai.6265@gmail.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.u-boot-project.org, Shigeaki Asai <y-asai.0816@docomonet.jp>
+References: <20261106000815.217889-1-asai.6265@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <20261106000815.217889-1-asai.6265@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,111 +123,111 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, 26 Nov 2026 at 18:18, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Richard,
->
-> On Thu, 26 Nov 2026 at 18:11, Richard Henderson
-> <richard.henderson@linaro.org> wrote:
-> >
-> > On 11/24/26 23:41, Ilias Apalodimas wrote:
-> > > +/**
-> > > + * relocate_code() - copy U-Boot to its final location and fix it up
-> > > + *
-> > > + * @dest: destination address, gd->relocaddr
-> > > + *
-> > > + * This is entered from _main in crt0_64.S with sp and gd already
-> > > + * pointing to the relocated area and with lr pointing to the relocated
-> > > + * copy of relocation_return, so returning from here continues execution
-> > > + * in the new image.
-> > > + *
-> > > + * Constraints for this function, since it runs from the old image and
-> > > + * before BSS is usable:
-> > > + * - It must not touch BSS. On arm64 .bss overlays .rela.dyn
-> > > + * - It must not rely on anything that needs relocating in the destination.
-> > > + *   Symbol addresses are generated PC-relative (adrp/add, -fno-pic), so they
-> > > + *   resolve to the runtime location of the currently executing image, which
-> > > + *   is already correct, either because we run at CONFIG_TEXT_BASE or because
-> > > + *   pie_fixup has fixed up the running image in place.
-> > > + * - It must not be instrumented.
-> > > + */
-> > > +void notrace relocate_code(ulong dest)
-> > > +{
-> > > +     u64 src = (u64)__image_copy_start;
-> > > +     u64 size = (u64)__image_copy_end - src;
-> > > +     const Elf64_Rela *rela = (const Elf64_Rela *)__rel_dyn_start;
-> > > +     const Elf64_Rela *rela_end = (const Elf64_Rela *)__rel_dyn_end;
-> > > +     u64 sctlr;
-> > > +     u64 offset;
-> > > +
-> > > +     if (src == dest)
-> > > +             return;
-> > > +     memcpy((void *)dest, (void *)src, size);
-> > > +     /*
-> > > +      * r_offset and r_addend are link-time values, so the offset to apply
-> > > +      * is link-to-copy
-> > > +      */
-> > > +     offset = dest - CONFIG_TEXT_BASE;
-> > > +
-> > > +     /*
-> > > +      * We have a makefile check that aborts if reloc entries are not
-> > > +      * R_AARCH64_RELATIVE.
-> > > +      */
-> > > +     for (; rela < rela_end; rela++) {
-> > > +             if (ELF64_R_TYPE(rela->r_info) != R_AARCH64_RELATIVE)
-> > > +                     continue;
-> > > +             *(u64 *)(rela->r_offset + offset) = rela->r_addend + offset;
-> > > +     }
-> >
-> > If you've got a build-time check that all reloc entries are RELATIVE,
-> > why are you checking again at runtime?
->
-> Defensive programming I guess, I can remove it, but I'd rather keep it
-> in case the Makefile checks ever go away.
+Hi Shigeaki Asai,
 
-Actually I remembered why I did this while responding to the second
-email. It wasn't defensive. The second patch removes the script
-because I couldn't find an easy way to parse RELR + RELA. Also while
-reading up on RELR, I thought RELA+RELR can co-exist.
+On 11/6/26 1:08 AM, Shigeaki Asai wrote:
+> From: Shigeaki Asai <y-asai.0816@docomonet.jp>
+> 
+> On the ROCK 4C+, nothing is printed on the debug UART after a cold
+> boot until U-Boot proper configures the regulators, so the TPL and
+> SPL output is lost.
+> 
+> The IO domains of UART2 (APIO4) and PMUIO2 are supplied by
+> vcc_3v0_s0, which is LDO7 of the RK809. This LDO comes up at 1.8V
+> at power-on (measured on the UART TX pin). U-Boot proper later sets
 
-Thanks
-/Ilias
->
-> >
-> > > +
-> > > +     sctlr = get_sctlr();
-> > > +     if (sctlr & CR_C) {
-> > > +             __asm_flush_dcache_range(dest, dest + size);
-> > > +             __asm_flush_l3_dcache();
-> > > +     } else {
-> > > +             /* Non-cacheable stores need to complete before we fetch new code */
-> > > +             asm volatile("dsb sy" : : : "memory");
-> > > +     }
-> > > +
-> > > +     if (sctlr & CR_I)
-> > > +             asm volatile("ic iallu\n\tdsb nsh\n\tisb" : : : "memory");
-> >
-> > isb here is redundant with the one below.
->
-> Ah fair enough. I need it whether CR_I is 0 or 1 right? So I can just
-> remove it from the if()
->
-> >
-> > > +
-> > > +     /* Always discard anything already fetched/prefetched */
-> > > +     asm volatile("isb" : : : "memory");
-> > > +}
-> >
-> >
-> > r~
->
-> Thanks
-> /Ilias
+That's odd, the datasheet says 2.8V (but also that the reset value 
+depends on the OTP value so who knows). It also seems it's off by default.
+
+Can you check as early as possible the value of LDO7_EN, LDO7_SLP_EN, 
+LDO7_ON_VSEL and LDO7_SLP_VSEL bitfields to triple check? Not sure how 
+to do that though, as the easiest way would be to print the values, but 
+oh well...
+
+> it to 3.0V and configures the IO domains to match.
+> 
+> Enable the PMIC, regulator and IO domain drivers in SPL, and add
+> bootph-pre-ram to the related nodes. The IO domain driver then sets
+> vcc_3v0_s0 to 3.0V and configures the IO domains early in SPL.
+> 
+> With this, the output is visible from SPL on a cold boot. The TPL
+> output is still not visible.
+> 
+> Tested on ROCK 4C+ V1.41.
+> 
+> This patch was written with the help of Claude (claude-opus-5-5).
+> 
+> Signed-off-by: Shigeaki Asai <y-asai.0816@docomonet.jp>
+> ---
+> Tested on top of the series "ram: rk3399: Fix LPDDR4 tRFCab for
+> high-density devices", because this board does not boot without it:
+> https://lore.kernel.org/all/20261101185441.755448-1-asai.6265@gmail.com/
+> 
+>   arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi | 32 ++++++++++++++++++++
+>   configs/rock-4c-plus-rk3399_defconfig        |  7 +++++
+>   2 files changed, 39 insertions(+)
+> 
+> diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> index 7a6af430a6f..6094cda551a 100644
+> --- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> @@ -49,3 +49,35 @@
+>   &vdd_log {
+>   	regulator-init-microvolt = <950000>;
+>   };
+> +
+> +&i2c0 {
+> +	bootph-pre-ram;
+> +};
+> +
+> +&i2c0_xfer {
+> +	bootph-pre-ram;
+> +};
+> +
+> +&pcfg_pull_none {
+> +	bootph-pre-ram;
+> +};
+> +
+
+issue: redundant
+
+Already in arch/arm/dts/rk3399-u-boot.dtsi.
+
+> +&rk809 {
+> +	bootph-pre-ram;
+> +
+> +	regulators {
+> +		bootph-pre-ram;
+> +	};
+> +};
+> +
+
+issue: unneeded
+
+bootph- properties are propagated to all parent nodes, so bootph-pre-ram 
+added to vcc_3v0_s0 should be enough.
+
+> +&vcc_3v0_s0 {
+> +	bootph-pre-ram;
+> +};
+> +
+> +&io_domains {
+> +	bootph-pre-ram;
+> +};
+> +
+> +&pmu_io_domains {
+> +	bootph-pre-ram;
+> +};
+
+issue: please reorder the phandles alphabetically
+
+Cheers,
+Quentin
