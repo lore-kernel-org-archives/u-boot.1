@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DB10606A680
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5559A606A337
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WVlE6p+W;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JDPVhseJ
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=a1aj+L0i;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=IqdClOeg
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DC2FD811C5;
-	Thu, 26 Nov 2026 13:33:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3389B40A08;
+	Thu, 26 Nov 2026 13:33:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NRhgPt4g9R7w; Thu, 26 Nov 2026 13:33:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 81B16811A5
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700027;
-	b=sNwefenwj37W6ix/YcKMvHIK+HDakBn2Y56xvQmaBoHlRUbDQG8zrPtPYDgTkKyB5d3Q
-	 nxpr0FI5oGRgCGP89aIiO8bBwrGBGLOQ/LtIdqif/NPXX3JAkdBLzs8Oxqf6wi5oW038g
-	 rfmE5JbbjG+5zfRyBz0DL5I0dXmJC9XhosR31bPHnAHA8xYlC1ZghNyR3+YLknKqc5E+j
-	 XA7mIsRF5ISV3CmlrsAGE7FwWVelxBZ8g++dxcF5XYo+mJd4i/BPHsnQhcRPWL0q0hyYf
-	 5Qjm/Q4bHtn9Cbe1PK2mWL+F3EFLELwqN7i2/cX+xxPcSXxULkJ2TO5/UyS0IwnUP9Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5v8NSW8oVKwK; Thu, 26 Nov 2026 13:33:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 55A0740A0F
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700029;
+	b=tGcwxhB1OHLvVV4Ns8Bk7F/t5FzvuY4fWv6PHL/911KbQvJnl9RdMgf37dAsvmfOWtNJ
+	 dFIAkpncjQJ+Xe4UQVvi2G2rQqClMvFcz7XVFuOe3uvbL55LFQnwhWbUeHrl1m451uNRF
+	 Ryui3pJzi22itzeHZK9oZZbw/a5VgtzwHuNRDcFEGbDZuniKcsfHnQb9dXjxdjohBj2l2
+	 nIs0tYUDJI1rkMU1nNjPXxhbBQL0y52EL4cO269dVbr0d/7Db0Xn3yhc8gyOcj841pOkE
+	 cLMqTQNfpbaVR3AAJOebdNMK615UeF48OuAwrGhUeU3op5D6FyTR2lWzMkP65B8dtWQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795700027;
+	c=relaxed/relaxed; t=1795700029;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,116 +33,114 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=FofOUSAW3Eoqj2dlOXaHR0i8DLCt7yIzJ6ZGd0OUweQ=;
-	b=UDabIFNFkhXjusr93Uy7evBz1F2YO9vLQ/FU+dVBe2fs44+D5FKkr4kxtuMJJ+GDWYTL
-	 GsxiKERp5CuYBQSuFJu4FxTl8HDKs6ZeJwwSdbO0HEfr7yeTUT1wr5H0IOmE2zT/ZAv84
-	 nS2LOMyfUK73Mr4AiugB3trqSulBnZRoudtJcvOPyyS7CjhYxYARr6jm30EO6+pLoeLns
-	 +AlwpfInuZ1JgJWCaOsm0GQju7kuiHjXgAaohghfXPK9Zed/1R0xSgGPYsgzHWQmuo+By
-	 aOuyF9l6LVPvVVNQloDEpdF3hZgVo4MNIo8sKRsZNsSebYSiJnVqFItKhT/LmCrTeZg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JDPVhseJ;
+	bh=BFALUQV3ELCOrszT7PrWHgXcv/8MhHqsbk0B6fB7vN4=;
+	b=WXkFGCn3dtno9vs+mez0DMTAS2QJaY5sg9t83JW1qsfgp5rdKZYeKHNVsyfu4dt+TgH5
+	 72422RKRgCU1/zdhCQfbtFEb4x9Ep8Etk6NzHxBdRjmBrcjeFVdPDXerqooDGwpJXsHDF
+	 fyNmuWw+5LtppjPZBeC1+52934Fil+Mayoqzg9n77y2gcz09vvLehVb+PjYBM9PqZyqlh
+	 dTTtM85M35kT0b1P8Tc03Vv1Yky/OmjGRuwHjWuvx6ABeJ/NyhGC1bRd5kvLlENkX6WXo
+	 QsEsjldiajWQ6QRGsBxMwr0blSsiRy3qqQdLwQUYqCiGfUCIttmo6cxaAV8maqYZNFQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795700027;
-	bh=FofOUSAW3Eoqj2dlOXaHR0i8DLCt7yIzJ6ZGd0OUweQ=;
+	d=lists.u-boot-project.org; s=default; t=1795700029;
+	bh=BFALUQV3ELCOrszT7PrWHgXcv/8MhHqsbk0B6fB7vN4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WVlE6p+WfLnh7UIMKhk5aIyOu9HDdJ5VXiyCXc56xZ/1vLtbxSHBbOs+FYuhRzhuQ
-	 e0dVzqwLEC5BPyr3codWQDyWw9KmWxZBGValyIky+j4NCOmXzzlpqEfOwiBAggP5ia
-	 n57WqOYJtCgAi6oqBUfNhJVqIqVPpY7TTqyNtdaMETd2IFiztleMIFOEh4WnVY6Jva
-	 JdTQH0f1CH6MOxZYuFTEr68hd6hAwN1fEAF45MKwtm0M60CHpvUY2SCgFfY3io3d8B
-	 f2qsmCJ7auYwGI6qmWp6dAA8/jUUsjx9jwHvwKkuQQspNUmsnAeDbF5fqXgzGiOnc5
-	 y5rVuM6UVbZwA==
+	b=a1aj+L0iTgPlOJf6kY/QiK+5+CxdUtbdJkCRNKyWkKKkFXiOtVIzgJ4xfWX2tswnm
+	 0eRUQSv3I9nfuSlxuOiwSqdgTdJ8QYyqmC1JzwjtuQrW0micR04gMvVQFcKgug5do5
+	 eeB0iuiX7NGD9AVmDir/zV98Fht9wgRQKOXSXI40hHAEeuVV8Yp/4FBy2GBPT1rogr
+	 0uCzJKs454yWavrJjnqj1/oRVV8JicHT2DeM2EWKDUUSUKCTlaqiUGQsnj00WqMKI/
+	 ZVu8Es1Rpr+PNe2olUOtBW9+YHyQA0Ft5/dTjrbdC+1ZB+dypNrzUz1nqdBf90WPbf
+	 RO9v/CpkbpZWQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 81B16811A5;
-	Thu, 26 Nov 2026 13:33:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 55A0740A0F;
+	Thu, 26 Nov 2026 13:33:49 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id F2DEC32D
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:41 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1CE6922B
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D906981004
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:41 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0EBC480FFA
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fIIEj6Dl42f6 for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 06:53:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 91DCC809C0
+ id 1DKljgb81XI9 for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 06:53:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 304D1809C0
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c30"
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c30; helo=mail-oo1-xc30.google.com;
+ client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=JDPVhseJ
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 91DCC809C0
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:40 +0000 (UTC)
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-6d68de53053so4928128eaf.0
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:40 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=IqdClOeg
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 304D1809C0
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:42 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-85ac281604dso3328199a34.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795676019; x=1796280819;
+ d=gmail.com; s=20260707; t=1795676021; x=1796280821;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=FofOUSAW3Eoqj2dlOXaHR0i8DLCt7yIzJ6ZGd0OUweQ=;
- b=JDPVhseJRKDCjeuZHqk+/mhQgHuO6u/9WMSY0Hg2sZVkyQMN1Bfznu9+I51lBMXboY
- mIPO0NznqGAp4JeAtBOcj9je26YVa1ntW2OmVV+OCETm0nuiklTK02HVHmRTW/qmK8E4
- Qkc+yMAwblT+HLc/EYBd0jYnHM69q4z4v16hvRKaN1HDQifliO53i2vgJsw24UlISGvj
- rUIp0McXA19DoG9cBHqbSuChvI6QsGkCtMV4ywRs/6HgOVu3E7iNIlCATlDdNoonynP5
- sthfnYpDDBEIyYeqcZ5acVHX6Hu62UX1R2k9v7SagPH2fEeN0hYTgWcATjX78f/8NWq+
- LDIQ==
+ bh=BFALUQV3ELCOrszT7PrWHgXcv/8MhHqsbk0B6fB7vN4=;
+ b=IqdClOegrIRtkCnqB5HH/ENweNof0+irLtbAlW35cw4zzTkaJBNtRT1t6FwW2WNeZf
+ tY0/zufwwljgOLTNMdcKASpIi3R8lIXB2LpfEx/2ksJsr91deNshIUTCbG3SrV63yyqQ
+ idwRcgGPvpj3OO3xrQHygtNPqsJ4j/Cw7nGcknPns4eApeOE6/Qjw3WrK2vWC/L1D71Z
+ GbnAGauLUvdV+j5urBcqb3pQIlm/KVxUZCH5A7zcicNXnIlYjFpUHeFCAWEBMwQNk+JR
+ ki1F4K1ugeHEGDyBnd7Geyx8T4RpT8Ux59pqfkn9JI4SRoC34VZEhNuiSJPcUbAIqI7g
+ D+xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795676019; x=1796280819;
+ d=1e100.net; s=20260707; t=1795676021; x=1796280821;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=FofOUSAW3Eoqj2dlOXaHR0i8DLCt7yIzJ6ZGd0OUweQ=;
- b=fSraRSsTart6gf4fg8/LZVKN+m5eyt+H4aIwMveoq0RxadPJKJuEH2KHJohXGz0cFF
- ToJKoUq7wHPUmLi6GKaRTzK9Ichk3QH98C5dgE3DtGvWDw6IlWSfeHXtwbduN00lVAHw
- h6QbKFrhAqx1Zb3l9pInOZ2njSL2ycGA1TaelsCi3lvCTmRoAuz6EtzbjVjOu5enviHS
- YLpe7YiA6WV5PCLRATaQ6SJEGFzOZUP+IpFf7gBrcOB++xs2DV20g6qKc3Ouyzi1XcPy
- vw3g5vSkQAc1h/6e61SUmTRPJ/cDNKBmgpUyF7xRJQhwAxkfxAU9hMAkHTI/OqedE85k
- v2Dg==
-X-Gm-Message-State: APuU4Z+iRx1u8ZR8SRle2TNvIKh0k9ZHLdeMNkGEcO8B+v777Tny68Yl
- L6QdctPSTSTXE5vKCi2hHP1tj7lzg8wNvDQBQvGvU0o78DwFQBzKNzjM
-X-Gm-Gg: AZFdTZfTp7bbEjeGQNl5ziCm5ZqreGugLtv+LHrCumGMliYzXVU+4ip/lgmtBvjnzOW
- EJDN6VCGvkWqMm/HhMhW66PT6BTpEfK1YVNvTRdwEfTl/zv/yxgSeZpMYElb8ZndmgR2LZusc80
- b9DvOIjZ/6Dp5raVSNh2sH5q4YokevJQNHyewDnDi9q7wUXArVdhR0+0NGiBP0U7h4rhnUt+LZ1
- g497fhqN/B9virnn+377ZRx3342Rc+DvB64b0rPBS4R7Od2yPbV00lCK4wi49K2ERwnZOFP9OTT
- J/Op//+lYdMpTFdwDMgPJ4WzNPs+H/6sHSb9oty13Lm+Fw2kE8tQDq7j17wS3wa3iV1Gjaij34x
- 8FE0ubr7akAfuEs0fbwv+fB6GU1/PSupnU062P8gn2nGZ6uEe88qap1VfJAZ7jIdyDVFvcAkw1E
- b/329yN5Wh0cwwUAoZPifhebZkiTObBRcF9DGQ5NZCk7Bi7mdTF8DiroX1TOF3sKwy9qfU+cQfc
- BOAc9Mr4HgRiHcy+YbY5DnxMUIT4fgSwlixD+fqhF4Mv1Rtnwg9kv03GXpE+2yOtNdHjuxPW98O
- YP6Kmk9zBx8aJ0O73TyNQhi+vHFbWlP19fAGzU9SSecqJ9tVUQ/F2Pljx7gca4UBOTo39E33j5o
- RpqPxHP1ROvaAKYXHUYwZP2iFalHCzj+iSWxkpDzoqumlOlJU0FArZDWPlr1TQwZTsSjuPXFY4E
- AL9TbHFJBs4uBzCkLu7OBMq+ShvDiKEk5hRDt6nLYuLbESCysE8fK5Nr2cQxoiOqcoXnX0ctq5
-X-Received: by 2002:a05:6820:571c:10b0:6cd:3fdc:a932 with SMTP id
- 006d021491bc7-71b3958daaamr11080872eaf.79.1795676019097; 
- Wed, 25 Nov 2026 22:53:39 -0800 (PST)
+ bh=BFALUQV3ELCOrszT7PrWHgXcv/8MhHqsbk0B6fB7vN4=;
+ b=wzU6jufiDFtKJC8/CuWguH2/13HUVSfVe+u6dJvFAD8zyYSDGgQuEgUD71FHl/whf8
+ TuXfE0InWLnrzK5JC3kb+av3EG7KuVGgB3AD+8bE0ktzGs14wVvvv4FtrFU7xqQMAn5T
+ dYmwFfUHOemaC+TACb3b83adoQjEDWWLzOiEyx1stKo3YchNNebhG8QT2I5SUi0tVIjX
+ daj/sITOasLTi9qK261gmL4aQ/3kTgPvCTKoqVuKsMie5frFp3g9ngGTwV7J2NTwQvqi
+ TCtY8dPof4oXJOGyOmLYgQoOAdEIso7jHngYOEMMMG4HinWM1c+OTEkgBchl9RwIW36L
+ zwjQ==
+X-Gm-Message-State: APuU4Z83ERr+rQoWnqaXnuYmQTAkO2YnIllr3Y5BFdMzIzAJBr9cVbOG
+ 30KLZGl3R5VXqWV692t4SY4MUMqgmZxY8CeaYXwHVZ+XZhxDDoCZ2FVs
+X-Gm-Gg: AZFdTZdxoLkq1y0ZqvKcj7VJSiYB6dSJBivImpsXcJ+eJIG7Bogx1wTeLd1v+WnJ3RK
+ Fy0xe+BKi8lBIXSmJdgZYHMjrHcYlu+oFw/IMSu5WVH4TKg/S0o3n6sA6murE2AsMiY01ME4RiD
+ AanfRCJj6uOLs78pPc0LKoh9VFc7tgx4ZRgsglErKTLk2galk4B4IkxwZdj0UuA5NO5MKZBFmRD
+ w5gfwTSFDQ/qsfJcPu+KtSE6LWL49p50UkmuVZeNNqg9ASDTDJjytfBwsI7cbtvOQFtvQWIEQSw
+ DqrOQsZqNv0npBbx2wMnlG7Br6wDEpdSdoREpz56NPPbhQ2a8SqWlbZIz86IsKLjVvRnA+JbvBe
+ CZVFP+J6f1pyQmdhsvGZjwYKvjrKsoU6qkANA47M0BbKqbuqNubstP4EXHalQDR28jn28EOCd/j
+ H6TcZLB8QmzRG8llk7FdnloGSRBxwtZ8mhEfkSbglEaV3+rHBohE4vrj3fkaO1YiVxnhdmvGSL+
+ zxI5PxYKPVUYMxni8Wm3ZTzP7o3ulmV3mrVcQIRwvNhqdqmuSP0KIpBPCYlYoIboW0k/1W1PlSr
+ P1TzEQDqjRVpzbdDjZ5YXiFt5AC5/QQk1nVyvH6gzEvIEhXp0lKITLt9txhPjVoLN/zb3ilN55J
+ l1tjnsr6llRIh6Exnicv/ZzB0niLnYO27PUXq8tvOS92Ud74Mr6jCjsMHfWgfU+OrqIiIAzCiI8
+ vCq9kYhRYAjbs9jM4N4K1ElyHZM/0A7yTdY3g5n+4JUxwEjbIeyEFAhK341eiGwyt8IV5U9PDR
+X-Received: by 2002:a05:6830:924:b0:85f:31f:7643 with SMTP id
+ 46e09a7af769-863157cd696mr29706936a34.7.1795676021068; 
+ Wed, 25 Nov 2026 22:53:41 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.37
+ 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 22:53:38 -0800 (PST)
+ Wed, 25 Nov 2026 22:53:40 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 25 Nov 2026 23:53:05 -0700
-Subject: [PATCH 16/19] spl: net: load a boot image with lwIP
+Date: Wed, 25 Nov 2026 23:53:06 -0700
+Subject: [PATCH 17/19] net: ncsi: check the selected interface before probing
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-submit-lwip-network-boot-v1-v1-16-63df291d9392@gmail.com>
+Message-Id: <20261125-submit-lwip-network-boot-v1-v1-17-63df291d9392@gmail.com>
 References: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 In-Reply-To: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -193,446 +191,241 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Let Ethernet SPL boot use the same IPv4 address acquisition and TFTP
-transfer as U-Boot proper. The loader needs a nonempty file in RAM:
-leave the decision to boot it to SPL, regardless of the interactive
-autoload and autostart settings.
+With multiple Ethernet interfaces, net_loop() decides whether to probe
+NC-SI before it selects the device named by ethact. It can start
+discovery on an ordinary port, or skip discovery on a sideband port.
+Its recursive call also starts a second Ethernet session and clears
+the ping destination before the original command can use it.
 
-Make the in-memory environment writable if the backend exposes only the
-built-in defaults. DHCP and BOOTP need to publish the filename and
-addresses for TFTP. Use the SPL vendor-class identifier and require a
-reusable malloc pool for packet buffers.
+Select the protocol after Ethernet startup and repeat the choice when a
+retry rotates to another interface. Run discovery in the same loop:
+on success, start the requested protocol on the configured interface;
+on failure, use the normal retry and error paths. Reject an explicit
+NC-SI command on a regular port or without an active PHY context.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- common/spl/Kconfig         | 10 ++++++++--
- common/spl/spl_net.c       | 13 ++++++++++++-
- include/net-lwip.h         |  1 +
- lib/Makefile               |  2 +-
- lib/lwip/u-boot/lwipopts.h | 14 +++++++-------
- net/Makefile               |  2 +-
- net/lwip/Makefile          |  5 +++++
- net/lwip/dhcp.c            | 28 ++++++++++++++++++++++------
- net/lwip/net-lwip.c        |  2 +-
- test/dm/lwip_dhcp.c        | 23 ++++++++++++++++++++---
- test/image/spl_load_net.c  | 43 +++++++++++++++++++++++++++++++++++--------
- 11 files changed, 113 insertions(+), 30 deletions(-)
+ drivers/net/phy/ncsi.c |  6 ++++
+ net/net.c              | 55 ++++++++++++++++++++++------------
+ test/dm/eth.c          | 81 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 123 insertions(+), 19 deletions(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 4930ecb0861..19b5d9f30f8 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1177,7 +1177,10 @@ config SPL_DM_SPI_FLASH
+diff --git a/drivers/net/phy/ncsi.c b/drivers/net/phy/ncsi.c
+index a1de438ffff..7857412248e 100644
+--- a/drivers/net/phy/ncsi.c
++++ b/drivers/net/phy/ncsi.c
+@@ -793,6 +793,12 @@ void ncsi_probe_packages(void)
+ 	struct ncsi_package *package;
+ 	unsigned int np, nc;
  
- config SPL_NET
- 	bool "Support networking"
--	depends on NET_LEGACY
-+	depends on NET_LEGACY || NET_LWIP
-+	depends on !NET_LWIP || (SPL_DM && SPL_LIBGENERIC_SUPPORT && SPL_ENV_SUPPORT)
-+	depends on !NET_LWIP || (SPL_SYS_MALLOC && !SPL_SYS_MALLOC_SIMPLE)
-+	depends on !NET_LWIP || (CMD_TFTPBOOT && (CMD_BOOTP || CMD_DHCP))
- 	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
- 	help
- 	  Enable support for network devices (such as Ethernet) in SPL.
-@@ -1187,7 +1190,10 @@ config SPL_NET
- 	  SPL_ETH.
- 
- config SPL_NET_LEGACY
--	def_bool y if SPL_NET
-+	def_bool SPL_NET && NET_LEGACY
-+
-+config SPL_NET_LWIP
-+	def_bool SPL_NET && NET_LWIP
- 
- config SPL_NET_VCI_STRING
- 	string "BOOTP Vendor Class Identifier string sent by SPL"
-diff --git a/common/spl/spl_net.c b/common/spl/spl_net.c
-index 1cdb7027ef2..27c7170133b 100644
---- a/common/spl/spl_net.c
-+++ b/common/spl/spl_net.c
-@@ -13,8 +13,11 @@
- #include <spl.h>
- #include <spl_load.h>
- #include <net.h>
-+#include <asm/global_data.h>
- #include <linux/libfdt.h>
- 
-+DECLARE_GLOBAL_DATA_PTR;
-+
- #if defined(CONFIG_SPL_ETH) || defined(CONFIG_SPL_USB_ETHER)
- static ulong spl_net_load_read(struct spl_load_info *load, ulong sector,
- 			       ulong count, void *buf)
-@@ -39,7 +42,11 @@ static int spl_net_load_image(struct spl_image_info *spl_image,
- 
- 	env_init();
- 	env_relocate();
--	env_set("autoload", "yes");
-+	/* The nowhere backend leaves SPL's default environment read-only. */
-+	if (CONFIG_IS_ENABLED(NET_LWIP) && !(gd->flags & GD_FLG_ENV_READY))
-+		env_set_default(NULL, 0);
-+	if (!CONFIG_IS_ENABLED(NET_LWIP))
-+		env_set("autoload", "yes");
- 	rv = eth_initialize();
- 	if (rv == 0) {
- 		printf("No Ethernet devices found\n");
-@@ -47,7 +54,11 @@ static int spl_net_load_image(struct spl_image_info *spl_image,
- 	}
- 	if (bootdev->boot_device_name)
- 		env_set("ethact", bootdev->boot_device_name);
-+#if CONFIG_IS_ENABLED(NET_LWIP)
-+	rv = net_lwip_load_bootfile();
-+#else
- 	rv = net_loop(BOOTP);
-+#endif
- 	if (rv < 0) {
- 		printf("Problem booting with BOOTP\n");
- 		return rv;
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index 8b64f32b913..65d6ab4af12 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -106,6 +106,7 @@ void net_lwip_dhcp6_poll(void);
- int net_lwip_ip6_prepare(struct net_lwip_ctx *ctx, ip_addr_t *dest);
- #endif
- int net_lwip_tftp_download(struct net_lwip_ctx *net, int argc, char *const argv[]);
-+int net_lwip_load_bootfile(void);
- 
- /**
-  * wget_validate_uri() - varidate the uri
-diff --git a/lib/Makefile b/lib/Makefile
-index 925cb619807..9ce701075dc 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -104,7 +104,7 @@ obj-$(CONFIG_$(PHASE_)OF_REAL) += fdtdec_common.o fdtdec.o
- 
- obj-$(CONFIG_$(PHASE_)MBEDTLS_LIB) += mbedtls/
- 
--obj-$(CONFIG_NET_LWIP) += lwip/
-+obj-$(CONFIG_$(PHASE_)NET_LWIP) += lwip/
- 
- ifdef CONFIG_XPL_BUILD
- obj-$(CONFIG_SPL_YMODEM_SUPPORT) += crc16-ccitt.o
-diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
-index ab3b39a198f..5ce6b166f73 100644
---- a/lib/lwip/u-boot/lwipopts.h
-+++ b/lib/lwip/u-boot/lwipopts.h
-@@ -60,9 +60,9 @@
- #define NO_SYS                          1
- 
- #define LWIP_IPV4			1
--#define LWIP_IPV6			IS_ENABLED(CONFIG_IPV6)
--#define LWIP_IPV6_SEND_ROUTER_SOLICIT	IS_ENABLED(CONFIG_IPV6_ROUTER_DISCOVERY)
--#define LWIP_IPV6_AUTOCONFIG		IS_ENABLED(CONFIG_IPV6_ROUTER_DISCOVERY)
-+#define LWIP_IPV6			CONFIG_IS_ENABLED(IPV6)
-+#define LWIP_IPV6_SEND_ROUTER_SOLICIT	CONFIG_IS_ENABLED(IPV6_ROUTER_DISCOVERY)
-+#define LWIP_IPV6_AUTOCONFIG		CONFIG_IS_ENABLED(IPV6_ROUTER_DISCOVERY)
- #define LWIP_ND6_RDNSS_MAX_DNS_SERVERS	(IS_ENABLED(CONFIG_IPV6_ROUTER_DISCOVERY) && \
- 					 IS_ENABLED(CONFIG_DNS) ? DNS_MAX_SERVERS : 0)
- /* A 64-bit reassembly pointer does not fit in the fragment header. */
-@@ -113,13 +113,13 @@
- 
- #define IP_DEFAULT_TTL                  255
- 
--#if defined(CONFIG_PROT_ICMP_LWIP)
-+#if CONFIG_IS_ENABLED(PROT_ICMP_LWIP)
- #define LWIP_ICMP                       1
- #else
- #define LWIP_ICMP                       0
- #endif
- 
--#if defined(CONFIG_PROT_RAW_LWIP)
-+#if CONFIG_IS_ENABLED(PROT_RAW_LWIP)
- #define LWIP_RAW                        1
- #else
- #define LWIP_RAW			0
-@@ -211,7 +211,7 @@
- 
- #define LWIP_IGMP                       0
- 
--#if defined(CONFIG_PROT_DNS_LWIP)
-+#if CONFIG_IS_ENABLED(PROT_DNS_LWIP)
- #define LWIP_DNS                        1
- #define DNS_TABLE_SIZE                  1
- #else
-@@ -229,7 +229,7 @@
-  * CONFIG_PROT_TCP_LWIP is not defined
-  */
- #define TCP_MSS                         1460
--#if defined(CONFIG_PROT_TCP_LWIP)
-+#if CONFIG_IS_ENABLED(PROT_TCP_LWIP)
- #define LWIP_TCP                        1
- #define TCP_WND                         CONFIG_LWIP_TCP_WND
- #define LWIP_WND_SCALE                  1
-diff --git a/net/Makefile b/net/Makefile
-index fb06ccdb38d..929b9ae9874 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -49,5 +49,5 @@ obj-$(CONFIG_CMD_WOL) += wol-common.o
- obj-y += net-common.o
- endif
- 
--obj-$(CONFIG_NET_LWIP) += lwip/
-+obj-$(CONFIG_$(PHASE_)NET_LWIP) += lwip/
- obj-$(CONFIG_NET_9P) += 9p/
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index ac17ebe87f2..539092190e4 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -1,9 +1,13 @@
- ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
- 
- obj-$(CONFIG_$(PHASE_)DM_ETH) += net-lwip.o
-+ifdef CONFIG_XPL_BUILD
-+obj-$(CONFIG_$(PHASE_)NET_LWIP) += dhcp.o tftp.o
-+else
- ifneq ($(filter y,$(CONFIG_CMD_BOOTP) $(CONFIG_CMD_DHCP)),)
- obj-y += dhcp.o
- endif
-+
- obj-$(CONFIG_DNS) += dns.o
- obj-$(CONFIG_$(PHASE_)CMD_CDP) += cdp.o
- obj-$(CONFIG_CMD_DHCP6) += dhcp6.o
-@@ -19,3 +23,4 @@ $(obj)/builtin_cacert.c: $(CONFIG_WGET_BUILTIN_CACERT_PATH:"%"=%) FORCE
- 	$(call if_changed,bin2c,builtin_cacert)
- obj-y += builtin_cacert.o
- endif
-+endif # !CONFIG_XPL_BUILD
-diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-index b756199541b..a4b1d236f67 100644
---- a/net/lwip/dhcp.c
-+++ b/net/lwip/dhcp.c
-@@ -931,7 +931,7 @@ out:
- }
- 
- static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
--		     char *const argv[], bool bootp)
-+		     char *const argv[], bool bootp, bool download_only)
- {
- 	struct net_lwip_ctx net = {};
- 	struct dhcp_options *options;
-@@ -964,7 +964,14 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 		      sizeof(net_boot_file_name));
- 
- 	hostname = IS_ENABLED(CONFIG_BOOTP_SEND_HOSTNAME) ? env_get("hostname") : NULL;
--	vendor = env_get("bootp_vci") ?: CONFIG_BOOTP_VCI_STRING;
-+	vendor = env_get("bootp_vci");
-+	if (!vendor) {
-+#ifdef CONFIG_SPL_BUILD
-+		vendor = CONFIG_SPL_NET_VCI_STRING;
-+#else
-+		vendor = CONFIG_BOOTP_VCI_STRING;
-+#endif
++	if (!ncsi_priv) {
++		printf("NCSI: no active interface\n");
++		net_set_state(NETLOOP_FAIL);
++		return;
 +	}
- 	if ((hostname && strlen(hostname) > 255) || strlen(vendor) > 255) {
- 		log_err("BOOTP/DHCP hostname/vendor class exceeds 255 bytes\n");
- 		return CMD_RET_FAILURE;
-@@ -1014,8 +1021,8 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 		acquisition_timeout = ret == -ETIMEDOUT;
- 		if (!ret) {
- 			autoload = env_get("autoload");
--			if ((autoload && !strcmp(autoload, "NFS")) ||
--			    env_get_yesno("autoload") == 0)
-+			if (!download_only && ((autoload && !strcmp(autoload, "NFS")) ||
-+					       env_get_yesno("autoload") == 0))
- 				break;
- 			if (!IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
- 				log_err("Cannot autoload with TFTP: command is disabled\n");
-@@ -1056,6 +1063,8 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
++
+ 	switch (ncsi_priv->state) {
+ 	case NCSI_PROBE_PACKAGE_SP:
+ 		if (ncsi_priv->current_package == NCSI_PACKAGE_MAX)
+diff --git a/net/net.c b/net/net.c
+index 0fa6178023b..a249a674236 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -414,30 +414,20 @@ int net_init(void)
+  *	Main network processing loop.
+  */
  
- 	if (ret)
- 		return CMD_RET_FAILURE;
-+	if (IS_ENABLED(CONFIG_SPL_BUILD) || download_only)
-+		return downloaded && net_boot_file_size ? CMD_RET_SUCCESS : CMD_RET_FAILURE;
- 	if (!downloaded) {
- 		autoload = env_get("autoload");
- 		if (!autoload || strcmp(autoload, "NFS"))
-@@ -1073,10 +1082,17 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-int net_loop(enum proto_t protocol)
++int net_loop(enum proto_t requested)
  {
--	return bootp_run(cmdtp, flag, argc, argv, false);
-+	return bootp_run(cmdtp, flag, argc, argv, false, IS_ENABLED(CONFIG_SPL_BUILD));
+-	int ret = -EINVAL;
+ 	enum net_loop_state prev_net_state = net_state;
+-
+-#if defined(CONFIG_CMD_PING)
+-	if (protocol != PING)
+-		net_ping_ip.s_addr = 0;
++	enum proto_t protocol = requested;
++#ifdef CONFIG_CMD_PING
++	struct in_addr ping_ip = net_ping_ip;
+ #endif
++	int ret;
++
+ 	net_restarted = 0;
+ 	net_dev_exists = 0;
+ 	net_try_count = 1;
+ 	debug_cond(DEBUG_INT_STATE, "--- net_loop Entry\n");
+ 
+-#ifdef CONFIG_PHY_NCSI
+-	if (phy_interface_is_ncsi() && protocol != NCSI && !ncsi_active()) {
+-		printf("%s: configuring NCSI first\n", __func__);
+-		if (net_loop(NCSI) < 0)
+-			return ret;
+-		eth_init_state_only();
+-		goto restart;
+-	}
+-#endif
+-
+ 	bootstage_mark_name(BOOTSTAGE_ID_ETH_START, "eth_start");
+ 	net_init();
+ 	if (eth_is_on_demand_init()) {
+@@ -449,7 +439,9 @@ int net_loop(enum proto_t protocol)
+ 			return ret;
+ 		}
+ 	} else {
+-		eth_init_state_only();
++		ret = eth_init_state_only();
++		if (ret < 0)
++			return ret;
+ 	}
+ 
+ restart:
+@@ -464,11 +456,25 @@ restart:
+ 	 *	packets and timer events.
+ 	 */
+ 	debug_cond(DEBUG_INT_STATE, "--- net_loop Init\n");
+-	net_init_loop();
++	ret = net_init_loop();
++	if (ret < 0)
++		goto done;
+ 
+ 	if (!test_eth_enabled())
+ 		return 0;
+ 
++#ifdef CONFIG_PHY_NCSI
++	/* A retry may have selected a different interface. */
++	protocol = requested;
++	if (protocol != NCSI && phy_interface_is_ncsi() && !ncsi_active()) {
++		printf("%s: configuring NCSI first\n", __func__);
++		protocol = NCSI;
++	}
++#endif
++#ifdef CONFIG_CMD_PING
++	net_ping_ip.s_addr = protocol == PING ? ping_ip.s_addr : 0;
++#endif
++
+ 	switch (net_check_prereq(protocol)) {
+ 	case 1:
+ 		/* network not configured */
+@@ -580,7 +586,10 @@ restart:
+ #endif
+ #if defined(CONFIG_PHY_NCSI)
+ 		case NCSI:
+-			ncsi_probe_packages();
++			if (phy_interface_is_ncsi())
++				ncsi_probe_packages();
++			else
++				net_set_state(NETLOOP_FAIL);
+ 			break;
+ #endif
+ 		case RS:
+@@ -678,7 +687,15 @@ restart:
+ 			goto restart;
+ 
+ 		case NETLOOP_SUCCESS:
++#ifdef CONFIG_PHY_NCSI
++			if (protocol == NCSI && !ncsi_active()) {
++				net_set_state(NETLOOP_CONTINUE);
++				continue;
++			}
++#endif
+ 			net_cleanup_loop();
++			if (protocol != requested)
++				goto restart;
+ 			if (net_boot_file_size > 0) {
+ 				printf("Bytes transferred = %u (%x hex)\n",
+ 				       net_boot_file_size, net_boot_file_size);
+diff --git a/test/dm/eth.c b/test/dm/eth.c
+index a5e98f2e81f..6159475d2f0 100644
+--- a/test/dm/eth.c
++++ b/test/dm/eth.c
+@@ -622,6 +622,87 @@ static int dm_test_eth_async_ping_reply(struct unit_test_state *uts)
  }
+ DM_TEST(dm_test_eth_async_ping_reply, UTF_SCAN_FDT);
  
- int do_bootp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	return bootp_run(cmdtp, flag, argc, argv, true);
-+	return bootp_run(cmdtp, flag, argc, argv, true, IS_ENABLED(CONFIG_SPL_BUILD));
++#ifdef CONFIG_PHY_NCSI
++static int check_ncsi_selection(struct unit_test_state *uts,
++				struct udevice *ncsi_dev)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(ncsi_dev);
++	int starts = priv->start_count;
++
++	ut_assertok(env_set("ethact", "eth@10003000"));
++	ut_assertok(env_set("ethrotate", "no"));
++	ut_assertok(env_set("netretry", "no"));
++	ut_assertok(env_set("ipaddr", "1.1.2.3"));
++
++	eth_set_dev(ncsi_dev);
++	ut_assert(net_loop(NCSI) < 0);
++
++	eth_set_dev(ncsi_dev);
++	net_ping_ip = string_to_ip("1.1.2.2");
++	ut_assertok(net_loop(PING));
++	ut_asserteq_str("eth@10003000", eth_get_name());
++	ut_asserteq(starts, priv->start_count);
++
++	/* No NC-SI controller answers on the first sandbox interface. */
++	ut_assertok(env_set("ethact", ncsi_dev->name));
++	net_ping_ip = string_to_ip("1.1.2.2");
++	ut_assert(net_loop(PING) < 0);
++	ut_asserteq(starts + 1, priv->start_count);
++
++	/* A retry on the ordinary interface must run the original protocol. */
++	ut_assertok(env_set("netretry", "once"));
++	ut_assertok(env_set("ethrotate", "yes"));
++	net_ping_ip = string_to_ip("1.1.2.2");
++	ut_assertok(net_loop(PING));
++	ut_asserteq_str("eth@10003000", eth_get_name());
++
++	return 0;
 +}
 +
-+int net_lwip_load_bootfile(void)
++static int dm_test_eth_ncsi_select(struct unit_test_state *uts)
 +{
-+	char *const argv[] = { "bootp", NULL };
++	static const char * const vars[] = { "ethact", "ethrotate", "ipaddr", "netretry" };
++	struct udevice *ncsi_dev, *old_dev = eth_get_dev();
++	struct in_addr old_ping_ip = net_ping_ip;
++	struct eth_pdata *pdata;
++	char *saved[ARRAY_SIZE(vars)] = {};
++	phy_interface_t old_interface;
++	int i, ret = -ENOMEM;
 +
-+	return bootp_run(NULL, 0, 1, argv, !IS_ENABLED(CONFIG_CMD_DHCP), true) ? -EIO : 0;
- }
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 3a9a5a42716..075d5b1716f 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -1126,7 +1126,7 @@ static int net_lwip_rx(struct udevice *udev, struct netif *netif)
- 			if (!net_lwip_accept_vlan(packet, len))
- 				goto release;
- 
--			if (IS_ENABLED(CONFIG_CMD_WOL))
-+			if (CONFIG_IS_ENABLED(CMD_WOL))
- 				net_lwip_wol_receive(netif, packet, len);
- 
- 			pbuf = alloc_pbuf_and_copy(packet, len);
-diff --git a/test/dm/lwip_dhcp.c b/test/dm/lwip_dhcp.c
-index d7e1360d2de..f6af57a3647 100644
---- a/test/dm/lwip_dhcp.c
-+++ b/test/dm/lwip_dhcp.c
-@@ -19,6 +19,7 @@
- struct dhcp_handoff_test {
- 	const char *offer;
- 	bool fail;
-+	bool empty;
- 	bool timeout;
- 	bool dhcp_alive;
- 	bool rx_burst;
-@@ -123,6 +124,7 @@ static int dhcp_handoff_tx(struct udevice *dev, void *packet, unsigned int len)
- 	struct dhcp_handoff_test *test = priv->priv;
- 	struct ethernet_hdr *eth = packet, *reply_eth;
- 	struct ip_udp_hdr *ip, *reply_ip;
-+	unsigned int tftp_len = test->empty ? 4 : 6;
- 	u8 *data;
- 
- 	if (test->rx_burst && netif_dhcp_data(netif_default) &&
-@@ -167,14 +169,14 @@ static int dhcp_handoff_tx(struct udevice *dev, void *packet, unsigned int len)
- 	reply_ip = (void *)(reply_eth + 1);
- 	memset(reply_ip, 0, IP_UDP_HDR_SIZE);
- 	reply_ip->ip_hl_v = 0x45;
--	reply_ip->ip_len = htons(IP_UDP_HDR_SIZE + 6);
-+	reply_ip->ip_len = htons(IP_UDP_HDR_SIZE + tftp_len);
- 	reply_ip->ip_ttl = 64;
- 	reply_ip->ip_p = IPPROTO_UDP;
- 	reply_ip->ip_src = ip->ip_dst;
- 	reply_ip->ip_dst = ip->ip_src;
- 	reply_ip->udp_src = htons(1234);
- 	reply_ip->udp_dst = ip->udp_src;
--	reply_ip->udp_len = htons(UDP_HDR_SIZE + 6);
-+	reply_ip->udp_len = htons(UDP_HDR_SIZE + tftp_len);
- 	reply_ip->ip_sum = compute_ip_checksum(reply_ip, IP_HDR_SIZE);
- 	data = (void *)(reply_ip + 1);
- 	put_unaligned_be16(test->fail ? 5 : 3, data);
-@@ -187,7 +189,7 @@ static int dhcp_handoff_tx(struct udevice *dev, void *packet, unsigned int len)
- 	data[4] = 'x';
- 	data[5] = 0;
- 	priv->recv_packet_length[priv->recv_packets++] =
--		ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + 6;
-+		ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + tftp_len;
- 
- 	return 0;
- }
-@@ -289,6 +291,21 @@ static int dhcp_handoff_check(struct unit_test_state *uts,
- 	ut_assertok(env_set("nfsserverip", NULL));
- 	ut_assertok(env_set("tftpdstp", NULL));
- 	ut_assertok(env_set("tftpsrcp", NULL));
-+	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-+		*test = (struct dhcp_handoff_test){ .offer = "u-boot.img" };
-+		ut_assertok(env_set("autoload", "NFS"));
-+		ut_assertok(env_set("autostart", "yes"));
-+		ut_assertok(net_lwip_load_bootfile());
-+		ut_asserteq(1, test->tftp);
-+		ut_asserteq(0, test->nfs);
-+		ut_asserteq(2, net_boot_file_size);
-+		ut_asserteq_str("u-boot.img", test->filename);
-+		ut_assertnull(netif_default);
-+		test->empty = true;
-+		ut_asserteq(-EIO, net_lwip_load_bootfile());
-+		ut_asserteq(0, net_boot_file_size);
-+		ut_assertok(env_set("autostart", "no"));
-+	}
- 	ut_assertok(dhcp_autoload_retries(uts, test));
- 	for (i = 0; i < 4; i++) {
- 		*test = (struct dhcp_handoff_test){ .offer = "offered.bin" };
-diff --git a/test/image/spl_load_net.c b/test/image/spl_load_net.c
-index 4af6e21b8b9..0030dd52459 100644
---- a/test/image/spl_load_net.c
-+++ b/test/image/spl_load_net.c
-@@ -4,11 +4,15 @@
-  */
- 
- #include <dm.h>
-+#include <env.h>
- #include <spl.h>
- #include <test/spl.h>
- #include <asm/eth.h>
- #include <test/ut.h>
- #include "../../net/bootp.h"
-+#if CONFIG_IS_ENABLED(NET_LWIP)
-+#include <lwip/prot/dhcp.h>
-+#endif
- 
- /*
-  * sandbox_eth_bootp_req_to_reply()
-@@ -55,17 +59,34 @@ static int sandbox_eth_bootp_req_to_reply(struct udevice *dev, void *packet,
- 	memcpy(eth_recv->et_src, priv->fake_host_hwaddr, ARP_HLEN);
- 	ipr->ip_sum = 0;
- 	ipr->ip_off = 0;
--	net_write_ip(&ipr->ip_dst, net_ip);
--	net_write_ip(&ipr->ip_src, priv->fake_host_ipaddr);
-+	ipr->ip_dst.s_addr = htonl(0xffffffff);
-+	ipr->ip_src = priv->fake_host_ipaddr;
- 	ipr->ip_sum = compute_ip_checksum(ipr, IP_HDR_SIZE);
- 	ipr->udp_src = ip->udp_dst;
- 	ipr->udp_dst = ip->udp_src;
-+	ipr->udp_xsum = 0;
- 
- 	bpr->bp_op = OP_BOOTREPLY;
--	net_write_ip(&bpr->bp_yiaddr, net_ip);
--	net_write_ip(&bpr->bp_siaddr, priv->fake_host_ipaddr);
--	copy_filename(bpr->bp_file, CONFIG_BOOTFILE, sizeof(CONFIG_BOOTFILE));
-+	bpr->bp_yiaddr = net_ip;
-+	bpr->bp_siaddr = priv->fake_host_ipaddr;
-+	copy_filename(bpr->bp_file, CONFIG_BOOTFILE, sizeof(bpr->bp_file));
- 	memset(&bpr->bp_vend, 0, sizeof(bpr->bp_vend));
-+#if CONFIG_IS_ENABLED(NET_LWIP)
-+	if (IS_ENABLED(CONFIG_CMD_DHCP)) {
-+		/* lwIP sends the DHCP message type as its first option. */
-+		u8 *options = (u8 *)bpr->bp_vend;
-+		u8 type = bp->bp_vend[6];
++	ut_assertok(uclass_get_device(UCLASS_ETH, 0, &ncsi_dev));
++	for (i = 0; i < ARRAY_SIZE(vars); i++) {
++		const char *value = env_get(vars[i]);
 +
-+		if (type != DHCP_DISCOVER && type != DHCP_REQUEST)
-+			return -EAGAIN;
-+		memcpy(options, bp->bp_vend, 6);
-+		options[6] = type == DHCP_DISCOVER ? DHCP_OFFER : DHCP_ACK;
-+		options[7] = DHCP_OPTION_SERVER_ID;
-+		options[8] = 4;
-+		memcpy(options + 9, &priv->fake_host_ipaddr, 4);
-+		options[13] = DHCP_OPTION_END;
++		if (value) {
++			saved[i] = strdup(value);
++			if (!saved[i])
++				goto free_saved;
++		}
 +	}
++
++	pdata = dev_get_plat(ncsi_dev);
++	old_interface = pdata->phy_interface;
++	pdata->phy_interface = PHY_INTERFACE_MODE_NCSI;
++	ret = check_ncsi_selection(uts, ncsi_dev);
++	eth_halt();
++	eth_set_dev(old_dev);
++	pdata->phy_interface = old_interface;
++	net_ping_ip = old_ping_ip;
++	for (i = 0; i < ARRAY_SIZE(vars); i++)
++		if (env_set(vars[i], saved[i]))
++			ret = -EINVAL;
++free_saved:
++	while (i)
++		free(saved[--i]);
++	ut_assertok(ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_eth_ncsi_select, UTF_SCAN_FDT);
++
 +#endif
- 
- 	priv->recv_packet_length[priv->recv_packets] = len;
- 	++priv->recv_packets;
-@@ -171,8 +192,8 @@ static int sandbox_eth_tftp_req_to_reply(struct udevice *dev, void *packet,
- 	ipr->ip_ttl = 255;
- 	ipr->ip_p = IPPROTO_UDP;
- 	ipr->ip_sum = 0;
--	net_copy_ip(&ipr->ip_dst, &ip->ip_src);
--	net_copy_ip(&ipr->ip_src, &ip->ip_dst);
-+	ipr->ip_dst = ip->ip_src;
-+	ipr->ip_src = ip->ip_dst;
- 	ipr->ip_sum = compute_ip_checksum(ipr, IP_HDR_SIZE);
- 
- 	ipr->udp_src = htons(TFTP_TID);
-@@ -234,7 +255,13 @@ static int spl_test_net(struct unit_test_state *uts, const char *test_name,
- 	struct udevice *dev;
- 	int ret;
- 
--	net_server_ip = string_to_ip("1.1.2.4");
-+	if (CONFIG_IS_ENABLED(NET_LWIP) && IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
-+		/* This configuration takes the TFTP server from the environment. */
-+		env_set_default(NULL, 0);
-+		ut_assertok(env_set("serverip", "1.1.2.4"));
-+	} else {
-+		net_set_server_ip(string_to_ip("1.1.2.4"));
-+	}
- 	ret = do_spl_test_load(uts, test_name, type,
- 			       SPL_LOAD_IMAGE_GET(0, BOOT_DEVICE_CPGMAC,
- 						  spl_net_load_image_cpgmac),
++
+ #if IS_ENABLED(CONFIG_CMD_DHCP6) && IS_ENABLED(CONFIG_IPV6)
+ #define DHCP6_DUID_LL_LEN	10	/* type(2) + hw_type(2) + MAC(6) */
+ static bool dhcp6_request_seen;
 
 -- 
 2.53.0
