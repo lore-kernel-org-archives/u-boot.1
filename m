@@ -2,177 +2,130 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0111A606A6AE
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 10:29:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88CAE606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 10:46:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Bt1jemC2;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=f/2QudOS
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Qcrs74OX;
+	dkim=pass (2048-bit key, unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=GmIOXPxz
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C8151608E9;
-	Thu, 26 Nov 2026 10:29:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 46DF860A3C;
+	Thu, 26 Nov 2026 10:46:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iYivSruhqNsx; Thu, 26 Nov 2026 10:29:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 036AD608C5
+ id DAzjOx_CGYYd; Thu, 26 Nov 2026 10:46:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7370A608E9
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795688978;
-	b=VOfJ4uJAtqsV3KawpobInYFFrd0ILpzvEcl/s2NXKmK4aBEvChbHVc70ZtFND2FTACjU
-	 4m1nTheXV1xdZezh4+mV2P7N94oP4058PUXhfHV5QdrIfDImyu7cRwVFEPsKbc1tyHWv2
-	 /7x7/yEVjrcozYHYeU4OA7BBtAgTtl96OCBytg3cuz5N89RRo1QvS0S8/ibw4lZcsyfov
-	 KSoP05xhEW/CmmJAobs/2aXZ2aH+xC2LpaLgSF/krjSDaV0vjYxogyJE0DKEDImNdIoTS
-	 pc0ZaaOHiM8cW6DqxuGgPfDedi+jM4AW6d70R0MOzbdtopvYQ4r76w9O93EHydfDAkg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795690018;
+	b=mSqgDK9+z4Boa9ZKP2HitTPiNeGaIKFSl7Dzt0rtTAU7b0SRxPSICQ0A3yA1FLFOAY8X
+	 XUNdp9cXnX2VkmooovAaXisXWEZfXp/7gjdsFFTp+OFBp4MFZ58KvnAECXVJZf9VcX+Lu
+	 hyj/OKGyeT4aOG37X2a3aNYU5ZjKMvKqePr9/yRtjxnXyahJlI42gL30VigH/Brp/TvAQ
+	 6CFUoztugTdk26D1d9eWCzc6pn6a1F84yEvkq7sCQZiwB79RLp7ZtTeJj0Vy49JkFHW0/
+	 0pWOrysz9v5s9+hR8vkizEHh3HbiDqDysC9t7cWlznIcG3Pp8lG8lWPrzfEYcyKrqtw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795688978;
+	c=relaxed/relaxed; t=1795690018;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
-	 Received-SPF:Received:Received:Received:From:To:CC:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:Content-Type:X-EOPAttributedMessage:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 DKIM-Signature:Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Virus-Scanned:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=jipvb4QuuE0BvcqhGg7T7kD7q6Pebtb5rhjlj41JYe4=;
-	b=LG69swdxg9ERJAt5OmRVfTvSIfBL4ru6AaGT3evvH1pL1K2Ncin2FElmx5nem3IzPhpl
-	 JAD3h5Gws9K9ZjwZch398rrDUSjj+Mhyz6d6o54+2z0wKow785lXbgCFr3NUC5c92ovHm
-	 pxNULWJEAQ/nTY5kQiNKhjdK12IwBk/tkSg99EQva1y3N4//bI9actVK6d8FCKnntwrd1
-	 /E2tl6xj0n/QnvxYOcGJpmZ3u+QprTSDThzEDej4GDlu8eTiWPmITNscVsNf6my+HFEuR
-	 1bBvtvqmAf6k+pX6lIhkGV+sCsIW2ovWJTpSu9VOohoxI0WZRMfWrcSqs1c64iYchhQ==
+	bh=SA0ZAQb0NmV/ekl3VbHniOkzv9kaayRfZaLONrjcsTc=;
+	b=nA4v7wGzUGxev2j3q5KqgjSa4sHfcBolfKumS63nIKc9B7JIDEZRBuJ1vt4FC4XbOVsQ
+	 +U45qDgpwdVLl6/zGG5bO9kYY0ydNG+3bqf9V++hkVfp2gZtRIb9jB+le/UzQsK3IpGUc
+	 aVt8Uq7aOrllhw95dP9lTKuuuSmLdE0ph9Svk9REjzpBaKOzviOlllsHKHv2D+8nDJAWy
+	 jksKtG/N9FL8v/JqnhaWOimChlzyFaC4wYiZoafce5sI3djpvS9IL71HDS05Cn70S6je9
+	 8W36OnWOrxJwLAYyemimF+yi4twTBodrxNll4BTyyzDrteB4cDkL62z4ZQBDEgQ7n/Q==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=amd.com;
-	dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b="f/2QudOS";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795688978;
-	bh=jipvb4QuuE0BvcqhGg7T7kD7q6Pebtb5rhjlj41JYe4=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Bt1jemC2nGYtYSi8MzqPbJ5DqKwLJSynFoLlbkmT4XWOxMj9iabl3K3PchoqVBDs4
-	 JH6wI9i9dki1xJA08R8erL2nfvSpL+Fbx3yKN/vAFS6iCk1Bzdt/HFI9gJ58ab7vUX
-	 7JNekSTqyQuie8EENH0vgzfZbpDxfQQmTjCFYWSvjf0U7IAjoZg5ZI/79pIPZ+rSDH
-	 l5BzhteW7dGG++0a8lhxobJ70/JWUudzakfhFT4KdhPDulD6xnj/KvxyqUORU+Gnv7
-	 MQpldDXabpyJEBBCwYdzHEJiX68xb5EWtWPhoib289cuGv5giuPc1O4YqdYauB29pz
-	 nsoOt2W5nGhOA==
+	d=lists.u-boot-project.org; s=default; t=1795690018;
+	bh=SA0ZAQb0NmV/ekl3VbHniOkzv9kaayRfZaLONrjcsTc=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Qcrs74OXC9i9wt53sI/zxEoUyK88cOH0UakPYP9B79CuUtr4sozN5lQxVkLJu7N/z
+	 q8qnznJv+pa+uxT40VugJk5hEPpTUlJiC98PVuuPNfmaOUod3Fr+DR6szxqYJ0eCpb
+	 s9n34klKp0gehLARnGZJ+EplixJnDAF6HQkIc7/5zNAWXHTP5t5BGnYcTMvPvisSOw
+	 4+b/0PlWQByQIxN1HETMO+q06H/O76S1IajNWs1DDSR+/ddE9EgOmJgYQRg+Q3zzmE
+	 IDvk+jjFblFrPmKY9nlztu4OsoGxmj3vQhbgIpvCVuk1kLJJ0smPml6g66k9aLAyTO
+	 uo0L5TGYDL+Lg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 036AD608C5;
-	Thu, 26 Nov 2026 10:29:38 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E4F3C43
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:29:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7370A608E9;
+	Thu, 26 Nov 2026 10:46:58 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A93D4325
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D64866069A
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:29:36 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8ED5940277
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WzJB6lJUMCMI for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 10:29:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 762EF608C5
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c107::1"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c107::1;
- helo=ph8pr06cu001.outbound.protection.outlook.com;
- envelope-from=padmarao.begari@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=f/2QudOS
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 762EF608C5
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:29:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jipvb4QuuE0BvcqhGg7T7kD7q6Pebtb5rhjlj41JYe4=;
- b=f/2QudOSd97U0EcqDkXwiUqkW4oadsrjGoxLpDlEoaywoJs9z5HqetLBY3wHgcYRCAB3ZESKuzTpLlh3uAFsH5rWzTjCErBPXvB9u++3ZGSWctbgcVsKz8bA/AJA3l5B37bg7wCKFr4Eyx2yvf1GdrK4o+fbpJgN1yApNkn+YHE=
-Received: from BN9PR03CA0110.namprd03.prod.outlook.com (2603:10b6:408:fd::25)
- by CH3PR12MB8546.namprd12.prod.outlook.com (2603:10b6:610:15f::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Thu, 26 Nov
- 2026 10:29:27 +0000
-Received: from BN3PEPF00022BCD.namprd03.prod.outlook.com
- (2603:10b6:408:fd:cafe::6b) by BN9PR03CA0110.outlook.office365.com
- (2603:10b6:408:fd::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.662.6 via Frontend Transport; Thu, 26
- Nov 2026 10:29:26 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN3PEPF00022BCD.mail.protection.outlook.com (10.167.248.169) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.688.5 via Frontend Transport; Thu, 26 Nov 2026 10:29:25 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Thu, 26 Nov
- 2026 04:29:24 -0600
-Received: from xhdpabegari40x.xilinx.com (10.180.168.240) by
- satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.57 via Frontend Transport; Thu, 26 Nov 2026 04:29:22 -0600
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Tim Ouyang
- <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>, Yao Zi
- <me@ziyao.cc>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] riscv: dts: mbv: Add device node for ethernets
-Date: Thu, 26 Nov 2026 15:58:32 +0530
-Message-ID: <20261126102900.263559-3-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261126102900.263559-1-padmarao.begari@amd.com>
-References: <20261126102900.263559-1-padmarao.begari@amd.com>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 61hPHfDRdEyo for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 10:46:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5C40F401CD
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
+ helo=www537.your-server.de; envelope-from=max.merchel@ew.tq-group.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
+ header.a=rsa-sha256 header.s=default2602 header.b=GmIOXPxz
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5C40F401CD
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Cc:To:Content-Transfer-Encoding:
+ Content-Type:MIME-Version:Message-Id:Date:Subject:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References;
+ bh=SA0ZAQb0NmV/ekl3VbHniOkzv9kaayRfZaLONrjcsTc=; b=GmIOXPxz8jmV+MzUGzaOoHf/ZI
+ SwWQkmb55l25k781erdHtogXB2y+T7DGQZ/XJpTO/bVIGFjsae6ujWKWGj3XRdfGiW6d2/8xk6HLu
+ 92+38hpTe8h/Fiv3yMkOQyqwaSleaO/EscNhoDrHRT54eCiN72LERVZkgY7Hjg35m1P5k+rmujO13
+ FU+7YT8stf6adU0bv2wr8EAPJOI41ROLZuuLm8OYNCmkmQYtpFuhfKZx7wYn07a2AOlFLTUbB6Qse
+ Nfq6ZbA1XWJgm1UJPmopAEQHZf9gUk8nR/XHxa89/ShzKJls1+1orrB5hgQupyLeLclw0HhSQnkk6
+ eqjihOLg==;
+Received: from sslproxy06.your-server.de ([78.46.172.3])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1xWX05-000Nto-0g; Thu, 26 Nov 2026 11:46:49 +0100
+Received: from localhost ([127.0.0.1])
+ by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1xWX04-0002PX-0V; Thu, 26 Nov 2026 11:46:48 +0100
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+Subject: [PATCH 0/6] board: tqma6: uses SPL
+Date: Thu, 26 Nov 2026 11:46:45 +0100
+Message-Id: <20261126-update-tqma6-v1-0-a105aba78868@ew.tq-group.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF00022BCD:EE_|CH3PR12MB8546:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6b70d5a-9cf8-45de-d547-08df4ba824d6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|23010399003|376014|82310400026|1800799024|10067099003|11063799006|261021123027099003|56012099006|261021121427099003|261102123227099003|261009223027099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: uGSgZtz1pGlOBXhwjjzW4WQOZCXgrfcn6rPy40Jlj/+fK+nroGdgjqITQXv0FQJ9tw8DpXj+n+Na8RsVuuPWWJVNyOIS9wp2eYO7vEQVVEfGDR0cYryb4/UYynbqobX1Jfc488jMZ23NFTreXByhOxA3KPwSxzDn/fx40PjdRBXeaWEyzhpg1+MOPkKUV+FqAZ2LJHMxOtAk+D4RXfUK5RbZXEDoPrAvxdNHj5Luxr/JaR07yl4lN+pZ1EqqxnbHobxlXYXFK1PtCooaJ9RTKHDTXDXt3zZ5uUyGNNG7sdIodet+/yHfy0TAOEzsbv16AZkXpQUY6/rpNssKZwLPHPoBOQqDNAMHPj0zpzxL1AWf88JpnhUOpsiY5rmwweLbPt5ezvRqd8nylj4uLzqELrHoFDtqZdGI5LINkESDc/GVeuq7O685JHi8Dm09/+kk8Sc9fNqC8VhRZdawXGaf9ADWEST55lz5BQ+2YEyi7319sGJ1SpwjjWIZ7lZ6/pwDqHaFp9q3oV1vh1nwQ5yzI1Adf2tngNKAtJd7Y1HwoVsdzUuo7cLl8hHTzZodHiK10y2EoqECRLBzydoNkSXdK7VxR94epAXN1DHc5wGH76g8TucbdFKSyblB3Mhv/osFQAHbJ1ZE1LntOTim+iDsMrL7AqGKUW7LWL5lAq2C4ZGP2lrFsFmLcPfMBaahUEtjS8SeA9TAe0odphfei0c3+A==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(23010399003)(376014)(82310400026)(1800799024)(10067099003)(11063799006)(261021123027099003)(56012099006)(261021121427099003)(261102123227099003)(261009223027099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: vt6KRu4F4uWNOqPvY9wOstRXjcIEVq5Jdg/kCkL9lrBSGBgmZ9E87HaGIgAgtXPjIU4STvVK6b7rPUHAsF9ObQ+GAaRb6eFKoR+WdxVEKmowzeOXBkBkjNRDAjApyy/e1GUEUmYB2gQGGGhvZv8CbW39tAC0hSQ73ovQGK13oFXQ4Y73D9ZiNSMhgADiXL16yFvxtRGYryogLk1NMJBFSd9ZB2L4idl2sKJnPRAN0eF+C3iAV0S7wqstcdzc+vXlN9Z4o9crwMfcvEd2Jd98ZGfLCbgaoEK8Pt/yCzvm6hzqSsJdw5lqLQxntrZvZsp+B+sdePB0WxshXZfixsSMwXmSesly6jnHJKsfLVi2kT8ZskqZYKirz6AqsaCeAHeKPp9h6YkZ8aKkH5qpEtrcGjSUcKJAyj9joWpfWu4Tb5QZFIFi8YPD+7yfM4MlJrs4
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 10:29:25.4151 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6b70d5a-9cf8-45de-d547-08df4ba824d6
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF00022BCD.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8546
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDQyMz3dKClMSSVN2SwtxEM13DZOPEtBQLc0tDkyQloJaCotS0zAqwcdG
+ xtbUAKfIBUl4AAAA=
+X-Change-ID: 20261126-update-tqma6-1c3afd87914b
+To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot@ew.tq-group.com, 
+ u-boot@lists.u-boot-project.org, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Max Merchel <max.merchel@ew.tq-group.com>, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Paul Gerber <Paul.Gerber@tq-group.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Primoz Fiser <primoz.fiser@norik.com>, Adam Ford <aford173@gmail.com>, 
+ Nora Schiffer <nora.schiffer@ew.tq-group.com>, 
+ Johan Jonker <jbx6244@gmail.com>, 
+ Markus Niebel <Markus.Niebel@ew.tq-group.com>, 
+ Paul Gerber <Paul.Gerber@ew.tq-group.com>, 
+ Max Merchel <Max.Merchel@ew.tq-group.com>
+X-Mailer: b4 0.14.3
+X-Virus-Scanned: Clear (ClamAV 1.4.6/28194/Wed Nov 25 07:26:59 2026)
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -182,154 +135,69 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add device tree nodes for Ethernets on MB-V platform already modeled in
-QEMU.
+In this series, the TQMa6 uses SPL.
+The number of defconfigs is reduced.
+Support is added for the TQMa6DP/QP (with i-MX6DP/QP CPU) with
+1 GB or 2 GB of RAM.
+RAM timings for 2 GB of RAM on the TQMa6D/Q are added.
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- arch/riscv/dts/xilinx-mbv32.dts | 55 +++++++++++++++++++++++++++++++++
- arch/riscv/dts/xilinx-mbv64.dts | 55 +++++++++++++++++++++++++++++++++
- 2 files changed, 110 insertions(+)
+Markus Niebel (1):
+      board: tqma6: add support for variants with i.MX6DP/QP CPU
 
-diff --git a/arch/riscv/dts/xilinx-mbv32.dts b/arch/riscv/dts/xilinx-mbv32.dts
-index 82ae75f4aad..1fc01e02470 100644
---- a/arch/riscv/dts/xilinx-mbv32.dts
-+++ b/arch/riscv/dts/xilinx-mbv32.dts
-@@ -103,5 +103,60 @@
- 			xlnx,data-bits = <8>;
- 			xlnx,use-parity = <0>;
- 		};
-+
-+		eth: ethernet@40e00000 {
-+			compatible = "xlnx,xps-ethernetlite-1.00.a";
-+			reg = <0x40e00000 0x10000>;
-+			interrupt-parent = <&axi_intc>;
-+			interrupts = <5 0>;
-+			clocks = <&clk100>;
-+			xlnx,rx-ping-pong = <0>;
-+			xlnx,tx-ping-pong = <0>;
-+			phy-handle = <&phy0>;
-+
-+			mdio {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				phy0: phy@7 {
-+					device_type = "ethernet-phy";
-+					reg = <7>;
-+				};
-+			};
-+		};
-+
-+		enet: ethernet@40c00000 {
-+			compatible = "xlnx,axi-ethernet-1.00.a";
-+			reg = <0x40c00000 0x40000>;
-+			interrupt-parent = <&axi_intc>;
-+			interrupts = <7 2>;
-+			clocks = <&clk100>, <&clk100>;
-+			phy-mode = "rgmii";
-+			xlnx,rxcsum = <0>;
-+			xlnx,rxmem = <0x1000>;
-+			xlnx,txcsum = <0>;
-+			phy-handle = <&phy>;
-+			axistream-connected = <&axi_dma>;
-+
-+			mdio {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				phy: phy@7 {
-+					device_type = "ethernet-phy";
-+					reg = <7>;
-+				};
-+			};
-+		};
-+
-+		axi_dma: dma@41e00000 {
-+			#dma-cells = <1>;
-+			axistream-connected = <&enet>;
-+			reg = <0x41e00000 0x10000>;
-+			clock-frequency = <100000000>;
-+			clock-names = "s_axi_lite_aclk";
-+			clocks = <&clk100>;
-+			interrupt-names = "mm2s_introut", "s2mm_introut";
-+			interrupt-parent = <&axi_intc>;
-+			interrupts = <8 2 9 2>;
-+		};
- 	};
- };
-diff --git a/arch/riscv/dts/xilinx-mbv64.dts b/arch/riscv/dts/xilinx-mbv64.dts
-index 204a993aa35..f9b2dea64fe 100644
---- a/arch/riscv/dts/xilinx-mbv64.dts
-+++ b/arch/riscv/dts/xilinx-mbv64.dts
-@@ -105,5 +105,60 @@
- 			xlnx,data-bits = <8>;
- 			xlnx,use-parity = <0>;
- 		};
-+
-+		eth: ethernet@40e00000 {
-+			compatible = "xlnx,xps-ethernetlite-1.00.a";
-+			reg = <0x0 0x40e00000 0x0 0x10000>;
-+			interrupt-parent = <&axi_intc>;
-+			interrupts = <5 0>;
-+			clocks = <&clk100>;
-+			xlnx,rx-ping-pong = <0>;
-+			xlnx,tx-ping-pong = <0>;
-+			phy-handle = <&phy0>;
-+
-+			mdio {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				phy0: phy@7 {
-+					device_type = "ethernet-phy";
-+					reg = <7>;
-+				};
-+			};
-+		};
-+
-+		enet: ethernet@40c00000 {
-+			compatible = "xlnx,axi-ethernet-1.00.a";
-+			reg = <0x0 0x40c00000 0x0 0x40000>;
-+			interrupt-parent = <&axi_intc>;
-+			interrupts = <7 2>;
-+			clocks = <&clk100>, <&clk100>;
-+			phy-mode = "rgmii";
-+			xlnx,rxcsum = <0>;
-+			xlnx,rxmem = <0x1000>;
-+			xlnx,txcsum = <0>;
-+			phy-handle = <&phy>;
-+			axistream-connected = <&axi_dma>;
-+
-+			mdio {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				phy: phy@7 {
-+					device_type = "ethernet-phy";
-+					reg = <7>;
-+				};
-+			};
-+		};
-+
-+		axi_dma: dma@41e00000 {
-+			#dma-cells = <1>;
-+			axistream-connected = <&enet>;
-+			reg = <0x0 0x41e00000 0x0 0x10000>;
-+			clock-frequency = <100000000>;
-+			clock-names = "s_axi_lite_aclk";
-+			clocks = <&clk100>;
-+			interrupt-names = "mm2s_introut", "s2mm_introut";
-+			interrupt-parent = <&axi_intc>;
-+			interrupts = <8 2 9 2>;
-+		};
- 	};
- };
+Max Merchel (5):
+      configs: tqma6: rename .defconfig to .config
+      configs: tqma6: add memtest
+      board: tqma6: add SPL support
+      board: tqma6: unify mmc and spi configs
+      board: tqma6: add support for TQMa6 with 2GiB DRAM
+
+ arch/arm/dts/imx6qdl-mba6-u-boot.dtsi              |   7 +
+ arch/arm/dts/imx6qp-mba6b-u-boot.dtsi              |   8 +
+ arch/arm/mach-imx/mx6/Kconfig                      |   6 +
+ board/tq/tqma6/Kconfig                             |  38 ++--
+ board/tq/tqma6/Makefile                            |   9 +
+ board/tq/tqma6/clocks.cfg                          |  26 ---
+ board/tq/tqma6/spl_mba6.c                          | 187 ++++++++++++++++++++
+ board/tq/tqma6/spl_tqma6.c                         | 180 +++++++++++++++++++
+ board/tq/tqma6/spl_tqma6dl_ram.c                   | 194 +++++++++++++++++++++
+ board/tq/tqma6/spl_tqma6q_ram.c                    | 193 ++++++++++++++++++++
+ board/tq/tqma6/spl_tqma6qp_ram.c                   | 148 ++++++++++++++++
+ board/tq/tqma6/spl_tqma6s_ram.c                    | 145 +++++++++++++++
+ board/tq/tqma6/tqma6.c                             | 123 ++++++++-----
+ board/tq/tqma6/tqma6.h                             |   4 +
+ board/tq/tqma6/tqma6_mba6.c                        | 139 ++++++++-------
+ board/tq/tqma6/tqma6dl.cfg                         | 125 -------------
+ board/tq/tqma6/tqma6q.cfg                          | 126 -------------
+ board/tq/tqma6/tqma6s.cfg                          | 126 -------------
+ ...6_common.defconfig => tqma6_mba6_common.config} |  44 ++++-
+ configs/tqma6_mba6_mmc.defconfig                   |   3 -
+ configs/tqma6_mba6_spi.defconfig                   |   6 -
+ configs/tqma6dl_mba6_defconfig                     |   6 +
+ configs/tqma6dl_mba6_mmc_defconfig                 |   5 -
+ configs/tqma6dl_mba6_spi_defconfig                 |   5 -
+ configs/tqma6q_mba6_defconfig                      |   6 +
+ configs/tqma6q_mba6_mmc_defconfig                  |   5 -
+ configs/tqma6q_mba6_spi_defconfig                  |   5 -
+ configs/tqma6qp_mba6_defconfig                     |   6 +
+ configs/tqma6qp_mba6_uuu_defconfig                 |   2 +
+ configs/tqma6s_mba6_defconfig                      |   6 +
+ configs/tqma6s_mba6_mmc_defconfig                  |   5 -
+ configs/tqma6s_mba6_spi_defconfig                  |   5 -
+ 32 files changed, 1306 insertions(+), 587 deletions(-)
+---
+base-commit: a1ce46a6689641dd83d725edbfc3f5719abf3a94
+change-id: 20261126-update-tqma6-1c3afd87914b
+
+Best regards,
 -- 
-2.34.1
+Max Merchel <Max.Merchel@ew.tq-group.com>
 
