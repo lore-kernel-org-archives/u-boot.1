@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7494606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB339606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kIq2mTvR;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=A5iFe3Dy
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VqLWRGh6;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mJd58A/W
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C4933409E5;
-	Thu, 26 Nov 2026 13:33:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9694960A97;
+	Thu, 26 Nov 2026 13:33:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id u7or_EoVq4Vc; Thu, 26 Nov 2026 13:33:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 88FA8409E0
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700004;
-	b=OBE55V4II8WF9x4F9bz0MoC3ST6/sT31WUnV6b7erpp309XpUHyPXZQAj1zHCDLpKftJ
-	 mOSAkkqc9OADgTzWnyIWLjc8/LgLuuaELLaLinH5zdShjIBK9QJurkfQh0qDhSNLqPlvU
-	 jA7qWnTynuDdmC0Do76xQpq1PtHBGKzp6C6WBXWqmGuV9F9BEoSrSL9keNygdIaL8nuGy
-	 ZbpQqOLZA/WsWvHhdU65OqO8Ir0W5UeCNTtuV3kpXGzaHMn1XsRCd0dAcvGnf7rMZU+m+
-	 Bc840vNboPS/vo3zjrYzw5Y9r3I5OuS0GF8MqbyInu7xJY/Itbeoeb6fBdXhfA2K4YQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CRx2hJ_GRgvK; Thu, 26 Nov 2026 13:33:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2EE3E60A92
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700006;
+	b=e6PszRmycI471Ln6Nwf7sFL++iXQ+v+JK6SAiFrtONW+v3rwlEzAQtgaT5RfKV2aMFa4
+	 wXwogXklDwYTqHgXG7Hm6Lac2/qL+dV8LNbZ7GDSGhpp2n7izdiV7txI09p5iXAr4T94H
+	 8DcIgYwBkofgea2kvjWIbeeP7RYhHWGcHZ4t575yeHuBj9kUZT5oueFRsW85Bebl1r4rH
+	 eNvlOAGHxYOPqm9MODr4U/UrhDGLciOnhv31dOfWbLQ2uijt7rCqmpOuilekBPomwB1JO
+	 O5orBLNu4XfKYpDqpDN0Wp7fFbcihTiF9py3txXMlF1J3BnynTFH9PHpdyxMtzm42dg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795700004;
+	c=relaxed/relaxed; t=1795700006;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,116 +33,114 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
-	b=HczAq67d7wIkIDpxIaNP7CeMrx2mn/wW5K+HrC2pQ7Iu5f6xESm8zgJqP2kHRUpOwace
-	 mT2O0cl5Nuw8yJ7UFOAIzJd3dri7rRlBwnqYddyXpOgtO2UDgLUszI5XetdzuBBiTAihT
-	 qkc2blJ68wAvzC4ACn0kTj6ebhbpTh/bKVJUUskMO/59M4CuFXdv5iOsZ3Cj02OYKIW5X
-	 AZtVazLk/jHQs7RTiAjXlbi8vUFsWg2wEFdSrD+R92zgpIgzhsJ47jfqYZgympKHKQjAy
-	 Cg8rQc3f6HxydSjkq8Qj/Lkg0fXc31SUFt49ArNMAv+09qA49o9PuyUl3FX74GUU11Q==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=A5iFe3Dy;
+	bh=OhIR9pwoLsmAPOf7sZpsdBPxF9N+/AUajBRRSQi7hhg=;
+	b=FfLq+cnd5CuqnuI3n1TRgUgeX3vyMW+JQCZ9OZTcHpZiLZmfichTq5WRP3QZVGxTfvH/
+	 ByGGV2tQNooLDewASLt3yXeTT7+eAVK8Q8U8H3eFD06WA5z9yj2UGNA4LuSq5SvHvX5FN
+	 wfHPCu12WFw7PPeBqJ8PApRlbciireeJYvYa1tEhGU3FAWqgTWdRZyS3ykxOXtk6zQGNK
+	 alV66RYn1bAJsg5ikx4Nx3I6tWLcHZdedDZTEY/Oc6nxv2jPZZBKDgQueNkU6KKvkgKRY
+	 j+CGmSbRsTS+nMEwmjZj0VX97K6w1C8s92qFn89R/PTNC03RMzMgzzrdq6ilsDQ0SrA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795700004;
-	bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
+	d=lists.u-boot-project.org; s=default; t=1795700006;
+	bh=OhIR9pwoLsmAPOf7sZpsdBPxF9N+/AUajBRRSQi7hhg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=kIq2mTvR/BUnMQ4JATO4xqZF8iGwQmjFJ/WJSoz9VL3E3gY+sJjh0x9bTGFyjXNxe
-	 MKGbdi7Qvo9ysC4duJ13pL7uFP8RPuCzhX5cFllMeYhVahUml+zXHxiVekxgHs7r60
-	 rg4AKh5Wy8IB6u6kmasmK6Tza/ZQ+3FIleLCk5vKE7w4RLn5eko9RpHUKWcg3aOolv
-	 zLxCBTyNR/d4vdaeyLPBaEW4OdUUvkGplvZAfc+3rGotFtJoBS+vWJ6FmuYmLPMmwu
-	 V0ftvFFtyY2/derGXWuV1BrltNCe/rjlTjl2gfF3fDhXfAADtIypcfZoMmhzuG3+wY
-	 vqo5OMfjB4g1w==
+	b=VqLWRGh6znzGeeclxrgE+5BxrVd1tI+4BMhJnUNOVITrWsHJwI9rZTAv+1PcUHjL/
+	 1i5dqarEypI/40XVGxsmgw5Qx00y4C3Tlf4VHAP5JI2RYgOwIIXesv1vPlgabEjSuO
+	 SeFMuktDVssAA1NTMU34Q2xNBUXP2vdlQVwdHnPUplY/1jyeIwf2ZLA4Uo0QQQmhTy
+	 2e35XFF2OuKwiusX3bfb5gXPaarPifPRjpPTPKJYK+rpZibOCuOdZWUNlz7pDc8WAs
+	 /IBUM7maS3M4crlQTpyAr+jqS0+kcuvv0qcoLB14SUb/snzfqAlq5ilb1P/+f8xr4t
+	 EmN+pKO3gSdvw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 88FA8409E0;
-	Thu, 26 Nov 2026 13:33:24 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6FF2732D
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2EE3E60A92;
+	Thu, 26 Nov 2026 13:33:26 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5D3D5260
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 561214079A
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:14 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4E4BC80A88
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HJkSbnXCsBli for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 06:53:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 69F24405C8
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c31"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RevpVpqOoPw2 for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 06:53:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1B1D6809EE
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::334"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c31; helo=mail-oo1-xc31.google.com;
+ client-ip=2607:f8b0:4864:20::334; helo=mail-ot1-x334.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=A5iFe3Dy
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 69F24405C8
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:12 +0000 (UTC)
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-71ac9e15640so4221028eaf.3
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:12 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=mJd58A/W
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1B1D6809EE
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:14 +0000 (UTC)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-86288992de5so4940114a34.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795675992; x=1796280792;
+ d=gmail.com; s=20260707; t=1795675994; x=1796280794;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
- b=A5iFe3DypsBjySkjIoa42YO0mieMwwd3g+1zQfgBq/+dIrkdYAyoWF8R0xF4SYFv58
- i6oyQjghV9exVQMj0BtALLcAuST7DmXp/+OMYgSNKNhOgWd98OwKin1Gj3hlHOlAlwBv
- OStNoxbOyGv8FWHjxtvOrGkVinpITh+JCW7DGbip6cqSTj0oF3h1meUW8BaL6GRvuzgH
- qmXk6Hl6LnbbHOPvAjg+B+aJheBohNjM34LGZITgOPx7F1qMQJOm+Jy7gcqqi6Bvf/7w
- BzHOZcNE4YuI4ajNkQtsFKXdfdtCxlKi5X3WdrjJxhAiDp5LdT2umkuid8YaT/I2TAkR
- +AEA==
+ bh=OhIR9pwoLsmAPOf7sZpsdBPxF9N+/AUajBRRSQi7hhg=;
+ b=mJd58A/WfZjS7b1H8Op5TeFXKlARa4ULtdBSfKbGJAUxeRfAlwyGT781tEKAGWC5wF
+ rv292O8kQGj3H/EbKT4c7pzYK+bxgZ+NedzDw9/NUivvLDEr8f+1VvJlHd89Qn2qjDDM
+ YlWGocpBJtO44OeQDiiHiNvypMeN9sz1JutkAsAjAGiIzqxXopjR8sSZv7xUrd3GibVe
+ 5cob3sktLr6acVTxx8GnBgUKUUzRqYBiw8N95ILW5hAq0iaaG9qHwnvoMFLQUyxv9tUI
+ ts8yjswT1X4UdN8YUMwI0Z/Xuu00cG2/u/fz9XQTr9/cbX0GTWpNwIwtkVIG5TztwguT
+ QjYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795675992; x=1796280792;
+ d=1e100.net; s=20260707; t=1795675994; x=1796280794;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Us2nvpsWRUzU6kGZJdDDKkWzcd3AVRnXsjkStoPj5mM=;
- b=V+B9ZJrhxxCvRDZCybM+xQTviZBs3c2GVzt7hVjME9FJ9mGnodEAEwIfdKQI9jm61p
- BLyrXDR8bQMnKkUhRqsQmN92QgtrTktUvsSy+Cr9l0bQ9kgXwC1DQkOO1+nLAU2E0pnV
- XkbHqthZ2lqtDWopAjUJe8uBHQPK+/Fo42DD52UZ75V+ppzgMilaRaeHoyzNzfSgD28c
- wkQZFQo58H/z+G9dw1lvnlIfmy9EBZ5ABtdlMiy/a8cNb23+S5U/WjF5Er9IWjtJqR6e
- j/R8yitwEsSunfgnTjjVQErO7VAvwmXns6EzbpuubGJRlnPw7D6T82QO4qBcg8Mct3Ve
- Hamg==
-X-Gm-Message-State: APuU4Z8ceOh+F7IBVXbzvH59AROr7hkASlgRMCoK5AX3PRX4c4ZNA58v
- vAhrN67kCA0EzF5wy9UBs2huoKdERRsZCjBvCmlKRV4jtbIcGnQ/BAdQ
-X-Gm-Gg: AZFdTZdA0KhC4Yxmm+sIQi4YU1fGZzscC6iib/Kq7lzUoq5ZQORwBcE4O0IviZLpQQQ
- eIxQ4Z2zfZdmrj/mpVrvhPgxtsiDv+lHwBaGuvl9BnyuTvue6zcUxCTyOd3gi0ZOol+A3d98/7C
- Unbv0lLmFAdJ7v3cimgYK6UgtK7UmkrvbRi/YvgNTI3sPZ90VOgPjD8k77kOVRFzuPhwVROo4KO
- dqBmhZk2jM0SBWg32sM5xT+7Ton9OJuBlPOyItSgo60ftZi4MbabAR6+8BXmS2IXcXvaRLDPoHa
- +Sz73diChb5Em/asjycm0Ll3X9lo1t9usTnPLePd9fCaPJ1PoM0XCjrJplj0ndYTTHLHVXQ/p7S
- QRbf/Fyh0SprfsGNV9BAj6TE4bA3LhbkicwO2mgydY6O+jHoJNl6R3VkTvidLi1bcGAxZveGw5K
- XyUcUtv7DvViSPf+0OA/LhjreaRca1stFJP+rDiGJsc9vGzg+8kR7OinEPETECRyqhzFtmw2QZB
- GLJNPmGEJMuZ3xgRTAs5eQPyROO+pRHZ7RgCYfjAi+7vcqh6OJ/SfCoAlHRkdUKqczTA4GTmX/Y
- LhHUCkAXnJ3A9njAYrPBpYC5lZyk75fUQIqqRiR+B/4pnjtvjqYpV8gnfITq3KRoKvqKW/2H4hG
- 1H1/k+TCSrbgHAi6HmlfeqayvhlnnIiIzG0GIvZw7d9NMX/beu4m2vhW0sTqRF0GimBOffYoDSG
- D93REwwobzfEHglNdefGmUJSfHmCfXTEZ/o2B0KnEvANn13cr96GA=
-X-Received: by 2002:a05:6820:83c5:10b0:6f8:2346:cd8e with SMTP id
- 006d021491bc7-71b395b82d5mr11648832eaf.80.1795675991833; 
- Wed, 25 Nov 2026 22:53:11 -0800 (PST)
+ bh=OhIR9pwoLsmAPOf7sZpsdBPxF9N+/AUajBRRSQi7hhg=;
+ b=mUOnpdk0Gyj19YmlHjxiHDbv/hA74JMWTzlQ43vq586URJtj/ZWv/eGuHZeyQmhv6X
+ /IwvfauD3ZwjVSmCi2cT9Yl91OkRcKA15/sy5Liqzfh5sKai3RZmiAS+UyJDnT5qnFW1
+ qaM5wo4iwu465w7ycK7iAqQqOv0d9CJRMpEvQpDnJgzzSJQR0q3DdGR4SvgDu7dYlP94
+ Skg8DsVRRyEX1+7bOaCuQfCDJeja5vNEsHTq/JpHLPFAqrQPEOovGfcZ88qGkSIQ+ZYK
+ AgHhA2jxgSh6kVXSWZPAZHy4CgonZZ+YCUcC2ak+zxrQTO5gXR1aWYfWYzfI8xvyBRBQ
+ ZWZQ==
+X-Gm-Message-State: APuU4Z8JpYRSvMpux0ZRjbnSncuuK0LmN+5bQzAJSlygTVmoQH3nC4SP
+ TEv951m0DmOpZTJFyjGGyqrz4tG/xwRQp6eMU6RrjAOl3KqdP3HlOwbs
+X-Gm-Gg: AZFdTZcyAUU2pKhcsoQyxZzMsfnJrnJ6LizAuKV8wnbTEIkViGweTkVwm9l6syp2mxo
+ PGgYf6MnxIBHiO3ecyU/VXWOndF4JFCoJ6HDpfu9qSEi15vTzyhKKIF4VXA3xRStqM3XvDfX5xc
+ ShpOfHntn7z/x3QWtCO/hs+XmqM4FjDoC8FTvDqiuLLldXAgkwBsLtBIitokwp2WdA/OpZpVoTb
+ BZL3tfaN94/g8IuQ+PwxkQyGGS38XtxJiC/Vx7dJLNfFRvkIjTpDvgrpWJ1+vJi9i7wZ9KyhpM7
+ 3z0fF1yUvKhdlx8ua0nRnfSMc9Bevo7uconTV0CyvvG39MXWouw+TONEmJSoNlh9WASgaGzYpKm
+ abYFqkhQN0vQQnmp3ISoHA+ah6glN2sS5Zs4Tmtc4H4yr7XABgdUBcJJ57aUUjZI/tHJE/wsiww
+ WJVxM12JBoIHKS9zsgN1kmcrMLYy81cYT0qyoHb/yOSmq9h6eURq2wSEVpw40odKckIJDcOxALg
+ iyPvANd/+wTp+f1tl4pDgkwFBDhYgs7jy2jvW47Pm5q/cm12SK3SgoIj0OIKVUOiNFdxNGtmG1K
+ NS+nU/r3luSPZYnOk8fk3hwMoiDoZM76t5JPi0Bdt4ny98ZgW+vPTR+WiYv7E5bacD5Pw5GTnMj
+ iLmZgVCoU70w7Emaa0yYxR4VHFF/9nYQ0iJNjM/wCloKdLoFitpb1NzArMT0wVAzIVoPCsGgvou
+ aHC5O5+5RT0VixYCTlW82qdQiYyiBfcnZMowToG0xrI5S8owMutw0=
+X-Received: by 2002:a05:6830:4424:b0:863:3a1a:91f8 with SMTP id
+ 46e09a7af769-8633a1aa07cmr10110755a34.10.1795675993607; 
+ Wed, 25 Nov 2026 22:53:13 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.10
+ 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 22:53:11 -0800 (PST)
+ Wed, 25 Nov 2026 22:53:13 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 25 Nov 2026 23:52:51 -0700
-Subject: [PATCH 02/19] net: lwip: support the IPv4 linklocal command
+Date: Wed, 25 Nov 2026 23:52:52 -0700
+Subject: [PATCH 03/19] net: lwip: apply the configured Ethernet VLAN
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-submit-lwip-network-boot-v1-v1-2-63df291d9392@gmail.com>
+Message-Id: <20261125-submit-lwip-network-boot-v1-v1-3-63df291d9392@gmail.com>
 References: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 In-Reply-To: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -193,260 +191,402 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Allow boards without a DHCP server to acquire an IPv4 link-local address.
-Use the lwIP AutoIP client to probe the saved address and choose another
-one if a peer already owns it. Export the resulting address and subnet
-on the selected interface, and detach the client before releasing the
-shared runtime.
+Tag outgoing frames with vlan, and accept untagged frames on an
+active VLAN only when nvlan identifies it as the native VLAN. Apply
+the receive policy before handing packets to either lwIP or the raw
+WoL listener, while leaving packet capture on the wire side of the
+filter.
+
+Keep the VLAN policy fixed while clients share an interface. A VLAN
+change could otherwise reuse neighbor entries learned on the previous
+link. Reject attachment or refresh until the last client detaches and
+a new interface is created.
+
+Use lwIP Ethernet encapsulation for both IPv4 and IPv6 and reserve
+headroom for the larger header. Exercise VLAN transmission and receive
+policy changes in sandbox.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- cmd/Kconfig                |  4 +--
- cmd/lwip/Makefile          |  1 +
- cmd/lwip/linklocal.c       | 71 ++++++++++++++++++++++++++++++++++++++++++++++
- lib/lwip/u-boot/lwipopts.h |  2 +-
- test/dm/lwip.c             | 48 +++++++++++++++++++++++++++++++
- test/dm/lwip_test.h        | 42 +++++++++++++++++++++++++++
- 6 files changed, 165 insertions(+), 3 deletions(-)
+ lib/lwip/u-boot/lwip-hooks.h |   3 +
+ lib/lwip/u-boot/lwipopts.h   |   3 +-
+ net/lwip/net-lwip.c          |  75 ++++++++++++++++++++-
+ net/lwip/wol.c               |   7 ++
+ test/dm/lwip.c               | 152 +++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 237 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b44ec644b87..5c31fb00013 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2200,6 +2200,8 @@ config CMD_CDP
- 	  and to retrieve configuration data including the VLAN id using the
- 	  proprietary Cisco Discovery Protocol (CDP).
+diff --git a/lib/lwip/u-boot/lwip-hooks.h b/lib/lwip/u-boot/lwip-hooks.h
+index c4bf364ba3c..f665e80e869 100644
+--- a/lib/lwip/u-boot/lwip-hooks.h
++++ b/lib/lwip/u-boot/lwip-hooks.h
+@@ -4,6 +4,9 @@
+ #ifndef __UBOOT_LWIP_HOOKS_H
+ #define __UBOOT_LWIP_HOOKS_H
  
-+endif  # if NET_LEGACY
++int net_lwip_vlan_id(void);
++#define LWIP_HOOK_VLAN_SET(...) net_lwip_vlan_id()
 +
- config CMD_LINK_LOCAL
- 	bool "linklocal"
- 	depends on (LIB_RAND || LIB_HW_RAND)
-@@ -2214,8 +2216,6 @@ config CMD_NCSI
- 	  Normally this happens automatically before other network
- 	  operations.
+ #ifdef CONFIG_CMD_DHCP
+ #include "lwip-dhcp.h"
+ #endif
+diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+index b1f9d9cdb62..ab3b39a198f 100644
+--- a/lib/lwip/u-boot/lwipopts.h
++++ b/lib/lwip/u-boot/lwipopts.h
+@@ -244,7 +244,8 @@
  
--endif  # if NET_LEGACY
--
- config IPV6_ROUTER_DISCOVERY
- 	bool "Do IPv6 router discovery"
- 	depends on IPV6
-diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
-index 606c3693d2b..90ad4d21e6f 100644
---- a/cmd/lwip/Makefile
-+++ b/cmd/lwip/Makefile
-@@ -1,6 +1,7 @@
- obj-$(CONFIG_CMD_BOOTP) += bootp.o
- obj-$(CONFIG_CMD_DHCP) += dhcp.o
- obj-$(CONFIG_CMD_DNS) += dns.o
-+obj-$(CONFIG_CMD_LINK_LOCAL) += linklocal.o
- obj-$(CONFIG_CMD_NFS) += nfs.o
- ifneq ($(filter y,$(CONFIG_CMD_PING) $(CONFIG_CMD_PING6)),)
- obj-y += ping.o
-diff --git a/cmd/lwip/linklocal.c b/cmd/lwip/linklocal.c
-new file mode 100644
-index 00000000000..a2df1379276
---- /dev/null
-+++ b/cmd/lwip/linklocal.c
-@@ -0,0 +1,71 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include <command.h>
-+#include <console.h>
-+#include <dm/device.h>
-+#include <env.h>
-+#include <net.h>
-+#include <lwip/autoip.h>
-+#include <lwip/prot/autoip.h>
-+
-+static int set_addr_env(const char *name, int seq, const ip4_addr_t *addr)
+ #define LWIP_LISTEN_BACKLOG             0
+ 
+-#define PBUF_LINK_HLEN                  14
++#define ETHARP_SUPPORT_VLAN             1
++#define PBUF_LINK_HLEN                  18
+ #define PBUF_POOL_BUFSIZE               LWIP_MEM_ALIGN_SIZE(TCP_MSS + 40 + PBUF_LINK_HLEN)
+ 
+ #define LWIP_HAVE_LOOPIF                0
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 726731bc2fa..d7a38b9f72f 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -3,6 +3,7 @@
+ /* Copyright (C) 2024 Linaro Ltd. */
+ 
+ #include <command.h>
++#include <asm/unaligned.h>
+ #include <console.h>
+ #include <env.h>
+ #include <image.h>
+@@ -43,10 +44,12 @@ int net_restart_wrap;
+ static struct {
+ 	struct udevice *dev;
+ 	struct netif *netif;
++	int vlan;
+ 	unsigned int users;
+ 	unsigned int env_users;
+ 	unsigned int strict_env_users;
+ 	unsigned int no_addr_users;
++	bool accept_untagged;
+ 	bool polling;
+ #if CONFIG_IS_ENABLED(IPV6)
+ 	bool ip6_configured;
+@@ -61,6 +64,52 @@ static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN]
+ const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+ char *pxelinux_configfile;
+ 
++static int env_vlan_id(const char *name)
 +{
-+	char key[sizeof("gatewayip99")];
++	const char *value = env_get(name);
++	unsigned int id;
 +
-+	if (seq) {
-+		snprintf(key, sizeof(key), "%s%d", name, seq);
-+		name = key;
-+	}
++	if (!value || net_lwip_parse_decimal(value, strlen(value),
++					     VLAN_VID_MASK - 1, &id))
++		return -1;
 +
-+	return env_set(name, ip4addr_ntoa(addr));
++	return id;
 +}
 +
-+static int do_linklocal(struct cmd_tbl *cmdtp, int flag, int argc,
-+			char *const argv[])
++static int net_lwip_configure_vlan(void)
 +{
-+	struct net_lwip_ctx net = {};
-+	struct autoip client;
-+	const char *saved;
-+	ip4_addr_t addr;
-+	int seq, ret = CMD_RET_FAILURE;
++	int vlan = env_vlan_id("vlan");
++	bool untagged = vlan < 0 || vlan == env_vlan_id("nvlan");
 +
-+	if (net_lwip_start(&net, NET_LWIP_ADDR_NONE))
-+		return CMD_RET_FAILURE;
-+	seq = dev_seq(net.dev);
-+	if (seq < 0 || seq > 99)
-+		goto out;
++	/* ARP and IPv6 neighbor entries belong to the lifetime of the netif. */
++	if (net_lwip_runtime.users &&
++	    (vlan != net_lwip_runtime.vlan ||
++	     untagged != net_lwip_runtime.accept_untagged))
++		return -EBUSY;
 +
-+	autoip_set_struct(net.netif, &client);
-+	saved = env_get("llipaddr");
-+	if (saved && ip4addr_aton(saved, &addr) &&
-+	    ntohl(addr.addr) >= AUTOIP_RANGE_START &&
-+	    ntohl(addr.addr) <= AUTOIP_RANGE_END)
-+		client.llipaddr = addr;
-+	if (autoip_start(net.netif) != ERR_OK)
-+		goto detach;
++	net_lwip_runtime.vlan = vlan;
++	net_lwip_runtime.accept_untagged = untagged;
++	return 0;
++}
 +
-+	while (!autoip_supplied_address(net.netif)) {
-+		if (ctrlc() || net_lwip_poll() < 0)
-+			goto stop;
++int net_lwip_vlan_id(void)
++{
++	return net_lwip_runtime.vlan;
++}
++
++static bool net_lwip_accept_vlan(const uchar *packet, int len)
++{
++	int id = net_lwip_vlan_id();
++
++	if (len < ETHER_HDR_SIZE)
++		return false;
++	if (get_unaligned_be16(packet + 2 * ETH_ALEN) != PROT_VLAN)
++		return net_lwip_runtime.accept_untagged;
++
++	return len >= VLAN_ETH_HLEN && id >= 0 &&
++		(get_unaligned_be16(packet + ETHER_HDR_SIZE) & VLAN_VID_MASK) == id;
++}
++
+ static err_t net_lwip_tx(struct netif *netif, struct pbuf *p)
+ {
+ 	struct udevice *udev = netif->state;
+@@ -205,12 +254,20 @@ int net_set_ether(uchar *xet, const uchar *dest_ethaddr, uint prot)
+ {
+ 	struct ethernet_hdr *et = (struct ethernet_hdr *)xet;
+ 	const uchar *src = eth_get_ethaddr();
++	int vlan_id = net_lwip_runtime.users ? net_lwip_vlan_id() :
++		env_vlan_id("vlan");
+ 
+ 	memcpy(et->et_dest, dest_ethaddr, ARP_HLEN);
+ 	if (src)
+ 		memcpy(et->et_src, src, ARP_HLEN);
+ 	else
+ 		memset(et->et_src, 0, ARP_HLEN);
++	if (vlan_id >= 0) {
++		et->et_protlen = htons(PROT_VLAN);
++		put_unaligned_be16(vlan_id, xet + ETHER_HDR_SIZE);
++		put_unaligned_be16(prot, xet + ETHER_HDR_SIZE + 2);
++		return VLAN_ETH_HLEN;
++	}
+ 	et->et_protlen = htons(prot);
+ 
+ 	return ETHER_HDR_SIZE;
+@@ -754,6 +811,10 @@ static int net_lwip_start_ctx(struct net_lwip_ctx *ctx,
+ 	     net_lwip_runtime.no_addr_users))
+ 		return -EBUSY;
+ 
++	ret = net_lwip_configure_vlan();
++	if (ret)
++		return ret;
++
+ 	if (!net_lwip_runtime.users) {
+ 		/* net_start_again() already selected and started the next NIC. */
+ 		if (!eth_started) {
+@@ -857,8 +918,8 @@ void net_lwip_stop(struct net_lwip_ctx *ctx)
+ 		return;
+ 	}
+ 
+-	if (!net_lwip_runtime.no_addr_users &&
+-	    net_lwip_runtime.env_users &&
++	if (!net_lwip_runtime.no_addr_users && net_lwip_runtime.env_users &&
++	    !net_lwip_configure_vlan() &&
+ 	    net_lwip_configure(NET_LWIP_ADDR_ENV_FLEXIBLE))
+ 		log_err("Failed to restore lwIP interface addressing\n");
+ }
+@@ -931,10 +992,16 @@ int net_lwip_restart(struct net_lwip_ctx *ctx)
+  */
+ int net_lwip_refresh(struct net_lwip_ctx *ctx)
+ {
++	int ret;
++
+ 	if (!ctx || ctx->netif != net_lwip_runtime.netif ||
+ 	    ctx->dev != net_lwip_runtime.dev || !net_lwip_runtime.users)
+ 		return -EINVAL;
+ 
++	ret = net_lwip_configure_vlan();
++	if (ret)
++		return ret;
++
+ 	if (net_lwip_runtime.no_addr_users && ctx->addr_mode != NET_LWIP_ADDR_NONE)
+ 		return 0;
+ 
+@@ -1013,6 +1080,9 @@ static int net_lwip_rx(struct udevice *udev, struct netif *netif)
+ 					       packet, len, true);
+ 			}
+ 
++			if (!net_lwip_accept_vlan(packet, len))
++				goto release;
++
+ 			if (IS_ENABLED(CONFIG_CMD_WOL))
+ 				net_lwip_wol_receive(netif, packet, len);
+ 
+@@ -1020,6 +1090,7 @@ static int net_lwip_rx(struct udevice *udev, struct netif *netif)
+ 			if (pbuf)
+ 				netif->input(pbuf, netif);
+ 		}
++release:
+ 		if (len >= 0 && eth_get_ops(udev)->free_pkt)
+ 			eth_get_ops(udev)->free_pkt(udev, packet, len);
+ 		if (len <= 0)
+diff --git a/net/lwip/wol.c b/net/lwip/wol.c
+index 579f9752d50..0b0885ce4a2 100644
+--- a/net/lwip/wol.c
++++ b/net/lwip/wol.c
+@@ -71,6 +71,13 @@ void net_lwip_wol_receive(struct netif *netif, const u8 *packet, int len)
+ 	protocol = get_unaligned_be16(packet + 2 * ARP_HLEN);
+ 	packet += ETHER_HDR_SIZE;
+ 	len -= ETHER_HDR_SIZE;
++	if (protocol == PROT_VLAN) {
++		if (len < VLAN_HLEN)
++			return;
++		protocol = get_unaligned_be16(packet + 2);
++		packet += VLAN_HLEN;
++		len -= VLAN_HLEN;
++	}
+ 
+ 	switch (protocol) {
+ 	case PROT_WOL:
+diff --git a/test/dm/lwip.c b/test/dm/lwip.c
+index 78c074a7723..ba5e6ff1b96 100644
+--- a/test/dm/lwip.c
++++ b/test/dm/lwip.c
+@@ -12,6 +12,8 @@
+ #include <net.h>
+ #include <time.h>
+ #include <asm/eth.h>
++#include <asm/unaligned.h>
++#include <lwip/etharp.h>
+ #include <dm/test.h>
+ #include <linux/kconfig.h>
+ #include <test/ut.h>
+@@ -324,6 +326,156 @@ static int lwip_test_http_abort(struct unit_test_state *uts)
+ }
+ #endif
+ 
++struct vlan_wire {
++	int vid;
++};
++
++static int lwip_vlan_tx(struct udevice *dev, void *packet, unsigned int len)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct vlan_wire *wire = priv->priv;
++	const u8 *frame = packet;
++
++	if (len >= ETHER_HDR_SIZE &&
++	    get_unaligned_be16(frame + 12) == PROT_ARP) {
++		wire->vid = -1;
++	} else if (len >= VLAN_ETH_HLEN &&
++		   get_unaligned_be16(frame + 12) == PROT_VLAN &&
++		   get_unaligned_be16(frame + 16) == PROT_ARP)
++		wire->vid = get_unaligned_be16(frame + 14) & VLAN_VID_MASK;
++	return 0;
++}
++
++static int lwip_vlan_check(struct unit_test_state *uts, struct net_lwip_ctx *net,
++			   struct net_lwip_ctx *other, struct udp_pcb **pcb)
++{
++	const int tags[] = { 17, 16, -1 };
++	char *const reset_vars[] = { "vlan" };
++	struct in_addr host = string_to_ip("1.1.2.2");
++	struct eth_sandbox_priv *priv = dev_get_priv(net->dev);
++	struct lwip_test_recv_ctx rx = {};
++	struct vlan_wire wire = { .vid = -1 };
++	ip4_addr_t server;
++
++	sandbox_eth_set_priv(0, &wire);
++	sandbox_eth_set_tx_handler(0, lwip_vlan_tx);
++	ip4_addr_set_u32(&server, host.s_addr);
++	ut_asserteq(ERR_OK, etharp_request(net->netif, &server));
++	ut_asserteq(17, wire.vid);
++
++	*pcb = udp_new();
++	ut_assertnonnull(*pcb);
++	ut_asserteq(ERR_OK, udp_bind(*pcb, IP_ADDR_ANY, 10000));
++	udp_recv(*pcb, lwip_test_udp_recv, &rx);
++	for (int i = 0; i < ARRAY_SIZE(tags); i++) {
++		int idx = priv->recv_packets;
++		u8 *frame;
++
++		ut_assertok(lwip_test_inject_udp(net->dev, "test", host, 10001, 10000));
++		frame = priv->recv_packet_buffer[idx];
++		if (tags[i] >= 0) {
++			memmove(frame + 16, frame + 12, priv->recv_packet_length[idx] - 12);
++			put_unaligned_be16(PROT_VLAN, frame + 12);
++			put_unaligned_be16(tags[i] | (5 << VLAN_PRIO_SHIFT), frame + 14);
++			priv->recv_packet_length[idx] += VLAN_HLEN;
++		}
++		ut_assertok(net_lwip_poll());
++		ut_asserteq(1, rx.packets);
 +	}
 +
-+	if (set_addr_env("netmask", seq, netif_ip4_netmask(net.netif)) ||
-+	    set_addr_env("gatewayip", seq, netif_ip4_gw(net.netif)) ||
-+	    set_addr_env("ipaddr", seq, &client.llipaddr) ||
-+	    env_set("llipaddr", ip4addr_ntoa(&client.llipaddr)))
-+		goto stop;
-+	if (!seq)
-+		net_ip.s_addr = client.llipaddr.addr;
-+	ret = CMD_RET_SUCCESS;
-+stop:
-+	autoip_stop(net.netif);
-+	acd_remove(net.netif, &client.acd);
-+detach:
-+	autoip_remove_struct(net.netif);
-+out:
++	/* A VLAN change cannot reuse state from the attached netif. */
++	ut_assertok(env_set("vlan", "31"));
++	ut_asserteq(-EBUSY, net_lwip_refresh(net));
++	ut_asserteq(-EBUSY, net_lwip_start(other, NET_LWIP_ADDR_ENV_FLEXIBLE));
++	wire.vid = -2;
++	ut_asserteq(ERR_OK, etharp_request(net->netif, &server));
++	ut_asserteq(17, wire.vid);
++	{
++		int idx = priv->recv_packets;
++		u8 *frame;
++
++		ut_assertok(lwip_test_inject_udp(net->dev, "test", host, 10001, 10000));
++		frame = priv->recv_packet_buffer[idx];
++		memmove(frame + 16, frame + 12,
++			priv->recv_packet_length[idx] - 12);
++		put_unaligned_be16(PROT_VLAN, frame + 12);
++		put_unaligned_be16(17 | (5 << VLAN_PRIO_SHIFT), frame + 14);
++		priv->recv_packet_length[idx] += VLAN_HLEN;
++		ut_assertok(net_lwip_poll());
++		ut_asserteq(2, rx.packets);
++	}
++
++	/* A changed native VLAN is not used until the interface is reopened. */
++	ut_assertok(env_set("vlan", "17"));
++	ut_assertok(env_set("nvlan", "17"));
++	ut_asserteq(-EBUSY, net_lwip_refresh(net));
++
++	/* Untagged traffic remains filtered until the interface is reopened. */
++	{
++		ut_assertok(lwip_test_inject_udp(net->dev, "test", host, 10001, 10000));
++		ut_assertok(net_lwip_poll());
++		ut_asserteq(2, rx.packets);
++	}
++
++	udp_remove(*pcb);
++	*pcb = NULL;
++	net_lwip_stop(net);
++	ut_assertok(net_lwip_start(net, NET_LWIP_ADDR_ENV_STRICT));
++	rx = (struct lwip_test_recv_ctx){};
++	*pcb = udp_new();
++	ut_assertnonnull(*pcb);
++	ut_asserteq(ERR_OK, udp_bind(*pcb, IP_ADDR_ANY, 10000));
++	udp_recv(*pcb, lwip_test_udp_recv, &rx);
++	ut_assertok(lwip_test_inject_udp(net->dev, "test", host, 10001, 10000));
++	ut_assertok(net_lwip_poll());
++	ut_asserteq(1, rx.packets);
++
++	ut_asserteq(1, env_set_default_vars(ARRAY_SIZE(reset_vars),
++					    reset_vars, 0));
++	ut_asserteq(-EBUSY, net_lwip_refresh(net));
++	wire.vid = -2;
++	ut_asserteq(ERR_OK, etharp_request(net->netif, &server));
++	ut_asserteq(17, wire.vid);
++	udp_remove(*pcb);
++	*pcb = NULL;
++	net_lwip_stop(net);
++	ut_assertok(net_lwip_start(net, NET_LWIP_ADDR_ENV_STRICT));
++	wire.vid = -2;
++	ut_asserteq(ERR_OK, etharp_request(net->netif, &server));
++	ut_asserteq(-1, wire.vid);
++	return 0;
++}
++
++static int lwip_vlan_run(struct unit_test_state *uts)
++{
++	struct net_lwip_ctx net = {}, other = {};
++	struct udp_pcb *pcb = NULL;
++	int ret;
++
++	ut_assertok(env_set("ethact", "eth@10002000"));
++	ut_assertok(env_set("ipaddr", "1.1.2.1"));
++	ut_assertok(env_set("vlan", "17"));
++	ut_assertok(env_set("nvlan", "16"));
++	ut_assertok(net_lwip_start(&net, NET_LWIP_ADDR_ENV_STRICT));
++	ret = lwip_vlan_check(uts, &net, &other, &pcb);
++	if (pcb)
++		udp_remove(pcb);
++	sandbox_eth_set_tx_handler(0, NULL);
++	sandbox_eth_set_priv(0, NULL);
++	net_lwip_stop(&other);
 +	net_lwip_stop(&net);
 +	return ret;
 +}
 +
-+U_BOOT_CMD(linklocal, 1, 1, do_linklocal,
-+	   "acquire a network IP address using the link-local protocol", "");
-diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
-index 2c07bdd545c..b1f9d9cdb62 100644
---- a/lib/lwip/u-boot/lwipopts.h
-+++ b/lib/lwip/u-boot/lwipopts.h
-@@ -205,7 +205,7 @@
- 	UBOOT_DHCP_TIMEOFFSET UBOOT_DHCP_PXE_CONFIG 67
- #endif /* defined(CONFIG_CMD_BOOTP) || defined(CONFIG_CMD_DHCP) */
- 
--#define LWIP_AUTOIP                     0
-+#define LWIP_AUTOIP                     CONFIG_IS_ENABLED(CMD_LINK_LOCAL)
- 
- #define LWIP_SNMP                       0
- 
-diff --git a/test/dm/lwip.c b/test/dm/lwip.c
-index f5932a0ef97..78c074a7723 100644
---- a/test/dm/lwip.c
-+++ b/test/dm/lwip.c
-@@ -15,6 +15,7 @@
- #include <dm/test.h>
- #include <linux/kconfig.h>
- #include <test/ut.h>
-+#include "lwip_test.h"
- 
- #if CONFIG_IS_ENABLED(PROT_DNS_LWIP)
- #include <lwip/dns.h>
-@@ -42,6 +43,53 @@ struct lwip_test_recv_ctx {
- 	int nested_poll_ret;
- };
- 
-+#if CONFIG_IS_ENABLED(CMD_LINK_LOCAL)
-+static bool reject_lladdr;
-+
-+static int linklocal_tx(struct udevice *dev, void *packet, unsigned int len)
++static int dm_test_lwip_vlan(struct unit_test_state *uts)
 +{
-+	if (reject_lladdr && !sandbox_eth_arp_req_to_reply(dev, packet, len))
-+		reject_lladdr = false;
++	const char *const vars[] = { "ethact", "ipaddr", "vlan", "nvlan" };
 +
-+	return 0;
++	return lwip_test_with_env(uts, vars, ARRAY_SIZE(vars), lwip_vlan_run);
 +}
 +
-+static int linklocal_check(struct unit_test_state *uts)
-+{
-+	ut_assertok(env_set("ethact", "eth@10002000"));
-+	ut_assertok(env_set("llipaddr", "169.254.7.8"));
-+	ut_assertok(run_command("linklocal", 0));
-+	ut_asserteq_str("169.254.7.8", env_get("ipaddr"));
-+	ut_asserteq_str("255.255.0.0", env_get("netmask"));
-+	ut_asserteq_str("0.0.0.0", env_get("gatewayip"));
++DM_TEST(dm_test_lwip_vlan, UTF_SCAN_FDT);
 +
-+	reject_lladdr = true;
-+	ut_assertok(run_command("linklocal", 0));
-+	ut_assert(!reject_lladdr);
-+	ut_assert(!strncmp(env_get("ipaddr"), "169.254.", 8));
-+	ut_assert(strcmp(env_get("ipaddr"), "169.254.7.8"));
-+	ut_asserteq_str(env_get("ipaddr"), env_get("llipaddr"));
-+	return 0;
-+}
-+
-+static int dm_test_lwip_linklocal(struct unit_test_state *uts)
-+{
-+	const char *const vars[] = { "ethact", "llipaddr", "ipaddr", "netmask",
-+				     "gatewayip" };
-+	struct in_addr old_ip = net_ip;
-+	int ret;
-+
-+	sandbox_eth_set_tx_handler(0, linklocal_tx);
-+	reject_lladdr = false;
-+	ret = lwip_test_with_env(uts, vars, ARRAY_SIZE(vars), linklocal_check);
-+	sandbox_eth_set_tx_handler(0, NULL);
-+	net_ip = old_ip;
-+	return ret;
-+}
-+
-+DM_TEST(dm_test_lwip_linklocal, UTF_SCAN_FDT);
-+#endif
-+
- static int dm_test_lwip_decimal(struct unit_test_state *uts)
- {
- 	static const char *const invalid[] = {
-diff --git a/test/dm/lwip_test.h b/test/dm/lwip_test.h
-new file mode 100644
-index 00000000000..3f435b59421
---- /dev/null
-+++ b/test/dm/lwip_test.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+#ifndef __DM_LWIP_TEST_H
-+#define __DM_LWIP_TEST_H
-+
-+#include <env.h>
-+#include <malloc.h>
-+
-+#include <test/ut.h>
-+
-+/* Preserve the caller's network settings even when a test assertion fails. */
-+static inline int lwip_test_with_env(struct unit_test_state *uts,
-+				     const char *const *names, size_t count,
-+				     int (*run)(struct unit_test_state *))
-+{
-+	char **saved;
-+	size_t i;
-+	int ret = -ENOMEM;
-+
-+	saved = calloc(count, sizeof(*saved));
-+	ut_assertnonnull(saved);
-+	for (i = 0; i < count; i++) {
-+		const char *value = env_get(names[i]);
-+
-+		if (value) {
-+			saved[i] = strdup(value);
-+			if (!saved[i])
-+				goto out;
-+		}
-+	}
-+	ret = run(uts);
-+	for (i = 0; i < count; i++)
-+		if (env_set(names[i], saved[i]))
-+			ret = -EINVAL;
-+out:
-+	while (i)
-+		free(saved[--i]);
-+	free(saved);
-+	ut_assertok(ret);
-+	return 0;
-+}
-+
-+#endif
+ static int _dm_test_lwip_runtime(struct unit_test_state *uts,
+ 				 struct net_lwip_ctx *client_a,
+ 				 struct net_lwip_ctx *client_b,
 
 -- 
 2.53.0
