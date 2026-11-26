@@ -1,115 +1,116 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88CAE606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 10:46:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7AF00606A326
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 10:47:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Qcrs74OX;
-	dkim=pass (2048-bit key, unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=GmIOXPxz
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=b4Zt7yoc;
+	dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=Xl/nc+x4
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 46DF860A3C;
-	Thu, 26 Nov 2026 10:46:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CB9CB408E4;
+	Thu, 26 Nov 2026 10:47:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DAzjOx_CGYYd; Thu, 26 Nov 2026 10:46:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7370A608E9
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795690018;
-	b=mSqgDK9+z4Boa9ZKP2HitTPiNeGaIKFSl7Dzt0rtTAU7b0SRxPSICQ0A3yA1FLFOAY8X
-	 XUNdp9cXnX2VkmooovAaXisXWEZfXp/7gjdsFFTp+OFBp4MFZ58KvnAECXVJZf9VcX+Lu
-	 hyj/OKGyeT4aOG37X2a3aNYU5ZjKMvKqePr9/yRtjxnXyahJlI42gL30VigH/Brp/TvAQ
-	 6CFUoztugTdk26D1d9eWCzc6pn6a1F84yEvkq7sCQZiwB79RLp7ZtTeJj0Vy49JkFHW0/
-	 0pWOrysz9v5s9+hR8vkizEHh3HbiDqDysC9t7cWlznIcG3Pp8lG8lWPrzfEYcyKrqtw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zEwfXpYd4WJ7; Thu, 26 Nov 2026 10:47:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A985F408C7
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795690023;
+	b=gCHIgoB7bJPNBzaSPCVNa4SuY8Yd24ZclabZphzjTO2n2/uFDN02SPrQepah94E648ab
+	 y5ODTEcVGZQ3tfZkrBZj3wbpcco8ll7RxxTPp2yD68JwilMn/G0GOuST+Hwqlkgzt8Z7t
+	 VFjjrp9KeGf02cNnCb+CvD6OKVPCUJ9qvxzFUbM6Dh+J3FfRmgUkdAZp+YHpzE4hKfAEH
+	 jTLelpVnL3Zu2JQRU/rf9qLXxUKoTMxhFaeTHyYc8PoUOOUcT+Z+bS2/+fWwhMvZ8E2yI
+	 0anpkmzNR7oUjRLt/nYbFSKFrOVvfUKSLtoIeU5C/GQHuquNvlN5LuTR1wVd7gSNEgg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795690018;
+	c=relaxed/relaxed; t=1795690023;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Virus-Scanned:X-BeenThere:
+	 DKIM-Signature:Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Virus-Scanned:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=SA0ZAQb0NmV/ekl3VbHniOkzv9kaayRfZaLONrjcsTc=;
-	b=nA4v7wGzUGxev2j3q5KqgjSa4sHfcBolfKumS63nIKc9B7JIDEZRBuJ1vt4FC4XbOVsQ
-	 +U45qDgpwdVLl6/zGG5bO9kYY0ydNG+3bqf9V++hkVfp2gZtRIb9jB+le/UzQsK3IpGUc
-	 aVt8Uq7aOrllhw95dP9lTKuuuSmLdE0ph9Svk9REjzpBaKOzviOlllsHKHv2D+8nDJAWy
-	 jksKtG/N9FL8v/JqnhaWOimChlzyFaC4wYiZoafce5sI3djpvS9IL71HDS05Cn70S6je9
-	 8W36OnWOrxJwLAYyemimF+yi4twTBodrxNll4BTyyzDrteB4cDkL62z4ZQBDEgQ7n/Q==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=/wDSsaQf+mxSANZX7TxGBI7PbDUa2kpAlTQKU9QMuMw=;
+	b=La8ox6mY4UzDaq8DoC4U+vGp2sm3WuyOd2FHKPuyQsvniEkKleHAJ1Hz3BBObGnLibWA
+	 NLMnqD6N2Qxii6tRI2J+3JUXANlxF+ZYHFfmF5d4NiS4NrZGwZpfxguRYoOL7pH00SPg1
+	 qPse6+0SFmq06OMX7twUtEE8rZuGWEBu/WiFhf6+7jw3j9KWEj6zwWW7obZx5a2kJ56nB
+	 lYGrcLutK7wNDV7ke2zy9UCvbhWKUPalkDXdhrOHE7hQdQpYtMp2V7lcmYqZOD7XS6Ga5
+	 8E1RdMRtu1WhXbClim7TVxhxb3uR7CyRGecSk6OhhHFal872AwOFMYJsCfTn86BrYyg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=ew.tq-group.com;
+	dkim=pass header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b="Xl/nc+x4";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795690018;
-	bh=SA0ZAQb0NmV/ekl3VbHniOkzv9kaayRfZaLONrjcsTc=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Qcrs74OXC9i9wt53sI/zxEoUyK88cOH0UakPYP9B79CuUtr4sozN5lQxVkLJu7N/z
-	 q8qnznJv+pa+uxT40VugJk5hEPpTUlJiC98PVuuPNfmaOUod3Fr+DR6szxqYJ0eCpb
-	 s9n34klKp0gehLARnGZJ+EplixJnDAF6HQkIc7/5zNAWXHTP5t5BGnYcTMvPvisSOw
-	 4+b/0PlWQByQIxN1HETMO+q06H/O76S1IajNWs1DDSR+/ddE9EgOmJgYQRg+Q3zzmE
-	 IDvk+jjFblFrPmKY9nlztu4OsoGxmj3vQhbgIpvCVuk1kLJJ0smPml6g66k9aLAyTO
-	 uo0L5TGYDL+Lg==
+	d=lists.u-boot-project.org; s=default; t=1795690023;
+	bh=/wDSsaQf+mxSANZX7TxGBI7PbDUa2kpAlTQKU9QMuMw=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=b4Zt7yocTs8ABsj7ci+Gd9AYlkpB3typqJ97RVuZARSMaRtfRrNoo2wWLDqNjMjhH
+	 mowisnKBPO+m84JSWzoqm9Mj+UCXTu4Oauwk/6uqKG3Fn8XPKYiFMumCwT4OTwGiHb
+	 f/G+hc/oTLUtr0qa7GuH1StWGWc57kTz2MCwVFU+wCyMV026H3GYejIsjvP3ovebyn
+	 T41EDUrbv7SWNSBBgTHqa+UyVPm3YI5X0YtTBWv411joovWbnKys348tOjuNaKdAXb
+	 dNoVsPqtUOvGJ1riaBvqA3NnzkvbI9PqdY/hCzGsFiilqIKH7+LvFgiPHZ2idcBQt2
+	 aCsUqdHKmq1gg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7370A608E9;
-	Thu, 26 Nov 2026 10:46:58 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id A93D4325
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A985F408C7;
+	Thu, 26 Nov 2026 10:47:03 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 66BD710B
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8ED5940277
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:57 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4D1A9408CD
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 61hPHfDRdEyo for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 10:46:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5C40F401CD
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bKw9yRglLEz8 for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 10:46:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 04042408C4
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
  helo=www537.your-server.de; envelope-from=max.merchel@ew.tq-group.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=GmIOXPxz
+ header.a=rsa-sha256 header.s=default2602 header.b=Xl/nc+x4
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5C40F401CD
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:55 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 04042408C4
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Cc:To:Content-Transfer-Encoding:
- Content-Type:MIME-Version:Message-Id:Date:Subject:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References;
- bh=SA0ZAQb0NmV/ekl3VbHniOkzv9kaayRfZaLONrjcsTc=; b=GmIOXPxz8jmV+MzUGzaOoHf/ZI
- SwWQkmb55l25k781erdHtogXB2y+T7DGQZ/XJpTO/bVIGFjsae6ujWKWGj3XRdfGiW6d2/8xk6HLu
- 92+38hpTe8h/Fiv3yMkOQyqwaSleaO/EscNhoDrHRT54eCiN72LERVZkgY7Hjg35m1P5k+rmujO13
- FU+7YT8stf6adU0bv2wr8EAPJOI41ROLZuuLm8OYNCmkmQYtpFuhfKZx7wYn07a2AOlFLTUbB6Qse
- Nfq6ZbA1XWJgm1UJPmopAEQHZf9gUk8nR/XHxa89/ShzKJls1+1orrB5hgQupyLeLclw0HhSQnkk6
- eqjihOLg==;
+ d=ew.tq-group.com; s=default2602; h=Cc:To:In-Reply-To:References:Message-Id:
+ Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=/wDSsaQf+mxSANZX7TxGBI7PbDUa2kpAlTQKU9QMuMw=; b=Xl/nc+x4XgLxkeSpr7Yshxlq/+
+ TIaXHeVFqSRnCmeZ9687RwHpAyLR14ZncLZ9j64KfAXgfpwNEbJKZIfdE5bwE2WAqiryrh1YFCFqy
+ fXTnI5kENRRbeQAU0jGEvd6RWcOkqavTp4KbRb1beI9HxOQrgkhkn+mLzquAby7Yp2uKbgN24UYB2
+ 6n64E1qQfG8Kr3FqyIrxW6mDFxhsDEZYrHYmWXxlpmqgXaTPQ/BAYay/U/BUKJ/7czr5gg/uDY4Hp
+ OFsrEWi7qxVqrGACGvRIniRtv6mJBfqXohQEu3zAzCm/zDr45l7m65YZgMmgdasJUOxVcvELuphGJ
+ focIOAKQ==;
 Received: from sslproxy06.your-server.de ([78.46.172.3])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1xWX05-000Nto-0g; Thu, 26 Nov 2026 11:46:49 +0100
+ id 1xWX07-000NvC-2N; Thu, 26 Nov 2026 11:46:51 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1xWX04-0002PX-0V; Thu, 26 Nov 2026 11:46:48 +0100
+ id 1xWX06-0002PX-2C; Thu, 26 Nov 2026 11:46:51 +0100
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
-Subject: [PATCH 0/6] board: tqma6: uses SPL
-Date: Thu, 26 Nov 2026 11:46:45 +0100
-Message-Id: <20261126-update-tqma6-v1-0-a105aba78868@ew.tq-group.com>
+Date: Thu, 26 Nov 2026 11:46:50 +0100
+Subject: [PATCH 5/6] board: tqma6: add support for TQMa6 with 2GiB DRAM
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDQyMz3dKClMSSVN2SwtxEM13DZOPEtBQLc0tDkyQloJaCotS0zAqwcdG
- xtbUAKfIBUl4AAAA=
-X-Change-ID: 20261126-update-tqma6-1c3afd87914b
+Message-Id: <20261126-update-tqma6-v1-5-a105aba78868@ew.tq-group.com>
+References: <20261126-update-tqma6-v1-0-a105aba78868@ew.tq-group.com>
+In-Reply-To: <20261126-update-tqma6-v1-0-a105aba78868@ew.tq-group.com>
 To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot@ew.tq-group.com, 
  u-boot@lists.u-boot-project.org, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: Max Merchel <max.merchel@ew.tq-group.com>, 
@@ -142,62 +143,282 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-In this series, the TQMa6 uses SPL.
-The number of defconfigs is reduced.
-Support is added for the TQMa6DP/QP (with i-MX6DP/QP CPU) with
-1 GB or 2 GB of RAM.
-RAM timings for 2 GB of RAM on the TQMa6D/Q are added.
+This add 2 GB RAM support for the variant with
+i.MX6Q/D and i.MX6DL.
 
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Signed-off-by: Paul Gerber <Paul.Gerber@ew.tq-group.com>
 Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
-Markus Niebel (1):
-      board: tqma6: add support for variants with i.MX6DP/QP CPU
+ board/tq/tqma6/Kconfig           |  4 +-
+ board/tq/tqma6/spl_tqma6dl_ram.c | 89 ++++++++++++++++++++++++++++++----------
+ board/tq/tqma6/spl_tqma6q_ram.c  | 87 +++++++++++++++++++++++++++++----------
+ 3 files changed, 136 insertions(+), 44 deletions(-)
 
-Max Merchel (5):
-      configs: tqma6: rename .defconfig to .config
-      configs: tqma6: add memtest
-      board: tqma6: add SPL support
-      board: tqma6: unify mmc and spi configs
-      board: tqma6: add support for TQMa6 with 2GiB DRAM
+diff --git a/board/tq/tqma6/Kconfig b/board/tq/tqma6/Kconfig
+index 42b61cb620e..ab327c74730 100644
+--- a/board/tq/tqma6/Kconfig
++++ b/board/tq/tqma6/Kconfig
+@@ -24,14 +24,14 @@ config TQMA6Q
+ 	depends on MX6Q
+ 	help
+ 	  select TQMa6Q / TQMa6D variant with i.MX6Q resp. i.MX6D
+-	  with 1GiB DRAM
++	  with 1GiB or 2GiB DRAM
+ 
+ config TQMA6DL
+ 	bool "TQMa6DL"
+ 	depends on MX6DL
+ 	help
+ 	  select TQMa6DL variant with i.MX6DL
+-	  with 1GiB DRAM
++	  with 1GiB or 2GiB DRAM
+ 
+ config TQMA6S
+ 	bool "TQMa6S"
+diff --git a/board/tq/tqma6/spl_tqma6dl_ram.c b/board/tq/tqma6/spl_tqma6dl_ram.c
+index e18ac733b47..940398b34b9 100644
+--- a/board/tq/tqma6/spl_tqma6dl_ram.c
++++ b/board/tq/tqma6/spl_tqma6dl_ram.c
+@@ -14,9 +14,13 @@
+ 
+ #include "../common/tq_som.h"
+ 
+-static void tqma6dl_init_ddr_controller(void)
++static void tqma6dl_init_ddr_controller(u32 size)
+ {
+ 	debug("SPL: tqma6dl ddr iom ....\n");
++
++	/* Disable clock access for reset */
++	tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x031A0000);
++
+ 	/* TQMa6DL DDR config Rev. 0300D */
+ 	/* IOMUX configuration */
+ 	tq_som_init_write_reg(MX6_IOM_GRP_DDR_TYPE, 0x000C0000);
+@@ -93,24 +97,56 @@ static void tqma6dl_init_ddr_controller(void)
+ 	tq_som_init_write_reg(MX6_MMDC_P0_MPMUR0, 0x00000800);
+ 	tq_som_init_write_reg(MX6_MMDC_P1_MPMUR0, 0x00000800);
+ 
+-	debug("SPL: tqma6dl ddr config ....\n");
+-	/* configure memory interface */
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x0002002D);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x00333030);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x3F435333);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xB68E8B63);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00011740);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
+-
+-	debug("SPL: tqma6dl MX6_MMDC_P0_MDSCR %x ....\n", __raw_readl(MX6_MMDC_P0_MDSCR));
+-
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x00431023);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000027);
+-
+-	debug("SPL: tqma6dl ddr mdctl - leave reset\n");
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x831A0000);
++	switch (size) {
++	case SZ_2G:
++		debug("SPL: tqma6dl ddr 2g config ....\n");
++		/* configure memory interface */
++		tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x0002002D);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x00333030);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x66435333);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xB68E8B63);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00011740);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
++
++		debug("SPL: tqma6dl MX6_MMDC_P0_MDSCR %x ....\n", __raw_readl(MX6_MMDC_P0_MDSCR));
++
++		tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x00431023);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000047);
++
++		debug("SPL: tqma6dl ddr mdctl - leave reset\n");
++
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x841A0000);
++
++		break;
++	case SZ_1G:
++
++		debug("SPL: tqma6dl ddr 1g config ....\n");
++		/* configure memory interface */
++		tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x0002002D);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x00333030);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x3F435333);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xB68E8B63);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00011740);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
++
++		debug("SPL: tqma6dl MX6_MMDC_P0_MDSCR %x ....\n", __raw_readl(MX6_MMDC_P0_MDSCR));
++
++		tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x00431023);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000027);
++
++		debug("SPL: tqma6dl ddr mdctl - leave reset\n");
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x831A0000);
++
++		break;
++	default:
++		pr_err("ERROR: invalid/unsupported RAM size ....\n");
++		hang();
++		break;
++	}
+ 
+ 	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00408032);
+ 	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008033);
+@@ -131,14 +167,25 @@ static void tqma6dl_init_ddr_controller(void)
+ 
+ void tq_som_ram_init(void)
+ {
++	int i;
++	/* RAM sizes need to be in descending order */
++	static const u32 ram_sizes[] = {
++		SZ_2G,
++		SZ_1G,
++	};
++
+ 	if (!is_mx6dl()) {
+ 		printf("Not running on TQMa6DL\n");
+ 		hang();
+ 	}
+ 
+-	tqma6dl_init_ddr_controller();
++	for (i = 0; i < ARRAY_SIZE(ram_sizes); i++) {
++		tqma6dl_init_ddr_controller(ram_sizes[i]);
++		if (tq_som_ram_check_size(ram_sizes[i]))
++			break;
++	}
+ 
+-	if (tq_som_ram_check_size(SZ_1G)) {
++	if (i < ARRAY_SIZE(ram_sizes)) {
+ 		debug("SPL: TQMa6DL ddr init done ...\n");
+ 	} else {
+ 		pr_err("ERROR: Invalid DDR RAM size\n");
+diff --git a/board/tq/tqma6/spl_tqma6q_ram.c b/board/tq/tqma6/spl_tqma6q_ram.c
+index 0a48b5ff6ab..aec68575fb5 100644
+--- a/board/tq/tqma6/spl_tqma6q_ram.c
++++ b/board/tq/tqma6/spl_tqma6q_ram.c
+@@ -14,9 +14,13 @@
+ 
+ #include "../common/tq_som.h"
+ 
+-static void tqma6q_init_ddr_controller(void)
++static void tqma6q_init_ddr_controller(u32 size)
+ {
+ 	debug("SPL: tqma6q ddr iom ....\n");
++
++	/* Disable clock access for reset */
++	tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x031A0000);
++
+ 	/* TQMa6Q/D DDR config Rev. 0300D */
+ 	/* IOMUX configuration */
+ 	tq_som_init_write_reg(MX6_IOM_GRP_DDR_TYPE, 0x000C0000);
+@@ -94,24 +98,54 @@ static void tqma6q_init_ddr_controller(void)
+ 	tq_som_init_write_reg(MX6_MMDC_P0_MPMUR0, 0x00000800);
+ 	tq_som_init_write_reg(MX6_MMDC_P1_MPMUR0, 0x00000800);
+ 
+-	debug("SPL: tqma6q ddr config ....\n");
+-	/* configure memory interface */
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x00020036);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x09444040);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x545A79B4);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xDB538F64);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00011740);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
+-
+-	debug("SPL: tqma6q MX6_MMDC_P0_MDSCR %x ....\n", __raw_readl(MX6_MMDC_P0_MDSCR));
+-
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x005A1023);
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000027);
+-
+-	debug("SPL: tqma6q ddr mdctl - leave reset\n");
+-	tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x831A0000);
++	switch (size) {
++	case SZ_2G:
++		debug("SPL: tqma6q ddr config ....\n");
++		/* configure memory interface */
++		tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x00020036);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x09444040);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x895A79B4);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xDB538F64);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00011740);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
++
++		debug("SPL: tqma6q MX6_MMDC_P0_MDSCR %x ....\n", __raw_readl(MX6_MMDC_P0_MDSCR));
++
++		tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x005A1023);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000047);
++
++		debug("SPL: tqma6q ddr mdctl - leave reset\n");
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x841A0000);
++
++		break;
++	case SZ_1G:
++		debug("SPL: tqma6q ddr config ....\n");
++		/* configure memory interface */
++		tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x00020036);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x09444040);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x545A79B4);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xDB538F64);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00011740);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
++
++		debug("SPL: tqma6q MX6_MMDC_P0_MDSCR %x ....\n", __raw_readl(MX6_MMDC_P0_MDSCR));
++
++		tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x005A1023);
++		tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000027);
++
++		debug("SPL: tqma6q ddr mdctl - leave reset\n");
++		tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x831A0000);
++
++		break;
++	default:
++		pr_err("ERROR: invalid/unsupported RAM size ....\n");
++		hang();
++		break;
++	}
+ 
+ 	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00488032);
+ 	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008033);
+@@ -132,14 +166,25 @@ static void tqma6q_init_ddr_controller(void)
+ 
+ void tq_som_ram_init(void)
+ {
++	int i;
++	/* RAM sizes need to be in descending order */
++	static const u32 ram_sizes[] = {
++		SZ_2G,
++		SZ_1G,
++	};
++
+ 	if (!is_mx6dq()) {
+ 		printf("Not running on TQMa6D/Q\n");
+ 		hang();
+ 	}
+ 
+-	tqma6q_init_ddr_controller();
++	for (i = 0; i < ARRAY_SIZE(ram_sizes); i++) {
++		tqma6q_init_ddr_controller(ram_sizes[i]);
++		if (tq_som_ram_check_size(ram_sizes[i]))
++			break;
++	}
+ 
+-	if (tq_som_ram_check_size(SZ_1G)) {
++	if (i < ARRAY_SIZE(ram_sizes)) {
+ 		debug("SPL: TQMa6D/Q ddr init done ...\n");
+ 	} else {
+ 		pr_err("ERROR: Invalid DDR RAM size\n");
 
- arch/arm/dts/imx6qdl-mba6-u-boot.dtsi              |   7 +
- arch/arm/dts/imx6qp-mba6b-u-boot.dtsi              |   8 +
- arch/arm/mach-imx/mx6/Kconfig                      |   6 +
- board/tq/tqma6/Kconfig                             |  38 ++--
- board/tq/tqma6/Makefile                            |   9 +
- board/tq/tqma6/clocks.cfg                          |  26 ---
- board/tq/tqma6/spl_mba6.c                          | 187 ++++++++++++++++++++
- board/tq/tqma6/spl_tqma6.c                         | 180 +++++++++++++++++++
- board/tq/tqma6/spl_tqma6dl_ram.c                   | 194 +++++++++++++++++++++
- board/tq/tqma6/spl_tqma6q_ram.c                    | 193 ++++++++++++++++++++
- board/tq/tqma6/spl_tqma6qp_ram.c                   | 148 ++++++++++++++++
- board/tq/tqma6/spl_tqma6s_ram.c                    | 145 +++++++++++++++
- board/tq/tqma6/tqma6.c                             | 123 ++++++++-----
- board/tq/tqma6/tqma6.h                             |   4 +
- board/tq/tqma6/tqma6_mba6.c                        | 139 ++++++++-------
- board/tq/tqma6/tqma6dl.cfg                         | 125 -------------
- board/tq/tqma6/tqma6q.cfg                          | 126 -------------
- board/tq/tqma6/tqma6s.cfg                          | 126 -------------
- ...6_common.defconfig => tqma6_mba6_common.config} |  44 ++++-
- configs/tqma6_mba6_mmc.defconfig                   |   3 -
- configs/tqma6_mba6_spi.defconfig                   |   6 -
- configs/tqma6dl_mba6_defconfig                     |   6 +
- configs/tqma6dl_mba6_mmc_defconfig                 |   5 -
- configs/tqma6dl_mba6_spi_defconfig                 |   5 -
- configs/tqma6q_mba6_defconfig                      |   6 +
- configs/tqma6q_mba6_mmc_defconfig                  |   5 -
- configs/tqma6q_mba6_spi_defconfig                  |   5 -
- configs/tqma6qp_mba6_defconfig                     |   6 +
- configs/tqma6qp_mba6_uuu_defconfig                 |   2 +
- configs/tqma6s_mba6_defconfig                      |   6 +
- configs/tqma6s_mba6_mmc_defconfig                  |   5 -
- configs/tqma6s_mba6_spi_defconfig                  |   5 -
- 32 files changed, 1306 insertions(+), 587 deletions(-)
----
-base-commit: a1ce46a6689641dd83d725edbfc3f5719abf3a94
-change-id: 20261126-update-tqma6-1c3afd87914b
-
-Best regards,
 -- 
-Max Merchel <Max.Merchel@ew.tq-group.com>
+2.53.0
 
