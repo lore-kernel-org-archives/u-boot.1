@@ -1,28 +1,28 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DCC8606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 19:06:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 081D6606A31E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 19:07:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=etNIhMyT
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YaXf++x/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BB7BC81189;
-	Thu, 26 Nov 2026 19:06:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8FB0940A01;
+	Thu, 26 Nov 2026 19:07:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZeslpTQ9Ker6; Thu, 26 Nov 2026 19:06:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 01E3281113
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795720007;
-	b=OvNSZnHMdxzCVipykMvyMEzrdhCksYHwt2ZlaAaXfhuN5nh/l5dhbarsfn+pmCAuf2JJ
-	 qRQvUT/ml+JXWzM+CUENrVgXrc0dctr+HWZVv/AC1lGgnBU6Y/N9e0DpSH8FfVnCi8EtZ
-	 6rFfxaGLo7hCZobpGGKc5qId9Pd3ZRmnr+oOun4bJhPOcCqR/ySAXes9bYu1SAe1jt9zj
-	 h/UYRv/XZOqakK1322T50clVEps9wUpxj8nsQxB3grP9KwS0nXss7LxMz3d960FNavVCi
-	 2gRFuFBTHNuxsw7SviJTA0pj0/nv3N6hq+FJ3T0dXWa4pcl5yrstIhcifDfm24u2iTw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MkihIBqcAcPF; Thu, 26 Nov 2026 19:07:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BD881409FB
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795720023;
+	b=pLMst7y9EQLX0EaLCaWbQmoz+tsXwb6C0+s/rXI/0wJtzlvtORhCYWjx/p4KULMiFj52
+	 j97YgZVsr1OcX0fTpu8HZakRWStRYw6wL2IMWkUlZRMUSxyq/eZ89elZDjf9W0KGy1Zwf
+	 Qa1+b1yse0zp7BC1dc//3q02NQud+oVV1SV08TkXmzcXeesiYi4wTYHR4NleB4fB/AXmY
+	 7mlowAb63cx3IdMwkzuX8tyNWlp/RJRgkl6nMTteazxCGGpn/p6hPVFxSZTtWWftMu4cw
+	 4D06OO3izZ/cwsc44br7yMB143dCKpdrdqPB+GJ3bCmIEGwHwfaa/mKvTKl2yAXS3Gw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795720007;
+	c=relaxed/relaxed; t=1795720023;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:Date:
@@ -30,43 +30,42 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=8qiK8yaomU9p05pX+uhB5tQJGbysCz/Tv4JtnY1r4+M=;
-	b=YSMmu8VWG6HU/OCbBl/eUmCg2eFwpU79FGMYBEfXqoPqBaMz9SZjrgeCKZ7D0pUI+pTN
-	 jYi1XW63U6WZsqIZ4B5l57nv0robn0WHbqbhh7IQuPoz3idIF9T8bT7K7pXEgF4jmUO1p
-	 RfE1WqpqpivXzFQRe+fGTt1rB3kSPicBDUQ2ysH1GS7Y6wZDL6eSBGYPN4YbgyPkcfDt8
-	 2u6cFdVABxXLD2PR1xD3nmXFSMXk47UJCh8bgByKudxWNmg0mJsStx6LzcDSlWHbP8CtY
-	 UHhZJg+QMasgScDdbkIz8enzXR17YCMxFYGjEK+eJ4DJpXFd+DPvq3BG2SM5X3meQXQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=none header.from=makrotopia.org;
+	bh=bh+1MAknXgKoho242un+52sSApHm5MRkQBTgAv6TJf4=;
+	b=lO5Wu8vLPgIzZzN6RyfHxagaa56pKXhbE1GlMoLBozcUCCnmaGwtC0ZLcy+MIUvcSggh
+	 3vnnp8a86rPkJi8lStZT0nCA3EgBTrztNniwZUIGohVSrp26ZKElimvSGMtzHcd9Xf4f8
+	 Js2CCtow529tlNuDcLsrCebwbpc4BIajOhWM+ehrlIYG7p3BDqKte2aGQsVFj8EJSrHqn
+	 smfa7G9R/BS45mHPD7K2qZvhczfK/e8CjI3Kc50VyhfI0HGNh3KcyDPs80W1bY2cjH0mR
+	 1ERoEvDPZCvsfykl6ATh6lQdHdSyVEPQbJJQAVm9YZb74HJz/RbPVqlsoHqf7L6/blw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795720007;
-	bh=8qiK8yaomU9p05pX+uhB5tQJGbysCz/Tv4JtnY1r4+M=;
+	d=lists.u-boot-project.org; s=default; t=1795720023;
+	bh=bh+1MAknXgKoho242un+52sSApHm5MRkQBTgAv6TJf4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=etNIhMyThZT2QlIhghyIQO0zeSuwLj5bCqcmMwHE7iQk08bYGqFsHKO1cHA+X4qdA
-	 wmv1M5rq1gdPD32LWo9ZIAWXNpQcVuDd2zqxWI6MBR/f7qb1y33polxhQm9ROnEBdy
-	 jl5eRNbEJU9YmDCq1jtif0byXJ3ecai8aTD3bn4KL5KkIC0+/SZqfJvQ+0VZT2Lbkb
-	 3h3hBTHO0i4lpTepyjzm42Hki1bkxwi+DkwTaRN+TLUVJ3vIZZB1gErHcKW+R8PrrE
-	 E3vqVG3j17rroBMqvgy50TdHgH9EaS5cPtrtXWmEV80fTYeB2FDbWK2PWEieb22/lp
-	 5X8VqlOnZBRvw==
+	b=YaXf++x/JvzcJiYm/TucODYTfQ2+7//rbb1V7S5HOFImkbSWRL8zyjkFgTomdL5xd
+	 w0tJ4doXmLpTL4i3WabelTxRLRDn6IxEqnSTW4di94Am1UAJWdMYw7eO/2HpAIwnyy
+	 BQgXRrAr6fXb8yrQaE6T2SuYhxodGUTVBe/7MLJm6C6T+sgCzcgcjQmiY55o8sMnCI
+	 FHaOJd/sb5FZZTZvJCn7gB24c8aQrGe2Xe9jBvpbEyCT7zg8BSoRhSzCEjagPDd/8U
+	 1UbFTGhNJ+sDoimR/V2EgQelA/2YuvLLpyVoU6GP8El17c6mYJgPBpoHOCX+Ntbb3+
+	 qvKn5yeAApW6g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 01E3281113;
-	Thu, 26 Nov 2026 19:06:47 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7CDDC2BD
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:06:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BD881409FB;
+	Thu, 26 Nov 2026 19:07:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 187EA1AB
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:07:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6267D81113
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:06:45 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0A99B811B9
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:07:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id penGqyry3yJD for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 19:06:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EBE1B81111
+ id DqlTjU3RCGsB for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 19:07:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7FD9B81111
 Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip="2a07:2ec0:3002::65"
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
@@ -76,13 +75,13 @@ Authentication-Results: smtp1.osuosl.org; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EBE1B81111
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:06:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7FD9B81111
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:06:59 +0000 (UTC)
 Received: from local by pidgin.makrotopia.org with esmtpsa
  (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768) (Exim 4.100.1)
- (envelope-from <daniel@makrotopia.org>) id 1xWeni-000000007rB-3kYv;
- Thu, 26 Nov 2026 19:06:34 +0000
-Date: Thu, 26 Nov 2026 19:06:25 +0000
+ (envelope-from <daniel@makrotopia.org>) id 1xWeo4-000000007ra-2zj7;
+ Thu, 26 Nov 2026 19:06:56 +0000
+Date: Thu, 26 Nov 2026 19:06:53 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Alastair D'Silva <alastair@d-silva.org>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
@@ -97,16 +96,16 @@ Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
  Enzo Adriano <enzo.adriano.code@gmail.com>,
  Junhui Liu <junhui.liu@pigmoral.tech>,
  Alastair D'Silva <alastair@d-silva.org>
-Subject: Re: [PATCH 15/26] sunxi: dram: a733: Add ARC PMU primitives, clock,
- telemetry, and CBT
-Message-ID: <awiDMTcFCalJb_Q3@makrotopia.org>
+Subject: Re: [PATCH 17/26] sunxi: dram: a733: Add ARC PMU 1D/2D eye training
+ firmware
+Message-ID: <awiDTdTwKwnvPoBp@makrotopia.org>
 References: <20261113023236.569054-1-alastair@d-silva.org>
- <20261113023236.569054-16-alastair@d-silva.org>
+ <20261113023236.569054-18-alastair@d-silva.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261113023236.569054-16-alastair@d-silva.org>
+In-Reply-To: <20261113023236.569054-18-alastair@d-silva.org>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -118,152 +117,61 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Alastair,
 
-I have been running this series on an Orange Pi 4 Pro with 4 GiB LPDDR5
-(dual rank, two channels, pin swizzle enabled, 3600 MT/s). On that
-board dual-rank training passes in about one attempt out of three (16
-of 48 trainings in a loop in SPL); the others end in status 0xff and
-the driver falls back or fails. The vendor boot0 trains the same board
-reliably each time. The cause is in this patch, with two more problems
-in patches 17 and 18 which I will comment on there.
-
-On Fri, 13 Nov 2026 13:32:25 +1100, Alastair D'Silva wrote:
+On Fri, 13 Nov 2026 13:32:27 +1100, Alastair D'Silva wrote:
 > [...]
-> +void pmu_cbt_timing_pulse_coordinator(u16 cal_mode, u32 phase_sel)
-> +{
-> +	u32 zero = 0U;
-> +	__volatile__ u16 *out_tbl =
-> +		(__volatile__ u16 *)PMU_DMEM_DELAY_TAP_LUT;
-> +	__volatile__ u16 *out_sub1 =
-> +		(__volatile__ u16 *)PMU_DMEM_DELAY_TAP_SUB1;
-> +	u32 mask_word;
-> +	u32 phase;
+> +	is_pm0_mode1 = (is_pm_0 && is_mode_1);
+> +	is_cond_or_m0 = is_pm0_mode1 || mode_zero_cond;
+> +	is_mode0_pm1 = (is_mode_0 && is_pm_1);
+> +	step_val = is_mode0_pm1 ? lo_margin_val : 0x50U;
+> +	is_eval_active = is_mode0_pm1 || is_cond_or_m0;
+> +	timing_reg_alt_b = is_eval_active ? step_val : 0x51U;
 > +
-> +	out_tbl[0] = 100U;
-> +
-> +	for (phase = 0U; phase < 4U; phase++) {
-> +		u32 pulse_mask;
-> +		u16 step;
-> +		u16 marker;
-> +
-> +		if (phase_sel == 0U) {
-> +			if (phase == 0U)
-> +				pulse_mask = 0x7f00U;
-> +			else if (phase == 1U)
-> +				pulse_mask = 0x7f0000U;
-> +			else if (phase == 2U)
-> +				pulse_mask = 0x7f007f7fUL;
-> +			else
-> +				pulse_mask = 0x7f7f007fUL;
-> +		} else {
-> +			if (phase == 0U)
-> +				pulse_mask = 0x7fU;
-> +			else if (phase == 1U)
-> +				pulse_mask = 0x7f000000UL;
-> +			else if (phase == 2U)
-> +				pulse_mask = 0x7f007f7fUL;
-> +			else
-> +				pulse_mask = 0x007f7f7fUL;
-> +		}
-> +
-> +		mask_word = pulse_mask;
-> +		step = out_tbl[phase];
-> +		pmu_cal_marker_pair_set((u16)(step << 2));
-> +
-> +		pmu_cal_sequence_pulse_send(0x41UL << 19, 7U, 8U, 0U,
-> +					    zero, zero, zero);
-> +		pmu_cal_pad_timing_delay_set(0U, 4U, 1U);
-> +
-> +		pmu_cal_window_params_dispatch((const u8 *)&mask_word, 2U, cal_mode);
+> +	alt_reg_sel = (is_mode_1 && is_pm_1) || is_eval_active;
+> +	hi_margin_val = alt_reg_sel ? 0x4fU : 0x4eU;
+> +	pass_reg_a = alt_reg_sel || (is_mode_0 && is_pm_2);
+> +	keep_pass_regs = pass_reg_a || (is_pm_2 && is_mode_1);
 
-The capture masks do not match what the PHY firmware in the vendor
-boot0 sends for the two phase selectors, and the last two arguments of
-pmu_cal_window_params_dispatch() are swapped: its prototype is
-(params_buf, base_val, mode_flags), so cal_mode has to be the base
-value and 2 the mode. With the masks as above CBT finds no CA window on
-my board and the CA delays stay at their reset value 0x40.
+The selection of the delay registers to sweep is wrong for three
+combinations, all with a non-zero swizzle flag: operating mode 0 with
+sweep mode 0, operating mode 0 with sweep mode 1, and operating mode 1
+with sweep mode 0. In the per-bit scan this sweeps CSR 0x50 where the
+two per-bit delays 0x4e/0x4f are meant. On my Orange Pi 4 Pro (4 GiB,
+see my reply to patch 15) most per-bit delays then stay at or next to
+their reset value 0x40 and CSR 0x50 is left at 0x7f on every lane;
+after the vendor boot0 it reads 0x35.
 
-With the change below dual-rank training passes in 48 of 48 attempts,
-on the first try each time, and the CA delays of channel 0 end up
-within one step of the values boot0 leaves in the PHY:
+Suggested change:
 
-diff --git a/arch/arm/mach-sunxi/pmu/pmu_cbt.c b/arch/arm/mach-sunxi/pmu/pmu_cbt.c
-index 6c97ad8532e..fe2d59f2d96 100644
---- a/arch/arm/mach-sunxi/pmu/pmu_cbt.c
-+++ b/arch/arm/mach-sunxi/pmu/pmu_cbt.c
-@@ -244,18 +244,18 @@ void pmu_cbt_timing_pulse_coordinator(u16 cal_mode, u32 phase_sel)
- 		u16 step;
- 		u16 marker;
+diff --git a/arch/arm/mach-sunxi/pmu/pmu_eye.c b/arch/arm/mach-sunxi/pmu/pmu_eye.c
+index 1c1ebb35363..9fb59d99a82 100644
+--- a/arch/arm/mach-sunxi/pmu/pmu_eye.c
++++ b/arch/arm/mach-sunxi/pmu/pmu_eye.c
+@@ -2529,12 +2529,12 @@ void pmu_cal_margin_matrix_scan_eval(u32 channel, u32 rank, u32 slice,
+ 	is_pm0_mode1 = (is_pm_0 && is_mode_1);
+ 	is_cond_or_m0 = is_pm0_mode1 || mode_zero_cond;
+ 	is_mode0_pm1 = (is_mode_0 && is_pm_1);
+-	step_val = is_mode0_pm1 ? lo_margin_val : 0x50U;
++	step_val = is_cond_or_m0 ? lo_margin_val : 0x50U;
+ 	is_eval_active = is_mode0_pm1 || is_cond_or_m0;
+ 	timing_reg_alt_b = is_eval_active ? step_val : 0x51U;
  
--		if (phase_sel == 0U) {
-+		if (phase_sel != 0U) {
- 			if (phase == 0U)
- 				pulse_mask = 0x7f00U;
- 			else if (phase == 1U)
- 				pulse_mask = 0x7f0000U;
- 			else if (phase == 2U)
--				pulse_mask = 0x7f007f7fUL;
--			else
- 				pulse_mask = 0x7f7f007fUL;
-+			else
-+				pulse_mask = 0x7f007f7fUL;
- 		} else {
- 			if (phase == 0U)
--				pulse_mask = 0x7fU;
-+				pulse_mask = 0x7f0000U;
- 			else if (phase == 1U)
- 				pulse_mask = 0x7f000000UL;
- 			else if (phase == 2U)
-@@ -272,7 +272,7 @@ void pmu_cbt_timing_pulse_coordinator(u16 cal_mode, u32 phase_sel)
- 					    zero, zero, zero);
- 		pmu_cal_pad_timing_delay_set(0U, 4U, 1U);
- 
--		pmu_cal_window_params_dispatch((const u8 *)&mask_word, 2U, cal_mode);
-+		pmu_cal_window_params_dispatch((const u8 *)&mask_word, cal_mode, 2U);
- 
- 		pmu_cal_pad_timing_delay_set(0U, 20U, 1U);
- 		pmu_cal_sequence_pulse_send(1UL << 18, 7U, 4U, 0U,
-
-> [...]
-> +
-> +	*out_num_slices = (u8)(is_ch1 + 1U);
-> +	return 0U;
-
-pmu_cal_rx_en_pre_init() in patch 18 needs to know which AC slice this
-call selected. Please also record it here, at the DMEM byte the CA
-sampler pmu_dbyte_deskew_phase_sample() reads (0x80000b66, see my reply
-to patch 18 for the name and the rest of that change):
-
-diff --git a/arch/arm/mach-sunxi/pmu/pmu_telemetry.c b/arch/arm/mach-sunxi/pmu/pmu_telemetry.c
-index ea47e991fcf..0e004448fea 100644
---- a/arch/arm/mach-sunxi/pmu/pmu_telemetry.c
-+++ b/arch/arm/mach-sunxi/pmu/pmu_telemetry.c
-@@ -565,6 +565,7 @@ u32 pmu_cal_channel_rank_config_get(u32 rank, u16 *out_cfg, u8 *out_mode_sel,
- 		return 1U;
- 
- 	*out_num_slices = (u8)(is_ch1 + 1U);
-+	dmem_write8(PMU_DMEM_ACTIVE_SLICE, (u8)is_ch1);
- 	return 0U;
- }
+ 	alt_reg_sel = (is_mode_1 && is_pm_1) || is_eval_active;
+-	hi_margin_val = alt_reg_sel ? 0x4fU : 0x4eU;
++	hi_margin_val = mode_zero_cond ? 0x4fU : 0x4eU;
+ 	pass_reg_a = alt_reg_sel || (is_mode_0 && is_pm_2);
+ 	keep_pass_regs = pass_reg_a || (is_pm_2 && is_mode_1);
  
 
-Tested on the Orange Pi 4 Pro only: 48 trainings per step of the three
-changes, each 48 of 48, plus ten boots of the result; training then
-takes 4.65 s from the SPL banner, boot0 needs 5.04 s. The three
-functions were also compared call by call against the boot0 firmware in
-an emulator for other inputs (single rank, single channel, swizzle off,
-other step sizes and data rates), where they behave the same; nothing
-but the 4 GiB board has run on hardware.
-
-For transparency: an LLM coding assistant was used for the emulator
-comparison and for drafting these changes; the numbers above were
-measured on the board.
+With it CSR 0x50 ends up at 0x35 on all lanes of both channels and the
+per-bit delays are trained. With pin swizzle disabled the flag is zero
+and the change has no effect.
 
 
 Cheers
