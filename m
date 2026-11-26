@@ -2,131 +2,154 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B863606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 10:47:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 116A9606A330
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 10:50:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NJ2KrU3H;
-	dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=TEOoJMwq
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=keQFjGcR;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lFBX5zKL
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A71F960A73;
-	Thu, 26 Nov 2026 10:47:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E1024608F5;
+	Thu, 26 Nov 2026 10:50:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JzrHhK7wrfO6; Thu, 26 Nov 2026 10:47:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0937260A4E
+ id CwmbP2ariZjA; Thu, 26 Nov 2026 10:50:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 48C40608DE
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795690034;
-	b=FPfGlj0oeW6OEKd+z8djendCohuCimqVqJob66MBPt17McO2udYbN5MpLT9A96NRV/JM
-	 xGSkV3l9EZ5bH64GE3JlseOSYCxih5YMM0vjbXqPYK6uJ8PHRV4cM3ovttq9IYlgzulwi
-	 FaDJZkE9E38CMj4DtOYQCghLjVmR9uBbGa6lliDreZK7I3+0zwrHyKewrvtmzlUaZ9xSp
-	 DybruGo5TaTg0DUsDamsy9XNGbvKOPqL/s4bFSDnX0GmRF7z3RoWUne/LylsFkAOCdyZQ
-	 E5BfcQ9t3vyJ4PJhryQ/lxXFKsmxtBC0jkqmb+dwJMCPAdiC8chCnfeF5fLyRjnE1nA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795690241;
+	b=gp2wse5uiRSQw5l1wt/IzosBmXKJB9i26SCzHqZm3I1Or7kbDAe/PyUrDjs4p3yOWu8i
+	 KjBaXsooZBuD5i7ADipj2s0dkR5Ob6q4OtYzafLEENLFJpOl223XkUF8aQk9fqNDRq6eG
+	 EHMocb349zQmVCIy61Y2/RShUXsG4Q/VTsyoyCe3wEqmohaYeOqZ8JljJQTuR4xTYA8If
+	 A5tDOiwYf6LSXnGN5J2ZYq4/qwzesgV983PGSlH+opl96LrJIEfCqtwaqtzsOMS0x4jXP
+	 FGLzSHZKuRJE9uydxUjzhJb/OA/F1jaMv67RVsA/KFkxZ5rc11DdrXmQNug1Q3oRfug==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795690034;
+	c=relaxed/relaxed; t=1795690241;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Virus-Scanned:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ocJPOR28l15n9VSeF0ILGbChrrIAsK2cXLeHJ6ILbw8=;
-	b=S9sM0KCsPSD64TBjvxwsG1UopxawCAqYuhvBhptgG9YT6yyLiJ3kQM8R3qbp9hXCTUoO
-	 B2cjSr4IWss0CegAucmUWr1uiK54SSOvRIeqIfuoklDojdTAMGI6ZYWVrj1HylBD7KU23
-	 73pah9i4oKxmjbk2LbVXsiN0OXsshu6CoSKU1DX5UZ+aD176KuVLZcmvFnBPwczn3Ed7S
-	 kd5VOvjdHObRKsDHGk9P7roQQNRjHIuClRrQuRjSOgbZbXllekZrrxnfSif3Ab8hUvDnH
-	 28iLS/aeVWDg6NRE1klnl41XeyDVIPlkJiur/qHLy7xfdr5z4gCSnX7I5N8QmQPfhag==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=+5kN1QBdMecvLWaaTCfmxRb9EjXuLHO50WM/yakmMoE=;
+	b=tUPIKFlEdQWI1dHtzvK/t6ciSPmqgNdYyO6Pkz2sQA9aiqbRgRz/CKSh/hDWnGRuelzN
+	 H0vIabgDbMEhU66gZzlAcNyMlFVnyCdrj0KGDUDjopV46cm5+U0Cx3lprpahiI6Oj92IA
+	 JjTe/9u2Z7jUcRHjTGEZlwvr70TuauzSD/nxkzhq4RbpLLqcGTpULsPdh926S4OifZpOP
+	 Y9yrcrOoxzgcefeBq1UOKbuQS4k0SXxNzMVPlzF2Hhnls0/sZsKmxx83ZsNhox6mtU3Ut
+	 8qERUJSEuEcqE9PTWn7lMTEUrUUN/eQ9WOFOP8+jrDzWfihqlyypsdWddY1PZgPfN1g==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=ew.tq-group.com;
-	dkim=pass header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=TEOoJMwq;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795690034;
-	bh=ocJPOR28l15n9VSeF0ILGbChrrIAsK2cXLeHJ6ILbw8=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795690241;
+	bh=+5kN1QBdMecvLWaaTCfmxRb9EjXuLHO50WM/yakmMoE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NJ2KrU3HF2l7ERTpI945n+0k90D+neihX0IkfQgaJEeM6gMuTpq0jgW/l/hEx4cFW
-	 1XzwTJgSkVKLDry4B4tqkETvP/ei36vnUEnd7VG/1vCICX82WcNC0QZx96AXvkgDg2
-	 iZjb6pEIig99BQ4GVhsAXG0XlwuYOW9MYURUoQwvM0gi1T85ZhD3IvrfMyv5WoOzFy
-	 OaBJyMTeNYSRO05czSyXkc5SO1IOk+m8qkOuK3IuIckQiZRcaaQEE9INEcwOYVeA0S
-	 PAaW/ak0Cngimx6ip+KT4TZpF/OuDfUG3id1NLop0n3B5hQS8CQ3wYu7/K2tq66dIh
-	 wgSFIT4Oa/jfw==
+	b=keQFjGcRAxPbcIvqqSztEA3y7vWAil8ydm7iXhxQu7A5d4Vyx+O9BpKjx/Op4SfMc
+	 MKKz7L1x80HjATOoxaCvTkhShx+3BPLL+WdFFXZlS02uIxMsgC9vCNesiOsbAHgAQF
+	 yQEC+p49vBNit+NcYmD+sSBE6YILUSM5Q2ivFKB+/bC2NBl5jXb/rwqrGzytI8l06L
+	 GEb+Pp4j4zKVxmdHsI2+ScUUFjjGYQR9v5lgMyQGUC34ePEniLeuYqs5ATQCtP0NN7
+	 Erf1vy0fNPvgqAGCChS64I8oxbHCjAuaDv36WGLRzPmVVL+udDlXaKdtmfjd1FTyo9
+	 dI76TbFcK+hCA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0937260A4E;
-	Thu, 26 Nov 2026 10:47:14 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8A63610B
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:47:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 48C40608DE;
+	Thu, 26 Nov 2026 10:50:41 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 23964325
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:50:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 647DB608E9
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:47:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 094E9810D2
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:50:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 38dFCLI5Rrqg for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 10:47:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 37831608F5
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
- helo=www537.your-server.de; envelope-from=max.merchel@ew.tq-group.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=TEOoJMwq
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 37831608F5
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:46:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Cc:To:In-Reply-To:References:Message-Id:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID;
- bh=ocJPOR28l15n9VSeF0ILGbChrrIAsK2cXLeHJ6ILbw8=; b=TEOoJMwqOvVW7J47GesUSWVzCp
- ZNffA/7FoaQs8aMcwN/mPFCw/kby51CeaU3lz+11LcvDfOblvtoZhOhbOXmPQDkA/0bIUTSPiz2je
- M1N9fAv4NFhHQdCIr89dvS6ZdH6TpprFTlXsYVl/qg4xeV6vmfZFH45XVnEmOaL+UNSKlQz4GMSJr
- etZZjwhfjeqUobE/NpBTvbcheiPxCQlc3HPhR5O5uJgSPrrJ4wir0QtW2i5S/S9w7QeysKflRhw7Y
- cP3xEYCTkH8XdCs15cfSV1YyxirWeRHeYxXl6vhGS1+SBsuKVjqH7YzPccMMLE4ahv707p/2KlxVQ
- RvstxUDw==;
-Received: from sslproxy06.your-server.de ([78.46.172.3])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1xWX08-000NvZ-0f; Thu, 26 Nov 2026 11:46:52 +0100
-Received: from localhost ([127.0.0.1])
- by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1xWX07-0002PX-0Y; Thu, 26 Nov 2026 11:46:51 +0100
-From: Max Merchel <Max.Merchel@ew.tq-group.com>
-Date: Thu, 26 Nov 2026 11:46:51 +0100
-Subject: [PATCH 6/6] board: tqma6: add support for variants with i.MX6DP/QP CPU
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VIqOgaRDO0VE for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 10:50:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0B983810E2
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::12d"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::12d; helo=mail-lf1-x12d.google.com;
+ envelope-from=festevam@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=lFBX5zKL
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0B983810E2
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 10:50:37 +0000 (UTC)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5bcdae234ecso1423902e87.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:50:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1795690235; x=1796295035;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=+5kN1QBdMecvLWaaTCfmxRb9EjXuLHO50WM/yakmMoE=;
+ b=lFBX5zKL9Db+AHG6C3dPghQAcLEsEnBicIjrGiOjty64d/n7XTPKqu1c4PDXv+XWk3
+ MoCq2u/CAPkcjIUPC8B1AGsxBpev7QVaKn6pw95RT9Buay/bkX+BuVwvRx63ez3sPkh9
+ 5tuTD40m+W5fgOC9Kjh8cIzjA30MBH7wA5QiHE9avKH8SGO8oYDF0nWzMT/Nf0N0m92u
+ u3Bl6fMB2uLke0XhY3vc39dWw7lIaDtMcfGZQGKvfIfmhinnUDhffVjco3GP3/7/kCl4
+ pTMZHw8295hrQMF4mexAe676ZuDGfpExVSwq6d6Xtk9yhSeTZJGCq8f6L3aUcvz2EdcR
+ z1RQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795690235; x=1796295035;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=+5kN1QBdMecvLWaaTCfmxRb9EjXuLHO50WM/yakmMoE=;
+ b=E/xc79sJcYQGYixPR4ui28JIRtDSsuJ7YsuR7/SIR8cL3pi1QF7k+pPyXkzym4Qeft
+ 0aUxOfF1ogFuFHWt/Un1Ff1TavdmjFLegGue9A/ILTWOkrbiDRVzv7kE/7S+SEdn17CN
+ UiIMlW8+wLIjuUJpz2ZPkwdcMVR8PE25rvbcx4BMxXdh4ESs2oB2oprIX3Me8Srb3vu3
+ Prp4CDy1NBlnKAGaFoLRZ6MiQ/oTC//tXyS5yxrcmxvS6wKx1CeH7EcW/tdO09yjqh1e
+ 1WwTeVUlQr2ENUtaqb/dW/GtiNZOj+6pQGZcQd+ceNE3JyCNoeMKa6NFu407X973CLlW
+ kzvQ==
+X-Forwarded-Encrypted: i=1;
+ AL+hErHqiVuWUqj/DFwGd4aUk1sUSbgeupJduzv14oERonGIUCZx/J7xS9KRkMWUnmkaZe8xL6UsUgQ=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8VzkmLrkplCt35uOq6C4BeA5/0cNM10ojyNqms7HoR8Y28JzcG
+ Cezyi3wWMTDZiYSYSu6QW4/eJEh5d1ZOqoe8tADQsfJqH4DAxQPuhpG/DqPTH0+9qnLFBp6+YtM
+ oy/RoddB+sRNVAHLAu9+VQ7POF9thsgM=
+X-Gm-Gg: AZFdTZcVB9m7BlYDCSta8N8ZR0qEOP5jfKJeHI37AUhFfHjisXRDEMy/RUUr4N6FVZQ
+ FvaLH7kuInoEYR65yQ/LUowzkxumYg63wbhHRRwrUEK2AWwAFwgv1TKdbyOthSVLsedZWuumXd/
+ xiNH3F41kCi3X3KhNK9O8TYbib9m2xr2bgJfCjEGv3UF2b3ZY2NoIemiwS5rMuIPT6vCi5Ag+R/
+ ihLOM9ZFVF5RlEDJWxOG1ZXFj7ufwjtTAZzI8LIKmV0A3EXSXiD9Vhnbx9ifn3Ko29lTo3YPHir
+ 7uTji1hYFjQcuHu/d/kDK/GFZtgdnCOzJHfIWjilfm9QlDbDkmuSmXjwgXmJJAmzmET5VBSwopZ
+ xfAJ9MT3dG6PHR0Kw4fF7yQ42WEyMsAYfj3lor8S9YPzAv8SmZntYvbtyUvhEYGpvrcmz24mi4e
+ 1gjak+zXg0C1FYjzaWtiBr1S0cmg==
+X-Received: by 2002:a05:6512:804b:b0:5c3:1ac3:131e with SMTP id
+ 2adb3069b0e04-5c31ac3132emr1943492e87.20.1795690235163; Thu, 26 Nov 2026
+ 02:50:35 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261126-update-tqma6-v1-6-a105aba78868@ew.tq-group.com>
 References: <20261126-update-tqma6-v1-0-a105aba78868@ew.tq-group.com>
-In-Reply-To: <20261126-update-tqma6-v1-0-a105aba78868@ew.tq-group.com>
-To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot@ew.tq-group.com, 
- u-boot@lists.u-boot-project.org, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Max Merchel <max.merchel@ew.tq-group.com>, 
+ <20261126-update-tqma6-v1-1-a105aba78868@ew.tq-group.com>
+In-Reply-To: <20261126-update-tqma6-v1-1-a105aba78868@ew.tq-group.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 26 Nov 2026 07:50:23 -0300
+X-Gm-Features: Aa3M54rZcYg6M8onv39RNbvgrVo0q5lVI-qd2J8-sjrtAbt5i9DIm0oEQ-F4KVY
+Message-ID: <CAOMZO5CV=BV07naQgYG=0f330Und_haW856-S2tuMpPBX0W7EQ@mail.gmail.com>
+Subject: Re: [PATCH 1/6] configs: tqma6: rename .defconfig to .config
+To: Max Merchel <Max.Merchel@ew.tq-group.com>
+Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot@ew.tq-group.com, 
+ u-boot@lists.u-boot-project.org, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Paul Gerber <Paul.Gerber@tq-group.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Paul Gerber <Paul.Gerber@tq-group.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>, 
  Primoz Fiser <primoz.fiser@norik.com>, Adam Ford <aford173@gmail.com>, 
- Nora Schiffer <nora.schiffer@ew.tq-group.com>, 
- Johan Jonker <jbx6244@gmail.com>, 
- Markus Niebel <Markus.Niebel@ew.tq-group.com>, 
- Paul Gerber <Paul.Gerber@ew.tq-group.com>, 
- Max Merchel <Max.Merchel@ew.tq-group.com>
-X-Mailer: b4 0.14.3
-X-Virus-Scanned: Clear (ClamAV 1.4.6/28194/Wed Nov 25 07:26:59 2026)
+ Nora Schiffer <nora.schiffer@ew.tq-group.com>, Johan Jonker <jbx6244@gmail.com>,
+ Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Paul Gerber <Paul.Gerber@ew.tq-group.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,300 +159,21 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-2.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Hi Max,
 
-Since the enet errata is solved in silicon this SOM variant comes
-only in one flavour and with 1GB of RAM.
+On Thu, Nov 26, 2026 at 7:47=E2=80=AFAM Max Merchel <Max.Merchel@ew.tq-grou=
+p.com> wrote:
+>
+> Change name from *.defconfig to *.config
 
-Add Kconfig entries, RAM config and boilerplate code.
+Please explain the motivation for doing this.
 
-Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
----
- arch/arm/dts/imx6qp-mba6b-u-boot.dtsi |   8 ++
- board/tq/tqma6/Kconfig                |   9 ++-
- board/tq/tqma6/Makefile               |   1 +
- board/tq/tqma6/spl_tqma6qp_ram.c      | 148 ++++++++++++++++++++++++++++++++++
- board/tq/tqma6/tqma6.c                |   6 ++
- board/tq/tqma6/tqma6_mba6.c           |   2 +-
- configs/tqma6qp_mba6_defconfig        |   6 ++
- configs/tqma6qp_mba6_uuu_defconfig    |   2 +
- 8 files changed, 180 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/dts/imx6qp-mba6b-u-boot.dtsi b/arch/arm/dts/imx6qp-mba6b-u-boot.dtsi
-new file mode 100644
-index 00000000000..d484a5dda00
---- /dev/null
-+++ b/arch/arm/dts/imx6qp-mba6b-u-boot.dtsi
-@@ -0,0 +1,8 @@
-+// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
-+/*
-+ * Copyright (c) 2023-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Markus Niebel
-+ */
-+
-+#include "imx6qdl-mba6-u-boot.dtsi"
-diff --git a/board/tq/tqma6/Kconfig b/board/tq/tqma6/Kconfig
-index ab327c74730..4a86d54b4f9 100644
---- a/board/tq/tqma6/Kconfig
-+++ b/board/tq/tqma6/Kconfig
-@@ -26,6 +26,13 @@ config TQMA6Q
- 	  select TQMa6Q / TQMa6D variant with i.MX6Q resp. i.MX6D
- 	  with 1GiB or 2GiB DRAM
- 
-+config TQMA6QP
-+	bool "TQMaQP / TQMaDP"
-+	depends on MX6Q
-+	help
-+	  select TQMa6QP / TQMa6DP with i.MX6QP/DP
-+	  with 1GiB DRAM
-+
- config TQMA6DL
- 	bool "TQMa6DL"
- 	depends on MX6DL
-@@ -82,7 +89,7 @@ endchoice
- 
- config TEXT_BASE
- 	default 0x2fc00000 if TQMA6S
--	default 0x4fc00000 if TQMA6Q || TQMA6DL
-+	default 0x4fc00000 if TQMA6Q || TQMA6QP || TQMA6DL
- 
- config SPL_TEXT_BASE
- 	default 0x00908000
-diff --git a/board/tq/tqma6/Makefile b/board/tq/tqma6/Makefile
-index c29720341ff..73c56b7fb2c 100644
---- a/board/tq/tqma6/Makefile
-+++ b/board/tq/tqma6/Makefile
-@@ -12,6 +12,7 @@ ifdef CONFIG_SPL_BUILD
- obj-y += spl_tqma6.o
- obj-$(CONFIG_TQMA6DL) += spl_tqma6dl_ram.o
- obj-$(CONFIG_TQMA6Q) += spl_tqma6q_ram.o
-+obj-$(CONFIG_TQMA6QP) += spl_tqma6qp_ram.o
- obj-$(CONFIG_TQMA6S) += spl_tqma6s_ram.o
- obj-$(CONFIG_MBA6) += spl_mba6.o
- endif
-diff --git a/board/tq/tqma6/spl_tqma6qp_ram.c b/board/tq/tqma6/spl_tqma6qp_ram.c
-new file mode 100644
-index 00000000000..8dd1bf58ef3
---- /dev/null
-+++ b/board/tq/tqma6/spl_tqma6qp_ram.c
-@@ -0,0 +1,148 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2016-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Markus Niebel, Max Merchel
-+ */
-+
-+#include <config.h>
-+#include <hang.h>
-+#include <asm/arch/mx6-ddr.h>
-+#include <asm/arch/mx6q-ddr.h>
-+#include <asm/arch/sys_proto.h>
-+#include <linux/delay.h>
-+
-+#include "../common/tq_som.h"
-+
-+static void tqma6qp_init_ddr_controller(void)
-+{
-+	debug("SPL: tqma6qp ddr iom ....\n");
-+	/* TQMa6QP DDR config Rev. 0300D */
-+	/* IOMUX configuration */
-+	tq_som_init_write_reg(MX6_IOM_GRP_DDR_TYPE, 0x000C0000);
-+	tq_som_init_write_reg(MX6_IOM_GRP_DDRPKE, 0x00000000);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDCLK_0, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDCLK_1, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_CAS, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_RAS, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_ADDDS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_RESET, 0x00003030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDCKE0, 0x00003000);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDCKE1, 0x00003000);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDBA2, 0x0000B000);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDODT0, 0x00003030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDODT1, 0x00003030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_CTLDS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DDRMODE_CTL, 0x00020000);
-+
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS0, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS1, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS2, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS3, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS4, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS5, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS6, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS7, 0x00000030);
-+
-+	tq_som_init_write_reg(MX6_IOM_GRP_DDRMODE, 0x00020000);
-+
-+	tq_som_init_write_reg(MX6_IOM_GRP_B0DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B1DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B2DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B3DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B4DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B5DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B6DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B7DS, 0x00000030);
-+
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM0, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM1, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM2, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM3, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM4, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM5, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM6, 0x00008030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM7, 0x00008030);
-+
-+	debug("SPL: tqma6qp ddr calibration ....\n");
-+	/* memory interface calibration values */
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPZQHWCTRL, 0xA1390003);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPZQHWCTRL, 0xA1390003);
-+
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPWLDECTRL0, 0x00180016);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPWLDECTRL1, 0x001F0018);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPWLDECTRL0, 0x00130023);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPWLDECTRL1, 0x00040018);
-+
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPDGCTRL0, 0x43500364);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPDGCTRL1, 0x034C0344);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPDGCTRL0, 0x43580364);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPDGCTRL1, 0x033C031C);
-+
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPRDDLCTL, 0x3C323438);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPRDDLCTL, 0x383A3040);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPWRDLCTL, 0x3A3E4440);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPWRDLCTL, 0x4834483A);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPRDDQBY0DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPRDDQBY1DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPRDDQBY2DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPRDDQBY3DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPRDDQBY0DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPRDDQBY1DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPRDDQBY2DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPRDDQBY3DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPMUR0, 0x00000800);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPMUR0, 0x00000800);
-+
-+	debug("SPL: tqma6qp ddr config ....\n");
-+	/* configure memory interface */
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x00020036);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x09444040);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x545A79B4);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xDB538F64);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00011740);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
-+
-+	debug("SPL: tqma6qp MX6_MMDC_P0_MDSCR %x ....\n", __raw_readl(MX6_MMDC_P0_MDSCR));
-+
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x005A1023);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000027);
-+
-+	debug("SPL: tqma6qp ddr mdctl - leave reset\n");
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x831A0000);
-+
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00488032);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008033);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00048031);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x19308030);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x04008040);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDREF, 0x00007800);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPODTCTRL, 0x00022222);
-+	tq_som_init_write_reg(MX6_MMDC_P1_MPODTCTRL, 0x00022222);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x00025536);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MAPSR, 0x00001006);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00000000);
-+
-+	/* wait for auto-ZQ calibration to complete */
-+	mdelay(1);
-+	debug("SPL: tqma6qp ddr init done ...\n");
-+}
-+
-+void tq_som_ram_init(void)
-+{
-+	if (!is_mx6dqp()) {
-+		printf("Not running on TQMa6DP/QP\n");
-+		hang();
-+	}
-+
-+	tqma6qp_init_ddr_controller();
-+
-+	if (tq_som_ram_check_size(SZ_1G)) {
-+		debug("SPL: TQMa6DP/QP ddr init done ...\n");
-+	} else {
-+		pr_err("ERROR: Invalid DDR RAM size\n");
-+		hang();
-+	}
-+}
-diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
-index f0f2ddfe48a..dc43674e835 100644
---- a/board/tq/tqma6/tqma6.c
-+++ b/board/tq/tqma6/tqma6.c
-@@ -97,6 +97,8 @@ const char *tqma6_get_fdt_configuration(void)
- 
- 	if (is_mx6dq())
- 		return !tqma6_has_enet_workaround() ? "imx6q-mba6b" : "imx6q-mba6a";
-+	if (is_mx6dqp())
-+		return "imx6qp-mba6b";
- 	if (is_mx6sdl())
- 		return !tqma6_has_enet_workaround() ? "imx6dl-mba6b" : "imx6dl-mba6a";
- 
-@@ -144,8 +146,12 @@ static const char *tqma6_get_boardname(void)
- 		return "TQMa6DL";
- 	case MXC_CPU_MX6D:
- 		return "TQMa6D";
-+	case MXC_CPU_MX6DP:
-+		return "TQMa6DP";
- 	case MXC_CPU_MX6Q:
- 		return "TQMa6Q";
-+	case MXC_CPU_MX6QP:
-+		return "TQMa6QP";
- 	default:
- 		return "??";
- 	};
-diff --git a/board/tq/tqma6/tqma6_mba6.c b/board/tq/tqma6/tqma6_mba6.c
-index e8d166dfef1..136c75b6dc8 100644
---- a/board/tq/tqma6/tqma6_mba6.c
-+++ b/board/tq/tqma6/tqma6_mba6.c
-@@ -70,7 +70,7 @@ static void mba6_setup_iomuxc_enet(void)
- 			     (void *)TQMA6DL_IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM);
- 		__raw_writel(IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII_1P5V,
- 			     (void *)TQMA6DL_IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII);
--	} else if (is_mx6dq()) {
-+	} else if (is_mx6dq() || is_mx6dqp()) {
- 		__raw_writel(IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM_DISABLE,
- 			     (void *)TQMA6Q_IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM);
- 		__raw_writel(IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII_1P5V,
-diff --git a/configs/tqma6qp_mba6_defconfig b/configs/tqma6qp_mba6_defconfig
-new file mode 100644
-index 00000000000..23d2bc48f6e
---- /dev/null
-+++ b/configs/tqma6qp_mba6_defconfig
-@@ -0,0 +1,6 @@
-+#include <configs/tqma6_mba6_common.config>
-+
-+CONFIG_MX6Q=y
-+CONFIG_TQMA6QP=y
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6qp-mba6b"
-+
-diff --git a/configs/tqma6qp_mba6_uuu_defconfig b/configs/tqma6qp_mba6_uuu_defconfig
-new file mode 100644
-index 00000000000..e20d231cda2
---- /dev/null
-+++ b/configs/tqma6qp_mba6_uuu_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/tqma6qp_mba6_defconfig>
-+#include <configs/tqma6_mba6_uuu.config>
-
--- 
-2.53.0
-
+I understand after reading the full series, but each patch needs to
+provide its own rationale.
