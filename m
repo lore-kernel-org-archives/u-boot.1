@@ -2,124 +2,201 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFBE9606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 17:42:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16034606A32C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 17:57:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=i0QihCyy;
-	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=FIPvW3jv
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=hosSWr13;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=AmJEi0Nh
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2B01260AAA;
-	Thu, 26 Nov 2026 17:42:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9F2FD60AA8;
+	Thu, 26 Nov 2026 17:57:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0qV8kUaUattb; Thu, 26 Nov 2026 17:42:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 248D260A9F
+ id PvxIKDiVciwm; Thu, 26 Nov 2026 17:57:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7995060A6E
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795714954;
-	b=hcOKqKY0vHyPB7BhJeKVleCEvYfEE8cpZYy2QRAcg/fO67THmZgsnNtCVzhGjxia+iLU
-	 jk5x67YrVDCbQ6SSvPXzBN3aYNnkmD5PqbF8EwumacnpW63p0Z7zQAho0lYYsXkgiSqAP
-	 jvwYTPZHrCsUzDC0yYFMJczZC5Cgaw6dHvRKac59Rnln5nXBrWHAnZHFEJxL+0+5lOfBN
-	 V+bDL1/2gRy5KM9aFWYiaGe0QYVr+ybWZn1cq5UnT7WC9mUWHtbLHg/nbcbwnGcGpjCsF
-	 njub//pKvNLxb8oJWuNe4zeNB2ncZvb9S32kGzLGKYXvRkuiIEL7et60+oitSiclW/g==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795715874;
+	b=gEm+M6zHZO4MYMcIyGblzhrOqldF5XlxilWSrow6sDO2sXoXITXp9NyORw9Rfqd8KIpH
+	 iGSKokVRbHCT7dS0g4ApVk6RgQ81BbVjmh9QrtKQMMq1mlYZAOSQHyafsV21aRtafPdzM
+	 a2sATtVwIJ2vokVxVO1fFfSieOHXb/W8pWcMH8mt7QGw3MX/bM04c1TCdH3Tw4oLyeeIj
+	 9/gn+KiJImsWfbg9uIuF0abGtNmP/R/gvtYBBx/+em5wQIf6O5mZAK1eZCgJoxhCsgIho
+	 KNoJyENsMkArccC9m4Y0Ng7s+I6HLlrujd1Nphz8Vsn9yL8KmmY0tzzO7uZzoVSbcGA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795714954;
+	c=relaxed/relaxed; t=1795715874;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2/Dpi4P9qEhoKUyEKdPiB502QLk53VDCi/sgZt/wF0M=;
-	b=JrKyd5PBPwPBRgpxCZrTEauwkHGoEb6dD/KQFExYVgKuluQiUk5hqeSJ1qoaED5m4t2S
-	 3OVBYfO+jgtCB8fsXq3X/BLq0AkUyVOlR+8DzGIOfIhjbbiDCQwoDE9crXqgcbF29C/8l
-	 i+6tHa3vBytorOrbmRPZjnnwgZmWprmgg14ohzakhdPDHm4h+VZ6c2xFOncX357bFD37S
-	 pI+OvRqmv7NEYvD+2PfF+dfp2zCmvnxQCQdfzfvZIUIQC/ERrW8juEAGG+DcmnHI7Os4k
-	 qS/YLe0DmHFqksMRd+6IBSLDpIJlfcfgnsQRVHgXY3R6ZaTaftftp+rr3ztbkrfyvAA==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=RAFZhwDc1YZgl4V0slo609CPHX/a6shDDT+euqWnX7g=;
+	b=Bmm/wkv0rUDvvxPAvcPmT0yesA9PTaABTRcglgMZeASAQ0cMS7Y3+/NUZoobRI4V0Pg6
+	 6sPmIPp2dE5q5/buvBoap3tmMQfpAoh2HvqMbCllvc+JUpE0j+N9DSxo1fhJWJ1Tk80NL
+	 wb7aB3GTsXCmIzaj/1RMhE0FbHfcbo8HYO2vAScvdz65HMymjjc4XIg4JImEjC0+bBQWy
+	 GZkRAiZarIGC2Um0fGqqCWUcXB5BCVGXo3uNRd84maFggyDti2j2NiF2RCK/lqpQ5cnkL
+	 rAfbeJEbK8F0VswFWSVd407WfstS83FtNigUZtqcAa8axEPyECzn11bw2bA4GlZKXxw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=0leil.net;
-	dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=FIPvW3jv;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795714954;
-	bh=2/Dpi4P9qEhoKUyEKdPiB502QLk53VDCi/sgZt/wF0M=;
+	d=lists.u-boot-project.org; s=default; t=1795715874;
+	bh=RAFZhwDc1YZgl4V0slo609CPHX/a6shDDT+euqWnX7g=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=i0QihCyyb67psAP7iV9lbBnrcZQS2ECSkbp5R7UdOXpOovRSzGDRmF9LLzUdGm++a
-	 42PhgLQeMBT78OLHnZ/P+hAB2J0/bbQ+7IALLrilMkWRWCHi8ZMfy71V1k380bjzHO
-	 IywCAhGJrGoME+ZUsIbn3jYO8jQeOw+n6SKa/O79FSdf1PGc2NBtPSYRmlCGntAtuJ
-	 nJ0qkPr2jiQ21+ad/bwPCG+TaZBhkwcXqlFqL6+3gC4cK7IMuHlbYkVr3B6x9qFPR1
-	 lc0bHIHLYlBdwla5PD4wjpYvlwMYAoy+DQS09hIb2F6AkuP0lN6yU1pUMsM8T305G0
-	 813aJhOt1qjGQ==
+	b=hosSWr13AHPsTZn8mJndQLv9HiZpurh67sMdawMLVP+D9ZVQcgMPiCHVBKkyErJcW
+	 6XdDC5VzhLZh55SGtepFOhlwtjQ765tCAGNFsrI6i9jXR43xf8nx7Eyx8OSJXXP2sN
+	 sjfjywCF9v+RNAyedKV2h0jwMIQJYJe9xiWflQnbUe9v/j473AQcDc+QVcIRXeAZhT
+	 qJsMU/43+U1TAT3ccSs2QHUD7z8vLny9frgrCj+PGKCggM60RaIuZZXczQUVnZIYd2
+	 OeeDFHk8sC9UiFWiCS7+BSYn5RbzJkMwwKNohnTPJ8YtshNIFtqjJr4Tx4K4FL71ak
+	 e/oRIqT05FLpg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 248D260A9F;
-	Thu, 26 Nov 2026 17:42:34 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 014C010B
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:42:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7995060A6E;
+	Thu, 26 Nov 2026 17:57:54 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5979D22B
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:57:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DB51F60A9F
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:42:32 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3F49640971
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:57:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8r95BoHXYYpk for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 17:42:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 23DDF60A6E
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2001:1600:19:7ff8::42ae"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IJgHTpzD2sVR for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 17:57:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B47BB40929
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c207::3"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:7ff8::42ae; helo=smtp-42ae.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=FIPvW3jv
-Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
- [IPv6:2001:1600:19:7ff8::42ae])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 23DDF60A6E
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:42:30 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000 (Postfix) with ESMTPS id 4jb3lm1trQzsdv;
- Thu, 26 Nov 2026 18:42:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1795714948;
- bh=2/Dpi4P9qEhoKUyEKdPiB502QLk53VDCi/sgZt/wF0M=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=FIPvW3jvxtfH0lVVYUaVDxSBRquHpo8XscfuzaafKqOLRvsSOUHiS14MGq/TRFLFo
- Ivmk6u/FvhrW4WksPGGy32rDKlBu1T++kwfqIWDbiYOtXvNCCYKnXjs+pQOyqi4UzJ
- nBQLV/Jx86OO8E7fvn7rvSldmS95T+ww4LRsfA1NJnMg7mALFTdC/PgkkE9zEeOLPw
- KCkmW9uAD4LhQuUGSGDQW9Cnt6yimqQ/eujG/gSLKLJHtrcxQBULgxBN8L/BJKBSCQ
- Pjb6xxaJEr8dqetOwKwd1CL00lf81nWyQpoJk/O/33nWsvXomMwiwXeYNB8rzRNZTQ
- r5dlHsdkp2/qQ==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jb3lk2mTxzdcS; Thu, 26 Nov 2026 18:42:26 +0100 (CET)
-Message-ID: <fb5f21e7-ac32-4d0d-b825-5aec96ece829@0leil.net>
-Date: Thu, 26 Nov 2026 18:42:25 +0100
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
+ client-ip=2a01:111:f403:c207::3;
+ helo=mrwpr03cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=AmJEi0Nh
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B47BB40929
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 17:57:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RAFZhwDc1YZgl4V0slo609CPHX/a6shDDT+euqWnX7g=;
+ b=AmJEi0NhEQ99He6MyIlfqnyyfHK5mZbhuSPydGHzTegnh7mIAfpafQQa9S1BlAYmU9ixISSiAISXl/ed4+jyhSL2sDnFHe9+o84hbYtuV70s2l4I/Un0AdFKUGGVVs3AljSFbOstlEM9p5oOURr39DjZqjqyYeK7zOsiD2yAzDc=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by DB9PR04MB11474.eurprd04.prod.outlook.com (2603:10a6:10:5de::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Thu, 26 Nov
+ 2026 17:57:44 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0662.004; Thu, 26 Nov 2026
+ 17:57:44 +0000
+Message-ID: <fc6bc1c3-bf73-404b-9985-9d777cfcc222@cherry.de>
+Date: Thu, 26 Nov 2026 18:57:42 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] ata: dwc_ahci: fall back to the PHY in the sata-port
- subnode
+Subject: Re: [PATCH 2/3] ata: ahci: return the last LBA from emulated READ
+ CAPACITY
 To: ricardo@pardini.net, u-boot@lists.u-boot-project.org,
- Kever Yang <kever.yang@rock-chips.com>, Eugen Hristev <ehristev@kernel.org>,
- Jon Lin <jon.lin@rock-chips.com>
+ Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Eugen Hristev <ehristev@kernel.org>, Jon Lin <jon.lin@rock-chips.com>
 Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
+ Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>,
+ Julius Lehmann <lehmanju@devpi.de>
 References: <20261109-rk3588-sata-fixes-v2027-01-v1-0-e54ca8e68f18@pardini.net>
- <20261109-rk3588-sata-fixes-v2027-01-v1-1-e54ca8e68f18@pardini.net>
+ <20261109-rk3588-sata-fixes-v2027-01-v1-2-e54ca8e68f18@pardini.net>
 Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <20261109-rk3588-sata-fixes-v2027-01-v1-1-e54ca8e68f18@pardini.net>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20261109-rk3588-sata-fixes-v2027-01-v1-2-e54ca8e68f18@pardini.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+X-ClientProxiedBy: VIUP296CA0059.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:337::16) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|DB9PR04MB11474:EE_
+X-MS-Office365-Filtering-Correlation-Id: 642e4696-6838-4509-427d-08df4be6c59e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|366016|376014|1800799024|23010399003|56012099006|4143699003|11063799006|10067099003|261102123227099003|261021121427099003|261026121527099003|18002099003|22082099003|6133799003;
+X-Microsoft-Antispam-Message-Info: tRhifpBzxbrKnEKfyDHrQ/VdNSKoNeO1bVpbH9LM1QZNkpKHZzn3Bdyf2jHz7rt8zgcnkST3o+XxdZXOIuVadCyux9W4m/XI6F25fQq33ZybWmCSdjqP19cySuceyDzjNZTAz52sjF4W+B070ZmHhkSB0MW/EBvbeJK+q2WB9tDveNRkvE/tTwowfRiiXzfbHCrJVCGBaiZpuM2Z1wif55DW/lPwhXaZ8hBrEavWvAoGLn3kWJfSoYlY8k1TWXcEO97VS2/rAq2njwCYfz1R+FKEQb0oA9V+Apceq+Sz0IYjXcjOnUpdzEqJqEVnlCejtnKQMTquh5MLInHDiuf4dZmIqtUYL33fSMHCuHTagNJK8JTmkIwusoaq9QcqLyfFznL96qT9sT739EJcoPzVsyWbYNPLKWNiTG96QMgy86S7jci4LCGY+quglINnd9u4Yj/BN/2w7IkA+dNj0In7YtWwlCSzbd/1qTYikoFc0yo6RRD1AOBDO6sY9Xs2p1wOdH+7fwx0imNVyFjQggR61QfwGvn0V4+e4g+HNIymhFeJQH4PI3j2EsZbFIcJMpQGN9fJS8d4sBHyz6u1ojerCKZ4tUZnXEpMpip1mzPXqpCmBmnIZ3/UlrW4tnvC/2/8SFOFoSbppixYb2hPf3ni4PL79KYAd5y8GIR+ZbLk+c0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(366016)(376014)(1800799024)(23010399003)(56012099006)(4143699003)(11063799006)(10067099003)(261102123227099003)(261021121427099003)(261026121527099003)(18002099003)(22082099003)(6133799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c0UwTWVZTVFzYmlqbTIvR1RKY3BIa05wcWtSb29lRDllNmQ2TDBUcmxWQjVw?=
+ =?utf-8?B?UVdkM2ptWWEzeHdVUGhmMUM3RnhlSFRJb1grazdzMEV4U0RLNk1Qdm4xRGRX?=
+ =?utf-8?B?L1p6VGhSNU1CMGg4Mi9tcXRpSkQrSmluMlZGbmFFUXppZEdpdVpLYXRKUkhj?=
+ =?utf-8?B?aGJwOUorUnlEWjYrdFk3YmlRVWd4QU9JZm11OTgxY3RlbHUyNjhlTWFVSmIv?=
+ =?utf-8?B?R2l1bzdlcjg5U3E1Y0NzeU9MVzdUWG9sdlJ5SkovaTVPazRtakFpN1gxVGM5?=
+ =?utf-8?B?czZZbG52cHJobzJEcjkwU3RPcWhXT1VPRTlkejYxTTJNZmowRDN0ekFsT21l?=
+ =?utf-8?B?c2dpUVo5STBJV3d1ZE42cFoydGx4NzJ1aTE2cUpNT1RqdGZHQlQ2eUZZck11?=
+ =?utf-8?B?dXEwWTA0Tlp4ZmVZYWR0NnRxUVhWWklCdUlCUVpublhvUWVPa1g2WGI2bVo3?=
+ =?utf-8?B?bUZ1SkN4aE13TXNSMXE0WktyZVpWeXkyTUpLY21yYU1OVG9FNHN3WjNadUN5?=
+ =?utf-8?B?UTdpT2RyMFJMTEtNSmVCN2E2anVYdWRoS2VlalBnRkIyWVZvcWpjMmhpak9n?=
+ =?utf-8?B?WkdpS1N4SmhBdnFySEFhWUlaMzV3NmdmKytRNkN2V3JsaVcxTlY4cjVCbjhH?=
+ =?utf-8?B?TWZqeDdnMzYxTTNKanlRbjlzQ0VyT1k5bGdwdWMrbVVqbEoxbGhVMVBTVzBV?=
+ =?utf-8?B?RTlwamZXdHZjVlR4OTZ0OUtueUtBYzYxei8yM0hLd3h2azlDWTJtc3kxc0E2?=
+ =?utf-8?B?amNvOGZQRkdoYkJyZTZZU0RsVkl2RlhGYnl0cDZmaGdxZVR1amRhckg2WFZW?=
+ =?utf-8?B?eFpiNEpGV1RsL0s4U1FLc0VoSk9ZR3ZzaHlWc0RmYlBwVDZxeUQvNXJIRkpR?=
+ =?utf-8?B?Y3JwbUdxQnlzVThOZ0t5NWZ2OUQzNlJLTGNuYzlxdGdNenVUN3Q2NUxyRmtj?=
+ =?utf-8?B?TnJBcG1yUFJhV2dGcWNJSnZrRGJIdkJIUnZmNldna1JNRVBjSHgvVUlNY2Jw?=
+ =?utf-8?B?eFpmeEdUUWNLc3hNYWtuRk53UnlXamt3bElQSmpOYVdCQVJRL2RIMHJ4QWVU?=
+ =?utf-8?B?Sm9QTEJHeGovTnZZRmxFcnkwdm00cksxUllUUUhhNEdoTFF1bjJaaXdFOHpV?=
+ =?utf-8?B?SGVLTW9BSmZkRHhNWnhLclVZVThPakZSSi93b2l2M3FUYU5PMkQwczJUTkY5?=
+ =?utf-8?B?TlhWUGZYTVRZSytZdStaTjR5MFltUDJFTGd3Rk9ZNUVId1dIYkhvYWxldW1j?=
+ =?utf-8?B?OEc1aGVDaVpTcDZvREZxTkxQcG1iVlp3NjJuT2JHQS9zU3VXaldBejRsNDQ5?=
+ =?utf-8?B?eFBsSU5JQkpEWHBVMDdKSTVIVENFRjFOQTJmVVJuamlaTDdMdUF2OU1sSitx?=
+ =?utf-8?B?a0k5ZzBsY0dnQm5hYWlPZDNIcks3WEZXY0d0WEVZVzRzYjExamZocmxWQVk1?=
+ =?utf-8?B?bjU3YmNWWi9wcGJ1bW5vMzFkNW9LS3N3Ym1tdE1zamFGSGZSMHpUaFZtd2tu?=
+ =?utf-8?B?Wmx4eGlvbGYvL2tzMFk0ODViOEVLekxCS1BrYXkrMTNMM2xmK2UvT3hZeDNu?=
+ =?utf-8?B?YmJBNWRYeTZDTWllYlhoZytyc1pDRjhONlc1eVhERDNxU0NneDViUVJUaFdG?=
+ =?utf-8?B?dFJrVFhnTmhzRDJsTTdWaTBzTHpZOU5UbkZZam0rUmFHNVNCUGlWUlpxYlVm?=
+ =?utf-8?B?YWhWcTdPd1ZYN1Vhbm1jSGtlcWhYd3hlaTNOdWc4L0NiOFZ0Rk5tbHdXKzN0?=
+ =?utf-8?B?ZkhFbW94SEVtaFcydUduU2JtTmFkTzA1anhjc0ZPOVlhSGlhQm9vNjZKMXF6?=
+ =?utf-8?B?YUkydDRiQnpNNXk0Q2s1aDY4Y3RGbTJvUDRueTBDOUR1QnlRcmtScFJkeE52?=
+ =?utf-8?B?TW4vOTVzZUlpSTVPc3NPMVBlWDMxNGtUdTEvaVBySThEMnd5TTNuSHJnOURi?=
+ =?utf-8?B?QTllV3U1WUVtbGVDbkovUUZlODlVclFwaWQvN3RXTDFnQzRycTZiRWdTSEpi?=
+ =?utf-8?B?SjFuRm5PTkhINmVCem5uOGYzOWY2QzI2OGUzdWgyTEc0R2ZSNFpHcFFjVmVS?=
+ =?utf-8?B?akMxQ2VJRmJNQ2wwemNheEJRRHpTRERvZFNmTGxVSTJINk5ZMHEyNmppR3lq?=
+ =?utf-8?B?dFcyQ09kODVtcHBHK1krdEdKOVc2emlmU1ptK1RMaDNXeDR1Sm9vN09oNlpn?=
+ =?utf-8?B?Zi9MVkN2bURrUG5iWG02ZjdpbFE3WXppanVRVTd1ZWxTeXpaL2s1UzJlaGhV?=
+ =?utf-8?B?ZWZDc09JZFpqQ2ZFV0FUR0VxOE1TUVRoWXBQc1RaWUczbDZacGc3YWdrNmZ2?=
+ =?utf-8?B?N1pCSGhaSm1lTVA3TFl6eHRTMUlMNzlId05LWXNvbTJRRWNOSXlJZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 642e4696-6838-4509-427d-08df4be6c59e
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 17:57:44.1960 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: f3tXOi18RpPa6rkqhcQcYMeYMYu+t2rq+phDGAmnRdwUNaJHDtY1NBw5AdM8SdwqvSzVsVKoPZ9g0vSU044ISWE23d9PYoW3VK3UWjadu0k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB11474
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -129,9 +206,9 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
@@ -141,78 +218,23 @@ Hi Ricardo,
 On 11/9/26 3:57 AM, Ricardo Pardini via B4 Relay wrote:
 > From: Ricardo Pardini <ricardo@pardini.net>
 > 
-> dwc_ahci_probe() only looks for a "sata-phy" PHY on the controller node.
-> The RK3588 device tree, as synced from Linux, describes the PHY in the
-> sata-port@0 subnode instead (the binding allows per-port PHYs, which is
-> how Linux's libahci_platform consumes them), so probing every RK3588
-> on-board SATA controller fails:
+> SCSI READ CAPACITY returns the address of the last block, and since
+> commit 5f7c06bdc3c6 ("scsi: fix disk capacity too small by one sector")
+> scsi_read_capacity() adds one to get the block count. The AHCI emulation
+> returns the sector count instead, so AHCI disks are now reported one
+> sector too large.
 > 
->    => scsi scan
->    scanning bus for devices...
->    can't get the phy from DT
+> Reading that non-existent sector ends in a 10 s AHCI timeout. With
+> "ums 0 scsi 0" this happens as soon as the host looks for the backup
+> GPT, and UMS exits.
 > 
-> RK3566/RK3568 sata1 and sata2 have been affected the same way since the
-> v7.1 DT sync (d0a838bdc62), which brought in the Linux change "arm64:
-> dts: rockchip: Add port subnodes to RK356x SATA controllers" (linked
-> below). Only RK3568 sata0 still has the PHY on the controller node.
+> Return n_sectors - 1 from both handlers, keeping the READ CAPACITY (10)
+> clamp.
 > 
-> If the controller node has no "sata-phy" in phy-names, use the first PHY
-> of the first enabled subnode. A "sata-phy" that is declared but cannot
-> be resolved still fails the probe. Only one PHY is brought up, as
-> before; the RK3588 and RK356x controllers have a single port
-> (ports-implemented = <0x1>).
-> 
-> Only tested on RK3588.
-> 
-> Link: https://patch.msgid.link/20260201191804.41421-2-heiko@sntech.de
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Signed-off-by: Ricardo Pardini <ricardo@pardini.net>
-> ---
->   drivers/ata/dwc_ahci.c | 13 +++++++++++++
->   1 file changed, 13 insertions(+)
-> 
-> diff --git a/drivers/ata/dwc_ahci.c b/drivers/ata/dwc_ahci.c
-> index 0431d370716..8192d2f5f34 100644
-> --- a/drivers/ata/dwc_ahci.c
-> +++ b/drivers/ata/dwc_ahci.c
-> @@ -57,6 +57,19 @@ static int dwc_ahci_probe(struct udevice *dev)
->   	struct phy phy;
->   
->   	ret = generic_phy_get_by_name(dev, "sata-phy", &phy);
+> Fixes: 5f7c06bdc3c6 ("scsi: fix disk capacity too small by one sector")
+> Cc: Julius Lehmann <lehmanju@devpi.de>
 
-question: relevance of getting the phy by name?
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Considering the Linux kernel driver completely ignores phy-names as far 
-as I could tell and simply get the first phy listed in phys, and that 
-the dt-bindings doesn't require phy-names to be present, should we 
-rather switch completely to just get the first phy listed in the phys 
-property too? There's only one Device Tree which has more than one 
-phy-names when sata-phy is mentioned, and it's not one handled by this 
-driver here so this seems safe to do.
-
-> +	if (ret && dev_read_stringlist_search(dev, "phy-names",
-> +					      "sata-phy") < 0) {
-> +		ofnode node;
-> +
-> +		/* e.g. RK35xx: the phy is in the sata-port@N subnode */
-> +		dev_for_each_subnode(node, dev) {
-> +			if (!ofnode_is_enabled(node))
-> +				continue;
-> +			ret = generic_phy_get_by_index_nodev(node, 0, &phy);
-> +			if (!ret)
-> +				break;
-> +		}
-> +	}
-
-issue: diverge from Linux's implementation
-
-Linux has decided if there are subnodes, then we should only parse 
-subnodes, no fallback to the main node. If no subnode, then parse the 
-main node. Please go with the same implementation.
-
-I know the Linux kernel iterates over all subnodes, but in U-Boot we can 
-still decide to stop after the first subnode with a valid is found and 
-let future contributors handle cases where there are more than one subnode.
-
-Cheers,
+Thanks!
 Quentin
