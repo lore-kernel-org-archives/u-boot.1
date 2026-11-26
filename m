@@ -2,121 +2,117 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D489C606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 12:24:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95895606A323
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 12:31:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=k8DqjwnF;
-	dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=o2dVEJyN
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kW/7G1Iv;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ckrc6K0+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AB3C260A66;
-	Thu, 26 Nov 2026 12:24:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6FA5660A58;
+	Thu, 26 Nov 2026 12:31:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kbH1gBSKZtow; Thu, 26 Nov 2026 12:24:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7A79A60A57
+ id bZFW5nXdi-k1; Thu, 26 Nov 2026 12:31:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A2D9F60A4C
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795695893;
-	b=CPGUhowILwYHQ+19xGCWUapUOKgr9iRb3gUEl/sV5x69avOyr+p7APBRY5QxpMH4xTDQ
-	 ZzlRomy/Pqpcq1/UCL7ME6TWjdiJWtNbmrrnQkH5HAkg6zX21vJau2AapCXS42rmJ5HSO
-	 QRHXjNXh9wt5IXpNdlocX3amrAR+nL0njLaeFiDWgD284lsuma00ig7artzX0A3HI7+fF
-	 PxTSpeqtkukZLK+9HN96QUDYmTXypjp4HKYblJVmpuIhtjSZHIXKrEkZWetlEwa54zCPi
-	 26SeJEI+MdOqapaiWs1ZYD2I2GGDaZkmwaQn+eR9QmMEkyi3k+REhhqzhBWLao9u2yw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795696274;
+	b=KHUBlUdolniho1Av5+4qQfnT6jFtUCBZyVOabfjlZhZ0UFo+UfLb7493QyKMCj54Y7EJ
+	 +OheqBnQhmxD5A7IqN5WQ4QJhxDxURDwwT7JncoWEOCJFReL75mM8PMBKrq4BNFyrfGHs
+	 bxOIhRxXzjC/FDg4aP7AZ7+F/G/+/BnQRg18pjIfDF/AOIaOnlIvVdC0QSVtMhaEOuEGj
+	 t0CjSZPuYxMZlcxfWlap8tkSy20jN64N8na4cS7QQklIUZ4o7cFPqW/3eJt+fGOLgA9ls
+	 EWdGDlI50gpsmTxLzHsieujRvWxxH0qNBRWrQ02ivW6a1FDeMHVfFIfN5lWOllxHdDg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795695893;
+	c=relaxed/relaxed; t=1795696274;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Virus-Scanned:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=dG9e+q99oUpu7eRRDEi5vZR3LCYs/EXYQ//8JDjSR14=;
-	b=TNq14av0Po8BbJrPzc4Ng9+++G9Wl8htW1h4ERzzUDKz5Ep9xsk9GJdCikIXkIt+uBOk
-	 wxfMFZoTpXtR+GHxZDNJs7KvFzPRBFiplWGoyseGGe0+jwFFl9Y4S3729fgUcWvCpHIX7
-	 bqF64ONGvomFeWdda1iz+JStYMItDolUahuuPP0gILLIQw6j42+RJX9Gy8R1uJs5lkk7O
-	 oqiyNOotGtxScarc+OXg0755xLNJ0pjg9NbpQOoJaiZ3AS0oG6VECww8Osz6D2Atcg18f
-	 X0EUjwZtjEvd13vTx4Og69wSlAKxDJLoXIJ5jy+fjQNjA4XA493h84Eob0CJeluggtw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=qoDjVOQaUsSyna6RI0mKpnxhVUgydkoymH+BYvl117o=;
+	b=AlSnNkgXFDgjZ4hn2hDpNqLyf8PJOSuR0xvX/CTD+n2XJnJp1MUygVeciKURJv2Tx/5e
+	 2EpZXhHDs3HMB54yh+WHbirgAREdG3Ha2FVunkBVMVvo4GWyCG3quiUpJKLvNP9jDvcQ3
+	 cBfZ588WBuk6pmRVvAkwEpt/NaNynjo+eRYbmxlPUCDvQ1TXc17Dn+5pof2w963je2FSb
+	 u6vKq9GpDSsQcXM9VILSIaIxoUXBxGolmQZSpxqA8erP8aj5kP4B1VsKWWXFp0BcJ5ml1
+	 MMkWYPgIfsa9e76ayDrdhNXWhdnWovEC+CEJ4iYzc85m2jvsNo+UR+nAACAnTKgwFcw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795695893;
-	bh=dG9e+q99oUpu7eRRDEi5vZR3LCYs/EXYQ//8JDjSR14=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1795696274;
+	bh=qoDjVOQaUsSyna6RI0mKpnxhVUgydkoymH+BYvl117o=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=k8DqjwnFwanIL3M748K8ogmJK7/stne1HKJUN9yiWP4FaLKkH39erLvDzbRatcqjw
-	 LPN9DteZNGHXTseRh7duFZ/iFUjPK7uubAhhdPHjQ2bRfzfe8V9FITwW1nbL8zKBcV
-	 ZUZRXIKBf+rMxZmlnH5sSkcmAcdPBOaxK9+lt0qLCc5DM0jdQaIvY+RV7b2/Ac8VJh
-	 xFhIT65JFxVNE0vqmegxSmnAWL2WTQ6/enEvH4tRNKdennEpJuiwrauqICwDRBdzCf
-	 2exihqu169YADvfdq6/MHtvijyZ7ejq6FU2STyup29aesj604t3ao4rtIqYNyH9tfh
-	 a0taepZ55SdjQ==
+	b=kW/7G1IvF03r29OgaoJae3cJfNlh5q2CdveCfFIZ1xs0at1nlOGHnaN++Rn2tkxU7
+	 fE0Op2mkgqxYXQX4My7lP2l8YsuXESJPyDezE4gmYPOMAvGRCDR2lk2M0hCxQAaijM
+	 LQTll9MpKnCbDkSDsIBK7hzzo6/7M/8+uw2DnGegoqDkTFT70WROgdJEeOwUoo/zWh
+	 2nwOVHYEgf8ZEbcaixBkhXNMh0svjmtZqHmuwtwVy9hB0kgAw4eYczt76KeGMDhFcA
+	 aJdfI5ssPA+kzMvQG4NBElmAina2Fl35UFIUJbq251/NYupk5qWvaQWRflSZlXiyRq
+	 0hHQ0w7I0bBYg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7A79A60A57;
-	Thu, 26 Nov 2026 12:24:53 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E45331AB
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:24:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A2D9F60A4C;
+	Thu, 26 Nov 2026 12:31:14 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0941732D
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:31:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D5F054087D
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:24:37 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EF5838112F
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:31:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0gqoYX6Tds21 for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 12:24:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9160040547
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
- helo=www537.your-server.de; envelope-from=nora.schiffer@ew.tq-group.com;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Wpj2wIh4TjKa for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 12:31:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 54EBC81132
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=sumit.garg@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=o2dVEJyN
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9160040547
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:24:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=dG9e+q99oUpu7eRRDEi5vZR3LCYs/EXYQ//8JDjSR14=; b=o2dVEJyNptJQoxwKsKPOI/YHzL
- wzvCbgA4/VV5qkitqh+U3Vo4/4HMfRzxern/nnj/Q4cRcs4QocTtScGd7iR86ozdZfV/0lA7TSURc
- VvrlGwAXXFQXA5LM/4LrMiSsk/vUqNqvagguRj7bM7cryM9BtJKLYNgP1u7csnKgGCIDdjmP5nx6Q
- 5lOyyAapoGPCzvfHx8tfaJkHs0eMOw9bRTbdUXw5p5uEeiT/zmuTgWW7Mizkl5gUwFKLNtZjfXj6T
- ZIMgliwlMdjUJjdYxDAx1f/xfk9Htd1c2RI/BXOYECneR038l3lwnY8lt+9h/SmXMlQcvYNYC4j65
- f/PciF0g==;
-Received: from sslproxy08.your-server.de ([78.47.166.52])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xWYWg-000ICw-1y; Thu, 26 Nov 2026 13:24:34 +0100
-Received: from localhost ([127.0.0.1])
- by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xWYWf-0003gJ-1c; Thu, 26 Nov 2026 13:24:34 +0100
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Marek Vasut <marex@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
- u-boot@lists.u-boot-project.org,
- Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Subject: [PATCH v3 7/7] power: domain: imx8m: add support for i.MX7D
-Date: Thu, 26 Nov 2026 13:23:59 +0100
-Message-ID: <3415df204f287b0ad440d5becab9f4345a4a79e7.1795694935.git.nora.schiffer@ew.tq-group.com>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <cover.1795694935.git.nora.schiffer@ew.tq-group.com>
-References: <cover.1795694935.git.nora.schiffer@ew.tq-group.com>
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=ckrc6K0+
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 54EBC81132
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:31:11 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 0B1E3629A6;
+ Thu, 26 Nov 2026 12:31:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B725D1F000D2;
+ Thu, 26 Nov 2026 12:31:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1795696270;
+ bh=qoDjVOQaUsSyna6RI0mKpnxhVUgydkoymH+BYvl117o=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date;
+ b=ckrc6K0+V6UNl7AUCZS1AXv818zMCnsoSQR+y2slTefwtAgLBOJUgiiliSnb+TzxT
+ dfIa93+wPox0GmkXCjs2QRNUdAqRQfABwmLGav6oAykFQ+InskIHgTwLghUz4rfW7W
+ W8C/59ZauVuiIux0V2BmJD4gK4Wr34Q2mZad9lnRmXcNxfZGOHhu0Nrn2kCuaUhWpT
+ mKuE6MuZ3AFx33F65v0bKQdCipXJbg1rdE67uCYILm3nSHnnKDr5reYLvzTjp/P2yf
+ P3MxXkvPTugrTS+gdIBZ3cncDzFeAXb3qg6NVfFmS2ScTtSIvl5G7IYuaSbDoWcP2n
+ nlAAPnrHOWY1g==
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Virus-Scanned: Clear (ClamAV 1.4.6/28194/Wed Nov 25 07:26:59 2026)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH RESEND] configs: qcom_defconfig: Enable EFI variable
+ runtime storage
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.u-boot-project.org, Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <20261009-efi-runtime-v1-1-6f02220d2020@oss.qualcomm.com>
+References: <20261009-efi-runtime-v1-1-6f02220d2020@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 18:01:04 +0530
+Message-Id: <179569626470.130558.10794995679096831968.b4-reply@b4>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,155 +122,60 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Import the power domain definitions for the i.MX7D from the Linux kernel.
+On 2026-10-09 07:12 +0530, Balaji Selvanathan wrote:
+> Allow SetVariable at runtime on U-Boot's in-RAM EFI variable
+> store so the OS can write EFI variables via efivarfs. With this
+> enabled U-Boot also advertises EFI_RT_SUPPORTED_SET_VARIABLE and
+> exposes the RTStorageVolatile and VarToFile variables, which
+> userspace tools such as efivar use to persist runtime changes
+> back to the ubootefi.var store on the ESP across reboots.
+> 
+> EFI_RT_VOLATILE_STORE depends on EFI_VARIABLE_FILE_STORE; select
+> it explicitly so the option is not silently dropped if that
+> default changes.
+> 
+> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+>  configs/qcom_defconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 
-Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
----
- drivers/power/domain/Kconfig              |  6 +--
- drivers/power/domain/imx8m-power-domain.c | 60 ++++++++++++++++++++++-
- 2 files changed, 62 insertions(+), 4 deletions(-)
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-index 8809887b1c4..2ca2bb07dfa 100644
---- a/drivers/power/domain/Kconfig
-+++ b/drivers/power/domain/Kconfig
-@@ -41,10 +41,10 @@ config IMX8_POWER_DOMAIN
- 	  requests to the SCU.
- 
- config IMX8M_POWER_DOMAIN
--	bool "Enable i.MX8M power domain driver"
--	depends on POWER_DOMAIN && ARCH_IMX8M
-+	bool "Enable i.MX7D/i.MX8M power domain driver"
-+	depends on POWER_DOMAIN && (MX7D || ARCH_IMX8M)
- 	help
--	  Enable support for manipulating NXP i.MX8M on-SoC power domains.
-+	  Enable support for manipulating NXP i.MX7D/i.MX8M on-SoC power domains.
- 
- config IMX8MP_HSIOMIX_BLKCTRL
- 	bool "Enable i.MX8MP HSIOMIX domain driver"
-diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
-index aef7f4cbb35..df70621c50f 100644
---- a/drivers/power/domain/imx8m-power-domain.c
-+++ b/drivers/power/domain/imx8m-power-domain.c
-@@ -17,6 +17,7 @@
- #include <power/regulator.h>
- #include <wait_bit.h>
- 
-+#include <dt-bindings/power/imx7-power.h>
- #include <dt-bindings/power/imx8mm-power.h>
- #include <dt-bindings/power/imx8mn-power.h>
- #include <dt-bindings/power/imx8mp-power.h>
-@@ -25,6 +26,12 @@
- #define GPC_PGC_CPU_MAPPING			0x0ec
- #define IMX8MP_GPC_PGC_CPU_MAPPING		0x1cc
- 
-+#define IMX7_USB_HSIC_PHY_A_CORE_DOMAIN		BIT(6)
-+#define IMX7_USB_OTG2_PHY_A_CORE_DOMAIN		BIT(5)
-+#define IMX7_USB_OTG1_PHY_A_CORE_DOMAIN		BIT(4)
-+#define IMX7_PCIE_PHY_A_CORE_DOMAIN		BIT(3)
-+#define IMX7_MIPI_PHY_A_CORE_DOMAIN		BIT(2)
-+
- #define IMX8M_PCIE2_A53_DOMAIN			BIT(15)
- #define IMX8M_OTG2_A53_DOMAIN			BIT(5)
- #define IMX8M_OTG1_A53_DOMAIN			BIT(4)
-@@ -49,6 +56,12 @@
- #define GPC_PU_PGC_SW_PUP_REQ			0x0f8
- #define GPC_PU_PGC_SW_PDN_REQ			0x104
- 
-+#define IMX7_USB_HSIC_PHY_SW_Pxx_REQ		BIT(4)
-+#define IMX7_USB_OTG2_PHY_SW_Pxx_REQ		BIT(3)
-+#define IMX7_USB_OTG1_PHY_SW_Pxx_REQ		BIT(2)
-+#define IMX7_PCIE_PHY_SW_Pxx_REQ		BIT(1)
-+#define IMX7_MIPI_PHY_SW_Pxx_REQ		BIT(0)
-+
- #define IMX8M_PCIE2_SW_Pxx_REQ			BIT(13)
- #define IMX8M_OTG2_SW_Pxx_REQ			BIT(3)
- #define IMX8M_OTG1_SW_Pxx_REQ			BIT(2)
-@@ -90,6 +103,10 @@
-  * GPC_PGC memory map are incorrect, below offset
-  * values are from design RTL.
-  */
-+#define IMX7_PGC_MIPI			16
-+#define IMX7_PGC_PCIE			17
-+#define IMX7_PGC_USB_HSIC		20
-+
- #define IMX8M_PGC_PCIE1			17
- #define IMX8M_PGC_OTG1			18
- #define IMX8M_PGC_OTG2			19
-@@ -150,7 +167,8 @@ struct imx8m_power_domain_plat {
- 	int has_pd;
- };
- 
--#if defined(CONFIG_IMX8MM) || defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MQ)
-+#if defined(CONFIG_MX7D) || defined(CONFIG_IMX8MM) || \
-+	defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MQ)
- static const struct imx_pgc_regs imx7_pgc_regs = {
- 	.map = GPC_PGC_CPU_MAPPING,
- 	.pup = GPC_PU_PGC_SW_PUP_REQ,
-@@ -159,6 +177,43 @@ static const struct imx_pgc_regs imx7_pgc_regs = {
- };
- #endif
- 
-+#ifdef CONFIG_MX7D
-+static const struct imx_pgc_domain imx7_pgc_domains[] = {
-+	[IMX7_POWER_DOMAIN_MIPI_PHY] = {
-+		.bits  = {
-+			.pxx = IMX7_MIPI_PHY_SW_Pxx_REQ,
-+			.map = IMX7_MIPI_PHY_A_CORE_DOMAIN,
-+		},
-+		.voltage   = 1000000,
-+		.pgc	   = BIT(IMX7_PGC_MIPI),
-+	},
-+
-+	[IMX7_POWER_DOMAIN_PCIE_PHY] = {
-+		.bits  = {
-+			.pxx = IMX7_PCIE_PHY_SW_Pxx_REQ,
-+			.map = IMX7_PCIE_PHY_A_CORE_DOMAIN,
-+		},
-+		.voltage   = 1000000,
-+		.pgc	   = BIT(IMX7_PGC_PCIE),
-+	},
-+
-+	[IMX7_POWER_DOMAIN_USB_HSIC_PHY] = {
-+		.bits  = {
-+			.pxx = IMX7_USB_HSIC_PHY_SW_Pxx_REQ,
-+			.map = IMX7_USB_HSIC_PHY_A_CORE_DOMAIN,
-+		},
-+		.voltage   = 1200000,
-+		.pgc	   = BIT(IMX7_PGC_USB_HSIC),
-+	},
-+};
-+
-+static const struct imx_pgc_domain_data imx7_pgc_domain_data = {
-+	.domains = imx7_pgc_domains,
-+	.domains_num = ARRAY_SIZE(imx7_pgc_domains),
-+	.pgc_regs = &imx7_pgc_regs,
-+};
-+#endif
-+
- #ifdef CONFIG_IMX8MQ
- static const struct imx_pgc_domain imx8m_pgc_domains[] = {
- 	[IMX8M_POWER_DOMAIN_PCIE1] = {
-@@ -580,6 +635,9 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
- }
- 
- static const struct udevice_id imx8m_power_domain_ids[] = {
-+#ifdef CONFIG_MX7D
-+	{ .compatible = "fsl,imx7d-gpc", .data = (long)&imx7_pgc_domain_data },
-+#endif
- #ifdef CONFIG_IMX8MQ
- 	{ .compatible = "fsl,imx8mq-gpc", .data = (long)&imx8m_pgc_domain_data },
- #endif
--- 
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-https://www.tq-group.com/
+-Sumit
+
+> 
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 7d4a2b589aa..40ee45e8d42 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -10,6 +10,8 @@ CONFIG_SYS_LOAD_ADDR=0xA0000000
+>  CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> +CONFIG_EFI_VARIABLE_FILE_STORE=y
+> +CONFIG_EFI_RT_VOLATILE_STORE=y
+>  CONFIG_BUTTON_CMD=y
+>  CONFIG_FIT=y
+>  CONFIG_FIT_VERBOSE=y
+> 
+> ---
+> base-commit: 0a55b098d6f5f6bafa84fc2f18b433dd167bf729
+> change-id: 20261009-efi-runtime-b9f07cc48993
+> 
+> Best regards,
+> -- 
+> Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> 
+> 
+> 
+
 
