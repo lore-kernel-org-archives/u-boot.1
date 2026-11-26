@@ -2,176 +2,177 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9B0C606A330
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 14:31:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84E2C606A33B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 14:31:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ENfBRy2D;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BsPChA2L;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V07wJuk9
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ws7LHtC4;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TBntRHKe;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NdvMaElg
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BBD6C60A92;
-	Thu, 26 Nov 2026 14:31:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2B4E960AAF;
+	Thu, 26 Nov 2026 14:31:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4vAZlaNGaV90; Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B668D60A7F
+ id kNLHpvyN-DVS; Thu, 26 Nov 2026 14:31:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4B5F160A7F
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795703466;
-	b=MLccLMlIwAf2qw3np2Tj67uziah7vgbfTzLnhEHyWExiZ2qiHP/nktVKI/dEM1FngXjs
-	 sxhGQ1tSsGR9Nh6aWfHMDD7XILhG3Zg/jijkuNkumMgU0rMstse/jrhlXxN7uDL6J2HAJ
-	 yy+rwywz2hpGVW5h79BwwKORj26ApB6NN3RosxOe8njZPh6v3lRjwTGNA7DWB2LtlT6jy
-	 1KNrDm8UawmAhJyycRtuqHmNAXEuCnvFDtNGy0fixCBh2wctoETkEL62lEJpDz/hsVIGD
-	 WeTjozddiK5grb7nuBp+cUcHhGsooovX4jug2d6AppYW98Qs6sb0ine7FxUnXUGCLJw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795703470;
+	b=XFsYUVOsSGgUIbhmkLzr6K4RUmFSrz6FtD6zJ9CBQvCFPOXnfBhfkYAYq//eQabj5W1j
+	 PQnX4tkbP4Q56QzgLp/Nv1hU1SjmbxJT3SNAsoih5xfBswmLp5YGzHzhD78gMXCuGOTJV
+	 uz7/Or6NdPwVhv7+8Jm0gOnJVQpD93d6Te/wK6r2EUDgXcBaRIg2eDAVEwwFcgh9mvd2S
+	 HFmOyFy66kcuayYLfnbe8SK2hUiMQV5i0lxVH8TZR+kA264y+7E/PRyJ6AfI2//gSpadA
+	 tPMDbwmkpHPazR+oKyA4stEUUaTuX3X8Dfcdja2gGcnHClsuyOXa9TlNSvNNdRQ+vkQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795703466;
+	c=relaxed/relaxed; t=1795703470;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:Received:DKIM-Signature:
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Authority-Analysis:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Authority-Analysis:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
 	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=rTi4m/2d/OfzrGWpZyvWn08lu69GxA0EMZ0OojRCIvw=;
-	b=oNTa8hqFV3DXf+btTOnyL463uuLRAiICY/qSrjL29u0QLx7G0zn1t+YPS1zLChCfIcFr
-	 rPKNbVmbqlRJZ3R2LudDdMNypafyl0OW0ITsx/pc+1+OOHhP2mjkoXTT0fMAy2noQ1cox
-	 qHigeqt87yno1XiZ2fyqwcrI1Go9p9N5jI/saRjHLYtu8bR3vQrB3Ur8sqMBlC+cHNjSd
-	 mZsxiTOtowsaVEoAzpqw+362wFNveKUTsrF3iiVlpPsGgy+r2wlMSxG6ILUfSsv6p28ft
-	 j8jF6NTjvcihuA7NWhmOw33kY5frQEbFPJTeTXuN9hlmfCMm2Esejy8ENYwHBx5OEew==
+	bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
+	b=p+dC/75rnAhjA+k+mADipKD5BhMJ8npi2oTEXUz+V5sNWzDZrfsQQ5V60P/b7oyzzSmG
+	 8zPGvyA2ShTc4Wj2V49bMjmyEPG30Nx611bWX88/oDK/8c3j6Q6AloMjlVrg/acmRMYOU
+	 vWDJVIMtmSOHIx4S3wxA9e5yol3tyL3AttuVx8Z/lIDnzzbYaGZtfuYhxyb0OI5aWTS+o
+	 e5mzEHZMp09LpXbMaPeL2ghJVVpMftQHujIdrH8OWHquRX3sWi3MV7G1pMCAlFHDzE1bm
+	 ttct+XPwwG/5wLe/VylJ4OSqAVTMbp2Ehri5YSkjh39wExv/uSqtK0UogsRLIicTgxA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795703466;
-	bh=rTi4m/2d/OfzrGWpZyvWn08lu69GxA0EMZ0OojRCIvw=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ENfBRy2DL8MhHi/Wba7QkVAcW1HNYSLnbSLztvGpAcHiI0CiShQsYM9Ml5xRQIOHM
-	 iTZSdFqiivcN5WIQGDjGuabcYvP1fuxHyrCATRVC6/snGopCGKhKsC9WPzedcIrWbh
-	 eLH6kSJg6af3jlY2EFjxoPL7Euk2ZiC+/KyYzmA6/Hu5Fi2Fuk8/gAmRieF9CYuXyX
-	 IlU0LocSEexHryFysTsbGMv7yXpD9nNYiV6tKh2WUoij1JZwKztZckISBiUp4PBttO
-	 O5hCOewgiiIZKiuthtu9dMpS3PUYnAlsECEY6tcqEwNWe1MPG7J/bwEW+5H+XrbZvL
-	 RxKBK+FPyx73g==
+	d=lists.u-boot-project.org; s=default; t=1795703470;
+	bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Ws7LHtC4baZbZrAJenzJIPu94jgiIj719CvKsM3N4vvu4qe031MhlHJ164rQS2uEP
+	 RV7r7zNs8AOUe1S/BsWz+zS47ui374Sa9W0g3obC89qXxCgRSE3mynluL/ZaHadgcL
+	 iKubUY+M8jzp6UGWwXr4OUaDADH09QvpSONMcPHYyeCcOr8iQvUeGZ5EkB3kzcpi3e
+	 J9LrM53whtqOD4AyIzB5uDJ6QFq5SWR+5knt3plPblqbPDbifQJX73PWvyYGpB8975
+	 7q2PDl97g3qCYChpfl2PuH79A+QWQBKBDBvAwb6NZW4h3uH45Y9BN/0jyqm6a27xkX
+	 TaUgfY2gLmA9g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B668D60A7F;
-	Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0F59910B
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4B5F160A7F;
+	Thu, 26 Nov 2026 14:31:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A63B0325
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E988F404A4
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 97BEE4087A
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ct-THNBGFv5W for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 14:31:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 439C340111
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3fkPDiJA9vBn for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 14:31:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5E8694085C
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
  helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
  header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=BsPChA2L; dkim=pass (2048-bit key,
+ header.b=TBntRHKe; dkim=pass (2048-bit key,
  unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=V07wJuk9
+ header.a=rsa-sha256 header.s=google header.b=NdvMaElg
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 439C340111
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:02 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5E8694085C
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:03 +0000 (UTC)
 Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AQBVnl2633215
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:01 GMT
+ 6AQBVnb9633206
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=rTi4m/2d/OfzrGWpZyvWn0
- 8lu69GxA0EMZ0OojRCIvw=; b=BsPChA2LqSxLvP50PgSLCz2qWmUOp9bQIB65hE
- P0JCb3FRdTGklns56m3qUekcuBZ7Oft95SciWus3S9IjE63/LMpH9fAudKluKMh5
- hWz17i1opuHvTrLEAhIrCp0ClamJmdQ94P8elN/D0ZBGqtM+wJTYnuYEi8ReF/dF
- PpnsIDnezyw1lXn1S3G4zGCSoycXW6FUZE9lu8GnS+rcW3V2/08XCUl2LCNhVld1
- QsfQLh+WJb4vtgccryIY0jOLwwZZitm34qU+yGxkoQzyUp/EQzONmne3NwukXR2S
- /ckmN91B2xYOimoRptiTRa5lZo0RpwOzxiyGtZkHxGF5vfdw==
-Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com
- [209.85.221.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6gne1dxx-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=; b=TBntRHKeHkPoEIJQ
+ zqp5FyLnCHF7iVVAntuqeFKj1phcUVkA+sY3ndulFJZHVbDkgudkpM8xJ1F9adT7
+ y5/KnhhAPBR6VQ91XuzpEMbzDIlYAfmDsRjbPlMtbVDERqOm/XaBE8u/iTIr/LqH
+ LXGkLqkfJ5JvSf7LKUWzTFg3+ui22ntlcGO0VsuTXWwrV6UBA8yaOq/3TnYbyUtm
+ jqdvvVo5KHPsax6eqML3R1D2sYJdQGW3S9rOVf7uf2CYZe/0feOmRgW0KPhlC9Up
+ KgnnF8AGVDPdZV2DghHzyV5BwqNGhcb2gMZr5DWM0v5L7AQC7x1YKGyh72AXJ0gE
+ hTSHeg==
+Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com
+ [209.85.222.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6gne1dy0-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:01 +0000 (GMT)
-Received: by mail-vk1-f199.google.com with SMTP id
- 71dfb90a1353d-5eab0467c89so7414965e0c.2
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:31:01 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:02 +0000 (GMT)
+Received: by mail-ua1-f69.google.com with SMTP id
+ a1e0cc1a2514c-990aa76e3daso1307970241.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:31:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795703460; x=1796308260;
+ d=oss.qualcomm.com; s=google; t=1795703462; x=1796308262;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=rTi4m/2d/OfzrGWpZyvWn08lu69GxA0EMZ0OojRCIvw=;
- b=V07wJuk91WngI9X3sH2kzEYX58vZL9TRBm9DIs+ueRy/4YUrJmxnJT2ev22t40UfoU
- kpHPqMeeEel/+G+JTAu/WBpSdTc92BszAHeyZWSVMgBJw8H8lhHLGYUP1uft0VmvdH3F
- 2mwEM/aNMmHkiyyZskiWobiSc1ZAvFzFr5ymI1rXSMOCyCXoxwbmbdUTf61z1EGxDf7p
- C3Fu7EzXOiQtq+pObCzRYDqGVGaVBPj+8GpqMX4uGkOHFBzZOgtCleaE9fd09Uh0QjLH
- NI0HULgVKNy4FP2lT/hBAzLxf7/rLO6c2FVsrik2EOB790pa0nNHdJjwBkqOByuPWLl8
- pyEw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
+ b=NdvMaElgw2pvR54EL4aQu7j5X0xIQpuy7kshHGYtSV2v2zmRE1ttxtgPIb60v+ImDP
+ 2WdshzZ/KSsqNEeZFJi6syVDOq9r58oK8BPCrAPKUYwtWXb1yPngrYP+oyDHRMnNCUBY
+ 9uudgQkTkZFr8ApM291w+Yd9WhTXOm5K2gv+COewOFQEXnFLUrHJPARCiNOigxXj5aK6
+ V1FS9ljrkHH6j1udFYuCbZV8470wbWaFwn2Hawr36RiWSr9gHHMuQA6V1bHDG5h6/ZEg
+ g2NafG5h/o/tRew/7m2hA5/vAatNOqrOTrdxycAVnWnZTEBKRkUn+j8LJ9SESgQF4pJ2
+ dl7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795703460; x=1796308260;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=rTi4m/2d/OfzrGWpZyvWn08lu69GxA0EMZ0OojRCIvw=;
- b=dCPMXrgfv1IQPOLndXa/v7wpb4yaUn9Vh7cwXVercjAxfuM29i0GD+iLo8nm8zJRbB
- TNrZUej7AzO+q6KmZSpESTWGROL2/hh9UPnLUFPpHiJsz3nqNEmeva5a6GQpLrVZeJE8
- kr6IkCKaBxvbNuweRz2FlQ0u60MhvTnCOSufk8iimtDIcRswh4PDsITWP5ggKMgl04J6
- dwFclKnHlEXJxqs6djTOivqZ95OdSs6lrkaRkDo7xYFtR5VvQzojpSdXuamFWkHfh1Ch
- WgqVPO9Azu7rq5qXmBIRA9Rhq8sAOJST+9N2yTRe5Wc3XqAylsrSMKKYiM+Soq1WrgS7
- wUgA==
+ d=1e100.net; s=20260707; t=1795703462; x=1796308262;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=OKjdvMlG32QyAuJQ+k9HwyzQajL0gNhJJ90mX8y1Hqc=;
+ b=oGbTKjoL7wzGcRa4Zvg+rCIOr6cmbTVnmFoaERS1xwLV4RoLMYtnt+85/NVej4WKiC
+ 8DrR+P4oaPnUBrOs4YyHstEuvphrwmZCDa2/z0+jULXaJrpPO0WGNz5/W/fxb4JwzCgr
+ Z6DqCgiMSjuI6dq4hykltPrfHEztG3VQl5XP7cehHXNZL5wm373/xzXFg/Chh1raAJ6c
+ CkYA1nOQXT2E99C/P7f/NO81MDmV2dq7EjKAhbyxQn7WSz5nBC30XwciQREh8CoubNZC
+ tcMN/24brCYGIlVD2KTgfGHbJr4rdLIEGbnxzFSgL5v79g/3h5WZMD9Ob/nToQoLZXPI
+ 9EvA==
 X-Forwarded-Encrypted: i=1;
- AL+hErGQGb/SSu3Xed54va0PRIPSF9x6nkC5K9khCu4T1otq9lX9UaOmFBfeN5CWrLgDPh1Tv6Zm/UY=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+/KiUESTqp9Ljc4qklUUf4iuZJEvOpJacVOL7eM7VQEYIe3rjP
- LE68lq4Z/qyoc4hb/6vKn/nQKK60oKR7xkMWzauUjUxrhSHEQ7psh5qZt1GR5jHc1J1WPeaNddU
- o+88x6HqEEPBEs4/yla52lKbiuOUtR6k3rSIGf2lk7mOa6/g25wv/qMOsXv/MOanG5cpGKKg=
-X-Gm-Gg: AZFdTZdfykJGJH67i4XIJ4Gc+t2rwAz5CsNpXdXTo2A4B/SNl15CKWemAAK8YrvHNpj
- 60EKryUf718XkyGGIBS4y+zkkSwlHeMB5fgh5W0vFItKEedtQJBNsfstcT97/p/NJww2di0e6/a
- M9+nTBMhHYK9Tj8gmactXBcWmeAGWemf1qWy9CmLoXB3Bvxz5a6BrUztVQ+A3g9kGCQybpsAxn6
- 99QmFj8vh8yI7swsDk74QWmAokKaNSljCh0AoHk4ShXUZBEN4GM7g5kNDg+pFZ+x/i3MWgSNqWT
- cIF2ZPgjCLtgJciPuOVaHTizzx46Hdt7lbDEh22CiLXx9tugu1P7xTXBjUGRZLxxShueYrQHlql
- P0KOkHOuP0jef6dg15wm9fAWHQTAd2xWu3ZfUWG6Py2gYVK9ovi5+ehiESPp+ZjaV7OzLb0oIjy
- zljYWDu22+slia
-X-Received: by 2002:a05:6122:209f:b0:5c7:fbb5:6ea0 with SMTP id
- 71dfb90a1353d-5ee8af0c762mr12895956e0c.4.1795703460236; 
- Thu, 26 Nov 2026 06:31:00 -0800 (PST)
-X-Received: by 2002:a05:6122:209f:b0:5c7:fbb5:6ea0 with SMTP id
- 71dfb90a1353d-5ee8af0c762mr12895891e0c.4.1795703459629; 
- Thu, 26 Nov 2026 06:30:59 -0800 (PST)
+ AL+hErHNpACgcKZ9WyVpq1P3EW2yJzcX36KIHrjxSG8/iHWqBRJVWzLsSX3quq8xvpK7tIioiQyyi8k=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9eIfJJaoC/DumRbN7XK6RsJCFHr+lO4oZUhZKrP+u7pklqqjec
+ QVOwYNET/NkPA5P5OXbqoyH/NYrPSFO8cPyQmk2OS7aIrKI1aY0ruZ4qdHgyUd+v+kM2kWW1AJX
+ uIMiU1LQ5g/m25lXnUobWktadD/jW5TZz42qbX6UwTuXB07HYNtUe0VppLv1B/1B4pZtywRs=
+X-Gm-Gg: AZFdTZepAesf8o7F2o3LoXLswYfkuIU9BqMPN/pBJWaOXsw0dvi9Q2lcc2XrdtdXGOw
+ eu5uNs4h1IyyJxB7UjvVvQyE+x9DnVyf/Wh4T4mTgsXJbP2gHBxuitCarb9KtxwU1hxPIEAJm2t
+ eS2nWuDVQioJyYtJFjwU7BQ7oTHIY4Jg7qcNn0uajBkOFNDTcMAiyxmfmcHeGOp648ouwJWPhwp
+ 0+JWuSXMWk5TRfBJuU8BfVrKdV16CyetDYAXSoDcTeSXMTJLmydhtEZshh5TTiMRC/MFC80FHDk
+ jjoQ+wk5TDsd9T3xBSxap58W8btL0JjrW91D8+EXXMMu/Hu4Oy9ByGonc6fIHvPT5UZFIEvQhce
+ 2HMESy8M3Iy2iKMrS6PE+2uJCUzm8Yoj8jxUTsgzLONKBnxq79n3/rZc/K7vYfaMxfyiMTPiasC
+ MbU3zWlCaSQJ2P
+X-Received: by 2002:a67:e713:0:b0:7cc:1192:563c with SMTP id
+ ada2fe7eead31-7d7395edf5emr11030653137.25.1795703462074; 
+ Thu, 26 Nov 2026 06:31:02 -0800 (PST)
+X-Received: by 2002:a67:e713:0:b0:7cc:1192:563c with SMTP id
+ ada2fe7eead31-7d7395edf5emr11030615137.25.1795703461504; 
+ Thu, 26 Nov 2026 06:31:01 -0800 (PST)
 Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c513b03723bsm753575366b.87.2026.11.26.06.30.58
+ a640c23a62f3a-c513b03723bsm753575366b.87.2026.11.26.06.30.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Nov 2026 06:30:58 -0800 (PST)
+ Thu, 26 Nov 2026 06:31:00 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Subject: [PATCH v3 0/2] mmc: msm_sdhci: drop the 1 ms delay after every command
-Date: Thu, 26 Nov 2026 15:30:56 +0100
-Message-Id: <20261126-msm-sdhci-wait-send-cmd-v3-0-cf38d2d321b8@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 15:30:57 +0100
+Subject: [PATCH v3 1/2] mmc: sdhci: delay the status clear after a response
+ without CRC
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4XNwQ6CMAwG4FcxO1vCNjbQk+9hPADrZIljSnFqC
- O/u4OJF46XJ3/z9OjHCwSGx/WZiA0ZHLvQpyO2GtV3dnxGcSZmJXGieyxw8eSDTtQ4etRuBsDf
- QegOFrKQV5S4VBUvX1wGte67y8ZRy52gMw2t9FPmy/W9GDhw0Wl1WpuGqUodAlN3u9aUN3mdps
- IWO4sNxIX9zAnJQBpXERhbW6i/cPM9v1Vf3NxQBAAA=
-X-Change-ID: 20261030-msm-sdhci-wait-send-cmd-4383f2792022
+Message-Id: <20261126-msm-sdhci-wait-send-cmd-v3-1-cf38d2d321b8@oss.qualcomm.com>
+References: <20261126-msm-sdhci-wait-send-cmd-v3-0-cf38d2d321b8@oss.qualcomm.com>
+In-Reply-To: <20261126-msm-sdhci-wait-send-cmd-v3-0-cf38d2d321b8@oss.qualcomm.com>
 To: Sumit Garg <sumit.garg@kernel.org>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot-qcom@groups.io,
@@ -186,25 +187,25 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Authority-Analysis: v=2.4 cv=XpVvqlF9 c=1 sm=1 tr=0 ts=6b0842a5 cx=c_pps
- a=+D9SDfe9YZWTjADjLiQY5g==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
+X-Authority-Analysis: v=2.4 cv=XpVvqlF9 c=1 sm=1 tr=0 ts=6b0842a6 cx=c_pps
+ a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=wzO0mAoEWfedGYpSfHEA:9 a=QEXdDO2ut3YA:10
- a=vmgOmaN-Xu0dpDh8OwbV:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX38EQw3oi1QY1
- hDJbnIzatslq4Lg3RU0LVj9MORwzZSNWEuVdtPkBEqlyXRmMADkbbg2bdTvBLtfPdSmGiL/riWL
- hmCw2Kd07yV/SzXZFaLFdpNSkAYIQcNB9BtAr7TFKn0nek/2zUB6Wn2Sv80RqSPIz+Lj9izJ09o
- Radl4Ok0QV0i6+PSTLNqImlF4fF2EblEijMPDlAaKBjoGqOW46c74SdgmVEIheP/8g6JF4Gtj82
- 3jRgB38LuPs8l2lZ61YcYDEcok3Dn9lpoBcaVDd0ZlKfOjcKZoPHiXnRAtbzoCYvK/puMImIs3y
- Der+v4xXQWaHr3JNLz3C4xt6tKmH7u6fxE6C6z/Pn7HeK5VtduvLRM9d8gvp5QF5vu32dNEo9Cg
- Nb1zLHkietTi3K60yJZphnmDAr7NqvNMMU0M8Bz0+x5F5tWZcsPLNnPB+D/byL+hyN+Y7KQFb3x
- e73I2ZmJeuAB0YYajGQ==
-X-Proofpoint-GUID: oJJv1NYh9aQZy6hbVuFtbT9ihdRUNbT9
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX2Jm9/nr3ZG5B
- /kfso+Iltm3YoFEqTinkvNRV2Ohh9sAgOkqsyvBDxIxUNFlDWMY7nD7pEmRTmD+XWjxoc8z92Ka
- jOA0deWDU1PSFAWtxAK2oe+dVgcpRto=
-X-Proofpoint-ORIG-GUID: oJJv1NYh9aQZy6hbVuFtbT9ihdRUNbT9
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=2diJqn6QHJFZazVFkGMA:9 a=QEXdDO2ut3YA:10
+ a=TOPH6uDL9cOC6tEoww4z:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX82w+B2UfTxl2
+ fd5T0l1ixBjEH54/fqBtdHyB2Adoob15ojlFrZJCLJgLMEaP/7P5D5Q6k3W3fxOneFNPP32NGRO
+ TSw9dSZIfagz3XpBb9LmMETObkBP7rPAPBAYpdkZUsbZk5vSz8YA4UCQKr1IS/fyX43+7nhjbud
+ F1YW49b9pVLBuphfJNng81kGJZsrXHccSRu1czrk13FC7LtCN/73VXXT2GFoD0pYwsOEds+AxTM
+ 5xOrmM4KspG6Yv+Dcd4DIIqcNofIlZnrB2f/7i8sE5UI5gd00/y+hrNMgOZwwTEIwPo0FIsd0Rl
+ PVzozsc1s2PmREkcFq5djN7GTwxYMpiCGH7b0RXjGHIFENNnLIVMnZ3RY8KzlGaYw2nQ628tgSR
+ BQPJc+PKL7eVUaQyvEklO7VVQHsh9sAObS33Z2uJXFfO87r3Clxnj0IbdyatCAV0l5oc6S8+xbA
+ ogHwv0TYwu3UxQoymeA==
+X-Proofpoint-GUID: LFk63MezpTkv81KZrX15a6BaDl4PFCS9
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX8deuKcmvvEKF
+ n9trW4FlbzxgDIqIJ9zOJaMUNQQa75J4QB6TEr+J3Fq+8roMFTKwfSOF+Gxrca/FFJPtXsvwlJy
+ N1jSWps0GK6iU8R2TY1m7xOcmpRoprw=
+X-Proofpoint-ORIG-GUID: LFk63MezpTkv81KZrX15a6BaDl4PFCS9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_03,2026-11-26_01,2025-10-01_01
@@ -222,120 +223,78 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-msm_sdhci sets SDHCI_QUIRK_WAIT_SEND_CMD, a 1 ms sleep after most
-commands. It costs 2 ms per multi-block read and caps USB mass storage
-on an Arduino UNO Q at 46 MB/s instead of 201 MB/s.
+The issue was observer on Qualcomm SDHCI controllers, where the
+first CRC-checked command after an R3 response (CMD1, ACMD41)
+fails at once with a command CRC error:
 
-v1 only dropped the quirk. Stephan Gerhold found that this breaks SD
-card detection on DB410c, DB820c and RB3 Gen 2: the CMD55 after the
-first ACMD41 fails with a response CRC error.
+- SD: the CMD55 after the first ACMD41 fails, the card is not detected;
+- eMMC: the CMD2 after the last CMD1 fails and only passes on the
+  MMC_QUIRK_RETRY_SEND_CID retry.
 
-Root cause:
+The R3 response leaves a latent CRC error in the controller. It does
+not show in the interrupt status and does not go away with time. It is
+removed only by a status clear issued a few SD clock cycles after the
+command has completed, and the clear in sdhci_send_command() comes
+earlier than that.
 
-The same failure exists on eMMC, where MMC_QUIRK_RETRY_SEND_CID hides
-it: the CMD2 after the last CMD1 fails on its first status read with
-INT_STATUS 0x00028000. Both cases are a CRC-checked command that
-follows an R3 response.
+msm_sdhci hides the problem with SDHCI_QUIRK_WAIT_SEND_CMD, which
+delays that clear by 1 ms for every command.
 
-After an R3 response the controller keeps a latent command CRC error:
+Wait 16 SD clock periods before the final status clear of a command
+whose response carries no CRC. Only CMD1 and ACMD41 are affected.
 
-- it is not visible: INT_STATUS reads 0 before the next command;
-- it does not expire: the next command fails even 10 ms later;
-- it is removed by a status clear issued a few SD clock cycles after
-  the R3 command has completed. The clear sdhci_send_command() does at
-  completion is too early.
+Tested on the Arduino UNO Q (QRB2210, eMMC, identification clock
+188 kHz), with a status trace in sdhci_send_command() and without
+SDHCI_QUIRK_WAIT_SEND_CMD. First CMD2 of "mmc rescan":
 
-The quirk worked because it delayed that clear by 1 ms.
-
-Testing results:
-
-Arduino UNO Q (QRB2210, qcom,sdhci-msm-v5, eMMC, ADMA). A status trace
-was added to sdhci_send_command(); the identification clock is
-188 kHz, 5.3 us per cycle. Each line is the first CMD2 of "mmc rescan"
-with the quirk dropped:
-
-  Without patch 1                                    CMD2 result
+  Without this patch                                 CMD2 result
     as is                                            fails   6/6
     50 us .. 10 ms wait before the CMD2              fails   3/3 each
     final clear of the CMD1 delayed by 1 .. 8 us     fails   6/6 each
     final clear of the CMD1 delayed by 12 .. 32 us   passes  6/6 each
 
-  With patch 1 (85 us at this clock)
+  With this patch (85 us at this clock)
     as is                                            passes  30/30
     1 ms wait before the CMD2                        passes  10/10
     10 ms wait before the CMD2                       passes  10/10
 
-The 1 ms case has the gap of the SD ACMD41 loop. With patch 1 the CMD2
-is sent once per initialisation, without the retry.
-
-Both patches, no trace:
-
-  eMMC mode                          HS400 (200 MHz)
-  1 GiB "mmc read"                   302 MiB/s
-  CRC32 of the first 128 MiB         same in U-Boot and Linux
-  Linux boot from the eMMC           ok
-
-v3, each patch by itself, same trace; "CMD1" is the duration of one
-CMD1 in sdhci_send_command():
-
-                                     first CMD2      CMD1
-  quirk dropped, no patch 1          fails  10/10     587 us
-  patch 1, quirk still set           passes 20/20    1586 us
-  patches 1 and 2                    passes 20/20     674 us
-
-A host that keeps the quirk waits its 1 ms once, not 1 ms plus the new
-delay. Both patches without the trace: HS400, 1 GiB read at 302 MiB/s,
-Linux boots from the eMMC.
-
-Stephan Gerhold tested v2 on DB410c with eMMC and SD.
-
-Not tested:
-
-- SD cards and other boards by me: the UNO Q has no slot.
-- Other SDHCI hosts: patch 1 is in the common sdhci.c.
-
+Reported-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+Tested-by: Stephan Gerhold <stephan.gerhold@linaro.org> # DB410c eMMC/SD
+Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
-Changes in v3:
-- Patch 1: the new delay is an "else if" of the
-  SDHCI_QUIRK_WAIT_SEND_CMD check, so a host with the quirk does not
-  wait twice (Stephan).
-- Patch 1 stays unconditional rather than behind a quirk: it applies
-  only to responses without CRC (CMD1, ACMD41) and lasts 16 SD clock
-  periods. Say if a quirk is preferred.
-- Collected Tested-by from Stephan.
-- Link to v2: https://lore.kernel.org/r/20261123-msm-sdhci-wait-send-cmd-v2-0-5de53eb34ff6@oss.qualcomm.com
+ drivers/mmc/sdhci.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-Changes in v2:
-- New patch 1: delay the status clear after a response without CRC
-  (SD detection failure reported by Stephan).
-- Patch 2: commit message reworded ("after most commands", Tanmay) and
-  shortened. The code is unchanged.
-- The Reviewed-by tags from Aswin and Tanmay are not carried over: the
-  patch now depends on a new sdhci.c change that they have not seen.
-- Rebased on snapdragon/qcom-next.
-- Cc the maintainers of the boards that use the driver.
-- Link to v1: https://lore.kernel.org/r/20261030-msm-sdhci-wait-send-cmd-v1-1-6ef678db1585@oss.qualcomm.com
+diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+index 97de02c262c..76acbca405b 100644
+--- a/drivers/mmc/sdhci.c
++++ b/drivers/mmc/sdhci.c
+@@ -343,8 +343,17 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
+ 	if (!ret && data)
+ 		ret = sdhci_transfer_data(host, data);
+ 
++	/*
++	 * A response without CRC (R3) can leave a latent CRC error in the
++	 * controller (seen on Qualcomm SDHCI) that fails the next CRC-checked
++	 * command. Clearing the status a few SD clock periods after the
++	 * command removes it; SDHCI_QUIRK_WAIT_SEND_CMD already waits longer.
++	 */
+ 	if (host->quirks & SDHCI_QUIRK_WAIT_SEND_CMD)
+ 		udelay(1000);
++	else if (!ret && (cmd->resp_type & MMC_RSP_PRESENT) &&
++		 !(cmd->resp_type & MMC_RSP_CRC) && mmc->clock)
++		udelay(DIV_ROUND_UP(16 * 1000000U, mmc->clock));
+ 
+ 	stat = sdhci_readl(host, SDHCI_INT_STATUS);
+ 	sdhci_writel(host, SDHCI_INT_ALL_MASK, SDHCI_INT_STATUS);
 
----
-Igor Opaniuk (2):
-      mmc: sdhci: delay the status clear after a response without CRC
-      mmc: msm_sdhci: drop SDHCI_QUIRK_WAIT_SEND_CMD
-
- drivers/mmc/msm_sdhci.c | 2 +-
- drivers/mmc/sdhci.c     | 9 +++++++++
- 2 files changed, 10 insertions(+), 1 deletion(-)
----
-base-commit: 36d2b7b46c77b44021f0a6f36684a123e5560492
-change-id: 20261030-msm-sdhci-wait-send-cmd-4383f2792022
-
-Best regards,
 -- 
-Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+2.53.0
 
