@@ -2,191 +2,136 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A91E606A321
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 02:13:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C545606A321
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 02:53:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KRWXLUch;
-	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tVi7OOHe
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BCYvMMKu;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RGktH2DO
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B146040643;
-	Thu, 26 Nov 2026 02:13:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 25C58405BF;
+	Thu, 26 Nov 2026 02:53:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hGs9FOdwKydm; Thu, 26 Nov 2026 02:13:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 065854052C
+ id fa1qX4pDGYIu; Thu, 26 Nov 2026 02:53:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 51DA7405CF
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795659238;
-	b=pZZWDYl4xzYToVwlELkdmBgBpqydCHL8oYDnD4Z36MvVENiH2VZlmBVosckzEIpPggYN
-	 doQWQf3sIbZtizCHXyjUPcoF67xBnHWxt7/nM5kNchR9yjL1ktciZPrrUA17fqcGuiPVM
-	 bIGu5rxErtKsfGqa0gD9a+RPiexKyk3ythBHBL3fKfOrwQQF42h1OjsM6fy8Newdj7pFG
-	 rpJ+juooWq8iFCYmy+L9FniTdn5SAXqO3hVZTveFk60iQIsh1702r+Kj84QZ4IH0O3x+i
-	 XM968k/sDtZoDtUhlaGbTGHWFGVPKsh2xwEnIrQZ8pru+bceEyMO7L+gFIEk4Q5rEbQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795661625;
+	b=YOWlqlbe3jiI1zTlf1QRLIVxnk6uoETYyVYM9SoKuiWurl7C+r16yZ5ebPAgtD2ZZ2W3
+	 Ll4tbEkDyiPGbpAVV/Gc4gNhxzDBsOQPjBHEs/75hLHa6Ye9gGpgtW1hjzIISzobY3erL
+	 0x8HxNdABXLicvzIq+W+I8li8FgZMvZVtplZoegr2fz0M7sdaR1kmwOEZ8OLVHdBitwRa
+	 bsE5iA6nXGI34ej8zfOOIIo1fd8GHH5ABNIbqZ3EO8rAKT54b1tm4zDAPbsQ66AMPhRpN
+	 sPUUvC2YBVVorMSKHhUT59O3L8bJ8d4vTP7IIWkn9wz4Y34PXLPuCAc07ZcmR+fADdg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795659238;
+	c=relaxed/relaxed; t=1795661625;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:Content-Transfer-Encoding:
-	 Content-Type:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=sDFgoZjmagiN4P323zOSpMhB2iy4M8CsmqtWA563jjw=;
-	b=FyrzRSaPUnA8UlEMKYiXVINpVhkzJbaffv2ifHbUGby5BMqqmMIOyb8ArHvZwWv8EtSl
-	 XMpz2/k01qs/RlgWycMvnfbvnFUb2H8i95HFXdgdigrgj+0rmtYPFDXPCgmQUItxLKr6H
-	 v3rkhiXNH6PWAXU7GEg+GdJklkuRaCoj7thjrCGqEMiY9T4SCnHGvOY4uiR5dePHTLZgT
-	 aHTmsrTJR4X01efT7YgTPLFBQ6oQVAL/fFawehIiCHyEgwzTrV72WqU284yaxlu7MVcXy
-	 9LbYwHfRItA/aPlYMy+UI34SVLrrR276EvenzF/8pJl1CQ24NvlkwQ+iCE39dEk3SyQ==
+	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
+	bh=ObVT+MYh8bc16ikcW11T6hYQmRAMUhuPZWVzYbs2lFc=;
+	b=gknKF0mbLFEBd5f/UJQrYHjaMfNNPiVPIBs9+qny3G+/YqjlUfj9iDAVoNGkqs7gDh+J
+	 v2RWtDswmlln/xeEBypKeug7ryUcJa3o4VpxGA+XQX7j7rB47RAa70SIu8vdNc88PucQ4
+	 7he3UKo21OMVT/tKPbpOUVZX//TRTnYmSBtryl+BProK88nvcAKbLeZPRHWn1dh8qVn05
+	 feicTkj/+GZdKx6YtWSocVytbI8mpc4AZCwGd+gq8iu7B2kKHGF4Iet1ZhvQ0hEd/SpBi
+	 jVNyLxS0xEGB++4XEqcFum6GJJ3AaBxLWM/Qh11Iau18LlaME98czR2BQe/y098GKUw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795659238;
-	bh=sDFgoZjmagiN4P323zOSpMhB2iy4M8CsmqtWA563jjw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KRWXLUch2OD1QHJWOcnRvkbY22V/AqjVzsRSduRVYBZy4DdmeESdM8Z/ZmVzaBnwJ
-	 2ISe/nPCYbYexW0I6sZ0drpCf59ubGGE2fgWQ4vC1sOHSWNlBuMNClELyff4l9celd
-	 ikGpSP4ksKj9+a/hKNlT4uG4s94+LQb65UnpuS6TAl0NqyHcUpo9fbH5GyWHeEV5LD
-	 IfYTezUfqGTNDuN0BzxTVScbghrwDXQUszq/6is7alpRYVTyEQ1wqSxKmgwE6os5fL
-	 9FVt3Lti+kpITjyYTZWZczGzsSCDjMGTydLp55tXeRUTfMxVqtM2+3C5H+gEoWUlSk
-	 62Yw8Vy0x4VwA==
+	d=lists.u-boot-project.org; s=default; t=1795661625;
+	bh=ObVT+MYh8bc16ikcW11T6hYQmRAMUhuPZWVzYbs2lFc=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=BCYvMMKup/V05rm4n8ZuZvzO+K9Ji5M4PSS9RivtE+mQXN7RSmsdJl/5NEMgXaMaP
+	 vww/wdvXEB7a/poRKluV/FmCQ6Cu7sCTOqFG1YlNVbBI26u5HD2FlDzrbo01P3X6l6
+	 XY15wxmZajJxgQqz4W63hV9PfMQn/dBDGv+XfqSYPVrK2Domw4Uh0pSPTVeQAdSPqH
+	 1maVZEb4evUjrUdxgTzZqJ3pnukSruC/f8iPNIM5r1UtB+DTRUzZOzkAMkA1BWiQli
+	 LJIWbESHjIbBgu00HLHpPMNC/NSLooZzOsXBB2bkAzvieRamuxtet9LNCwxrTtUbCd
+	 N1ACa+kNi6xIg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 065854052C;
-	Thu, 26 Nov 2026 02:13:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 51DA7405CF;
+	Thu, 26 Nov 2026 02:53:45 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 477EE260
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:13:57 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 24AAA26D
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:53:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2D085605DB
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:13:57 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 223F260725
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:53:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UFYKJe6nzJbg for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 02:13:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CF2C7606D9
+ id 73ZL3ZIJCJpx for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 02:53:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2978B606DA
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c202::7"
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c202::7;
- helo=gvxpr05cu001.outbound.protection.outlook.com;
- envelope-from=peng.fan@oss.nxp.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=fail (p=none dis=none) header.from=oss.nxp.com
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=devnull+iav.iav.lv@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tVi7OOHe
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CF2C7606D9
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:13:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sDFgoZjmagiN4P323zOSpMhB2iy4M8CsmqtWA563jjw=;
- b=tVi7OOHeXfKEuUpPYpcaAinbwbgXldeyZzVbXmrnra/lY1qU44OMgPAWaQ2UYasqSrt5X6tqn3+OR/g9LjtsY69FbZDbzatrCg4qu0otazFLrZ4Zq28pJEEvAR8pYX3AIH/Gjiq0c/wCvhGJ2G5g2k8IObzYXgGowjBF/qPJaf/9ch2vnjVaj1Se0v0QHeU6ibtmYLZBF3pRE+Viqaw1KW9VWg5+aKwWApfpyO47mfEzCCNQAPomijhQ5f4Gz1lj7EGCR2zPuCJfQcbUm2RIqcWB40MHGlACV15bMxCl7WY5clnzI4YgyEhi/7uIHShM005Dpo+nzwNg0VX7IvXROw==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by AMBPR04MB12312.eurprd04.prod.outlook.com (2603:10a6:20b:723::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Thu, 26 Nov
- 2026 02:13:50 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%5]) with mapi id 15.21.0639.012; Thu, 26 Nov 2026
- 02:13:50 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: Josef Schlehofer <pepe.schlehofer@gmail.com>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, u-boot@lists.u-boot-project.org,
- Tom Rini <trini@konsulko.com>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- Bradley Morgan <bradley.morgan@linux.dev>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Subject: Re: [PATCH 3/6] mmc: Use div_u64() in mmc_berase()
-Date: Thu, 26 Nov 2026 10:10:51 +0800
-Message-ID: <20261126021051.40183-1-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20261125124259.95636-4-pepe.schlehofer@gmail.com>
-References: 
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI3PR02CA0010.apcprd02.prod.outlook.com
- (2603:1096:4:295::19) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=RGktH2DO
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2978B606DA
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 02:53:42 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id B4AFC42E48;
+ Thu, 26 Nov 2026 02:53:41 +0000 (UTC)
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.kernel.org (Postfix) with ESMTPS id 041C51F000C6;
+ Thu, 26 Nov 2026 02:53:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1795661621;
+ bh=ObVT+MYh8bc16ikcW11T6hYQmRAMUhuPZWVzYbs2lFc=;
+ h=From:Date:Subject:To:Cc:Reply-To;
+ b=RGktH2DOGFxq6WgVSpXRnerNFfQff65OnQBEjKgenn5//JliLSfRXT8weddh9Mh1V
+ 0NwFvA7Hk35AyM+WjCYfB/MeeaUJFJUbGccMHtUjo3kxpvuaa6sBw2r6GlrDYnR2Hc
+ onb1yxzgfziSGyYfpge3dSNpYVE4EKrSR5CLCVea5NypolrXRuqfHxUJ+mnPjyVZQX
+ XPX1JTCpRVqPHja4gKQmG8HUTjTPeDGF32kWITUKtKJ0Jsm4xJwGxx2xj6SSqwnz/e
+ PwFehL+zxeULITRi54vP187VULa0OfWka2ieAAV3L/muZ4HXtcr+FlpPzXXRHfNKUe
+ jZBTOK0Em+O6A==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+ by lkml.kernel.org (Postfix) with ESMTP id 8DE4F4D1A8;
+ Thu, 26 Nov 2026 02:53:37 +0000 (UTC)
+From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
+Date: Thu, 26 Nov 2026 04:53:36 +0200
+Subject: [PATCH] configs: odroid-n2: enable the SPI NOR flash
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|AMBPR04MB12312:EE_
-X-MS-Office365-Filtering-Correlation-Id: 13ff4cf7-4da9-4be3-417f-08df4b62e962
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|23010399003|1800799024|376014|261026140227099003|261022105027099003|10067099003|261026121527099003|261028144727099003|22082099003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: M4xnm7QXn/ZptQpjCDB0hZ+jdxa7LazjcbNPqpZJig1hnF/QZALd+k+RRW6YWdOXVtFJwcrHIX9MncW1rt/opIkzZQmZtxC4sOkL1WsDIcoZ8kymV2W3HOMvf8l0ebO6qhiSzwpJ9Vr9rvidCqU74wCypye7ikM64vesxpgPU+VJfq7DzVk/QG4VQSyxqSrlAaneWuGS0g4fqcqAf713C8Id2AjsiR4d5Q4teai+UEAnB5mNvbuLQtNPjI7VEzXVXCJiiL1O1QlG+td2clC0u96KcgjCWRcdEW0rFcEUtKhHZyGyWTFd5fNnehCr9xXRdKa9DWA3dnlBUHZIcldzC1yWG8pn8jN3I4boZ01iHfmLdbqqHREH0H4cZSldaOQVP+/VSW7YOkCZ9cMTzfeXfvPeJVE23XBYlsHA9JJGT1gtFj6Pi1dhW0anEc2pJ/+Ju/CtpyWp6qT5zuQszxXc3ixLCwS0AcdhgtwF7ZKP2/8ioHi7IpNOrZuxLfV0ftqbx34DTJzr8mBJAIHkMo9clp4e9ZE/uSNAMJtHQ4LIsBOHGUfjK4T8zHQaCqtmFz2RQLY4rOv7XcDqMm4huOtISqV5BmKCJmBX4L7ePSoHckfSXAi9qELRAwxFoiylH8+sQ6Jv8hYEUIYeM5CT+1SeiAZFA4J8P9PHHJ80O8OQEeg=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(23010399003)(1800799024)(376014)(261026140227099003)(261022105027099003)(10067099003)(261026121527099003)(261028144727099003)(22082099003)(18002099003)(56012099006)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?439THnu+c79P52hDdV+6+qq+WiIfQ4UcdUQKr80Uq9zsjFdKhqY8gI1Uqqhj?=
- =?us-ascii?Q?qGwWSrmwEUVS8oM1V7S1b5X0wC2476Bvxp7Xg8FoIE4sx5RnSmVA1HGNeLas?=
- =?us-ascii?Q?QdeTvGo3jZiNOopsQE7D6LkYKQdhFrPSc9VfbvhaAb24BR8hg1aM3K2Kl3u+?=
- =?us-ascii?Q?GMGWyJwhDUtjCV0BydRInZIThxwYTTWBqaYW4XEq4mPTrwl6Nhzw33EKG71G?=
- =?us-ascii?Q?cv87WbNiemJm4V1P1N/mTAF/UNwi1pg5DjMGOw33VHybw8B3mXnZOUD6gBKq?=
- =?us-ascii?Q?bwI/TOkAOEDvsd8tsJKgf8uUvtlYFvVsfxy6MDXopjcTgYldAxs8lr4C3D6i?=
- =?us-ascii?Q?il5hAYRQolrPOgxR1i27jwqWs6fZ4hzF+uqzF15P6w9ynb79lEiOqJ/I7D2m?=
- =?us-ascii?Q?jxBjgZ9ilEZ7LmAQE0YaI7JSC9cyfzuOpa8FMo2+T3bIQthOM/j7guIcFGz/?=
- =?us-ascii?Q?UEa1k85EURe9EJsEbiQbsALa5vjoinHDz0Z904RJ1Wpwt9EWYs8fQ/VMwdiy?=
- =?us-ascii?Q?xnc6/d5o1Prn3idkEzzTMDfIufeEILgUfGT+K9gKLDsmMBt4dlggu2CvbYq+?=
- =?us-ascii?Q?UGqB80nSlas7Dkv/RAzDqbqaMds6GGvdgLRk8/0uaqfZ4Bc4byZ8DT8wxU+H?=
- =?us-ascii?Q?9YQB/jBRVRZbKD6V6wxT7kBLiZB0oDoClp+CmJ7AWiVlNhpnmCRFKV9vIIMz?=
- =?us-ascii?Q?lk4+SYmkRA4GUF9E6vazT9rt8xugQoJ3QRpTRAPec84JqNOlikFAiNZHDDit?=
- =?us-ascii?Q?5QHBC9rwT95Y2pklcQKjLaVDWL03pBEIuGbPzPfjhmaMpl7Avikgp8sMFfob?=
- =?us-ascii?Q?UITRlx8hrOsva9cogqiST9zb7fDxDheHZfIn8mlVXa/yV196errERLT31w8z?=
- =?us-ascii?Q?cWmZKXFs9SjN8sDuRB3wMR8i+5kAVADibQT564oLzH3A7pRxzWLei+UNCEiw?=
- =?us-ascii?Q?DO3TeYnCBBhD+BW0nSCcbcCZvFvEBlQ1DulgrqeD2HsQbucvXIYgf/VvD+z1?=
- =?us-ascii?Q?O5Oekhsin2uO55SNR7rsxuv+T4O1hwUVDD776mQCJPM0l6y0rghBho/2ZJSD?=
- =?us-ascii?Q?WcVCxNgaCekth21r2DpgwddyVLcMEfIPpZSWyXcE7irX8+Xo024FiLIXQzDw?=
- =?us-ascii?Q?w6q+menKXcl2CsZdR0lvxV20Wm/JRe4irMkT+hnThIUJMEL9JBi207AGELNN?=
- =?us-ascii?Q?STQHnWqRjwG7WWMEyzEcYhG2Ptu9OfgVjfzNAZr0Crmlsb9oXfsQFbddMTBe?=
- =?us-ascii?Q?iIm+p55YShPx6HboQ1HSO/WPgV8NQ4wnCIFo2FVB4lihYptSizgj+1GzgAkk?=
- =?us-ascii?Q?AQYTLXEJNodAatG1Fo3dkgN/A8Pbp4T7+qQFmLUKeN0dapxoGdTVLNH63v0D?=
- =?us-ascii?Q?2ltHIf1LAAvvBqQXKNFhblDy5mXb/jvSttI5hkLWcviZT++TL4Lx/EpnnN1y?=
- =?us-ascii?Q?5mb+X3WYDHnyQMSu4HtCkfnfqZOaD1N9CeXEPIW+Yk1G0NDFrpunLJeVY1q8?=
- =?us-ascii?Q?mAiZFvKPM9IsIlVE6/i4kptPGNbuXrPXYaXfrVyhfknx6HSEk304kBtBOHi3?=
- =?us-ascii?Q?c6cYOJiZ8f9YCTDlJH17Z5z3WQbKSoTx8iQ07awiRgkddogbVaGWWgZaJnVx?=
- =?us-ascii?Q?feNLKfkHFh5oc7Yh2MLWQ78EJ+yrJTuxLZkOVvKngVDuvYb7qZzgtSIikSVi?=
- =?us-ascii?Q?eKuorXurr920eFatV4d2y/9bB1cUF4mYZP0CoZPVxQmRHN1e/hRNolKinb/m?=
- =?us-ascii?Q?6GVB9KMVWUxFtIvXblcsERTkCekvJm+8wOPhcq2EZj+1GviQJWQp?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 13ff4cf7-4da9-4be3-417f-08df4b62e962
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 02:13:50.6181 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zoGTHxULRBpavSKEuOvOhL2//lmwChSGDad4ellnKghGkiWyk/oVbF7SNOyqHEeqp0ZUk1eMfSguXRcegCzG7m04NCUBfGzqEfQgZ7TKzFeRPBMymHo4HBcsVqvRPDEn
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR04MB12312
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261126-b4-n2-spi-nor-v1-1-4fd806d0fa00@iav.lv>
+X-B4-Tracking: v=1; b=H4sIAC+fB2sC/x3MPQqAMAxA4atIZgNtsf5dRRy0ppqlSgIiFO9uc
+ fyG9zIoCZPCWGUQuln5TAW2riAcS9oJeSsGZ1xrrWtxbTA51IsxnYLRDKsP3tLW9VCaSyjy8/+
+ m+X0/Ts29e18AAAA=
+To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ u-boot@lists.u-boot-project.org, Igor Velkov <iav@iav.lv>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4536; i=iav@iav.lv;
+ h=from:subject:message-id;
+ bh=VYaPFTtVFfxBx3u0j2uhGXyauX6iBflpyXSxLToNX+E=;
+ b=owGbwMvMwCVmNH1q96v4SmbG02pJDNns8w34ti3u1mlxNw29/ukN2+/+M0ZSczgnm/o5fazrs
+ fm5yoa/o5SFQYyLQVZMkWXCIY1bGUuu/vX3MH8AM4eVCWQIAxenAEyk8yUjw4871sLGN5V/uCUv
+ m3vAVzNTe3GpboLAv6oqWY4TPMy3ORgZTknXXdnl+bug7frN6edrk/elP/ixgnHWx3nx/v7tm/4
+ +ZwEA
+X-Developer-Key: i=iav@iav.lv; a=openpgp;
+ fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
+X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
+X-Original-From: Igor Velkov <iav@iav.lv>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -196,22 +141,137 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,T_SPF_PERMERROR,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+Reply-To: iav@iav.lv
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, 25 Nov 2026 13:42:56 +0100 Josef Schlehofer <pepe.schlehofer@gmail.com> wrote:
+From: Igor Velkov <iav@iav.lv>
 
-> With CONFIG_SYS_64BIT_LBA, GCC turns the lbaint_t division in
-> mmc_berase() into a call to __udivdi3() on 32-bit PowerPC, which
-> U-Boot's private libgcc does not provide.
-> 
-> Use div_u64(), as the remainders above already use div_u64_rem().
-> 
-> Suggested-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
-> Signed-off-by: Josef Schlehofer <pepe.schlehofer@gmail.com>
+The SPI NOR of the ODROID-N2/N2+ shares the SoC pins BOOT_3..BOOT_7
+with the eMMC data lines D3..D7, so the device tree has spifc disabled
+and the defconfig has no SPI support. Enable both, and describe how to
+write the flash in the board documentation.
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Normal boot does not touch the flash: there is no SF boot target or
+bootdev, and the environment is not in SPI. The first probe of the SPI
+controller ("sf probe") muxes BOOT_4..BOOT_6 and the chip select
+(BOOT_14) to the flash, while the eMMC stays set up for eight lines, so
+the eMMC must not be accessed after that until reset. On an N2+, an
+eMMC access after "sf probe" also made the boot ROM fail to read the
+SPI NOR after the reset.
+
+The 4-bit eMMC setup used on the VIM3 does not help: pin 7 of the
+flash (RESET# on the MX25U6435F) is on eMMC D3, and on an N2+ eMMC reads
+in 4-bit mode broke writes to the flash under Linux.
+
+An OS booted through EFI without its own device tree gets this one,
+where spifc and the 8-bit eMMC claim the same pins.
+
+Tested on an ODROID-N2+ (MX25U6435F; spi-max-frequency 104 MHz, about
+83 MHz after the controller divider): the eMMC comes up with the same
+bus width with and without this patch; sf update of 1 MiB reads back
+equal; the board boots from the SPI NOR after reset. Boards with an XTX
+flash were not tested.
+
+Signed-off-by: Igor Velkov <iav@iav.lv>
+---
+ arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi |  9 +++++++++
+ configs/odroid-n2_defconfig                   |  9 +++++++++
+ doc/board/amlogic/odroid-n2.rst               | 21 +++++++++++++++++++++
+ 3 files changed, 39 insertions(+)
+
+diff --git a/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi b/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi
+index a92f9e9ff13..1dfb521e65f 100644
+--- a/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi
++++ b/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi
+@@ -11,3 +11,12 @@
+ 	status = "okay";
+ 	vref-supply = <&vddao_1v8>;
+ };
++
++/*
++ * The SPI NOR shares BOOT_3..BOOT_7 with eMMC D3..D7. Probing spifc
++ * ("sf probe") muxes BOOT_4..BOOT_6 to it; do not access the eMMC after
++ * that until reset.
++ */
++&spifc {
++	status = "okay";
++};
+diff --git a/configs/odroid-n2_defconfig b/configs/odroid-n2_defconfig
+index 73a1a08afde..1f237d928ba 100644
+--- a/configs/odroid-n2_defconfig
++++ b/configs/odroid-n2_defconfig
+@@ -30,6 +30,7 @@ CONFIG_CMD_DFU=y
+ CONFIG_CMD_GPIO=y
+ # CONFIG_CMD_LOADS is not set
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ # CONFIG_CMD_SETEXPR is not set
+@@ -40,6 +41,11 @@ CONFIG_ADC=y
+ CONFIG_SARADC_MESON=y
+ CONFIG_DFU_RAM=y
+ CONFIG_MMC_MESON_GX=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_XTX=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+@@ -55,6 +61,9 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_MESON_SPIFC=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+diff --git a/doc/board/amlogic/odroid-n2.rst b/doc/board/amlogic/odroid-n2.rst
+index 5222a21c808..194edde081b 100644
+--- a/doc/board/amlogic/odroid-n2.rst
++++ b/doc/board/amlogic/odroid-n2.rst
+@@ -130,3 +130,24 @@ Then write U-Boot to SD or eMMC with:
+     $ DEV=/dev/boot_device
+     $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
+     $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
++
++Writing U-Boot to the SPI NOR
++-----------------------------
++
++The SPI NOR shares the SoC pins BOOT_3..BOOT_7 with the eMMC data lines
++D3..D7. The boot ROM reads it when the boot switch is set to SPI at power-on.
++
++U-Boot uses the eMMC with all eight data lines. The first probe of the SPI
++controller, for instance by "sf probe", muxes BOOT_4..BOOT_6 to the flash,
++and the eMMC must not be accessed after that until reset. Load the image
++first, from the eMMC or any other device, then write it:
++
++.. code-block:: none
++
++    => load mmc 1:1 ${loadaddr} u-boot.bin
++    => sf probe
++    => sf update ${loadaddr} 0 ${filesize}
++    => reset
++
++Here u-boot.bin is the signed image from the steps above (fip/u-boot.bin, or
++u-boot.bin in the build-fip.sh output directory), not u-boot.bin.sd.bin.
+
+---
+base-commit: 9d67454e920b3908529c9fc642a8c911db040896
+change-id: 20261126-b4-n2-spi-nor-f09b5c51ed78
+
+Best regards,
+-- 
+Igor Velkov <iav@iav.lv>
+
+
