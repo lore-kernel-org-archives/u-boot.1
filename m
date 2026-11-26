@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0752D606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 12:24:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D489C606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 12:24:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VWoeiuiw;
-	dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=k55WFc55
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=k8DqjwnF;
+	dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=o2dVEJyN
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 49A9E409E9;
-	Thu, 26 Nov 2026 12:24:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AB3C260A66;
+	Thu, 26 Nov 2026 12:24:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OmC7SMvzhBEF; Thu, 26 Nov 2026 12:24:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2929C409D1
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795695890;
-	b=H8vIc2VEajzgL4uaWZI/fLARqMi4qvvKvhH9SSGgBWQBFJ577mjc9+X8Hi53AiOuEtcz
-	 rRz/JRuCXerXOwCA9yzQ1UXVtVJiFcVnwdhYB0TQCSkvBr5uQqru/SishNHF0DJM13Tw5
-	 oFR9zLhBVmCtlyma7ZKC70/PPqbPdNjc8OHoKSLWXxt8Ee0KLmZMMI6seVVedLlC+t6tt
-	 u9jJMoaYLGuRdRMou6OHH2gJ6VFEkpvugVuNj0bpNaGP3G2Lqa6/jBGQcaEnqvFFebf08
-	 FJR55LUX0ttTBocxzXdgctIu3/x24/H+1Kn2CdTd+/IJVRzxK5KX1lPELp5BemQkCBg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kbH1gBSKZtow; Thu, 26 Nov 2026 12:24:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7A79A60A57
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795695893;
+	b=CPGUhowILwYHQ+19xGCWUapUOKgr9iRb3gUEl/sV5x69avOyr+p7APBRY5QxpMH4xTDQ
+	 ZzlRomy/Pqpcq1/UCL7ME6TWjdiJWtNbmrrnQkH5HAkg6zX21vJau2AapCXS42rmJ5HSO
+	 QRHXjNXh9wt5IXpNdlocX3amrAR+nL0njLaeFiDWgD284lsuma00ig7artzX0A3HI7+fF
+	 PxTSpeqtkukZLK+9HN96QUDYmTXypjp4HKYblJVmpuIhtjSZHIXKrEkZWetlEwa54zCPi
+	 26SeJEI+MdOqapaiWs1ZYD2I2GGDaZkmwaQn+eR9QmMEkyi3k+REhhqzhBWLao9u2yw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795695890;
+	c=relaxed/relaxed; t=1795695893;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,73 +32,73 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Virus-Scanned:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=7pZ5ai9d6Xth/UwYD9ZAIQplsfnhau/G8mCs4TqRiFU=;
-	b=Y010tIAOxBLo0SyjtMFJ4tUZr8hHhKEwNDhmqbgtJVdqeNlV8Z95I71841m8UBw8sYaC
-	 1fNX/I5O/loAmxuBy91th+Ht7OYU5apg13Qilj+qGvIDvw6YsoGrFRSYrjij4NV5QIKgk
-	 C9+PM7U3cRv1o0Am7WuRjIWtp1uv8mHmihzHaloYNwSCVAEpr1wx+jGx8ZITnpSIEj3CQ
-	 Olvqm1oFLR4pEHAvpQ8QfF8vDXEu2htCXLN/+nvTbr6Z5DuB6rk4kgzYbSJaGTCg0/1wJ
-	 54D7kBWlwhVWEp7T/t5QonO7xnvJVKP1NXNtydU6BxhjWxKKUC7LENd1qrus8rvnPoQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=dG9e+q99oUpu7eRRDEi5vZR3LCYs/EXYQ//8JDjSR14=;
+	b=TNq14av0Po8BbJrPzc4Ng9+++G9Wl8htW1h4ERzzUDKz5Ep9xsk9GJdCikIXkIt+uBOk
+	 wxfMFZoTpXtR+GHxZDNJs7KvFzPRBFiplWGoyseGGe0+jwFFl9Y4S3729fgUcWvCpHIX7
+	 bqF64ONGvomFeWdda1iz+JStYMItDolUahuuPP0gILLIQw6j42+RJX9Gy8R1uJs5lkk7O
+	 oqiyNOotGtxScarc+OXg0755xLNJ0pjg9NbpQOoJaiZ3AS0oG6VECww8Osz6D2Atcg18f
+	 X0EUjwZtjEvd13vTx4Og69wSlAKxDJLoXIJ5jy+fjQNjA4XA493h84Eob0CJeluggtw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795695890;
-	bh=7pZ5ai9d6Xth/UwYD9ZAIQplsfnhau/G8mCs4TqRiFU=;
+	d=lists.u-boot-project.org; s=default; t=1795695893;
+	bh=dG9e+q99oUpu7eRRDEi5vZR3LCYs/EXYQ//8JDjSR14=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VWoeiuiwFq92+ySLfc+SqfEkbtN8/FLwrMSmTQ+r5UYZlAeGK/8b25afSjOMup7lg
-	 T8kq6KxumjpbDXQ/Lr+fHk268T8vb2bSnJyesI4XFtpNw0l0xV3b+uTFJ3gvy6qmop
-	 f1j+lEN3joAcGVBRQN9W6NBkfUU5pROwCtvz0wfF5vvVpKqItdr6t7zyoMqNAB5O+k
-	 fyxBShRaV6eygQLtFFMlBB2RkEg17aIYdtgwfKwXQaA4YaiG9z53eXi0yVZsNBlcq4
-	 lPSYze7iBI3xVtvu2vJrlMbEJn2nIDRw4bx1aBlHEA4LmK9Am9U4FR+HB9dEGNXOqR
-	 WIwPeSrTlHSdQ==
+	b=k8DqjwnFwanIL3M748K8ogmJK7/stne1HKJUN9yiWP4FaLKkH39erLvDzbRatcqjw
+	 LPN9DteZNGHXTseRh7duFZ/iFUjPK7uubAhhdPHjQ2bRfzfe8V9FITwW1nbL8zKBcV
+	 ZUZRXIKBf+rMxZmlnH5sSkcmAcdPBOaxK9+lt0qLCc5DM0jdQaIvY+RV7b2/Ac8VJh
+	 xFhIT65JFxVNE0vqmegxSmnAWL2WTQ6/enEvH4tRNKdennEpJuiwrauqICwDRBdzCf
+	 2exihqu169YADvfdq6/MHtvijyZ7ejq6FU2STyup29aesj604t3ao4rtIqYNyH9tfh
+	 a0taepZ55SdjQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2929C409D1;
-	Thu, 26 Nov 2026 12:24:50 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id AFC3B1AB
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7A79A60A57;
+	Thu, 26 Nov 2026 12:24:53 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E45331AB
  for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:24:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A2024608CD
+ by smtp4.osuosl.org (Postfix) with ESMTP id D5F054087D
  for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:24:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CZx7Z1nljhH8 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0gqoYX6Tds21 for <u-boot@lists.u-boot-project.org>;
  Thu, 26 Nov 2026 12:24:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7F63A608EF
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9160040547
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
  helo=www537.your-server.de; envelope-from=nora.schiffer@ew.tq-group.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=k55WFc55
+ header.a=rsa-sha256 header.s=default2602 header.b=o2dVEJyN
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7F63A608EF
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9160040547
  for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 12:24:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=7pZ5ai9d6Xth/UwYD9ZAIQplsfnhau/G8mCs4TqRiFU=; b=k55WFc55LLfPxoX2hyTP4aW8U4
- DCb91YLEC063m+gfvztKUZuSqqEJQcMmiU3vGnIf9DoksxbimZ1egwYqYHXMv5fwgcf0HXqHWUvCk
- 3kYJTcschVa1avamV+c9TNiYoKYg5pHI+GbMHipNwSXwXsFMZhTJGEQjuI6AyHYhY9NYBmqn5o4DA
- aDi/QDW9/Vhxf1sbAFtRvrS+gEaHfvN/1dqKObS9dp6XfLGhs998G071VQsCmof3sk4Ui24cBex15
- GOlDoa2NKMOjf237OCXyYvCgVEzE0sed6Cg3sQ63sC6sEn0WGjrtwtIlc+SwpJA8921FbRcvHeoCL
- 5CncUh2Q==;
+ bh=dG9e+q99oUpu7eRRDEi5vZR3LCYs/EXYQ//8JDjSR14=; b=o2dVEJyNptJQoxwKsKPOI/YHzL
+ wzvCbgA4/VV5qkitqh+U3Vo4/4HMfRzxern/nnj/Q4cRcs4QocTtScGd7iR86ozdZfV/0lA7TSURc
+ VvrlGwAXXFQXA5LM/4LrMiSsk/vUqNqvagguRj7bM7cryM9BtJKLYNgP1u7csnKgGCIDdjmP5nx6Q
+ 5lOyyAapoGPCzvfHx8tfaJkHs0eMOw9bRTbdUXw5p5uEeiT/zmuTgWW7Mizkl5gUwFKLNtZjfXj6T
+ ZIMgliwlMdjUJjdYxDAx1f/xfk9Htd1c2RI/BXOYECneR038l3lwnY8lt+9h/SmXMlQcvYNYC4j65
+ f/PciF0g==;
 Received: from sslproxy08.your-server.de ([78.47.166.52])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xWYWg-000ICc-12; Thu, 26 Nov 2026 13:24:34 +0100
+ id 1xWYWg-000ICw-1y; Thu, 26 Nov 2026 13:24:34 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xWYWf-0003gJ-0k; Thu, 26 Nov 2026 13:24:33 +0100
+ id 1xWYWf-0003gJ-1c; Thu, 26 Nov 2026 13:24:34 +0100
 From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Marek Vasut <marex@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
@@ -106,10 +106,9 @@ To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
  u-boot@lists.u-boot-project.org,
  Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Subject: [PATCH v3 6/7] power: domain: imx8m: add support for power-supply
- regulator
-Date: Thu, 26 Nov 2026 13:23:58 +0100
-Message-ID: <c1f130e537b2e0a99c70b563c37d5284ee0b0ef1.1795694935.git.nora.schiffer@ew.tq-group.com>
+Subject: [PATCH v3 7/7] power: domain: imx8m: add support for i.MX7D
+Date: Thu, 26 Nov 2026 13:23:59 +0100
+Message-ID: <3415df204f287b0ad440d5becab9f4345a4a79e7.1795694935.git.nora.schiffer@ew.tq-group.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <cover.1795694935.git.nora.schiffer@ew.tq-group.com>
 References: <cover.1795694935.git.nora.schiffer@ew.tq-group.com>
@@ -134,114 +133,145 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On the i.MX7D, the integrated anatop regulator needs to be configured and
-enabled with the power domains.
+Import the power domain definitions for the i.MX7D from the Linux kernel.
 
 Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 ---
- drivers/power/domain/imx8m-power-domain.c | 36 ++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
+ drivers/power/domain/Kconfig              |  6 +--
+ drivers/power/domain/imx8m-power-domain.c | 60 ++++++++++++++++++++++-
+ 2 files changed, 62 insertions(+), 4 deletions(-)
 
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index 8809887b1c4..2ca2bb07dfa 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -41,10 +41,10 @@ config IMX8_POWER_DOMAIN
+ 	  requests to the SCU.
+ 
+ config IMX8M_POWER_DOMAIN
+-	bool "Enable i.MX8M power domain driver"
+-	depends on POWER_DOMAIN && ARCH_IMX8M
++	bool "Enable i.MX7D/i.MX8M power domain driver"
++	depends on POWER_DOMAIN && (MX7D || ARCH_IMX8M)
+ 	help
+-	  Enable support for manipulating NXP i.MX8M on-SoC power domains.
++	  Enable support for manipulating NXP i.MX7D/i.MX8M on-SoC power domains.
+ 
+ config IMX8MP_HSIOMIX_BLKCTRL
+ 	bool "Enable i.MX8MP HSIOMIX domain driver"
 diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
-index fdca4d9d9ff..aef7f4cbb35 100644
+index aef7f4cbb35..df70621c50f 100644
 --- a/drivers/power/domain/imx8m-power-domain.c
 +++ b/drivers/power/domain/imx8m-power-domain.c
-@@ -14,6 +14,7 @@
- #include <dm/device_compat.h>
- #include <imx_sip.h>
- #include <linux/bitmap.h>
-+#include <power/regulator.h>
+@@ -17,6 +17,7 @@
+ #include <power/regulator.h>
  #include <wait_bit.h>
  
++#include <dt-bindings/power/imx7-power.h>
  #include <dt-bindings/power/imx8mm-power.h>
-@@ -128,6 +129,7 @@ struct imx_pgc_domain {
- 		u32 hskack;
- 	} bits;
+ #include <dt-bindings/power/imx8mn-power.h>
+ #include <dt-bindings/power/imx8mp-power.h>
+@@ -25,6 +26,12 @@
+ #define GPC_PGC_CPU_MAPPING			0x0ec
+ #define IMX8MP_GPC_PGC_CPU_MAPPING		0x1cc
  
-+	const int voltage;
- 	const bool keep_clocks;
++#define IMX7_USB_HSIC_PHY_A_CORE_DOMAIN		BIT(6)
++#define IMX7_USB_OTG2_PHY_A_CORE_DOMAIN		BIT(5)
++#define IMX7_USB_OTG1_PHY_A_CORE_DOMAIN		BIT(4)
++#define IMX7_PCIE_PHY_A_CORE_DOMAIN		BIT(3)
++#define IMX7_MIPI_PHY_A_CORE_DOMAIN		BIT(2)
++
+ #define IMX8M_PCIE2_A53_DOMAIN			BIT(15)
+ #define IMX8M_OTG2_A53_DOMAIN			BIT(5)
+ #define IMX8M_OTG1_A53_DOMAIN			BIT(4)
+@@ -49,6 +56,12 @@
+ #define GPC_PU_PGC_SW_PUP_REQ			0x0f8
+ #define GPC_PU_PGC_SW_PDN_REQ			0x104
+ 
++#define IMX7_USB_HSIC_PHY_SW_Pxx_REQ		BIT(4)
++#define IMX7_USB_OTG2_PHY_SW_Pxx_REQ		BIT(3)
++#define IMX7_USB_OTG1_PHY_SW_Pxx_REQ		BIT(2)
++#define IMX7_PCIE_PHY_SW_Pxx_REQ		BIT(1)
++#define IMX7_MIPI_PHY_SW_Pxx_REQ		BIT(0)
++
+ #define IMX8M_PCIE2_SW_Pxx_REQ			BIT(13)
+ #define IMX8M_OTG2_SW_Pxx_REQ			BIT(3)
+ #define IMX8M_OTG1_SW_Pxx_REQ			BIT(2)
+@@ -90,6 +103,10 @@
+  * GPC_PGC memory map are incorrect, below offset
+  * values are from design RTL.
+  */
++#define IMX7_PGC_MIPI			16
++#define IMX7_PGC_PCIE			17
++#define IMX7_PGC_USB_HSIC		20
++
+ #define IMX8M_PGC_PCIE1			17
+ #define IMX8M_PGC_OTG1			18
+ #define IMX8M_PGC_OTG2			19
+@@ -150,7 +167,8 @@ struct imx8m_power_domain_plat {
+ 	int has_pd;
  };
  
-@@ -141,6 +143,7 @@ struct imx8m_power_domain_plat {
- 	struct power_domain pd;
- 	const struct imx_pgc_domain *domain;
- 	const struct imx_pgc_regs *regs;
-+	struct udevice *regulator;
- 	struct clk_bulk clk;
- 	void __iomem *base;
- 	int resource_id;
-@@ -343,11 +346,19 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
- 	u32 pgc;
- 	int ret;
+-#if defined(CONFIG_IMX8MM) || defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MQ)
++#if defined(CONFIG_MX7D) || defined(CONFIG_IMX8MM) || \
++	defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MQ)
+ static const struct imx_pgc_regs imx7_pgc_regs = {
+ 	.map = GPC_PGC_CPU_MAPPING,
+ 	.pup = GPC_PU_PGC_SW_PUP_REQ,
+@@ -159,6 +177,43 @@ static const struct imx_pgc_regs imx7_pgc_regs = {
+ };
+ #endif
  
-+	if (pdata->regulator) {
-+		ret = regulator_enable(pdata->regulator);
-+		if (ret) {
-+			dev_err(dev, "failed to enable regulator: %d\n", ret);
-+			return ret;
-+		}
-+	}
++#ifdef CONFIG_MX7D
++static const struct imx_pgc_domain imx7_pgc_domains[] = {
++	[IMX7_POWER_DOMAIN_MIPI_PHY] = {
++		.bits  = {
++			.pxx = IMX7_MIPI_PHY_SW_Pxx_REQ,
++			.map = IMX7_MIPI_PHY_A_CORE_DOMAIN,
++		},
++		.voltage   = 1000000,
++		.pgc	   = BIT(IMX7_PGC_MIPI),
++	},
 +
- 	if (pdata->clk.count) {
- 		ret = clk_enable_bulk(&pdata->clk);
- 		if (ret) {
- 			dev_err(dev, "failed to enable reset clocks\n");
--			return ret;
-+			goto out_regulator_disable;
- 		}
- 	}
- 
-@@ -392,6 +403,9 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
- out_clk_disable:
- 	if (pdata->clk.count)
- 		clk_disable_bulk(&pdata->clk);
-+out_regulator_disable:
-+	if (pdata->regulator)
-+		regulator_disable(pdata->regulator);
- 	return ret;
++	[IMX7_POWER_DOMAIN_PCIE_PHY] = {
++		.bits  = {
++			.pxx = IMX7_PCIE_PHY_SW_Pxx_REQ,
++			.map = IMX7_PCIE_PHY_A_CORE_DOMAIN,
++		},
++		.voltage   = 1000000,
++		.pgc	   = BIT(IMX7_PGC_PCIE),
++	},
++
++	[IMX7_POWER_DOMAIN_USB_HSIC_PHY] = {
++		.bits  = {
++			.pxx = IMX7_USB_HSIC_PHY_SW_Pxx_REQ,
++			.map = IMX7_USB_HSIC_PHY_A_CORE_DOMAIN,
++		},
++		.voltage   = 1200000,
++		.pgc	   = BIT(IMX7_PGC_USB_HSIC),
++	},
++};
++
++static const struct imx_pgc_domain_data imx7_pgc_domain_data = {
++	.domains = imx7_pgc_domains,
++	.domains_num = ARRAY_SIZE(imx7_pgc_domains),
++	.pgc_regs = &imx7_pgc_regs,
++};
++#endif
++
+ #ifdef CONFIG_IMX8MQ
+ static const struct imx_pgc_domain imx8m_pgc_domains[] = {
+ 	[IMX8M_POWER_DOMAIN_PCIE1] = {
+@@ -580,6 +635,9 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
  }
  
-@@ -450,6 +464,14 @@ static int imx8m_power_domain_off(struct power_domain *power_domain)
- 	if (pdata->clk.count)
- 		clk_disable_bulk(&pdata->clk);
- 
-+	if (pdata->regulator) {
-+		ret = regulator_disable(pdata->regulator);
-+		if (ret) {
-+			dev_err(dev, "failed to disable regulator: %d\n", ret);
-+			return ret;
-+		}
-+	}
-+
- 	if (pdata->has_pd)
- 		power_domain_off(&pdata->pd);
- 
-@@ -458,6 +480,8 @@ static int imx8m_power_domain_off(struct power_domain *power_domain)
- out_clk_disable:
- 	if (!domain->keep_clocks && pdata->clk.count)
- 		clk_disable_bulk(&pdata->clk);
-+	if (pdata->regulator)
-+		regulator_disable(pdata->regulator);
- 
- 	return ret;
- }
-@@ -515,6 +539,16 @@ static int imx8m_power_domain_probe(struct udevice *dev)
- 	if (!strstr(dev->name, "power-domain"))
- 		return 0;
- 
-+	ret = device_get_supply_regulator(dev, "power-supply", &pdata->regulator);
-+	if (ret) {
-+		if (ret != -ENOENT && ret != -ENOSYS) {
-+			dev_err(dev, "Failed to get domain's regulator (%d)\n", ret);
-+			return ret;
-+		}
-+	} else if (pdata->domain->voltage) {
-+		regulator_set_value(pdata->regulator, pdata->domain->voltage);
-+	}
-+
- 	/* Grab optional power domain clock. */
- 	ret = clk_get_bulk(dev, &pdata->clk);
- 	if (ret && ret != -ENOENT && ret != -ENOSYS) {
+ static const struct udevice_id imx8m_power_domain_ids[] = {
++#ifdef CONFIG_MX7D
++	{ .compatible = "fsl,imx7d-gpc", .data = (long)&imx7_pgc_domain_data },
++#endif
+ #ifdef CONFIG_IMX8MQ
+ 	{ .compatible = "fsl,imx8mq-gpc", .data = (long)&imx8m_pgc_domain_data },
+ #endif
 -- 
 TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
 Amtsgericht München, HRB 105018
