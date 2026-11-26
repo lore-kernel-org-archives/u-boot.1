@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED4C1606A338
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87354606A335
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZuNcp7I9;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JfdChct+
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Hr1PTkqc;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=AdMYFkSj
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CCCEE60AAD;
-	Thu, 26 Nov 2026 13:33:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6414B811D7;
+	Thu, 26 Nov 2026 13:33:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id leejnKj9EXCn; Thu, 26 Nov 2026 13:33:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E023460A92
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700031;
-	b=Ofl9kDrjeLzLF1kynb/pzayx+D6udu8zfnbFDMav77r/RM5k0wPnwNZ3+Fi/tHVCt0mU
-	 qlgmEE67nx7GEf5QO7WSTEE2VZ6Bqc+6hJa39rJ3R7LK49cr/TmtgoR3kXh9UH9zuX7JV
-	 spgfKBTgbntvKbm3SdbPnovAqFGQwI3XDEhF3h46foo1fgAqGhFaWizNcQ5hgk4fJbkZW
-	 pYMOV375aNfIAsIOpGwVTsYNojza7OGj36qFIpZXkt03PSmyBhNc7jdY9vtjv0t1FiJ9/
-	 m+EUsw5NgLFO8ZTTLkzqeEen6JiJfIfmp1vSAAErlCSasQpMBPQX1fWntxRj2NTaQ0A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id b2d49DYoGJdq; Thu, 26 Nov 2026 13:33:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 827F0811C0
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700032;
+	b=gYK2meLpGbzpKtNULkbi97cmSmf7FoS3h3R1CDBBx0ToGOtFIyZXlIL4xGOhIYi1gUwd
+	 Al1PbOBbrxgDp3PJhdVDnZ5/qcvUva9qPuWxk2YSgez5aexex4SqZOCZFK0Izbs7FZVVd
+	 O+CrC14kKD7vCafxOkYez+21IWOX0tFJYoBsIbM8tH4nCvRlkjZKlF/ZASAeyGTCLp8F4
+	 PmfcMhoZb5WTZpVNHaNZrXo98Loy5wdIwg13xUfy65+a+/HlafGsm5tnlWbmnJFr6yc9L
+	 dlQanvfnlcKFa1cwCjyHHuxBcyjA5DKeYd5mfRLxKszfqUR3cm27dUo2h3dQ+pVbdow==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795700031;
+	c=relaxed/relaxed; t=1795700032;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,114 +33,115 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=fj14GqQPvA/K7BkK3W/9Vgbo9WhDP5tz+kMIhHRUXaQ=;
-	b=F9m47txqS7+Hwly1R6ktnWk2ITq0cceNAR3VPlSGkO3CFsH0RCkEhUY2S5mCPf+O4oBo
-	 M1JQUGsw0TjtmRHyVLbV9h4mnAxldMiWVw124TI4TmyfEBXmJRYfVYXlWoY1KM9i2F3xN
-	 EJvHQqZnDYtl8ZDTBct66br3vSA+lbvHVdVVq+lHL2kwAhXQofkxuyq60jQ7XvSOCOSZe
-	 +MfYQOStZlwXSRLMSuQuywHADy7Tu+RD0yeny2hle64gAig85bEmKlcNVASLcaneCD1BB
-	 jvvWH0uyjs1u/Ayl36yUqIfpUC1D2ivn1d6D+dXFvyhhJ1wevuRyuRqawpSEliU+Wfw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=W2N9ByAvgO45672TzpMKPdHEUTvgFTXCNpoZy1hrqog=;
+	b=H9yfcytPC07TEij1qaCFrc7xjI46m4VDmhmH7B2Celo+EULtJfiTRyXB2ux9yZsiBK3j
+	 Kxpg9H4aWoIhk9B3P7w7RRr7DFF9c6ER8AzvUKY/WANzmWjiuzu12qNBR6NcrawWL9zup
+	 FBJdVVVONEE26EAnW6N8N7dfvUPwptWJMPocCp31OlLoSLTHE0RPPVy/RPXhd2Wyap2Sc
+	 eeUp23yQ6eFxMlWl1Va8A8xikrNVaE5DUHq54byE9Tr9dgccgKKPrEf27w96F3crv4sHq
+	 kme93MZn4iBrOHFnWEkcqmzKMHQCISxYV9cFCITdU1G5gXOF93nEonQx9gMc06FGElA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795700031;
-	bh=fj14GqQPvA/K7BkK3W/9Vgbo9WhDP5tz+kMIhHRUXaQ=;
+	d=lists.u-boot-project.org; s=default; t=1795700032;
+	bh=W2N9ByAvgO45672TzpMKPdHEUTvgFTXCNpoZy1hrqog=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZuNcp7I958fejMHTg0eAMRDwLP3vcFSXPM7Seom+cdwsQui6Aq1k6gbBxC99KUPAa
-	 3mp1KG10197spomfXyAHzCSlgNTyRLzI1GpADWim7LtfX0TytBpR/FXxWBDvXR3K8X
-	 ohLJU7li78YBa3i5gUOQOFRxUK77VGdLthjXiQbRCGIJPvXLNQ1jv/yQxuHmxkdkrU
-	 RhQPwWvaXa1f29hFH6555I+9Jn8oH5pyCqqQdwjQROlGMfBquMokMhFRlo9OjFuHBT
-	 f54VZidhgzaRjG9YPBooyISECv8WO+YEzyLmlDfgXpL2dzUOtryJvbYouchJtwFALA
-	 sjN35+20X4esg==
+	b=Hr1PTkqcO/v9gFjeQlV20HcD8d/2IPxtfQKoW/ArBQSNDPUcx0YsiO/pOtwjbP0xE
+	 RKTIt6bm+v2ZT7EvGmA90LwJn1jrB00bVDVCwMPsxoeGSn/kjBaH/P26bRq0j0l8Iv
+	 wLusl1dRlFYtM5CIN57B+f4hq33XsyP9yZ+PAqlEBYZ2rU8dmfp9LNGNh7DKXyBfPh
+	 +EEuxgGv9C2vsn0lZE1vplXHqxUpLqwCVeQFW8UPKfHxTA3eP28jyygLiK+J1LHcZK
+	 dA/Y4zb1JJyzU21xFlhsz90zkNZ/cyBtbU+FastXWc0A8UmGOGYC9wns4GpcKVo0Ws
+	 raY8HrNvBxffQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E023460A92;
-	Thu, 26 Nov 2026 13:33:50 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0BD9E260
+	by smtp1.osuosl.org (Postfix) with ESMTP id 827F0811C0;
+	Thu, 26 Nov 2026 13:33:52 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A11681C9
  for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id F1FEE81005
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:46 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9389E40492
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w8mOwpzjVJG3 for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 06:53:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7382981004
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id utaA2QiZQT8c for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 06:53:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3B5BC40490
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::329"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ client-ip=2607:f8b0:4864:20::329; helo=mail-ot1-x329.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=JfdChct+
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7382981004
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:44 +0000 (UTC)
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-8631e07b756so3703063a34.3
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:44 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=AdMYFkSj
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3B5BC40490
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:46 +0000 (UTC)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-843cf077f10so8992437a34.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795676023; x=1796280823;
+ d=gmail.com; s=20260707; t=1795676025; x=1796280825;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=fj14GqQPvA/K7BkK3W/9Vgbo9WhDP5tz+kMIhHRUXaQ=;
- b=JfdChct+oZq671EL0Y8sy8ZEz3fpXXN+bRT/VzRawSlqy65/h50hQVumK4QejL33j8
- EoH3KGIBiFVgYeNakLauw6GEX6rbGR1wuDKztX4Dx5rs5JU4d37Zo8Thq80Mj8VUFt0q
- aXPRpGWdsGVKJ4Dazaj+YtBhptco1T15/crsuG4oz14jjq/Z+wNwsEyQyu0u6HqIQeV+
- Qw31EiVXrq2rfYJ4PxVK+YzZ4VlRekK0jmccLt4GNIK6hLe9EMQxHViNfH8RMoISjgwG
- gsN/SKVPDtrT/2TKdFJ0/TKaYekiq+9/NHaaMVuFp3dErk9ms63in2Z/kpUjD+KRPS0o
- m1PQ==
+ bh=W2N9ByAvgO45672TzpMKPdHEUTvgFTXCNpoZy1hrqog=;
+ b=AdMYFkSjnb19i/+hcFlVelvJQKJlDOxFS8HNQLqX3WuAYtGqeafG7VX8aR7pez2g1S
+ TtU30cTeLsbEOYBoqAveUiz/CqMpYjTkksnNZ1l+JNJzRUmdmchslVdAml5m02Gz0N/M
+ nEzGuGfMTjGWBqhYHq6F1MWBI0Xkn56UljUUDKfsqnwOWvtFaRwpz9/+1KKVUFJ2jjnG
+ 8RDWQR0g9k8cmdLFUkrspnB2Bqt/GWORXgpqO0c6ylBeqzB5iUcKHRu5YjgXg8YA82gE
+ zoT/cKJdshmts6tVRM2IY/VEV6ZNZwOuu19/v6UTvzqb82V+2D8q6LGCCwkhEmZh82dC
+ qPgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795676023; x=1796280823;
+ d=1e100.net; s=20260707; t=1795676025; x=1796280825;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fj14GqQPvA/K7BkK3W/9Vgbo9WhDP5tz+kMIhHRUXaQ=;
- b=fyz8el2BHg/Kmy983i7Bhugq6OQdigPPDUJGEkMsb4JDdZusjFUYfrYCONM+CCJAzt
- 6M9nSFHz/41wpFT3R+gz2uPCWNAIzyztm3JVtCsa1BBVYoniP5BJX/t1GTWbEeNeMm02
- /mM5MB49s10Kr5L9b3GvQKVOVx6SvbnzoWTztSo/c4knTBiG71t7HXOYB5JBYD3DYIPc
- XvqbNkXCO6fqs6MDB1Pws5bWIhPVsp1+WA+olo410zhP3y+/VAjkL5aHdvKvZOLxmAoY
- l7P5wSrzSZJvB0SV1f7klBQWdUua+NGxoap6zSsT3BShN5t0liuSHFHAXCO7Ll4L01uE
- Sk1g==
-X-Gm-Message-State: APuU4Z9dZCub6rwWwXSi/DRL8b9FsfAq8MR/KgQXrCDUNWwcFn9CeGBM
- v2PBOo8h8gWBUbi/gy8VJEKeNcze2xWxpCJjMNFLA8oY3RxSJla/i2QL
-X-Gm-Gg: AZFdTZfLEKJQI5QMoIfIWc2nE8pw3m9UOI56BUtlrtSPdkBqzizi/9IIAOelmwiTy1I
- xdPa/kJeuAqOnKu36MX2+nVSyCBHPhe4L/K5zedP83Eq6gUtpMFdYUcUUFYqHZxTM1XHeHdy9af
- 6jdKqEhWIsMI4fqu1dP1VA1vuD+lLJ+/6I2un5ne7vtaHCcDHDzC7qKeCW8tNum7Zh4Cv19cU5P
- rSCEuW/FlsawkAMjf58qD+GSUqLJ5njBY1Ahsu+LvC7JfIXgXQXAxd6Jj/jdz1ZHeNkxTDXHo5o
- MaaQzJeadHopJcjf2MQdEJl2MqJ9G+n/8eFF4MtcQKC+6RhZ/fM/Cd8eXaZeWjOcZ+ATPKOieRV
- Lj39D8/G7GXHpeOpKfNHu+JFopV/f/0jrk4spRpVIS8BdhLOpu+57r3vk9CremTjKgjEMmsVhyk
- pvFitPoR5kcN/w60INWYdfrvUli/fYwHVPJp7dLzw13cg3pj2/XnAID8/xoOT3hc4BYIRR0128x
- PPdynbkz3EWhcvRfer3IMfUbK3Tn8nTaN3gPe85kcEjCTIOm2sQ80gAUv2SSWLSexWCsdnE1Grf
- Ss6NWqDdsVHQKZSvn0k+tjcy9ax9ffITpqTTi0a+JIg0laC5UQfomrTUyu+jLHtdGAhg1VYn3I0
- xyqWrFy5EXyB6g5Xq/L7JUgRyp9C1zIYc/++v7nAoYZ9fKC5xZ6DAowlIRZj2i47wurW5PoMsfF
- QkdSWslOAit3TQB2xdocGcc+hTpoz5a+bz50W0s9F3bKBfthqI6co=
-X-Received: by 2002:a05:6830:4103:b0:862:7ba1:9b35 with SMTP id
- 46e09a7af769-8631597709bmr24800622a34.11.1795676023317; 
- Wed, 25 Nov 2026 22:53:43 -0800 (PST)
+ bh=W2N9ByAvgO45672TzpMKPdHEUTvgFTXCNpoZy1hrqog=;
+ b=hhUVogXgbiT0s8R3+BLq+AWdzVC/DIsplNUowBR516C6ePLx6TB1aQRF0+FbAFnbA1
+ RiCsyDaOcZRbLTd9cV0Vd09PmL/I6ek82YN2JzyR0xFxtnmnzuYm8ezyUi3G12sdehrT
+ F0ft9IOCU3CqL/zLpLKHUHRjw5SosZ9bSiCbnA8xOFEh2MWSuhmzdWjJxUB0VqorRBoh
+ IOkUWijJGksfq3jw5oRSllRj5BVmPQZdA+92RkgLRNy3UeMuNy2jykHRwToP4BB0QPEZ
+ x5bf5W4SNNjGXFYkWd5EhDy6XvC1WfnsnMiDanR84pCDkscN9SQkJVf4PvqVYB5mhE2L
+ JwxA==
+X-Gm-Message-State: APuU4Z/0Jj+MV5+oBSYREWwjgTb7c1qVX/E6ox0JGedMi2uk+/dpAzVc
+ UEzPUrouC8N+0B1QTdZgIArQSUiHo1ViE/sO9IPGldyuwK77e4YBHtyT
+X-Gm-Gg: AZFdTZf5nZQ/Zk0H5Tv/Noz13fdk/QzAJ1ZKdH6lmfbHl2bI984DfTPyCVQosB/gm7N
+ pONHerya5v7o21SIa5DSBZNabFPMHusDt1SD7T2VFsgUWC8TkXXizYNdPaZ/fJQ8et+eTxp6qHI
+ hzRNU0+qd9dTefrajkcRn0wMiC7raabYLUraC+N5ZDzmFj9Aky5waLtfHOJAX6PD1cc3QvvMElv
+ c9QJowp3B4JC6aihjOoNo0moNIDp0zZOzuVZ++T3NafVzUSeGhykNiBvKbc0Nu3awAxtJk1CsFA
+ iqSJERXlCkZp6P79WpDdIon4OtygL3wCZ86MF1FsTQl77jD31AZ8f646wwZJBppvla9zqrvR6BD
+ AIW7vNkY43wm8A3sIfCjAc8TTdM4qLgF5Po7RUxhOOZ0NezbIP2P+3IXuvlh0v2yBktVuzMbQnJ
+ FRDdD++0EN7APVAjwtK2lz3WZcHeunG6HucNUnXl4hxFnKFTg6SzPvRIu5BhNuheVAIQ6P1zOjP
+ w7AXnWt9aJGr2nWhjsMIsUdIEZAfif/pIzekEfmGPMQ3kkhm3fUuC1PNXyR8ZaElZH3kLSZTCly
+ A9bfXG1y9kqQwn2REL/Rvb5INPiUzeERzCTjonXT0JXNCLydVnBxxlB//5TtazORuo3YhkJUMza
+ Bpmg4Vs/rh84E7ImN02c0SMC8swqFrO4rrRBUI3dVUc6Mcf7zJEze+SS12quP0gjGeDMFz6G/wV
+ SNmmbRAM+DN7n5+HoyHqd64RMnN8f4ozeICoNPszWP//7pPXuPC0c=
+X-Received: by 2002:a05:6830:4487:b0:861:5cbb:8603 with SMTP id
+ 46e09a7af769-863158d55b4mr22313614a34.20.1795676025073; 
+ Wed, 25 Nov 2026 22:53:45 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.41
+ 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 22:53:42 -0800 (PST)
+ Wed, 25 Nov 2026 22:53:44 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 25 Nov 2026 23:53:07 -0700
-Subject: [PATCH 18/19] net: ncsi: track the outstanding management command
+Date: Wed, 25 Nov 2026 23:53:08 -0700
+Subject: [PATCH 19/19] net: lwip: configure NC-SI before starting network
+ clients
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-submit-lwip-network-boot-v1-v1-18-63df291d9392@gmail.com>
+Message-Id: <20261125-submit-lwip-network-boot-v1-v1-19-63df291d9392@gmail.com>
 References: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 In-Reply-To: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -191,726 +192,697 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-If the controller stops replying while a channel is being enabled,
-NC-SI can report success and let an IP client use an unconfigured
-channel. The timeout drops the last pending request, which the state
-machine mistakes for successful completion.
+On an NC-SI port, the management controller must enable a channel
+before IP traffic can reach the network. Use the shared NC-SI state
+machine to configure the channel before bringing up the lwIP interface.
+Dispatch management frames separately from IP and track their timeouts
+independently. The ncsi command can also bring up the channel without
+an IP transfer.
 
-Record each command's ID, type and channel and advance only on its
-matching reply. Wrap from 0xff to 1 because zero is reserved for
-asynchronous events. Check the received length before reading the response
-payload or checksum. Report timeouts and send or allocation failures.
-Send management frames from a DMA-aligned buffer, as required by MACs
-that pass the packet buffer directly to hardware.
+A Configuration Required event can start discovery again while a client
+still holds the interface. Check the channel before attaching another
+client or changing its addressing. Reject reentrant attachment during
+discovery and leave existing clients and their addresses alone if
+discovery fails.
 
-Select the active PHY at startup and release its discovery state at
-shutdown. Keep the package and channel selected by discovery through
-configuration. If link status succeeds but a later capability query
-times out, discovery advances but leaves the earlier has_link bit set.
-Rescanning those flags can select the timed-out channel instead of the
-channel whose probe completed.
+Do not let a retry stop or rotate an interface another client is using.
+If Ctrl-C interrupts initial discovery, return from ping without trying
+the next interface.
 
-Exercise discovery with a sandbox controller that checks command IDs
-and buffer alignment. Verify that a ping does not transmit IP traffic
-until the channel has been enabled.
+Exercise capability-query timeouts, request-ID rollover, failed channel
+enable, shared-client recovery, callback reentry and cancellation with
+interface rotation enabled.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- drivers/net/phy/ncsi.c | 243 ++++++++++++++++++++++++++-----------------------
- include/net/ncsi.h     |   3 +-
- net/net.c              |   2 +-
- test/dm/Makefile       |   3 +
- test/dm/ncsi.c         | 141 ++++++++++++++++++++++++++++
- 5 files changed, 273 insertions(+), 119 deletions(-)
+ cmd/lwip/Makefile       |   1 +
+ cmd/lwip/ncsi.c         |  23 +++++
+ cmd/lwip/ping.c         |   2 +-
+ drivers/net/phy/Kconfig |   2 +-
+ drivers/net/phy/ncsi.c  |  55 ++++++++++++
+ include/net/ncsi.h      |   2 +
+ net/lwip/net-lwip.c     |  70 ++++++++++++---
+ test/dm/Makefile        |   2 +-
+ test/dm/ncsi.c          | 230 +++++++++++++++++++++++++++++++++++++++++++++++-
+ 9 files changed, 372 insertions(+), 15 deletions(-)
 
+diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+index 90ad4d21e6f..43a6b29e687 100644
+--- a/cmd/lwip/Makefile
++++ b/cmd/lwip/Makefile
+@@ -2,6 +2,7 @@ obj-$(CONFIG_CMD_BOOTP) += bootp.o
+ obj-$(CONFIG_CMD_DHCP) += dhcp.o
+ obj-$(CONFIG_CMD_DNS) += dns.o
+ obj-$(CONFIG_CMD_LINK_LOCAL) += linklocal.o
++obj-$(CONFIG_CMD_NCSI) += ncsi.o
+ obj-$(CONFIG_CMD_NFS) += nfs.o
+ ifneq ($(filter y,$(CONFIG_CMD_PING) $(CONFIG_CMD_PING6)),)
+ obj-y += ping.o
+diff --git a/cmd/lwip/ncsi.c b/cmd/lwip/ncsi.c
+new file mode 100644
+index 00000000000..3b6b257977d
+--- /dev/null
++++ b/cmd/lwip/ncsi.c
+@@ -0,0 +1,23 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <command.h>
++#include <net.h>
++#include <net/ncsi.h>
++
++static int do_ncsi(struct cmd_tbl *cmdtp, int flag, int argc,
++		   char *const argv[])
++{
++	struct net_lwip_ctx ctx = {};
++	int ret;
++
++	ret = net_lwip_start(&ctx, NET_LWIP_ADDR_ENV_FLEXIBLE);
++	if (ret)
++		return CMD_RET_FAILURE;
++
++	ret = !phy_interface_is_ncsi() || !ncsi_active();
++	net_lwip_stop(&ctx);
++
++	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
++}
++
++U_BOOT_CMD(ncsi, 1, 1, do_ncsi, "configure the NC-SI interface", "");
+diff --git a/cmd/lwip/ping.c b/cmd/lwip/ping.c
+index 31c9e0ad4d6..f50765cbf0f 100644
+--- a/cmd/lwip/ping.c
++++ b/cmd/lwip/ping.c
+@@ -183,7 +183,7 @@ static int ping_execute(const char *name, u8 type)
+ 				    NET_LWIP_ADDR_ENV_STRICT);
+ 		if (!ret)
+ 			break;
+-	} while (!net_start_again());
++	} while (ret != -EINTR && !net_start_again());
+ 	if (ret)
+ 		return CMD_RET_FAILURE;
+ 
+diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+index 02aeb1db977..ed5c52039a6 100644
+--- a/drivers/net/phy/Kconfig
++++ b/drivers/net/phy/Kconfig
+@@ -389,7 +389,7 @@ config PHY_FIXED
+ 
+ config PHY_NCSI
+ 	bool "NC-SI based PHY"
+-	depends on NET_LEGACY
++	depends on NET
+ 
+ endif #PHYLIB
+ 
 diff --git a/drivers/net/phy/ncsi.c b/drivers/net/phy/ncsi.c
-index 7857412248e..5cc183b88f8 100644
+index 5cc183b88f8..5ae65bebf46 100644
 --- a/drivers/net/phy/ncsi.c
 +++ b/drivers/net/phy/ncsi.c
-@@ -7,6 +7,7 @@
+@@ -5,6 +5,7 @@
+  * Copyright (C) 2019, IBM Corporation.
+  */
  
++#include <console.h>
  #include <log.h>
  #include <malloc.h>
-+#include <memalign.h>
- #include <phy.h>
- #include <net.h>
- #include <net/ncsi.h>
-@@ -76,8 +77,10 @@ struct ncsi {
- 	} state;
- 
- 	unsigned int	pending_requests;
--	unsigned int	requests[256];
--	unsigned int	last_request;
-+	u8		last_request;
-+	u8		expected_type;
-+	u8		expected_channel;
-+	int		result;
+ #include <memalign.h>
+@@ -81,6 +82,7 @@ struct ncsi {
+ 	u8		expected_type;
+ 	u8		expected_channel;
+ 	int		result;
++	ulong		request_start;
  
  	unsigned int	current_package;
  	unsigned int	current_channel;
-@@ -86,7 +89,7 @@ struct ncsi {
- 	struct ncsi_package	*packages;
- };
- 
--struct ncsi *ncsi_priv;
-+static struct ncsi *ncsi_priv;
- 
- bool ncsi_active(void)
+@@ -112,8 +114,10 @@ static void ncsi_complete(int result)
  {
-@@ -98,13 +101,37 @@ bool ncsi_active(void)
- 	np = ncsi_priv->current_package;
- 	nc = ncsi_priv->current_channel;
- 
--	if (ncsi_priv->state != NCSI_CONFIG)
-+	if (ncsi_priv->state != NCSI_CONFIG || ncsi_priv->result)
- 		return false;
- 
--	return np < NCSI_PACKAGE_MAX && nc < NCSI_CHANNEL_MAX &&
-+	return np < ncsi_priv->n_packages && nc < ncsi_priv->packages[np].n_channels &&
- 		ncsi_priv->packages[np].channels[nc].has_link;
+ 	ncsi_priv->result = result;
+ 	ncsi_priv->pending_requests = 0;
++#if CONFIG_IS_ENABLED(NET_LEGACY)
+ 	net_set_timeout_handler(0, NULL);
+ 	net_set_state(result ? NETLOOP_FAIL : NETLOOP_SUCCESS);
++#endif
  }
  
-+static void ncsi_complete(int result)
+ static void ncsi_reset_probe(void)
+@@ -536,9 +540,45 @@ static void ncsi_timeout_handler(void)
+ 	ncsi_update_state(NULL);
+ }
+ 
++#if CONFIG_IS_ENABLED(NET_LWIP)
++void ncsi_poll_timeout(void)
 +{
-+	ncsi_priv->result = result;
-+	ncsi_priv->pending_requests = 0;
-+	net_set_timeout_handler(0, NULL);
-+	net_set_state(result ? NETLOOP_FAIL : NETLOOP_SUCCESS);
++	if (ncsi_priv && ncsi_priv->pending_requests &&
++	    get_timer(ncsi_priv->request_start) >= 1000)
++		ncsi_timeout_handler();
 +}
 +
-+static void ncsi_reset_probe(void)
++int ncsi_lwip_configure(void)
 +{
-+	unsigned int i;
++	int ret;
 +
-+	for (i = 0; i < ncsi_priv->n_packages; i++)
-+		free(ncsi_priv->packages[i].channels);
-+	free(ncsi_priv->packages);
-+	ncsi_priv->packages = NULL;
-+	ncsi_priv->n_packages = 0;
-+	ncsi_priv->current_package = NCSI_PACKAGE_MAX;
-+	ncsi_priv->current_channel = NCSI_CHANNEL_MAX;
-+	ncsi_priv->pending_requests = 0;
-+	ncsi_priv->result = -EINPROGRESS;
-+	ncsi_priv->state = NCSI_PROBE_PACKAGE_SP;
-+}
++	if (!ncsi_priv)
++		return -ENODEV;
 +
- static unsigned int cmd_payload(int cmd)
- {
- 	switch (cmd) {
-@@ -183,8 +210,7 @@ static u32 ncsi_calculate_checksum(unsigned char *data, int len)
- static int ncsi_validate_rsp(struct ncsi_rsp_pkt *pkt, int payload)
- {
- 	struct ncsi_rsp_pkt_hdr *hdr = &pkt->rsp;
--	u32 checksum, c_offset;
--	__be32 pchecksum;
-+	u32 checksum, c_offset, pchecksum;
- 
- 	if (hdr->common.revision != 1) {
- 		printf("NCSI: 0x%02x response has unsupported revision 0x%x\n",
-@@ -202,7 +228,7 @@ static int ncsi_validate_rsp(struct ncsi_rsp_pkt *pkt, int payload)
- 
- 	if (ntohs(hdr->common.length) != payload) {
- 		printf("NCSI: 0x%02x response has incorrect length %d\n",
--		       hdr->common.type, hdr->common.length);
-+		       hdr->common.type, ntohs(hdr->common.length));
- 		return -1;
- 	}
- 
-@@ -341,7 +367,7 @@ static void ncsi_rsp_gls(struct ncsi_rsp_pkt *pkt)
- 	}
- 
- 	ncsi_priv->packages[np].channels[nc].has_link =
--					!!(get_unaligned_be32(&gls->status));
-+					!!(get_unaligned_be32(&gls->status) & BIT(0));
- 
- 	if (ncsi_priv->state == NCSI_PROBE_CHANNEL)
- 		ncsi_send_command(np, nc, NCSI_PKT_CMD_GVI, NULL, 0, true);
-@@ -351,6 +377,7 @@ static void ncsi_rsp_cis(struct ncsi_rsp_pkt *pkt)
- {
- 	struct ncsi_rsp_pkt_hdr *rsp = (struct ncsi_rsp_pkt_hdr *)pkt;
- 	struct ncsi_package *package;
-+	struct ncsi_channel *channels;
- 	unsigned int np, nc;
- 
- 	np = NCSI_PACKAGE_INDEX(rsp->common.channel);
-@@ -363,28 +390,22 @@ static void ncsi_rsp_cis(struct ncsi_rsp_pkt *pkt)
- 
- 	package = &ncsi_priv->packages[np];
- 
--	if (nc < package->n_channels) {
--		/*
--		 * This is fine in general but in the current design we
--		 * don't send CIS commands to known channels.
--		 */
--		debug("NCSI: Duplicate channel 0x%02x\n", nc);
--		return;
--	}
--
--	package->channels = realloc(package->channels,
--				    sizeof(struct ncsi_channel) *
--				    (package->n_channels + 1));
--	if (!package->channels) {
--		printf("NCSI: Could not allocate memory for new channel\n");
--		return;
-+	if (nc >= package->n_channels) {
-+		channels = realloc(package->channels, sizeof(*channels) * (nc + 1));
-+		if (!channels) {
-+			ncsi_complete(-ENOMEM);
-+			return;
++	if (ncsi_active())
++		return 0;
++	if (ncsi_priv->result != -EINPROGRESS)
++		ncsi_reset_probe();
++	if (!ncsi_priv->pending_requests)
++		ncsi_probe_packages();
++	while (ncsi_priv->result == -EINPROGRESS) {
++		ret = net_lwip_poll();
++		if (ret < 0 || ctrlc()) {
++			ncsi_complete(ret < 0 ? ret : -EINTR);
++			break;
 +		}
-+		memset(channels + package->n_channels, 0,
-+		       (nc + 1 - package->n_channels) * sizeof(*channels));
-+		package->channels = channels;
-+		package->n_channels = nc + 1;
- 	}
- 
- 	debug("NCSI: New channel 0x%02x\n", nc);
- 
- 	package->channels[nc].id = nc;
- 	package->channels[nc].has_link = false;
--	package->n_channels++;
- 
- 	ncsi_send_gls(np, nc);
- }
-@@ -404,6 +425,7 @@ static void ncsi_rsp_dp(struct ncsi_rsp_pkt *pkt)
- static void ncsi_rsp_sp(struct ncsi_rsp_pkt *pkt)
- {
- 	struct ncsi_rsp_pkt_hdr *rsp = (struct ncsi_rsp_pkt_hdr *)pkt;
-+	struct ncsi_package *packages;
- 	unsigned int np;
- 
- 	np = NCSI_PACKAGE_INDEX(rsp->common.channel);
-@@ -416,18 +438,16 @@ static void ncsi_rsp_sp(struct ncsi_rsp_pkt *pkt)
- 
- 	debug("NCSI: adding new package %d\n", np);
- 
--	ncsi_priv->packages = realloc(ncsi_priv->packages,
--				      sizeof(struct ncsi_package) *
--				      (ncsi_priv->n_packages + 1));
--	if (!ncsi_priv->packages) {
--		printf("NCSI: could not allocate memory for new package\n");
-+	packages = realloc(ncsi_priv->packages, sizeof(*packages) * (np + 1));
-+	if (!packages) {
-+		ncsi_complete(-ENOMEM);
- 		return;
- 	}
--
-+	memset(packages + ncsi_priv->n_packages, 0,
-+	       (np + 1 - ncsi_priv->n_packages) * sizeof(*packages));
-+	ncsi_priv->packages = packages;
- 	ncsi_priv->packages[np].id = np;
--	ncsi_priv->packages[np].n_channels = 0;
--	ncsi_priv->packages[np].channels = NULL;
--	ncsi_priv->n_packages++;
-+	ncsi_priv->n_packages = np + 1;
- }
- 
- static void ncsi_update_state(struct ncsi_rsp_pkt_hdr *nh)
-@@ -452,7 +472,7 @@ static void ncsi_update_state(struct ncsi_rsp_pkt_hdr *nh)
- 		} else {
- 			if (!ncsi_priv->n_packages) {
- 				printf("NCSI: no packages found\n");
--				net_set_state(NETLOOP_FAIL);
-+				ncsi_complete(-ENODEV);
- 				return;
- 			}
- 			printf("NCSI: probing channels\n");
-@@ -466,9 +486,9 @@ static void ncsi_update_state(struct ncsi_rsp_pkt_hdr *nh)
- 			ncsi_priv->state = NCSI_PROBE_CHANNEL;
- 			return ncsi_probe_packages();
- 		}
--		printf("NCSI: failed to select package 0x%0x2 or timeout\n",
-+		printf("NCSI: failed to select package 0x%02x or timeout\n",
- 		       ncsi_priv->current_package);
--		net_set_state(NETLOOP_FAIL);
-+		ncsi_complete(-ENODEV);
- 		break;
- 	case NCSI_PROBE_CHANNEL:
- 		// TODO only does package 0 for now
-@@ -477,7 +497,8 @@ static void ncsi_update_state(struct ncsi_rsp_pkt_hdr *nh)
- 			nc = ncsi_priv->current_channel;
- 
- 			/* Configure first channel that has link */
--			if (ncsi_priv->packages[np].channels[nc].has_link) {
-+			if (nc < ncsi_priv->packages[np].n_channels &&
-+			    ncsi_priv->packages[np].channels[nc].has_link && !timeout) {
- 				ncsi_priv->state = NCSI_CONFIG;
- 			} else if (ncsi_priv->current_channel + 1 <
- 				   NCSI_CHANNEL_MAX) {
-@@ -485,24 +506,24 @@ static void ncsi_update_state(struct ncsi_rsp_pkt_hdr *nh)
- 			} else {
- 				// XXX As above only package 0
- 				printf("NCSI: no channel found with link\n");
--				net_set_state(NETLOOP_FAIL);
-+				ncsi_complete(-ENETDOWN);
- 				return;
- 			}
- 			return ncsi_probe_packages();
- 		}
- 		break;
- 	case NCSI_CONFIG:
--		if (ncsi_priv->pending_requests == 0) {
--			printf("NCSI: configuration done!\n");
--			net_set_state(NETLOOP_SUCCESS);
--		} else if (timeout) {
-+		if (timeout) {
- 			printf("NCSI: timeout during configure\n");
--			net_set_state(NETLOOP_FAIL);
-+			ncsi_complete(-ETIMEDOUT);
-+		} else if (ncsi_priv->pending_requests == 0) {
-+			printf("NCSI: configuration done!\n");
-+			ncsi_complete(0);
- 		}
- 		break;
- 	default:
- 		printf("NCSI: something went very wrong, nevermind\n");
--		net_set_state(NETLOOP_FAIL);
-+		ncsi_complete(-EINVAL);
- 		break;
- 	}
- }
-@@ -523,11 +544,15 @@ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
- 	int eth_hdr_size;
- 	u32 checksum;
- 	uchar *pkt, *start;
--	int final_len;
-+	int final_len, ret;
- 
--	pkt = calloc(1, PKTSIZE_ALIGN + PKTALIGN);
--	if (!pkt)
-+	pkt = malloc_cache_aligned(PKTSIZE_ALIGN);
-+	if (!pkt) {
-+		if (wait)
-+			ncsi_complete(-ENOMEM);
- 		return -ENOMEM;
 +	}
-+	memset(pkt, 0, PKTSIZE_ALIGN);
++
++	return ncsi_priv->result;
++}
++#endif
++
+ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
+ 			     uchar *payload, int len, bool wait)
+ {
++#if CONFIG_IS_ENABLED(NET_LWIP)
++	struct ethernet_hdr *eth;
++#endif
+ 	struct ncsi_pkt_hdr *hdr;
+ 	__be32 *pchecksum;
+ 	int eth_hdr_size;
+@@ -555,7 +595,16 @@ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
+ 	memset(pkt, 0, PKTSIZE_ALIGN);
  	start = pkt;
  
++#if CONFIG_IS_ENABLED(NET_LWIP)
++	/* NC-SI management frames travel directly to the controller. */
++	eth = (void *)pkt;
++	memcpy(eth->et_dest, net_bcast_ethaddr, ARP_HLEN);
++	memcpy(eth->et_src, eth_get_ethaddr(), ARP_HLEN);
++	eth->et_protlen = htons(PROT_NCSI);
++	eth_hdr_size = sizeof(*eth);
++#else
  	eth_hdr_size = net_set_ether(pkt, net_bcast_ethaddr, PROT_NCSI);
-@@ -537,8 +562,10 @@ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
- 	hdr = (struct ncsi_pkt_hdr *)pkt;
- 	hdr->mc_id = 0;
- 	hdr->revision = NCSI_PKT_REVISION;
--	hdr->id = ++ncsi_priv->last_request;
--	ncsi_priv->requests[ncsi_priv->last_request] = 1;
-+	/* Instance ID zero is reserved for asynchronous events. */
-+	if (!++ncsi_priv->last_request)
-+		ncsi_priv->last_request = 1;
-+	hdr->id = ncsi_priv->last_request;
- 	hdr->type = cmd;
- 	hdr->channel = NCSI_TO_CHANNEL(np, nc);
- 	hdr->length = htons(len);
-@@ -553,6 +580,8 @@ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
- 	put_unaligned_be32(checksum, pchecksum);
++#endif
+ 	pkt += eth_hdr_size;
  
+ 	/* Set NCSI command header fields */
+@@ -582,7 +631,11 @@ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
  	if (wait) {
-+		ncsi_priv->expected_type = cmd + 0x80;
-+		ncsi_priv->expected_channel = hdr->channel;
+ 		ncsi_priv->expected_type = cmd + 0x80;
+ 		ncsi_priv->expected_channel = hdr->channel;
++#if CONFIG_IS_ENABLED(NET_LWIP)
++		ncsi_priv->request_start = get_timer(0);
++#else
  		net_set_timeout_handler(1000UL, ncsi_timeout_handler);
++#endif
  		ncsi_priv->pending_requests++;
  	}
-@@ -562,17 +591,18 @@ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
- 	/* frame header, packet header, payload, checksum */
- 	final_len = eth_hdr_size + sizeof(struct ncsi_cmd_pkt_hdr) + len + 4;
  
--	net_send_packet(start, final_len);
-+	ret = eth_send(start, final_len);
- 	free(start);
--	return 0;
-+	if (ret < 0 && wait)
-+		ncsi_complete(ret);
-+	return ret < 0 ? ret : 0;
- }
- 
--static void ncsi_handle_aen(struct ip_udp_hdr *ip, unsigned int len)
-+static void ncsi_handle_aen(void *data, unsigned int len)
+@@ -817,7 +870,9 @@ void ncsi_probe_packages(void)
  {
--	struct ncsi_aen_pkt_hdr *hdr = (struct ncsi_aen_pkt_hdr *)ip;
--	int payload, i;
--	__be32 pchecksum;
--	u32 checksum;
-+	struct ncsi_aen_pkt_hdr *hdr = data;
-+	int payload;
-+	u32 pchecksum, checksum;
- 
- 	switch (hdr->type) {
- 	case NCSI_PKT_AEN_LSC:
-@@ -599,9 +629,9 @@ static void ncsi_handle_aen(struct ip_udp_hdr *ip, unsigned int len)
- 		return;
- 	}
- 
--	if (ntohs(hdr->common.length) != payload) {
-+	if (ntohs(hdr->common.length) != payload || len < sizeof(*hdr) + payload) {
- 		printf("NCSI: 0x%02x response has incorrect length %d\n",
--		       hdr->common.type, hdr->common.length);
-+		       hdr->common.type, ntohs(hdr->common.length));
- 		return;
- 	}
- 
-@@ -617,39 +647,32 @@ static void ncsi_handle_aen(struct ip_udp_hdr *ip, unsigned int len)
- 	}
- 
- 	/* Link or configuration lost - just redo the discovery process */
--	ncsi_priv->state = NCSI_PROBE_PACKAGE_SP;
--	for (i = 0; i < ncsi_priv->n_packages; i++) {
--		free(ncsi_priv->packages[i].channels);
--		ncsi_priv->packages[i].channels = NULL;
--	}
--	free(ncsi_priv->packages);
--	ncsi_priv->packages = NULL;
--	ncsi_priv->n_packages = 0;
--
--	ncsi_priv->current_package = NCSI_PACKAGE_MAX;
--	ncsi_priv->current_channel = NCSI_CHANNEL_MAX;
--
-+	ncsi_reset_probe();
- 	ncsi_probe_packages();
- }
- 
--void ncsi_receive(struct ethernet_hdr *et, struct ip_udp_hdr *ip,
--		  unsigned int len)
-+void ncsi_receive(void *data, unsigned int len)
- {
--	struct ncsi_rsp_pkt *pkt = (struct ncsi_rsp_pkt *)ip;
-+	struct ncsi_rsp_pkt *pkt = data;
- 	struct ncsi_rsp_pkt_hdr *nh = (struct ncsi_rsp_pkt_hdr *)&pkt->rsp;
- 	void (*handler)(struct ncsi_rsp_pkt *pkt) = NULL;
- 	unsigned short payload;
- 
--	if (ncsi_priv->pending_requests)
--		ncsi_priv->pending_requests--;
-+	if (!ncsi_priv)
-+		return;
- 
- 	if (len < sizeof(struct ncsi_rsp_pkt_hdr)) {
- 		printf("NCSI: undersized packet: %u bytes\n", len);
--		goto out;
-+		return;
- 	}
- 
- 	if (nh->common.type == NCSI_PKT_AEN)
--		return ncsi_handle_aen(ip, len);
-+		return ncsi_handle_aen(data, len);
-+
-+	if (!ncsi_priv->pending_requests || nh->common.id != ncsi_priv->last_request ||
-+	    nh->common.type != ncsi_priv->expected_type ||
-+	    nh->common.channel != ncsi_priv->expected_channel)
-+		return;
- 
- 	switch (nh->common.type) {
- 	case NCSI_PKT_RSP_SP:
-@@ -699,19 +722,20 @@ void ncsi_receive(struct ethernet_hdr *et, struct ip_udp_hdr *ip,
- 	default:
- 		printf("NCSI: unsupported packet type 0x%02x\n",
- 		       nh->common.type);
--		goto out;
-+		return;
- 	}
- 
--	if (ncsi_validate_rsp(pkt, payload) != 0) {
-+	if (len < sizeof(*nh) + payload || ncsi_validate_rsp(pkt, payload)) {
- 		printf("NCSI: discarding invalid packet of type 0x%02x\n",
- 		       nh->common.type);
--		goto out;
-+		return;
- 	}
- 
-+	ncsi_priv->pending_requests--;
- 	if (handler)
- 		handler(pkt);
--out:
--	ncsi_update_state(nh);
-+	if (ncsi_priv->result == -EINPROGRESS)
-+		ncsi_update_state(nh);
- }
- 
- static void ncsi_send_sp(unsigned int np)
-@@ -773,6 +797,7 @@ static void ncsi_send_sma(unsigned int np, unsigned int nc)
- 	addr = eth_get_ethaddr();
- 	if (!addr) {
- 		printf("NCSI: no MAC address configured\n");
-+		ncsi_complete(-EADDRNOTAVAIL);
- 		return;
- 	}
- 
-@@ -790,9 +815,6 @@ static void ncsi_send_sma(unsigned int np, unsigned int nc)
- 
- void ncsi_probe_packages(void)
- {
--	struct ncsi_package *package;
--	unsigned int np, nc;
--
  	if (!ncsi_priv) {
  		printf("NCSI: no active interface\n");
++#if CONFIG_IS_ENABLED(NET_LEGACY)
  		net_set_state(NETLOOP_FAIL);
-@@ -820,24 +842,8 @@ void ncsi_probe_packages(void)
- 			      ncsi_priv->current_channel);
- 		break;
- 	case NCSI_CONFIG:
--		for (np = 0; np < ncsi_priv->n_packages; np++) {
--			package = &ncsi_priv->packages[np];
--			for (nc = 0; nc < package->n_channels; nc++)
--				if (package->channels[nc].has_link)
--					break;
--			if (nc < package->n_channels)
--				break;
--		}
--		if (np == ncsi_priv->n_packages) {
--			printf("NCSI: no link available\n");
--			return;
--		}
--
--		printf("NCSI: configuring channel %d\n", nc);
--		ncsi_priv->current_package = np;
--		ncsi_priv->current_channel = nc;
--		/* Kicks off rest of configure chain */
--		ncsi_send_sma(np, nc);
-+		printf("NCSI: configuring channel %u\n", ncsi_priv->current_channel);
-+		ncsi_send_sma(ncsi_priv->current_package, ncsi_priv->current_channel);
- 		break;
- 	default:
- 		printf("NCSI: unknown state 0x%x\n", ncsi_priv->state);
-@@ -853,8 +859,6 @@ int ncsi_probe(struct phy_device *phydev)
- 		memset(phydev->priv, 0, sizeof(struct ncsi));
++#endif
+ 		return;
  	}
  
--	ncsi_priv = phydev->priv;
--
- 	return 0;
- }
- 
-@@ -866,27 +870,34 @@ int ncsi_startup(struct phy_device *phydev)
- 	/* Normal phy reset is N/A */
- 	phydev->flags |= PHY_FLAG_BROKEN_RESET;
- 
--	/* Set initial probe state */
--	ncsi_priv->state = NCSI_PROBE_PACKAGE_SP;
--
--	/* No active package/channel yet */
--	ncsi_priv->current_package = NCSI_PACKAGE_MAX;
--	ncsi_priv->current_channel = NCSI_CHANNEL_MAX;
--
- 	/* Pretend link works so the MAC driver sets final bits up */
- 	phydev->link = true;
- 
- 	/* Set ncsi_priv so we can use it when called from net_loop() */
- 	ncsi_priv = phydev->priv;
-+	ncsi_reset_probe();
- 
- 	return 0;
- }
- 
- int ncsi_shutdown(struct phy_device *phydev)
- {
--	printf("NCSI: Disabling package %d\n", ncsi_priv->current_package);
--	ncsi_send_dp(ncsi_priv->current_package);
--	return 0;
-+	int ret = 0;
-+
-+	if (!ncsi_priv || ncsi_priv != phydev->priv)
-+		return 0;
-+#if CONFIG_IS_ENABLED(NET_LEGACY)
-+	if (ncsi_priv->pending_requests)
-+		net_set_timeout_handler(0, NULL);
-+#endif
-+	if (ncsi_priv->current_package < ncsi_priv->n_packages) {
-+		printf("NCSI: Disabling package %d\n", ncsi_priv->current_package);
-+		ret = ncsi_send_command(ncsi_priv->current_package, NCSI_RESERVED_CHANNEL,
-+					NCSI_PKT_CMD_DP, NULL, 0, false);
-+	}
-+	ncsi_reset_probe();
-+	ncsi_priv = NULL;
-+	return ret;
- }
- 
- U_BOOT_PHY_DRIVER(ncsi) = {
 diff --git a/include/net/ncsi.h b/include/net/ncsi.h
-index 7aec457562d..42405992da3 100644
+index 42405992da3..619c08a4e18 100644
 --- a/include/net/ncsi.h
 +++ b/include/net/ncsi.h
-@@ -8,6 +8,5 @@
- #include <phy.h>
- 
+@@ -10,3 +10,5 @@
  bool ncsi_active(void);
--void ncsi_receive(struct ethernet_hdr *et, struct ip_udp_hdr *ip,
--		  unsigned int len);
-+void ncsi_receive(void *data, unsigned int len);
+ void ncsi_receive(void *data, unsigned int len);
  void ncsi_probe_packages(void);
-diff --git a/net/net.c b/net/net.c
-index a249a674236..30ce04893be 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1450,7 +1450,7 @@ void net_process_received_packet(uchar *in_packet, int len)
- #endif
- #ifdef CONFIG_PHY_NCSI
- 	case PROT_NCSI:
--		ncsi_receive(et, ip, len);
-+		ncsi_receive(ip, len);
- 		break;
- #endif
++void ncsi_poll_timeout(void);
++int ncsi_lwip_configure(void);
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 075d5b1716f..8efafe6550b 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -27,6 +27,7 @@
+ #include <lwip/timeouts.h>
+ #include <lwip-hooks.h>
+ #include <net.h>
++#include <net/ncsi.h>
+ #include <net/pcap.h>
+ #include <net/wol.h>
+ #include <timer.h>
+@@ -37,6 +38,9 @@
+ /* xx:xx:xx:xx:xx:xx\0 */
+ #define MAC_ADDR_STRLEN 18
+ 
++/* The PHY driver uses a global option but is linked with this phase's MACs. */
++#define LWIP_HAS_NCSI (CONFIG_IS_ENABLED(ETH) && IS_ENABLED(CONFIG_PHY_NCSI))
++
+ static void net_lwip_keep_serveraddr(const u8 *frame, unsigned int len)
+ {
+ 	static u8 saved[ETH_ALEN];
+@@ -90,6 +94,7 @@ static struct {
+ 	unsigned int no_addr_users;
+ 	bool accept_untagged;
+ 	bool polling;
++	bool ncsi_configuring;
+ #if CONFIG_IS_ENABLED(IPV6)
+ 	bool ip6_configured;
+ 	u64 ip6_lifetime_time;
+@@ -434,8 +439,6 @@ static struct netif *new_netif(struct udevice *udev, bool with_ip)
+ 		return NULL;
  	}
+ 
+-	netif_set_up(netif);
+-	netif_set_link_up(netif);
+ 	/* Routing: use this interface to reach the default gateway */
+ 	netif_set_default(netif);
+ 
+@@ -830,6 +833,28 @@ static int net_lwip_configure(enum net_lwip_addr_mode addr_mode)
+ 	return 0;
+ }
+ 
++static int net_lwip_ensure_ncsi(void)
++{
++	int ret;
++
++	if (!LWIP_HAS_NCSI || !phy_interface_is_ncsi())
++		return 0;
++	/* Do not re-enter synchronous NC-SI configuration from a callback. */
++	if (net_lwip_runtime.ncsi_configuring)
++		return -EBUSY;
++	if (ncsi_active())
++		return 0;
++	/* Discovery needs to poll for replies; defer it while polling. */
++	if (net_lwip_runtime.polling)
++		return -EBUSY;
++
++	net_lwip_runtime.ncsi_configuring = true;
++	ret = ncsi_lwip_configure();
++	net_lwip_runtime.ncsi_configuring = false;
++
++	return ret;
++}
++
+ static int net_lwip_start_ctx(struct net_lwip_ctx *ctx,
+ 			      enum net_lwip_addr_mode addr_mode,
+ 			      bool eth_started)
+@@ -841,6 +866,8 @@ static int net_lwip_start_ctx(struct net_lwip_ctx *ctx,
+ 		return -EINVAL;
+ 	if (ctx->netif || ctx->dev)
+ 		return -EBUSY;
++	if (net_lwip_runtime.users && !netif_is_up(net_lwip_runtime.netif))
++		return -EBUSY;
+ 	if (addr_mode != NET_LWIP_ADDR_ENV_STRICT &&
+ 	    addr_mode != NET_LWIP_ADDR_ENV_FLEXIBLE &&
+ 	    addr_mode != NET_LWIP_ADDR_NONE)
+@@ -876,16 +903,16 @@ static int net_lwip_start_ctx(struct net_lwip_ctx *ctx,
+ #if CONFIG_IS_ENABLED(IPV6)
+ 		net_lwip_runtime.ip6_lifetime_time = get_timer_us(0);
+ #endif
+-	} else if (addr_mode == NET_LWIP_ADDR_NONE &&
+-		   !net_lwip_runtime.no_addr_users) {
+-		ret = net_lwip_configure(NET_LWIP_ADDR_NONE);
+-		if (ret)
+-			return ret;
+-	} else if (addr_mode != NET_LWIP_ADDR_NONE &&
+-		   !net_lwip_runtime.no_addr_users) {
+-		ret = net_lwip_configure(addr_mode);
++	} else {
++		/* The controller can request reconfiguration while clients are attached. */
++		ret = net_lwip_ensure_ncsi();
+ 		if (ret)
+ 			return ret;
++		if (!net_lwip_runtime.no_addr_users) {
++			ret = net_lwip_configure(addr_mode);
++			if (ret)
++				return ret;
++		}
+ 	}
+ 
+ 	net_lwip_runtime.users++;
+@@ -901,6 +928,15 @@ static int net_lwip_start_ctx(struct net_lwip_ctx *ctx,
+ 	ctx->netif = net_lwip_runtime.netif;
+ 	ctx->addr_mode = addr_mode;
+ 
++	if (net_lwip_runtime.users == 1) {
++		ret = net_lwip_ensure_ncsi();
++		if (ret) {
++			net_lwip_stop(ctx);
++			return ret;
++		}
++		netif_set_up(ctx->netif);
++	}
++
+ 	return 0;
+ }
+ 
+@@ -1123,7 +1159,14 @@ static int net_lwip_rx(struct udevice *udev, struct netif *netif)
+ 					       packet, len, true);
+ 			}
+ 
+-			if (!net_lwip_accept_vlan(packet, len))
++			if (LWIP_HAS_NCSI && len >= ETHER_HDR_SIZE &&
++			    get_unaligned_be16(packet + 2 * ETH_ALEN) == PROT_NCSI &&
++			    phy_interface_is_ncsi()) {
++				ncsi_receive(packet + ETHER_HDR_SIZE, len - ETHER_HDR_SIZE);
++				goto release;
++			}
++
++			if (!netif_is_up(netif) || !net_lwip_accept_vlan(packet, len))
+ 				goto release;
+ 
+ 			if (CONFIG_IS_ENABLED(CMD_WOL))
+@@ -1172,6 +1215,8 @@ int net_lwip_poll(void)
+ 	net_lwip_dhcp6_poll();
+ #endif
+ 	ret = net_lwip_rx(net_lwip_runtime.dev, net_lwip_runtime.netif);
++	if (LWIP_HAS_NCSI && phy_interface_is_ncsi())
++		ncsi_poll_timeout();
+ 	net_lwip_runtime.polling = false;
+ 
+ 	return ret;
+@@ -1241,6 +1286,9 @@ int net_start_again(void)
+ 	int retry_forever = 0;
+ 	unsigned long retrycnt = 0;
+ 
++	if (net_lwip_runtime.users)
++		return -EBUSY;
++
+ 	nretry = env_get("netretry");
+ 	if (nretry) {
+ 		if (!strcmp(nretry, "yes"))
 diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 5448be2267a..c926ec3958f 100644
+index c926ec3958f..a869371f305 100644
 --- a/test/dm/Makefile
 +++ b/test/dm/Makefile
-@@ -73,6 +73,9 @@ endif
+@@ -73,7 +73,7 @@ endif
  ifeq ($(CONFIG_NET_LWIP)$(CONFIG_CMD_RARP),yy)
  obj-y += lwip_rarp.o
  endif
-+ifeq ($(CONFIG_CMD_PING),y)
-+obj-$(CONFIG_PHY_NCSI) += ncsi.o
-+endif
+-ifeq ($(CONFIG_CMD_PING),y)
++ifneq ($(filter y,$(CONFIG_NET_LWIP) $(CONFIG_CMD_PING)),)
+ obj-$(CONFIG_PHY_NCSI) += ncsi.o
+ endif
  ifeq ($(CONFIG_NET_LWIP)$(CONFIG_CMD_TFTPBOOT),yy)
- obj-y += lwip_tftp.o
- obj-y += lwip_net_loop.o
 diff --git a/test/dm/ncsi.c b/test/dm/ncsi.c
-new file mode 100644
-index 00000000000..58776851857
---- /dev/null
+index 58776851857..5d7c68334d6 100644
+--- a/test/dm/ncsi.c
 +++ b/test/dm/ncsi.c
-@@ -0,0 +1,141 @@
-+// SPDX-License-Identifier: GPL-2.0+
+@@ -3,6 +3,10 @@
+ #include <dm.h>
+ #include <net.h>
+ #include <time.h>
++#if CONFIG_IS_ENABLED(NET_LWIP)
++#include <console.h>
++#include <lwip/timeouts.h>
++#endif
+ #include <asm/eth.h>
+ #include <asm/unaligned.h>
+ #include <dm/test.h>
+@@ -12,12 +16,28 @@
+ #include "lwip_test.h"
+ 
+ struct ncsi_peer {
++#if CONFIG_IS_ENABLED(NET_LWIP)
++	struct net_lwip_ctx nested;
++	int nested_ret;
++	bool try_nested;
++	bool try_active_nested;
++#else
+ 	bool ping;
++#endif
++	bool drop_enable;
+ 	bool enabled;
+ 	bool early_tx;
++	bool cancel_probe;
++	bool wrapped;
+ 	u8 last_id;
++	u8 drop_ch0_cmd;
++	u8 enabled_channel;
+ };
+ 
++#if CONFIG_IS_ENABLED(NET_LWIP)
++static void ncsi_test_cancel_tick(void *arg);
++#endif
 +
-+#include <dm.h>
-+#include <net.h>
-+#include <time.h>
-+#include <asm/eth.h>
-+#include <asm/unaligned.h>
-+#include <dm/test.h>
-+#include <net/ncsi.h>
-+#include <net/ncsi-pkt.h>
-+#include <test/ut.h>
-+#include "lwip_test.h"
+ static int ncsi_test_tx(struct udevice *dev, void *packet, unsigned int len)
+ {
+ 	struct eth_sandbox_priv *priv = dev_get_priv(dev);
+@@ -30,10 +50,12 @@ static int ncsi_test_tx(struct udevice *dev, void *packet, unsigned int len)
+ 	if (get_unaligned_be16(packet + 2 * ETH_ALEN) != PROT_NCSI) {
+ 		if (!peer->enabled)
+ 			peer->early_tx = true;
++#if CONFIG_IS_ENABLED(NET_LEGACY)
+ 		if (!sandbox_eth_ping_req_to_reply(dev, packet, len))
+ 			peer->ping = true;
+ 		else
+ 			sandbox_eth_arp_req_to_reply(dev, packet, len);
++#endif
+ 		return 0;
+ 	}
+ 	if (!IS_ALIGNED((uintptr_t)packet, PKTALIGN))
+@@ -41,9 +63,22 @@ static int ncsi_test_tx(struct udevice *dev, void *packet, unsigned int len)
+ 	memcpy(&hdr, packet + ETHER_HDR_SIZE, sizeof(hdr));
+ 	if (hdr.id != (peer->last_id == U8_MAX ? 1 : peer->last_id + 1))
+ 		return -EINVAL;
++	if (peer->last_id == U8_MAX)
++		peer->wrapped = true;
+ 	peer->last_id = hdr.id;
++#if CONFIG_IS_ENABLED(NET_LWIP)
++	if (peer->cancel_probe) {
++		peer->cancel_probe = false;
++		console_in_puts("\x03");
++		sys_timeout(1, ncsi_test_cancel_tick, peer);
++		return 0;
++	}
++#endif
+ 	/* Only package 0 exists. */
+-	if (hdr.channel >> 5) {
++	if (hdr.channel >> 5 ||
++	    (!hdr.channel && peer->drop_ch0_cmd &&
++	     hdr.type == peer->drop_ch0_cmd) ||
++	    (hdr.type == NCSI_PKT_CMD_EC && peer->drop_enable)) {
+ 		timer_test_add_offset(1001);
+ 		return 0;
+ 	}
+@@ -58,9 +93,17 @@ static int ncsi_test_tx(struct udevice *dev, void *packet, unsigned int len)
+ 		break;
+ 	case NCSI_PKT_CMD_GC:
+ 		payload = 32;
++#if CONFIG_IS_ENABLED(NET_LWIP)
++		if (peer->try_nested) {
++			peer->try_nested = false;
++			peer->nested_ret = net_lwip_start(&peer->nested,
++							  NET_LWIP_ADDR_NONE);
++		}
++#endif
+ 		break;
+ 	case NCSI_PKT_CMD_EC:
+ 		peer->enabled = true;
++		peer->enabled_channel = hdr.channel;
+ 		break;
+ 	}
+ 	out = priv->recv_packet_buffer[n];
+@@ -81,6 +124,190 @@ static int ncsi_test_tx(struct udevice *dev, void *packet, unsigned int len)
+ 	return 0;
+ }
+ 
++#if CONFIG_IS_ENABLED(NET_LWIP)
++static void ncsi_test_cancel_tick(void *arg)
++{
++	(void)arg;
++	console_in_puts("\x03");
++	timer_test_add_offset(1000);
++}
 +
-+struct ncsi_peer {
-+	bool ping;
-+	bool enabled;
-+	bool early_tx;
-+	u8 last_id;
-+};
-+
-+static int ncsi_test_tx(struct udevice *dev, void *packet, unsigned int len)
++static void ncsi_test_free_pkt(struct udevice *dev, int len)
 +{
 +	struct eth_sandbox_priv *priv = dev_get_priv(dev);
 +	struct ncsi_peer *peer = priv->priv;
-+	struct ncsi_pkt_hdr hdr;
-+	int n = priv->recv_packets;
-+	unsigned int payload = 4;
-+	u8 *out;
 +
-+	if (get_unaligned_be16(packet + 2 * ETH_ALEN) != PROT_NCSI) {
-+		if (!peer->enabled)
-+			peer->early_tx = true;
-+		if (!sandbox_eth_ping_req_to_reply(dev, packet, len))
-+			peer->ping = true;
-+		else
-+			sandbox_eth_arp_req_to_reply(dev, packet, len);
-+		return 0;
++	if (len <= 0 || !peer->try_active_nested || !ncsi_active())
++		return;
++
++	peer->try_active_nested = false;
++	peer->nested_ret = net_lwip_start(&peer->nested, NET_LWIP_ADDR_NONE);
++}
++
++#if CONFIG_IS_ENABLED(CMD_PING)
++static int ncsi_test_ping_cancel(struct unit_test_state *uts,
++				 struct phy_device *phy, struct ncsi_peer *peer)
++{
++	struct udevice *dev;
++	struct eth_sandbox_priv *priv;
++	unsigned int starts;
++	int ctrlc_state, ret;
++	bool interrupted, rotated;
++	unsigned int tries;
++
++	ut_assertok(phy_startup(phy));
++	eth_set_current();
++	dev = eth_get_dev();
++	priv = dev_get_priv(dev);
++	starts = priv->start_count;
++	ut_assertok(env_set("netretry", "once"));
++	ut_assertok(env_set("ethrotate", "yes"));
++	peer->cancel_probe = true;
++	ctrlc_state = disable_ctrlc(0);
++	ret = run_command("ping 192.0.2.2", 0);
++	sys_untimeout(ncsi_test_cancel_tick, peer);
++	interrupted = had_ctrlc();
++	tries = net_try_count;
++	rotated = eth_get_dev() != dev;
++	clear_ctrlc();
++	disable_ctrlc(ctrlc_state);
++	peer->cancel_probe = false;
++	ut_assertok(env_set("netretry", "no"));
++	ut_assertok(env_set("ethrotate", "no"));
++	eth_set_dev(dev);
++
++	ut_asserteq(CMD_RET_FAILURE, ret);
++	ut_assert(interrupted);
++	ut_asserteq(1, tries);
++	ut_assert(!rotated);
++	ut_asserteq(starts + 1, priv->start_count);
++
++	return 0;
++}
++#endif
++
++static int ncsi_test_start(struct unit_test_state *uts, struct phy_device *phy,
++			   struct ncsi_peer *peer)
++{
++	struct net_lwip_ctx net = {};
++	int ret;
++
++	ut_assertok(phy_startup(phy));
++	ret = net_lwip_start(&net, NET_LWIP_ADDR_ENV_STRICT);
++	if (net.netif)
++		net_lwip_stop(&net);
++	ut_asserteq(peer->drop_enable ? -ETIMEDOUT : 0, ret);
++	ut_asserteq(!peer->drop_enable, ncsi_active());
++	if (!peer->drop_enable) {
++		ut_assert(peer->enabled);
++		ut_asserteq(peer->drop_ch0_cmd ? 1 : 0, peer->enabled_channel);
 +	}
-+	if (!IS_ALIGNED((uintptr_t)packet, PKTALIGN))
-+		return -EINVAL;
-+	memcpy(&hdr, packet + ETHER_HDR_SIZE, sizeof(hdr));
-+	if (hdr.id != (peer->last_id == U8_MAX ? 1 : peer->last_id + 1))
-+		return -EINVAL;
-+	peer->last_id = hdr.id;
-+	/* Only package 0 exists. */
-+	if (hdr.channel >> 5) {
-+		timer_test_add_offset(1001);
-+		return 0;
++	ut_assert(!peer->early_tx);
++	ut_assertnull(netif_default);
++	return 0;
++}
++
++static int ncsi_test_shared(struct unit_test_state *uts, struct phy_device *phy,
++			    struct ncsi_peer *peer, struct net_lwip_ctx *held,
++			    struct net_lwip_ctx *other)
++{
++	struct ncsi_aen_cr_pkt event = {
++		.aen.common.revision = NCSI_PKT_REVISION,
++		.aen.common.type = NCSI_PKT_AEN,
++		.aen.common.length = htons(4),
++		.aen.type = NCSI_PKT_AEN_CR,
++	};
++	ip4_addr_t address;
++	u8 id;
++
++	peer->drop_enable = false;
++	ut_assertok(phy_startup(phy));
++	ut_assertok(net_lwip_start(held, NET_LWIP_ADDR_ENV_FLEXIBLE));
++	address = *netif_ip4_addr(held->netif);
++	ut_assert(!ip4_addr_isany_val(address));
++
++	/* Lose the enable reply while the original client stays attached. */
++	peer->enabled = false;
++	peer->drop_enable = true;
++	peer->try_nested = true;
++	ncsi_receive(&event, sizeof(event));
++	ut_assert(!ncsi_active());
++	ut_asserteq(-ETIMEDOUT, net_lwip_start(other, NET_LWIP_ADDR_NONE));
++	ut_assertnull(other->netif);
++	ut_asserteq(-EBUSY, peer->nested_ret);
++	ut_assertnull(peer->nested.netif);
++	ut_asserteq_ptr(netif_default, held->netif);
++	ut_assert(ip4_addr_cmp(netif_ip4_addr(held->netif), &address));
++
++	if (CONFIG_IS_ENABLED(CMD_PING)) {
++		/* A failed ping attachment must neither stop nor rotate the held MAC. */
++		ut_asserteq(CMD_RET_FAILURE, run_command("ping 192.0.2.2", 0));
++		ut_assert(eth_is_active(held->dev));
++		ut_assertok(env_set("netretry", "once"));
++		ut_assertok(env_set("ethrotate", "yes"));
++		ut_asserteq(CMD_RET_FAILURE, run_command("ping 192.0.2.2", 0));
++		ut_asserteq_ptr(held->dev, eth_get_dev());
++		ut_assert(eth_is_active(held->dev));
 +	}
-+	if (n >= PKTBUFSRX)
-+		return -ENOSPC;
-+	switch (hdr.type) {
-+	case NCSI_PKT_CMD_GLS:
-+		payload = 16;
-+		break;
-+	case NCSI_PKT_CMD_GVI:
-+		payload = 40;
-+		break;
-+	case NCSI_PKT_CMD_GC:
-+		payload = 32;
-+		break;
-+	case NCSI_PKT_CMD_EC:
-+		peer->enabled = true;
-+		break;
-+	}
-+	out = priv->recv_packet_buffer[n];
-+	memset(out, 0, ETHER_HDR_SIZE + sizeof(hdr) + payload + sizeof(u32));
-+	memcpy(out, packet + ETH_ALEN, ETH_ALEN);
-+	memcpy(out + ETH_ALEN, priv->fake_host_hwaddr, ETH_ALEN);
-+	put_unaligned_be16(PROT_NCSI, out + 2 * ETH_ALEN);
-+	hdr.type += 0x80;
-+	hdr.length = htons(payload);
-+	memcpy(out + ETHER_HDR_SIZE, &hdr, sizeof(hdr));
-+	if (hdr.type == NCSI_PKT_RSP_GLS)
-+		put_unaligned_be32(1, out + ETHER_HDR_SIZE + sizeof(hdr) + 4);
-+	if (hdr.type == NCSI_PKT_RSP_GC)
-+		put_unaligned_be32(BIT(NCSI_PKT_AEN_CR), out + ETHER_HDR_SIZE +
-+				   offsetof(struct ncsi_rsp_gc_pkt, aen_cap));
-+	priv->recv_packet_length[n] = ETHER_HDR_SIZE + sizeof(hdr) + payload + sizeof(u32);
-+	priv->recv_packets++;
++
++	peer->drop_enable = false;
++	peer->try_active_nested = true;
++	ut_assertok(net_lwip_start(other, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assert(!peer->try_active_nested);
++	ut_asserteq(-EBUSY, peer->nested_ret);
++	ut_assertnull(peer->nested.netif);
++	ut_assert(ncsi_active());
++	ut_assert(ip4_addr_cmp(netif_ip4_addr(held->netif), &address));
++	id = peer->last_id;
++	ut_assertok(net_lwip_start(&peer->nested, NET_LWIP_ADDR_ENV_FLEXIBLE));
++	ut_assert(ncsi_active());
++	ut_asserteq_ptr(held->netif, other->netif);
++	ut_asserteq_ptr(held->netif, peer->nested.netif);
++	ut_asserteq(id, peer->last_id);
 +	return 0;
 +}
 +
 +static int ncsi_run(struct unit_test_state *uts, struct phy_device *phy,
 +		    struct ncsi_peer *peer)
 +{
-+	struct in_addr saved = net_ping_ip;
-+	int ret;
++	static const u8 probe_cmds[] = { NCSI_PKT_CMD_GVI, NCSI_PKT_CMD_GC };
++	struct net_lwip_ctx held = {}, other = {};
++	int i, ret = 0;
 +
-+	ut_assertok(phy_startup(phy));
-+	net_ping_ip = string_to_ip("192.0.2.2");
-+	ret = net_loop(PING);
-+	net_ping_ip = saved;
-+	ut_assertok(ret);
-+	ut_assert(peer->ping);
-+	ut_assert(!peer->early_tx);
++	sandbox_eth_set_free_pkt_handler(0, ncsi_test_free_pkt);
++#if CONFIG_IS_ENABLED(CMD_PING)
++	ret = ncsi_test_ping_cancel(uts, phy, peer);
++#endif
++	/* Channel 0 reports link up but never completes discovery. */
++	for (i = 0; i < ARRAY_SIZE(probe_cmds) && !ret; i++) {
++		peer->drop_ch0_cmd = probe_cmds[i];
++		peer->enabled = false;
++		ret = ncsi_test_start(uts, phy, peer);
++	}
++	peer->drop_ch0_cmd = 0;
++	/* Even one command per setup must wrap by the 256th attempt. */
++	for (i = 0; i <= U8_MAX && !peer->wrapped && !ret; i++) {
++		peer->enabled = false;
++		ret = ncsi_test_start(uts, phy, peer);
++	}
++	if (!ret && peer->wrapped) {
++		peer->enabled = false;
++		peer->drop_enable = true;
++		ret = ncsi_test_start(uts, phy, peer);
++	}
++	if (!ret)
++		ret = ncsi_test_shared(uts, phy, peer, &held, &other);
++	net_lwip_stop(&peer->nested);
++	net_lwip_stop(&other);
++	net_lwip_stop(&held);
++	sandbox_eth_set_free_pkt_handler(0, NULL);
++	if (ret)
++		return ret;
++	ut_assert(peer->wrapped);
 +
 +	return 0;
 +}
-+
-+static int ncsi_check(struct unit_test_state *uts)
-+{
-+	struct udevice *old = eth_get_dev(), *dev;
-+	struct ncsi_peer peer = {};
-+	struct eth_pdata *pdata;
-+	struct phy_device *phy;
-+	phy_interface_t saved;
-+	int ret;
-+
-+	ut_assertok(env_set("ethact", "eth@10002000"));
-+	ut_assertok(env_set("ethrotate", "no"));
-+	ut_assertok(env_set("netretry", "no"));
-+	ut_assertok(env_set("ipaddr", "192.0.2.1"));
-+	ut_assertok(uclass_get_device_by_seq(UCLASS_ETH, 0, &dev));
-+	phy = phy_device_create(NULL, 0, PHY_NCSI_ID, false);
-+	ut_assertnonnull(phy);
-+	pdata = dev_get_plat(dev);
-+	saved = pdata->phy_interface;
-+	pdata->phy_interface = PHY_INTERFACE_MODE_NCSI;
-+	sandbox_eth_set_priv(0, &peer);
-+	sandbox_eth_set_tx_handler(0, ncsi_test_tx);
-+	ret = ncsi_run(uts, phy, &peer);
-+	phy_shutdown(phy);
-+	free(phy->priv);
-+	free(phy);
-+	sandbox_eth_set_tx_handler(0, NULL);
-+	sandbox_eth_set_priv(0, NULL);
-+	pdata->phy_interface = saved;
-+	eth_set_dev(old);
-+
-+	return ret;
-+}
-+
-+static int dm_test_eth_ncsi(struct unit_test_state *uts)
-+{
-+	const char *const names[] = { "ethact", "ethrotate", "netretry", "ipaddr" };
-+
-+	return lwip_test_with_env(uts, names, ARRAY_SIZE(names), ncsi_check);
-+}
-+
-+DM_TEST(dm_test_eth_ncsi, UTF_SCAN_FDT);
++#else
+ static int ncsi_run(struct unit_test_state *uts, struct phy_device *phy,
+ 		    struct ncsi_peer *peer)
+ {
+@@ -97,6 +324,7 @@ static int ncsi_run(struct unit_test_state *uts, struct phy_device *phy,
+ 
+ 	return 0;
+ }
++#endif
+ 
+ static int ncsi_check(struct unit_test_state *uts)
+ {
 
 -- 
 2.53.0
