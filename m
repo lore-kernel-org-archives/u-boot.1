@@ -2,154 +2,204 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8564606A31E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 19:01:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A44C606A321
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 19:01:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gpSP+TCf;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=jSfY2Blk
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aToIhxKN;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WjLuuZKR;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=iMKEWenM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6234160AC3;
-	Thu, 26 Nov 2026 19:01:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 67E2060A9F;
+	Thu, 26 Nov 2026 19:01:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vdWfbEEw1_ty; Thu, 26 Nov 2026 19:01:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7626460AA2
+ id 3AjTHWUN9wmH; Thu, 26 Nov 2026 19:01:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7C17A6066C
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795719664;
-	b=Wo1AAS3w/AEJe0gB+GSNmWjAE7P5JXaVValmjJVGUG2/LN/y07PXLlXJw5ZX6jyxHdwX
-	 EzPIt2yhvBGFd6LrtY37wUKTpAcVv1zOx2XLYMxykfRdM7UVo6DcBinI0luif5HIu1LR3
-	 SJAPrPiP9dmq/MJ3V7lzCJsYgUzUuQNv8GqccEtBGE8rRRtyzNVGBzP3XYBJFR7VtyWe+
-	 s3rCwOYE6//0/6hy3qK2pE3+stlhHXydIy961HDKA604Hc6K/CBFA6ZwOCQyKlMAB960O
-	 QsYxcdsoEOlGS6HvZZidLuKgohOGL41xJVyRzOxofSk1FvSqcyOtZuj7F9NwqGgHhoA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795719703;
+	b=LTxGdyb8luREkXbdBXMaQ0Yfcsn7mPecM0xHDVHf0OUsHTkhX22y/R6PZsufTsjLH86o
+	 dI9PPmzVU+bUaSyuM3y6rC8dJtOp2vqpxaqUpaPTvXHQGGerLKeeTu6R60Z6Pn6xeW4Pc
+	 BrxCR38MY0RZ5l5dx5lpolUmgv/EJqr5h1m9wc84UP4V0a/Dihayzk6pZUFlOTsm/CU2w
+	 NV4ocWfNn0Ao6pyYTBeLel8Ki8/6A4FRtwUoMQp5j87N+UbOb3Bgo3wu5Bhx36EPslMl6
+	 z5REwx6VDa2zve12KDSDmIyirJ+ugRV6wVSuYnTua8eRVjCsrKg9PSeVx0l3O6X7TMA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795719664;
+	c=relaxed/relaxed; t=1795719703;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=Nm9DhTMbx4lmIgsHqSREg64MMoVLRVfZYgfbdqdXf3I=;
-	b=jgoqArs1ykpu0xflhXOQz1a0uS41NEz8OyafE1KXiQ/mkFVi8eS5UV4wfzq/gLtrgkZS
-	 W46WE9V2RXFCQRIAxSkgIRdKadqxmm7UysEONY4YjXcmuS6mauplIJXFrd1aAU1l4jXgv
-	 RVypGL1o0NEPyi0m/94RvpxhTSL9brSFBQwqsPuAiphHAyXUh0KtRY1IOh/9e8CxRQIQe
-	 gHo8aPdEjlWxx1f+v6UdwLEW5b89qiTfMQ0xzY7MZf9cjn0NYA469WJcuiASi/pIaP+Jb
-	 62Uo5nrxtJv9bl3kixZK+DhK0ui68qQWAacTlTHYy6H2foGZ0Tb2fwgQX0vWe8qXmhw==
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=+8bZ4djPdfCPHoYWKdohBJQOVuPRkdRO8qbsH/QEYKs=;
+	b=nd42+M6Uay89GOrLbxNsFU46eVqxlfROBxRAXBFsGmxADzC3TST66Pal9YQYVIX5DBjC
+	 FOtyT4VlPSZTodb87BTc9qFVf+7NzNOPY+EL3vwv3DJun/7EbgC3i0cghIYK/oI1Gnzfi
+	 zkQ93KWfb70mUk+sp6BG/GbmbI7ZHQzZ4vYkPbQvxeWHadXrg8bnwDK1GmZTT5iVshG0Q
+	 laqy5LutTIQaIBnjOBKoFzKjixBGhVhaOAugIwbBl2tRzMZy36w1QMujr+YTMEGrD7JNN
+	 8Erd1/iTVFLAin4IwbewydZkwkIL2d4XuuTgD0kzyB28pB6e1Hpg/rf37+yg9wle58A==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WjLuuZKR;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=iMKEWenM;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795719664;
-	bh=Nm9DhTMbx4lmIgsHqSREg64MMoVLRVfZYgfbdqdXf3I=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=gpSP+TCfzV0cmX3EAMqv2sHCkfZrW8htlCItDO7egXT4oFm5rPChDKc/3PIM59Q5e
-	 Tkgy57LTSzDNsqVEkty3VIkOWDp20AaAVdsusS5jVx/Er6I2oKpazUIAOimEE5uqhg
-	 dWGX7W1UANh1Erh1TB/oAsaY0XD3/+RoK42dBvBUhnQZiydUXTLTlnF0NyHYI031KR
-	 sjln5Gc7ip+B3nX1V5T1G3vNV4tCqO3Svei4cQmTvLHssFiRWH/QHv1KL50HsSgRJX
-	 Lc5E9zXqV4X0d2Kwzl3A+ugjqsSb9HNdqFXCjZ+PBqz7mwTU7A7KPZ+tH7QiyVoZyL
-	 2g9F7mIyHa5NQ==
+	d=lists.u-boot-project.org; s=default; t=1795719703;
+	bh=+8bZ4djPdfCPHoYWKdohBJQOVuPRkdRO8qbsH/QEYKs=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=aToIhxKN8b4aNjNxREvX3JoSjuGHwQTiEjRMF5wdLOpgS/H8//bIF4em9iC15miwT
+	 CD+YonGQE6lAL7EmZ6bWvLKx2JdUFGmM7mm76hJF6pntZ05OuwPchGKpKhuebibqww
+	 S73X3awVpIjLJF4hzWcuy/zFoRaskO8QT3Y2O6y+XYfUjzmJpJIrLnr/XR0fUHomuM
+	 RYzWFKoLYj06tgb0QjRE/8kBp29B6rFB5HZ+J65ymXl0HG+1uFcQEqcnybarpUUCvj
+	 q+uzuRPng4WCIe11BAVSz8KanucQhxZeyqaDws+hH4vWPgzmt3GOqhhaYVKIJvwTKg
+	 jdDVLArTcDLmA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7626460AA2;
-	Thu, 26 Nov 2026 19:01:04 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 14963260
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 16:35:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7C17A6066C;
+	Thu, 26 Nov 2026 19:01:43 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id E6A9222B
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:01:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 06343811D4
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 16:35:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E3C3460ABA
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:01:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RA58E7YH7B08 for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 16:35:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 19B37811D3
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::1030"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1030; helo=mail-pj1-x1030.google.com;
- envelope-from=richard.henderson@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=jSfY2Blk
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 19B37811D3
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 16:35:13 +0000 (UTC)
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-3ae7626d14aso3574940a91.2
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 08:35:13 -0800 (PST)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TN9ahlceGUes for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 19:01:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6BC8160A9F
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=WjLuuZKR; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=iMKEWenM
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6BC8160A9F
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:01:39 +0000 (UTC)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6AQFuKBC275895
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:01:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=+8bZ4djPdfCPHoYWKdohBJQOVuPRkdRO8qb
+ sH/QEYKs=; b=WjLuuZKRD72mkgzrwMV3OVd4USW5xds/1/kYThCR6HLWfpNPS+u
+ HTFwMVHcFc8PGuIRKriEgQNIy/Z04RbySzrAQ2r/frzevkw2vUDXL8mKJ9/k39Xp
+ P8VcI64GbdX4f+9L60iX7eR4FGmNJ1TqzhUi1zABV6d13kY1VBKY+FwS9GD/buNE
+ 8jGcYhp4MDjLzFiZhKbypSKN35PHKpGOrZxChd3VTK3SSQ1NKrTdEFotIf8BboIP
+ y5EcMsGjTjInuxp8fmIsHc7WiYxBBt8Fq1kLd7IHFO/CikD3R+es0lPvnkAGQ1J4
+ k3Mz8GnJcEo2/mhMVZmd65ILQ4myIXObgbQ==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6hm822de-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 19:01:38 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id
+ a92af1059eb24-1b588e4bd7fso2391840c88.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 11:01:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795710913; x=1796315713;
+ d=oss.qualcomm.com; s=google; t=1795719697; x=1796324497;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Nm9DhTMbx4lmIgsHqSREg64MMoVLRVfZYgfbdqdXf3I=;
- b=jSfY2BlkSOd8nVxWUqSsGy3HhWmCMQXXDCmG5kn/LyXNZjUyrYUB/AIARP3DdYx8bF
- W6mXlhyXRkPZxI6EM3uOOndBwKN2WgWtn3HAUYPSJk4Ym/K+9//OqKZiCdqe74YtW/H4
- A93FAbmwxOblndZrglhbDneYS91TSe+mXJwiFyFJloHmdRRR9+TAhqae6SYtk99qys8q
- WLA3viWcuDnIioSVroSOHA7pEqNInHxxGIUzPjcZ7VtYuTzhjxSc1AMxlytCT6leUT/i
- hYgtCAPSzWSMPPOkOSIqs8n9ULTYfoYcRCdDBSGSW4Zhzfa0dYkGCnSlNg351Hz5TE8q
- 2Sdg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+8bZ4djPdfCPHoYWKdohBJQOVuPRkdRO8qbsH/QEYKs=;
+ b=iMKEWenM/a8NPi9/T5CX6i6W/69PmbHyAh/96jJtrz6slMRd1kxC4NIqXHb4D0NwMd
+ NOK45EfDbVJpxOIKVDBb32YfQwqRL+snRlOn2QFnD7I6nttcnUjB/NBRFcn5QE2mboQ4
+ szTU2gki5vNz+ELSZAEz5tqWXkIvtUqlJDkVE+NhR8ADVgIHAC97JYiTeve7tlGTwOD0
+ wT5nfQoOnyx9N3aMgJfdAJGAdf7Rb+MAwAN687TUAXvJzUBIK7JU2S1hOrhspaduWQsr
+ 97e9LyCQCKn/k6t8iuHWGKOvQolTekIkGz+C26YrHseZ+GvK4B9P7XjPrMdIXR1TAybp
+ jjog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795710913; x=1796315713;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Nm9DhTMbx4lmIgsHqSREg64MMoVLRVfZYgfbdqdXf3I=;
- b=deXrvvFN7/TP/nJ4gVwVxelHhSDxXL4tCUiEFJZysD0eQapVcQudlAhBWMttPHe1ou
- D+Xg8/pPQcwMuumPlbjVK1Htooe6AooR1yQtNQBT122C4lAxwSrVATPh3M6rTX3etZW7
- bK3JQbp2gGR6NC8/r3Vwo9Bghythp4aq4Jbbqdd6b+v6vdGKcuTsnL96J4wOqG7R5VtZ
- byhkdKi7r25lHfsH+7zG5qIVGS9jyUwNPjiOt3xXMpo02x8ioSlyOupLuplc0dG/PPPc
- rnFpfBhFB3u5aVkviOH5jamEp3KceKpTN00Re8sALFDJo+xz3cA60m5mu6yY0Zu07Ieb
- OKUw==
+ d=1e100.net; s=20260707; t=1795719697; x=1796324497;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=+8bZ4djPdfCPHoYWKdohBJQOVuPRkdRO8qbsH/QEYKs=;
+ b=kO7uMxWsY88CfkjLJj4QhtMzX6L0XlQW/LpncdRWVvaa3ugDL+2tleyROir/VhOrI4
+ gFdSt5zWD1KTzgowMYi362AbgtEAPOkKKl1JaW6flXAIjlEbO5X/SGeLgP6ZB7ePuNx7
+ CWariR7XfIR5wzEHziZKchwmRjKoWdLx1qtyzEn0/yx6HHsGbT0AS1sV6XzKQP8EVeTD
+ xjpLm4KvcUzGytwlmwqM+xRdn/idRS4PbKrZuHpqojIB9kz079qq3J/REzD16Yaf5UqJ
+ 0AwYDxXZs8MkcjwCEEH+v8wESXhNoeMl0ozPtF+pOCss+hLtq5EjpTtHupf8UbM+i4cX
+ 8uoA==
 X-Forwarded-Encrypted: i=1;
- AL+hErEScO57dlNEQOXgrkfszRPh8/mp/7CFh/l4DufOesFQHFTbOhsN1Oa3dAhB9qStu0k3PkOYt9Q=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/Diri9z6uFmyAV0KvyqZVT1c7X9xrsmtnRbGwCHvRwQkAGZt+U
- 02TB2x2xW5txjdbHhBTAoExHodb6+0YzA9XooFCVdcDm+t55FhSj5Qhjco6vh1kRk3Q=
-X-Gm-Gg: AZFdTZf9TiGLVlz5jAewetAv615pdQ7v/1vJOVUqaetwKi2ViFNfUkq6ElMDbnaJclp
- UdbTNm0gRq4qRrq8sseHuNdbvvOQ9uPxjb5ahJ3UmMrbNWaTuw+dk0qrAjR8RoF3thTL0KaXDEP
- QmxA2Xfu9FbYU7K5baPtjQ7AuEf6YXLo2OWdGCzn/sfhM9kYh2ZPJ9cNKSe1RZJ3OmrHElMtsrM
- 0x02GTVgGzgsSId+t6p0ONsH31c8XTjQyUIV617+eCL6Q4uKL78ncFKAMDvhUwRzKxWMuoP2cAl
- b3riPTVScIXjbUN7IcbclTjTvIQGhwfWiNYP7K45UvyVIxTxw7ZOlbdw1vxo62zLPm2wj2C5UW5
- Eb23/Yp+sAzQjrC19xGKoUsMxqcIDDSrMjptskbZYa2pZDTwRQsnCsPNanKWtq1Mf2eTQOFLAMh
- IzoJHgNka+WX2WJgL8T0MJKY/3PAKsxA5pyg8FjASyjN/2ZagysP0doGBTTZVyPzL1nIUynKQIt
- z1/rBleD4bT4Wbns/OfwBaqoGxBYnJG/P22LZO1gjIKU5zO9QrEgQi1qNQoqTCxIPCBUcuRJlCK
- 6InsI2KWSSx+sVEu/5CRceP+QBcIY0yWvkef5e8g7fY=
-X-Received: by 2002:a17:90b:2f8f:b0:3b3:b0f4:1bf7 with SMTP id
- 98e67ed59e1d1-3b41c8d460emr21248670a91.23.1795710912695; 
- Thu, 26 Nov 2026 08:35:12 -0800 (PST)
-Received: from [172.20.3.121] ([156.19.246.27])
+ AL+hErFg4+afaxS9KvhuiAImbSYBvhGhdID3G16D6SlygCjNSOIH99ajv4jy4qlLj2HvBQzjHSdWHBg=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8fVLoT9SjXrxaQeIHJu9yveO5Eko4tCYburp/DGyzcZom0MviW
+ 9X9h9mc5wbOWOPk21c618gCWoZx7LDVTstavef/wF89Tjz6A37GKxxJJ4HLnFdpDEjhbPBWQ7/h
+ rOqtqLEIndcK8923W31EtHCRjITlJ0Y1WJzh/ELnJXIoABhIa2uGXu0kX/nUeUKTEmGQxXK6TIu
+ cy7Bg=
+X-Gm-Gg: AZFdTZdFXT9MvgelWMvX2V1LEeRTQc9002ykp83cx2a3rc6HwqDiecXeqZWgEGNCWy0
+ +KhZeKUCKD0Vu2hv7Rrd42pTneU9X37Bp144IcBBnxCniNvZHFQHWTll4WtyWTCqVk7Hztbk5US
+ iWfJOgq38+I8ANICVvxMN6uq9H+d/JOsl778uAeuG9vz4jmzcAmE+USIfoE4CI+ODAg4lV5pOzC
+ 7qjoYDfkrVSiQVtALxtvk34jQwnCDtLGT3q+9ZNIkwjdFoH9QQ7T4i6cLFZpJrNHuH7prsptLsT
+ jsD6EkywL0ZC9KsfYFwegvYipbqt1MTgSLRylBGDn/Y9NdVv4TZfn0riapYy40jX5TKMpuHuIIJ
+ 3rGb+cgUqoS053mwe68hS+MAiz7Lkl0MZWtkWh99KAf5UBTzB+sefeIM8xxx699NxZBf+dtt9Dm
+ ccNgzQbB+Jggfjhov0TPRgJmbKFmElRWNyrwVP86HRZ32cnCIkwFEcyxE8f1VStlMtquFD
+X-Received: by 2002:a05:7023:888:b0:1b3:ad63:b9c2 with SMTP id
+ a92af1059eb24-1b5568ee910mr23106079c88.22.1795719697182; 
+ Thu, 26 Nov 2026 11:01:37 -0800 (PST)
+X-Received: by 2002:a05:7023:888:b0:1b3:ad63:b9c2 with SMTP id
+ a92af1059eb24-1b5568ee910mr23106068c88.22.1795719696583; 
+ Thu, 26 Nov 2026 11:01:36 -0800 (PST)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b44b2156c2sm14803843a91.0.2026.11.26.08.35.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Nov 2026 08:35:12 -0800 (PST)
-Message-ID: <d19f2102-4da4-4369-b4e4-f6be0fb92500@linaro.org>
-Date: Thu, 26 Nov 2026 08:35:10 -0800
+ a92af1059eb24-1b55682d301sm52248845c88.10.2026.11.26.11.01.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Nov 2026 11:01:36 -0800 (PST)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v1] iommu: qcom-smmu: derive used context banks from stream
+ mappings
+Date: Fri, 27 Nov 2026 00:31:23 +0530
+Message-Id: <20261126190123.591256-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: Add RELR relocs
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com
-Cc: casey.connolly@linaro.org, u-boot@lists.u-boot-project.org
-References: <20261125074122.1965495-1-ilias.apalodimas@linaro.org>
- <20261125074122.1965495-2-ilias.apalodimas@linaro.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20261125074122.1965495-2-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 26 Nov 2026 19:01:01 +0000
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: NHJj3WO0o_w5EEyzuEF6hXSqxzJFOEub
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA3NCBTYWx0ZWRfX9lkeqamQLZmC
+ WFQ2VLZRxn0C+w8xrXD4yBH8d2Coxbzh5UwZMuDpAULIFtdPpK9IDMqjbRNgMipxQrRALFtNfjp
+ oxmqhalb8yXIuZC9vtpnIkGxwg1NuZM=
+X-Proofpoint-GUID: NHJj3WO0o_w5EEyzuEF6hXSqxzJFOEub
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA3NCBTYWx0ZWRfXyYsGssumvwvb
+ vQnEAe0VxgI4yr63o1MtmYc+QpvP/eQoufim/orbLLQ2mySR1unTyQJyqa24vS1Pd3jNSVNKQw4
+ YIYfC0A0jdOAghPns2sZFxegDv2fO7yWYPgkmXKqgmeDjt0KWVjUxfZjvoh65wVCADAa+I+nneF
+ nXTgSQ2EPCw1KnkBP/6OmAAhAh+iEGx71e5WD+/einliTdFV/c74bQUpN4rGkTvkgknXOnUp5ac
+ DZvIfsk3npergpKYSgebIfCQ3J4YLyH3cW6N0nSmeHcL5hVOzUn/31qNU1XZepoI+Pt9/sTU2wc
+ xIRLW9Bp5ZeGv57emz25zlpgDQIom0GR07B8QVnF42u5oRl5xhlpQiHunZPJ2H/uHn1uSiY1hcx
+ TfsOGlPpxjfAh4nnFOpasjb2I8ZEjHruM4AlLkD0jeC4+CxKbQocyDWEuPCosWfxLegYWmlTEDj
+ qXBiDmyk4KGIyHWOlsw==
+X-Authority-Analysis: v=2.4 cv=O/usLx9W c=1 sm=1 tr=0 ts=6b088212 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
+ a=ocz8Ny-be4e2-HX_-FcA:9 a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_04,2026-11-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 priorityscore=1501 bulkscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260074
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -159,154 +209,139 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/24/26 23:41, Ilias Apalodimas wrote:
->   ifneq ($(CONFIG_XPL_BUILD),y)
-> -# Check that only R_ARM_RELATIVE relocations are generated.
-> +# Check that only R_ARM_RELATIVE relocations are generated
-> +# unless we compile with RELR
-> +ifneq ($(CONFIG_RELR),y)
->   INPUTS-y += checkarmreloc
-> +endif
+Some firmware enables the SMMU without reserving a context bank and
+leaves all CBARs programmed identically. In this case, CBAR contents
+alone cannot reliably distinguish unused context banks from those
+configured by firmware, causing alloc_cb() to incorrectly treat all
+banks as busy.
 
-No, you should still run this.  If there are non-relative relocs they 
-won't be packed.  You still want the build to fail if something goes wrong.
+The stream mapping table provides a reliable record of context bank
+usage, as only valid TRANS entries reference a context bank while
+BYPASS entries do not consume one. Determine the set of used banks from
+the stream mappings instead of inferring it from CBAR state.
 
-Alternately, a different check that ensures *only* relr exists.
+Also extend the stream mapping debug output to print the associated
+S2CR type and context bank for each stream ID, making context bank
+usage easier to inspect.
 
-> +++ b/arch/arm/cpu/armv8/start.S
-> @@ -89,6 +89,7 @@ pie_fixup:
->   	add     x2, x2, #:lo12:__rel_dyn_start
->   	adrp    x3, __rel_dyn_end       /* x3 <- Runtime &__rel_dyn_end */
->   	add     x3, x3, #:lo12:__rel_dyn_end
-> +	b	pie_skip_reloc		/* .rela.dyn may be empty */
->   pie_fix_loop:
->   	ldp	x0, x1, [x2], #16	/* (x0, x1) <- (Link location, fixup) */
->   	ldr	x4, [x2], #8		/* x4 <- addend */
-> @@ -101,6 +102,43 @@ pie_fix_loop:
->   pie_skip_reloc:
->   	cmp	x2, x3
->   	b.lo	pie_fix_loop
-> +
-> +#ifdef CONFIG_RELR
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+---
+ drivers/iommu/qcom-hyp-smmu.c | 71 +++++++++++++++++++++++++++--------
+ 1 file changed, 56 insertions(+), 15 deletions(-)
 
-With RELR, the above pie_fix_loop *will* be empty, not may be.
-So why are you compiling it in at all?
+diff --git a/drivers/iommu/qcom-hyp-smmu.c b/drivers/iommu/qcom-hyp-smmu.c
+index 5b37c21f66c..5043a0626db 100644
+--- a/drivers/iommu/qcom-hyp-smmu.c
++++ b/drivers/iommu/qcom-hyp-smmu.c
+@@ -177,24 +177,55 @@ static struct mmu_dev *alloc_dev(struct udevice *dev)
+ 	return mmu_dev;
+ }
+ 
++/**
++ * find_used_cbs() - Mark the context banks the boot firmware translates through
++ * @priv: SMMU private data
++ * @used: array of at least @priv->num_cb bytes, zeroed by the caller
++ *
++ * A context bank only ever sees the transactions that a valid stream mapping
++ * entry of type TRANS directs to it, so the stream mapping table is a complete
++ * record of the banks in use. The CBARs are not: their reset values are not
++ * architecturally specified, and firmware that claims no bank of its own
++ * leaves every one of them at the same value, which no test can tell apart
++ * from in use.
++ */
++static void find_used_cbs(struct qcom_smmu_priv *priv, u8 *used)
++{
++	u32 val;
++	int cbx, i;
++
++	for (i = 0; i < priv->num_smr; i++) {
++		if (!(gr0_readl(priv, ARM_SMMU_GR0_SMR(i)) & ARM_SMMU_SMR_VALID))
++			continue;
++
++		val = gr0_readl(priv, ARM_SMMU_GR0_S2CR(i));
++		if (FIELD_GET(ARM_SMMU_S2CR_TYPE, val) != S2CR_TYPE_TRANS)
++			continue;
++
++		cbx = FIELD_GET(ARM_SMMU_S2CR_CBNDX, val);
++		if (cbx < priv->num_cb)
++			used[cbx] = 1;
++	}
++}
++
+ /* Find and init the first free context bank */
+ static int alloc_cb(struct qcom_smmu_priv *priv)
+ {
+ 	u32 cbar, type, vmid, val;
++	int ret = -1;
++	u8 *used;
+ 
+-	for (int i = 0; i < priv->num_cb; i++) {
+-		cbar = gr1_readl(priv, ARM_SMMU_GR1_CBAR(i));
+-		type = FIELD_GET(ARM_SMMU_CBAR_TYPE, cbar);
+-		vmid = FIELD_GET(ARM_SMMU_CBAR_VMID, cbar);
++	used = calloc(priv->num_cb, 1);
++	if (!used)
++		return -ENOMEM;
+ 
+-		/* Check that the context bank is available. We haven't reset the SMMU so
+-		 * we just make a best guess.
+-		 */
+-		if (type != CBAR_TYPE_S2_TRANS &&
+-		    (type != CBAR_TYPE_S1_TRANS_S2_BYPASS ||
+-		     vmid != VMID_UNUSED))
++	find_used_cbs(priv, used);
++
++	for (int i = 0; i < priv->num_cb; i++) {
++		if (used[i])
+ 			continue;
+ 
++		cbar = gr1_readl(priv, ARM_SMMU_GR1_CBAR(i));
+ 		debug("%s: Found free context bank %d (cbar %#x)\n",
+ 		      priv->dev->name, i, cbar);
+ 		type = CBAR_TYPE_S1_TRANS_S2_BYPASS;
+@@ -206,10 +237,13 @@ static int alloc_cb(struct qcom_smmu_priv *priv)
+ 
+ 		val = IS_ENABLED(CONFIG_ARM64) == 1 ? ARM_SMMU_CBA2R_VA64 : 0;
+ 		gr1_setbits(priv, ARM_SMMU_GR1_CBA2R(i), val);
+-		return i;
++		ret = i;
++		break;
+ 	}
+ 
+-	return -1;
++	free(used);
++
++	return ret;
+ }
+ 
+ /* Search for a context bank that is already configured for this stream
+@@ -333,9 +367,16 @@ static inline void dump_boot_mappings(struct qcom_smmu_priv *priv)
+ 	debug("  SMMU dump boot mappings:\n");
+ 	for (i = 0; i < priv->num_smr; i++) {
+ 		val = gr0_readl(priv, ARM_SMMU_GR0_SMR(i));
+-		if (val & ARM_SMMU_SMR_VALID)
+-			debug("\tSMR %3d: SID: %#lx\n", i,
+-			      FIELD_GET(ARM_SMMU_SMR_ID, val));
++		if (!(val & ARM_SMMU_SMR_VALID))
++			continue;
++
++		debug("\tSMR %3d: SID: %#lx", i,
++		      FIELD_GET(ARM_SMMU_SMR_ID, val));
++
++		val = gr0_readl(priv, ARM_SMMU_GR0_S2CR(i));
++		debug(" S2CR type %lu CB %lu\n",
++		      FIELD_GET(ARM_SMMU_S2CR_TYPE, val),
++		      FIELD_GET(ARM_SMMU_S2CR_CBNDX, val));
+ 	}
+ }
+ #else
+-- 
+2.34.1
 
-> +	/*
-> +	 * Fix .relr.dyn relocations. Entries hold link-time addresses
-> +	 * while x9 holds the run-vs-link offset and the addend is the value
-> +	 * already stored in the place.
-> +	 */
-> +	adrp	x2, __relr_dyn_start	/* x2 <- Runtime &__relr_dyn_start */
-> +	add	x2, x2, #:lo12:__relr_dyn_start
-> +	adrp	x3, __relr_dyn_end	/* x3 <- Runtime &__relr_dyn_end */
-> +	add	x3, x3, #:lo12:__relr_dyn_end
-> +	b	pie_relr_next
-> +pie_relr_loop:
-> +	ldr	x4, [x2], #8		/* x4 <- RELR entry */
-> +	tbnz	x4, #0, pie_relr_bitmap
-> +	add	x5, x4, x9		/* x5 <- Runtime address of the word */
-> +	ldr	x6, [x5]
-> +	add	x6, x6, x9
-> +	str	x6, [x5], #8		/* x5 <- Start of the next bitmap */
-> +	b	pie_relr_next
-> +pie_relr_bitmap:
-> +	mov	x7, x5
-> +	lsr	x4, x4, #1
-> +pie_relr_bit:
-> +	tbz	x4, #0, pie_relr_skip_bit
-> +	ldr	x6, [x7]
-> +	add	x6, x6, x9
-> +	str	x6, [x7]
-> +pie_relr_skip_bit:
-> +	add	x7, x7, #8
-> +	lsr	x4, x4, #1
-> +	cbnz	x4, pie_relr_bit
-> +	add	x5, x5, #(63 * 8)	/* Each bitmap covers 63 words */
-> +pie_relr_next:
-> +	cmp	x2, x3
-> +	b.lo	pie_relr_loop
-> +#endif
->   pie_fixup_done:
->   #endif
->   
-> diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-> index 231ab28b50cd..73f0230629cc 100644
-> --- a/arch/arm/cpu/armv8/u-boot.lds
-> +++ b/arch/arm/cpu/armv8/u-boot.lds
-> @@ -149,6 +149,15 @@ SECTIONS
->   		. = ALIGN(8);
->   	}
->   
-> +#ifdef CONFIG_RELR
-> +	.relr.dyn ALIGN (8) : {
-> +		__relr_dyn_start = .;
-> +		*(.relr.dyn)
-> +		__relr_dyn_end = .;
-> +		. = ALIGN(8);
-> +	}
-> +#endif
-> +
->   	_end = .;
->   
->   	/*
-> diff --git a/arch/arm/lib/relocate_64.c b/arch/arm/lib/relocate_64.c
-> index 6f7a50f2264e..0572fe2d29f8 100644
-> --- a/arch/arm/lib/relocate_64.c
-> +++ b/arch/arm/lib/relocate_64.c
-> @@ -43,12 +43,19 @@ void notrace relocate_code(ulong dest)
->   	u64 size = (u64)__image_copy_end - src;
->   	const Elf64_Rela *rela = (const Elf64_Rela *)__rel_dyn_start;
->   	const Elf64_Rela *rela_end = (const Elf64_Rela *)__rel_dyn_end;
-> +#if IS_ENABLED(CONFIG_RELR)
-> +	const u64 *relr = (const u64 *)__relr_dyn_start;
-> +	const u64 *relr_end = (const u64 *)__relr_dyn_end;
-> +	u64 run_to_copy;
-> +	u64 *place = NULL;
-> +#endif
->   	u64 sctlr;
->   	u64 offset;
->   
->   	if (src == dest)
->   		return;
->   	memcpy((void *)dest, (void *)src, size);
-> +
->   	/*
->   	 * r_offset and r_addend are link-time values, so the offset to apply
->   	 * is link-to-copy
-> @@ -65,6 +72,27 @@ void notrace relocate_code(ulong dest)
->   		*(u64 *)(rela->r_offset + offset) = rela->r_addend + offset;
->   	}
->   
-> +#if IS_ENABLED(CONFIG_RELR)
-> +	/*
-> +	 * RELR entries hold link-time addresses, so the location is found
-> +	 * with the link-to-copy offset. The addend is the value already
-> +	 * stored in the word, which pie_fixup has shifted to the run
-> +	 * address, so it is adjusted by the run-to-copy offset.
-> +	 */
-> +	run_to_copy = dest - src;
-> +	for (; relr < relr_end; relr++) {
-> +		if ((*relr & 1) == 0) {
-> +			place = (u64 *)(*relr + offset);
-> +			*place++ += run_to_copy;
-> +		} else {
-> +			for (u64 *p = place, r = *relr >> 1; r; p++, r >>= 1)
-> +				if (r & 1)
-> +					*p += run_to_copy;
-> +			place += 63;
-> +		}
-> +	}
-> +#endif
-
-Similarly.
-
-
-r~
