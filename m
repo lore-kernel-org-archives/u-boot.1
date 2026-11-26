@@ -1,30 +1,30 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4564E606A336
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 14:31:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57362606A684
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 14:32:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=drL/0+O8;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=B4Vz9bBn;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AldCQOHK
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KZSDEtHb;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cIXN9LQJ;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XqnlrCtQ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 17D8581175;
-	Thu, 26 Nov 2026 14:31:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3040960A80;
+	Thu, 26 Nov 2026 14:32:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 48726FHq6t0A; Thu, 26 Nov 2026 14:31:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6553A81176
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795703472;
-	b=S/UZOoX/0kYM2ZsicjD3ZKNbVoTy3Szl43krtXMYvDa3BwYX8gCpBPVevsR192eXXcgV
-	 DER8xrrdno1JYhnreIRDkb01VufupKcvqFjJC6qQm/RjHkaSN46oSBv/8IDdwVKntt8Iq
-	 GWoq0roo2VymqhXheohK65PbEsR+mv7ks46Pkouw7NDqbctV/EOfhHOTDXJK4y45KK2Bt
-	 hSNESvHq2ABF1xawWa3mU8lvp+Z/Tw/94svXqVYUmNGk7z5T17JDaJUHscqKS3+LX05LR
-	 FH6OMhA0E9Kvo20PEpDHGxdK6znfzMc+Yj5KBDU24v1MI6Ypa+POPi/sF0I/Ro6ICiQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ndwm9zZDigjO; Thu, 26 Nov 2026 14:32:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 587CD60A98
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795703524;
+	b=jDvoaEMAXbgLnthPNMUDWzLH0XN866IQexYdyKlco0EsvpYmMVV6HwEFKIuh+6XLXEjp
+	 RWdrOSz/QbyyZtN3KFXcQz9jJlN3t9lspkAP7Pc7WwbEHHSnBTdOgtEZ67uKDs1QrRN7v
+	 LqcAOGF1oZj1WP3AWPsCQ1/crHQMso9PFi+0+ainBjBdXgUJ4jze6YoZ2KZD53clOk9Fu
+	 lJGIlQ8BoDTus6aoJhvwvJ592nCd7nItzcl3jbkOooVmWNuuRj3+QjYOnxTQrisns5W/i
+	 FtjKsa7YWT6H5wYj4wR9uWAokQXd4Q/maqlZrDE7dMOXu1CTvkPn54/R39Q8DpKdF/Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795703472;
+	c=relaxed/relaxed; t=1795703524;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,183 +33,179 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
 	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
-	b=sjjM3+Z19fZbk5X8Q9JApqSVmf+vpO2YXY4O9ZYKoy0EsoDdn7J6tk/vF90w5mEBQV5+
-	 67j1FVns/GxpbxbsmKy2X1XxRxBqfnfbbeRRwoxwzZ41Ivijm9CPnbwLUrQ0jZsmAlLUb
-	 KuMUONwqAk/+HzPqStXzzBXxeiBry9yZPf2nWc1aM9MP183nOi6yWIiPazw3ATSwpbCWh
-	 S9VZp+DrUBdzwgiKSguSJt5nhLK6tCqpXv4zZg8n4wqjQdaPRFj3ewL09BKJp1Y2q0Slf
-	 VTYbhU48sxdZtCvM7oT+WliaYlb88DzCbpNnO7s+CVYVUpJumoai15u6ya/FjWSDW+g==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=nVzQWt+6Spw5rc87I9Uto0Pxl64X2VycjWOZhqyn0SQ=;
+	b=eSn8K6b3u5PdBnV6UsUuXRv1ybul0GXgUzm1byN3dudcCBC1KIYfuiePpREUc9SDHy5/
+	 zQ8YRKOogy+z74vznie9JeD6tIXBewk7c0GxVezLIKBLY8Z8MT5k0jUWYevusOUvEatr2
+	 /pZxiW2sHKoSxRtkLSaDG7pR+eMmpV2r4JXG/PAIgWdjYN6kBfQFDCGsc6l1DSWQBaioQ
+	 Mhqy4MHtZwU6WPR0cdm7Ld/4PRbsK8cTgWA+PZSO3BKGRWpxGq3k2w5AOiVEMvNQ7F/bt
+	 mU4DmxknKs2QMaVvbDUS//+i6SDGee81LkGwwZfkPlPR3wFywLXhGGlESTDxhaIXrNQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795703472;
-	bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
+	d=lists.u-boot-project.org; s=default; t=1795703524;
+	bh=nVzQWt+6Spw5rc87I9Uto0Pxl64X2VycjWOZhqyn0SQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=drL/0+O87MFV/PvMk7MjfFncYlMZ1X9OgqITt78/lExZYYLLEdfeN+ERYzNaLhT2h
-	 y1bVjsCu9didZCowSxfOVOvyGtuJu0DzaLNVO/+pMmEUD/DBw+KNOGpKFCndm5A67T
-	 hJXN95gVtv0Jdt9Wj+Nwlw0Iq05v1xMHsNIqIY4XdzrDvUOSzeMZflYP70I+147KtI
-	 p7EqGtzT9FnT1r+lXqlLqt1IJlZYVa1ZJBYNpJ0wRxvJEHynxLHheK+1+own5iAMWF
-	 Hl1ZtL9E/z2mo8fCTDnB9/eIM3VX9I2cwcMB5dZppXR/hdThIthvLV9zzn/RxC6Nvf
-	 BnjJRsafz4nkg==
+	b=KZSDEtHblpnit7e47WqDlxB5jTlFhC3GlKegbzF/eW1KE7qD4XIDU2yYS7TtSM0ze
+	 snAqV24lgQjWGSaWyiCgH2sO8GwoUfi+fK28bmA9T/0tXsqTY16AZhhczbnyr4B8jA
+	 yRRhLN+VHToaz/Q4DyFqslIKsidAwrFKXDQd4MujNNpfMe+aoIBDz3kimQjr7Cq69y
+	 i3iphbF9/43EXEGcqr8XHRjR9WdiI4yws5H9+gmrZVFwBAxPf84droWtPd68GFsy22
+	 4iKR/YZrfjiEFOaK6N8o9nXEllC4/huIL9qJQWqw4pmBYBbyhkhgunICOm1/CtpZUK
+	 UJ3NDFo5g380w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6553A81176;
-	Thu, 26 Nov 2026 14:31:12 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id B459B371
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 587CD60A98;
+	Thu, 26 Nov 2026 14:32:04 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6AB80311
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:32:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9A1DB404A4
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5B81D80816
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:32:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UOTHc0hnPx18 for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 14:31:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B086440111
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iO3AsINFUDnR for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 14:32:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7FDCE8119D
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
  helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=B4Vz9bBn; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=cIXN9LQJ; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=AldCQOHK
+ header.a=rsa-sha256 header.s=google header.b=XqnlrCtQ
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B086440111
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:05 +0000 (UTC)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7FDCE8119D
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:32:01 +0000 (UTC)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AQEV22H3170951
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:04 GMT
+ 6AQEV5fJ3664852
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:32:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=; b=B4Vz9bBnUZI5syxE
- MhR1v3HL+wUAiw1EXaIygRRNIRnetUjLt+SWM/R9lvvVfgXC+gX3QLGlxmQgcXVh
- sqfPurhTzJUXMgNI+1zPNPNf8SQ0b8vOKY7/YY6/WFezG6Ehb1K/wPZ8ThQSbBzz
- VrnVJHZt+jLrnkJhpHIfMqXZpIlGjnqbF/ncd73oeqtlUH+bWyC6hs73m/CpBrD1
- TNrgszQacswrHuBLguLV3lc8zSSIFly2YpwpyatGKyFUz/4Sd1Pni/afq8psSLTS
- Ll1sLVXmOO0XY2fVmedwK065yGHk4VqA5yCWPl3tsrJ8i96Zt7GgkHr0HNsuks/q
- XRRSXw==
-Received: from mail-oi1-f199.google.com (mail-oi1-f199.google.com
- [209.85.167.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j66qfba75-1
+ nVzQWt+6Spw5rc87I9Uto0Pxl64X2VycjWOZhqyn0SQ=; b=cIXN9LQJRjaFgAvO
+ hLUpfspkMe5CzB7Q9nzV4UwCRKcT3tzmRO1dGjqvirYJLkivGX+s0HclGJ2Ia9SP
+ YwaZn/Ls753D7x0Ye43QbPbRIyu0T+8Yigq6o+zCjFtx6TIk9h9OkW/XIq2u5cdK
+ 5MV1ZSwTlj5UJrog5gimMsmAt2z4ZVj+LEPecz3Mu+nQopmBHaeJQ52F9xvKY4Ix
+ Owkj1QZV0vCNUrgJswf2E4kP8zULGIhirW8pPsvU5c5iRokgvcbiOTp0FptORJJE
+ 3gmX9XjatDmG2lg5mpGFvFSIaONnBvBXVn27qMa32HO1iUzPPrTilYajZzi9i12C
+ wugYKA==
+Received: from mail-oi1-f197.google.com (mail-oi1-f197.google.com
+ [209.85.167.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6h7g9a9x-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:31:04 +0000 (GMT)
-Received: by mail-oi1-f199.google.com with SMTP id
- 5614622812f47-4ea2c058e67so7561310b6e.1
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:31:04 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 14:32:00 +0000 (GMT)
+Received: by mail-oi1-f197.google.com with SMTP id
+ 5614622812f47-57ce46ad0c1so5295764b6e.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:32:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795703464; x=1796308264;
+ d=oss.qualcomm.com; s=google; t=1795703519; x=1796308319;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
- b=AldCQOHKo4coENY6zgQPcWpirCDkvqsDOV6EgFtuk0vww6yIeTZc1nuM9VnxIrRVsy
- hD5DWNXEIlr2HCuRTGOOmfllcbJsJL1AxedTaxFEsiZTveNEXR7w6bm82+JhfzzGQm4n
- wulou3olHBuh3M9+3HlaTM4VzkVGOk9igXIIyR45e7W2wA6tlQ4/wU1sag0JOmFatrs1
- 6bspScKslL45MK8l8l1lM/2MmmOXWI5/XQKPXEf4zXtU0xx2qtjedTjSiIYzvWF+84rS
- Dmqtvs3jqo9TmTP8Rs9UIvzgKNpCimXK6WuqQ09LYJj9aulq6vZAqhSn2nP2DQMaCHc/
- Ygjg==
+ bh=nVzQWt+6Spw5rc87I9Uto0Pxl64X2VycjWOZhqyn0SQ=;
+ b=XqnlrCtQHOGDHCSXAsRyVNYojBsD/wUx/aI9MtmC9AbcIOvIEtsNN9qsAfdk2JnRTW
+ W1bKiiR6tAYMkjlhLksYXyLxl3Wb9QtGUijhOQr5koxgq2a4jDJDFWXHe3vhwILSqc2p
+ NTOnhRTiSJv9l2VGNZaYMBZhwIr1ir3t8CR0F9XfRDc3GRVHkhbBx4TGxFhmO44UrcGn
+ 5QCk1iV8JEablcZTV1YfdMfB+vbHPxu1UeGVLydK8dnfyLkB4ZNCwuOHKHOzdhflYzMH
+ 3KFpFnsxPiY0z6BIyY99fQB/1U6i92d8T5cVt0NF6gkN3p9SOjo1VJgEyAPD3fIj389J
+ 4wcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795703464; x=1796308264;
+ d=1e100.net; s=20260707; t=1795703519; x=1796308319;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=aW5LxFuAZqpev774fiKjWSq5LJG8MrDbHoGMnyxyN04=;
- b=zCsLw3eHRypNnmrg9rgQBh3AAzghRM5sFamM2Zd7l2+U+ojEY3NWz8cqTZfq7xt6nG
- pSBp7gFFXTZMQaWlfxe3xazhOxg4aQwZwbZvD1iXze2njvFllDuesERzWnrNRiMUc1kp
- CXpeR16filJCd8IvZggSFDFK+yh6DU5L8BHbALn0efExr98hBAwHmE0ZW4xx4r5VS/zU
- ewJEI16Kgk7QRnlqmnBMdsHpPQMnIYqU2hJd88OIzIixOAvVfvGHGqqJIZLnIglChHCe
- +VIspsT3LNZA47m+k8Tr/dJdED/8Z3NmtQKG+kbwnjyTE82CpS5iaDxnx4UqwYpSISh4
- cxVg==
+ bh=nVzQWt+6Spw5rc87I9Uto0Pxl64X2VycjWOZhqyn0SQ=;
+ b=q9wupxhitPtGNWYqhbkUbn3w3+ILo59+9EgBCsiSLSqPr6jBgVOsl0snHYAZkyvdXR
+ ehOP0WjfHVzQvCj47V/S5juwom60dOEai9MEK8QS49xXKryVkO3MHL/X20b/7zZd+DTz
+ 5zSe1Wvno1DUvFaInu/unw1UEzXfL+oiodvuyMcuHn0kmGCXuboM5G49pk6kyu1fFqa4
+ 8iq6XSP8j+rQZZja7ehgb3Mpq6trTaolkFJU7fEs762HtXoDFlafsa/e9P9WjvDXiwhl
+ yEAcn8V847pyaZKmOzOZ3XbBLenmn/gFBg7V0czG+5hbIBZnJVj1pK7ZiY6gtex3QcQT
+ Qv3A==
 X-Forwarded-Encrypted: i=1;
- AL+hErF+FivUMzg3zkW+jZTqOnDImDn1O0/F3udiq7vXfResKbUeEh1lScw6ZoLwtgF4Yg715nXlv3A=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+gHCdmwrG8Dv3Yg0duYLXkv80Rar0mr7pd44ExBXpWO47ygOd/
- HfJbE28ep1uzj7sgWtC9wbsFQWouDSEMMNaB/zoKWjekH2IgXqVsn6xL1O91Ng92eZgHCl/qgSs
- 8zlxmqX4U7FvICmJA6ijRdeS5Ev+8bPhQa7HQcyoqqBYgSj6s/vheIS1EXuK290GewGDzykg=
-X-Gm-Gg: AZFdTZed+7AP/iwNF9Kt+vkyfCnl2iDj33v2OSzV8EgwkWYCKn/E7CBnv+nNpZKYl/9
- UOQlpvFeU9G8g+QArLrQK79Mgp+lrHFhA44+V+c2lcCuoChTGXJWA00wO3tv7OBaawRXKS5W2Xk
- /6z0eOhI+tVSGekg13NqDnqnBJFzuCGJYK1I9KIWOQ8t2FXz8ulgnZu7IAeRtjqs2w7If+OHeV0
- DuQusSOEl6eP/SLdcRi37N5tlaR/oKSEnVAL8JgUtJnOJdMNhxwvog2nD9ahWfqBBFKl2I+Zg/2
- OMjxrY2LosRddPD71zimXZ/1bEb/AIq7XWRtML1jLCk2/GpDcoK6qxs1NUZwohEZbFPvHkQhuBV
- UuZXF6PTff56JOtIyO1OYzn5Ddjtl5lgkw1vbu5CsGGQAevw+KTEI3cvINtno3nmXYR6EdvE79v
- I7TFopXT1KCXod
-X-Received: by 2002:a05:6808:f13:b0:4e9:df3c:c45c with SMTP id
- 5614622812f47-57a09c0f808mr20852323b6e.19.1795703463894; 
- Thu, 26 Nov 2026 06:31:03 -0800 (PST)
-X-Received: by 2002:a05:6808:f13:b0:4e9:df3c:c45c with SMTP id
- 5614622812f47-57a09c0f808mr20852267b6e.19.1795703463342; 
- Thu, 26 Nov 2026 06:31:03 -0800 (PST)
+ AL+hErHiR/mxrrhY+zDkSooO7VlAIbN6w4oRb//HvU7EsXkxWIXU5/N+NxF9/JTqySksiWhD/RQtrLs=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8ujgd2scFXK1iIsXoOJ1FHvXrmUL157x0kJBmBhywUOFTxV8fr
+ AP551mjfwn+nRPqHbBftjGpJXL03jWuQAW50ZPWli3aDXl8dW0nMiBNc3zP+gbaxdGsYyvzGVSc
+ o4JN5af2kdP2KYrtFa8048X6Lo3zxCF1bkkQG5b4hJjnWNQiscEXEkfAc+bTyydfWeFHtDRoXKu
+ EKlzM=
+X-Gm-Gg: AZFdTZdnWWfThhni9964uRqgVfJp7K1WuFsa3LDbGifzeSeJEsirjGAAnHVQ+/atOX1
+ 36BjBQFr3NqHix/fz17lwx07Y57lLNDuO/AlxNV9u1DhRvwXs2mcvR3YWc1SvmAI9ylv9NiSEHK
+ DzkZDbLOLmjvJOREcHBq5or0vj8tXEZMwqK3kJ2VDlKbIoC/8i/KNEX1juhDeyH49DwfxwaciNs
+ vYTbtNOo20Y9Hg1asxzz7wm3mjqaFxNBUt9Xscqjw4Ae8wr/T3Z5liLAlY1UE/rD5Z9+AcUU4wR
+ pSKEBZwLCAh4jLTLm9boFFzyn6D/BSG3CVbf9XoXHN4/gIcEoIuNjwvb5wNSPDOpBHEtR9DGwjy
+ G8DOlI9zZwXJILs0/CUVnw0vMCLX+WKVC1alg9zB4oVGyoLpevSo3pVHG1vN0PCKFV+xOCuuMo4
+ faV0JWJ5oBwaBz
+X-Received: by 2002:a05:6809:2792:20b0:57e:3c4f:4b4c with SMTP id
+ 5614622812f47-57e3c4f5369mr7528031b6e.68.1795703519385; 
+ Thu, 26 Nov 2026 06:31:59 -0800 (PST)
+X-Received: by 2002:a05:6809:2792:20b0:57e:3c4f:4b4c with SMTP id
+ 5614622812f47-57e3c4f5369mr7528012b6e.68.1795703518984; 
+ Thu, 26 Nov 2026 06:31:58 -0800 (PST)
 Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c513b03723bsm753575366b.87.2026.11.26.06.31.01
+ a640c23a62f3a-c513b030ed9sm772664866b.86.2026.11.26.06.31.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Nov 2026 06:31:02 -0800 (PST)
+ Thu, 26 Nov 2026 06:31:58 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Thu, 26 Nov 2026 15:30:58 +0100
-Subject: [PATCH v3 2/2] mmc: msm_sdhci: drop SDHCI_QUIRK_WAIT_SEND_CMD
+Date: Thu, 26 Nov 2026 15:31:51 +0100
+Subject: [PATCH v2 1/4] mailbox: add the Qualcomm APCS IPC driver
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261126-msm-sdhci-wait-send-cmd-v3-2-cf38d2d321b8@oss.qualcomm.com>
-References: <20261126-msm-sdhci-wait-send-cmd-v3-0-cf38d2d321b8@oss.qualcomm.com>
-In-Reply-To: <20261126-msm-sdhci-wait-send-cmd-v3-0-cf38d2d321b8@oss.qualcomm.com>
-To: Sumit Garg <sumit.garg@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, u-boot-qcom@groups.io,
+Message-Id: <20261126-qcom-rpm-glink-v2-1-15707dc6f396@oss.qualcomm.com>
+References: <20261126-qcom-rpm-glink-v2-0-15707dc6f396@oss.qualcomm.com>
+In-Reply-To: <20261126-qcom-rpm-glink-v2-0-15707dc6f396@oss.qualcomm.com>
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
  u-boot@lists.u-boot-project.org
 Cc: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>, Sam Day <me@samcday.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@nabladev.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Biswapriyo Nath <nathbappai@gmail.com>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-ORIG-GUID: ErPtrngGw-ZM2pZbfS5RmIZMDpaxz6yz
-X-Proofpoint-GUID: ErPtrngGw-ZM2pZbfS5RmIZMDpaxz6yz
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfXzO6vFjDrV2Cg
- Sol9Ne7OACxxKo35grIE+3RBUpjmqxsb/F0vzsdB5wOd+MHj09qgfro5aq3kk1UJr/OB1vGOqT2
- cBTwxlcK/4irSJF4hPa/F5W+jrcYgUE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfXzgcTK/bHsbHq
- NEdNs9x2g5hw71VVcfYv1tKMzLhc6ZOTITRDuZyFKp+7LCx1u8I7HA56rj8IvsnbkSfRY0Ocaoz
- Jb9HSZ07C8sDZG0zoGseAFKfAfbThXPnTHPQUAE/BPvO3g4m91FoA5th5LTwIE0C2+Qzcwt3i2F
- m3rMBTeDXNTH6THjaCbvlflc0xCHR+8uFJ13gkeAfvFbF9rT0A+CRXWuIhoMmZaKSLg3wnktlcp
- NZQ6inT89P9RdfSAx+UU5re42mXca5i8ph2UUj4cIBku/LTg2nzmDBLplWaW+P44ukwNh1JJNqR
- iGmb+92inr2j759+zcVte4DLkT0I39Qqirk3ZybSZNnLduqtWnQovwUsAlH55s3l2zAkTh4imDW
- ZGKs2k+fgjyo8NwkWiuW1Mgb9sL911eszyH5AU4cBFBrymBozffCG2FZ5HfWxeWWFeaRQ03sfVt
- VQrSD67uq77kz6gPvjw==
-X-Authority-Analysis: v=2.4 cv=Q5VHcI2a c=1 sm=1 tr=0 ts=6b0842a8 cx=c_pps
- a=yymyAM/LQ7lj/HqAiIiKTw==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
+X-Proofpoint-ORIG-GUID: UoNDwy3Os-P5o-SzT4ezvVZuRFlx4G-6
+X-Proofpoint-GUID: UoNDwy3Os-P5o-SzT4ezvVZuRFlx4G-6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX/rG38PH5s9TB
+ 1su8G4SIs5GcFUpFSthAq6cp8FNCO5JKP4erKER40gY1CRK7xQfJ961lJSwZQ3VCe7yK4ZlJnQH
+ W/n6g/vRoUeQgN1Eid25sDE/8c5ifiVl6OtfSglYReuynQg8l3gtrn72nj7MmAD3QBi7jbjOAmv
+ RjaQyMSsgpdrWWwmwb9dPp44GpltsEFEx23lxVyOmQOtXl4J0o/LD1cAs3bywinJkwP9aeBavSh
+ 2/GEBu70BsZFpN2Kxoc5p2SrXY0aSChDKOTFIL/C/oxM9QaXjKQrty4dLEaDwXEsXGZMQO2UtWf
+ aWaQ/96huS9PGHecrNwBzgfs+k4xVBBJ7sBjIE82MQ/xGyY8Bnq+nUu1Z0Kzipuqw+3Ncb4Q/kS
+ OmXsefQE/LmB4d/N7Jdexh0ZsVKyhKqEwz9oLxYcsMs554iWbWOJTnKIRWI5mmcj89F0+HxWRYQ
+ OWEiRL87yl0YHR5P+Hw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA1NiBTYWx0ZWRfX90S+AVKR3Wka
+ hF74Uk16T1909xrG+L5tGX3ZXAdtFAwwzUE+a5wvLPFhiJ8pBqXCR3sk8jFfhkJnPs/KCu/f2/o
+ 190SFbJzcTWa2dVMhVszhaHp+QzSjJo=
+X-Authority-Analysis: v=2.4 cv=L4GI0OT8 c=1 sm=1 tr=0 ts=6b0842e0 cx=c_pps
+ a=WJcna6AvsNCxL/DJwPP1KA==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=T-8G4zspr1_uoGV1AJYA:9 a=QEXdDO2ut3YA:10
- a=efpaJB4zofY2dbm2aIRb:22 a=cvBusfyB2V15izCimMoJ:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=9D0mPIKU8ckUToVstoAA:9 a=QEXdDO2ut3YA:10
+ a=_Y9Zt4tPzoBS9L09Snn2:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_03,2026-11-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 spamscore=0 adultscore=0 bulkscore=0
- priorityscore=1501 suspectscore=0 malwarescore=0 clxscore=1015 phishscore=0
+ adultscore=0 bulkscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ clxscore=1015 spamscore=0 impostorscore=0 phishscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260056
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -224,49 +220,129 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-SDHCI_QUIRK_WAIT_SEND_CMD makes sdhci_send_command() sleep for 1 ms
-after most commands (R1b commands without data return earlier because
-of SDHCI_QUIRK_BROKEN_R1B). The Linux sdhci-msm driver has no such
-delay.
+The APCS IPC register is a write-only doorbell with one bit per remote
+processor. Add a mailbox driver for it, with the register offset per
+compatible as in Linux: 8 for QCM2290 and the
+qcom,msm8994-apcs-kpss-global fallback, 12 for the SDM845 APSS shared
+block.
 
-This delay postponed the final status clear, which is what removed the
-stale CRC error left by an R3 response.
-
-The previous patch does that for the affected commands only,
-so the quirk is no longer needed.
-
-The quirk is costly: a multi-block read is CMD18 + CMD12, so every read
-pays 2 ms, while a 128 KiB read from an eMMC in HS400 takes about
-0.4 ms. USB mass storage reads in 128 KiB chunks; on the Arduino UNO Q:
-
-Test results:
-                     ums read, 1 GiB
-  with the quirk     46 MB/s
-  without            201 MB/s
-
-Tested-by: Stephan Gerhold <stephan.gerhold@linaro.org> # DB410c eMMC/SD
+Tested-by: Biswapriyo Nath <nathbappai@gmail.com>
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
- drivers/mmc/msm_sdhci.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mailbox/Kconfig                 |  8 ++++
+ drivers/mailbox/Makefile                |  1 +
+ drivers/mailbox/qcom-apcs-ipc-mailbox.c | 68 +++++++++++++++++++++++++++++++++
+ 3 files changed, 77 insertions(+)
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 9cc11a5e269..ab217393a54 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -198,7 +198,7 @@ static int msm_sdc_probe(struct udevice *dev)
- 		udelay(200);
- 	}
+diff --git a/drivers/mailbox/Kconfig b/drivers/mailbox/Kconfig
+index 1d9e284cfd1..63d4d5d4ee9 100644
+--- a/drivers/mailbox/Kconfig
++++ b/drivers/mailbox/Kconfig
+@@ -38,6 +38,14 @@ config MPFS_MBOX
+ 	  Enable support for the mailboxes that provide a communication
+ 	  channel with the system controller integrated on PolarFire SoC.
  
--	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD | SDHCI_QUIRK_BROKEN_R1B;
-+	host->quirks = SDHCI_QUIRK_BROKEN_R1B;
- 
- 	host->max_clk = 0;
- 
++config QCOM_APCS_IPC
++	bool "Qualcomm APCS IPC mailbox"
++	depends on DM_MAILBOX && ARCH_SNAPDRAGON
++	help
++	  Enable the APCS IPC doorbell, which the application processors
++	  use to interrupt the RPM and the other remote processors on
++	  Qualcomm SoCs.
++
+ config SANDBOX_MBOX
+ 	bool "Enable the sandbox mailbox test driver"
+ 	depends on DM_MAILBOX && SANDBOX
+diff --git a/drivers/mailbox/Makefile b/drivers/mailbox/Makefile
+index b3a36691497..7daf6eaba14 100644
+--- a/drivers/mailbox/Makefile
++++ b/drivers/mailbox/Makefile
+@@ -7,6 +7,7 @@ obj-$(CONFIG_$(PHASE_)DM_MAILBOX) += mailbox-uclass.o
+ obj-$(CONFIG_APPLE_MBOX) += apple-mbox.o
+ obj-$(CONFIG_IMX_MU_MBOX) += imx-mailbox.o
+ obj-$(CONFIG_MPFS_MBOX) += mpfs-mbox.o
++obj-$(CONFIG_QCOM_APCS_IPC) += qcom-apcs-ipc-mailbox.o
+ obj-$(CONFIG_SANDBOX_MBOX) += sandbox-mbox.o
+ obj-$(CONFIG_SANDBOX_MBOX) += sandbox-mbox-test.o
+ obj-$(CONFIG_STM32_IPCC) += stm32-ipcc.o
+diff --git a/drivers/mailbox/qcom-apcs-ipc-mailbox.c b/drivers/mailbox/qcom-apcs-ipc-mailbox.c
+new file mode 100644
+index 00000000000..acff66a7403
+--- /dev/null
++++ b/drivers/mailbox/qcom-apcs-ipc-mailbox.c
+@@ -0,0 +1,68 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Qualcomm APCS IPC mailbox: a write-only doorbell register in the APCS
++ * global (or APSS shared) block, one bit per remote processor and channel.
++ *
++ * Based on the Linux qcom-apcs-ipc-mailbox driver:
++ * Copyright (c) 2017, Linaro Ltd
++ */
++
++#include <dm.h>
++#include <mailbox-uclass.h>
++#include <asm/io.h>
++#include <linux/bitops.h>
++
++struct qcom_apcs_ipc {
++	void __iomem *reg;
++};
++
++static int qcom_apcs_ipc_request(struct mbox_chan *chan)
++{
++	return chan->id < 32 ? 0 : -EINVAL;
++}
++
++static int qcom_apcs_ipc_send(struct mbox_chan *chan, const void *data)
++{
++	struct qcom_apcs_ipc *apcs = dev_get_priv(chan->dev);
++
++	writel(BIT(chan->id), apcs->reg);
++
++	return 0;
++}
++
++static int qcom_apcs_ipc_probe(struct udevice *dev)
++{
++	struct qcom_apcs_ipc *apcs = dev_get_priv(dev);
++	fdt_addr_t base;
++
++	base = dev_read_addr(dev);
++	if (base == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	apcs->reg = (void __iomem *)(base + dev_get_driver_data(dev));
++
++	return 0;
++}
++
++static const struct mbox_ops qcom_apcs_ipc_ops = {
++	.request = qcom_apcs_ipc_request,
++	.send = qcom_apcs_ipc_send,
++};
++
++/* .data is the offset of the IPC register in the block */
++static const struct udevice_id qcom_apcs_ipc_ids[] = {
++	{ .compatible = "qcom,msm8994-apcs-kpss-global", .data = 8 },
++	{ .compatible = "qcom,qcm2290-apcs-hmss-global", .data = 8 },
++	{ .compatible = "qcom,sdm845-apss-shared", .data = 12 },
++	{ }
++};
++
++U_BOOT_DRIVER(qcom_apcs_ipc) = {
++	.name = "qcom_apcs_ipc",
++	.id = UCLASS_MAILBOX,
++	.of_match = qcom_apcs_ipc_ids,
++	.probe = qcom_apcs_ipc_probe,
++	.priv_auto = sizeof(struct qcom_apcs_ipc),
++	.ops = &qcom_apcs_ipc_ops,
++	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
++};
 
 -- 
 2.53.0
