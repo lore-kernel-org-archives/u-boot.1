@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04F1B606A339
-	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFA68606A33B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Nov 2026 13:33:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m0EiUEu+;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Os0Budp1
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lLOK26Xs;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=U4vnBqIR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C652D81181;
-	Thu, 26 Nov 2026 13:33:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9C3A760AB7;
+	Thu, 26 Nov 2026 13:33:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1pQZdR4olcpB; Thu, 26 Nov 2026 13:33:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C112E8119D
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700017;
-	b=aTh0jU/8GgbWchjisMwDDg+9mL1m8yadv7+I7TECEs/WiAo8zScE0gY2E37NgzinwitR
-	 9cH8/DhM8K0DzjKRTayHprhxMHgXBRTK9Zf3fsV2ufY/2t0U6yUrv+JM+wb02urxvEWWN
-	 2I7bGcsc12IvxIssD0KMLSIgB7aechedcrs8tSy9RHy75b3vxD27mGMO3IScp2TxreqxR
-	 QlqQNfzs/nPP7cUlfCtR1ZCMkni3VvULhZrXqlF7CO29ypnNI+vqmgmDp/Yq4s9843W2A
-	 DhnYOn2e2YOS5pVCOuW/Z0Ui2bOU+2jEWfyQ7EJnRLD/eK7RP4vF23dJ32EFcWVnhcg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vWqz9iwqiTeD; Thu, 26 Nov 2026 13:33:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EED5A60A9D
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795700021;
+	b=KD3hq56wLa4VA116UNEjbUF4geEYA0yPjMma29wmiZcTLqS06ZJPGp3IWy1AImbyahES
+	 K/B0GdFspMpX9WG9Hc2GrLG6cdBloNrtXF6s3mUBljMtkg23id6YsGNAUjgG4pw9+puyO
+	 tuhSG3d0oLsY47OtYK+w2+h4ckhG/3xmk3QifZmt69Hw8dHTuVs98LBeCU/mFAk/n+ime
+	 ZXy//8Cwa7Os9F76j+Xr6lhE2yZWnjR1RKRPQvctc4LZfot3Kfv95+7zF+9ISaNE3gtzV
+	 8rHG75cSrkI3FPFPCyNd/gPv8zuoV39aGKWQnnS1OkJCIwiGIN/bgaB79EHmePiDW5w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795700017;
+	c=relaxed/relaxed; t=1795700021;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,114 +33,114 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=6fsYMR8SeV0flYtsIylVBasEQ7RomJB+HqpPYsg1QFs=;
-	b=fpd7/iJ7X2sOUWJSO764LFJkpylGrZ1U5Lqbw7+LKTUC5YG8Wis+3p/2gZ771BALvfOM
-	 urlupDRuAWN6VH03eOxQ7X3GJz+qBQAVI4jbNi/j7ZEZve3Tq1U+JM3yT9sxksdSnV+Lx
-	 vXEZ9r/N9pqBuRCNdmQp9qNgvYpVjpMmBGJ4GLpiOezB1f6V3uaUR2Fr9/Moe9jyxtLqC
-	 piOPGPHYSkak8GiF3Jzhyp2eqJ2YxCiAEgT0Zk3krPY9sYVIHsVbNG/vtVYCaNN88R9zF
-	 5lNGx+/W9ajOtX6/9H3DCs3wrRME2LwmjeyB4OJrE2E0D28Rnt16thuQxR99tlJhFuQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=DO4/h2OEHfCflrjH/aZjeQ1Yb9zV9/oPcgRokeywf/8=;
+	b=e9vEDAJorTMsh7aj8+PA+tGH5vYQ7egPa3mivssyPxZa9YUElVEdECS1AvFSKpMRO9vC
+	 pKWmDm5YG5DYDfkyLUbakDOFwj0yRBQ4UQA1mTN0yxcxw+sYl2hcXE4LnW9ecwecydOyS
+	 VH94gOAorMVm7v0kVDUc4EcXccGpCgay3EgAopGoPD3exu9ZnF7qyH7AGFq7Z1sxAt3yb
+	 sRMgOwgxyGAEu34tRJGjoBv6uNSJcGmZdlGr+oSyfs7ZNlTx1bzC7Wry22lMbxtH1FRT1
+	 97Aq+7cCQwiZ3Y6u6SlUizzarKbFwH5S9YHWKSwpQOxegahJojZ5GrFonLzjRtuAmjg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795700017;
-	bh=6fsYMR8SeV0flYtsIylVBasEQ7RomJB+HqpPYsg1QFs=;
+	d=lists.u-boot-project.org; s=default; t=1795700021;
+	bh=DO4/h2OEHfCflrjH/aZjeQ1Yb9zV9/oPcgRokeywf/8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=m0EiUEu+9TJrMjbnZh2RRgwI8NU2brM3tPbf4wEswZDdOmmnQZgleiDwSnz32VLn6
-	 QvgYG+n0RDQj/BhkXuCriEAcu4mpFEOCnPstyaddaXcBc2Ym71I9KhIaEFSmw93V02
-	 doNWr974R6WiESyt5Ad/OcFW/MoMvx4+j9l7+ySAgpdK7yA6VGrbjAHykXgDLHek4d
-	 TUqlmNzkCuFk1rdr+AlGDoxvJ2ktT6o/r8QrJTtrrb0NX98+cfx7i6d5lSUxI+Y6PC
-	 pVCsn6t9p+lQ+ZqeDdJYakRiC2NAb1IyQHRlDPPquKQ2610MCaXK2pMzOvOJleTQvz
-	 6QRn4QacQEvjg==
+	b=lLOK26Xsh+ZtAmibOko6Z32ytFey/n499TZJLthuFgcUAEuZFjhugupW9t3VvTx0U
+	 o8Dk6GHkY5MtodK9sy2LleGXdXx+9hCMfWBmCLTSGo8j2GRT2JfCTsh2G0KwpbcTPY
+	 oTNF94Dg4wQYXBIL56E1Tu+vOIpEKZ63aBDqkBgO3VxazrvwU2dSVcNpXb2Mv/Oipt
+	 q/B1i4aFCLeGnEMhSz3p4XikkI9XaLWZNJ/Gprg2c24ZqTJ2K50AorGDAVT51SwywU
+	 ezq+A1M6nIGxSLxZJT2oE6rfAuKU+GBCM1smhf6PGi9eHaVk4guK7tC4o/d4VeVTrG
+	 AAlVbQjQqLO4A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C112E8119D;
-	Thu, 26 Nov 2026 13:33:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EED5A60A9D;
+	Thu, 26 Nov 2026 13:33:40 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id D3B74260
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:29 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 38FC332D
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BAC1940492
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:29 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1F43A40492
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZLhcat6FbavT for <u-boot@lists.u-boot-project.org>;
- Thu, 26 Nov 2026 06:53:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C6C9C40490
+ id QOxJkVtdFGPq for <u-boot@lists.u-boot-project.org>;
+ Thu, 26 Nov 2026 06:53:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 743B240490
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2f"
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2f; helo=mail-oo1-xc2f.google.com;
+ client-ip=2607:f8b0:4864:20::32b; helo=mail-ot1-x32b.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=Os0Budp1
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C6C9C40490
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:28 +0000 (UTC)
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-6df5e315bd1so5393774eaf.2
- for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:28 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=U4vnBqIR
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 743B240490
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 06:53:32 +0000 (UTC)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-8253bc5a613so4207258a34.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 25 Nov 2026 22:53:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795676007; x=1796280807;
+ d=gmail.com; s=20260707; t=1795676011; x=1796280811;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=6fsYMR8SeV0flYtsIylVBasEQ7RomJB+HqpPYsg1QFs=;
- b=Os0Budp1VDIM6DFg2Y5yUiE2ImIbth3iIhMN1DfZ0F7luZjj6Bj6ulWixDsD8Subwp
- W7c+izpFVOCVk17EXIDeBZitrRmpBwFUYGoB0pARGYdgLyZf3FXRypwkTdJamtFmec5Z
- DD39aQz0aFaLk63HSo4GqJ0eu4q2B/Gkx9j+8YpCd8tyE437L3r6ar0zXtNPkFnnOHiL
- e2dniEd9Zk2Kk+ibpIvwLToTLGdc5rqGQUT8ty7wO8ym3thz6esY1bK576YtIHbde6VL
- wOCtlDL8rew/P4iDfXQnqZkjw5RBB0ikLdCLJuDmdS9qFa9U3qYu6VPrwLO+31OsYp/T
- OeMw==
+ bh=DO4/h2OEHfCflrjH/aZjeQ1Yb9zV9/oPcgRokeywf/8=;
+ b=U4vnBqIRfImP19qEVo3XAPdiYN3KcPofh33n7rZEewRUexEGxQqsurq0aXknsM2Am+
+ S9NBU7E7zu1gdBBTqpHOVLzW26AEHM7P/eIPwNadlFVBQAd3iuq+HeY6HtWxoiRJoV0f
+ xXg155Gpli8HSpiX2x0aPi7LtI+MfxfXih33s5G3KMMu3JgpMSQqMWVA1O8yszHxGGQc
+ N5e7/ZWM/3J7mOyzY6QVUch4dxDceyHl2kTE0hdFOCXTyDtiKi+Dp1alLdNOjeXJ2kpm
+ 3vl9XJmV2MCuMoTlR9mB5IYZOUH6NiEk6yW/k5rhhX63lXofNU14P7nNA9xgM6qqDXcF
+ 6kpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795676007; x=1796280807;
+ d=1e100.net; s=20260707; t=1795676011; x=1796280811;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=6fsYMR8SeV0flYtsIylVBasEQ7RomJB+HqpPYsg1QFs=;
- b=GpLcAaU4B/VCMKb1CI+Y8Q8Vzt/xBTjNaLvs6N9Mh3WjusuZlqK473tRg6zmcTE0hM
- wgjvMdZvQmmp003BIuBQRzFnlbKf5D1lWrsK3pjG4KORxl+rKweCHuMZf/rwjyObkuQl
- KaXtvEuf02romIHOn3FP6ido8B3rqEEATFMFXEYRU7F2RXIVkXs10Zsukz+Afus9TWkv
- D9IwxvUJ3AuuSQxLVUC298PaMQ1I3xlwlIZ0riPyinZsHwed59sf4iUyIfNa8y81FHsv
- tqACukhD/VwVleq8eVasAjLQjcerK3bwP/ePxQQhy2s2bfC5f5SpT0sd51zOxaHby+ek
- 2sHg==
-X-Gm-Message-State: APuU4Z9n+NgNf0x9TuF6peHFpxon+tYkXrZUkAqhka+5VmFKoBJAXpDD
- xXW9ZDppKp3tjq11uJxpPNi6MDMht8YjJjVTAzX+nHAixsFlilq5u1K3
-X-Gm-Gg: AZFdTZdGNvDJ9PN64/YLBIkBm5UbuCrpEdS4FqZjZpPbNUEtjJtJepy1czmZFR1w83d
- 3pdQeoGSz1wdUfQfOksKq8jcxfid4Vo0LYzPMz2/43tMGLyOmH2IVGadzJyHi+NZlO+hlPpRBSs
- b8y6Snnm+WQjaou95q5klKPGrYHoDsMjFmZsEnCXTwsORoDP82T50XnV900zThu4k5Sf57+Yapq
- Qnk5t9n7AGmBPLpfdExg9DU6eC7KmNyyk6+vGuIQykV9nhgNEdt88KjkE6zIoa2QWV86kba45zP
- yMz1loUtHFHfbaGJpIcPC1aKSNpIxfhX+EwlmQ0wbxMx7rUK7OahZ6/6fuqwr+ZPldwvCA8aUse
- Pxs5N9rKbaCSRGBl0I7SS1Yfv5hT1EOQiv9l8v8xiD3HabYs0EeQkquP5fK35d7N5H7mADCamZE
- t7i3/L132cR1LMN+ToQ0X6Oa3xc6r9d17b8ubuHqGlMBioxlM/G8mF5TToh8ZBWISZ2F1PYTeqj
- ljI9kkx7m5z8rWN5gE0K4jn8av4En0FNZsb6ZOmz2Djg53o+Bx6wbWCKlvX/Rfo7nK6LtH5nI4Z
- 84uYVd8wuCCFWE9jm2Wrp0q49vcJ6UMek7tkTlDwc0+3XuTB0uSUnPx/JmfBYGwrJUKlOniTN9/
- tYobo04f7OQ1RGOPIKJaXh/tFn0kc5lL+5C7i8r8ICFDCz/EJAxW+lYBEgudkXQYVlTliow4A8+
- fPeImmRP4p4fP8gvm3PfSOyUyTxF09zuLu5gQe+UTwKCwINxjkALuHPbtbTuSp1liRkhlFeYb2
-X-Received: by 2002:a05:6820:4204:b0:715:21d1:b70 with SMTP id
- 006d021491bc7-71b392944b3mr14480446eaf.4.1795676007406; 
- Wed, 25 Nov 2026 22:53:27 -0800 (PST)
+ bh=DO4/h2OEHfCflrjH/aZjeQ1Yb9zV9/oPcgRokeywf/8=;
+ b=T3HN1ER/PA0emZi1+k3S1f6UNn5Jh+nNWs0p0baCxovruijbkrYfmtXHKvQTBKkjEc
+ czeZFsrLSbfZudFMKKla2GsFGt+HvfuMGZD2juF9I5N2B84ofBVLxDD4bnbBHdOuHNPe
+ 3vWhH6MH0V1hvFxcchBY420SgGCt92EaD6OZQGS7FPnrOlhcjfzgS5jBTgN+9wNE6GqB
+ 3UYy/9KaShZStRnAPZ+45BFGTuZugoMCxGCxK1djINT2OL7jXX2G1Otf18fASs2WqEeV
+ WfjxqLTWgxBcoHWS7zlGI6DvIYPALyoWkrkG8v9L7f7cYBFjT0OIZCIQ8bY+uqJiytOp
+ R/yw==
+X-Gm-Message-State: APuU4Z9q0fsK049gNbYQZVofmO+N3V9Qol8QsIYacZJpr+m35goWcIpu
+ zmkoaxYJAoJJrdceLMgoYUZpU24J33SLwelyKXO5IWsHkjeU9Rs0XYxY
+X-Gm-Gg: AZFdTZcKnnyv+HQv7N8szQNiQwQJfuAH1Vk8r2lX/vJcYxMu8hzyZgpy6D3J7OVv2/1
+ QmeBd2hyXmcsb0WYWcD50ua/UXYQKtosRJyNEJ528+OcDJhQ1WOjJNX+uApFlhXrM8zSEckcqIU
+ 4FmYcQykNuCQv9jcvqvsj9WQiiqjiq18hrgN2RPVyKeLipLTPfFgmVPmwVh0gmYmgZSX2LORbLB
+ vsx46dGu6YJqMZkPTPl0YxiihD5IUVk3yIfCyPNe8bLSJ2d0noNjx42yVxpw/cHof6g0HnY3chT
+ M5iaFNgxPAecbzKInRJMzq4Tx0Xp9rhV4Tpn924lCTPJWS+yTky0EtEqRQmhZefVN74ZKFiAA1i
+ ZX0JphaVW56Eq2j4xSNQyrdjlBnzKF6PaDfdXpGezPg3J/aLI+fGor1XCcOGSyuHtijTmlXUbdT
+ 72bvYe2/rElWM/J8FFxGbLUwV256wte+WSJY7erKJsKNqQ/CltMrmNVG/TX0Hqiob6p5llEnmAi
+ JN3vBVpfHEQn/S18mAwcvIYXTxZglH5Q4lIteXopHwQHKjZU7ykDMdv1SphUBeDwsZC9+Bpoogs
+ VKteyupik25ajoH3l0qWPeq+g5B8Ew/0OrIbY0l1UXXilKSwJAlMjDCUUj0E6uP/KhtMrWdItlI
+ rfF4dfFkrBudstgHF8aNcvxMvIKsh2rZ1ltq8mx2NS/9Vls2vNOGbWIDWbrQUYs3X5kI8kc0KIC
+ PlL1jgwu9QDJTiLE/XDBFo5/e/4gkUq1f86Xfv0TUIglNtjvx3vQs=
+X-Received: by 2002:a05:6830:680f:b0:806:d79a:c932 with SMTP id
+ 46e09a7af769-863159f2a98mr21026417a34.20.1795676011174; 
+ Wed, 25 Nov 2026 22:53:31 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.25
+ 46e09a7af769-86385358ca2sm31041a34.21.2026.11.25.22.53.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 22:53:27 -0800 (PST)
+ Wed, 25 Nov 2026 22:53:30 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 25 Nov 2026 23:52:59 -0700
-Subject: [PATCH 10/19] net: lwip: restart NFS after an RPC timeout
+Date: Wed, 25 Nov 2026 23:53:01 -0700
+Subject: [PATCH 12/19] boot: pxe: allow boot without the DHCP command
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-submit-lwip-network-boot-v1-v1-10-63df291d9392@gmail.com>
+Message-Id: <20261125-submit-lwip-network-boot-v1-v1-12-63df291d9392@gmail.com>
 References: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 In-Reply-To: <20261125-submit-lwip-network-boot-v1-v1-0-63df291d9392@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -191,247 +191,38 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When an NFS server stops answering, lwIP exhausts the RPC retries and
-returns to the prompt even if netretry allows trying another interface.
-Restart the network only after this timeout, once the old UDP callback
-has been removed. Re-resolve the server on the selected interface and
-start a fresh transfer so the previous attempt cannot inflate its size.
+Enabling the PXE boot method on a BOOTP-only build prevents U-Boot
+from linking: dhcp_run() is only built with CMD_DHCP. PXE can already
+fetch its configuration over TFTP when the addresses are set.
 
-A timeout can occur after the first attempt mounts the export. Reset
-mount ownership at the start of each attempt so a mount failure on a
-replacement interface does not send UMOUNTALL using stale state.
+Only acquire an address through DHCP when the command is enabled.
+Otherwise use the current network settings.
 
+Fixes: 1915fdcc2126 ("boot: call dhcp_run in pxe bootmethod")
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- net/lwip/nfs.c      | 32 ++++++++++++++------
- net/nfs-common.c    |  5 ++++
- net/nfs-common.h    |  1 +
- test/dm/lwip_ipv6.c | 84 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 113 insertions(+), 9 deletions(-)
+ boot/bootmeth_pxe.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
-index 3ecd259717a..1f6f84fd24f 100644
---- a/net/lwip/nfs.c
-+++ b/net/lwip/nfs.c
-@@ -117,9 +117,6 @@ static int nfs_loop(struct net_lwip_ctx *net, ulong addr, char *fname,
- {
- 	int ret;
+diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
+index 27f254b9f93..f6e95b03fad 100644
+--- a/boot/bootmeth_pxe.c
++++ b/boot/bootmeth_pxe.c
+@@ -54,9 +54,11 @@ static int extlinux_pxe_read_bootflow(struct udevice *dev,
+ 		return log_msg_ret("pxeb", -EPERM);
+ 	addr = simple_strtoul(addr_str, NULL, 16);
  
--	ret = net_lwip_prepare_addr(net, &srvip);
+-	ret = dhcp_run(addr, NULL, false);
 -	if (ret)
--		return ret;
- 	ip_addr_set(&sess_ctx.nfs_server, &srvip);
- 	nfs_use_rpcbind = IP_IS_V6(&srvip);
- 
-@@ -150,6 +147,8 @@ static int nfs_loop(struct net_lwip_ctx *net, ulong addr, char *fname,
- 	image_load_addr = addr;
- 
- 	nfs_timeout_count = 0;
-+	choosen_nfs_version = NFS_V3;
-+	nfs_reset_mount_state();
- 	nfs_state = STATE_PRCLOOKUP_PROG_MOUNT_REQ;
- 
- 	ret = nfs_udp_init(&sess_ctx);
-@@ -173,8 +172,10 @@ static int nfs_loop(struct net_lwip_ctx *net, ulong addr, char *fname,
- 			break;
- 		}
- 
--		if (nfs_timeout_check())
-+		if (nfs_timeout_check()) {
-+			ret = -EAGAIN;
- 			break;
-+		}
- 	} while (true);
- 	debug("%s: Loop exit at %lu\n", __func__, get_timer(0));
- 
-@@ -189,7 +190,7 @@ static int nfs_loop(struct net_lwip_ctx *net, ulong addr, char *fname,
- 		if (env_set_hex("filesize", net_boot_file_size) ||
- 		    env_set_hex("fileaddr", image_load_addr))
- 			ret = -EIO;
--	} else {
-+	} else if (!ret) {
- 		debug("%s: NFS loop failed\n", __func__);
- 		ret = -1;
- 	}
-@@ -308,10 +309,23 @@ int net_lwip_nfs_download(int argc, char *const argv[], const char *bootserver)
- 		goto out;
- 	}
- 
--	if (net_lwip_resolve(&net, server_ip, &srvip,
--			     ipv6 ? IPADDR_TYPE_V6 : IPADDR_TYPE_ANY) ||
--	    nfs_loop(&net, laddr, fname, srvip) < 0)
--		ret = CMD_RET_FAILURE;
-+	net_try_count = 1;
-+	net_restart_wrap = 0;
-+	do {
-+		ret = net_lwip_resolve(&net, server_ip, &srvip,
-+				       ipv6 ? IPADDR_TYPE_V6 : IPADDR_TYPE_ANY);
+-		return log_msg_ret("dhc", ret);
++	if (IS_ENABLED(CONFIG_CMD_DHCP)) {
++		ret = dhcp_run(addr, NULL, false);
 +		if (ret)
-+			break;
-+		ret = net_lwip_prepare_addr(&net, &srvip);
-+		if (ret)
-+			break;
-+		ret = nfs_loop(&net, laddr, fname, srvip);
-+		if (ret != -EAGAIN)
-+			break;
-+		puts("\nRetry count exceeded; starting again\n");
-+		ret = net_lwip_restart(&net);
-+	} while (!ret);
-+	ret = ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
- out:
- 	net_lwip_stop(&net);
- 	free(arg_copy);
-diff --git a/net/nfs-common.c b/net/nfs-common.c
-index a82b3b795a0..06216cc3bcc 100644
---- a/net/nfs-common.c
-+++ b/net/nfs-common.c
-@@ -72,6 +72,11 @@ const ulong nfs_timeout = CONFIG_NFS_TIMEOUT;
- 
- enum nfs_version choosen_nfs_version = NFS_V3;
- 
-+void nfs_reset_mount_state(void)
-+{
-+	fs_mounted = 0;
-+}
-+
- static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
- {
- 	ulong newsize = offset + len;
-diff --git a/net/nfs-common.h b/net/nfs-common.h
-index b48e035c6a8..b61ba833eea 100644
---- a/net/nfs-common.h
-+++ b/net/nfs-common.h
-@@ -111,6 +111,7 @@ void rpc_req_common(int rpc_prog, int rpc_proc, uint32_t *data, int datalen,
- 		    uchar *txbuff, int *pktlen, int *sport);
- void nfs_send(void);
- void nfs_pkt_recv(uchar *pkt, unsigned int len);
-+void nfs_reset_mount_state(void);
- 
- extern enum nfs_version choosen_nfs_version;
- 
-diff --git a/test/dm/lwip_ipv6.c b/test/dm/lwip_ipv6.c
-index 5eb48adb92c..871f0446590 100644
---- a/test/dm/lwip_ipv6.c
-+++ b/test/dm/lwip_ipv6.c
-@@ -82,6 +82,7 @@ struct ip6_test {
- 	unsigned int dhcp_bad;
- 	unsigned int http_requests;
- 	unsigned int rpc_requests;
-+	unsigned int unexpected_umount;
- 	unsigned int sntp_requests;
- 	unsigned int console_packets;
- 	bool console_no_reply;
-@@ -106,6 +107,9 @@ struct ip6_test {
- 	bool cancel;
- 	bool fragment;
- 	bool empty_nfs;
-+	bool drop_first_nfs;
-+	bool fail_retry_mount;
-+	bool retry_seen;
- };
- 
- static u16 ip6_test_checksum(struct ip6_hdr *ip, void *data, unsigned int len)
-@@ -662,6 +666,26 @@ static int ip6_test_rpc_reply(struct udevice *dev, struct ip6_hdr *ip)
- 	const char *uaddr;
- 	int ret;
- 
-+	if (test->drop_first_nfs && net_try_count == 1) {
-+		timer_test_add_offset(1000000);
-+		return 0;
++			return log_msg_ret("dhc", ret);
 +	}
-+	if (test->fail_retry_mount) {
-+		/* Complete the first mount and lookup, then lose READ replies. */
-+		if (net_try_count == 1 && ntohs(udp->dest) == 4001 &&
-+		    get_unaligned_be32(query + 20) == 6) {
-+			timer_test_add_offset(1000000);
-+			return 0;
-+		}
-+		if (net_try_count == 2 && !test->retry_seen) {
-+			/* Restart the reply sequence on the replacement interface. */
-+			test->retry_seen = true;
-+			test->rpc_requests = 0;
-+		}
-+		if (net_try_count == 2 && ntohs(udp->dest) == 4000 &&
-+		    get_unaligned_be32(query + 20) == 4)
-+			test->unexpected_umount++;
-+	}
- 	/* A normal NFS export requires a reserved client port. */
- 	if (ntohs(udp->src) >= 1024)
- 		return -EACCES;
-@@ -687,6 +711,9 @@ static int ip6_test_rpc_reply(struct udevice *dev, struct ip6_hdr *ip)
- 	case 3:
- 	case 4:
- 		reply[7] = htonl(32);
-+		if (test->fail_retry_mount && net_try_count == 2 &&
-+		    test->rpc_requests == 3)
-+			reply[6] = htonl(13);
- 		break;
- 	case 5:
- 		if (test->empty_nfs)
-@@ -1421,6 +1448,63 @@ static int dm_test_lwip_ip6_dns(struct unit_test_state *uts)
- DM_TEST(dm_test_lwip_ip6_dns, UTF_SCAN_FDT);
- #endif
  
-+#if CONFIG_IS_ENABLED(CMD_NFS)
-+static int ip6_test_nfs_retry(struct unit_test_state *uts, struct ip6_test *test)
-+{
-+	int ret;
-+
-+	test->drop_first_nfs = true;
-+	ut_assertok(env_set("netretry", "once"));
-+	ut_assertok(env_set("ethrotate", "yes"));
-+	sandbox_eth_set_priv(1, test);
-+	sandbox_eth_set_tx_handler(1, ip6_test_tx);
-+	ret = run_command("nfs 2100000 [fe80::2]:/ipv6.bin", 0);
-+	sandbox_eth_set_tx_handler(1, NULL);
-+	sandbox_eth_set_priv(1, NULL);
-+	ut_assertok(ret);
-+	ut_asserteq_str("eth@10003000", env_get("ethact"));
-+	ut_asserteq(2, net_try_count);
-+	ut_asserteq(7, test->rpc_requests);
-+	ut_asserteq(9, net_boot_file_size);
-+	return 0;
-+}
-+
-+static int dm_test_lwip_ip6_nfs_retry(struct unit_test_state *uts)
-+{
-+	return ip6_test_run(uts, ip6_test_nfs_retry);
-+}
-+
-+DM_TEST(dm_test_lwip_ip6_nfs_retry, UTF_SCAN_FDT);
-+
-+static int ip6_test_nfs_mounted_retry(struct unit_test_state *uts,
-+				      struct ip6_test *test)
-+{
-+	int ret;
-+
-+	test->fail_retry_mount = true;
-+	ut_assertok(env_set("netretry", "once"));
-+	ut_assertok(env_set("ethrotate", "yes"));
-+	sandbox_eth_set_priv(1, test);
-+	sandbox_eth_set_tx_handler(1, ip6_test_tx);
-+	ret = run_command("nfs 2100000 [fe80::2]:/ipv6.bin", 0);
-+	sandbox_eth_set_tx_handler(1, NULL);
-+	sandbox_eth_set_priv(1, NULL);
-+	ut_asserteq(CMD_RET_FAILURE, ret);
-+	ut_asserteq(2, net_try_count);
-+	ut_assert(test->retry_seen);
-+	ut_asserteq(3, test->rpc_requests);
-+	ut_asserteq(0, test->unexpected_umount);
-+	return 0;
-+}
-+
-+static int dm_test_lwip_ip6_nfs_mounted_retry(struct unit_test_state *uts)
-+{
-+	return ip6_test_run(uts, ip6_test_nfs_mounted_retry);
-+}
-+
-+DM_TEST(dm_test_lwip_ip6_nfs_mounted_retry, UTF_SCAN_FDT);
-+#endif
-+
- static int ip6_test_apps(struct unit_test_state *uts, struct ip6_test *test)
- {
- 	void *data = map_sysmem(0x2100000, 9);
+ 	log_debug("calling pxe_get()\n");
+ 	ret = pxe_get(addr, &bootdir, &size, false);
 
 -- 
 2.53.0
