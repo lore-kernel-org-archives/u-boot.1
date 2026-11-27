@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C3D7606A31C
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 10:31:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C32DA606A31E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 10:31:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xLZcjoJz;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=P3HrdBSI
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AtieAeXr;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UNcivsf+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1A73E81244;
-	Fri, 27 Nov 2026 10:31:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9EA45409C1;
+	Fri, 27 Nov 2026 10:31:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CN1poEqeroTc; Fri, 27 Nov 2026 10:31:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 64FE981222
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795775509;
-	b=hYoz7Xi4XlfehhGZQc9LHxCexfbZKOPrczD9qFkd2o5r3i+tLfaopbQDFpAGWd7L/fkq
-	 dUZrnQOsR6Nfn7jxlQ/rLgX2/dopTUTbaRjfmkXiNJP8NhVRvpi/HF/x1AxQOF2ZnpJUT
-	 MFcOWhTe/Kvdb7R/cDRz8T6GCE57u9xnzIARnSwqSXkqZGt+BRWZ/FUR3EueWdNKGDp1i
-	 Hvd9zMt+iM35IR8EI/z+Ph5qMr5QHug4pDlClqHMvRNNx8KZTcLhq62TWDLNZILbCE9uO
-	 gv8k6ajGF0/ILIHOs9bemCWubEy9MdwWzBf33RTUetNX5VC3dlMIKVl4t7sNAopKtNQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NilpZrhBh-7S; Fri, 27 Nov 2026 10:31:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E028B409E9
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795775515;
+	b=FH+tCu4zHwojGaCGNSpBSvs8gqhonMCeGafaBpHRNIQ31Nrh8kC0ypV5AfH6aVWjDnLD
+	 hIYTi9epcMN2QOFEP3X/Zffb3bLjL1OfsGNNsE5YykcJknUF3NPZoPW0eNtx3VMS1T20M
+	 OuWyLrrM9M25DD+v4VdWvQ0eC1gMK+6YBraMJRsG1rdEPHBM3q/itGPBkI/jQT9m85S9G
+	 G/LPhirf4KPlVHNrIL+ypuhCNGzoPOjI/0xupOzLEKF7uzm15zX1PZRkXGh8x2e54VL0X
+	 8+UB3WcZX3zelEpQvBMX01yUum5ZQ88FLgbZVOs2HTnWEAgynijwYNUyps6eoCzmm6g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795775509;
+	c=relaxed/relaxed; t=1795775515;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,113 +32,116 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=DshH5ADBHUlJ3V7LZW9j2sgLPIX3gDSYtcrMVx1zFh4=;
-	b=atkKnJI73oY9cq5ZpJ+Q4xf2Dcplx7/h6tRdU4wBLhwWX5dEWfrftojIQZjV/GharwV1
-	 VAwzMB9nGO2GHKEle/dpd3//w4+8vVjQ0K3HkZtFzNvFFPYkmiGb5htTuEZxceJKLkYPA
-	 QKTLFJkd60S+8/2OZy0W1y4WTKzwSqtPCRZ0P06JZ/nwgkMQklZc84fa7YxvqRKKgNenZ
-	 aliCzU2xaAFZ5jXj5VrzqaWBe7shydSairfMkBbxtuMjellzteb96OZgM6JjDDR2hI9Fg
-	 G8jGR6uxE0LF4B7+qZaDCur5R3AIfmE3kTdzf2VacgBkmkMEBjzBBOGTi8TfgGYQQog==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=f2tIG2cVjSt5Vb2jMYmqq1aJtLZM7etG1tuv3h/8pg8=;
+	b=ZvdKczzJLGRccFHQxzRCP9maUb5c9hKsyvVBQEyQ5p5y2Fjq5AoiYOKbQhuvOr3O9lLt
+	 oc+D2NHOFBuWGydLjTT2uUk1Uat5FTg80NSLelRmJe/w9YFdMyZUua2rKxbNOnRg5K79N
+	 JgEpQiSuOae23kL9e+huy6ur2Qpt5Zh3T/fhhqHIuvaByfWoZ+8Hm+5irv20yqRNMyjPk
+	 bMNA2JUG3zyD5e59MepKyJD4sCi81BxgLvU4TqUNLg+F++z0gHFEyRMv2MBg1WNZN8EqR
+	 7JGcvScx6+0jQ97oTwxGIH4lSW87PHRk1Orz+iZAMLNrSCNaAUFZPt7IfROEQQi+NhA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795775509;
-	bh=DshH5ADBHUlJ3V7LZW9j2sgLPIX3gDSYtcrMVx1zFh4=;
+	d=lists.u-boot-project.org; s=default; t=1795775515;
+	bh=f2tIG2cVjSt5Vb2jMYmqq1aJtLZM7etG1tuv3h/8pg8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xLZcjoJzPd38n2I7Hm44bmUvc3c3qVmIWx8B41kT6j50K5hUqpwTJ4wjIAvzxm9HZ
-	 ZrOUn7vPm5NREwKt/xtnZK1W/pWgpHsrkEi5LC1r8Xur6UVqPKEj7y7/Gf8aERiv58
-	 XiUAqnfJtcRrY7dceNGCVKFL/ZonnzNWvW2iy3i01D8qpekqYRvEz0wVMjClOpiS8s
-	 6HvI92L3M8roCvR9/X7deO8aWgkPxBhcYOkiF3TwXcJ0Orf9Ks59mG4QrkNv3tLZf9
-	 5spwZvwIGJ5XWsEhqcvtcoDK7GN3W/SjELRWgXjPUqkHtJMfGAZHsDsVkS6IHWqwt/
-	 H4QvTUmZaF0vA==
+	b=AtieAeXrepAVseVhEIxCRkLLLIrav83NFeuPpw1ewmp0ATid1RgaEe9ReLdERb316
+	 csj+8zmT5/t8EUOntfDCz2gH7fZJTOV1nKjva9Noj+uKpKNctJRvqop/t2DPftNBc0
+	 RmID7PZHXp2Wr4UBWY9XMKQ5mYLKMn7LuEeaIeiN11gKwv/wE+mFoNJfTL6gFVUuUk
+	 3Gya5CKEzXhbbpLAiJkYG8A1E0x11M8hvy9oNccQvfCAKqbbEc6+Brwv5sYEyawkVF
+	 P1MQwQNIzn/jSOtflyFw1XYRys4IHp8w2GxXiK2FY4fC/N/GuZ1CKzQZsfK36Ighw9
+	 II14oyaecfjPw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 64FE981222;
-	Fri, 27 Nov 2026 10:31:49 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2AFE5266
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:31:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E028B409E9;
+	Fri, 27 Nov 2026 10:31:54 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7C212D1
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:31:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0F5EA40A70
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:31:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7995981247
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:31:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WTtQoOBLT73d for <u-boot@lists.u-boot-project.org>;
- Fri, 27 Nov 2026 10:31:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 72BEF409C1
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::1333"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 62qr_ME8AW_R for <u-boot@lists.u-boot-project.org>;
+ Fri, 27 Nov 2026 10:31:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B9ACC81222
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::132c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1333; helo=mail-dy1-x1333.google.com;
+ client-ip=2607:f8b0:4864:20::132c; helo=mail-dy1-x132c.google.com;
  envelope-from=linux.amoon@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=P3HrdBSI
-Received: from mail-dy1-x1333.google.com (mail-dy1-x1333.google.com
- [IPv6:2607:f8b0:4864:20::1333])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 72BEF409C1
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:31:47 +0000 (UTC)
-Received: by mail-dy1-x1333.google.com with SMTP id
- 5a478bee46e88-386ab9ab619so10847110eec.1
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 02:31:47 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=UNcivsf+
+Received: from mail-dy1-x132c.google.com (mail-dy1-x132c.google.com
+ [IPv6:2607:f8b0:4864:20::132c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B9ACC81222
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:31:53 +0000 (UTC)
+Received: by mail-dy1-x132c.google.com with SMTP id
+ 5a478bee46e88-380c28f9e35so8815673eec.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 02:31:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795775506; x=1796380306;
+ d=gmail.com; s=20260707; t=1795775513; x=1796380313;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=DshH5ADBHUlJ3V7LZW9j2sgLPIX3gDSYtcrMVx1zFh4=;
- b=P3HrdBSIjKvJF0OE14j0InRzGJGkOkVYL4lN4JD47JIiyhKOj2BTQqf1xPxaJ0cNJv
- xd0OoVg/TQp1nI5TVz7ZSwJcXy8qRsQAI9VOuAHudmTPZuDl5aRHj6nuTp9f6BmFhLEk
- 1f3lCblKNnQdHSZCz3wQpgW8Nz6uB0ijmUjIny+83wCmA4aQWA09dXmmcTnOf7OhL6Z0
- VJDkZlyqxUFYeEQxqTNOuWccQ6s06Pcig82r7wjaOmhE5ADCh60ikB7xe4WBNUI+9GZH
- J4eVpb4Hr18785Fnc/N9tHYFEXRVa5A1OGKK6rSeZzkhyknIW2JT7HhIVFBcMb2QqvhU
- 0fPA==
+ bh=f2tIG2cVjSt5Vb2jMYmqq1aJtLZM7etG1tuv3h/8pg8=;
+ b=UNcivsf+C5UYdH/sWznMf+OuciC18haHAAOxbIrB39e40DmLZqjDOqh4ayvzOnxI1k
+ vgBbz7GRvcpTjZy25GXKzItoC2kzqF/cJ2MIMm2RjrFoWO6pj1eaihfTsXOKh4Oa6bEo
+ NKyEl4NK6gPtVxANtdB9L3Z1OzEEs6PmMlM0kyWhMW1d3M6XMFDf2J74+ZzUY/aZwNXo
+ 1Ls9iCux/H/3th9JiviFk6mkS2dk9mWJxrJXZBnLgC+WsJUpfO6MxYURQTwCYKEftC41
+ nv59pIHL6WXe5El+cycPXFq6YyQsx4bHHAOu03a5GXBBDq5S3C2kiCTlwEKw+yH6/nsD
+ uU0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795775506; x=1796380306;
+ d=1e100.net; s=20260707; t=1795775513; x=1796380313;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=DshH5ADBHUlJ3V7LZW9j2sgLPIX3gDSYtcrMVx1zFh4=;
- b=FZfSbTn/9znYZR2pU+I+Dqr6HP0ZJPZa8WvQLTgPF7h5gTWdXMDysxK/XFVkeIjMFq
- 2fVSAfy6B2fReaEjU/DuHhHrOoupe5e7etuN9s5lgni61jJ/Ja9Jno5+FSGoy2u4hnLT
- ux6AD9vJ/hx66AEsfKb/A+9LN1QrOnPP0l2snz5il2FLDkd68hzOTA7BYur0YMa7BJx+
- occ24mVqcLmrvw8/bbLUa1X3DDm/peSPbs2aXjxpISmyraYhKAQxhSSddGLdjSpp8oX2
- zyaXQ5ekdXefYOhDbqMxR/+Uw2etXZmtiqdZwunZyIpRPb3Q8Lv99FC5361XRGSikqxU
- xHkA==
-X-Gm-Message-State: APuU4Z9TZS85q0sF1wRCdbApY46dEY0VgMYZhzBzNpWWKYCtEIo/KsjF
- aeWaf9PN+pkAxrLxhm9qPue/AC/sW3KQy3n5Je0Eapd6/g2IdXoWmj+0JRbdjA==
-X-Gm-Gg: AZFdTZd9azitT0Vbih9rM1/S8jnjWgnV3ohy4VKb8dJ+6JfHOwdmZf0t8qwqyEdKnSR
- bjAhXqyuOWzYq+VybY9B3AXL7K8B46TtS5qjv9hac/bK9BncORy7vcvhL40Uihwef32onkoyqSZ
- /1Ou9LApoKQu6eGhox1JHyt+qXxKfB8zHCnP16+GHzO7RKrahmDfK/bl2ez4xwP+45YFx9gzwAg
- 71maU5eSx1UV9In/4oRyzZZSHP5OALg/EYHUO8oaeVUSRh3PpHg84MYWnMtKbIkU3d/aOdQjZau
- elsxNhvx+zmfWDJNfXF1WTFqAhwMYTd5AzQ6blg2T1ODUA4MZWtntMGJAiN9nU6Xy2eSekbT0Bz
- sUm5oihp/5HVilF4qvHTmJr5eJtIb9KsY+v5Pz+DvxFRCP+qT4jNVQ6QRsCEPbI8e39V6hNrkeb
- t8SoiR5z2EO4RVVoQtswfjHETRoPOnQ1ZDF9+GSnbXQQj9mOXWMsDfMNZv482QmikmOpQA2IEbg
- kC9xfYUfQeO4mLvTLG8XjE8FxCI1ytJ7UFV6iXaLYxfU4BLW4BG4O1bMHji4iUvqafBw5zJ5zv/
- aaOr7PS8xScsAqrjzqqMe+Gyj8D4
-X-Received: by 2002:a05:7301:4301:b0:386:548e:e533 with SMTP id
- 5a478bee46e88-386548ee6c3mr22655965eec.18.1795775506286; 
- Fri, 27 Nov 2026 02:31:46 -0800 (PST)
+ bh=f2tIG2cVjSt5Vb2jMYmqq1aJtLZM7etG1tuv3h/8pg8=;
+ b=RfvhFvM/wm1DawO2u5l1AiGQVwFzDx9ZaEFwgpHn0lpX6qqYQyCrnIS+QhWi+5qTYU
+ fDzGyLgCssPgwYPkd8i00e+3Ivmam8Rp+BWjmbUuURY5O/Srv52mzXHj5tS2sSN0nvhh
+ VY48PAccj4pW7EE5J/av7SA4tvbRi3HhFUxU0gmiN42zxOJQ0KaP6YR+eV8KoHz73GbM
+ pMknhu4sppTHXFeqPfeEZtnkhcL1P+w017ndwLXuLjoZgxV/cdXPdhYz91Hnm685TrAn
+ iGjUS1jUTauUJsr1Kr53CMLMpfg3hgaVxotoZA8LGQ2lbZHnIRbWAZ1alYsiwqAPU6bG
+ ss6w==
+X-Gm-Message-State: APuU4Z99rpCSBa8nFfTawYnFZ3KroRUYl162h9ffiDTE2vidux3v/k/X
+ UXVz44M3+agaBR5lmNCsgaCUGin7VQxPOUqGPgeLKLU4R6YcmB6BeIig1ZhBJQ==
+X-Gm-Gg: AZFdTZfcJNf62+E9TtaTivbPEilhhkex4qfel418DHha0ypZ4165plhxZZRNWZZinYO
+ Dl+USfY5oChKwGIth/mKkqVjw/GxphRZ02q6m6pRC2KSHI3hVQYyGrZ7FhcCpHrt8lZLm1SEdha
+ utUWeKzJaTcuFDU0tG71d5CXdtyOWDmeCsWDQCm27mf2kW/IVMAu0bD8k/oOaO6BOhUzxANVUr+
+ gosNcyaMSqeFjclA0/wM6VHRUqJyh6AhnMq8nR6UOE8fRESZxMMLvkt7lP1NZTGfRx9/iVs0w+V
+ NAavIiqGdtG3IQrvrkYoMFh1NeaCBpnYpcPJaV3LmWiXjB5WLBCNCTDBmqOQRIfW6eGRAxLKsib
+ 5xNCvLvDUahYvM3djAhY6sFSCCWExWgyxjjDGcB1tsqwUp5mclSKJhHN97XPtjviWJTwEJgHL8j
+ hPGfqvrKPe+E8wPba6B0UQUr83Q0OeF8y8+fQTLZj/BiVY/ZoPlkbmeVFiMczCMzZJeswLKbwmj
+ mTOEWJdu1oc+gWNGUX9xist3DMY9LMtkIDeNFe6SPK/hhfSUoJk8Gu0dSI096Jt2dcYekVyCWx7
+ gvJr06gBgRTjPaTXKkw9SUQ4cpUY
+X-Received: by 2002:a05:7300:50fa:b0:383:9f52:e54d with SMTP id
+ 5a478bee46e88-3856ff52e83mr25654468eec.8.1795775512564; 
+ Fri, 27 Nov 2026 02:31:52 -0800 (PST)
 Received: from arch-rock5b ([45.112.0.246]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-385666e7fc3sm63369991eec.8.2026.11.27.02.31.41
+ 5a478bee46e88-385666e7fc3sm63369991eec.8.2026.11.27.02.31.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Nov 2026 02:31:45 -0800 (PST)
+ Fri, 27 Nov 2026 02:31:51 -0800 (PST)
 From: Anand Moon <linux.amoon@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Anand Moon <linux.amoon@gmail.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
  Dave Klotz <DaveWK225@protonmail.com>,
  Eric Chung <eric.chung@riscstar.com>,
  Hung-Chun Tseng <alan.tseng.cs@gmail.com>, E Shattow <e@freeshell.de>,
- Yixun Lan <dlan@kernel.org>, Tom Rini <trini@konsulko.com>,
- Johan Jonker <jbx6244@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>
-Subject: [PATCH v3 06/13] gpio: spacemit: Add SPL support for K1/K3 GPIO driver
-Date: Fri, 27 Nov 2026 10:30:05 +0000
-Message-ID: <20261127103030.4647-7-linux.amoon@gmail.com>
+ Yixun Lan <dlan@kernel.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io
+Subject: [PATCH v3 07/13] mmc: spacemit_sdhci: Improve voltage switching
+ diagnostics
+Date: Fri, 27 Nov 2026 10:30:06 +0000
+Message-ID: <20261127103030.4647-8-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261127103030.4647-1-linux.amoon@gmail.com>
 References: <20261127103030.4647-1-linux.amoon@gmail.com>
@@ -154,47 +157,144 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Allow SPL to access GPIOs on SpacemiT K1 and K3 platforms during
-early board initialization, including GPIO-based card detection
-for SD controllers.
+Improve error reporting when setting or enabling the VQMMC
+regulator fails.
+
+Refactor voltage handling to determine the target signal voltage
+before updating the regulator, and report failures when the
+SDHCI voltage-switch bit does not reflect the requested state.
+
+Keep the SDHCI host-control voltage-bit handling specific to SD
+devices, while allowing the VQMMC regulator to be configured
+for other MMC device types.
 
 Cc: Dave Klotz <DaveWK225@protonmail.com>
 Cc: Eric Chung <eric.chung@riscstar.com>
 Cc: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
 Cc: E Shattow <e@freeshell.de>
 Cc: Yixun Lan <dlan@kernel.org>
-Reviewed-by: Yixun Lan <dlan@kernel.org>
 Signed-off-by: Anand Moon <linux.amoon@gmail.com>
 ---
- drivers/gpio/Kconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/mmc/spacemit_sdhci.c | 79 ++++++++++++++++++++++--------------
+ 1 file changed, 48 insertions(+), 31 deletions(-)
 
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 7f12e39dad8..ac7bd642cf6 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -457,6 +457,13 @@ config SPACEMIT_GPIO
- 	  arranged into a number of banks (different for each SoC type) each
- 	  with 32 GPIOs.
+diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sdhci.c
+index fdedb9a301a..45acab38b4b 100644
+--- a/drivers/mmc/spacemit_sdhci.c
++++ b/drivers/mmc/spacemit_sdhci.c
+@@ -226,11 +226,18 @@ static int spacemit_sdhci_set_vqmmc_voltage(struct mmc *mmc, int voltage)
+ 		return 0;
  
-+config SPL_SPACEMIT_GPIO
-+	bool "SpacemiT GPIO driver in SPL"
-+	depends on SPL_DM_GPIO && (TARGET_SPACEMIT_K1 || TARGET_SPACEMIT_K3)
-+	select SPACEMIT_GPIO
-+	help
-+	  Enable the SpacemiT GPIO driver in SPL to provide GPIO
-+	  access during early board initialization.
+ 	ret = regulator_set_value(mmc->vqmmc_supply, voltage);
+-	if (ret)
++	if (ret) {
++		log_err("%s: failed to set VQMMC to %d uV: %d\n",
++			mmc->dev->name, voltage, ret);
+ 		return ret;
++	}
++
+ 	ret = regulator_set_enable_if_allowed(mmc->vqmmc_supply, true);
+-	if (ret)
++	if (ret) {
++		log_err("%s: failed to enable VQMMC: %d\n",
++			mmc->dev->name, ret);
+ 		return ret;
++	}
+ #endif
+ 	return 0;
+ }
+@@ -239,44 +246,54 @@ static void spacemit_sdhci_set_voltage(struct sdhci_host *host)
+ {
+ 	if (IS_ENABLED(CONFIG_MMC_IO_VOLTAGE)) {
+ 		struct mmc *mmc = host->mmc;
++		bool to_180, ok;
++		int voltage_uv, ret;
+ 		u32 ctrl;
  
- config SUNXI_GPIO
- 	bool "Allwinner GPIO driver"
+-		ctrl = sdhci_readw(host, SDHCI_HOST_CONTROL2);
+-
+ 		switch (mmc->signal_voltage) {
+ 		case MMC_SIGNAL_VOLTAGE_330:
+-		case MMC_SIGNAL_VOLTAGE_180: {
+-			bool to_180 = mmc->signal_voltage ==
+-				      MMC_SIGNAL_VOLTAGE_180;
+-			bool ok;
+-			int voltage_mv = to_180 ? 1800000 : 3300000;
+-
+-			if (spacemit_sdhci_set_vqmmc_voltage(mmc, voltage_mv))
+-				return;
+-			if (!IS_SD(mmc))
+-				return;
+-			if (to_180)
+-				ctrl |= SDHCI_CTRL_VDD_180;
+-			else
+-				ctrl &= ~SDHCI_CTRL_VDD_180;
+-			sdhci_writew(host, ctrl, SDHCI_HOST_CONTROL2);
+-
+-			mdelay(5);
+-
+-			ctrl = sdhci_readw(host, SDHCI_HOST_CONTROL2);
+-			ok = !!(ctrl & SDHCI_CTRL_VDD_180) == to_180;
+-			if (ok)
+-				return;
+-
+-			log_err("%d.%dV regulator output not stable\n",
+-				voltage_mv / 1000000,
+-				(voltage_mv / 100000) % 10);
++			to_180 = false;
++			voltage_uv = 3300000;
++			break;
++		case MMC_SIGNAL_VOLTAGE_180:
++			to_180 = true;
++			voltage_uv = 1800000;
+ 			break;
+-		}
+ 		default:
+ 			/* No signal voltage switch required */
+ 			return;
+ 		}
++
++		ret = spacemit_sdhci_set_vqmmc_voltage(mmc, voltage_uv);
++		if (ret) {
++			log_err("%s: VQMMC switch to %d uV failed: %d\n",
++				mmc->dev->name, voltage_uv, ret);
++			return;
++		}
++
++		/*
++		 * Non-SD devices may not use the SD Host Control 2
++		 * voltage-switch bit. Keep their handling separate.
++		 */
++		if (!IS_SD(mmc))
++			return;
++
++		ctrl = sdhci_readw(host, SDHCI_HOST_CONTROL2);
++
++		if (to_180)
++			ctrl |= SDHCI_CTRL_VDD_180;
++		else
++			ctrl &= ~SDHCI_CTRL_VDD_180;
++
++		sdhci_writew(host, ctrl, SDHCI_HOST_CONTROL2);
++		mdelay(5);
++
++		ctrl = sdhci_readw(host, SDHCI_HOST_CONTROL2);
++		ok = !!(ctrl & SDHCI_CTRL_VDD_180) == to_180;
++		if (!ok) {
++			log_err("%s: SDHCI voltage bit did not switch to %d uV\n",
++				mmc->dev->name, voltage_uv);
++		}
+ 	}
+ }
+ 
 -- 
 2.56.1
 
