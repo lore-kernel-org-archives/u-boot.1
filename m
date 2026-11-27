@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9CAB606A332
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 13:25:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F11FC606A324
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 13:25:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XHMjhwvp;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ODEixYdP
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BAIxBiM+;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TlBz1rMW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B7DCF60AC4;
-	Fri, 27 Nov 2026 13:25:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C344D40A70;
+	Fri, 27 Nov 2026 13:25:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xm70NdRa6ZRT; Fri, 27 Nov 2026 13:25:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0C0CE60B11
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795785954;
-	b=EKKe6ak+54B26nzgulul/2Ut/L7aQ4MpzQ+C2Rf4tE1jMd72xltLON38DNR4nWuAOkVC
-	 8D5GDPo4+lUcZINsTSePBzVlOr4YpKUzyq7eb4WW3IsiLi4zf5zWLtqRiP4I1/ZKY4gos
-	 +2Mn1Oi2zKGQ9CrPabH6kDskZ9CoF4Tn2IW8y1VMmVaPCg0pXjhqTyqyH2Bm8i6bqXzdX
-	 mkZj572hP6isXrWRUpeJlFRHvVHrC9CgQm8VVnUfqB2I8qNk0OIxBSbIUc/gpltPqgYJc
-	 vk+PuXWOqvE3P3NjTJh2u5SlJFW/hq02RpeQ9uu0M5eIzad9DR4w5GV824MykuM7TQw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JLjtLCI8nYz4; Fri, 27 Nov 2026 13:25:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BAA5B40971
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795785955;
+	b=MpOnPe6Gz9M5u6bItf9JPbuUKGcw/qeXcjMSb949FkPdqiDOSKB13iuno3wU0ouS54Ir
+	 445arMUJBbMUayNRO/MfQoKpw9xAZdT7yz8Dv0yN7LUTXitxossWjNn8mzuOxTFkZVDpt
+	 ikSUD9KGQ8A6eF5v+ubk4XrClzTKXZxCsfdUAdaUgKgvkTr4j3VF8+XEeVEgCaMv7ra2N
+	 n05phsImHMxZcBCsPhpfsbGB+8ZMFwHWGidVmp+jI+Bnj6WAJ/oyXkLS2NHpzK3kEhDBH
+	 yce0oWWI1SfvP7QQCaZgHYbqWdgf+cXg3Tuh9Sv036TmcYQYNAwhFBpyYQx8k4a9W+w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795785954;
+	c=relaxed/relaxed; t=1795785955;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,86 +33,86 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Original-From:Content-Transfer-Encoding:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=nbS5CZdAcdYAV6LvtGEdyMQwwhaCFouRkno2EhRik3Q=;
-	b=eh5tv9cPKQ7Cgsx+uiKVwNwfK7c4IvoqO3RD7kOBw8rI7UKtlrbTgMsh45y1KrvWzA6J
-	 2Lyv2YHwseV5kIvrSvx00uCRM3uq6Iq32xIV8I7Q1KS9R+yABui4ibv9QPP8//mQiRUda
-	 06MKeVltVnpy5fa0uBx638WmU/40pJrNLcYRoHhj1Zr2Y6FGhEc/LDS4D31/1kgTMVl2F
-	 A6VsSDbJgYjbdQx0mSSueFeT2Jy3IF8tzBqF/JEgbzsyNagTkMp+QPx4gI16MtfOXG/Gx
-	 g7EycpM5wzLw5Z/dsBkCnGNuZKMX6m2z3ZqLvoiiCEwCpf5hCRofRe/xUJZaVdsilEQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=z1zxFoM1Y4U3urtcvsTRgYOOIprxJdQvvdMc2Rg3a9w=;
+	b=XYbRXAylKUe3AqODPmiErOyCLD6ZTvi52I5PDD3llgmJkTTS4+GJ2AdEHO8AWWnl0hdU
+	 /z3z9a7Zp4KKrRfQCTpQanDSHCqL8tp7dbBnbtA6LFAVAAVY4fT0df9Y6zbhcQt3SzYi8
+	 MTZ1IFIafRD0rY/U+iYTka1dbbr4Rt4GUZTLzEqFOlKElFLGunMw8PlNLwMvzlEMe7DXD
+	 xWssta/vlPh/lY6+pjE1/6wP+9Fpng9NENhbnrbVHqHDN/B4MO/NF4FoMorO0jf5eTx0H
+	 exoDjmMfdgVwOZ5lVlOZZlxf1Tw+bwX9S4PNxAKOGlq8QA0OciWP3Mpfa7GD28VeC5A==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795785954;
-	bh=nbS5CZdAcdYAV6LvtGEdyMQwwhaCFouRkno2EhRik3Q=;
+	d=lists.u-boot-project.org; s=default; t=1795785955;
+	bh=z1zxFoM1Y4U3urtcvsTRgYOOIprxJdQvvdMc2Rg3a9w=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=XHMjhwvp3V+1+Yk0dJYHr0UHBatpxxKb2u8XPeBvNDQlCTXFJYyMHrYfYNbPBb/Xc
-	 3lCZqvuULxar/l1MczPg7UHm9cO5+ECnN4ZQXUIea0jYHzCbs+/2uH/m5mENgOA3RA
-	 elmC9Cy2b3V4AWaeF848voEHNhVhVTu9ytowsWNYe2qq0zcC9+XWd5WTLOEwhTzLJJ
-	 R66j3dkwaIMvFAzZ3Awl6p6EtjZDcHbJYCF4UZ5XVkLshFxOG9px3aAZgIms5o0k/q
-	 oiNXodwcvsjAm1dpvOXPSyih8bG25VAiyw6naOExcd4K0Uk6dvSA+FcpFLcrwNYd5N
-	 Qj3eJ6dBlT7OQ==
+	b=BAIxBiM+Cf5g8kTLq22CTDAxW1j3PQ9r8rYbgzd10jbDY+9Rx1f1rBWK/7k6t2rn2
+	 xy+H43A+s/nvVDRh+jIqYm4YR9eTentJFNzO7NvJGZIPz2FF9hA19mYiemw+DSYsqa
+	 KL/+9G1ETFqOIYmpjxNSyIb5VeoMGP0oAG+n/Sg2DgTm+Mmv5vJFDojHZp47x4Lajc
+	 LwFiXbx7CmVpTPsdf4k9ueUdOBvmdn3pOcqu1842ESx88D6wPjQBmZUxpKBoECL9ip
+	 epVejNJFx2Rr0W45HzmVnqWQFPr9NRmU1OUUySVWSARzA6EV5ixrvhyOFSVQ6M8i0v
+	 +vtixOlqeu1kQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C0CE60B11;
-	Fri, 27 Nov 2026 13:25:54 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id F334D3D9
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:14:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BAA5B40971;
+	Fri, 27 Nov 2026 13:25:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7E185373
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:14:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E50DD40571
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:14:17 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6404160AC2
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:14:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nt3R5LOqV01J for <u-boot@lists.u-boot-project.org>;
- Fri, 27 Nov 2026 13:14:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 14954400F5
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0vNQ0Fh1g4_V for <u-boot@lists.u-boot-project.org>;
+ Fri, 27 Nov 2026 13:14:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 66EBB608CD
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org;
  envelope-from=devnull+ricardo.pardini.net@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=ODEixYdP
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 14954400F5
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:14:16 +0000 (UTC)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=TlBz1rMW
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 66EBB608CD
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:14:17 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id EB32A621AA;
- Fri, 27 Nov 2026 13:14:15 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C52A844718;
+ Fri, 27 Nov 2026 13:14:16 +0000 (UTC)
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 673571F0089C;
+ by smtp.kernel.org (Postfix) with ESMTPS id 4587D1F0089B;
  Fri, 27 Nov 2026 13:14:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1795785255;
- bh=nbS5CZdAcdYAV6LvtGEdyMQwwhaCFouRkno2EhRik3Q=;
+ s=k20260515; t=1795785256;
+ bh=z1zxFoM1Y4U3urtcvsTRgYOOIprxJdQvvdMc2Rg3a9w=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=ODEixYdPIxqyfuHGXhwC2/Y4vgM0n4mGCQ7RHuv7+FGDgoQlLxb5dCW2cV5AnR76o
- 2a03M2/MvQ9FhS08J3KpjGf0lI5maFN24FVLYVRbMtV7U1aqqQYlbzwDBT/ImIedjp
- Xtvxp1bLmKv8qPtxYlgh2ZWPTOaOAtW2w0ng8fZxEndz7Ei7vqmjDcZemk+QT1LRQZ
- xKjLs6EIwSwb3XeANVyVAFpaLmGMbX831AqUL8ZcQu1gB+v9vyy/QphTUM4Fz2tbIO
- ysr4LJCqYDgvVd2exMBdS4xS3w2X5Iqf8SAaZw8KFBmBDEoIC2s5DAjmDHcot6T+yg
- WZeLWpwa9T2nA==
+ b=TlBz1rMWllC40KcM1GSbCVLzVszoDUPqKKLFMdY5xSsIx0YrySBMMFJSgddu40cbW
+ i/BOEfMK/718WzdGUhYS1cqmRyILLXKAFeesuDNqYtKUbhC6sJglFycOcb/XryPmg0
+ pYIWKbNxVjNGHgklNVHatkhaOXWWknm6kCgYU+2ZIu7eH9ZHtponmjdBbLeGgcsULc
+ hBYzJK8YoXYNEP+tr0dlnrGJ+rOwCUX5Vxc5PCM1SzaAsSOWKo/Jc0CzoC3G79q9w0
+ jhjpTJgpnOEMllzUHPWyPEbya9kwy/O7Y/y+THy+kzkzLJFvSKESqtXUdPzG7/UVTf
+ eXACtmlSQ8TWw==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id E88244B7EF;
+ by lkml.kernel.org (Postfix) with ESMTP id CA33D4B7EB;
  Fri, 27 Nov 2026 13:14:03 +0000 (UTC)
 From: Ricardo Pardini via B4 Relay <devnull+ricardo.pardini.net@kernel.org>
-Date: Fri, 27 Nov 2026 14:13:00 +0100
-Subject: [PATCH v2 3/4] ata: ahci: return the last LBA from emulated READ
- CAPACITY
+Date: Fri, 27 Nov 2026 14:12:59 +0100
+Subject: [PATCH v2 2/4] ata: dwc_ahci: get the PHY from the sata-port
+ subnodes if any
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261127-rk3588-sata-fixes-v2027-01-v2-3-dbdf7770972a@pardini.net>
+Message-Id: <20261127-rk3588-sata-fixes-v2027-01-v2-2-dbdf7770972a@pardini.net>
 References: <20261127-rk3588-sata-fixes-v2027-01-v2-0-dbdf7770972a@pardini.net>
 In-Reply-To: <20261127-rk3588-sata-fixes-v2027-01-v2-0-dbdf7770972a@pardini.net>
 To: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, 
@@ -122,18 +122,18 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ricardo Pardini <ricardo@pardini.net>, 
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Quentin Schulz <u-boot@0leil.net>, Jonas Karlman <jonas@kwiboo.se>, 
- Heiko Stuebner <heiko@sntech.de>, Julius Lehmann <lehmanju@devpi.de>
+ Heiko Stuebner <heiko@sntech.de>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1809;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1329;
  i=ricardo@pardini.net; h=from:subject:message-id;
- bh=9TIiApzFn3xQtzGU/fV7KRaSTT+cb2gTL4l52MT6QlY=;
- b=owEBbQGS/pANAwAKATteP+Oex+3pAcsmYgBrCYIa2sv7PQWFUDvqq7FQRJ1X8BXafGqvUCpsb
- fhOUI3YlbWJATMEAAEKAB0WIQSsGCMM9q/qytxIiJM7Xj/jnsft6QUCawmCGgAKCRA7Xj/jnsft
- 6eWJB/9Bl6kDQkGdnELraR1J0aAJI83xCH+5LO8CKlqrj/f5SoqqqKTtXgd8ZCISfNMiQd/l77T
- Ml+FHNWd+SAa1rn4UKQID3djbnRZ6oa0SmALHcLF8UmWIeXss3m+IlhwHKYvUwFliVhbpj5Bqcs
- MiSATZnca6uB6eWzwcztJUxxYi9XV2R/IJWU01bhev6xiM2wlE7fw+oFlnXcoYlL6gTjuO5lNs+
- kCwA6fvlNsWilR3mv64DQqv9lwdqmvco2MdfawAvX+QMVanNdgtpWbkFBesMsRSgJ6W4KX10HFO
- WmHnes/BNv7LZmC1ggyTZXwM1QvZzN1ivTb25/4uBRlbHjMp
+ bh=jMc4maRHATqvBOpmaGWwi0WL8TS7p4hi/1K0YzF8JMw=;
+ b=owEBbQGS/pANAwAKATteP+Oex+3pAcsmYgBrCYIZr4XAedgn/zbutvGOIHKJStkEhdoInLmn+
+ Hnyk8b0U/WJATMEAAEKAB0WIQSsGCMM9q/qytxIiJM7Xj/jnsft6QUCawmCGQAKCRA7Xj/jnsft
+ 6c7TB/4+K5mHIhzPlYF2pg5uasJmt1KFvbbnPSoXXW6foxl+Pr0AOYqXo3KEMcLaHkiZsH1SPbY
+ KttVq8b8OFOHmIKTGl9q6WtkEYa/2PXFEtUIxz5RHRJA8lVzFVPKcgkqaG923dyPBjKOO8ek30N
+ C5A+toyoTtQcXlhmz0Wu6zS9qG05toSRSIcuq2jYufIEiBiUm1i+8HTFUvCFtbb4S6awmUYjtQf
+ McDnLoyjzxGGmgfGxVeTJ236+B81swez3kMhe3SA6itBBq8ZFSC8BNBR/iN+9aa9E1Zy80yDcjg
+ bXqBguEkay8jf6GPKRTRDNiVo4a4GRpQvuzeMUSWj6iFU7+p
 X-Developer-Key: i=ricardo@pardini.net; a=openpgp;
  fpr=AC18230CF6AFEACADC4888933B5E3FE39EC7EDE9
 X-Endpoint-Received: by B4 Relay for ricardo@pardini.net/default with
@@ -161,53 +161,46 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Ricardo Pardini <ricardo@pardini.net>
 
-SCSI READ CAPACITY returns the address of the last block, and since
-commit 5f7c06bdc3c6 ("scsi: fix disk capacity too small by one sector")
-scsi_read_capacity() adds one to get the block count. The AHCI emulation
-returns the sector count instead, so AHCI disks are now reported one
-sector too large.
+If the controller node has sata-port subnodes, take the PHY of the
+first enabled one instead, like Linux's libahci_platform does.
 
-Reading that non-existent sector ends in a 10 s AHCI timeout. With
-"ums 0 scsi 0" this happens as soon as the host looks for the backup
-GPT, and UMS exits.
+This fixes probing on RK3588 and on RK356x sata1/sata2, whose DTs
+have the PHY in sata-port@0.
 
-Return n_sectors - 1 from both handlers, keeping the READ CAPACITY (10)
-clamp.
-
-Fixes: 5f7c06bdc3c6 ("scsi: fix disk capacity too small by one sector")
-Cc: Julius Lehmann <lehmanju@devpi.de>
+Link: https://patch.msgid.link/20260201191804.41421-2-heiko@sntech.de
+Cc: Jonas Karlman <jonas@kwiboo.se>
 Signed-off-by: Ricardo Pardini <ricardo@pardini.net>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/ata/ahci.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ drivers/ata/dwc_ahci.c | 16 ++++++++++++++--
+ 1 file changed, 14 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
-index 38e953ee79c..c806ee55d70 100644
---- a/drivers/ata/ahci.c
-+++ b/drivers/ata/ahci.c
-@@ -759,8 +759,9 @@ static int ata_scsiop_read_capacity10(struct ahci_uc_priv *uc_priv,
- 		return -EPERM;
- 	}
- 
--	cap64 = ata_id_n_sectors(uc_priv->ataid[pccb->target]);
--	if (cap64 > 0x100000000ULL)
-+	/* READ CAPACITY returns the address of the last block */
-+	cap64 = ata_id_n_sectors(uc_priv->ataid[pccb->target]) - 1;
-+	if (cap64 > 0xffffffffULL)
- 		cap64 = 0xffffffff;
- 
- 	cap = cpu_to_be32(cap64);
-@@ -788,7 +789,8 @@ static int ata_scsiop_read_capacity16(struct ahci_uc_priv *uc_priv,
- 		return -EPERM;
- 	}
- 
--	cap = ata_id_n_sectors(uc_priv->ataid[pccb->target]);
-+	/* READ CAPACITY returns the address of the last block */
-+	cap = ata_id_n_sectors(uc_priv->ataid[pccb->target]) - 1;
- 	cap = cpu_to_be64(cap);
- 	memcpy(pccb->pdata, &cap, sizeof(cap));
- 
+diff --git a/drivers/ata/dwc_ahci.c b/drivers/ata/dwc_ahci.c
+index 138a025cb02..97315441950 100644
+--- a/drivers/ata/dwc_ahci.c
++++ b/drivers/ata/dwc_ahci.c
+@@ -55,8 +55,20 @@ static int dwc_ahci_probe(struct udevice *dev)
+ 	struct dwc_ahci_priv *priv = dev_get_priv(dev);
+ 	int ret;
+ 	struct phy phy;
+-
+-	ret = generic_phy_get_by_index(dev, 0, &phy);
++	ofnode node;
++
++	/* Like Linux: first enabled sata-port subnode, else the controller */
++	if (dev_get_child_count(dev)) {
++		ret = -ENODEV;
++		dev_for_each_subnode(node, dev) {
++			if (!ofnode_is_enabled(node))
++				continue;
++			ret = generic_phy_get_by_index_nodev(node, 0, &phy);
++			break;
++		}
++	} else {
++		ret = generic_phy_get_by_index(dev, 0, &phy);
++	}
+ 	if (ret) {
+ 		pr_err("can't get the phy from DT\n");
+ 		return ret;
 
 -- 
 2.47.3
