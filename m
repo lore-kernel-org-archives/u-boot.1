@@ -2,187 +2,138 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0284606A31C
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 13:18:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47586606A321
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 13:25:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TG295DAd;
-	dkim=pass (2048-bit key, unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256 header.s=selector2 header.b=bavRybhm
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fHLv3/s5;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UKH2cVDH
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A910D40A3A;
-	Fri, 27 Nov 2026 13:18:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D375E40974;
+	Fri, 27 Nov 2026 13:25:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hm_mwUqosRfD; Fri, 27 Nov 2026 13:18:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BF74940A08
+ id KX2Ecl8CM6GW; Fri, 27 Nov 2026 13:25:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0CDFC408E1
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795785500;
-	b=r1YHIq4tNE/tOojz3gWdDWNirlBCJSL9IGMcL8OTDAad4ulA8+bwt2ca8J770GlzXxFv
-	 JSoaLjkSwIhWgHobhyufZLhYhfwzrFs3HmmvdPxgUhpUI83/NuxMj31azc0FNtXF4fapL
-	 bpFM2ydvpIZeQG1It5PGyildkVGKej9ROhoS9gJvwYuwn+dvpiEPmOXVZGg4MT1R/9+cN
-	 l9xoW2HXWIvWhEsod2R59d+amfCB7XQc4FyWaiXyx+yAR9S4VZyLA3ND6IwBP4Cg5d2Lm
-	 tskkhJ8V3JmHTUAsTB4eYb38j31R9MOHr2baohc9HwGjgGwwFAK/VmBpGf67BlF/eFw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795785945;
+	b=dq7DCvrki34PhEJ8bNtaQ92nF8jyHOhmJvi57+NA73utx2ip3aySp+qY+/XA3dWeDla6
+	 IvaNKZhkIkHdDHfULZT0vZCy4W9mClC9AgIVvmiWJqoMitMOOtLj3YZ8jkR9kMa1S3Has
+	 IDCbpUkS3ylER6dvkcwPq1eTHrNKYCKixFDHxPzi2pN7niun9WYVPluAclvXBe9otfmxx
+	 pXlbxv5icBJd6F4rfWR7W0GLwQPyxdjPqXbdl6+qNHUH/KQbPX89/kSij2iiU2CspRknv
+	 9U84Ing6/FT38QEQUCBPwbKykv+BdM2wzvyJ9xsPJp2VVLcsCIA5h7P3H6uleOXpSRQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795785500;
+	c=relaxed/relaxed; t=1795785945;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
-	 Received-SPF:Received:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:From:To:CC:References:Content-Language:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Originating-IP:
-	 X-ClientProxiedBy:X-EOPAttributedMessage:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Received:MIME-Version:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Content-Type:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=IgxaiS+BD6g9V87g5XYMZa2LhY6vpx36upnXIeb3RRo=;
-	b=MdxChP9pl5/LlGC2B/3QxxXHlYEtvxQKH/k5B/x3JCXxQS1RQ0gTyTqdX00Y/NPO1rJq
-	 q1Kk9kXn6zz7nDz5Mg0HSdMYJgJAyzubzHQ7J163VGGPZwFZdxNbcKxrOE/2BghjJedNB
-	 RxJd9UcPe4IBWmZ7SFghm1yUzT88upi63QB/WKBUiGdXS41X4loeoCEgFxgz4kO3uBWv5
-	 Vd6JY5BG2cXRW+HuZx+0D+1hOI86erpT09/24jJHw4G5Uj9EjLWDqE1JwBtpzQnXzwWl3
-	 KwVAX1fF71MF0uO1QFyEzuyV6/CTDxBQ8x8Id4Ir6vm7wrGiGQ2+xRegxaE0J842heg==
+	bh=bV+xzc7O0QGiCasC4D7VdW3VE9gcj/wW/nRasyoh1cQ=;
+	b=RoYYy7nY8Jo8sOJQEu0OsvwG4AlOWmnLNpuMajIVIvY7O7m168odcdeziySg6jlTyDHa
+	 /E5alSAJkx7twWHyAsduxFB/uSindDaMOVmFP9hjA1Txa1Jh8TM9jpiqircnvcSE4VxaU
+	 7e9qfW3d6KZU7lPZRe4dWd7AD9MqfUj9+CxoDIYnYTjZf3L4VbMAqIfnr3pGao0U6V3VV
+	 hdjiihoxnrHU5sRrw/OsQrEkIwzZVaf+p44l18Q/KLKky9KbUilvfvCG2p4Od3KALB54+
+	 kBEWVHb3FXjTIayLpLfOwWq/Eq1j0Y4wZJQHzExjjcU7gow9Cvpw/gu63vZNyLRYBEg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795785500;
-	bh=IgxaiS+BD6g9V87g5XYMZa2LhY6vpx36upnXIeb3RRo=;
-	h=Date:Subject:From:To:CC:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TG295DAdEttt8JA27eQ+u9oYOljgaUom3aUSRk3EDA/U/LKgJPYGM39sKRhN/oFw5
-	 Pn5wJ7wEl+BkKtgBjTRf5x1ClO63ykiVpaHBQTX1mdY8OZpCN/KR23XIOWqPzTNwBc
-	 qP0rICNInC7z8ZrAHqbOKft+Kjle+veQMsKsePvtVsV26ANoQoqwio845z6LgV+u1z
-	 jJD4UQOtyxQ36jhTG6ilR0iACcVxK44LImjDPqtGABVIUqQlSVGNQt1TJsSLlWIzgG
-	 twE8hoUzi84yfXXcPkAXS3tzdg/GdARSPC7cPH6oJrbocplea3OIrLKpj/0UAxFoWv
-	 Bztnlhl2Sd0AA==
+	d=lists.u-boot-project.org; s=default; t=1795785945;
+	bh=bV+xzc7O0QGiCasC4D7VdW3VE9gcj/wW/nRasyoh1cQ=;
+	h=From:Date:Subject:To:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=fHLv3/s5XMrKph8aUAyARc/5q2dLM32U5jwH6rco0yEM7Q7krnCdiLsGtwz/PQGIo
+	 PaxTRkXBEtfXisecf0TYfr2URNLu6zs8e6YNd8z7ixvPOp+F/exlgJZk2nIj5xKA0l
+	 vh93XbEldl6lIbcOORwkq2XtIOzRzpYxsoqt7lYUDBnb/Rd1j27G/ljDdDgcowg+pr
+	 bE6K9cRBZiOOXL3h2GJgQ9ySGJbOLv54jptkF1ZNuH/e/tOTgE8fDqnBM2kIPDluq+
+	 ClKQx17oR0ADXQtFZV0ewStJHiBggXTBobWuZx9ihfZyjPje4bicMDFYtvoJImvntN
+	 oQMZiP33Oetrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BF74940A08;
-	Fri, 27 Nov 2026 13:18:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0CDFC408E1;
+	Fri, 27 Nov 2026 13:25:45 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 54EB1311
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:18:19 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id CEE271C9
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 11:14:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3B31D400F5
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:18:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B47844008B
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 11:14:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2K44g3dMMA5l for <u-boot@lists.u-boot-project.org>;
- Fri, 27 Nov 2026 13:18:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 19B034004D
+ id WGt3wrrG7IJi for <u-boot@lists.u-boot-project.org>;
+ Fri, 27 Nov 2026 11:14:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9E5CC4004D
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c202::7"
+ smtp.remote-ip="2607:f8b0:4864:20::1133"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c202::7;
- helo=gvxpr05cu001.outbound.protection.outlook.com;
- envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
+ client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
+ envelope-from=urak76028@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
- header.s=selector2 header.b=bavRybhm
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 19B034004D
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 13:18:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IgxaiS+BD6g9V87g5XYMZa2LhY6vpx36upnXIeb3RRo=;
- b=bavRybhmH1BftHqP1DpNLX/4fUq9GPWYmGxOWA36exGe4X2fwjCsevHe+8p+r6PeyeS+mOgw6rHKZnUHUa4i5YNSSPdadNejwnlve4JvTg2uoA4ujp5EaBDYbW2xvz8jXgEB/5niS7qbbnru8wSqpelJejHCcUgM7kfEpFlhDyODLqsYqRLazHCTbUeQIu4wKP3Smsv1GlPXbibLX6Y4eRr4oVJppxz2z/SfX39YvBsSbCml9YFMPT1C2984+mQpQaBK1NnB1XGHb+s12hLsNPbM7+Jqp8IjAog9HJyr+kVtz2V5d4vvRm4qCfE3zOnAJGJAjkFAq+1G3ClS+HBYuA==
-Received: from AM8P190CA0007.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:219::12)
- by MI7PR10MB375404.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:290:100::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.4; Fri, 27 Nov
- 2026 13:18:11 +0000
-Received: from AMS1EPF0000009E.eurprd02.prod.outlook.com
- (2603:10a6:20b:219:cafe::7) by AM8P190CA0007.outlook.office365.com
- (2603:10a6:20b:219::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.662.10 via Frontend Transport; Fri,
- 27 Nov 2026 13:18:11 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=fail (sender IP
- is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AMS1EPF0000009E.mail.protection.outlook.com (10.167.242.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.688.5 via Frontend Transport; Fri, 27 Nov 2026 13:18:10 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.56; Fri, 27 Nov
- 2026 14:19:00 +0100
-Received: from [10.252.12.59] (10.252.12.59) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.56; Fri, 27 Nov
- 2026 14:18:09 +0100
-Message-ID: <a2b406c3-b939-4f5b-ab11-eaa3b1213b8a@foss.st.com>
-Date: Fri, 27 Nov 2026 14:18:09 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=UKH2cVDH
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9E5CC4004D
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 11:14:20 +0000 (UTC)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-8b4c685c751so69090277b3.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 03:14:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1795778059; x=1796382859;
+ darn=lists.u-boot-project.org; 
+ h=content-type:to:subject:message-id:date:from:mime-version:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=bV+xzc7O0QGiCasC4D7VdW3VE9gcj/wW/nRasyoh1cQ=;
+ b=UKH2cVDHiSnJmWKIILjxz43/CaLi1siUa59ns62LUZ2OhNNQE1RL/oKay+zVA0JUTF
+ cJgHuWkquhsWvxjnb8Xz31HIgEmRTiKKog9MIu0i2jt4EwWaeOOxRI0gjkmXEGLJNyDJ
+ ZKtKC8OYLb0h4kBcRPnDarlpXoJRh+93bmkLqwqo5m7dlI8WNmhx1r9Bt+ABJIFjMpvW
+ xHaex7/kUwteU0G/uwUSkv0oCLkhHk43tHqjdUX23KjD8wz3OjC9bPQEqchUreRn+zBW
+ 2NvJKw5ct383RgRz87R5/iqXhkGOTqvhoMxGxYZ6fA4WVG6KKtH1fePqyaWI+4UECOIM
+ Z9KQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795778059; x=1796382859;
+ h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=bV+xzc7O0QGiCasC4D7VdW3VE9gcj/wW/nRasyoh1cQ=;
+ b=njVrTiv7ykMxyshkflJS12w+bMjeNvTdl7Znc4A0HaXt5j5x69Ji05w87WfImpIb9N
+ hvx34JeeTxTkKuSZS2OWOhMGgBHFVyA6oLsSA40fLG0hqLLUT+P+tm97joeINGV3sm0w
+ lg6wY/Jo55JkeDxzEnTTYYoFpnTuuNJF8/fdEhCkyLllJlHdyPVFpXjccVsWdWOMzMBD
+ OccURY21J5rPYwQl18ZS8F4olE6eypWydz/e7ElvND7EQLOVLQ/Bdh7L08SyJEHOqYIy
+ oLTiPj64eTpi2REk9OMwRdXAz740SNzQHgUQU2AH2oW7JNNguqFkG5Z1sl6gCm9IXNvv
+ 33XA==
+X-Gm-Message-State: APuU4Z9nFRyKpIL4cvza8XNIqaVimHCKGqQCdBlDLTyguWFCB4lKKEuW
+ Yf/U62aZxhg0VfaDq0QKnUHGsdcRGSQhsKuWwHBzr3/iOzvt0dd16vKhMh2eNOUWtsx1f+OLRLd
+ DxTZGwxQhiXqghLgSCKSQaiQW6Ja2TJ+Bbw==
+X-Gm-Gg: AZFdTZdjTFYtcYewd8pLNI76cl4i83Aefk+57eH08hX8BN4XinqGsj6cfeWjUPagxpG
+ Xu+2pF3q9WeL5Y48pJIIdKT8IPi1UQ+AV8pMvf5zGXhq078E25AS4bPjRziX4+CTxFF5nu0o7fu
+ LFI78ar6tVXRhMmDxNFnNvF+M5PRXzIHmnEAL/O72W0P4Jk96jqeZhCLgLe0Bt7Xwe00bxnxE0q
+ u2A4dBmBawT0+VQe0GmTxQlalXvnpjqrR381UdM9HAikkf9/npDS53MeFh83uxrb+9lJasQbcY9
+ WcpQWsnn+bO7uW8WeeCFbfAmNt1+y7PlnzEZDRXMHvoCAgLS2NnN9WrQ0RaX2GzgKgkYHbvC3NT
+ tc2vdgqZXkTi6Io7Abq5KXBQKxNMxqNXxTRE=
+X-Received: by 2002:a05:690c:e3f0:b0:8b4:d44a:c4ce with SMTP id
+ 00721157ae682-8b5204e5e75mr83351117b3.82.1795778059146; Fri, 27 Nov 2026
+ 03:14:19 -0800 (PST)
+Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST; 
+ Fri, 27 Nov 2026 06:14:18 -0500
+Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST; 
+ Fri, 27 Nov 2026 05:29:15 -0500
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [Uboot-stm32] [PATCH v2 23/35] video: stm32: ltdc: stop looking
- for the panel once found
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Yannick FERTRE <yannick.fertre@foss.st.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.u-boot-project.org>,
- <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>,
- <michael@amarulasolutions.com>, <linux-amarula@amarulasolutions.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>
-References: <20261107143241.2236511-1-dario.binacchi@amarulasolutions.com>
- <20261107143241.2236511-24-dario.binacchi@amarulasolutions.com>
- <64337014-f5a4-4121-a992-132f1c99a8b5@foss.st.com>
- <3197827e-6f9b-49ff-9eb6-14c099ebb3f0@foss.st.com>
-Content-Language: en-US
-In-Reply-To: <3197827e-6f9b-49ff-9eb6-14c099ebb3f0@foss.st.com>
+From: =?UTF-8?B?2bQ=?= <urak76028@gmail.com>
+Date: Fri, 27 Nov 2026 06:14:18 -0500
+X-Gm-Features: Aa3M54qAg9y45sUi0HXg5FtUSQ3_upbCp2o88ZwFwyfyglSCyGmW8J0gsb-17N0
+Message-ID: <CADwP7ENpn=ks26u=q2y0aLFb0+KcPsQEYZn7QAbutjM7Z-Op5Q@mail.gmail.com>
+Subject: MT7626 / Leopard: historical public U-Boot source references
+To: u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF0000009E:EE_|MI7PR10MB375404:EE_
-X-MS-Office365-Filtering-Correlation-Id: 73399eee-de1b-4194-3c56-08df4c88e27e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|36860700016|376014|82310400026|56012099006|261022105027099003|11063799006|4143699003|10067099003|261021121427099003|261026140227099003|261021135927099003|261028144727099003|261102123227099003|18002099003|22082099003|261009223027099003;
-X-Microsoft-Antispam-Message-Info: PcayumTFdK7TS2Jd2QS0fg8+Ap5LSQFAxUfyvbdpOO5Mbki89hj8m+WtGJK5MdS+AsEK3DS4Rrf91H5fkjUOUfbaMSogA6AM8ffET23w5iTF5i8bhaxxT09cbh1OQefuHfkQwhzo5NEvkatc6zM2tB2EdVVAHoN1On3X5K915xAEzhPzwpGCLdiEDCDxXBcI0F+LWxd4jHAlOwPcn9zfQDPRC7+nFC0b2zqzvHFIVzecZ7Cp3QlbT32LQSj3bk+IxDUEvTSaczoOh+OyGw2sKo1Pm5K3ReVWr1jev97vgxBED1D6aGgLizWz6gk1doCcYMJPDDnCKHp0n8l2zRwFYaWfY0EJN4PTD9nf8nrGcsIGU3ZoaL1ibQmN68//SSlOgCcpivcv+tXLNiDhtnJKZFZeC9dT7XIIG9t6KMAaM8a11eljJOWyXBDnjaceA7mPtR89csHLOZ9gAlWlY1ok3s63iyi5xmi1szCUXfDmtFMBRQaHbwxjXLOh7XvKtCnuuqFCI4dc0Zo5deRXR4HMmTdneefAh4hQ6Y8o9EX/TP/xDEgoP+uZnxzVTT43hIJiMTXdBJ4A3xZ2o+y7l638D+ZUyQrm5Q0uB2beyHcqUeyhiaHyiWmDvieN8eYJ43TzYhyvrtS+wEG3yPnsgAD/T0c7/wfIyUQXbdAEAe3zgq8=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(36860700016)(376014)(82310400026)(56012099006)(261022105027099003)(11063799006)(4143699003)(10067099003)(261021121427099003)(261026140227099003)(261021135927099003)(261028144727099003)(261102123227099003)(18002099003)(22082099003)(261009223027099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: CNoF/JYBejavHU/Rg9oqkbqNdA27FCHDBuXpmz9V7aFsZlm0peHqhdmjZp8IUclq3ZfSOvATlIQYeZJDj0pAjyvRWXQfYKaoM+agMjeYyiZY6NT3cislrSQEizwhOc9crog7M60aY3BDlMdzLPuLS0l0az1YbyTtUuBbW01Uin6bCB3L9yrhot6kZgt2rDFFTdFdtl/FZMuDIhRJswKZvBWwdGb4hBrolr1kv+mLfwNTBWGVN0m0NIx2bou1uDs5Hu3gMrCAkGxULcJqN1WyYbkdiIyHcADEcgUmz/EYFZKISTLYuj5inNatYSLdKUD/xoPgv+ark+KyImFFxZFO0KTzXpZlpjyywiL32Ko9PLFXqA2KhDcnSTrQY5d/+BVPBkLpMCGH/5Us5LJ4lN8fd71Q164emhC4/HyJhynR58vhiqIxOeHSmj1a0O8A0FS6
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2026 13:18:10.8226 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 73399eee-de1b-4194-3c56-08df4c88e27e
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000009E.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MI7PR10MB375404
+X-Mailman-Approved-At: Fri, 27 Nov 2026 13:25:43 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -192,71 +143,36 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hello U-Boot developers,
 
+I am investigating TP-Link EC225-G5(RU) V1.0. Three local firmware
+reference files of unconfirmed provenance contain a legacy uImage
+labelled U-Boot 2014.04-rc1 for leopard_e with MT7626 markers. A
+repeat static analysis verified header/data CRCs and identical
+decompressed components (196032 bytes, SHA-256
+4ee47962110a775886d6147be238858f7dd1470ec412f084c9d463ff6440dbdd).
+This is not proof of vendor provenance or the installed build.
 
-On 11/27/26 14:17, Patrice CHOTARD wrote:
-> 
-> 
-> On 11/27/26 11:30, Yannick FERTRE wrote:
->> Hi Dario
->>
->> thanks for the path.
->>
->> Acked-by: Yannick Fertre <yannick.fertre@foss.st.com>
->> Tested-by: Yannick Fertre <yannick.fertre@foss.st.com>
->>
->> Best regards
->>
->> n 11/7/26 15:32, Dario Binacchi wrote:
->>> stm32_ltdc_get_panel() looks for the panel on each port of the bridge,
->>> without stopping once found, so the panel is only found if its port is
->>> the last one in the devicetree. This is not always the case, e.g. when
->>> the ports are added by a DT overlay.
->>>
->>> Stop at the first port connected to a panel.
->>>
->>> Fixes: 35be94614733 ("video: stm32: ltdc: properly search the first available panel")
->>> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
->>> ---
->>>
->>> Changes in v2:
->>> - New patch
->>>
->>>   drivers/video/stm32/stm32_ltdc.c | 2 ++
->>>   1 file changed, 2 insertions(+)
->>>
->>> diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
->>> index 7bd6724bc2a7..da580a78a5db 100644
->>> --- a/drivers/video/stm32/stm32_ltdc.c
->>> +++ b/drivers/video/stm32/stm32_ltdc.c
->>> @@ -571,6 +571,8 @@ static int stm32_ltdc_get_panel(struct udevice *dev, struct udevice **panel)
->>>               continue;
->>>             ret = stm32_ltdc_get_remote_device(dev, ep_node, UCLASS_PANEL, panel);
->>> +        if (!ret && *panel)
->>> +            break;
->>>       }
->>>         /* Sanity check, we can get out of the loop without having a clean ofnode */
-> Applied to u-boot-stm32/next
+A related public third-party tree is
+https://github.com/a-andre/u-boot_mt7626_archer_c88 ; I do not assume
+it is the corresponding source for EC225-G5. Are there historical
+upstream or vendor-published references for Leopard board
+initialization, SPL and build configuration which could help identify
+the lineage? A historical device log recorded a June 2023 build
+identifier, but the reference filename date alone does not establish a
+match.
 
-Sorry i made an error, instead :
+I am pursuing corresponding source separately with the distributor. No
+custom image has been booted on the physical router. This is a request
+for source-lineage references, not a patch submission or a request for
+proprietary information.
 
-Applied to u-boot-stm32/main
-
-Thanks
-Patrice
-
-> 
-> Thanks
-> Patrice
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
+Thank you.
