@@ -1,115 +1,140 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55014606A31E
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 21:52:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED0D6606A31E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 23:29:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GeWqgs+p;
-	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=YyAxGNCQ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=JhRjPPW4;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mUl1ZVJY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B77EB40AE6;
-	Fri, 27 Nov 2026 21:52:10 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qdSQ0SXmntwJ; Fri, 27 Nov 2026 21:52:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E572C40AD7
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795816330;
-	b=jAAMj0H5QeAe3RI9/gPraFfVId+QKWgSNpu46awyOrov20atE5WvCqS9kZpeM+rVZdjq
-	 xesvhT8i6RrW1+xpI35YIQ8slT1KA1adfdfB+PoJYceClAWNabZ+9IZeacvKSe9R9o3C5
-	 zq53VU8C2LNF4PYDnISGytovVuRJog4uu52EvVKxvSQnnXzntgtoOsePZ1jrNmQ7iRDWF
-	 zUqwRUIovP6jmaZoC/lWrEgAPsJvmtitdFa3t5E0UrxMf6iT7fVrkKNKpkcbWbQRprQfJ
-	 0rJyvBK++Pzcjv5J2iQoQhPgUPMYyPuESoBKXJHc6lUPBF9EM0XCsL/o2UaQuSSX5nw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795816330;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=y4kq9g6BAMgPa8zS0MbbF/ahn+tVz5OI7a45LcAtMQA=;
-	b=pV/Qb5OvRgV4uxGhI3DvnhPZnst0qMKlXbCoz3o/Cfpllkg42MFtduukC2jycqPo75Pc
-	 p+iXw8Fk2ssJ2tYs724XDh78iSJphGZtHG29XNLQP584efa0/zpK0n0H0g5s/FxE4C41i
-	 7RIVPcFpy7/NmMGAunOp6EMwm3+VZBtpBLPxy0QzSxlrerNrBDXH6V7GFumYD2dPiqJV+
-	 q++BlRqLVpy4lN2kwAmOSrmNy5ILtU+XIZkbE249Tx/49bI5tbkMB28ElSYZXuoVmSb6x
-	 OiriKB2towSV33UdCPkPYOExNIDx17YR24h5iTIqngT98VNVeNAO2sUxQ+wpcTUFu3A==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795816330;
-	bh=y4kq9g6BAMgPa8zS0MbbF/ahn+tVz5OI7a45LcAtMQA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=GeWqgs+pxcas1y8XQdR/Zn22ARMGtjYHIlmzMibZYxfW9vilUFKOpExklCUy1Yjda
-	 8BiqC6dc2i+R5m+PPslUWezSZYc0ykyhhvye4DA2xo0UkANr2GuGEEkxgRbg/G+Puo
-	 6KcK9UsapP4rCCEHz0Cx+qGeycOYwGrTNfAl11s0163Bj/GcuO8q7ywunL82CKlF5q
-	 LYSjHLxWf9dC4k33VJc7+ZlFJoGk/AEx5SIMK+kLCsdVy+5MzSD9rm5nUjc21W9QCg
-	 LRbMBZiM6X5LZh5tEE3nGbIPZNFw6N/tYb6Xz/2+74b5Z+qJJ2E9/MrmJO52CcojI7
-	 1uuf0j81Rdd0g==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E572C40AD7;
-	Fri, 27 Nov 2026 21:52:09 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0F2CE49D
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:52:08 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E9207607BC
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:52:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4ADD96064E;
+	Fri, 27 Nov 2026 23:29:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YnZxqvIdoiYZ for <u-boot@lists.u-boot-project.org>;
- Fri, 27 Nov 2026 21:52:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5E51A60716
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.27.42.4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.4;
- helo=smtp4-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=YyAxGNCQ
-Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5E51A60716
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:52:05 +0000 (UTC)
-Received: from L30177.local (unknown
- [IPv6:2a02:8440:2604:bcb1:9487:132:7b93:c36c])
- (Authenticated sender: vjardin@free.fr)
- by smtp4-g21.free.fr (Postfix) with ESMTPSA id 9FDFA19F5C2;
- Fri, 27 Nov 2026 22:51:58 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1795816324;
- bh=5iDcAIHC5UTqj1LH6H8CCaqGlQii1S4vtt8eOtJz9B8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YyAxGNCQRrDEc5qMKxhsymAXC+tzTSpkrZwZmF7Vm6cBG4mIflfdYBv08i5E04FNQ
- wX1TLvA98zCrUqYw/tLJtZfHV8JW88rwdXquJnV/c8h/KKe2IaVsvzDeiwpCzElB6c
- ZSmYTXsl/Alxd033xg5VP8uYzViGtYrtA02XDXa+aZEVSYBC6SvEHgKZzjw65B7u99
- lQTKO59s+KfX8OKWgxw/iLlOJ9B4Y2sVwZiVY3qK7EbxwOqXJmsMhR+EH1zFXwy8FY
- vXWBI06fH1oK/68ZnKpoqGXdOQcb+fhfAwNR0JDMdsbIUBAqhPw4UtRWObvN6RSRwS
- A5a63aig2yK4w==
-Date: Fri, 27 Nov 2026 22:51:57 +0100
-From: Vincent Jardin <vjardin@free.fr>
-To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-Cc: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
- "jerome.forissier@arm.com" <jerome.forissier@arm.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "maxime@leroys.fr" <maxime@leroys.fr>,
- "peng.fan@nxp.com" <peng.fan@nxp.com>
-Subject: Re: [PATCH] net: ldpaa_eth: track the open state in the driver
-Message-ID: <awn7fYjK_R3biZ9P@L30177.local>
-References: <20261127081721.788638-1-vjardin@free.fr>
- <6642ed077e3af23939ae1f15a06368b3e7ef8ce9.camel@siemens.com>
+ id zRQWjwfrM7fK; Fri, 27 Nov 2026 23:29:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6A9276061B
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795822172;
+	b=DR6HEiBL132R3ssdtq8Z/sKledoMTeqowLZcquSOuWUYZMRB2XCNVSsT6kCKISkQx83K
+	 lY25Ssn7u+Ae2YB0hhHX4TQ+ibPGDR+NQLZ3hS4Gj+05cHPmKv2qHZn6jc9xpgtNVMts8
+	 q08tlQmblOo5bU4a0gRL6paxUd4pNgF+6gSgss+a4Ir78oKoZOknxNZQuHId7woBYhr2S
+	 E8LGx0Rmjw966dZjSR0IEVM9hCHMJs7IhGcX4yu9Rrbx+uIYHTQOAKml+lWojnsxRF6wh
+	 T6tNciEzekjd+nJXthaX2ty9+0sPSYPJV4lxTyvvQRSt0JaOrKYyishDUf+tGL/OosQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795822172;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
+	bh=U0MxB/X9dac5fzJfprVWkDwEoVZuVhO5L0PDhTER49w=;
+	b=JnLOftADWDyeaXYAhDNTL3UCIj4TMWCtnMc49el7xwNFrUT2cXfKQwD5QI92U+xFSPYr
+	 5ph2mar1w+LzcXPLHV/eBgfYRxX/VagSJlqj8drmyyg9IpIsdpZDUUEgAPDp+8xCFaXWB
+	 1FoKKla5zpJqk6WuyC7NiUc6TScek+54xBP8+5wXn9hCdCCnxseG8M+5WneuE8Apy+AJq
+	 HQ6E+wkNujg9vG8gWq/hAsWEZV3hZLsKJAijOpG93m+6HpBgpZPdFAb1GuVCnaSHdJQZU
+	 4Sq8dPb9C97xyW266QSdhDoPs2ynV9caEwDIGQy6pzl4Ohb7E64S09La03NDn6dfFIQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1795822172;
+	bh=U0MxB/X9dac5fzJfprVWkDwEoVZuVhO5L0PDhTER49w=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=JhRjPPW4IhAGdIzVju4VAd/mL6tfnq9KqL99GHnR+8v5n96yBODlvp/KTRIdHZ/mi
+	 BJOmBQwKahOqigcN3Lvr1Hn4G4a5IWWYf9k3gU+1JSY4GB1P6rG09jJdgzqpnZ62fv
+	 wnjxskFXknphXPgmMshhC9Fos1Yn86077JoQyMeOS6xLd4FdGujoSYZYbwUkiq3Z1j
+	 25Vdew6xGh2dCw3/D8X3MUJLoWCuIf61ewj9Hbi4gn3CN4S5EohukHJfqyE2gkFeEN
+	 zqiw0DMZJ52JqsEv2UTjsoENf/htvW8TnW0nCuQ1v+d2cjBZDtqKxAfLSEikaimPaK
+	 TSD5BVFXwcNyA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6A9276061B;
+	Fri, 27 Nov 2026 23:29:32 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 86A7526D
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 23:29:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8415740569
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 23:29:31 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3QfTVCSo7ur7 for <u-boot@lists.u-boot-project.org>;
+ Fri, 27 Nov 2026 23:29:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 83EDB4055A
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=devnull+iav.iav.lv@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=mUl1ZVJY
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 83EDB4055A
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 23:29:29 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 042006013B;
+ Fri, 27 Nov 2026 23:29:28 +0000 (UTC)
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.kernel.org (Postfix) with ESMTPS id 9AE941F00899;
+ Fri, 27 Nov 2026 23:29:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1795822167;
+ bh=U0MxB/X9dac5fzJfprVWkDwEoVZuVhO5L0PDhTER49w=;
+ h=From:Date:Subject:To:Cc:Reply-To;
+ b=mUl1ZVJY+qnLBpwmnYkvNNoU/snN9BvHqjtYbIrs5MKjzK+SyCii7v24xPl5SyjmG
+ 4g7+ge/DytYRkqENXiwEVx7Nf+544LV9HKO0SMn69QMns2uNauI4GXZCwx6WiEH7ls
+ 4l1Iuf6CEY/FAZiW6/Yh8lQBNkQRiO7ssCxrLaQwkCyo/s/x+scucc0+nDL9h5ZfhQ
+ VDs/w1BxNGipRT5CLOFFsST+3I0SPgrIzvhKetXjxBbfbKham9Pg+WlcE95l0mOgCQ
+ sGqtnsXHG5Rm0L0FnRT82lPxYuTIZAyEpBjKtdvp5ApQuiVH9lbGQs5OF68qP1Q9ix
+ CK9Uv8hATg+fw==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+ by lkml.kernel.org (Postfix) with ESMTP id 2A6224DE75;
+ Fri, 27 Nov 2026 23:29:20 +0000 (UTC)
+From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
+Date: Sat, 28 Nov 2026 01:29:18 +0200
+Subject: [PATCH] arm: dts: meson-g12b-odroid-n2-u-boot: limit the eMMC to
+ 40 MHz
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <6642ed077e3af23939ae1f15a06368b3e7ef8ce9.camel@siemens.com>
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261128-n2-emmc-40mhz-v1-1-fbfa199affdd@iav.lv>
+X-B4-Tracking: v=1; b=H4sIAE0SCmsC/x3MQQqAIBBA0avErBtoVDK6SrQIm3IWWihEJN09a
+ fkW/xfInIQzjE2BxJdkOWIFtQ04v8SdUdZqUJ3qidSAUSGH4NB0wT+oedicJXLWaKjNmXiT+/9
+ N8/t+sV22IV8AAAA=
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sean Anderson <sanderson@brivo.com>, u-boot-amlogic@groups.io, 
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Nick Xie <nick@khadas.com>, 
+ Igor Velkov <iav@iav.lv>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1977; i=iav@iav.lv;
+ h=from:subject:message-id;
+ bh=zSkjLbhWCVDhiJZZwds1KL7JCuIcaS4Ezoeg897SLYs=;
+ b=owGbwMvMwCVmNH1q96v4SmbG02pJDNlcQv6f9x67foVvz/UXbOtk1z/wmC+lJrr/nj4vR6NlK
+ u/1I/PtO0pZGMS4GGTFFFkmHNK4lbHk6l9/D/MHMHNYmUCGMHBxCsBEQj4wMmzI67B8tNHen81w
+ wZX9E6Ye+HHq/8UGeaXAjB0i7h0bp2YxMvxNVBJismuTr7vbE35a1sn4/6L1qhEela58pQXdS5R
+ mMgEA
+X-Developer-Key: i=iav@iav.lv; a=openpgp;
+ fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
+X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
+X-Original-From: Igor Velkov <iav@iav.lv>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -119,25 +144,65 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+Reply-To: iav@iav.lv
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Alexander,
+From: Igor Velkov <iav@iav.lv>
 
-> I'd say, the Fixes: tag could be 267c5146d3f
-> ("drivers: net: ldpaa: add DTS based probing support"),
-> while 44340456475d exposed additional to non-netconsole TFTP error path. 
-> 
-> Other than that and a nit below,
-> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Since commit f7e3eaebd300 ("mmc: meson: Parse devicetree properties")
+the max-frequency of 200 MHz from the Linux DT replaces the 40 MHz
+limit of the driver, and U-Boot runs the ODROID-N2 eMMC in High Speed
+mode at 52 MHz, 50 MHz after the clock divider. The meson_gx_mmc
+driver has no tuning and uses a fixed clock phase, and the defconfig
+has no HS200.
 
-thanks, I did apply your comments into a v2 and kept your reviewed-by:
-  https://lore.kernel.org/all/20261127214450.865924-1-vjardin@free.fr/
+On an ODROID-N2+ with a Kingston 128 GB eMMC (Y29128) the EXT_CSD
+read-back after the bus width switch then fails with CRC errors on
+DAT0-2 and DAT5 in 8-bit mode and on DAT0-2 in 4-bit mode. U-Boot falls
+back to 1-bit, where multi-block reads fail too. At 40 MHz the same
+board runs 8-bit and a 256 MiB read matches the crc32 from Linux. The
+same module in an ODROID-N2 ran 15 of 15 starts at 40 MHz and had one
+failed session in about 120 starts at 50 MHz.
+
+Limit the eMMC to 40 MHz again, the limit from commit 8fa0db145f6b
+("mmc: meson_gx_mmc: reduce maximum frequency"), which is also what
+the Hardkernel U-Boot for the board uses without HS200; the ODROID-N2
+and N2+ share this DT. The limit goes into the board DT rather than
+the driver, since the DT describes the hardware.
+
+Fixes: f7e3eaebd300 ("mmc: meson: Parse devicetree properties")
+Signed-off-by: Igor Velkov <iav@iav.lv>
+---
+Tested by starting the builds with load + go from U-Boot v2026.07.
+---
+ arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi b/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi
+index a92f9e9ff13..d6cb2f3c245 100644
+--- a/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi
++++ b/arch/arm/dts/meson-g12b-odroid-n2-u-boot.dtsi
+@@ -11,3 +11,7 @@
+ 	status = "okay";
+ 	vref-supply = <&vddao_1v8>;
+ };
++
++&sd_emmc_c {
++	max-frequency = <40000000>;
++};
+
+---
+base-commit: 40bafcab3bea0511eb3925da2f0fdc1df9758e3d
+change-id: 20261128-n2-emmc-40mhz-3e8fc711c743
 
 Best regards,
-  Vincent
+-- 
+Igor Velkov <iav@iav.lv>
+
+
