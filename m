@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D27E3606A321
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 18:29:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67D47606A31C
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 18:29:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XS8RVr0u;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yUzTajOW
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mmwAbTyp;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=dSHICuP8
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A918E408F8;
-	Fri, 27 Nov 2026 18:29:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3860940D65;
+	Fri, 27 Nov 2026 18:29:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iUkTrNUwOEW4; Fri, 27 Nov 2026 18:29:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E9A2140D2E
+ id YgqqMzlmNOgK; Fri, 27 Nov 2026 18:29:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F0A1240D76
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795804169;
-	b=tbi49PuyVlmGBcsqLsjdxqXB9buE3K2iu+SNgqWXRGB9sx34WmrA60SWm4qsvmvdRSzZ
-	 47cRx+SG5990U5LiZpCwNUSVy4CZfG0hDhQydx56/9UfF1BxOITKaoy5QCIY2c5Dfox+k
-	 g6LSJeCKyEkBKK/q9gD4PebdSEbj+djX9dYsJ/2X151ZfFTyOPNVp1dUS8Fkb1X1AzVts
-	 doSXsWBprBLlIX88hqUI1cRqsw3Zartbf2iSwRHTzo45vRmtQZuB2lWoV+UBmVwvC07Rl
-	 kKGUBMD1i0aLZ540EZmg8JsiOyFwxsnLhKd4jYgpNBqt58+kUPJwq42xiC+ahB9p4gw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795804171;
+	b=RebC9OnrxYvWGXVtX4pMSjyQkVpj46An5xdnR+XY4AzV6HD7oO/KwIttFgotHzg8VkQk
+	 ypPw+CN6TV14qXcLxBB9JLfaL7iA1xDdBir+0VInEpHQWjqrE8kFIZsnTGB925EE9VQFn
+	 /1qv6vFXq3muMbA+K3qFvMm7KnqB4R4BHtbwh/b+ULqQk+XvdTSppof/ZQxTY8fA5WyrG
+	 MvsbVYhUyb8qOJh8HZloVfXKLE2C5oB3npTtuDswORicgYpFZuBsK9X1oV48aXrmpUPrK
+	 g0Vaufh4HeESPow7LdP3ftxcpDutg+2Hk0UpnvEErwsIMwNAClDKs3M5maPzuZwgguw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795804169;
+	c=relaxed/relaxed; t=1795804171;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,105 +33,107 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=LRkizq88DwnrjIgZynT8s/Jj0qiOhXgG88V+csS96LQ=;
-	b=qLfb/di+EFBYd25x/O51QWsw3dMZX2UheK0Au7rzRBxcSszGmZxqnnaA3w4JBJ87sBvM
-	 JrdTawowxklv/3+G1E3zrA1giEOtb5mxzwOaxBGGRyYcuGbZjVy+Z5hqyyYKsD7xxbUWQ
-	 ZCtuvBJ6EF7TVnUiO4ogDXRGXUdpI+sw9aHeprVnyionOexF6dM1bAPl9BqN9oPpc7yD+
-	 Y3J+5OBWR8SB8voqTfj8Eq3qmZvqgqyUVxpKvG2n/l76hXvst1d3i5WbDHNnh9HYkokzG
-	 BpH26USe8saK36qmToa6LP1t8NXCiNLc28b6ZyDJ709FUzzQWATX6mmMrgwh8vTQiJQ==
+	bh=SodvxaDSX0ne4FOZFnDuhODuoV/gVcBiQOmQ4fQL4xE=;
+	b=h1Hbji6n9TK6OQWT0FgKARPIu1uzuRp+DJ0PefmWPkLhKNaYHxIMtVrX6/PFiR5RqGpW
+	 79Ax5+39gctA6PHlMxRysxeybwrGB4AVt160vqBw1wI1U3ZVhf9jLz4Tf5sXR1mkqEObu
+	 8Ruz8tv/mcZs/uJzuB1pe9gagi3gdenuEIIK4fhb0LRh7Z4wfzwh6R0MIfAwP9x2GXqiI
+	 EmY4YwrDDuFRvIw7fLV9eWwlGXLDRi6wmSS6abnIUn8LFAsKmOfIxZOQj1VtVEIvj5GgY
+	 LA9n7URT6iyVATnUJXPpsCn36nZKATxQXF2NL6LWbtvmWQlUypNUkHbqRlyq0f0O1OQ==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=dSHICuP8;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795804169;
-	bh=LRkizq88DwnrjIgZynT8s/Jj0qiOhXgG88V+csS96LQ=;
+	d=lists.u-boot-project.org; s=default; t=1795804171;
+	bh=SodvxaDSX0ne4FOZFnDuhODuoV/gVcBiQOmQ4fQL4xE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XS8RVr0ubPmimmuSjSkI7eH3s0tFhyR55n/doKpaJbWqXeRoAL2urX+YMwVl6ll7d
-	 JWNkhc10d+cZKEpQETPi2G5fkaS8PMTJc99EpHbRLC7ta5Ge12Kv+D9sGluDsQ4g5x
-	 RNVq4F5lzLUfK1A9PTPz0xg2qKzm7rZSLRyu4AbMunzaBw109iNoslCebFfL8iISH+
-	 VnR3tI0QGE2nJgRcZgmn8/5i+8UTYhxilmbltfQQhPyeCKnZGrsKGAUQPTDfyA7ngu
-	 mW0YrVYD32vbss6bDS/I6WXlgtpBp+DLEcXpO/BoRscVt3Ne4Exku+VkADZyKwphqN
-	 QTljKIsm9sb+g==
+	b=mmwAbTypfIMFpVIusrVrHSmUsgb7fkHeAbqu+9WwRHnV7tFOn/UM32xzu+RLJouHc
+	 psaFvyN8olXOSN3jc0fSY8Tfoi+iJS+4+dudW5kme152FjbvZr6i0h+65Tzoxc4Ov1
+	 vxi71/NqgrCBh+lUiWTSkqSq6LDYTcQIZsDdtzEspv2Bbg2z31zZ4jj/RHoE6HCnMv
+	 5hmXkAS7YloXHzT8rlWzhfqufhgP4i25aTvNUgpi7bz6iORIwhCWLIiNm3Zyh5LZMi
+	 LUOcAt0ACUEkgD/9Vf0QC2K3aGVGqSwrcFbvL02BUuxUCz2NNnj0RY4sWzs+L9++hm
+	 WGhUQCYSo7ndA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E9A2140D2E;
-	Fri, 27 Nov 2026 18:29:28 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id A01F0A0B
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 18:29:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F0A1240D76;
+	Fri, 27 Nov 2026 18:29:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2BF7B373
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 18:29:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8F1CB405CE
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 18:29:17 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1417D40AD9
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 18:29:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Gl8diI4jwYIo for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id j7XRP9uFptvW for <u-boot@lists.u-boot-project.org>;
  Fri, 27 Nov 2026 18:29:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C07FC400BC
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 79ACB40CA6
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::435"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
+ client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=yUzTajOW
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C07FC400BC
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 18:29:16 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-48e47347279so5142926f8f.1
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:29:16 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=dSHICuP8
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 79ACB40CA6
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 18:29:14 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-4a2f4ca0dcfso4821580f8f.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 10:29:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795804155; x=1796408955;
+ d=gmail.com; s=20260707; t=1795804152; x=1796408952;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=LRkizq88DwnrjIgZynT8s/Jj0qiOhXgG88V+csS96LQ=;
- b=yUzTajOWMPytkw9aDQP+jd1cjRjd65t/YGia2MDN5JiVc7AgvkDkF94odqXr4aBpFJ
- 7k1TCYJwcuASwU77SsU+vdOwVHOL3SmMFRS9ovHpzI8Y/H3ErsiEThaJ8yDeE6NdrBUA
- Hoe0GktbvNupn0jlamHmPVq6HbW1Y1fJupd2ER0e0sS4zx26RBYJZC3l2s4uCxBNUVmN
- TKkrsbxlsFKdT0vqNEu2iYcpahB2oKl6Huc5vz2d+zcHEcE3Sq66KKTpaKThy8toSA+R
- AFVCAI9p+CuSpA0qPyCf5VPkTSt5x+ypcblk6kOyiBje7ZDYOMN6qFqpqBZHYFIRSFCr
- wKwA==
+ bh=SodvxaDSX0ne4FOZFnDuhODuoV/gVcBiQOmQ4fQL4xE=;
+ b=dSHICuP8Mq2oEYGlK8T6zRYO7QkuMJQhiCXSfuL1ojXcOzyLMyQ/xxAIAnCEryz0T8
+ y7BgaIa6trMSkOKQuhRD1CNGB9sHtHcKQPU/squF8iFRbdRHmb8eR3+gxL24G3jNTawU
+ VsurPVAz4aDvly07X7HA60Vipg9ruZQ2INZqa4576wj2mpmUDSh7tdTahNrJDB2PMgCv
+ Xg76aNnEIAb1xZ22M6IWXJGddwq5rcZErQjvN/+9vWnInUvGZPqVY4DyZRWZfa5v272o
+ lfsZQl6mZRTKs/MezjBoGyrbBLEIXzP1sB52lD9NpCnfaur4/U9HTMyO0zlM/s4q2spU
+ 0MWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795804155; x=1796408955;
+ d=1e100.net; s=20260707; t=1795804152; x=1796408952;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=LRkizq88DwnrjIgZynT8s/Jj0qiOhXgG88V+csS96LQ=;
- b=uglJy85C05juPfLAgR4lBs3+XN9O36s8GMjMjJQkpf/Y1sYdqFH/h8mB4LJCk6kvrq
- GFjjM654DHkPNAcVBibmxmz14Ul7NyZrewZ5QMXeouX1bkri/yupPgFaWteorfdTdAjH
- vZ6BbC0j9nCCd5ZcA4gfc6vKS7Fmrk1c8J9pHUscMpG2+NGSfWuhzt26n2BUBhRdtjp0
- hZTHFummtddIK6w04kfXF5baQa12zqTQmUlENm1ISQsXGjQ2j3MRSCKW5k6g5UlfNp+5
- apcH8Y/73aR27Gr5jGKJwIc+IHmfVrKfQJDOZN27/u0gVl2k5lyKxKGCkVHhaffgX6xQ
- bazw==
+ bh=SodvxaDSX0ne4FOZFnDuhODuoV/gVcBiQOmQ4fQL4xE=;
+ b=rbIZVCALdRrajLaZmCKNlpd+HYoKZdb7XCTomlbyMXLVGUNSUw8GoY3mJrz2fQJe7p
+ 5Rylbu4rYGbNgBwZOxhcAleNoal8ZA8RyErxHFiXZQu/3npJbeu728hzLwde2lQjvFQb
+ 24NAYwNVew0eXecQjknZZWnhsfgZfzFyBij3x+maXmcgwhEgU5nffe4gYah5uOxMFz4A
+ mIkNPePbhl4xb50iTiTuZ+DK+AaPqguesnWhOzQ8jH8ONdm1VUqchN6J6ZNOy2MvJSSk
+ x/v/LHvjMmJHwsY8XT46dVSAFkPTTNMOArEj0M6suaZ/ow+0rEjdhl00lgwGsdbgfqYq
+ JsEg==
 X-Forwarded-Encrypted: i=1;
- AL+hErEdx4lRbnLfU8KJEyIAE9Swtc3S5K4P/UMriZD8yMDwek8TN99rmniFjQDJHe9XpwGpZa2OZlQ=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9LNc6UNp31LKu4OKnKb01lnKRPiAb8d4b4DpZtGfUlRw/Y6o1f
- vNzbzcYqo3R/Vyg/BNgrshiFR3P8IqMzVcjOYwRRGEnIYvx//JaHb17s
-X-Gm-Gg: AZFdTZeXTKyKt/BWpgOdZBf3uKoFpY6Qfzqps38ZuqRFQaGWap81bLpb8gRDRVQlyva
- J78VMrIc5gIFyuv8oKs1rz6jepzGV8kSOXwkmJazM3WcjTHiP9tUPIoLWrDjtsxXrlgkfzBkxk9
- JEJuHJnvKL6YguDiw6fRyDZbUapcMGkzwqnl/wPXV9b/mMaos7TbIfq/nBIcNhF0qqUY3Ueu7LY
- hZ748Ff3e9MKc4tPvK/t14DrqpCPN2Q8YQBqwVH9yJjhAJBB8YdYqHeZQkrzkkD/gDmPyvUMWRS
- FSu1tCuDAny8bxvBvxDh7tyCZQjRSfdLrnzT4j/u3yDa4kXKXcU7geagVwZn3MhC6xRf5GNPZqN
- qQ/ym5QrpQlOYzWt6AFZoChC0HsnDR05t05II6gCVLwTXiIKAm67tPqfHzUFr7nahA4f0JuNx2c
- QU2aEwI2JztGRwyCoX87vNpqpXAdP869N0Uh1n+IpWDqAVXyfkUv7W6dgxpZVa7XK8DZ3aEcGWW
- ZsmpZo9Il/ZQLFH+3cC9A2SvfFXC9xhr+eCSM54UBwwuN6OpIH/zrwqW9n7xeoO9I+4ksZWTTWQ
- fXIBiH3nsMeRLJRVGfxRzTEyagOkLuwQM+8=
-X-Received: by 2002:a05:6000:2c09:b0:4a6:4687:2cec with SMTP id
- ffacd0b85a97d-4abacfea516mr49918112f8f.5.1795804154787; 
- Fri, 27 Nov 2026 10:29:14 -0800 (PST)
+ AL+hErFSH2TnUp+CczueuDo5+BzWdB/+wWEB8xnBeXJW3cAcEswO4lE43GW0c4FLfTyS4jZ9CfP24NA=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9kxwCvXh4nH0E+3YwWt6oyGs0VJ5d6VV2Zd2I1+5/kgXCWVzWn
+ nq3m9fXBZwZwWBB2ezs7v5/vEzv2MH721xsJRjsRoMp384/hB6KnIW9z
+X-Gm-Gg: AZFdTZcxQcDZktKQGz78DiJAtu0V1pR0dCaVRujuunZttdMcBIj83zsV/8K6Sc+7JbE
+ NK+X/CIsyBP4rlBB+bJzo0xLZT7nTXDf+Yc7MEW9pnYfJn2XHY+aJCdyUj1/5v7ey1rjhUF5yx1
+ ZCNl5fajkR0WWfBN9J2yw9sbRYoadrHHK5e8Af33BT/eo7nHBXVUdv+yn7PSRXnhfbL/egAYDxl
+ hdTQuzH7cP7E256O2gOSD4ctl8HVd+1d1AlERuQ1x3+GkKF/4lnJvfoIzMTVuI5W0Iejlktvv5n
+ XbeKcAiFJJQ//3KFZd/bp05VU2sCE5FCYgQDKWij+DSxJ3UkXSLfd4I7u6IIXpYHIN4cdOYSN7u
+ DoEqBr0eS+IDUucS5xRm6XHxStmQMigmFlK0Tq5iYGUomRyFRJXEMt2k0P4hQKVwVIXW+1WRxX/
+ 68HDqBwD4QOCD+GC7b4UnRYElIrBjZxg5TEUdmpMXUQP1ojA+6wpTOul6o7ije2JxYPDeyOLfhU
+ KseKaf4Lb8BfFs3rBc3DCegwBMb4ZmTdJOJ3U5XFlKVsojWOpizYwGR7dQPnESAhNtxZvJbbgxq
+ pZgq0B+P5cU7Sz6/swhff913pr32NNlnNwg=
+X-Received: by 2002:a5d:6f1b:0:b0:4b9:15d1:46c9 with SMTP id
+ ffacd0b85a97d-4b915d146fbmr20222415f8f.5.1795804152190; 
+ Fri, 27 Nov 2026 10:29:12 -0800 (PST)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab658e2d1bsm50584856f8f.8.2026.11.27.10.29.14
+ ffacd0b85a97d-4ab658e2d1bsm50584856f8f.8.2026.11.27.10.29.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Nov 2026 10:29:14 -0800 (PST)
+ Fri, 27 Nov 2026 10:29:11 -0800 (PST)
 From: Mehmet Fide <mehmet.fide@gmail.com>
 To: Marek Vasut <marek.vasut+usb@mailbox.org>,
  Fabio Estevam <festevam@gmail.com>
@@ -143,9 +145,10 @@ Cc: Lukasz Majewski <lukma@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
  Stefan Eichenberger <stefan.eichenberger@toradex.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  u-boot@lists.u-boot-project.org, mehmet.fide@screeningeagle.com
-Subject: [PATCH 8/8] colibri_vf: leave the USB clocks to the drivers
-Date: Fri, 27 Nov 2026 19:29:05 +0100
-Message-ID: <20261127182905.2836449-9-mehmet.fide@gmail.com>
+Subject: [PATCH 5/8] usb: ehci-vf: enable the PHY clock through the clock
+ driver
+Date: Fri, 27 Nov 2026 19:29:02 +0100
+Message-ID: <20261127182905.2836449-6-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261127182905.2836449-1-mehmet.fide@gmail.com>
 References: <20261127182905.2836449-1-mehmet.fide@gmail.com>
@@ -161,54 +164,170 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-14.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
+	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-ehci-vf enables the controller clock and the clock of the PHY, which
-powers PLL3 or PLL7 up, and the clock driver takes the PLLs out of
-bypass. Drop the USB part of clock_init().
+The driver powers PLL3 or PLL7 up and enables its USB output by hand,
+through the anatop registers. That is the clock the PHY node names in
+its clocks property, VF610_CLK_USBPHY0 or VF610_CLK_USBPHY1, and the
+clock driver handles it now.
 
-That part also switched off the PLL3 the boot ROM leaves running: bit 12
-of the USB PLL control registers, named POWERDOWN here, powers the PLL
-up, and clock_init() cleared it. PLL3 now stays as the ROM left it.
+Get the clock of the PHY and enable it instead, and drop the anatop
+lookup, which only served that. The driver depends on the clock driver
+now.
 
 Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 ---
- board/toradex/colibri_vf/colibri_vf.c | 14 --------------
- 1 file changed, 14 deletions(-)
+ drivers/usb/host/Kconfig   |  2 +-
+ drivers/usb/host/ehci-vf.c | 53 +++++++-------------------------------
+ 2 files changed, 10 insertions(+), 45 deletions(-)
 
-diff --git a/board/toradex/colibri_vf/colibri_vf.c b/board/toradex/colibri_vf/colibri_vf.c
-index adf755707f9..2ef78a5e47d 100644
---- a/board/toradex/colibri_vf/colibri_vf.c
-+++ b/board/toradex/colibri_vf/colibri_vf.c
-@@ -132,20 +132,6 @@ static void clock_init(void)
- 	clrsetbits_le32(&ccm->ccgr10, CCM_REG_CTRL_MASK,
- 			CCM_CCGR10_NFC_CTRL_MASK);
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index 6bbed9cb513..e92c989288d 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -246,7 +246,7 @@ config USB_EHCI_OMAP
  
--#ifdef CONFIG_USB_EHCI_VF
--	setbits_le32(&ccm->ccgr1, CCM_CCGR1_USBC0_CTRL_MASK);
--	setbits_le32(&ccm->ccgr7, CCM_CCGR7_USBC1_CTRL_MASK);
+ config USB_EHCI_VF
+ 	bool "Support for Vybrid on-chip EHCI USB controller"
+-	depends on ARCH_VF610
++	depends on ARCH_VF610 && CLK_VF610
+ 	default y
+ 	help
+ 	  Enables support for the on-chip EHCI controller on Vybrid SoCs.
+diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
+index f7809a98c88..fa36e3e2af4 100644
+--- a/drivers/usb/host/ehci-vf.c
++++ b/drivers/usb/host/ehci-vf.c
+@@ -6,13 +6,13 @@
+  * Based on ehci-mx6 driver
+  */
+ 
++#include <clk.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
+ #include <usb.h>
+ #include <asm-generic/gpio.h>
+ #include <asm/arch/clock.h>
+-#include <asm/arch/crm_regs.h>
+ #include <asm/arch/imx-regs.h>
+ #include <asm/io.h>
+ #include <asm/mach-imx/iomux-v3.h>
+@@ -27,8 +27,6 @@
+ 
+ #include "ehci.h"
+ 
+-#define ANADIG_PLL_CTRL_EN_USB_CLKS		(1 << 6)
 -
--	clrsetbits_le32(&anadig->pll3_ctrl, ANADIG_PLL3_CTRL_BYPASS |
--			ANADIG_PLL3_CTRL_POWERDOWN |
--			ANADIG_PLL3_CTRL_DIV_SELECT,
--			ANADIG_PLL3_CTRL_ENABLE);
--	clrsetbits_le32(&anadig->pll7_ctrl, ANADIG_PLL7_CTRL_BYPASS |
--			ANADIG_PLL7_CTRL_POWERDOWN |
--			ANADIG_PLL7_CTRL_DIV_SELECT,
--			ANADIG_PLL7_CTRL_ENABLE);
--#endif
+ #define UCTRL_OVER_CUR_POL	(1 << 8) /* OTG Polarity of Overcurrent */
+ #define UCTRL_OVER_CUR_DIS	(1 << 7) /* Disable OTG Overcurrent Detection */
+ 
+@@ -42,11 +40,11 @@ struct ehci_vf_priv_data {
+ 	struct gpio_desc cdet_gpio;
+ 	enum usb_init_type init_type;
+ 	enum usb_dr_mode dr_mode;
+-	struct anadig_reg __iomem *anatop_addr;
+ 	void __iomem *phy_addr;
+ 	void __iomem *misc_addr;
+ 	struct udevice *dev;
+ 	struct udevice *vbus_supply;
++	struct clk phy_clk;
+ 	u32 portnr;
+ };
+ 
+@@ -55,31 +53,6 @@ static void usb_internal_phy_clock_gate(struct ehci_vf_priv_data *priv)
+ 	clrbits_le32(priv->phy_addr + USBPHY_CTRL, USBPHY_CTRL_CLKGATE);
+ }
+ 
+-static void usb_power_config(struct ehci_vf_priv_data *priv)
+-{
+-	struct anadig_reg __iomem *anadig = priv->anatop_addr;
+-	void __iomem *pll_ctrl;
 -
- 	clrsetbits_le32(&anadig->pll5_ctrl, ANADIG_PLL5_CTRL_BYPASS |
- 			ANADIG_PLL5_CTRL_POWERDOWN, ANADIG_PLL5_CTRL_ENABLE |
- 			ANADIG_PLL5_CTRL_DIV_SELECT);
+-	switch (priv->portnr) {
+-	case 0:
+-		pll_ctrl = &anadig->pll3_ctrl;
+-		clrbits_le32(pll_ctrl, ANADIG_PLL3_CTRL_BYPASS);
+-		setbits_le32(pll_ctrl, ANADIG_PLL3_CTRL_ENABLE
+-			 | ANADIG_PLL3_CTRL_POWERDOWN
+-			 | ANADIG_PLL_CTRL_EN_USB_CLKS);
+-		break;
+-	case 1:
+-		pll_ctrl = &anadig->pll7_ctrl;
+-		clrbits_le32(pll_ctrl, ANADIG_PLL7_CTRL_BYPASS);
+-		setbits_le32(pll_ctrl, ANADIG_PLL7_CTRL_ENABLE
+-			 | ANADIG_PLL7_CTRL_POWERDOWN
+-			 | ANADIG_PLL_CTRL_EN_USB_CLKS);
+-		break;
+-	default:
+-		return;
+-	}
+-}
+-
+ static void usb_phy_enable(struct ehci_vf_priv_data *priv)
+ {
+ 	void __iomem *phy_reg = priv->phy_addr;
+@@ -134,7 +107,10 @@ static int ehci_vf_common_init(struct ehci_vf_priv_data *priv)
+ 	if (ret)
+ 		return ret;
+ 
+-	usb_power_config(priv);
++	ret = clk_enable(&priv->phy_clk);
++	if (ret)
++		return ret;
++
+ 	usb_oc_config(priv);
+ 	usb_internal_phy_clock_gate(priv);
+ 	usb_phy_enable(priv);
+@@ -145,8 +121,7 @@ static int ehci_vf_common_init(struct ehci_vf_priv_data *priv)
+ static int vf_parse_dt_addrs(struct udevice *dev)
+ {
+ 	struct ehci_vf_priv_data *priv = dev_get_priv(dev);
+-	struct ofnode_phandle_args phy, misc, clk;
+-	ofnode anatop_node;
++	struct ofnode_phandle_args phy, misc;
+ 	fdt_addr_t addr;
+ 	int ret;
+ 
+@@ -159,16 +134,11 @@ static int vf_parse_dt_addrs(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	anatop_node = ofnode_parse_phandle(phy.node, "fsl,anatop", 0);
+-	if (!ofnode_valid(anatop_node))
+-		return -EINVAL;
+-
+-	ret = ofnode_parse_phandle_with_args(phy.node, "clocks", "#clock-cells",
+-					     0, 0, &clk);
++	ret = clk_get_by_index_nodev(phy.node, 0, &priv->phy_clk);
+ 	if (ret)
+ 		return ret;
+ 
+-	switch (clk.args[0]) {
++	switch (priv->phy_clk.id) {
+ 	case VF610_CLK_USBPHY0:
+ 		priv->portnr = 0;
+ 		break;
+@@ -189,11 +159,6 @@ static int vf_parse_dt_addrs(struct udevice *dev)
+ 		return -EINVAL;
+ 	priv->misc_addr = (void __iomem *)addr;
+ 
+-	addr = ofnode_get_addr(anatop_node);
+-	if (addr == FDT_ADDR_T_NONE)
+-		return -EINVAL;
+-	priv->anatop_addr = (struct anadig_reg __iomem *)addr;
+-
+ 	return 0;
+ }
+ 
 -- 
 2.56.0
 
