@@ -2,111 +2,114 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B502606A321
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 21:45:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55014606A31E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 21:52:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tNopcvNb;
-	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=c2sz4isn
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GeWqgs+p;
+	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=YyAxGNCQ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 95F4240A55;
-	Fri, 27 Nov 2026 21:45:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B77EB40AE6;
+	Fri, 27 Nov 2026 21:52:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KElcROZB1Uv4; Fri, 27 Nov 2026 21:45:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CC30840A01
+ id qdSQ0SXmntwJ; Fri, 27 Nov 2026 21:52:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E572C40AD7
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795815910;
-	b=B9/R7mzKyHAIN8I8irafPJhhNGNiFimVj6IryI5QB/xSNteApsUYcna9kwFefX4ZCrmU
-	 kX886evq0wUo1Al0eInlyefSNLXejAZFhg474x9MFjjZjn3kRSdFjk/hCoHurkg3l3MVf
-	 uXvKSEFpeP7FGwIEDn0Yg0Y8UqHt+AxlTzveeI/KwhjyLELkFcrtQjS1xzcCE3Yz4CDrS
-	 dt5S+brtnatp9CSAszmGLtH5RB7kYwNMsQ0dxQ6PWL3G9wsRH8CJ3Y3WUNZThf9abyJKB
-	 xWmUDghkudKBM5ZQhRPEIhoZRyYUJA070tsAPJrpiDuXt7GLwDX6wFeyCAIoYitQF7Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795816330;
+	b=jAAMj0H5QeAe3RI9/gPraFfVId+QKWgSNpu46awyOrov20atE5WvCqS9kZpeM+rVZdjq
+	 xesvhT8i6RrW1+xpI35YIQ8slT1KA1adfdfB+PoJYceClAWNabZ+9IZeacvKSe9R9o3C5
+	 zq53VU8C2LNF4PYDnISGytovVuRJog4uu52EvVKxvSQnnXzntgtoOsePZ1jrNmQ7iRDWF
+	 zUqwRUIovP6jmaZoC/lWrEgAPsJvmtitdFa3t5E0UrxMf6iT7fVrkKNKpkcbWbQRprQfJ
+	 0rJyvBK++Pzcjv5J2iQoQhPgUPMYyPuESoBKXJHc6lUPBF9EM0XCsL/o2UaQuSSX5nw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795815910;
+	c=relaxed/relaxed; t=1795816330;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=fCLfwjK4EG6guxzK36UgdrBjf+HhPxcxbsGVl4qkGRA=;
-	b=h57d0h3Ajon7OHjsCeLNvYoMaNCm3pM2HELJ6N5sH8kTsTHTI/x04aX5AtIPOYRRS/Kr
-	 Vpqibn8UU7jJ6QWuHI8yrPm4nJGZN2sC4Hu3g8UULlN3s1Q8zdvEEm58cM7BAXWAmrLMr
-	 e+PoK4uhb5sZWOOU+iSzLT5a79B9N9sC+22K774UK1I8iIdcnpdDFz4NZtWsKfxKJU16z
-	 QI+VAfLNZ7yJ60jp4OJZdQwfA/vAHaqG7dvZPx9jQi9B7s38I4tvpLF8Exz2P0DAvSdxU
-	 zbFaX+gVzoMmCk7m34l14XoSnJqCgmOsKFI2o8cGEoWETNbLsQHrID45YIHwDM5dlJA==
+	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=y4kq9g6BAMgPa8zS0MbbF/ahn+tVz5OI7a45LcAtMQA=;
+	b=pV/Qb5OvRgV4uxGhI3DvnhPZnst0qMKlXbCoz3o/Cfpllkg42MFtduukC2jycqPo75Pc
+	 p+iXw8Fk2ssJ2tYs724XDh78iSJphGZtHG29XNLQP584efa0/zpK0n0H0g5s/FxE4C41i
+	 7RIVPcFpy7/NmMGAunOp6EMwm3+VZBtpBLPxy0QzSxlrerNrBDXH6V7GFumYD2dPiqJV+
+	 q++BlRqLVpy4lN2kwAmOSrmNy5ILtU+XIZkbE249Tx/49bI5tbkMB28ElSYZXuoVmSb6x
+	 OiriKB2towSV33UdCPkPYOExNIDx17YR24h5iTIqngT98VNVeNAO2sUxQ+wpcTUFu3A==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795815909;
-	bh=fCLfwjK4EG6guxzK36UgdrBjf+HhPxcxbsGVl4qkGRA=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=tNopcvNb/J/17ykwlXpmf7nSt66RQH/AxdtYx/pCsba7bToU4lK4VC2k/8Yp5G13H
-	 +Zk1UcbaqKI9g/OrZMEKew1PZO/lK7L/NJG4vWt03TPJHjOlhCuvy+DI81wgX5HNPG
-	 cauiFUg6VDLjIyQyKk38EnZN4ZXevIhP0qjplt9ea+LVCiXgWqh5wJbRzq30f0MI8A
-	 jBC0JqWJ++ZxNa5OPs999Vv9tszmjVWn+w3rl4oIHfwsM1xgSn2S0ZcLCK/BxFDzRT
-	 OFgYZxJ+hibecmk+w1FeWpanQf9wAsmyxAgueRDmpNkTVXUisfFShSawyeinrk4skw
-	 IqIqlar8bLEuA==
+	d=lists.u-boot-project.org; s=default; t=1795816330;
+	bh=y4kq9g6BAMgPa8zS0MbbF/ahn+tVz5OI7a45LcAtMQA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=GeWqgs+pxcas1y8XQdR/Zn22ARMGtjYHIlmzMibZYxfW9vilUFKOpExklCUy1Yjda
+	 8BiqC6dc2i+R5m+PPslUWezSZYc0ykyhhvye4DA2xo0UkANr2GuGEEkxgRbg/G+Puo
+	 6KcK9UsapP4rCCEHz0Cx+qGeycOYwGrTNfAl11s0163Bj/GcuO8q7ywunL82CKlF5q
+	 LYSjHLxWf9dC4k33VJc7+ZlFJoGk/AEx5SIMK+kLCsdVy+5MzSD9rm5nUjc21W9QCg
+	 LRbMBZiM6X5LZh5tEE3nGbIPZNFw6N/tYb6Xz/2+74b5Z+qJJ2E9/MrmJO52CcojI7
+	 1uuf0j81Rdd0g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CC30840A01;
-	Fri, 27 Nov 2026 21:45:09 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D39C32BD
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:45:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E572C40AD7;
+	Fri, 27 Nov 2026 21:52:09 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0F2CE49D
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:52:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C47E9400BB
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:45:08 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E9207607BC
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:52:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YLKhgKAzBdhl for <u-boot@lists.u-boot-project.org>;
- Fri, 27 Nov 2026 21:45:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 81ACE4008C
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a01:e0c:1:1599::10"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:e0c:1:1599::10;
- helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YnZxqvIdoiYZ for <u-boot@lists.u-boot-project.org>;
+ Fri, 27 Nov 2026 21:52:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5E51A60716
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.27.42.4
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.4;
+ helo=smtp4-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=c2sz4isn
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 81ACE4008C
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:45:06 +0000 (UTC)
-Received: from localhost.localdomain (unknown [91.160.0.144])
+ header.s=smtp-20201208 header.b=YyAxGNCQ
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5E51A60716
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 21:52:05 +0000 (UTC)
+Received: from L30177.local (unknown
+ [IPv6:2a02:8440:2604:bcb1:9487:132:7b93:c36c])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 72A93B0053D;
- Fri, 27 Nov 2026 22:44:54 +0100 (CET)
+ by smtp4-g21.free.fr (Postfix) with ESMTPSA id 9FDFA19F5C2;
+ Fri, 27 Nov 2026 22:51:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1795815904;
- bh=nfNpBdFhPNbW1sF2KHyfYtp0IuVVjjjE086qhHXKPe8=;
- h=From:To:Cc:Subject:Date:From;
- b=c2sz4isn6SBQfPgb7f47p8bjyJv+4GAhGNoXeymqKqz/vASjr2CzVcQ+OedGMSKIK
- 4nG1WD6hxvQFLIVtowVjTXlDLqP0vhb/255rVmpjFUN3ij5++AB/cvC4JLe4dqRQqj
- 5DDhzrjRErN+BtFHGtt2+jn7BUA8xuQQMj5kUrrGda+qsINvc8iSv9gsKRsyYtFZEj
- EpSPELj51kulekc7gpIhHeLzPsBzrSyE80CS5Bc6QPMoZbZQPyAnoL197z7sm4Qcg9
- 0zwSfPtEtWWk3lWg4qjQLVqGs/d1MOZDNYDTXpZBvlm5/gWd6OyQxNNMDCwarvVJHl
- HSp3/sQJBki0Q==
+ s=smtp-20201208; t=1795816324;
+ bh=5iDcAIHC5UTqj1LH6H8CCaqGlQii1S4vtt8eOtJz9B8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=YyAxGNCQRrDEc5qMKxhsymAXC+tzTSpkrZwZmF7Vm6cBG4mIflfdYBv08i5E04FNQ
+ wX1TLvA98zCrUqYw/tLJtZfHV8JW88rwdXquJnV/c8h/KKe2IaVsvzDeiwpCzElB6c
+ ZSmYTXsl/Alxd033xg5VP8uYzViGtYrtA02XDXa+aZEVSYBC6SvEHgKZzjw65B7u99
+ lQTKO59s+KfX8OKWgxw/iLlOJ9B4Y2sVwZiVY3qK7EbxwOqXJmsMhR+EH1zFXwy8FY
+ vXWBI06fH1oK/68ZnKpoqGXdOQcb+fhfAwNR0JDMdsbIUBAqhPw4UtRWObvN6RSRwS
+ A5a63aig2yK4w==
+Date: Fri, 27 Nov 2026 22:51:57 +0100
 From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Maxime Leroy <maxime@leroys.fr>, Vincent Jardin <vjardin@free.fr>,
- Florin Laurentiu Chiculita <florinlaurentiu.chiculita@nxp.com>,
- Priyanka Jain <priyanka.jain@nxp.com>
-Subject: [PATCH v2] net: ldpaa_eth: track the open state in the driver
-Date: Fri, 27 Nov 2026 22:44:47 +0100
-Message-ID: <20261127214450.865924-1-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
+To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
+Cc: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
+ "jerome.forissier@arm.com" <jerome.forissier@arm.com>,
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "maxime@leroys.fr" <maxime@leroys.fr>,
+ "peng.fan@nxp.com" <peng.fan@nxp.com>
+Subject: Re: [PATCH] net: ldpaa_eth: track the open state in the driver
+Message-ID: <awn7fYjK_R3biZ9P@L30177.local>
+References: <20261127081721.788638-1-vjardin@free.fr>
+ <6642ed077e3af23939ae1f15a06368b3e7ef8ce9.camel@siemens.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <6642ed077e3af23939ae1f15a06368b3e7ef8ce9.camel@siemens.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -116,82 +119,25 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Maxime Leroy <maxime@leroys.fr>
+Hi Alexander,
 
-ldpaa_eth_open() and ldpaa_eth_stop() use eth_is_active() to check
-if the port is open.
-But eth_is_active() tells whether the port is in use, not whether it
-is open!
+> I'd say, the Fixes: tag could be 267c5146d3f
+> ("drivers: net: ldpaa: add DTS based probing support"),
+> while 44340456475d exposed additional to non-netconsole TFTP error path. 
+> 
+> Other than that and a nit below,
+> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-Fixes: 267c5146d3f1 ("drivers: net: ldpaa: add DTS based probing support")
-Signed-off-by: Maxime Leroy <maxime@leroys.fr>
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+thanks, I did apply your comments into a v2 and kept your reviewed-by:
+  https://lore.kernel.org/all/20261127214450.865924-1-vjardin@free.fr/
 
----
-It has been tested on an LX2160A board (Nodebox v3) on its RGMII port
-(DPMAC 17), at the U-Boot prompt: 3 rounds of a tftp of a missing file
-with the errors:
-  "TFTP error: 'File not found' (1)"
-then a tftp of an existing file, each load transferring the file.
-Two loads in a row and a ping.
-
-Changes in v2:
-- Fixes tag: 267c5146d3f1, which added the eth_is_active() guards
-  (Alexander Sverdlin)
-- Add blank line after the early return of ldpaa_eth_stop()
-  (Alexander Sverdlin)
-
- drivers/net/ldpaa_eth/ldpaa_eth.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/net/ldpaa_eth/ldpaa_eth.c b/drivers/net/ldpaa_eth/ldpaa_eth.c
-index 27ae6747464..e15e5247463 100644
---- a/drivers/net/ldpaa_eth/ldpaa_eth.c
-+++ b/drivers/net/ldpaa_eth/ldpaa_eth.c
-@@ -380,7 +380,7 @@ static int ldpaa_eth_open(struct udevice *dev)
- 	struct dpni_queue d_queue_cfg = { 0 };
- 	struct dpni_queue_id d_queue;
- 
--	if (eth_is_active(dev))
-+	if (priv->started)
- 		return 0;
- 
- 	if (get_mc_boot_status() != 0) {
-@@ -476,6 +476,8 @@ static int ldpaa_eth_open(struct udevice *dev)
- 		goto err_qdid;
- 	}
- 
-+	priv->started = true;
-+
- 	return dpmac_link_state.up;
- 
- err_qdid:
-@@ -502,9 +504,11 @@ static void ldpaa_eth_stop(struct udevice *dev)
- 	int err = 0;
- 	u64 *data;
- 
--	if (!eth_is_active(dev))
-+	if (!priv->started)
- 		return;
- 
-+	priv->started = false;
-+
- 	data = kzalloc(sizeof(u64) * LDPAA_ETH_DPNI_NUM_STATS, GFP_KERNEL);
- 	if (data) {
- 		ldpaa_eth_collect_dpni_stats(dev, data);
----
-base-commit: 9d67454e920b3908529c9fc642a8c911db040896
-branch: for-upstream/ldpaa-eth-open-state-v2
-
--- 
-2.43.0
-
+Best regards,
+  Vincent
