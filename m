@@ -1,148 +1,171 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1FE4606A31E
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 19:00:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16237606A31C
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 19:07:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sUc3xUQ0;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=cygd/mFf
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oAjMidvC;
+	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=sKE1sL5D
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 440DA40AF4;
-	Fri, 27 Nov 2026 19:00:15 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E9QgwVt7vNJQ; Fri, 27 Nov 2026 19:00:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2F7D440AA5
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795806014;
-	b=jH5C88xGN31uObD7BKehDA9KD5JNeg1Wjagwmvbfnv8to4gkQLetznn5VELO5IfNQha6
-	 IWdEGChwBeG/ZvVDn7sLN6cLDpXhEhJZc0jXNbc8Ob5uA09nBzeNWWEi4V2nrLoUHoTo4
-	 9fc0mwJyihnLCHPoOSh0OnuookiwN7c42wQynD4y5U2lL7EaTZgF+3HOijqDx425EzKGA
-	 7ns1Y7fUIgV7I0QrDkXyr9PBlxdOwxMgjphUcFk24N5j9B5lPCNpCI+TZNGRz9yWWZIsM
-	 LJYVlm9Np+F0GT/K5rfsIdLW//M0LchoTSSviKWFSNpS45tvuFEriptzWmDmWfOfRPg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795806014;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=VuPfef4T+XQyuIUOeWF9/yn4HO25rdlCansZeSd0+sc=;
-	b=WfCUrrZWfSwXyKmfXNqcmqIpKWJ3Cz/Dxuu5yWOy3WmBJfT/drG1ujK+u1UhyUo20h2g
-	 a95crYXPP9BNrBQu5PYHXE+SLfijceWmyKwKa+qC1sSMIk9d4CdWH0eDi021Mn0Izyv/w
-	 h+7LuPd4cVDDqCiYgzGqYmNe5RGBADqYtdGQ7omjytycMzfBbHaY5pXwGkk9PTHYYkzOm
-	 8Un3ggQeJS3oZCxYL1Z9Sc39qPR54OlFvlUqDwPPuyPJKKps5n1enyexg+R6myZ42FT3R
-	 9uz4JvJvioNzAO6ZZuXFYpdKlnXyYAeAX6XeaLvQpijENKyYqWoKdmhUrPZzqvX31IQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795806014;
-	bh=VuPfef4T+XQyuIUOeWF9/yn4HO25rdlCansZeSd0+sc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=sUc3xUQ0DQ9Pyl247jvBzyvkfFQ8RV/QRo2yFdG8KufVLXEUsMOY43hXm0r4KjDBQ
-	 JUPZUx1FF07VgbF3J3uIm3aE1x/D2S6mYQW6lV5R4u9m+QHewuI5Z7TK31eLeHRxmg
-	 47pZ/es938NLJuDxcUR4tdVO5bcmzG8xNfDp/11KubSVMmyeHVvFGpMNPkEb7h39su
-	 ov72JAv1lpxIwOdEfo6WNvGaEqJ3jTeYwhrZO73JCnWnQtQLVy3KpJrcHLa5RQzd0C
-	 XasUxY1xUltJpBP00eVOyfSr/gAy/C5PT0G2gWgonTVHa9T97Hgy/ksB7zeauzF+Bx
-	 MaPXdmWs1XT1w==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2F7D440AA5;
-	Fri, 27 Nov 2026 19:00:14 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id A87412BD
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 19:00:12 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8E7ED812EB
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 19:00:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5655E812F5;
+	Fri, 27 Nov 2026 19:07:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 12o3Lnbq8Ej1 for <u-boot@lists.u-boot-project.org>;
- Fri, 27 Nov 2026 19:00:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1211D812E9
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
- envelope-from=stephan.gerhold@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=cygd/mFf
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1211D812E9
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 19:00:08 +0000 (UTC)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-4a3e706b5dfso5348248f8f.2
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 11:00:08 -0800 (PST)
+ id u9_LXQ6FUfr4; Fri, 27 Nov 2026 19:07:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DF229812E4
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795806449;
+	b=JurIuRf3Lr/yNwxj1JaiMYw0hLFJYeknU6M/4QCXgmJb7m2zTMahli5WiGXv4gpeoQVi
+	 VNPd07NvjZ1RuGt2x/LTumNCBUwMp7t5XHjgRFuqatkoOAYt30BZxOF6DUq5RIG0NNYZI
+	 GOl4hpjuwiLfbHCXV11LfLMkQib57mL0+7I+tR7dee/W0bi1UsbQBZTLN1zZPL1UFNB/h
+	 ad2onMWycPXCG/3jNFp3h6L6c9o5vjIMyoR4VyDPTZ9GGDFIaFTYIym3pPU3yVjP/AMvX
+	 ziDYA847Fe747JxC3KpBiazW4ZjsSZRmfVkLiAfRJ+EDXyS/XER5yPyhJd+9xgveLsQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795806449;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=xDxrAfWCQyfgrfhkvSzPvjhd98GaY9hXO6CVoM5z86A=;
+	b=HoZD96+/wc1PEzuVJJZKDa7AKHtP5oRjCVpBmSPoUdoeWFUECs6GnZ1FN7qbLMQYM5qI
+	 WJ8xemhVNJ2AGLrPJ7ogbSE4plGVmmPuuz4wlYKuKe1NvrRLLAw6XhAFJKagPZ+XI9xHq
+	 nOijOieJbez4ubR196zunecTg1wgvrmOkTe7bKZ0eujcOCsLnInrJlanSsoQhGzrgoCmg
+	 b0nKXFYHMlQ+RZzyMvwZafJQUvW3Yc7ybSrDZmKFjznKXIVAyuu+uSBOPyvNogUgvRzSr
+	 uv00qX8ftoKhQCf8oTrfezaXJL2eL37mr1/MuNrxUWwbasVdC1srXos4jO18Vtv5GmQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795806007; x=1796410807;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=VuPfef4T+XQyuIUOeWF9/yn4HO25rdlCansZeSd0+sc=;
- b=cygd/mFfGbZxDcrClQ4PAxp4pWL4NSF/PmOnywyzdYthTQ7BaOfeHNbV0nbCcZg9db
- /YdUp81XVq5LeIidvHIi7MjEMpQQYKiiF4OTXT+/gNZy6g7kA2jiFTk0gum48u9lJvf1
- hFiftQrJgchPmQaLSztUyaBUEajljuiS0U3uWBHuvmO31AB1NhASQofsgS9olih/ykC2
- 9dO/0P3/hwYX7y2vIGKtju+dyvFpPjhbzzyo3iE+XnZgPwTp4sd1Xp6zMuH2tKPQuCQr
- 7aWfGzQelNF++8/QokowhJs8oxxJSUkPxUvUOsuqcoV1prrARLhAml7sKKuQ+bT1XIVc
- gdtg==
+	d=lists.u-boot-project.org; s=default; t=1795806449;
+	bh=xDxrAfWCQyfgrfhkvSzPvjhd98GaY9hXO6CVoM5z86A=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=oAjMidvCjmfOdP1JZpm9E1Ui1fV8XcTih7bzPsCFRpKRzzrUR/VSPQu7faPhkq3Hn
+	 I87YdQ7EwF0B5IjACM9Jo/zf+65XgjmQTFdOJDnk7vmSQClyQmbKFJLny2JLEJ3vfb
+	 /gpj7Iig6IhGwrg6okiZ/8Kz/EImSrrzSrajyz9NaNXiHixXlvELBjWTK5aWSA4w49
+	 v9RyINM1fulNOMSI3oLBphU3kUTL2S975G49q+UGbmEVyEpeEt0GGL84785sSK2JNA
+	 462OvC90EX5nZ/lR8SgnXFs8dkXvAOevNDPufon0LCg1CradKOnnr7orYojzGVRUJu
+	 EMsS9ClvT9yzQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id DF229812E4;
+	Fri, 27 Nov 2026 19:07:28 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A91B3373
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 19:07:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8F09860D64
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 19:07:27 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oXY4gh9Fbt_4 for <u-boot@lists.u-boot-project.org>;
+ Fri, 27 Nov 2026 19:07:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6F315607B0
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=185.125.188.122
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
+ helo=smtp-relay-internal-0.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=sKE1sL5D
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6F315607B0
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 19:07:24 +0000 (UTC)
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 0FDE84025B
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 19:07:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1795806442;
+ bh=xDxrAfWCQyfgrfhkvSzPvjhd98GaY9hXO6CVoM5z86A=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=sKE1sL5D0laOKupPrTVqyLQf0suDFv21TfidGi/jkL8GzV4JvG74NC1zWo1bjdD4T
+ +VZK7YJfjxOseRwN/FDKPQMQT17u0gBsFlxL0GDy0VobP/Npurx/O+Bb5bH8NRv4lv
+ MpS1DqdQNg2TFapf1GiBaqXuUs296rwrNQPT5VKi37cWkK+IEOWriUC6rN2Df91sAQ
+ +0mYUDtkLfpdp3ZzqtwM7umKhZgJUGDin4WDXa9e5AFvq6vPZtt0pu3ceKsgZ0aiVH
+ qjoBrjflzA/LG7evdXG5YoHC3isVDU408lLZQvwcOIMJouPKsfsPLhJ0n3CGSueVTO
+ pemH8x7RUoySj3u1yASu4PxbbQzV4k24KT9aW/x/puwntQ/hvWP+y+u+m8RL3jFOP6
+ UqklixurgrdZthM1xf8MEuQ+IHH+VcJZ8er5R+xRhztxkJhLCMmh+/jZ9i8aDAmn+R
+ xnYviv7jQRkwUWNCmeLnCx6qdh143DJwoZOaHMhA1xVsqN+x+OMbxqA4W/0l9DJrnK
+ KUe1A+LQJpVBCPMVz4Ta9wmgWApzeILLlYQU0zYkQHwxEUKMxoMamlFlcdjVr7byp/
+ y1jczg52g5LFdwhrwtHHLGCEtjEP2BuYBzhbJEtwEY2UPFTuww+vHXcuXj6w5NBxdg
+ nj37WSEIUzcZpZJUVA7vtnEE=
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4a17741243eso11584415e9.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 11:07:22 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795806007; x=1796410807;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=VuPfef4T+XQyuIUOeWF9/yn4HO25rdlCansZeSd0+sc=;
- b=uKqGp3Nzr9tJwf+qfLdYp7+SO2VISGyI1bo16xrYCewlJKqSfjVA7ghawJeVCcdlO7
- G4L2XcsQ0H3Yu9VomMxxkgui/TZ/9G5pobojOnpAyb2v+zLEv8K+MBYl/TkrZ6h8n8nd
- dwYafa/xnK23U6cGQIscgNWBPRnbzRyKanfd90RjAnRLAc6N47Mtu5d8RDB9fzbCMtV9
- O6/Qgs7qfeUcGI/zVctlMhEYPuqPZxDnSLH3FDNZFD33t8X2n0Q3NoOXnNtCd4KVmU/U
- sfzo9UBPHRoT7hYlsGjLuQ/ridVnViECPfz3cf8YSF0PfgsbGDt3Kbx+WDqoon1gDlj7
- sPIA==
-X-Gm-Message-State: APuU4Z9pPUzhnBEVmCdTWGNzOTXILyJsqMcT+G9UlVBXeAiBRacjSKRW
- 13o30EhqhQnLAcdMorvYmxRaNxCM6RUkW1Km2mC68SL+obbjMwTZ4nLu7ENxM9eIpBE=
-X-Gm-Gg: AZFdTZc8vqwPlnWa3ssBmPGTTiyrmxQBlAEIDEv9sfvWI3KTww0BPR/4GGEE3pqm4SX
- OfDWUbsKT3smfjuM+1T7w9eXSpDqcIog2ZUQ/ZPIwUNeEpz+gs00nnl/1vxalcnsObESNZuIq5Y
- Y/UYIm8/UFMeeNL4tJEUBDBJKu7F31s9HNoS8gcpUO5SGEOyZvbKoY7qkdJ4TJRanuJJeVmY47a
- UcWQx/W8JVA4fxQElL5Pozm+4kfy+uBGkVHfNKfbiKCMw31LrF+GLD1pjwtwqaG37mPgztTyL6X
- ebIdQ7ebgQtFXLg3SG2djwKRM04muCOVdZaKDmE8QFWeRMPGFE6Rv08p/7rdmxtUvY/Py6ninyM
- M1VId3vdEa9OR/+PK49zfBlvvaxQIovbcej/e1NGKx8EBq7VqabZRlBtnRWIc6ZNU6wQgxFANe2
- x0A9Ngy9YsYEEiVL6eQ7GGlo+5TrkvWm4Nz/hBPbi9TZK+G0BlVOLQOoK1jL6RKypUfAvZ3qTnS
- VBrPJjjj8m8jED4Z3kxjtNBbdmvqyiswk0CO46UCRiD626vTVYY4QktYOcNXD9BJe3XdQ29FL3U
- W1+GC3akGdcguN45ZgU8dxGHfE/luMJPZ7156Q50DPQG/AGZq3NEkIc5dHz58Q==
-X-Received: by 2002:a05:6000:250a:b0:49e:1601:2fa1 with SMTP id
- ffacd0b85a97d-4abb514618bmr58996593f8f.33.1795806006963; 
- Fri, 27 Nov 2026 11:00:06 -0800 (PST)
-Received: from linaro.org ([2a02:2454:ff25:4f10:16ae:8ed1:cf83:edae])
+ d=1e100.net; s=20260707; t=1795806441; x=1796411241;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=xDxrAfWCQyfgrfhkvSzPvjhd98GaY9hXO6CVoM5z86A=;
+ b=KEh29/v8r7cfRKzItHowlLHWRixOiQG8jIbIvOkievdKm+529DMEC0V4PCBwNfy/wN
+ rBpVS+AJaxEM3TbZeQtkWZH7X3QvbuqrV9+kjTQ3uPp2Q0YI16aXhUuy1DZskg1axVda
+ JQ8WjS+sNQyqV8TlZ0Ur7+t7fsGsYdo2L2KP+xFJ/405iJ7dQv6cP7L/tzlPk9+Ovtym
+ q9akxiTiWDAGYV97rmorMFrO8paxAcgmsF9fRiYlt5eWBiuxedVy1AgujOWA1uTxV7fy
+ ABO/zl8/JImRERUK6Jc7mXhSK2Kauez1E04/px+RXFjhUSaP6DpC9sazORi/PqHZbUI5
+ uVyw==
+X-Forwarded-Encrypted: i=1;
+ AL+hErFzVP3VF8teHixMQZ6srRYxVuxsJ8ohERQtc2+s8l3oJkBG/ByIODlkTkm+m2LgKDW3jkp3ByU=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z95e+JB5gi34r/MFgbrl95ywTHDoykv4vxNgO3eW+vwRNglNn/8
+ fY996QFSncepRHkj9qXRXIxAwUvmyRukN8tEI57NtNiVrdqHoGcItrupdMKNm7HE3YZ7XQ6BB+A
+ 1zZcrP6Yg004DwKvDhoUhyu2XLWY7DcgxJ1/UMNIfK3WeUvOe/stamT6o6apooEr7dctsjYgzdI
+ oWAmAH4XIFCA==
+X-Gm-Gg: AZFdTZdK5pCO0OYS0IZXf9jPK0N2IQdkDxINt25rpmq3d8JcDT5wpP+B1zQrLEx7tOY
+ I28qjUtUbyJRLRmnAfLAjCu3qc75H+bnNl5968GEA4wsL4vLDuUmrQt6mEE3jHJEFmx9vji4juJ
+ 7Kv0974ppwFOZaJSf6TFAnRE7uzW7v+ErMTzu2eTpNnIS0TciKsqUl30qUdnnoH+PZYbSj248aJ
+ yCKK0ln6mgn1YFdRoJg978RkwVkujFS3L08QUSCejuE615K7KJathGuV1qZGheMG7nPSSrJDiqA
+ 6PEpVKGvbGA56+GGJm6/kAQOA1Glrs4C4ElnaNlIbmDKjpfZuUM2TOjYXgTEYy2OSR7TZ6+K5DO
+ 2bqVTkvs/VrulOSz1VHozB/yDq9ApZXb049nRen3nHGhBq7NqkfrClO3jJIBj50ZgxmLEzHKyw6
+ Pe3ohkecKVswsCAY3fwWprbIGp7TIUywJB8UTAAaXDI7fxv3IKM+uQe9mbfJATz00xCQ319Hipc
+ Q==
+X-Received: by 2002:a05:600c:4f0d:b0:4bb:5c97:f4b1 with SMTP id
+ 5b1f17b1804b1-4bb8881941bmr572107525e9.24.1795806441538; 
+ Fri, 27 Nov 2026 11:07:21 -0800 (PST)
+X-Received: by 2002:a05:600c:4f0d:b0:4bb:5c97:f4b1 with SMTP id
+ 5b1f17b1804b1-4bb8881941bmr572106965e9.24.1795806441058; 
+ Fri, 27 Nov 2026 11:07:21 -0800 (PST)
+Received: from ?IPV6:2a02:908:1242:30e0:c495:9f2a:a9d7:a02f?
+ ([2a02:908:1242:30e0:c495:9f2a:a9d7:a02f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab6ae2dd55sm47340319f8f.30.2026.11.27.11.00.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Nov 2026 11:00:06 -0800 (PST)
-Date: Fri, 27 Nov 2026 20:00:04 +0100
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Linus Walleij <linusw@kernel.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Stefan Hansson <newbyte@postmarketos.org>
-Subject: Re: [PATCH v2] board: stemmy: Read persistent radio addresses
-Message-ID: <awnTNNVRsSbl1FvU@linaro.org>
-References: <20261124-ux500-efs-v2-1-796a522177f9@kernel.org>
+ 5b1f17b1804b1-4bb906c089dsm432337105e9.1.2026.11.27.11.07.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 27 Nov 2026 11:07:20 -0800 (PST)
+Message-ID: <14990744-782e-4159-99a8-260f960a028b@canonical.com>
+Date: Fri, 27 Nov 2026 20:07:18 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261124-ux500-efs-v2-1-796a522177f9@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] lib: vsprintf: add %uZ to print sizes
+To: Padmarao Begari <padmarao.begari@amd.com>
+Cc: git@amd.com, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org, michal.simek@amd.com,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20261105051715.215560-1-padmarao.begari@amd.com>
+ <20261105051715.215560-2-padmarao.begari@amd.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20261105051715.215560-2-padmarao.begari@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,143 +175,390 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Nov 24, 2026 at 10:42:24AM +0100, Linus Walleij wrote:
-> Samsung stores persistent Wi-Fi and Bluetooth addresses in several
-> locations depending on the device and firmware. The eMMC partition
-> numbers also differ between devices.
+On 11/5/26 06:16, Padmarao Begari wrote:
+> A size with a binary unit can only be printed to the console with
+> print_size(). Code which builds a string, such as a boot menu entry,
+> has to format the size itself.
 > 
-> Locate the EFS and DATAFS partitions by name. Search the known Samsung
-> Wi-Fi address files in priority order and support both Bluetooth EFS
-> layouts. Accept colon-separated and compact addresses, including Codina's
-> bt_macaddr: record, while rejecting known firmware placeholders.
+> Add a Z suffix to the %u conversion which prints the value as a size in
+> bytes with a binary unit, as print_size() does, so that sizes can be
+> printed with printf() and its variants:
 > 
-> Pass valid addresses to the operating system through the radio device
-> tree nodes from ft_board_setup().
+> 	printf("%lluZ\n", 0x113000ULL);		/* 1 MiB */
+> 	printf("%.3lluZ\n", 0x113000ULL);	/* 1.074 MiB */
 > 
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
+> The precision is the number of decimal places, with the last one rounded
+> and trailing zeros left out, so that "%.1lluZ" prints the same as
+> print_size(). The Z only has this meaning after %u, since an existing
+> format string has "%dZ" followed by other text. Compilers which check
+> format strings see the Z as an ordinary character, so this does not
+> cause warnings.
+> 
+> Document the format and add tests, including one which checks that
+> "%.1lluZ" prints the same as print_size() for a range of sizes.
+> 
+> Suggested-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 > ---
-> Changes in v2:
-> - The code was overly cautious, use exact EFS and DATAFS names and
->   drop both partition lookup fallbacks.
-> - Clarify that fs_read() closes the filesystem even on failure.
-> - Use log_warning() and log_info() for radio address messages.
-> - Link to v1: https://patch.msgid.link/20261120-ux500-efs-v1-1-58147e2eae41@kernel.org
-> ---
->  MAINTAINERS                     |   1 +
->  board/ste/stemmy/Makefile       |   2 +-
->  board/ste/stemmy/stemmy-radio.c | 287 ++++++++++++++++++++++++++++++++++++++++
->  board/ste/stemmy/stemmy-radio.h |   8 ++
->  board/ste/stemmy/stemmy.c       |   4 +
->  5 files changed, 301 insertions(+), 1 deletion(-)
+> Changes in v3:
+> - New patch, replacing "lib: display_options: add snprint_size()":
+>    print sizes with a Z suffix to the %u conversion, as suggested by
+>    Heinrich Schuchardt
 > 
-> [...]
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 6edf740a9ceb..ceb474751906 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -772,6 +772,7 @@ R:	Linus Walleij <linusw@kernel.org>
+> checkpatch reports 'Please use a blank line after
+> function/struct/union/enum declarations' for each COMMON_TEST() line.
+> COMMON_TEST() is placed directly after its test function, as in the
+> other tests.
+> 
+>   doc/develop/printf.rst | 30 +++++++++++++
+>   lib/vsprintf.c         | 98 ++++++++++++++++++++++++++++++++++++++++++
+>   test/common/print.c    | 97 +++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 225 insertions(+)
+> 
+> diff --git a/doc/develop/printf.rst b/doc/develop/printf.rst
+> index 99d05061b14..33f2e027fa0 100644
+> --- a/doc/develop/printf.rst
+> +++ b/doc/develop/printf.rst
+> @@ -127,6 +127,36 @@ size_t              %zu, %zx, %zX
+>   ssize_t             %zd, %zx, %zX
+>   =================== ==================
+>   
+> +Sizes
+> +-----
+> +
+> +%uZ, %luZ, %lluZ, %zuZ
+> +	prints an unsigned integer as a size in bytes with a binary unit:
+> +	"xxx Bytes" below 1 KiB, otherwise "xxx KiB", "xxx MiB" and so on up
+> +	to "xxx EiB", using the largest unit which gives at least 1.
+> +
+> +	The precision is the number of decimal places, at most 9. The last
+> +	one is rounded and trailing zeros are left out. Without a precision,
+> +	the size is rounded to a whole number of the unit. A field width pads
+> +	the whole string with spaces.
+> +
+> +	"%.1lluZ" prints a size the same way as print_size().
+> +
+> +	The Z only has this meaning after %u. After other conversions, such
+> +	as %d or %x, it is printed as a normal character. The SPL and TPL
+> +	tiny printf() does not support it.
+> +
+> +=================== ======================= ==============
+> +Format              Value                   Output
+> +=================== ======================= ==============
+> +%lluZ               0x113000                1 MiB
+> +%.1lluZ             0x113000                1.1 MiB
+> +%.3lluZ             0x113000                1.074 MiB
+> +%.3lluZ             0x100000                1 MiB
+> +%zuZ                512                     512 Bytes
+> +%10lluZ             1024                    "     1 KiB"
+> +=================== ======================= ==============
+> +
 
-I think you should swap our M/R roles nowadays. :')
+Hello Padmarao,
 
-> [...]
-> diff --git a/board/ste/stemmy/stemmy-radio.c b/board/ste/stemmy/stemmy-radio.c
-> new file mode 100644
-> index 000000000000..4a09ebcfe994
-> --- /dev/null
-> +++ b/board/ste/stemmy/stemmy-radio.c
-> @@ -0,0 +1,287 @@
-> [...]
-> +static struct blk_desc *stemmy_radio_device(void)
+Overall the series looks good to me. I am just a bit surprised by the 
+formatting of numbers.
+
+For floating point numbers %f uses fixed number of decimals and %g uses 
+a fixed number of significant digits.
+
+%8s = %.3f
+       3. = 3.000
+      3.1 = 3.100
+     3.14 = 3.140
+    3.142 = 3.142
+  3.14159 = 3.142
+  31.4159 = 31.416
+  314.159 = 314.159
+%8s = %.3g
+       3. = 3
+      3.1 = 3.1
+     3.14 = 3.14
+    3.142 = 3.14
+  3.14159 = 3.14
+  31.4159 = 31.4
+  314.159 = 314
+
+Your code does neither the one nor the other.
+
+printf("%llx = %.3lluZ\n", 0x3FF80000LLU, 0x3FF80000LLU);
+printf("%llx = %.3lluZ\n", 0x3FF80001LLU, 0x3FF80001LLU);
+printf("%llx = %.3lluZ\n", 0x3FFFFDF2LLU, 0x3FFFFDF2LLU);
+printf("%llx = %.3lluZ\n", 0x3FFFFDF3LLU, 0x3FFFFDF3LLU);
+printf("%llx = %.3lluZ\n", 0x3FFFFDF4LLU, 0x3FFFFDF4LLU);
+printf("%llx = %.3lluZ\n", 0x3FFFFFFFLLU, 0x3FFFFFFFLLU);
+printf("%llx = %.3lluZ\n", 0x40000000LLU, 0x40000000LLU);
+
+3ff80000 = 1023.5 MiB
+3ff80001 = 1023.5 MiB
+3ffffdf2 = 1023.999 MiB
+3ffffdf3 = 1023.999 MiB
+3ffffdf4 = 1 GiB
+3fffffff = 1 GiB
+40000000 = 1 GiB
+
+I would have preferred 3 significant digits for %.3lluZ:
+
+3E77FFFF = 999. MiB
+3E780000 = 0.98 GiB
+3F5C28F5 = 0.99 GiB
+3ff80000 = 1.00 GiB
+40000000 = 1.00 GiB
+
+This would make best use of restricted screen space.
+
+But as your %.1lluZ matches the behavior of print_size() I will take it 
+as is. Follow up work can replace print_size() occurences.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+>   Characters
+>   ----------
+>   
+> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+> index 49dc9c38c65..a14f8c600b7 100644
+> --- a/lib/vsprintf.c
+> +++ b/lib/vsprintf.c
+> @@ -151,6 +151,7 @@ static noinline char *put_dec(char *buf, uint64_t num)
+>   #define SMALL	32		/* Must be 32 == 0x20 */
+>   #define SPECIAL	64		/* 0x */
+>   #define ERRSTR	128		/* %dE showing error string if enabled */
+> +#define SIZEUNIT	256		/* %uZ showing a size with a unit */
+>   
+>   /*
+>    * Macro to add a new character to our output string, but only if it will
+> @@ -281,6 +282,94 @@ static char *string(char *buf, char *end, const char *s, int field_width,
+>   	return buf;
+>   }
+>   
+> +/* Most decimal places which %uZ shows */
+> +#define SIZE_MAX_DECIMALS	9
+> +
+> +/**
+> + * size_string() - Print a size with a binary unit, for %uZ
+> + *
+> + * Print a size in bytes as "xxx Bytes" below 1 KiB, and otherwise as
+> + * "xxx KiB", "xxx MiB", ... "xxx EiB", with the largest unit that gives at
+> + * least 1. The precision is the number of decimal places, at most
+> + * SIZE_MAX_DECIMALS, with the last one rounded and trailing zeros left out,
+> + * so that "%.1lluZ" prints the same as print_size(). There are no decimal
+> + * places without a precision.
+> + *
+> + * @buf:	Buffer to write to
+> + * @end:	End of the buffer
+> + * @size:	Size in bytes
+> + * @field_width:	Minimum width of the output, padded with spaces
+> + * @precision:	Number of decimal places, -1 for none
+> + * @flags:	Formatting flags; only LEFT is used
+> + * Return:	Pointer to the end of the output in @buf
+> + */
+> +static char *size_string(char *buf, char *end, u64 size, int field_width,
+> +			 int precision, int flags)
 > +{
-> +	struct blk_desc *desc;
-> +	struct udevice *dev;
-> +	struct uclass *uc;
-> +	struct mmc *mmc;
+> +	static const char units[] = "KMGTPE";
+> +	char tmp[32], *p, *tmp_end = tmp + sizeof(tmp);
+> +	int unit, shift, decimals, i;
+> +	u64 whole, rem, mask;
+> +	u32 frac, scale;
 > +
-> +	if (uclass_get(UCLASS_MMC, &uc))
-> +		return NULL;
-> +
-> +	uclass_foreach_dev(dev, uc) {
-> +		/* Android's mmcblk0 is not necessarily U-Boot's mmc 0. */
-> +		if (!dev_read_bool(dev, "non-removable") || device_probe(dev))
-> +			continue;
-
-non-removable doesn't tell us much because the devices also have
-non-removable SDIO and sometimes SD slots. Maybe check for "no-sdio" +
-"no-sd", so we don't unnecessarily search the SD card or try to probe
-the SDIO card?
-
-> +
-> +		mmc = mmc_get_mmc_dev(dev);
-> +		if (!mmc || mmc_init(mmc) || !IS_MMC(mmc))
-> +			continue;
-> +
-> +		/* Persistent data is in the user area, not an eMMC boot area. */
-> +		desc = mmc_get_blk_desc(mmc);
-> +		if (!desc || blk_dselect_hwpart(desc, 0))
-> +			continue;
-> +
-> +		return desc;
+> +	/* Find the largest unit which gives at least 1 */
+> +	for (unit = -1; unit + 1 < (int)ARRAY_SIZE(units) - 1; unit++) {
+> +		if (!(size >> (10 * (unit + 2))))
+> +			break;
 > +	}
 > +
-> +	return NULL;
+> +	if (unit < 0) {
+> +		p = number(tmp, tmp_end, size, 10, -1, -1, 0);
+> +		strcpy(p, " Bytes");
+> +
+> +		return string(buf, end, tmp, field_width, -1, flags);
+> +	}
+> +
+> +	shift = 10 * (unit + 1);
+> +	mask = (1ULL << shift) - 1;
+> +	whole = size >> shift;
+> +	rem = size & mask;
+> +	decimals = precision < 0 ? 0 : min(precision, SIZE_MAX_DECIMALS);
+> +
+> +	/* Work out each decimal place in turn, then round the last one */
+> +	frac = 0;
+> +	scale = 1;
+> +	for (i = 0; i < decimals; i++) {
+> +		rem *= 10;
+> +		frac = frac * 10 + (rem >> shift);
+> +		rem &= mask;
+> +		scale *= 10;
+> +	}
+> +	if (rem >> (shift - 1))
+> +		frac++;
+> +
+> +	/* Rounding can carry into the whole part, and on into the next unit */
+> +	if (frac >= scale) {
+> +		frac -= scale;
+> +		whole++;
+> +		if (whole == 1024 && units[unit + 1]) {
+> +			whole = 1;
+> +			unit++;
+> +		}
+> +	}
+> +
+> +	while (decimals > 0 && !(frac % 10)) {
+> +		frac /= 10;
+> +		decimals--;
+> +	}
+> +
+> +	p = number(tmp, tmp_end, whole, 10, -1, -1, 0);
+> +	if (decimals) {
+> +		*p++ = '.';
+> +		p = number(p, tmp_end, frac, 10, -1, decimals, 0);
+> +	}
+> +	*p++ = ' ';
+> +	*p++ = units[unit];
+> +	strcpy(p, "iB");
+> +
+> +	return string(buf, end, tmp, field_width, -1, flags);
 > +}
-> [...]
-> +static void stemmy_fixup_radio_addr(void *fdt,
-> +				    struct stemmy_radio_storage *storage,
-> +				    const struct stemmy_radio_source *sources,
-> +				    size_t count, const char *compatible,
-> +				    bool bluetooth)
+> +
+>   /* U-Boot uses UTF-16 strings in the EFI context only. */
+>   static __maybe_unused char *string16(char *buf, char *end, u16 *s,
+>   				     int field_width, int precision, int flags)
+> @@ -726,6 +815,10 @@ repeat:
+>   			flags |= SIGN;
+>   		/* fallthrough */
+>   		case 'u':
+> +			if (*fmt == 'u' && fmt[1] == 'Z') {
+> +				flags |= SIZEUNIT;
+> +				fmt++;
+> +			}
+>   			break;
+>   
+>   		default:
+> @@ -755,6 +848,11 @@ repeat:
+>   			if (flags & SIGN)
+>   				num = (signed int) num;
+>   		}
+> +		if (flags & SIZEUNIT) {
+> +			str = size_string(str, end, num, field_width, precision,
+> +					  flags);
+> +			continue;
+> +		}
+>   		str = number(str, end, num, base, field_width, precision,
+>   			     flags);
+>   		if (IS_ENABLED(CONFIG_ERRNO_STR) && (flags & ERRSTR)) {
+> diff --git a/test/common/print.c b/test/common/print.c
+> index 27fdb444d0d..1d2ee8f3839 100644
+> --- a/test/common/print.c
+> +++ b/test/common/print.c
+> @@ -164,6 +164,103 @@ static int print_printf(struct unit_test_state *uts)
+>   }
+>   COMMON_TEST(print_printf, 0);
+>   
+> +/* Test printing sizes with %uZ */
+> +static int print_size_unit(struct unit_test_state *uts)
 > +{
-> +	const char *property = bluetooth ? "local-bd-address" :
-> +					       "local-mac-address";
-> +	const char *name = bluetooth ? "Bluetooth BD" : "WiFi MAC";
-> +	u8 addr[ETH_ALEN];
-> +	int node, ret, i;
+> +	char str[40];
 > +
-> +	ret = stemmy_find_radio_addr(storage, sources, count, bluetooth, addr);
-> +	if (ret) {
-> +		log_warning("Persistent %s missing\n", name);
-> +		return;
+> +	/* The integer types */
+> +	snprintf(str, sizeof(str), "%uZ", 0x100000);
+> +	ut_asserteq_str("1 MiB", str);
+> +	snprintf(str, sizeof(str), "%luZ", 0x100000UL);
+> +	ut_asserteq_str("1 MiB", str);
+> +	snprintf(str, sizeof(str), "%lluZ", 0x100000ULL);
+> +	ut_asserteq_str("1 MiB", str);
+> +	snprintf(str, sizeof(str), "%zuZ", (size_t)0x100000);
+> +	ut_asserteq_str("1 MiB", str);
+> +
+> +	/* Below 1 KiB, and each unit */
+> +	snprintf(str, sizeof(str), "%lluZ", 0ULL);
+> +	ut_asserteq_str("0 Bytes", str);
+> +	snprintf(str, sizeof(str), "%lluZ", 1023ULL);
+> +	ut_asserteq_str("1023 Bytes", str);
+> +	snprintf(str, sizeof(str), "%lluZ", 1ULL << 10);
+> +	ut_asserteq_str("1 KiB", str);
+> +	snprintf(str, sizeof(str), "%lluZ", 1ULL << 30);
+> +	ut_asserteq_str("1 GiB", str);
+> +	snprintf(str, sizeof(str), "%lluZ", 1ULL << 40);
+> +	ut_asserteq_str("1 TiB", str);
+> +	snprintf(str, sizeof(str), "%lluZ", 1ULL << 50);
+> +	ut_asserteq_str("1 PiB", str);
+> +	snprintf(str, sizeof(str), "%lluZ", 1ULL << 60);
+> +	ut_asserteq_str("1 EiB", str);
+> +	snprintf(str, sizeof(str), "%.1lluZ", ~0ULL);
+> +	ut_asserteq_str("16 EiB", str);
+> +
+> +	/* The precision is the number of decimal places */
+> +	snprintf(str, sizeof(str), "%lluZ", 0x113000ULL);
+> +	ut_asserteq_str("1 MiB", str);
+> +	snprintf(str, sizeof(str), "%.1lluZ", 0x113000ULL);
+> +	ut_asserteq_str("1.1 MiB", str);
+> +	snprintf(str, sizeof(str), "%.3lluZ", 0x113000ULL);
+> +	ut_asserteq_str("1.074 MiB", str);
+> +	snprintf(str, sizeof(str), "%.*lluZ", 3, 0x113000ULL);
+> +	ut_asserteq_str("1.074 MiB", str);
+> +
+> +	/* Leading zeros of the decimals are kept, trailing ones left out */
+> +	snprintf(str, sizeof(str), "%.3lluZ", 0x101000ULL);
+> +	ut_asserteq_str("1.004 MiB", str);
+> +	snprintf(str, sizeof(str), "%.3lluZ", 0x100000ULL);
+> +	ut_asserteq_str("1 MiB", str);
+> +	snprintf(str, sizeof(str), "%.3lluZ", 0x180000ULL);
+> +	ut_asserteq_str("1.5 MiB", str);
+> +
+> +	/* Rounding, also into the next unit */
+> +	snprintf(str, sizeof(str), "%lluZ", 0x180000ULL);
+> +	ut_asserteq_str("2 MiB", str);
+> +	snprintf(str, sizeof(str), "%.1lluZ", (1ULL << 30) - 1);
+> +	ut_asserteq_str("1 GiB", str);
+> +
+> +	/* Field width */
+> +	snprintf(str, sizeof(str), "[%10lluZ]", 1ULL << 10);
+> +	ut_asserteq_str("[     1 KiB]", str);
+> +	snprintf(str, sizeof(str), "[%-10lluZ]", 1ULL << 10);
+> +	ut_asserteq_str("[1 KiB     ]", str);
+> +
+> +	/* Only %u takes the Z */
+> +	snprintf(str, sizeof(str), "%dZ %xZ", 0x100000, 0x100000);
+> +	ut_asserteq_str("1048576Z 100000Z", str);
+> +
+> +	/* A size which does not fit is truncated like any other output */
+> +	ut_asserteq(9, snprintf(str, 5, "%.3lluZ", 0x113000ULL));
+> +	ut_asserteq_str("1.07", str);
+> +
+> +	return 0;
+> +}
+> +COMMON_TEST(print_size_unit, 0);
+> +
+> +/* Test that %.1lluZ prints the same as print_size() */
+> +static int print_size_unit_compat(struct unit_test_state *uts)
+> +{
+> +	static const u64 sizes[] = {
+> +		0, 1, 999, 1023, 1024, 1025, 1536, 1588, 1638, 0x3ffff,
+> +		0xfffff, 0x100000, 0x113000, 0x1f00000, 0x7e00000,
+> +		0x3fffffff, 0x40000000, 0x76c0000000ULL, 0xe8d4a51000ULL,
+> +		0xfffffffffffULL, 1ULL << 40, (1ULL << 50) + (1ULL << 49),
+> +		(1ULL << 60) - 1, 3ULL << 60, ~0ULL,
+> +	};
+> +	int i;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(sizes); i++) {
+> +		print_size(sizes[i], "\n");
+> +		ut_assert_nextline("%.1lluZ", sizes[i]);
 > +	}
+> +	ut_assert_console_end();
 > +
-> +	log_info("Persistent %s: %pM\n", name, addr);
+> +	return 0;
+> +}
+> +COMMON_TEST(print_size_unit_compat, UTF_CONSOLE);
 > +
-> +	node = fdt_node_offset_by_compatible(fdt, -1, compatible);
-> +	if (node < 0)
-> +		return;
-> +
-> +	/* local-bd-address uses Bluetooth (least significant byte first) order. */
-> +	if (bluetooth) {
-> +		for (i = 0; i < ETH_ALEN / 2; i++)
-> +			swap(addr[i], addr[ETH_ALEN - i - 1]);
-> +	} else if (fdt_getprop(fdt, node, "mac-address", NULL)) {
-> +		/* Linux prefers mac-address if it is already present. */
-> +		ret = fdt_setprop(fdt, node, "mac-address", addr, sizeof(addr));
-> +		if (ret)
-> +			goto err;
+>   static int print_display_buffer(struct unit_test_state *uts)
+>   {
+>   	u8 *buf;
 
-It is true that Linux prefers "mac-address" over "local-mac-address",
-but I don't think we should override that property given the definition
-in the dt-bindings:
-
-  mac-address:
-    description:
-      Specifies the MAC address that was last used by the boot program. This
-      property should be used in cases where the MAC address assigned to the
-      device by the boot program is different from the
-      local-mac-address property. This property shall be used only if the value
-      differs from local-mac-address property value.
-
-We're not "using" the mac-address. (I don't think this property should
-be already set by anything...)
-
-Thanks,
-Stephan
