@@ -1,143 +1,148 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07E93606A31C
-	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 06:36:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3F32606A31C
+	for <u-boot@archiver.kernel.org>; Fri, 27 Nov 2026 06:36:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uUH2QKbN;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZKOeA9AO
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=j3She+Ki;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rGR4J5IX
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B1F9D40A3C;
-	Fri, 27 Nov 2026 06:36:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 85C8D60A83;
+	Fri, 27 Nov 2026 06:36:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rd64ABXlxRJ6; Fri, 27 Nov 2026 06:36:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9D943409C7
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795761392;
-	b=JT6mFeUJDdS2ZgdkrF5sgz+vrIfLUw/aYeUNDrMKfNkQIY4a51xQsdRPz7+kvfEsnKXn
-	 3+s7FNS+SXD7pMQ4zA8mE5pLDmFKBRx4dMS5makD3UMjZCrqQUGpHA3/njkd7wLEnsHKh
-	 1HOP6HZPU839NkV3YzDDmEF2J8XmM7nXEsvk8VcgXO+JkZu8vVXhkcr5EYFjEEbO712MO
-	 BSgiedjMYP0YaTYsjlyrye2hY11nrGK7HkDdnJR6BrlMOzWHQ7TMYmNFf3OC4QfCpeiTm
-	 i6LEDI/RBQT89acGxv00H9/PwI+VDqsQg3xCgz/5oGGSmN0wY1Lu4D5Vf3OXchwdW0w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9U27tap7aHUB; Fri, 27 Nov 2026 06:36:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 75E8460A67
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795761396;
+	b=K0V3TJ5UfQdQJkNAjJ3JYi2JozD3DiCfoYkW2PNOIVLTw8FOlbwFNFPw4GAQHdDliwsW
+	 jrvPTZO/4BetgzjbUw70Gjj3FET61g1jqE7qtZKz7bCMLEoqq8YnS5oICkr14D3miDVhq
+	 X7hljdi/r4WT7o8PVLPwDEyRrUuXKuavIvoy3bMLGV7CrVD5+VB5cu7O3xgaAsq58ddDb
+	 EfrwLADBZyRyfAPoZJmS9EIGYJaedA+NiW+p1iUkjN7HF02eQ1qjHBZ0FhsaIjecmCyb0
+	 icOg6TEW72BrFDBFjUqFnCXZoqvN13sO8IHmyBdIm/+Wgfff8blNkdE17lWj0g6enAg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795761392;
+	c=relaxed/relaxed; t=1795761396;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=eTVz9he4ojeIJrv/0miiKKBXZ1ypKfKGRF9w46na14E=;
-	b=mrW+eZzArEI+tSZ22ROkyHUZQfa1BedGnOiGom0SfsX4Lr67szJdIcADJSWvKvWpxkxG
-	 rvITP8/PbN+WVFItyY52lCLt0Fdn6xZhWf1r7Xmj3IKuuA4oHPTlC5GXm8yxyJB10TlwJ
-	 vmHnKkahWJGvmhoFKtpuHsB4yWH6LWMLS+n9wAxxgLXFXj6/Y1UsYsZ3bG00wTO1ydWxa
-	 DNzn/+EDSC/ViMsqYbMup9qN66mLLmozL0gXK14id4nu+zWAoxEDPzhcd/mBElpLp5lpZ
-	 Bl6HAK1U8kQO3Qq610jfP3b02oWmx3On5T/BoGis4UPqEzgURiPnvCOU37n+w4UyDkA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=TuVER0CfSrmLTFsnU6SN3oHn7ZIxqRoRgTWvNLBSdCI=;
+	b=U9d2NftKn/WXhmSEPtdRi5OrziqIBkSqyeSeQonTnHiyMJBuuuPaUnunKT29rArgE5B1
+	 4exVOD9IPrqimWC+o0cveiIFSHX7xfA8stBXQJBOid6y4Rvl97whqVrnwo/LSLfD0COIm
+	 eVGqP/wVSWd9tECdDeJgL4JBOj5Qqu9ZLzAIX3JscsnHtH4+/kZM/kAO1y+vw5ryLICG5
+	 A54l5cBhJhJ6ooeIlZpA7ILxFFAoOBZxP1S7B25Orsn1RbCwqYngiTrj7RxsWTGBggLXU
+	 AynDwKkdErTbpUCr3/mG4ydrSCabR0bynnBMXHzQTBFH+y29L8Ujs3vPcXW1IsWbQxg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795761392;
-	bh=eTVz9he4ojeIJrv/0miiKKBXZ1ypKfKGRF9w46na14E=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=uUH2QKbNSRfdRI9nmSu1+8UMd6+nuYbCnHgzkHgG2QLWtywU3+jmvtomBsN/G2MFZ
-	 58/3WwBskHoWt2kR+Db+o1LGVz9Ue5bholgj53ckaTEm/r/J4F1MrufJozYelB+hdC
-	 qZRKySImqL0xJ75Q2FDjyGqQ1qiYmwT/+CR7MgDuwIA0TKw49/ckFy3cd9PT0wH76O
-	 KQjZ+DvySfL17jsc6I/cyZt0f2QjBH+tIt02zld5/1zkxC0kUl7PDd7rnoenQ9Elmb
-	 6MMUP6fNhCB4tjQdymWUkBi6FpQ29N9Ix4RPfWA4BDIZZT2xRAA9FHw02BfknEuA2c
-	 hegegA7w4uGsg==
+	d=lists.u-boot-project.org; s=default; t=1795761396;
+	bh=TuVER0CfSrmLTFsnU6SN3oHn7ZIxqRoRgTWvNLBSdCI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=j3She+KiFI85gTCA9DUguJzeLGC+vkjjBq52ZoHOBaEYyaHMIFsUHB3n7X2d2/CHf
+	 eCHCK8xtxw7ffmTeOV2uge7QdRCyjm6R24c6Q2OpZMxQmLz8Mqjfxp6NSp+ZXHFA1c
+	 /4ew3hmYTmALzvLjue4OB42ymLf3Ka8VUs7BTd1160gi246eC0HJ9ii4/oG5yV0diQ
+	 N79FFF6bgIFoCbd9XPFP7i3a8S+4oFmPCiLH38SYbpNoPAt1JWg6PULi6L0w9RyEKf
+	 Y8TfJhjjtE234Mf10EZ2udGAhSG6zHfjlhXN0HEYJqBfXjwiJMdZYSu8ztoxr2h1uD
+	 eMY2TFDipNuKw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9D943409C7;
-	Fri, 27 Nov 2026 06:36:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 94345266
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 06:36:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 75E8460A67;
+	Fri, 27 Nov 2026 06:36:36 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 595033C0
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 06:36:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 91DED60A4E
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 06:36:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4A02F81201
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 06:36:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5vJlnvv5tPsn for <u-boot@lists.u-boot-project.org>;
- Fri, 27 Nov 2026 06:36:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A8F0960A63
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::1329"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id et0ykpXM9ryR for <u-boot@lists.u-boot-project.org>;
+ Fri, 27 Nov 2026 06:36:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 61815811FD
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::132a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1329; helo=mail-dy1-x1329.google.com;
+ client-ip=2607:f8b0:4864:20::132a; helo=mail-dy1-x132a.google.com;
  envelope-from=visitorckw@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=ZKOeA9AO
-Received: from mail-dy1-x1329.google.com (mail-dy1-x1329.google.com
- [IPv6:2607:f8b0:4864:20::1329])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A8F0960A63
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 06:36:30 +0000 (UTC)
-Received: by mail-dy1-x1329.google.com with SMTP id
- 5a478bee46e88-386bd881d39so8436690eec.1
- for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 22:36:30 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=rGR4J5IX
+Received: from mail-dy1-x132a.google.com (mail-dy1-x132a.google.com
+ [IPv6:2607:f8b0:4864:20::132a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 61815811FD
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 06:36:32 +0000 (UTC)
+Received: by mail-dy1-x132a.google.com with SMTP id
+ 5a478bee46e88-3866a784546so10616292eec.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 26 Nov 2026 22:36:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795761389; x=1796366189;
+ d=gmail.com; s=20260707; t=1795761392; x=1796366192;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=eTVz9he4ojeIJrv/0miiKKBXZ1ypKfKGRF9w46na14E=;
- b=ZKOeA9AOKxL1rDfupi4/kOf9DdY2vJbOd41mQ4YT4/pnX1qS9Qu62GG0/pcsX0ncyx
- nMfeM2La/sO7OgKHajnBuWE+/rGsLYlImL6giZP8wAT2kug7flG/5ZkHuiZ5kBPDDffZ
- lXUP27EdXEHBy1NejxMReJs8ThXV/Xq22+rsrAz7PpKyY1QYBT4WyEGr0s3+d8nWLSIV
- KtVuOeHPevyLChZ7BTf1ZnZ66LNDRDzPU1rba/CgtSoE8ZvBeL2nKn9GIsAS0QaALAwR
- vInWg41hK0Oi4TGkyyNCzQlrrtkDNlhHLTpy6+oKX9hiAxkijcErruFiCUWcqu4CcunB
- 0emw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795761389; x=1796366189;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=eTVz9he4ojeIJrv/0miiKKBXZ1ypKfKGRF9w46na14E=;
- b=D0FS/kVyXzIey4EyCcYSf6STjvvFZ9qCm+gwu8YqI65GxnCcqoMrhMcAWqnUhCj2Ab
- TmRZwkIqzHNZ2MbZDQVwMMswB6YEhoRqe3+Cq8aY0iUi50LBkRD+yXMhG50DO2MGpsDR
- DLGEFdt+Z6iuhyeuBQW5VGWrmNqt68mzf/ifL09acneFggaztijK0E81j1htYdKn+X24
- sDwOiDxpMGLWFMlMDpb4ypSJ5HgyXFOQkjzdaXObiL88GosqDgO/hkoUY2XhQX+bcF4q
- KCf972YhaTU54AxVAxUz/lsvMsljne+nMop40GxvLiVCBSgNiiwXsScqIWo3y+pCzZk8
- 2MUg==
-X-Gm-Message-State: APuU4Z/E2JQoieg1l6xPjYgL4FxYGTWhEMm3/9x1EPRBpv9VlH2zCELA
- 5Du03nF9YBFMNIBt2neygGzHNxPHM2rVhfL1vzTSr1Aj2dnCmCBdljOf
-X-Gm-Gg: AZFdTZdFPeJJtOU+bPwYiQEPrFHNW/u9EAJq8S6FDQADniBhcjwGox08xQjWLXN+/a0
- rFk1FkNYzQDD28GtHxZSNFAIY71GHQdJBA6TBYoUAr1aGMMjpfEeN3ijEAA3SkSsEnIuFr8kacD
- lSY1H+2XiXtgEv3aLc/bdF/8HNJI6bwOvg7pnTLccUWqgP8K0i2Z3DH2q8xeCzO2ZG4hcc+L/rW
- cCIwLZ9qACh8sP2FjsEHwdybqWgeGVdDd41BLONe9sTu5kvGxjg1izJgq4/r/vuvZX4k8gKX6IR
- t8xB3pswrkQhM6x7GNJwECqIxxmY8guH3ipjmOQMU7sKA41aptjYCCzUduIgk2c3t5aDsBeAI5H
- OnFdY6zeFh5p0jt8f6YRZtIrO3Yg8MpvYUBCRuzB9OiCo/Eh5tBr3P/+g3EffFrykvWN2myZOby
- FSyOjvjnUsJfTVSq/bk+fqChSQL0mlBzaC3jBmm0ZoUWzMnvFl7hA6PXPfPBYwQRHlFF2yLJ30v
- yuwrqc4115Krb9j4JdSJmQdXmyJ0usD57y1eG0tmX0CPHZWLn6TUlPlpWf++aCpyNwJinn3PvLn
- Dm+BHJyX0p9gnJkKCgvise+LMPb1ncgG14ry/MrDSR4rD6z3W6xZPUxMUwcxROwD47b/+WZdIRr
- cP+IoCsw1CjjUWV300WVRUF0/
-X-Received: by 2002:a05:693c:8083:b0:376:6530:248f with SMTP id
- 5a478bee46e88-38570a3717dmr27592982eec.24.1795761389323; 
- Thu, 26 Nov 2026 22:36:29 -0800 (PST)
+ bh=TuVER0CfSrmLTFsnU6SN3oHn7ZIxqRoRgTWvNLBSdCI=;
+ b=rGR4J5IXWNtJrU6oxsbJ5cen4TZd2KwPx9pEOhrTYGZo5CJAuMG4SuljSZldTx9iUe
+ fglBG8AhLWlGW7JGuMOwcEGBNPWyqETF4OgO0Vc+Fe90WSKZ162xECjORJrXXl4P/X/g
+ kg+tyKtAHkKCnVdpYHyqJvRcT8CtYWw2PYLeFkmCefnGxJezv3bg2B6u7PGb8o1VWNnj
+ I0de2fDK7po5ks0auSH2Xssipa8jLGJV7JOOwbx6dzHOlsE4d7oeAorEWAoGd6vunIUr
+ BJbOYd0g47v3q7NizCoeUqd7J4994zfsw6vvkF1Ieeg94WHmmazO65JoFDl9ep/9g52j
+ A4xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795761392; x=1796366192;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=TuVER0CfSrmLTFsnU6SN3oHn7ZIxqRoRgTWvNLBSdCI=;
+ b=KEtji80YQc2TsajSoZZHr9KxtjpgR8xXwKnRUSigjxlcUV379jWhuvAORebR9BCS1f
+ tWsJneSQKNZtZcpxIYc5OHe6miczas21NAwC/iiBmd2bkITPdkJjxdcTo7YQCK+vkSN8
+ Q0tHHlbpzTb+mwBj0rfsLjwBuvTJLjYbmy0BjtOt2jvz/nSkHXjitTK1UKKqoLGtlUh9
+ NQkZfrKd3miNFDW0v+B3DN+uouT9Eajp2S91rE3KpJlIpFvg0vY0rdaS6H2GxBi5Hq0x
+ fnetGt7QIMKPuD5yBmTNdUoVN6Qw6jR5BwK1bJVyTp8QZdDob+Dhdjh+CYXQWwfyiZSt
+ Bxtw==
+X-Gm-Message-State: APuU4Z9EBbKsjC7/2+9Bf0cn9TzW3yXLjyg5eXkdN3HZNryZYIRlDmKS
+ AiftvjM95727XLRZvJiW/cwXvkSjJ/pjilO8QTQEvRgZSyk4BJAMsfp/
+X-Gm-Gg: AZFdTZdJO83oDEXQzWFcmT7K57d3Y8dPYOxvG6fcJOboRpu6KM3yXgFsbSb6inNMKT1
+ b+COmbfM/txFfvUnVEE0atyd3ZUIXyDV9vIdo9vb4BF3sVDkfNnlsSZ+Ts5MNQ2YkiZmMIte5bQ
+ R+YtlDJE1UaiZgiI0rIZ832XQsZ6G/rgb/XxwpZqkqkb/6tG1o0AvuIqREIlBcn8ro7/zGgXu2N
+ ufJRb+Fglv0v9yJGV5+P5ycLiLEAuBBxypTavq1sskcQ5PSHi1aV7tdXdMUzvWa6Qf2uVePr2HJ
+ Kjfuwvn3OW3gIOW5Z0gFl+vdBwQEFGdYRs+61M1kNOYfCablGvkh+NbRx21bbRckRR3QIZELF3P
+ fgIh4LB5sJKngAb+fiZTtVzDJXhIFpJWY2uBDGFySSf8VpnqQIX2RwzDmTREEXoxtLRIFFb4d1+
+ nx4xnN9HWt0Kp1dnX5JByM1fBB2BPjtAL50TNo77X+E9wm5GaB1j1hLXgq/bG0r1aenK6eK2ss6
+ X6UKIGeysI89CoyelL9Ol86ZAvf5f0/8w81L86bsbGgZGI5AXX9bm3s9m9qYBf/TemTByEcZHwg
+ CJJBqs9BlGEl+5FgOkFLqoW8wqno+VQEI/seHVfSRrH+ATD0B8GhwOz0dPSxWqU8vA7PbdsGtWb
+ tZjX4tcHliNOYmobgZ7JnFQvQ4MsAIE5voP+c4hCIlddM
+X-Received: by 2002:a05:7300:1c17:b0:386:a105:fa66 with SMTP id
+ 5a478bee46e88-386a105fd17mr18016391eec.7.1795761392073; 
+ Thu, 26 Nov 2026 22:36:32 -0800 (PST)
 Received: from visitorckw-work01.c.googlers.com.com
  (55.11.81.34.bc.googleusercontent.com. [34.81.11.55])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-385672c6f31sm67452444eec.15.2026.11.26.22.36.26
+ 5a478bee46e88-385672c6f31sm67452444eec.15.2026.11.26.22.36.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Nov 2026 22:36:28 -0800 (PST)
+ Thu, 26 Nov 2026 22:36:31 -0800 (PST)
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: trini@konsulko.com,
 	ilias.apalodimas@linaro.org
 Cc: u-boot@lists.u-boot-project.org, sjg@chromium.org, marscheng@google.com,
  eleanor15x@gmail.com, jserv@ccns.ncku.edu.tw, visitorckw@gmail.com
-Subject: [PATCH v2 0/8] arm: google: Add initial support for Google Tensor G5
-Date: Fri, 27 Nov 2026 06:36:12 +0000
-Message-ID: <20261127063620.399391-1-visitorckw@gmail.com>
+Subject: [PATCH v2 1/8] dt-bindings: arm: google: Add dt bindings for
+ frankel/blazer/mustang
+Date: Fri, 27 Nov 2026 06:36:13 +0000
+Message-ID: <20261127063620.399391-2-visitorckw@gmail.com>
 X-Mailer: git-send-email 2.56.1.839.g22a8290db9-goog
+In-Reply-To: <20261127063620.399391-1-visitorckw@gmail.com>
+References: <20261127063620.399391-1-visitorckw@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -150,97 +155,114 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series adds initial architecture and board support for the Google
-Tensor G5 SoC, referred to in code as LGA, and the Pixel 10 series
-boards based on it.
+From: Peter Griffin <peter.griffin@linaro.org>
 
-U-Boot is built to run as the BL33 payload. This initial port sets up
-the MMU mapping and DRAM bounds, disables the APC watchdog left running
-by earlier boot stages, and enables the serial console.
+Add binding documentation for Tensor G5 SoC (Laguna) which is referred
+to in code as "lga" and three of the boards that use the Laguna SoC
+Frankel (Pixel 10), Blazer (Pixel 10 Pro) and Mustang (Pixel 10 Pro XL).
 
-The first three patches cherry-pick the upstream LGA devicetree bindings
-and sources from devicetree-rebasing using tools/update-subtree.sh so
-that this series builds cleanly on top of next.
+Additionally update to use a more efficient and scalable way to express
+the various names a SoC is known by.
 
-Tested on real silicon:
+Co-developed-by: Douglas Anderson <dianders@chromium.org>
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
+Link: https://patch.msgid.link/20260918-contrib-pg-pixel10-initial-dts-v4-1-745eaca28b1a@linaro.org
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 
-U-Boot 2027.01-rc3-00221-g7f8c292cf873 (Nov 27 2026 - 06:19:48 +0000)
+[ upstream commit: ecf6405fa6c503c34eb4e7e905957d70d4018e93 ]
 
-Model: Frankel
-DRAM:  2 GiB
-Core:  7 devices, 7 uclasses, devicetree: separate
-MMC:   
-Loading Environment from nowhere... OK
-In:    serial@db62000
-Out:   serial@db62000
-Err:   serial@db62000
-=>
-
+(cherry picked from commit 083c7465276a6f49b4f77896f0c82ee9cc9639e3)
+Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
-Changes in v2:
-- Rebased onto next
-- Cherry-picked upstream devicetree commits via tools/update-subtree.sh
-- Added SPDX header to arch/arm/mach-google/Kconfig
-- Dropped SYS_CONFIG_NAME and include/configs/lga.h
-- Lowered LGA_BL33_RAM_TOP to 0xbe000000 to avoid LMB overlap
-- Added doc
+ dts/upstream/Bindings/arm/google.yaml | 48 ++++++++++++++++-----------
+ 1 file changed, 29 insertions(+), 19 deletions(-)
 
-Link to v1: https://lore.kernel.org/u-boot/20261016040216.3636305-1-visitorckw@gmail.com/
-
-Douglas Anderson (1):
-  arm64: dts: google: Add initial dts for frankel/blazer/mustang
-
-Kuan-Wei Chiu (5):
-  arm: Add Google Tensor SoC architecture support
-  board: google: Add Google Tensor G5 board support
-  arm: dts: lga: Enable console UART in U-Boot
-  configs: google: Add lga default configuration
-  doc: board: google: Add Google Tensor G5 documentation
-
-Peter Griffin (2):
-  dt-bindings: arm: google: Add dt bindings for frankel/blazer/mustang
-  arm64: dts: google: lga: fixup #size-cells DT warning
-
- MAINTAINERS                                   |  10 +
- arch/arm/Kconfig                              |  21 +
- arch/arm/dts/lga-u-boot.dtsi                  |   9 +
- arch/arm/mach-google/Kconfig                  |  18 +
- board/google/lga/Kconfig                      |  11 +
- board/google/lga/MAINTAINERS                  |   6 +
- board/google/lga/Makefile                     |   3 +
- board/google/lga/lga.c                        |  65 +++
- configs/google_lga_defconfig                  |  10 +
- doc/board/google/index.rst                    |   1 +
- doc/board/google/lga.rst                      |  37 ++
- dts/upstream/Bindings/arm/google.yaml         |  48 +-
- dts/upstream/src/arm64/google/lga-blazer.dts  |  15 +
- dts/upstream/src/arm64/google/lga-frankel.dts |  15 +
- dts/upstream/src/arm64/google/lga-mustang.dts |  15 +
- .../src/arm64/google/lga-pixel-common.dtsi    |  22 +
- dts/upstream/src/arm64/google/lga.dtsi        | 411 ++++++++++++++++++
- 17 files changed, 698 insertions(+), 19 deletions(-)
- create mode 100644 arch/arm/dts/lga-u-boot.dtsi
- create mode 100644 arch/arm/mach-google/Kconfig
- create mode 100644 board/google/lga/Kconfig
- create mode 100644 board/google/lga/MAINTAINERS
- create mode 100644 board/google/lga/Makefile
- create mode 100644 board/google/lga/lga.c
- create mode 100644 configs/google_lga_defconfig
- create mode 100644 doc/board/google/lga.rst
- create mode 100644 dts/upstream/src/arm64/google/lga-blazer.dts
- create mode 100644 dts/upstream/src/arm64/google/lga-frankel.dts
- create mode 100644 dts/upstream/src/arm64/google/lga-mustang.dts
- create mode 100644 dts/upstream/src/arm64/google/lga-pixel-common.dtsi
- create mode 100644 dts/upstream/src/arm64/google/lga.dtsi
-
+diff --git a/dts/upstream/Bindings/arm/google.yaml b/dts/upstream/Bindings/arm/google.yaml
+index 99961e5282e..b5977e20f39 100644
+--- a/dts/upstream/Bindings/arm/google.yaml
++++ b/dts/upstream/Bindings/arm/google.yaml
+@@ -13,27 +13,16 @@ description: |
+   ARM platforms using SoCs designed by Google branded "Tensor" used in Pixel
+   devices.
+ 
+-  Currently upstream this is devices using "gs101" SoC which is found in Pixel
+-  6, Pixel 6 Pro and Pixel 6a.
+-
+-  Google have a few different names for the SoC:
+-  - Marketing name ("Tensor")
+-  - Codename ("Whitechapel")
+-  - SoC ID ("gs101")
+-  - Die ID ("S5P9845")
+-
+-  Likewise there are a couple of names for the actual device
+-  - Marketing name ("Pixel 6")
+-  - Codename ("Oriole")
+-
+-  Devicetrees should use the lowercased SoC ID and lowercased board codename,
+-  e.g. gs101 and gs101-oriole.
++  Currently upstream this is devices using gs101 SoC which is found in Pixel
++  6, Pixel 6 Pro and Pixel 6a and Laguna SoC canonically referred to as lga
++  found in Pixel 10, Pixel 10 Pro and Pixel 10 Pro XL.
+ 
+ properties:
+   $nodename:
+     const: '/'
+   compatible:
+     oneOf:
++      # Google Tensor G1 AKA gs101 AKA whitechapel AKA Die ID S5P9845 boards
+       - description: Google Pixel 6 or 6 Pro (Oriole or Raven)
+         items:
+           - enum:
+@@ -41,14 +30,35 @@ properties:
+               - google,gs101-raven
+           - const: google,gs101
+ 
+-  # Bootloader requires empty ect node to be present
++      # Google Tensor G5 AKA lga (laguna) SoC and boards
++      - description:
++          Google Pixel 10, 10 Pro, 10 Pro XL (Frankel, Blazer,
++          Mustang).
++        items:
++          - enum:
++              - google,lga-blazer
++              - google,lga-frankel
++              - google,lga-mustang
++          - const: google,lga
++
+   ect:
+     type: object
+     additionalProperties: false
+ 
+-required:
+-  - ect
+-
+ additionalProperties: true
+ 
++allOf:
++  # Bootloader requires empty ect node to be present
++  - if:
++      properties:
++        compatible:
++          contains:
++            const: google,gs101
++    then:
++      required:
++        - ect
++    else:
++      properties:
++        ect: false
++
+ ...
 -- 
 2.56.1.839.g22a8290db9-goog
 
