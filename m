@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2A97606A31C
-	for <u-boot@archiver.kernel.org>; Sat, 28 Nov 2026 13:12:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63215606A31C
+	for <u-boot@archiver.kernel.org>; Sat, 28 Nov 2026 13:12:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=M2NqsKOQ;
-	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=r0jTVrQ6
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fQlskRpk;
+	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=LjaqCC/X
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CF80360635;
-	Sat, 28 Nov 2026 13:12:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3897A81175;
+	Sat, 28 Nov 2026 13:12:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ChUgkSXOguNi; Sat, 28 Nov 2026 13:12:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BC21E6066A
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795871535;
-	b=X2vCWmy7fb3b2GPv1NFFn5oHGYgc8PWkVivNmrZiTMdHn+SLQFsBFG7p3dnRvoXPlTam
-	 X6iegsdKF5FpTtu9+P0NctCgr3ajnKHOVOLaNoBslPxjpVAh0itwsb0gJh1jPjPeeqFdI
-	 fDICKG3ni8DuKe+dRPTyhEOd5jX6B3da5Niqmej9Yxd4/11eXitCONz5tMjOPTW4saQOI
-	 9wRJpCO1gWZbhLAvTdb+bJ66oikf1+67nBfQZF6nE2riIwy0ZeLJ2Nh0l+hzSozHD8eO0
-	 WR1Pe7oZF1h9r/z+Di25BkrnCJuyQFHB7ycMYTEWiiDYk+lVWutySl0yEET5EOdZKXA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1DAOUm-vPCbo; Sat, 28 Nov 2026 13:12:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 50B8A810A3
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795871539;
+	b=PHSDYHfuiII/14NAfGfCSRerh09+JYD6K9L93MXEsyLGTga+bAymp0qPwj9/HwwSOGIc
+	 5ZaAfC9qGvlI/lcZZXhNXNIGsAHGJAufQv1zT2VMAjiKo4Wy4mdNtvg0VR+6VwlW2kiao
+	 6JFlPuONcbV1P41PZsYD9ZAM3guO7zRT5WXiMXvo/X64uKkECuq9D7qn20JpIWMSWJSuJ
+	 1PEx/tAsQKRqaKBMHR+cKgEaXJboh/+M3sQ1v37kUWDpw1l22JM3/U1M21IK+hG4c96aG
+	 aKanWNx4Zm6TWM7ie7JmaX8EytsSfyzcs68RgUJ5CG5UFKGqG4KDWunC+g44k9jFnHA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795871535;
+	c=relaxed/relaxed; t=1795871539;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,119 +33,118 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=mLeabquhLypPwGKl0y42DOfxQ184ltG1ldGGGUT4CXo=;
-	b=rFTtTNwkc5R/Qbwvo3tpgZy+qApjbZoKuPEn2pMkjXZgp5XzuT3u1/GHgAOllzNck5Rj
-	 s7mKySJ1KIwgIq88vJ8mlOp9OjXxcYOPwEaaz0+2AC5J6cgSJnA7lhPhvqgGoGQvlai0o
-	 cIJRL0siTj9ugMWXGD5rCuVbYchnBNj+KVnTbh6cNb+EzCEfD/rRvpVEsJTiNz5yNEgDa
-	 qLSYvTT87eNAraTDZdWTI+QQC5qAmD5bo8f4P3Im6TBK99Lh091Ebqw6+qZk8wEeN6w0M
-	 9uj+LAErjZCldGbkmSU62aVELXBHiff/jk/k9DZNZ92Ud3i0NSyVQo5nMAtn6AZlS8w==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
+	b=ZmtfLbrMe/9ivKSVjdbl3FRxf/wsswGZ3UkBWDMe0aZ5CdFoReI4t4YhJkdC1q/Dah7Q
+	 dSG2a1ejt1VYcdT01o5xYrI55HUhLiuX0mKRzhBREtW9MT3bzXuTrqgoWL9HqWFEx3MSF
+	 l4FuX8dFvm5jVrjaHHacwICfmuOUMlHB4ixCNQJr1egG+PGSB5XOySOs2DtJjnevz/PD3
+	 HxSljZpYcMO07H8Fcog8gZ7Lb8xGAba8PxmSlVuWHYPnexY0+suFz4TauW7D6sBsQPbYd
+	 t1UTdqsEazyoVb5kU/d8aZL0OZDl58c0FmoaH01wQoau9ww3n2ZCuTqriOFw7pYmLfA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795871535;
-	bh=mLeabquhLypPwGKl0y42DOfxQ184ltG1ldGGGUT4CXo=;
+	d=lists.u-boot-project.org; s=default; t=1795871539;
+	bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=M2NqsKOQBWtntbU3Se0g95tq4SfnhM+cCSnrQIcLYi6KtQJghnBvWqVJmSoaXu3YU
-	 6m9XKVejdfGpD5nLuvmeILAX3RSoiB/zFJcKiSQKxea0kf5bxBfIF44+VNd/EVqJ6r
-	 HbpECFJA12Hj70vhBPJ9+xt8SSLfajHxnFx0lo4MxfkvTGlNWaDGukQiG1uPa0X6XQ
-	 ECNjwtIGqLa60JzEvFnhxQ2Y17IJf6Kpo2Le/BEHIoiF1Tc4bK++S2a63BLvbwnA7+
-	 8u35LUK+JWkpooMIQREaQzTa4mbnplLeI1XQbEkJRrhsj3iCo+xmWoS6FLQ/lnkhFA
-	 Ld9MJ8Hk8eWIg==
+	b=fQlskRpkPG/juZaD4nPLNnu+RvOpAfXNYskWE1qsyG/0vS1zDPq0vVwk/0n7yGPt3
+	 ef7CMdMJ6TiSgPu5HRGESOeQMsb+3ElcbLsVekSTW0wo5g1BqKxsBCkE6yMbMCRYrn
+	 hWKyMI4kc6IqgXQCHO+Kcmq0DDfOVbs2hoYBNfJySmflBsMWhn4rUhUIrNSRbqm+f2
+	 28Nz6mTbhxLeLZEVCyQmQM3ZDEb6OfqsmnYauCp4+xJFQCJZO39nOSnA2k8FgHfD9T
+	 YnYz/tTD0XzYc1XgztHij7fJG/NGWsuLfXVF29u+8fiyWN8xULzI5d0UQud89mdjW8
+	 DBHhb0fSMyqcQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BC21E6066A;
-	Sat, 28 Nov 2026 13:12:15 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id CDD70BF4
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 50B8A810A3;
+	Sat, 28 Nov 2026 13:12:19 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 141EF3D9
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B4009400E0
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:01 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id EE87540659
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NvdGLBt3iizk for <u-boot@lists.u-boot-project.org>;
- Sat, 28 Nov 2026 13:12:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A34B54005D
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IVUFGF6lwTmQ for <u-boot@lists.u-boot-project.org>;
+ Sat, 28 Nov 2026 13:12:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EB93840645
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
  envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=amarulasolutions.com
  header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google
- header.b=r0jTVrQ6
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A34B54005D
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:00 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4bb77a462c6so70929805e9.1
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 05:12:00 -0800 (PST)
+ header.b=LjaqCC/X
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id EB93840645
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:01 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4bba5e17cbeso34339675e9.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 05:12:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1795871518; x=1796476318;
+ d=amarulasolutions.com; s=google; t=1795871520; x=1796476320;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=mLeabquhLypPwGKl0y42DOfxQ184ltG1ldGGGUT4CXo=;
- b=r0jTVrQ6oL1QNXoUB6NztOAlUft5WBiGqy2INTo/peT5DHZks3FSKPi0Itu2WSIvlU
- XczQXAmoUuUJC4E0A86AMEPO6xUwcr+1ropMfd4fVAyLyZ1xq/FbEiXpQ1ytimV47Rh8
- incRDIi20OKcGbiUnLA9F3FKbQmufMi66yiKc=
+ bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
+ b=LjaqCC/XUA4RO1nHVtKkEFCXQkr6uiNQihjU2EZ6eT+bpE25l6fiarK7tBMQojjVgq
+ OubWffAkJq6C7iCrYlZkOPEOqNbjFFbDhLyydJ59bqDczxNISaIUEXfekn/USBsjSKT4
+ 0NrxeT6bB6l62PDyuqQe6e+e481dWJ5//cnCY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795871518; x=1796476318;
+ d=1e100.net; s=20260707; t=1795871520; x=1796476320;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=mLeabquhLypPwGKl0y42DOfxQ184ltG1ldGGGUT4CXo=;
- b=TTA5Ia9fHVmRDxf30wA0LlGWG8raWmoLlrcOE6sFJ8ykyrYlqYZG8bx1S88hGceNz0
- nDkLaW6PxGI5n+c/nsSzQOEWcP1SRK0aa8IWf9V8xRWIdSO4ut1ZRDuhCe3XHBmkLW0C
- SMvxXRhOh2C6HNF1muBvrG9fTrQmMgSzVG11mUucogkSeRAotjucE7x5Pw3QnV8SMiVy
- qDsPirX4wIdDaQeYUBM6oKxFek2E+UUrfio/fOPNZDi5D5JwoBun3vVDMMJTo8/UnbTT
- /AkIsD/nmV7ad1J95bb6RP2oYhvoYFjiddW3ihNiybLgzkcOLg4Bvl9s4ZLTxW4zZs4R
- AcFg==
+ bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
+ b=O/kll/D2lrlWSt49fbsahjcHB0uvmvpjw8aKocD8aTUxGR6IMKRmm1ozgR7ElseeSk
+ 5zneXlkSj7fZV90I/ohagRoa3zfVE/CsOSRiJZF5jODkggr6HUh0togPtfPCye4BzNVy
+ T0M7t9OK7XMSdjsosg4IYFAMo25eHr69XO8pcFoW5M+UJDmwItzVHky/7kr3CHsmnngV
+ s7VGh0rtTuWpUXf6AaNQbHhtiQVfMwS1UrgFQhqMSYJsgq6/8XM5SdLvXrigixrvjEhc
+ wz69je0pX4IPaSrW4Xivq+CKQTK9a/nHTakwyh4B1RIX3KsqEXRUkL73O208pUKZ2j0x
+ QzsQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErHLPeSbdvt7CfOej44EC5xMU6eRnTYyny3GElE9XEu1uBW1XSS3bLykovYIHzE0ZyE+Zjxk+80=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+NKfSYiFVL6MFmSz9TT8b3UdSNcuXxlgJGFMj27Xr/VodeZsVC
- xWJpcXQs9dZt4Oa4US6KkIFfhk4J7sOCgAqrqT9yLRqGntBfZhmU5BmaX+Mfn286YYs=
-X-Gm-Gg: AZFdTZfP6mEUc70wXY98VKydNL2ADn81EtCzYyo5DLu8jm0ggSuBkOsQGFQif9eGCAa
- vT+6G6DkNfmQKbZcGik25rmNkWjJpQ4c2sPmH9PqMwn+RFJEhmN4qoQpERCDawFGZ1B8JX+NXND
- x5mHyMXFW01oo4VXtWuBEdrE/cyFz/fmG232ZBCWQl+Y9JeNgelX1hemdZnXboD5gs+9rtAfX28
- HZOtWvyYjIZOM0EX7n2C4fBIwZgCQgePnsesjYNFc6fJCk1bxDivQhUzCvPTrnCB8y0DQzlv7wd
- fYECdfmjA7ubJpysgq466SG1Q1fAUpaP/8+gsCsVtonYSSwyKl/XrZylHzA2m3RJzXi6exVx465
- TqMxZaj/ZNoGwJyl/b5uss9WlJzhG8UVMYts5Oq7pL1u7tNTIE0Eb7enftsItKu8fALYybX6QBj
- Fw8z9i4Tv/eesojrQX51uVoKmuHqLWoB61g9TXYaY2cGI2KhJLyPOI8HYyc68i3wfiGSrP/AWq0
- ftjX4fOaILVNhJ81rpA7cWpWGgRxMhKLhuIrYwFpck53pXgshhM85XKs1nLzCfTKHNw4C0OpX8u
- NuZ1d3XZ1m/oRThL/G4EUiE+Qnphv4Vrna76vbiiA3r1gafzIERQD38ax9p8tAeeHhTuJwjO8ry
- 4PcgXJUcJRRw6M0W1EpREVMQV7iwwBxE3CMBSNnQGuqQJUV1iAWUsINcdXu94bJYgZu7AkMIOBm
- K952ZVGKE0cLf8/+XgYKw26Ui6+TgM31OVMq242UAvZ7db4OY=
-X-Received: by 2002:a05:600c:a085:b0:4bb:85d9:156e with SMTP id
- 5b1f17b1804b1-4bb8880fe46mr556794185e9.11.1795871518446; 
- Sat, 28 Nov 2026 05:11:58 -0800 (PST)
+ AL+hErHJZQtadiktqF0H/g0dutbGbSGcMNkYRAicPGrralZS40hUzgyJc6Uebo/gFDV8uZ7pHGiBz7c=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+kEc41Rm9nOpKLoQ2qqBxRpaxLkaYkXZydAyBMBPwp00h8Vs5M
+ 8ygtAoB4oTIuOAWt7Tjv0gHhgczhlmOmaSCQJm2OOyHIBKDwuHUzoUvyfMseKYt808w=
+X-Gm-Gg: AZFdTZfGISJ0ep8OkLAgoT/g525yOMwrhitbpDOfjcb/GJzOLoBWsMjW+kCuGmlkiul
+ pEQuqckYmYxK6RA8GDpo+meQmw4tsdd226DLcH2GCklfEUBVu4BWAn0B342DBObrBgwFzyJmiM0
+ 9PIyPo7U7CuUGwO5q1cthavp4r4S7yLo8AAQwA7RRJRL+eOhlV27deTo9/91dd3mO2JZCMbZMGS
+ HT+MQdLe7D0WZ/nFnct/dvl1h4UAXJf0moYRfSff+MFe7I9xYVP8TV0Jo9g64D8IOc/Wi4yb6QB
+ CsQ6aWiMdxb4Rx14ecP+ZAzkziv3kQoRuCdMcjhhBVwx9aqPi63s8RqDiAMZcwuelV7wdAqdpVO
+ 47/0r2U6QwrjK6PHwORLPGYrTMoOmZxuqjFUJU9HNboLAb5vY6c/wa9v4TUuoTflB8lfYAbOBlk
+ GduSJINBRaz3nKfZfjB1zQB6nQCJYLVKc3Q3m/8Gc6SLwoLR2hyGJa7turDGMF3U6xlgYWY38xq
+ Le6i68FQAI8O7asyrM0lNPIx24hZN23DBXma9uLF0DbhQlbm6kG2bEKkthzA18BpsGtcuwPkZzH
+ IzAojc+yk8hjC22xX9lLA/PagQxk7BtzkUG+Z1WZCbNaUwrxyG8WDe2KbWzj1JqqrNRQoUmDcMd
+ k5Yr6ngb1/n/Dn2CwvKoS93D88/rEiJqDbh/6OcSLP3rt1KLKwxOHCwJMFlfdXzOHbEqtXn7Ryd
+ 47fCnROco9G0aD0bvu8Ge6ea0G9Q==
+X-Received: by 2002:a05:600c:c173:b0:4a1:813f:2a60 with SMTP id
+ 5b1f17b1804b1-4bb88800134mr537916315e9.11.1795871519774; 
+ Sat, 28 Nov 2026 05:11:59 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-79-14-29-58.business.telecomitalia.it. [79.14.29.58])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb853b2437sm1076382015e9.13.2026.11.28.05.11.57
+ 5b1f17b1804b1-4bb853b2437sm1076382015e9.13.2026.11.28.05.11.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Nov 2026 05:11:58 -0800 (PST)
+ Sat, 28 Nov 2026 05:11:59 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Yannick Fertre <yannick.fertre@foss.st.com>,
  linux-amarula@amarulasolutions.com, michael@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org (open list)
-Subject: [PATCH v3 17/29] arm64: dts: st: add Engicam MicroGEA-STM32MP257D-RMM
- LVDS display overlay
-Date: Sat, 28 Nov 2026 14:10:34 +0100
-Message-ID: <20261128131125.2141352-18-dario.binacchi@amarulasolutions.com>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Subject: [PATCH v3 18/29] arm: stm32mp: stm32mp2: move boot device environment
+ helpers to SoC code
+Date: Sat, 28 Nov 2026 14:10:35 +0100
+Message-ID: <20261128131125.2141352-19-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261128131125.2141352-1-dario.binacchi@amarulasolutions.com>
 References: <20261128131125.2141352-1-dario.binacchi@amarulasolutions.com>
@@ -163,117 +162,227 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add an overlay for the variant fitted with the AM-1280800W8TZQW-T00H
-10.1" 1280x800 LVDS panel. Its touchscreen is connected over USB, so
-there is no touchscreen node.
+The environment location and the MMC environment device only depend on
+the boot device reported by the ROM code, so they are not specific to
+the STMicroelectronics boards.
+
+Move env_get_location(), mmc_get_env_dev() and the mmc_get_boot() helper
+to the SoC code, so that other vendor boards can use them too.
+
+No functional change intended.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/r/20260923155333.610134-3-dario.binacchi@amarulasolutions.com
-Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-[ upstream commit: 29ee49c0f82fffb8b0eed14b4ef3ff19ab89f455 ]
-
-(cherry picked from commit 535f863022c1f9491a2d224023f5a6e3419ebc6f)
 ---
 
-(no changes since v1)
+Changes in v3:
+- Add Reviewed-by tag
 
- ...gea-rmm-overlay-am-1280800w8tzqw-t00h.dtso | 67 +++++++++++++++++++
- .../st/stm32mp257d-engicam-microgea-rmm.dts   |  2 +-
- 2 files changed, 68 insertions(+), 1 deletion(-)
- create mode 100644 dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso
+ arch/arm/mach-stm32mp/stm32mp2/Makefile |  1 +
+ arch/arm/mach-stm32mp/stm32mp2/env.c    | 82 +++++++++++++++++++++++++
+ board/st/stm32mp2/stm32mp2.c            | 71 +--------------------
+ 3 files changed, 84 insertions(+), 70 deletions(-)
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/env.c
 
-diff --git a/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/Makefile b/arch/arm/mach-stm32mp/stm32mp2/Makefile
+index 8f2e641dcab6..f2def2d1283e 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/Makefile
++++ b/arch/arm/mach-stm32mp/stm32mp2/Makefile
+@@ -5,6 +5,7 @@
+ 
+ obj-y += cpu.o
+ obj-y += arm64-mmu.o
++obj-y += env.o
+ obj-y += rifsc.o
+ obj-y += stm32mp2x.o
+ obj-$(CONFIG_OF_SYSTEM_SETUP) += fdt.o
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/env.c b/arch/arm/mach-stm32mp/stm32mp2/env.c
 new file mode 100644
-index 000000000000..7655c1bf56b1
+index 000000000000..9e7b5b882908
 --- /dev/null
-+++ b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso
-@@ -0,0 +1,67 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/arch/arm/mach-stm32mp/stm32mp2/env.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
 +/*
-+ * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-+ * Copyright (C) 2026 Engicam srl
-+ *
-+ * Ampire AM-1280800W8TZQW-T00H 10.1" 1280x800 LVDS panel. Its touchscreen
-+ * controller is connected over USB.
++ * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
 + */
 +
-+/dts-v1/;
-+/plugin/;
++#define LOG_CATEGORY LOGC_ARCH
 +
-+#include <dt-bindings/clock/st,stm32mp25-rcc.h>
++#include <config.h>
++#include <env_internal.h>
++#include <log.h>
++#include <mmc.h>
++#include <asm/arch/sys_proto.h>
++#include <dm/device.h>
++#include <dm/uclass.h>
 +
-+&{/} {
-+	panel-lvds {
-+		compatible = "ampire,am-1280800w8tzqw-t00h";
-+		backlight = <&backlight>;
-+		power-supply = <&reg_3v3>;
++enum env_location env_get_location(enum env_operation op, int prio)
++{
++	u32 bootmode = get_bootmode();
 +
-+		port {
-+			panel_in: endpoint {
-+				remote-endpoint = <&lvds_out>;
-+			};
-+		};
++	if (prio)
++		return ENVL_UNKNOWN;
++
++	switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
++	case BOOT_FLASH_SD:
++	case BOOT_FLASH_EMMC:
++		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
++			return ENVL_MMC;
++		else
++			return ENVL_NOWHERE;
++
++	case BOOT_FLASH_NAND:
++	case BOOT_FLASH_SPINAND:
++		if (CONFIG_IS_ENABLED(ENV_IS_IN_UBI))
++			return ENVL_UBI;
++		else
++			return ENVL_NOWHERE;
++
++	case BOOT_FLASH_NOR:
++		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
++			return ENVL_SPI_FLASH;
++		else
++			return ENVL_NOWHERE;
++	default:
++		return ENVL_NOWHERE;
++	}
++}
++
++static int mmc_get_boot(void)
++{
++	struct udevice *dev;
++	u32 boot_mode = get_bootmode();
++	unsigned int instance = (boot_mode & TAMP_BOOT_INSTANCE_MASK) - 1;
++	char cmd[20];
++	const u32 sdmmc_addr[] = {
++		STM32_SDMMC1_BASE,
++		STM32_SDMMC2_BASE,
++		STM32_SDMMC3_BASE
 +	};
-+};
 +
-+&framebuffer {
-+	clocks = <&rcc CK_BUS_LTDC>, <&rcc CK_KER_LTDC>,
-+		 <&rcc CK_BUS_LVDS>, <&rcc CK_KER_LVDSPHY>;
-+};
++	if (instance >= ARRAY_SIZE(sdmmc_addr))
++		return 0;
 +
-+&ltdc {
-+	status = "okay";
++	/* search associated sdmmc node in devicetree */
++	snprintf(cmd, sizeof(cmd), "mmc@%x", sdmmc_addr[instance]);
++	if (uclass_get_device_by_name(UCLASS_MMC, cmd, &dev)) {
++		log_err("mmc%d = %s not found in device tree!\n", instance, cmd);
++		return 0;
++	}
 +
-+	port {
-+		ltdc_out: endpoint {
-+			remote-endpoint = <&lvds_in>;
-+		};
-+	};
-+};
++	return dev_seq(dev);
++}
 +
-+&lvds {
-+	status = "okay";
++int mmc_get_env_dev(void)
++{
++	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_ENV_MMC_DEVICE_INDEX), (-1));
 +
-+	ports {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
++	if (mmc_env_dev >= 0)
++		return mmc_env_dev;
 +
-+		port@0 {
-+			reg = <0>;
-+
-+			lvds_in: endpoint {
-+				remote-endpoint = <&ltdc_out>;
-+			};
-+		};
-+
-+		port@1 {
-+			reg = <1>;
-+
-+			lvds_out: endpoint {
-+				remote-endpoint = <&panel_in>;
-+			};
-+		};
-+	};
-+};
-diff --git a/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts
-index faedddc2c914..96b7cb6b5bc1 100644
---- a/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts
-+++ b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts
-@@ -43,7 +43,7 @@
- 		#size-cells = <2>;
- 		ranges;
++	/* use boot instance to select the correct mmc device identifier */
++	return mmc_get_boot();
++}
+diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
+index f2575339b990..96735fa9f8a1 100644
+--- a/board/st/stm32mp2/stm32mp2.c
++++ b/board/st/stm32mp2/stm32mp2.c
+@@ -7,12 +7,11 @@
  
--		framebuffer {
-+		framebuffer: framebuffer {
- 			compatible = "simple-framebuffer";
- 			clocks = <&rcc CK_BUS_LTDC>, <&rcc CK_KER_LTDC>;
- 			lcd-supply = <&reg_3v3>;
+ #include <button.h>
+ #include <config.h>
+-#include <env_internal.h>
++#include <env.h>
+ #include <fdt_support.h>
+ #include <led.h>
+ #include <log.h>
+ #include <misc.h>
+-#include <mmc.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/arch/sys_proto.h>
+@@ -88,74 +87,6 @@ int board_init(void)
+ 	return 0;
+ }
+ 
+-enum env_location env_get_location(enum env_operation op, int prio)
+-{
+-	u32 bootmode = get_bootmode();
+-
+-	if (prio)
+-		return ENVL_UNKNOWN;
+-
+-	switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
+-	case BOOT_FLASH_SD:
+-	case BOOT_FLASH_EMMC:
+-		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
+-			return ENVL_MMC;
+-		else
+-			return ENVL_NOWHERE;
+-
+-	case BOOT_FLASH_NAND:
+-	case BOOT_FLASH_SPINAND:
+-		if (CONFIG_IS_ENABLED(ENV_IS_IN_UBI))
+-			return ENVL_UBI;
+-		else
+-			return ENVL_NOWHERE;
+-
+-	case BOOT_FLASH_NOR:
+-		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
+-			return ENVL_SPI_FLASH;
+-		else
+-			return ENVL_NOWHERE;
+-	default:
+-		return ENVL_NOWHERE;
+-	}
+-}
+-
+-int mmc_get_boot(void)
+-{
+-	struct udevice *dev;
+-	u32 boot_mode = get_bootmode();
+-	unsigned int instance = (boot_mode & TAMP_BOOT_INSTANCE_MASK) - 1;
+-	char cmd[20];
+-	const u32 sdmmc_addr[] = {
+-		STM32_SDMMC1_BASE,
+-		STM32_SDMMC2_BASE,
+-		STM32_SDMMC3_BASE
+-	};
+-
+-	if (instance >= ARRAY_SIZE(sdmmc_addr))
+-		return 0;
+-
+-	/* search associated sdmmc node in devicetree */
+-	snprintf(cmd, sizeof(cmd), "mmc@%x", sdmmc_addr[instance]);
+-	if (uclass_get_device_by_name(UCLASS_MMC, cmd, &dev)) {
+-		log_err("mmc%d = %s not found in device tree!\n", instance, cmd);
+-		return 0;
+-	}
+-
+-	return dev_seq(dev);
+-};
+-
+-int mmc_get_env_dev(void)
+-{
+-	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_ENV_MMC_DEVICE_INDEX), (-1));
+-
+-	if (mmc_env_dev >= 0)
+-		return mmc_env_dev;
+-
+-	/* use boot instance to select the correct mmc device identifier */
+-	return mmc_get_boot();
+-}
+-
+ int board_late_init(void)
+ {
+ 	const void *fdt_compat;
 -- 
 2.43.0
 
