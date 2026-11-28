@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76BC5606A31C
-	for <u-boot@archiver.kernel.org>; Sat, 28 Nov 2026 13:16:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA636606A31F
+	for <u-boot@archiver.kernel.org>; Sat, 28 Nov 2026 13:16:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rIwHnPTB;
-	dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=WyLTUv5R
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BE9RcGk8;
+	dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=rkEre3ko
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 517E860623;
-	Sat, 28 Nov 2026 13:16:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4178181231;
+	Sat, 28 Nov 2026 13:16:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XdsRObCXPyTq; Sat, 28 Nov 2026 13:16:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 80C1460635
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795871780;
-	b=dlAsnD8CsqPO321HMv/kA59730RYVo2DPubbMzhRGWbDyHEXb1xD0nuFc2TpqwANn4X6
-	 e7i4tSOkjlRVSYqZRHj56lNxMMIL1XTvBCOTh8oGk9eELzxmgVF0iMNN5z4tQ/D/TQaKx
-	 OCLUvXxAkUZkLCtjiPCR65wbxTWy+gjJkdqda3cJB5KmVhAAn5uTbM44JVWLpNEBd5CQG
-	 OPk+75mwnSeAqnMaXUo97fI9THRYjfSb6tSiQSpO7iG/4S2416/7XaU2CKcqvBSqRw2pO
-	 vwBKLqois2NDsGXw3ygkXrYbx2jcpR/s7ACL2gmvQH8K25CsS6sgm/xOaFJZf3G48Nw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FMA4m1JbRsH9; Sat, 28 Nov 2026 13:16:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 31F4481158
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795871782;
+	b=oi6mmbeFt9Fivbw8Vs5cE1QE9tsqwEzJurK7LUnVrGMK96sTS2drFaBLuc+B6bNyWW9b
+	 BWVPEvgHWrTDRK3qsUw7FR9L+qlufJGcSU3cAu9gC1eq/m8LZOimaSHz7s2UUHV6/Zyut
+	 +E33MeXVB8cL4Ay4pXJIcCH/cJKqgphFbZlz0Z0dJqQtF+9NS877zbq4dd9djeBezS6G9
+	 AUXfReTPGd2F8QhSXP28haVHKnuW4+gy93vyvSP4PxMLj9mN114Ak7PaXDnnFcycXjwL9
+	 CKwWUF95chvwVRGN5MSVcEmoMD/NZOJU57M/nSvYJDc9wCvLgTpFEj9FWVvcm2MiulA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795871780;
+	c=relaxed/relaxed; t=1795871782;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,123 +33,123 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=8sa2CK3WBk6qMIpVyTpwX12Q4dx6tyDMBPz0K+1CFwY=;
-	b=s+SYy44Cx4kGB7Ul79i08WI3hHq8Fj0el+S1bSy1xLPKmxFqhmUlvhSl7bpxMePOgPSC
-	 O6oyRZpNwNCQ5jb9jlQWz7yDbQSV18sJSHVuvxoXERPn+aKZSpan27qPT+9QNaNDxI9EE
-	 +GZ4sFLjzkiAfTngooxD0WOEksyeI+fkQxIwa5uCKVBL7MsrhTkFtICHh6H6uQJu7q4jO
-	 GK97Z8/eGzG97b3Zdx+gc8OokDOpbFeRH9Kew9VwjtT2HobanAXHmTHtS43nsgfYCGoc/
-	 QUaawp7OXWT8jOY+1z5RUmP6pkx7igYt1XFXaM8+SWxeTo+QzCUW7+g4fs4HJa/DZgA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=4tYFzAQZiNOHPYTHMvPV6/5nrx1Q3P/Sn7W36m8/RG0=;
+	b=eOc+mjuVHsNo0Cpk1RudfPMq/gvkh0wi8+8FCVqiKyZRTQ7oQHusL96/DkTFvYxkuVFJ
+	 /xV2tO3Rr869CmFcZZOM38+skv671APyF8cUAgbTtR7GyoFseSpeB7JrPeQFAGyO32UPZ
+	 /Sxhd6o+++OvOgRW+8EUHifTajCFK7k7YQBb7YQPq0UotgAxLZms2utJEBfH0nfdohKOS
+	 PzKSNHCYireqEBBcNeT6z5odFnostwNNVG83sAnXKXw8IBWSnW+BAZQX3v0QWaPGOPc36
+	 GLNyBu8mCKeVZe4vBYSeD27NwOm67z0uoIV0VU04KQp6zS//zlbVpgq6slDxjbAo7lg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795871780;
-	bh=8sa2CK3WBk6qMIpVyTpwX12Q4dx6tyDMBPz0K+1CFwY=;
+	d=lists.u-boot-project.org; s=default; t=1795871782;
+	bh=4tYFzAQZiNOHPYTHMvPV6/5nrx1Q3P/Sn7W36m8/RG0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rIwHnPTBeYC5Mg6bUaau4C+XiWoyuMo0qmqyu7t8m/i4yv0exelKPmI0+mGFa1sM1
-	 moCYDIM3cwCcuN28KXhIlJntM8vBFQYEHyD3wrbTuysgerHlzK2Lrb7Fyr6Pj9KXUJ
-	 SIJzu8HYzzEzhwMSCUglXGQnmRxMqtOGMJS8Re0T/vRSSCKTK90deL9ORe+hK5ZgIs
-	 PfTLtdMDG8z98gYWfZfGgq1I3IlaqLUOSCpjAuUFUemX1IXDgmX65Lw6nRBd3pBVB8
-	 9n4lSkVHl99IXmqf8F8eaae9p/LiD44ZGe0ET9mPCCdmInaajzh3OdBD3Qnkq4+Vib
-	 7oNesyuYiPxfQ==
+	b=BE9RcGk8MH/XumHyza+DDUCHRh6Ai7LXQ0TPeO42x9Yitpn0seSjqdX3WtlQoDIVT
+	 +IG3AvuCwp/ahHf5EHS9dc4ueGrKHYAx35upGsdQwpfZkliyP7nPG9Av6KggLKzG4P
+	 xWkqvNOoz+E3UMdgstvv//skqj/oFymsU9aiTK3dycRq+zc1nF5fibdrtMP0J/XxJT
+	 FRMkHgSrCD/ZvRgOFY8K4328ZWzetVlTnRIAeVtLCq0GQZQsiDr8g+du7lWxjhfdx0
+	 R9D3AmXu4bo6SzXz870A6KAR7xmW6b51cW2CfVKsPgIMmZA8kIANwjaQ41uwBtR5AG
+	 9QtD1bhBnQaRQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 80C1460635;
-	Sat, 28 Nov 2026 13:16:20 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id C6A74472
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 31F4481158;
+	Sat, 28 Nov 2026 13:16:22 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 149CC2BD
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B84CF40A20
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:46 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id EF2766065D
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y5RWO17P0d8L for <u-boot@lists.u-boot-project.org>;
- Sat, 28 Nov 2026 07:48:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 585B44091D
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vIYy_5lCQ1oh for <u-boot@lists.u-boot-project.org>;
+ Sat, 28 Nov 2026 07:48:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6B17F605FA
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=185.125.188.122
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
  helo=smtp-relay-internal-0.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (4096-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (4096-bit key,
  unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=WyLTUv5R
+ header.a=rsa-sha256 header.s=20251003 header.b=rkEre3ko
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 585B44091D
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:44 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6B17F605FA
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:47 +0000 (UTC)
 Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
  [209.85.215.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A9DA43F193
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:43 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C74A33FEB0
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 07:48:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1795852123;
- bh=8sa2CK3WBk6qMIpVyTpwX12Q4dx6tyDMBPz0K+1CFwY=;
+ s=20251003; t=1795852125;
+ bh=4tYFzAQZiNOHPYTHMvPV6/5nrx1Q3P/Sn7W36m8/RG0=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=WyLTUv5RpZH2HZzcmqPsOXzMbojWZ1oj4DhHTaGjemXIXF/yVTal3smYCDiPsU8Ba
- 6SNTCV32NPiN92L1QC7BoxUX3S/s4vmSLfL5AA9K4kArcghG/liWzPHjTxmP3gYv4a
- R/ZigAeZsNFmBocYlSm/2Jl8HR53e1cX6+z5ADQ/FhIwkhFKbIinqyE6gT3oor+MVQ
- xoYL+RdUJ8Y9UQalXxN914ehMRrNuzLGVlP7UJO/ACo5MT8qBPBQJbsuHZY7PbGoI6
- fBU9DUiA9xMSsK6mS4J6qn82bMJBuVVX+SWDnX/j71n5CgusBePO0iH3gCSAnBNNef
- uFK65jpGgTA6GT3ItLH3PVZZkPsSn9XQbxly0bCvwxO27wEUOzazptA+sEVxAPVLy8
- rQxDTjJpPQqnD9gVbEhsZE1S+s5pA8j1Bx3U7W8PQb5+t50gfIkvfrqx78tIXncd+B
- bT/MBHkbq2Wflb+zaUQeLetdXujNcsyT4Yoj7QUs5WwehUt1fEcadEECrni6o4CR/M
- VAjeT56n0W0/APHU8J6cNK8/wIHUztZsPl63UUIjL4kvJf0bK/VpaYZXnp+pKElF3C
- 7f6cez06C3ahFj9JJGaF9yp09GxsQGUSK5QEviU4lErncHYm7JwXWD2iN+P4onezhI
- AsFy6g604/jkbwS4UMYKBjZ8=
+ b=rkEre3kof+0xQVhTye9k/3+6BN8n7/zgMcn9bvu72TP7qDCHSmQEh7XnRahbugfIb
+ 3oIKNKr8q+nydmOStUSiySBX/i7ZDwmngkuWq767HbW7R3Hj6YeOYSePX4LtjH1z6q
+ Ktgg+8JIEwN4N6RepPI1Vyg2bj1ctmBCH4f4ehRSibQ2wkEFIFSp4FmgUc/lOcImkm
+ /X+fKs7MsbXEdBTtUqx5dbFnX5RynFYXbELLb/r/lswsWW77Dc7oBnwr9ihRJy+ibk
+ 6vuJkV3l5dtEeEWS/1IqyPEDeKDBnKYqr7TlqoA2/VoaQMiCGxU7IDBNPgv/oGr5nK
+ W4kHJ0tDf8lVt2hqsfwQ22Jvn3BDYM2ALWG9Nc+YzwsxFwmpORHr/ebByS8tb2gJa+
+ uJv+8axVa1JnpsXW4X1LPktD++ikk1Cs6uFSfkoxTTHV6y4AiOMsD04nX1j0VCoBSt
+ cLgMLINP3lG0LRbycJhYRs2y8h9utisDAyeRDD5OGINbumgbfOwqEHVP48JWh7EQRu
+ 5GPgsNg99M7O5C4HR69VSRNPL7m3SGDQn6K29IQPhlQNiGB0hzMQB3Aaowf+rYPrfc
+ xhJZOBGDAdaAQds0RPHxw3gVnkHdfNibiUkFQQhskkfRgIWUglazQ929WQAQKV6arF
+ 3xEQVAN+x6L7wdqsWtYEb/ec=
 Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-cde9044a96aso5255389a12.3
- for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 23:48:43 -0800 (PST)
+ 41be03b00d2f7-cdb45b4ed6bso3110768a12.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 27 Nov 2026 23:48:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795852122; x=1796456922;
+ d=1e100.net; s=20260707; t=1795852124; x=1796456924;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=8sa2CK3WBk6qMIpVyTpwX12Q4dx6tyDMBPz0K+1CFwY=;
- b=twWWUDVj2FHxvp3OnlJdu9fKyTEHKRzqsRLJpT++C/np65EkUx95kkDu3vETRTogWy
- W09OUe6tiEwmnGZXfWS+6hqj8rM4LXFPAhSpEBaUcXkYaBCsG1rFy4alTJQy+lzIsnsi
- LTyj4+ALXxpRKdjloUUor515+rR+v6Y+XRevuEao17GTqJuUMECuB29bL6A4BwJxd3ya
- uPS/BkSpaYleZFEbOMANrGmPfM3X0brV1UaTu+Wpsj0K9yUibW/FL10hsLxdV6CgaRBi
- AZ1m3du6cE2WV2gN9qKFj2e9EgWaavdM+cWR9Ti6vJS71eUXqks6yxyxkqNk7k9vrUG+
- Y9Sw==
-X-Gm-Message-State: APuU4Z/0tRzNrbWiV7SS+miySr0eFGf/j+24o0V7gmvA2v8b9OaAO1Om
- fQePT4I31darTDLEnfZUpW6a0KF67o1wL24TpUjtRgV9cb0uJfAYPRZ38Y3WkcPVQodmOwCpnT+
- E0QsJL/Z7sga7SidakTfhlZKJBVF+EG8atYqLjVgEZroeISva/BjBP1iWeFPRj5jVt8L8v4mB1g
- 7ayc1tie5jdzn5NBNZpQ==
-X-Gm-Gg: AZFdTZczVBcmiIPAhziyzM2o7FZcR+jX3HsBwljMNt7+DTVCxqJHEkvpZXHG9qwJSjp
- EOFbRvXcIriJoBUenwv6S7U+Jhmj8TQBH+FfC/5fZkvzfhRNAmgXjDPSHq+zVnqwfqIB6uff1O0
- O/SUvcCET30eogAqu0NxVMSnzWir1yYMOF26AVa6TFrxBrxB0nbjr0RzX88jl19JsoPJlnsYlCl
- N4O8hJCnGkDP6aaAq+H8oKCU0rUI6jPusAxnIuWashyVUyU79SDJqmii8CSiof7e9a28tcz0e1c
- qqTRWjvP8jYYy2BpkwcQtN70rkETGPotQqChuFwf1mM4XfvtY6EKbGhAEAg2/KdWHp+I6vEpFnK
- umrrJ57qBRczW9oLc0QHi0Ca4aCZ6x2wzRCh570H+7LiKMAOADKQmtHFOOwxYtvnCkDy2Zdbf6y
- BJbqOrLJxx67ndz2bWIz6Bwnuk
-X-Received: by 2002:a05:6a20:a110:b0:3e2:7c10:d46b with SMTP id
- adf61e73a8af0-4014c250152mr30116507637.13.1795852122235; 
- Fri, 27 Nov 2026 23:48:42 -0800 (PST)
-X-Received: by 2002:a05:6a20:a110:b0:3e2:7c10:d46b with SMTP id
- adf61e73a8af0-4014c250152mr30116499637.13.1795852121876; 
- Fri, 27 Nov 2026 23:48:41 -0800 (PST)
+ bh=4tYFzAQZiNOHPYTHMvPV6/5nrx1Q3P/Sn7W36m8/RG0=;
+ b=2JzVdk2tTEsTJsySXXIfTxUqYxHid90yWQggoUj6kTkdtOtntYU7E8x4dT7Iz4No30
+ FRrEVPbuGdh1foxWpOdJbhwk5UDINeiUHBorgQHUsywriHpjJRtT0Na+H7vzJoVBaqMG
+ eSKZNDqhgFM0/vZKQKZ88eCZpku0ijSIau66sICvQSv/nevKlEOJLnO32SDVOvj7AGjh
+ kN9AE9nsojp+cZMOhAe3rn1k2+tG8/STHzstQJUrjdv5+dE2JAA3IIFzeA1LQQi8lhNU
+ DDjP7BlGfKDamjDJ4lwLT0CaFsfd0cUfHhC14iSRgHDP4x0pj7md5So1cgxSk3aMHQtS
+ xUcQ==
+X-Gm-Message-State: APuU4Z8ZdksMOMQNLpuB1zGecMwD9Zso5lqoFx0EuNkdzHjSkO3QO4hc
+ XOvfOyWYQwKjWdKLJp2/n+zEpiukhBXNL3DjnLxikdw/NDMEZgUdrkbPjFroPUtPBhjJ1snwNxw
+ m7JVoeARsOht5Vw+vkECvuSHFtkPUIdcqOd6leEktCJ8Z1XLCXT84t72Ndv2r6/tNl7YQHRG8z9
+ eKLdvz4e07axC/JwDDMA==
+X-Gm-Gg: AZFdTZdVpmG/pjm4OT0hWkX3RfInM1ZzcJ+fZsXdLH5G7BlECa8KgwNlh52+cPyI9KK
+ 1GUQyoDWwdx5e/XzCHyb77ZMOmwyHBKvJT3CxXd15rCPIxaoCso6mz+rl2OJohUHruQryQkmavY
+ awXj+xtLVIKlNNeP5lBJnmARk04t8ZwtQ1Gd5Pxeqy1AIWcizDdwlyMo2bUa5H09dgWPWT8Yof3
+ J4T0KGgNPRNwSFOTGnJY4uYR662b9bKxYR5IkZKOo06+wYSPRnrn0HLTMVFGlkpK0JCHrsVr708
+ OizPLjUQS7sKCbe+QaVo0CLA0/ZEyVlRpfoEqGrzOAfQxgQGaipJwSvNn2pnSMIYJUTY1bTMvdP
+ SmYF10Mh757YmR5E0VoM4EZD+vLgvqyU3aXO8mypgRKSJOMf34NxOoBgjg7KXz5qk4RfKaUwk4t
+ oqHmzAPq74+ruXWzaCPSOPqOty
+X-Received: by 2002:a05:6a21:6450:b0:3f0:9b9f:f29a with SMTP id
+ adf61e73a8af0-4014a17d314mr24905332637.2.1795852124167; 
+ Fri, 27 Nov 2026 23:48:44 -0800 (PST)
+X-Received: by 2002:a05:6a21:6450:b0:3f0:9b9f:f29a with SMTP id
+ adf61e73a8af0-4014a17d314mr24905323637.2.1795852123695; 
+ Fri, 27 Nov 2026 23:48:43 -0800 (PST)
 Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
  [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8c872e4af1fsm14086238b3a.28.2026.11.27.23.48.40
+ d2e1a72fcca58-8c872e4af1fsm14086238b3a.28.2026.11.27.23.48.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Nov 2026 23:48:41 -0800 (PST)
+ Fri, 27 Nov 2026 23:48:43 -0800 (PST)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
 	Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 2/4] test: pstore: check the names of the saved dump records
-Date: Sat, 28 Nov 2026 07:47:38 +0000
-Message-ID: <20261128074801.11306-3-aristo.chen@canonical.com>
+Subject: [PATCH v1 3/4] cmd: pstore: decompress the dump records
+Date: Sat, 28 Nov 2026 07:47:39 +0000
+Message-ID: <20261128074801.11306-4-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261128074801.11306-1-aristo.chen@canonical.com>
 References: <20261128074801.11306-1-aristo.chen@canonical.com>
@@ -169,52 +169,200 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a test that saves the records of dump zones 0 and 2, with an empty
-record in zone 1, as Linux leaves one when the file of a record is
-deleted, and checks that the files are named after their zones.
+Linux compresses the dump records by default. For such a record, pstore
+display only prints "Compressed buffer, display not available", so it
+shows none of the panic and oops messages of a kernel that has its
+default configuration. pstore save writes the record compressed, to a
+file whose name ends with .enc.z, as Linux does with a record that it
+cannot decompress.
+
+Linux 6.6 and later compress these records with deflate, without a zlib
+or gzip header, and do not decompress a record into more than 3 times
+what its zone can hold. Linux 4.17 to 6.5 use the same format by
+default. zunzip() reads this format, so use it to decompress a record
+into a buffer of 3 times the zone size. Display the result, or save it
+under the name that Linux gives to a record that it has decompressed,
+without .enc.z.
+
+Nothing changes when CONFIG_GZIP is disabled. Otherwise, a record that
+cannot be decompressed is handled as before, after an error message from
+zunzip() or about the memory for the buffer. That is the case of the
+records that Linux 4.16 and older compress with zlib, which adds a
+header, and of the records of the other algorithms that Linux 6.5 and
+older can be set to use. Nothing in a record tells which algorithm it
+was compressed with: as in Linux 6.6 and later, a record that inflates
+without error is taken for a deflate one.
+
+The buffer is large enough for the deflate records of Linux 4.20 and
+later, and of the 4.19 stable kernels that got the same change: their
+text is at most 100/45 of what a zone can hold. Linux 4.17 and 4.18,
+and 4.19 without that change, size their own buffer from the record
+size, or from 1024 bytes if that is more and there is a console zone,
+so the text of a record in a smaller dump zone can be up to 1828 bytes.
+Such a record is kept compressed as well when its text does not fit.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- test/py/tests/test_pstore.py | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ cmd/pstore.c             | 80 ++++++++++++++++++++++++++++++++++++----
+ doc/usage/cmd/pstore.rst | 11 ++++++
+ 2 files changed, 83 insertions(+), 8 deletions(-)
 
-diff --git a/test/py/tests/test_pstore.py b/test/py/tests/test_pstore.py
-index 8473b7ff625..3fb262253ef 100644
---- a/test/py/tests/test_pstore.py
-+++ b/test/py/tests/test_pstore.py
-@@ -355,3 +355,27 @@ def test_pstore_zone_order(ubman):
-     finally:
-         # Restore the default record sizes
-         ubman.restart_uboot()
+diff --git a/cmd/pstore.c b/cmd/pstore.c
+index 7468e8824e2..ee2bf66365c 100644
+--- a/cmd/pstore.c
++++ b/cmd/pstore.c
+@@ -8,6 +8,7 @@
+ #include <div64.h>
+ #include <fdtdec.h>
+ #include <fs.h>
++#include <gzip.h>
+ #include <log.h>
+ #include <mapmem.h>
+ #include <memalign.h>
+@@ -151,6 +152,48 @@ static u32 pstore_get_buffer(u32 sig, phys_addr_t buffer, u32 size, char *dest)
+ 	return dest_size;
+ }
+ 
++/**
++ * pstore_unzip() - Decompress the data of a dump record
++ * @src: Compressed data, which follows the header of the record
++ * @size: Length of @src, returns the length of the decompressed data
++ * @zone_size: Size of the dump zones
++ *
++ * Linux 4.17 and later compress the dump records with deflate by default,
++ * without a zlib or gzip header. Since Linux 4.20, the text of such a record
++ * is not larger than 3 times what a zone can hold, so use a buffer of 3 times
++ * the zone size.
++ *
++ * Return: decompressed data, to free() after use, or NULL if @src cannot be
++ * decompressed
++ */
++static char *pstore_unzip(char *src, u32 *size, u32 zone_size)
++{
++	u64 dst_size = (u64)zone_size * 3;
++	unsigned long len = *size;
++	char *dst = NULL;
 +
-+@pytest.mark.buildconfigspec('cmd_pstore')
-+def test_pstore_save_zone_numbers(ubman):
-+    """Test that pstore save names the dump records after their zone."""
++	if (!IS_ENABLED(CONFIG_GZIP))
++		return NULL;
 +
-+    ubman.run_command('')
-+    ubman.run_command_list([
-+        'mw.b 0x%x 0 0x%x' % (PSTORE_ADDR, PSTORE_LENGTH),
-+        'pstore set 0x%x 0x%x' % (PSTORE_ADDR, PSTORE_LENGTH)])
-+    write_record(ubman, PSTORE_ADDR, PSTORE_SIG, b'====1.0-D\nzone 0\n')
-+    # Linux leaves an empty record in the zone of a file that it deletes
-+    write_record(ubman, PSTORE_ADDR + 0x1000, PSTORE_SIG, b'')
-+    write_record(ubman, PSTORE_ADDR + 0x2000, PSTORE_SIG,
-+                 b'====2.0-D\nzone 2\n')
++	/* zunzip() takes the size of its buffer as an int */
++	if (dst_size <= INT_MAX)
++		dst = malloc_cache_aligned(dst_size);
++	if (!dst) {
++		printf("Cannot allocate %llu bytes to decompress a record\n",
++		       dst_size);
++		return NULL;
++	}
 +
-+    response = ubman.run_command('pstore display dump 2')
-+    assert('zone 2' in response)
++	/* On success, len is the length of the data in dst */
++	if (zunzip(dst, dst_size, (unsigned char *)src, &len, 1, 0)) {
++		free(dst);
++		return NULL;
++	}
++	*size = len;
 +
-+    with tempfile.TemporaryDirectory() as outdir:
-+        ubman.run_command('pstore save hostfs - %s' % (outdir))
-+        assert(sorted(os.listdir(outdir)) ==
-+               ['dmesg-ramoops-0', 'dmesg-ramoops-2'])
-+        with open('%s/dmesg-ramoops-2' % (outdir), 'rb') as f:
-+            assert(f.read() == b'zone 2\n')
++	return dst;
++}
++
+ /**
+  * pstore_round_size() - Round a zone size down to a power of two
+  * @size: Zone size, can be 0
+@@ -338,7 +381,7 @@ static int pstore_display(struct cmd_tbl *cmdtp, int flag,  int argc,
+ 	int type = PSTORE_TYPE_ALL;
+ 	struct pstore_zones zones;
+ 	phys_addr_t ptr;
+-	char *buffer;
++	char *buffer, *data, *unzipped;
+ 	u32 size;
+ 	int header_len = 0;
+ 	bool compressed;
+@@ -399,13 +442,21 @@ static int pstore_display(struct cmd_tbl *cmdtp, int flag,  int argc,
+ 				continue;
+ 			}
+ 
++			data = buffer + header_len;
++			size -= header_len;
++			unzipped = NULL;
+ 			if (compressed) {
+-				printf("Compressed buffer, display not available\n");
+-				continue;
++				unzipped = pstore_unzip(data, &size,
++							zones.dump.size);
++				if (!unzipped) {
++					printf("Compressed buffer, display not available\n");
++					continue;
++				}
++				data = unzipped;
+ 			}
+ 
+-			pstore_print_buffer("Dump", buffer + header_len,
+-					    size - header_len);
++			pstore_print_buffer("Dump", data, size);
++			free(unzipped);
+ 		}
+ 	}
+ 
+@@ -459,7 +510,7 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
+ {
+ 	struct pstore_zones zones;
+ 	phys_addr_t ptr, ptr_end;
+-	char *buffer;
++	char *buffer, *data, *unzipped;
+ 	char *save_argv[6];
+ 	char addr[19], length[19];
+ 	char path[256];
+@@ -508,11 +559,24 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
+ 			continue;
+ 		}
+ 
+-		sprintf(addr, "0x%08lx", (ulong)map_to_sysmem(buffer + header_len));
+-		sprintf(length, "0x%X", size - header_len);
++		data = buffer + header_len;
++		size -= header_len;
++		unzipped = NULL;
++		if (compressed) {
++			/* As in Linux, save it compressed if this fails */
++			unzipped = pstore_unzip(data, &size, zones.dump.size);
++			if (unzipped) {
++				data = unzipped;
++				compressed = false;
++			}
++		}
++
++		sprintf(addr, "0x%08lx", (ulong)map_to_sysmem(data));
++		sprintf(length, "0x%X", size);
+ 		snprintf(path, sizeof(path), "%s/dmesg-ramoops-%u%s", argv[3],
+ 			 index, compressed ? ".enc.z" : "");
+ 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
++		free(unzipped);
+ 	}
+ 
+ 	sprintf(addr, "0x%08lx", (ulong)map_to_sysmem(buffer));
+diff --git a/doc/usage/cmd/pstore.rst b/doc/usage/cmd/pstore.rst
+index b8e2a478421..f8be7ef9fc5 100644
+--- a/doc/usage/cmd/pstore.rst
++++ b/doc/usage/cmd/pstore.rst
+@@ -94,3 +94,14 @@ Or saved to an existing directory in an Ext2 or Ext4 partition, e.g. on root
+ directory of 1st partition of the 2nd MMC::
+ 
+     => pstore save mmc 1:1 /
++
++Linux compresses the dump records by default (Linux config option
++PSTORE_COMPRESS). With CONFIG_GZIP, U-Boot decompresses the records that Linux
++4.17 and later compress with deflate, which is the default algorithm up to
++Linux 6.5 and the only one since Linux 6.6. It does not decompress a record
++into more than 3 times the size of a dump zone, which is enough for these
++records since Linux 4.20.
++
++When U-Boot cannot decompress a record, 'pstore display' does not show it and
++'pstore save' saves it compressed, in a file whose name ends with ``.enc.z`` as
++in /sys/fs/pstore under Linux.
 -- 
 2.43.0
 
