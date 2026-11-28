@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63215606A31C
-	for <u-boot@archiver.kernel.org>; Sat, 28 Nov 2026 13:12:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B99A7606A31C
+	for <u-boot@archiver.kernel.org>; Sat, 28 Nov 2026 13:12:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fQlskRpk;
-	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=LjaqCC/X
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=JkVEohcB;
+	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=miI+eL0i
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3897A81175;
-	Sat, 28 Nov 2026 13:12:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 70CE4810A3;
+	Sat, 28 Nov 2026 13:12:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1DAOUm-vPCbo; Sat, 28 Nov 2026 13:12:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 50B8A810A3
+ id H939WypJtK6Y; Sat, 28 Nov 2026 13:12:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D4E9181113
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795871539;
-	b=PHSDYHfuiII/14NAfGfCSRerh09+JYD6K9L93MXEsyLGTga+bAymp0qPwj9/HwwSOGIc
-	 5ZaAfC9qGvlI/lcZZXhNXNIGsAHGJAufQv1zT2VMAjiKo4Wy4mdNtvg0VR+6VwlW2kiao
-	 6JFlPuONcbV1P41PZsYD9ZAM3guO7zRT5WXiMXvo/X64uKkECuq9D7qn20JpIWMSWJSuJ
-	 1PEx/tAsQKRqaKBMHR+cKgEaXJboh/+M3sQ1v37kUWDpw1l22JM3/U1M21IK+hG4c96aG
-	 aKanWNx4Zm6TWM7ie7JmaX8EytsSfyzcs68RgUJ5CG5UFKGqG4KDWunC+g44k9jFnHA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1795871541;
+	b=k/1tgrv1Dcg/NuosklfD/hS4bm3RUdcEkVpasBZ2vv4cWG5fzAeMxC1cZyXPvYFPH8ws
+	 6Fpf/HZ9H3jspg/0rbcRfMB6d5/rlLo3X5DeINvGEh97i9zHU+6VkG1hO7WMIZWZMOhoC
+	 8t1I5Gbv7yYcGb+uYDXYBZiJeCILkhDyCe2Qw1B4WAeFnnlD7vJtGxJxjm7+zIxcnfpeS
+	 9zeCiUoXOSZ9oEZQjeYmb+/Z/8WB26yGa7SiXvCjvLY7CXPqF5YG9Zi1Ty5F4FDDBOP6W
+	 fZSUX2SutNuik7JRsL+ZH29RmXo7Mx/7I9b389DLBdQr1G4iLZQ8S/DLHiwhmJw8NKA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795871539;
+	c=relaxed/relaxed; t=1795871541;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,118 +33,118 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
-	b=ZmtfLbrMe/9ivKSVjdbl3FRxf/wsswGZ3UkBWDMe0aZ5CdFoReI4t4YhJkdC1q/Dah7Q
-	 dSG2a1ejt1VYcdT01o5xYrI55HUhLiuX0mKRzhBREtW9MT3bzXuTrqgoWL9HqWFEx3MSF
-	 l4FuX8dFvm5jVrjaHHacwICfmuOUMlHB4ixCNQJr1egG+PGSB5XOySOs2DtJjnevz/PD3
-	 HxSljZpYcMO07H8Fcog8gZ7Lb8xGAba8PxmSlVuWHYPnexY0+suFz4TauW7D6sBsQPbYd
-	 t1UTdqsEazyoVb5kU/d8aZL0OZDl58c0FmoaH01wQoau9ww3n2ZCuTqriOFw7pYmLfA==
+	bh=firUyxtO9KLRMcFx16aO8Scj7YJsAy+Cv+h0WgfxJdo=;
+	b=hlAZF13sboaNI4DFhX5Ri7xqOF6qAWmRIBod+dEY9cXbpLO7rBp+DAcTVqH/FJj8QC0L
+	 epwRObNnj0mlV89ijS+QmLwGl12EsdHwD3/lnlKAKUWgs38Q/+vgm4BEru6gcRQskP1IJ
+	 mjZ/Lwk1LtXwPnUBRiOdDeIMfU2UG+45HPnpYYutKt8iWzYkCnf1bl4WCFkCiJoYGhkco
+	 fBY2+eo6HA4Wkqm7S5z9snxklhliAGczBzujLxH8VsaJY7JC4j0HOCcHiAiI3ZUnWzw3R
+	 FAbycE8l0l8vrvgVfMtpVCrAw9hLyeWQZbSf2ID3QpsD4gZ2qK5gM8dZnwyiQapuG4w==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1795871539;
-	bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
+	d=lists.u-boot-project.org; s=default; t=1795871541;
+	bh=firUyxtO9KLRMcFx16aO8Scj7YJsAy+Cv+h0WgfxJdo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fQlskRpkPG/juZaD4nPLNnu+RvOpAfXNYskWE1qsyG/0vS1zDPq0vVwk/0n7yGPt3
-	 ef7CMdMJ6TiSgPu5HRGESOeQMsb+3ElcbLsVekSTW0wo5g1BqKxsBCkE6yMbMCRYrn
-	 hWKyMI4kc6IqgXQCHO+Kcmq0DDfOVbs2hoYBNfJySmflBsMWhn4rUhUIrNSRbqm+f2
-	 28Nz6mTbhxLeLZEVCyQmQM3ZDEb6OfqsmnYauCp4+xJFQCJZO39nOSnA2k8FgHfD9T
-	 YnYz/tTD0XzYc1XgztHij7fJG/NGWsuLfXVF29u+8fiyWN8xULzI5d0UQud89mdjW8
-	 DBHhb0fSMyqcQ==
+	b=JkVEohcBJrQj45JUuGB1Ih9gvTRMGhNzASY63QgRYD8CJ9UyFpM0NEpPdZ4EtBmN3
+	 xfnvtwTe13R6AGbK/qeL9R/Q8T0yiwr5uVCAnXE8b064onDLy0L/Dvgk/y8i7EJiU/
+	 pcjE0q+hBNNKGM5WOI9+MAQ6aX/k3tdmATMQBY7Cf3BvrZyERqDDYwO5tQlOL/f7bE
+	 P/XrqTfvFkCmVFMLVUf1jz/rxWsttPuDdgG39zdplyem/sjf8EUVT6+xmQX8a2fnRw
+	 Slmu88swiKx+5WzrF8isEJy9obGxEDxTguI9JGxW6kymsfa8QHBXwwXOskroewUSZ3
+	 iO2Lqs3Lc/vIA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 50B8A810A3;
-	Sat, 28 Nov 2026 13:12:19 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 141EF3D9
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D4E9181113;
+	Sat, 28 Nov 2026 13:12:20 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2DF303C0
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EE87540659
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:02 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 129BB40659
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IVUFGF6lwTmQ for <u-boot@lists.u-boot-project.org>;
- Sat, 28 Nov 2026 13:12:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EB93840645
+ id bOdJGzGSqg7y for <u-boot@lists.u-boot-project.org>;
+ Sat, 28 Nov 2026 13:12:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 35DC640645
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
+ client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
  envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=amarulasolutions.com
  header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google
- header.b=LjaqCC/X
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EB93840645
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:01 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4bba5e17cbeso34339675e9.1
- for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 05:12:01 -0800 (PST)
+ header.b=miI+eL0i
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 35DC640645
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 13:12:02 +0000 (UTC)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4a1fbd52ab6so61418095e9.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 28 Nov 2026 05:12:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1795871520; x=1796476320;
+ d=amarulasolutions.com; s=google; t=1795871521; x=1796476321;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
- b=LjaqCC/XUA4RO1nHVtKkEFCXQkr6uiNQihjU2EZ6eT+bpE25l6fiarK7tBMQojjVgq
- OubWffAkJq6C7iCrYlZkOPEOqNbjFFbDhLyydJ59bqDczxNISaIUEXfekn/USBsjSKT4
- 0NrxeT6bB6l62PDyuqQe6e+e481dWJ5//cnCY=
+ bh=firUyxtO9KLRMcFx16aO8Scj7YJsAy+Cv+h0WgfxJdo=;
+ b=miI+eL0iWoMigp80Hr97ZgPtz1yVledS1tYhJZ4/bjEY7SOM0JqQNt5bDeWAdgaDJZ
+ JZLE3br1SKPoXxcE7YMm2AE6Vsst52O7SpjRU0mH8sgaQ6Ro5ht0AhAf/zfD0szRFCaJ
+ 9WVRGmGYYY8LwgmmV2aKDk/r+TYju0u9V23r8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795871520; x=1796476320;
+ d=1e100.net; s=20260707; t=1795871521; x=1796476321;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=rdxNlosAlBewiPdjMJ1RAkatpO+Vb2wrgMzcVEygBJA=;
- b=O/kll/D2lrlWSt49fbsahjcHB0uvmvpjw8aKocD8aTUxGR6IMKRmm1ozgR7ElseeSk
- 5zneXlkSj7fZV90I/ohagRoa3zfVE/CsOSRiJZF5jODkggr6HUh0togPtfPCye4BzNVy
- T0M7t9OK7XMSdjsosg4IYFAMo25eHr69XO8pcFoW5M+UJDmwItzVHky/7kr3CHsmnngV
- s7VGh0rtTuWpUXf6AaNQbHhtiQVfMwS1UrgFQhqMSYJsgq6/8XM5SdLvXrigixrvjEhc
- wz69je0pX4IPaSrW4Xivq+CKQTK9a/nHTakwyh4B1RIX3KsqEXRUkL73O208pUKZ2j0x
- QzsQ==
+ bh=firUyxtO9KLRMcFx16aO8Scj7YJsAy+Cv+h0WgfxJdo=;
+ b=bbQ3wdiawpNEx7JgWNwgat5aoQJdC1w7uytsnsFv7fpkzGpM92SIvIdjRwVckRFRCK
+ I7hCOcyKjppoigM97sHyZhSwDzI0/YuDTNlL/+GtdbXNs4YVnS1KIjg7gQUgMFY2Woy9
+ ZXVOJQN2Y9vYdBmi+tWyY65F0Krw1XBpzA8rKM+yt2yyWR3OX57ZKhQdd2r3ZBQOdW8O
+ t+mV0BTbr5IZWAYrYpNZXTXOc2hv4en8+yKTqRrxAu2xnVw6LprI+XQ08OgtZxc7GcYD
+ f7nEA+cEphnViXBfjozCoGVCLc83lOXh20WinzxOyEhlAWJJF8mIcsVqIn9ZmCQo2gcr
+ pNaw==
 X-Forwarded-Encrypted: i=1;
- AL+hErHJZQtadiktqF0H/g0dutbGbSGcMNkYRAicPGrralZS40hUzgyJc6Uebo/gFDV8uZ7pHGiBz7c=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+kEc41Rm9nOpKLoQ2qqBxRpaxLkaYkXZydAyBMBPwp00h8Vs5M
- 8ygtAoB4oTIuOAWt7Tjv0gHhgczhlmOmaSCQJm2OOyHIBKDwuHUzoUvyfMseKYt808w=
-X-Gm-Gg: AZFdTZfGISJ0ep8OkLAgoT/g525yOMwrhitbpDOfjcb/GJzOLoBWsMjW+kCuGmlkiul
- pEQuqckYmYxK6RA8GDpo+meQmw4tsdd226DLcH2GCklfEUBVu4BWAn0B342DBObrBgwFzyJmiM0
- 9PIyPo7U7CuUGwO5q1cthavp4r4S7yLo8AAQwA7RRJRL+eOhlV27deTo9/91dd3mO2JZCMbZMGS
- HT+MQdLe7D0WZ/nFnct/dvl1h4UAXJf0moYRfSff+MFe7I9xYVP8TV0Jo9g64D8IOc/Wi4yb6QB
- CsQ6aWiMdxb4Rx14ecP+ZAzkziv3kQoRuCdMcjhhBVwx9aqPi63s8RqDiAMZcwuelV7wdAqdpVO
- 47/0r2U6QwrjK6PHwORLPGYrTMoOmZxuqjFUJU9HNboLAb5vY6c/wa9v4TUuoTflB8lfYAbOBlk
- GduSJINBRaz3nKfZfjB1zQB6nQCJYLVKc3Q3m/8Gc6SLwoLR2hyGJa7turDGMF3U6xlgYWY38xq
- Le6i68FQAI8O7asyrM0lNPIx24hZN23DBXma9uLF0DbhQlbm6kG2bEKkthzA18BpsGtcuwPkZzH
- IzAojc+yk8hjC22xX9lLA/PagQxk7BtzkUG+Z1WZCbNaUwrxyG8WDe2KbWzj1JqqrNRQoUmDcMd
- k5Yr6ngb1/n/Dn2CwvKoS93D88/rEiJqDbh/6OcSLP3rt1KLKwxOHCwJMFlfdXzOHbEqtXn7Ryd
- 47fCnROco9G0aD0bvu8Ge6ea0G9Q==
-X-Received: by 2002:a05:600c:c173:b0:4a1:813f:2a60 with SMTP id
- 5b1f17b1804b1-4bb88800134mr537916315e9.11.1795871519774; 
- Sat, 28 Nov 2026 05:11:59 -0800 (PST)
+ AL+hErHYtxq5PXr1HPaWPOay9qpHm/Qf7Zp4q6mFgzFQdx8oltt41LzPVQSRxy3sDiOiOjvRvGtAq/c=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/UCidCjoaES69nLgFrGq/8Rw/RRKQ16bdh17QLahwlw/iUw4aW
+ /nT67WRYTSQ0Lbu6VGo9zxDGFFpM0M2nejOAl+D4Y1rx7FtaZjnJofVdNSOUnAWPOE0=
+X-Gm-Gg: AZFdTZeDq0AisdlUrCqviL7PR9H9+wLzcBPAhEdIwQgAcV5EKpAkGQMQyGqV3McYT0z
+ b82g5TCoooBWopNl2KDD3ALh54z2i/tNKjhJsC4zf2UoRezQWGTGISs8g5taWIhmjUL25igeq+v
+ mnaw1yBZv3yATp8CJua9TU5WO0Hqpp/xwGputGNX79PC4XDrGR1sORK8hlsocM0jMpQ8wD2uQT1
+ PjPqHaDCVWpO17eOoc0lLOOChwldV//Rz1w6af2X6qLiNF6PnF8wfUvEEDGrgiywSB20VXK6+XW
+ ZEzNBw+1LlNnwqeDyy+QD5fkFBholdtNsfj9JcV5uu9vOq3lRqVtqkIJyy+B22OZjRRELApZEsu
+ ILnkcZyXGVsvTQQLl9q68SgqZBvdtt1HT7saAW7VWfdB+wx9WQQS7LHk9ZkP9b5tHu0ednitgVK
+ Bz6fav9GewXSXaO+HoTy9+Js3D8E75dan0gMeCZQ1yi5cm5gUYqbaEA7AGG4OGWvjCCWzRpIdKy
+ A+vO7OHydLn8DQijB659oV30W2If326nszjtf/R6RaZeVsDysQgmtP1ZJtJO+fMvsyglbQAgR2F
+ pZpFQg5jyUSiwOMdVLohthTdK1o20UyCDC0Qgb8qCBTrYQGpdW2xNvNoB8gHUvrcX7XNB+xLK1C
+ /WjUoFlnH4Qob4ILnJajxE++/UpDyYVTQAx9nri9rY20RtxN20Txy2mbBt8GQYNo9e8r9mCG3GM
+ CjdCtGaSy4qqs14S0SzJZzDgv74g==
+X-Received: by 2002:a05:600c:5307:b0:4a3:d327:6ed with SMTP id
+ 5b1f17b1804b1-4bb888283d8mr556767105e9.17.1795871521123; 
+ Sat, 28 Nov 2026 05:12:01 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-79-14-29-58.business.telecomitalia.it. [79.14.29.58])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb853b2437sm1076382015e9.13.2026.11.28.05.11.58
+ 5b1f17b1804b1-4bb853b2437sm1076382015e9.13.2026.11.28.05.12.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Nov 2026 05:11:59 -0800 (PST)
+ Sat, 28 Nov 2026 05:12:00 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Yannick Fertre <yannick.fertre@foss.st.com>,
  linux-amarula@amarulasolutions.com, michael@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v3 18/29] arm: stm32mp: stm32mp2: move boot device environment
- helpers to SoC code
-Date: Sat, 28 Nov 2026 14:10:35 +0100
-Message-ID: <20261128131125.2141352-19-dario.binacchi@amarulasolutions.com>
+ Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>,
+ u-boot@lists.u-boot-project.org (open list)
+Subject: [PATCH v3 19/29] splash: make splash_video_logo_load() available to
+ boards
+Date: Sat, 28 Nov 2026 14:10:36 +0100
+Message-ID: <20261128131125.2141352-20-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261128131125.2141352-1-dario.binacchi@amarulasolutions.com>
 References: <20261128131125.2141352-1-dario.binacchi@amarulasolutions.com>
@@ -162,227 +162,74 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The environment location and the MMC environment device only depend on
-the boot device reported by the ROM code, so they are not specific to
-the STMicroelectronics boards.
+Boards providing their own splash_screen_prepare() to load the splash
+image from a board specific location have no way to fall back to the
+built-in logo when that image is missing.
 
-Move env_get_location(), mmc_get_env_dev() and the mmc_get_boot() helper
-to the SoC code, so that other vendor boards can use them too.
-
-No functional change intended.
+Export splash_video_logo_load(), which copies the built-in logo to
+the "splashimage" address, so that they can use it as fallback.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 ---
 
-Changes in v3:
+(no changes since v2)
+
+Changes in v2:
 - Add Reviewed-by tag
 
- arch/arm/mach-stm32mp/stm32mp2/Makefile |  1 +
- arch/arm/mach-stm32mp/stm32mp2/env.c    | 82 +++++++++++++++++++++++++
- board/st/stm32mp2/stm32mp2.c            | 71 +--------------------
- 3 files changed, 84 insertions(+), 70 deletions(-)
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/env.c
+ common/splash.c  | 4 +---
+ include/splash.h | 9 +++++++++
+ 2 files changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/Makefile b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-index 8f2e641dcab6..f2def2d1283e 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/Makefile
-+++ b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-@@ -5,6 +5,7 @@
+diff --git a/common/splash.c b/common/splash.c
+index 8a65ae597771..5502b4f5452f 100644
+--- a/common/splash.c
++++ b/common/splash.c
+@@ -70,7 +70,7 @@ static struct splash_location default_splash_locations[] = {
  
- obj-y += cpu.o
- obj-y += arm64-mmu.o
-+obj-y += env.o
- obj-y += rifsc.o
- obj-y += stm32mp2x.o
- obj-$(CONFIG_OF_SYSTEM_SETUP) += fdt.o
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/env.c b/arch/arm/mach-stm32mp/stm32mp2/env.c
-new file mode 100644
-index 000000000000..9e7b5b882908
---- /dev/null
-+++ b/arch/arm/mach-stm32mp/stm32mp2/env.c
-@@ -0,0 +1,82 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#define LOG_CATEGORY LOGC_ARCH
-+
-+#include <config.h>
-+#include <env_internal.h>
-+#include <log.h>
-+#include <mmc.h>
-+#include <asm/arch/sys_proto.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h>
-+
-+enum env_location env_get_location(enum env_operation op, int prio)
-+{
-+	u32 bootmode = get_bootmode();
-+
-+	if (prio)
-+		return ENVL_UNKNOWN;
-+
-+	switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
-+	case BOOT_FLASH_SD:
-+	case BOOT_FLASH_EMMC:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
-+			return ENVL_MMC;
-+		else
-+			return ENVL_NOWHERE;
-+
-+	case BOOT_FLASH_NAND:
-+	case BOOT_FLASH_SPINAND:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_UBI))
-+			return ENVL_UBI;
-+		else
-+			return ENVL_NOWHERE;
-+
-+	case BOOT_FLASH_NOR:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
-+			return ENVL_SPI_FLASH;
-+		else
-+			return ENVL_NOWHERE;
-+	default:
-+		return ENVL_NOWHERE;
-+	}
-+}
-+
-+static int mmc_get_boot(void)
-+{
-+	struct udevice *dev;
-+	u32 boot_mode = get_bootmode();
-+	unsigned int instance = (boot_mode & TAMP_BOOT_INSTANCE_MASK) - 1;
-+	char cmd[20];
-+	const u32 sdmmc_addr[] = {
-+		STM32_SDMMC1_BASE,
-+		STM32_SDMMC2_BASE,
-+		STM32_SDMMC3_BASE
-+	};
-+
-+	if (instance >= ARRAY_SIZE(sdmmc_addr))
-+		return 0;
-+
-+	/* search associated sdmmc node in devicetree */
-+	snprintf(cmd, sizeof(cmd), "mmc@%x", sdmmc_addr[instance]);
-+	if (uclass_get_device_by_name(UCLASS_MMC, cmd, &dev)) {
-+		log_err("mmc%d = %s not found in device tree!\n", instance, cmd);
-+		return 0;
-+	}
-+
-+	return dev_seq(dev);
-+}
-+
-+int mmc_get_env_dev(void)
-+{
-+	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_ENV_MMC_DEVICE_INDEX), (-1));
-+
-+	if (mmc_env_dev >= 0)
-+		return mmc_env_dev;
-+
-+	/* use boot instance to select the correct mmc device identifier */
-+	return mmc_get_boot();
-+}
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index f2575339b990..96735fa9f8a1 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -7,12 +7,11 @@
+ #include <bmp_logo_data.h>
  
- #include <button.h>
- #include <config.h>
--#include <env_internal.h>
-+#include <env.h>
- #include <fdt_support.h>
- #include <led.h>
- #include <log.h>
- #include <misc.h>
--#include <mmc.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch/sys_proto.h>
-@@ -88,74 +87,6 @@ int board_init(void)
+-static int splash_video_logo_load(void)
++int splash_video_logo_load(void)
+ {
+ 	char *splashimage;
+ 	ulong bmp_load_addr;
+@@ -90,8 +90,6 @@ static int splash_video_logo_load(void)
+ 
  	return 0;
  }
+-#else
+-static inline int splash_video_logo_load(void) { return -ENOSYS; }
+ #endif
  
--enum env_location env_get_location(enum env_operation op, int prio)
--{
--	u32 bootmode = get_bootmode();
--
--	if (prio)
--		return ENVL_UNKNOWN;
--
--	switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
--	case BOOT_FLASH_SD:
--	case BOOT_FLASH_EMMC:
--		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
--			return ENVL_MMC;
--		else
--			return ENVL_NOWHERE;
--
--	case BOOT_FLASH_NAND:
--	case BOOT_FLASH_SPINAND:
--		if (CONFIG_IS_ENABLED(ENV_IS_IN_UBI))
--			return ENVL_UBI;
--		else
--			return ENVL_NOWHERE;
--
--	case BOOT_FLASH_NOR:
--		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
--			return ENVL_SPI_FLASH;
--		else
--			return ENVL_NOWHERE;
--	default:
--		return ENVL_NOWHERE;
--	}
--}
--
--int mmc_get_boot(void)
--{
--	struct udevice *dev;
--	u32 boot_mode = get_bootmode();
--	unsigned int instance = (boot_mode & TAMP_BOOT_INSTANCE_MASK) - 1;
--	char cmd[20];
--	const u32 sdmmc_addr[] = {
--		STM32_SDMMC1_BASE,
--		STM32_SDMMC2_BASE,
--		STM32_SDMMC3_BASE
--	};
--
--	if (instance >= ARRAY_SIZE(sdmmc_addr))
--		return 0;
--
--	/* search associated sdmmc node in devicetree */
--	snprintf(cmd, sizeof(cmd), "mmc@%x", sdmmc_addr[instance]);
--	if (uclass_get_device_by_name(UCLASS_MMC, cmd, &dev)) {
--		log_err("mmc%d = %s not found in device tree!\n", instance, cmd);
--		return 0;
--	}
--
--	return dev_seq(dev);
--};
--
--int mmc_get_env_dev(void)
--{
--	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_ENV_MMC_DEVICE_INDEX), (-1));
--
--	if (mmc_env_dev >= 0)
--		return mmc_env_dev;
--
--	/* use boot instance to select the correct mmc device identifier */
--	return mmc_get_boot();
--}
--
- int board_late_init(void)
- {
- 	const void *fdt_compat;
+ __weak int splash_screen_prepare(void)
+diff --git a/include/splash.h b/include/splash.h
+index 7671bd7e9c44..0a3ea0346030 100644
+--- a/include/splash.h
++++ b/include/splash.h
+@@ -61,6 +61,15 @@ static inline int splash_source_load(struct splash_location *locations,
+ }
+ #endif
+ 
++#if IS_ENABLED(CONFIG_VIDEO_LOGO)
++int splash_video_logo_load(void);
++#else
++static inline int splash_video_logo_load(void)
++{
++	return -ENOSYS;
++}
++#endif
++
+ int splash_screen_prepare(void);
+ void splash_get_pos(int *x, int *y);
+ int splash_display(void);
 -- 
 2.43.0
 
